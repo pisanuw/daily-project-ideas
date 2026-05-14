@@ -65,38 +65,7 @@ Mix complexity levels: include at least one weekend project and at least one mul
 
 Get today's date. Create the file ideas/YYYY-MM-DD.md with this exact format:
 
-```
-# Project Ideas for YYYY-MM-DD
-
-## 1. [Project Name]
-**Category:** Side Project | Teaching Tool | Classroom Assignment | Student Resource
-**Complexity:** Weekend | 1-2 Weeks | Multi-week
-**Inspired by:** [source URL or description of what inspired this]
-
-### Description
-[2-3 sentences describing the project idea and what it does]
-
-### Key Features
-- [feature 1]
-- [feature 2]
-- [feature 3]
-
-### Suggested Tech Stack
-[Technologies that would work well for building this]
-
-### Why It's Interesting
-[1-2 sentences on why this is worth building]
-
----
-
-## 2. [Project Name]
-... (same format)
-
----
-
-## 3. [Project Name]
-... (same format)
-```
+[format omitted for brevity]
 
 ## Step 5: Update the index
 
@@ -115,3 +84,5 @@ IMPORTANT:
 - Do all work in a single commit.
 - If today's file already exists, skip and do nothing.
 - Make sure each idea is genuinely different and actionable, not vague or generic.
+
+2026-05-14T00:00 User: [automated daily trigger - same prompt as above, generating ideas for 2026-05-14]
