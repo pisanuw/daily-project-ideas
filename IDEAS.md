@@ -11,3 +11,6 @@
 | 2026-05-14 | Vibe Rubric | Side Project | Weekend |
 | 2026-05-14 | Socratic Debugger | Teaching Tool | 1-2 Weeks |
 | 2026-05-14 | Accessible Game Jam Platform | Classroom Assignment | Multi-week |
+| 2026-05-15 | Commit Narrator | Side Project | Weekend |
+| 2026-05-15 | Agent Memory Lab | Teaching Tool | 1-2 Weeks |
+| 2026-05-15 | Agentic Game Playtester | Classroom Assignment | Multi-week |
