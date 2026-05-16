@@ -14,3 +14,6 @@
 | 2026-05-15 | Commit Narrator | Side Project | Weekend |
 | 2026-05-15 | Agent Memory Lab | Teaching Tool | 1-2 Weeks |
 | 2026-05-15 | Agentic Game Playtester | Classroom Assignment | Multi-week |
+| 2026-05-16 | Lecture-to-Flashcard Pipeline | Side Project | Weekend |
+| 2026-05-16 | AI Office Hours Bot | Teaching Tool | 1-2 Weeks |
+| 2026-05-16 | Personal Dev RAG Assistant | Classroom Assignment | Multi-week |
