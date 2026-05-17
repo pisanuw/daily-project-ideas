@@ -9,3 +9,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 
 2026-05-14 [code] Created ideas/2026-05-14.md with 3 ideas: Vibe Rubric, Socratic Debugger, Accessible Game Jam Platform
 2026-05-15 [code] Created ideas/2026-05-15.md with 3 ideas: Commit Narrator, Agent Memory Lab, Agentic Game Playtester
+
+2026-05-17 [code] Created ideas/2026-05-17.md with 3 ideas: Paper Reel, Spec Forge, Algorithm Race
