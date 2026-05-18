@@ -20,3 +20,6 @@
 | 2026-05-17 | Paper Reel | Side Project | Weekend |
 | 2026-05-17 | Spec Forge | Teaching Tool | 1-2 Weeks |
 | 2026-05-17 | Algorithm Race | Classroom Assignment | Multi-week |
+| 2026-05-18 | Ethics Diff | Side Project | Weekend |
+| 2026-05-18 | MCP Playground | Teaching Tool | 1-2 Weeks |
+| 2026-05-18 | Replay Board | Classroom Assignment | Multi-week |
