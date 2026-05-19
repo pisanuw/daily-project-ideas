@@ -23,3 +23,6 @@
 | 2026-05-18 | Ethics Diff | Side Project | Weekend |
 | 2026-05-18 | MCP Playground | Teaching Tool | 1-2 Weeks |
 | 2026-05-18 | Replay Board | Classroom Assignment | Multi-week |
+| 2026-05-19 | Skill Scout | Side Project | Weekend |
+| 2026-05-19 | Bias Lens | Teaching Tool | 1-2 Weeks |
+| 2026-05-19 | Accessibility Audit Bot | Classroom Assignment | Multi-week |
