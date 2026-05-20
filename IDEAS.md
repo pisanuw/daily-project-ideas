@@ -26,3 +26,6 @@
 | 2026-05-19 | Skill Scout | Side Project | Weekend |
 | 2026-05-19 | Bias Lens | Teaching Tool | 1-2 Weeks |
 | 2026-05-19 | Accessibility Audit Bot | Classroom Assignment | Multi-week |
+| 2026-05-20 | Agent Audit Trail | Side Project | Weekend |
+| 2026-05-20 | Peer Review Simulator | Teaching Tool | Multi-week |
+| 2026-05-20 | Live Interview Coach | Classroom Assignment | 1-2 Weeks |

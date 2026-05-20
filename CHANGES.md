@@ -15,3 +15,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-05-18 [code] Created ideas/2026-05-18.md with 3 ideas: Ethics Diff, MCP Playground, Replay Board
 
 2026-05-19 [code] Created ideas/2026-05-19.md with 3 ideas: Skill Scout, Bias Lens, Accessibility Audit Bot
+
+2026-05-20 [code] Created ideas/2026-05-20.md with 3 ideas: Agent Audit Trail, Peer Review Simulator, Live Interview Coach
