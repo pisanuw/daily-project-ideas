@@ -29,3 +29,6 @@
 | 2026-05-20 | Agent Audit Trail | Side Project | Weekend |
 | 2026-05-20 | Peer Review Simulator | Teaching Tool | Multi-week |
 | 2026-05-20 | Live Interview Coach | Classroom Assignment | 1-2 Weeks |
+| 2026-05-21 | README Roast | Side Project | Weekend |
+| 2026-05-21 | Curriculum Graph Builder | Teaching Tool | 1-2 Weeks |
+| 2026-05-21 | NPC Constitution | Classroom Assignment | Multi-week |
