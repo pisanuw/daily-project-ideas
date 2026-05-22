@@ -32,3 +32,6 @@
 | 2026-05-21 | README Roast | Side Project | Weekend |
 | 2026-05-21 | Curriculum Graph Builder | Teaching Tool | 1-2 Weeks |
 | 2026-05-21 | NPC Constitution | Classroom Assignment | Multi-week |
+| 2026-05-22 | Agent State Sketcher | Side Project | Weekend |
+| 2026-05-22 | Knowledge Gap Mapper | Teaching Tool | 1-2 Weeks |
+| 2026-05-22 | Security Escape Room | Classroom Assignment | Multi-week |
