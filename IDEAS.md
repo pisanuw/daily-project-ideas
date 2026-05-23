@@ -35,3 +35,6 @@
 | 2026-05-22 | Agent State Sketcher | Side Project | Weekend |
 | 2026-05-22 | Knowledge Gap Mapper | Teaching Tool | 1-2 Weeks |
 | 2026-05-22 | Security Escape Room | Classroom Assignment | Multi-week |
+| 2026-05-23 | PR Narrator | Side Project | Weekend |
+| 2026-05-23 | AI Pair Logger | Teaching Tool | 1-2 Weeks |
+| 2026-05-23 | Prompt Injection Dojo | Classroom Assignment | Multi-week |
