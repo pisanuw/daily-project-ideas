@@ -21,3 +21,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-05-22 [code] Created ideas/2026-05-22.md with 3 ideas: Agent State Sketcher, Knowledge Gap Mapper, Security Escape Room
 
 2026-05-23 [code] Created ideas/2026-05-23.md with 3 ideas: PR Narrator, AI Pair Logger, Prompt Injection Dojo
+
+2026-05-24 [code] Created ideas/2026-05-24.md with 3 ideas: Review Vibe Meter, Multi-Agent Ethics Roundtable, Agent Skills Workshop

@@ -38,3 +38,6 @@
 | 2026-05-23 | PR Narrator | Side Project | Weekend |
 | 2026-05-23 | AI Pair Logger | Teaching Tool | 1-2 Weeks |
 | 2026-05-23 | Prompt Injection Dojo | Classroom Assignment | Multi-week |
+| 2026-05-24 | Review Vibe Meter | Side Project | Weekend |
+| 2026-05-24 | Multi-Agent Ethics Roundtable | Teaching Tool | 1-2 Weeks |
+| 2026-05-24 | Agent Skills Workshop | Classroom Assignment | Multi-week |
