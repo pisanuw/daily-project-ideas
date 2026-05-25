@@ -41,3 +41,6 @@
 | 2026-05-24 | Review Vibe Meter | Side Project | Weekend |
 | 2026-05-24 | Multi-Agent Ethics Roundtable | Teaching Tool | 1-2 Weeks |
 | 2026-05-24 | Agent Skills Workshop | Classroom Assignment | Multi-week |
+| 2026-05-25 | Ollama Arena | Side Project | Weekend |
+| 2026-05-25 | AI Observation Journal | Teaching Tool | 1-2 Weeks |
+| 2026-05-25 | Adaptive Hint Engine | Classroom Assignment | Multi-week |
