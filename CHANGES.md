@@ -25,3 +25,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-05-24 [code] Created ideas/2026-05-24.md with 3 ideas: Review Vibe Meter, Multi-Agent Ethics Roundtable, Agent Skills Workshop
 
 2026-05-25 [code] Created ideas/2026-05-25.md with 3 ideas: Ollama Arena, AI Observation Journal, Adaptive Hint Engine
+
+2026-05-26 [code] Created ideas/2026-05-26.md with 3 ideas: Student Portfolio Diff, Classroom Trend Radar, Synthetic Bias Lab
