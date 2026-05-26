@@ -44,3 +44,6 @@
 | 2026-05-25 | Ollama Arena | Side Project | Weekend |
 | 2026-05-25 | AI Observation Journal | Teaching Tool | 1-2 Weeks |
 | 2026-05-25 | Adaptive Hint Engine | Classroom Assignment | Multi-week |
+| 2026-05-26 | Student Portfolio Diff | Side Project | Weekend |
+| 2026-05-26 | Classroom Trend Radar | Teaching Tool | 1-2 Weeks |
+| 2026-05-26 | Synthetic Bias Lab | Classroom Assignment | Multi-week |
