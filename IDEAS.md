@@ -47,3 +47,6 @@
 | 2026-05-26 | Student Portfolio Diff | Side Project | Weekend |
 | 2026-05-26 | Classroom Trend Radar | Teaching Tool | 1-2 Weeks |
 | 2026-05-26 | Synthetic Bias Lab | Classroom Assignment | Multi-week |
+| 2026-05-27 | Algorithm Cinema | Side Project | Weekend |
+| 2026-05-27 | Behavior Facts Checker | Teaching Tool | 1-2 Weeks |
+| 2026-05-27 | API Cost Compass | Student Resource | Multi-week |
