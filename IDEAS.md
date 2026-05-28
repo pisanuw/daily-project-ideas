@@ -50,3 +50,6 @@
 | 2026-05-27 | Algorithm Cinema | Side Project | Weekend |
 | 2026-05-27 | Behavior Facts Checker | Teaching Tool | 1-2 Weeks |
 | 2026-05-27 | API Cost Compass | Student Resource | Multi-week |
+| 2026-05-28 | Context Primer | Side Project | Weekend |
+| 2026-05-28 | Swipe to Ship | Classroom Assignment | 1-2 Weeks |
+| 2026-05-28 | Live Coding Observatory | Teaching Tool | Multi-week |
