@@ -59,3 +59,6 @@
 | 2026-05-30 | PR Impact Map | Side Project | Weekend |
 | 2026-05-30 | Agent Permission Dojo | Teaching Tool | 1-2 Weeks |
 | 2026-05-30 | CS Swipe Deck | Classroom Assignment | Multi-week |
+| 2026-05-31 | Honest Commit Checker | Side Project | Weekend |
+| 2026-05-31 | Pre-Lecture Q&A Predictor | Teaching Tool | 1-2 Weeks |
+| 2026-05-31 | Tiny Transformer Workshop | Classroom Assignment | Multi-week |
