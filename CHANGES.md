@@ -37,3 +37,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-05-31 [code] Created ideas/2026-05-31.md with 3 ideas: Honest Commit Checker, Pre-Lecture Q&A Predictor, Tiny Transformer Workshop
 
 2026-06-01 [code] Created ideas/2026-06-01.md with 3 ideas: Agent Tripwire, Misconception Mosaic, Source Watcher
+
+2026-06-02 [code] Created ideas/2026-06-02.md with 3 ideas: Local Model Router, Difficulty Dial, Model Card Studio

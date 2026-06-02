@@ -65,3 +65,6 @@
 | 2026-06-01 | Agent Tripwire | Side Project | Weekend |
 | 2026-06-01 | Misconception Mosaic | Teaching Tool | 1-2 Weeks |
 | 2026-06-01 | Source Watcher | Classroom Assignment | Multi-week |
+| 2026-06-02 | Local Model Router | Side Project | Weekend |
+| 2026-06-02 | Difficulty Dial | Teaching Tool | 1-2 Weeks |
+| 2026-06-02 | Model Card Studio | Classroom Assignment | Multi-week |
