@@ -39,3 +39,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-06-01 [code] Created ideas/2026-06-01.md with 3 ideas: Agent Tripwire, Misconception Mosaic, Source Watcher
 
 2026-06-02 [code] Created ideas/2026-06-02.md with 3 ideas: Local Model Router, Difficulty Dial, Model Card Studio
+
+2026-06-03 [code] Created ideas/2026-06-03.md with 3 ideas: Changelog Storyteller, Rubric Calibration Bench, LLM Behavior Observatory

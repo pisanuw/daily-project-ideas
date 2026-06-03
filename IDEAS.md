@@ -68,3 +68,6 @@
 | 2026-06-02 | Local Model Router | Side Project | Weekend |
 | 2026-06-02 | Difficulty Dial | Teaching Tool | 1-2 Weeks |
 | 2026-06-02 | Model Card Studio | Classroom Assignment | Multi-week |
+| 2026-06-03 | Changelog Storyteller | Side Project | Weekend |
+| 2026-06-03 | Rubric Calibration Bench | Teaching Tool | 1-2 Weeks |
+| 2026-06-03 | LLM Behavior Observatory | Classroom Assignment | Multi-week |
