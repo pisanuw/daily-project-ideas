@@ -71,3 +71,6 @@
 | 2026-06-03 | Changelog Storyteller | Side Project | Weekend |
 | 2026-06-03 | Rubric Calibration Bench | Teaching Tool | 1-2 Weeks |
 | 2026-06-03 | LLM Behavior Observatory | Classroom Assignment | Multi-week |
+| 2026-06-04 | Error Autopsy | Side Project | Weekend |
+| 2026-06-04 | Study Buddy Matchmaker | Teaching Tool | 1-2 Weeks |
+| 2026-06-04 | Real-Time Accessibility Overlay | Classroom Assignment | Multi-week |
