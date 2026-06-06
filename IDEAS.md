@@ -77,3 +77,6 @@
 | 2026-06-05 | Lecture Tape Deck | Side Project | Weekend |
 | 2026-06-05 | AI ROI Tracker | Teaching Tool | 1-2 Weeks |
 | 2026-06-05 | API Archaeologist | Classroom Assignment | Multi-week |
+| 2026-06-06 | Persona Review Panel | Side Project | Weekend |
+| 2026-06-06 | Demo Rescue Kit | Teaching Tool | 1-2 Weeks |
+| 2026-06-06 | Replication Lab | Classroom Assignment | Multi-week |
