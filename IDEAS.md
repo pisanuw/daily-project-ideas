@@ -83,3 +83,6 @@
 | 2026-06-07 | Vibe Code Fingerprinter | Side Project | Weekend |
 | 2026-06-07 | Agent Workflow Diff | Teaching Tool | 1-2 Weeks |
 | 2026-06-07 | Personal MCP Context Server | Classroom Assignment | Multi-week |
+| 2026-06-08 | Agent Tool Heatmap | Side Project | Weekend |
+| 2026-06-08 | Grading Transparency Dashboard | Teaching Tool | 1-2 Weeks |
+| 2026-06-08 | Tiny Browser Renderer | Classroom Assignment | Multi-week |
