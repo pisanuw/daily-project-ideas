@@ -28,6 +28,8 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 
 2026-05-26 [code] Created ideas/2026-05-26.md with 3 ideas: Student Portfolio Diff, Classroom Trend Radar, Synthetic Bias Lab
 
+2026-06-08 [code] Created ideas/2026-06-08.md with 3 ideas: Agent Tool Heatmap, Grading Transparency Dashboard, Tiny Browser Renderer
+
 2026-06-07 [code] Created ideas/2026-06-07.md with 3 ideas: Vibe Code Fingerprinter, Agent Workflow Diff, Personal MCP Context Server
 
 2026-05-27 [code] Created ideas/2026-05-27.md with 3 ideas: Algorithm Cinema, Behavior Facts Checker, API Cost Compass
