@@ -86,3 +86,6 @@
 | 2026-06-08 | Agent Tool Heatmap | Side Project | Weekend |
 | 2026-06-08 | Grading Transparency Dashboard | Teaching Tool | 1-2 Weeks |
 | 2026-06-08 | Tiny Browser Renderer | Classroom Assignment | Multi-week |
+| 2026-06-09 | Claim Grounding Lens | Side Project | Weekend |
+| 2026-06-09 | Assignment Load Estimator | Teaching Tool | 1-2 Weeks |
+| 2026-06-09 | NPC Dialogue Architect | Classroom Assignment | Multi-week |
