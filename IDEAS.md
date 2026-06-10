@@ -89,3 +89,6 @@
 | 2026-06-09 | Claim Grounding Lens | Side Project | Weekend |
 | 2026-06-09 | Assignment Load Estimator | Teaching Tool | 1-2 Weeks |
 | 2026-06-09 | NPC Dialogue Architect | Classroom Assignment | Multi-week |
+| 2026-06-10 | CS History Clash | Side Project | Weekend |
+| 2026-06-10 | Repo Tour Guide | Teaching Tool | 1-2 Weeks |
+| 2026-06-10 | Multiplayer Code Golf Arena | Classroom Assignment | Multi-week |

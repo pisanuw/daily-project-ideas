@@ -32,6 +32,8 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 
 2026-06-07 [code] Created ideas/2026-06-07.md with 3 ideas: Vibe Code Fingerprinter, Agent Workflow Diff, Personal MCP Context Server
 
+2026-06-10 [code] Created ideas/2026-06-10.md with 3 ideas: CS History Clash, Repo Tour Guide, Multiplayer Code Golf Arena
+
 2026-05-27 [code] Created ideas/2026-05-27.md with 3 ideas: Algorithm Cinema, Behavior Facts Checker, API Cost Compass
 
 2026-05-28 [code] Created ideas/2026-05-28.md with 3 ideas: Context Primer, Swipe to Ship, Live Coding Observatory
