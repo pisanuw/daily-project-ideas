@@ -92,3 +92,6 @@
 | 2026-06-10 | CS History Clash | Side Project | Weekend |
 | 2026-06-10 | Repo Tour Guide | Teaching Tool | 1-2 Weeks |
 | 2026-06-10 | Multiplayer Code Golf Arena | Classroom Assignment | Multi-week |
+| 2026-06-11 | Devcontainer Sketch Pad | Side Project | Weekend |
+| 2026-06-11 | Code Review Council | Teaching Tool | 1-2 Weeks |
+| 2026-06-11 | Constraint Dungeon | Classroom Assignment | Multi-week |

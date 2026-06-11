@@ -49,3 +49,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-06-03 [code] Created ideas/2026-06-03.md with 3 ideas: Changelog Storyteller, Rubric Calibration Bench, LLM Behavior Observatory
 
 2026-06-09 [code] Created ideas/2026-06-09.md with 3 ideas: Claim Grounding Lens, Assignment Load Estimator, NPC Dialogue Architect
+
+2026-06-11 [code] Created ideas/2026-06-11.md with 3 ideas: Devcontainer Sketch Pad, Code Review Council, Constraint Dungeon
