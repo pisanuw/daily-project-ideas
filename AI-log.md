@@ -4,6 +4,10 @@
 
 Your task: Find 3 fresh, interesting project ideas and commit them to this repo.
 
+2026-06-12T00:00 User: You are a daily project idea curator for Yusuf Pisan, a CS professor interested in AI in education, interactive web apps (React, Vite, Tailwind, Flask, Supabase, Claude API, Gemini API), game development, CS education tools, accessibility, AI agents, AI ethics, and open to new tech.
+
+Your task: Find 3 fresh, interesting project ideas and commit them to this repo.
+
 ## Step 1: Search for inspiration
 
 Use WebSearch to find recent trending posts and projects from these sources (in priority order):
