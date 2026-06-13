@@ -53,3 +53,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-06-11 [code] Created ideas/2026-06-11.md with 3 ideas: Devcontainer Sketch Pad, Code Review Council, Constraint Dungeon
 
 2026-06-12 [code] Created ideas/2026-06-12.md with 3 ideas: Voice Rubber Duck Debugger, Syllabus Semantic Diff, Multi-Agent Conversation Replay Studio
+
+2026-06-13 [code] Created ideas/2026-06-13.md with 3 ideas: Context Window Cartographer, Office Hours Replay Engine, AI Ethics Court Simulator

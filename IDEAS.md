@@ -98,3 +98,6 @@
 | 2026-06-12 | Voice Rubber Duck Debugger | Side Project | Weekend |
 | 2026-06-12 | Syllabus Semantic Diff | Teaching Tool | 1-2 Weeks |
 | 2026-06-12 | Multi-Agent Conversation Replay Studio | Classroom Assignment | Multi-week |
+| 2026-06-13 | Context Window Cartographer | Side Project | Weekend |
+| 2026-06-13 | Office Hours Replay Engine | Teaching Tool | 1-2 Weeks |
+| 2026-06-13 | AI Ethics Court Simulator | Classroom Assignment | Multi-week |
