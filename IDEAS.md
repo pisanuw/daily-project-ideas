@@ -101,3 +101,6 @@
 | 2026-06-13 | Context Window Cartographer | Side Project | Weekend |
 | 2026-06-13 | Office Hours Replay Engine | Teaching Tool | 1-2 Weeks |
 | 2026-06-13 | AI Ethics Court Simulator | Classroom Assignment | Multi-week |
+| 2026-06-14 | Code Time Capsule | Side Project | Weekend |
+| 2026-06-14 | Visual Rubric Grader | Teaching Tool | 1-2 Weeks |
+| 2026-06-14 | Code Forensics Studio | Classroom Assignment | Multi-week |
