@@ -104,3 +104,6 @@
 | 2026-06-14 | Code Time Capsule | Side Project | Weekend |
 | 2026-06-14 | Visual Rubric Grader | Teaching Tool | 1-2 Weeks |
 | 2026-06-14 | Code Forensics Studio | Classroom Assignment | Multi-week |
+| 2026-06-15 | Agent Decision Tree Visualizer | Side Project | Weekend |
+| 2026-06-15 | TIL Board | Teaching Tool | 1-2 Weeks |
+| 2026-06-15 | Computer-Use Obstacle Course | Classroom Assignment | Multi-week |

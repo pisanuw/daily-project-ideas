@@ -57,3 +57,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-06-13 [code] Created ideas/2026-06-13.md with 3 ideas: Context Window Cartographer, Office Hours Replay Engine, AI Ethics Court Simulator
 
 2026-06-14 [code] Created ideas/2026-06-14.md with 3 ideas: Code Time Capsule, Visual Rubric Grader, Code Forensics Studio
+
+2026-06-15 [code] Created ideas/2026-06-15.md with 3 ideas: Agent Decision Tree Visualizer, TIL Board, Computer-Use Obstacle Course
