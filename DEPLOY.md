@@ -15,8 +15,11 @@ cd dist && python3 -m http.server 8000
 
 ## Deploy to Netlify (continuous, recommended)
 
+This is already set up — the site is live at https://daily-project-ideas.netlify.app/
+and auto-deploys from `main`. The steps below are for reference / re-connecting.
+
 1. Push this repo to a Git host Netlify can read (GitHub/GitLab/Bitbucket).
-   The Bitbucket remote `pisanuw/daily-project-ideas` works.
+   This repo lives on GitHub at `pisanuw/daily-project-ideas`.
 2. In the Netlify dashboard: **Add new site → Import an existing project**.
 3. Pick this repository. Netlify reads `netlify.toml`, so the settings are
    already filled in:
