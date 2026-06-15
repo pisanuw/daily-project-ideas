@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daily Project Ideas</title>
+  <meta name="description" content="A fresh batch of buildable software project ideas, every day. Sized by effort on a chili-pepper scale." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%B6%EF%B8%8F%3C/text%3E%3C/svg%3E" />
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <h1 class="hero__title">🌶️ Daily Project Ideas</h1>
+      <p class="hero__tagline" id="tagline"></p>
+      <p class="hero__desc" id="description"></p>
+      <p class="hero__meta" id="hero-meta"></p>
+    </div>
+  </header>
+
+  <main class="wrap" id="sections">
+    <!-- Tier sections injected by app.js -->
+  </main>
+
+  <footer class="footer wrap">
+    <p>
+      Curated automatically by a <a href="https://claude.com/claude-code">Claude Code</a> routine.
+      Source: <a href="https://bitbucket.org/pisanuw/daily-project-ideas">daily-project-ideas</a>.
+    </p>
+  </footer>
+
+  <!-- Detail modal -->
+  <div class="modal" id="modal" hidden>
+    <div class="modal__backdrop" data-close></div>
+    <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button class="modal__close" data-close aria-label="Close">&times;</button>
+      <div class="modal__body" id="modal-body"></div>
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

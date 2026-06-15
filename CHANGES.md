@@ -59,3 +59,9 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-06-14 [code] Created ideas/2026-06-14.md with 3 ideas: Code Time Capsule, Visual Rubric Grader, Code Forensics Studio
 
 2026-06-15 [code] Created ideas/2026-06-15.md with 3 ideas: Agent Decision Tree Visualizer, TIL Board, Computer-Use Obstacle Course
+
+2026-06-15 [scope] Added public website (Netlify) to display ideas; landing page groups by complexity pepper tiers (Weekend/1-2wk/Multi-week) + Implemented section.
+
+2026-06-15 [code] Added build.js (zero-dep md/json parser), web/ static site (4 sections, 3-latest+fold, click-to-modal), implemented.json overlay, ideas/SCHEMA.md, netlify.toml, DEPLOY.md.
+
+2026-06-15 [decision] Site data: build.js prefers ideas/YYYY-MM-DD.json over .md; routine should going forward emit JSON + a 1-2 sentence summary per idea (see ideas/SCHEMA.md). Implemented status is hand-curated in implemented.json, never by the routine.

@@ -277,3 +277,17 @@ IMPORTANT:
 - Do all work in a single commit.
 - If today's file already exists, skip and do nothing.
 - Make sure each idea is genuinely different and actionable, not vague or generic.
+
+2026-06-15T06:16 User: /init
+
+2026-06-15T06:30 User: I want to make the ideas visible on a web site, possibly netlify
+Landing page should have a description of the project and the 3 categories of projects based on compexity: weekend, 1-2 weeks, multi-week. Maybe indicated with pepper spice emoji based on difficulty
+For each category, 1-2 sentence description of the 3 of the latest projects should be displayed with a link/fold to more which would display all other projects in that category
+
+Each project should be clickable so a more detailed description fo the project can be show, can be a popup
+
+2026-06-15T06:45 User: In https://github.com/pisanuw/Claude-capstone under accessibility-lens directory
+Code Blindfold from 2026-05-12.md is implemented
+Live URL for that project is https://accessibility-lens-pisanuw.netlify.app/
+
+Commit changes directly to main

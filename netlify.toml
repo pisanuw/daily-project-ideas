@@ -1,0 +1,8 @@
+# Netlify build configuration for the Daily Project Ideas site.
+# build.js has zero npm dependencies, so no install step is needed.
+[build]
+  command = "node build.js"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
