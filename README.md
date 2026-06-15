@@ -1,5 +1,7 @@
 # Daily Project Ideas
 
+**Live site: https://daily-project-ideas.netlify.app/**
+
 Automated daily project ideas curated by a Claude Code Remote Trigger.
 
 Every day at 5am, Claude searches Reddit and the web for interesting project ideas and commits 3 new ones here.
@@ -20,6 +22,8 @@ Every day at 5am, Claude searches Reddit and the web for interesting project ide
 4. Anything useful for students
 
 ## Website
+
+Live at **https://daily-project-ideas.netlify.app/** (auto-deployed from `main`).
 
 A static site renders the ideas grouped by complexity (Weekend 🌶️, 1-2 Weeks 🌶️🌶️,
 Multi-week 🌶️🌶️🌶️) plus an Implemented section. Build it with `node build.js`

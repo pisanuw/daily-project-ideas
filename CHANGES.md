@@ -65,3 +65,7 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-06-15 [code] Added build.js (zero-dep md/json parser), web/ static site (4 sections, 3-latest+fold, click-to-modal), implemented.json overlay, ideas/SCHEMA.md, netlify.toml, DEPLOY.md.
 
 2026-06-15 [decision] Site data: build.js prefers ideas/YYYY-MM-DD.json over .md; routine should going forward emit JSON + a 1-2 sentence summary per idea (see ideas/SCHEMA.md). Implemented status is hand-curated in implemented.json, never by the routine.
+
+2026-06-15 [doc] Marked Code Blindfold (2026-05-12 #2) as first implemented project in implemented.json; live at accessibility-lens-pisanuw.netlify.app, repo pisanuw/Claude-capstone/accessibility-lens.
+
+2026-06-15 [code] Contrast/readability fix: cards are <button>, which don't inherit color/font, so titles rendered as UA-default dark text; set button{inherit}, lightened text vars, verified all 18 text pairs pass WCAG AA.
