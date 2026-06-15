@@ -2,11 +2,11 @@
   --bg: #0f1115;
   --bg-soft: #171a21;
   --card: #1d212b;
-  --card-hover: #232836;
-  --border: #2b3140;
-  --text: #e8eaf0;
-  --text-dim: #a4abbd;
-  --text-faint: #717892;
+  --card-hover: #262c3a;
+  --border: #3a4258;
+  --text: #f0f2f7;
+  --text-dim: #c0c7d6;
+  --text-faint: #99a1b5;
   --accent: #ff6b4a;
   --accent-soft: #ff6b4a22;
   --weekend: #4ade80;
@@ -33,6 +33,10 @@ body {
 
 a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
+
+/* Buttons don't inherit font or color by default — make them, so button-based
+   cards render their text in the page's font/color instead of the UA default. */
+button { font-family: inherit; font-size: inherit; line-height: inherit; color: inherit; }
 
 .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
 
@@ -82,6 +86,7 @@ a:hover { text-decoration: underline; }
 }
 .card {
   background: var(--card);
+  color: var(--text);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 18px 18px 16px;
@@ -98,7 +103,7 @@ a:hover { text-decoration: underline; }
   transform: translateY(-2px);
 }
 .card__top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
-.card__title { font-size: 1.1rem; font-weight: 600; margin: 0; }
+.card__title { font-size: 1.1rem; font-weight: 700; margin: 0; color: var(--text); }
 .card__peppers { font-size: 1rem; flex-shrink: 0; }
 .card__summary { color: var(--text-dim); font-size: 0.92rem; margin: 0; }
 .card__foot { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-top: auto; }
@@ -195,10 +200,10 @@ a:hover { text-decoration: underline; }
 .btn-link {
   display: inline-block;
   background: var(--accent);
-  color: #fff;
+  color: #2a1206; /* dark text on orange: white-on-orange is too low contrast */
   padding: 9px 16px;
   border-radius: 10px;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 0.9rem;
 }
 .btn-link:hover { text-decoration: none; opacity: 0.92; }
