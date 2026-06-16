@@ -107,3 +107,6 @@
 | 2026-06-15 | Agent Decision Tree Visualizer | Side Project | Weekend |
 | 2026-06-15 | TIL Board | Teaching Tool | 1-2 Weeks |
 | 2026-06-15 | Computer-Use Obstacle Course | Classroom Assignment | Multi-week |
+| 2026-06-16 | Prompt A/B Lab | Side Project | Weekend |
+| 2026-06-16 | Exit Ticket Bot | Teaching Tool | 1-2 Weeks |
+| 2026-06-16 | AI Podcast Studio | Classroom Assignment | Multi-week |
