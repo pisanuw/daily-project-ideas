@@ -110,3 +110,6 @@
 | 2026-06-16 | Prompt A/B Lab | Side Project | Weekend |
 | 2026-06-16 | Exit Ticket Bot | Teaching Tool | 1-2 Weeks |
 | 2026-06-16 | AI Podcast Studio | Classroom Assignment | Multi-week |
+| 2026-06-17 | Screenshot-to-Spec | Side Project | Weekend |
+| 2026-06-17 | Student Confusion Heatmap | Teaching Tool | 1-2 Weeks |
+| 2026-06-17 | Tiny 2D Game Engine | Classroom Assignment | Multi-week |

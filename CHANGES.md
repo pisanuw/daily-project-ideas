@@ -71,3 +71,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-06-15 [code] Contrast/readability fix: cards are <button>, which don't inherit color/font, so titles rendered as UA-default dark text; set button{inherit}, lightened text vars, verified all 18 text pairs pass WCAG AA.
 
 2026-06-16 [code] Created ideas/2026-06-16.md and .json with 3 ideas: Prompt A/B Lab, Exit Ticket Bot, AI Podcast Studio
+
+2026-06-17 [code] Created ideas/2026-06-17.md with 3 ideas: Screenshot-to-Spec, Student Confusion Heatmap, Tiny 2D Game Engine
