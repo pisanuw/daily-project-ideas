@@ -113,3 +113,6 @@
 | 2026-06-17 | Screenshot-to-Spec | Side Project | Weekend |
 | 2026-06-17 | Student Confusion Heatmap | Teaching Tool | 1-2 Weeks |
 | 2026-06-17 | Tiny 2D Game Engine | Classroom Assignment | Multi-week |
+| 2026-06-18 | Knowledge Constellation | Side Project | Weekend |
+| 2026-06-18 | Concept Short Factory | Teaching Tool | 1-2 Weeks |
+| 2026-06-18 | Personal API Gateway | Classroom Assignment | Multi-week |

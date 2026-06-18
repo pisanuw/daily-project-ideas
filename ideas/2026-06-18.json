@@ -1,0 +1,56 @@
+{
+  "date": "2026-06-18",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Knowledge Constellation",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "Drop in notes or article URLs and Claude extracts concepts and relationships, rendering your knowledge as an interactive force-directed graph you can explore and chat with.",
+      "description": "A personal knowledge graph app where you drop in notes, article URLs, or lecture snippets and Claude automatically extracts concepts and relationships, rendering them as an interactive constellation of nodes. Click any node to drill into its connections and chat with Claude scoped to that part of your knowledge graph.",
+      "keyFeatures": [
+        "Drag-and-drop or paste text/URL input with Claude-powered entity and relationship extraction",
+        "Interactive force-directed graph (D3.js) where node proximity reflects conceptual closeness",
+        "Node-click Claude chat scoped to the selected node and its direct neighbors only",
+        "Persistent graph storage in Supabase or localStorage so the constellation grows over time"
+      ],
+      "techStack": "React + Vite + Tailwind, D3.js, Claude API, Supabase",
+      "whyInteresting": "The graph-native approach to knowledge is having a moment (BlitzGraph went viral for applying it to AI agents), and this brings the same mental model to individual learners -- creating a visually compelling portfolio piece that doubles as a genuinely useful study tool.",
+      "inspiredBy": "BlitzGraph (graph-native AI backend, https://blitzgraph.com/) and the growing mainstream use of knowledge graphs in LLM agent workflows"
+    },
+    {
+      "n": 2,
+      "title": "Concept Short Factory",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "Type a CS concept and get a structured 60-second micro-lesson card with a hook, bullet points, code snippet, and trivia fact -- ready to export for Canvas, slides, or social media.",
+      "description": "A web tool where a professor types a CS concept (like 'binary search trees' or 'race conditions') and receives a structured 60-second micro-lesson: a punchy hook line, three digestible bullet points, a minimal code snippet, and a 'did you know' fact. The output is a shareable card exportable as a slide, PDF, or short video script.",
+      "keyFeatures": [
+        "Claude API generates hook, bullets, code snippet, and trivia fact in a single structured call",
+        "Live editable card preview with theme options (dark/light, custom brand colors)",
+        "One-click export to PNG, PDF, or Markdown for Canvas, Slack, or social media",
+        "Batch mode: paste a course syllabus outline and generate micro-lessons for every topic at once"
+      ],
+      "techStack": "React + Vite + Tailwind, Claude API, html2canvas or Puppeteer for export, optional Flask backend for batch processing",
+      "whyInteresting": "It adapts the viral 'TikTok for papers' concept into an active teaching workflow, turning the 10 minutes a professor spends crafting a clear explanation into 30 seconds and a polished shareable card.",
+      "inspiredBy": "Show HN: TikTok but for scientific papers (https://news.ycombinator.com/item?id=48096842)"
+    },
+    {
+      "n": 3,
+      "title": "Personal API Gateway",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "Students build MCP-compatible tool servers exposing their own real-world data sources, then wire them to a Claude chat interface -- capstone is their agent completing a multi-step task using tools they built.",
+      "description": "Students build a personal AI gateway: a set of MCP-compatible tool servers that expose their own real-world data (GitHub stats, a local to-do list, a weather API, a Canvas LMS feed) and connect them to a Claude-powered chat interface. The capstone demo is their agent autonomously completing a realistic multi-step task using at least three tools they built themselves.",
+      "keyFeatures": [
+        "MCP tool server implementation in Python or Node.js exposing at least 3 real external APIs",
+        "Claude API integration with structured tool-use calls, error handling, and result chaining",
+        "Minimal chat UI that renders tool calls and responses in real time so the agent's reasoning is visible",
+        "Written reflection on tool schema design decisions and failure modes observed during testing"
+      ],
+      "techStack": "Python or Node.js for MCP servers, Claude API (tool use), React + Vite for chat UI, Supabase for optional state persistence",
+      "whyInteresting": "MCP is now the standard every major AI provider supports, and building a personal integration hub teaches the protocol hands-on while producing a genuinely useful artifact students can extend after the course ends.",
+      "inspiredBy": "OpenClaw (personal AI connecting to 50+ integrations, surged to 210k GitHub stars in 2026) and Gemini CLI's agentic terminal approach"
+    }
+  ]
+}
