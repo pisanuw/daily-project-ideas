@@ -116,3 +116,6 @@
 | 2026-06-18 | Knowledge Constellation | Side Project | Weekend |
 | 2026-06-18 | Concept Short Factory | Teaching Tool | 1-2 Weeks |
 | 2026-06-18 | Personal API Gateway | Classroom Assignment | Multi-week |
+| 2026-06-19 | Game Palette Inspector | Side Project | Weekend |
+| 2026-06-19 | Teach-Back Video Studio | Teaching Tool | 1-2 Weeks |
+| 2026-06-19 | City Builder AI Stakeholder Sim | Classroom Assignment | Multi-week |
