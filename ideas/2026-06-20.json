@@ -1,0 +1,56 @@
+{
+  "date": "2026-06-20",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Pixel Sort Canvas",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "Upload any image and watch sorting algorithms rearrange pixels by hue or brightness on the GPU in real-time, turning a CS1 concept into shareable generative art.",
+      "description": "Upload any image and watch classic sorting algorithms (bubble, merge, radix, bitonic) rearrange pixels by brightness, hue, or saturation in real-time, directly on the GPU. The result is a generative art piece unique to your image and algorithm choice — every sort produces a different visual journey from the scrambled state to the final gradient.",
+      "keyFeatures": [
+        "Image upload with pixel extraction into a WebGPU buffer for GPU-side sorting",
+        "Choose algorithm (bubble, merge, radix, bitonic), sort channel (hue, brightness, saturation), and sort direction",
+        "Adjustable speed slider from glacial to instant so you can pause mid-sort for art screenshots",
+        "One-click export of the current canvas state as a PNG"
+      ],
+      "techStack": "Vanilla JS + WebGPU API (compute shaders in WGSL), Canvas 2D API as a fallback for unsupported browsers",
+      "whyInteresting": "WebGPU is now stable in Chrome, Firefox, and Safari, making this a zero-dependency browser project that is visually spectacular — it turns a CS1 sorting concept into shareable generative art and gives students instant intuition about how different algorithms traverse data.",
+      "inspiredBy": "ChartGPU (WebGPU-powered charting at 1M points/60fps, trending on HN June 2026, https://news.ycombinator.com/item?id=48528779)"
+    },
+    {
+      "n": 2,
+      "title": "Lesson Plan Autopsy",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "Paste a lesson plan and four AI agents critique it in parallel as a struggling student, advanced student, accessibility-needs student, and pedagogy researcher, with color-coded inline annotations.",
+      "description": "A professor pastes or uploads a lesson plan, and four AI agents critique it in parallel — each reading as a different stakeholder: a struggling student, an advanced student, a student with accessibility needs, and a pedagogy researcher. Each agent annotates specific sections with concerns and concrete rewrites, and the UI renders all four viewpoints side-by-side with color-coded highlights.",
+      "keyFeatures": [
+        "Paste or PDF-upload a lesson plan; Claude splits it into annotatable segments",
+        "Four parallel Claude API calls, each with a distinct system prompt establishing persona and critique framework",
+        "Side-by-side annotation view: click any highlighted segment to see all four agents' notes",
+        "Export a consolidated feedback report as PDF or Markdown for revision planning"
+      ],
+      "techStack": "React + Vite + Tailwind, Flask backend for orchestrating parallel Claude API calls, pdf-parse for PDF ingestion, jsPDF for export",
+      "whyInteresting": "A single AI reviewer produces generic feedback, but four agents with locked personas surface blind spots that would otherwise only appear in live classrooms — giving professors a structured pre-flight check before the lesson ever runs.",
+      "inspiredBy": "Multi-agent critique patterns trending in AI workflows (HN June 2026) and broad adoption of AI teaching tools like MagicSchool AI (https://www.magicschool.ai)"
+    },
+    {
+      "n": 3,
+      "title": "Behavior Tree Studio",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "Students build a visual drag-and-drop behavior tree editor for game NPCs, with a Claude assistant that explains the tree in plain English, warns about edge cases, and exports a runnable TypeScript or Python runtime.",
+      "description": "Students build a browser-based visual editor for game NPC behavior trees, where they design AI using drag-and-drop composite, decorator, and action nodes. An embedded Claude assistant explains what the tree will make the NPC do in plain English, suggests missing edge cases, and auto-generates a TypeScript or Python runtime that executes the tree in a tiny test sandbox.",
+      "keyFeatures": [
+        "Visual canvas with draggable nodes: Sequence, Selector, Fallback, Inverter, and leaf actions with configurable parameters",
+        "Claude API integration that reads the current tree JSON and generates a plain-English behavior walkthrough plus edge-case warnings",
+        "Executable runtime export: Claude generates TypeScript or Python from the tree that students drop into their own game project",
+        "Test sandbox: a tiny grid-based scene where an NPC runs the exported behavior tree so students see it in action before exporting"
+      ],
+      "techStack": "React + Vite + Tailwind, React Flow for the visual node editor, Claude API (structured output for tree-to-code generation), Supabase for saving and sharing tree designs",
+      "whyInteresting": "Behavior trees are the industry standard for game NPC AI but rarely taught in CS courses because the tooling is intimidating — this closes that gap while giving students a visual AI design skill that transfers directly to Unreal Engine, Unity, and game-adjacent robotics.",
+      "inspiredBy": "Resurgence of game AI education on HN and GitHub, Cloudflare Agents Week 2026 (https://www.cloudflare.com/en-au/agents-week), and behavior trees remaining the dominant NPC AI pattern in AAA game production"
+    }
+  ]
+}

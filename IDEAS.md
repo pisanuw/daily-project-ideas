@@ -119,3 +119,6 @@
 | 2026-06-19 | Game Palette Inspector | Side Project | Weekend |
 | 2026-06-19 | Teach-Back Video Studio | Teaching Tool | 1-2 Weeks |
 | 2026-06-19 | City Builder AI Stakeholder Sim | Classroom Assignment | Multi-week |
+| 2026-06-20 | Pixel Sort Canvas | Side Project | Weekend |
+| 2026-06-20 | Lesson Plan Autopsy | Teaching Tool | 1-2 Weeks |
+| 2026-06-20 | Behavior Tree Studio | Classroom Assignment | Multi-week |
