@@ -1,0 +1,56 @@
+{
+  "date": "2026-06-21",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Lean-Back Lecture Player",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A distraction-free web app that plays curated educational YouTube playlists as 'cable TV channels' — continuous, auto-advancing, no algorithm, no sidebar — so you can study on a second monitor without decision fatigue.",
+      "description": "A distraction-free web app that turns curated educational YouTube playlists into 'channels' (Web Dev, Machine Learning, CS Theory, Game Dev) and streams them in a continuous, auto-advancing loop — no recommendations sidebar, no comments, no algorithm. You pick a channel and lean back, letting the content wash over you like cable TV for learning.",
+      "keyFeatures": [
+        "Hardcoded or user-configurable channel presets backed by YouTube playlist IDs",
+        "Fullscreen player that strips all YouTube UI chrome via the embed API, leaving only the video",
+        "Auto-advance with a 5-second countdown overlay so you can opt out before the next video starts",
+        "Minimal playlist editor: drag-and-drop URL entries saved to localStorage"
+      ],
+      "techStack": "React + Vite + Tailwind, YouTube IFrame API, localStorage for channel config (no backend needed)",
+      "whyInteresting": "The algorithm-driven YouTube experience is the opposite of intentional study — this flips it by giving learners a 'set and forget' study companion they can run on a second monitor or TV while coding, with zero decision fatigue about what to watch next.",
+      "inspiredBy": "Channel Surfer (trending on HN June 2026 — plays YouTube like cable TV, https://news.ycombinator.com/item?id=48528779)"
+    },
+    {
+      "n": 2,
+      "title": "AI Act Risk Classifier",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "Students describe any AI system in plain language and Claude classifies it by EU AI Act risk tier (unacceptable, high-risk, limited, minimal), explains the ruling with article citations, and generates a compliance checklist — turning abstract regulation into interactive feedback.",
+      "description": "A classroom tool where students describe any real or hypothetical AI system in plain language and the app automatically classifies it by EU AI Act risk tier: unacceptable, high-risk, limited risk, or minimal risk. Claude explains the classification, cites the relevant articles, and generates a tailored compliance checklist so students see exactly what building this system would require legally.",
+      "keyFeatures": [
+        "Free-text description input with optional structured fields (use case, affected population, autonomy level)",
+        "Claude API classifies the system with a risk tier badge and a sentence-by-sentence rationale citing EU AI Act articles",
+        "Compliance checklist auto-generated for the identified tier (data governance, transparency, human oversight, logging)",
+        "Side-by-side comparison mode: submit two systems and see how their risk profiles differ"
+      ],
+      "techStack": "React + Vite + Tailwind, Flask backend, Claude API (structured output for consistent JSON risk reports), optional Supabase for saving and sharing analyses",
+      "whyInteresting": "The EU AI Act is the first binding global AI regulation and takes effect in August 2026, making this immediately relevant to any student who might build or deploy AI systems professionally — it turns abstract legal text into interactive, decision-relevant feedback.",
+      "inspiredBy": "EU AI Act obligations taking effect August 2026, discussed in GitHub trending AI governance tools (https://ossinsight.io/trending/ai)"
+    },
+    {
+      "n": 3,
+      "title": "Procedural World Lore Engine",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "Students build a web app that generates and maintains a consistent fictional world (factions, characters, history, geography) by injecting a live 'world bible' into every Claude call — teaching consistency management across many LLM requests in a domain students actually care about.",
+      "description": "Students build a web app that generates and maintains a consistent fictional world: continents, factions, historical events, cultures, and named characters. The key engineering challenge is consistency management — every new piece of generated content must be aware of what already exists, so Claude receives a live 'world bible' summary as context and never contradicts established lore. Everything persists in Supabase and is browseable as an interactive atlas.",
+      "keyFeatures": [
+        "World-generation wizard: choose genre (fantasy, sci-fi, post-apocalyptic), scale, and tone; Claude generates seed geography and two founding factions",
+        "Incremental generation panel: add a new character, event, or location; the app injects the current world-bible summary so Claude's output is always consistent",
+        "Interactive atlas: a browseable graph view linking entities (factions border regions, characters belong to factions, events affect locations)",
+        "Conflict detector: a separate Claude call that scans new additions and flags logical contradictions against existing lore before saving"
+      ],
+      "techStack": "React + Vite + Tailwind, React Flow for the atlas graph, Flask + Claude API (structured output for entity schema), Supabase (entities stored as typed rows with embedding-search for context injection)",
+      "whyInteresting": "Consistency management across many LLM calls is one of the hardest real-world agent engineering problems, and this project teaches it in a domain students actually care about: game and story world-building, where contradictions break immersion and are immediately obvious.",
+      "inspiredBy": "Resurgence of procedural generation and world-building tools in game dev communities on GitHub trending (https://github.com/trending), and NPC AI education trends on HN June 2026"
+    }
+  ]
+}

@@ -122,3 +122,6 @@
 | 2026-06-20 | Pixel Sort Canvas | Side Project | Weekend |
 | 2026-06-20 | Lesson Plan Autopsy | Teaching Tool | 1-2 Weeks |
 | 2026-06-20 | Behavior Tree Studio | Classroom Assignment | Multi-week |
+| 2026-06-21 | Lean-Back Lecture Player | Side Project | Weekend |
+| 2026-06-21 | AI Act Risk Classifier | Teaching Tool | 1-2 Weeks |
+| 2026-06-21 | Procedural World Lore Engine | Classroom Assignment | Multi-week |
