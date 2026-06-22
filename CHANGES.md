@@ -81,3 +81,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-06-19 [code] Created ideas/2026-06-19.md with 3 ideas: Game Palette Inspector, Teach-Back Video Studio, City Builder AI Stakeholder Sim
 
 2026-06-21 [code] Created ideas/2026-06-21.md and .json with 3 ideas: Lean-Back Lecture Player, AI Act Risk Classifier, Procedural World Lore Engine
+
+2026-06-22 [code] Created ideas/2026-06-22.md and .json with 3 ideas: Dependency Storyteller, Live Code Annotation Station, Agents From Scratch Workshop

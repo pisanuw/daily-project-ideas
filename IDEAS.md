@@ -125,3 +125,6 @@
 | 2026-06-21 | Lean-Back Lecture Player | Side Project | Weekend |
 | 2026-06-21 | AI Act Risk Classifier | Teaching Tool | 1-2 Weeks |
 | 2026-06-21 | Procedural World Lore Engine | Classroom Assignment | Multi-week |
+| 2026-06-22 | Dependency Storyteller | Side Project | Weekend |
+| 2026-06-22 | Live Code Annotation Station | Teaching Tool | 1-2 Weeks |
+| 2026-06-22 | Agents From Scratch Workshop | Classroom Assignment | Multi-week |

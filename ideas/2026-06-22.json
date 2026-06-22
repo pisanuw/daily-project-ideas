@@ -1,0 +1,56 @@
+{
+  "date": "2026-06-22",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Dependency Storyteller",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "Paste any dependency file and Claude generates a plain-English biography for each library, turning a wall of package names into a scannable 'cast of characters' for faster project onboarding.",
+      "description": "A web tool where you paste a package.json, requirements.txt, or go.mod file and Claude generates a 'cast of characters' narrative, giving each dependency a short biography: what it does, why this project likely uses it, and any notable quirks or gotchas. The result is a scannable one-pager that turns a wall of library names into a readable story.",
+      "keyFeatures": [
+        "Paste or upload dependency files (JSON, TOML, txt)",
+        "Per-dependency bio: purpose, common use cases, known footguns",
+        "Dependency category grouping (auth, UI, testing, data, etc.)",
+        "Copy as Markdown or export to PDF for team onboarding docs"
+      ],
+      "techStack": "React + Vite, Tailwind, Claude API",
+      "whyInteresting": "New contributors to a project spend hours reverse-engineering what each library does; this collapses that into a 30-second read. It also teaches students to think critically about why they reach for each dependency, not just how to install it.",
+      "inspiredBy": "GitHub trending exploration of project onboarding pain points; HN discussions on making codebases approachable for new contributors"
+    },
+    {
+      "n": 2,
+      "title": "Live Code Annotation Station",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "Students tap any line of a live-coded file on their phones to drop questions or confusion emojis in real time, giving the professor a live heatmap of where the class is getting lost, with an AI confusion summary at session end.",
+      "description": "A lightweight web app professors share a link to at the start of a live coding session. Students open it on their phones or laptops, see a line-numbered view of the code being typed, and can tap any line to drop a question or confusion emoji in real time. A sidebar aggregates reactions as a live heatmap. At the end of the session, Claude summarizes the top confusion clusters with suggested re-explanations.",
+      "keyFeatures": [
+        "Real-time line-by-line reaction and question dropping (no sign-in required for students)",
+        "Live heatmap sidebar showing which lines generated the most confusion",
+        "Professor view: questions stream in alongside the code as it is typed",
+        "Session-end AI summary of top confusion clusters with suggested re-explanations"
+      ],
+      "techStack": "React + Vite, Supabase Realtime, Tailwind, Claude API",
+      "whyInteresting": "Most professors don't know which part of a live demo lost the class until the next exam. This surfaces confusion the moment it happens, making live coding sessions dramatically more responsive.",
+      "inspiredBy": "Classroom engagement challenges during live coding lectures; HN 'Ask HN: What are you working on? (June 2026)' https://news.ycombinator.com/item?id=48528779"
+    },
+    {
+      "n": 3,
+      "title": "Agents From Scratch Workshop",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "A multi-week assignment where students implement a minimal AI agent runtime from scratch in under 200 lines of Python, then use their own framework to build and demo one real-world agent.",
+      "description": "A structured multi-week assignment where students implement a minimal AI agent loop in Python from scratch, targeting under 200 lines for the core runtime: tool registration, JSON tool-call parsing, context window management, and a multi-turn conversation loop. In the second half, students use their own mini-framework to build one useful agent and present a framework architecture diagram explaining their design decisions.",
+      "keyFeatures": [
+        "Week 1-2: Implement the agent runtime (tool definitions, LLM call loop, error recovery)",
+        "Week 3: Add memory via sliding context window and a simple vector store for retrieval",
+        "Week 4: Build and demo one real agent using their own framework",
+        "Automated test harness that runs each student's agent against a suite of tool-use scenarios"
+      ],
+      "techStack": "Python, Flask (tool server), React + Vite (dashboard), Claude API or Gemini API, SQLite or ChromaDB",
+      "whyInteresting": "Most CS students use agent frameworks as black boxes; building one from scratch forces them to confront every design decision that mature frameworks have already made, producing a much deeper understanding of how LLMs use tools and manage context.",
+      "inspiredBy": "Hugging Face smolagents library philosophy of keeping agent core logic under 1,000 lines; https://dev.to/anmolbaranwal/open-source-toolkit-for-building-ai-agents-in-2026-55h1"
+    }
+  ]
+}
