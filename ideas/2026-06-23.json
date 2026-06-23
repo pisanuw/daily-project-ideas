@@ -1,0 +1,58 @@
+{
+  "date": "2026-06-23",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Sprint Reflection Buddy",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A focused-work timer that pairs each 90-minute session with AI-generated reflection questions and a personalized improvement plan, stored entirely in your browser.",
+      "description": "A minimalist focused-work timer that pairs each 90-minute deep-work session with AI-powered retrospectives. Before starting, you set a specific goal; when the session ends, Claude generates 3 targeted reflection questions based on your stated goal, then distills your answers into a 5-bullet improvement plan for your next sprint. All data stays local in the browser with no account required.",
+      "keyFeatures": [
+        "Pre-sprint goal-setting with AI-generated scope-check nudge (is this goal realistic in 90 minutes?)",
+        "Post-sprint adaptive reflection prompts dynamically generated from your stated goal",
+        "Weekly heatmap showing session frequency and self-reported output quality over time",
+        "Export full sprint log as markdown for journaling or sharing with a mentor"
+      ],
+      "techStack": "Vite + React + Tailwind + Claude API + localStorage (no backend or account required)",
+      "whyInteresting": "Pomodoro timers have been around forever but none offer personalized AI coaching tied to each session's specific goal, making this a tangible upgrade that could ship in a weekend.",
+      "inspiredBy": "HN 'Ask HN: What are you working on? (June 2026)' productivity tool discussions (https://news.ycombinator.com/item?id=48528779)"
+    },
+    {
+      "n": 2,
+      "title": "GPU Parallel Puzzler",
+      "category": "Classroom Assignment",
+      "complexity": "1-2 Weeks",
+      "summary": "A browser-based puzzle game where students configure visual thread blocks on a simplified GPU model to solve data challenges, learning parallel computing concepts level by level.",
+      "description": "A browser-based educational puzzle game where students solve data transformation challenges by visually configuring 'thread blocks' in a simplified GPU model. Each of 12+ levels introduces one parallel computing concept (SIMD lanes, shared memory, thread synchronization, memory coalescing) and auto-grades solutions on correctness plus a 'parallelism efficiency score.' An AI hint system explains in plain language why a student's approach is or is not GPU-friendly.",
+      "keyFeatures": [
+        "Drag-and-drop thread block configurator with animated parallel execution timeline",
+        "Side-by-side CPU vs. GPU performance simulation for each solved puzzle",
+        "Claude-powered hint system that diagnoses common parallelism mistakes and suggests fixes",
+        "Auto-grading rubric export so instructors can use this as a graded lab assignment",
+        "Student progress dashboard via Supabase for classroom tracking"
+      ],
+      "techStack": "Vite + React + WebGPU (WebGL fallback for older browsers) + Claude API + Supabase",
+      "whyInteresting": "WebGPU is now a stable W3C standard in every major browser, making GPU-accelerated education finally feasible without plugins; parallel computing is one of the most persistent skill gaps in CS graduates and there are almost no interactive tools that make it approachable.",
+      "inspiredBy": "HN Show HN 'Build a GPU' game (June 2026 front page) and WebGPU reaching W3C standard status across all major browsers"
+    },
+    {
+      "n": 3,
+      "title": "Classroom Automation Recipes",
+      "category": "Teaching Tool",
+      "complexity": "Multi-week",
+      "summary": "A no-code visual workflow builder for educators that lets instructors automate repetitive classroom tasks (grading drafts, nudging late students, summarizing discussions) using drag-and-drop recipe blocks connected to their LMS.",
+      "description": "A visual no-code workflow builder purpose-built for educators that lets instructors design automated classroom routines using drag-and-drop 'recipe blocks.' Blocks cover common tasks: AI-grade a submission draft, send a personalized nudge to a student who has not submitted, summarize a discussion thread, generate a quiz from lecture notes, or route a student question to the right TA. Workflows trigger on LMS events such as new submission, discussion post, or grade release.",
+      "keyFeatures": [
+        "20+ pre-built recipe templates for common instructor workflows (late submission nudge, office hours summary, quiz generator from slides)",
+        "LMS webhook connectors for Canvas, Moodle, and Gradescope",
+        "AI processing block using Claude API for summarize, grade-draft, generate, and classify operations",
+        "Run-log dashboard showing every workflow execution with the AI output for instructor review before any action is final",
+        "Dry-run mode to preview exactly what a recipe would do before activating it in a live class"
+      ],
+      "techStack": "React + Flask + Supabase + Claude API (workflow engine inspired by n8n patterns)",
+      "whyInteresting": "Instructors spend enormous time on repetitive administrative tasks that AI can handle; this lowers the barrier from 'AI sounds useful' to 'AI is actively running my class workflows today' without requiring any coding knowledge.",
+      "inspiredBy": "n8n's explosive 2026 growth as an AI-native workflow automation platform with 400+ integrations, and the gap between powerful automation tools and typical instructor technical literacy (https://github.com/orgs/community/discussions/187143)"
+    }
+  ]
+}

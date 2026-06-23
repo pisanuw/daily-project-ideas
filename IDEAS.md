@@ -128,3 +128,6 @@
 | 2026-06-22 | Dependency Storyteller | Side Project | Weekend |
 | 2026-06-22 | Live Code Annotation Station | Teaching Tool | 1-2 Weeks |
 | 2026-06-22 | Agents From Scratch Workshop | Classroom Assignment | Multi-week |
+| 2026-06-23 | Sprint Reflection Buddy | Side Project | Weekend |
+| 2026-06-23 | GPU Parallel Puzzler | Classroom Assignment | 1-2 Weeks |
+| 2026-06-23 | Classroom Automation Recipes | Teaching Tool | Multi-week |
