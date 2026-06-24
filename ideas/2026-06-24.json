@@ -1,0 +1,56 @@
+{
+  "date": "2026-06-24",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Isometric CS Campus",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A pixel-art isometric campus toy where every building hides an animated CS concept — click the library for data structures, the coffee shop for sorting algorithms, the lab for neural nets.",
+      "description": "A playful browser toy that renders a university campus in isometric pixel art where every building houses a CS concept. Click the library to explore data structures with animated card stacks and queues, visit the robotics lab for a neural-net diagram, or head to the coffee shop for a live sorting-algorithm race. It's a visual, gamified entry point into a CS curriculum.",
+      "keyFeatures": [
+        "Isometric canvas scene with 8-12 clickable campus buildings, each themed to a CS topic",
+        "Per-building popup with a short animated explainer (GIF-style canvas animation)",
+        "Explore mode that walks students through buildings in recommended curriculum order",
+        "Shareable permalink per building so professors can link directly to a concept"
+      ],
+      "techStack": "Vite + TypeScript, HTML Canvas (or PixiJS for sprite management), Tailwind for UI panels, optionally Claude API for on-demand concept Q&A inside each building",
+      "whyInteresting": "Students remember spatial metaphors: 'the sorting happens at the coffee shop' sticks better than slide 47 of a deck. It's also a fun weekend portfolio piece that doubles as a living CS reference site anyone can share or fork.",
+      "inspiredBy": "isometric.nyc (trending on GitHub, June 2026) — a giant isometric pixel-art map of NYC adapted for CS concept teaching"
+    },
+    {
+      "n": 2,
+      "title": "Live API Cost Meter",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "A shared classroom dashboard where a class budget ticker ticks up in real time as students make AI API calls, turning prompt efficiency into a live competitive lesson visible on the projector.",
+      "description": "A shared classroom dashboard that shows AI API costs accumulating in real time as students make calls during a lab session. A large 'class budget' ticker ticks up on the projector while individual student rows show their token counts, latency, and cost per call. Students compete to write the most cost-efficient prompt that still passes a quality rubric, making cost-awareness a hands-on lesson rather than a slide topic.",
+      "keyFeatures": [
+        "Real-time cost ticker per student and class aggregate, powered by Supabase Realtime",
+        "Per-call breakdown: input tokens, output tokens, model tier, latency, USD cost",
+        "Efficiency leaderboard ranking students by cost per quality point (rubric scored by Claude)",
+        "Professor view: pause the class, replay a student's call history, compare two prompting strategies side-by-side"
+      ],
+      "techStack": "React + Vite, Tailwind, Supabase Realtime (cost events), Claude API + Gemini API (student calls proxied through a Flask middleware that logs usage), Python/Flask backend",
+      "whyInteresting": "Most students treat AI API calls as free until they see a real bill; watching the class budget burn on a projector in real time creates immediate intuition about token economy and prompt efficiency that no lecture achieves.",
+      "inspiredBy": "Canvas IgniteAI Agent launch (Inside Higher Ed, March 2026) and growing classroom AI API use; HN discussions on AI cost transparency https://news.ycombinator.com/item?id=48528779"
+    },
+    {
+      "n": 3,
+      "title": "Execution Sound Map",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "A tool that converts Python or JavaScript execution traces into generative music — loops pulse rhythmically, recursion stacks harmonics, errors buzz — making program behavior audible and memorable for any learner.",
+      "description": "A learning tool that turns Python or JavaScript execution traces into generative music: loops pulse at their iteration frequency, function calls ring distinct tones, recursion stacks harmonics on top of each other, and errors buzz a harsh chord. Students write code they can literally hear running, developing an auditory intuition for control flow and performance. The tool is also a genuine accessibility aid for visually impaired CS learners.",
+      "keyFeatures": [
+        "Execution tracer that captures loop iterations, function calls, variable mutations, and exceptions",
+        "Configurable sound palette: each construct type maps to a MIDI instrument and pitch range",
+        "Side-by-side view: code on the left, a live piano-roll visualization on the right as it executes",
+        "Compose mode: students write code with the goal of producing a specific musical phrase, reinforcing structured programming"
+      ],
+      "techStack": "Python (execution tracer via sys.settrace), Web Audio API or Tone.js (sound synthesis), React + Vite (piano-roll UI), WebSockets (streaming trace events from backend to browser), Flask",
+      "whyInteresting": "Sonification is an underexplored modality for CS education; hearing a nested loop build layered rhythms or a runaway recursion stack overflow into dissonance gives students a visceral, memorable signal that purely visual debuggers cannot replicate.",
+      "inspiredBy": "Accessibility-driven sonification research; Wario Synth Show HN (converts songs to Game Boy audio, Jan 2026); applied to make program execution audible rather than just visual"
+    }
+  ]
+}

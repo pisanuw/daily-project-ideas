@@ -83,3 +83,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-06-21 [code] Created ideas/2026-06-21.md and .json with 3 ideas: Lean-Back Lecture Player, AI Act Risk Classifier, Procedural World Lore Engine
 
 2026-06-22 [code] Created ideas/2026-06-22.md and .json with 3 ideas: Dependency Storyteller, Live Code Annotation Station, Agents From Scratch Workshop
+
+2026-06-24 [code] Created ideas/2026-06-24.md and .json with 3 ideas: Isometric CS Campus, Live API Cost Meter, Execution Sound Map

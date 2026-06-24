@@ -131,3 +131,6 @@
 | 2026-06-23 | Sprint Reflection Buddy | Side Project | Weekend |
 | 2026-06-23 | GPU Parallel Puzzler | Classroom Assignment | 1-2 Weeks |
 | 2026-06-23 | Classroom Automation Recipes | Teaching Tool | Multi-week |
+| 2026-06-24 | Isometric CS Campus | Side Project | Weekend |
+| 2026-06-24 | Live API Cost Meter | Teaching Tool | 1-2 Weeks |
+| 2026-06-24 | Execution Sound Map | Classroom Assignment | Multi-week |

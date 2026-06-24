@@ -679,3 +679,7 @@ IMPORTANT:
 - Do all work in a single commit.
 - If today's file already exists, skip and do nothing.
 - Make sure each idea is genuinely different and actionable, not vague or generic.
+
+2026-06-24T00:00 User: You are a daily project idea curator for Yusuf Pisan, a CS professor interested in AI in education, interactive web apps (React, Vite, Tailwind, Flask, Supabase, Claude API, Gemini API), game development, CS education tools, accessibility, AI agents, AI ethics, and open to new tech.
+
+Your task: Find 3 fresh, interesting project ideas and commit them to this repo.
