@@ -134,3 +134,6 @@
 | 2026-06-24 | Isometric CS Campus | Side Project | Weekend |
 | 2026-06-24 | Live API Cost Meter | Teaching Tool | 1-2 Weeks |
 | 2026-06-24 | Execution Sound Map | Classroom Assignment | Multi-week |
+| 2026-06-25 | TypeScript Type Puzzle Arena | Side Project | Weekend |
+| 2026-06-25 | Agent Reliability Harness | Teaching Tool | 1-2 Weeks |
+| 2026-06-25 | Multi-Source Research Synthesizer | Classroom Assignment | Multi-week |
