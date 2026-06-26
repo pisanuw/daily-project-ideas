@@ -87,3 +87,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-06-24 [code] Created ideas/2026-06-24.md and .json with 3 ideas: Isometric CS Campus, Live API Cost Meter, Execution Sound Map
 
 2026-06-25 [code] Created ideas/2026-06-25.md with 3 ideas: TypeScript Type Puzzle Arena, Agent Reliability Harness, Multi-Source Research Synthesizer
+
+2026-06-26 [code] Created ideas/2026-06-26.md and .json with 3 ideas: Design System Scribe, Collaborative Debug Room, Model Distillation Lab

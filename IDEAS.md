@@ -137,3 +137,6 @@
 | 2026-06-25 | TypeScript Type Puzzle Arena | Side Project | Weekend |
 | 2026-06-25 | Agent Reliability Harness | Teaching Tool | 1-2 Weeks |
 | 2026-06-25 | Multi-Source Research Synthesizer | Classroom Assignment | Multi-week |
+| 2026-06-26 | Design System Scribe | Side Project | Weekend |
+| 2026-06-26 | Collaborative Debug Room | Teaching Tool | 1-2 Weeks |
+| 2026-06-26 | Model Distillation Lab | Classroom Assignment | Multi-week |
