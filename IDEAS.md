@@ -140,3 +140,6 @@
 | 2026-06-26 | Design System Scribe | Side Project | Weekend |
 | 2026-06-26 | Collaborative Debug Room | Teaching Tool | 1-2 Weeks |
 | 2026-06-26 | Model Distillation Lab | Classroom Assignment | Multi-week |
+| 2026-06-27 | Intent Drift Detector | Side Project | Weekend |
+| 2026-06-27 | Accessibility Challenge Arena | Teaching Tool | 1-2 Weeks |
+| 2026-06-27 | Agent Safety Ruleset Studio | Classroom Assignment | Multi-week |
