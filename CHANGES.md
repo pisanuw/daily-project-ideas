@@ -2,6 +2,8 @@
 
 Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, doc, scope, code, note.
 
+2026-06-28 [code] Created ideas/2026-06-28.md + .json with 3 ideas: Doc DX Grader, Pair Programming Pulse, WebGPU Shader Studio
+
 2026-05-12 [note] Initialized.
 2026-05-12 [decision] Use Claude Code Remote Trigger (not local cron) for daily project idea generation
 2026-05-12 [code] Created repo structure: README.md, IDEAS.md, ideas/, .gitignore; pushed to pisanuw/daily-project-ideas

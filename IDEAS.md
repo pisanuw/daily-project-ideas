@@ -143,3 +143,6 @@
 | 2026-06-27 | Intent Drift Detector | Side Project | Weekend |
 | 2026-06-27 | Accessibility Challenge Arena | Teaching Tool | 1-2 Weeks |
 | 2026-06-27 | Agent Safety Ruleset Studio | Classroom Assignment | Multi-week |
+| 2026-06-28 | Doc DX Grader | Side Project | Weekend |
+| 2026-06-28 | Pair Programming Pulse | Teaching Tool | 1-2 Weeks |
+| 2026-06-28 | WebGPU Shader Studio | Classroom Assignment | Multi-week |
