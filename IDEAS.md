@@ -146,3 +146,6 @@
 | 2026-06-28 | Doc DX Grader | Side Project | Weekend |
 | 2026-06-28 | Pair Programming Pulse | Teaching Tool | 1-2 Weeks |
 | 2026-06-28 | WebGPU Shader Studio | Classroom Assignment | Multi-week |
+| 2026-06-29 | Prompt Compression Studio | Side Project | Weekend |
+| 2026-06-29 | Assignment Scaffolder | Teaching Tool | 1-2 Weeks |
+| 2026-06-29 | Agentic Study Buddy Network | Classroom Assignment | Multi-week |

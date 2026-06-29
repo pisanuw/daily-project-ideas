@@ -1,0 +1,61 @@
+{
+  "date": "2026-06-29",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Prompt Compression Studio",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "Paste an overly long prompt, set a target token budget, and watch Claude trim it down with a live diff showing exactly what was cut and how much money you'll save per 1000 API calls.",
+      "description": "A web app where you paste an overly long prompt or conversation history and specify a target token budget. Claude analyzes and rewrites the content, preserving the critical instructions and examples while removing redundancy, over-explanation, and filler. A side-by-side diff shows exactly what was cut, a meter shows the token reduction percentage, and an estimated cost savings calculator tells you how much you would save per 1000 API calls at current pricing.",
+      "keyFeatures": [
+        "Paste or type any prompt and set a target token budget with a slider",
+        "Claude-powered compression that preserves intent while eliminating redundancy",
+        "Side-by-side diff highlighting removed and rewritten passages in color",
+        "Token count and cost savings calculator supporting Claude, GPT-4, and Gemini pricing tiers",
+        "One-click copy of the compressed prompt with an option to iterate further"
+      ],
+      "techStack": "React + Vite + Tailwind, Claude API (claude-sonnet-4-6), tiktoken or Anthropic token counter, Flask proxy for API key safety",
+      "whyInteresting": "Every developer who works with LLMs eventually hits token limits or a surprisingly large invoice -- this tool makes prompt optimization fast and visual, and teaching yourself to write tighter prompts is a genuinely transferable skill.",
+      "inspiredBy": "GitHub trending June 2026 discussion on LLM context limits and MiniMax M3's 1M-token context window launch (https://github.com/trending)"
+    },
+    {
+      "n": 2,
+      "title": "Assignment Scaffolder",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "Describe a programming assignment in plain English and get back a ready-to-distribute package: starter code with TODO stubs, a rubric, tiered hints, and autograder-ready test cases.",
+      "description": "An instructor-facing web tool where you describe a programming assignment in plain English and Claude generates a complete, ready-to-distribute assignment package: starter code with strategic TODO stubs, a detailed rubric with point breakdowns, autograder-friendly test cases, and a set of tiered hints that progressively reveal the solution path. Everything is exported as a downloadable zip so the instructor can push it directly to a course GitHub org.",
+      "keyFeatures": [
+        "Natural language assignment description form with optional constraints (language, libraries, time limit)",
+        "Claude generates starter code with TODOs at pedagogically useful breakpoints",
+        "Structured rubric output with point weights across functionality, style, testing, and documentation",
+        "Progressive hint set (3-5 levels) that guides students without giving away the answer",
+        "Autograder-ready test suite in pytest or Jest exported alongside the starter code",
+        "One-click zip download for the full assignment package"
+      ],
+      "techStack": "React + Vite + Tailwind, Flask backend, Claude API (claude-sonnet-4-6), Supabase for template storage",
+      "whyInteresting": "Writing good scaffolded assignments is one of the most time-consuming parts of teaching CS -- a tool that turns a one-sentence description into a publish-ready package could save instructors hours per assignment.",
+      "inspiredBy": "HN 'Ask HN: What developer tool do you wish existed in 2026?' (https://news.ycombinator.com/item?id=46345827) and n8n's 2026 AI agent development tools report"
+    },
+    {
+      "n": 3,
+      "title": "Agentic Study Buddy Network",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "Students build a multi-agent tutoring system where specialized domain agents hand off conversations between each other, maintain a shared memory of what the student knows, and visualize their growing knowledge as an interactive graph.",
+      "description": "Students build a multi-agent tutoring system where specialized Claude-powered study buddy agents each own a topic domain (data structures, algorithms, systems, etc.) and can hand off a student to a peer agent when the conversation shifts domains. A shared Supabase memory store tracks what the student has already mastered so no agent re-explains known concepts. The student-facing interface is a single chat window that seamlessly transitions between agents, and a dashboard shows the student a graph of their growing knowledge map.",
+      "keyFeatures": [
+        "At least three domain agents with their own system prompts that route conversations based on topic detection",
+        "Handoff protocol where the sending agent writes a context summary that the receiving agent reads",
+        "Shared persistent memory in Supabase recording mastered concepts, common mistakes, and last-session summary",
+        "Student-facing knowledge graph (Cytoscape.js) that updates after each session",
+        "Instructor panel showing aggregate knowledge gaps across the class by topic node",
+        "Evaluation harness that tests correct handoff detection and memory retrieval"
+      ],
+      "techStack": "Python FastAPI or Flask for agent orchestration, Claude API (claude-sonnet-4-6), Supabase, React + Vite + Tailwind + Cytoscape.js",
+      "whyInteresting": "Building this teaches multi-agent architecture, memory design, and context management all at once in a domain students care about, and the finished product is something they can actually use in their own coursework.",
+      "inspiredBy": "GitHub trending repo msitarzewski/agency-agents (specialized AI agency platform) and Hugging Face smolagents library multi-agent patterns (https://github.com/trending)"
+    }
+  ]
+}
