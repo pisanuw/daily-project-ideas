@@ -149,3 +149,6 @@
 | 2026-06-29 | Prompt Compression Studio | Side Project | Weekend |
 | 2026-06-29 | Assignment Scaffolder | Teaching Tool | 1-2 Weeks |
 | 2026-06-29 | Agentic Study Buddy Network | Classroom Assignment | Multi-week |
+| 2026-06-30 | Presentation Pacer | Side Project | Weekend |
+| 2026-06-30 | AI Research Methods Lab | Teaching Tool | 1-2 Weeks |
+| 2026-06-30 | Synthetic Learner Studio | Classroom Assignment | Multi-week |

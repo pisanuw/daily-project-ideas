@@ -1,0 +1,59 @@
+{
+  "date": "2026-06-30",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Presentation Pacer",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A browser-based slide practice tool that tracks per-slide timing and uses Claude to give immediate, actionable coaching on pacing and clarity — no video recording or backend required.",
+      "description": "A browser-based presentation practice tool where you paste your slide content or upload a deck, then advance slides with the space bar while speaking. On finish, the Claude API analyzes your per-slide timing and an optional Web Speech API transcript to give coaching: which slides you rushed, where your explanation was unclear, and concrete pacing suggestions. Everything runs client-side with no backend required.",
+      "keyFeatures": [
+        "Paste or upload slide content; advance slides with keyboard",
+        "Per-slide timer tracking with visual heatmap of fast vs. slow slides",
+        "Optional live speech transcription via Web Speech API",
+        "Claude API post-session coaching report with specific, actionable feedback",
+        "Export coaching report as markdown or PDF"
+      ],
+      "techStack": "React + Vite + Tailwind, Web Speech API, Claude API (client-side via SDK), optional PDF export with jsPDF",
+      "whyInteresting": "Public speaking is a genuine pain point for students and developers alike, yet most practice tools are either expensive or require video recording and manual review. This makes AI coaching frictionless and immediate.",
+      "inspiredBy": "HN discussion on developer productivity tools (https://news.ycombinator.com/item?id=46345827) and the growing trend of AI coaching tools for async skill-building"
+    },
+    {
+      "n": 2,
+      "title": "AI Research Methods Lab",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "Students design hypothesis-driven experiments about LLM behavior, run them automatically, and write structured mini-reports — teaching scientific method alongside AI evaluation literacy.",
+      "description": "A classroom tool where students design and run small-scale AI behavior experiments. A student writes a hypothesis, defines test cases and a scoring rubric, and the tool automatically runs the experiment across multiple Claude API calls, logs results in a structured table, and walks the student through writing a mini research report with methods, results, and discussion sections.",
+      "keyFeatures": [
+        "Hypothesis and variable definition form with guided prompts",
+        "Automated experiment runner that sends batched API calls and logs structured results",
+        "Side-by-side response diff viewer for comparing conditions",
+        "AI-assisted write-up scaffold (methods, results, discussion templates)",
+        "Class dashboard for instructors to see all student experiments and share interesting findings"
+      ],
+      "techStack": "React + Vite + Tailwind (frontend), Flask + Supabase (backend and result storage), Claude API for experiment execution and write-up coaching",
+      "whyInteresting": "Most AI literacy curricula focus on using AI tools, not on evaluating them rigorously. This gives students a taste of real empirical AI research methodology without requiring ML expertise or GPU access.",
+      "inspiredBy": "Karpathy's autoresearch project (https://github.com/karpathy/autoresearch), which showed the value of having AI agents run systematic ML experiments autonomously"
+    },
+    {
+      "n": 3,
+      "title": "Synthetic Learner Studio",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "Students build a multi-agent system where AI agents role-play diverse student archetypes, then iterate their lesson explanation until all synthetic learners are satisfied — teaching both empathy and agent design.",
+      "description": "Students build a multi-agent system in which each AI agent plays a 'synthetic student' with a distinct, persistent learning profile: a visual learner, an anxious test-taker, a fast grasper, and a misconception-holder. The real student feeds these synthetic learners a lesson explanation and observes how each responds differently, then iterates their teaching until all profiles are satisfied. The exercise builds empathy for diverse learners while teaching practical AI agent design.",
+      "keyFeatures": [
+        "Configurable synthetic student profiles with persistent memory across a conversation session",
+        "Side-by-side chat UI showing all learner agents responding in parallel",
+        "Satisfaction meter per profile that updates as the lesson improves",
+        "Profile editor so instructors can add domain-specific misconceptions for a course",
+        "Session export showing which explanations resonated with which profiles and why"
+      ],
+      "techStack": "React + Vite + Tailwind (frontend), Flask + Supabase (session storage and profile management), Claude API for each synthetic student agent with distinct system prompts and persistent context",
+      "whyInteresting": "Building a multi-agent empathy tool forces students to think deeply about diverse learning needs while practicing real agent orchestration — two difficult skills that rarely appear in the same assignment.",
+      "inspiredBy": "Inworld AI's NPC character work applied to pedagogy, and AI-in-education trends around understanding diverse learning styles (https://www.analyticsinsight.net/artificial-intelligence/top-10-ai-game-development-tools-in-2026-you-should-know)"
+    }
+  ]
+}
