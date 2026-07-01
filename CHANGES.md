@@ -96,3 +96,9 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-06-26 [code] Created ideas/2026-06-26.md and .json with 3 ideas: Design System Scribe, Collaborative Debug Room, Model Distillation Lab
 
 2026-06-27 [code] Created ideas/2026-06-27.md with 3 ideas: Intent Drift Detector, Accessibility Challenge Arena, Agent Safety Ruleset Studio
+
+2026-07-01 [scope] Added research idea track: daily routine now generates 1 research idea (n=4) grounded in SIGCSE/ITiCSE papers with 3-6 month plan
+2026-07-01 [code] Extracted 469 papers into research-papers/papers-index.json from 4 conference proceedings PDFs
+2026-07-01 [code] Updated build.js (Research tier), web/app.js (research section + richer modal), web/styles.css (purple accent), ideas/SCHEMA.md
+2026-07-01 [code] Updated Remote Trigger trig_01VAVxabSrhffVLks64CwzG7 to generate research idea daily; added WebFetch to allowed tools
+2026-07-01 [code] Created first research idea (2026-07-01 n=4): LLM-Driven Misconception Clustering for CS1 Feedback

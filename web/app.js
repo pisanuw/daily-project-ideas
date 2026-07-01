@@ -65,10 +65,11 @@
   // ---- Section ----
   function section(tier, ideas) {
     var sorted = ideas.slice().sort(byDateDesc);
+    var countWord = tier.key === 'research' ? (sorted.length === 1 ? ' idea' : ' ideas') : (sorted.length === 1 ? ' project' : ' projects');
     var head = el('div', { class: 'section__head' }, [
       el('span', { class: 'section__peppers', text: tier.peppers }),
       el('h2', { class: 'section__title', text: tier.label }),
-      el('span', { class: 'section__count', text: sorted.length + (sorted.length === 1 ? ' project' : ' projects') }),
+      el('span', { class: 'section__count', text: sorted.length + countWord }),
       el('p', { class: 'section__blurb', text: tier.blurb }),
     ]);
 
@@ -114,8 +115,8 @@
     var host = document.getElementById('sections');
     DATA.tiers.forEach(function (tier) {
       var ideas = DATA.ideas.filter(function (i) { return i.tierKey === tier.key; });
-      // Hide a tier only if it's the special implemented tier and empty.
-      if (tier.key === 'implemented' && ideas.length === 0) return;
+      // Hide a tier only if it's the special implemented or research tier and empty.
+      if ((tier.key === 'implemented' || tier.key === 'research') && ideas.length === 0) return;
       host.appendChild(section(tier, ideas));
     });
   }
@@ -136,7 +137,8 @@
     if (idea.category) tags.push(el('span', { class: 'tag', text: idea.category }));
     tags.push(el('span', { class: 'tag tag--date', text: idea.date }));
 
-    var frag = el('div', { class: 'detail' }, [
+    var extraClass = idea.tierKey === 'research' ? 'detail detail--research' : 'detail';
+    var frag = el('div', { class: extraClass }, [
       el('div', { class: 'detail__peppers', text: peppersFor(idea.tierKey) }),
       el('h2', { class: 'detail__title', id: 'modal-title', text: idea.title }),
       el('div', { class: 'detail__tags' }, tags),
@@ -152,6 +154,78 @@
     if (idea.techStack) frag.appendChild(detailSection('Suggested Tech Stack', el('p', { text: idea.techStack })));
     if (idea.whyInteresting) frag.appendChild(detailSection("Why It's Interesting", el('p', { text: idea.whyInteresting })));
     if (idea.inspiredBy) frag.appendChild(detailSection('Inspired By', el('p', { class: 'inspired', text: idea.inspiredBy })));
+
+    // Research-specific sections
+    if (idea.papers && idea.papers.length) {
+      var papersDiv = el('div', { class: 'research-papers' });
+      idea.papers.forEach(function (p) {
+        var paperEl = el('div', { class: 'research-paper' }, [
+          el('div', { class: 'research-paper__title', text: p.title }),
+          el('div', { class: 'research-paper__meta', text: p.authors + ' — ' + p.venue + ' ' + p.year }),
+        ]);
+        if (p.abstract) paperEl.appendChild(el('p', { class: 'research-paper__abstract', text: p.abstract }));
+        if (p.relevance) paperEl.appendChild(el('p', { class: 'research-paper__relevance', text: 'Relevance: ' + p.relevance }));
+        if (p.url) {
+          var doiLink = el('a', { class: 'research-paper__doi', href: p.url, target: '_blank', rel: 'noopener', text: 'ACM DL ↗' });
+          paperEl.appendChild(doiLink);
+        }
+        papersDiv.appendChild(paperEl);
+      });
+      frag.appendChild(detailSection('Source Paper(s)', papersDiv));
+    }
+
+    if (idea.additionalRefs && idea.additionalRefs.length) {
+      var refsDiv = el('div', { class: 'research-refs' });
+      idea.additionalRefs.forEach(function (r) {
+        var refEl = el('div', { class: 'research-ref' });
+        var meta = r.authors ? r.authors + ' — ' + r.venue : r.venue;
+        refEl.appendChild(el('div', { class: 'research-ref__title', text: r.title }));
+        refEl.appendChild(el('div', { class: 'research-ref__meta', text: meta }));
+        if (r.relevance) refEl.appendChild(el('p', { class: 'research-ref__relevance', text: r.relevance }));
+        if (r.url) refEl.appendChild(el('a', { class: 'research-paper__doi', href: r.url, target: '_blank', rel: 'noopener', text: 'View ↗' }));
+        refsDiv.appendChild(refEl);
+      });
+      frag.appendChild(detailSection('Additional References', refsDiv));
+    }
+
+    if (idea.researchPlan) {
+      var plan = idea.researchPlan;
+      var planDiv = el('div', { class: 'research-plan' });
+      if (plan.overview) planDiv.appendChild(el('p', { class: 'research-plan__overview', text: plan.overview }));
+
+      if (plan.milestones && plan.milestones.length) {
+        var milestoneList = el('ol', { class: 'research-plan__milestones' });
+        plan.milestones.forEach(function (m) {
+          var liText = 'Month ' + m.month + ': ' + m.goal;
+          var li = el('li', {}, [
+            el('strong', { text: liText }),
+          ]);
+          if (m.deliverable) li.appendChild(document.createTextNode(' — ' + m.deliverable));
+          milestoneList.appendChild(li);
+        });
+        planDiv.appendChild(milestoneList);
+      }
+
+      if (plan.targetVenues && plan.targetVenues.length) {
+        planDiv.appendChild(el('p', { class: 'research-plan__venues', text: 'Target venues: ' + plan.targetVenues.join(', ') }));
+      }
+      if (plan.resources) planDiv.appendChild(el('p', { class: 'research-plan__resources', text: 'Resources needed: ' + plan.resources }));
+
+      if (plan.risks && plan.risks.length) {
+        var riskList = el('ul', { class: 'research-plan__risks' });
+        plan.risks.forEach(function (r) {
+          riskList.appendChild(el('li', { text: r.risk + ' — Mitigation: ' + r.mitigation }));
+        });
+        planDiv.appendChild(el('div', {}, [el('strong', { text: 'Risks:' }), riskList]));
+      }
+
+      if (typeof plan.humanSubjects === 'boolean') {
+        var hsText = plan.humanSubjects ? 'Requires IRB approval (human subjects involved).' : 'No human subjects — no IRB required.';
+        planDiv.appendChild(el('p', { class: 'research-plan__irb', text: hsText }));
+      }
+
+      frag.appendChild(detailSection('3-6 Month Research Plan', planDiv));
+    }
 
     var links = [];
     if (idea.url) links.push(el('a', { class: 'btn-link', href: idea.url, target: '_blank', rel: 'noopener', text: 'View live project ↗' }));

@@ -51,6 +51,104 @@
       "techStack": "React + Vite, Flask API, YouTube Data API, Claude API (vision) or Gemini API (vision), Supabase",
       "whyInteresting": "It combines API integration, vision AI, and LMS tooling into one project with immediate real-world utility for any professor who records lectures or assigns video homework.",
       "inspiredBy": "MiniMax M3 and Kimi-K2.6 multimodal open-source models released June 2026 with native video and image understanding https://www.devflokers.com/blog/open-source-ai-roundup-june-2026"
+    },
+    {
+      "n": 4,
+      "title": "LLM-Driven Misconception Clustering for CS1 Feedback",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Build an LLM-powered pipeline that classifies and clusters student programming errors by underlying conceptual cause, then generates targeted feedback messages tied to specific misconceptions rather than raw test failures.",
+      "description": "Most automated feedback systems (including Jolly Feedback) report what failed, not why. This research extends a SIGCSE 2026 real-time misconception detection framework by applying it offline to archived submission logs, constructing a reusable misconception taxonomy for introductory CS (C++/Java), and then wiring that taxonomy into a targeted LLM critique layer. The system pairs static analysis output from existing autograders with a misconception classifier to produce feedback that names the conceptual gap and suggests a conceptual next step without revealing the answer. This addresses the open question from Pisan's prior work: does misconception-targeted critique reduce resubmission cycles compared to plain pass/fail output?",
+      "papers": [
+        {
+          "title": "AI-Augmented Instruction: Real-Time Misconception Detection",
+          "authors": "Georgia Institute of Technology (authors not parsed from poster format)",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770761.3777326",
+          "url": "https://doi.org/10.1145/3770761.3777326",
+          "abstract": "We present an analysis framework and instructor tool that leverage LLMs to classify, cluster, and present students' coding errors in real time. The approach uses a prompt-engineered GPT-4o agent to classify syntactical, conceptual, and strategic errors, then clusters them via Universal Sentence Encoder embeddings + KMeans, achieving 89.5% error-classification agreement in a pilot study.",
+          "relevance": "Provides a validated LLM-based error classification and clustering pipeline that can be adapted from real-time lecture use to offline analysis of archived autograder submission logs, directly feeding the misconception taxonomy DT-2 agenda."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "Keuning, Jeuring & Heeren (2019): A Systematic Literature Review of Automated Feedback Generation for Programming Exercises",
+          "authors": "Hieke Keuning, Johan Jeuring, Bastiaan Heeren",
+          "venue": "ACM Transactions on Computing Education",
+          "year": 2019,
+          "url": "https://dl.acm.org/doi/10.1145/3231711",
+          "relevance": "Comprehensive survey of 66 automated feedback tools; establishes baseline taxonomy of feedback types (errors reported, hints, explanations) and identifies misconception-targeted feedback as underserved but high-impact."
+        },
+        {
+          "title": "Qian & Lehman (2017): Students' Misconceptions and Other Difficulties in Introductory Programming",
+          "authors": "Yizhou Qian, James Lehman",
+          "venue": "ACM Transactions on Computing Education",
+          "year": 2017,
+          "url": "https://dl.acm.org/doi/10.1145/2996205",
+          "relevance": "Canonical reference for CS1 misconception taxonomy covering variable scope, loops, conditionals, and object identity. Used by the SIGCSE 2026 paper as the classification schema — gives empirical grounding for the cluster labels."
+        },
+        {
+          "title": "Price, Dong & Lipovac (2017): iSnap: Towards Intelligent Tutoring in a Novice Programming Environment",
+          "authors": "Thomas W. Price, Yihuan Dong, Dragan Lipovac",
+          "venue": "SIGCSE 2017",
+          "year": 2017,
+          "url": "https://dl.acm.org/doi/10.1145/3017680.3017762",
+          "relevance": "Shows that hint systems grounded in common-mistake patterns produce measurable learning gains; provides methodological precedent for the A/B evaluation design."
+        }
+      ],
+      "researchPlan": {
+        "overview": "This project constructs a misconception taxonomy from archived Jolly Feedback submission logs using the SIGCSE 2026 LLM-classification approach, then builds a targeted LLM critique layer that ties feedback to specific misconceptions. The evaluation tests whether misconception-targeted feedback reduces resubmission cycles in CSS 142 compared to plain pass/fail output — a clean A/B comparison on infrastructure already owned.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review and taxonomy adaptation",
+            "deliverable": "Annotated Qian & Lehman taxonomy extended with C++/Java-specific patterns; replication of SIGCSE 2026 classification pipeline on 200-error sample from Jolly Feedback logs"
+          },
+          {
+            "month": 2,
+            "goal": "Full log analysis and cluster construction",
+            "deliverable": "LLM classification run on full Jolly Feedback archive; KMeans clusters reviewed and labeled; final 20-30 misconception category taxonomy document"
+          },
+          {
+            "month": 3,
+            "goal": "Misconception-targeted feedback prompt engineering",
+            "deliverable": "Prompt library: one critique template per taxonomy category; outputs explanation of WHY the error reflects the misconception + conceptual next step, without revealing code"
+          },
+          {
+            "month": 4,
+            "goal": "Integration with Jolly Feedback pipeline",
+            "deliverable": "Extended Jolly Feedback that routes each test failure through the misconception classifier and attaches a targeted LLM critique to the email report; deployed to sandbox section"
+          },
+          {
+            "month": 5,
+            "goal": "Evaluation data collection (observational)",
+            "deliverable": "Submission-log comparison: resubmission rate and time-to-pass for targeted vs. standard feedback groups in CSS 142 (using existing system logs, no new human-subjects protocol needed)"
+          },
+          {
+            "month": 6,
+            "goal": "Analysis and paper writing",
+            "deliverable": "Draft paper with RQ, method, results, and discussion submitted to SIGCSE or ICER"
+          }
+        ],
+        "targetVenues": ["SIGCSE", "ICER", "EDM", "ITiCSE"],
+        "resources": "Existing Jolly Feedback submission logs from CSS 142 (C++/Python); Claude API (Sonnet tier) for classification and critique generation; GitHub Actions for pipeline integration; no new course infrastructure needed.",
+        "risks": [
+          {
+            "risk": "Archived logs may not have enough volume per assignment to reach statistical significance in the evaluation",
+            "mitigation": "Extend data collection over two academic terms; use effect-size framing if n is modest, and position as a feasibility study with a clearly-stated future replication plan"
+          },
+          {
+            "risk": "LLM misconception classifier may not generalize from Python (training domain) to C++ submission patterns",
+            "mitigation": "Start with 200-error human-validated sample to measure cross-language accuracy before scaling; adapt few-shot examples to C++ idioms"
+          },
+          {
+            "risk": "Misconception-targeted feedback may leak solution strategies if prompts are not carefully constrained",
+            "mitigation": "Add explicit 'do not reveal code or algorithm' constraint to all critique prompts; blind human rater review of 50 outputs before deployment"
+          }
+        ],
+        "humanSubjects": false
+      }
     }
   ]
 }

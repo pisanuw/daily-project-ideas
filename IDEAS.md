@@ -155,3 +155,4 @@
 | 2026-07-01 | Agent Framework Scaffolder | Side Project | Weekend |
 | 2026-07-01 | Prompt History Grader | Teaching Tool | 1-2 Weeks |
 | 2026-07-01 | Video Scene Question Bank | Classroom Assignment | Multi-week |
+| 2026-07-01 | LLM-Driven Misconception Clustering for CS1 Feedback | Research | Research |

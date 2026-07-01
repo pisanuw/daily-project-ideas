@@ -4,7 +4,7 @@
 
 Automated daily project ideas curated by a Claude Code Remote Trigger.
 
-Every day at 5am, Claude searches Reddit and the web for interesting project ideas and commits 3 new ones here.
+Every day at 5am, Claude searches Reddit and the web for interesting project ideas and commits 3 new ones here. It also generates 1 research idea grounded in recent CS education conference papers (SIGCSE TS 2026, ITiCSE 2025), complete with source papers, additional references, and a 3-6 month research plan.
 
 ## Sources (by priority)
 
@@ -36,4 +36,5 @@ Multi-week 🌶️🌶️🌶️) plus an Implemented section. Build it with `no
 - `build.js` - Zero-dependency build: parses `ideas/` into `dist/`
 - `web/` - Static site source (HTML/CSS/JS), copied into `dist/` at build time
 - `implemented.json` - Hand-curated list of ideas that have been built
+- `research-papers/papers-index.json` - Extracted metadata for all papers from local proceedings
 - `DEPLOY.md` - How to preview locally and deploy to Netlify

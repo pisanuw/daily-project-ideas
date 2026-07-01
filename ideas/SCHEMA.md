@@ -78,6 +78,75 @@ picks up JSON automatically on the next build.
 
 ---
 
+## Research idea format (n=4 each day)
+
+Each daily JSON file includes a fourth entry with `"complexity": "Research"`.
+Research ideas are grounded in one or more conference papers and include a
+detailed research plan. They appear in a separate **Research Ideas** section
+on the website.
+
+```json
+{
+  "n": 4,
+  "title": "Research Idea Title",
+  "category": "Research",
+  "complexity": "Research",
+  "summary": "One to two sentence card blurb for the website card.",
+  "description": "Full description of the research idea and how it extends the source paper(s).",
+  "papers": [
+    {
+      "title": "Source Paper Title",
+      "authors": "Author One, Author Two",
+      "venue": "SIGCSE TS 2026",
+      "year": 2026,
+      "doi": "10.1145/XXXXXXX.YYYYYYY",
+      "url": "https://doi.org/10.1145/XXXXXXX.YYYYYYY",
+      "abstract": "Paper abstract (first 2-3 sentences).",
+      "relevance": "How this paper connects to the research idea."
+    }
+  ],
+  "additionalRefs": [
+    {
+      "title": "Related Work Title",
+      "authors": "Author(s)",
+      "venue": "Conference or Journal, Year",
+      "year": 2024,
+      "url": "https://...",
+      "relevance": "How this reference supports or contextualizes the idea."
+    }
+  ],
+  "researchPlan": {
+    "overview": "2-3 sentence summary of the research agenda.",
+    "milestones": [
+      { "month": 1, "goal": "Literature review and problem scoping", "deliverable": "Annotated bibliography + refined research questions" },
+      { "month": 2, "goal": "...", "deliverable": "..." },
+      { "month": 3, "goal": "...", "deliverable": "..." },
+      { "month": 4, "goal": "...", "deliverable": "..." },
+      { "month": 5, "goal": "...", "deliverable": "..." },
+      { "month": 6, "goal": "...", "deliverable": "Draft paper ready for submission" }
+    ],
+    "targetVenues": ["SIGCSE", "ICER", "EDM", "ITiCSE"],
+    "resources": "What data, compute, APIs, student collaborators, or infrastructure would be needed.",
+    "risks": [
+      { "risk": "Description of a risk", "mitigation": "How to address it" }
+    ],
+    "humanSubjects": false
+  }
+}
+```
+
+### Paper index
+
+`research-papers/papers-index.json` contains metadata for all papers from the
+local proceedings (SIGCSE TS 2026 v1/v2, ITiCSE 2025 v1/v2): title, authors,
+abstract, DOI, venue, year. The daily routine reads this index to pick a paper
+not yet used, then does additional web research to enrich the idea.
+
+Used-paper tracking: the routine checks existing `ideas/*.json` files and reads
+the `papers[].doi` arrays to know which papers have already generated ideas.
+
+---
+
 ## Implemented projects (`implemented.json`, repo root)
 
 Hand-curated. The daily routine does **not** touch this file. An idea becomes
