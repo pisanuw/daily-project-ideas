@@ -152,3 +152,6 @@
 | 2026-06-30 | Presentation Pacer | Side Project | Weekend |
 | 2026-06-30 | AI Research Methods Lab | Teaching Tool | 1-2 Weeks |
 | 2026-06-30 | Synthetic Learner Studio | Classroom Assignment | Multi-week |
+| 2026-07-01 | Agent Framework Scaffolder | Side Project | Weekend |
+| 2026-07-01 | Prompt History Grader | Teaching Tool | 1-2 Weeks |
+| 2026-07-01 | Video Scene Question Bank | Classroom Assignment | Multi-week |

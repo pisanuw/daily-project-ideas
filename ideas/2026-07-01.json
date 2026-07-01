@@ -1,0 +1,56 @@
+{
+  "date": "2026-07-01",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Agent Framework Scaffolder",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "Paste a task description and instantly get scaffold code side-by-side for LangGraph, CrewAI, and the Claude Agents SDK, with color-coded highlights of each framework's structural idioms.",
+      "description": "A browser-based tool where you paste a natural-language task description and instantly see scaffold code generated side-by-side for LangGraph, CrewAI, and the Claude Agents SDK. The scaffolds highlight structural idioms unique to each framework, making it easy to pick the right one without reading three separate docs. No code runs in-browser (keeping it fast and cost-free beyond one API call).",
+      "keyFeatures": [
+        "Text input for task description, instant tabbed scaffold output",
+        "Color-coded diff view highlighting framework-specific idioms (loops, tools, memory, handoffs)",
+        "One-click copy to clipboard per framework",
+        "Optional 'explain this scaffold' sidebar using Claude API"
+      ],
+      "techStack": "React + Vite + Tailwind, Claude API (claude-sonnet-5 for generation)",
+      "whyInteresting": "Developers spend hours reading framework docs before committing to one; this compresses that decision to minutes and is a natural classroom demo for teaching agentic architecture patterns.",
+      "inspiredBy": "JetBrains blog 'Top Agentic Frameworks for Building Applications 2026' and GitHub trending AI agent repositories https://blog.jetbrains.com/pycharm/2026/06/top-agentic-frameworks-for-building-applications-2026/"
+    },
+    {
+      "n": 2,
+      "title": "Prompt History Grader",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "Students upload their exported AI conversation history alongside a project submission; the tool scores prompt quality, iteration, and comprehension signals and generates a structured grading report for professors.",
+      "description": "A Flask web app where students upload their exported AI conversation history (Claude JSON export, ChatGPT ZIP, or raw text) alongside their project submission. The tool uses the Claude API to analyze the conversation, scoring for prompt specificity, productive iteration, critical pushback on AI suggestions, and evidence the student understood the output. Professors receive a structured report with scores and supporting excerpts.",
+      "keyFeatures": [
+        "Parses Claude, ChatGPT, and generic JSON conversation export formats",
+        "Rubric-based scoring: prompt specificity, iteration quality, comprehension signals, originality",
+        "Side-by-side timeline view: conversation history vs. final artifact",
+        "Exportable grading report (PDF + JSON) for LMS upload"
+      ],
+      "techStack": "Flask + Claude API, React or Jinja2 frontend, Supabase for storage, pdfkit for report generation",
+      "whyInteresting": "As AI-assisted coding becomes the norm, grading only the final output misses how students actually learned; this tool gives professors a practical way to assess the process without requiring real-time surveillance.",
+      "inspiredBy": "HN 'Ask HN: What are you working on? June 2026' discussions about assessing AI-assisted student work https://news.ycombinator.com/item?id=48528779"
+    },
+    {
+      "n": 3,
+      "title": "Video Scene Question Bank",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "Students build an app that fetches a YouTube video's chapters and key frames, analyzes them with a vision model, and auto-generates a shareable multiple-choice quiz exportable to Canvas, Google Forms, or Markdown.",
+      "description": "Students build a full-stack web app that takes any educational YouTube video, extracts key frames at chapter boundaries using the YouTube Data API, feeds them through a vision-capable model (Claude or Gemini), and auto-generates a multiple-choice question bank from the visual and transcript content. The final product is a shareable quiz that professors can embed in their LMS.",
+      "keyFeatures": [
+        "YouTube URL input: auto-fetches chapters, transcript, and key frame thumbnails",
+        "Vision model analysis of frames to identify diagrams, code snippets, and equations",
+        "Auto-generated multiple-choice and short-answer questions with answer keys",
+        "Export to Canvas quiz XML, Google Forms JSON, or plain Markdown"
+      ],
+      "techStack": "React + Vite, Flask API, YouTube Data API, Claude API (vision) or Gemini API (vision), Supabase",
+      "whyInteresting": "It combines API integration, vision AI, and LMS tooling into one project with immediate real-world utility for any professor who records lectures or assigns video homework.",
+      "inspiredBy": "MiniMax M3 and Kimi-K2.6 multimodal open-source models released June 2026 with native video and image understanding https://www.devflokers.com/blog/open-source-ai-roundup-june-2026"
+    }
+  ]
+}

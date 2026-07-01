@@ -5,6 +5,7 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-06-28 [code] Created ideas/2026-06-28.md + .json with 3 ideas: Doc DX Grader, Pair Programming Pulse, WebGPU Shader Studio
 2026-06-29 [code] Created ideas/2026-06-29.md + .json with 3 ideas: Prompt Compression Studio, Assignment Scaffolder, Agentic Study Buddy Network
 2026-06-30 [code] Created ideas/2026-06-30.md + .json with 3 ideas: Presentation Pacer, AI Research Methods Lab, Synthetic Learner Studio
+2026-07-01 [code] Created ideas/2026-07-01.md + .json with 3 ideas: Agent Framework Scaffolder, Prompt History Grader, Video Scene Question Bank
 
 2026-05-12 [note] Initialized.
 2026-05-12 [decision] Use Claude Code Remote Trigger (not local cron) for daily project idea generation
