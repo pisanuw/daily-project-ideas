@@ -102,3 +102,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-07-01 [code] Updated build.js (Research tier), web/app.js (research section + richer modal), web/styles.css (purple accent), ideas/SCHEMA.md
 2026-07-01 [code] Updated Remote Trigger trig_01VAVxabSrhffVLks64CwzG7 to generate research idea daily; added WebFetch to allowed tools
 2026-07-01 [code] Created first research idea (2026-07-01 n=4): LLM-Driven Misconception Clustering for CS1 Feedback
+
+2026-07-02 [code] Created ideas/2026-07-02.json: Live Multiplayer Pixel Canvas, Assignment Error Profiler, Persistent NPC Memory Engine, LLM-Mediated Async Checkoffs (research)

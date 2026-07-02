@@ -1,0 +1,165 @@
+{
+  "date": "2026-07-02",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Live Multiplayer Pixel Canvas",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A browser-based collaborative pixel art canvas where every click broadcasts to all connected users in real time via Supabase Realtime, with a Claude API sidebar that suggests color palettes based on the current composition.",
+      "description": "Build a real-time collaborative pixel art canvas inspired by r/place, where any number of users can paint pixels simultaneously with changes propagating to all browsers in under 100ms using Supabase Realtime broadcast channels. A fixed-size grid (e.g. 64x64 or 128x128) is stored in a Supabase Postgres table; each pixel-click event is broadcast and applied optimistically on the client. A sidebar button calls the Claude API with a compact hex snapshot of the canvas and returns a suggested 5-color palette that harmonizes with the current composition. An optional time-lapse mode replays the full edit history in chronological order.",
+      "keyFeatures": [
+        "Real-time pixel broadcast to all connected clients via Supabase Realtime channels (<100ms latency)",
+        "Persistent canvas state in Supabase Postgres; each row is one pixel with x, y, color, user_id, timestamp",
+        "Claude API palette suggestion: hex grid snapshot → color harmony prompt → 5-color swatch returned",
+        "Time-lapse playback replaying the canvas edit history in order",
+        "One-click PNG export of the current canvas state"
+      ],
+      "techStack": "React + Vite + Tailwind, Supabase (Realtime + Postgres), Claude API (claude-haiku-4-5 for palette suggestions)",
+      "whyInteresting": "Supabase Realtime makes multi-user features surprisingly easy to wire up, and adding an AI palette advisor turns a fun weekend hack into a portfolio piece that demonstrates real-time architecture, API integration, and creative UX in one compact codebase.",
+      "inspiredBy": "The r/place collaborative art phenomenon and GitHub trending 'cozy creative coding' repositories (June 2026) showcasing Supabase Realtime broadcast demos for multi-user canvas apps"
+    },
+    {
+      "n": 2,
+      "title": "Assignment Error Profiler",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "A Flask web app where professors upload ZIP archives of student code submissions and receive an LLM-generated heat map of conceptual error categories per assignment, plus a per-student longitudinal view that flags anyone whose errors repeatedly cluster around the same misconception.",
+      "description": "Professors upload ZIP archives of student code submissions (C++, Java, or Python). The backend extracts compiler errors, test-runner failures, and lint warnings per submission, then sends each error to the Claude API with a prompt that classifies it into one of a fixed 12-category conceptual taxonomy (off-by-one, null dereference, scope confusion, type mismatch, logic error, missing base case, and more). The frontend renders a stacked heat map showing which categories dominate each assignment, a per-student longitudinal panel showing which categories appear across multiple weeks, and an at-risk flag for students who hit the same category on three or more consecutive assignments. Professors can export the full analysis as CSV for advising or gradebook import.",
+      "keyFeatures": [
+        "ZIP upload of student submissions; automatic extraction of compiler output and test-runner logs per file",
+        "Batch LLM classification of errors into a configurable 12-category conceptual taxonomy via Claude API",
+        "Assignment heat map: columns = assignments, rows = error categories, cell color = percentage of students affected",
+        "Per-student longitudinal panel with intervention flag when the same error category appears 3+ consecutive weeks",
+        "CSV export for gradebook systems and advising notes"
+      ],
+      "techStack": "Flask + Claude API (claude-sonnet-5 for classification), React + Recharts for visualization, Supabase for submission and result storage",
+      "whyInteresting": "Autograders already collect the raw error signal; this tool converts that signal into actionable class-wide and per-student intelligence without requiring a full research pipeline, giving professors a practical early-warning system deployable in a single setup session.",
+      "inspiredBy": "SIGCSE TS 2026 work on large-course assessment tools and the recurring instructor need for cluster-level insights from autograder runs without standing up a custom data science pipeline"
+    },
+    {
+      "n": 3,
+      "title": "Persistent NPC Memory Engine",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "Students build a conversational game NPC with retrievable long-term memory: every player dialogue turn is embedded and stored in Supabase pgvector so the NPC can recall specific past events, form evolving opinions about the player, and exhibit measurable persona drift across extended sessions.",
+      "description": "Students design and implement a conversational game NPC (shopkeeper, quest giver, or villain) that maintains a persistent memory of every past conversation with a player. Each dialogue turn is embedded via the Claude API and stored in Supabase pgvector. When the player speaks, the NPC retrieves the three most semantically similar past memories via cosine similarity, injects them into the system prompt, and generates a response that references or reacts to prior events. Students also implement a lightweight 'persona state' vector tracking trust, curiosity, and hostility levels toward the player, updated after each exchange using sentiment classification. The assignment culminates in a controlled comparison: students test their NPC with (a) RAG retrieval memory, (b) rolling summarization memory, and (c) no memory, then write a reflection on narrative coherence, response latency, and token cost across the three strategies.",
+      "keyFeatures": [
+        "Every dialogue turn embedded with Claude API and stored in Supabase pgvector; retrieval via cosine similarity",
+        "Persona state vector (trust, curiosity, hostility) updated per exchange using sentiment classification",
+        "Three memory strategies to implement and compare: RAG retrieval, rolling summarization, sliding window",
+        "Simple web frontend to play as the player and inspect the NPC's current memory store and persona state in real time",
+        "Written reflection comparing strategies on narrative coherence, latency, and API token cost"
+      ],
+      "techStack": "React + Vite frontend, Flask API, Claude API (claude-sonnet-5 for dialogue + embeddings), Supabase (pgvector extension)",
+      "whyInteresting": "Memory architecture is one of the hardest design choices in agentic systems; this assignment makes it concrete, measurable, and narratively engaging by grounding it in a game character students care about — and the comparison experiment teaches empirical thinking about LLM tradeoffs that transfers directly to industry agent work.",
+      "inspiredBy": "Open-source LLM memory libraries (mem0, MemGPT) trending on GitHub and the gap in CS game-development curricula for assignments that bridge narrative design with applied vector search and agentic memory patterns"
+    },
+    {
+      "n": 4,
+      "title": "LLM-Mediated Asynchronous Checkoffs for Developer Tool Proficiency",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Investigate whether an LLM evaluator scoring asynchronous student screen-recording walkthroughs can match the reliability of in-person TA checkoffs for CLI, debugger, and Git proficiency, enabling large courses to scale authentic developer-tool assessment without proportional TA staffing.",
+      "description": "In-person checkoffs where students verbalize tool use to a TA are pedagogically effective but demand significant TA scheduling time per student. This research tests whether asynchronous LLM evaluation of brief student screen-capture walkthroughs achieves comparable reliability. Students complete a short screen recording narrating a specified CLI, debugging, or Git task; the recording is transcribed (Whisper API) and scored by an LLM against the same rubric criteria used by human TAs in the source paper. The study compares LLM scores to human TA scores on the same submissions, measures inter-rater agreement (Cohen's kappa), and evaluates whether LLM-mediated checkoffs preserve the authenticity properties (verbalized reasoning, anti-AI-completion) that make the format valuable. A secondary experiment tests whether text-only transcripts suffice or whether multimodal analysis (frame extraction + transcript) is necessary for reliable evaluation of command-line and debugger tasks. A successful tool would allow courses with 200+ students to run proficiency checkoffs without scheduling individual TA appointments, directly extending Pisan's toolchain-first pedagogy from teaching into scalable assessment.",
+      "papers": [
+        {
+          "title": "Assessing Student Proficiency in Foundational Developer Tools",
+          "authors": "Authors from North Carolina (full author metadata not parsed from proceedings index)",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770762.3772618",
+          "url": "https://doi.org/10.1145/3770762.3772618",
+          "abstract": "Most undergraduate computer science programs still treat core developer tools including the command-line interface (CLI), symbolic debuggers, and version control systems as skills students will acquire on their own outside of class. This experience report presents a practical, scalable method to assess proficiency through checkoffs: one-on-one sessions where students demonstrate skills and verbalize concepts to a teaching assistant (TA). In a semester-long Systems Fundamentals course enrolling 237 students, three checkoffs were administered — one each for CLI, debugging, and Git. Survey results indicated the checkoff format boosted students' confidence with the tools, encouraged earlier help-seeking on other assignments, and fostered a stronger sense of community.",
+          "relevance": "Directly establishes the checkoff model this research proposes to automate: the rubric structure, task types (CLI, debugger, Git), the 237-student scaling challenge, and the pedagogical rationale all transfer directly to the proposed asynchronous system. The paper also explicitly plans to continue using checkoffs, making scalability the natural open research question."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "Designing and Implementing Skill Tests at Scale: Frequent, Computer-Based, Proctored Assessments with Minimal Infrastructure",
+          "authors": "Authors from UC San Diego",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "url": "https://doi.org/10.1145/3770762.3772518",
+          "relevance": "Complementary approach to frequent low-stakes assessment using 10-minute computer-based tests in a large CS1 course. Shows that replacing a midterm with distributed skill tests improves student preference and reduces anxiety, providing a comparison format for the evaluation design."
+        },
+        {
+          "title": "Code Interviews: Design and Evaluation of a More Authentic Assessment for Introductory Programming Assignments",
+          "authors": "Anonymous (arXiv preprint)",
+          "venue": "arXiv, 2024",
+          "year": 2024,
+          "url": "https://arxiv.org/abs/2410.01010",
+          "relevance": "Studies structured code interviews as an authentic alternative to take-home programming assignments. The interview rubric design, scoring methodology, and inter-rater reliability analysis directly inform how to construct and validate the LLM-mediated checkoff scoring rubric."
+        },
+        {
+          "title": "A Survey of LLM-Based Applications in Programming Education: Balancing Automation and Human Oversight",
+          "authors": "Anonymous (arXiv preprint)",
+          "venue": "arXiv, 2025",
+          "year": 2025,
+          "url": "https://arxiv.org/abs/2510.03719",
+          "relevance": "Comprehensive survey of LLM use in programming education and the open question of when human oversight is necessary. Frames the automation-vs-oversight tension that this research directly addresses for developer-tool assessment."
+        },
+        {
+          "title": "Toolchain-First Pedagogy in Introductory CS Courses",
+          "authors": "Yusuf Pisan",
+          "venue": "Creative Education, 2024",
+          "year": 2024,
+          "url": "https://www.scirp.org/journal/ce",
+          "relevance": "Pisan's own work establishing that intentional early toolchain instruction (Git, IDE, build systems) in CSS 342/343 reduces cognitive load and improves learning outcomes. The proposed research extends this from teaching into scalable assessment — measuring developer-tool proficiency at course scale rather than only teaching it."
+        }
+      ],
+      "researchPlan": {
+        "overview": "This study tests whether LLM evaluation of asynchronous student screen-recording walkthroughs can match human TA reliability for developer-tool checkoffs, enabling large courses to scale authentic proficiency assessment without proportional TA staffing. The design compares text-only transcripts to multimodal (transcript + frames) evaluation across CLI, debugger, and Git tasks, with human TA scoring of a stratified sample as the ground-truth baseline.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Rubric digitization and pilot task design",
+            "deliverable": "Digital rubric adapted from paper-218 checkoff criteria for CLI, debugger, and Git; 9 pilot task prompts (3 per tool); screen-recording protocol document; 10 volunteer recordings collected from TAs or research assistants"
+          },
+          {
+            "month": 2,
+            "goal": "LLM scoring pipeline construction",
+            "deliverable": "Whisper transcription pipeline + Claude API scoring chain with per-criterion rubric; text-only and multimodal (frame extraction every 10s + transcript) variants; JSON output with per-criterion scores, confidence flags, and qualitative feedback"
+          },
+          {
+            "month": 3,
+            "goal": "Human TA baseline scoring and inter-rater reliability",
+            "deliverable": "Dual TA scoring of 10 pilot recordings; human inter-rater agreement (Cohen's kappa); LLM-vs-human comparison on pilot set — identifies divergence patterns and informs prompt refinement"
+          },
+          {
+            "month": 4,
+            "goal": "Full course deployment in CSS 342 or Systems Fundamentals",
+            "deliverable": "Asynchronous checkoff administered to full cohort (60-240 students); human TAs score a stratified 20% random sample; full comparison dataset produced"
+          },
+          {
+            "month": 5,
+            "goal": "Analysis: reliability, validity, and student experience",
+            "deliverable": "Inter-rater agreement (LLM vs. human) across tool types; score distribution comparison; student survey on async format vs. in-person preference; qualitative coding of cases where LLM and human diverge"
+          },
+          {
+            "month": 6,
+            "goal": "Paper writing and submission",
+            "deliverable": "Draft paper with research questions, method, results, and discussion; submitted to SIGCSE TS or ITiCSE"
+          }
+        ],
+        "targetVenues": ["SIGCSE", "ITiCSE", "ICER", "EDULEARN"],
+        "resources": "Existing CSS 342 or Systems Fundamentals course enrollment; screen recording tool (OBS or Loom free tier); Whisper API for transcription; Claude API (Sonnet tier) for scoring; Supabase for submission storage; 2-4 volunteer TA scorers for the human-baseline sample; IRB approval for recording study.",
+        "risks": [
+          {
+            "risk": "Asynchronous recording lacks the real-time probing that makes in-person checkoffs pedagogically valuable",
+            "mitigation": "Include a required reflection prompt in each task ('explain why you chose this command') to elicit verbalization equivalent to TA questioning; measure student self-reported confidence before and after to test whether the format preserves the confidence-building effect"
+          },
+          {
+            "risk": "LLM may score CLI and debugger tasks unreliably when transcript is ambiguous without visual context",
+            "mitigation": "Run both text-only and multimodal variants; compare inter-rater agreement to quantify when frame-level context is required and report this as a finding rather than a flaw"
+          },
+          {
+            "risk": "IRB requirements for student recording may reduce participation rates",
+            "mitigation": "Design as opt-in with explicit data destruction timeline; pilot with TA volunteers before student deployment; offer an in-person alternative for students who decline recording"
+          }
+        ],
+        "humanSubjects": true
+      }
+    }
+  ]
+}
