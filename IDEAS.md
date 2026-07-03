@@ -160,3 +160,7 @@
 | 2026-07-02 | Assignment Error Profiler | Teaching Tool | 1-2 Weeks |
 | 2026-07-02 | Persistent NPC Memory Engine | Classroom Assignment | Multi-week |
 | 2026-07-02 | LLM-Mediated Asynchronous Checkoffs for Developer Tool Proficiency | Research | Research |
+| 2026-07-03 | CSS Animation Timeline Explorer | Side Project | Weekend |
+| 2026-07-03 | Bloom's Exam Question Classifier | Teaching Tool | 1-2 Weeks |
+| 2026-07-03 | AI Assistant Persona Studio | Classroom Assignment | Multi-week |
+| 2026-07-03 | Hint Interaction Profiling for Adaptive Hint Selection in CS1 | Research | Research |

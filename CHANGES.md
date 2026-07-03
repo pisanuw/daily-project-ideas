@@ -104,3 +104,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-07-01 [code] Created first research idea (2026-07-01 n=4): LLM-Driven Misconception Clustering for CS1 Feedback
 
 2026-07-02 [code] Created ideas/2026-07-02.json: Live Multiplayer Pixel Canvas, Assignment Error Profiler, Persistent NPC Memory Engine, LLM-Mediated Async Checkoffs (research)
+
+2026-07-03 [code] Created ideas/2026-07-03.json: CSS Animation Timeline Explorer, Bloom's Exam Question Classifier, AI Assistant Persona Studio, Hint Interaction Profiling for Adaptive Hint Selection (research)

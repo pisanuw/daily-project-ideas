@@ -1,0 +1,165 @@
+{
+  "date": "2026-07-03",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "CSS Animation Timeline Explorer",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A browser tool where developers paste CSS keyframe animation code and interactively scrub through every frame, seeing easing curves, per-property values at any timestamp, and timing function visualizations side by side.",
+      "description": "Paste any @keyframes block and a matching element style declaration into the editor, and the tool renders the animated element on a canvas alongside a scrubable timeline. The timeline displays every keyframe as a vertical marker; dragging the playhead shows exact computed property values (transform, opacity, color, etc.) at that instant. A second panel renders the timing function curve (cubic-bezier or steps) so developers can see visually why an animation feels bouncy or stiff. The tool detects multiple simultaneous animation properties and stacks their curves in color-coded lanes, making compound animations readable at a glance. No backend is required: parsing is done in the browser with a hand-rolled CSS keyframe tokenizer (roughly 200 lines), and the canvas renderer uses requestAnimationFrame with a synthetic clock rather than actual DOM time, so scrubbing is instant even on low-power hardware.",
+      "keyFeatures": [
+        "Live CSS @keyframes parser with instant error feedback; accepts pasted or typed input without file upload",
+        "Scrubable playhead showing exact computed property values at any timestamp for all animated properties",
+        "Easing curve visualizer rendering cubic-bezier and steps() timing functions as interactive SVG paths",
+        "Multi-property lane view stacking concurrent animation properties in color-coded rows",
+        "Zero-dependency browser build: tokenizer + renderer run entirely client-side with no backend"
+      ],
+      "techStack": "React + Vite, Canvas API + SVG for visualization, hand-rolled CSS keyframe tokenizer (no external parser), no backend",
+      "whyInteresting": "Browser DevTools show the computed end state and play/pause controls, but offer no way to scrub through an animation frame by frame or understand why a timing function produces the motion it does. This tool fills that gap for the large community of developers who learn animation by experimentation, and the constraint of parsing CSS in the browser without a backend makes it a satisfying technical puzzle that demonstrates deep understanding of the CSS animation model.",
+      "inspiredBy": "The CSS transitions library transitions.dev trending on GitHub in June 2026 and recurring discussions on r/webdev about the lack of frame-by-frame animation inspection tools outside of After Effects"
+    },
+    {
+      "n": 2,
+      "title": "Bloom's Exam Question Classifier",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "Instructors upload a PDF or paste exam questions and receive instant Bloom's taxonomy level classifications (Remember through Create) with confidence scores, justifications, and semester-over-semester trend charts showing how cognitive demand in their assessments shifts over time.",
+      "description": "Instructors paste or PDF-upload a set of exam or quiz questions. The app sends each question to the Claude API with a structured prompt that classifies it into one of the six Bloom's taxonomy levels (Remember, Understand, Apply, Analyze, Evaluate, Create) and returns a confidence score and one-sentence justification. Questions are displayed in a color-coded table by level, allowing quick visual identification of over-represented levels (e.g., a midterm that is 80% Recall). Instructors can override any classification and record the corrected label, building a human-validated dataset over time. Results are saved to Supabase indexed by course and semester, enabling a trend panel that shows how the cognitive demand profile of each course shifts across semesters. A one-click PDF report exports the classified question set with annotations suitable for course review portfolios or accreditation documentation.",
+      "keyFeatures": [
+        "PDF upload and text-paste input; per-question Bloom's level label, confidence score, and one-sentence justification via Claude API",
+        "Color-coded question table with level distribution bar chart for instant visual assessment of cognitive demand balance",
+        "Human override workflow: click any label to correct it; overrides accumulate as a local training signal",
+        "Supabase-backed semester history enabling trend charts showing Bloom's level distribution drift across terms",
+        "PDF export of classified question set with annotations for accreditation portfolios or course review meetings"
+      ],
+      "techStack": "React + Vite + Tailwind, Claude API (claude-sonnet-5 for classification), Supabase (Postgres for question history), pdf-parse for PDF extraction",
+      "whyInteresting": "Most instructors design exams by intuition; this tool makes the cognitive demand of an assessment visible in seconds and turns Bloom's taxonomy from an abstract course-design framework into a live feedback signal. The semester-trend view gives course coordinators evidence for accreditation and curriculum review that would otherwise require hours of manual categorization.",
+      "inspiredBy": "SIGCSE and ITiCSE 2025 work showing that LLMs perform differently across Bloom's levels (e.g., paper on evaluating ChatGPT for multi-modal exercises) and the recurring call in CS education research to make assessment design more data-informed"
+    },
+    {
+      "n": 3,
+      "title": "AI Assistant Persona Studio",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "Students design, build, and evaluate a domain-specific AI coding assistant targeting a chosen audience (CS1 beginners, game developers, accessibility engineers), going from persona definition through knowledge-base curation to systematic evaluation of helpfulness versus over-assistance.",
+      "description": "In this multi-week project students act as AI product designers and engineers. Week 1: students choose a target audience and write a persona document specifying what the assistant should and should not do, what expertise level it should assume, and what refusals or caveats it must always include. Week 2: students curate a small domain-specific knowledge base (10-20 reference documents or code snippets) and implement a RAG retrieval layer using Supabase pgvector so the assistant grounds its answers in the provided sources rather than hallucinating. Week 3: students build a web chat UI and instrument it to log every question and response. Week 4: students design a systematic evaluation: they write 20 test cases spanning 4 difficulty tiers, score each response on helpfulness (does it unblock the user?) and over-assistance (does it do the thinking the user should do themselves?), and compute an assistance calibration score. The final deliverable is a 10-minute demo plus a written design critique reflecting on the tension between helpfulness and scaffolding, and what guardrails they would add in a production deployment.",
+      "keyFeatures": [
+        "Persona definition document: target audience, assumed expertise, behavioral contracts (must-dos, must-not-dos, required caveats)",
+        "RAG knowledge base: 10-20 curated documents embedded and stored in Supabase pgvector; retrieval grounded in domain sources",
+        "Instrumented chat UI logging every question and response for later evaluation analysis",
+        "Systematic 20-question evaluation rubric scoring helpfulness vs. over-assistance across 4 difficulty tiers",
+        "Written design critique reflecting on the scaffolding vs. helpfulness tension and production deployment guardrails"
+      ],
+      "techStack": "React + Vite + Tailwind frontend, Flask API backend, Claude API (claude-sonnet-5 for dialogue), Supabase (pgvector for RAG + Postgres for conversation logs)",
+      "whyInteresting": "Building an AI assistant is now a plausible first project for any developer, but most students skip the design thinking required to avoid building something harmful or counterproductive. This assignment creates a concrete artifact (a working assistant for a real audience) while making the hardest design tradeoffs legible and measurable, teaching the kind of responsible-AI reasoning that industry teams rarely have time to document explicitly.",
+      "inspiredBy": "FEEDBOT and related AI-in-education tools presented at ITiCSE 2025, and CS education research showing that students who engage critically with AI suggestion quality develop better metacognitive habits than those who use AI assistants passively"
+    },
+    {
+      "n": 4,
+      "title": "Hint Interaction Profiling for Adaptive Hint Selection in CS1",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Use a validated taxonomy of 16 student hint-interaction scenarios (from process-mining analysis of IDE hint logs) to reclassify Jolly Feedback submission sequences and build an adaptive hint selector that chooses between next-step, solution-free, and conceptual hints based on observed student behavior patterns.",
+      "description": "Students interact with AI-powered hints in wildly different ways: some read once and implement, others request the same hint repeatedly until it 'explains' differently, and others adapt partial hints by modifying their code to trigger a variation. A recent SIGCSE TS 2026 study applied process mining to logs from 34 students solving Kotlin tasks in an in-IDE environment and identified 16 distinct interaction scenarios through PM4PY analysis, later validated against semi-structured interviews with 6 students. This research proposes to import that 16-scenario taxonomy and apply it to the existing Jolly Feedback submission log database from UW CSS 142/143, then build an adaptive hint selector that matches a student's current scenario to an appropriate hint type: next-step hints for students who are productively iterating, solution-free hints for students who are stuck in a concept gap, and worked-example-style hints for students showing repeated-request behavior suggesting the current hint format is not landing. The long-term goal is a live adaptive hint system that switches hint strategy mid-session when a student's interaction pattern changes, with a controlled evaluation comparing adaptive to fixed-strategy hints on task completion time and hint request volume.",
+      "papers": [
+        {
+          "title": "Understanding Student Interaction with AI-Powered Next-Step Hints: Strategies and Challenges",
+          "authors": "Authors from JetBrains Research Berlin and Utrecht University",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770762.3772544",
+          "url": "https://doi.org/10.1145/3770762.3772544",
+          "abstract": "This study investigates how students interact with an AI-driven next-step hint system in an in-IDE learning environment. We gathered and analyzed a dataset from 34 students solving Kotlin tasks, containing detailed hint interaction logs. We applied process mining techniques and identified 16 common interaction scenarios. Semi-structured interviews with 6 students revealed strategies for managing unhelpful hints, such as adapting partial hints or modifying code to generate variations of the same hint.",
+          "relevance": "Provides the 16-scenario taxonomy this research proposes to import into the Jolly Feedback context. The process mining methodology (PM4PY on hint interaction logs) is directly applicable to the existing CSS 142/143 submission log database. Extends Pisan's 2021 SIGCSE work on hints without full solutions by adding a behavioral classification layer that can drive adaptive hint selection."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "Next-Step Hint Generation for Introductory Programming Using Large Language Models",
+          "authors": "Various (SIGCSE 2024)",
+          "venue": "SIGCSE TS 2024",
+          "year": 2024,
+          "url": "https://dl.acm.org/doi/fullHtml/10.1145/3636243.3636259",
+          "relevance": "Demonstrates that LLMs can generate accurate next-step hints for CS1 student code without exposing the full solution, establishing the technical feasibility of the hint-generation component in the proposed adaptive system."
+        },
+        {
+          "title": "One Step at a Time: Combining LLMs and Static Analysis to Generate Next-Step Hints",
+          "authors": "Various (Koli Calling 2024)",
+          "venue": "Koli Calling 2024",
+          "year": 2024,
+          "url": "https://dl.acm.org/doi/10.1145/3699538.3699556",
+          "relevance": "Hybrid LLM + static analysis approach that improves hint precision for syntactically malformed student code. Relevant to the implementation of the adaptive selector because next-step hints are harder to generate reliably when the student's code does not compile."
+        },
+        {
+          "title": "Exploring How Multiple Levels of GPT-Generated Programming Hints Support or Disappoint Novices",
+          "authors": "Various (arXiv 2024)",
+          "venue": "arXiv, 2024",
+          "year": 2024,
+          "url": "https://arxiv.org/pdf/2404.02213",
+          "relevance": "Studies how different hint granularity levels (from high-level conceptual to near-solution) affect novice CS students, providing empirical grounding for which hint types to include in the adaptive selector and under what student conditions each level is most effective."
+        },
+        {
+          "title": "Data-Driven Hints in Intelligent Tutoring Systems",
+          "authors": "Various (arXiv 2025)",
+          "venue": "arXiv, 2025",
+          "year": 2025,
+          "url": "https://arxiv.org/pdf/2603.07311",
+          "relevance": "Surveys the state of data-driven hint selection in ITS, covering historical approaches (nearest-neighbor, decision trees) and LLM-based methods. Provides the methodological baseline for evaluating whether interaction-scenario-driven selection outperforms simpler data-driven strategies."
+        }
+      ],
+      "researchPlan": {
+        "overview": "This research applies a validated 16-scenario hint interaction taxonomy (derived via process mining from in-IDE logs) to the existing Jolly Feedback submission database, then builds and evaluates an adaptive hint selector that matches a student's current behavioral profile to the most effective hint type. The study proceeds in two phases: retrospective reclassification of historical logs to measure scenario frequency and correlation with outcomes, followed by a prospective deployment of the adaptive selector in CSS 142 or CSS 143.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Taxonomy import and log schema mapping",
+            "deliverable": "Annotated bibliography; mapping document aligning the 16 paper scenarios to Jolly Feedback event types (submit, view-hint, request-hint, pass, fail); PM4PY environment configured on anonymized log export"
+          },
+          {
+            "month": 2,
+            "goal": "Retrospective reclassification of historical submission logs",
+            "deliverable": "Scenario labels assigned to every hint-interaction sequence in the existing log database; frequency distribution of all 16 scenarios; correlation analysis of scenario type vs. task completion rate and time-to-pass"
+          },
+          {
+            "month": 3,
+            "goal": "Adaptive hint selector design and implementation",
+            "deliverable": "Rule-based selector mapping each scenario to a hint type (next-step, solution-free, conceptual); selector integrated into Jolly Feedback dev environment; unit tests covering all 16 scenario transitions"
+          },
+          {
+            "month": 4,
+            "goal": "Pilot deployment in CSS 142 or CSS 143",
+            "deliverable": "Adaptive selector active for one assignment; interaction logs collected; parallel fixed-strategy control group (same assignment, non-adaptive hints) for comparison"
+          },
+          {
+            "month": 5,
+            "goal": "Analysis: task completion, hint request volume, student satisfaction",
+            "deliverable": "Statistical comparison of adaptive vs. fixed-strategy groups on task completion time, number of hint requests, and pass rate; qualitative coding of cases where adaptive switching correlated with state change"
+          },
+          {
+            "month": 6,
+            "goal": "Paper writing and submission",
+            "deliverable": "Full draft submitted to SIGCSE TS or ICER; includes retrospective frequency analysis, selector design rationale, and prospective evaluation results"
+          }
+        ],
+        "targetVenues": ["SIGCSE", "ICER", "EDM", "ITiCSE"],
+        "resources": "Existing anonymized Jolly Feedback submission logs from CSS 142/143; PM4PY library for process mining; Claude API (Sonnet tier) for hint generation; one quarter of CSS 142 or 143 enrollment for prospective pilot; TA support for monitoring adaptive selector behavior during pilot week.",
+        "risks": [
+          {
+            "risk": "The 16 scenarios were identified from Kotlin in-IDE tasks and may not map cleanly onto Jolly Feedback C++ or Python submission patterns",
+            "mitigation": "Run the retrospective reclassification first and measure scenario coverage; if fewer than 12 of 16 scenarios appear in the Jolly Feedback logs, refine the taxonomy before building the selector rather than deploying a poorly-fit classifier"
+          },
+          {
+            "risk": "Adaptive hint switching mid-session may disrupt students who have calibrated their strategy to a consistent hint format",
+            "mitigation": "Implement switching with a minimum dwell time (e.g., 3 consecutive matching events before switching) to prevent rapid oscillation; include a student override toggle to opt back to fixed hints if they prefer"
+          },
+          {
+            "risk": "Small pilot cohort may lack statistical power to detect realistic effect sizes",
+            "mitigation": "Pre-register the analysis with an a priori power calculation; if the single-assignment pilot is underpowered, extend to the full quarter and treat the first assignment as a warm-up that contributes to a within-student longitudinal analysis"
+          }
+        ],
+        "humanSubjects": false
+      }
+    }
+  ]
+}
