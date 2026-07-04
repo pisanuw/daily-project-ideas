@@ -1,0 +1,165 @@
+{
+  "date": "2026-07-04",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "MCP Tool Inspector",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A browser-based debugger for MCP servers that lets developers connect to any running server, browse its exposed tools and resources, fire test calls with custom JSON inputs, and inspect raw responses in a collapsible tree view — essentially Postman for the Model Context Protocol.",
+      "description": "Paste an MCP server URL (or select a locally running server from a dropdown populated via the MCP discovery handshake) and the inspector fetches the server's tool and resource manifests, then renders them in a sidebar as an expandable tree. Clicking any tool opens a form auto-generated from its JSON Schema input definition, with fields pre-filled from the schema's examples or defaults. Submitting the form sends the call over the chosen transport (WebSocket or SSE) and renders the response in a collapsible JSON tree viewer with syntax highlighting and a copy button. A persistent request history panel stores every call with its inputs, response, and latency. A 'diff mode' lets developers fire the same tool against two different server URLs side by side and highlight response differences, useful for comparing a development build against a deployed version. Everything runs in the browser; the only backend is a tiny proxy server (50 lines of Node) that forwards requests when CORS prevents direct connection from the browser.",
+      "keyFeatures": [
+        "Auto-generated input form from a tool's JSON Schema definition, with example-prefilled fields and inline validation",
+        "Raw JSON response viewer with collapsible tree, syntax highlighting, and one-click copy",
+        "Persistent request history panel recording every call with inputs, response, and latency",
+        "Diff mode: fire the same tool against two server URLs and highlight response divergences",
+        "Minimal Node proxy (50 lines) to handle CORS; everything else runs client-side"
+      ],
+      "techStack": "React + Vite + Tailwind, WebSocket and SSE MCP transports, @rjsf/core for JSON Schema form generation, react-json-view for response tree, 50-line Express proxy for CORS",
+      "whyInteresting": "MCP became the de facto standard for connecting AI agents to external tools in 2026, but debugging MCP servers still means grepping raw logs or writing throwaway test scripts. This tool fills the gap that Postman fills for REST and GraphiQL fills for GraphQL, and the weekend scope is achievable because MCP's transport layer is simple and well-specified, making the project a useful study of the protocol even before a line of UI is written.",
+      "inspiredBy": "MCP's rapid adoption across the developer ecosystem in 2026 and recurring posts on r/LocalLLaMA about the pain of debugging MCP servers without a proper inspector tool"
+    },
+    {
+      "n": 2,
+      "title": "Office Hours Analytics Dashboard",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "A lightweight web app where TAs log each office hours question by topic, assignment, and whether it was conceptual or procedural; instructors see rolling heatmaps of which topics generate the most help-seeking, enabling evidence-based decisions about where to add lecture time or extra examples.",
+      "description": "TAs open a simple mobile-friendly form at the start of each office hours session and log questions as they come in: select the assignment from a dropdown, pick a concept tag from a pre-configured list (pointer arithmetic, loop invariants, recursion base case, etc.), classify the question as conceptual, procedural, or clarification, and optionally type a one-sentence note. The form is intentionally fast: a full log entry takes under 10 seconds. The instructor dashboard aggregates these logs in real time via Supabase subscriptions and displays three views: (1) a heatmap grid of concept-tag by week showing which topics generated sustained confusion across the quarter, (2) a per-assignment bar chart of question volume over time so instructors can see which assignments spike demand, and (3) a conceptual-vs-procedural ratio panel identifying whether students are stuck on understanding or on execution. Instructors can export a CSV for inclusion in course retrospective reports. Setup for a new course takes 15 minutes: create a Supabase project, paste the environment variables, and edit a JSON config file listing the course's assignments and concept tags.",
+      "keyFeatures": [
+        "Mobile-friendly TA entry form: assignment dropdown, concept tag picker, question type (conceptual/procedural/clarification), one-sentence note; full entry in under 10 seconds",
+        "Real-time heatmap grid: concept-tag vs. week showing persistent confusion hotspots across the quarter",
+        "Per-assignment question-volume bar chart updated live as TAs submit entries during office hours",
+        "Conceptual vs. procedural ratio panel to distinguish understanding gaps from execution difficulties",
+        "CSV export for course retrospective reports; 15-minute setup per course via JSON config file"
+      ],
+      "techStack": "React + Vite + Tailwind, Supabase (Postgres + real-time subscriptions), Recharts for heatmap and bar charts, no backend beyond Supabase",
+      "whyInteresting": "Instructors currently rely on memory and anecdote to decide what needs more coverage in lecture. This tool turns the information TAs already have in their heads into a structured signal visible before the next class, not after the exam. The Supabase real-time subscriptions mean the instructor can watch the heatmap update live during office hours if they choose, turning a logging chore into a genuinely useful feedback loop.",
+      "inspiredBy": "ITiCSE 2025 papers on equity-guided tutoring and help-seeking behavior in CS1, and discussions among CS instructors about the lack of lightweight office hours tracking tools that do not require a full LMS integration"
+    },
+    {
+      "n": 3,
+      "title": "AI Red Team Lab",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "Students build a systematic framework for probing a chosen LLM deployment for safety failures: they design attack categories, execute prompts, record success rates, and deliver a structured vulnerability report with severity ratings and proposed mitigations — developing critical AI literacy through adversarial practice.",
+      "description": "In this four-week project students become AI security researchers targeting a publicly accessible LLM endpoint (Claude, OpenAI, or an open-weight model served via Ollama). Week 1: students study the taxonomy of prompt injection, jailbreak, data extraction, and sycophancy attacks from provided readings and define their own attack category breakdown. Week 2: students execute a minimum of 50 structured test prompts across their categories, logging each prompt, the model's response, a success/failure label, and an explanation of what failure means in context. Students use a provided Python harness that calls the API and appends results to a SQLite database. Week 3: students analyze their results with a provided Jupyter notebook: compute category success rates, visualize attack effectiveness by category and prompt length, and identify the three most reproducible failure modes. Week 4: students write a structured vulnerability report (modeled on CVE format) for each confirmed failure mode, rating severity on a rubric that considers reproducibility, potential for misuse, and difficulty of mitigation. The final deliverable is the report plus a 5-minute recorded demo of their top finding. An optional extension asks students to propose and test a system-prompt-level mitigation for one failure mode.",
+      "keyFeatures": [
+        "Python testing harness: parameterized prompt templates, automatic API calls, SQLite logging of prompt, response, and student-assigned success label",
+        "Provided Jupyter analysis notebook: category success rates, prompt-length vs. effectiveness scatter, top-N reproducible failure modes",
+        "Structured vulnerability report template (CVE-style): failure description, reproduction steps, severity rating rubric, proposed mitigation",
+        "5-minute recorded demo requirement: students must demonstrate the top finding live on the model, not only in writing",
+        "Optional extension: implement and test a system-prompt-level mitigation for one confirmed failure mode, comparing attack success rates before and after"
+      ],
+      "techStack": "Python + SQLite for the testing harness, Jupyter for analysis, Claude API or OpenAI API as the target (or local Ollama), React + Recharts for an optional live dashboard extension",
+      "whyInteresting": "Responsible AI literacy is most effectively built through doing, not reading. Having students systematically attack a model forces them to internalize what safety failures actually look like at the prompt level, why they are reproducible, and what mitigations are and are not effective. The CVE-style report format connects AI safety to the professional security research practice students will encounter in industry, and the adversarial framing makes an otherwise dry topic genuinely engaging.",
+      "inspiredBy": "ITiCSE 2025 work on fostering responsible AI use through negative expertise, growing industry demand for engineers who understand LLM safety boundaries, and the success of CTF-style learning formats in CS security education"
+    },
+    {
+      "n": 4,
+      "title": "LLM Error Progression Taxonomy for CS2 C++ Courses",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Replicate and extend a Georgia Tech study classifying student coding errors as syntactical, conceptual, or strategic (using LLM analysis of successive submissions) by applying the same methodology to Jolly Feedback C++ and Java logs from UW CSS 142/143, then test whether surfacing conceptual and strategic error diagnoses to students reduces resubmission cycles.",
+      "description": "A 2025 ITiCSE poster analyzed 346 coding attempts from the lowest-performing 15% of CS1 students and found that syntactical errors drop sharply across submissions (from 0.89 to 0.24 per attempt in the first 10 submissions) while conceptual and strategic errors remain flat. Students spend roughly 10 minutes fixing syntax per submission without recognizing that a conceptual misunderstanding is the actual blocker. This research proposes to replicate that finding using the existing Jolly Feedback submission log database from UW CSS 142/143, which contains C++ and Java submissions with per-test-case pass/fail records across multiple assignment attempts. The first phase reproduces the three-category taxonomy (syntactical: compiler errors; conceptual: logical misunderstanding of the problem domain; strategic: wrong algorithmic approach) using Claude API batch classification of submission diffs. The second phase examines whether the CS2 data structures context produces a different error progression profile than the Georgia Tech CS1 Java results, hypothesizing that strategic errors (wrong data structure choice, incorrect traversal strategy) are more prevalent in CS2 than in CS1. The third phase designs an intervention: students in a treatment section receive an LLM-generated diagnosis of their error category alongside the standard test-case failure output from Jolly Feedback, while a control section receives only the standard output. The primary outcome measure is the number of additional submissions required to pass each assignment; secondary measures are time-to-pass and whether the error category label in the feedback correlates with fewer subsequent errors of the same type.",
+      "papers": [
+        {
+          "title": "Tracking the Progression of Errors Across Successive CS1 Code Submissions",
+          "authors": "Zhixian Christopher Liding, Nimisha Roy, Rodrigo Borela",
+          "venue": "ITiCSE 2025",
+          "year": 2025,
+          "doi": "10.1145/3724389.3730809",
+          "url": "https://doi.org/10.1145/3724389.3730809",
+          "abstract": "This poster presents an analysis of 346 coding attempts from the lowest-performing 15% of CS1 students. Using LLM classification, errors are categorized as syntactical, conceptual, or strategic. Results show syntactical errors drop from 0.89 to 0.24 per submission across the first 10 attempts, while conceptual and strategic errors remain flat. Students spend roughly 10 minutes per submission fixing syntax without identifying the underlying conceptual blocker.",
+          "relevance": "Provides the three-category error taxonomy (syntactical, conceptual, strategic) and the LLM classification methodology this research proposes to replicate using Jolly Feedback C++ and Java logs. The flat conceptual-error trajectory directly motivates the proposed intervention: surfacing error-category diagnoses to students who would otherwise only see test-case failure output."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "Automated Identification of Logical Errors in Programs",
+          "authors": "Various (EDM 2025)",
+          "venue": "EDM 2025 / arXiv",
+          "year": 2025,
+          "url": "https://arxiv.org/pdf/2505.10913",
+          "relevance": "Extends LLM-based error classification to logical (conceptual and strategic) errors specifically, providing a methodological complement to the syntactical-error compilers already catch. Directly relevant to building the Jolly Feedback classification pipeline."
+        },
+        {
+          "title": "McMining: Automated Discovery of Misconceptions in Student Code",
+          "authors": "Various",
+          "venue": "arXiv",
+          "year": 2025,
+          "url": "https://arxiv.org/pdf/2510.08827",
+          "relevance": "Demonstrates automated mining of recurring misconception patterns from student code corpora, which provides a scalable method for building the CS2-specific misconception taxonomy beyond the three top-level categories from the source paper."
+        },
+        {
+          "title": "Rubric Is All You Need",
+          "authors": "Various (ICER 2025)",
+          "venue": "ICER 2025",
+          "year": 2025,
+          "url": "https://dl.acm.org/doi/10.1145/3702652.3744220",
+          "relevance": "Shows that LLM feedback grounded in a structured rubric outperforms open-ended LLM feedback for CS student code, supporting the design choice to provide category-labeled diagnoses (the rubric) rather than free-form error explanations in the proposed Jolly Feedback intervention."
+        },
+        {
+          "title": "A Classroom Study of LLM-Generated Feedback Intervention in Introductory Programming",
+          "authors": "Various (arXiv 2025)",
+          "venue": "arXiv, 2025",
+          "year": 2025,
+          "url": "https://arxiv.org/pdf/2606.08807",
+          "relevance": "Controlled classroom study of LLM feedback delivery in CS1, providing an experimental design template for the proposed treatment vs. control comparison and reporting effect size estimates useful for the power analysis when designing the pilot."
+        }
+      ],
+      "researchPlan": {
+        "overview": "This research replicates a Georgia Tech ITiCSE 2025 finding about syntactical vs. conceptual vs. strategic error progression in CS1 using the existing Jolly Feedback submission log database from UW CSS 142/143, then extends it to a CS2 C++ context and tests whether delivering LLM-generated error-category diagnoses alongside standard test-failure output reduces resubmission cycles. The study proceeds in three phases: retrospective replication, CS2 taxonomy extension, and a prospective classroom intervention.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Log extraction, anonymization, and taxonomy operationalization",
+            "deliverable": "Anonymized export of CSS 142/143 Jolly Feedback submission logs (past 2 quarters); annotation guide defining syntactical, conceptual, and strategic error categories with C++ and Java examples; Claude API batch classification pipeline configured and unit-tested on 50 hand-labeled sample submissions"
+          },
+          {
+            "month": 2,
+            "goal": "Retrospective replication: classify all historical submissions and reproduce error progression curves",
+            "deliverable": "Three-category error labels assigned to every submission in the historical log; per-student error progression charts across attempt number; statistical test of whether conceptual and strategic error rates are flat across attempts (replication of source paper result) or show a different profile in CSS 142/143"
+          },
+          {
+            "month": 3,
+            "goal": "CS2 taxonomy extension: identify data-structures-specific strategic error subtypes",
+            "deliverable": "Refined taxonomy adding CS2-specific strategic error subtypes (wrong data structure choice, incorrect traversal order, off-by-one in pointer arithmetic, etc.); inter-rater reliability check between LLM classification and two human raters on 100 submissions; taxonomy document suitable for submission as a conference artifact"
+          },
+          {
+            "month": 4,
+            "goal": "Intervention design, IRB submission, and Jolly Feedback integration",
+            "deliverable": "IRB protocol submitted for prospective classroom study; error-category diagnosis feature integrated into Jolly Feedback dev instance (treatment branch); control condition defined (standard test-failure output only); assignment and course identified for pilot (target: one CSS 142 or CSS 143 assignment in quarter 5 or 6)"
+          },
+          {
+            "month": 5,
+            "goal": "Pilot deployment and data collection",
+            "deliverable": "Treatment and control groups active for one assignment; submission counts, time-to-pass, and error-category sequences logged for both groups; post-assignment survey administered to treatment group asking whether the category label helped them identify what to change"
+          },
+          {
+            "month": 6,
+            "goal": "Analysis and paper writing",
+            "deliverable": "Statistical comparison of treatment vs. control on resubmission count and time-to-pass; qualitative analysis of survey responses; full draft submitted to SIGCSE TS, ICER, or EDM"
+          }
+        ],
+        "targetVenues": ["SIGCSE", "ICER", "EDM", "ITiCSE"],
+        "resources": "Existing anonymized Jolly Feedback submission logs from CSS 142/143 (2+ quarters); Claude API (Sonnet tier) for batch classification; IRB for prospective pilot; one CSS 142 or 143 quarter with split-section or within-section randomization; TA support for monitoring Jolly Feedback during the pilot assignment.",
+        "risks": [
+          {
+            "risk": "The source paper analyzed Java CS1 submissions; CSS 142 uses C++ with different compiler error taxonomy, and CSS 143 is CS2 with data structures content that may not fit the original three categories cleanly",
+            "mitigation": "Run the retrospective classification first and measure category coverage; if more than 15% of submissions are uncategorizable, expand the taxonomy before proceeding to the intervention rather than forcing ill-fitting labels"
+          },
+          {
+            "risk": "LLM classification accuracy may be lower for C++ pointer and memory-management errors, which are syntactically valid but semantically incorrect in ways that require runtime behavior to diagnose",
+            "mitigation": "Combine LLM classification with static analysis outputs from the existing Jolly Feedback test harness (segfault, assertion failure, wrong output) to provide the classifier with structured context beyond the source code diff alone"
+          },
+          {
+            "risk": "Section-level randomization may confound results if treatment and control sections differ on prior academic preparation",
+            "mitigation": "Use within-student pre/post design where possible (student receives standard feedback on one assignment and categorized feedback on the next), or use matched pairs based on prior GPA if section-level randomization is required"
+          }
+        ],
+        "humanSubjects": true
+      }
+    }
+  ]
+}

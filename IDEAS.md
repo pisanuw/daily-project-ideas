@@ -164,3 +164,7 @@
 | 2026-07-03 | Bloom's Exam Question Classifier | Teaching Tool | 1-2 Weeks |
 | 2026-07-03 | AI Assistant Persona Studio | Classroom Assignment | Multi-week |
 | 2026-07-03 | Hint Interaction Profiling for Adaptive Hint Selection in CS1 | Research | Research |
+| 2026-07-04 | MCP Tool Inspector | Side Project | Weekend |
+| 2026-07-04 | Office Hours Analytics Dashboard | Teaching Tool | 1-2 Weeks |
+| 2026-07-04 | AI Red Team Lab | Classroom Assignment | Multi-week |
+| 2026-07-04 | LLM Error Progression Taxonomy for CS2 C++ Courses | Research | Research |
