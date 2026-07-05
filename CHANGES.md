@@ -108,3 +108,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-07-03 [code] Created ideas/2026-07-03.json: CSS Animation Timeline Explorer, Bloom's Exam Question Classifier, AI Assistant Persona Studio, Hint Interaction Profiling for Adaptive Hint Selection (research)
 
 2026-07-04 [code] Created ideas/2026-07-04.json: MCP Tool Inspector, Office Hours Analytics Dashboard, AI Red Team Lab, LLM Error Progression Taxonomy for CS2 C++ Courses (research)
+
+2026-07-05 [code] Created ideas/2026-07-05.json: Copilot Critical Lens, Social SOS Board, Natural Language Decomposer, Skill-Adaptive Misconception Feedback (research)

@@ -168,3 +168,7 @@
 | 2026-07-04 | Office Hours Analytics Dashboard | Teaching Tool | 1-2 Weeks |
 | 2026-07-04 | AI Red Team Lab | Classroom Assignment | Multi-week |
 | 2026-07-04 | LLM Error Progression Taxonomy for CS2 C++ Courses | Research | Research |
+| 2026-07-05 | Copilot Critical Lens | Side Project | Weekend |
+| 2026-07-05 | Social SOS Board | Teaching Tool | 1-2 Weeks |
+| 2026-07-05 | Natural Language Decomposer | Classroom Assignment | Multi-week |
+| 2026-07-05 | Skill-Adaptive Misconception Feedback: Calibrating LLM Explanation Depth to Student Proficiency in CS1 | Research | Research |

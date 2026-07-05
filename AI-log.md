@@ -1691,3 +1691,9 @@ IMPORTANT:
 - If today's file already exists with all 4 ideas, skip and do nothing.
 - Make sure each project idea is genuinely different and actionable, not vague or generic.
 - The research idea must cite a real paper from papers-index.json by its actual title and DOI.
+
+2026-07-05T00:00 User: You are a daily idea curator for Yusuf Pisan, a CS professor interested in AI in education, interactive web apps (React, Vite, Tailwind, Flask, Supabase, Claude API, Gemini API), game development, CS education tools, accessibility, AI agents, AI ethics, and open to new tech.
+
+Your task: Find 3 fresh project ideas AND generate 1 research idea grounded in CS education papers, then commit all 4 to this repo in a single JSON file.
+
+[... full prompt as provided - daily idea curator routine ...]
