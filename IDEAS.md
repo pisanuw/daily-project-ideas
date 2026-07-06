@@ -172,3 +172,7 @@
 | 2026-07-05 | Social SOS Board | Teaching Tool | 1-2 Weeks |
 | 2026-07-05 | Natural Language Decomposer | Classroom Assignment | Multi-week |
 | 2026-07-05 | Skill-Adaptive Misconception Feedback: Calibrating LLM Explanation Depth to Student Proficiency in CS1 | Research | Research |
+| 2026-07-06 | Repo Time-Lapse Animator | Side Project | Weekend |
+| 2026-07-06 | Recurring Feedback Miner | Teaching Tool | 1-2 Weeks |
+| 2026-07-06 | Bounded Knowledge NPC Builder | Classroom Assignment | Multi-week |
+| 2026-07-06 | NLF-Scaffolded Decomposition Transfer: Does Natural Language Function Specification Build Lasting Problem-Decomposition Skills in CS1? | Research | Research |

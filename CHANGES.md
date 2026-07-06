@@ -110,3 +110,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-07-04 [code] Created ideas/2026-07-04.json: MCP Tool Inspector, Office Hours Analytics Dashboard, AI Red Team Lab, LLM Error Progression Taxonomy for CS2 C++ Courses (research)
 
 2026-07-05 [code] Created ideas/2026-07-05.json: Copilot Critical Lens, Social SOS Board, Natural Language Decomposer, Skill-Adaptive Misconception Feedback (research)
+
+2026-07-06 [code] Created ideas/2026-07-06.json: Repo Time-Lapse Animator, Recurring Feedback Miner, Bounded Knowledge NPC Builder, NLF-Scaffolded Decomposition Transfer (research)

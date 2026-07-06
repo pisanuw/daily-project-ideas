@@ -1,0 +1,99 @@
+[
+  {
+    "date": "2026-07-06",
+    "n": 1,
+    "title": "Repo Time-Lapse Animator",
+    "category": "Side Project",
+    "complexity": "Weekend",
+    "summary": "Animate a GitHub repo's file-structure evolution commit-by-commit in the browser, with files appearing, growing, and fading as the codebase changes.",
+    "description": "A browser tool that fetches a repo's commit history via the GitHub API and renders each commit as a frame: files appear as nodes sized by line count, colored by recency or churn, and edges show directory containment. Scrubbing the timeline plays back the repo's growth as a short animation. Users can export the result as a GIF or MP4 using ffmpeg.wasm. Useful for retrospectives, project demos, and teaching version-control concepts visually.",
+    "tech": ["React", "Vite", "GitHub REST API", "Canvas API", "ffmpeg.wasm"],
+    "tags": ["git", "visualization", "animation", "version-control"],
+    "why_now": "ffmpeg.wasm now runs entirely client-side at practical speed, making browser-based video export viable without a backend. GitHub's tree and commit APIs are rate-limit-friendly for small repos."
+  },
+  {
+    "date": "2026-07-06",
+    "n": 2,
+    "title": "Recurring Feedback Miner",
+    "category": "Teaching Tool",
+    "complexity": "1-2 Weeks",
+    "summary": "Instructors upload past assignment feedback exports and an LLM clusters recurring patterns into a searchable, reusable comment bank with a drag-and-drop rubric builder.",
+    "description": "Instructors import Canvas SpeedGrader exports or plain text feedback files. A Flask backend calls Claude to cluster semantically similar comments, label each cluster with a theme (e.g., 'loop boundary errors', 'missing edge-case tests'), and surface representative examples. The React frontend lets instructors browse clusters, promote items to a reusable comment bank, and assemble those comments into a shareable rubric. Over successive semesters the bank grows, surfacing which misconceptions recur year after year.",
+    "tech": ["React", "Vite", "Flask", "Claude API", "SQLite"],
+    "tags": ["grading", "feedback", "NLP", "rubric", "instructor-tools"],
+    "why_now": "Instructors accumulate years of free-text feedback with no tooling to mine it. LLM-based semantic clustering now makes this tractable in a weekend of backend work."
+  },
+  {
+    "date": "2026-07-06",
+    "n": 3,
+    "title": "Bounded Knowledge NPC Builder",
+    "category": "Classroom Assignment",
+    "complexity": "Multi-week",
+    "summary": "Students build a web adventure where NPCs have explicit knowledge graphs; a constraint checker ensures NPCs never assert facts outside their defined belief set.",
+    "description": "Students design a small text-adventure world where each NPC has a structured knowledge graph: what it knows, what it believes (with confidence), and what it is explicitly ignorant of. When a player talks to an NPC, the LLM generates dialogue, but a constraint-checking layer inspects every response and flags or blocks statements that exceed the NPC's declared knowledge. Students must define the knowledge representation schema, write the constraint logic, and craft a narrative where the NPC's epistemic limits create meaningful gameplay tension. Reflection prompts connect the design challenge to AI alignment and knowledge-grounded generation.",
+    "tech": ["React", "Vite", "Supabase", "Claude API", "JSON Schema"],
+    "tags": ["game-design", "knowledge-representation", "LLM-constraints", "AI-alignment", "classroom"],
+    "why_now": "Grounded generation and hallucination control are front-of-mind research problems. This assignment makes the challenge concrete and playable, meeting students where game design meets AI safety."
+  },
+  {
+    "date": "2026-07-06",
+    "n": 4,
+    "title": "NLF-Scaffolded Decomposition Transfer: Does Natural Language Function Specification Build Lasting Problem-Decomposition Skills in CS1?",
+    "category": "Research",
+    "complexity": "Research",
+    "summary": "Investigate whether prompting students to describe functions in natural language before coding durably improves decomposition behavior in later unscaffolded assignments, using Jolly Feedback submission logs as a measurement backbone.",
+    "description": "A 2026 SIGCSE study (Becker et al.) found that students using a Natural Language Functions (NLF) tool created roughly 3x more functions and exhibited significantly more decomposition behavior than controls. The scaffolding requires students to articulate function purpose in plain English before writing code, serving as a proxy for the verbal articulation practiced in pair programming. This project asks the follow-on question: does the scaffold produce durable skill transfer, or does decomposition collapse when the scaffold is removed?\n\nPhase 1 (months 1-2) is retrospective: mine existing Jolly Feedback submission logs from CS1 and CS2 C++ courses to establish baseline decomposition metrics (function count, average function length, call-graph depth) per assignment and per student over the semester. Phase 2 (months 3-4) designs a lightweight NLF variant for C++, integrated into the existing Jolly Feedback workflow so students describe each function's purpose before the autograder runs. Phase 3 (months 5-6) deploys the intervention in one CS1 section, compares decomposition metrics on later unscaffolded assignments against a matched control section, and assesses whether early-semester NLF use predicts better late-semester structure. The research connects to Pisan's 'toolchain-first in the copilot era' agenda: if LLM-assisted description teaches decomposition, it may belong in the standard developer workflow from day one.",
+    "papers": [
+      {
+        "doi": "10.1145/3770762.3772513",
+        "title": "Describing Functionality in Natural Language May Improve Decomposition",
+        "authors": ["Becker", "et al."],
+        "venue": "SIGCSE TS 2026",
+        "relevance": "Primary source: NLF tool produced ~3x more function definitions and significantly more decomposition behavior in a controlled CS1 study."
+      }
+    ],
+    "additionalRefs": [
+      {
+        "doi": "10.1145/3706598.3713748",
+        "title": "DBox: Scaffolding Algorithmic Programming Learning through Learner-LLM Co-Decomposition",
+        "venue": "CHI 2025",
+        "relevance": "Parallel LLM-scaffolded decomposition approach; compares co-decomposition with student-only decomposition."
+      },
+      {
+        "doi": "10.1145/3491140.3528272",
+        "title": "Using NLP to Quantify Program Decomposition in CS1",
+        "venue": "L@S 2022",
+        "relevance": "Establishes NLP-based metrics for measuring decomposition in student code; informs the measurement methodology for Phase 1."
+      },
+      {
+        "arxiv": "2511.05764",
+        "title": "Assessing Problem Decomposition in CS1 for the GenAI Era",
+        "venue": "arXiv 2025",
+        "relevance": "Reviews how generative AI changes what decomposition assessment must measure."
+      },
+      {
+        "arxiv": "2411.09463",
+        "title": "Teaching Program Decomposition in CS1: A Conceptual Framework",
+        "venue": "arXiv 2024",
+        "relevance": "Provides a conceptual framework for decomposition pedagogy to ground the intervention design."
+      }
+    ],
+    "researchPlan": {
+      "milestones": [
+        "Month 1-2: IRB amendment for retrospective log analysis; extract and anonymize Jolly Feedback submission logs; compute baseline decomposition metrics (function count, avg length, call-graph depth) per assignment and student cohort",
+        "Month 3: Design NLF prompt integration for Jolly Feedback C++ workflow; pilot with volunteer students outside the study cohort; refine UX",
+        "Month 4: IRB approval for prospective classroom study; finalize assignment pairings (NLF-scaffolded early assignments, unscaffolded transfer assignments)",
+        "Month 5: Deploy intervention in one CS1 section; collect submission data alongside matched control section",
+        "Month 6: Statistical analysis of decomposition transfer (mixed-effects models, student as random effect); write up and submit to SIGCSE or ICER"
+      ],
+      "targetVenues": ["SIGCSE TS 2027", "ICER 2027", "ITiCSE 2027", "EDM 2027"],
+      "resources": ["Jolly Feedback submission logs (existing infrastructure)", "Claude API for NLF prompt integration", "IRB approval (UW)", "One CS1 section willing to adopt NLF workflow"],
+      "risks": [
+        "Retrospective logs may lack consistent metadata across semesters; mitigate by scoping to courses with uniform assignment structure",
+        "NLF integration into C++ Jolly Feedback requires moderate engineering effort; scope to a minimal prompt-before-submit UI change",
+        "Transfer effect may be confounded by instructor variation; use matched section taught by same instructor or control statistically"
+      ],
+      "humanSubjects": true
+    }
+  }
+]
