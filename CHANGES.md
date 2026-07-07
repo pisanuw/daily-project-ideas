@@ -112,3 +112,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-07-05 [code] Created ideas/2026-07-05.json: Copilot Critical Lens, Social SOS Board, Natural Language Decomposer, Skill-Adaptive Misconception Feedback (research)
 
 2026-07-06 [code] Created ideas/2026-07-06.json: Repo Time-Lapse Animator, Recurring Feedback Miner, Bounded Knowledge NPC Builder, NLF-Scaffolded Decomposition Transfer (research)
+
+2026-07-07 [code] Created ideas/2026-07-07.json: Accessibility-First UI Generator, Student Self-Assessment Calibrator, Procedural Game Balance Tester, Negative Expertise Transfer (research)

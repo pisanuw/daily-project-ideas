@@ -1,0 +1,93 @@
+[
+  {
+    "date": "2026-07-07",
+    "n": 1,
+    "title": "Accessibility-First UI Generator",
+    "category": "Side Project",
+    "complexity": "Weekend",
+    "summary": "Describe a UI component in plain English and get back a fully accessible HTML/CSS snippet: ARIA roles, keyboard navigation, focus rings, and a color palette that passes WCAG AA contrast.",
+    "description": "A React + Vite app where the user types a component description (e.g., 'a drag-and-drop file upload area that shows upload progress and allows cancellation') and Claude returns a self-contained HTML/CSS/JS snippet with correct ARIA roles, keyboard event handlers, focus-visible styles, and a color pair verified to meet WCAG AA (4.5:1 minimum). A live preview renders the component in an iframe. A side panel lists every ARIA decision made, which success criterion it satisfies, and why. axe-core runs on the preview and flags any remaining issues. The output snippet can be copied into any project.",
+    "tech": ["React", "Vite", "Tailwind", "Claude API", "axe-core"],
+    "tags": ["accessibility", "WCAG", "ARIA", "UI-generation", "HTML"],
+    "why_now": "Claude's structured output and instruction-following make it reliable enough to produce ARIA-correct HTML on demand. axe-core runs entirely client-side, so the full accessibility audit loop needs no backend."
+  },
+  {
+    "date": "2026-07-07",
+    "n": 2,
+    "title": "Student Self-Assessment Calibrator",
+    "category": "Teaching Tool",
+    "complexity": "1-2 Weeks",
+    "summary": "Before assignments are returned, students predict their own score and explain their reasoning; the instructor dashboard tracks calibration accuracy across the semester to flag persistently over- or under-confident learners.",
+    "description": "After submission but before feedback is released, students enter a predicted score and a short explanation of what they got right and wrong. Once the instructor releases feedback, the platform calculates the prediction gap and plots each student's calibration curve over the semester. A Claude-powered analyzer reads the students' reasoning logs and summarizes systematic blind spots (e.g., 'consistently underestimates loop logic errors'). Instructors see a cohort-level calibration heatmap and can click into individual student trajectories to inform advising conversations. Students see their own trend line to build metacognitive awareness.",
+    "tech": ["React", "Vite", "Supabase", "Claude API", "Chart.js"],
+    "tags": ["metacognition", "self-assessment", "calibration", "instructor-tool", "feedback"],
+    "why_now": "Metacognition research shows calibration accuracy is trainable and predicts learning outcomes. Supabase makes it straightforward to persist longitudinal student data without a custom backend, lowering the cost to actually build and deploy this."
+  },
+  {
+    "date": "2026-07-07",
+    "n": 3,
+    "title": "Procedural Game Balance Tester",
+    "category": "Classroom Assignment",
+    "complexity": "Multi-week",
+    "summary": "Students implement a turn-based game with a defined API; an AI harness runs thousands of Monte Carlo playthroughs to surface dominant strategies, snowball effects, and unreachable game states, then generates a balance report with replay links.",
+    "description": "Students build a turn-based strategy or card game exposing a takeTurn(gameState) API. A Python simulation backend runs the game with randomized and greedy AI players to collect statistics: win rate by starting position, per-action frequency heatmaps, game-length distribution, and convergence speed toward dominant strategies. A React frontend displays histograms, state-space coverage graphs, and flagged imbalances (any single strategy winning >65% of simulated games triggers a warning). Claude reads the raw statistics and produces a balance report in the style of a game designer's notes, proposing specific rule-change experiments. Students iterate at least twice, comparing balance reports before and after changes. Reflection prompts connect the assignment to Monte Carlo methods, probability, and the difference between perceived and measured balance.",
+    "tech": ["React", "Vite", "Flask", "Claude API", "Python"],
+    "tags": ["game-design", "simulation", "Monte-Carlo", "balance-testing", "classroom"],
+    "why_now": "Game balance is a motivating real-world application of Monte Carlo simulation that CS students rarely encounter in coursework. Claude can now interpret raw simulation output and translate it into actionable design feedback, closing a loop that previously required domain expertise."
+  },
+  {
+    "date": "2026-07-07",
+    "n": 4,
+    "title": "Negative Expertise Transfer: Do IDE Autocompletion Quizzes Build Lasting AI Code Evaluation Skills in CS1?",
+    "category": "Research",
+    "complexity": "Research",
+    "summary": "Investigate whether repeated practice with a simulated-IDE autocompletion quiz (choosing correct AI suggestions vs. plausible-but-wrong ones) produces durable, transferable skill in critically evaluating real Copilot suggestions in later unscaffolded coursework.",
+    "description": "MacNeil et al. (ITiCSE 2025) built an interactive quiz embedded in a simulated IDE where students choose the correct AI code completion at each line of a program. Students reported the system helped them distinguish good from bad suggestions, and most preferred it to GitHub Copilot or traditional quizzes. The paper stops at user perceptions; it does not measure whether the practiced 'negative expertise' transfers to real-world AI use or persists beyond the quiz context.\n\nThis project asks the follow-on question: if CS1 students practice rejecting bad AI completions in a quiz, do they become measurably more critical when using real AI coding tools later in the semester? And does the effect vary by student proficiency?\n\nPhase 1 (months 1-2) adapts the MacNeil et al. quiz to C++ using error types drawn from Jolly Feedback submission logs: the 15-20 most common autograder-caught mistakes become the 'wrong' completion options. The quiz is piloted with a small volunteer group outside the study.\n\nPhase 2 (month 3) designs a transfer measurement protocol. A lightweight Copilot usage logger (browser extension or Jolly Feedback plugin) records, per student: how often a suggestion is accepted as-is, accepted with modifications, or rejected. 'Critical acceptance rate' (modifications + rejections divided by total suggestions) becomes the primary transfer metric.\n\nPhase 3 (months 4-5) runs a two-section study: one section receives the quiz as a graded weekly activity for the first half of the course; the control section does not. Both sections use Copilot for the second half. Jolly Feedback submission logs are collected for both.\n\nPhase 4 (month 6) tests whether the treatment group shows higher critical acceptance rates and whether quiz performance predicts real-world evaluation behavior. A proficiency-stratified analysis asks whether the effect is larger for weaker or stronger students. Results connect directly to Pisan's 'toolchain-first in the copilot era' open question: if the quiz builds transferable evaluation skill, it belongs in the standard early-course toolkit.",
+    "papers": [
+      {
+        "doi": "10.1145/3724363.3729067",
+        "title": "Fostering Responsible AI Use Through Negative Expertise: A Contextualized Autocompletion Quiz",
+        "authors": ["MacNeil", "Prather", "Nabid", "Gutierrez", "Carvalho", "Shrestha", "Denny", "Reeves", "Leinonen", "Rossetti"],
+        "venue": "ITiCSE 2025",
+        "relevance": "Primary source: built and evaluated the IDE-quiz system; this project extends it with a controlled transfer study and a real Copilot usage logger."
+      }
+    ],
+    "additionalRefs": [
+      {
+        "doi": "10.1145/3724363.3729106",
+        "title": "Student's Use of Generative AI as a Support Tool in an Advanced Web Development Course",
+        "venue": "ITiCSE 2025",
+        "relevance": "Empirical study finding students report concerns about over-reliance and incorrect solutions from AI tools; motivates the need for explicit negative-expertise training."
+      },
+      {
+        "doi": "10.1145/3770762.3772605",
+        "title": "LLM-Based Explainable Detection of LLM-Generated Code in Introductory Programming Courses",
+        "venue": "SIGCSE TS 2026",
+        "relevance": "Documents a rise from 0% to 40% LLM-generated submissions in introductory courses from 2022 to 2024; establishes the scale and urgency of the over-reliance problem the quiz intervention addresses."
+      },
+      {
+        "doi": "10.1145/3770762.3773025",
+        "title": "CS and SE Education, Post-AI",
+        "venue": "SIGCSE TS 2026",
+        "relevance": "Industry keynote arguing that AI tools are accelerants that amplify existing pedagogical shortcomings; frames why critical AI evaluation is a durable skill worth teaching explicitly in CS1."
+      }
+    ],
+    "researchPlan": {
+      "milestones": [
+        "Month 1-2: Extract the 15-20 most common autograder-caught error types from Jolly Feedback CS1 C++ submission logs; build a C++ version of the MacNeil et al. autocompletion quiz; pilot with 5-10 volunteer students and refine distractor quality",
+        "Month 3: Design and implement a Copilot usage logger (browser extension or Jolly Feedback plugin hook) that records accept-as-is vs. accept-with-modification vs. reject events per student; define and validate the 'critical acceptance rate' metric with pilot data",
+        "Month 4: Obtain IRB approval for a two-section study; finalize quiz assignment schedule (weeks 1-7), Copilot deployment schedule (weeks 8-14), and assignment pairing; confirm instructor buy-in for control section",
+        "Month 5: Run study: treatment section completes weekly quiz assignments in first half; both sections use Copilot in second half with logger active; collect Jolly Feedback submission logs alongside Copilot usage logs",
+        "Month 6: Statistical analysis: mixed-effects models with student as random effect, treatment as fixed effect, pre-course proficiency as covariate; proficiency-stratified subgroup analysis; write manuscript for SIGCSE or ITiCSE"
+      ],
+      "targetVenues": ["SIGCSE TS 2027", "ITiCSE 2027", "ICER 2027"],
+      "resources": ["Jolly Feedback submission logs (existing infrastructure)", "Claude API for quiz distractor generation and pilot feedback analysis", "IRB approval (UW)", "Two CS1 sections willing to participate; one adopting quiz assignments"],
+      "risks": [
+        "Copilot usage logger requires students to install a browser extension; adoption may be incomplete; mitigate by building it into the Jolly Feedback submission flow instead",
+        "Critical acceptance rate may not capture editing quality (students may modify trivially); mitigate by logging edit distance alongside accept/reject events",
+        "Confounding by assignment difficulty: second-half assignments that happen to be harder or easier could inflate/suppress modification rates independent of treatment; mitigate with matched assignment sets across sections"
+      ],
+      "humanSubjects": true
+    }
+  }
+]

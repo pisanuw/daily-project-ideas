@@ -176,3 +176,7 @@
 | 2026-07-06 | Recurring Feedback Miner | Teaching Tool | 1-2 Weeks |
 | 2026-07-06 | Bounded Knowledge NPC Builder | Classroom Assignment | Multi-week |
 | 2026-07-06 | NLF-Scaffolded Decomposition Transfer: Does Natural Language Function Specification Build Lasting Problem-Decomposition Skills in CS1? | Research | Research |
+| 2026-07-07 | Accessibility-First UI Generator | Side Project | Weekend |
+| 2026-07-07 | Student Self-Assessment Calibrator | Teaching Tool | 1-2 Weeks |
+| 2026-07-07 | Procedural Game Balance Tester | Classroom Assignment | Multi-week |
+| 2026-07-07 | Negative Expertise Transfer: Do IDE Autocompletion Quizzes Build Lasting AI Code Evaluation Skills in CS1? | Research | Research |
