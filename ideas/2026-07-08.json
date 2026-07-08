@@ -1,0 +1,104 @@
+[
+  {
+    "date": "2026-07-08",
+    "n": 1,
+    "title": "Mutation Test Narrator",
+    "category": "Side Project",
+    "complexity": "Weekend",
+    "summary": "Run your mutation test suite and get a plain-English analyst report: which surviving mutants actually matter, what your tests are missing, and the three highest-value tests to write next.",
+    "description": "A CLI wrapper (npx mutation-narrator or pip install mutation-narrator) that runs an existing mutation testing tool -- Stryker for JS/TS, mutmut for Python, Pitest for Java -- captures the JSON output, and passes surviving mutants to Claude with the corresponding source code. Claude explains each surviving mutant in terms a developer cares about: what real bug it simulates, which scenario it would silently hide, and whether the mutant reveals a genuine coverage gap or is an innocuous equivalent mutant. A priority-ranked list of test cases to write is produced at the end. The report renders as rich terminal output (with color-coded severity) or as a Markdown file that can be committed alongside the test suite. A --top-n flag limits Claude API calls to the N most impactful mutants when the suite is large.",
+    "tech": ["Node.js", "Python (CLI)", "Claude API", "Stryker", "mutmut"],
+    "tags": ["mutation-testing", "test-quality", "CLI", "dev-tools", "LLM-assisted"],
+    "why_now": "Mutation testing adoption is low because raw mutant reports are cryptic: developers cannot easily tell which surviving mutants represent dangerous logic holes and which are harmless equivalents. Claude can now parse code semantics reliably enough to make that distinction and generate targeted test recommendations, turning mutation output from noise into an actionable coaching session."
+  },
+  {
+    "date": "2026-07-08",
+    "n": 2,
+    "title": "Autograder Error Pulse",
+    "category": "Teaching Tool",
+    "complexity": "1-2 Weeks",
+    "summary": "Ingest weekly autograder test-failure logs, cluster them by semantic error type using local embeddings, and deliver a Friday digest to the instructor: which concepts the class is actually stuck on and what to address Monday.",
+    "description": "A lightweight Flask app that accepts autograder output in common formats (Gradescope JSON, xUnit XML, custom CSV). Each student's test failures are embedded with a sentence-transformer model that runs locally so no student data leaves the server. An HDBSCAN pass groups failures into semantic clusters, then Claude labels each cluster ('off-by-one in loop bounds', 'null pointer on first access', 'missing base case in recursion') and synthesizes a Markdown weekly digest. The digest ranks clusters by prevalence and estimated conceptual seriousness, links to relevant lecture slides if a syllabus is provided, and suggests a 10-minute remediation activity or targeted practice problem per cluster. A comparison to prior weeks shows whether clusters are shrinking (intervention working) or persisting. The instructor receives the digest via email or Slack webhook every Friday. All student data stays on the department server; only aggregated cluster labels go to the Claude API.",
+    "tech": ["Flask", "Python", "sentence-transformers", "Claude API", "SQLite", "SMTP / Slack webhook"],
+    "tags": ["autograder", "error-clustering", "instructor-tool", "weekly-digest", "teaching"],
+    "why_now": "Autograders produce rich per-student failure logs that most instructors never analyze at the cohort level. Embedding models small enough to run locally (all-MiniLM-L6-v2, 80 MB) make semantic clustering of test output feasible on a department server. Claude can reliably label abstract error clusters when given representative examples, turning what was a manual data-mining chore into a Friday-night automated briefing."
+  },
+  {
+    "date": "2026-07-08",
+    "n": 3,
+    "title": "Code Archaeology Museum",
+    "category": "Classroom Assignment",
+    "complexity": "Multi-week",
+    "summary": "Students excavate a landmark open-source repository's early history, using LLM-assisted commit analysis to build a public web exhibit explaining key design decisions, abandoned ideas, and architectural fossils still visible in today's code.",
+    "description": "Student teams pick a milestone version span of a landmark project: Linux v0.0.1 to v1.0, Python 0.9.1 to 2.0, git's first 30 days of commits, or CPython's GIL-free transition. They use the GitHub REST API or local git log to extract commits, diffs, and issue comments. Claude reads commit messages and diffs and helps students write annotations for each pivotal commit: what problem it solved, what it discarded, what constraint it revealed. The final deliverable is a React + Vite single-page web exhibit with a scrollable commit timeline, expandable diff annotations, a 'Hall of Fossils' section showing code patterns from the chosen era still present in modern versions, and a 500-word design retrospective. Students also write a 1-page 'what I would do differently with modern tools (LLMs, containers, cloud)' reflection. The grader evaluates technical accuracy, narrative clarity, and depth of design analysis. Outstanding exhibits become reference material for future cohorts.",
+    "tech": ["React", "Vite", "Tailwind CSS", "Claude API", "GitHub REST API", "git"],
+    "tags": ["open-source-history", "software-archaeology", "git-analysis", "exhibit", "CS-history"],
+    "why_now": "GitHub's REST API makes it straightforward to pull full commit history programmatically. Claude can parse code diffs and explain design intent well enough to scaffold student analysis of early Linux kernel or early Python internals without requiring a domain expert in the room. The combination turns archival research into a tractable undergraduate assignment that teaches software design thinking alongside version-control fluency."
+  },
+  {
+    "date": "2026-07-08",
+    "n": 4,
+    "title": "Routing-Aware LLM Grading of Handwritten CS Exams: Privacy-Preserving Calibration with Open-Source Models",
+    "category": "Research",
+    "complexity": "Research",
+    "summary": "Extend 'Fighting Fire with Fire' (SIGCSE TS 2026) by replacing GPT-4o with fine-tuned open-source models and adding a calibrated confidence router that auto-escalates uncertain grades to a TA, reducing grading time and privacy exposure without sacrificing accuracy.",
+    "description": "Leithner et al. (SIGCSE TS 2026) showed that a GPT-4o-assisted grading pipeline reduced handwritten CS exam grading time by ~40% while maintaining accuracy comparable to human TAs. Two limitations remain: (1) sending student exam images to a proprietary API raises FERPA/privacy concerns for on-premises deployment; (2) the grader is always-on with no confidence filtering, so equally costly API calls are made for clear-cut answers and genuinely ambiguous responses.\n\nThis project addresses both limitations through two interlocking contributions.\n\nPrivacy contribution: We investigate whether fine-tuned or few-shot-prompted open-source models (Llama 3.1 70B, Qwen 2.5 72B -- the same tier validated for CS compiler-message explanation in paper-205) can match GPT-4o grading accuracy when deployed on department-owned GPU servers. Using a dataset of historical anonymized exams and expert grades collected under existing IRB, we measure per-question-type accuracy across four types common in CS1/CS2: short-answer explanation, algorithm tracing, Explain-in-Plain-English (EiPE), and fill-in-the-code.\n\nRouting contribution: We train a lightweight binary classifier on the LLM's own uncertainty signals (token-level log-probability entropy, answer-length variance across temperature sweeps) to predict which grades are likely to disagree with a human expert. Items above a confidence threshold are auto-accepted; items below are flagged for a 30-second TA review. We measure the Pareto frontier of (% auto-accepted) vs. (accuracy on auto-accepted items) across threshold values, targeting a 95% confidence band where auto-graded items match human grades at ICC > 0.90.\n\nExperiment: Using existing grading logs from prior courses (no new student subjects), we simulate four pipeline configurations: (a) full GPT-4o grading (Leithner baseline), (b) open-source LLM only, (c) open-source LLM + routing at 90% confidence threshold, (d) open-source LLM + routing at 95% threshold. Primary metrics are grading accuracy vs. gold human grades, estimated TA time for flagged items, and privacy cost (number of images sent to external APIs).\n\nConnection to Pisan's infrastructure: Submit! and Jolly Feedback already collect grading rubrics and TA grades. Adding exam OCR output as a new input channel would allow the routing system to slot in as a 'suggested grade' module, with TAs reviewing uncertain items rather than grading from scratch. A Phase 2 field deployment could follow a successful simulation study.",
+    "papers": [
+      {
+        "doi": "10.1145/3770762.3772615",
+        "title": "Fighting Fire with Fire: LLM-Assisted Grading of Handwritten CS Assessments",
+        "authors": ["Leithner", "et al."],
+        "venue": "SIGCSE TS 2026",
+        "relevance": "Primary source: demonstrates ~40% grading time reduction with GPT-4o-assisted handwritten exam grading. This project extends it with open-source model alternatives and a calibrated confidence routing layer."
+      }
+    ],
+    "additionalRefs": [
+      {
+        "doi": "10.1145/3770762.3772576",
+        "title": "Fine-Tuning Open-Source Models as a Viable Alternative to Proprietary LLMs for Explaining Compiler Messages",
+        "venue": "SIGCSE TS 2026",
+        "relevance": "Shows that fine-tuned Llama 3.1 70B and Qwen 2.5 72B match GPT-4o quality on CS-specific explanation tasks; establishes the open-source model tier to compare against Leithner's proprietary baseline."
+      },
+      {
+        "doi": "10.1145/3702652.3744220",
+        "title": "Rubric Is All You Need: Enhancing LLM-based Code Evaluation With Question-Specific Rubrics",
+        "venue": "ICER 2025",
+        "relevance": "Validates that question-specific rubrics substantially improve LLM grading accuracy on open-ended CS questions; motivates the rubric-conditioning approach used for each question type in this project."
+      },
+      {
+        "doi": "10.1145/3770762.3772613",
+        "title": "Improving the Reliability of Grading Written-Response Coding Questions in a Large CS1 Course",
+        "venue": "SIGCSE TS 2026",
+        "relevance": "Reports ICC-based inter-rater reliability analysis for rubric-based grading of written-response coding questions; provides the human grader reliability ceiling (ICC 0.83-0.97) that the automated routing system is calibrated to match or exceed on auto-accepted items."
+      },
+      {
+        "url": "https://arxiv.org/abs/2601.08843",
+        "title": "Rubric-Conditioned LLM Grading: Alignment, Uncertainty, and Robustness",
+        "venue": "arXiv 2025",
+        "relevance": "Proposes calibration-based bias correction and confidence intervals for LLM-as-judge setups; directly informs the uncertainty routing mechanism at the core of this project."
+      }
+    ],
+    "researchPlan": {
+      "milestones": [
+        "Month 1: Collect existing anonymized handwritten exam scans and TA grades from prior CS1/CS2 courses under existing IRB coverage; categorize by question type (short-answer, algorithm trace, EiPE, fill-in-code); target 200+ graded items per type across multiple past semesters",
+        "Month 2: Set up OCR pipeline (GPT-4o vision for baseline; Llama 3.2-vision or PaddleOCR for open-source path); measure per-question-type OCR accuracy; build rubric-conditioned prompting templates following the Rubric-Is-All-You-Need methodology",
+        "Month 3: Run full grading experiment across all four model configurations; collect per-item LLM confidence signals (log-probability entropy, top-token probability, temperature-variance across 5 samples); calibrate confidence classifier using Platt scaling on a held-out validation split",
+        "Month 4: Simulate routing pipeline at 80%, 90%, 95%, and 99% confidence thresholds; measure the accuracy-vs-auto-accept-rate Pareto frontier; analyze which question types are reliably auto-gradeable and which consistently require human review",
+        "Month 5: Write manuscript; prepare open-source release of the routing pipeline; draft integration specification for Submit!/Jolly Feedback for a future field-deployment semester"
+      ],
+      "targetVenues": ["SIGCSE TS 2027", "ICER 2027", "EDM 2027"],
+      "resources": [
+        "Anonymized historical exam grading logs from Pisan's CS1/CS2 courses (existing data, covered by existing IRB)",
+        "Department GPU server with A100 or equivalent for Llama 3.1 70B / Qwen 2.5 72B inference",
+        "GPT-4o API access for baseline comparisons (estimated < $200 for 1000 exam items at current pricing)",
+        "Submit! / Jolly Feedback infrastructure for future field-deployment phase"
+      ],
+      "risks": [
+        "Historical exam scans may vary in image quality (lighting, handwriting legibility); mitigate by stratifying analysis by an automated scan-quality score from the OCR confidence pass and reporting results per quality tier",
+        "Open-source OCR models may have lower accuracy than GPT-4o vision on cursive handwriting or complex diagrams (algorithm traces); mitigate by reporting per-question-type OCR error rates and allowing GPT-4o vision as a fallback for OCR-only while open-source models handle the grading step",
+        "Sample size per question type from a single institution may be insufficient for statistical significance; mitigate by pooling across multiple course offerings and semesters, applying bootstrapped 95% confidence intervals on all accuracy comparisons"
+      ],
+      "humanSubjects": false
+    }
+  }
+]

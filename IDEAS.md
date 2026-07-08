@@ -180,3 +180,7 @@
 | 2026-07-07 | Student Self-Assessment Calibrator | Teaching Tool | 1-2 Weeks |
 | 2026-07-07 | Procedural Game Balance Tester | Classroom Assignment | Multi-week |
 | 2026-07-07 | Negative Expertise Transfer: Do IDE Autocompletion Quizzes Build Lasting AI Code Evaluation Skills in CS1? | Research | Research |
+| 2026-07-08 | Mutation Test Narrator | Side Project | Weekend |
+| 2026-07-08 | Autograder Error Pulse | Teaching Tool | 1-2 Weeks |
+| 2026-07-08 | Code Archaeology Museum | Classroom Assignment | Multi-week |
+| 2026-07-08 | Routing-Aware LLM Grading of Handwritten CS Exams: Privacy-Preserving Calibration with Open-Source Models | Research | Research |

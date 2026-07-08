@@ -114,3 +114,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-07-06 [code] Created ideas/2026-07-06.json: Repo Time-Lapse Animator, Recurring Feedback Miner, Bounded Knowledge NPC Builder, NLF-Scaffolded Decomposition Transfer (research)
 
 2026-07-07 [code] Created ideas/2026-07-07.json: Accessibility-First UI Generator, Student Self-Assessment Calibrator, Procedural Game Balance Tester, Negative Expertise Transfer (research)
+
+2026-07-08 [code] Created ideas/2026-07-08.json: Mutation Test Narrator, Autograder Error Pulse, Code Archaeology Museum, Routing-Aware LLM Grading of Handwritten CS Exams (research)
