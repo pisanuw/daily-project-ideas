@@ -184,3 +184,7 @@
 | 2026-07-08 | Autograder Error Pulse | Teaching Tool | 1-2 Weeks |
 | 2026-07-08 | Code Archaeology Museum | Classroom Assignment | Multi-week |
 | 2026-07-08 | Routing-Aware LLM Grading of Handwritten CS Exams: Privacy-Preserving Calibration with Open-Source Models | Research | Research |
+| 2026-07-09 | Agent Spec Sketchpad | Side Project | Weekend |
+| 2026-07-09 | Assignment Spec Linter | Teaching Tool | 1-2 Weeks |
+| 2026-07-09 | Requirements Interview Bot | Classroom Assignment | Multi-week |
+| 2026-07-09 | LLM-Scaffolded Code Self-Explanation for Reducing Resubmission Cycles in CS1 | Research | Research |

@@ -1,0 +1,170 @@
+[
+  {
+    "date": "2026-07-09",
+    "n": 1,
+    "title": "Agent Spec Sketchpad",
+    "category": "Side Project",
+    "complexity": "Weekend",
+    "summary": "A browser tool where developers write a YAML/JSON multi-agent workflow spec, instantly see it as an interactive graph, and export to LangGraph or CrewAI -- with Claude validating the spec and simulating one round of agent interactions.",
+    "description": "Developers paste or type a declarative YAML/JSON spec that names agents, defines their tools and handoff conditions, and describes the flow between them. The Sketchpad renders the spec as a live interactive DAG using a lightweight graph library. A 'Simulate' button sends the spec to Claude, which plays all agent roles for one turn and returns annotated output: which agent fired, what it returned, and whether the handoff condition was met. Errors (cycles with no exit, unreachable agents, undefined tool references) are flagged inline with inline red highlights on the YAML. An 'Export' button generates a working LangGraph Python file or a CrewAI crew definition. Built as a single-page app with no backend: the Claude API call is made directly from the browser using a user-supplied API key stored in sessionStorage. Inspired by the Kastor 'Show HN' launch, the Terraform-for-agents design trend, and the visual pipeline editors in n8n and Langflow.",
+    "keyFeatures": [
+      "YAML/JSON spec editor with live DAG preview",
+      "Claude-powered spec validation (cycles, dead ends, undefined tools)",
+      "One-turn agent simulation with annotated trace",
+      "Export to LangGraph Python and CrewAI crew definitions",
+      "No backend: API key stored in sessionStorage only"
+    ],
+    "techStack": "React + Vite, D3 or Dagre-D3 for graph layout, Claude API (claude-sonnet-5), js-yaml for parsing",
+    "whyInteresting": "Every multi-agent framework has its own DSL and the mental model for 'what will this do' is hard to hold in your head without running it. A spec-first tool that shows the graph and simulates one turn closes the feedback loop instantly, catching topology errors before you write a line of framework code. The export step also lowers the cost of switching between LangGraph and CrewAI.",
+    "inspiredBy": "Kastor (Show HN, June 2026), n8n/Langflow visual pipeline trend, Microsoft Flint agent framework announcement"
+  },
+  {
+    "date": "2026-07-09",
+    "n": 2,
+    "title": "Assignment Spec Linter",
+    "category": "Teaching Tool",
+    "complexity": "1-2 Weeks",
+    "summary": "CS instructors paste a programming assignment spec and get back a structured report: ambiguous requirements flagged, Bloom's taxonomy coverage, missing edge cases, rubric consistency warnings, and a difficulty estimate.",
+    "description": "A Flask + React web app where instructors upload or paste a programming assignment description in Markdown or plain text. Claude analyses the spec against a structured rubric and returns a JSON report with five sections: (1) Ambiguity Flags -- sentences where student interpretation could diverge, with suggested rewrites; (2) Bloom's Coverage -- which taxonomy levels (Remember, Understand, Apply, Analyse, Evaluate, Create) are explicitly or implicitly addressed, and which are absent for the stated learning goals; (3) Edge Cases -- common edge conditions for the implied problem type (sorting, trees, recursion, I/O parsing) that the spec does not mention; (4) Rubric Consistency -- mismatches between what the spec says is important and what the grading breakdown rewards; (5) Difficulty Estimate -- a calibrated 1-5 scale with reasoning. The React dashboard renders each section as an expandable card with inline diff suggestions. Instructors can accept, reject, or mark-for-manual-review each suggestion, then export the annotated spec as Markdown. A history tab shows all past linting sessions for a course so instructors can track how assignment clarity evolves across semesters.",
+    "keyFeatures": [
+      "Ambiguity detection with rewrite suggestions",
+      "Bloom's taxonomy coverage analysis",
+      "Edge-case identification by problem type",
+      "Rubric consistency cross-check",
+      "Difficulty estimation with reasoning",
+      "Export annotated spec as Markdown"
+    ],
+    "techStack": "Flask, React + Vite, Claude API (claude-sonnet-5), SQLite for session history",
+    "whyInteresting": "Instructors spend hours wordsmithing assignment specs but rarely get structured feedback on them before students hit the problems -- feedback that then arrives as a flood of Piazza posts. A spec linter gives instructors a structured pre-flight check in minutes, catching the ambiguities students will exploit and the edge cases that will break half the class.",
+    "inspiredBy": "Recurring Piazza/Ed Discussion patterns in CS courses, Bloom's taxonomy analysis tools, GitHub code linting UX"
+  },
+  {
+    "date": "2026-07-09",
+    "n": 3,
+    "title": "Requirements Interview Bot",
+    "category": "Classroom Assignment",
+    "complexity": "Multi-week",
+    "summary": "Students interview an LLM playing a product client with a hidden brief, elicit software requirements through chat, produce a requirements document, and are scored against the hidden brief -- building real-world requirements elicitation skills at scale.",
+    "description": "An instructor-configured Flask + React app for teaching software requirements elicitation. The instructor creates a 'client persona': a name, industry context, and a structured hidden brief (feature list, constraints, priorities, must-haves, nice-to-haves). Students see only the persona description and chat with the LLM-as-client through a conversational interface. The client answers questions in character -- sharing information only when asked specific questions, deflecting vague questions as a real client would, and volunteering no more than necessary. After a 30-minute session, the chat closes and the student produces a requirements document in a structured template (user stories, acceptance criteria, constraints, out-of-scope items). The instructor releases the hidden brief after the deadline; a rubric-based comparison Claude run computes a score across five dimensions (completeness, precision, no-hallucination, priority alignment, format). Instructors can create personas for domains like hospital scheduling, e-commerce checkout, or campus event management. The system logs all conversations for instructor review and aggregate analysis of which requirements students most often miss. Directly implements the approach validated by UC Berkeley researchers (Li et al., ITiCSE 2025, DOI: 10.1145/3724389.3730772) who found LLM-client simulation significantly improved students' requirements elicitation skills over traditional methods (n=120, p<0.01).",
+    "keyFeatures": [
+      "Instructor persona builder with hidden brief configuration",
+      "LLM-as-client chat interface with realistic deflection and information-gating",
+      "Student requirements document submission in structured template",
+      "Automated scoring against hidden brief via Claude rubric comparison",
+      "Conversation log viewer for instructor debrief and aggregate analysis",
+      "Multiple concurrent personas (different domains) per course"
+    ],
+    "techStack": "Flask, React + Vite, Claude API (claude-sonnet-5), SQLite, Tailwind CSS",
+    "whyInteresting": "Requirements elicitation is one of the hardest skills to teach because it requires a willing and realistic client -- traditionally a TA roleplaying, which does not scale. LLMs can play consistent, configurable client personas at scale, making it possible to run this exercise for an entire class simultaneously. The UC Berkeley study showed the approach is effective; this project packages it as a reusable, instructor-friendly platform.",
+    "inspiredBy": "Li et al. (ITiCSE 2025) 'Using Large Language Models to Develop Requirements' (n=120, UC Berkeley)"
+  },
+  {
+    "date": "2026-07-09",
+    "n": 4,
+    "title": "LLM-Scaffolded Code Self-Explanation for Reducing Resubmission Cycles in CS1",
+    "category": "Research",
+    "complexity": "Research",
+    "summary": "Before a student resubmits a failed CS1 assignment, require them to explain their own code to an LLM and reconcile the LLM's expert explanation -- then measure whether this self-explanation gate reduces resubmission cycles and error recurrence compared to direct resubmission.",
+    "description": "Tran et al. (ITiCSE 2025) showed that LLM-scaffolded self-explanation in a flipped computer organization course improved perceived learning, with non-native English speakers reporting ~15% higher comfort when an LLM guided them through identifying gaps in their own explanations versus comparing with a fixed expert explanation. The paper's A/B design (fixed-prompt condition vs. interactive-dialogue condition) provides a clean methodological template.\n\nThis project applies that self-explanation scaffolding specifically to the CS1 code-resubmission moment -- the highest-leverage intervention point in a course that uses Jolly Feedback (Pisan's autograder/feedback system). When a student's submission fails, instead of allowing immediate resubmission, the system presents a self-explanation gate: the student types a plain-English explanation of what their code does and why they believe it should work. An LLM then asks two to three follow-up Socratic questions targeting the likely misconception (inferred from the failing test category), the student responds, and the LLM produces a brief 'reconciliation summary' showing what the student's explanation implies about their code versus what the failing tests reveal. Only after completing the gate is the resubmission button enabled.\n\nPhase 1 (computational, no human subjects): Mine existing Jolly Feedback submission logs to build a misconception taxonomy for each assignment in CS1 -- which test failures cluster together, and what code-level error pattern each cluster corresponds to. This phase replicates and extends Tran et al.'s finding that LLMs can accurately scaffold self-explanations, but on code rather than hardware concepts.\n\nPhase 2 (system build): Implement the self-explanation gate as a Jolly Feedback plugin. The gate uses Claude to generate follow-up questions conditioned on (failing test IDs, student code diff, misconception category from Phase 1).\n\nPhase 3 (quasi-experimental, requires IRB): Deploy in one CSS 142 section with self-explanation gate vs. one section with direct resubmission. Measure resubmission cycles per student, pass rate on first-post-gate submission, and longitudinal error recurrence on later assignments.\n\nThe research contributes: (a) a CS1 misconception taxonomy derived from Jolly Feedback logs, (b) an LLM Socratic questioning protocol for code self-explanation, and (c) causal evidence on whether self-explanation gates reduce resubmission churn.",
+    "papers": [
+      {
+        "title": "Enhancing Self-Explanation in Student Learning: An Investigation of LLM-Driven Dialogue",
+        "authors": "Tran, Q. D., et al. (McMaster University, University of Toronto Mississauga)",
+        "venue": "ITiCSE 2025",
+        "year": 2025,
+        "doi": "10.1145/3724389.3730790",
+        "url": "https://doi.org/10.1145/3724389.3730790",
+        "abstract": "We investigate whether large language models can scaffold self-explanations in a flipped computer organization course. In an A/B test, one group used a fixed prompt to compare their explanations with an expert's, while another engaged in an interactive dialogue with an LLM to identify gaps. Non-native English speakers in the LLM condition reported approximately a 15% higher rating in comfort and perceived learning.",
+        "relevance": "Primary source and methodological template: provides the A/B self-explanation design, the LLM-dialogue protocol, and evidence that interactive LLM scaffolding outperforms fixed-prompt comparison, particularly for non-native English speakers. This project adapts the protocol to CS1 code resubmission and extends the evaluation to objective resubmission-cycle metrics."
+      }
+    ],
+    "additionalRefs": [
+      {
+        "title": "Exploring the Effectiveness of Using LLMs for Automated Assessment of Student Self-Explanations in Programming Education",
+        "authors": "Anonymous (arXiv preprint)",
+        "venue": "arXiv 2025",
+        "year": 2025,
+        "url": "https://arxiv.org/abs/2605.21614",
+        "relevance": "Demonstrates that LLMs can reliably assess the quality of student self-explanations in programming contexts, supporting the feasibility of using Claude to evaluate explanation quality in the self-explanation gate."
+      },
+      {
+        "title": "DBox: Scaffolding Algorithmic Programming Learning through Learner-LLM Co-Decomposition",
+        "authors": "Ma, Y., et al.",
+        "venue": "CHI 2025",
+        "year": 2025,
+        "doi": "10.1145/3706598.3713748",
+        "url": "https://doi.org/10.1145/3706598.3713748",
+        "relevance": "Shows that LLM-guided decomposition scaffolding (learner + LLM co-decomposing a problem) improves algorithmic problem-solving outcomes in CS education; contextualizes code self-explanation as a related metacognitive scaffolding strategy."
+      },
+      {
+        "title": "Enhancing LLM-Based Feedback: Insights from Intelligent Tutoring Systems and the Learning Sciences",
+        "authors": "Kochmar, E., et al.",
+        "venue": "International Journal of Artificial Intelligence in Education (Springer), 2024",
+        "year": 2024,
+        "doi": "10.1007/978-3-031-64315-6_3",
+        "url": "https://doi.org/10.1007/978-3-031-64315-6_3",
+        "relevance": "Reviews ITS design principles (hints, Socratic dialogue, worked examples) and maps them to LLM-based feedback; provides theoretical grounding for the Socratic follow-up questioning protocol used in the self-explanation gate."
+      },
+      {
+        "title": "A Survey of LLM-Based Applications in Programming Education",
+        "authors": "Various",
+        "venue": "arXiv 2025",
+        "year": 2025,
+        "url": "https://arxiv.org/abs/2510.03719",
+        "relevance": "Comprehensive survey of LLM applications in CS education including autograders, tutors, and feedback systems; situates this project within the broader landscape and identifies open research gaps in the resubmission-intervention space."
+      }
+    ],
+    "researchPlan": {
+      "overview": "Mine existing Jolly Feedback CS1 submission logs to build a misconception taxonomy (Phase 1, no IRB needed), then build and deploy an LLM self-explanation gate as a Jolly Feedback plugin (Phase 2), and finally run a quasi-experimental evaluation in CSS 142 to measure resubmission cycle reduction (Phase 3, IRB required). The first two phases produce publishable artifacts independent of the field study.",
+      "milestones": [
+        {
+          "month": 1,
+          "goal": "Data preparation and misconception taxonomy construction",
+          "deliverable": "Annotated dataset of failing submission clusters from Jolly Feedback logs across 2-3 past semesters of CSS 142, with each cluster labeled by error type (off-by-one, wrong base case, type mismatch, etc.) -- at least 500 submission pairs (fail → pass or fail → multiple fails)"
+        },
+        {
+          "month": 2,
+          "goal": "LLM misconception inference evaluation",
+          "deliverable": "Benchmark report: given (student code, failing tests, assignment spec), how accurately does Claude infer the misconception category from the taxonomy? Target: 80%+ top-1 accuracy vs. human expert labels on a held-out set of 100 submission pairs"
+        },
+        {
+          "month": 3,
+          "goal": "Self-explanation gate prototype implementation",
+          "deliverable": "Working Jolly Feedback plugin that (a) intercepts resubmission, (b) presents self-explanation prompt, (c) runs two to three Socratic follow-ups conditioned on inferred misconception, (d) delivers reconciliation summary, and (e) unlocks resubmission. Internal usability pilot with 5 volunteer students."
+        },
+        {
+          "month": 4,
+          "goal": "IRB application submission and pre-registration",
+          "deliverable": "Submitted IRB protocol for CSS 142 quasi-experiment; pre-registered study design on OSF; teaching team briefed and section assignment randomized"
+        },
+        {
+          "month": 5,
+          "goal": "Field deployment in CSS 142 (one semester)",
+          "deliverable": "Deployment log, student interaction transcripts, resubmission cycle counts per student per assignment for treatment and control sections"
+        },
+        {
+          "month": 6,
+          "goal": "Analysis and manuscript preparation",
+          "deliverable": "Draft paper with results: resubmission cycle reduction (primary), first-post-gate pass rate (secondary), longitudinal error recurrence on later assignments (exploratory). Target SIGCSE or ICER submission."
+        }
+      ],
+      "targetVenues": ["SIGCSE TS 2027", "ICER 2027", "ITiCSE 2027", "EDM 2027"],
+      "resources": "Existing Jolly Feedback submission logs from CSS 142 (2-3 past semesters, under existing data use agreement); Claude API for misconception inference and self-explanation dialogue (estimated < $100 for Phase 1-2 at scale); one undergraduate RA for annotation and plugin development; CSS 142 instructor cooperation for Phase 3 deployment.",
+      "risks": [
+        {
+          "risk": "Students game the self-explanation gate by typing placeholder text to unlock resubmission faster",
+          "mitigation": "Detect low-effort responses (< 20 words, copied from assignment spec) and require revision; log gate completion time and explanation length as covariates in the analysis"
+        },
+        {
+          "risk": "The self-explanation gate increases frustration and time-on-task in ways that harm student experience, particularly for students already struggling",
+          "mitigation": "Include a student experience survey (brief, 3-item Likert) at end of each assignment; monitor office hours traffic as a proxy for distress; define a pre-specified stopping rule if the treatment section shows significantly higher withdrawal rate"
+        },
+        {
+          "risk": "Jolly Feedback plugin integration takes longer than expected, reducing time available for Phase 3 field deployment",
+          "mitigation": "Phases 1 and 2 produce standalone publishable contributions (misconception taxonomy + LLM inference benchmark) that do not depend on Phase 3; scope Phase 3 as a planned extension if plugin is delayed"
+        }
+      ],
+      "humanSubjects": false
+    }
+  }
+]
