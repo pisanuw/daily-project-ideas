@@ -2315,3 +2315,5 @@ IMPORTANT:
 - If today's file already exists with all 4 ideas, skip and do nothing.
 - Make sure each project idea is genuinely different and actionable, not vague or generic.
 - The research idea must cite a real paper from papers-index.json by its actual title and DOI.
+
+2026-07-10T00:00 User: [AUTOMATED BACKGROUND TASK] Daily idea curation routine: Find 3 fresh project ideas AND generate 1 research idea grounded in CS education papers, then commit all 4 to this repo in a single JSON file for 2026-07-10.

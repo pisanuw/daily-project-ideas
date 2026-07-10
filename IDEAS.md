@@ -188,3 +188,7 @@
 | 2026-07-09 | Assignment Spec Linter | Teaching Tool | 1-2 Weeks |
 | 2026-07-09 | Requirements Interview Bot | Classroom Assignment | Multi-week |
 | 2026-07-09 | LLM-Scaffolded Code Self-Explanation for Reducing Resubmission Cycles in CS1 | Research | Research |
+| 2026-07-10 | Thinking Lens | Side Project | Weekend |
+| 2026-07-10 | Algorithm Misconception Mirror | Teaching Tool | 1-2 Weeks |
+| 2026-07-10 | LLM Routing Testbed | Classroom Assignment | Multi-week |
+| 2026-07-10 | Misconception-Targeted LLM Feedback for Data Structures Algorithm Simulation | Research | Research |

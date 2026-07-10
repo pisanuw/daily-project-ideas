@@ -118,3 +118,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-07-08 [code] Created ideas/2026-07-08.json: Mutation Test Narrator, Autograder Error Pulse, Code Archaeology Museum, Routing-Aware LLM Grading of Handwritten CS Exams (research)
 
 2026-07-09 [code] Created ideas/2026-07-09.json: Agent Spec Sketchpad, Assignment Spec Linter, Requirements Interview Bot, LLM-Scaffolded Code Self-Explanation for Reducing Resubmission Cycles in CS1 (research)
+
+2026-07-10 [code] Created ideas/2026-07-10.json: Thinking Lens, Algorithm Misconception Mirror, LLM Routing Testbed, Misconception-Targeted LLM Feedback for DSA Algorithm Simulation (research, ITiCSE 2025 Dijkstra misconceptions paper)

@@ -1,0 +1,165 @@
+{
+  "date": "2026-07-10",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Thinking Lens",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A split-pane web app that renders an LLM's chain-of-thought reasoning alongside its final answer, letting users annotate the thinking trace as insightful, questionable, or surprising. Perfect for educators demonstrating AI transparency and developers debugging prompt strategies.",
+      "description": "Most LLM users only ever see the final answer, missing the intermediate reasoning that shapes it. Thinking Lens calls Claude's extended-thinking API and lays the thinking trace in a left panel and the response in a right panel, rendered in parallel. Color-coded annotation lets educators mark moments where the model self-corrects, gets confused, or makes a creative leap. Annotated traces can be exported as HTML teaching materials or shared as permalinks. Preset prompts cover classic CS topics (sorting, recursion, Big-O analysis) so instructors can drop it into a lecture with zero setup.",
+      "keyFeatures": [
+        "Live split-pane: scrollable thinking trace on the left, final answer on the right",
+        "Click-to-annotate: tag any reasoning span as Insightful, Questionable, or Surprising with a color highlight",
+        "Export annotated traces as standalone HTML for course materials or Slack shares",
+        "Preset prompt library for CS1/CS2 topics so instructors can demo in one click",
+        "Model selector to swap between thinking-capable models and compare trace styles"
+      ],
+      "techStack": "React + Vite, Tailwind CSS, Claude API (extended thinking), lightweight local-storage persistence, no backend required",
+      "whyInteresting": "The era of inspectable model cognition has arrived but no simple teaching tool surfaces it. Thinking Lens makes AI reasoning legible to students in seconds, turning 'the AI just knows' into 'here's the step where it got confused and corrected itself' - a far more honest and educational picture of how LLMs work.",
+      "inspiredBy": "HN 2026 thread 'What are you working on?' mention of a tool to see and edit what an AI thinks before it answers; Claude extended-thinking API release"
+    },
+    {
+      "n": 2,
+      "title": "Algorithm Misconception Mirror",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "An interactive web tool where students manually trace through graph and sorting algorithms on a live visualization; the system detects systematic error patterns that reveal known misconceptions and generates targeted Socratic hints rather than answers. Instructors see a class-wide misconception heatmap.",
+      "description": "Research has identified specific, reproducible misconceptions that students hold about algorithms like Dijkstra's (confusing fringe with spanning tree, applying alphabetical tie-breaking instead of priority ordering) - but standard autograders just mark the answer wrong. Algorithm Misconception Mirror records each student step choice on an interactive D3 graph or array visualization, applies lightweight heuristic classifiers for known misconception patterns, and when a pattern fires, generates a personalized Socratic question via the Claude API that guides the student toward the correct conceptual model without revealing the answer. An instructor dashboard aggregates misconception frequencies across the class, letting professors know which concept to re-teach before the exam.",
+      "keyFeatures": [
+        "Interactive step-by-step traces for Dijkstra, BFS, binary search, and merge sort on live visualizations",
+        "Misconception classifier: heuristic rules identify alphabetical-ordering, fringe-spanning-tree conflation, and 3 other common error patterns",
+        "LLM-generated Socratic hints targeted at the classified misconception, never revealing the solution",
+        "Student session replay so TAs can see exactly which choices triggered a misconception flag",
+        "Instructor heatmap: per-algorithm, per-misconception frequency counts across the whole class"
+      ],
+      "techStack": "React + Vite, D3.js (graph/array visualizations), Flask (misconception classification API), Claude API (Socratic hint generation), Supabase (session storage)",
+      "whyInteresting": "Autograders tell students they are wrong; this tool tells them HOW they are wrong at a conceptual level - a distinction that matters enormously in DS&A courses where the same surface error can stem from three different misunderstandings. Giving the misconception name to a student is already a pedagogically meaningful intervention.",
+      "inspiredBy": "Tilanterä et al., 'Investigating Students' Misconceptions of Dijkstra's Algorithm: Exploration of Algorithm Simulation Traces', ITiCSE 2025 (https://doi.org/10.1145/3724363.3729081); JSAV visual algorithm simulation research"
+    },
+    {
+      "n": 3,
+      "title": "LLM Routing Testbed",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "A multi-week project where students build and evaluate a prompt router that classifies incoming queries by complexity and routes each to the most cost-effective model, teaching model evaluation, system design, and empirical benchmarking in one cohesive assignment.",
+      "description": "As multi-model AI applications become standard in industry, knowing WHEN to use an expensive frontier model versus a cheap small model is a core engineering skill. In this assignment students build a Prompt Router: a Flask API that accepts a query, classifies its task type and complexity using a lightweight classifier of their own design, then routes it to Claude Opus 4.8, Claude Haiku 4.5, or a locally-running Ollama model based on that classification. Students curate a benchmark dataset of 50+ labeled prompt-response pairs, implement and iterate on their routing policy, and evaluate on three axes (cost, quality, latency). A shared class leaderboard ranks routing strategies by cost-efficiency ratio, encouraging friendly competition. A written reflection analyzes which task types genuinely required expensive models versus which could have gone local.",
+      "keyFeatures": [
+        "Benchmark dataset builder: students label prompt-response pairs with task type and minimum acceptable model tier",
+        "Routing policy engine with pluggable classifiers (keyword rules, embedding similarity, lightweight ML)",
+        "Three-axis evaluation dashboard: cost per query, quality score (LLM judge), and median latency",
+        "Ollama integration for true local-model routing, teaching privacy-first AI design",
+        "Class-wide leaderboard comparing cost-efficiency ratios across routing strategies"
+      ],
+      "techStack": "Python + Flask (routing API), React + Vite (evaluation dashboard), Claude API (Opus 4.8 + Haiku 4.5), Ollama (local models), Supabase (benchmark results and leaderboard), sentence-transformers (embedding classifier)",
+      "whyInteresting": "LLM cost optimization is one of the most practical skills missing from CS curricula right now. This assignment forces students to think empirically about model capabilities rather than defaulting to 'use the biggest model' - a mindset shift that reflects real production engineering decisions and teaches evaluation methodology as a first-class skill.",
+      "inspiredBy": "Frugon (HN 2026) - finds which LLM calls a cheaper model could handle; industry trend toward multi-model routing in production AI systems"
+    },
+    {
+      "n": 4,
+      "title": "Misconception-Targeted LLM Feedback for Data Structures Algorithm Simulation",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "A research program that extends a validated misconception-classification framework for algorithm simulation traces to three additional DSA algorithms, then evaluates whether LLM-generated, solution-free explanations targeted at the classified misconception reduce error persistence more than generic wrong-answer feedback.",
+      "description": "Tilanterä et al. (ITiCSE 2025) demonstrated that students' systematic errors in visual Dijkstra simulations can be modeled as classifiable misconceptions - four concrete patterns accounting for 16% of incorrect traces from 289 students. This research extends that classification framework to BFS, binary search, and merge sort, building a multi-algorithm misconception taxonomy from existing trace datasets. The core contribution is a targeted LLM feedback layer: when a student's trace is classified into a misconception category, Claude generates a Socratic explanation that names the conceptual confusion and asks a leading question - without revealing the correct step. The research question is whether this targeted, misconception-aware feedback reduces error persistence on subsequent algorithm traces compared to a control condition receiving only binary correct/incorrect feedback. The study uses an existing VAS platform (JSAV) and leverages Pisan's established infrastructure for automated assessment to deploy in a CSS 342 data structures section without requiring new IRB human subjects approval beyond existing course evaluation protocols.",
+      "papers": [
+        {
+          "title": "Investigating Students' Misconceptions of Dijkstra's Algorithm: Exploration of Algorithm Simulation Traces",
+          "authors": "Artturi Tilanterä, Ari Korhonen, Otto Seppälä, Teemu Taivainen",
+          "venue": "ITiCSE 2025",
+          "year": 2025,
+          "doi": "10.1145/3724363.3729081",
+          "url": "https://doi.org/10.1145/3724363.3729081",
+          "abstract": "We utilize a corpus of 712 algorithm simulation traces from 289 non-CS major undergraduate students to find evidence for misconceptions in Dijkstra's algorithm. We model students' systematic errors as algorithms to classify traces as misconceptions. The models explain 16% of 451 incorrect traces, providing evidence for four previously identified misconceptions: students conflate spanning tree and fringe, solve shortest paths heuristically, apply the algorithm to all graph components, and apply alphabetical ordering in neighbor iteration. The findings show how VAS exercise design and learning analytics can support diagnosing students' misconceptions of algorithms.",
+          "relevance": "This paper's misconception-classification framework - modeling systematic errors from VAS traces as distinguishable algorithmic patterns - provides the detection substrate that a targeted LLM feedback layer can transform into calibrated, solution-free Socratic explanations. The four Dijkstra misconceptions serve as the validated starting point for extending the taxonomy to BFS, binary search, and merge sort."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "Students Struggle with Concepts in Dijkstra's Algorithm",
+          "authors": "Artturi Tilanterä, Ari Korhonen, Otto Seppälä",
+          "venue": "ICER 2024, ACM",
+          "year": 2024,
+          "url": "https://dl.acm.org/doi/10.1145/3632620.3671096",
+          "relevance": "Direct predecessor to the ITiCSE 2025 paper; establishes the qualitative misconception taxonomy through think-aloud interviews with students tracing Dijkstra on paper, providing the conceptual grounding for the automated classification approach."
+        },
+        {
+          "title": "Automatic Recognition of Misconceptions in Visual Algorithm Simulation Exercises",
+          "authors": "Ville Karavirta, Ari Korhonen, Teemu Taivainen",
+          "venue": "IEEE FIE 2015",
+          "year": 2015,
+          "url": "https://ieeexplore.ieee.org/document/7344046/",
+          "relevance": "Establishes the technical precedent for automated misconception recognition in VAS exercises using rule-based pattern matching on trace logs - the detection substrate this research extends with LLM-powered feedback generation."
+        },
+        {
+          "title": "JSAV: The JavaScript Algorithm Visualization Framework",
+          "authors": "Ville Karavirta, Cliff Shaffer",
+          "venue": "ITiCSE 2013, ACM",
+          "year": 2013,
+          "url": "https://dl.acm.org/doi/10.1145/2462476.2462487",
+          "relevance": "JSAV is the open-source VAS framework used across the existing misconception research, making it the natural platform for deploying a new LLM feedback layer without requiring custom visualization development."
+        },
+        {
+          "title": "Algorithm Visualization: The State of the Field",
+          "authors": "Christopher Hundhausen, Sarah Douglas, John Stasko",
+          "venue": "ACM Transactions on Computing Education, Vol 10 No 3, 2010",
+          "year": 2010,
+          "url": "https://dl.acm.org/doi/10.1145/1821996.1821997",
+          "relevance": "The canonical survey of algorithm visualization research, establishing that active student engagement with visualizations (rather than passive viewing) produces learning gains - the pedagogical foundation for using student-generated simulation traces as a feedback trigger."
+        }
+      ],
+      "researchPlan": {
+        "overview": "The project runs in two arcs: a replication and extension arc (months 1-3) that ports the Dijkstra classification framework to three additional algorithms and validates it on publicly available trace datasets, and a deployment and evaluation arc (months 4-6) that integrates LLM feedback into JSAV and measures misconception persistence in a live data structures course. Both arcs can proceed with existing trace data, avoiding the need for a new IRB submission beyond routine course evaluation approval.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review and misconception taxonomy scoping",
+            "deliverable": "Annotated bibliography of VAS misconception research + draft taxonomy table mapping known misconceptions for Dijkstra, BFS, binary search, and merge sort with testable trace signatures"
+          },
+          {
+            "month": 2,
+            "goal": "Classifier implementation and validation on Dijkstra traces",
+            "deliverable": "Python classification pipeline reproducing the Tilanterä et al. four-misconception results on the publicly available trace dataset; precision/recall report"
+          },
+          {
+            "month": 3,
+            "goal": "Taxonomy extension to BFS, binary search, and merge sort",
+            "deliverable": "Misconception classifiers for three additional algorithms validated on synthetic and student-generated traces; extended taxonomy document"
+          },
+          {
+            "month": 4,
+            "goal": "LLM feedback layer design and integration into JSAV",
+            "deliverable": "Prompt templates for each misconception category (Socratic, solution-free); JSAV plugin that fires the feedback API on misconception detection; usability pilot with 5 students"
+          },
+          {
+            "month": 5,
+            "goal": "Deployment in CSS 342 and data collection",
+            "deliverable": "Trace logs and feedback interaction records from one data structures section; pre/post misconception error rates; student perception survey"
+          },
+          {
+            "month": 6,
+            "goal": "Analysis and paper writing",
+            "deliverable": "Submitted paper draft with results comparing targeted LLM feedback vs. binary correct/incorrect feedback on misconception persistence"
+          }
+        ],
+        "targetVenues": ["SIGCSE TS", "ITiCSE", "ICER", "EDM"],
+        "resources": "Existing VAS trace datasets from JSAV research community (publicly available); Jolly Feedback infrastructure for submission logging; Claude API (Haiku tier sufficient for feedback generation at approximately $0.01 per student session); one student RA for JSAV integration work; routine course evaluation IRB approval for CSS 342 trace collection",
+        "risks": [
+          {
+            "risk": "Existing public trace datasets may be too small or imbalanced to train reliable classifiers for BFS and merge sort misconceptions beyond Dijkstra",
+            "mitigation": "Supplement with synthetic traces generated by deliberately implementing each known misconception as a trace-producing algorithm; validate against qualitative think-aloud coding from the ICER 2024 paper"
+          },
+          {
+            "risk": "LLM-generated Socratic hints may be too generic to distinguish between misconception types, reducing the targeted feedback advantage over generic hints",
+            "mitigation": "Use multi-step prompting: pass the specific misconception label and a canonical example of correct vs. incorrect traces to the LLM before asking it to generate the hint; include a blind evaluation phase where expert raters judge hint specificity before deployment"
+          },
+          {
+            "risk": "Low base rate of classifiable misconceptions in a single course section may limit statistical power for the feedback comparison",
+            "mitigation": "Pre-register the analysis plan and power calculation; recruit a second section or collaborating institution through the JSAV research network to increase sample size"
+          }
+        ],
+        "humanSubjects": true
+      }
+    }
+  ]
+}
