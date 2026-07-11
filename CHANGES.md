@@ -120,3 +120,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-07-09 [code] Created ideas/2026-07-09.json: Agent Spec Sketchpad, Assignment Spec Linter, Requirements Interview Bot, LLM-Scaffolded Code Self-Explanation for Reducing Resubmission Cycles in CS1 (research)
 
 2026-07-10 [code] Created ideas/2026-07-10.json: Thinking Lens, Algorithm Misconception Mirror, LLM Routing Testbed, Misconception-Targeted LLM Feedback for DSA Algorithm Simulation (research, ITiCSE 2025 Dijkstra misconceptions paper)
+
+2026-07-11 [code] Created ideas/2026-07-11.json: ARIA Navigator, Hypothesis Sandbox, RAG Course Companion Builder, Comprehension-Gated Feedback: MCQ Quizzes for CS1 Misconception Persistence (research, AutoMCQ ITiCSE 2025)

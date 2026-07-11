@@ -192,3 +192,7 @@
 | 2026-07-10 | Algorithm Misconception Mirror | Teaching Tool | 1-2 Weeks |
 | 2026-07-10 | LLM Routing Testbed | Classroom Assignment | Multi-week |
 | 2026-07-10 | Misconception-Targeted LLM Feedback for Data Structures Algorithm Simulation | Research | Research |
+| 2026-07-11 | ARIA Navigator | Side Project | Weekend |
+| 2026-07-11 | Hypothesis Sandbox | Teaching Tool | 1-2 Weeks |
+| 2026-07-11 | RAG Course Companion Builder | Classroom Assignment | Multi-week |
+| 2026-07-11 | Comprehension-Gated Feedback: Do LLM-Generated Code Comprehension Quizzes Reduce Misconception Persistence in CS1? | Research | Research |

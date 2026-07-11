@@ -1,0 +1,156 @@
+{
+  "date": "2026-07-11",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "ARIA Navigator",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A web tool that simulates the screen reader experience for any HTML snippet and uses Claude to generate copy-paste ARIA fixes with plain-English explanations. Makes accessibility concrete and actionable for developers who have never used a screen reader.",
+      "details": "Paste any HTML fragment and ARIA Navigator walks through the DOM as a screen reader would: announcing roles, labels, focus order, and missing alt text in a simulated transcript. Claude analyzes the structural gaps and returns copy-paste ARIA attribute patches with one-sentence explanations for each fix. A before/after diff view shows exactly what changes. An exportable report can be shared with teammates or filed as an issue.",
+      "features": [
+        "Screen reader transcript simulation showing tab order, ARIA labels, and focus flow",
+        "LLM-generated ARIA fix suggestions with copy-paste snippets and plain-English rationale",
+        "Before/after structural diff view",
+        "Shareable accessibility report export"
+      ],
+      "tech": ["React", "Vite", "Tailwind", "Claude API", "axe-core", "JSDOM"],
+      "inspiration": "SIGCSE TS 2026 accessibility game paper (doi: 10.1145/3770762.3772557) and browser accessibility APIs",
+      "whyInteresting": "Most developers write HTML without ever hearing what it sounds like to a screen reader user. This bridges that empathy gap instantly, replacing abstract WCAG rules with a concrete simulation and AI-generated, actionable fixes."
+    },
+    {
+      "n": 2,
+      "title": "Hypothesis Sandbox",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "An in-browser coding lab that requires students to write a prediction before running each test, then explains the gap when wrong. Instructors get a class-wide map of which misconceptions are most common.",
+      "details": "Before a student can click Run, Hypothesis Sandbox surfaces a mandatory prediction field: 'What do you expect this test to output, and why?' When the actual output differs, Claude explains the conceptual gap (not just the syntax error) and ties it to a named misconception category. Student prediction accuracy is stored per concept, surfaced back as a personal heatmap. Instructors see an aggregate view showing which misconceptions cluster around each assignment, letting them target the next lecture at the real sticking points.",
+      "features": [
+        "Prediction-before-run workflow with mandatory hypothesis text entry",
+        "LLM explanation of prediction failures targeting the underlying concept, not just the error",
+        "Student-level prediction accuracy heatmap per concept area",
+        "Instructor dashboard showing class-wide misconception patterns per assignment"
+      ],
+      "tech": ["React", "Vite", "Flask", "Supabase", "Claude API", "Monaco Editor"],
+      "inspiration": "Block-N-Key paper ITiCSE 2025 (doi: 10.1145/3724363.3729035) and predict-observe-explain pedagogy",
+      "whyInteresting": "Predict-observe-explain is one of the most evidence-backed active-learning techniques, but most autograders skip the predict step entirely. Adding it takes one form field and yields a rich misconception signal."
+    },
+    {
+      "n": 3,
+      "title": "RAG Course Companion Builder",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "A multi-week project where students build a course-specific RAG chatbot from scratch: document ingestion, pgvector search, LLM response generation, confidence calibration, and a React chat UI with source citations.",
+      "details": "Students start with a folder of course PDFs and end with a working domain-bounded chatbot. The assignment is scaffolded into five milestones: (1) chunking and embedding pipeline, (2) Supabase pgvector store and similarity search, (3) Flask retrieval API, (4) Claude or Gemini response generation with grounding prompt, (5) React chat UI with inline source citations and a confidence refusal mechanism. Each milestone has an autograded integration test. A final showcase lets students demo their bot on course content of their choice.",
+      "features": [
+        "Full RAG pipeline from document chunking to response generation",
+        "Supabase pgvector integration for semantic search",
+        "Confidence calibration with graceful out-of-scope refusal",
+        "React chat UI with inline source citations",
+        "Autograded milestone checkpoints"
+      ],
+      "tech": ["React", "Vite", "Tailwind", "Supabase", "pgvector", "Flask", "Claude API", "Gemini API"],
+      "inspiration": "Growing RAG adoption in industry, Supabase pgvector documentation, and course assistant chatbot papers at SIGCSE 2026",
+      "whyInteresting": "RAG is now a core industry skill. This assignment gives students hands-on experience with every layer of the stack, from vector embeddings to citation-aware UI, using their own course material as the corpus."
+    },
+    {
+      "n": 4,
+      "title": "Comprehension-Gated Feedback: Do LLM-Generated Code Comprehension Quizzes Reduce Misconception Persistence in CS1?",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "A controlled classroom study that gates autograder feedback behind 2-3 LLM-generated MCQs about the student's own submitted code, testing whether forced comprehension checks reduce misconception persistence and resubmission cycles in CS1.",
+      "details": "Extends the AutoMCQ pipeline (ITiCSE 2025) into a longitudinal misconception-detection loop integrated with Jolly Feedback. After each submission, students see a brief comprehension quiz generated from their own code before test results are revealed. Quiz responses are classified against a CS1 misconception taxonomy mined from Pisan's existing CSS 142/143 submission logs (DT-2 agenda). Jolly Feedback is augmented to deliver targeted explanations keyed to the classified misconception rather than generic autograder output. A preregistered experiment in two CSS 142/143 sections compares comprehension-gated versus standard autograder conditions across resubmission count, time-to-pass, and misconception recurrence rate over one quarter.",
+      "papers": [
+        {
+          "doi": "10.1145/3724389.3731266",
+          "title": "AutoMCQ: Automatically Generate Code Comprehension Questions using GenAI",
+          "venue": "ITiCSE 2025",
+          "relevance": "Provides the MCQ generation pipeline that is the direct technical foundation of the comprehension gate; demonstrates LLM-generated questions achieve acceptable discrimination and difficulty parity with instructor-authored questions."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "citation": "Keuning, H., Jeuring, J., & Heeren, B. (2019). A Systematic Literature Review of Automated Feedback Generation for Programming Exercises. ACM Transactions on Computing Education, 19(1).",
+          "doi": "10.1145/3231711",
+          "relevance": "Establishes the baseline taxonomy of automated feedback types and effectiveness evidence; frames where comprehension-gated feedback sits relative to prior approaches."
+        },
+        {
+          "citation": "A Survey of LLM-Based Applications in Programming Education (2025). arXiv:2510.03719.",
+          "url": "https://arxiv.org/abs/2510.03719",
+          "relevance": "Surveys the current landscape of LLM use in programming education, situating the proposed work relative to recent AutoMCQ and feedback generation systems."
+        },
+        {
+          "citation": "'I Would Have Written My Code Differently': Beginners Struggle to Understand LLM-Generated Code (2025). arXiv:2504.19037.",
+          "url": "https://arxiv.org/abs/2504.19037",
+          "relevance": "Motivates the need for comprehension checks: if students cannot explain LLM-assisted code, the same gap likely applies to autograder-corrected code they did not fully understand."
+        }
+      ],
+      "researchPlan": {
+        "duration": "6 months",
+        "milestones": [
+          {
+            "month": 1,
+            "title": "Misconception Taxonomy Mining",
+            "tasks": [
+              "Cluster historical CSS 142/143 submission errors and resubmission patterns using Jolly Feedback logs",
+              "Produce a labeled CS1 misconception taxonomy with frequency and persistence scores",
+              "Validate taxonomy with two experienced CS1 TAs"
+            ]
+          },
+          {
+            "month": 2,
+            "title": "AutoMCQ Integration",
+            "tasks": [
+              "Adapt AutoMCQ prompts to target misconception categories from the taxonomy",
+              "Build a quiz-generation microservice that accepts a student submission and returns 2-3 MCQs",
+              "Pilot on 20 archived submissions; blind-rate question quality against original AutoMCQ baseline"
+            ]
+          },
+          {
+            "month": 3,
+            "title": "Jolly Feedback Augmentation",
+            "tasks": [
+              "Extend Jolly Feedback to gate test-result display behind quiz completion",
+              "Route quiz responses through misconception classifier; select targeted explanation template",
+              "IRB application and preregistration on OSF"
+            ]
+          },
+          {
+            "month": 4,
+            "title": "Controlled Classroom Study",
+            "tasks": [
+              "Deploy comprehension-gated condition in one CSS 142 section; standard autograder in matched section",
+              "Collect resubmission counts, time-to-pass, quiz response logs, and opt-in exit surveys"
+            ]
+          },
+          {
+            "month": 5,
+            "title": "Analysis",
+            "tasks": [
+              "Compare primary outcomes (resubmission count, time-to-pass) with Mann-Whitney U and effect sizes",
+              "Secondary analysis: misconception recurrence rate and quiz accuracy as predictors of final exam performance",
+              "Qualitative thematic analysis of exit survey free-text responses"
+            ]
+          },
+          {
+            "month": 6,
+            "title": "Write-Up and Submission",
+            "tasks": [
+              "Draft paper targeting ICER 2027 or SIGCSE TS 2027",
+              "Release taxonomy, quiz-generation prompts, and anonymized dataset as open artifacts",
+              "Present preliminary findings at local UW CS education reading group"
+            ]
+          }
+        ]
+      },
+      "targetVenues": ["ICER 2027", "SIGCSE TS 2027", "EDM 2027", "ITiCSE 2027"],
+      "risks": [
+        "Quiz generation latency may frustrate students if response time exceeds 3-4 seconds; mitigate with async pre-generation triggered at submission",
+        "Comprehension gate may increase perceived workload and reduce submission frequency; monitor with weekly opt-in pulse survey",
+        "Misconception taxonomy may not generalize beyond CSS 142/143 problem set; address in limitations and replicate in CSS 143 second semester",
+        "IRB approval timeline may compress study deployment; begin IRB application in month 3 in parallel with system build"
+      ],
+      "humanSubjects": true
+    }
+  ]
+}
