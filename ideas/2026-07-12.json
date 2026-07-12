@@ -1,0 +1,157 @@
+{
+  "date": "2026-07-12",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Micro-Demo Maker",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "Enter a GitHub repo URL and get back a self-contained, shareable live demo page that showcases the project's key features. Claude reads the README and sample code, generates example inputs, and wires up a live interactive interface in under two minutes.",
+      "details": "Paste a GitHub repo URL and Micro-Demo Maker fetches the README, package.json, and up to three sample files via the GitHub API. Claude analyzes what the project does, selects representative inputs, and generates a minimal interactive demo page embedded in a sandboxed iframe. The output is a single portable HTML file with the demo wired to a Claude-powered backend that executes the key function or API call live. A shareable link lets you drop the demo into a README badge, a portfolio, or a hackathon submission in under two minutes.",
+      "features": [
+        "GitHub repo ingestion: README, package.json, and key source files fetched via GitHub API",
+        "Claude-generated demo scaffold with representative example inputs",
+        "Live execution via Claude API function-calling or a tiny sandboxed worker",
+        "One-click export to a single portable HTML file or shareable URL",
+        "README badge snippet generated automatically"
+      ],
+      "tech": ["React", "Vite", "Tailwind", "Claude API", "GitHub API"],
+      "inspiration": "HN thread on making repos actually discoverable and the portfolio use case for hackathon projects; GitHub's lack of interactive preview surfaces",
+      "whyInteresting": "The gap between working code and code anyone can try in 10 seconds is enormous. This collapses it to a URL, turning a repo into a live demo with no deployment work and making open-source projects dramatically more discoverable."
+    },
+    {
+      "n": 2,
+      "title": "Pair Debugging Observatory",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "Students paste their pair debugging session transcript and code snapshots; an AI observer delivers a timestamped coaching report on debugging strategy quality. Instructors see class-wide patterns showing which debugging anti-patterns cluster around which assignments.",
+      "details": "Students copy-paste their pair debugging chat log, console output, and code snapshots into the Observatory after a lab session. Claude plays the role of a silent observer, scanning the session for debugging moves (hypothesis formation, systematic bisection, rubber ducking, random guessing) and produces a timestamped coaching report naming each move, rating its effectiveness, and suggesting a better approach where applicable. A confidence score highlights the two or three most impactful inflection points. Instructors see an aggregated class view: which debugging anti-patterns appear most often, which pairs are hypothesis-driven vs. trial-and-error, and which assignment problems trigger the most dead-end loops.",
+      "features": [
+        "Session transcript ingestion: chat logs, console output, and code snapshots",
+        "LLM observer classifying debugging moves and rating strategy quality",
+        "Timestamped coaching report with concrete improvement suggestions per move",
+        "Confidence-based highlight of 2-3 highest-impact session moments",
+        "Instructor dashboard aggregating strategy patterns across all pairs and assignments"
+      ],
+      "tech": ["React", "Vite", "Tailwind", "Flask", "Supabase", "Claude API"],
+      "inspiration": "SIGCSE 2026 research on UTA pedagogical practices and pair-programming observational studies; the challenge of making debugging strategy visible to instructors at scale without live observation",
+      "whyInteresting": "Debugging strategy is the hardest CS skill to teach because it is invisible during normal autograder workflows. This makes it legible without requiring instructors to sit in on every pair session."
+    },
+    {
+      "n": 3,
+      "title": "LLM Negotiation Arena",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "Students build LLM-powered negotiation agents with defined roles and goals (job offer, lease renewal, software license), which compete in structured conversational tournaments with a referee agent tracking offers and outcomes. Teaches prompt engineering, agent design, and game-theoretic thinking.",
+      "details": "Each student or team receives a negotiation scenario and a role card: the hiring manager trying to close below budget, or the candidate holding a competing offer. They design a system prompt and negotiation strategy for their LLM agent. The Arena pairs agents head-to-head in asynchronous conversational rounds; a separate referee agent parses each message for offer amounts, bluffs, and concessions, updates a deal state machine, and terminates the round on agreement or impasse. A leaderboard tracks deal closure rate, average deal quality, and turns-to-close. Students write a post-mortem analyzing what worked, what failed, and how they would redesign their agent's strategy.",
+      "features": [
+        "Scenario library: job offer, apartment lease, software license, freelance contract",
+        "Head-to-head asynchronous agent match runner with configurable turn limits",
+        "Referee agent parsing offers, bluffs, and concessions while updating a deal state machine",
+        "Leaderboard tracking closure rate, deal quality score, and turns-to-close",
+        "Student post-mortem template tied to specific match transcript moments"
+      ],
+      "tech": ["React", "Vite", "Tailwind", "Flask", "Supabase", "Claude API"],
+      "inspiration": "Multi-agent system design patterns, game-theoretic AI coursework, and the growing industry need for agents that operate in adversarial or cooperative environments",
+      "whyInteresting": "Negotiation arenas make prompt engineering tactically concrete: a student can see exactly when their agent's framing backfired and iterate with immediate feedback from the next match result."
+    },
+    {
+      "n": 4,
+      "title": "GenAI-Scaffolded Mastery Learning for CS1: Can Adaptive Automated Feedback Finally Enable Bloom's Vision at Scale?",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "A design-based research project wrapping Jolly Feedback with a GenAI hint layer to implement mastery-style progressive feedback in CSS 142, testing whether LLM-generated targeted hints reduce average resubmissions needed to reach mastery and improve final exam performance.",
+      "details": "Álvarez et al. (ITiCSE 2025) catalog the practical obstacles preventing mastery learning adoption in CS courses, chiefly the labor cost of generating varied resubmission tasks and grading them without inflating instructor load. This project addresses those obstacles directly by wrapping Pisan's Jolly Feedback infrastructure with a GenAI scaffolding layer. After a failing submission, Claude generates a targeted Socratic hint grounded in the specific test cases that failed and the inferred misconception category. After a second failure, it generates a worked example that varies the surface form of the problem. After a third failure, it schedules an office-hours flag. The existing test harness and Canvas pipeline remain unchanged; only the feedback message and submission counter logic are modified. A one-semester study in two CSS 142 sections compares mastery-gated (must pass all tests to advance) vs. standard (deadline-based) conditions, measuring resubmission count, time-to-mastery, and final exam performance.",
+      "papers": [
+        {
+          "doi": "10.1145/3724363.3729104",
+          "title": "Show Me the Mastery Learning! Obstacles to Adoption and Opportunities for New Solutions",
+          "authors": "Claudio Álvarez, Isabela Gasparini, Luiz Rodrigues, Seiji Isotani",
+          "venue": "ITiCSE 2025",
+          "year": 2025,
+          "url": "https://doi.org/10.1145/3724363.3729104",
+          "abstract": "Mastery learning requires students to demonstrate proficiency before advancing and has strong empirical support but remains rare in CS courses. This paper surveys adoption barriers including grading overhead, variant generation, and LMS integration, and maps GenAI opportunities onto each barrier.",
+          "relevance": "Directly identifies the obstacles this project proposes to solve with GenAI scaffolding over Jolly Feedback; the opportunity map in the paper aligns with each proposed intervention (hint generation, variant problems, load reduction)."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "The 2 Sigma Problem: The Search for Methods of Group Instruction as Effective as One-to-One Tutoring",
+          "authors": "Benjamin S. Bloom",
+          "venue": "Educational Researcher, 13(6), 4-16",
+          "year": 1984,
+          "url": "https://doi.org/10.3102/0013189X013006004",
+          "relevance": "The foundational motivation: mastery learning with one-to-one feedback produces 2 standard deviation gains; GenAI makes this scalable for the first time."
+        },
+        {
+          "title": "A High-Transparency Approach to Mastery Learning in CS1",
+          "authors": "ITiCSE 2025 authors",
+          "venue": "ITiCSE 2025",
+          "year": 2025,
+          "url": "https://doi.org/10.1145/3724363.3729023",
+          "relevance": "Companion ITiCSE 2025 paper demonstrating a working mastery learning deployment in CS1; provides a concrete baseline implementation to contrast with the GenAI-scaffolded approach."
+        },
+        {
+          "title": "FEEDBOT: A Framework for Formative Feedback with LLMs in Programming Courses",
+          "authors": "ITiCSE 2025 authors",
+          "venue": "ITiCSE 2025",
+          "year": 2025,
+          "url": "https://doi.org/10.1145/3724363",
+          "relevance": "Demonstrates LLM-generated formative feedback integrated with autograder pipelines similar to Jolly Feedback; validates the technical feasibility of the proposed architecture."
+        }
+      ],
+      "researchPlan": {
+        "overview": "A three-phase project: instrument Jolly Feedback with a GenAI hint layer, run a controlled classroom study in CSS 142 comparing mastery-gated with GenAI hints vs. standard deadline-based grading, and analyze resubmission count, time-to-mastery, and final exam performance. Target timeline is one academic year, submitting to SIGCSE TS 2027.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review and baseline instrumentation",
+            "deliverable": "Annotated bibliography + Jolly Feedback instrumentation logging resubmission counts and test failure patterns per student per assignment"
+          },
+          {
+            "month": 2,
+            "goal": "GenAI hint layer design and prototype",
+            "deliverable": "Prototype Flask microservice accepting (submission, failed tests, attempt number) returning a Socratic hint, worked example, or office-hours flag based on attempt count; evaluated on 50 archived submissions"
+          },
+          {
+            "month": 3,
+            "goal": "IRB application and Canvas integration",
+            "deliverable": "IRB application submitted; mastery gate logic integrated into Canvas submission pipeline via Jolly Feedback; preregistration on OSF"
+          },
+          {
+            "month": 4,
+            "goal": "Controlled classroom study deployment",
+            "deliverable": "One CSS 142 section running mastery-gated condition; matched section running standard condition; mid-quarter pulse survey data collected"
+          },
+          {
+            "month": 5,
+            "goal": "Data analysis",
+            "deliverable": "Primary analysis: resubmission count and time-to-mastery compared with Mann-Whitney U; secondary analysis: hint type vs. attempt reduction; qualitative coding of exit survey free-text"
+          },
+          {
+            "month": 6,
+            "goal": "Paper write-up and submission",
+            "deliverable": "Draft submitted to SIGCSE TS 2027; hint prompts, anonymized dataset, and Jolly Feedback extension released as open artifacts"
+          }
+        ],
+        "targetVenues": ["SIGCSE TS 2027", "ITiCSE 2027", "ICER 2027", "EDM 2027"],
+        "resources": "Jolly Feedback Python infrastructure (existing), Claude API access, IRB approval for CSS 142 study, 1 undergraduate RA for data labeling, anonymized submission logs from prior quarters (already held).",
+        "risks": [
+          {
+            "risk": "LLM hint latency adds friction to the resubmission loop and discourages resubmission",
+            "mitigation": "Pre-generate hints asynchronously at submission time so they are ready before the student returns to revise"
+          },
+          {
+            "risk": "Mastery gate increases student anxiety and reduces willingness to attempt harder problems",
+            "mitigation": "Cap total resubmissions at five; after five attempts the gate opens with a grade penalty, maintaining mastery incentive without a hard wall"
+          },
+          {
+            "risk": "IRB approval timeline slips past the study deployment window",
+            "mitigation": "Begin IRB application in month 3 in parallel with Canvas integration; prepare an exempt protocol pathway for aggregate log analysis if full protocol is delayed"
+          }
+        ],
+        "humanSubjects": true
+      }
+    }
+  ]
+}

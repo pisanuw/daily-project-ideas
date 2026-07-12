@@ -196,3 +196,7 @@
 | 2026-07-11 | Hypothesis Sandbox | Teaching Tool | 1-2 Weeks |
 | 2026-07-11 | RAG Course Companion Builder | Classroom Assignment | Multi-week |
 | 2026-07-11 | Comprehension-Gated Feedback: Do LLM-Generated Code Comprehension Quizzes Reduce Misconception Persistence in CS1? | Research | Research |
+| 2026-07-12 | Micro-Demo Maker | Side Project | Weekend |
+| 2026-07-12 | Pair Debugging Observatory | Teaching Tool | 1-2 Weeks |
+| 2026-07-12 | LLM Negotiation Arena | Classroom Assignment | Multi-week |
+| 2026-07-12 | GenAI-Scaffolded Mastery Learning for CS1: Can Adaptive Automated Feedback Finally Enable Bloom's Vision at Scale? | Research | Research |
