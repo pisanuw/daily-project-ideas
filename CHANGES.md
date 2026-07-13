@@ -124,3 +124,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-07-11 [code] Created ideas/2026-07-11.json: ARIA Navigator, Hypothesis Sandbox, RAG Course Companion Builder, Comprehension-Gated Feedback: MCQ Quizzes for CS1 Misconception Persistence (research, AutoMCQ ITiCSE 2025)
 
 2026-07-12 [code] Created ideas/2026-07-12.json: Micro-Demo Maker, Pair Debugging Observatory, LLM Negotiation Arena, GenAI-Scaffolded Mastery Learning for CS1 (research, ITiCSE 2025 mastery learning paper doi:10.1145/3724363.3729104)
+
+2026-07-13 [code] Created ideas/2026-07-13.json: Proof Sketch Animator, TA Queue Intelligence, Debugging Theater, In-Class Snapshot Profiling for LLM-Personalized Practice in CS Courses (research, SIGCSE TS 2026 paper-226)

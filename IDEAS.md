@@ -200,3 +200,7 @@
 | 2026-07-12 | Pair Debugging Observatory | Teaching Tool | 1-2 Weeks |
 | 2026-07-12 | LLM Negotiation Arena | Classroom Assignment | Multi-week |
 | 2026-07-12 | GenAI-Scaffolded Mastery Learning for CS1: Can Adaptive Automated Feedback Finally Enable Bloom's Vision at Scale? | Research | Research |
+| 2026-07-13 | Proof Sketch Animator | Side Project | Weekend |
+| 2026-07-13 | TA Queue Intelligence | Teaching Tool | 1-2 Weeks |
+| 2026-07-13 | Debugging Theater | Classroom Assignment | Multi-week |
+| 2026-07-13 | In-Class Snapshot Profiling for LLM-Personalized Practice in CS Courses | Research | Research |
