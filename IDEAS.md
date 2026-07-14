@@ -204,3 +204,7 @@
 | 2026-07-13 | TA Queue Intelligence | Teaching Tool | 1-2 Weeks |
 | 2026-07-13 | Debugging Theater | Classroom Assignment | Multi-week |
 | 2026-07-13 | In-Class Snapshot Profiling for LLM-Personalized Practice in CS Courses | Research | Research |
+| 2026-07-14 | Level Design Lens | Game Development | Weekend |
+| 2026-07-14 | Comparative LLM Explanation Bench | CS Education / AI Literacy | 1-2 Weeks |
+| 2026-07-14 | Living API Doc Generator | Developer Tools / Teaching | Multi-week |
+| 2026-07-14 | LLM-Client Simulation for Analogical Requirements Discovery | CS Education Research / Requirements Engineering | Research |

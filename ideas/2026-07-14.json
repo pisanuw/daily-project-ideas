@@ -1,0 +1,162 @@
+{
+  "date": "2026-07-14",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Level Design Lens",
+      "category": "Game Development",
+      "complexity": "Weekend",
+      "summary": "Upload a game level screenshot or paste a description and get a multi-lens critique from Claude API covering difficulty curve, player guidance flow, exploration affordances, and visual clarity.",
+      "description": "Indie developers and students learn game design theory in class but rarely get structured feedback on their actual levels. Level Design Lens bridges that gap: you drop in a screenshot or typed description of a game level and Claude API analyzes it through four design lenses simultaneously (difficulty pacing, spatial wayfinding cues, exploration reward density, visual hierarchy). Each lens returns a 2-3 sentence critique plus ranked action items. A side-by-side panel shows the original image annotated with heat-zone overlays generated from the critique text. Results export as markdown for portfolio write-ups.",
+      "keyFeatures": [
+        "Screenshot upload with Claude vision analysis across four design lenses",
+        "Text-description mode for levels that are hard to screenshot (3D, procedural)",
+        "Annotated heat-zone overlay drawn on the original image via Canvas API",
+        "Ranked action-item list per lens with estimated effort (quick-fix vs redesign)",
+        "Markdown export for portfolio documentation"
+      ],
+      "techStack": ["React", "Vite", "Tailwind CSS", "Claude API (vision)", "Canvas API"],
+      "whyInteresting": "Game design critique is usually informal and personality-driven. Structuring it around established lenses (flow theory, affordance theory, spatial cognition) teaches students to articulate why something feels wrong rather than just that it does. Pisan's game development background makes this personally relevant and gives it pedagogical credibility.",
+      "inspiredBy": "HN discussions of game platform projects and the persistent gap between game design theory taught in class and practical critique tools available to indie developers and students."
+    },
+    {
+      "n": 2,
+      "title": "Comparative LLM Explanation Bench",
+      "category": "CS Education / AI Literacy",
+      "complexity": "1-2 Weeks",
+      "summary": "An instructor dashboard that sends a CS concept question to multiple LLMs simultaneously, displays responses side-by-side with an auto-scored rubric, and exports comparison reports for classroom AI literacy discussions.",
+      "description": "Instructors who want to teach AI literacy through direct model comparison currently have to juggle multiple browser tabs and evaluate responses subjectively. Comparative LLM Explanation Bench fixes both problems. You type a CS concept question (e.g., 'Explain recursion to a CS1 student'), choose 3-4 models (Claude, Gemini, a local open model via OpenRouter), and fire them all simultaneously. A Flask backend fans out the requests and streams responses into a Tailwind grid. A lightweight rubric engine (accuracy, appropriate level, use of examples, no hallucinations) scores each response on a 1-5 scale using a meta-prompt sent to Claude. The scored grid exports as a PDF or markdown report for in-class handouts or Canvas assignments.",
+      "keyFeatures": [
+        "Simultaneous fan-out to Claude, Gemini, and OpenRouter-hosted open models",
+        "Streaming responses rendered in parallel columns as they arrive",
+        "Meta-prompt rubric auto-scoring each response on accuracy, level, examples",
+        "Side-by-side diff highlighting where models diverge on key claims",
+        "Export to PDF or markdown for Canvas assignment handouts"
+      ],
+      "techStack": ["React", "Vite", "Tailwind CSS", "Flask", "Claude API", "Gemini API", "OpenRouter API"],
+      "whyInteresting": "Teaching AI literacy by talking about LLMs in the abstract is far less effective than letting students see concrete differences on a topic they already know. This tool makes that comparison structured and reproducible. It also surfaces the rubric design problem: students must decide what 'good explanation' means before they can evaluate models, which is itself a valuable pedagogical exercise.",
+      "inspiredBy": "The recurring instructor need to run in-class AI comparison exercises without a reliable multi-model tool; existing arena tools like Ollama Arena focus on general prompts rather than education-specific rubric scoring."
+    },
+    {
+      "n": 3,
+      "title": "Living API Doc Generator",
+      "category": "Developer Tools / Teaching",
+      "complexity": "Multi-week",
+      "summary": "Students build a tool that auto-generates interactive, always-current API documentation from a running Flask or FastAPI backend, with live endpoint testing, Claude-generated usage examples, and regeneration on every git push via GitHub Actions.",
+      "description": "Documentation is the first thing developers skip and the first thing teams regret skipping. Living API Doc Generator turns documentation into a first-class CI artifact. Given a running Flask or FastAPI app, the tool introspects all routes, parameters, and response schemas, then calls Claude API to generate human-readable descriptions and usage examples in context. The generated docs are a React SPA with live 'Try It' panels that hit the actual running server. A GitHub Actions workflow re-runs the generator on every push so docs are always in sync with the code. Students learn API design (clean routes force clean docs), documentation philosophy (what belongs in a doc vs. code comment), and DevOps integration (CI/CD as a quality gate) in a single project.",
+      "keyFeatures": [
+        "Flask or FastAPI route introspection to extract endpoints, params, and schemas",
+        "Claude API generation of human-readable descriptions and usage examples per endpoint",
+        "Interactive React SPA with live 'Try It' panels calling the real server",
+        "GitHub Actions workflow that regenerates docs on every push",
+        "Diff view showing what changed between doc versions across commits"
+      ],
+      "techStack": ["React", "Vite", "Tailwind CSS", "Flask or FastAPI", "Claude API", "GitHub Actions", "Supabase (optional: store doc snapshots)"],
+      "whyInteresting": "Most documentation assignments are fake: students document imaginary code that never runs. Making the doc generator live and CI-driven means students immediately feel the pain of poorly named routes and inconsistent parameter conventions because the generated docs look bad. Portfolio-worthy: the final artifact is both the generator tool and the docs it produced.",
+      "inspiredBy": "The gap between living documentation tools in enterprise settings (Swagger, Redoc) and the student experience of writing documentation as a one-off homework deliverable disconnected from actual code."
+    },
+    {
+      "n": 4,
+      "title": "LLM-Client Simulation for Analogical Requirements Discovery",
+      "category": "CS Education Research / Requirements Engineering",
+      "complexity": "Multi-week (Research)",
+      "summary": "Extend LLM-as-client requirements elicitation simulation with Structure-Mapping Engine-style analogical reasoning so students discover missing requirements by cross-domain analogy transfer, bridging Pisan's GONDOLA environment with ITiCSE 2025 LLM-client findings.",
+      "description": "Practicing requirements elicitation (RE) is difficult in academic settings: real clients are unavailable and scripted role-plays feel hollow. A 2025 ITiCSE paper (Garg et al., UC Berkeley/Seville) demonstrates that an LLM conditioned to play the client role produces realistic RE practice with positive student outcomes. This project extends that simulation with analogical scaffolding drawn from Pisan's prior work on analogy-based requirements elaboration (ICSE 2000) and Falkenhainer, Forbus and Gentner's Structure-Mapping Engine (SME, 1989). The LLM client is configured with a multi-domain persona (e.g., a hospital scheduling system that also operates like an airline booking system). Students must apply analogical transfer to surface latent requirements that only emerge when the system is compared to the analogue domain. A second LLM judge evaluates whether discovered requirements are genuinely novel versus surface-level restatements. The platform logs all interview transcripts for qualitative analysis of analogical reasoning strategies.",
+      "keyFeatures": [
+        "LLM client persona conditioned on a primary domain plus one or two analogue domains",
+        "Student chat interface that prompts for analogical probes alongside standard RE questions",
+        "SME-inspired cross-domain mapper that highlights structural correspondences the student surfaced",
+        "LLM judge scoring each discovered requirement for novelty and analogical grounding",
+        "Transcript logger and qualitative coding interface for research analysis",
+        "Instructor dashboard to configure domain personas and analogy pairings without code"
+      ],
+      "techStack": ["React", "Vite", "Tailwind CSS", "Flask", "Claude API", "Supabase (transcript storage and auth)", "GitHub Actions (CI for persona config validation)"],
+      "whyInteresting": "Requirements elicitation is one of the hardest skills to teach because it requires real-world ambiguity. Combining LLM-as-client simulation (scalable, available 24/7) with analogical reasoning scaffolding (grounded in 35 years of cognitive science) creates a practice environment that is both realistic and pedagogically principled. Directly extends Pisan's existing GONDOLA work into the LLM era and connects to the CS education community's growing interest in scalable RE pedagogy.",
+      "papers": [
+        {
+          "doi": "10.1145/3724389.3730772",
+          "title": "Using Large Language Models to Develop Requirements Elicitation Skills",
+          "authors": "Garg, Karim, Dodero, Maharjan, Cleland-Huang",
+          "venue": "ITiCSE 2025",
+          "year": 2025,
+          "relevance": "Primary paper: LLM-as-client simulation for RE practice, positive findings on student outcomes, directly motivates analogical extension"
+        }
+      ],
+      "additionalRefs": [
+        {
+          "citation": "Pisan, Y. 'Extending requirement specifications using analogy.' ICSE 2000 / ResearchGate.",
+          "relevance": "Pisan's foundational work on analogy-based requirements elaboration, the direct precedent this project updates to LLM tools"
+        },
+        {
+          "citation": "Falkenhainer, B., Forbus, K.D., Gentner, D. 'The Structure-Mapping Engine: Algorithm and Examples.' Artificial Intelligence 41(1), 1989.",
+          "relevance": "Foundational SME framework that formalizes cross-domain analogical mapping; provides the theoretical basis for the analogical scaffolding mechanism"
+        },
+        {
+          "citation": "Camara, J. et al. 'Simulating Requirement Elicitation: A Persona-Based Tool.' SIGCSE 2025, doi:10.1145/3641555.3705250.",
+          "relevance": "Parallel work on persona-based RE simulation; useful for comparing LLM client conditioning approaches"
+        },
+        {
+          "citation": "ReqElicitGym: An Evaluation Environment for Interview Competence in Conversational Requirements Elicitation. arXiv:2602.18306, 2026.",
+          "relevance": "Benchmark environment for RE interview competence; useful for evaluation methodology and comparison baseline"
+        }
+      ],
+      "researchPlan": {
+        "duration": "6 months",
+        "humanSubjects": false,
+        "milestones": [
+          {
+            "month": "1-2",
+            "title": "Literature and Persona Design",
+            "tasks": [
+              "Full literature review: LLM-as-client RE simulation, analogical reasoning in SE education, SME applications",
+              "Design 3-5 domain persona pairs (primary domain + analogue, e.g., hospital scheduling / airline booking)",
+              "Implement baseline LLM client (replicating Garg et al.) with Claude API, no analogy yet",
+              "Build chat interface and transcript logger in React + Flask + Supabase"
+            ]
+          },
+          {
+            "month": "3",
+            "title": "Analogical Scaffolding Layer",
+            "tasks": [
+              "Implement SME-inspired cross-domain mapper as a Claude API meta-prompt",
+              "Add analogical probe suggestions in the student interface (optional hints, not mandatory)",
+              "LLM judge prompt for scoring requirement novelty and analogical grounding",
+              "Pilot with synthetic student sessions (LLM-generated) to validate scoring rubric"
+            ]
+          },
+          {
+            "month": "4",
+            "title": "Pilot Study (Synthetic)",
+            "tasks": [
+              "Run 50 synthetic student sessions across 3 domain pairs using Claude to play the student role",
+              "Qualitative coding of transcripts for analogical reasoning strategy types",
+              "Measure: requirements discovered per session, novelty score, analogical grounding score",
+              "Compare analogical-scaffolded vs. baseline (no analogy) across same domain pairs"
+            ]
+          },
+          {
+            "month": "5",
+            "title": "Analysis and Instrument Refinement",
+            "tasks": [
+              "Thematic analysis of analogical reasoning patterns in synthetic transcripts",
+              "Refine persona conditioning prompts based on failure modes observed",
+              "Build instructor dashboard for no-code persona configuration",
+              "Write up methodology for classroom deployment (IRB considerations for future human study)"
+            ]
+          },
+          {
+            "month": "6",
+            "title": "Writing and Submission",
+            "tasks": [
+              "Write research paper: introduction, related work, system design, synthetic pilot results, discussion",
+              "Target venues: ITiCSE 2026 (work-in-progress), SIGCSE TS 2027 (full paper), or AIED 2026",
+              "Open-source the platform with persona config examples",
+              "Prepare demo video for submission artifact"
+            ]
+          }
+        ],
+        "targetVenues": ["ITiCSE 2026 (work-in-progress track)", "SIGCSE TS 2027", "AIED 2026", "ICER 2027"]
+      }
+    }
+  ]
+}
