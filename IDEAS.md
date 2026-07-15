@@ -208,3 +208,7 @@
 | 2026-07-14 | Comparative LLM Explanation Bench | CS Education / AI Literacy | 1-2 Weeks |
 | 2026-07-14 | Living API Doc Generator | Developer Tools / Teaching | Multi-week |
 | 2026-07-14 | LLM-Client Simulation for Analogical Requirements Discovery | CS Education Research / Requirements Engineering | Research |
+| 2026-07-15 | Phaser Game Scaffolder | Side Project | Weekend |
+| 2026-07-15 | Live Accessibility Explainer | Teaching Tool | 1-2 Weeks |
+| 2026-07-15 | Collaborative Student Wiki | Classroom Assignment | Multi-week |
+| 2026-07-15 | Rubric-Grounded LLM Feedback for Code Readability in CS1: Scaling a Pilot and Closing the Structural-Formatting Gap | Research | Research |
