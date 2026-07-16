@@ -130,3 +130,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-07-14 [code] Created ideas/2026-07-14.json: Level Design Lens, Comparative LLM Explanation Bench, Living API Doc Generator, LLM-Client Simulation for Analogical Requirements Discovery (research, ITiCSE 2025 doi:10.1145/3724389.3730772)
 
 2026-07-15 [code] Created ideas/2026-07-15.json: Phaser Game Scaffolder, Live Accessibility Explainer, Collaborative Student Wiki, Rubric-Grounded LLM Feedback for Code Readability in CS1 (research, ITiCSE 2025 doi:10.1145/3724389.3730771)
+
+2026-07-16 [code] Created ideas/2026-07-16.json: JSON Schema Factory, Concept Prerequisite Mapper, Personal Data Journalist, Adaptive Hint Mode Router (research, SIGCSE TS 2026 doi:10.1145/3770761.3777327)

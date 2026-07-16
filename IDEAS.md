@@ -212,3 +212,7 @@
 | 2026-07-15 | Live Accessibility Explainer | Teaching Tool | 1-2 Weeks |
 | 2026-07-15 | Collaborative Student Wiki | Classroom Assignment | Multi-week |
 | 2026-07-15 | Rubric-Grounded LLM Feedback for Code Readability in CS1: Scaling a Pilot and Closing the Structural-Formatting Gap | Research | Research |
+| 2026-07-16 | JSON Schema Factory | Side Project | Weekend |
+| 2026-07-16 | Concept Prerequisite Mapper | Teaching Tool | 1-2 Weeks |
+| 2026-07-16 | Personal Data Journalist | Classroom Assignment | Multi-week |
+| 2026-07-16 | Adaptive Hint Mode Router: Dynamic Selection Between Targeted and Socratic LLM Hints in CS1 | Research | Research |

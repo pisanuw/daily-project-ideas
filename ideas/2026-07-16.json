@@ -1,0 +1,165 @@
+{
+  "date": "2026-07-16",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "JSON Schema Factory",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "Paste raw JSON and instantly generate TypeScript interfaces, Zod validation schemas, or SQL table definitions. A zero-install, browser-only tool that turns messy API responses into typed contracts in seconds.",
+      "description": "Developers waste hours manually writing TypeScript interfaces for API responses they did not design. JSON Schema Factory solves this with a split-pane Monaco editor: paste any JSON on the left, pick an output format (TypeScript types, Zod schema, Prisma model, or PostgreSQL CREATE TABLE) and the right pane populates instantly. Optional Claude API integration adds smart field descriptions, flags suspicious nullability gaps, and suggests better field names based on context. The whole thing runs in the browser with no backend required — the Claude call is the only network request, and it is optional. A genuine daily-use developer utility buildable in a weekend.",
+      "keyFeatures": [
+        "JSON-to-TypeScript type inference with optional/required detection",
+        "Zod, Prisma model, and PostgreSQL CREATE TABLE output modes",
+        "Monaco editor with live JSON validation and syntax highlighting",
+        "Optional Claude API annotation: field descriptions and nullability warnings",
+        "One-click copy per output block, no signup or install required"
+      ],
+      "techStack": "React + Vite, Tailwind CSS, Monaco Editor, Claude API (optional)",
+      "whyInteresting": "Every frontend developer who works against undocumented or evolving APIs needs this daily. It is tiny to build and immediately portfolio-worthy, and the optional LLM layer turns a utility into something genuinely smarter than existing JSON-to-TS converters.",
+      "inspiredBy": "Recurring HN discussions about the cost of hand-typing API interfaces; trending React developer productivity tooling (builder.io React+AI stack 2026); the demand for browser-only zero-install dev tools seen in r/SideProject"
+    },
+    {
+      "n": 2,
+      "title": "Concept Prerequisite Mapper",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "Instructors describe any CS topic and get an LLM-generated visual prerequisite graph showing every concept students need first, tagged by course level. Students use the same graph as a self-assessment checklist to identify exactly which gaps are blocking them.",
+      "description": "When students struggle with recursion or pointers, they are often missing a prerequisite the instructor assumed was already in place. Concept Prerequisite Mapper takes a topic description (e.g., 'recursive backtracking in Python') and uses an LLM to generate a structured prerequisite graph, labeling each node with its typical course level (CS0, CS1, CS2, etc.) and a short explanation of why it matters. The graph is rendered interactively using React Flow so instructors can annotate nodes and save maps to Supabase for sharing with a class. Students load the same map, check off concepts they understand, and immediately see which specific gaps are blocking their progress on the current topic. This makes invisible prerequisite chains visible and actionable for both sides of the classroom.",
+      "keyFeatures": [
+        "LLM-generated prerequisite graph from a plain-text topic description",
+        "Interactive React Flow visualization with click-to-expand node details",
+        "CS course-level tagging per node (CS0 through CS3)",
+        "Student self-assessment mode: check off known concepts, highlight gaps",
+        "Instructor save and share: persist maps to Supabase, share via URL"
+      ],
+      "techStack": "React + Vite, Tailwind CSS, Claude API, React Flow, Supabase",
+      "whyInteresting": "Curriculum graphs exist at the course level, but no tool generates them at the individual concept level on demand. This gives instructors a fast diagnostic when students are stuck and gives students a concrete study checklist instead of vague advice to 'review the material'.",
+      "inspiredBy": "HN July 2026 AI-in-education discussions; classroom observation that students fail advanced topics because of implicit prerequisite gaps; gap in existing curriculum tools (course-level vs. concept-level granularity)"
+    },
+    {
+      "n": 3,
+      "title": "Personal Data Journalist",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "Students build a privacy-first, self-hosted web app that imports their own data exports from platforms they use daily and generates a narrative 'year in review' data story with charts and AI-written analysis. No personal data leaves the browser.",
+      "description": "Modern students export gigabytes of personal data from GitHub, Spotify, Apple Health, and browser history, yet few know how to analyze or narrate it. In this multi-week assignment students build a full-stack app (React + Vite frontend, Flask or Node backend) that accepts standard platform export files, processes them locally, and uses an LLM with privacy constraints (only aggregate statistics, never raw personal data, are sent to the API) to write narrative summaries and generate Recharts visualizations. The deliverable is a working personal analytics app that produces a shareable, exportable HTML 'year in review' page from the student's own data. The assignment teaches the complete stack: data pipeline design, privacy-by-design LLM integration, data visualization, and self-hosting — and because students use their own data, motivation is built in. The final app makes a strong portfolio piece.",
+      "keyFeatures": [
+        "Multi-source data import: GitHub JSON, Spotify streaming history, Apple Health XML, custom CSV",
+        "Privacy-first LLM layer: only aggregate stats sent to API, raw data stays local",
+        "Recharts visualizations: activity timelines, top-N charts, year-over-year comparisons",
+        "AI-written narrative summaries per data source",
+        "Exportable HTML report shareable without requiring the app to be running"
+      ],
+      "techStack": "React + Vite, Tailwind CSS, Flask or Node.js backend, Claude API, Recharts, Papa Parse",
+      "whyInteresting": "Students learn the full data pipeline simultaneously with LLM integration and privacy-by-design, all while building something they will actually use. An open-source self-hosted 'Spotify Wrapped for everything' addresses real demand while teaching real skills.",
+      "inspiredBy": "HN/Reddit 'personal analytics' threads; the proliferation of GDPR data exports; HN June 2026 trending projects including Micasa (house tracking from terminal) and Infini-News; student desire for portfolio projects with personal relevance"
+    },
+    {
+      "n": 4,
+      "title": "Adaptive Hint Mode Router: Dynamic Selection Between Targeted and Socratic LLM Hints in CS1",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "A randomized controlled trial that assigns hints dynamically based on real-time student-state signals rather than statically per student, testing whether a hint-mode router outperforms fixed Targeted or fixed Socratic hint delivery in CS1.",
+      "description": "A landmark SIGCSE TS 2026 study found that Socratic AI hints lead to more student struggle in the short term without clear long-term benefits over Targeted hints, but that study permanently assigned each student to one mode for the entire semester. The key open question is whether the problem is Socratic hints themselves or the one-size-fits-all assignment: a student who is deeply confused likely benefits from a direct targeted nudge, while a student who is close to the solution likely benefits from Socratic questioning that preserves their discovery. This project proposes an Adaptive Hint Mode Router that uses lightweight student-state signals (accumulated error count on the current problem, time-on-task, prior-assignment performance tier) to dynamically choose between Targeted and Socratic hint modes at each hint request. We will implement the router as an extension to an existing hint-delivery platform, run a three-arm RCT in CS1 (Targeted-only, Socratic-only, Adaptive), and measure short-term completion rates, long-term transfer on novel problems, and student-reported help-seeking quality. The project directly extends Pisan's SIGCSE 2021 solution-free hint generation work and creates the student-state feedback loop that prior hint studies have lacked.",
+      "papers": [
+        {
+          "title": "To Tell or to Ask? Comparing the Effects of Targeted vs. Socratic AI Hints",
+          "authors": "LLM-generated debugging assistance (SIGCSE TS 2026 author list)",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770761.3777327",
+          "url": "https://doi.org/10.1145/3770761.3777327",
+          "abstract": "A randomized controlled trial with 178 CS1 students compared two LLM hint styles over two semesters: Targeted hints (clear, concise suggestions pointing directly at the error) and Socratic hints (questions and analogies guiding students to discover errors independently). Students receiving Socratic hints spent more time, took more attempts, and committed more repeat errors in the short term, with no evidence of compensating long-term improvement in coding outcomes.",
+          "relevance": "This is the direct source paper. Its key limitation is static hint-mode assignment: every student received the same mode for the entire study. The proposed research tests the hypothesis that dynamic routing based on student state — rather than permanent assignment — can recover the pedagogical benefit of Socratic questioning while avoiding the short-term struggle cost for confused students."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "SocraticAI: Transforming LLMs into Guided CS Tutors Through Scaffolded Interaction",
+          "authors": "Karthik Sunil, Aalok Thakkar",
+          "venue": "COMPUTE 2025 Best Practices Track; arXiv:2512.03501",
+          "year": 2025,
+          "url": "https://arxiv.org/abs/2512.03501",
+          "relevance": "Describes a deployed Socratic LLM tutor with daily query limits, structured question-formulation requirements, and RAG-based course grounding. Reports that students shift from vague help-seeking to deliberate problem decomposition within 2-3 weeks — providing evidence that Socratic dialogue scaffolds can work when paired with sufficient structure, and offering a design template for the routing system's Socratic mode."
+        },
+        {
+          "title": "One Step at a Time: Combining LLMs and Static Analysis to Generate Next-Step Hints for Programming Tasks",
+          "authors": "Multiple authors",
+          "venue": "Koli Calling 2024",
+          "year": 2024,
+          "url": "https://doi.org/10.1145/3699538.3699556",
+          "relevance": "Proposes combining chain-of-thought LLM prompting with static analysis to generate verifiable next-step hints, controlling for hint size and code quality. Directly applicable to the Targeted mode of the proposed router: static analysis provides the grounding that prevents LLM hints from being vague or incorrect, which is the known failure mode of pure-LLM Targeted hints."
+        },
+        {
+          "title": "A Comparison of On-Demand Hints and Progress Bar Feedback on Programming Exercises",
+          "authors": "University of Toronto; North Carolina State University",
+          "venue": "ITiCSE 2025",
+          "year": 2025,
+          "url": "https://doi.org/10.1145/3724389.3730787",
+          "relevance": "A large-scale (1,260 students) study finding that more confident students prefer on-demand hints for direct problem-solving support, while progress bars were beneficial across confidence levels. Establishes that student self-efficacy and confidence level moderate hint preference, directly supporting the hypothesis that hint mode should vary with student state rather than being fixed per student."
+        },
+        {
+          "title": "Automating Human Tutor-Style Programming Feedback: Leveraging GPT-4 Tutor Model for Hint Generation and GPT-3.5 Student Model for Hint Validation",
+          "authors": "Multiple authors",
+          "venue": "arXiv:2310.03780; EDM 2024",
+          "year": 2024,
+          "url": "https://arxiv.org/abs/2310.03780",
+          "relevance": "Introduces a two-model pipeline where a GPT-4 tutor generates hints and a GPT-3.5 student model simulates student reception to validate hint quality before delivery. The student-model validation technique provides a mechanism for the adaptive router to pre-test whether a Socratic hint is appropriately calibrated for a student at a given state, or whether to fall back to Targeted delivery."
+        }
+      ],
+      "researchPlan": {
+        "overview": "The project has three phases: (1) build and instrument the Adaptive Hint Mode Router on top of an existing hint platform, implementing heuristic routing rules derived from the SIGCSE TS 2026 and ITiCSE 2025 findings; (2) run a three-arm RCT in one or two CS1 sections; (3) analyze short-term completion rates, long-term transfer, and help-seeking quality. A secondary contribution is the routing decision log itself, which will provide a labeled dataset of student-state-to-hint-mode pairings for future ML-based routing research.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review and router design: survey all published hint-type comparison studies, extract student-state features used or available, define routing heuristics, design three-arm RCT protocol, and confirm IRB pathway",
+            "deliverable": "Annotated bibliography, routing heuristic specification document, IRB protocol draft"
+          },
+          {
+            "month": 2,
+            "goal": "Build the Adaptive Hint Mode Router: extend an existing hint delivery platform (e.g., the study platform from the SIGCSE TS 2026 paper, or a Jolly Feedback-style substrate) with the router logic, state-signal instrumentation, and per-request logging",
+            "deliverable": "Working router implementation with unit tests; pilot test with 5-10 volunteer students"
+          },
+          {
+            "month": 3,
+            "goal": "Run RCT semester 1 in CS1 course: deploy three arms (Targeted-only, Socratic-only, Adaptive), collect completion rates, attempt counts, time-on-task, and end-of-assignment quiz scores as short-term outcome measures",
+            "deliverable": "RCT data collection complete; preliminary descriptive statistics"
+          },
+          {
+            "month": 4,
+            "goal": "Administer long-term transfer assessment: give students a novel problem set one month after deployment ends, measuring whether Adaptive arm outperforms fixed arms on transfer and help-seeking quality (survey)",
+            "deliverable": "Transfer assessment data; complete dataset ready for analysis"
+          },
+          {
+            "month": 5,
+            "goal": "Statistical analysis and write-up: run mixed-effects models for completion rate, transfer score, and help-seeking; analyze router decision log for patterns (which student-state features drove most mode switches); draft paper",
+            "deliverable": "Analysis code + results; first full paper draft"
+          },
+          {
+            "month": 6,
+            "goal": "Revise and submit paper; if effect sizes warrant, plan semester 2 replication with ML-learned routing weights",
+            "deliverable": "Submitted paper; semester 2 protocol (if applicable)"
+          }
+        ],
+        "targetVenues": ["SIGCSE TS", "ICER", "EDM", "ITiCSE"],
+        "resources": "Access to one or two CS1 course sections (60-150 students); an existing hint-delivery platform or lightweight custom build (React + Flask + Supabase); Claude API credits for hint generation; undergraduate or graduate RA for instrumentation and data cleaning; IRB approval (human subjects — students in enrolled courses, with opt-out consent)",
+        "risks": [
+          {
+            "risk": "Small course enrollment limits statistical power for a three-arm RCT",
+            "mitigation": "Run the study across two semesters or partner with one additional institution; pre-register the study and use equivalence testing if effect sizes are small; publish as a replication/extension even with null results given the direct comparison to the SIGCSE TS 2026 finding"
+          },
+          {
+            "risk": "Routing heuristics based on error count and time-on-task may be too coarse to detect student state reliably",
+            "mitigation": "Log all routing decisions and student outcomes to enable post-hoc analysis of which features actually predicted hint benefit; iterate routing rules between semester 1 and semester 2 based on this log"
+          },
+          {
+            "risk": "Students in the Adaptive arm may perceive inconsistency in hint style as confusing or unfair",
+            "mitigation": "Frame hint variation in the student-facing UI as 'personalized to where you are right now'; conduct a brief post-study survey on perceived consistency; if confusion is high, add a brief visible explanation of the routing rationale ('This looks like you are close — want to try working it out?')"
+          }
+        ],
+        "humanSubjects": true
+      }
+    }
+  ]
+}
