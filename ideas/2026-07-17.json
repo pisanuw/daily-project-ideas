@@ -1,0 +1,162 @@
+{
+  "date": "2026-07-17",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "LLM Stream Cassette",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "Record real LLM streaming API sessions to portable JSON cassettes and replay them at identical timing without spending tokens, perfect for building and testing streaming chat UIs.",
+      "description": "Teams building AI-powered chat apps spend significant time and money running live API calls just to test loading states, streaming animations, and error handling in their UI. LLM Stream Cassette lets you record an actual streaming session (Claude, Gemini, or OpenAI) to a JSON file capturing every chunk, timing delta, and metadata, then replay it through a local mock server at the same cadence as the original. You can share cassettes with teammates, commit them to version control, and use them in CI pipelines to test streaming UI behavior without ever hitting the API. A lightweight browser devtools panel shows the active cassette name and a live chunk-progress counter during replay.",
+      "keyFeatures": [
+        "Record full streaming sessions including per-chunk timing deltas and metadata",
+        "Local mock server that mirrors the real API SSE contract at recorded speed",
+        "Portable JSON cassette format shareable via git or npm package",
+        "Browser devtools panel showing active cassette, chunk counter, and replay controls"
+      ],
+      "techStack": "TypeScript, Node.js (Fastify mock server), React + Vite (devtools panel), Chrome Extension API",
+      "whyInteresting": "Removes the API cost and latency barrier from streaming UI development. Cassettes make streaming behavior reproducible and testable in CI without any tokens spent, the same way VCR.rb and nock solved this problem for HTTP at large.",
+      "inspiredBy": "Hacker News Show HN July 2026 developer tool trend; cassette-pattern HTTP mocking (VCR.rb, nock) adapted to the new challenge of AI streaming response timing and chunk fidelity"
+    },
+    {
+      "n": 2,
+      "title": "Erroneous Code Example Forge",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "A teacher-facing tool that uses Claude API to generate banks of subtly buggy code examples targeting specific CS1 misconceptions, ready to deploy as interactive 'spot the bug' exercises.",
+      "description": "Creating high-quality erroneous examples is one of the most time-consuming parts of CS course prep: each one must be subtly wrong in a pedagogically meaningful way, accompanied by plausible distractor explanations. Erroneous Code Example Forge lets instructors describe a target misconception in plain language (for example, 'students think Python lists are copied on assignment'), then generates 6-8 buggy code variants, each paired with three wrong explanations and one correct diagnosis. The resulting exercise bank is stored in Supabase and can be exported to Canvas quiz XML, a printable PDF, or an embeddable interactive widget. Instructors rate each generated example for quality and can see at a glance which misconceptions have enough exercise coverage. Supports Python, Java, and C++ out of the box.",
+      "keyFeatures": [
+        "Natural language misconception description drives structured buggy code generation",
+        "Configurable programming language, difficulty level, and error subtlety",
+        "Canvas LMS quiz XML export and embeddable interactive widget",
+        "Instructor quality-rating loop with per-misconception coverage dashboard"
+      ],
+      "techStack": "React + Vite, Claude API (claude-sonnet-5), Supabase, Tailwind CSS",
+      "whyInteresting": "Turns a multi-hour manual task into a five-minute exercise while directly supporting a researched but underused pedagogical technique: deliberate exposure to misconception-embodying code. Aligned with SIGCSE TS 2026 findings that LLMs can reliably generate high-quality erroneous examples at scale.",
+      "inspiredBy": "SIGCSE TS 2026 paper: 'Exploring LLMs for Generating Erroneous Examples in CS1' (doi:10.1145/3770761.3777210); instructor workflow pain points in large introductory programming courses"
+    },
+    {
+      "n": 3,
+      "title": "Browser-Native Socratic Tutor",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "Students build a fully in-browser CS tutor powered by a quantized small LLM via WebLLM, with Socratic questioning mode, adaptive hint depth, and a private local conversation history stored in IndexedDB.",
+      "description": "This multi-week assignment teaches students the emerging skill set of browser-native AI: loading a quantized small model (Phi-3-mini or Qwen2.5-1.5B) via WebLLM with WebGPU acceleration, managing a local conversation history in IndexedDB with no server calls, and implementing Socratic tutoring logic that progressively reveals hints only after failed attempts. The assignment has three graded phases: (1) get a model running in the browser and producing coherent responses; (2) add a Socratic mode that asks one probing question before giving any direct answer, with a configurable minimum-attempts threshold; (3) build a session dashboard showing which programming concepts the student visited and how hint depth evolved over the session. No API keys, no server, and no data leaving the device: privacy is a first-class feature and part of the grading rubric.",
+      "keyFeatures": [
+        "Full in-browser LLM inference via WebLLM and WebGPU, no API key required",
+        "Socratic mode that delays direct answers with a configurable probing-question phase",
+        "Adaptive hint depth that increases specificity after each consecutive failed attempt",
+        "Local session dashboard with concept-visit history stored entirely in IndexedDB"
+      ],
+      "techStack": "React + Vite, WebLLM (web-llm npm), IndexedDB (idb library), Tailwind CSS",
+      "whyInteresting": "Teaches a rapidly emerging and highly marketable skill (browser-native AI with WebGPU) while surfacing genuine design tradeoffs around model size, latency, and privacy. The Socratic mode requires students to think carefully about pedagogical design, not just prompt engineering, producing a portfolio piece that showcases both AI engineering and educational technology design.",
+      "inspiredBy": "WebLLM/WebGPU Show HN thread (July 2026); SIGCSE TS 2026 paper 'Learning-Centered Intelligent Tutor for Novice Java Programmers' (doi:10.1145/3770761.3777266); DeliverC GenAI game-based learning work (doi:10.1145/3770762.3772509)"
+    },
+    {
+      "n": 4,
+      "title": "From Submission Logs to Tutor Configurations: Mining Institution-Specific Misconception Taxonomies for LLM-Grounded CS1 Tutoring",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Extends MisconceptionTutor (SIGCSE TS 2026) by asking whether a misconception taxonomy mined from a course's own submission logs outperforms a literature-derived list, using Pisan's Jolly Feedback history as the data source.",
+      "description": "MisconceptionTutor demonstrated that grounding LLM feedback in a curated misconception list improved student satisfaction in 85.1% of interactions, but its taxonomy was hand-curated from prior literature and may not reflect the specific error patterns of a given institution, curriculum, or programming language. This research proposes an automated pipeline: cluster LLM-coded error patterns from an existing autograder's submission logs (Jolly Feedback, CSS 142/143, C++) into an institution-specific misconception taxonomy using McMining-style techniques, then deploy a grounded LLM tutor in an A/B study comparing (a) the data-mined taxonomy, (b) a literature-derived taxonomy, and (c) an ungrounded baseline. The key research questions are whether data-mined taxonomies are richer and more locally valid than literature-derived ones, and whether that local validity translates into measurably better tutoring outcomes. A positive result would establish a scalable, zero-labeling-effort pipeline for generating institution-specific tutor configurations from any course with sufficient submission history.",
+      "papers": [
+        {
+          "title": "Misconception-Aware LLM Programming Tutor: Lessons Learned from Student-Tutor Interactions",
+          "authors": "Rose Niousha, J.D. Zamfirescu-Pereira, Samantha Boatright Smith, et al.",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770761.3777289",
+          "url": "https://doi.org/10.1145/3770761.3777289",
+          "abstract": "Large Language Models (LLMs) are increasingly used as programming tutors, but their feedback is often generic and prone to solution leakage. MisconceptionTutor grounds feedback in common student misconceptions; through both pre-deployment analyses and a real-classroom deployment, even simple prompting frameworks can meaningfully steer tutor behavior to be more pedagogically oriented and noticeably more satisfying to students, with MisconceptionTutor preferred in 85.1% of comparison cases.",
+          "relevance": "This paper is the direct source for the research idea: it establishes that misconception-grounded LLM tutoring substantially outperforms generic tutoring, and explicitly leaves open the question of where misconception taxonomies should come from and how locally valid they need to be."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "McMining: Automated Discovery of Misconceptions in Student Code",
+          "authors": "Erfan Al-Hossami, Razvan Bunescu",
+          "venue": "arXiv preprint",
+          "year": 2025,
+          "url": "https://arxiv.org/abs/2510.08827",
+          "relevance": "Provides the core method for mining misconception patterns from collections of student code using LLMs (MCMINER-S and MCMINER-M variants), directly enabling the log-to-taxonomy pipeline proposed in this research idea."
+        },
+        {
+          "title": "Towards Just-in-Time Adaptive Feedback: Enhancing Student Learning via Knowledge-Grounded LLM",
+          "authors": "Younghun Lee, Amir Bralin, Nobel Sanjay Rebello, Dan Goldwasser",
+          "venue": "arXiv preprint (Purdue University)",
+          "year": 2026,
+          "url": "https://arxiv.org/abs/2605.26405",
+          "relevance": "Demonstrates that grounding LLM feedback in domain-specific expert knowledge yields over 80% improvement in student performance in a large university course (N > 1000), establishing the scalability and impact ceiling for knowledge-grounded tutoring approaches."
+        },
+        {
+          "title": "MaskingAgent: Preventing LLM Tutor from Providing Full Solutions in Python Programming Courses",
+          "authors": "Jeonghun Baek, Tetsuro Yamazaki, et al.",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "url": "https://doi.org/10.1145/3770761.3777255",
+          "relevance": "Companion SIGCSE 2026 paper addressing the solution-leakage failure mode of LLM tutors; relevant because the institution-specific misconception taxonomy should also help steer tutors away from full-solution disclosure."
+        },
+        {
+          "title": "Identifying Student Misconceptions of Programming",
+          "authors": "Lisa C. Kaczmarczyk, Elizabeth R. Petrick, J.P. East, Geoffrey L. Herman",
+          "venue": "SIGCSE 2010",
+          "year": 2010,
+          "url": "https://dl.acm.org/doi/10.1145/1734263.1734299",
+          "relevance": "Foundational taxonomy of programming misconceptions derived from formal student interviews; provides the literature-derived baseline taxonomy against which the data-mined taxonomy will be compared in the proposed A/B study."
+        }
+      ],
+      "researchPlan": {
+        "overview": "The research mines an institution-specific programming misconception taxonomy from Jolly Feedback submission logs using LLM-assisted clustering, deploys a grounded LLM tutor in CSS 142 in an A/B design, and compares outcomes against a literature-derived taxonomy and an ungrounded baseline. A successful outcome validates a zero-labeling-effort pipeline for generating course-specific tutor configurations from submission history alone, with direct implications for Pisan's DT-1 and DT-2 research directions.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review and data preparation: read MisconceptionTutor, McMining, and JiT Adaptive Feedback papers; export anonymized Jolly Feedback submission logs from CSS 142/143 (last 3 years); define IRB exemption scope and data governance protocol",
+            "deliverable": "Annotated bibliography, anonymized log dataset (submission text + pass/fail per test), refined research questions"
+          },
+          {
+            "month": 2,
+            "goal": "Build the mining pipeline: adapt McMining MCMINER-M approach to C++ submissions; run LLM-assisted clustering (Claude API) over the log dataset to produce candidate misconception clusters; have two domain experts independently validate and label the resulting taxonomy",
+            "deliverable": "Institution-specific misconception taxonomy (target: 15-25 named misconceptions with example code patterns), inter-rater reliability report"
+          },
+          {
+            "month": 3,
+            "goal": "Implement and calibrate the grounded LLM tutor: build a Claude-backed tutoring endpoint that accepts a student's code and returns a misconception-aware hint; implement three conditions (data-mined taxonomy, Kaczmarczyk literature taxonomy, ungrounded baseline); run pre-deployment comparison study to validate tutor behavior quality",
+            "deliverable": "Working tutor system deployed behind a Canvas assignment button, pre-deployment quality evaluation report"
+          },
+          {
+            "month": 4,
+            "goal": "A/B classroom deployment: run the three-condition experiment in CSS 142 (one quarter, ~45 students); collect resubmission counts, time-to-passing-tests, and a brief end-of-assignment tutor satisfaction survey",
+            "deliverable": "Raw outcome data, participation logs, anonymized interaction transcripts"
+          },
+          {
+            "month": 5,
+            "goal": "Analysis: compare resubmission counts and time-to-pass across conditions using mixed-effects models; analyze satisfaction ratings; qualitatively code a sample of tutor transcripts for misconception coverage depth",
+            "deliverable": "Statistical analysis report, misconception coverage heatmap, qualitative codebook"
+          },
+          {
+            "month": 6,
+            "goal": "Paper writing and submission: write full conference paper; present preliminary findings at an internal seminar; target SIGCSE TS 2027 or ICER 2027",
+            "deliverable": "Submitted conference paper draft (target: 6-7 pages)"
+          }
+        ],
+        "targetVenues": ["SIGCSE TS 2027", "ICER 2027", "EDM 2027", "AIED 2027"],
+        "resources": "Jolly Feedback submission logs from CSS 142/143 (already held by Pisan; requires anonymization protocol); Claude API access for mining and tutoring (estimated 2-5M tokens for mining phase); Canvas LMS integration for deployment (already in use); one undergraduate research assistant for taxonomy validation and data management; IRB exemption review (expected: educational records exempt if anonymized).",
+        "risks": [
+          {
+            "risk": "Submission log volume is insufficient for robust clustering (fewer than a few hundred submissions per assignment)",
+            "mitigation": "Pool submissions across multiple assignment types and across three years of course offerings; supplement with publicly available CS1 submission datasets (e.g., CodeWorkout or Python Tutor logs) as a secondary corpus"
+          },
+          {
+            "risk": "Small class size (approx. 45 students) limits statistical power to detect differences between taxonomy conditions",
+            "mitigation": "Pre-register a directional hypothesis to reduce the multiple-comparisons burden; use resubmission count as the primary outcome (high variance, high sensitivity); plan a replication in the following quarter if the initial result is inconclusive"
+          },
+          {
+            "risk": "Students in the deployed tutor condition use external AI tools (ChatGPT, Copilot), diluting the treatment effect",
+            "mitigation": "Add a brief end-of-assignment survey item on external AI use; analyze as a moderator rather than trying to prevent it; frame the paper around intent-to-treat analysis"
+          }
+        ],
+        "humanSubjects": true
+      }
+    }
+  ]
+}

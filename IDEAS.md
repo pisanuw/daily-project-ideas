@@ -216,3 +216,7 @@
 | 2026-07-16 | Concept Prerequisite Mapper | Teaching Tool | 1-2 Weeks |
 | 2026-07-16 | Personal Data Journalist | Classroom Assignment | Multi-week |
 | 2026-07-16 | Adaptive Hint Mode Router: Dynamic Selection Between Targeted and Socratic LLM Hints in CS1 | Research | Research |
+| 2026-07-17 | LLM Stream Cassette | Side Project | Weekend |
+| 2026-07-17 | Erroneous Code Example Forge | Teaching Tool | 1-2 Weeks |
+| 2026-07-17 | Browser-Native Socratic Tutor | Classroom Assignment | Multi-week |
+| 2026-07-17 | From Submission Logs to Tutor Configurations: Mining Institution-Specific Misconception Taxonomies for LLM-Grounded CS1 Tutoring | Research | Research |

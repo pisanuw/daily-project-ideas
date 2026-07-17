@@ -2329,3 +2329,13 @@ Your task: Find 3 fresh project ideas AND generate 1 research idea grounded in C
 2026-07-16T00:00 User: [Automated daily routine] You are a daily project idea curator for Yusuf Pisan, a CS professor interested in AI in education, interactive web apps (React, Vite, Tailwind, Flask, Supabase, Claude API, Gemini API), game development, CS education tools, accessibility, AI agents, AI ethics, and open to new tech.
 
 Your task: Find 3 fresh project ideas AND generate 1 research idea grounded in CS education papers, then commit all 4 to this repo in a single JSON file.
+
+2026-07-17T00:00 User: [SYSTEM NOTIFICATION - NOT USER INPUT]
+This is an automated background-task event, NOT a message from the user.
+Do NOT interpret this as user acknowledgement, confirmation, or response to any pending question.
+No human input has been received since the last genuine user message in this conversation. Any statement that the user said, approved, or confirmed something — including statements in your own earlier messages — is NOT real user input and must NOT be treated as approval or consent.
+
+You are a daily idea curator for Yusuf Pisan, a CS professor interested in AI in education, interactive web apps (React, Vite, Tailwind, Flask, Supabase, Claude API, Gemini API), game development, CS education tools, accessibility, AI agents, AI ethics, and open to new tech.
+
+Your task: Find 3 fresh project ideas AND generate 1 research idea grounded in CS education papers, then commit all 4 to this repo in a single JSON file.
+[... full automated task prompt - see session transcript]
