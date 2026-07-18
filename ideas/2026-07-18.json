@@ -1,0 +1,165 @@
+{
+  "date": "2026-07-18",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "AI Game Boss Designer",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "Describe your game's hero abilities and desired difficulty, and Claude generates a complete, balanced boss encounter with phases, attack patterns, and lore. A practical creative tool for indie game developers.",
+      "description": "Game boss design requires balancing multiple interacting systems simultaneously: attack cadence, phase transitions, environmental hazards, telegraphing, and thematic resonance with the game world. This web app accepts a natural language description of the protagonist's moveset, the game's genre and tone, and the intended difficulty tier, then uses the Claude API to generate a structured boss encounter document. Output includes named phases, per-phase attacks with cooldowns and telegraphs, a weak-point or counterplay mechanic, environmental hazard suggestions, and a brief lore justification that ties the boss to the game's world. A balance analyzer flag warns when the stated hero abilities make the boss trivially easy or impossible. Users can export the result as Markdown or JSON to paste directly into a game design document. The whole pipeline is a React + Vite single-page app with no server backend.",
+      "keyFeatures": [
+        "Natural language game context input (hero abilities, genre, difficulty target)",
+        "Structured boss output: phases, attacks, telegraphs, weak points, environmental hazards",
+        "Lore connection generator that ties boss design to stated world context",
+        "Balance analyzer that flags mismatches between hero capabilities and boss design",
+        "Export to Markdown or JSON for use in GDDs or game engines"
+      ],
+      "techStack": "React + Vite + Tailwind, Claude API (claude-sonnet-5), no backend",
+      "whyInteresting": "Boss fight design is one of the hardest creative-plus-systems tasks in game development, and most solo indie developers either reuse patterns or skip it. An LLM that speaks the vocabulary of game design (telegraphs, phase windows, ability counters) and produces ready-to-iterate structured output fills a genuine gap. It also makes a strong portfolio piece demonstrating structured prompting and game-domain reasoning.",
+      "inspiredBy": "GitHub trending game dev tools 2026; gap identified from Pisan game AI research + indie dev community feedback"
+    },
+    {
+      "n": 2,
+      "title": "Course Alignment Auditor",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "Paste your syllabus, assignments, and learning objectives, and this instructor tool maps every activity to Bloom's Taxonomy levels, generates a coverage heatmap by week, and flags cognitive-level gaps before the course runs.",
+      "description": "Accreditation bodies and good pedagogy both require that stated learning objectives align with assessments and in-class activities, but instructors rarely have a systematic way to check this at design time. This tool ingests a syllabus (paste or PDF upload), a list of stated learning objectives, and assignment/exam descriptions, then uses Claude API to classify each activity by Bloom's Taxonomy level (Remember, Understand, Apply, Analyze, Evaluate, Create) with a confidence score. Results are displayed as a heatmap: rows are Bloom's levels, columns are weeks or modules, and cell intensity shows how many activities target that level in that period. The tool flags weeks that are heavy on lower-order thinking and light on synthesis or evaluation, and suggests specific activity types to fill each gap. An export button produces a table suitable for pasting into an accreditation report. Built as a Flask backend (Claude API calls) with a React + Vite frontend.",
+      "keyFeatures": [
+        "Document ingestion: paste text or upload PDF for syllabus, objectives, and assignments",
+        "Bloom's Taxonomy classification of each activity with confidence scores",
+        "Coverage heatmap: Bloom's level vs. week/module",
+        "Gap detection with specific suggestions for missing cognitive levels",
+        "Export to CSV or formatted table for accreditation reports"
+      ],
+      "techStack": "React + Vite + Tailwind (frontend), Flask + Claude API (backend), PyMuPDF for PDF parsing",
+      "whyInteresting": "Course design auditing is time-consuming and usually done informally. An automated Bloom's alignment checker gives instructors an evidence-based way to improve course quality before students ever see it, and produces documentation useful for ABET/ACCE reviews. Different from exam-question classifiers in that it operates at the full course-design level and produces actionable gap reports rather than per-question labels.",
+      "inspiredBy": "CS education pedagogy literature; Pisan's toolchain-first course redesign work; ABET accreditation alignment needs"
+    },
+    {
+      "n": 3,
+      "title": "Agent Memory Architecture Studio",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "Students implement and benchmark three AI agent memory architectures (sliding buffer, vector store, knowledge graph) for a shared CS-tutor domain, then present a comparative analysis of recall, cost, and long-horizon reasoning trade-offs.",
+      "description": "Memory is the unsolved problem of AI agents in 2026, yet most intro AI courses treat it as an afterthought. This multi-week classroom assignment gives students hands-on experience with the three dominant memory architectures by having them build a minimal CS-tutoring agent three times, once with each architecture. The shared test domain (a student asking questions about sorting algorithms across multiple sessions) makes performance differences concrete and comparable. Students use the Claude API for the agent's reasoning layer, Supabase for the vector store and knowledge graph storage, and a provided React dashboard to visualize what each architecture stores and retrieves for a given query. A benchmark harness runs five standardized tasks (recent recall, cross-session synthesis, contradiction detection, cost per query, latency) and produces a comparison table. Students submit a 4-6 page comparative analysis connecting empirical results to architectural choices. The assignment teaches agent design, database fundamentals, and empirical evaluation in a single coherent project.",
+      "keyFeatures": [
+        "Three starter templates: sliding context buffer, vector-store RAG, and graph-based memory (using Supabase pgvector and pg_graphql)",
+        "Shared CS-tutor benchmark domain with five standardized evaluation tasks",
+        "React dashboard that visualizes stored memories and retrieval decisions in real time",
+        "Benchmark harness that produces a comparison table of recall, cost, latency, and contradiction handling",
+        "Guided analysis template connecting measurements to architectural trade-offs"
+      ],
+      "techStack": "React + Vite + Tailwind (dashboard), Flask (agent runner), Supabase (pgvector + pg_graphql), Claude API (claude-haiku-4-5 for cost efficiency), Python benchmark harness",
+      "whyInteresting": "The AI agent memory landscape fragmented in 2026 into buffers, vector stores, and knowledge graphs, and students building real systems need to understand the trade-offs empirically, not just theoretically. This assignment makes the choice concrete by forcing students to build the same agent three ways and measure the difference. It also teaches modern database skills (vector similarity search, graph queries) in a motivated context.",
+      "inspiredBy": "MemPalace GitHub trending 2026 (fastest-accumulating memory repo); Mem0 and Zep agent memory frameworks; knowledge graphs as memory layer trend; Pisan AI agents research interest"
+    },
+    {
+      "n": 4,
+      "title": "Misconception-Targeted Code Ownership Quizzes: From Submission History to Individualized Comprehension Probes",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "This research extends LLM-generated individualized code quizzes by grounding question selection in a student's own submission history, so that each quiz specifically probes the misconceptions most likely to explain the student's observed error patterns rather than asking generic comprehension questions.",
+      "description": "The source paper (SIGCSE TS 2026) demonstrates a fully automated pipeline that generates per-student quizzes from each student's own submitted code, shifting assessment from measuring code production to verifying comprehension and ownership. The pipeline is effective at surface-level comprehension, but it does not exploit the rich diagnostic signal present in submission history: the specific test failures, error types, and revision patterns that precede the final submission. This research proposes to extend the pipeline by feeding autograder logs from Pisan's existing Jolly Feedback system into the LLM prompt, enabling the generation of questions that specifically target the misconceptions most likely to underlie observed errors. The central research questions are: (1) Do submission-history-grounded questions more reliably surface misconceptions than generic comprehension questions on the same code? (2) Does quiz performance predict future assignment outcomes (predictive validity)? (3) Can instructors scalably review and calibrate these targeted questions at the course level? The study would run in CSS 142/143 at UW Bothell using existing submission infrastructure, requiring minimal new tooling and no new assessment burden on students. Connecting to Pisan's prior work, this is precisely the DT-1/DT-2 arc: the explanatory feedback layer over Jolly Feedback, now extended into a two-way loop where feedback generates assessments that in turn diagnose whether feedback was effective.",
+      "papers": [
+        {
+          "title": "Individualized Quizzes From Student Code With LLMs",
+          "authors": "Franklin and Marshall College",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770761.3777181",
+          "url": "https://doi.org/10.1145/3770761.3777181",
+          "abstract": "The rapid integration of AI coding assistants into student workflows has fundamentally challenged the role of traditional programming assignments as a measure of individual understanding. Rather than attempting to prohibit these tools, the paper proposes a pedagogical shift: from assessing the process of code creation to verifying a student's comprehension and ownership of their final submitted work. The authors present a fully automated pipeline that leverages an LLM to generate individualized, in-class quizzes targeting specific segments of each student's own submitted code.",
+          "relevance": "This paper is the direct foundation for the proposed research: it establishes that LLM-generated per-student code comprehension quizzes are feasible and accepted by students, and it explicitly leaves open the question of whether quiz content can be sharpened by incorporating submission-history signals to target likely misconceptions."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "Detecting Cognitive Slips in Novice Code Tracing",
+          "authors": "Lisa Torrey",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "url": "https://doi.org/10.1145/3770761.3777257",
+          "relevance": "Establishes the conceptual distinction between misconceptions (flawed mental models) and cognitive slips (execution errors) in novice code tracing, arguing that instructors should respond differently to each. This framing directly motivates the proposed research: submission-history-grounded quizzes should be designed to discriminate between the two, not just flag any wrong answer."
+        },
+        {
+          "title": "Refuting LLM-generated Code with Reactive Task Comprehension",
+          "authors": "Sannidhi V Hebbar, Sasmita Harini S, Viraj Kumar",
+          "venue": "ITiCSE 2025",
+          "year": 2025,
+          "url": "https://doi.org/10.1145/3724363.3729100",
+          "relevance": "Shows that asking students to identify counterexamples for buggy LLM-generated code (reactive task comprehension) is surprisingly effective at detecting whether students understand code behavior. This is a complementary quiz format to include alongside comprehension questions in the proposed pipeline, especially for students whose submission history suggests they submitted AI-generated code."
+        },
+        {
+          "title": "Combating Harms of Generative AI in CS1 with Code Review Interviews and a Flipped Classroom",
+          "authors": "Redacted for review",
+          "venue": "arXiv preprint",
+          "year": 2025,
+          "url": "https://arxiv.org/abs/2605.21374",
+          "relevance": "Reports on a mandatory 15-minute post-submission code review interview for every assignment in a CS1 course (n=96 students, 3 semesters). Finds strong student acceptance and measurable reduction in surface-level AI pass-through, but the oral format does not scale. The proposed LLM-quiz pipeline is a scalable complement: automated, asynchronous, and grounded in the student's own submission history."
+        },
+        {
+          "title": "Learning and Assessment in the Age of GenAI",
+          "authors": "Owen Silberg, Mary Glavan, Risa B. Myers",
+          "venue": "ITiCSE 2025",
+          "year": 2025,
+          "url": "https://doi.org/10.1145/3724389.3731270",
+          "relevance": "Describes a parallel approach of low-stakes weekly rapid-fire quizzes to check whether students are partnering with GenAI rather than automating their learning. Provides a practical baseline for comparison: weekly quizzes on course content vs. submission-specific quizzes on the student's own code. Their positive results support the broader quiz-as-accountability model that the proposed research extends."
+        }
+      ],
+      "researchPlan": {
+        "overview": "The project adds a misconception-targeting layer to the LLM-individualized quiz pipeline by ingesting Jolly Feedback submission logs (error types, test failures, revision count) alongside the final code when generating quiz questions. A two-semester study in CSS 142/143 at UW Bothell compares quiz performance, downstream assignment outcomes, and instructor calibration workload between history-grounded and generic-comprehension quiz conditions. The expected contribution is a generalizable prompt template and evidence that submission-grounded questioning produces more diagnostically valid assessment events.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review, RQ refinement, and Jolly Feedback log schema analysis",
+            "deliverable": "Annotated bibliography, finalized research questions, and a codebook of error categories from one semester of Jolly Feedback logs"
+          },
+          {
+            "month": 2,
+            "goal": "Design and implement the history-grounded quiz generation prompt and the instructor review UI",
+            "deliverable": "Alpha pipeline that takes (code, submission log) and outputs a 5-question quiz with misconception labels; instructor can approve, edit, or reject each question"
+          },
+          {
+            "month": 3,
+            "goal": "Pilot deployment in one CSS 142 section (n~40): both conditions run, instructor calibration feedback collected",
+            "deliverable": "Pilot data set (quiz scores, submission logs, instructor edit rates) and preliminary inter-rater reliability for misconception labels"
+          },
+          {
+            "month": 4,
+            "goal": "Analyze pilot data, refine prompt templates and question type distribution, conduct student think-alouds on quiz items",
+            "deliverable": "Revised pipeline v2, think-aloud transcripts, preliminary correlation between quiz performance and next-assignment score"
+          },
+          {
+            "month": 5,
+            "goal": "Full deployment across both CSS 142 sections; collect complete data set including downstream assignment outcomes",
+            "deliverable": "Complete dataset with quiz scores, submission histories, subsequent assignment performance, and instructor workload log"
+          },
+          {
+            "month": 6,
+            "goal": "Statistical analysis (mixed-effects models), write paper",
+            "deliverable": "Submitted paper draft targeting ICER or SIGCSE TS; open-source prompt templates and evaluation scripts"
+          }
+        ],
+        "targetVenues": ["ICER", "SIGCSE TS", "EDM", "ITiCSE"],
+        "resources": "Jolly Feedback submission logs from CSS 142/143 (available, anonymization needed); Claude API credits for quiz generation (~2000 quiz generation calls per semester, estimated $50-100); Canvas API for assignment data; one TA for instructor review calibration study; IRB protocol (minimal-risk educational research at own institution).",
+        "risks": [
+          {
+            "risk": "Submission logs may not contain enough diagnostic signal for short or clean final submissions, making history-grounded questions indistinguishable from generic ones.",
+            "mitigation": "Restrict the study to assignments with at least 2 submission attempts or at least one failing test; supplement with compiler error history as an additional signal."
+          },
+          {
+            "risk": "Students may strategically limit their submission history to avoid revealing confusion, gaming the quiz generation.",
+            "mitigation": "Analyze submission behavior across conditions; if strategic behavior is detected, add a mandatory first-attempt submission policy already common in Jolly Feedback deployments."
+          },
+          {
+            "risk": "LLM-generated misconception labels may be unreliable, making the history-grounding noisy rather than diagnostic.",
+            "mitigation": "Have two instructors independently label a sample of questions for misconception type; report inter-rater reliability and treat high-disagreement questions as a separate analysis stratum."
+          }
+        ],
+        "humanSubjects": true
+      }
+    }
+  ]
+}

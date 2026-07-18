@@ -220,3 +220,7 @@
 | 2026-07-17 | Erroneous Code Example Forge | Teaching Tool | 1-2 Weeks |
 | 2026-07-17 | Browser-Native Socratic Tutor | Classroom Assignment | Multi-week |
 | 2026-07-17 | From Submission Logs to Tutor Configurations: Mining Institution-Specific Misconception Taxonomies for LLM-Grounded CS1 Tutoring | Research | Research |
+| 2026-07-18 | AI Game Boss Designer | Side Project | Weekend |
+| 2026-07-18 | Course Alignment Auditor | Teaching Tool | 1-2 Weeks |
+| 2026-07-18 | Agent Memory Architecture Studio | Classroom Assignment | Multi-week |
+| 2026-07-18 | Misconception-Targeted Code Ownership Quizzes: From Submission History to Individualized Comprehension Probes | Research | Research |
