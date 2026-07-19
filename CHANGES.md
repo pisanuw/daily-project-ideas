@@ -136,3 +136,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-07-17 [code] Created ideas/2026-07-17.json: LLM Stream Cassette, Erroneous Code Example Forge, Browser-Native Socratic Tutor, From Submission Logs to Tutor Configurations (research, SIGCSE TS 2026 doi:10.1145/3770761.3777289)
 
 2026-07-18 [code] Created ideas/2026-07-18.json: AI Game Boss Designer, Course Alignment Auditor, Agent Memory Architecture Studio, Misconception-Targeted Code Ownership Quizzes (research, SIGCSE TS 2026 doi:10.1145/3770761.3777181)
+
+2026-07-19 [code] Created ideas/2026-07-19.json: ADR Auto-Scribe, GenAI Social Thermometer, Bus Factor Visualizer, From Grading Traces to Learning Maps (research, SIGCSE TS 2026 doi:10.1145/3770762.3772615)

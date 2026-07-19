@@ -1,0 +1,170 @@
+{
+  "date": "2026-07-19",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "ADR Auto-Scribe",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "Paste a PR description or Git diff and Claude generates a structured Architecture Decision Record (ADR) with context, decision, alternatives considered, and consequences. Exports as Markdown.",
+      "description": "Architecture Decision Records are widely recommended but rarely written, because the cost of context-switching from 'get the PR in' mode to 'document the why' mode is too high in the moment. This web app removes that friction: paste a PR description, a raw Git diff, or a free-text problem statement, and Claude generates a fully-structured ADR following the MADR or Nygard template. The output sections are context (what forces were in play), decision (what was chosen and why), alternatives considered (what was evaluated and rejected), consequences (trade-offs, follow-on work, risks), and a status field. Each section can be edited inline before export. Users can also paste an existing ADR stub and ask Claude to fill in gaps or sharpen the rationale. The entire app is a React + Vite single-page app with no backend; the Claude API call is made from the browser using a user-supplied API key stored only in sessionStorage.",
+      "keyFeatures": [
+        "Multi-format input: paste PR description, Git diff, or free-text problem statement",
+        "Structured ADR output: context, decision, alternatives considered, consequences, status",
+        "Choice of template: MADR (Markdown ADR) or Nygard-style",
+        "Inline editing of every generated section before export",
+        "One-click Markdown export formatted for pasting into a docs/ or .adr/ directory"
+      ],
+      "techStack": "React + Vite + Tailwind, Claude API (claude-sonnet-5), no backend (API key in sessionStorage)",
+      "whyInteresting": "Documentation automation is a genuine developer pain point, and ADRs are the specific artifact that teams most often intend to write and most often skip. An LLM that can reconstruct the 'why' from a diff or PR description removes the single biggest barrier. The app is also a clean portfolio piece that demonstrates structured prompting, multi-format input normalization, and a real professional workflow integration.",
+      "inspiredBy": "HN trending July 2026 developer tooling threads; 'crit' code review CLI trend toward documentation generation; gap between ADR adoption intent and actual ADR authoring rate in software teams"
+    },
+    {
+      "n": 2,
+      "title": "GenAI Social Thermometer",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "Students anonymously log which help source they used for each assignment (peer, TA, AI, textbook, self). Instructors see a real-time dashboard of class-level help-seeking trends, including whether peer collaboration is declining as AI use rises.",
+      "description": "Research presented at ITiCSE 2025 documented that students who previously sought help from peers and TAs are increasingly routing all questions through ChatGPT, eroding the social learning fabric of CS courses. This tool gives instructors visibility into that trend before it becomes invisible. At the end of each assignment, students submit a one-click anonymous help-receipt log: which sources did they use (checkboxes for peer help, TA, AI chatbot, textbook, office hours, self-solved), and an optional open text field for notes. The instructor dashboard shows: (1) a stacked bar chart of help-source distribution across assignments over the semester, (2) a social network diagram built from peer-help declarations (who helped whom, anonymized to seat IDs), (3) a trend line comparing AI-tool use to peer-help use over time, and (4) a course-health score flagging weeks where peer help dropped below a threshold. The tool requires no authentication for students (assignment code + seat ID), uses Supabase for real-time data, and is deployed as a React + Vite app with a lightweight Flask backend for the aggregation queries.",
+      "keyFeatures": [
+        "Anonymous student help-receipt log: checkboxes for peer, TA, AI, textbook, office hours, self-solved",
+        "Assignment-over-time stacked bar showing help-source distribution across the semester",
+        "Anonymized peer-help social network diagram (who helped whom by seat ID)",
+        "Trend line comparing AI-tool uptake to peer collaboration over time",
+        "Course-health score and alert when peer help drops below configurable threshold"
+      ],
+      "techStack": "React + Vite + Tailwind (frontend), Flask (backend), Supabase (real-time data), D3.js (social network diagram + charts)",
+      "whyInteresting": "The 'all roads lead to ChatGPT' problem is real and measurable, but most instructors have no data stream that surfaces it at course scale. This tool reframes the problem: not 'should students use AI?' but 'are we still building a learning community?' The social network visualization is particularly powerful for showing instructors which students are isolated versus well-connected, enabling proactive intervention that no LLM policy alone can replace.",
+      "inspiredBy": "ITiCSE 2025 paper 'All Roads Lead to ChatGPT: How Generative AI is Eroding Social Interactions and Student Learning Communities'; CS education community concern about erosion of peer learning"
+    },
+    {
+      "n": 3,
+      "title": "Bus Factor Visualizer",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "A React + GitHub API tool that analyzes any public repository and generates a treemap of file ownership, bus factor calculations per directory, orphaned code heatmap, and a team health radar chart for use in software engineering courses.",
+      "description": "Bus factor (how many developers could leave before critical code becomes unmaintained) is a foundational software engineering concept that most students only encounter theoretically. This multi-week classroom assignment asks students to build a GitHub repository analysis tool that makes bus factor tangible through interactive visualization. The tool authenticates with the GitHub API, ingests any public repository's commit history, and computes: per-file ownership percentages (who wrote what fraction of each file's lines), bus factor scores per directory subtree (minimum developer departures before no one with >20% ownership remains), orphaned code identification (files unchanged for 2+ years with no dominant author still active), and a team health radar chart covering five dimensions: coverage breadth (how many people know each area), freshness, concentration risk, commit recency, and issue-response rate. Students build the data pipeline in one sprint (GitHub API + Git log parsing), the visualization layer in a second sprint (D3 treemap + radar), and write a 3-page analysis of a real open-source project of their choice in a third sprint. The assignment teaches API integration, data transformation, D3.js visualization, and empirical software engineering analysis in a coherent project arc.",
+      "keyFeatures": [
+        "GitHub API integration: ingests commit history and computes per-file authorship fractions",
+        "Interactive D3 treemap of repository file ownership colored by concentration risk",
+        "Bus factor calculator per directory subtree with configurable ownership threshold",
+        "Orphaned code heatmap: files last touched 2+ years ago with no dominant active author",
+        "Team health radar chart across five dimensions: breadth, freshness, concentration, recency, responsiveness",
+        "Three-sprint structure with defined deliverables for classroom use"
+      ],
+      "techStack": "React + Vite + Tailwind, D3.js (treemap + radar), GitHub REST API (Octokit), Python script for pre-processing large repos, no backend required for small repos",
+      "whyInteresting": "Bus factor is easy to define and almost never measured in student projects, because the tooling to compute it from real commit data is non-trivial to build. Making students build the measurement tool forces them to operationalize the concept, engage with a production-scale API, and interpret their own findings on real code. The treemap visualization also creates memorable 'aha' moments when students see familiar open-source projects with alarming concentration in a single committer.",
+      "inspiredBy": "ITiCSE 2025 paper 'Chronicling Consistency and Parity of Contributions to Software Engineering Teams'; software engineering education gap between bus factor concept and empirical measurement; GitHub API classroom assignment design space"
+    },
+    {
+      "n": 4,
+      "title": "From Grading Traces to Learning Maps: Mining LLM Exam Grading Chains to Build Actionable CS1 Misconception Taxonomies",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "When an LLM grades a handwritten exam it generates a chain-of-thought reasoning trace explaining every point awarded or deducted. This research proposes mining those grading traces at scale to automatically construct a CS1 misconception taxonomy from exam data, then use that taxonomy to generate personalized post-exam study guides.",
+      "description": "The source paper (SIGCSE TS 2026) demonstrates that LLM-assisted grading of handwritten CS1 exams reduces grading time 40% overall with only a 0.4-percentage-point increase in regrade requests. The study focuses on efficiency and accuracy, but it surfaces an under-exploited artifact: the LLM's grading reasoning chain. When an LLM grades a free-response question, it must articulate why a student earned or lost points: 'student confused loop termination with off-by-one error,' 'student correctly identified base case but misapplied recursive call,' 'student reversed the roles of left and right subtree.' These grading traces are a new kind of student data: not submission logs from autograders (which capture syntactic errors) and not survey responses (which capture self-report), but a semantically-labeled record of conceptual errors as understood by the grader. At scale across a CS1 course and across multiple semesters, these traces form the raw material for a data-driven misconception taxonomy. The proposed research asks: (1) Can grading-trace mining produce a misconception taxonomy that is both reliable (inter-rater agreement between LLM categories and human expert labels) and actionable (maps to pedagogical interventions)? (2) Do grading-trace-derived misconception profiles predict performance on future assessments? (3) Can personalized post-exam study guides generated from a student's own grading traces improve preparation for the next exam? The study would instrument an LLM-assisted grader on CSS 142/143 at UW Bothell, extract and cluster grading trace statements, validate the taxonomy with instructor review, and run a two-condition pilot: students in one section receive generic study resources; students in another receive post-exam study guides generated from their own grading traces. Connecting to Pisan's existing work, this extends the Jolly Feedback substrate toward a closed-loop system: autograder detects errors, LLM grader explains errors at exam time, grading traces build a misconception model, misconception model informs subsequent tutoring and assignment design.",
+      "papers": [
+        {
+          "title": "Fighting Fire with Fire: LLM-Assisted Grading of Handwritten CS Assessments",
+          "authors": "University of California, Irvine",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770762.3772615",
+          "url": "https://doi.org/10.1145/3770762.3772615",
+          "abstract": "Widespread student adoption of large language models has prompted many CS instructors to assign greater weight to handwritten, proctored assessments. However, this approach struggles to scale as class sizes outpace course staff resources. The study explores LLM-assisted grading to reduce required grading time, evaluating both time and accuracy by comparing outcomes when course staff use an LLM-assisted grader versus Gradescope. In a CS1 course of 166 students supported by four TAs, LLM-assisted grading reduced overall grading time by 40%, with time savings of 48% for exams and 25% for quizzes; accepted regrade requests increased negligibly from 0.1% to 0.5%.",
+          "relevance": "This paper establishes the LLM-assisted grading pipeline and documents that the LLM produces reasoning traces explaining every point awarded or deducted. These traces are the raw data source for the proposed mining study. The paper explicitly focuses on time and accuracy, leaving the diagnostic potential of grading traces entirely unexplored."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "Automated Identification of Logical Errors in Programs",
+          "authors": "Preprint",
+          "venue": "EDM 2025",
+          "year": 2025,
+          "url": "https://arxiv.org/abs/2505.10913",
+          "relevance": "Demonstrates that LLMs can reliably identify and classify logical errors in student programs at the semantic level, not just syntactic. Provides a methodological foundation for the trace-mining step: the same classification capability that works on submitted code should transfer to natural-language grading traces describing the same error categories."
+        },
+        {
+          "title": "The Effects of Structured LLM-Generated Feedback on Programming Assignment Performance",
+          "authors": "Preprint",
+          "venue": "arXiv preprint",
+          "year": 2025,
+          "url": "https://arxiv.org/abs/2605.16933",
+          "relevance": "Shows that structured LLM feedback on programming assignments measurably improves subsequent assignment performance, establishing a causal pathway from feedback to learning outcomes. Motivates the personalized study guide component of the proposed research: if structured feedback on assignments works, misconception-targeted study guides derived from exam grading traces should be similarly effective."
+        },
+        {
+          "title": "Towards Reliable LLM Grading Through Self-Consistency and Selective Human Review",
+          "authors": "Multiple authors",
+          "venue": "MDPI Education Sciences 2026",
+          "year": 2026,
+          "url": "https://doi.org/10.3390/educsci16010087",
+          "relevance": "Proposes a self-consistency framework for LLM graders that identifies low-confidence items for human review. Relevant to the proposed research in two ways: it validates the reliability of LLM grading traces as a data source (high-confidence traces are reliable labels), and it provides a quality-filtering step to exclude ambiguous trace statements before mining."
+        },
+        {
+          "title": "Mining Error Messages in CS1: Do Students Who Persist Differ From Those Who Give Up?",
+          "authors": "Jacqueline Smith, Beth Simon",
+          "venue": "SIGCSE TS 2022",
+          "year": 2022,
+          "url": "https://doi.org/10.1145/3478431.3499359",
+          "relevance": "Establishes the foundational methodology for mining CS1 error data at scale to understand misconception-driven behavior, and shows that error persistence patterns predict course outcomes. The proposed research extends this approach from autograder compiler errors to the richer semantic level of LLM grading traces on handwritten exams."
+        }
+      ],
+      "researchPlan": {
+        "overview": "The project instruments an LLM-assisted exam grader in CSS 142/143 at UW Bothell to capture grading reasoning traces at scale, then applies NLP clustering to construct a CS1 misconception taxonomy validated by instructor review. A two-condition pilot tests whether personalized post-exam study guides derived from a student's own grading traces improve performance on subsequent exams compared to generic review resources. The expected contributions are a validated grading-trace mining methodology, a reusable CS1 misconception taxonomy, and causal evidence for the effectiveness of trace-derived personalized study guides.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review, RQ finalization, and grading trace schema design",
+            "deliverable": "Annotated bibliography, finalized research questions, and a pilot trace extraction from one archived exam graded with an LLM tool"
+          },
+          {
+            "month": 2,
+            "goal": "Build the grading trace capture pipeline and NLP clustering prototype",
+            "deliverable": "Working pipeline that takes LLM grading outputs, extracts misconception-labeled statements, and clusters them into candidate taxonomy categories; initial taxonomy draft reviewed by two instructors"
+          },
+          {
+            "month": 3,
+            "goal": "Taxonomy validation study with three CS instructors using card-sorting protocol; compute inter-rater reliability",
+            "deliverable": "Validated taxonomy (target: Cohen's kappa > 0.7), taxonomy documentation, and calibration guide for LLM-assisted labeling"
+          },
+          {
+            "month": 4,
+            "goal": "Design and implement the personalized study guide generator; design two-condition IRB-approved pilot",
+            "deliverable": "Study guide generation pipeline, IRB approval, and pilot logistics plan including section assignments for treatment and control conditions"
+          },
+          {
+            "month": 5,
+            "goal": "Run the two-condition pilot during a full exam cycle; collect pre- and post-exam scores, student perceptions survey",
+            "deliverable": "Complete dataset: grading traces, study guides delivered, subsequent exam scores, and student survey responses"
+          },
+          {
+            "month": 6,
+            "goal": "Statistical analysis (mixed-effects models for exam score outcomes), qualitative coding of student perceptions, write paper",
+            "deliverable": "Submitted paper draft targeting ICER or SIGCSE TS; open-source taxonomy and pipeline code"
+          }
+        ],
+        "targetVenues": ["ICER", "SIGCSE TS", "EDM", "ITiCSE"],
+        "resources": "LLM-assisted grading tool integration with existing Gradescope setup at UW Bothell (or standalone grader on archived exams); Claude API credits for grading trace generation and study guide generation (estimated 5000-8000 API calls over two semesters, ~$200-400); Jolly Feedback submission logs for cross-referencing misconception patterns with autograder data; two instructors for taxonomy validation; IRB protocol (minimal-risk educational research at own institution).",
+        "risks": [
+          {
+            "risk": "Grading traces may be too terse or inconsistent across different TAs using the LLM tool, making clustering unreliable.",
+            "mitigation": "Standardize the grading prompt to require a structured rationale per question; use only traces from the LLM's own outputs (not TA free-text edits); filter for minimum trace length."
+          },
+          {
+            "risk": "Personalized study guides may not be sufficiently distinct from generic review to detect a signal in exam performance.",
+            "mitigation": "Pre-register a minimum detectable effect size; include a fidelity check (compare study guide content to student's actual error profile to confirm personalization is working); use multiple exam cycles to accumulate power."
+          },
+          {
+            "risk": "Students who receive personalized study guides may perceive the feedback as negative or discouraging (being told what you got wrong vs. a generic review).",
+            "mitigation": "Frame study guides as 'your personalized practice path' rather than error reports; pilot the framing with a focus group before the main study; include opt-out with automatic fallback to generic materials."
+          },
+          {
+            "risk": "IRB approval timeline may delay pilot deployment to align with a course's exam schedule.",
+            "mitigation": "Submit IRB in month 1 alongside literature review; begin taxonomy validation work (months 2-3) which does not require student participants while awaiting approval."
+          }
+        ],
+        "humanSubjects": true
+      }
+    }
+  ]
+}

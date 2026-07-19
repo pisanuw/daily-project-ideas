@@ -224,3 +224,7 @@
 | 2026-07-18 | Course Alignment Auditor | Teaching Tool | 1-2 Weeks |
 | 2026-07-18 | Agent Memory Architecture Studio | Classroom Assignment | Multi-week |
 | 2026-07-18 | Misconception-Targeted Code Ownership Quizzes: From Submission History to Individualized Comprehension Probes | Research | Research |
+| 2026-07-19 | ADR Auto-Scribe | Side Project | Weekend |
+| 2026-07-19 | GenAI Social Thermometer | Teaching Tool | 1-2 Weeks |
+| 2026-07-19 | Bus Factor Visualizer | Classroom Assignment | Multi-week |
+| 2026-07-19 | From Grading Traces to Learning Maps: Mining LLM Exam Grading Chains to Build Actionable CS1 Misconception Taxonomies | Research | Research |
