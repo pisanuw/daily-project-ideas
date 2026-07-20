@@ -1,0 +1,173 @@
+{
+  "date": "2026-07-20",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "REST-to-MCP Wrapper",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "Paste or upload any OpenAPI spec and instantly get a working MCP server: auto-generated tool definitions, parameter schemas, and handler boilerplate, ready to run in Claude Desktop or any MCP-compatible agent framework.",
+      "description": "Setting up an MCP server to expose an existing REST API to Claude agents involves writing the same tedious boilerplate every time: tool definitions, parameter schemas, request/response mappings, and authentication wiring. This web app eliminates that friction. Paste or upload an OpenAPI 3.x spec (JSON or YAML) and the app uses Claude to analyze the schema, select the most agent-useful endpoints, generate clean tool names and descriptions from the operation summaries, and emit a fully working Node.js MCP server package. The generated server handles authentication (API key header, Bearer token, or basic auth), maps OpenAPI parameter types to JSON Schema tool parameters, and includes a simple error normalizer so Claude always gets a readable error string instead of an HTTP 422 blob. The UI shows a preview of every generated tool schema before download, lets users edit descriptions and exclude noisy endpoints, and exports the final package as a zip with a package.json, server.js, and a one-line README. The entire client side is a React + Vite single-page app; the code generation step calls Claude API from the browser using a user-supplied key stored only in sessionStorage.",
+      "keyFeatures": [
+        "Paste or drag-and-drop OpenAPI 3.x spec (JSON or YAML); URL fetch also supported",
+        "Claude-powered tool description generation from operationId, summary, and description fields",
+        "Authentication wiring: API key header, Bearer token, or HTTP basic auth",
+        "Per-endpoint preview and edit: toggle endpoints on/off, refine Claude's generated tool descriptions",
+        "One-click download as a ready-to-run Node.js MCP server package (package.json + server.js + README)"
+      ],
+      "techStack": "React + Vite + Tailwind (frontend), Claude API claude-sonnet-5 (schema analysis + code generation), no backend (API key in sessionStorage), generated output is Node.js MCP server",
+      "whyInteresting": "Every team that adopted MCP in 2026 has a backlog of internal REST APIs they want to expose to Claude agents but hasn't gotten to yet because the setup cost is non-trivial. This tool converts that backlog into a one-minute job. It also demonstrates a meta-use of Claude: using the model to generate tool definitions for itself. The weekend scope is achievable because the hard parts (MCP spec, code gen) are offloaded to the Claude call, leaving only UI and packaging work for the builder.",
+      "inspiredBy": "Anthropic MCP adoption wave in 2026; developer frustration with repeated tool-definition boilerplate documented across HN threads and the Anthropic Discord; Astryx machine-readable CLI manifest trend pushing toward zero-config agent tool integration"
+    },
+    {
+      "n": 2,
+      "title": "Test Design Mentor",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "Students paste their code and test suite; Claude identifies untested scenarios, explains the concrete failure each gap would cause, and delivers Socratic hints that guide students to write the missing tests themselves rather than handing them the answer.",
+      "description": "Code coverage metrics tell students what lines were executed but not what scenarios are unverified, and they offer no explanation of why a gap matters. This teaching tool fills both holes. A student pastes their implementation and existing tests into the app, and Claude performs a semantic analysis of the test suite against the implementation, identifying untested scenarios grouped by category: boundary values (empty input, single element, maximum size), error paths (invalid types, null inputs, exception conditions), state transitions (calling methods out of order, double-close, etc.), and logic edge cases (off-by-one, overflow, equal keys). For each gap, Claude generates a one-sentence failure scenario in plain English ('if the list has exactly one element, your current tests pass, but the pop() call on an already-empty list after remove() would throw an uncaught exception in a scenario your tests never reach'). Students are then offered Socratic hints: first a guiding question ('what happens if start equals end in your range loop?'), then on request a pseudocode sketch, then on further request a completed test stub. All hint levels are available but students must request each escalation, encouraging them to try before seeing the answer. Sessions are saved to Supabase so students can return to the same assignment after office hours or between study sessions. Instructors can view aggregated gap-type frequency across the class to spot systemic misconceptions about what needs testing.",
+      "keyFeatures": [
+        "Semantic gap analysis: Claude identifies untested scenarios by category (boundary, error path, state, logic edge case)",
+        "Failure scenario explanation: each gap described as a concrete one-sentence failure story in plain English",
+        "Three-level Socratic hint ladder: guiding question, pseudocode sketch, completed test stub, each requiring explicit request",
+        "Session persistence via Supabase so students can return across multiple study sessions",
+        "Instructor dashboard: aggregate view of which gap categories appear most across the class"
+      ],
+      "techStack": "React + Vite + Tailwind (frontend), Flask (backend + session management), Supabase (session and aggregation storage), Claude API claude-sonnet-5 (semantic gap analysis + hint generation)",
+      "whyInteresting": "Test design is the skill that most separates novice from intermediate programmers, but it is almost impossible to teach through coverage numbers alone. Students learn to game coverage (write a test that touches every line) without learning to reason about scenarios (what could go wrong?). This tool teaches the reasoning by making the abstract concrete: every gap becomes a specific failure story. The Socratic hint ladder is crucial: handing students a complete test teaches nothing, but letting them struggle with only a guiding question and the knowledge that a gap exists is the right friction level. The instructor aggregation view turns individual student gaps into course-level data about where test design reasoning breaks down.",
+      "inspiredBy": "Gap between coverage tools (quantitative, no explanation) and real test design teaching; ITiCSE 2025 paper on adaptive hint modes showing Socratic hints outperform direct hints for retention; CS1 course design need for formative feedback that teaches thinking rather than just flagging errors"
+    },
+    {
+      "n": 3,
+      "title": "Multi-Agent Game Production Studio",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "Students build a playable Phaser.js browser game by orchestrating four specialized AI agents (Game Designer, Sprite Describer, Level Builder, QA Playtester) that communicate through MCP tools and a shared Supabase state store, teaching multi-agent software engineering through a motivating game production workflow.",
+      "description": "This multi-week classroom assignment uses game production as the domain for teaching multi-agent software engineering. Students orchestrate four specialized Claude agents that mirror real game studio roles: the Game Designer agent reads a student-supplied one-paragraph game concept and produces a structured Game Design Document (GDD) in JSON, including mechanics, win conditions, and level specifications. The Sprite Describer agent reads the GDD and generates detailed textual descriptions for each game asset (player, enemies, tiles, UI elements), formatted for a pixel-art generation prompt. The Level Builder agent reads the GDD and sprite manifest and writes the corresponding Phaser.js scene code, complete with tilemap setup, physics configuration, and entity placement. The QA Playtester agent reads the GDD, the sprite manifest, and the generated scene code, then produces a structured review flagging inconsistencies between the spec and the implementation (e.g., 'GDD specifies double-jump mechanic but no jump velocity multiplier is present in scene config'). Students write the orchestration layer: a Node.js or Python script that assigns tasks to agents, passes structured context between them via MCP tool calls, stores shared state in Supabase, handles retry on agent failures, and logs each agent's reasoning trace. The final deliverable is a playable browser game plus a written reflection comparing the agent-orchestrated workflow to a human team workflow: where did the agents help, where did they hallucinate or diverge, and what orchestration decisions made the biggest difference. A four-milestone structure keeps the project tractable: single-agent GDD generation, two-agent GDD-to-level handoff, full four-agent pipeline, polished game plus reflection.",
+      "keyFeatures": [
+        "Four specialized agent roles: Game Designer (GDD), Sprite Describer (asset manifest), Level Builder (Phaser.js scene code), QA Playtester (spec-vs-code review)",
+        "MCP tools for shared state: read_gdd, write_gdd, read_sprite_manifest, write_sprite_manifest, read_scene_code, write_issue_list",
+        "Students write the orchestration layer (task routing, context handoff, retry logic, trace logging)",
+        "Supabase backend stores all agent artifacts so the dashboard and agents share a single source of truth",
+        "Live React dashboard shows agent conversation threads, current artifact state, and open QA issues",
+        "Four-milestone structure: single agent, two-agent handoff, full pipeline, playable game plus reflection"
+      ],
+      "techStack": "Phaser.js 3 (game engine, browser), Claude API with MCP tool calls (claude-sonnet-5), Supabase (shared artifact store), React + Vite (orchestration dashboard), Node.js or Python (orchestration script students write)",
+      "whyInteresting": "Multi-agent systems are a core emerging topic in software engineering but almost all classroom treatments are theoretical. Using game production as the domain gives students intrinsic motivation (they get a playable game at the end) while requiring them to solve real multi-agent engineering problems: how do you pass structured context between agents without losing information, how do you handle an agent that contradicts a previous agent's output, how do you know when to retry versus accept a partial result? The QA Playtester agent closing the loop on the Level Builder is particularly valuable: it models a real review cycle and gives students empirical experience with the fact that agents diverge from specs, which is the most important lesson for responsible AI engineering.",
+      "inspiredBy": "2026 multi-agent framework adoption wave (Anthropic MCP, LangGraph, AutoGen); game development as a high-engagement domain for CS education; need for classroom assignments that teach multi-agent orchestration with real artifacts rather than toy examples; MCP Tool Inspector idea from 2026-07-04 pointing toward agent-tool integration as a teaching domain"
+    },
+    {
+      "n": 4,
+      "title": "Modality-Aware Hint Generation: Matching AI Tutor Output Format to Error Type in CS1",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Students naturally reach for different input modalities (text, audio, image upload, screen-sharing) depending on the type of programming error they face. This research proposes to close the loop: build a CS1 tutor that automatically selects its hint output modality based on error classification, and measure whether modality-matched hints produce better conceptual gains than text-only hints.",
+      "description": "The source paper (SIGCSE TS 2026, doi:10.1145/3770762.3772548) observed 16 undergraduate programming novices in think-aloud sessions as they chose which modality to use when consulting a multimodal GenAI platform for help with programming problems. Students consistently chose different modalities for different error types: audio or text for conceptual questions, image upload or screen-sharing for pointer-and-memory confusion and debugging visual state, text for syntax errors. The paper documents the student-side choice but does not build a system that acts on this insight from the tutor side. This research proposes to close that loop. The key hypothesis is: if students naturally gravitate toward visual representations when confused about pointer semantics or memory state, then a tutor that automatically generates visual hints (annotated memory diagrams, heap-stack diagrams) for pointer errors and animated call-stack visualizations for recursion errors will produce better conceptual learning outcomes than a text-only tutor. The proposed research has three stages: (1) Build an error-type classifier that categorizes CS1 programming errors into modality-relevant buckets (pointer/reference confusion, loop boundary error, recursion base/recursive case confusion, algorithm design error, syntax error) from submission logs and compiler/test output. (2) Implement a modality-aware hint generator that routes each error type to the appropriate hint renderer: text explanation for logic and algorithm errors, generated SVG memory diagram for pointer/reference errors, step-by-step animated pseudocode for recursion, side-by-side diff annotation for syntax. The visual representations draw directly on Pisan's SKETCHY visual routine framework (1994-95): SKETCHY demonstrated that domain-independent visual understanding requires structured graphical language rather than free-form imagery, and the same principle applies here: a structured heap-stack diagram speaks the right visual language for pointer confusion, where a free-form screenshot does not. (3) A controlled classroom study comparing text-only hints to modality-matched hints across a CS1 semester, measuring conceptual gains on post-test items targeting each error category, time-to-correct-submission, and resubmission rate. The study aligns with Pisan's digital tutor priority (DT-1: CS1 tutoring) and extends SKETCHY's visual reasoning insight into the LLM-era tutoring context.",
+      "papers": [
+        {
+          "title": "Exploring Student Choice and the Use of Multimodal Generative AI in Programming Learning",
+          "authors": "University of Michigan Ann Arbor; Carnegie Mellon University Pittsburgh",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770762.3772548",
+          "url": "https://doi.org/10.1145/3770762.3772548",
+          "abstract": "With recent developments, GenAI applications have begun supporting multiple modes of communication. In this work, we explored how undergraduate programming novices choose and work with multimodal GenAI tools, and their criteria for choices. Through 16 think-aloud sessions combining participant observation with follow-up semi-structured interviews, we investigated student modality choices when completing programming problems and the underlying criteria for modality selections.",
+          "relevance": "This paper establishes the empirical foundation: students exhibit systematic modality preferences tied to error type when consulting multimodal GenAI for programming help. The proposed research operationalizes this finding into an automated tutor system that selects output modality based on error classification, closing the loop the paper leaves open."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "Understanding Student Interaction with AI-Powered Next-Step Hints: Strategies and Challenges",
+          "authors": "JetBrains Research; Utrecht University",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770762.3772544",
+          "url": "https://doi.org/10.1145/3770762.3772544",
+          "relevance": "Documents how students interact with AI-generated next-step hints in an IDE learning environment, surfacing failure modes (ignoring hints, misreading them, over-relying on them) and success patterns. The modality-aware hint system needs to account for these interaction patterns: a visually rich memory diagram is only useful if the student knows how to read it. This paper informs the hint presentation design and the evaluation metrics."
+        },
+        {
+          "title": "A Comparison of On-Demand Hints and Progress Bar Feedback on Programming Exercises",
+          "authors": "University of Toronto; North Carolina State University",
+          "venue": "ITiCSE 2025",
+          "year": 2025,
+          "doi": "10.1145/3724389.3730787",
+          "url": "https://doi.org/10.1145/3724389.3730787",
+          "relevance": "Large-scale (n=1,260 CS1 students) randomized comparison of on-demand hints vs. progress bar feedback shows that hint type affects learning outcomes beyond just availability. Provides methodological grounding for the proposed controlled study design (randomized assignment, outcome measures, survey instrumentation) and establishes that the form of automated feedback, not just its presence, matters for learning."
+        },
+        {
+          "title": "SKETCHY: Domain-Independent Visual Understanding of Line Graphs via Visual Routines",
+          "authors": "Yusuf Pisan",
+          "venue": "PhD Dissertation, University of Texas at Austin",
+          "year": 1995,
+          "url": "https://repositories.lib.utexas.edu/handle/2152/31534",
+          "relevance": "Pisan's SKETCHY system demonstrated that structured visual language, not free-form imagery, is required for domain-independent diagrammatic reasoning. The same principle applies to visual hints in programming tutors: a structured heap-stack diagram with labeled arrows conveys pointer semantics in a way that a screenshot or free-form sketch cannot. SKETCHY's visual routine framework directly informs the design of the memory diagram and call-stack animation generators proposed in this research."
+        },
+        {
+          "title": "Multimodal Analogy Generation in Programming Education",
+          "authors": "Conference authors",
+          "venue": "ITiCSE 2025",
+          "year": 2025,
+          "doi": "10.1145/3724389.3730781",
+          "url": "https://doi.org/10.1145/3724389.3730781",
+          "relevance": "Explores generating cross-modal analogies (code-to-diagram, code-to-narrative) to support programming concept learning, directly adjacent to the modality-aware hint generation approach. Provides a related implementation baseline and a vocabulary for evaluating multimodal analogy quality in the context of CS education."
+        }
+      ],
+      "researchPlan": {
+        "overview": "The project builds a modality-aware CS1 hint system that automatically classifies student programming errors into modality-relevant buckets (pointer/reference, recursion, loop boundary, algorithm design, syntax) and routes each error to an appropriate hint renderer (text, SVG memory diagram, animated call-stack, pseudocode diff). A controlled classroom study across one CS1 semester compares modality-matched hints to text-only hints on conceptual post-test gains, time-to-correct-submission, and resubmission rate. The study connects SKETCHY visual routine theory (structured graphical language for domain understanding) to LLM-era tutoring, and contributes an open-source modality-routing hint system and a validated error-to-modality classification scheme.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review, error-type taxonomy design, and pilot error classifier on archived CS1 submission logs",
+            "deliverable": "Annotated bibliography, finalized error-type taxonomy (6-8 categories), pilot classifier with accuracy report on 200 archived submissions, refined research questions"
+          },
+          {
+            "month": 2,
+            "goal": "Implement modality-aware hint generators for all error categories and build the tutor UI",
+            "deliverable": "Working hint system: text explanation (all types), SVG heap-stack diagram generator (pointer errors), animated call-stack visualization (recursion), pseudocode diff annotation (algorithm design); React + Flask tutor UI integrated with a CS1 problem set"
+          },
+          {
+            "month": 3,
+            "goal": "Expert usability evaluation of hint quality and modality appropriateness; refine generators based on feedback",
+            "deliverable": "Structured expert review from two CS instructors (rating hint clarity, modality fit, and pedagogical appropriateness per error category); revised generators addressing expert feedback; finalized evaluation rubric"
+          },
+          {
+            "month": 4,
+            "goal": "IRB approval, study design finalization, and pilot deployment with a small student cohort",
+            "deliverable": "IRB approval, randomized assignment plan (treatment: modality-matched hints; control: text-only hints), pre-study concept inventory administered, pilot data from 10-15 students used to check logistics and flag problems"
+          },
+          {
+            "month": 5,
+            "goal": "Full classroom deployment across a CS1 semester; collect submission logs, hint interactions, post-test scores, and student perceptions survey",
+            "deliverable": "Complete dataset: submission logs with error classifications, hint modality selections and dwell times, post-test concept inventory scores (pointer semantics, recursion, loop boundary items), student perception survey"
+          },
+          {
+            "month": 6,
+            "goal": "Statistical analysis (mixed-effects models, per-error-category subgroup analysis), write paper, release open-source system",
+            "deliverable": "Submitted paper draft targeting ICER or SIGCSE TS; open-source hint system and error classifier on GitHub; validated error-to-modality classification scheme as a reusable artifact"
+          }
+        ],
+        "targetVenues": ["ICER", "SIGCSE TS", "ITiCSE", "EDM"],
+        "resources": "CS1 course access at UW Bothell (CSS 142 or 143) for study deployment; Claude API credits for hint generation (estimated 3000-5000 API calls per semester cohort, ~$150-250); archived submission logs from prior semesters for classifier training and pilot evaluation; two CS1 instructors for expert review (months 2-3); React + Flask development environment for tutor UI; Supabase for logging hint interactions and submission data; IRB protocol (minimal-risk educational research at own institution).",
+        "risks": [
+          {
+            "risk": "Error classifier accuracy may be insufficient to correctly route errors to the right modality, producing mismatched hints that confuse students more than help them.",
+            "mitigation": "Train classifier on a large archived submission log corpus and validate against manually-labeled gold standard before deployment; include a fallback to text-only hints when classifier confidence is below a threshold; log all classifier decisions so misclassification rates can be computed post-hoc and excluded from the analysis."
+          },
+          {
+            "risk": "Visual hint generators (SVG memory diagrams, animated call-stacks) may produce outputs that are correct in content but confusing in presentation for novice students unfamiliar with formal diagram notation.",
+            "mitigation": "Base diagram designs on existing CS1 textbook conventions (not custom notation); conduct expert review in month 3 specifically for novice readability; add a brief legend to every diagram explaining symbol meanings; run a comprehension pre-check (can the student describe what the diagram shows?) before presenting the Socratic hint."
+          },
+          {
+            "risk": "Insufficient statistical power to detect learning outcome differences if the effect of modality-matching is small and the course section is small.",
+            "mitigation": "Pre-register a minimum detectable effect size and power calculation; target a course section with at least 60 students per condition; use repeated-measures design (same students across multiple assignment types) to reduce variance; report effect sizes with confidence intervals regardless of significance."
+          },
+          {
+            "risk": "Students in the text-only control condition may seek out visual explanations from other sources (YouTube, textbooks, AI chatbots), contaminating the control condition.",
+            "mitigation": "Use a between-section design rather than within-section randomization to reduce crossover; in the consent and briefing, ask students to note their use of external resources; include an external resource usage item on the perception survey and use it as a covariate in the analysis."
+          }
+        ],
+        "humanSubjects": true
+      }
+    }
+  ]
+}

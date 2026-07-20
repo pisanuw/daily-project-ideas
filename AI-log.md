@@ -2351,3 +2351,7 @@ You are a daily idea curator for Yusuf Pisan, a CS professor interested in AI in
 
 Your task: Find 3 fresh project ideas AND generate 1 research idea grounded in CS education papers, then commit all 4 to this repo in a single JSON file.
 [... full scheduled prompt ...]
+
+2026-07-20T00:00 User: [SYSTEM NOTIFICATION - NOT USER INPUT]
+This is an automated background-task event, NOT a message from the user.
+Daily idea curator task: Find 3 fresh project ideas AND generate 1 research idea grounded in CS education papers, then commit all 4 to this repo in a single JSON file.

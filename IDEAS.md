@@ -228,3 +228,7 @@
 | 2026-07-19 | GenAI Social Thermometer | Teaching Tool | 1-2 Weeks |
 | 2026-07-19 | Bus Factor Visualizer | Classroom Assignment | Multi-week |
 | 2026-07-19 | From Grading Traces to Learning Maps: Mining LLM Exam Grading Chains to Build Actionable CS1 Misconception Taxonomies | Research | Research |
+| 2026-07-20 | REST-to-MCP Wrapper | Side Project | Weekend |
+| 2026-07-20 | Test Design Mentor | Teaching Tool | 1-2 Weeks |
+| 2026-07-20 | Multi-Agent Game Production Studio | Classroom Assignment | Multi-week |
+| 2026-07-20 | Modality-Aware Hint Generation: Matching AI Tutor Output Format to Error Type in CS1 | Research | Research |
