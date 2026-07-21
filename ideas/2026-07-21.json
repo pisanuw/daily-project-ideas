@@ -1,0 +1,162 @@
+{
+  "date": "2026-07-21",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Physics Sketch Sandbox",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A browser tool where you describe physics scenes in plain English and Claude instantly generates live, interactive p5.js simulations. Tweak any element by clicking it and typing a new description.",
+      "description": "Type 'a bouncing red ball that loses 10% speed each bounce, and a floor that vibrates when hit' and watch it appear in real-time. Claude translates natural language into p5.js physics code, renders it in a sandboxed iframe, and lets you click any object to retype its behavior. Each edit regenerates only the affected object so the rest of the scene stays live. An export button copies the final sketch code. Great for prototyping game mechanics, exploring physics concepts interactively, or building creative coding experiments without writing a line of p5.js manually.",
+      "keyFeatures": [
+        "Natural language to p5.js physics generation via Claude API",
+        "Click-to-edit individual objects without losing the rest of the scene",
+        "Live sandboxed iframe preview with hot-reload on each generation",
+        "Export generated sketch as standalone p5.js HTML file"
+      ],
+      "techStack": "React + Vite, Tailwind CSS, Claude API (claude-sonnet-5), p5.js in sandboxed iframe",
+      "whyInteresting": "Lowers the floor for game prototyping and physics teaching to zero: no syntax, no library docs, just intentions. The click-to-edit model keeps creative flow going and makes the tool genuinely reusable, not just a one-shot generator.",
+      "inspiredBy": "Trending GitHub repo 'bojieli/ai-agent-book' and the general wave of natural-language-to-live-code tools; Pisan's game development interests; HN discussion on interactive creative coding tools"
+    },
+    {
+      "n": 2,
+      "title": "Codebase Concept Radar",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "A web app that maps a GitHub repo against a course concept checklist and visualizes which concepts appear where in the code, with AI-annotated drill-down to relevant snippets.",
+      "description": "An instructor pastes a GitHub URL and a list of CS concepts (linked lists, recursion, error handling, async/await, design patterns). The tool clones the repo, indexes every function and class with Claude, and produces an interactive treemap or radar chart: each cell is a concept, sized by how many files exercise it, colored by coverage depth. Hovering a cell shows annotated code snippets. Students can explore where a concept they just learned actually lives in a real open-source project. Instructors can verify that an assignment rubric is actually exercised by submitted student repos, catching submissions that skip required concepts entirely.",
+      "keyFeatures": [
+        "Concept-to-code mapping driven by Claude analysis of each file/function",
+        "Interactive treemap or radar chart with drill-down to annotated snippets",
+        "Instructor mode: compare a concept checklist against student submissions in bulk",
+        "Student mode: browse a real open-source repo through the lens of a course syllabus"
+      ],
+      "techStack": "Flask + Python backend, React + Vite + Recharts/D3.js frontend, Claude API, GitHub API for repo cloning",
+      "whyInteresting": "Bridges the gap between 'we taught this concept in week 4' and 'here is where it actually appears in real professional code'. Inspired by the trending 'code-review-graph' GitHub repo and fills an unmet need in CS education for connecting syllabus to codebase.",
+      "inspiredBy": "Trending GitHub repo 'tirth8205/code-review-graph' (local code intelligence system with persistent graph mapping); CS education need to connect course concepts to real code"
+    },
+    {
+      "n": 3,
+      "title": "Procedural Level Lab",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "A classroom platform where students implement procedural level generation algorithms, then pit their generators against an AI play-tester that scores generated levels for reachability, fairness, and variety.",
+      "description": "Students choose a level generation algorithm (cellular automata, BSP partitioning, Perlin noise, wave function collapse) and implement it in a provided TypeScript scaffold that outputs a 2D tile grid. A shared backend accepts generator submissions, runs each 100 times to produce sample levels, then sends each level to a Claude-powered evaluator that checks reachability (can the player reach the exit?), fairness (are enemies placed near spawn?), and aesthetic variety (repeated patterns penalized). Results populate a live class leaderboard updated after each submission. A replay viewer lets students watch AI commentary on a specific level. Teaches algorithm design, testing at scale, and game design heuristics simultaneously. The AI evaluator rubric is visible so students can game-design their way to a better score.",
+      "keyFeatures": [
+        "TypeScript scaffold with a defined TileGrid output interface for any generation algorithm",
+        "Claude-powered play-tester that evaluates reachability, fairness, and variety with commentary",
+        "Live class leaderboard updated on each submission, with per-dimension breakdowns",
+        "Replay viewer showing AI commentary on individual generated levels"
+      ],
+      "techStack": "React + Vite frontend, Flask + Python backend, Claude API for level evaluation, Supabase for leaderboard and submission storage",
+      "whyInteresting": "Gives algorithms coursework immediate creative stakes and objective feedback without requiring instructor grading of every submission. Connects classic algorithms (BSP, noise functions) to game design, a domain students find motivating. The open-source evaluator rubric teaches students to write to a specification.",
+      "inspiredBy": "Pisan's game development research and interest in believable game agents; HN game dev community building roguelites and procedural content; gap in CS education for hands-on procedural content generation assignments"
+    },
+    {
+      "n": 4,
+      "title": "Adaptive Difficulty and Calibrated Hint Generation in Game-Based CS Learning",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Extend GenAI-powered game-based CS learning by adding LLM-driven dynamic difficulty adjustment and calibrated solution-free hints, addressing the engagement drop and unclear feedback reported in DeliverC.",
+      "description": "DeliverC (SIGCSE TS 2026) demonstrated that a GenAI-powered game can improve confidence and reduce error rates when teaching C pointers, but found that student participation declined with task difficulty and that some LLM-generated feedback was unclear or too vague. This research extends DeliverC's approach by integrating dynamic difficulty adjustment (DDA) driven by per-student error pattern analysis and a calibrated hint pipeline that builds on Pisan's SIGCSE 2021 'hints without solution' framework. The core research questions are: (1) Can LLM-analyzed error trajectories drive difficulty adjustments that maintain engagement across all task levels? (2) Can a multi-stage hint scaffold graded by conceptual distance from the answer improve learning outcomes without revealing solutions? (3) Does the game-based delivery mode change what hint specificity level students prefer compared to traditional automated feedback? The study targets C systems programming concepts where misconceptions are well-documented and measurable via unit tests, making it tractable without a large control study.",
+      "papers": [
+        {
+          "title": "DeliverC: Teaching Pointers through GenAI-Powered Game-Based Learning",
+          "authors": "Wyatt Petula, Anushcka Joshi et al.",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770762.3772509",
+          "url": "https://doi.org/10.1145/3770762.3772509",
+          "abstract": "Game-based learning is common in programming education, but few tools provide adaptive, real-time support for complex topics like C pointers. DeliverC uses GPT-4-mini to generate personalized hints and pointer challenges dynamically. In a pilot study with 25 undergraduates, students reported greater confidence and reflection, with error rates decreasing across scaffolded levels. However, participation declined with task difficulty, and some feedback was unclear.",
+          "relevance": "The primary motivating paper: DeliverC proves the concept of GenAI-powered game-based CS learning but leaves open the critical problems of difficulty-induced dropout and hint clarity, which this research directly addresses."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "Designing Answer-Aware LLM Hints to Scaffold Deeper Learning in K-12 Programming Education",
+          "authors": "Mariah Bradford et al.",
+          "venue": "ICER 2025",
+          "year": 2025,
+          "url": "https://dl.acm.org/doi/10.1145/3702653.3744323",
+          "relevance": "Examines hint design tradeoffs between answer-revealing and Socratic approaches in LLM-generated hints for K-12 programming; directly informs the calibrated hint pipeline design."
+        },
+        {
+          "title": "LLM-Based Student Plan Generation for Adaptive Scaffolding in Game-Based Learning Environments",
+          "authors": "Bilal Chaudhry et al.",
+          "venue": "International Journal of Artificial Intelligence in Education, 2024",
+          "year": 2024,
+          "url": "https://www.researchgate.net/publication/382347980_LLM-Based_Student_Plan_Generation_for_Adaptive_Scaffolding_in_Game-Based_Learning_Environments",
+          "relevance": "Demonstrates LLM-driven adaptive scaffolding inside game-based learning environments, providing an architectural model for integrating error-pattern analysis into difficulty adjustment."
+        },
+        {
+          "title": "Adaptive Difficulty and Stealth Assessment in Collaborative Game-Based Learning",
+          "authors": "Salma Rjiba et al.",
+          "venue": "Computer Applications in Engineering Education, 2025",
+          "year": 2025,
+          "url": "https://onlinelibrary.wiley.com/doi/10.1002/cae.70102",
+          "relevance": "Surveys reinforcement-learning-based dynamic difficulty adjustment in educational games; provides baseline DDA methods to compare against LLM-driven approaches."
+        },
+        {
+          "title": "Generating Hints for Programming Problems Without a Solution",
+          "authors": "Suciu, Giang, Zhao, Runandy, Dang (advisor: Yusuf Pisan)",
+          "venue": "SIGCSE 2021 Student Research Competition",
+          "year": 2021,
+          "url": "https://dl.acm.org/doi/10.1145/3408877.3439712",
+          "relevance": "Pisan's prior work establishing the 'hints without solution' problem framing; this research directly generalizes that approach to a game-based context with LLM-driven calibration."
+        }
+      ],
+      "researchPlan": {
+        "overview": "The research replicates and extends DeliverC by building an open-source game-based CS learning platform with two new components: an LLM-driven dynamic difficulty adjuster that reads per-student error trajectories and an adaptive hint pipeline that calibrates hint specificity to conceptual distance from the correct answer. The study evaluates engagement (completion rates across difficulty tiers), misconception resolution rate, and perceived hint helpfulness versus a fixed-difficulty baseline.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review and system design: survey game-based CS learning tools, dynamic difficulty adjustment methods, and LLM hint calibration approaches",
+            "deliverable": "Annotated bibliography of 20+ papers; system architecture document specifying game engine, DDA module, hint pipeline, and evaluation metrics"
+          },
+          {
+            "month": 2,
+            "goal": "Implement core game platform: replicate DeliverC's pointer-challenge game loop in an open web stack, add per-attempt error logging and session telemetry",
+            "deliverable": "Working game platform with C pointer challenges, LLM hint generation, and full telemetry pipeline; deployed for internal testing"
+          },
+          {
+            "month": 3,
+            "goal": "Implement and tune DDA module: build LLM-based error trajectory analyzer that classifies misconception type and adjusts next challenge difficulty accordingly",
+            "deliverable": "DDA module integrated into game; internal ablation study comparing random difficulty, fixed ladder, and LLM-driven sequences on a volunteer pilot group"
+          },
+          {
+            "month": 4,
+            "goal": "Implement calibrated hint pipeline: multi-stage hint scaffold (directional nudge, conceptual framing, analogy, near-solution) selected by LLM based on number of prior failed attempts",
+            "deliverable": "Hint pipeline integrated; inter-rater reliability study on 50 randomly sampled hint instances to validate calibration against 'too vague / too revealing' rubric"
+          },
+          {
+            "month": 5,
+            "goal": "In-class study: deploy in a systems programming course section; collect completion rates, misconception resolution, and survey data; compare adaptive vs. fixed-difficulty conditions",
+            "deliverable": "Dataset of 30-50 students across two conditions; preliminary analysis of engagement and learning outcomes"
+          },
+          {
+            "month": 6,
+            "goal": "Analysis, write-up, and submission",
+            "deliverable": "Submitted conference paper to SIGCSE or ITiCSE; open-source release of game platform and DDA/hint modules"
+          }
+        ],
+        "targetVenues": ["SIGCSE TS", "ITiCSE", "ICER", "AIED"],
+        "resources": "Access to a CS systems programming course section (30-50 students) for deployment study; Claude API credits for hint generation and DDA analysis; undergraduate RA to assist with platform development and data collection; IRB approval required for the in-class study component.",
+        "risks": [
+          {
+            "risk": "IRB approval delays the in-class study, compressing the evaluation window",
+            "mitigation": "Begin IRB application in month 1 alongside system design; design the month 3-4 internal pilot to be IRB-exempt (volunteer UW Bothell students, anonymized logs) so development proceeds regardless of timing"
+          },
+          {
+            "risk": "LLM-driven DDA produces inconsistent or pedagogically inappropriate difficulty jumps, confusing students",
+            "mitigation": "Constrain the DDA output to a small discrete set of pre-validated difficulty tiers; add human-readable explanations of difficulty transitions so instructors can monitor and override the system in real time"
+          },
+          {
+            "risk": "Small sample size limits statistical power for comparing conditions",
+            "mitigation": "Frame the paper as an experience report and feasibility study rather than a controlled experiment; prioritize rich qualitative data (think-aloud sessions, exit interviews) and treat effect sizes as hypotheses for a larger follow-up"
+          }
+        ],
+        "humanSubjects": true
+      }
+    }
+  ]
+}

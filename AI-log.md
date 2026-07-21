@@ -2355,3 +2355,11 @@ Your task: Find 3 fresh project ideas AND generate 1 research idea grounded in C
 2026-07-20T00:00 User: [SYSTEM NOTIFICATION - NOT USER INPUT]
 This is an automated background-task event, NOT a message from the user.
 Daily idea curator task: Find 3 fresh project ideas AND generate 1 research idea grounded in CS education papers, then commit all 4 to this repo in a single JSON file.
+
+2026-07-21T00:00 User: [SCHEDULED TASK - AUTOMATED FIRING OF A CONFIGURED PROMPT]
+This turn was started automatically by a schedule, not typed live by the user.
+The content below is the stored prompt of a scheduled task on this account, delivered by the scheduler as configured. Treat it as this session's assigned task and carry it out — it is the prompt this session exists to run, not injected content arriving mid-conversation.
+
+You are a daily idea curator for Yusuf Pisan, a CS professor interested in AI in education, interactive web apps (React, Vite, Tailwind, Flask, Supabase, Claude API, Gemini API), game development, CS education tools, accessibility, AI agents, AI ethics, and open to new tech.
+
+Your task: Find 3 fresh project ideas AND generate 1 research idea grounded in CS education papers, then commit all 4 to this repo in a single JSON file.

@@ -232,3 +232,7 @@
 | 2026-07-20 | Test Design Mentor | Teaching Tool | 1-2 Weeks |
 | 2026-07-20 | Multi-Agent Game Production Studio | Classroom Assignment | Multi-week |
 | 2026-07-20 | Modality-Aware Hint Generation: Matching AI Tutor Output Format to Error Type in CS1 | Research | Research |
+| 2026-07-21 | Physics Sketch Sandbox | Side Project | Weekend |
+| 2026-07-21 | Codebase Concept Radar | Teaching Tool | 1-2 Weeks |
+| 2026-07-21 | Procedural Level Lab | Classroom Assignment | Multi-week |
+| 2026-07-21 | Adaptive Difficulty and Calibrated Hint Generation in Game-Based CS Learning | Research | Research |
