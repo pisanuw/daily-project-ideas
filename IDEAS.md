@@ -236,3 +236,7 @@
 | 2026-07-21 | Codebase Concept Radar | Teaching Tool | 1-2 Weeks |
 | 2026-07-21 | Procedural Level Lab | Classroom Assignment | Multi-week |
 | 2026-07-21 | Adaptive Difficulty and Calibrated Hint Generation in Game-Based CS Learning | Research | Research |
+| 2026-07-22 | Regex Explainer Studio | Side Project | Weekend |
+| 2026-07-22 | AI-Exam Resistance Rater | Teaching Tool | 1-2 Weeks |
+| 2026-07-22 | Gameplay Postmortem Agent | Classroom Assignment | Multi-week |
+| 2026-07-22 | From Benchmark to Classroom: Closing the Personalization Gap in LLM-Based CS Tutoring Using Institution-Specific Interaction Data | Research | Research |

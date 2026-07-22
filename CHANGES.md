@@ -142,3 +142,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-07-20 [code] Created ideas/2026-07-20.json: REST-to-MCP Wrapper, Test Design Mentor, Multi-Agent Game Production Studio, Modality-Aware Hint Generation (research, SIGCSE TS 2026 doi:10.1145/3770762.3772548)
 
 2026-07-21 [code] Created ideas/2026-07-21.json: Physics Sketch Sandbox, Codebase Concept Radar, Procedural Level Lab, Adaptive Difficulty and Calibrated Hint Generation in Game-Based CS Learning (research, SIGCSE TS 2026 doi:10.1145/3770762.3772509)
+
+2026-07-22 [code] Created ideas/2026-07-22.json: Regex Explainer Studio, AI-Exam Resistance Rater, Gameplay Postmortem Agent, From Benchmark to Classroom (research, CSTutorBench SIGCSE TS 2026 doi:10.1145/3770761.3777333)

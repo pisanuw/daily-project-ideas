@@ -1,0 +1,157 @@
+{
+  "date": "2026-07-22",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Regex Explainer Studio",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A modern regex playground that combines live testing with AI-powered plain-English explanations, natural language to regex translation, and automatic edge-case generation. Finally a tool that makes regular expressions readable by anyone.",
+      "description": "Regular expressions are powerful but notoriously opaque: developers write a pattern, test a few strings, and move on hoping it works. Regex Explainer Studio changes that by adding an AI layer to the classic playground loop. Paste any regex and get an instant plain-English breakdown of what every group, quantifier, and anchor does. Type a description in natural language and watch the AI draft the pattern. Click 'Find Edge Cases' and get a set of tricky strings the regex might accept or reject unexpectedly. A side-by-side diff view shows how two similar patterns behave differently on the same input. Built as a self-contained React app with no backend, so it can be hosted as a static page.",
+      "keyFeatures": [
+        "Plain-English explanation of any regex, broken down token by token",
+        "Natural language to regex translation with multiple candidate patterns",
+        "AI-generated edge-case strings that probe corner behaviors",
+        "Side-by-side comparison mode for two patterns on the same corpus",
+        "Shareable permalink for any regex plus its explanation"
+      ],
+      "techStack": "React + Vite, Tailwind CSS, Claude API (claude-sonnet-5), no backend",
+      "whyInteresting": "Regex is one of the few developer skills where even experienced engineers regularly hit a wall. A tool that explains and generates patterns in natural language has immediate practical value for any developer, and it doubles as a teaching resource for students who encounter regex for the first time.",
+      "inspiredBy": "Widespread developer frustration with regex readability; tools like Regex101 augmented with the conversational AI layer now possible via the Claude API"
+    },
+    {
+      "n": 2,
+      "title": "AI-Exam Resistance Rater",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "Paste a CS programming exam question and get an instant AI-resistance score (0-100), a live demonstration of what an LLM produces as an answer, and concrete redesign suggestions based on the GenAI-era exam taxonomy from SIGCSE 2026.",
+      "description": "Research from SIGCSE TS 2026 shows that LLMs can correctly solve most standard introductory programming questions, forcing educators to rethink assessment design. AI-Exam Resistance Rater lets instructors stress-test their questions before using them. Submit any question and the tool sends it to an LLM, displays the full AI response, then scores resistance on four axes: requirement for personal context, need for oral or visual explanation, structural novelty that foils pattern matching, and Bloom's level. Each axis is explained in plain English. The tool then offers redesign options across three modes: AI-resistant (question references student's own prior code), AI-accepting (student works alongside AI transparently), and AI-cooperative (AI is part of the assignment workflow). Instructors can iterate on rewrites until the resistance profile matches their pedagogical goal.",
+      "keyFeatures": [
+        "Live LLM solve attempt with full response displayed for inspection",
+        "AI-resistance score broken into four graded axes with explanations",
+        "One-click redesign suggestions in AI-resistant, AI-accepting, and AI-cooperative modes",
+        "Bloom's taxonomy level detector for each question variant",
+        "Batch mode to rate an entire exam PDF and rank questions by vulnerability"
+      ],
+      "techStack": "React + Vite, Tailwind CSS, Claude API (claude-sonnet-5), Flask backend for PDF parsing",
+      "whyInteresting": "Every CS instructor teaching in 2026 faces the AI-on-exams problem but few have a systematic way to audit their question bank. A tool that gives quantitative resistance scores and concrete redesigns turns an abstract policy debate into an actionable design process.",
+      "inspiredBy": "SIGCSE TS 2026 paper: Executable Exams in the Era of Generative AI (doi:10.1145/3770761.3777272), which introduced a revised taxonomy of AI-resistant, AI-accepting, and AI-cooperative question types"
+    },
+    {
+      "n": 3,
+      "title": "Gameplay Postmortem Agent",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "Students build a simple 2D game with a structured action-log system, then build an LLM agent that reads session logs and writes a rich narrative postmortem of a player's run: strategies tried, failure patterns, skill progression, and emergent play style.",
+      "description": "Commercial games studios produce postmortem analyses to understand player behavior, but most CS students never experience this data-driven design loop. In this multi-week assignment, students first build a small grid-based or Phaser.js game with a well-structured event log (every move, death, retry, and decision timestamped and serialized to JSON). In phase two they build a Flask API that accepts a session log file and calls the Claude API to generate a narrative postmortem: what strategies the player experimented with, where they got stuck and how they adapted, whether their style evolved across attempts, and what the game designer could improve. In phase three they build a React dashboard that visualizes the raw log alongside the generated narrative with synchronized highlighting. The result is a portfolio-ready project that teaches game state design, event-driven architecture, REST API construction, LLM prompt engineering, and data visualization in one coherent arc.",
+      "keyFeatures": [
+        "Phase 1: Phaser.js game with structured JSON event logging (moves, outcomes, timing)",
+        "Phase 2: LLM agent that reads logs and generates a player narrative postmortem",
+        "Phase 3: React dashboard with timeline visualization synchronized to the AI narrative",
+        "Stretch goal: multi-session comparison to detect skill progression across runs",
+        "Rubric-friendly deliverables at each phase for phased grading"
+      ],
+      "techStack": "Phaser.js (game), React + Vite + Tailwind (dashboard), Flask + Python (API), Claude API (claude-sonnet-5), Supabase (session log storage)",
+      "whyInteresting": "This assignment sits at the intersection of game development, data analysis, and LLM integration, which are three of the most in-demand skills in the 2026 job market. Students ship something playable AND analytical, making it compelling for portfolios, and the postmortem framing teaches them to think about games as data-generating systems rather than just entertainment products.",
+      "inspiredBy": "Game analytics practices from industry (Unity Analytics, Overwolf); growing interest in LLM-powered narrative generation; the need for multi-skill assignments that span game dev and AI integration"
+    },
+    {
+      "n": 4,
+      "title": "From Benchmark to Classroom: Closing the Personalization Gap in LLM-Based CS Tutoring Using Institution-Specific Interaction Data",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "CSTutorBench revealed that state-of-the-art LLMs lag most on personalization and interactive scaffolding in CS tutoring contexts. This research builds an institution-specific tutoring benchmark from UW Bothell Jolly Feedback logs and tests whether injecting student submission history into LLM prompts closes the personalization gap and predicts real learning outcomes.",
+      "description": "CSTutorBench (SIGCSE TS 2026) established a rigorous five-dimension evaluation framework (accuracy, clarity, conciseness, personalization, engagement) for LLM tutors drawn from authentic course discussion-forum exchanges, and found that leading LLMs approach human tutors on accuracy and clarity but fall notably short on personalization and interactive scaffolding. This research extends that finding in two directions: first, constructing UWB-TutorBench, an institution-specific benchmark derived from de-identified Jolly Feedback submission histories and Canvas discussion exchanges at UW Bothell, which captures the local assignment structures, error patterns, and misconceptions that general benchmarks miss; second, running a controlled experiment that tests whether injecting a student's prior submission history into LLM tutor prompts measurably improves personalization scores on the CSTutorBench five-dimension rubric. Critically, this work takes a step that CSTutorBench could not: linking the proxy quality metrics (personalization score, engagement) to observable classroom outcomes (resubmission count, time-to-pass, grade) to determine which benchmark dimensions actually predict learning. The result is both a replicable methodology for building institution-specific CS tutoring benchmarks and the first empirical answer to whether context-injection can close the personalization gap without model fine-tuning.",
+      "papers": [
+        {
+          "title": "CSTutorBench: Benchmarking Large Language Models for Realistic Computer Science Tutoring",
+          "authors": "University of New South Wales Sydney team",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770761.3777333",
+          "url": "https://doi.org/10.1145/3770761.3777333",
+          "abstract": "We present CSTutorBench, a dataset built from real tutor-student exchanges on authentic course discussion forums augmented with course documents and images, comprising 2,970 multimodal question-answer pairs. We propose a five-dimensional evaluation framework encompassing accuracy, clarity, conciseness, personalization, and engagement that reflects the pedagogical principles of effective human tutoring. Benchmarking leading LLMs including GPT-4o, Claude, and Llama 4, we find that models approach human performance on accuracy and clarity but fall notably short on personalization and interactive scaffolding.",
+          "relevance": "CSTutorBench is the direct anchor for this research: it establishes the five-dimension evaluation framework this work extends, identifies personalization and scaffolding as the key gap, and provides the general benchmark against which an institution-specific benchmark can be compared."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "DeepTutor: Towards Agentic Personalized Tutoring",
+          "authors": "HKUDS Lab",
+          "venue": "arXiv, 2026",
+          "year": 2026,
+          "url": "https://arxiv.org/abs/2604.26962",
+          "relevance": "DeepTutor introduces a Hybrid Personalization Engine combining static knowledge grounding with dynamic personal memory to close exactly the personalization gap identified in CSTutorBench. It is the most direct competing approach and provides the personalization architecture this research will contrast against the simpler context-injection strategy."
+        },
+        {
+          "title": "Rethinking Scaffolding in LLM Tutors: The Interactional Mismatch Between Benchmarks and Real-World Deployments",
+          "authors": "Multiple institutions",
+          "venue": "arXiv, 2026",
+          "year": 2026,
+          "url": "https://arxiv.org/abs/2606.15766",
+          "relevance": "This paper argues that existing LLM tutoring benchmarks measure response quality in isolation but miss the interactional dynamics that define real scaffolding, directly motivating the need for institution-specific benchmarks grounded in longitudinal student data rather than single-turn exchanges."
+        },
+        {
+          "title": "SP-TeachLLM: An LLM-Driven Framework for Personalized and Adaptive Programming Education",
+          "authors": "Multiple institutions",
+          "venue": "MDPI Information, 2025",
+          "year": 2025,
+          "url": "https://www.mdpi.com/2078-2489/16/12/1045",
+          "relevance": "SP-TeachLLM implements a multi-module LLM tutoring architecture with curriculum decomposition, reflective learning, and memory augmentation for CS education, serving as a concrete technical comparison point for the context-injection pipeline this research proposes."
+        }
+      ],
+      "researchPlan": {
+        "overview": "This 6-month project constructs UWB-TutorBench from de-identified Jolly Feedback and Canvas data, runs a controlled context-injection experiment against the CSTutorBench five-dimension rubric, and links proxy quality scores to real learning outcomes (resubmission rate, time-to-pass) to determine which evaluation dimensions actually predict learning in a CS1 setting.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review, annotation of CSTutorBench evaluation rubric, and research question scoping",
+            "deliverable": "Annotated bibliography (25+ papers) and three concrete research questions with measurable hypotheses"
+          },
+          {
+            "month": 2,
+            "goal": "Data extraction and de-identification: pull Jolly Feedback submission logs and Canvas discussion data, strip PII, build UWB-TutorBench corpus",
+            "deliverable": "UWB-TutorBench v1: 500+ de-identified tutor-student interaction pairs with ground-truth human ratings on the five-dimension rubric"
+          },
+          {
+            "month": 3,
+            "goal": "Baseline LLM evaluation: run zero-context prompts (no student history) for 4-5 LLMs on UWB-TutorBench and score on all five dimensions",
+            "deliverable": "Baseline evaluation table and replication of the CSTutorBench personalization-gap finding in the local institutional context"
+          },
+          {
+            "month": 4,
+            "goal": "Context-injection experiment: design and run prompts that include N prior student submissions as context; evaluate on the same five dimensions",
+            "deliverable": "Ablation study across context-window sizes (0, 1, 3, 5 prior submissions) with statistical significance testing"
+          },
+          {
+            "month": 5,
+            "goal": "Outcome correlation study: match benchmark quality scores to actual learning outcomes from Canvas gradebook (resubmission count, final grade, time-to-pass)",
+            "deliverable": "Correlation analysis identifying which of the five benchmark dimensions best predicts observable student learning"
+          },
+          {
+            "month": 6,
+            "goal": "Paper writing, internal review, and submission preparation",
+            "deliverable": "Submitted conference paper with UWB-TutorBench released as an open dataset"
+          }
+        ],
+        "targetVenues": ["SIGCSE", "ICER", "EDM", "AIED"],
+        "resources": "De-identified Jolly Feedback submission logs and Canvas discussion data (available locally at UWB), Claude API access for LLM evaluation, 1-2 student research assistants for human annotation of the UWB-TutorBench rubric, ~$500 API budget for multi-model evaluation runs",
+        "risks": [
+          {
+            "risk": "Jolly Feedback logs may be sparse or inconsistently structured for the target courses, yielding too few usable interaction pairs",
+            "mitigation": "Supplement with Canvas discussion-forum data and TA office-hours transcripts; set a minimum corpus size threshold of 300 pairs before proceeding to the experiment phase"
+          },
+          {
+            "risk": "The five CSTutorBench rubric dimensions may have low inter-annotator agreement when applied by local raters to UWB-specific interactions",
+            "mitigation": "Run a pilot annotation with three raters and compute Krippendorff's alpha before committing to the full corpus; refine rubric dimension definitions with local examples"
+          },
+          {
+            "risk": "Context-injection may not improve personalization scores because the LLM treats submission history as irrelevant background rather than adapting its response style",
+            "mitigation": "Design structured context formats (e.g., tagged error summaries rather than raw code) and test multiple injection templates; a null result is still publishable given the novelty of the linking-to-outcomes contribution"
+          }
+        ],
+        "humanSubjects": true
+      }
+    }
+  ]
+}
