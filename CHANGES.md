@@ -144,3 +144,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-07-21 [code] Created ideas/2026-07-21.json: Physics Sketch Sandbox, Codebase Concept Radar, Procedural Level Lab, Adaptive Difficulty and Calibrated Hint Generation in Game-Based CS Learning (research, SIGCSE TS 2026 doi:10.1145/3770762.3772509)
 
 2026-07-22 [code] Created ideas/2026-07-22.json: Regex Explainer Studio, AI-Exam Resistance Rater, Gameplay Postmortem Agent, From Benchmark to Classroom (research, CSTutorBench SIGCSE TS 2026 doi:10.1145/3770761.3777333)
+
+2026-07-23 [code] Created ideas/2026-07-23.json: City Livability Radar, Agent Skills Library Builder, Socratic Error Cascade Visualizer, Closing the Feedback Loop (research, SIGCSE TS 2026 doi:10.1145/3770761.3777326)

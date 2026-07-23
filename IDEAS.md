@@ -240,3 +240,7 @@
 | 2026-07-22 | AI-Exam Resistance Rater | Teaching Tool | 1-2 Weeks |
 | 2026-07-22 | Gameplay Postmortem Agent | Classroom Assignment | Multi-week |
 | 2026-07-22 | From Benchmark to Classroom: Closing the Personalization Gap in LLM-Based CS Tutoring Using Institution-Specific Interaction Data | Research | Research |
+| 2026-07-23 | City Livability Radar | Side Project | Weekend |
+| 2026-07-23 | Agent Skills Library Builder | Side Project | 1-2 Weeks |
+| 2026-07-23 | Socratic Error Cascade Visualizer | Teaching Tool | Multi-week |
+| 2026-07-23 | Closing the Feedback Loop: Real-Time Misconception Clusters to Targeted Student Hints in CS1 | Research | Research |

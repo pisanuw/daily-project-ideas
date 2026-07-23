@@ -1,0 +1,155 @@
+{
+  "date": "2026-07-23",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "City Livability Radar",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A React + Vite web app that pulls free public data for any US city and renders an interactive radar chart scoring livability across tech-worker-relevant dimensions, with a Claude-written narrative comparison.",
+      "description": "Type in one or two US cities and instantly see a radar chart scoring each on cost of living, walkability, air quality, broadband access, university density, and remote-work friendliness using free public APIs (WalkScore, EPA AQI, Census Bureau, BLS). Claude API writes a one-paragraph 'tech worker livability brief' for each city and a head-to-head comparison sentence. All data fetching runs client-side through a serverless edge function, so there is no backend to maintain. The chart is shareable as a permalink. Inspired by the HN July 2026 trending project that computed livability scores for all of Germany by rent, commute, and quality of life.",
+      "keyFeatures": [
+        "Radar chart comparing up to 3 cities across 6 livability dimensions",
+        "Claude Haiku-generated narrative summary per city and head-to-head blurb",
+        "Shareable permalink with city selections encoded in the URL",
+        "Mobile-responsive card layout with dark and light mode support"
+      ],
+      "techStack": "React + Vite + Tailwind, Claude Haiku API, WalkScore API, EPA AQI API, Census Bureau Data API, Vercel serverless functions",
+      "whyInteresting": "A quick but polished portfolio piece that demonstrates data aggregation from multiple public APIs, interactive charting, and AI-enhanced presentation. Genuinely useful for anyone deciding where to relocate or comparing job markets, and straightforward to extend with additional metrics like transit scores or tech job density.",
+      "inspiredBy": "HN July 2026 trending project computing livability for all of Germany by rent, commute, and quality of life (https://bestofshowhn.com/2026/7)"
+    },
+    {
+      "n": 2,
+      "title": "Agent Skills Library Builder",
+      "category": "Side Project",
+      "complexity": "1-2 Weeks",
+      "summary": "A web app for creating, tagging, testing, and composing reusable AI agent skill definitions, with a live sandbox that runs each skill against any Claude model tier.",
+      "description": "The AI agent skills ecosystem now has thousands of CLAUDE.md and AGENTS.md skill files scattered across repos but no central place to browse, remix, or compose them. This app lets users write skill definitions in a structured editor (name, description, trigger condition, and instructions), test them instantly in an embedded chat sandbox backed by the Claude API, tag and search community-submitted skills by technology or task type, and compose multiple skills into a downloadable skill pack. Inspired by the VoltAgent awesome-agent-skills collection (1000+ community skills) and the Vercel agent-skills repo that went viral in mid-2026. Supabase handles auth and storage so skill packs are shareable via URL and can be forked by other users.",
+      "keyFeatures": [
+        "Structured skill editor with name, trigger condition, and instruction fields using Monaco Editor",
+        "Live sandbox to test any skill against Claude Sonnet or Haiku in real time",
+        "Tag-based search and browse across community-submitted skills",
+        "Skill composition: merge multiple skills into a single downloadable CLAUDE.md"
+      ],
+      "techStack": "React + Vite + Tailwind, Claude API, Supabase (auth + Postgres), Monaco Editor for skill editing",
+      "whyInteresting": "Directly useful for the growing Claude Code and Cursor user base who write agent skills but lack tooling for discovery and reuse. Teaches the architecture of AI agent configuration in a hands-on way while producing something students and developers will actually use day to day.",
+      "inspiredBy": "VoltAgent awesome-agent-skills (https://github.com/VoltAgent/awesome-agent-skills) and the Vercel agent-skills repo; AI agent skills ecosystem trending on HN and DEV Community in July 2026"
+    },
+    {
+      "n": 3,
+      "title": "Socratic Error Cascade Visualizer",
+      "category": "Teaching Tool",
+      "complexity": "Multi-week",
+      "summary": "An instructor tool that ingests a student's full sequence of code submissions for one problem, traces how error types shifted across attempts, and generates targeted Socratic questions for the pivotal wrong-turn submission.",
+      "description": "Upload all N versions of a student's code for a single assignment problem and the tool uses Claude to classify each version's errors (syntactic, conceptual, and strategic), draw a color-coded timeline showing how error counts shifted across attempts, and detect the pivotal wrong-turn submission where the student dug deeper into a misconception instead of correcting it. At each pivot point the tool generates a short sequence of Socratic questions an instructor or tutor bot could have asked in real time. Instructors view cascades for all students side by side to see where the class diverged. A Flask backend processes submissions through a prompt-engineered LLM pipeline; a React + Recharts frontend renders the error timeline with expandable Socratic question cards per pivot. The tool accepts Jolly Feedback submission logs directly, making it immediately deployable in CSS 142 and 143 without new data collection infrastructure.",
+      "keyFeatures": [
+        "Error-type timeline across all submission attempts (syntactic, conceptual, strategic)",
+        "Pivot-point detection highlighting the submission where the student locked into a misconception",
+        "Socratic question sequence generator for each detected misconception pivot",
+        "Class-wide heatmap of pivot points grouped by assignment and error category"
+      ],
+      "techStack": "React + Vite + Tailwind, Recharts, Flask, Claude API, Supabase, Jolly Feedback log import",
+      "whyInteresting": "Transforms raw multi-attempt submission logs into actionable pedagogical insight. Bridges the gap between knowing a student struggled and knowing exactly where and why, enabling targeted just-in-time intervention without requiring a full intelligent tutoring system.",
+      "inspiredBy": "ITiCSE 2025 paper 'Tracking the Progression of Errors Across Successive CS1 Code Submissions' (doi:10.1145/3724389.3730809) showing that conceptual and strategic errors persist across attempts while syntactic errors resolve quickly"
+    },
+    {
+      "n": 4,
+      "title": "Closing the Feedback Loop: Real-Time Misconception Clusters to Targeted Student Hints in CS1",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Extend a proven instructor-facing misconception dashboard to close the loop to students: use the same real-time error clusters that alert instructors to generate calibrated, Socratic hints per student, then measure whether cluster-targeted hints reduce misconception persistence compared to generic feedback.",
+      "description": "A SIGCSE TS 2026 paper built an instructor-facing tool that classifies CS1 coding errors in real time using LLMs, clusters them with sentence encoders and KMeans, and surfaces clusters on a live dashboard. The instructor-side contribution stops there. This research proposes closing the loop to students: the same cluster label and error description that alerts the instructor is simultaneously used to generate a personalized, Socratic hint grounded in the Qian-Lehman misconception taxonomy. A within-subjects A/B design across matched CS1 assignments compares three feedback conditions: (A) autograder test output only, (B) generic LLM hint not informed by cluster, and (C) cluster-targeted Socratic hint. Primary outcome is misconception persistence rate across successive submissions. This design builds on the existing Jolly Feedback infrastructure and is a direct continuation of Pisan's DT-1 (explanatory feedback layer) and DT-2 (misconception modeling) agenda, and of the solution-free hint line from Suciu et al. (SIGCSE 2021). The research avoids a standalone data-collection study by treating hint generation as a feature of the existing autograding pipeline, keeping IRB risk low.",
+      "papers": [
+        {
+          "title": "AI-Augmented Instruction: Real-Time Misconception Detection and Clustering for CS1 Instruction at Scale",
+          "authors": "Georgia Institute of Technology (Price et al.)",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770761.3777326",
+          "url": "https://doi.org/10.1145/3770761.3777326",
+          "abstract": "We present an analysis framework and instructor tool that leverage LLMs to classify, cluster, and present students' coding errors in real time. The approach uses a prompt-engineered workflow for automatic error detection and a clustering pipeline using universal sentence encoders, KMeans, and t-SNE to group errors into thematic clusters, plus a dashboard that lets instructors review class-wide errors and dynamically tailor instruction. An evaluation of 391 errors confirmed 89.5% were relevant and correctly classified.",
+          "relevance": "This paper provides the real-time misconception detection and clustering infrastructure this research proposes to extend from an instructor-only tool to a closed-loop student feedback system, establishing the feasibility of LLM-based error classification at CS1 scale."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "McMining: Automated Discovery of Misconceptions in Student Code",
+          "authors": "Erfan Al-Hossami, Razvan Bunescu",
+          "venue": "arXiv, October 2025",
+          "year": 2025,
+          "url": "https://arxiv.org/abs/2510.08827",
+          "relevance": "Introduces McMiner-S and McMiner-M, two LLM-based tools for mining programming misconceptions from individual and multiple student code samples, providing complementary misconception discovery methods and a benchmark dataset usable for ground-truth calibration of the hint targeting system."
+        },
+        {
+          "title": "Tracking the Progression of Errors Across Successive CS1 Code Submissions",
+          "authors": "Zhixian Christopher Liding et al., Georgia Institute of Technology",
+          "venue": "ITiCSE 2025",
+          "year": 2025,
+          "doi": "10.1145/3724389.3730809",
+          "url": "https://doi.org/10.1145/3724389.3730809",
+          "relevance": "Demonstrates that syntactic errors drop rapidly across submission attempts while conceptual and strategic errors persist, directly motivating the need for cluster-targeted rather than generic hints -- the core intervention this research proposes."
+        },
+        {
+          "title": "Reasoning Trajectories for Socratic Debugging of Student Code: From Misconceptions to Contradictions and Updated Beliefs",
+          "authors": "arXiv preprint, November 2025",
+          "venue": "arXiv",
+          "year": 2025,
+          "url": "https://arxiv.org/abs/2511.00371",
+          "relevance": "Proposes using explicit LLM reasoning trajectories to drive Socratic debugging of student code, informing the hint-generation strategy in this research by showing how chain-of-thought can surface the logical contradiction underlying a student's misconception."
+        }
+      ],
+      "researchPlan": {
+        "overview": "This project extends an existing real-time misconception detection pipeline (SIGCSE TS 2026) by closing the student-facing loop: cluster labels are used to generate calibrated Socratic hints delivered alongside autograder output. A within-subjects A/B study across matched CS1 assignments tests whether cluster-targeted hints reduce misconception persistence compared to generic feedback, using the existing Jolly Feedback infrastructure to avoid building new data collection pipelines.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Reproduce the source paper's LLM error classification and KMeans clustering pipeline on institution-specific submission data from Jolly Feedback logs; submit IRB for A/B study",
+            "deliverable": "Running classification and clustering pipeline on local CSS 142 data; initial institution-specific misconception taxonomy; IRB application submitted"
+          },
+          {
+            "month": 2,
+            "goal": "Design and implement the Socratic hint generator: prompt engineering to convert a cluster label and error description into a guiding question sequence without revealing the answer; blind rater quality evaluation",
+            "deliverable": "Hint generation module with rubric-based evaluation by two independent raters; ablation comparing three prompt variants on 50 example errors"
+          },
+          {
+            "month": 3,
+            "goal": "Integrate the full pipeline (classify → cluster → generate hint) into Jolly Feedback; deploy in one CSS 142 section as an IRB-approved pilot",
+            "deliverable": "Deployed system with logging; pilot data on hint delivery rate, student engagement with hints, and subsequent submission behavior"
+          },
+          {
+            "month": 4,
+            "goal": "Run the within-subjects A/B study across matched assignments in two CS1 sections: condition A (autograder only), B (generic LLM hint), C (cluster-targeted Socratic hint)",
+            "deliverable": "Data collection complete; dataset of at least 1000 submission sequences with condition labels"
+          },
+          {
+            "month": 5,
+            "goal": "Analyze misconception persistence rates across conditions; secondary analysis of which cluster types respond most to targeted hints; identify failure cases where cluster-targeted hints did not help",
+            "deliverable": "Statistical analysis report; error-trajectory visualizations by condition; draft findings and discussion sections"
+          },
+          {
+            "month": 6,
+            "goal": "Finalize paper including related work, methodology, results, and design implications for hint systems",
+            "deliverable": "Submitted paper draft to SIGCSE TS 2027 or ICER 2027"
+          }
+        ],
+        "targetVenues": ["SIGCSE TS 2027", "ICER 2027", "EDM 2027", "AIED 2027"],
+        "resources": "Jolly Feedback submission logs from CSS 142/143 (existing infrastructure); Claude Haiku API (cost-efficient at scale, approximately 1-2 cents per student per submission); 1-2 undergraduate research assistants for rubric rating and annotation of 200 hand-labeled calibration submissions; IRB review needed for outcome data collection (expected minimal-risk classification given educational use).",
+        "risks": [
+          {
+            "risk": "LLM error classification quality may degrade on institution-specific code patterns that differ from the source paper's Python-for-CS1 context",
+            "mitigation": "Run a 200-submission hand-labeled calibration pass before deployment; tune few-shot prompt examples to local assignment types and grade-level expectations"
+          },
+          {
+            "risk": "Students may ignore Socratic hints if they appear alongside a generic test-failure message, reducing treatment fidelity and statistical power",
+            "mitigation": "Redesign the Jolly Feedback email format to display the Socratic hint prominently above test output; instrument hint-acknowledgment clicks as an engagement proxy"
+          },
+          {
+            "risk": "IRB approval timeline may delay the A/B study by one quarter, compressing data collection into a single assignment set",
+            "mitigation": "Submit IRB application in month 1 concurrently with pipeline reproduction; the pipeline reproduction phase is fully IRB-exempt as it uses anonymized historical logs"
+          }
+        ],
+        "humanSubjects": true
+      }
+    }
+  ]
+}
