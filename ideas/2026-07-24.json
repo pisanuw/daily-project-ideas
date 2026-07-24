@@ -1,0 +1,163 @@
+{
+  "date": "2026-07-24",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Tilemap Story Generator",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "Describe a 2D game world and get back a Tiled-compatible tilemap JSON plus AI-written narrative descriptions for each zone, ready to drop straight into Phaser or RPG Maker.",
+      "description": "Designing a game world by hand is slow; writing the narrative for each zone even slower. Tilemap Story Generator takes a plain-English world description (e.g., 'a medieval village at the edge of a haunted forest with a ruined keep to the north') and uses Claude to generate a plausible 2D map layout as a Tiled-compatible JSON file, complete with layer definitions, tile placement heuristics, and a named zone list. For each zone it also writes a short narrative blurb — the kind of text that populates a game design document or in-game sign. The output can be pasted directly into the Tiled editor or imported via Phaser's tilemapTiledJSON loader. A React + Vite interface shows a rendered ASCII preview of the generated map alongside the narrative cards, with a 'Regenerate zone' button per area. Great for rapid game-jam prototyping or for game development students who want to iterate on world layouts without manual tile-painting.",
+      "keyFeatures": [
+        "Claude API generates Tiled-compatible tilemap JSON from a free-text world description",
+        "Per-zone narrative cards with lore blurbs, mood keywords, and suggested encounter types",
+        "ASCII preview of the map layout in-browser before export",
+        "One-click re-generation of individual zones without discarding the rest of the world"
+      ],
+      "techStack": "React + Vite + Tailwind, Claude API (claude-sonnet-5 for structured JSON output), Tiled JSON format specification",
+      "whyInteresting": "Bridges the gap between a game designer's imagination and a working tilemap without requiring art assets or a tile-painting session. Students in game development courses can use it to quickly prototype multiple world layouts and compare them structurally before committing to one. The structured-output requirement (valid Tiled JSON) is also a nice Claude API exercise that demonstrates constrained generation.",
+      "inspiredBy": "GitHub Trending July 2026 game-dev tooling wave and the React AI Desktop Companion project; Pisan's game development and Phaser.js course interests"
+    },
+    {
+      "n": 2,
+      "title": "Bloom's Assessment Forge",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "Paste in a CS course learning outcome and get a complete set of six assessment items — one per Bloom's taxonomy level — with answer keys, rubric notes, and GenAI-resistance ratings.",
+      "description": "Writing exam questions that genuinely span Bloom's taxonomy is time-consuming and easy to get wrong: most instructors default to Remember and Understand items that are trivial for GenAI to answer. Bloom's Assessment Forge takes a learning outcome (e.g., 'Students can implement and analyze sorting algorithms') and generates one assessment item per Bloom's level (Remember, Understand, Apply, Analyze, Evaluate, Create), each with a model answer, a 3-criterion rubric, an estimated completion time, and a 1–5 GenAI-resistance score based on whether ChatGPT or Copilot can solve it verbatim. Instructors can accept, regenerate, or manually edit each item before exporting to a formatted PDF or Canvas quiz JSON. A Flask backend handles the multi-step Claude chain (generate → critique → refine per item); a React frontend renders the six-item card grid with inline editing. Particularly useful during course redesign or when adapting assignments for the executable-exam format.",
+      "keyFeatures": [
+        "Six Bloom's-level items generated from a single learning outcome, with per-item rationale",
+        "GenAI-resistance rating (1–5) with a one-sentence explanation per item",
+        "Inline editing of any item with one-click re-generation of just that level",
+        "Export to PDF for paper exams or Canvas quiz JSON for LMS upload"
+      ],
+      "techStack": "React + Vite + Tailwind, Flask, Claude API (multi-step chain: generate, critique, refine), Canvas LMS Quiz JSON export",
+      "whyInteresting": "Addresses the most pressing curriculum design pain point of 2026: how to write assessments that still measure genuine understanding when AI tools can solve traditional programming tasks. The GenAI-resistance rating turns a vague concern into an actionable signal. The six-item output also serves as a starting point for collaborative rubric calibration workshops.",
+      "inspiredBy": "SIGCSE TS 2026 paper 'Executable Exams in the Era of Generative AI' (doi:10.1145/3770761.3777272) which calls for AI-resistant, AI-accepting, and AI-cooperative question design; Bloom's Exam Question Classifier (2026-07-03) classifies existing questions — this generates new ones across all levels"
+    },
+    {
+      "n": 3,
+      "title": "MCP Tool Forge",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "A multi-week capstone assignment where students design, implement, document, and publicly release a production-quality MCP server for a real-world domain, then test it against multiple AI agent clients.",
+      "description": "The Model Context Protocol (MCP) has become the standard plumbing for connecting AI agents to real-world tools and data sources, but most students have only ever consumed MCP tools, never built one. In this assignment students pick a domain they care about (university library catalog, campus shuttle schedule, a local game's data API, a public government dataset), design a set of five or more MCP tools with proper schemas and error handling, implement the server in Python using FastMCP or TypeScript using the official SDK, write an AGENTS.md or CLAUDE.md skill file that explains when to use each tool, and publish the server on a public GitHub repo with a README that includes demo screenshots from at least two AI agent clients (Claude Code, Cursor, or a custom Claude API integration). A final peer review session has students test each other's MCP servers via shared configuration. The assignment teaches API contract design, structured output validation, agent integration testing, and technical writing — all skills that translate directly to industry MCP development and agentic AI workflows.",
+      "keyFeatures": [
+        "Domain selection guide with 10 suggested real-world datasets that have public APIs",
+        "Scaffolded starter repo with FastMCP boilerplate, pytest fixtures, and GitHub Actions CI",
+        "Peer review rubric covering tool schema quality, error handling, documentation, and agent compatibility",
+        "Final showcase: live demo of another student's AI agent using your MCP server"
+      ],
+      "techStack": "Python + FastMCP (or TypeScript MCP SDK), pytest, GitHub Actions, Claude API or Claude Code for agent client testing, Supabase for any stateful tools",
+      "whyInteresting": "Building an MCP server forces students to think from the agent's perspective: what does the AI actually need, what context must be provided, and how do errors propagate through an agentic loop? The public-release requirement means students produce a portfolio artifact that is immediately discoverable and usable by the AI developer community. Given that 'MCP server for X' is one of the most common open-source contributions in 2026, this assignment aligns perfectly with job-market skills.",
+      "inspiredBy": "The 2026 MCP ecosystem explosion on GitHub Trending and Product Hunt; the enterprise shift toward open-source agent infrastructure; Pisan's existing interest in toolchain-first pedagogy extended to the agentic toolchain era"
+    },
+    {
+      "n": 4,
+      "title": "From Error Categories to Misconception Taxonomies: Grounding Local-LLM Socratic Tutoring in Institution-Specific CS1 Submission Data",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Extend a locally-deployable, learning-centered intelligent tutor for novice Java programmers by replacing generic error categories with a data-driven misconception taxonomy mined from institutional submission logs, then measure whether institution-grounded Socratic hints reduce resubmission cycles in CS1.",
+      "description": "A SIGCSE TS 2026 paper introduced a learning-centered intelligent tutor that mimics human TAs by asking guiding questions rather than giving direct answers, uses broad error categories for context-sensitive feedback, and prefers locally-deployable LLMs to protect student privacy. This research extends that work in two directions. First, it replaces the hand-crafted error categories with a data-driven misconception taxonomy mined from years of CS1 submission logs using LLM-assisted clustering on Jolly Feedback data, producing categories that are grounded in the actual errors UW Bothell students make rather than a generic taxonomy. Second, it conducts a controlled evaluation comparing three feedback conditions: autograder output only, generic LLM Socratic hint, and institution-taxonomy-grounded Socratic hint. The study builds directly on Pisan's SIGCSE 2021 work on solution-free hint generation and his DT-1 and DT-2 research agenda, and integrates the tutor directly into the existing Jolly Feedback pipeline so no new submission infrastructure is needed. A secondary analysis compares hint quality between locally-deployable models and proprietary APIs on institution-grounded tasks, informing privacy-preserving deployment decisions for programs where FERPA compliance restricts sending student code to third-party servers.",
+      "papers": [
+        {
+          "title": "Learning-Centered Intelligent Tutor for Novice Java Programmers",
+          "authors": "Lu-Hung Su, Yang Gao, Jeremy Morris (The Ohio State University)",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770761.3777266",
+          "url": "https://doi.org/10.1145/3770761.3777266",
+          "abstract": "Novice programmers often get stuck while programming and debugging. They would turn to AI tools like ChatGPT for help when instructors or teaching assistants are unavailable. However, conventional AI tools give away answers too easily, which undermines the learning process. This project develops a learning-centered intelligent tutoring system that mimics human TAs by asking guiding questions to build problem-solving skills and deeper understanding. Integrated into an online IDE, the AI tutor leverages error categories to deliver context-sensitive feedback in real time. To ensure accessibility and control, the system uses smaller, locally deployable models rather than relying solely on proprietary services.",
+          "relevance": "This paper provides the core architecture — error-category-driven Socratic hint generation with locally-deployable LLMs — that this research proposes to extend by replacing generic error categories with an institution-specific misconception taxonomy mined from real CS1 submission logs, enabling a controlled comparison of hint precision and resubmission outcomes."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "SocraticAI: Transforming LLMs into Guided CS Tutors Through Scaffolded Interaction",
+          "authors": "Karthik Sunil, Aalok Thakkar",
+          "venue": "COMPUTE 2025 Best Practices Track, arXiv:2512.03501",
+          "year": 2025,
+          "url": "https://arxiv.org/abs/2512.03501",
+          "relevance": "Demonstrates a deployable Socratic LLM tutoring system with structured constraints (query limits, required reflection submissions, RAG-based course grounding) and reports measurable improvement in student problem-decomposition behavior within 2–3 weeks, providing a working design template and evaluation approach for the Socratic hint component of this research."
+        },
+        {
+          "title": "Reasoning Trajectories for Socratic Debugging of Student Code: From Misconceptions to Contradictions and Updated Beliefs",
+          "authors": "Erfan Al-Hossami, Razvan Bunescu",
+          "venue": "arXiv:2511.00371",
+          "year": 2025,
+          "url": "https://arxiv.org/abs/2511.00371",
+          "relevance": "Formalizes Socratic debugging as a guided reasoning trajectory that surfaces a logical contradiction with the bug-causing misconception, and introduces a dataset of manually and LLM-annotated debugging problems. This informs the hint-generation strategy in this research by showing how chain-of-thought can be anchored to specific misconception categories rather than generic error labels."
+        },
+        {
+          "title": "When LLM Tutoring Responses Work: Evidence from Student Programming Conversations",
+          "authors": "StudyChat Dataset Team",
+          "venue": "arXiv:2607.09919",
+          "year": 2026,
+          "url": "https://arxiv.org/abs/2607.09919",
+          "relevance": "Analyzes 16,851 assistant-response interactions from 203 students in naturalistic, longitudinal, course-embedded conversations using local LLM annotation (Gemma 4) to label response style and student next-turn outcome, directly informing which response styles lead to productive follow-up behavior — the primary outcome variable for this research."
+        },
+        {
+          "title": "To Tell or to Ask? Comparing the Effects of Targeted vs. Socratic AI Hints",
+          "authors": "Price et al.",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770761.3777327",
+          "url": "https://doi.org/10.1145/3770761.3777327",
+          "relevance": "Provides the most directly comparable prior RCT (178 CS1 students) comparing targeted vs. Socratic hint styles at the same level of analysis; this research extends that comparison by adding a third condition where hints are grounded in institution-specific rather than generic misconception categories."
+        }
+      ],
+      "researchPlan": {
+        "overview": "This project replaces the generic error categories in an existing learning-centered Socratic tutor with a data-driven misconception taxonomy mined from years of institutional CS1 submission logs, integrates the enhanced tutor into the Jolly Feedback pipeline, and measures whether institution-grounded Socratic hints reduce resubmission cycles compared to generic LLM hints and autograder-only feedback in a controlled A/B study across matched CSS 142 assignments.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review focused on misconception taxonomies, Socratic tutoring evaluation, and local LLM deployment; LLM-assisted clustering of anonymized Jolly Feedback submission logs to surface institution-specific error categories; submit IRB for A/B evaluation study",
+            "deliverable": "Annotated bibliography; initial 15–25 category misconception taxonomy with example submissions per cluster; IRB application submitted"
+          },
+          {
+            "month": 2,
+            "goal": "Adapt the source paper's error-category-to-Socratic-hint pipeline to use the mined taxonomy; design prompt engineering that generates guiding questions without revealing the answer for each category; evaluate hint quality via two independent raters using a five-dimension rubric (specificity, Socraticness, correctness, brevity, actionability)",
+            "deliverable": "Hint generation module; inter-rater reliability analysis on 100 sampled hints; ablation over three prompt strategies per category"
+          },
+          {
+            "month": 3,
+            "goal": "Implement full pipeline (classify error → assign taxonomy category → generate Socratic hint → deliver via Jolly Feedback email) and deploy in one CSS 142 section as an IRB-approved pilot; compare local model quality (Llama 3.1 8B via Ollama) vs. Claude Haiku on 200 institution-specific error samples",
+            "deliverable": "Deployed system with logging; pilot data on hint delivery rate and engagement; local vs. proprietary model quality comparison report"
+          },
+          {
+            "month": 4,
+            "goal": "Run the within-subjects A/B study across matched assignments in two CSS 142 sections: condition A (autograder output only), B (generic LLM Socratic hint without taxonomy grounding), C (taxonomy-grounded Socratic hint); collect resubmission sequences and time-to-pass data",
+            "deliverable": "Data collection complete; dataset of at least 800 submission sequences across three conditions with condition labels"
+          },
+          {
+            "month": 5,
+            "goal": "Analyze primary outcome (misconception persistence rate across successive submissions per condition); secondary analysis of which taxonomy categories respond most to grounded hints; identify failure categories where even taxonomy-grounded hints did not reduce persistence",
+            "deliverable": "Statistical analysis report; error-trajectory visualizations per condition; preliminary findings with effect sizes and confidence intervals"
+          },
+          {
+            "month": 6,
+            "goal": "Finalize paper covering related work, misconception taxonomy construction method, system design, evaluation methodology, results, and design implications for institution-adaptive tutoring systems",
+            "deliverable": "Submitted paper draft targeting SIGCSE TS 2027 or ICER 2027"
+          }
+        ],
+        "targetVenues": ["SIGCSE TS 2027", "ICER 2027", "AIED 2027", "EDM 2027"],
+        "resources": "Anonymized Jolly Feedback submission logs from CSS 142/143 (existing infrastructure, ~3 years of data); Claude Haiku API for hint generation at scale (approximately $0.01–0.02 per student per submission); Ollama with Llama 3.1 8B for local LLM comparison (runs on department server); 1–2 undergraduate research assistants for 200-submission blind rater annotation study; IRB review expected as minimal-risk educational research.",
+        "risks": [
+          {
+            "risk": "IRB approval timeline may delay the A/B study by a full quarter, compressing data collection into too few assignments for sufficient statistical power",
+            "mitigation": "Submit IRB in month 1 concurrently with log mining; months 1–3 work (taxonomy construction, system implementation, quality evaluation) is fully IRB-exempt as it uses only anonymized historical logs"
+          },
+          {
+            "risk": "Local LLM (Llama 3.1 8B) hint quality may fall below a usability threshold on institution-specific misconception categories, weakening the privacy-preserving deployment case",
+            "mitigation": "Quantify the quality gap and report it as a finding rather than a failure; use proprietary API as primary deployment path and local model as a documented alternative with explicit quality tradeoffs"
+          },
+          {
+            "risk": "Students may ignore the Socratic hint if it appears as a plain-text addition to a test-failure email, reducing treatment fidelity and effect size",
+            "mitigation": "Redesign the Jolly Feedback email to display the Socratic hint prominently above test output with a bolded header; instrument hint-click and resubmission latency as engagement proxies in the analysis"
+          }
+        ],
+        "humanSubjects": true
+      }
+    }
+  ]
+}

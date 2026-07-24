@@ -244,3 +244,7 @@
 | 2026-07-23 | Agent Skills Library Builder | Side Project | 1-2 Weeks |
 | 2026-07-23 | Socratic Error Cascade Visualizer | Teaching Tool | Multi-week |
 | 2026-07-23 | Closing the Feedback Loop: Real-Time Misconception Clusters to Targeted Student Hints in CS1 | Research | Research |
+| 2026-07-24 | Tilemap Story Generator | Side Project | Weekend |
+| 2026-07-24 | Bloom's Assessment Forge | Teaching Tool | 1-2 Weeks |
+| 2026-07-24 | MCP Tool Forge | Classroom Assignment | Multi-week |
+| 2026-07-24 | From Error Categories to Misconception Taxonomies: Grounding Local-LLM Socratic Tutoring in Institution-Specific CS1 Submission Data | Research | Research |

@@ -146,3 +146,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-07-22 [code] Created ideas/2026-07-22.json: Regex Explainer Studio, AI-Exam Resistance Rater, Gameplay Postmortem Agent, From Benchmark to Classroom (research, CSTutorBench SIGCSE TS 2026 doi:10.1145/3770761.3777333)
 
 2026-07-23 [code] Created ideas/2026-07-23.json: City Livability Radar, Agent Skills Library Builder, Socratic Error Cascade Visualizer, Closing the Feedback Loop (research, SIGCSE TS 2026 doi:10.1145/3770761.3777326)
+
+2026-07-24 [code] Created ideas/2026-07-24.json: Tilemap Story Generator, Bloom's Assessment Forge, MCP Tool Forge, From Error Categories to Misconception Taxonomies (research, SIGCSE TS 2026 doi:10.1145/3770761.3777266)
