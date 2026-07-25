@@ -248,3 +248,7 @@
 | 2026-07-24 | Bloom's Assessment Forge | Teaching Tool | 1-2 Weeks |
 | 2026-07-24 | MCP Tool Forge | Classroom Assignment | Multi-week |
 | 2026-07-24 | From Error Categories to Misconception Taxonomies: Grounding Local-LLM Socratic Tutoring in Institution-Specific CS1 Submission Data | Research | Research |
+| 2026-07-25 | Agent Sims | Side Project | Weekend |
+| 2026-07-25 | Two-Stage Exam Studio | Teaching Tool | 1-2 Weeks |
+| 2026-07-25 | Learnersourced Problem Factory | Classroom Assignment | Multi-week |
+| 2026-07-25 | From Detection to Reflection: Repurposing LLM Code Explainability Reports as Formative Feedback in CS1 | Research | Research |

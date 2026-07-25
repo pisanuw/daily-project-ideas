@@ -1,0 +1,165 @@
+{
+  "date": "2026-07-25",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Agent Sims",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A browser game where you build and raise your own AI agent, defining its tools and mission, then watch it autonomously navigate a simulated office environment to expose failure modes and design trade-offs.",
+      "description": "Players pick up to three tools (web search, code runner, file memory), write a mission goal in natural language, and watch their agent work through a 2D office environment rendered in Phaser.js. A real-time 'brain panel' shows the agent's reasoning steps, tool calls, and confidence. Missions escalate in complexity, and when the agent fails, loops, or hallucinates, a 'Failure Museum' logs the breakdown with a label (hallucination, infinite loop, scope creep, etc.). The goal is to teach agent design principles through play: players iterate on tool selection and mission phrasing until the agent succeeds, developing intuitions about prompt design, tool scoping, and guardrails. Calling Claude API under the hood, the game keeps each agent run deterministic via a saved seed.",
+      "keyFeatures": [
+        "Visual 2D office world with rooms for each tool (browser room, terminal room, memo room)",
+        "Real-time agent reasoning panel showing each CoT step and tool call",
+        "Escalating mission board with beginner to expert tasks",
+        "Failure Museum cataloging common agent failure modes with explanatory labels",
+        "Mission replay: save a seed to share or replay a run"
+      ],
+      "techStack": "React + Vite, Phaser.js (browser game), Claude API, Zustand (state)",
+      "whyInteresting": "Agent internals are abstract and hard to teach; making them tangible through a playable simulation lets developers and students develop intuitions without reading documentation. The failure modes are the curriculum.",
+      "inspiredBy": "Show HN: 'We started building an AI dev tool but it turned into a Sims-style game' (HN #44943986); Cloudflare Agents Week 2026 focus on production agent frameworks"
+    },
+    {
+      "n": 2,
+      "title": "Two-Stage Exam Studio",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "A web app for running two-stage collaborative CS exams where students first answer individually then reconcile with a small group, with AI-generated post-exam analysis showing which questions gained the most from collaboration.",
+      "description": "Instructors create multi-question exams with rubric notes; students join via QR code and complete Phase 1 under timed lockdown (no collaboration, typed answers). When time expires, the system automatically forms small groups and unlocks Phase 2: a real-time shared document where the group negotiates and submits a consensus answer. After both phases, Claude API compares individual versus group answers per question and generates a 'collaboration value report' for the instructor: which questions had the highest disagreement, which groups converged on wrong answers, and which concept areas show the widest individual spread. Students also get a personal diff showing where group discussion changed their initial answer.",
+      "keyFeatures": [
+        "Phase-locked exam interface: Phase 1 isolated, Phase 2 group real-time editing via Supabase",
+        "Auto-grouping at phase transition (instructor configures group size)",
+        "Claude-generated collaboration value report per question",
+        "Student personal diff: 'here is how group discussion changed your answer'",
+        "Export results to CSV or Canvas grade book format"
+      ],
+      "techStack": "React + Vite, Supabase (real-time subscriptions for Phase 2 sync), Claude API, Tailwind CSS",
+      "whyInteresting": "Research from ITiCSE 2025 shows two-stage exams improve learning outcomes and reduce anxiety, but instructors run them with paper or cobbled-together Google Docs. A purpose-built tool removes friction and adds the analytics layer that makes them research-grade.",
+      "inspiredBy": "ITiCSE 2025 Working Group: 'Investigating How Course Features Correlate with Student Perceptions of Two-Stage CS Exams' (https://doi.org/10.1145/3724389.3731279)"
+    },
+    {
+      "n": 3,
+      "title": "Learnersourced Problem Factory",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "Students generate their own programming problems tied to domains they care about (music, gaming, sports), Claude quality-gates each submission, peers rate and refine the best ones, and the approved problems enter a searchable institution-specific problem bank instructors can pull into Canvas.",
+      "description": "Students use a step-by-step wizard to create a programming problem: pick a domain (from a list or free-form), describe desired function behavior in natural language, write two example input/output pairs, and set a difficulty estimate. Claude API checks each draft for clarity, solvability at the stated difficulty, and absence of ambiguous edge cases, returning a structured quality score with specific improvement suggestions. Peers then rate approved problems on five rubric dimensions (clarity, difficulty calibration, interest level, test-case correctness, uniqueness). Problems that pass both AI and peer review enter the shared bank. Instructors browse by topic, difficulty, and domain, and can import with one click into a Canvas assignment. The project gives students authorship experience and produces a growing institution-specific problem bank that instructors actually use.",
+      "keyFeatures": [
+        "Step-by-step problem creation wizard with domain picker and NL behavior description",
+        "AI quality gate: Claude returns structured feedback before problem enters peer review",
+        "Peer review rubric with five dimensions and aggregate score display",
+        "Searchable problem bank with difficulty, domain, and concept tags",
+        "Canvas LMS API integration: one-click import into assignment"
+      ],
+      "techStack": "React + Vite, Supabase (auth + DB), Claude API, Tailwind CSS, Canvas LMS REST API",
+      "whyInteresting": "Personalized contextualized problems measurably increase engagement and problem-solving transfer. The system is self-sustaining: each cohort expands the bank, and instructors shift from writing problems to curating them.",
+      "inspiredBy": "ITiCSE 2025 papers: 'Towards Learnersourcing Relatable and Contextualized Learning Materials' (https://doi.org/10.1145/3724363.3729117) and 'Generating Personalized Assignments with Students in the Loop' (https://doi.org/10.1145/3724363.3729070)"
+    },
+    {
+      "n": 4,
+      "title": "From Detection to Reflection: Repurposing LLM Code Explainability Reports as Formative Feedback in CS1",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Extends a state-of-the-art explainable LLM-code detector by routing its natural-language explanations back to students as formative reflective prompts, measuring whether explanation-grounded feedback reduces AI over-reliance on subsequent assignments.",
+      "description": "A 2026 SIGCSE paper from the University of Tokyo achieves over 99% accuracy detecting LLM-generated Python submissions and produces GPT-4o-generated natural-language explanations for each detection (e.g., 'variable names are generic and the helper-function decomposition matches LLM conventions'). The paper deploys this capability solely for academic integrity enforcement. This research asks a different question: what if students receive the explanation, not just a verdict? A student who sees exactly which code patterns look LLM-generated has actionable information for reflection and change. We propose replicating the Tokyo framework on UW Bothell CSS 142 Jolly Feedback logs, then running a three-condition A/B study: explanation-report, flag-only, and control, measuring LLM-use rate, submission count, and code authenticity on subsequent assignments. A secondary analysis cross-references detected explanation patterns with known CS1 misconceptions, feeding Pisan's DT-2 misconception-taxonomy agenda.",
+      "papers": [
+        {
+          "title": "LLM-Based Explainable Detection of LLM-Generated Code in Python Programming Courses",
+          "authors": "Junichiro Mori, Yoko Yamakata, Kenjiro Taura, Shigeru Chiba et al.",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770762.3772605",
+          "url": "https://doi.org/10.1145/3770762.3772605",
+          "abstract": "Students increasingly submit LLM-generated code in introductory programming courses, raising concerns about skill development. This paper proposes an explainable detection framework that predicts whether a submission is LLM-generated and produces a natural-language explanation validated by human instructors. Fine-tuned code-LLMs achieve over 99% accuracy. Applied to archival course data, the detector reveals LLM-generated submissions rose from near 0% in 2022 to over 40% in 2024.",
+          "relevance": "Provides the detection + explanation infrastructure this research repurposes as pedagogical feedback; the public codebase and explanation methodology are directly extensible to UW Bothell's submission logs."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "Detecting AI-Generated Code in Introductory Programming Courses",
+          "authors": "Multiple authors",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "url": "https://dl.acm.org/doi/10.1145/3770762.3772522",
+          "relevance": "A companion SIGCSE 2026 paper on AI-generated code detection, providing complementary detection methods and CS1-focused evaluation that situates the Tokyo framework in a broader landscape."
+        },
+        {
+          "title": "To Rely or Not to Rely? Evaluating Interventions for Appropriate Reliance on Large Language Models",
+          "authors": "Multiple authors",
+          "venue": "CHI 2025",
+          "year": 2025,
+          "url": "https://dl.acm.org/doi/10.1145/3706598.3714097",
+          "relevance": "Directly frames the reliance-intervention design space this research targets; establishes that transparency and explanation-level feedback outperform flag-only approaches for calibrating AI reliance."
+        },
+        {
+          "title": "ChatGPT and Cheat Detection in CS1 Using a Program Autograding System",
+          "authors": "Multiple authors",
+          "venue": "ITiCSE 2024",
+          "year": 2024,
+          "url": "https://dl.acm.org/doi/10.1145/3649217.3653558",
+          "relevance": "Shows that autograder logs can surface ChatGPT-generated code through style anomalies detectable within existing grading infrastructure, motivating integration with Jolly Feedback's submission pipeline."
+        },
+        {
+          "title": "The Effects of Structured LLM-Generated Feedback on Programming Assignment Performance",
+          "authors": "Multiple authors",
+          "venue": "arXiv preprint",
+          "year": 2025,
+          "url": "https://arxiv.org/pdf/2605.16933",
+          "relevance": "Provides outcome metrics and study design precedent for measuring how structured AI-generated feedback affects subsequent programming performance, directly informing the A/B study design."
+        }
+      ],
+      "researchPlan": {
+        "overview": "This project replicates the Tokyo explainable-detection framework on UW Bothell's existing CSS 142 submission logs, then runs a minimal-risk A/B study across three feedback conditions in one course section to measure whether explanation-level feedback reduces LLM over-reliance. A secondary analysis maps detection explanations onto CS1 misconception categories, feeding the broader digital-tutor research agenda.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review, framework replication, and data preparation",
+            "deliverable": "Annotated bibliography; local fine-tuned detector running on 2-3 years of CSS 142 Jolly Feedback submission logs with per-assignment LLM-use trend chart"
+          },
+          {
+            "month": 2,
+            "goal": "Design and build feedback delivery pipeline",
+            "deliverable": "Three-condition feedback module integrated into Jolly Feedback: (A) explanation report, (B) flag only, (C) no feedback; IRB protocol submitted if not previously approved"
+          },
+          {
+            "month": 3,
+            "goal": "Pilot A/B study in one CSS 142 section across 4-6 assignments",
+            "deliverable": "Raw submission logs with condition labels; interim signal on per-student LLM-use rate change"
+          },
+          {
+            "month": 4,
+            "goal": "Analysis: primary outcomes and code authenticity metrics",
+            "deliverable": "Statistical comparison of LLM-use rate, resubmission count, and code-quality proxy across conditions; preliminary findings memo"
+          },
+          {
+            "month": 5,
+            "goal": "Secondary analysis: map explanations to CS1 misconception taxonomy",
+            "deliverable": "Labeled taxonomy of explanation patterns (variable naming, control-flow, decomposition, commenting) correlated with known CS1 misconceptions; input to DT-2 misconception-modeling agenda"
+          },
+          {
+            "month": 6,
+            "goal": "Finalize paper draft and submit",
+            "deliverable": "Submitted paper draft targeting SIGCSE TS 2027 or ICER 2027"
+          }
+        ],
+        "targetVenues": ["SIGCSE TS 2027", "ICER 2027", "ITiCSE 2027", "EDM 2027"],
+        "resources": "Existing Jolly Feedback submission logs from CSS 142 (multi-year archive); Claude API for explanation generation; Jolly Feedback GitHub codebase as integration substrate; one undergraduate research assistant for data labeling and taxonomy coding.",
+        "risks": [
+          {
+            "risk": "The Tokyo framework's detector accuracy drops on UW Bothell data due to different problem set, language subset, or local coding style conventions",
+            "mitigation": "Fine-tune on a UW Bothell-specific subset (manually labeling 200-300 submissions as LLM vs student-written) before deploying; report domain-transfer accuracy as a study finding in itself"
+          },
+          {
+            "risk": "Students in the explanation-feedback condition become gaming-aware and write code that avoids the flagged patterns without genuine learning",
+            "mitigation": "Include a delayed assessment (final exam, in-class coding activity) measuring transfer without AI assistance as the true dependent variable; also measure whether the gamed code scores higher on code quality rubrics"
+          },
+          {
+            "risk": "IRB approval for A/B study on enrolled students adds timeline uncertainty",
+            "mitigation": "Months 1-2 use archival data only (typically exempt); submit IRB protocol early in Month 2; if approval delays, extend archival analysis and run pilot in following semester"
+          }
+        ],
+        "humanSubjects": true
+      }
+    }
+  ]
+}
