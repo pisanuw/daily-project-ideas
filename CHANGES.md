@@ -149,3 +149,4 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 
 2026-07-24 [code] Created ideas/2026-07-24.json: Tilemap Story Generator, Bloom's Assessment Forge, MCP Tool Forge, From Error Categories to Misconception Taxonomies (research, SIGCSE TS 2026 doi:10.1145/3770761.3777266)
 2026-07-25 [code] Created ideas/2026-07-25.json: Agent Sims, Two-Stage Exam Studio, Learnersourced Problem Factory, From Detection to Reflection (research, SIGCSE TS 2026 doi:10.1145/3770762.3772605)
+2026-07-26 [code] Created ideas/2026-07-26.json: Pathfinding Playground, Spec-to-Test Oracle, Emergent NPC Society, Repair-as-Diagnosis (research, SIGCSE TS 2026 doi:10.1145/3770761.3777323)

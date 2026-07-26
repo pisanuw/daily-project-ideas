@@ -1,0 +1,166 @@
+{
+  "date": "2026-07-26",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Pathfinding Playground",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "An interactive browser sandbox that animates classic pathfinding algorithms step-by-step on user-drawn grids, with AI narration explaining each decision in real time. Good for teaching, portfolio demos, and pure curiosity.",
+      "description": "Users draw a grid map with walls, start, and goal tiles, then pick an algorithm (A*, Dijkstra, BFS, DFS, Greedy Best-First) and watch it animate one step at a time. At each step a Claude API call generates a one-sentence narration explaining what the algorithm is doing and why, grounding the abstract concept in the visible state of the search frontier. Instructors can embed it in flipped classroom materials; students can compare algorithms side-by-side to build intuition about completeness, optimality, and efficiency. A shareable-URL feature encodes the full grid configuration so specific puzzles can be distributed to a class.",
+      "keyFeatures": [
+        "Grid editor with wall placement, resize, and drag start/goal",
+        "Side-by-side dual-algorithm comparison mode",
+        "Step-through controls with AI narration explaining each decision",
+        "Speed slider and instant replay for live demos",
+        "Shareable URL encoding the grid and algorithm selections"
+      ],
+      "techStack": "React + Vite + Tailwind, Canvas API for grid rendering, Claude API for step narration, URL serialization for sharing",
+      "whyInteresting": "Pathfinding is taught in nearly every CS curriculum but static diagrams rarely convey the intuition of how the search frontier grows. Real-time animation with a narrating AI tutor makes the 'why' visible, not just the 'what'. The shareable URL means a professor can push a specific maze to 30 students with one link, and the whole thing ships in a weekend.",
+      "inspiredBy": "HN 'What developer tool do you wish existed in 2026?' discussions and the gap between existing algorithm visualizers (which animate) and ones that also explain their reasoning"
+    },
+    {
+      "n": 2,
+      "title": "Spec-to-Test Oracle",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "A web tool that generates a fully annotated test suite from any function spec or assignment description, labeling each test with the concept it exercises and its Bloom's taxonomy level. Instructors validate assignment quality; students pre-check their code.",
+      "description": "Paste a function docstring, assignment rubric, or natural-language specification and the tool produces a structured set of test cases covering typical inputs, boundary conditions, edge cases, and intentional failure modes. Each test is annotated with the learning objective it probes (loop termination, null handling, off-by-one, type coercion, etc.) and a Bloom's level (remember, understand, apply, analyze). An adversarial mode instructs the LLM to specifically target common CS1 misconceptions. Instructors use it to stress-test their own specs before distributing them; students use it as a concrete 'am I done?' checklist without having the solution revealed. A diff view shows which tests change when the spec is revised, helping track scope creep.",
+      "keyFeatures": [
+        "Generates test cases from plain-English spec, docstring, or rubric",
+        "Each test annotated with concept exercised and Bloom's level",
+        "Adversarial mode targeting known CS1 misconceptions",
+        "Diff view showing test changes when spec is updated",
+        "Export to pytest, JUnit, or Jest format"
+      ],
+      "techStack": "React + Vite + Tailwind, Flask backend, Claude API for test generation and annotation, Supabase for saving spec/test sessions",
+      "whyInteresting": "Instructors routinely discover ambiguous specs only after students submit hundreds of broken implementations. This tool inverts the workflow: generate tests first, find the ambiguity before anyone writes code. For students it provides a self-assessment checklist grounded in the actual learning objectives, not just 'does it run.'",
+      "inspiredBy": "Pisan's Submit! and Jolly Feedback work on automated assessment, and the recurring instructor pain of post-submission spec clarifications"
+    },
+    {
+      "n": 3,
+      "title": "Emergent NPC Society",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "A browser-based 2D world where students configure NPC agents with minimal rules and observe emergent social structures form over time, making complex systems theory and agent design principles viscerally concrete.",
+      "description": "Students place agents on a tile map with configurable drives (hunger, socialization, curiosity) and resource distributions, then run the simulation forward and watch emergent behaviors develop: foraging routes, trade networks, territorial patterns, and simple tag-based communication conventions. An LLM-backed observer mode lets students ask questions like 'why is this cluster forming?' and receive an analysis grounded in current agent states and drive values. Students pause, save checkpoints, and adjust parameters mid-run to test hypotheses. The assignment has three deliverables: a hypothesis before the run, a written analysis of observed emergent behaviors, and a parameter-tuning experiment comparing two configurations. Built in stages over the multi-week timeline: baseline simulation, agent AI layer, LLM observer, and shared world persistence.",
+      "keyFeatures": [
+        "Tile-map world editor with resource placement and terrain types",
+        "Per-agent configurable drives and behavior weights via sliders",
+        "Time controls: variable speed, pause, rewind to named checkpoint",
+        "LLM observer: ask plain-English questions about agent states and behavior patterns",
+        "Shareable world snapshots so classmates can fork and compare configurations",
+        "Instructor dashboard showing aggregate behavior metrics across all student worlds"
+      ],
+      "techStack": "React + Vite + Tailwind, Pixi.js for 2D rendering, Flask + Claude API for observer mode, Supabase for world persistence and classroom sharing",
+      "whyInteresting": "Students read about emergence and complex systems but rarely experience the 'aha' moment of watching simple rules generate surprising structure. Building a running simulation as a class assignment makes the theory concrete, encourages genuine scientific curiosity, and connects directly to real topics in game AI, multi-agent systems, and social simulation.",
+      "inspiredBy": "HN post about a self-running space economy simulation in Rust/Bevy where 'nothing is scripted', and Pisan's long-standing work on believable game agents and the GONDOLA learning environment"
+    },
+    {
+      "n": 4,
+      "title": "Repair-as-Diagnosis: Using LLM Program Repair Edits to Map CS1 Misconceptions and Generate Targeted Solution-Free Feedback",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "A research program that reframes automated program repair as diagnosis: the minimal edits an LLM makes to fix uncompilable student code implicitly classify the underlying misconception, and that classification can drive solution-free, targeted feedback without a reference solution.",
+      "description": "Pitts et al. (SIGCSE TS 2026) show that LLMs can recover uncompilable CS1 submissions while preserving structural intent, enabling downstream student modeling. This project extends that framing: the repair edit itself is a diagnostic signal. A missing-semicolon repair signals one misconception; a type-mismatch repair signals another; an undeclared-variable repair signals a third. By running LLM repair at scale over Jolly Feedback submission logs and clustering edit-pattern features, the project builds an institution-specific misconception taxonomy grounded in real compilation failures rather than hand-crafted examples. That taxonomy feeds a feedback generation layer that names the misconception and suggests a conceptual next step without revealing the fix, directly implementing the DT-1 and DT-2 research directions from Pisan's prior agenda. A controlled A/B study in CSS 142 compares repair-grounded feedback versus raw compiler error messages on resubmission count and time-to-pass. The project requires no new data collection infrastructure because Jolly Feedback already logs all submissions; Phase 1 log analysis is likely IRB-exempt.",
+      "papers": [
+        {
+          "title": "Automated Program Repair of Uncompilable Student Code",
+          "authors": "Griffin Pitts, Aum Pandya, Darsh Rank, Tirth Bhatt, Muntasir Hoq, Bita Akram",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770761.3777323",
+          "url": "https://doi.org/10.1145/3770761.3777323",
+          "abstract": "A significant portion of student programming submissions in CS1 learning environments are uncompilable, limiting their use in student modeling and downstream knowledge tracing. Traditional modeling pipelines often exclude these cases, discarding observations of student learning. This study investigates automated program repair as a strategy to recover uncompilable code while preserving students' structural intent for use in student modeling, assessing LLMs as repair agents under high- and low-context prompting conditions.",
+          "relevance": "Provides the core repair framework, evaluation metrics (Structural Preservation, Logical Preservation), and empirical baseline that this project extends into a misconception taxonomy and feedback pipeline grounded in repair edit patterns."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "Automated Identification of Logical Errors in Programs: Advancing Scalable Analysis of Student Misconceptions",
+          "authors": "Anonymous et al.",
+          "venue": "EDM 2025",
+          "year": 2025,
+          "url": "https://educationaldatamining.org/EDM2025/proceedings/2025.EDM.long-papers.85/index.html",
+          "relevance": "Provides a taxonomy and LLM-based detection pipeline for logical (post-compilation) student misconceptions, complementing the compilation-error misconception taxonomy this project builds from repair edits."
+        },
+        {
+          "title": "Identifying and Validating Java Misconceptions Toward a CS1 Concept Inventory",
+          "authors": "Zhi and Ieva et al.",
+          "venue": "SIGCSE 2019",
+          "year": 2019,
+          "url": "https://doi.org/10.1145/3304221.3319771",
+          "relevance": "Documents 31 validated Java CS1 misconceptions organized by conceptual category, providing a ground-truth reference against which to validate the repair-derived taxonomy."
+        },
+        {
+          "title": "Characterizing the Pedagogical Benefits of Adaptive Feedback for Compilation Errors by Novice Programmers",
+          "authors": "Umair Z. Ahmed et al.",
+          "venue": "ICSE SEET 2020",
+          "year": 2020,
+          "url": "https://github.com/umairzahmed/seet2020",
+          "relevance": "Shows that adaptive, targeted compilation-error feedback improves novice outcomes over generic compiler messages, providing the pedagogical motivation for using repair-derived misconception labels to shape feedback content."
+        },
+        {
+          "title": "Using Program Repair as a Proxy for Language Models' Understanding of Code",
+          "authors": "Gregorius Bhagya Adinugraha et al.",
+          "venue": "BEA Workshop at ACL 2024",
+          "year": 2024,
+          "url": "https://aclanthology.org/2024.bea-1.15",
+          "relevance": "Investigates what LLM repair behavior reveals about code comprehension, directly relevant to understanding the reliability and limits of using repair edits as diagnostic signals about student misconceptions."
+        }
+      ],
+      "researchPlan": {
+        "overview": "The project runs in two phases over six months: Phase 1 builds and validates a misconception taxonomy by clustering LLM repair edits on historical CS1 submission logs; Phase 2 integrates the taxonomy into a feedback pipeline and evaluates its effect in a live A/B study in CSS 142. The deliverable is a publishable taxonomy plus empirical evidence on whether repair-grounded feedback reduces resubmission cycles.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review, infrastructure setup, and IRB scoping: review Pitts et al. and adjacent misconception taxonomies in depth; configure LLM repair pipeline over Jolly Feedback logs; determine whether log analysis phase is IRB-exempt",
+            "deliverable": "Annotated bibliography + working repair pipeline processing 500 historical uncompilable submissions"
+          },
+          {
+            "month": 2,
+            "goal": "Repair-edit taxonomy construction: run LLM repair at scale, extract token-level diff features, apply clustering (k-means and hierarchical), manually label emerging misconception clusters",
+            "deliverable": "Draft misconception taxonomy with frequency distribution across one full semester of CS1 submissions"
+          },
+          {
+            "month": 3,
+            "goal": "Taxonomy validation: compare repair-derived clusters to the Java misconception inventory (2019) and EDM 2025 logical-error taxonomy; conduct one instructor interview to resolve gaps; compute inter-rater reliability on 100 sampled repairs",
+            "deliverable": "Validated taxonomy document with inter-rater reliability report (Cohen's kappa target >= 0.70)"
+          },
+          {
+            "month": 4,
+            "goal": "Feedback generation layer: build and prompt-engineer an LLM module that takes a repair edit plus taxonomy label and generates a solution-free, misconception-targeted explanation; pilot usability test with 5 students",
+            "deliverable": "Feedback pipeline prototype + usability pilot report with iteration notes"
+          },
+          {
+            "month": 5,
+            "goal": "A/B study deployment in CSS 142: route uncompilable submissions through repair-grounded feedback (treatment) versus raw compiler output (control); collect resubmission count, time-to-pass, and exit-ticket self-report data",
+            "deliverable": "Anonymized dataset + preliminary effect-direction analysis"
+          },
+          {
+            "month": 6,
+            "goal": "Statistical analysis and write-up: finalize analysis, frame contribution relative to Pitts et al. and the broader automated feedback literature, and submit",
+            "deliverable": "Submitted conference paper draft"
+          }
+        ],
+        "targetVenues": ["SIGCSE", "ICER", "EDM", "ITiCSE"],
+        "resources": "Jolly Feedback submission logs from CSS 142/143 (existing infrastructure, no new collection needed); Claude API credits for repair and feedback generation at scale; one graduate or advanced undergraduate research assistant for taxonomy coding (inter-rater reliability phase); minimal-risk IRB protocol for the Phase 2 A/B study.",
+        "risks": [
+          {
+            "risk": "LLM repairs systematically over-correct (rewriting rather than minimally patching), making the repair edit noisy and the misconception signal unreliable",
+            "mitigation": "Apply the Structural Preservation and Logical Preservation filters from Pitts et al. to accept only minimal repairs; cap accepted repairs by edit distance; ablate across Claude Sonnet, GPT-4o, and a smaller open model to identify the best-preserving repair agent"
+          },
+          {
+            "risk": "CSS 142 section enrollment is too small for statistical power in the A/B study",
+            "mitigation": "Run across two sections in the same term; pre-register a ROPE-based equivalence test so a null result is publishable as evidence of no difference; report effect sizes and confidence intervals regardless of significance"
+          },
+          {
+            "risk": "Students find repair-grounded feedback still too vague or inadvertently too revealing",
+            "mitigation": "Pilot with 5 students in Month 4 and iterate on feedback templates before deployment; add an optional 'I need more help' escalation that routes to the TA queue as a fallback"
+          }
+        ],
+        "humanSubjects": true
+      }
+    }
+  ]
+}

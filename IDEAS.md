@@ -252,3 +252,7 @@
 | 2026-07-25 | Two-Stage Exam Studio | Teaching Tool | 1-2 Weeks |
 | 2026-07-25 | Learnersourced Problem Factory | Classroom Assignment | Multi-week |
 | 2026-07-25 | From Detection to Reflection: Repurposing LLM Code Explainability Reports as Formative Feedback in CS1 | Research | Research |
+| 2026-07-26 | Pathfinding Playground | Side Project | Weekend |
+| 2026-07-26 | Spec-to-Test Oracle | Teaching Tool | 1-2 Weeks |
+| 2026-07-26 | Emergent NPC Society | Classroom Assignment | Multi-week |
+| 2026-07-26 | Repair-as-Diagnosis: Using LLM Program Repair Edits to Map CS1 Misconceptions and Generate Targeted Solution-Free Feedback | Research | Research |
