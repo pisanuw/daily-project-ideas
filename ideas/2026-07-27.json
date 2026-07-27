@@ -1,0 +1,159 @@
+{
+  "date": "2026-07-27",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Spec Mutation Lab",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "Paste any product requirement or user story and watch an AI systematically mutate it — flipping assumptions, swapping user personas, and stress-testing edge cases — to surface hidden dependencies before they become bugs.",
+      "description": "Spec Mutation Lab applies mutation testing principles (normally used to evaluate test suites) to product specifications. You paste a feature requirement, and the tool generates 6-10 targeted mutations: changing the target user, removing an implicit constraint, scaling volume 100x, inverting a business rule. For each mutation, an LLM explains how the implementation would need to diverge and flags which mutations expose the most dangerous hidden assumptions. The result is a shareable mutation report teams can attach to a PR or design doc. It is a fast, zero-code way to make spec reviews more rigorous and reveals disagreements before they become costly rework.",
+      "keyFeatures": [
+        "LLM-generated spec mutations across 5 categories: user persona, scale, constraint removal, rule inversion, environment change",
+        "Side-by-side diff view showing how each mutation changes the required implementation",
+        "Danger score for each mutation based on implementation divergence depth",
+        "Shareable mutation report exportable as Markdown or GitHub issue template",
+        "History of past specs for iterative refinement and comparison"
+      ],
+      "techStack": "React + Vite, Claude API, TailwindCSS, localStorage for history",
+      "whyInteresting": "Mutation testing is a well-established software quality technique; this is the first application to product specs rather than test suites. It makes abstract spec-review discussions concrete and is immediately useful for any team that writes requirements. Fast to prototype, fun to demo, and genuinely useful for teaching requirements engineering in a CS course.",
+      "inspiredBy": "Mutation testing in software quality engineering + HN 'Ask HN: What developer tool do you wish existed in 2026?' discussions on spec-first development"
+    },
+    {
+      "n": 2,
+      "title": "Early Alert Canvas Compass",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "A Flask dashboard that plugs into the Canvas LMS API to detect at-risk students from early engagement patterns, surfaces a ranked intervention list with AI-drafted outreach messages, and sends instructors a weekly digest before it is too late to help.",
+      "description": "Research shows students who will fail or withdraw reveal early behavioral signals: late first logins, last-minute submissions, repeated quiz attempts with minimal improvement, or participation drops in discussion boards. Early Alert Canvas Compass collects these signals via the Canvas REST API during the first 4-5 weeks of a course, scores each student with a lightweight logistic model trained on prior-semester outcome data, and presents instructors with a prioritized intervention list. Claude drafts a personalized outreach email for each flagged student, citing the specific signals that triggered the alert and suggesting a concrete next step. All processing runs behind the instructor's own Canvas OAuth token, so student data never leaves the institution.",
+      "keyFeatures": [
+        "Canvas LMS OAuth integration with per-course signal collection",
+        "Engagement signal tracker: login frequency, submission timing relative to deadlines, quiz attempt patterns, discussion participation delta",
+        "Logistic regression risk scorer trained on historical Canvas grade exports",
+        "Weekly instructor digest email with ranked at-risk list and recommended actions",
+        "AI-drafted personalized outreach messages grounded in the specific signals that triggered each alert",
+        "Privacy-first: all processing runs on the instructor's own server"
+      ],
+      "techStack": "Flask + Supabase, Canvas REST API (OAuth 2.0), Claude API, React + TailwindCSS frontend, Scikit-learn for risk scoring",
+      "whyInteresting": "CS departments at teaching-focused universities often lack the institutional data infrastructure that large R1 schools use for early-warning systems. This project makes that capability self-hostable on a single server. It connects directly to CS equity and retention research and is a strong portfolio piece that solves a pain point instructors feel every semester.",
+      "inspiredBy": "SIGCSE TS 2026 and ITiCSE 2025 research on student retention, equity, and mentoring interventions + HN discussions on monitoring data pipelines that trigger action items"
+    },
+    {
+      "n": 3,
+      "title": "CRDT Clash",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "Students implement a conflict-free replicated data type from scratch, then submit it to a tournament server that stress-tests it with concurrent edits and simulated network partitions, competing on convergence correctness and merge quality.",
+      "description": "CRDT Clash turns distributed systems theory into a competitive engineering challenge. Students implement a basic CRDT variant (a simple Logoot or RGA list CRDT) for collaborative text editing following a clean TypeScript interface spec. A tournament server bombards each submission with dozens of adversarial scenarios: simultaneous edits from four clients, network partitions with message reordering, and sequences designed to expose common implementation bugs. Implementations are scored on convergence correctness, idempotency, and merge quality. A replay viewer shows students exactly which test case broke their implementation and why, turning every failure into a learning moment. Instructors configure which CRDT properties to test, making the same platform suitable from a one-week intro lab to a full capstone.",
+      "keyFeatures": [
+        "TypeScript CRDT interface spec with autograder harness",
+        "Tournament server testing convergence, commutativity, idempotency, and merge quality",
+        "Network partition simulator with configurable delay, reorder, and drop rates",
+        "Replay viewer showing the exact operation sequence that caused divergence",
+        "Live leaderboard with score breakdown by test category",
+        "Instructor panel for test suite selection and scenario difficulty scaling"
+      ],
+      "techStack": "React + Vite (tournament UI), Node.js + Fastify (tournament server), WebSockets (real-time leaderboard), Vitest (correctness harness), TypeScript throughout",
+      "whyInteresting": "CRDTs power Notion, Figma, and Google Docs yet rarely appear in undergraduate curricula because they seem too theoretical. CRDT Clash makes them tactile: students implement a real algorithm and immediately see whether it holds up under adversarial conditions. With AI coding assistants, the implementation is now feasible at the intro-to-systems level, and the competitive scoring drives engagement far beyond a traditional lab.",
+      "inspiredBy": "Y.js and Automerge open-source CRDT libraries + SIGCSE TS 2026 collaborative learning meta-analysis + the ubiquity of real-time collaborative apps in students' daily lives"
+    },
+    {
+      "n": 4,
+      "title": "Mistake or Misconception? Error-Type-Aware LLM Feedback Routing for CS1 Compiler Errors",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "A system that automatically distinguishes surface-level syntax slips from deep conceptual misconceptions in CS1 compiler errors, routes each to a calibrated LLM feedback strategy, and measures whether error-type-aware routing reduces resubmission cycles.",
+      "description": "Not all compilation errors signal the same thing: a misplaced semicolon is a surface slip that needs a location hint, while a wrong mental model of variable scope requires a structured Socratic explanation. Current LLM-powered feedback tools treat both error types identically, potentially over-explaining trivial typos and under-explaining conceptual gaps. This research extends Gao and Su's hybrid LLM-human annotation framework (SIGCSE TS 2026) to C++ CS1 submissions in Pisan's existing Jolly Feedback pipeline. The plan is to annotate a sample of CSS 142 Jolly Feedback error logs using the slip-vs-gap taxonomy, train a lightweight classifier on the resulting labeled data, and route each category to a calibrated LLM feedback strategy: minimal error location hints for surface slips, structured Socratic explanations for knowledge gaps. A natural A/B comparison against Jolly Feedback's baseline pass-fail output measures whether error-type-aware routing reduces resubmission cycles and affects grade trajectories differently across the two categories.",
+      "papers": [
+        {
+          "title": "Live Feedback, Deeper Insights: Categorizing Java Syntax Errors in an Intelligent Online IDE for Novices",
+          "authors": "Yang Gao, Lu-Hung Su",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770761.3777268",
+          "url": "https://doi.org/10.1145/3770761.3777268",
+          "abstract": "Novice programmers frequently struggle with compilation errors, and providing precise and targeted feedback in the IDE still remains a challenge. This paper introduces a novel hybrid LLM-human labeling methodology based on the large-scale IBM CodeNet dataset that classifies Java syntax errors by distinguishing between unintentional mistakes and knowledge gaps. The granular classification enables an intelligent tutoring system to deliver targeted, real-time feedback grounded in the root cause of each compiler error.",
+          "relevance": "This paper provides the direct methodological precedent for the slip-vs-gap taxonomy: it demonstrates that LLM-assisted annotation can scale error categorization to real student datasets and that the unintentional-mistake vs. knowledge-gap distinction is both tractable and consequential for downstream feedback design. The proposed research extends this framework to C++ and connects the classification output to differentiated LLM feedback routing."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "dcc --help: Transforming the Role of the Compiler by Generating Context-Aware Error Explanations with Large Language Models",
+          "authors": "Jack Medley, Andrew Taylor, et al.",
+          "venue": "SIGCSE TS 2024",
+          "year": 2024,
+          "url": "https://doi.org/10.1145/3626252.3630822",
+          "relevance": "This paper demonstrates large-scale (64,000 uses, 2,565 students) deployment of LLM-generated compiler error explanations integrated directly into a compiler. It establishes the feasibility of real-time LLM feedback at CS1 scale and provides a baseline architecture against which error-type-aware routing can be compared."
+        },
+        {
+          "title": "PyMETA: A Benchmark Dataset for Hierarchical Student Code Error Classification with Python-Interpreter-Based Labels",
+          "authors": "Anonymous",
+          "venue": "arXiv 2026",
+          "year": 2026,
+          "url": "https://arxiv.org/abs/2606.30610",
+          "relevance": "PyMETA introduces a three-level hierarchical taxonomy (48,646 student submissions, 14 fine-grained error types) and benchmarks current LLMs on multi-label error classification. Its finding that LLMs over-classify as Logic Error motivates fine-tuning on institution-specific annotated data, which is the approach the proposed research takes with Jolly Feedback logs."
+        },
+        {
+          "title": "You're (Not) My Type: Can LLMs Generate Feedback of Specific Types for Introductory Programming Tasks?",
+          "authors": "Dietrich Lohr et al.",
+          "venue": "Journal of Computer Assisted Learning, 2025",
+          "year": 2025,
+          "url": "https://onlinelibrary.wiley.com/doi/10.1111/jcal.13107",
+          "relevance": "This study directly tests whether current LLMs can generate feedback constrained to a specific pedagogical type (e.g., hint-only, explanation-only, directive). Its finding that LLMs struggle to stay within requested feedback types motivates the routing architecture, where a separate classifier selects the feedback strategy rather than leaving it to prompting alone."
+        }
+      ],
+      "researchPlan": {
+        "overview": "The research adapts a proven Java error-typing methodology to the C++ CS1 context, uses Pisan's existing Jolly Feedback submission logs as training and deployment data, and measures whether routing compiler errors to calibrated LLM feedback strategies (minimal hint for slips, Socratic explanation for gaps) reduces resubmission cycles compared to the current pass-fail baseline. The study avoids new subject recruitment by using existing anonymized logs for training and a natural semester comparison for evaluation.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review and error corpus sampling",
+            "deliverable": "Annotated bibliography of error taxonomy and ITS feedback routing literature + random sample of 500 Jolly Feedback C++ error instances pulled from CSS 142 logs"
+          },
+          {
+            "month": 2,
+            "goal": "Taxonomy definition and LLM-assisted annotation",
+            "deliverable": "C++ slip-vs-gap taxonomy document + 500-instance labeled dataset with inter-annotator agreement scores (human vs. LLM labels)"
+          },
+          {
+            "month": 3,
+            "goal": "Classifier training and evaluation",
+            "deliverable": "Fine-tuned lightweight classifier (CodeBERT or similar) achieving target F1 on held-out CSS 142 error set, with ablation comparing LLM-only vs. hybrid labeling"
+          },
+          {
+            "month": 4,
+            "goal": "Feedback routing integration and semester deployment",
+            "deliverable": "Jolly Feedback fork with error-type-aware LLM feedback routing deployed in CSS 142; resubmission and grade data collection underway"
+          },
+          {
+            "month": 5,
+            "goal": "Data analysis and comparison",
+            "deliverable": "Statistical analysis of resubmission cycle reduction and grade trajectory differences between slip and gap categories, compared with prior-semester baseline"
+          },
+          {
+            "month": 6,
+            "goal": "Paper writing and submission",
+            "deliverable": "Submitted conference paper draft targeting SIGCSE TS or ICER with full methodology, results, and replication package"
+          }
+        ],
+        "targetVenues": ["SIGCSE TS", "ICER", "EDM", "AIED"],
+        "resources": "Existing Jolly Feedback submission logs from CSS 142 and 143 (already collected), Canvas grade export API access, Claude API for LLM-assisted annotation and feedback generation, one undergraduate RA for annotation validation, UW Bothell HPC cluster or standard cloud compute for classifier fine-tuning.",
+        "risks": [
+          {
+            "risk": "The slip-vs-gap distinction may not transfer cleanly from Java to C++, where pointer and memory errors introduce a third category (runtime undefined behavior) that blurs the taxonomy.",
+            "mitigation": "Pilot the taxonomy on 100 C++ errors before full annotation; add a third 'runtime behavior' category if inter-annotator agreement on slip vs. gap is below 0.7 kappa."
+          },
+          {
+            "risk": "A single semester's deployment may not produce enough resubmission events to detect a statistically significant routing effect, especially if the course has fewer than 60 students.",
+            "mitigation": "Pool two consecutive semesters of data using the prior semester as a historical control; pre-register the analysis plan to allow this design before data collection."
+          },
+          {
+            "risk": "LLM-generated Socratic explanations for knowledge gaps may inadvertently reveal solutions, undermining the pedagogical goal of preserving student agency.",
+            "mitigation": "Develop a 5-item 'agency preservation' rubric, have two instructors rate a random sample of generated explanations before deployment, and add a solution-detection filter to the prompt chain."
+          }
+        ],
+        "humanSubjects": true
+      }
+    }
+  ]
+}

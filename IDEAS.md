@@ -256,3 +256,7 @@
 | 2026-07-26 | Spec-to-Test Oracle | Teaching Tool | 1-2 Weeks |
 | 2026-07-26 | Emergent NPC Society | Classroom Assignment | Multi-week |
 | 2026-07-26 | Repair-as-Diagnosis: Using LLM Program Repair Edits to Map CS1 Misconceptions and Generate Targeted Solution-Free Feedback | Research | Research |
+| 2026-07-27 | Spec Mutation Lab | Side Project | Weekend |
+| 2026-07-27 | Early Alert Canvas Compass | Teaching Tool | 1-2 Weeks |
+| 2026-07-27 | CRDT Clash | Classroom Assignment | Multi-week |
+| 2026-07-27 | Mistake or Misconception? Error-Type-Aware LLM Feedback Routing for CS1 Compiler Errors | Research | Research |
