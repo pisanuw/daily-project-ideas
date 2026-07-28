@@ -1,0 +1,167 @@
+{
+  "date": "2026-07-28",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Code Smell Sommelier",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "Paste any code and receive an entertaining wine-tasting-style critique that surfaces real quality issues through playful metaphors, making code review approachable and shareable.",
+      "description": "Code Smell Sommelier reads your code with the discerning nose of an AI sommelier and produces tasting notes that map code smells to wine characteristics: 'notes of spaghetti coupling on the palate, with a lingering finish of premature optimization.' The real value beneath the joke is that each metaphor links to a specific, actionable refactoring suggestion. The output is a shareable image card plus a plain-text improvement checklist. Instructors can use it as a low-stakes way to introduce code review in class; developers can use it to make peer reviews less painful. The playful framing creates psychological distance that helps beginners receive critique without defensiveness.",
+      "keyFeatures": [
+        "Drag-and-drop or paste code input for any language",
+        "AI generates structured tasting-note critique: aroma, body, finish, and verdict",
+        "Each metaphor links to a specific, actionable refactor suggestion",
+        "Shareable image card output and plain-text improvement checklist",
+        "Session history so you can compare a file before and after refactoring"
+      ],
+      "techStack": "React + Vite + Tailwind, Claude API (claude-sonnet-5), html2canvas for card export",
+      "whyInteresting": "Code review is notoriously hard to make engaging for students and junior developers. The wine metaphor provides a safe, playful distance that makes critique more receivable, and the shareable card format makes good code review viral. A weekend project with genuine classroom and workplace utility.",
+      "inspiredBy": "HN Show HN July 2026 trend toward playful developer tools; the ITiCSE 2025 Quack the Code paper on LLM-powered gamified code feedback (doi:10.1145/3724363.3729096)"
+    },
+    {
+      "n": 2,
+      "title": "Concept Duel Arena",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "A real-time multiplayer classroom game where students race to build accurate concept maps for CS topics, with an LLM validating every connection live and revealing class-wide misconceptions at the end.",
+      "description": "Students join via a room code during lecture. The instructor sets a topic (recursion, sorting algorithms, OOP inheritance, etc.) and a countdown timer. Players drag labeled nodes onto a shared canvas and draw edges between them; each submitted edge is validated by an LLM judge within seconds (correct, partially correct, or wrong) and points are awarded on the live scoreboard. At round end, the class's aggregated concept map overlays everyone's connections, revealing where students agree and where they diverge. The instructor sees a ranked list of most-contested edges to address in discussion. Unlike Kahoot-style tools that test recognition, Concept Duel Arena surfaces relational knowledge gaps, the richer cognitive structure that predicts transfer to new problems.",
+      "keyFeatures": [
+        "Room-code join system for instant classroom deployment",
+        "Real-time drag-and-drop concept map canvas with labeled edge builder",
+        "LLM judge validates edge labels within 1-2 seconds with brief explanations",
+        "Live scoreboard and per-round point awards",
+        "Aggregated class concept map view with agreement heat overlay",
+        "Instructor export of contested edges as misconception summary"
+      ],
+      "techStack": "React + Vite + Tailwind, Supabase real-time subscriptions, Claude API, Framer Motion for canvas animations",
+      "whyInteresting": "Existing classroom polling tools test recall, not relational understanding. Concept maps expose how students connect ideas, which is a richer diagnostic than any MCQ, but building them is usually slow and solo. Making the process competitive and real-time turns a usually tedious activity into an energetic 5-minute exercise that leaves both students and instructor with actionable insight.",
+      "inspiredBy": "ITiCSE 2025 Kahoot vs. Mentimeter active-learning comparison (doi:10.1145/3724363.3729086); HN discussion on classroom engagement tools July 2026; challenge of assessing relational CS knowledge at speed"
+    },
+    {
+      "n": 3,
+      "title": "Gameplay Difficulty DNA",
+      "category": "Side Project",
+      "complexity": "Multi-week",
+      "summary": "A full-stack analytics dashboard for indie game developers that ingests play telemetry via a lightweight webhook and uses AI to detect difficulty spikes, pacing problems, and drop-off cliffs, then outputs specific tuning recommendations.",
+      "description": "Developers instrument their game by adding one snippet that fires a webhook event on player deaths, retries, idle stretches, and level transitions. The Flask telemetry API stores these in Supabase and computes session difficulty profiles. The React dashboard renders annotated difficulty curves overlaid with player-retention metrics, flagging 'frustration zones' (clustered death events), 'boredom valleys' (prolonged idle stretches), and 'drop-off cliffs' (where sessions end). Claude analyzes the aggregated patterns and produces a structured tuning report: which parameters to relax, where to add a checkpoint, which encounter timing to spread out. The system is engine-agnostic — any game that can fire HTTP calls can integrate. Built-in before/after comparison lets developers validate that a patch actually flattened the frustration spike they targeted.",
+      "keyFeatures": [
+        "Minimal 5-line SDK for any game engine (sends JSON webhook events)",
+        "Annotated difficulty-curve dashboard with per-level retention waterfall",
+        "Frustration, boredom, and drop-off annotations on the timeline",
+        "AI tuning report with prioritized, specific parameter recommendations",
+        "Before/after patch comparison mode",
+        "CSV export for sharing with team members or professors"
+      ],
+      "techStack": "Flask (telemetry ingestion API), React + Vite + Tailwind (dashboard), Supabase (event storage), Claude API, Recharts (curve visualization)",
+      "whyInteresting": "Most indie developers tune difficulty by gut feel or informal playtesting. A lightweight, engine-agnostic telemetry tool with AI analysis brings data-driven game design to solo devs and student game projects without the complexity of Unity Analytics or Amplitude. Directly applicable to game development courses and capstone projects.",
+      "inspiredBy": "Pisan's game AI and player modeling research (player archetype detection, believable NPC difficulty); HN July 2026 indie game dev community discussions; gap between professional game analytics and what solo devs can access"
+    },
+    {
+      "n": 4,
+      "title": "From Generic to Grounded: Calibrating LLM-Generated Erroneous Code Examples to Institution-Specific CS1 Misconception Patterns",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Extends automatic LLM-based erroneous code example generation by grounding it in a submission-log-derived misconception taxonomy specific to one institution, then evaluates whether locally-calibrated examples better target actual student errors than generic LLM generation.",
+      "description": "A 2026 SIGCSE poster established that LLMs can automatically generate erroneous code examples for CS1 with accurate explanations, but the generation uses generic prompts unanchored to any institution's actual error distribution. This research proposes a two-phase extension. Phase 1 mines years of Jolly Feedback submission logs from UW Bothell CSS 142/143 to produce a ranked, institution-specific misconception taxonomy via LLM-assisted clustering; this taxonomy is then injected as a structured constraint into the erroneous-example generation prompt. Phase 2 compares generic vs. grounded examples on two criteria: (a) alignment with held-out real student errors, measured by expert rater agreement, and (b) diagnostic utility, measured by whether students who receive grounded erroneous examples as early-course prompts show lower resubmission rates on subsequent assignments. The study exploits the unique asset of Pisan's existing Jolly Feedback infrastructure — no new data collection is required for Phase 1 — and directly advances the DT-2 misconception-modeling thread of his digital-tutor agenda.",
+      "papers": [
+        {
+          "title": "Exploring LLMs for Generating Erroneous Examples in CS1",
+          "authors": "University of Illinois Urbana-Champaign",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770761.3777210",
+          "url": "https://doi.org/10.1145/3770761.3777210",
+          "abstract": "This paper introduces a framework that leverages Large Language Models to automatically generate erroneous programming examples for introductory computer science education. Erroneous examples incorporate deliberate errors that students identify and correct to reinforce understanding. The authors evaluate LLMs under zero-shot and two-shot prompting conditions, finding that LLMs are generally capable of generating meaningful erroneous examples along with accurate explanations.",
+          "relevance": "Provides the baseline generation pipeline and evaluation protocol this research directly extends by adding institution-specific misconception grounding; the gap it leaves open — generic prompts that ignore local error distributions — is exactly the problem addressed here."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "On Generating and Validating Erroneous Examples in CS1 Using LLMs",
+          "authors": "Chen, Y., Zhao, C., Levine, J., Feng, K., Fowler, M., Silva, M.",
+          "venue": "AIED 2026 (Lecture Notes in Computer Science, vol. 16583)",
+          "year": 2026,
+          "url": "https://doi.org/10.1007/978-3-032-29760-0_14",
+          "relevance": "Companion paper from the same UIUC group presenting a validation framework for LLM-generated erroneous examples; establishes quality criteria (accuracy, plausibility, pedagogical value) that the grounded generation approach can be benchmarked against."
+        },
+        {
+          "title": "Can LLMs Identify Gaps and Misconceptions in Students' Code Explanations?",
+          "authors": "Oli, P., Banjade, R., Olney, A. M., Rus, V.",
+          "venue": "arXiv preprint",
+          "year": 2025,
+          "url": "https://arxiv.org/abs/2501.10365",
+          "relevance": "Demonstrates that fine-tuned LLMs outperform zero-shot prompting for misconception identification in student code explanations, supporting the hypothesis that institution-specific grounding (a form of in-context calibration) will improve erroneous-example targeting."
+        },
+        {
+          "title": "Learning programming from erroneous worked-examples: Which type of error is beneficial for learning?",
+          "authors": "Beege, M., Schneider, S., Nebel, S., Zimm, J., Windisch, S., Rey, G. D.",
+          "venue": "Learning and Instruction, 75, 101497",
+          "year": 2021,
+          "url": "https://doi.org/10.1016/j.learninstruc.2021.101497",
+          "relevance": "Foundational empirical result showing that syntactic errors in erroneous examples improve learning but semantic errors often go undetected; informs the study design by motivating separate evaluation of error types and guiding which misconception categories to prioritize in the grounded taxonomy."
+        },
+        {
+          "title": "Misconception-Aware LLM Programming Tutor: Lessons Learned from Student-Tutor Interactions",
+          "authors": "SIGCSE TS 2026 Poster Presenters",
+          "venue": "SIGCSE TS 2026 (Poster)",
+          "year": 2026,
+          "url": "https://sigcse2026.sigcse.org/details/sigcse-ts-2026-posters/123/Misconception-Aware-LLM-Programming-Tutor-Lessons-Learned-from-Student-Tutor-Interac",
+          "relevance": "Reports that misconception-grounded tutors outperform baseline LLM tutors in helpfulness ratings; provides parallel evidence that domain-specific grounding (misconceptions) improves LLM educational tool quality, directly motivating the institution-calibrated generation approach."
+        }
+      ],
+      "researchPlan": {
+        "overview": "The project proceeds in two sequential phases: a data-mining phase that builds a ranked, institution-specific misconception taxonomy from existing Jolly Feedback logs, and an intervention phase that deploys grounded erroneous examples as early-course diagnostic prompts and measures their effect on resubmission rates. Because the data-mining phase uses existing, already-collected data, no human subjects are required until Phase 2, making it low-risk to start immediately.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Extract and anonymize three years of Jolly Feedback submission logs from CSS 142/143; develop LLM-assisted clustering pipeline to group errors by inferred conceptual cause (not surface syntax)",
+            "deliverable": "Annotated misconception taxonomy (top 20 categories) with frequency distribution and representative code snippets per category"
+          },
+          {
+            "month": 2,
+            "goal": "Implement two erroneous-example generation pipelines: (a) generic baseline matching the SIGCSE 2026 paper's zero-shot and two-shot conditions, (b) taxonomy-grounded condition that injects top-K misconceptions and representative snippets as structured prompt context; generate 200 examples per condition across 10 CS1 topics",
+            "deliverable": "Paired example dataset (400 total) with condition labels and LLM-generated explanations; generation cost analysis"
+          },
+          {
+            "month": 3,
+            "goal": "Conduct blind rater study: three CS instructors score each example on alignment with realistic student errors, plausibility, and pedagogical clarity; compute inter-rater agreement and statistical comparison between generic and grounded conditions",
+            "deliverable": "Evaluated dataset with rater scores; preregistered analysis report; draft of results section"
+          },
+          {
+            "month": 4,
+            "goal": "Design early-course diagnostic exercise using top-20 grounded erroneous examples; IRB submission for classroom deployment; pilot with one section of CSS 142 as an ungraded formative exercise in week 3",
+            "deliverable": "IRB approval; exercise instrument; deployment log with participation rates"
+          },
+          {
+            "month": 5,
+            "goal": "Analyze resubmission rates on the two assignments following the diagnostic exercise; compare to historical baseline; code qualitative student reactions from optional reflection prompts",
+            "deliverable": "Statistical analysis of resubmission rates; qualitative codebook; integrated discussion connecting both phases"
+          },
+          {
+            "month": 6,
+            "goal": "Finalize paper, incorporate reviewer feedback from workshop submission, submit to target venue",
+            "deliverable": "Submitted paper with full results, discussion of limitations, and open-source release of the grounded generation pipeline"
+          }
+        ],
+        "targetVenues": ["SIGCSE TS", "ICER", "AIED", "EDM"],
+        "resources": "Three years of anonymized Jolly Feedback submission logs from CSS 142/143 (existing); Claude API for generation and clustering (low cost at poster scale); one undergraduate TA for exercise deployment and data collection; IRB approval required for Phase 2 classroom study.",
+        "risks": [
+          {
+            "risk": "Existing Jolly Feedback logs may not be retained or may require additional anonymization before analysis",
+            "mitigation": "Begin with a data audit in Month 1; if raw logs are unavailable, reconstruct taxonomy from instructor recollection and prior error-report exports, then focus the paper on the generation and evaluation phases only"
+          },
+          {
+            "risk": "The classroom study sample (one section, ~40 students) may be too small to detect a significant resubmission-rate effect",
+            "mitigation": "Pre-register the analysis and power estimate; use within-subject error-type comparison and non-parametric tests; frame negative results as informative null — even a null result on resubmission rate with high rater-alignment scores is a publishable contribution"
+          },
+          {
+            "risk": "LLMs may conflate syntactic and semantic errors in grounded examples, reducing the precision of the taxonomy-grounded condition",
+            "mitigation": "Implement error-type tagging in the generation prompt (guided by Beege et al. 2021 taxonomy); evaluate syntactic and semantic examples separately in the rater study"
+          }
+        ],
+        "humanSubjects": true
+      }
+    }
+  ]
+}

@@ -260,3 +260,7 @@
 | 2026-07-27 | Early Alert Canvas Compass | Teaching Tool | 1-2 Weeks |
 | 2026-07-27 | CRDT Clash | Classroom Assignment | Multi-week |
 | 2026-07-27 | Mistake or Misconception? Error-Type-Aware LLM Feedback Routing for CS1 Compiler Errors | Research | Research |
+| 2026-07-28 | Code Smell Sommelier | Side Project | Weekend |
+| 2026-07-28 | Concept Duel Arena | Teaching Tool | 1-2 Weeks |
+| 2026-07-28 | Gameplay Difficulty DNA | Side Project | Multi-week |
+| 2026-07-28 | From Generic to Grounded: Calibrating LLM-Generated Erroneous Code Examples to Institution-Specific CS1 Misconception Patterns | Research | Research |
