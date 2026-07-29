@@ -264,3 +264,7 @@
 | 2026-07-28 | Concept Duel Arena | Teaching Tool | 1-2 Weeks |
 | 2026-07-28 | Gameplay Difficulty DNA | Side Project | Multi-week |
 | 2026-07-28 | From Generic to Grounded: Calibrating LLM-Generated Erroneous Code Examples to Institution-Specific CS1 Misconception Patterns | Research | Research |
+| 2026-07-29 | Dependency Health Scorecard | Side Project | Weekend |
+| 2026-07-29 | Code Reading Fluency Trainer | Teaching Tool | 1-2 Weeks |
+| 2026-07-29 | Generative Art Gallery | Classroom Assignment | Multi-week |
+| 2026-07-29 | Misconception-Seeded Exercise Synthesis | Research | Research |

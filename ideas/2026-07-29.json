@@ -1,0 +1,162 @@
+{
+  "date": "2026-07-29",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Dependency Health Scorecard",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "Paste a package.json or requirements.txt and get an instant AI-narrated health report on every dependency: license type, CVE count, days since last commit, and suggested alternatives for unmaintained packages.",
+      "description": "Dependency Health Scorecard lets developers drop in a package manifest and receive a structured, shareable report card for each dependency. The app calls Claude to synthesize publicly available information about each package (license, known vulnerabilities, update recency, download trend) into a three-verdict card: healthy, needs attention, or replace now. The full project list gets an overall risk score and a plain-English executive summary. Users can filter by risk level, copy the report as Markdown, or share it via a short URL. Great for pre-deployment audits, onboarding new developers to an existing codebase, or deciding between competing libraries.",
+      "keyFeatures": [
+        "Paste any package.json or requirements.txt to start",
+        "Per-package health card with license, CVE count, freshness, and verdict",
+        "Project-level risk score and AI-narrated executive summary",
+        "Exportable Markdown report with shareable link"
+      ],
+      "techStack": "React + Vite + Tailwind, Claude API, npm audit JSON API and PyPI JSON API for live package data",
+      "whyInteresting": "Dependency rot is a silent project killer; making the health of every dependency visible and shareable in one click turns an invisible maintenance chore into a quick, actionable review.",
+      "inspiredBy": "Hacker News July 2026 trust-and-stability backlash trend; Greptile developer productivity roundup on mature stacks; Best of Show HN 2026/7 project roundup"
+    },
+    {
+      "n": 2,
+      "title": "Code Reading Fluency Trainer",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "A timed web tool that presents CS students with unfamiliar code snippets and comprehension questions, tracking speed vs. accuracy per concept to surface patterns like 'struggles with recursion' or 'misreads boolean short-circuit.'",
+      "description": "Code Reading Fluency Trainer makes code comprehension a measurable, coachable skill. Students log in and are shown unfamiliar snippets (loops, recursion, object methods, closures) one at a time; a timer starts when the snippet appears and stops when they submit an answer about output, variable state, or control flow. The system logs response time, accuracy, and wrong-answer patterns per concept, then generates a personalized fluency profile. Instructors see a class-level dashboard showing which patterns most students misread and how fluency shifts week over week. Claude generates additional targeted practice snippets for each student's weak spots, keeping the drill fresh without requiring manual authoring from the instructor. Designed to complement writing-heavy CS1 and CS2 courses where reading code is assumed but never explicitly practiced or measured.",
+      "keyFeatures": [
+        "Timed snippet reader with multiple question formats: output trace, variable value, control-flow order",
+        "Per-concept accuracy and speed profile for each student",
+        "Class-wide heatmap of comprehension gaps for instructor view",
+        "Claude-generated targeted practice snippets for identified weak areas"
+      ],
+      "techStack": "React + Vite + Tailwind, Flask, Supabase (student profiles and response logs), Claude API",
+      "whyInteresting": "Code reading is a foundational skill that CS education research identifies as a strong predictor of programming success, yet most courses never explicitly practice or measure it; this tool closes that gap with a lightweight instrument instructors can deploy in the first week.",
+      "inspiredBy": "CS education research on code tracing as predictor of success (Lister et al.); ITiCSE 2025 control-flow tracing activities paper; instructor pain point of not knowing why students fail tests they cannot debug"
+    },
+    {
+      "n": 3,
+      "title": "Generative Art Gallery",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "Students build a full-stack web gallery where users submit text prompts, an LLM generates live HTML5 Canvas or SVG artwork from those prompts, and the community can vote, remix, and tag each creation.",
+      "description": "The Generative Art Gallery is a four-week full-stack assignment with a creative hook that keeps motivation high throughout. Users enter a text prompt and the backend calls the Claude or Gemini API to generate executable HTML5 Canvas JavaScript; the result is stored in Supabase and rendered live in a sandboxed iframe inside the React gallery. Students must implement the sandboxed execution pipeline (safe iframe isolation, error handling for invalid generated code), the gallery UI (browsing, voting, tags), the remix feature (fork a prompt and modify it, preserving the original in a parent-child version chain), and a report and moderation flag system. The assignment covers API integration, async rendering, relational database schema design, collaborative UX patterns, and basic content moderation, all in a context where debugging is immediately visible and satisfying because the output is art.",
+      "keyFeatures": [
+        "Prompt-to-Canvas LLM pipeline with sandboxed iframe execution and graceful error fallback",
+        "Community gallery with voting, categories, and tags",
+        "Remix/fork feature that preserves the full prompt-lineage chain",
+        "Report and moderation flag system with instructor review queue"
+      ],
+      "techStack": "React + Vite + Tailwind, Claude API or Gemini API, Supabase, Netlify or Vercel",
+      "whyInteresting": "Art as output makes every API call immediately visible and emotionally engaging; the sandboxed execution challenge, prompt-lineage tracking, and moderation system add rigorous engineering depth that generic CRUD assignments lack, while the gallery format creates natural peer motivation.",
+      "inspiredBy": "p5.js community galleries; Rosebud.ai prompt-to-game pattern; Hacker News discussion of LLM-generated procedural art; SIGCSE creative-coding pedagogy papers"
+    },
+    {
+      "n": 4,
+      "title": "Misconception-Seeded Exercise Synthesis",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Extend the verification-first LLM exercise generation pipeline to accept a specific student misconception as a seed, producing CS1 exercises guaranteed to surface and remediate that conceptual error without revealing the solution.",
+      "description": "The SIGCSE TS 2026 verification-first framework (generator-evaluator-solver LLM pipeline) demonstrates that multi-role LLM architectures can produce valid, topically-aligned CS1 exercise variants at scale. This research proposes extending that architecture with two new components: a Misconception Seeder that injects a target conceptual error description into the Generator's prompt, and a Misconception Fidelity Checker that verifies the generated exercise actually forces the student to confront and resolve the seeded error rather than solve around it. The misconception inventory is drawn from institution-specific Jolly Feedback submission logs at UW Bothell, providing an empirically-grounded seed catalog rather than hypothetical errors. The study evaluates whether seeded exercises achieve higher misconception-fidelity scores (rated by CS instructors) than generic topic-matched variants, and whether deploying misconception-targeted exercises reduces the recurrence of seeded errors in follow-on CSS 142 submissions. Phases 1-4 require no human subjects; Phase 5 is an optional classroom deployment that extends the work into a learning-outcome study with IRB review.",
+      "papers": [
+        {
+          "title": "A Verification-First, Self-Healing Framework for LLM-Enabled Generation of CS1 Exercises",
+          "authors": "UC Berkeley research group (full author list at doi)",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770761.3777364",
+          "url": "https://doi.org/10.1145/3770761.3777364",
+          "abstract": "Large CS1 courses routinely need several versions of the same idea. The authors propose a generator-evaluator-solver pipeline of LLM role instances where acceptance is determined by executable docstring tests and a lightweight repair loop closes most initial failures. Across generated items, concept fidelity held, perceived difficulty remained stable, and executable verification improved after the repair loop while maintaining alignment with original learning objectives.",
+          "relevance": "Provides the generator-evaluator-solver pipeline architecture and the executable-test-as-acceptance criterion that this research extends with misconception seeding and fidelity checking."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "BugSpotter: Automated Generation of Code Debugging Exercises",
+          "authors": "Victor-Alexandru Pădurean, Paul Denny, Adish Singla",
+          "venue": "SIGCSE TS 2025",
+          "year": 2025,
+          "url": "https://doi.org/10.1145/3641554.3701974",
+          "relevance": "Demonstrates LLM-generated buggy-code exercises verified by a test suite and deployed in a large classroom; confirms the viability of verification-based automated exercise generation and provides a comparison baseline for misconception-targeted generation."
+        },
+        {
+          "title": "Automatic Generation of Programming Exercises and Code Explanations Using Large Language Models",
+          "authors": "Tran et al.",
+          "venue": "ICER 2022",
+          "year": 2022,
+          "url": "https://doi.org/10.1145/3501385.3543957",
+          "relevance": "Foundational work establishing that LLMs can generate isomorphic programming exercises; provides the historical baseline against which verification-first and misconception-seeded approaches represent meaningful methodological advances."
+        },
+        {
+          "title": "Synthesizing High-Quality Programming Tasks with LLM-based Expert and Student Agents",
+          "authors": "Pankalla et al.",
+          "venue": "arXiv preprint, 2025",
+          "year": 2025,
+          "url": "https://arxiv.org/abs/2504.07655",
+          "relevance": "Introduces multi-role LLM agent architectures (expert and student agents) for task synthesis quality control, suggesting how a dedicated Misconception Fidelity Checker agent role could be designed and evaluated."
+        },
+        {
+          "title": "Generating Personalized Programming Exercises via Cognitive State Graphs and ZPD-Driven Prompting",
+          "authors": "Anonymous (AIED 2025 proceedings)",
+          "venue": "AIED 2025",
+          "year": 2025,
+          "url": "https://link.springer.com/chapter/10.1007/978-3-032-29744-0_10",
+          "relevance": "Models learner cognitive state as a dynamically updatable concept-mastery graph to guide personalized exercise generation; provides a student-modeling framework that misconception-seeded exercises could plug into as a targeted remediation step downstream."
+        }
+      ],
+      "researchPlan": {
+        "overview": "The project mines Jolly Feedback submission logs to build an institution-specific CS1 misconception taxonomy, then extends the SIGCSE TS 2026 generator-evaluator-solver pipeline with a Misconception Seeder and a Fidelity Checker, and evaluates whether seeded exercises achieve higher expert-rated misconception coverage than generic topic-matched variants. A classroom deployment in CSS 142 is an optional capstone that measures downstream learning outcomes.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review and misconception taxonomy extraction from Jolly Feedback logs",
+            "deliverable": "Annotated bibliography plus LLM-clustered misconception taxonomy from submission logs (target: 20-30 categories with representative wrong-answer evidence)"
+          },
+          {
+            "month": 2,
+            "goal": "Implement Misconception Seeder and extend the generator-evaluator-solver pipeline",
+            "deliverable": "Working prototype that accepts a misconception description and produces candidate exercises that pass executable doctest verification"
+          },
+          {
+            "month": 3,
+            "goal": "Design and run expert rater evaluation of misconception fidelity",
+            "deliverable": "Inter-rater reliability scores (Cohen's kappa) for whether generated exercises actually target the seeded misconception; comparison against topic-only variants from the baseline pipeline"
+          },
+          {
+            "month": 4,
+            "goal": "Scale evaluation across all 20-30 misconception categories and iterate on prompt engineering",
+            "deliverable": "Per-category fidelity scores, failure mode catalogue, and revised prompts that boost low-fidelity categories above a target threshold"
+          },
+          {
+            "month": 5,
+            "goal": "Classroom deployment in CSS 142 (IRB-gated) or synthetic study using student error simulator",
+            "deliverable": "Preliminary evidence on whether targeted exercises reduce misconception recurrence, or simulation results calibrated against historical wrong-answer distributions if classroom study is deferred"
+          },
+          {
+            "month": 6,
+            "goal": "Finalize and submit conference paper",
+            "deliverable": "Submitted draft to SIGCSE TS 2027 or ICER 2026"
+          }
+        ],
+        "targetVenues": ["SIGCSE TS", "ICER", "EDM", "AIED"],
+        "resources": "Access to Jolly Feedback historical submission logs from CSS 142; Claude API budget for exercise generation (estimated 50k-100k tokens per misconception category); 2-3 CS instructor volunteers for expert-rating sessions (1-2 hours each); one graduate or senior undergraduate research assistant at 10-15 hours per week.",
+        "risks": [
+          {
+            "risk": "The log-derived misconception taxonomy is too coarse or too fine-grained to seed exercises at a useful level of specificity",
+            "mitigation": "Calibrate the taxonomy against Sorva's documented novice programmer misconception list before expanding; start with 5-6 well-validated categories and iterate granularity based on fidelity scores from expert raters."
+          },
+          {
+            "risk": "The Fidelity Checker has high false-positive rate: exercises pass executable tests but can be solved without resolving the target misconception",
+            "mitigation": "Use a two-stage gate: executable test verification plus a separate Fidelity Checker LLM instance that adversarially probes whether the exercise is solvable by a student who still holds the seeded misconception."
+          },
+          {
+            "risk": "Classroom deployment phase requires IRB approval, adding delay beyond the 6-month window",
+            "mitigation": "Prepare the IRB protocol in month 2 in parallel with pipeline development; if approval lags, substitute a synthetic evaluation using a student error simulator calibrated against historical Jolly Feedback wrong-answer patterns and frame the classroom study as future work."
+          }
+        ],
+        "humanSubjects": false
+      }
+    }
+  ]
+}
