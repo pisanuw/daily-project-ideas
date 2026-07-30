@@ -1,0 +1,166 @@
+{
+  "date": "2026-07-30",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "SQL Replay",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A browser app that animates SQL query execution step by step, showing rows scanning, joining, filtering, and grouping as moving visual cards. A quick way to build intuition for what the database actually does.",
+      "description": "SQL Replay turns a SQL SELECT statement into a visual narrative. Type a query, paste sample data, and watch execution unfold: table rows materialize, flow through WHERE filters, join with partner rows at intersection lanes, collapse into groups, then sort into final order. Each stage pauses and labels what happened. An optional Claude API narrator adds a one-sentence plain-English explanation at every step. The entire core experience runs in the browser with no backend required, making it trivially hostable on Netlify or GitHub Pages.",
+      "keyFeatures": [
+        "Step-by-step animation of SELECT, FROM, JOIN, WHERE, GROUP BY, HAVING, ORDER BY, LIMIT",
+        "Paste your own CSV sample data or use built-in demonstration datasets",
+        "Pause, rewind, and single-step through execution stages manually",
+        "Optional Claude API narrator that explains each stage in plain English without spoiling the next",
+        "Share a query animation via URL-encoded state (no server needed)"
+      ],
+      "techStack": "React + Vite + Tailwind + Framer Motion (animations) + optional Claude API for narration",
+      "whyInteresting": "Students learn SQL syntax quickly but struggle to build mental models of how queries actually execute. A visual replay makes the abstract concrete without requiring a running database server. Doubles as a polished teaching demo for any database course and is genuinely shareable with students on mobile.",
+      "inspiredBy": "PGSimCity (explorable 3D Postgres internals visualization, trending on GitHub July 2026 per HN front page); HN community interest in making database internals tangible for learners"
+    },
+    {
+      "n": 2,
+      "title": "Classroom CI/CD Pulse",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "A real-time dashboard that shows GitHub Actions CI status across every student repo in a GitHub Classroom organization, instantly surfacing stuck students and letting instructors drill into failure logs without switching tabs.",
+      "description": "In toolchain-first programming courses, GitHub Actions CI is the backbone of formative feedback, yet instructors have no class-wide view of who is passing, failing, or completely stuck. Classroom CI/CD Pulse connects to a GitHub Classroom organization via OAuth, polls Actions runs for every student repo on a configurable interval, and renders a color-coded grid: green (all tests passing), yellow (failing less than 24 hours), red (failing more than 24 hours), grey (no recent push). Clicking any student cell expands their latest workflow log inline. A 'stuck student' panel automatically lists everyone with no passing build in over a configurable threshold and can pre-populate a nudge email with the first failure line. Historical trend sparklines show whether a student's pass rate is improving across an assignment window, letting instructors prioritize who needs office-hours attention.",
+      "keyFeatures": [
+        "Per-student CI status grid (green/yellow/red/grey) with configurable polling interval",
+        "Click-to-expand failure log for any student repo without leaving the dashboard",
+        "Stuck-student detector with configurable time threshold and one-click nudge email pre-population",
+        "Assignment-scoped filter so the view is scoped to a single homework or project at a time",
+        "Per-student trend sparkline showing pass-rate trajectory over the assignment window"
+      ],
+      "techStack": "React + Vite + Tailwind, GitHub REST API (Actions and Repos endpoints), Supabase for caching CI run history, Flask or Hono backend for GitHub OAuth and API proxying",
+      "whyInteresting": "Toolchain-first pedagogy is only effective if instructors can see whether students are actually using the tools. This fills the class-wide CI visibility gap that GitHub Classroom itself does not provide, making it trivial to intervene before a student falls too far behind. Directly extends Pisan's own toolchain-first research to the operational problem of real-time classroom monitoring.",
+      "inspiredBy": "Pisan's toolchain-first pedagogy research (Creative Education 2024); GitHub Classroom's limited class-wide CI visibility gap; parallel-agent status UX patterns in Grok Build (xAI, trending July 2026)"
+    },
+    {
+      "n": 3,
+      "title": "WASM Performance Lab",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "A web-based assignment platform where students implement the same algorithm in JavaScript and Rust, compile Rust to WebAssembly in a sandboxed server, and see live benchmark comparisons across execution time, memory, and binary size.",
+      "description": "WebAssembly is a first-class web technology in 2026, yet few undergraduate courses give students hands-on experience with its performance tradeoffs. WASM Performance Lab is an assignment scaffold and evaluation platform: students open a split-pane editor with JavaScript on the left and Rust on the right, implement an assigned algorithm (sorting, image convolution, prime sieve), and click Benchmark. The server compiles the Rust code via a containerized Wasmtime pipeline, returns a WASM binary, and runs both implementations under a micro-benchmark harness in the browser. A visual report displays execution time with confidence intervals, memory usage, and binary size side by side. Students iterate on optimizations (SIMD hints, zero-copy buffers, avoiding allocations) and submit a reflection alongside their best benchmark run. Instructors see all student results on an aggregated leaderboard with optional anonymization.",
+      "keyFeatures": [
+        "Split Monaco editor: JavaScript on the left, Rust on the right with syntax highlighting and error squiggles",
+        "Server-side Rust-to-WASM compilation in a sandboxed Docker container (Wasmtime)",
+        "In-browser micro-benchmark harness with 50-run statistics and confidence interval visualization",
+        "Visual comparison report: execution time, memory (performance.measureUserAgentSpecificMemory), binary size",
+        "Instructor leaderboard and submission portal with anonymization toggle and CSV export",
+        "Starter assignment templates for sorting, image convolution, and numeric computation"
+      ],
+      "techStack": "React + Vite + Tailwind + Monaco Editor, Flask backend, Docker + Wasmtime for sandboxed WASM compilation, Supabase for submissions and leaderboard",
+      "whyInteresting": "WebAssembly is one of the few remaining browser-accessible performance frontiers, and building intuition for when it helps (heavy compute loops) versus when it hurts (startup cost, JS interop overhead) is a high-value skill for systems-aware web developers. The platform makes that intuition empirical and reproducible rather than folklore, and the Rust component introduces memory-safety thinking without requiring a full systems course.",
+      "inspiredBy": "WebAssembly listed as a defining 2026 web technology (Figma Web Development Trends 2026, weweb.io); Wasmtime and Emscripten gaining mainstream production traction; PGSimCity ethos of making computing internals explorable and tangible"
+    },
+    {
+      "n": 4,
+      "title": "In-Lecture Misconception Radar: Closing the Feedback Loop from Open-Response Summarization to Individual Targeted Hints",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Extend LLM-based classroom response summarization to automatically cluster student open-ended responses by misconception type and deliver solution-free targeted hints to individual students within the live lecture window, measuring whether in-lecture hint delivery improves follow-up accuracy.",
+      "description": "Esiason et al. (SIGCSE TS 2026) demonstrated that LLMs can accurately summarize class-level open-ended classroom response system (CRS) answers and surface misconception themes to instructors in real time. This research extends that work across three dimensions: (1) automatic misconception clustering that groups student responses by inferred conceptual error rather than surface phrasing, (2) solution-free targeted hint generation for each cluster drawing on Pisan's SIGCSE 2021 'hints without a solution' prior work, and (3) individual in-lecture hint delivery paired with a follow-up question, enabling a within-lecture A/B measurement of whether targeted hints lead students to correct their answers. The system is designed to operate within a single 5-8 minute lecture window: question posed, responses collected, misconception clusters formed, hints dispatched, follow-up answered. This creates a fully agentic in-lecture tutoring loop that does not require extra office hours or asynchronous turnaround, making scalable Socratic correction of live misconceptions realistic for the first time in large CS courses.",
+      "papers": [
+        {
+          "title": "Topic-Level Feedback Summarization for an Explanation-Based Classroom Response System",
+          "authors": "Jordan Esiason, Wookhee Min, Seung Lee, Xiaoying Zheng, Yeil Jeong, Gamze Ozogul, James Lester",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770761.3777250",
+          "url": "https://doi.org/10.1145/3770761.3777250",
+          "abstract": "This poster presents a system for delivering, assessing, and summarizing students' open-ended responses during CS lectures. The system extracts relevant knowledge components for each question, tags student responses according to whether they address each component, and generates class-level summaries that highlight common misconceptions to support instructors in pivoting their lectures in real time. Semantic accuracy was found to be high and consistent across summarization methods, and instructor interviews identified key qualities of useful summaries including format preferences and features allowing selective insight into misconception-related responses.",
+          "relevance": "This paper establishes the summarization-to-instructor half of the feedback loop. The proposed research adds the second half: using those misconception clusters to generate and deliver solution-free targeted hints back to individual students within the same lecture period, then measuring learning impact via paired follow-up questions."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "Generating Hints for Programming Problems Without a Solution",
+          "authors": "Suciu et al. (Pisan, advisor)",
+          "venue": "SIGCSE 2021 Student Research Competition",
+          "year": 2021,
+          "url": "https://dl.acm.org/doi/abs/10.1145/3408877.3439591",
+          "relevance": "Pisan lab prior work establishing that useful, non-solution-revealing hints can be generated from problem statements alone. The proposed research applies and extends this methodology to generate hints calibrated to specific misconception clusters detected from open-ended student responses."
+        },
+        {
+          "title": "Leveraging Lecture Content for Improved Feedback: Explorations with GPT-4 and Retrieval Augmented Generation",
+          "authors": "Pankiewicz, Mason",
+          "venue": "arXiv preprint 2405.06681",
+          "year": 2024,
+          "url": "https://arxiv.org/abs/2405.06681",
+          "relevance": "Demonstrates that grounding LLM feedback in lecture-specific content via RAG significantly improves relevance and reduces hallucination, directly applicable to misconception-targeted hint generation in the proposed pipeline where course notes anchor the hint vocabulary."
+        },
+        {
+          "title": "Automated Grading of Open-Ended Questions in Higher Education Using GenAI Models",
+          "authors": "Various",
+          "venue": "International Journal of Artificial Intelligence in Education (Springer), 2025",
+          "year": 2025,
+          "url": "https://link.springer.com/article/10.1007/s40593-025-00517-2",
+          "relevance": "Reports that GPT-4 achieves near-human agreement when grading open-ended CS responses across 1,885 student answers, providing validation that the automatic response-tagging step in the proposed pipeline is technically sound at the scale of a typical course section."
+        },
+        {
+          "title": "Exploring Student Reactions to LLM-Generated Feedback on Explain in Plain English Problems",
+          "authors": "Various",
+          "venue": "ACM Computing Education Research, 2025",
+          "year": 2025,
+          "url": "https://www.researchgate.net/publication/389191181_Exploring_Student_Reactions_to_LLM-Generated_Feedback_on_Explain_in_Plain_English_Problems",
+          "relevance": "Provides empirical evidence on how CS students perceive and act on LLM-generated explanatory feedback for open-ended responses, informing the hint tone and format design choices for the proposed in-lecture delivery system."
+        }
+      ],
+      "researchPlan": {
+        "overview": "The research builds a complete in-lecture feedback pipeline (open question, LLM cluster, targeted hint, follow-up question) and measures via within-class counterbalanced A/B whether receiving a targeted hint during a live 5-8 minute window improves follow-up response accuracy compared to no hint. The study is designed to run on Pisan's existing CS1/CS2 sections using Jolly Feedback infrastructure extended with a CRS front end, avoiding the need for new IRB approval if data is collected via course-administration channels and de-identified.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review, system architecture design, and selection of target course and question types",
+            "deliverable": "Annotated bibliography + system design document + set of 15 pilot open-ended CRS questions covering common CS1/CS2 misconceptions"
+          },
+          {
+            "month": 2,
+            "goal": "Build CRS question delivery interface and LLM response-clustering module; evaluate cluster quality on archived student response data from Jolly Feedback logs",
+            "deliverable": "Working CRS prototype + clustering accuracy report (Adjusted Rand Index vs. human-coded clusters on 200 archived responses)"
+          },
+          {
+            "month": 3,
+            "goal": "Build misconception-targeted solution-free hint generator and instructor dashboard showing cluster summaries with one-click hint dispatch to matched students",
+            "deliverable": "End-to-end prototype running in a staging environment; usability pilot with 3 TAs acting as students to validate 5-8 minute cycle time"
+          },
+          {
+            "month": 4,
+            "goal": "Deploy in one CS1 or CS2 section; run within-lecture counterbalanced A/B across at least 8 class sessions; collect follow-up response accuracy, hint revision rates, and student experience data",
+            "deliverable": "Dataset from at least 8 class sessions (approximately 400 student-question pairs); interim analysis report"
+          },
+          {
+            "month": 5,
+            "goal": "Quantitative analysis (mixed-effects model for hint-group vs. control on follow-up accuracy) and qualitative analysis of which misconception types responded most to targeted hints",
+            "deliverable": "Draft results and discussion sections with effect-size estimates and misconception type taxonomy"
+          },
+          {
+            "month": 6,
+            "goal": "Finalize paper: related work, system description, evaluation, discussion, and limitations",
+            "deliverable": "Submitted paper draft to target venue"
+          }
+        ],
+        "targetVenues": ["SIGCSE TS", "ICER", "EDM (Educational Data Mining)", "AIED"],
+        "resources": "Pisan's existing Jolly Feedback course infrastructure for integration; Claude API credits (estimated under $200 for a semester run at typical class sizes); access to one CS1 or CS2 section of 40-100 students; one undergraduate or graduate research assistant to handle manual cluster-quality coding; IRB may be exempt if data is collected as part of normal course administration and de-identified per standard university data policy.",
+        "risks": [
+          {
+            "risk": "LLM misconception clusters are too coarse or noisy, producing hints that do not align with individual students' actual errors, reducing hint effectiveness",
+            "mitigation": "Evaluate cluster precision against human-coded labels on 200 archived responses before deployment; if precision falls below 70%, add an instructor approval step before hint dispatch to maintain hint quality"
+          },
+          {
+            "risk": "The 5-8 minute in-lecture cycle is too short for students to meaningfully read, process, and act on a hint before the follow-up question appears",
+            "mitigation": "Pilot the full cycle timing in one lecture before the A/B study; if the cycle is too tight, extend to an 'end-of-lecture' delivery window where the follow-up is answered in the final 10 minutes of class or as a brief pre-class warm-up in the next session"
+          },
+          {
+            "risk": "Within-class counterbalancing is contaminated if students in the hint condition share hints verbally with nearby classmates in the control condition",
+            "mitigation": "Randomize hint assignment at the student level rather than the row or section level; remind students at the start of each session that their hint assignments may differ, normalizing variation without revealing the study design"
+          }
+        ],
+        "humanSubjects": true
+      }
+    }
+  ]
+}

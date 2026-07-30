@@ -155,3 +155,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-07-28 [code] Created ideas/2026-07-28.json: Code Smell Sommelier, Concept Duel Arena, Gameplay Difficulty DNA, From Generic to Grounded: Calibrating LLM-Generated Erroneous Code Examples (research, SIGCSE TS 2026 doi:10.1145/3770761.3777210)
 
 2026-07-29 [code] Created ideas/2026-07-29.json: Dependency Health Scorecard, Code Reading Fluency Trainer, Generative Art Gallery, Misconception-Seeded Exercise Synthesis (research, SIGCSE TS 2026 doi:10.1145/3770761.3777364)
+
+2026-07-30 [code] Created ideas/2026-07-30.json: SQL Replay, Classroom CI/CD Pulse, WASM Performance Lab, In-Lecture Misconception Radar (research, SIGCSE TS 2026 doi:10.1145/3770761.3777250)
