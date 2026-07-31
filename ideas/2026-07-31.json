@@ -1,0 +1,160 @@
+{
+  "date": "2026-07-31",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Game Pitch Studio",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A browser app where indie game designers paste a raw concept and Claude instantly generates three distinct pitch framings — player-centric, investor-facing, and press-ready — plus a 10-word elevator pitch, five comparable titles, and a suggested visual style direction.",
+      "description": "Pitching an indie game is a skill independent of making one, and most designers get little practice at it. Game Pitch Studio turns a rough idea into a shareable pitch portfolio in under a minute. The user types a one-paragraph concept (genre, core mechanic, tone), selects a target audience (gamers, publishers, journalists, or investors), and hits Generate. Claude produces three fully formatted pitch variants, each framing the same game through a different rhetorical lens: the player pitch focuses on emotional experience and moment-to-moment flow, the investor pitch leads with market comparables and monetisation model, and the press pitch foregrounds narrative hook and screenshot-worthy moments. Alongside the pitches, Claude returns a 10-word elevator pitch, a suggested working title, five comparable released games with a short note on what each comparison signals, and a three-word visual style direction. Users can regenerate individual sections, pin variants they like, export the full pitch sheet as a PDF, and optionally submit to a public gallery where peers vote on the most compelling framing. The entire experience requires no login for the core generation flow; the gallery and save features use anonymous session IDs.",
+      "keyFeatures": [
+        "Three-variant pitch generation (player, investor, press) from a single concept paragraph",
+        "10-word elevator pitch, working title suggestion, and five comparable games with annotations",
+        "Three-word visual style direction to anchor art direction conversations",
+        "Section-level regeneration so users can keep good parts and re-roll weak ones",
+        "Public gallery with peer voting on which framing is most compelling",
+        "One-click PDF export of the full pitch sheet for use in submissions"
+      ],
+      "techStack": "React + Vite + Tailwind, Claude API (streaming), jsPDF for export, Supabase for optional gallery persistence",
+      "whyInteresting": "Pitching is a separate craft from designing, and most game dev curricula skip it entirely. This tool makes pitch iteration fast enough that students and hobbyists will do it reflexively, building rhetorical fluency alongside technical skills. The three-framing structure also teaches that the same idea can be narrated very differently depending on audience — a transferable communication insight that extends well beyond game design.",
+      "inspiredBy": "HN threads on indie pitch critique (recurring format, June-July 2026); Pisan's game-AI research interest; r/gamedev community frustration with pitch template rigidity"
+    },
+    {
+      "n": 2,
+      "title": "Hint Token Economy",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "A gamified hint system where students spend a limited weekly token budget to request Socratic hints from Claude on programming assignments, earn tokens back by helping peers, and give instructors a per-problem demand heatmap revealing which exercises stump the class most.",
+      "description": "Unlimited hint access tends to produce passive help-seeking: students request hints at the first sign of difficulty rather than engaging in productive struggle. Hint Token Economy reframes hint access as a resource to manage. Each student begins the week with a fixed token wallet (configurable by the instructor, e.g., 5 tokens). Spending one token on a problem opens a Socratic dialogue: Claude does not give the answer but instead asks a leading question targeted at the student's most recent code submission (pasted or uploaded). Students can earn tokens back by posting a public explanation of how they solved a problem, which peers upvote; each upvote above a threshold credits the author's wallet. Instructors see a live heatmap showing token spend per problem, flagging exercises that consistently drain budgets fastest as candidates for additional scaffolding or an office-hours spotlight. A personal analytics page shows each student their own hint-to-solution ratio over time, nudging metacognitive awareness. The hint dialogue is stored per-assignment so students can replay their own problem-solving conversation after submission.",
+      "keyFeatures": [
+        "Configurable weekly token wallet per student with instructor-set parameters",
+        "Socratic hint generation from Claude grounded in the student's own submitted code snippet",
+        "Peer-help token economy: posting a worked explanation earns tokens back through upvotes",
+        "Instructor heatmap showing per-problem token demand across the course section",
+        "Student self-analytics: hint-to-solve ratio, token spend trajectory, most-hinted problems",
+        "Hint dialogue replay so students can revisit their problem-solving arc after submitting"
+      ],
+      "techStack": "React + Vite + Tailwind, Supabase (wallets, hint logs, peer posts, upvotes), Claude API, Flask or Edge Functions for wallet mutation and rate-limiting",
+      "whyInteresting": "The token constraint makes hint-seeking a deliberate choice rather than a reflex, which research on productive struggle suggests improves long-term retention. The peer-help economy creates a positive classroom incentive: the fastest way to replenish your budget is to help someone else. The instructor heatmap turns aggregate help-seeking behavior into a curriculum signal, making implicit student confusion explicitly visible without requiring exit tickets or extra surveys.",
+      "inspiredBy": "Pisan's 'Generating Hints for Programming Problems Without a Solution' (SIGCSE 2021); token economy behavior design from edtech and language learning apps; r/learnprogramming threads on productive struggle (July 2026)"
+    },
+    {
+      "n": 3,
+      "title": "Socratic Agent Trio",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "A multi-week assignment where students design and build a three-agent chatbot system — an Explainer, a Devil's Advocate, and a Synthesizer — then run a peer user study measuring whether their trio improves quiz scores on a target CS concept.",
+      "description": "Socratic Agent Trio is a semester-project-scale classroom assignment that teaches multi-agent system design, prompt engineering, and empirical evaluation simultaneously. Students are given a target CS concept (e.g., recursion, big-O notation, memory allocation) and must build a web app with three Claude-powered agents that collaborate to tutor a user: the Explainer presents the concept with an analogy and a worked example; the Devil's Advocate immediately challenges the explanation with an edge case or counterexample that would break a naive mental model; the Synthesizer then helps the user consolidate by asking them to restate the insight in their own words and flagging gaps. The three agents communicate asynchronously through a shared message queue that students design. For the evaluation phase, student authors recruit three classmates to use their trio for 20 minutes before a short quiz on the topic, measuring pre/post quiz improvement against a control group who studied from the course textbook alone. Students submit a design document (agent role prompts, rationale for the dialogue structure), a running demo, and a brief empirical report comparing quiz results. Graded on prompt quality (rubric), system architecture, and whether the user study was conducted and reported honestly.",
+      "keyFeatures": [
+        "Three-agent architecture: Explainer, Devil's Advocate, Synthesizer with distinct system prompts",
+        "Shared message queue design exercise teaching agents-as-services composition patterns",
+        "In-app session recorder that saves the full three-agent dialogue for submission review",
+        "Peer user-study scaffold: built-in pre/post quiz builder and result collector",
+        "Instructor grading dashboard showing design document, demo link, and user-study CSV per student",
+        "Starter templates for recursion, big-O, and memory allocation to reduce topic-choice paralysis"
+      ],
+      "techStack": "React + Vite + Tailwind, Flask backend, Claude API (three concurrent agent calls per turn), Supabase (session logs, quiz results, submissions)",
+      "whyInteresting": "Building an AI tutor forces students to articulate what a correct explanation looks like, what misconceptions to anticipate, and how to check understanding — all of which deepens their own grasp of the target concept. The empirical evaluation component teaches them that 'the AI sounds good' is not evidence of learning, which is a critical AI literacy skill. The multi-agent architecture introduces software engineering patterns (async queues, role separation, shared context) in a domain students find immediately meaningful.",
+      "inspiredBy": "Pisan's CS education and AI tutors research; Socratic teaching method literature; extends 'Agentic Study Buddy Network' (2026-06-29) into a build-your-own assignment with empirical evaluation; multi-agent framework trends on HN (June-July 2026)"
+    },
+    {
+      "n": 4,
+      "title": "Player-Type-Adaptive Gamification for CS1 Programming Courses",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Design and evaluate a gamification platform for CS1 that classifies each student's HEXAD motivational player type at course start and presents dynamically matched game mechanics throughout the semester, testing whether personalized gamification produces higher sustained motivation than the one-size-fits-all approach demonstrated effective by Gamify-IT.",
+      "description": "Meißner et al. (SIGCSE TS 2026) demonstrated that Gamify-IT — a platform extending a CS1 programming course with minigames, leaderboards, and achievements aligned to Marczewski's HEXAD player types — significantly boosts both initial and sustained student motivation compared to traditional instruction. A key open question their work leaves is whether a single fixed gamification profile is optimal for all students, or whether students with different dominant player types would benefit from different dominant mechanics. Achievers are driven by challenge and mastery signals (timed challenges, streak counts, proficiency badges); Socializers by peer interaction (collaborative leaderboards, team challenges); Philanthropists by altruism (helping peers earns recognition); Free Spirits by exploration (optional side quests, creative open problems); Players by extrinsic rewards (points multipliers, random loot drops); and Disruptors by changing the rules (ability to vote on next week's challenge format). This research proposes building a player-type-adaptive extension of the Gamify-IT concept: students complete a validated HEXAD questionnaire in week 1, the platform classifies their dominant type, and for the remainder of the semester the game mechanics foregrounded in their interface match their motivational profile. The study uses a between-subjects design: one CS1 section receives adaptive gamification, a matched section receives fixed (Achiever-profile) gamification as in Gamify-IT, and the Gamify-IT published results serve as an additional historical baseline. Motivation is measured with the Intrinsic Motivation Inventory (IMI) at weeks 2, 6, and 10. The primary hypothesis is that adaptive gamification will produce a smaller motivation decline from week 2 to week 10 (i.e., less mid-semester drop-off) than fixed gamification, particularly for non-Achiever students.",
+      "papers": [
+        {
+          "title": "Boosting Student Motivation through Game-based Learning in Programming Education with Gamify-IT",
+          "authors": "Niklas Meißner, Sandro Speth, Niklas Krieger, Steffen Becker",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770762.3772508",
+          "url": "https://doi.org/10.1145/3770762.3772508",
+          "abstract": "Game-based learning (GBL) has emerged as a powerful instrument for enhancing student engagement and motivation in education. This paper evaluates the impact of Gamify-IT on student motivation in a first-semester CS1 programming course (~100 students), extending it with minigames, leaderboards, and an achievement system aligned with Marczewski's HEXAD player types. Results show higher initial and sustained motivation throughout the semester compared to a traditional-instruction cohort, while also identifying areas for improvement such as technical reliability and game variety.",
+          "relevance": "Establishes that HEXAD-informed gamification measurably improves CS1 student motivation over a full semester. The proposed research asks the next-order question: does matching game mechanics to each student's dominant HEXAD player type produce better sustained motivation than presenting a uniform HEXAD-informed profile to all students?"
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "The Gamification User Types Hexad Scale",
+          "authors": "Gustavo F. Tondello, Rina R. Wehbe, Lisa Diamond, Marc Busch, Andrzej Marczewski, Lennart E. Nacke",
+          "venue": "CHI Play 2016",
+          "year": 2016,
+          "url": "https://dl.acm.org/doi/10.1145/2967934.2968082",
+          "relevance": "Provides the validated HEXAD questionnaire and scale used to classify students into one of six player types. The instrument's psychometric properties (internal consistency, test-retest reliability) are directly applicable to the enrollment-week classification step in the proposed study."
+        },
+        {
+          "title": "Gamification and player type: Relationships of the HEXAD model with the learning experience",
+          "authors": "Various",
+          "venue": "Journal of New Approaches in Educational Research, 2024",
+          "year": 2024,
+          "url": "https://link.springer.com/article/10.1007/s44322-024-00021-w",
+          "relevance": "Demonstrates empirical relationships between HEXAD player types and learning experience outcomes in educational gamification, providing the theoretical warrant for hypothesizing that matching mechanics to type will improve motivational trajectories beyond what a fixed profile achieves."
+        },
+        {
+          "title": "The Influence of Player Type on the Motivation of Students in a Gamified Programming Learning Environment",
+          "authors": "Various",
+          "venue": "Springer, 2025",
+          "year": 2025,
+          "url": "https://link.springer.com/chapter/10.1007/978-3-031-82478-4_1",
+          "relevance": "Provides direct prior evidence that different HEXAD player types respond differently to gamification elements in a programming learning context, strengthening the case that one-size-fits-all gamification leaves motivational value on the table for non-dominant-type students."
+        }
+      ],
+      "researchPlan": {
+        "overview": "Build a player-type-adaptive gamification platform for CS1, classify each student's HEXAD type at course start, and run a semester-long between-subjects study comparing adaptive vs. fixed gamification on motivation trajectory (IMI) and programming assessment scores. The Gamify-IT published results serve as a historical baseline for the fixed condition.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review of HEXAD adaptive systems; selection and piloting of HEXAD and IMI instruments for a CS1 population; IRB protocol submission; system architecture design with per-type mechanic matrix",
+            "deliverable": "Annotated bibliography, adapted HEXAD questionnaire piloted on 20 CS students for face validity, IRB protocol submitted, system design document"
+          },
+          {
+            "month": 2,
+            "goal": "Build the adaptive gamification platform: HEXAD classifier module, per-type mechanic profile selector, minigame and achievement library with at least two mechanic variants per player type",
+            "deliverable": "Working prototype with six player-type profiles in a staging environment; walkthrough video demonstrating distinct interface variants for Achiever, Socializer, and Philanthropist types"
+          },
+          {
+            "month": 3,
+            "goal": "Wizard-of-Oz pilot with one lab section (n ≈ 20): manually assign player types, deploy platform, collect week-2 and week-6 IMI, gather usability feedback",
+            "deliverable": "Pilot usability report, revised mechanic profiles incorporating student feedback, go/no-go decision for full deployment"
+          },
+          {
+            "month": 4,
+            "goal": "Full deployment across two matched CS1 sections: adaptive condition (n ≈ 50) and fixed-gamification control (n ≈ 50). Administer HEXAD at enrollment and IMI at weeks 2, 6, and 10. Collect programming assessment grades throughout.",
+            "deliverable": "Dataset from full semester: HEXAD classifications, three IMI waves, assessment scores, platform engagement logs"
+          },
+          {
+            "month": 5,
+            "goal": "Quantitative analysis: repeated-measures mixed-effects model for IMI trajectory (group x time), per-player-type subgroup analysis testing whether non-Achiever students benefit more from the adaptive condition, correlation of motivation trajectory with assessment performance",
+            "deliverable": "Draft results and discussion sections with effect sizes, per-type breakdowns, and comparison to Gamify-IT published baseline"
+          },
+          {
+            "month": 6,
+            "goal": "Finalize paper: introduction, related work, system description, study design, results, discussion, limitations, and future work",
+            "deliverable": "Submitted paper draft to target venue"
+          }
+        ],
+        "targetVenues": ["ITiCSE", "ICER", "CHI Play", "EDM"],
+        "resources": "Access to two matched CS1 sections (approximately 50 students each); one graduate research assistant for platform development and data coding; Claude API for hint integration in minigames (estimated under $300 for a semester run); IRB approval; Gamify-IT open-source codebase as a starting point.",
+        "risks": [
+          {
+            "risk": "HEXAD classification at week 1 may be unstable — students' dominant player types could shift as they acclimate to university-level CS, causing the adaptive mechanic to become misaligned mid-semester",
+            "mitigation": "Re-administer HEXAD at the midpoint (week 6) and update the mechanic profile if the dominant type has shifted; compare stability rates as a secondary analysis variable"
+          },
+          {
+            "risk": "Students in the adaptive condition may compare notes and realize they are receiving different game mechanics, introducing social-comparison confounds or gaming the HEXAD questionnaire to receive preferred mechanics",
+            "mitigation": "Frame the platform variation as 'personalized learning experience' in the syllabus without naming the HEXAD classification; avoid in-class discussion of mechanic differences; include a post-study awareness check"
+          },
+          {
+            "risk": "Gamify-IT open-source codebase may not be extensible enough to implement six player-type profiles without prohibitive engineering effort",
+            "mitigation": "Evaluate Gamify-IT codebase in month 1; if not extensible, build a minimal adaptive platform from scratch using React + Supabase targeting three player-type variants (Achiever, Socializer, Philanthropist) as a reduced-scope fallback"
+          }
+        ],
+        "humanSubjects": true
+      }
+    }
+  ]
+}

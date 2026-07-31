@@ -272,3 +272,7 @@
 | 2026-07-30 | Classroom CI/CD Pulse | Teaching Tool | 1-2 Weeks |
 | 2026-07-30 | WASM Performance Lab | Classroom Assignment | Multi-week |
 | 2026-07-30 | In-Lecture Misconception Radar: Closing the Feedback Loop from Open-Response Summarization to Individual Targeted Hints | Research | Research |
+| 2026-07-31 | Game Pitch Studio | Side Project | Weekend |
+| 2026-07-31 | Hint Token Economy | Teaching Tool | 1-2 Weeks |
+| 2026-07-31 | Socratic Agent Trio | Classroom Assignment | Multi-week |
+| 2026-07-31 | Player-Type-Adaptive Gamification for CS1 Programming Courses | Research | Research |

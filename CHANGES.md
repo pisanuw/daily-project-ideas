@@ -157,3 +157,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-07-29 [code] Created ideas/2026-07-29.json: Dependency Health Scorecard, Code Reading Fluency Trainer, Generative Art Gallery, Misconception-Seeded Exercise Synthesis (research, SIGCSE TS 2026 doi:10.1145/3770761.3777364)
 
 2026-07-30 [code] Created ideas/2026-07-30.json: SQL Replay, Classroom CI/CD Pulse, WASM Performance Lab, In-Lecture Misconception Radar (research, SIGCSE TS 2026 doi:10.1145/3770761.3777250)
+
+2026-07-31 [code] Created ideas/2026-07-31.json: Game Pitch Studio, Hint Token Economy, Socratic Agent Trio, Player-Type-Adaptive Gamification for CS1 (research, SIGCSE TS 2026 doi:10.1145/3770762.3772508)
