@@ -276,3 +276,7 @@
 | 2026-07-31 | Hint Token Economy | Teaching Tool | 1-2 Weeks |
 | 2026-07-31 | Socratic Agent Trio | Classroom Assignment | Multi-week |
 | 2026-07-31 | Player-Type-Adaptive Gamification for CS1 Programming Courses | Research | Research |
+| 2026-08-01 | Ambiguity Magnifier | Side Project | Weekend |
+| 2026-08-01 | Exam Question Equity Scanner | Teaching Tool | 1-2 Weeks |
+| 2026-08-01 | Federated Learning Privacy Lab | Classroom Assignment | Multi-week |
+| 2026-08-01 | Teach-Back Misconception Mining: From LLM-Peer Explanations to Targeted Socratic Recovery in CS1 | Research | Research |

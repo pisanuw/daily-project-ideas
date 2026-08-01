@@ -1,0 +1,162 @@
+{
+  "date": "2026-08-01",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Ambiguity Magnifier",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "Paste any prose document and instantly see every ambiguous sentence highlighted with 2-3 alternate interpretations and a suggested unambiguous rewrite — so writers know exactly where readers will diverge.",
+      "description": "Ambiguity Magnifier is a browser-based tool that takes any text (requirement specs, assignment descriptions, contract clauses, exam questions) and uses Claude to identify every sentence or phrase that two reasonable readers might interpret differently. For each flagged passage, the tool shows 2-3 concretely different interpretations to illustrate the ambiguity, then proposes a clearer rewrite. Unlike grammar checkers, this targets semantic ambiguity: vague pronouns, underspecified quantities, implicit assumptions, and scope creep hidden in natural language. CS students benefit when writing project specs or user stories; professors benefit when reviewing exam questions; product managers benefit when writing PRDs. The whole analysis streams back in real time as the user types.",
+      "keyFeatures": [
+        "Sentence-level ambiguity detection with color-coded severity (mild, moderate, severe)",
+        "Side-by-side display of 2-3 divergent interpretations per flagged phrase",
+        "One-click rewrite suggestions that preserve the original intent",
+        "Export to annotated Markdown or PDF for sharing with a team"
+      ],
+      "techStack": "React + Vite + Tailwind, Claude API (streaming), no backend needed",
+      "whyInteresting": "Specification quality is the hidden bottleneck in nearly every student project failure and product misalignment. A tool that makes ambiguity viscerally visible — not just 'this is unclear' but 'here are three ways your teammates will read this' — teaches a skill that no linter or spell-checker addresses.",
+      "inspiredBy": "Hacker News thread on requirements clarity debt and ProductHunt AI-document-analysis category growth in 2026; the observation that Claude excels at generating plausible alternative readings"
+    },
+    {
+      "n": 2,
+      "title": "Exam Question Equity Scanner",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "Upload a set of exam or quiz questions and get a rubric-style dashboard that scores each question across four dimensions simultaneously: linguistic bias, Bloom's taxonomy level, ambiguity, and AI-cheating resistance — with suggested rewrites for every flagged issue.",
+      "description": "CS instructors typically reach for separate tools (or none at all) when trying to ensure their exams are fair, cognitively challenging, clearly written, and hard for students to outsource to AI. Exam Question Equity Scanner collapses all four concerns into one batch-upload workflow. Instructors paste or upload their questions (plain text or PDF), and Claude evaluates each question across the four dimensions, returning a color-coded rubric grid with a 1-5 score per dimension and specific, actionable suggestions. A class-level heatmap shows which Bloom's levels are over- or under-represented and flags any cluster of similar questions that could be answered by a single AI prompt. The tool stores scan history so instructors can track improvement across semesters.",
+      "keyFeatures": [
+        "Four-dimension rubric per question: bias, Bloom's level, clarity, AI-resistance",
+        "Class-level Bloom's coverage heatmap to catch gaps in cognitive complexity",
+        "AI-similarity clustering: flags question sets answerable by one LLM prompt",
+        "Suggested rewrites for each flagged dimension, exportable to CSV or Word"
+      ],
+      "techStack": "React + Vite + Tailwind (frontend), Flask + Claude API (backend), PDF parsing via pdf-parse, Supabase for session history",
+      "whyInteresting": "Three separate concerns — equity/bias, cognitive level, and AI resistance — are independently discussed in CER literature and practitioner circles, but no tool unifies them in one rubric. Combining them reveals tradeoffs that aren't visible when you look at each dimension alone (e.g., making a question more AI-resistant sometimes makes it more biased toward students with certain cultural backgrounds).",
+      "inspiredBy": "ITiCSE 2025 discussions on GenAI's impact on assessment integrity; SIGCSE 2026 papers on equity in CS courses; ProductHunt trend of AI-assisted document analysis tools"
+    },
+    {
+      "n": 3,
+      "title": "Federated Learning Privacy Lab",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "Students build and experiment with a browser-based federated learning simulation — local models, gradient aggregation, and adjustable differential privacy noise — so they can directly observe the privacy-utility tradeoff without any GPU or server setup.",
+      "description": "Federated Learning Privacy Lab is a multi-week capstone assignment for AI, ML, or data-privacy courses. Students implement a client-server FL system entirely in the browser using TensorFlow.js for training and a lightweight Flask server for gradient aggregation. A control panel lets students dial in the number of simulated clients, the dataset partition strategy (IID vs. non-IID), and the Laplace or Gaussian differential privacy noise level added to each gradient update before it leaves the client. A live dashboard shows model accuracy after each round, the privacy budget consumed (epsilon), and per-client gradient norms. A Claude-powered narrator explains what is happening at each training round in plain language, making the math approachable. Students submit a lab report analyzing specific scenarios: how much accuracy is lost per unit of privacy added, and when non-IID data distributions cause model divergence.",
+      "keyFeatures": [
+        "Browser-based TF.js training for each simulated client — no GPU or cloud account needed",
+        "Adjustable differential privacy noise (Laplace/Gaussian) with real-time epsilon budget meter",
+        "IID vs. non-IID data partition toggle to observe statistical heterogeneity effects",
+        "Claude-powered round-by-round narrator explaining aggregation and privacy mechanics"
+      ],
+      "techStack": "React + Vite + Tailwind (UI), TensorFlow.js (in-browser training), Flask + Python (aggregation server), Claude API (narrator), Supabase (optional: log experiment runs for lab report auto-generation)",
+      "whyInteresting": "Federated learning is a foundational concept in production AI (Google Keyboard, Apple Siri) but almost impossible to teach with hands-on depth in a single lecture. By running everything in the browser, this assignment lowers the barrier to experimentation to zero — students can explore 50 different epsilon values in an afternoon — while building genuine intuition about a privacy concept that every AI practitioner will encounter.",
+      "inspiredBy": "OpenClaw (210k stars) local-AI trend showing appetite for privacy-first, on-device AI; GitHub trending federated learning frameworks in 2026; growing 'AI ethics' module demand in undergraduate CS programs"
+    },
+    {
+      "n": 4,
+      "title": "Teach-Back Misconception Mining: From LLM-Peer Explanations to Targeted Socratic Recovery in CS1",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "This research extends the Teach2Learn teach-back-to-AI paradigm from assessment-only into a closed feedback loop: when students' LLM-peer explanations reveal a misconception, the system classifies it, generates Socratic recovery questions (no answers), and logs the pattern for instructor review.",
+      "description": "Teach2Learn (SIGCSE TS 2026) showed that asking CS1 students to teach an LLM-simulated peer can surface learning gaps and build confidence, but the platform currently stops at assessment — it does not act on what students reveal about their misconceptions. This research closes that loop. When a student's teach-back explanation contains a conceptual error (e.g., confusing assignment with equality, misidentifying loop termination conditions, or holding an off-by-one belief), the system uses LLM-assisted classification to label the misconception type against an institution-specific taxonomy, then generates 2-3 Socratic follow-up questions that guide the student toward self-correction without revealing the answer. This 'teach-back-as-probe' architecture is a natural extension of Pisan's prior work on solution-free hint generation (SIGCSE 2021) and Jolly Feedback's test-running substrate, and it leverages the teach-back corpus as a novel data source for misconception mining analogous to the submission-log mining in DT-2. A two-cohort A/B study in CSS 142/143 will compare: students who receive Socratic recovery questions after a misconception-flagged teach-back versus students who receive standard post-submission feedback, measuring resubmission cycles, time-to-pass, and conceptual-question performance on follow-up quizzes.",
+      "papers": [
+        {
+          "title": "Teach2Learn: Assessing the Learning among CS1 Students on How Well They Can Teach LLM-Simulated Students",
+          "authors": "University of California, Merced",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770761.3777348",
+          "url": "https://doi.org/10.1145/3770761.3777348",
+          "abstract": "Teach2Learn is a platform that assesses CS1 student learning by asking students to demonstrate knowledge by teaching an LLM-simulated peer. Two in-class pilot studies (N=87) showed an increase in student confidence in programming, though the impact on conceptual understanding was mixed across engineering and non-engineering cohorts. The platform presents a framework for teaching in harmony with AI and underscores the need for further research into the pedagogical impact of learning-by-teaching tools.",
+          "relevance": "This paper introduces the teach-back-to-LLM interaction paradigm as an assessment mechanism in CS1 — the exact substrate this research extends into misconception detection and Socratic recovery. Its mixed results on conceptual understanding (confidence improved but knowledge gains were cohort-dependent) motivate the next step: using what students reveal in their explanations to drive targeted remediation rather than treating teach-back as a one-way assessment signal."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "Teach2Eval: An Indirect Evaluation Method for LLM by Judging How It Teaches",
+          "authors": "Yuhang Zhou et al.",
+          "venue": "arXiv preprint, 2025",
+          "year": 2025,
+          "url": "https://arxiv.org/abs/2505.12259",
+          "relevance": "Demonstrates that a model's ability to teach a weaker student model correlates strongly with its general capability across knowledge, reasoning, and multilingual tasks — providing theoretical grounding for using teach-back quality as a signal of conceptual understanding, not just engagement."
+        },
+        {
+          "title": "Misconception-Aware LLM Programming Tutor: Lessons Learned from Student-Tutor Interactions",
+          "authors": "Rose Niousha, Samantha Boatright Smith, et al.",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "url": "https://doi.org/10.1145/3770761.3777289",
+          "relevance": "Shows that grounding LLM tutor feedback in a pre-specified misconception taxonomy produces more pedagogically helpful and less misleading responses than generic prompting. The misconception taxonomy design principles directly inform how this research classifies teach-back errors."
+        },
+        {
+          "title": "A SoTL Study of Generative AI-Facilitated Feynman Reviews",
+          "authors": "Various",
+          "venue": "ACL 2025 Workshop on AI for Education (AiMECon)",
+          "year": 2025,
+          "url": "https://aclanthology.org/2025.aimecon-wip.14",
+          "relevance": "Provides empirical evidence that AI-facilitated implementations of the Feynman Technique (explain it simply to check understanding) produce knowledge-building effects comparable to human tutoring, supporting the Teach2Learn paradigm's learning-by-teaching mechanism and its scalability as a classroom tool."
+        },
+        {
+          "title": "That's Not the Feedback I Need! Student Engagement with GenAI Feedback in the Tutor Kai",
+          "authors": "Various",
+          "venue": "arXiv preprint, 2025",
+          "year": 2025,
+          "url": "https://arxiv.org/abs/2506.20433",
+          "relevance": "Documents the disconnect between what AI tutors deliver and what students actually need — including that generic hints frustrate students with deeper misconceptions. This motivates the research's focus on misconception-specific Socratic questions rather than generic corrective feedback."
+        }
+      ],
+      "researchPlan": {
+        "overview": "This project adapts Jolly Feedback's existing submission infrastructure and CSS 142/143 as a living testbed to intercept student teach-back explanations, classify misconceptions via LLM clustering, and inject Socratic recovery questions before the next submission attempt. The resulting teach-back corpus also becomes the raw data for constructing an institution-specific CS1 misconception taxonomy — advancing the DT-2 agenda — while the Socratic recovery module advances DT-4.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review (teach-back learning, Feynman technique in CS, LLM-based misconception detection) and RQ finalization; audit Teach2Learn codebase for extension points",
+            "deliverable": "Annotated bibliography (20+ papers) + refined research questions + system architecture sketch"
+          },
+          {
+            "month": 2,
+            "goal": "Build teach-back prototype on top of Jolly Feedback: student submits code, system prompts teach-back dialogue with LLM-simulated novice peer, logs the transcript",
+            "deliverable": "Working prototype deployed in CSS 142 as optional extra-credit activity; 30+ pilot transcripts collected"
+          },
+          {
+            "month": 3,
+            "goal": "Develop misconception classifier: prompt engineering + few-shot labeling of pilot transcripts; validate against TA-labeled ground truth",
+            "deliverable": "Classifier achieving >70% agreement with TA labels on held-out transcripts; draft misconception taxonomy for CSS 142"
+          },
+          {
+            "month": 4,
+            "goal": "Implement Socratic recovery question generator: given a classified misconception, generate 2-3 guided questions (no answers); conduct think-aloud usability study with 6-8 students",
+            "deliverable": "Usability report + refined prompts + IRB-approved protocol for the A/B study"
+          },
+          {
+            "month": 5,
+            "goal": "Run A/B study in CSS 142/143 (two sections): treatment receives Socratic recovery after flagged teach-backs; control receives standard post-submission feedback. Collect resubmission cycles, time-to-pass, follow-up quiz scores",
+            "deliverable": "Dataset of 60-100 student interactions per condition; preliminary statistical analysis"
+          },
+          {
+            "month": 6,
+            "goal": "Analyze results, write paper comparing Socratic recovery vs. direct feedback on all outcome measures; present draft at lab meeting",
+            "deliverable": "Submitted paper draft (SIGCSE TS 2027 or ICER 2027 deadline)"
+          }
+        ],
+        "targetVenues": ["SIGCSE TS", "ICER", "AIED", "EDM"],
+        "resources": "Canvas LMS API (already in use for Jolly Feedback), CSS 142/143 class sections as testbed, Claude API credits (~$200/month during study), one undergraduate RA for TA-labeling of transcripts, IRB protocol for classroom data collection",
+        "risks": [
+          {
+            "risk": "IRB approval may delay classroom deployment by 4-8 weeks",
+            "mitigation": "Submit IRB application at project start; run the pilot in Month 2 under educational-improvement exemption (no identifiable data retained beyond aggregate); use IRB-approved protocol only for the formal A/B study in Month 5"
+          },
+          {
+            "risk": "Students game the teach-back by explaining correctly without true understanding (surface performance)",
+            "mitigation": "Randomize the LLM peer's follow-up questions and misconception probes so students cannot predict the interaction; compare teach-back performance against independent conceptual quiz as a validity check"
+          },
+          {
+            "risk": "Misconception classifier has low precision on novel error types not seen in pilot transcripts",
+            "mitigation": "Use an open-ended 'unknown misconception' category that routes to a human TA for labeling; iteratively expand the taxonomy each semester using active learning to select the most informative unlabeled transcripts"
+          }
+        ],
+        "humanSubjects": true
+      }
+    }
+  ]
+}
