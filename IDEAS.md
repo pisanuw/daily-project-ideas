@@ -280,3 +280,7 @@
 | 2026-08-01 | Exam Question Equity Scanner | Teaching Tool | 1-2 Weeks |
 | 2026-08-01 | Federated Learning Privacy Lab | Classroom Assignment | Multi-week |
 | 2026-08-01 | Teach-Back Misconception Mining: From LLM-Peer Explanations to Targeted Socratic Recovery in CS1 | Research | Research |
+| 2026-08-02 | Type Witness | Side Project | Weekend |
+| 2026-08-02 | Expert Think-Aloud Studio | Teaching Tool | 1-2 Weeks |
+| 2026-08-02 | Self-Narrating Game Agent | Classroom Assignment | Multi-week |
+| 2026-08-02 | XAI-Grounded CS Feedback Transparency: From Black-Box Predictions to Legible Tutoring Decisions | Research | Research |

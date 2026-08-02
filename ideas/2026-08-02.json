@@ -1,0 +1,162 @@
+{
+  "date": "2026-08-02",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Type Witness",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A browser-based TypeScript type inference visualizer that shows, step by step, how the compiler resolves types through each expression -- like a slow-motion replay of the type checker.",
+      "description": "TypeScript type errors are notoriously opaque: the error message tells you what went wrong but not how the compiler arrived there. Type Witness lets you paste a TypeScript snippet and watch type inference unfold expression by expression -- each sub-expression highlighted with its inferred type, generic constraints shown as they narrow, and union intersections resolved in sequence. Students learn the type system by seeing it think; developers debug cryptic errors by rewinding to where inference first went astray. Built with React + Vite + the TypeScript Compiler API running in a Web Worker, all in-browser with no server needed.",
+      "keyFeatures": [
+        "Step-through timeline: forward/backward through each inference step with keyboard shortcuts",
+        "Inline type pop-ups that show the full resolved type at any cursor position",
+        "Error explanation mode: when a type error exists, highlights the exact step where types diverged and explains why in plain English via Claude API",
+        "Share a URL for any snippet so students can load a specific example in class"
+      ],
+      "techStack": "React + Vite, TypeScript Compiler API (tsc programmatic API in a Web Worker), Claude API for error explanations, Tailwind CSS",
+      "whyInteresting": "TypeScript adoption has exploded, yet learning its type system is still largely trial-and-error. No existing tool shows inference as an animated process. Useful for every CS course that teaches typed languages, and genuinely portfolio-worthy as a developer tool.",
+      "inspiredBy": "Repeated student confusion over TypeScript type errors in upper-division CS courses; growing demand for TypeScript in CS curricula; developer tool trends around making compiler internals visible"
+    },
+    {
+      "n": 2,
+      "title": "Expert Think-Aloud Studio",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "A tool for instructors to record and share authentic problem-solving sessions -- wrong turns, debugging detours, and all -- with AI-generated segmentation, highlight reel, and student guide.",
+      "description": "Polished lecture videos hide the messy reality of expert problem-solving. Expert Think-Aloud Studio lets an instructor record their screen and voice while solving a coding problem, then automatically transcribes the audio, segments the recording into phases (problem framing, failed attempts, insight moments, solution), and flags 'productive failure' moments where the instructor made a mistake and recovered. The output is a shareable page with the full recording, a timestamped topic outline, an annotated highlight reel of key decision points, and a generated student guide the instructor can edit and post. Students see that struggle is part of expertise, not a sign they don't belong.",
+      "keyFeatures": [
+        "Browser-based screen + audio recording (MediaRecorder API), no install required",
+        "Auto-transcription and phase segmentation via Claude API (problem framing / attempted approach / pivoting / solution)",
+        "Highlight reel generator that clips and labels the top 3-5 pedagogically rich moments",
+        "Editable student guide output (Markdown) that instructors can post to their LMS or course site"
+      ],
+      "techStack": "React + Vite, MediaRecorder API, Supabase (storage + auth), Claude API (transcription and segmentation), Tailwind CSS",
+      "whyInteresting": "There is strong evidence that watching experts think aloud builds metacognitive skills in learners, but creating such content is tedious without tooling. This lowers the barrier enough that a professor can make a polished think-aloud episode during prep time. Uniquely useful at teaching-focused institutions where video production support is limited.",
+      "inspiredBy": "Research on metacognitive modeling in CS education; the gap between polished lecture recordings and authentic problem-solving; growing instructor interest in 'productive failure' pedagogy"
+    },
+    {
+      "n": 3,
+      "title": "Self-Narrating Game Agent",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "Students build a simple game and an AI agent that plays it while narrating every decision in natural language -- then evaluate whether the narrations are faithful explanations or post-hoc rationalizations.",
+      "description": "This multi-week assignment fuses two of the hardest ideas in AI: making an agent that plays well and making an agent that explains itself honestly. Students first build a small game (turn-based dungeon, tower defense, or maze -- their choice using Phaser or a text-based Python engine). They then implement a rule-based or search-based AI agent that plays the game and, after each decision, generates a natural-language rationale via the Claude API ('I moved left because the right corridor had three enemies and I needed a health pickup'). The final deliverable is an evaluation report: students use a structured rubric to judge whether the narrations faithfully reflect the agent's actual decision logic or merely sound plausible. This teaches game AI, prompt engineering, and the faithfulness vs. plausibility distinction central to AI explainability research. Connects directly to Pisan's 2001 work on agents that justify their actions.",
+      "keyFeatures": [
+        "Starter scaffold in Phaser (browser) or Python (terminal) for the game engine",
+        "Agent architecture template with a decision hook that feeds context to the Claude API for narration",
+        "Evaluation rubric: faithfulness score (does the narration match the actual decision inputs?), fluency, and misleadingness",
+        "Optional multiplayer mode: two student-built agents compete while narrating, and peers vote on whose narrations are more truthful"
+      ],
+      "techStack": "Phaser 3 + Vite (or Python terminal), Claude API (narration generation), Flask (if server-side agent logic), Supabase (multiplayer state and submission logging)",
+      "whyInteresting": "Explainability is one of the most important open problems in AI, but most CS courses address it only as a concept. This assignment makes students confront the faithfulness problem empirically by building and testing a system themselves. The game framing keeps it fun; the evaluation rubric gives it rigor. Scales from a weekend prototype to a polished portfolio piece.",
+      "inspiredBy": "Pisan's 2001 FUZZ-IEEE paper 'Increasing believability: agents that justify their actions'; growing focus on AI explainability in CS curricula; GitHub trending AI agent projects with built-in reasoning transparency"
+    },
+    {
+      "n": 4,
+      "title": "XAI-Grounded CS Feedback Transparency: From Black-Box Predictions to Legible Tutoring Decisions",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "A research program to make automated CS feedback systems transparent by applying XAI attribution techniques at the individual student level, then using an LLM layer to translate attributions into natural-language rationales students and instructors can audit.",
+      "description": "Automated feedback systems like Jolly Feedback produce pass/fail outputs; LLM-enhanced systems add natural-language critique. But neither explains WHY the system flagged a specific issue -- which features of the submission drove the feedback, and whether the reasoning is educationally sound. A 2025 systematic review (Choi et al., ITiCSE 2025) found that XAI techniques such as SHAP are almost never applied at the individual level in CS education, and that using XAI to generate personalized recommendations remains an open research gap. This project fills that gap by: (1) instrumenting the Jolly Feedback submission pipeline with SHAP-style attribution over test-failure signals to identify which code features drove each feedback decision; (2) using an LLM translation layer (inspired by the iLLuMinaTE AAAI 2025 framework) to convert attribution vectors into readable rationales; and (3) running a within-subjects study in CSS 142/143 to measure whether transparent rationales increase student trust, reduce resubmission cycles, and help instructors audit systemic bias in feedback coverage. This directly extends Pisan's career-long explainability agenda -- from agents that justify game actions (2001) to a tutor that justifies its pedagogical decisions (2026).",
+      "papers": [
+        {
+          "title": "A Systematic Literature Review of Explainable Artificial Intelligence (XAI) for Interpreting Student Performance Prediction in Computer Science and STEM Education",
+          "authors": "Wan-Chong Choi, Chan-Tong Lam (University of Coimbra)",
+          "venue": "ITiCSE 2025",
+          "year": 2025,
+          "doi": "10.1145/3724363.3729027",
+          "url": "https://doi.org/10.1145/3724363.3729027",
+          "abstract": "Educational Data Mining (EDM) supports early detection of learning difficulties by predicting student performance. However, machine learning models often operate as black boxes. This paper systematically reviews the past five years of research on XAI applications for interpreting student performance prediction in CS and STEM education. A research gap was identified in utilizing XAI at the individual level to support course improvements, customize visualizations, and generate personalized recommendations.",
+          "relevance": "This review identifies the exact gap this research fills: SHAP and LIME are used almost exclusively at the global level in CS education research, and using XAI to generate personalized, actionable recommendations for individual students is explicitly flagged as an open direction. Pisan's Jolly Feedback infrastructure and misconception data provide an ideal testbed."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "iLLuMinaTE: An LLM-XAI Framework Leveraging Social Science Explanation Theories Towards Actionable Student Performance Feedback",
+          "authors": "Sonsoles Lopez-Pernas, Mohammed Saqr, et al.",
+          "venue": "AAAI 2025",
+          "year": 2025,
+          "url": "https://arxiv.org/abs/2409.08027",
+          "relevance": "Demonstrates a production-grade pipeline that takes XAI attribution outputs and uses an LLM (GPT-4o, Llama3, Gemma2) with social-science explanation theories to produce actionable student feedback. Students preferred iLLuMinaTE explanations over raw XAI output 89.5% of the time. This is the closest architectural prior for the LLM translation layer proposed here, applied to CS1 programming feedback."
+        },
+        {
+          "title": "Explainable AI for Automated Assessment: Improving Transparency and Trust in Computer-Assisted Grading Systems",
+          "authors": "Various",
+          "venue": "ResearchGate preprint, 2025",
+          "year": 2025,
+          "url": "https://www.researchgate.net/publication/397432482_Explainable_Ai_For_Automated_Assessment_Improving_Transparency_And_Trust_In_Computer-Assisted_Grading_Systems",
+          "relevance": "Reports that XAI-enhanced autograding achieves higher accuracy and fairness than standard AI grading (90% vs. 82% accuracy, 88% vs. 76% fairness), and that transparency increases educator and student trust. Provides the justification for why transparency is not just academically interesting but practically beneficial."
+        },
+        {
+          "title": "Increasing Believability: Agents That Justify Their Actions",
+          "authors": "Yusuf Pisan",
+          "venue": "FUZZ-IEEE 2001",
+          "year": 2001,
+          "url": "https://scholar.google.com/scholar?q=Pisan+believability+agents+justify+actions+2001",
+          "relevance": "Pisan's own 2001 work established that agents which explain their decisions are perceived as more believable and trustworthy by users. The faithfulness-vs.-plausibility distinction raised in that paper is the central empirical question of this research: do LLM-generated feedback rationales faithfully represent the underlying signal, or do they produce fluent-but-misleading explanations?"
+        },
+        {
+          "title": "A Systematic Review of Automated Feedback Systems for Programming Education",
+          "authors": "Hieke Keuning, Johan Jeuring, Bastiaan Heeren",
+          "venue": "ACM Transactions on Computing Education, 2019",
+          "year": 2019,
+          "url": "https://doi.org/10.1145/3231711",
+          "relevance": "The canonical baseline review of 101 automated programming feedback tools, confirming that nearly all report only pass/fail results with no explanation of the reasoning behind the feedback. Establishes the gap that both Jolly Feedback and this research aim to close, and provides evaluation criteria (correctness, granularity, explainability) for benchmarking new systems."
+        }
+      ],
+      "researchPlan": {
+        "overview": "This project instruments Pisan's existing Jolly Feedback pipeline with SHAP-style attribution to identify which submission features drive each feedback decision, then uses an LLM translation layer to produce natural-language rationales for both students and instructors. A within-subjects study in CSS 142/143 measures whether transparent rationales improve student trust, reduce resubmission cycles, and surface systematic gaps in feedback coverage. The six-month arc moves from infrastructure to evaluation to paper submission.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review and system audit",
+            "deliverable": "Annotated bibliography (30+ papers on XAI in education, LLM feedback, and automated assessment) + audit of Jolly Feedback's current feature pipeline and available submission logs"
+          },
+          {
+            "month": 2,
+            "goal": "Attribution instrumentation",
+            "deliverable": "SHAP attribution layer integrated into Jolly Feedback test-failure pipeline; per-submission attribution vectors logged to Supabase; unit tests confirming attribution consistency"
+          },
+          {
+            "month": 3,
+            "goal": "LLM translation layer and rationale generation",
+            "deliverable": "Prompt templates (Claude API) that translate attribution vectors into student-facing rationales and instructor-facing coverage reports; manual review of 50 generated rationales for faithfulness and fluency"
+          },
+          {
+            "month": 4,
+            "goal": "Pilot deployment and data collection in CSS 142/143",
+            "deliverable": "Within-subjects pilot (one assignment with rationale-on vs. rationale-off condition); pre/post trust survey; resubmission counts logged; 10 student think-aloud interviews"
+          },
+          {
+            "month": 5,
+            "goal": "Analysis and faithfulness evaluation",
+            "deliverable": "Statistical analysis of resubmission cycles and trust scores; human-rater faithfulness scoring of 100 rationale-decision pairs; identification of failure modes (fluent-but-wrong rationales)"
+          },
+          {
+            "month": 6,
+            "goal": "Paper writing and submission",
+            "deliverable": "Submitted paper draft for SIGCSE TS 2027 or ICER 2027, including system description, study design, quantitative and qualitative results, and discussion of faithfulness vs. plausibility in LLM-generated educational rationales"
+          }
+        ],
+        "targetVenues": ["SIGCSE TS", "ICER", "EDM", "AIED"],
+        "resources": "Jolly Feedback codebase (owned), CSS 142/143 student submission logs (existing), Claude API access, Supabase (existing), 1 undergraduate research assistant for think-aloud interviews and rater training, IRB approval needed for student surveys and interviews",
+        "risks": [
+          {
+            "risk": "SHAP attribution over LLM-generated test failure signals may be unstable or uninterpretable when the underlying model is itself an LLM",
+            "mitigation": "Begin with a classical ML baseline (gradient-boosted classifier over hand-crafted code features) as the attribution target, then extend to LLM-based feedback as a second phase once the pipeline is validated"
+          },
+          {
+            "risk": "Students may not meaningfully engage with rationales if they appear in a UI element they tend to skip",
+            "mitigation": "Co-design the rationale display with student focus groups in month 3 before the pilot; test both inline and email-based delivery modes"
+          },
+          {
+            "risk": "Generated rationales may be fluent but systematically unfaithful, making the system worse than no rationale",
+            "mitigation": "Build the faithfulness scoring rubric early (month 3) and use it as a go/no-go gate before the pilot; include a 'rationale confidence' flag that suppresses low-confidence explanations"
+          }
+        ],
+        "humanSubjects": true
+      }
+    }
+  ]
+}
