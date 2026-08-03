@@ -1,0 +1,166 @@
+{
+  "date": "2026-08-03",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Slide Critique Bot",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "Upload or paste a slide deck and get instant AI critique on information density, narrative arc, jargon level, and visual clarity — slide by slide, with actionable suggestions.",
+      "description": "CS students and researchers routinely share dense, bullet-heavy slide decks without structured feedback before the big presentation day. Slide Critique Bot lets you paste slide content or upload a PDF, then uses Claude's multimodal API to analyze each slide across four dimensions: information overload (too many bullets per slide), narrative coherence (does the story flow logically?), jargon density (unexplained acronyms, assumed background), and visual description quality (is each visual earning its space?). Output is a per-slide breakdown plus an overall summary report you can download as Markdown. The one-slide-one-idea heuristic drives the scoring, so you quickly learn which slides to split, cut, or clarify. Built in a single afternoon with React + Vite + Claude API vision endpoint.",
+      "keyFeatures": [
+        "Multimodal PDF upload or text-paste input per slide",
+        "Per-slide critique across four dimensions with letter grades",
+        "Overall narrative arc score with reordering suggestions",
+        "Downloadable Markdown report with inline fix suggestions",
+        "Jargon glossary auto-generated for undefined terms"
+      ],
+      "techStack": "React + Vite + Tailwind CSS, Claude API (multimodal/vision)",
+      "whyInteresting": "Most presentation feedback happens during or after the talk, when it is too late to restructure. Instant pre-presentation critique fills the gap between 'draft done' and 'ready to present' without waiting for a TA or instructor review slot.",
+      "inspiredBy": "HN 'Ask HN: What are you working on?' threads discussing AI content-quality tools; CS educator frustration with students submitting dense, unreadable slide decks in capstone reviews"
+    },
+    {
+      "n": 2,
+      "title": "Semantic Page Monitor",
+      "category": "Side Project",
+      "complexity": "1-2 Weeks",
+      "summary": "Watch any list of URLs for meaningful content changes and receive plain-English summaries of what changed and why it matters — not just 'line 47 differs'.",
+      "description": "Standard webpage monitors tell you that a page changed; Semantic Page Monitor tells you what changed and why it matters. You add URLs to watch (scholarship eligibility pages, department requirements, software pricing, course catalog entries, financial aid rules) and a daily scheduled job fetches each page, stores a snapshot in Supabase, and compares it to the previous version using Claude API. Instead of a raw text diff, you get a semantic summary: 'The GPA requirement for the merit scholarship increased from 3.2 to 3.5 effective Fall 2027' or 'The refund policy section was removed entirely.' A React dashboard shows monitored URLs, a change timeline, and AI-generated change cards. Optional webhook or email digest keeps you notified without checking the dashboard daily. The scheduling layer can be implemented with a Supabase Edge Function or a Claude Code remote trigger — the same infrastructure that powers this project.",
+      "keyFeatures": [
+        "Add any public URL to the watchlist; configurable check frequency",
+        "Semantic diff powered by Claude API — explains the meaning of changes, not just character deltas",
+        "Supabase storage for full page snapshots and change history",
+        "React dashboard with timeline view and change severity tags",
+        "Webhook and email digest for proactive alerts"
+      ],
+      "techStack": "React + Vite + Tailwind CSS, Supabase (Postgres + Edge Functions), Claude API",
+      "whyInteresting": "Policy pages, scholarship deadlines, and course requirements change quietly and consequentially. A semantic monitor that explains changes in plain language is useful to students, advisors, and faculty who cannot manually check every page they rely on.",
+      "inspiredBy": "HN 'Ask HN: What are you working on? (July 2026)' — a project described as a pipeline that monitors government/organization sources and triggers pull requests or notifications when policy information changes semantically"
+    },
+    {
+      "n": 3,
+      "title": "Paper Argument Cartographer",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "An AI-assisted tool that extracts and visualizes the argument structure of a research paper, letting students annotate claims, flag assumptions, and surface counterarguments for class discussion.",
+      "description": "Close reading and critical evaluation of research papers is a core upper-division CS skill, but students rarely get structural scaffolding for this practice beyond 'write a summary.' Paper Argument Cartographer lets a student upload a CS paper PDF; Claude API extracts the argument map — main thesis, supporting claims, methodology, key evidence, stated limitations, and unstated assumptions — and renders it as an interactive D3.js diagram. Students then annotate each node: do they agree with the claim? Can they cite a counterexample? AI surfaces potential counterarguments or missing citations on demand, acting as a 'devil's advocate' reviewer. A group mode allows multiple students to annotate the same paper, and an instructor dashboard highlights nodes where the class disagrees most — pinpointing exactly what to discuss in the next lecture. Builds critical reading, argumentation, and literature review skills in one assignment.",
+      "keyFeatures": [
+        "Multimodal PDF upload; Claude API extracts thesis, claims, evidence, assumptions, and limitations",
+        "Interactive D3.js argument map with zoom, pan, and node detail panel",
+        "Student annotation layer: agree/disagree, personal counterargument, linked evidence",
+        "AI devil's advocate mode: generates potential objections to any selected claim",
+        "Group mode with class disagreement heatmap for instructor-led discussion",
+        "Export as annotated Markdown outline or image for submission"
+      ],
+      "techStack": "React + Vite + Tailwind CSS, D3.js, Supabase (auth + annotations storage), Claude API (multimodal)",
+      "whyInteresting": "Research methods courses and upper-division CS seminars often struggle to turn paper reading into active practice. This tool scaffolds exactly the analytical moves that distinguish expert readers — finding assumptions, generating counterarguments, locating evidence gaps — within a single structured assignment.",
+      "inspiredBy": "HN discussions on how to genuinely understand a research paper rather than just summarize it; gap in CS research-methods course tooling for structured critical-reading practice"
+    },
+    {
+      "n": 4,
+      "title": "Misconception-Grounded LLM Student Personas for CS TA Training",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Extend VR-based TA training simulation to a web-based platform where AI student personas are grounded in institution-specific CS1 misconception taxonomies mined from submission logs, and evaluate whether such grounded personas produce more targeted, transferable TA skills than generic ones.",
+      "description": "VISTA (SIGCSE TS 2026) demonstrates that VR simulations with AI-driven student personas can train CS teaching assistants more scalably than live rehearsals, but its personas are defined by generic behavioral archetypes (high-need, low self-efficacy) rather than the specific programming misconceptions TAs will actually encounter. This research proposes replacing generic archetypes with misconception-grounded personas derived from institution-specific submission logs (such as those generated by Jolly Feedback), connecting Pisan's DT-2 misconception-modeling agenda directly to TA professional development. In a web-based text-chat simulator, each AI persona embodies a specific, named misconception (e.g., 'confuses pass-by-value with pass-by-reference in C++') and responds authentically to TA questions based on that misconception's internal logic. A controlled experiment compares TAs trained on generic vs. misconception-grounded personas, measuring response quality with a rubric aligned to the Socratic hint literature. The approach requires no VR hardware, making it accessible to institutions without that infrastructure, and the persona generator itself is a reusable artifact for the broader CS education community.",
+      "papers": [
+        {
+          "title": "VISTA: Virtual Interactive Simulation for Teaching Assistants",
+          "authors": "Fatemeh Sarshartehrani, Margaret Ellis, Asma Al Qahtani, Brett D. Jones",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770761.3777315",
+          "url": "https://doi.org/10.1145/3770761.3777315",
+          "abstract": "CS teaching assistants are vital for fostering student motivation and belonging, yet traditional training often lacks scalable, immersive practice. VISTA addresses these challenges by simulating realistic TA-student interactions in a virtual office-hours environment using Meta Quest 2 headsets. It employs a three-stage learning model — observe, interact, reflect — with five AI-driven student personas (e.g., high-need, low self-efficacy, solution-focused) derived from instructor and TA consultations, providing rubric-based feedback aligned with the MUSIC Model of Motivation.",
+          "relevance": "VISTA is the direct source paper: it establishes the viability of AI-powered student persona simulation for TA training but relies on generic behavioral archetypes and VR hardware. This research extends VISTA by grounding personas in real CS1 misconception taxonomies mined from submission logs, removing the VR hardware requirement, and testing whether specificity of persona grounds produces more transfer-ready TA skills."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "EducaSim: Interactive Simulacra for CS1 Instructional Practice",
+          "authors": "Various (arXiv preprint)",
+          "venue": "arXiv, 2025",
+          "year": 2025,
+          "url": "https://arxiv.org/abs/2410.03017",
+          "relevance": "EducaSim uses generative agents with pedagogical-based personas and actual course material to simulate small-group CS1 sections for teachers-in-training. It demonstrates that LLM-based simulation is feasible for CS instructional practice at scale (deployed to support a 20,000-student CS1 course), providing a direct precedent for the web-based simulator proposed here."
+        },
+        {
+          "title": "Simulating Students with Large Language Models: A Review of Architecture, Mechanisms, and Role Modelling in Education with Generative AI",
+          "authors": "Various (arXiv preprint)",
+          "venue": "arXiv, 2025",
+          "year": 2025,
+          "url": "https://arxiv.org/abs/2511.06078",
+          "relevance": "A comprehensive review of the emerging literature on LLM student simulation, covering persona specification, grounding strategies, and fidelity evaluation. Provides the theoretical framing for distinguishing generic behavioral personas from misconception-grounded ones and situates this research within the broader trajectory of the field."
+        },
+        {
+          "title": "Classroom Simulacra: Building Contextual Student Generative Agents in Online Education for Learning Behavioral Simulation",
+          "authors": "Various (arXiv preprint)",
+          "venue": "arXiv, 2025",
+          "year": 2025,
+          "url": "https://arxiv.org/abs/2502.02780",
+          "relevance": "Introduces contextual student generative agents whose behavior is shaped by actual course interaction history rather than hand-authored persona specs, directly motivating the proposed approach of grounding TA-training personas in real submission-log misconception patterns rather than hand-written archetypes."
+        },
+        {
+          "title": "Embracing Imperfection: Simulating Students with Diverse Cognitive Levels Using LLM-based Agents",
+          "authors": "Various (arXiv preprint)",
+          "venue": "arXiv, 2025",
+          "year": 2025,
+          "url": "https://arxiv.org/abs/2505.19997",
+          "relevance": "Studies how to create LLM-based student agents that authentically represent diverse cognitive levels, including misconception-holding learners. Its persona-specification methodology and fidelity metrics inform the misconception-persona construction pipeline proposed here."
+        }
+      ],
+      "researchPlan": {
+        "overview": "The project proceeds in two phases: (1) a data-driven phase that mines Jolly Feedback submission logs to build a CS1 misconception taxonomy and implements it as a persona-generation pipeline, producing a validated set of LLM student personas; (2) an experimental phase that deploys a web-based TA training simulator and runs a controlled pilot comparing generic vs. misconception-grounded personas on TA response quality. Together the phases produce two publishable artifacts: the misconception-persona generator (engineering contribution) and the controlled evaluation (empirical contribution).",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review of TA training simulation, LLM student personas, and CS1 misconception taxonomies; begin mining Jolly Feedback submission logs with LLM-assisted clustering",
+            "deliverable": "Annotated bibliography (30+ papers) and preliminary misconception taxonomy draft from log analysis"
+          },
+          {
+            "month": 2,
+            "goal": "Finalize misconception taxonomy (10-15 named misconceptions with behavioral signatures); build persona generator that maps each misconception to a structured LLM system prompt specifying knowledge state, help-seeking style, and response patterns",
+            "deliverable": "Validated persona generator with 10-15 misconception personas; qualitative review by two CS instructors"
+          },
+          {
+            "month": 3,
+            "goal": "Build web-based TA training simulator: text-chat interface where TAs conduct office hours with AI personas; rubric-based automated feedback on TA response quality (Socratic questioning, hint specificity, avoiding answer-giving)",
+            "deliverable": "Deployed web app (React + Claude API) with automated rubric feedback; five generic and five misconception-grounded training scenarios"
+          },
+          {
+            "month": 4,
+            "goal": "IRB submission and approval; recruit TA participants; run controlled pilot (random assignment to generic vs. misconception-grounded persona condition); collect pre/post rubric-graded TA responses",
+            "deliverable": "IRB approval; pilot dataset from 20-30 TA participants; coded TA response transcripts"
+          },
+          {
+            "month": 5,
+            "goal": "Quantitative and qualitative analysis: compare response quality across conditions; TA exit interviews on perceived realism and training value; iterate on persona specifications based on findings",
+            "deliverable": "Analysis report with effect size estimates; revised personas; preliminary results section draft"
+          },
+          {
+            "month": 6,
+            "goal": "Write and submit full paper; release persona generator and simulator as open-source artifacts",
+            "deliverable": "Submitted conference paper; public GitHub repo with all code and the misconception taxonomy"
+          }
+        ],
+        "targetVenues": ["SIGCSE", "ICER", "AIED", "ITiCSE"],
+        "resources": "Jolly Feedback submission logs from prior CSS 142/143 offerings (owned data, no new collection needed); Claude API credits for persona simulation (approximately 5M tokens for pilot); web hosting for the simulator (Supabase free tier); 1 undergraduate research assistant for participant recruitment and transcript coding; IRB approval for TA participants.",
+        "risks": [
+          {
+            "risk": "LLM personas may break character or fail to maintain consistent misconceptions across a multi-turn dialogue, reducing ecological validity of the training scenarios.",
+            "mitigation": "Use structured system prompts with explicit misconception state and turn-by-turn consistency checks; conduct a pilot fidelity study with CS instructors rating persona authenticity before the controlled experiment."
+          },
+          {
+            "risk": "TA participant pool at a small regional university may be too small (fewer than 20 TAs per semester) for statistical power, limiting the experimental phase.",
+            "mitigation": "Partner with one additional institution (UW Seattle or community college partner) for recruitment; consider a within-subjects crossover design to reduce the required N."
+          },
+          {
+            "risk": "Submission log data may not cluster cleanly into discrete misconceptions if error messages are uninformative (e.g., only compile errors without code context).",
+            "mitigation": "Supplement log-based clustering with instructor interviews and existing CS1 misconception literature (e.g., Qian and Lehman 2017) to seed the taxonomy when log signals are weak."
+          }
+        ],
+        "humanSubjects": true
+      }
+    }
+  ]
+}

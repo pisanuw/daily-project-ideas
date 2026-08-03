@@ -284,3 +284,7 @@
 | 2026-08-02 | Expert Think-Aloud Studio | Teaching Tool | 1-2 Weeks |
 | 2026-08-02 | Self-Narrating Game Agent | Classroom Assignment | Multi-week |
 | 2026-08-02 | XAI-Grounded CS Feedback Transparency: From Black-Box Predictions to Legible Tutoring Decisions | Research | Research |
+| 2026-08-03 | Slide Critique Bot | Side Project | Weekend |
+| 2026-08-03 | Semantic Page Monitor | Side Project | 1-2 Weeks |
+| 2026-08-03 | Paper Argument Cartographer | Classroom Assignment | Multi-week |
+| 2026-08-03 | Misconception-Grounded LLM Student Personas for CS TA Training | Research | Research |
