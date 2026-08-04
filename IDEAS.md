@@ -288,3 +288,7 @@
 | 2026-08-03 | Semantic Page Monitor | Side Project | 1-2 Weeks |
 | 2026-08-03 | Paper Argument Cartographer | Classroom Assignment | Multi-week |
 | 2026-08-03 | Misconception-Grounded LLM Student Personas for CS TA Training | Research | Research |
+| 2026-08-04 | Commit Predictor | Side Project | Weekend |
+| 2026-08-04 | Assignment Exemplar Engine | Teaching Tool | 1-2 Weeks |
+| 2026-08-04 | Process Narrator | Side Project | Multi-week |
+| 2026-08-04 | Contract-First LLM Feedback for CS2: Extending Pedagogical-Framework-Constrained Automated Assessment Beyond Functional CS1 | Research | Research |

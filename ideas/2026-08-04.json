@@ -1,0 +1,170 @@
+{
+  "date": "2026-08-04",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Commit Predictor",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A CLI tool that learns your personal git commit sequence patterns and predicts your most likely next 2-3 commits after each set of staged changes, then drafts a commit message in your own style.",
+      "description": "Commit Predictor analyzes your repo's git log to find recurring commit sequence patterns: what files you touch after refactoring, whether you always follow a bug fix with a test commit, whether you batch doc updates at the end of a feature. After you stage changes, it queries Claude with your staged diff and your personal pattern history to predict the next logical commits and drafts the current commit message matching your historical phrasing. The result is a forward-looking compass for focused development sessions, not just a backward-looking narrator. Ships as a Git hook + interactive CLI.",
+      "keyFeatures": [
+        "Analyzes git log to extract personal commit sequence fingerprints",
+        "Predicts next 2-3 likely commits based on your current staged diff and historical patterns",
+        "Auto-drafts commit message in your own vocabulary and style",
+        "Works as a pre-commit hook or on-demand CLI command",
+        "Fully local: only the current diff and a compact pattern summary go to the API"
+      ],
+      "techStack": "Python CLI, Claude API (claude-sonnet-5), gitpython, rich (terminal UI)",
+      "whyInteresting": "Every commit-helper tool looks backward (narrates what you did) or sideways (validates style). Commit Predictor looks forward, giving developers a lightweight 'what should I do next?' compass that learns their actual habits rather than imposing a generic workflow.",
+      "inspiredBy": "HN 'Ask HN: What are you working on? (July 2026)' thread discussion of personal productivity pipelines and pattern-recognition tools; local-first AI assistant trend (OpenClaw)"
+    },
+    {
+      "n": 2,
+      "title": "Assignment Exemplar Engine",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "Instructors seed the system with a handful of past high- and low-quality student submissions; Claude and vector embeddings automatically benchmark every new submission against those exemplars and generate specific, grounded feedback.",
+      "description": "Rubric-writing is a significant burden, and rubrics often fail to capture what makes a submission excellent in the context of a specific class. Assignment Exemplar Engine flips the model: instructors upload 8-12 past submissions labeled as strong, acceptable, or weak. The system embeds them and the current submission, finds nearest exemplars, and prompts Claude to explain specifically how the new submission compares: which strengths mirror the top-tier exemplars, and which weaknesses appear in the low-tier ones. Feedback is grounded in real student work from the same course rather than abstract rubric criteria. Instructors review and send with one click.",
+      "keyFeatures": [
+        "Instructor dashboard to upload and label past submissions as strong/acceptable/weak",
+        "Semantic embedding similarity search to find the most relevant exemplars for each new submission",
+        "Claude-generated paragraph-level feedback grounded in the exemplar set",
+        "One-click review and send via Canvas API integration",
+        "Blind mode: students never see which exemplar they were compared to"
+      ],
+      "techStack": "React + Vite + Tailwind, Flask, Supabase (storage + pgvector), Claude API, Canvas LMS API",
+      "whyInteresting": "Most LLM grading tools use generic rubrics or hallucinate criteria. Grounding feedback in actual exemplars from the same course makes it specific, defensible, and calibrated to local expectations without requiring instructors to write exhaustive rubric criteria.",
+      "inspiredBy": "Research on exemplar-based assessment in CS education; frustration with rubric-writing overhead discussed in SIGCSE 2026 practitioners' sessions; Autograder+ multi-faceted feedback framework (arXiv:2510.26402)"
+    },
+    {
+      "n": 3,
+      "title": "Process Narrator",
+      "category": "Side Project",
+      "complexity": "Multi-week",
+      "summary": "A local web dashboard that attaches to any running process's output stream and uses Claude to generate real-time plain-language narration of what your code is actually doing, with anomaly alerts and expected-vs-actual divergence detection.",
+      "description": "In the era of vibe coding, developers increasingly run code they did not fully write. Process Narrator bridges the gap: connect it to any CLI process (dev server, migration script, long-running agent, build pipeline) and Claude translates the log stream into running plain-English commentary in a sidebar: 'Now loading configuration... seeding 1,200 rows into users table... connection to cache timed out, falling back to direct query.' Users can define an 'expected behavior' script in prose and the narrator alerts when the actual narration diverges. The tool runs entirely locally, with only sliding-window log chunks sent to the API. Useful for debugging, demos, teaching, and monitoring autonomous agents.",
+      "keyFeatures": [
+        "Attach to any process via stdin pipe, named pipe, or log file tail",
+        "Streaming Claude narration with configurable verbosity (layperson, developer, expert)",
+        "Expected-behavior script mode: define what should happen in prose and get alerts on divergence",
+        "Timeline view of narrated events with searchable transcript",
+        "Export session as annotated log for post-mortem sharing"
+      ],
+      "techStack": "React + Vite + Tailwind (frontend), Python (FastAPI + WebSockets backend), Claude API streaming, Server-Sent Events",
+      "whyInteresting": "Static code analysis tells you what code does; Process Narrator tells you what it is doing right now. As agentic code and AI-generated scripts become routine, tools that make runtime behavior legible in plain language fill a real gap for debugging, teaching, and monitoring.",
+      "inspiredBy": "HN 'What are you working on? (July 2026)' entries on monitoring pipelines; the rise of autonomous agent debugging; local-first AI assistant trend; need to make generated code's behavior comprehensible"
+    },
+    {
+      "n": 4,
+      "title": "Contract-First LLM Feedback for CS2: Extending Pedagogical-Framework-Constrained Automated Assessment Beyond Functional CS1",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Adapts FEEDBOT's key insight — using a structured pedagogical framework to constrain LLM feedback to appropriately limited, actionable hints — from functional CS1 (the Design Recipe) to imperative CS2 C++ courses using a contract-first framework (preconditions, postconditions, class invariants, test stubs).",
+      "description": "FEEDBOT (ITiCSE 2025) demonstrated that an LLM constrained by the Design Recipe's sequential steps can provide limited, actionable formative feedback that improves student performance without revealing solutions. The critical generalizability question is whether this framework-constrained approach transfers to other pedagogical contexts. This research proposes applying the FEEDBOT principle to CS2 C++ data-structures courses (e.g., CSS 342/343) by substituting Contract-First Design — requiring students to specify preconditions, postconditions, class invariants, and test stubs before implementation — as the constraining framework. Just as FEEDBOT identifies the first incomplete Design Recipe step, the proposed system identifies the first missing or inadequate contract element, giving students a specific, bounded pointer without disclosing the implementation. The study connects directly to existing automated-feedback infrastructure (Jolly Feedback) and prior solution-free hint work (SIGCSE 2021), and requires no new IRB approval for the initial log-analysis and system-construction phases.",
+      "papers": [
+        {
+          "title": "FEEDBOT: Formative Design Feedback on Programming Assignments",
+          "authors": "Elaine Zhu, Smaran Teja, Chris Coombes, Daniel Patterson",
+          "venue": "ITiCSE 2025",
+          "year": 2025,
+          "doi": "10.1145/3724363.3729063",
+          "url": "https://doi.org/10.1145/3724363.3729063",
+          "abstract": "FEEDBOT is an open-source formative assessment tool leveraging large language models to provide structured, high-level feedback on design-oriented programming assignments. Designed to address the limitations of traditional autograding and overcome scaling challenges of formative assessment, FEEDBOT uses an existing pedagogical framework (the Design Recipe) to provide targeted but limited actionable feedback. Early results demonstrate measurable improvements in student performance in a large introductory computer science course, while avoiding the pitfall of providing too much assistance. The authors argue the general approach is adaptable to many other contexts.",
+          "relevance": "FEEDBOT is the direct source for the core principle: a structured pedagogical framework can constrain LLM feedback to be appropriately limited and actionable. The paper explicitly states that the approach is 'adaptable to many other contexts,' making this research a direct test of that claim in a CS2 C++ setting — the domain of Pisan's CSS 342/343 courses."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "The Effects of Structured LLM-Generated Feedback on Programming Assignment Performance",
+          "authors": "Various",
+          "venue": "arXiv preprint",
+          "year": 2026,
+          "url": "https://arxiv.org/abs/2605.16933",
+          "relevance": "Directly examines how structure imposed on LLM-generated feedback affects student performance outcomes, providing a methodological baseline for evaluating the contract-first feedback approach."
+        },
+        {
+          "title": "Autograder+: A Multi-Faceted AI Framework for Rich Pedagogical Feedback in Programming Education",
+          "authors": "Various",
+          "venue": "arXiv preprint",
+          "year": 2024,
+          "url": "https://arxiv.org/abs/2510.26402",
+          "relevance": "Proposes a multi-tier feedback framework for programming education that uses layered LLM-generated hints; relevant for comparison against the single-framework-constraint approach and for understanding the design space of structured LLM feedback."
+        },
+        {
+          "title": "Generating Planning Feedback for Open-Ended Programming Exercises with LLMs",
+          "authors": "Various",
+          "venue": "arXiv preprint",
+          "year": 2025,
+          "url": "https://arxiv.org/abs/2504.08958",
+          "relevance": "Examines LLM-generated feedback targeted at the planning and design phase of programming (rather than test failures), which is precisely the stage that contract-first pedagogy addresses — preconditions and postconditions are planning artifacts before implementation."
+        },
+        {
+          "title": "Generating Hints for Programming Problems Without a Solution",
+          "authors": "Suciu, Giang, Zhao, Runandy, Dang (advisor: Pisan)",
+          "venue": "SIGCSE SRC 2021",
+          "year": 2021,
+          "url": "https://doi.org/10.1145/3408877.3439712",
+          "relevance": "Pisan's prior work establishing solution-free hint generation as a tractable goal. The contract-first feedback system extends this by using contract specification completeness — rather than problem-statement classification — as the basis for solution-free guidance."
+        }
+      ],
+      "researchPlan": {
+        "overview": "The project constructs a FEEDBOT-style LLM feedback system for C++ CS2 assignments that checks contract completeness (preconditions, postconditions, invariants, test stubs) in sequential order and returns the first deficient element as a targeted hint. An offline study on historical CSS 342/343 submission logs validates that the contract-checking prompt reliably identifies the first missing element, followed by an optional in-class pilot to measure resubmission rates. The deliverable is an open-source tool and a conference paper reporting both the design rationale and evaluation results.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review on pedagogical frameworks in CS2, contract-first design pedagogy, and framework-constrained LLM feedback systems; read FEEDBOT paper in full and map Design Recipe steps to candidate contract-first equivalents",
+            "deliverable": "Annotated bibliography + framework-mapping document specifying the 4-6 contract steps and the sequential evaluation order"
+          },
+          {
+            "month": 2,
+            "goal": "Implement the contract-first feedback prompt pipeline in Python using Claude API; design evaluation rubric for 'correctly identified first deficient element' on historical submissions",
+            "deliverable": "Working prototype that accepts a C++ header + partial implementation and returns a contract-completeness hint; evaluation rubric document"
+          },
+          {
+            "month": 3,
+            "goal": "Offline evaluation on 100-200 past CSS 342/343 submissions (historical data, no IRB required); measure precision of first-deficient-element identification and qualitative rating of hint appropriateness",
+            "deliverable": "Evaluation results table; refined prompt and edge-case handling based on failure analysis"
+          },
+          {
+            "month": 4,
+            "goal": "Integrate with Jolly Feedback infrastructure so the contract hint is emailed alongside pass/fail test results; optionally pilot with one CSS 342 cohort (IRB if live students are included)",
+            "deliverable": "Integrated tool deployed in Canvas/GitHub Classroom; usage logs collected"
+          },
+          {
+            "month": 5,
+            "goal": "Analyze resubmission rates and contract-completeness improvement rates from pilot or from comparison against historical baselines; conduct qualitative analysis of edge cases where the system misidentifies the first deficient step",
+            "deliverable": "Analysis report; comparison table vs. FEEDBOT baseline metrics"
+          },
+          {
+            "month": 6,
+            "goal": "Write and submit conference paper: system description, evaluation methodology, results, discussion of generalizability of pedagogical-framework-constrained LLM feedback",
+            "deliverable": "Submitted paper draft to ITiCSE or SIGCSE"
+          }
+        ],
+        "targetVenues": [
+          "ITiCSE",
+          "SIGCSE",
+          "ICER",
+          "AIED"
+        ],
+        "resources": "Historical CSS 342/343 submission logs (already available via Jolly Feedback / GitHub Classroom); Claude API access; one graduate or advanced undergraduate student research assistant; optional: one section of CSS 342 for live pilot (requires IRB if graded submissions are analyzed with linked student identifiers).",
+        "risks": [
+          {
+            "risk": "Contract-first framework is not uniformly adopted across CSS 342/343 assignments, so not all historical submissions have the required contract elements to evaluate",
+            "mitigation": "Start with a subset of assignments that already require preconditions/postconditions in the spec; optionally add a contract-completion scaffolding step to one new assignment set"
+          },
+          {
+            "risk": "Claude reliably identifies which contract element is missing in simple cases but fails on partial or ambiguous contracts, reducing evaluation precision below publishable threshold",
+            "mitigation": "Use few-shot prompting with expert-labeled examples from the historical log; report precision with confidence intervals and frame ambiguous cases as future work on structured intermediate representations"
+          },
+          {
+            "risk": "Students and instructors may prefer richer (more solution-revealing) feedback despite worse long-term outcomes, making adoption difficult",
+            "mitigation": "Frame the limited-hint design as a pedagogy choice (as FEEDBOT does) and collect qualitative preference data to address this tension directly in the paper"
+          }
+        ],
+        "humanSubjects": false
+      }
+    }
+  ]
+}
