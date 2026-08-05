@@ -1,0 +1,165 @@
+{
+  "date": "2026-08-05",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Video Quiz Sprinter",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "Paste a YouTube URL or transcript and get an instant Bloom's-tiered quiz with answer explanations, turning passive video watching into active self-assessment in seconds.",
+      "description": "Video Quiz Sprinter lets you drop in a YouTube URL or paste a video transcript, then uses an LLM to generate a short quiz across three Bloom's taxonomy levels: recall, comprehension, and application. Each question is answered inline and immediately followed by a concise explanation, reinforcing the concept or correcting the misconception on the spot. Quizzes can be saved with a shareable link, making the tool equally useful for a student doing a solo review session and a faculty member seeding a pre-class activity with zero preparation. A one-click markdown export makes it trivial to drop questions into Canvas or any LMS.",
+      "keyFeatures": [
+        "YouTube URL or transcript paste to instant quiz in one click",
+        "Three Bloom's levels: recall, comprehension, application",
+        "Inline answer input with immediate LLM explanation",
+        "Shareable quiz link via URL hash or short code",
+        "One-click markdown export for LMS upload"
+      ],
+      "techStack": "React + Vite, Tailwind CSS, Claude API (no backend required)",
+      "whyInteresting": "Every student watching recorded lectures needs a way to verify comprehension, but flashcard apps require too much setup and re-watching feels passive. This collapses the gap between watching and knowing into a 30-second workflow and doubles as a zero-prep lecture-prep tool for instructors.",
+      "inspiredBy": "Trending AI study tool landscape in 2026 (Learnco AI, Quizlet AI); active learning research showing quiz-and-recall dramatically outperforms re-reading for retention"
+    },
+    {
+      "n": 2,
+      "title": "Parsons Problem Forge",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "CS instructors paste any code snippet and instantly get a Parsons problem with shuffled lines, optional LLM-generated distractors, and embeddable export, ready to drop into a lab or LMS in under a minute.",
+      "description": "Parsons Problem Forge takes the pain out of authoring one of the most effective low-stakes CS assessment formats. An instructor pastes a code snippet in Python, Java, C++, or JavaScript, selects a difficulty level, and the app uses an LLM to shuffle the lines, produce a meaningful block-indentation representation, and optionally add plausible-but-wrong distractor lines. A live preview shows exactly what students will see. Export options include an embeddable iFrame widget compatible with Canvas, a structured JSON for ParsonsJS, and a printable PDF worksheet for in-person labs. The project is directly inspired by a SIGCSE 2026 finding that Parsons problems were the only question type to generate zero negative student feedback across four semesters of automated assessment trials.",
+      "keyFeatures": [
+        "Paste code to shuffled Parsons problem with one click",
+        "LLM-generated distractor lines with adjustable plausibility",
+        "Live preview in both student and instructor views",
+        "Export: Canvas-compatible iFrame, ParsonsJS JSON, printable PDF",
+        "Multi-language support: Python, Java, C++, JavaScript"
+      ],
+      "techStack": "React + Vite, Tailwind CSS, Claude API, ParsonsJS for the embedded student widget",
+      "whyInteresting": "Parsons problems reduce blank-page anxiety, reveal structural misconceptions, and work for novices and retakers alike, yet they take significant time to hand-author. One-click generation from existing course code removes the main barrier to adoption and gives every instructor a quick formative-assessment format that students consistently rate well.",
+      "inspiredBy": "Moloughney (SIGCSE TS 2026): automated assessment study finding Parsons questions generated uniquely zero negative student feedback across four semesters; ITiCSE 2024 research on automating personalized Parsons problems with LLMs"
+    },
+    {
+      "n": 3,
+      "title": "Open-Source Onboarding Agent",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "A multi-agent web app that analyzes any GitHub repository and generates a personalized first-contribution roadmap for a student, teaching agent architecture, tool use, and real OSS navigation in one project.",
+      "description": "Students build this as a multi-week capstone assignment that teaches them how to compose AI agents with tool calls. The finished product accepts a GitHub repository URL and a brief skill self-assessment, then runs a four-phase agentic pipeline: a Fetcher agent reads the README, CONTRIBUTING guide, and open issues; a Mapper agent builds a concept map of the repository's major modules; a Recommender agent ranks open issues by fit to the student's skill profile; and a Writer agent produces a step-by-step first-contribution guide with specific file pointers. The output is an interactive roadmap page the user can bookmark and share. Building the project teaches agent orchestration, GitHub API integration, prompt engineering for tool use, and reading large unfamiliar codebases, all in a context with immediate real-world payoff.",
+      "keyFeatures": [
+        "Four-phase agentic pipeline: Fetch, Map, Recommend, Write",
+        "Skill self-assessment form drives personalized issue ranking",
+        "Interactive concept map of repository modules and dependencies",
+        "Ranked list of starter issues with file-level guidance",
+        "Step-by-step contribution guide as a shareable, bookmarkable page"
+      ],
+      "techStack": "React + Vite, Tailwind CSS, Flask (Python backend for agent orchestration), Claude API with tool use, GitHub REST API",
+      "whyInteresting": "OSS contribution is one of the highest-signal portfolio moves a CS student can make, yet the cold-start barrier stops most of them. This project turns that barrier into a curriculum topic and gives students a reusable tool they will actually use for their own development.",
+      "inspiredBy": "HN 'Ask: What tools have you made for yourself since AI?' thread; Show HN: OpenKnowledge (AI-first knowledge tool); developer onboarding pain documented across OSS communities; 2026 trend toward agent-first developer tooling with MCP and tool-use"
+    },
+    {
+      "n": 4,
+      "title": "Student-to-System Feedback as a Misconception Signal: Closing the Two-Way Loop in Automated CS1 Assessment",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Extend two-way automated assessment tools to use LLM clustering of per-question student free-text feedback as a real-time misconception signal, then close the loop by generating targeted solution-free hints, evaluated in a controlled study on CS1 programming submissions.",
+      "description": "Recent work on two-way automated assessment tools (AATs) shows that students produce per-question free-text feedback that is a valuable source of information for teaching staff but currently requires manual synthesis to act upon. This research automates that synthesis: an LLM-clustering layer reads student free-text feedback in near real time, maps it to a local misconception taxonomy derived from prior submission logs, and generates targeted solution-free hints delivered to students on subsequent attempts. The intervention is deployed within Jolly Feedback (Pisan's existing automated assessment infrastructure) in CSS 142/143 at UW Bothell using an A/B design, with resubmission count and time-to-pass as primary outcomes. Parsons-problem sections serve as a high-acceptance baseline because the source paper found them uniquely free of negative student feedback, making them the clearest signal channel. Results would directly inform whether student-generated feedback, currently treated as instructor data only, can be repurposed as a real-time learner-facing adaptation signal.",
+      "papers": [
+        {
+          "title": "Automated Assessment Tools: Feedback to and from Students",
+          "authors": "Matthew J. F. Moloughney",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770761.3777144",
+          "url": "https://doi.org/10.1145/3770761.3777144",
+          "abstract": "We have developed a novel Automated Assessment Tool (AAT) facilitating formative assessments for novice programming students in a Higher Education CS setting. The AAT offers automatically generated feedback to students and captures feedback from students per question and per assessment to inform teaching practice. Key findings are: (1) Parsons problem type questions were associated with no negative feedback from students, unique amongst the four AAT question-types; (2) students report concerns about providing free-text feedback per question, but this is a valuable source of information for teaching staff if automatically collated. Future work should replicate the experiments in other HE CS settings.",
+          "relevance": "This paper identifies the gap this research fills: per-question student free-text feedback in AATs is pedagogically rich but manually unscalable. Extending the AAT framework with LLM-mediated misconception clustering and targeted hint generation directly answers the paper's call for automatically collated student feedback and for replication at new institutions."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "A Systematic Literature Review of Automated Feedback Generation for Programming Exercises",
+          "authors": "Hieke Keuning, Johan Jeuring, Bastiaan Heeren",
+          "venue": "ACM Transactions on Computing Education, Vol. 19, No. 1",
+          "year": 2019,
+          "url": "https://doi.org/10.1145/3231711",
+          "relevance": "Provides the broadest map of automated feedback types across 101 tools, establishing that feedback mostly focuses on identifying mistakes and less on guiding the next step. This is exactly the ceiling the proposed LLM hint layer is designed to lift, and the review corroborates Pisan's own Submit! system as a validated prior work."
+        },
+        {
+          "title": "Automating Personalized Parsons Problems with Customized Contexts and Concepts",
+          "authors": "MacNeil et al.",
+          "venue": "ITiCSE 2024",
+          "year": 2024,
+          "url": "https://doi.org/10.1145/3649217.3653568",
+          "relevance": "Shows that LLMs can generate high-quality personalized Parsons problems at scale, establishing the viability of LLM-augmented Parsons workflows. Since Parsons problems are the highest-acceptance format in the source AAT paper, this reference supports using them as the primary signal channel in the proposed study."
+        },
+        {
+          "title": "LLM-based Multimodal Feedback Produces Equivalent Learning and Better Student Perceptions than Educator Feedback",
+          "authors": "Chloe Qianhui Zhao, Jie Cao, Jionghao Lin, Kenneth R. Koedinger",
+          "venue": "LAK 2026",
+          "year": 2026,
+          "url": "https://doi.org/10.1145/3785022.3785124",
+          "relevance": "Establishes that LLM-generated feedback produces learning outcomes equivalent to instructor feedback with better student perception ratings, strengthening the case that the proposed LLM-mediated hint layer will be both effective and acceptable to students in a CS1 context."
+        },
+        {
+          "title": "Exploring the Acceptance and Effectiveness of Parsons Problems on Scaffolding CS1 Retakers",
+          "authors": "Wang et al.",
+          "venue": "ITiCSE 2024",
+          "year": 2024,
+          "url": "https://doi.org/10.1145/3649217.3653590",
+          "relevance": "Confirms that Parsons problems are effective beyond true novices, including CS1 retakers, and documents good practices for engagement. This makes Parsons a reliable baseline format for the proposed two-way feedback study across a diverse CS1 student population."
+        }
+      ],
+      "researchPlan": {
+        "overview": "This research extends a two-way automated assessment framework by adding an LLM-mediated synthesis layer that converts per-question student free-text feedback into a real-time misconception signal and uses it to generate targeted solution-free hints for students on subsequent attempts. The study runs within Pisan's existing Jolly Feedback infrastructure at UW Bothell using a within-semester A/B design across CSS 142/143 sections, with no additional data collection beyond what the tool already performs.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review, local misconception taxonomy construction from prior Jolly Feedback logs, and AAT extension design",
+            "deliverable": "Annotated bibliography, draft misconception taxonomy with 20-30 CS1 categories, extension design document"
+          },
+          {
+            "month": 2,
+            "goal": "Build the LLM clustering layer that reads per-question free-text feedback and maps it to taxonomy entries; integrate with Jolly Feedback",
+            "deliverable": "Working prototype: student submits code, answers a free-text 'what confused you?' prompt, and the system maps the response to a misconception category"
+          },
+          {
+            "month": 3,
+            "goal": "Build the hint generation layer with pedagogical guardrails; add Parsons problem baseline section to the assessment module",
+            "deliverable": "End-to-end pipeline: free-text feedback to misconception cluster to targeted solution-free hint delivered on resubmission attempt"
+          },
+          {
+            "month": 4,
+            "goal": "Run the A/B study in CSS 142/143 (treatment: two-way loop with LLM hints; control: standard Jolly Feedback)",
+            "deliverable": "Collected dataset: submission logs, free-text feedback, resubmission counts, time-to-pass, Parsons interaction traces"
+          },
+          {
+            "month": 5,
+            "goal": "Data analysis: compare resubmission rates and time-to-pass; qualitative coding of student feedback themes; misconception frequency audit",
+            "deliverable": "Results section, refined misconception taxonomy, student feedback theme codebook"
+          },
+          {
+            "month": 6,
+            "goal": "Write and submit paper; release open-source pipeline for replication at other institutions",
+            "deliverable": "Submitted paper draft; public GitHub repository with setup documentation for external replication"
+          }
+        ],
+        "targetVenues": ["SIGCSE TS", "ICER", "ITiCSE", "EDM"],
+        "resources": "Existing Jolly Feedback infrastructure and CSS 142/143 submission logs at UW Bothell; Claude API access for LLM clustering and hint generation; one undergraduate RA for data coding; no custom hardware required.",
+        "risks": [
+          {
+            "risk": "Students decline to provide free-text feedback, leaving the misconception signal too sparse for reliable clustering.",
+            "mitigation": "Make free-text entry optional but prominent and brief (one sentence max); use Parsons problems as a parallel signal channel that already attracts high engagement; fall back to error-log clustering if free-text volume is insufficient."
+          },
+          {
+            "risk": "LLM-generated hints inadvertently reveal the solution, undermining the formative goal.",
+            "mitigation": "Implement a two-pass guardrail: a second LLM call checks whether the proposed hint contains or implies the answer; hints that fail the check are replaced by a Socratic probe question instead."
+          },
+          {
+            "risk": "The A/B study is confounded by instructor or cohort differences across sections.",
+            "mitigation": "Run treatment and control within the same section across two consecutive assignment cycles using a crossover design, or recruit two instructors who agree to follow the same lab script and randomly assign which sections receive which condition first."
+          }
+        ],
+        "humanSubjects": true
+      }
+    }
+  ]
+}

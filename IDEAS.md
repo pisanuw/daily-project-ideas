@@ -292,3 +292,7 @@
 | 2026-08-04 | Assignment Exemplar Engine | Teaching Tool | 1-2 Weeks |
 | 2026-08-04 | Process Narrator | Side Project | Multi-week |
 | 2026-08-04 | Contract-First LLM Feedback for CS2: Extending Pedagogical-Framework-Constrained Automated Assessment Beyond Functional CS1 | Research | Research |
+| 2026-08-05 | Video Quiz Sprinter | Side Project | Weekend |
+| 2026-08-05 | Parsons Problem Forge | Teaching Tool | 1-2 Weeks |
+| 2026-08-05 | Open-Source Onboarding Agent | Classroom Assignment | Multi-week |
+| 2026-08-05 | Student-to-System Feedback as a Misconception Signal: Closing the Two-Way Loop in Automated CS1 Assessment | Research | Research |
