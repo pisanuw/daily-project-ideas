@@ -167,3 +167,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-08-04 [code] Created ideas/2026-08-04.json with 4 ideas: Commit Predictor, Assignment Exemplar Engine, Process Narrator, Contract-First LLM Feedback for CS2 (research, FEEDBOT ITiCSE 2025 doi:10.1145/3724363.3729063)
 
 2026-08-05 [code] Created ideas/2026-08-05.json with 4 ideas: Video Quiz Sprinter, Parsons Problem Forge, Open-Source Onboarding Agent, Student-to-System Feedback as Misconception Signal (research, SIGCSE TS 2026 doi:10.1145/3770761.3777144)
+
+2026-08-06 [code] Created ideas/2026-08-06.json with 4 ideas: Git Blame Explainer, Multimodal Analogy Studio, Team Contribution Equity Analyzer, Institution-Specific Fine-Tuning of Open-Source LLMs for Compiler Error Explanation (research, SIGCSE TS 2026 doi:10.1145/3770762.3772576)

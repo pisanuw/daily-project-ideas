@@ -296,3 +296,7 @@
 | 2026-08-05 | Parsons Problem Forge | Teaching Tool | 1-2 Weeks |
 | 2026-08-05 | Open-Source Onboarding Agent | Classroom Assignment | Multi-week |
 | 2026-08-05 | Student-to-System Feedback as a Misconception Signal: Closing the Two-Way Loop in Automated CS1 Assessment | Research | Research |
+| 2026-08-06 | Git Blame Explainer | Side Project | Weekend |
+| 2026-08-06 | Multimodal Analogy Studio | Teaching Tool | 1-2 Weeks |
+| 2026-08-06 | Team Contribution Equity Analyzer | Classroom Assignment | Multi-week |
+| 2026-08-06 | Institution-Specific Fine-Tuning of Open-Source LLMs for Compiler Error Explanation: Does Local Calibration Outperform General Fine-Tuning? | Research | Research |

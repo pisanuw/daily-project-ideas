@@ -1,0 +1,157 @@
+{
+  "date": "2026-08-06",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Git Blame Explainer",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "Paste a GitHub file path and function name, and get an LLM-narrated story of how that function evolved over its commit history, turning cryptic git blame output into a readable archaeological dig.",
+      "description": "Git Blame Explainer takes a public GitHub repository URL plus a file path and function name, fetches the full git blame output and the relevant commit messages via the GitHub API, then asks an LLM to narrate the function's evolution as a chronological story: what it originally did, why it was refactored, which commits introduced bugs (and which fixed them), and what the current version is trying to accomplish. The result reads like a short engineering detective story rather than a wall of SHA hashes. Optional deep-link mode lets you click any highlighted commit to open a diff panel showing exactly what changed. The project is genuinely useful for onboarding to a new codebase and doubles as a study tool for reading real code written by others.",
+      "keyFeatures": [
+        "GitHub URL + file path + function name to full blame narrative in one click",
+        "LLM tells the chronological story: original intent, key refactors, bug fixes",
+        "Diff panel linked to each mentioned commit for line-level context",
+        "Shareable URL encodes the repo, file, and function for quick re-runs",
+        "Works with any public GitHub repository, no login required"
+      ],
+      "techStack": "React + Vite, Tailwind CSS, Claude API, GitHub REST API (no backend required for public repos)",
+      "whyInteresting": "Every developer who has inherited a codebase knows the feeling of staring at git blame and understanding nothing. LLMs are good at synthesizing commit histories into prose, but nobody has built a clean single-purpose UI around this. It is a weekend project with real daily utility and a clean demo story for a portfolio.",
+      "inspiredBy": "Show HN: Lathe (LLM-generated domain tutorials on demand); developer onboarding pain discussed in HN 'Ask: What tools have you built for yourself since AI?'; distinct from existing PR Narrator and Commit Narrator ideas which focus on PRs and individual commits rather than function-level longitudinal history"
+    },
+    {
+      "n": 2,
+      "title": "Multimodal Analogy Studio",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "CS instructors enter any concept and the tool generates multiple analogy-based explanations at different abstraction levels, each paired with a generated mini-diagram, so instructors can pick and remix the best one for slides or an LMS in under a minute.",
+      "description": "Multimodal Analogy Studio addresses a long-standing gap in CS pedagogy: good analogies are hard to generate on demand, and even experienced instructors often reuse the same metaphors for every student cohort. An instructor types a CS concept (recursion, hash tables, TCP handshake, mutex, gradient descent) and selects a target audience (CS1, CS2, non-majors, professional). The tool calls an LLM to generate three to five distinct analogies at different abstraction levels, each labeled with its strength and known failure mode. For each analogy it also generates a simple SVG diagram showing the structural mapping between the concept and the metaphor domain. The instructor can regenerate individual analogies, remix two together, and export the final result as a slide snippet, a Canvas HTML block, or a printable one-pager. A concept library lets instructors save favorites and share them with colleagues.",
+      "keyFeatures": [
+        "Concept + audience to 3-5 distinct analogies with labeled strengths and failure modes",
+        "Auto-generated SVG structural diagram for each analogy",
+        "Regenerate or remix any individual analogy without re-running the whole set",
+        "Export: slide snippet, Canvas HTML embed, printable one-pager",
+        "Shareable concept library for a department to accumulate a curated analogy bank"
+      ],
+      "techStack": "React + Vite, Tailwind CSS, Flask (for SVG generation logic and library persistence), Claude API, Supabase (for saved concept library)",
+      "whyInteresting": "Analogies are one of the most consistently effective pedagogical tools for abstract CS concepts, but analogy authoring at the multimodal level (text + diagram) takes significant instructor time. Research from ITiCSE 2025 confirms that LLMs can generate high-quality analogies for programming concepts when prompted carefully. This tool productizes that finding into a one-minute workflow for any course preparation session.",
+      "inspiredBy": "ITiCSE 2025 paper on multimodal analogy generation in programming education (paper-111 in the research index); frustration with reusing the same stack-of-plates analogy for recursion every semester; Show HN tools for AI-assisted slide prep"
+    },
+    {
+      "n": 3,
+      "title": "Team Contribution Equity Analyzer",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "A GitHub-connected dashboard that tracks whether team project contributions are equitable over time using the Gini coefficient across commits, code reviews, and issues, with weekly alerts and exportable instructor reports.",
+      "description": "In CS team projects, contribution inequity is both common and hard to surface until it is too late. Team Contribution Equity Analyzer connects to a GitHub repository, pulls commits, pull requests, code reviews, and issue activity per contributor across the project timeline, and computes a rolling Gini coefficient for each signal individually and as a composite equity score. A team dashboard shows contribution timelines side by side so students can see their own patterns. A weekly equity alert goes to the team (and optionally the instructor) when any contributor's composite share drops below a configurable threshold for two consecutive weeks. Instructors get a per-team summary report exportable to CSV for grade adjustment or intervention decisions. Students build the project as a multi-week assignment that teaches them GitHub API integration, time-series computation, Supabase data persistence, and data visualization with a real equity-focused framing.",
+      "keyFeatures": [
+        "GitHub OAuth and repository connection; ingests commits, PRs, code reviews, and issues",
+        "Rolling Gini coefficient per contributor across four activity signals",
+        "Side-by-side contributor timeline chart with composite equity score",
+        "Weekly equity alert emails to team and optional instructor CC",
+        "Instructor report: per-team equity scores exportable to CSV"
+      ],
+      "techStack": "React + Vite, Tailwind CSS, Recharts (for timelines), Flask (GitHub OAuth + Gini computation), Supabase, GitHub REST API",
+      "whyInteresting": "Contribution equity in team projects is a known educational equity issue, but most instructors rely on self-report surveys or spot-checking GitHub histories. Making the Gini coefficient a first-class UI element turns a fairness abstract into a visible, actionable number. The project also teaches students a meaningful data ethics application: quantifying fairness in their own work.",
+      "inspiredBy": "ITiCSE 2025 paper 'Chronicling Consistency and Parity of Contributions to Software' (paper-048 in the research index); CS team project grading pain; distinct from the earlier Bus Factor Visualizer (2026-07-19) which focuses on single-contributor dependency risk rather than ongoing equity across the whole team"
+    },
+    {
+      "n": 4,
+      "title": "Institution-Specific Fine-Tuning of Open-Source LLMs for Compiler Error Explanation: Does Local Calibration Outperform General Fine-Tuning?",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Fine-tune a small open-source LLM on institution-specific C++ compiler error logs from Pisan's Jolly Feedback system and compare its pedagogical quality against a generally fine-tuned baseline and a proprietary model, testing whether curriculum-aligned local calibration produces better student explanations.",
+      "description": "Recent SIGCSE TS 2026 work shows that supervised fine-tuning (SFT) of small open-source models on ~40,000 generic CS1 C compiler error examples produces explanations competitive with GPT-4, overcoming the privacy and cost barriers of proprietary LLMs. The critical open question is whether institution-specific fine-tuning adds further value over general fine-tuning. Pisan's Submit! / Jolly Feedback system at UW Bothell has accumulated years of C++ compiler error logs from CSS 142/143 (introductory programming) and CSS 342/343 (data structures and algorithms), each paired with student resubmission behavior that implicitly signals which explanations led to correction. This research uses that archive to create a UW Bothell-specific fine-tuning dataset, trains a local model (Llama-3.1-8B or Qwen3-4B via QLoRA) on it, and evaluates three conditions: (A) GPT-4 as a proprietary baseline, (B) a model fine-tuned on the general SIGCSE 2026 dataset, and (C) a model fine-tuned on the institution-specific UW Bothell C++ logs. Evaluation combines expert human ratings, LLM-judge scoring (replicating the SIGCSE 2026 framework), and a live deployment study measuring resubmission reduction in CSS 142/143. The hypothesis is that locally calibrated models will produce explanations better aligned with course-specific idioms, grading expectations, and common UW Bothell misconceptions, reducing the number of resubmissions needed to pass.",
+      "papers": [
+        {
+          "title": "Fine-Tuning Open-Source Models as a Viable Alternative to Proprietary LLMs for Explaining Compiler Messages",
+          "authors": "To be confirmed from ACM DL",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770762.3772576",
+          "url": "https://doi.org/10.1145/3770762.3772576",
+          "abstract": "Cryptic compiler error messages continue to present a significant barrier for novice programmers, especially in foundational languages like C. Although LLMs can generate accurate and comprehensible error explanations, computational requirements, propensity for over-assistance, and privacy concerns constrain their suitability for educational tools. This paper demonstrates that supervised fine-tuning on ~40,000 input-output pairs from CS1/2 student C compiler errors significantly boosts pedagogical quality of smaller open-source models (Qwen3-4B, Llama-3.1-8B, Qwen3-32B), achieving performance comparable to much larger models as evaluated by expert human reviewers and an ensemble LLM-judge framework.",
+          "relevance": "This is the direct seed paper. It establishes that SFT of small open-source models on compiler error data is viable and privacy-preserving, but uses generic CS1 C errors. The proposed research asks whether institution-specific C++ logs from Pisan's existing Jolly Feedback infrastructure produce further gains, extending the SIGCSE 2026 result into a domain-adaptation study."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "A Systematic Literature Review of Automated Feedback Generation for Programming Exercises",
+          "authors": "Hieke Keuning, Johan Jeuring, Bastiaan Heeren",
+          "venue": "ACM Transactions on Computing Education, Vol. 19, No. 1",
+          "year": 2019,
+          "url": "https://doi.org/10.1145/3231711",
+          "relevance": "Provides the foundational map of automated feedback types across 101 tools, establishing that most feedback identifies mistakes rather than guiding the next step. This gap is precisely what fine-tuned compiler error explainers are designed to close, and the review situates Pisan's Submit! system within the broader landscape of automated programming feedback tools."
+        },
+        {
+          "title": "Supervised Fine-Tuning LLMs to Behave as Pedagogical Agents in Programming Education",
+          "authors": "Markel Sanz Ausin et al.",
+          "venue": "arXiv:2502.20527",
+          "year": 2025,
+          "url": "https://arxiv.org/abs/2502.20527",
+          "relevance": "Demonstrates SFT on 528 student-question / teacher-answer pairs creates models (GuideLM) with 8% more Socratic guidance and 58% improvement in economy of words versus GPT-4. Directly motivates the hypothesis that domain-specific fine-tuning produces qualitatively different, more pedagogically calibrated outputs than general or proprietary models."
+        },
+        {
+          "title": "A Classroom Study of LLM-Generated Feedback Intervention in Introductory Programming",
+          "authors": "To be confirmed from arXiv listing",
+          "venue": "arXiv:2606.08807",
+          "year": 2026,
+          "url": "https://arxiv.org/abs/2606.08807",
+          "relevance": "A 2026 classroom deployment study of LLM feedback in introductory programming, providing a recent in-situ evaluation framework and outcome measures (submission behavior, student satisfaction) that can be directly replicated in the proposed UW Bothell deployment study in CSS 142/143."
+        }
+      ],
+      "researchPlan": {
+        "overview": "This research extends the SIGCSE TS 2026 finding that SFT of small open-source models on compiler errors is viable by asking whether institution-specific fine-tuning on Pisan's existing CSS 142/143/342/343 C++ submission logs outperforms general fine-tuning on a comparable dataset. The work uses no new data collection (existing Jolly Feedback logs), runs in infrastructure already deployed at UW Bothell, and produces a deployable local model that can run on a single department GPU server without sending student data to a third-party API.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Audit and export Jolly Feedback / Submit! compiler error logs from CSS 142/143 and CSS 342/343; anonymize and format into (error message + source context, ideal explanation) pairs; target 5,000-15,000 pairs",
+            "deliverable": "Annotated dataset in JSONL format; data card documenting provenance, anonymization steps, and known biases; preliminary analysis of most frequent error categories"
+          },
+          {
+            "month": 2,
+            "goal": "Set up QLoRA fine-tuning pipeline on Llama-3.1-8B and Qwen3-4B using the UW Bothell dataset; simultaneously collect or license the general-purpose dataset from the SIGCSE 2026 paper for the baseline condition",
+            "deliverable": "Two fine-tuned checkpoints (institution-specific, general); training curves; preliminary qualitative spot-check of 20 outputs per condition"
+          },
+          {
+            "month": 3,
+            "goal": "Expert evaluation: three CS education researchers rate 100 held-out (error, explanation) triples blind across conditions A/B/C on pedagogical quality, curriculum alignment, and solution-avoidance; run the SIGCSE 2026 LLM-judge ensemble on 1,000 held-out examples",
+            "deliverable": "Inter-rater reliability scores, per-condition ratings, statistical significance tests (Kruskal-Wallis with Bonferroni correction); preliminary finding on whether institution-specific fine-tuning adds value"
+          },
+          {
+            "month": 4,
+            "goal": "Integrate the best-performing condition into Submit! as an opt-in explanation overlay in CSS 142 or CSS 143; collect resubmission counts and time-to-pass for the treatment group vs. a historical matched control group from prior semesters",
+            "deliverable": "Deployment integration complete; IRB amendment submitted if required (likely minimal risk extension of existing data use); baseline outcome metrics from historical data"
+          },
+          {
+            "month": 5,
+            "goal": "Analyze deployment data: compare resubmission counts and time-to-pass; conduct short student survey on explanation helpfulness and perceived over-assistance; qualitative coding of 50 student free-text responses",
+            "deliverable": "Results section with statistical analysis; student survey summary; coding codebook for qualitative responses"
+          },
+          {
+            "month": 6,
+            "goal": "Write and submit paper; release fine-tuned model weights (UW Bothell-specific, if privacy review allows) or at minimum the training pipeline and data card for replication at other institutions",
+            "deliverable": "Submitted paper draft; public GitHub repository with training pipeline, evaluation scripts, and (where permissible) anonymized dataset sample for replication"
+          }
+        ],
+        "targetVenues": ["SIGCSE TS", "ITiCSE", "ICER", "ACM Transactions on Computing Education"],
+        "resources": "Existing Jolly Feedback / Submit! infrastructure and multi-year CSS 142/143/342/343 C++ submission logs at UW Bothell; department GPU server (single A100 or equivalent) for QLoRA fine-tuning; Claude API or GPT-4 API for condition A baseline and LLM-judge evaluation; one RA for data annotation and expert evaluation coordination; no new student data collection required.",
+        "risks": [
+          {
+            "risk": "Existing Jolly Feedback logs do not include the gold-standard explanation for each error, making supervised fine-tuning labels sparse or noisy.",
+            "mitigation": "Use resubmission behavior as a weak supervision signal: errors that students resolved quickly after a hint are labeled positive; add a targeted annotation sprint where an RA and Pisan annotate the 500 most frequent error patterns with explanations, covering the long tail with LLM-generated labels that experts spot-check."
+          },
+          {
+            "risk": "The institution-specific dataset is too small to outperform general fine-tuning, and the result is null.",
+            "mitigation": "A null result is still publishable and valuable: it would establish that general fine-tuning transfers well and institutions need not invest in local data curation. Frame the paper around the comparison methodology rather than a directional hypothesis, following the SIGCSE 2026 paper's own framing of 'viable alternative.'"
+          },
+          {
+            "risk": "Privacy review blocks release of UW Bothell submission logs for the dataset, reducing replicability.",
+            "mitigation": "Separate the paper's contribution into two parts: the training pipeline and evaluation framework (fully releasable) and the fine-tuned model (releasable if legal review approves, otherwise available on request). Use the SIGCSE 2026 general dataset for the pipeline demonstration so the replication path does not depend on UW Bothell data."
+          }
+        ],
+        "humanSubjects": false
+      }
+    }
+  ]
+}
