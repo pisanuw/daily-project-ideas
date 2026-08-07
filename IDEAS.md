@@ -300,3 +300,8 @@
 | 2026-08-06 | Multimodal Analogy Studio | Teaching Tool | 1-2 Weeks |
 | 2026-08-06 | Team Contribution Equity Analyzer | Classroom Assignment | Multi-week |
 | 2026-08-06 | Institution-Specific Fine-Tuning of Open-Source LLMs for Compiler Error Explanation: Does Local Calibration Outperform General Fine-Tuning? | Research | Research |
+
+| 2026-08-07 | Pipeline Semantic Diff | Side Project | Weekend |
+| 2026-08-07 | Competency Passport | Teaching Tool | 1-2 Weeks |
+| 2026-08-07 | Citizen Science Observatory | Classroom Assignment | Multi-week |
+| 2026-08-07 | Anchor-and-Extension: Recovering Community Learning in LLM-Personalized CS1 Assignments | Research | Research |

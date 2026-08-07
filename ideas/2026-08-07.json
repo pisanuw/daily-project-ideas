@@ -1,0 +1,157 @@
+{
+  "date": "2026-08-07",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Pipeline Semantic Diff",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A web tool that runs a shared test set of prompts through two versions of an LLM pipeline and uses Claude to semantically compare the outputs, flagging regressions in tone, accuracy, and length so AI product developers can iterate on prompts and models with confidence.",
+      "description": "Pipeline Semantic Diff addresses a gap in the LLM application development workflow: when you change a system prompt, swap a model, or restructure a LangChain or LangGraph chain, you currently have no reliable way to know whether the outputs got better or worse across your full test set. The tool lets you define a test set of prompts in a simple editor, configure two pipeline endpoints (any combination of Claude, OpenAI, or Gemini models with distinct system prompts), and run both in parallel. For each prompt, it then calls Claude to produce a semantic diff report: did the tone change, did the factual content shift, did the length or format drift, were any key points dropped or added? A summary dashboard shows a per-dimension regression matrix across all prompts so you can spot patterns (e.g., new system prompt is more concise but loses nuance on edge cases). Individual prompt cards let you drill into the raw outputs side by side. No backend required: endpoint keys stay in the browser, results persist in localStorage, and the entire tool ships as a single Vite build.",
+      "keyFeatures": [
+        "Test set editor: write, import, or paste prompts with optional expected-behavior tags",
+        "Dual pipeline runner: configure two endpoints (model + system prompt) and run all prompts in parallel",
+        "Claude-powered semantic diff per prompt: tone, accuracy, length, key-point retention",
+        "Summary regression matrix: per-dimension scores across all prompts at a glance",
+        "Per-prompt drill-down with raw A/B output panels and LLM explanation of differences"
+      ],
+      "techStack": "React + Vite, Tailwind CSS, Claude API (for semantic diff), Claude/OpenAI/Gemini as configurable pipeline endpoints (no backend, keys in browser)",
+      "whyInteresting": "Every team building on top of LLMs faces the prompt regression problem, but the tooling is either enterprise-priced (Braintrust, LangSmith) or requires significant setup. A single-page weekend project that puts semantic regression testing in the browser with no backend is immediately useful, demostrates Claude's evaluator capability, and has a clean demo story: run it live against two versions of a system prompt and watch the diff report generate in real time.",
+      "inspiredBy": "Growing adoption of LangGraph and CrewAI agent pipelines in 2026 making prompt regression a daily pain; HN discussions on LLM eval tooling being either too heavy or too shallow; distinct from existing LangSmith / Braintrust / PromptLayer which require accounts, backends, or per-seat pricing"
+    },
+    {
+      "n": 2,
+      "title": "Competency Passport",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "Instructors define a set of course competencies, Claude generates multi-level assessment tasks for each skill at the instructor's chosen Bloom's taxonomy level, and students earn visible digital stamps as they demonstrate mastery, with a class-wide heatmap showing where the cohort is struggling.",
+      "description": "Competency Passport brings competency-based education workflows into a single tool built for CS courses. An instructor opens the Competency Editor, types a skill name and description (e.g., 'Write a recursive function with a correct base case'), selects a Bloom's level (Remember through Create), and clicks Generate. Claude returns three to five assessment tasks of increasing difficulty, each tagged with the Bloom's level and a suggested grading rubric. The instructor approves, edits, or regenerates individual tasks before publishing. Students see their personal Passport: a grid of competency stamps, each showing Not Attempted, In Progress, or Mastered. When a student submits evidence (a code link, a short written response, a test result), the instructor marks it with one click and the stamp updates in real time via Supabase Realtime. The instructor dashboard shows a class heatmap so patterns are visible at a glance: which competencies are broadly mastered, which are lagging, which students are far behind. An export button generates a CSV suitable for gradebook import or an end-of-term portfolio PDF per student.",
+      "keyFeatures": [
+        "Competency editor: name, description, Bloom's level, and Claude-generated task set per skill",
+        "Per-task rubric generation with regenerate or edit controls",
+        "Student Passport view: stamp grid with Not Attempted / In Progress / Mastered states",
+        "Real-time stamp updates via Supabase Realtime when instructor grades",
+        "Instructor class heatmap showing mastery distribution per competency"
+      ],
+      "techStack": "React + Vite, Tailwind CSS, Supabase (auth + realtime + storage), Claude API",
+      "whyInteresting": "Competency-based education is gaining traction in CS programs but most LMS tools (Canvas, Blackboard) make it clunky: rubrics are buried, mastery tracking is manual, and students rarely see their own progress map. A lightweight tool purpose-built for CS competencies with an LLM generating the assessment tasks removes the authoring bottleneck and gives students a visual stake in their own mastery.",
+      "inspiredBy": "ITiCSE 2025 research on mastery learning and GenAI connections ('Show Me the Mastery Learning!'); competency-based grading adoption at UW Bothell CSS courses; distinct from the earlier Assignment Calibrator (2026-07-18) which focuses on difficulty calibration for individual problems rather than longitudinal competency tracking across a whole course"
+    },
+    {
+      "n": 3,
+      "title": "Citizen Science Observatory",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "Students choose a real-world observable phenomenon and build a full-stack public platform where anyone can submit observations with GPS coordinates, photos, and structured fields, with Claude validating incoming data and a live map-plus-chart dashboard aggregating results.",
+      "description": "Citizen Science Observatory is a multi-week capstone assignment in which student teams pick any quantifiable real-world phenomenon they can observe in the wild (parking lot light-out frequency, campus bird sightings, crosswalk signal timing, noise levels near construction sites) and build a public full-stack platform around it. The core deliverable is a production-deployed web app with a public submission form (structured fields plus optional GPS coordinates and photo upload), a Supabase backend storing all observations, a Claude API validation layer that checks each incoming submission for plausibility and flags outliers with an explanation, and a live aggregated dashboard combining a Leaflet map and Recharts time series. An admin panel lets the team moderate flagged submissions. Students write a reflection report documenting data quality decisions, observed bias in who submitted, privacy considerations for GPS data, and what they would do differently if the platform were deployed for a year. The assignment teaches full-stack development, API design, real data cleaning problems, and a concrete data ethics framing around a system they built themselves.",
+      "keyFeatures": [
+        "Public observation submission form: structured fields, GPS capture, and optional photo upload",
+        "Claude API validation layer: plausibility check per submission with natural-language flag explanation",
+        "Live dashboard: Leaflet map of geolocated observations plus Recharts time-series aggregation",
+        "Admin moderation panel: review flagged submissions, accept or reject with reason",
+        "Student reflection report on data quality, submission bias, GPS privacy, and lessons learned"
+      ],
+      "techStack": "React + Vite, Tailwind CSS, Supabase (database + storage + auth), Claude API, Leaflet (maps), Recharts (time series), deployed on Vercel or Netlify",
+      "whyInteresting": "Most multi-week CS assignments end in a demo that gets deleted. Citizen Science Observatory ends in a live public platform with real users submitting real data, which raises the stakes and makes data quality problems concrete rather than hypothetical. The data ethics reflection component gives students a structured way to reason about a system they built, which is more effective than reading a case study about someone else's system.",
+      "inspiredBy": "ITiCSE 2025 papers on contextual CS1 projects anchored in biology and environmental science; learnersourcing research on student-generated content platforms; distinct from the earlier Crowd-Sourced Accessibility Mapper (2026-04-25) which focuses specifically on accessibility data and uses a fixed domain rather than student-chosen phenomena"
+    },
+    {
+      "n": 4,
+      "title": "Anchor-and-Extension: Recovering Community Learning in LLM-Personalized CS1 Assignments",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Propose and evaluate an 'anchor-and-extension' assignment model that pairs a shared canonical problem (enabling peer discussion and instructor planning) with an LLM-generated personalized extension problem per student, testing whether this hybrid recovers the community-learning benefits that pure personalization eliminates.",
+      "description": "A 2025 ITiCSE study found that allowing CS1 students to co-design their own personalized programming assignments with an LLM significantly increased engagement and motivation. However, the study also identified two critical problems that pure personalization introduces: (1) students experience cognitive overhead from choosing their own domain, and (2) the loss of a shared common problem eliminates peer discussion, collective debugging, and instructor-side difficulty calibration. This research proposes and evaluates an 'anchor-and-extension' (A+E) model designed to recover those benefits. Every student receives the same anchor problem: a canonical problem that the instructor designs, difficulty-calibrates, and can anticipate misconceptions for. After completing the anchor, each student receives an LLM-generated extension problem tailored to their stated interest domain (sports statistics, cooking, music, game design) but structurally isomorphic to the anchor: same learning objective, same algorithmic pattern, same estimated difficulty, different surface context. The extension generation pipeline uses a structured template that constrains the LLM to preserve these pedagogical invariants. Evaluation uses a benchmark of 200 (anchor, student-domain, extension) triples rated blind by three CS education experts on pedagogical alignment, difficulty parity, and motivational language quality, plus an LLM-as-judge replication using Claude. The research tests the primary hypothesis that A+E extensions preserve learning-objective alignment as well as fully personalized assignments while adding no new cognitive overhead, since the domain is still student-chosen but the problem-authoring decision is removed.",
+      "papers": [
+        {
+          "title": "Generating Personalized Assignments with Students in the Loop",
+          "authors": "To be confirmed from ACM DL",
+          "venue": "ITiCSE 2025",
+          "year": 2025,
+          "doi": "10.1145/3724363.3729070",
+          "url": "https://doi.org/10.1145/3724363.3729070",
+          "abstract": "This paper investigates a co-design approach in which CS1 students use an LLM to generate personalized programming assignments aligned to their own interest domains. The study reports increased student engagement and motivation but identifies two tensions: cognitive load from open-ended domain choice and the loss of shared community around a common problem. Students in the personalized condition could not easily ask peers for help because everyone had a different problem.",
+          "relevance": "This is the seed paper. It establishes that LLM-personalized assignments improve motivation but eliminate the shared problem that enables peer learning and instructor planning. The proposed A+E model is a direct structural response to these two identified limitations, extending the ITiCSE 2025 finding into a testable hybrid design."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "CodeTailor: LLM-Powered Personalized Parsons Puzzles for Engaging Support While Preventing Over-Reliance",
+          "authors": "Xinying Hou, Zihan Wu, et al.",
+          "venue": "Proceedings of the Eleventh ACM Conference on Learning @ Scale (L@S 2024)",
+          "year": 2024,
+          "url": "https://doi.org/10.1145/3657604.3662032",
+          "relevance": "CodeTailor demonstrates that LLM-generated personalized Parsons puzzles maintain structural correctness and learning-objective alignment while adapting surface context to student code. The constrained generation approach used in CodeTailor (LLM fills in a template that preserves the learning objective) directly informs the A+E extension generation pipeline design."
+        },
+        {
+          "title": "Personalized Parsons Puzzles as Scaffolding Enhance Practice Engagement",
+          "authors": "To be confirmed from ACM DL",
+          "venue": "SIGCSE TS 2025",
+          "year": 2025,
+          "url": "https://doi.org/10.1145/3641555.3705227",
+          "relevance": "This paper shows that personalized scaffolding (Parsons puzzles adapted to student context) increases practice engagement versus showing worked solutions, without introducing over-assistance. It supports the A+E hypothesis that personalized extension problems will sustain motivation beyond the anchor while the shared anchor preserves peer-discussion affordances."
+        },
+        {
+          "title": "Beyond One-Size-Fits-All Exercises: Personalizing Computer Science Worksheets with LLMs",
+          "authors": "To be confirmed from ACM DL",
+          "venue": "ITiCSE 2026",
+          "year": 2026,
+          "url": "https://doi.org/10.1145/3803400.3809330",
+          "relevance": "The most recent published work on LLM-personalized CS worksheets, providing a 2026 baseline for quality benchmarks and evaluation methodology. The expert rating rubric and LLM-judge framework described in this paper can be directly adapted for the A+E benchmark evaluation, enabling a methodological comparison across the two personalization approaches."
+        }
+      ],
+      "researchPlan": {
+        "overview": "This research proposes and evaluates the anchor-and-extension (A+E) assignment model as a hybrid alternative to fully personalized LLM assignments. The core research question is: can structurally constrained LLM-generated extension problems preserve learning-objective alignment and difficulty parity with a canonical anchor problem while maintaining the motivational benefits of student-chosen context domains? The study is fully computational: no live student deployment is required in Phase 1, making it IRB-free and executable within a single semester. A Phase 2 deployment study is scoped as an optional extension if Phase 1 evaluation is positive.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Design the A+E generation framework: define the structured extension-generation prompt template, the invariants it enforces (learning objective, algorithmic pattern, estimated difficulty), and the 10 interest domains used in the benchmark; implement the pipeline as a Python script calling Claude API; generate 200 (anchor, domain, extension) triples across 20 anchor problems and 10 domains each",
+            "deliverable": "Generation pipeline code; 200-triple benchmark dataset in JSONL; preliminary qualitative spot-check of 20 triples"
+          },
+          {
+            "month": 2,
+            "goal": "Run LLM-as-judge evaluation on all 200 triples using Claude: rate each extension on pedagogical alignment (1-5), difficulty parity (1-5), and motivational language quality (1-5); compute per-domain and per-anchor-type aggregate scores; identify failure modes where the LLM breaks invariants",
+            "deliverable": "LLM-judge ratings for all 200 triples; failure mode taxonomy; per-domain and per-anchor score distributions"
+          },
+          {
+            "month": 3,
+            "goal": "Expert human evaluation: recruit three CS education researchers to rate 60 triples blind (sampled to cover all domains and failure-mode categories) on the same three dimensions; compute inter-rater reliability (Krippendorff alpha); compare human and LLM-judge scores to assess LLM-judge validity",
+            "deliverable": "Human ratings; inter-rater reliability scores; correlation analysis between human and LLM-judge; revised failure mode taxonomy with human-annotated explanations"
+          },
+          {
+            "month": 4,
+            "goal": "Run ablation: compare A+E extensions against (A) fully personalized assignments generated by the seed-paper method and (B) a no-personalization control (generic restatement of anchor in a different surface context), all rated by the LLM judge on the same rubric; analyze whether the structural constraints in A+E add or remove pedagogical value relative to unconstrained personalization",
+            "deliverable": "Three-condition comparison table; statistical significance tests (Kruskal-Wallis); narrative analysis of where A+E wins and where unconstrained personalization wins"
+          },
+          {
+            "month": 5,
+            "goal": "Optional deployment study (if Phase 1 is positive and IRB timeline allows): integrate A+E into one CSS 142 section as an opt-in assignment variant for two problem sets; collect completion rates and time-on-task for anchor vs. extension; short student survey on cognitive load and motivation; compare to prior-semester matched control using historical data",
+            "deliverable": "Deployment integration; IRB protocol (minimal risk amendment); preliminary outcome metrics; student survey summary"
+          },
+          {
+            "month": 6,
+            "goal": "Write and submit paper; release generation pipeline, benchmark dataset (200 triples), evaluation scripts, and LLM-judge prompts as a public GitHub repository for replication at other institutions",
+            "deliverable": "Submitted paper draft; public GitHub repository with full replication package"
+          }
+        ],
+        "targetVenues": ["ITiCSE", "SIGCSE TS", "ICER", "AIED"],
+        "resources": "Claude API for extension generation and LLM-judge evaluation; three CS education researchers for expert evaluation (Months 2-3); Python environment for pipeline and analysis scripts; optional: one section of CSS 142 at UW Bothell for Phase 2 deployment; no new infrastructure required beyond what is available in the department.",
+        "risks": [
+          {
+            "risk": "The A+E generation pipeline cannot reliably preserve learning-objective alignment and difficulty parity across all anchor-domain combinations, producing a noisy benchmark that obscures any real effect.",
+            "mitigation": "Run the LLM-judge spot-check after generating the first 50 triples; if failure rate exceeds 20%, refine the structured template before generating the full 200. Use rejection sampling: discard and regenerate any triple where the LLM judge rates pedagogical alignment below 3/5 on the first pass."
+          },
+          {
+            "risk": "Expert reviewers have low inter-rater reliability on the evaluation rubric, making the human evaluation inconclusive.",
+            "mitigation": "Conduct a calibration session before the main rating task: all three experts rate the same 10 triples and discuss disagreements to align on rubric interpretation. Publish the calibration protocol and examples in the replication package so future studies can replicate the norming step."
+          },
+          {
+            "risk": "A null result: A+E extensions are not rated higher than unconstrained personalization, removing the motivation for the structural constraints.",
+            "mitigation": "A null or near-null result is still publishable: it would establish that unconstrained personalization already preserves learning-objective alignment, which would be a meaningful empirical finding updating the field's prior. Frame the paper around the comparison methodology rather than a directional hypothesis, following the framing of the seed paper."
+          }
+        ],
+        "humanSubjects": false
+      }
+    }
+  ]
+}
