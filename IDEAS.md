@@ -305,3 +305,8 @@
 | 2026-08-07 | Competency Passport | Teaching Tool | 1-2 Weeks |
 | 2026-08-07 | Citizen Science Observatory | Classroom Assignment | Multi-week |
 | 2026-08-07 | Anchor-and-Extension: Recovering Community Learning in LLM-Personalized CS1 Assignments | Research | Research |
+
+| 2026-08-08 | Lint-to-Learn | Side Project | Weekend |
+| 2026-08-08 | JS Event Loop Visualizer | Teaching Tool | 1-2 Weeks |
+| 2026-08-08 | Game Feel Lab | Classroom Assignment | Multi-week |
+| 2026-08-08 | From Pen-and-Paper Traces to Targeted Hints: An LLM Misconception Classifier for Control-Flow Errors | Research | Research |

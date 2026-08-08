@@ -1,0 +1,165 @@
+{
+  "date": "2026-08-08",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Lint-to-Learn",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A VS Code extension that intercepts ESLint and Pylint diagnostics and, instead of surfacing only the terse rule name, fires a micro-lesson — a plain-English explanation of the rule, why the student's specific line triggered it, and one corrected rewrite — directly in the editor hover panel.",
+      "description": "Lint-to-Learn wraps the VS Code diagnostic API: whenever a new lint diagnostic appears after a save, the extension sends the surrounding code snippet and the error message to a configurable LLM backend (Ollama for offline use, or any OpenAI-compatible endpoint including Claude) and streams a three-part micro-lesson into a webview hover above the squiggly. Part 1 explains what the lint rule means in plain English. Part 2 explains precisely why this student's code triggered it — referencing the actual variable name, line, and construct involved. Part 3 shows a minimal corrected rewrite that preserves the student's apparent intent. A dismiss-until-edit mode suppresses repeat firings on consecutive saves of the same error so students are not interrupted mid-thought. An interaction log (stored only locally) counts how often each rule fires a lesson, producing a personal rule-frequency chart that shows students which lint rules they still trigger most across a project, giving them a learning signal alongside the code signal. Config options cover: ESLint vs. Pylint vs. both, minimum severity threshold, and LLM backend selection.",
+      "keyFeatures": [
+        "Diagnostic API hook: fires a micro-lesson on every new lint error not present at the previous save",
+        "Three-part lesson: rule meaning, why this code triggered it, corrected rewrite preserving student intent",
+        "Configurable LLM backend: Ollama (offline), OpenAI-compatible endpoint, or Claude API",
+        "Dismiss-until-edit mode: suppresses repeated micro-lessons on consecutive saves of the same unchanged error",
+        "Personal rule-frequency chart: per-project count of which lint rules triggered lessons most across session"
+      ],
+      "techStack": "TypeScript, VS Code Extension API, VS Code Diagnostic API, Ollama / OpenAI-compatible REST API, VS Code Webview for lesson panel",
+      "whyInteresting": "Novice programmers routinely dismiss lint errors without understanding them because rule names are terse, documentation is a context switch away, and the squiggly line carries no explanation of why this specific code is problematic. Lint-to-Learn keeps the student in flow: the micro-lesson appears exactly where the error appears, references the student's own variable names and constructs, and disappears as soon as the line is fixed. It is small enough to build in a weekend, works fully offline with Ollama, and demonstrates how the VS Code diagnostic API can be layered with an LLM to turn every lint event into a targeted teaching moment.",
+      "inspiredBy": "HN threads on lint-as-noise for beginners; toolchain-first CS pedagogy arguing that professional tools teach if students understand them rather than ignore them; GitHub Copilot's editor integration showing that LLM suggestions belong in the coding flow rather than a separate chat window; distinct from the earlier Assignment Spec Linter (2026-07-09) which lints instructor-authored assignment specifications, not student code errors"
+    },
+    {
+      "n": 2,
+      "title": "JS Event Loop Visualizer",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "An interactive browser tool where you paste JavaScript code and watch the call stack, Web APIs register, microtask queue, and callback queue animate step by step as the event loop advances — purpose-built for students learning async JS for the first time and covering Promise and async/await semantics that older visualizers miss.",
+      "description": "JS Event Loop Visualizer builds on the insight behind Philip Roberts' JSConf 2014 talk and the loupe.rocks tool: the best way to teach async execution is to make the event loop visible. This project delivers a modern, maintained alternative with a wider feature set. Users paste a JavaScript snippet into an editor panel, then step through execution using playback controls. On each step, four animated panels update simultaneously: the call stack (functions push and pop), the Web APIs register (timers count down, fetch requests pend), the microtask queue (Promise.then and async/await continuations), and the macro-task callback queue. An event-loop shuttle animates moving the next task onto the call stack when it empties. A source highlight traces which line of code corresponds to the current step. The key pedagogical gap this fills: loupe.rocks does not model microtasks or Promise resolution order, so students cannot use it to understand why Promise.resolve().then fires before setTimeout(fn, 0), or why async/await compiles to a chain of microtask-queued continuations. An embedded library of 15 runnable annotated examples covers the full async JS curriculum: setTimeout basics, clearTimeout, chained promises, Promise.all, async/await, fetch error handling, and the microtask-vs-macrotask ordering puzzle. An embeddable iframe widget mode lets instructors link to a specific example at a specific playback step directly from course notes.",
+      "keyFeatures": [
+        "Step-by-step playback: advance or rewind one event loop tick at a time with a scrubable timeline bar",
+        "Four animated panels: call stack, Web APIs register, microtask queue (Promise/async), and callback queue",
+        "Source highlight: current executing line in the editor highlighted on every step",
+        "15 curated annotated examples covering setTimeout, clearTimeout, chained promises, async/await, and fetch",
+        "Embeddable iframe widget mode: instructors link to a specific example at a specific step from course slides"
+      ],
+      "techStack": "TypeScript, Vite, acorn (JS parser), custom step-based interpreter, React for animated panels, CSS transitions, deployed as static site to Netlify or GitHub Pages",
+      "whyInteresting": "The JS event loop is the most frequently misunderstood concept for students making the transition from synchronous to async code, and the most commonly referenced learning resource (loupe.rocks) is more than ten years old and does not model Promise microtasks. This project fills a concrete, documented gap: every web-dev instructor who teaches async JS has to supplement loupe with a separate diagram to explain Promise ordering. A visually polished, freely hostable, embeddable tool covering the full async model would be the definitive shareable resource for the topic.",
+      "inspiredBy": "Philip Roberts' 'What the heck is the event loop?' (JSConf EU 2014) and loupe.rocks which does not handle microtasks; Jake Archibald's 'In The Loop' (JSConf Asia 2018) diagrams of microtask vs. macrotask ordering; annual GitHub trending spikes for async JS learning resources; distinct from Python Tutor which visualizes synchronous execution without event-loop concurrency semantics"
+    },
+    {
+      "n": 3,
+      "title": "Game Feel Lab",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "A browser-based sandbox assignment where game development students adjust twelve 'game feel' parameters — squash-and-stretch, screen shake, coyote time, particle bursts, audio pitch variation — on a minimal 2D platformer and run a blind user study to test whether their parameter choices predict the subjective player experience.",
+      "description": "Game Feel Lab is a multi-week assignment structured as a controlled experiment. Students start with a deliberately bare-bones 2D platformer built in Phaser.js: physically correct but aesthetically unpolished — no squash, no shake, no particles, no sound. A Tweakpane parameter panel on the right exposes twelve game-feel dimensions grouped by category: motion (jump squash-and-stretch scale factor and duration, landing camera dip), impact (screen shake amplitude, frequency, and decay curve), timing (coyote time in frames, jump buffer window), particles (landing burst count and velocity spread, run-dust density), and audio (jump sfx pitch randomization range, footstep interval). Week 1: students explore freely and keep a timestamped feel journal — parameter snapshots with free-text notes describing what changed and how it felt. Week 2: each student pair designs two distinct feel profiles — one tuned to feel floaty and dreamlike, one tuned to feel snappy and arcade-punchy — and documents every parameter value for both. Week 3: students run a blind user study with five other students: each rater plays both profiles in randomized order and rates the experience on six adjectives (floaty, snappy, heavy, responsive, satisfying, janky). The built-in export button generates a JSON parameter report and a CSV user-study rating file. The final written analysis asks: do the parameters predict the subjective experience? Where did design intent diverge from player response, and what does that gap suggest about the limits of parametric control over game feel?",
+      "keyFeatures": [
+        "Minimal Phaser.js 2D platformer baseline: physically correct, aesthetically unpolished starting point",
+        "Twelve-parameter feel panel: squash/stretch, screen shake, coyote time, particles, audio pitch, camera dip",
+        "Timestamped feel journal: parameter snapshot + free-text note logged on each journal entry",
+        "Blind A/B comparison widget: present two saved profiles to a rater in randomized order, collect adjective ratings",
+        "JSON parameter export and CSV user-study rating export for the written analysis deliverable"
+      ],
+      "techStack": "Phaser.js 3, TypeScript, Vite, Tweakpane (parameter panel), Web Audio API (real-time pitch randomization), deployed to Netlify or GitHub Pages for cross-device playtesting during the user study",
+      "whyInteresting": "Game feel is one of those concepts that game design students understand intellectually from GDC talks and YouTube tutorials but struggle to control intentionally when building their own projects. By fixing the physics and exposing every aesthetic parameter independently, the assignment separates feel from function and forces students to reason empirically about the link between numbers and subjective experience. The mandatory user study component is the payoff: students encounter first-hand the gap between design intent and player perception, which is the most important lesson in applied game design and one that is very hard to teach through lecture.",
+      "inspiredBy": "Steve Swink's 'Game Feel' (book, 2008); Martin Jonasson and Petri Purho's 'Juice It or Lose It' (GDC 2012, often cited as the canonical game-feel demonstration); Jonas Tyroller's YouTube game-feel tutorial series; distinct from the earlier Game AI Explainability Sandbox (2026-04-11) which focuses on AI agent decision transparency, not physical and aesthetic response parameters"
+    },
+    {
+      "n": 4,
+      "title": "From Pen-and-Paper Traces to Targeted Hints: An LLM Misconception Classifier for Control-Flow Errors",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Digitize the six-artefact pen-and-paper control-flow tracing protocol from ITiCSE 2025, build a validated taxonomy of student trace errors from a collected corpus, then train an LLM prompt-based classifier to categorize new submissions and generate taxonomy-targeted remediation hints — closing the feedback loop that the original paper left open.",
+      "description": "A 2025 ITiCSE paper introduced a scaffolded suite of pen-and-paper activities in which CS1 students construct six hand-drawn artefacts capturing the static and dynamic aspects of a Python program's control flow. The preliminary study found that most students correctly understood the artefact structure, but exhibited specific, recurring misconceptions about control flow — for example, difficulty identifying the boundary of conditional branches and the re-entry point of loop bodies. Crucially, the paper deployed this as a one-time diagnostic: instructors manually reviewed hand-drawn artefacts to infer misconceptions, but students received no automated, targeted feedback. This research proposes a three-phase project that closes that feedback loop. Phase 1 (IRB-free): digitize the six-artefact submission protocol as a structured web form (students draw artefacts on a canvas element or fill structured fields for each of the six artefact types); deploy in an existing CS1 course to collect a corpus of 300 or more digitized submissions across multiple problem types (sequential, conditional, loop, and first-order procedural programs); build a validated misconception taxonomy using affinity diagramming on the collected corpus, coded independently by two researchers. Phase 2 (LLM classifier): prompt Claude to classify new trace submissions against the validated taxonomy, compare classifier output to human expert coding on a held-out 100-submission test set, and measure agreement (Cohen kappa); iterate on the classification prompt using few-shot examples from the taxonomy until kappa exceeds 0.7. Phase 3 (hint generation + A/B study): generate taxonomy-targeted natural-language hints for each misconception category; run a controlled within-subjects study in which students who make a classified error receive either (A) a taxonomy-targeted hint or (B) a generic 'your answer is incorrect' message, then attempt an isomorphic follow-up problem; measure whether targeted hints improve follow-up performance. Primary research question: can an LLM reliably classify student control-flow trace errors into a domain-specific misconception taxonomy, and does receiving taxonomy-targeted hints improve performance on a subsequent isomorphic trace problem compared to generic 'incorrect' feedback?",
+      "papers": [
+        {
+          "title": "A Scaffolded Approach for Tracing Control-Flow in Simplified Python",
+          "authors": "International Institute of Information Technology, Hyderabad",
+          "venue": "ITiCSE 2025",
+          "year": 2025,
+          "doi": "10.1145/3724363.3729044",
+          "url": "https://doi.org/10.1145/3724363.3729044",
+          "abstract": "The ability of students to read, understand and explain code is tightly interlinked to their ability to trace. Multiple studies have shown that tracing helps students improve their comprehension of code. Analysis of traces also provides insight into student misconceptions about program execution. The authors propose a comprehensive suite of pen-and-paper class activities around control-flow: students construct six hand-drawn artefacts representing the static and dynamic aspects of a program's control-flow in a simplified subset of Python (sequential, conditional, iterative, and first-order procedural control). A preliminary study found that most students correctly understood the artefact structure but exhibited specific, recurring misconceptions about control-flow — including difficulty identifying the re-entry point of loop bodies.",
+          "relevance": "This is the seed paper. It establishes the six-artefact tracing protocol as a valid diagnostic for CS1 control-flow misconceptions, provides the artefact taxonomy to be digitized, and identifies the open gap this research addresses: the protocol was deployed as a one-time pen-and-paper diagnostic with no automated feedback loop. The proposed research digitizes the protocol, builds an error taxonomy from a collected corpus, and closes the loop with LLM-powered targeted hints."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "How Students (Mis)understand Conditionals and Loops: A Taxonomy",
+          "authors": "Anonymous (arXiv preprint)",
+          "venue": "arXiv 2025",
+          "year": 2025,
+          "url": "https://arxiv.org/abs/2605.26966",
+          "relevance": "Provides a complementary misconception taxonomy for conditionals and loops, developed from 181 pseudocode execution-trace questions and 10,799 student answers. The category structure from this taxonomy can seed the affinity-diagramming phase in the proposed research and enable cross-taxonomy comparison when the corpus-derived taxonomy is complete."
+        },
+        {
+          "title": "Automated Identification of Logical Errors in Programs: Advancing Scalable Analysis of Student Misconceptions",
+          "authors": "EDM 2025 authors",
+          "venue": "Educational Data Mining (EDM) 2025",
+          "year": 2025,
+          "url": "https://educationaldatamining.org/EDM2025/proceedings/2025.EDM.long-papers.85/2025.EDM.long-papers.85.pdf",
+          "relevance": "Demonstrates that LLMs can identify logical errors in student programs at scale, but finds that they perform better at correcting logical mistakes than at classifying them. This finding directly motivates the proposed misconception-taxonomy approach: giving the LLM a structured classification schema (the validated taxonomy) rather than asking it to reason about logic from scratch should improve classification reliability."
+        },
+        {
+          "title": "A Classroom Study of LLM-Generated Feedback Intervention in Introductory Programming",
+          "authors": "arXiv 2026 authors",
+          "venue": "arXiv 2026",
+          "year": 2026,
+          "url": "https://arxiv.org/abs/2606.08807",
+          "relevance": "A classroom-scale A/B study of LLM-generated feedback in CS1, providing methodology and effect-size benchmarks for the proposed Phase 3 controlled study. The study's design — within-subjects comparison of targeted vs. generic feedback on follow-up problems — is a direct methodological template for the hint-effectiveness experiment in Phase 3."
+        },
+        {
+          "title": "On Students' Usage of Tracing for Understanding Code",
+          "authors": "ACM SIGCSE TS 2023 authors",
+          "venue": "SIGCSE TS 2023",
+          "year": 2023,
+          "url": "https://dl.acm.org/doi/10.1145/3545945.3569741",
+          "relevance": "Documents how students actually use tracing as a comprehension strategy, finding that students who trace more understand code better but often apply tracing inconsistently. Provides baseline evidence that tracing ability is a meaningful predictor of code comprehension, supporting the argument that a feedback loop on trace errors will transfer to improved program understanding beyond the tracing task itself."
+        }
+      ],
+      "researchPlan": {
+        "overview": "Three-phase project. Phase 1 (IRB-free corpus collection and taxonomy): digitize the six-artefact protocol as a web form, deploy in an existing CS1 course to collect 300+ digitized trace submissions, build a validated misconception taxonomy via affinity diagramming coded by two independent researchers. Phase 2 (LLM classifier): prompt Claude to classify new trace submissions against the taxonomy; measure agreement with human expert coding on a held-out 100-submission test set (Cohen kappa target: >=0.70); iterate using few-shot examples from the taxonomy. Phase 3 (A/B hint study): generate taxonomy-targeted hints per misconception category; run a within-subjects study in one CS1 section testing targeted hints vs. generic 'incorrect' feedback on a subsequent isomorphic trace problem; measure improvement on follow-up. The primary research question spans Phases 2-3: can an LLM reliably classify trace errors into a validated taxonomy, and does receiving taxonomy-targeted hints improve isomorphic-problem performance?",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Digitize the six-artefact submission protocol: build a web form that mirrors each of the six artefact types from the seed paper (using structured input fields and a canvas draw element for hand-drawn artefacts); pilot with 20 students in an existing CS1 section to confirm the digital format captures the same errors as pen-and-paper; adjust form design based on pilot feedback",
+            "deliverable": "Deployed web form; pilot report documenting 20 submissions and comparing digital-format error patterns to seed-paper pen-and-paper findings"
+          },
+          {
+            "month": 2,
+            "goal": "Collect corpus: deploy the digitized protocol in a full CS1 section across 5 to 8 problem instances (covering sequential, conditional, loop, and procedural control); target 300+ total submissions; run affinity-diagramming session with two independent researchers to group observed errors into misconception categories; reconcile disagreements and finalize a taxonomy of 8 to 15 named categories with definitions and positive examples",
+            "deliverable": "Anonymized corpus of 300+ digitized trace submissions; validated misconception taxonomy document with category definitions, positive examples, and inter-coder reliability report (Cohen kappa)"
+          },
+          {
+            "month": 3,
+            "goal": "Build and iterate LLM classifier: write a classification prompt for Claude that presents a trace submission alongside the taxonomy category definitions and few-shot examples from Month 2; run on a 100-submission held-out test set coded independently by a human expert; compute Cohen kappa between Claude's classifications and human codes; if kappa < 0.70, add more few-shot examples or restructure the prompt and re-run; target kappa >= 0.70 within 3 prompt iterations",
+            "deliverable": "Classification prompt; kappa scores per iteration; final prompt achieving target kappa; failure analysis of remaining disagreements"
+          },
+          {
+            "month": 4,
+            "goal": "Generate taxonomy-targeted hints: for each of the 8 to 15 misconception categories, write 3 targeted natural-language hints of increasing specificity (vague procedural, specific procedural, worked example step); evaluate hint quality by having 3 CS instructors rate each hint on a 1-5 scale for correctness, specificity, and pedagogical appropriateness; revise low-rated hints",
+            "deliverable": "Hint bank: 3 hints per category; instructor rating report; revised hint bank"
+          },
+          {
+            "month": 5,
+            "goal": "Run within-subjects A/B study in one CS1 section: students attempt a trace problem; those who make a classified error receive either targeted hint (condition A) or generic 'incorrect' message (condition B), assigned via a balanced counterbalanced design across two matched problem pairs; students then attempt an isomorphic follow-up problem; collect performance data and a short exit survey on hint usefulness",
+            "deliverable": "IRB protocol (minimal risk); study data: first-attempt accuracy, follow-up accuracy per condition, hint usefulness ratings; preliminary statistical analysis (paired t-test or McNemar's test)"
+          },
+          {
+            "month": 6,
+            "goal": "Analysis and write-up: compute effect size of targeted vs. generic hints on follow-up performance; perform subgroup analysis by misconception category (which categories benefit most from targeted hints?); write and submit paper; release digitized protocol, anonymized corpus (with IRB-compliant privacy protections), taxonomy, classification prompt, and hint bank as a public GitHub repository",
+            "deliverable": "Submitted paper draft; public GitHub repository with full replication package including protocol, corpus (anonymized), taxonomy, classification prompt, hint bank, and analysis scripts"
+          }
+        ],
+        "targetVenues": ["ITiCSE", "SIGCSE TS", "ICER", "AIED"],
+        "resources": "Claude API for LLM classifier and hint generation; one CS1 course section at UW Bothell for corpus collection (Months 2 and 5); two independent researchers for affinity diagramming (Month 2) and human expert coding (Month 3); three CS instructors for hint quality rating (Month 4); web hosting for digitized protocol form (Netlify or departmental server); no specialized hardware required.",
+        "risks": [
+          {
+            "risk": "The digitized six-artefact protocol does not capture the same error patterns as pen-and-paper, reducing comparability with the seed paper's findings and the validity of the collected corpus.",
+            "mitigation": "Run a direct comparison pilot in Month 1: same students complete the same problem in both pen-and-paper and digital formats; compare error distributions using qualitative coding. If the digital format produces systematically different errors, adjust the form design (for example, replacing structured fields with a freehand draw canvas that more closely mimics paper)."
+          },
+          {
+            "risk": "The LLM classifier does not reach kappa >= 0.70 within the allotted prompt iterations, leaving the classifier unreliable for the Phase 3 hint study.",
+            "mitigation": "If three prompt iterations do not reach target kappa, fall back to a human-coded subset for Phase 3 (classify the Phase 3 study submissions manually rather than automatically). Phase 2 becomes a standalone contribution documenting the reliability gap and the failure modes, which is itself publishable as a cautionary result for LLM use in misconception detection."
+          },
+          {
+            "risk": "The A/B study (Phase 3) fails to detect a significant effect due to underpowered sample size (a single CS1 section may have 25 to 35 students).",
+            "mitigation": "Pre-register the study with a power analysis; if one section is underpowered, extend to a second section in the following term. Frame the Phase 3 paper section as a pilot with effect-size estimates for future replication rather than a definitive trial, and focus the submission's contribution on the taxonomy and classifier (Phases 1-2), which are valuable independently of the hint-study outcome."
+          }
+        ],
+        "humanSubjects": true
+      }
+    }
+  ]
+}
