@@ -1,0 +1,159 @@
+{
+  "date": "2026-08-09",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Procedural Sound Sketchpad",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "Describe any sound effect in plain words and get instant, playable, Web Audio API synthesis code with no assets required. A lightweight design tool for game developers and students who need free procedural audio.",
+      "description": "Procedural Sound Sketchpad is a browser-based tool where you type a natural-language description of a sound (e.g., 'muffled explosion heard from underground' or 'coin flicked across a marble table') and Claude API generates parametric Web Audio API synthesis code that plays immediately in the browser. A live oscilloscope and node-graph display let users tune reverb, envelope, and frequency; a single button exports a WAV. Every sound is generated procedurally, so there are no sample licenses, no large asset folders, and no backend storage. The project doubles as an interactive teaching demo for audio programming and signal processing concepts.",
+      "keyFeatures": [
+        "Natural-language to Web Audio API synthesis via Claude API, no assets required",
+        "Live oscilloscope waveform and synthesis node-graph visualization",
+        "WAV export at configurable sample rate and bit depth"
+      ],
+      "techStack": "React + Vite, Web Audio API, Claude API (claude-sonnet-5)",
+      "whyInteresting": "Game dev students and indie developers constantly need affordable, flexible sound creation; procedural audio is underexplored relative to sample-based libraries, and this bridges NLP prompting with digital signal processing in a single weekend build.",
+      "inspiredBy": "Vestiges roguelite game launch and game audio discussions on Hacker News August 2026; GitHub trending game-dev repositories"
+    },
+    {
+      "n": 2,
+      "title": "Packet Story",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "A browser extension that captures every HTTP request your tab makes and generates a readable detective-story narration of what your browser fetched, why, and what it reveals about real-world web architecture. Perfect for networking and web-dev courses.",
+      "description": "Packet Story is a Manifest v3 browser extension that intercepts network requests during any web session and feeds the request log to Claude API, which generates a plain-English narrative: which resources were fetched, which third parties were contacted, which cookies were set, and what the load waterfall reveals about page architecture. Instructors can project it as a live demo during networking lectures to make HTTP tangible on any site students already use. A side panel shows a collapsible load waterfall, a third-party tracker count, and a privacy-exposure score derived from the request inventory. Students submit short write-ups explaining one site's network behavior as an assignment.",
+      "keyFeatures": [
+        "Real-time interception of network requests with resource-type classification",
+        "Claude API narration of the full request story in plain English",
+        "Third-party tracker detection panel with load-waterfall timeline and privacy score"
+      ],
+      "techStack": "Browser Extension (Manifest v3), React + Vite (popup and side panel), Claude API (claude-sonnet-5), chrome.devtools.network API",
+      "whyInteresting": "Making HTTP traffic personally visible transforms an abstract networking topic into something students can investigate on any website they visit daily, giving every demo a concrete real-world hook.",
+      "inspiredBy": "Developer productivity tool trends in DEV Community 2026; need for hands-on, low-barrier networking fundamentals demonstrations"
+    },
+    {
+      "n": 3,
+      "title": "Code Carbon Lens",
+      "category": "Teaching Tool",
+      "complexity": "Multi-week",
+      "summary": "An autograder wrapper that profiles the energy draw and algorithmic efficiency of each student submission, shows a class-wide anonymized sustainability leaderboard, and generates AI coaching on how to reduce a solution's carbon footprint.",
+      "description": "Code Carbon Lens sits between a Canvas LMS assignment and an existing autograder. After each submission passes functional tests, the system profiles it with CodeCarbon and cProfile, measuring real CPU energy consumption alongside asymptotic complexity. Students see a feedback panel showing their submission's energy draw compared to the class distribution ('Your solution used 3x more energy than the median due to this O(n^2) inner loop') plus an AI-generated optimization suggestion that avoids giving away the answer. A class dashboard lets instructors track energy-efficiency improvement over the semester, rewarding algorithmic thinking alongside correctness. The project directly implements the ITiCSE 2025 call to make sustainability a first-class concern in CS curricula by attaching a real number to the environmental cost of an algorithm choice.",
+      "keyFeatures": [
+        "Per-submission CPU energy profiling via CodeCarbon integrated into the autograder pipeline",
+        "Anonymous class efficiency leaderboard with historical improvement tracking per student",
+        "Claude API coaching that names the inefficiency and suggests a direction without revealing the solution"
+      ],
+      "techStack": "Python + Flask, CodeCarbon, cProfile, Claude API (claude-sonnet-5), React + Vite, Supabase, Canvas LMS API",
+      "whyInteresting": "Correctness-only grading teaches students that working code is finished code; adding an energy score makes algorithmic choices feel consequential and builds the habit of reasoning about efficiency from the start.",
+      "inspiredBy": "ITiCSE 2025 paper 'Beyond Buzzwords: Making Sustainability a Pillar of the Computing Curriculum' (doi:10.1145/3724363.3729034); discussions on software energy efficiency in developer communities"
+    },
+    {
+      "n": 4,
+      "title": "Cross-Tool Critical AI Literacy: Building a Benchmark for Negative Expertise Transfer in CS Education",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "This research extends the MacNeil et al. (2025) negative expertise quiz intervention to ask whether the critical code-evaluation skill it builds transfers across AI tools, programming domains, and time, producing a reusable labeled benchmark dataset for CS instructors.",
+      "description": "MacNeil et al. (ITiCSE 2025) demonstrated that an interactive quiz presenting students with competing AI code suggestions at each line, called a 'negative expertise' intervention, promoted critical thinking and metacognitive planning in undergraduates using GitHub Copilot in a simulated IDE. The open questions are whether this critical literacy skill is tool-specific or genuinely transferable: will a student trained to spot bad Copilot suggestions also catch bad Claude or Gemini suggestions, on a different assignment type, four weeks later? This research answers these questions by (1) constructing a publicly available, multi-tool, multi-domain benchmark dataset of AI suggestion quality pairs rated by expert CS educators, (2) building a tool-agnostic quiz platform that replays those pairs across tool contexts, and (3) running a controlled study measuring immediate skill acquisition, cross-tool transfer, and 4-week retention. The benchmark alone, requiring no human subjects, is a direct community contribution: any instructor can slot it into their course to deploy the negative expertise intervention with whichever AI tool their students use. The findings directly inform Pisan's toolchain-first pedagogy by specifying whether 'evaluate AI output critically' should be taught as a tool-specific technique or as a first-class, transferable cognitive skill.",
+      "papers": [
+        {
+          "title": "Fostering Responsible AI Use Through Negative Expertise: A Contextualized Autocompletion Quiz",
+          "authors": "Stephen MacNeil, James Prather, Rahad Arman Nabid, Sebastian Gutierrez, Silas Carvalho, Saimon Shrestha, Paul Denny, Brent N. Reeves, Juho Leinonen, Rachel Louise Rossetti",
+          "venue": "ITiCSE 2025",
+          "year": 2025,
+          "doi": "10.1145/3724363.3729067",
+          "url": "https://doi.org/10.1145/3724363.3729067",
+          "abstract": "We developed an interactive quiz system within a simulated IDE environment designed to help students think critically about autogenerated code suggestions. Instructors use the tool to create contextualized coding quizzes that present multiple code suggestions at each line; students must choose the correct option to move on to the next step. Survey responses suggest this approach promotes critical thinking and scaffolds metacognitive skills like planning and reflection, and most students preferred this experience to traditional quizzes or GitHub Copilot.",
+          "relevance": "This is the source paper proposing the negative expertise intervention. The research idea extends it by asking whether the critical evaluation skill generalizes across AI tools, task types, and time, and by contributing a reusable labeled benchmark that solves the instructor-setup barrier the source paper identified."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "'It's Weird That it Knows What I Want': Usability and Interactions with Copilot for Novice Programmers",
+          "authors": "James Prather, Brent N. Reeves, Paul Denny, Brett A. Becker, Juho Leinonen, Andrew Luxton-Reilly, Garrett Powell, James Finnie-Ansley",
+          "venue": "ACM Transactions on Computer-Human Interaction, 2024",
+          "year": 2024,
+          "url": "https://dl.acm.org/doi/10.1145/3617367",
+          "relevance": "Establishes the core problem: novice programmers accept Copilot suggestions uncritically and without understanding, setting up the need for the negative expertise intervention and its cross-tool evaluation."
+        },
+        {
+          "title": "The Widening Gap: The Benefits and Harms of Generative AI for Novice Programmers",
+          "authors": "James Prather, Paul Denny, Juho Leinonen, Brett A. Becker, Arto Hellas, Sami Sarsa, Brent N. Reeves, Andrew Luxton-Reilly, Bailey Kimmel",
+          "venue": "Proceedings of the 2024 ACM Conference on International Computing Education Research (ICER 2024)",
+          "year": 2024,
+          "url": "https://arxiv.org/abs/2405.17739",
+          "relevance": "Systematic review documenting that over-reliance and uncritical acceptance of AI-generated code are consistent harms for novice CS students, providing the empirical motivation for developing transferable critical AI literacy skills."
+        },
+        {
+          "title": "'All Roads Lead to ChatGPT': How Generative AI is Eroding Social Interactions and Student Learning Communities",
+          "authors": "Irene Hou, Owen Man, Kate Hamilton, Leili Zadeh, Stephen MacNeil",
+          "venue": "ITiCSE 2025",
+          "year": 2025,
+          "url": "https://doi.org/10.1145/3724363.3729024",
+          "relevance": "Qualitative study across seven R1 universities showing that AI mediation is replacing peer help-seeking and eroding learning communities, underscoring why critical evaluation skills must be taught explicitly rather than assumed to develop organically."
+        },
+        {
+          "title": "To Tab or Not to Tab: Measuring Critical Engagement in AI Code Completion Tools Using Behavioral Signals and Attention Checks",
+          "authors": "Preprint (arxiv 2606.30549)",
+          "venue": "arXiv preprint, 2026",
+          "year": 2026,
+          "url": "https://arxiv.org/abs/2606.30549",
+          "relevance": "Complementary behavioral approach to measuring critical engagement with AI code completion; offers alternative metrics (tab-acceptance latency, attention checks) that could augment the quiz-based measurement in the proposed benchmark."
+        }
+      ],
+      "researchPlan": {
+        "overview": "The study proceeds in two IRB-distinct phases: a dataset-and-platform phase (no human subjects) that produces a reusable multi-tool AI suggestion benchmark and quiz platform, followed by a student study phase measuring skill acquisition, cross-tool transfer, and 4-week retention. This sequencing allows immediate publication of the benchmark as a community artifact while the IRB process runs in parallel.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review, define 'critical AI literacy' construct and rating codebook, file IRB for student study",
+            "deliverable": "Annotated bibliography, 5-dimension rating codebook for AI suggestion quality, IRB application submitted"
+          },
+          {
+            "month": 2,
+            "goal": "Build benchmark dataset: collect 30 CS1 and 20 CS2 tasks, generate suggestions from Copilot, Claude, and Gemini, rate all pairs using codebook",
+            "deliverable": "v1 benchmark dataset: 150 rated suggestion pairs across 3 tools and 2 course levels, hosted on GitHub"
+          },
+          {
+            "month": 3,
+            "goal": "Build tool-agnostic quiz platform extending MacNeil et al. system design, integrate all three tool corpora",
+            "deliverable": "Deployed quiz platform with 3-tool mode, instructor dashboard, and logging for transfer and retention analysis"
+          },
+          {
+            "month": 4,
+            "goal": "IRB-approved pilot with CS1/CS2 students: intervention (Copilot training), immediate post-test (Claude and Gemini transfer tasks), and qualitative interviews",
+            "deliverable": "Complete dataset from n >= 40 students; interview transcripts coded"
+          },
+          {
+            "month": 5,
+            "goal": "4-week retention post-test, full quantitative analysis (transfer effect, retention decay), benchmark refinement based on pilot feedback",
+            "deliverable": "Retention dataset, statistical analysis report, refined v2 benchmark"
+          },
+          {
+            "month": 6,
+            "goal": "Write and submit paper; release final benchmark and platform under open license",
+            "deliverable": "Submitted conference paper; public GitHub release of benchmark and quiz platform"
+          }
+        ],
+        "targetVenues": ["ITiCSE", "SIGCSE Technical Symposium", "ICER", "AIED"],
+        "resources": "Claude API and Gemini API access for suggestion generation; GitHub Copilot licenses for students during the study; IRB approval (low-risk educational intervention); 1-2 undergraduate research assistants for codebook rating; access to CSS 142 or CSS 143 at UW Bothell for the student cohort; Supabase for logging quiz interactions.",
+        "risks": [
+          {
+            "risk": "Different AI tools generate qualitatively distinct suggestion styles, making tool-agnostic training hard and potentially confounding transfer measurement",
+            "mitigation": "Begin with tool-stratified analysis in Month 5 before claiming cross-tool generalization; include tool identity as a covariate; design the codebook to capture tool-independent quality dimensions (correctness, efficiency, readability)"
+          },
+          {
+            "risk": "Student attrition between intervention and 4-week retention test reduces statistical power",
+            "mitigation": "Embed both sessions as low-stakes Canvas quiz activities integrated into the regular course grade to maximize completion; offer a small extra-credit incentive for the retention post-test"
+          },
+          {
+            "risk": "IRB review delays the student study, pushing the timeline past the planned semester",
+            "mitigation": "File IRB in Month 1 using expedited review (educational intervention, no deception, low risk); Months 2-3 are IRB-free dataset and platform work, providing a productive buffer"
+          }
+        ],
+        "humanSubjects": true
+      }
+    }
+  ]
+}

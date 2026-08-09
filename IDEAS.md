@@ -310,3 +310,7 @@
 | 2026-08-08 | JS Event Loop Visualizer | Teaching Tool | 1-2 Weeks |
 | 2026-08-08 | Game Feel Lab | Classroom Assignment | Multi-week |
 | 2026-08-08 | From Pen-and-Paper Traces to Targeted Hints: An LLM Misconception Classifier for Control-Flow Errors | Research | Research |
+| 2026-08-09 | Procedural Sound Sketchpad | Side Project | Weekend |
+| 2026-08-09 | Packet Story | Teaching Tool | 1-2 Weeks |
+| 2026-08-09 | Code Carbon Lens | Teaching Tool | Multi-week |
+| 2026-08-09 | Cross-Tool Critical AI Literacy: Building a Benchmark for Negative Expertise Transfer in CS Education | Research | Research |
