@@ -2,6 +2,7 @@
 
 Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, doc, scope, code, note.
 
+2026-08-10 [code] Created ideas/2026-08-10.json with 4 ideas: API Schema Drift Sentinel, Research Radar, Fuzz Whisperer, Debug Duck Misconception Mining (ITiCSE 2025 Quack the Code)
 2026-08-03 [code] Created ideas/2026-08-03.json with 4 ideas: Slide Critique Bot, Semantic Page Monitor, Paper Argument Cartographer, Misconception-Grounded LLM Student Personas for CS TA Training
 2026-06-28 [code] Created ideas/2026-06-28.md + .json with 3 ideas: Doc DX Grader, Pair Programming Pulse, WebGPU Shader Studio
 2026-06-29 [code] Created ideas/2026-06-29.md + .json with 3 ideas: Prompt Compression Studio, Assignment Scaffolder, Agentic Study Buddy Network

@@ -1,0 +1,165 @@
+{
+  "date": "2026-08-10",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "API Schema Drift Sentinel",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "Monitor third-party API endpoints for silent schema changes — field additions, removals, or type shifts — before they break your app in production.",
+      "description": "Third-party APIs change silently and constantly, breaking integrations without warning. API Schema Drift Sentinel lets you register any REST endpoint with a sample request, stores a baseline response schema, and periodically re-polls it. When any field appears, disappears, changes type, or shifts from required to optional, you get an immediate alert with a visual diff. Claude annotates what each change likely means (\"a new pagination field was added\") and whether it is breaking or safe to ignore. Built as a React + Vite + Tailwind frontend with a lightweight Flask backend and Supabase for schema snapshot storage.",
+      "keyFeatures": [
+        "Register API endpoints with a sample request config and auto-inferred baseline schema",
+        "Scheduled polling (hourly or daily) with structural diff comparison against the stored baseline",
+        "Claude-generated change summaries categorizing each diff as breaking, additive, or cosmetic",
+        "Email or webhook alerts with a visual before/after schema diff",
+        "Dashboard showing drift history per endpoint over time with severity timeline"
+      ],
+      "techStack": "React + Vite + Tailwind, Flask, Supabase (schema snapshots + auth), Claude API, Python APScheduler",
+      "whyInteresting": "Supply chain reliability and silent API breakage are top pain points in 2026. Every serious app integrates 5-10 third-party APIs yet almost none have drift detection. This fills a real gap that is buildable in a weekend with a Supabase free tier and a single Flask worker, and it directly benefits developers building on fast-evolving LLM provider APIs.",
+      "inspiredBy": "GitHub trending supply-chain security tools (Bumblebee scanner); common breakage pain when building on third-party APIs that version informally; Product Hunt 2026 trend of tools that embed into existing developer workflows"
+    },
+    {
+      "n": 2,
+      "title": "Research Radar",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "Paste a reading list of paper DOIs and a learning goal, and get an AI-ranked reading order with connection notes, estimated reading times, and a shareable weekly schedule.",
+      "description": "Reading lists in graduate seminars and CS education courses routinely exceed what students can absorb, yet no tool helps them triage intelligently. Research Radar accepts DOIs or paper titles, auto-fetches abstracts and citation counts via the Semantic Scholar API, and uses Claude to rank papers by relevance to a stated learning goal, prerequisite ordering (which papers should be read first to understand later ones), and estimated reading time based on abstract density. A force-directed graph shows conceptual and citation connections between papers. Instructors can share a pre-ranked list; students can re-rank for their own focus area. The tool exports a structured weekly reading schedule and generates a one-paragraph 'why read this first' note for each paper.",
+      "keyFeatures": [
+        "Paste a list of DOIs or paper titles; Semantic Scholar Open API auto-fetches abstracts and citation counts",
+        "State a learning goal in plain English; Claude ranks papers by relevance and prerequisite order",
+        "Interactive force-directed network graph showing citation and conceptual connections",
+        "Estimated reading time per paper and a generated multi-week reading schedule",
+        "Shareable URLs so instructors can distribute a ranked reading list to the whole class"
+      ],
+      "techStack": "React + Vite + Tailwind, Claude API, Semantic Scholar Open API (free), Supabase (saved reading lists), react-force-graph for network visualization",
+      "whyInteresting": "Every CS instructor faces too many good papers and too few weeks. Students often read in an unhelpful order or skip foundational work. Research Radar makes course reading lists navigable without requiring the instructor to write a custom reading guide each semester, and it adapts to each student's stated focus area.",
+      "inspiredBy": "Heavy paper-reading load in CS education graduate seminars; tools like Connected Papers and Litmaps; HN discussions about making academic reading more tractable for busy students"
+    },
+    {
+      "n": 3,
+      "title": "Fuzz Whisperer",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "An AI-powered fuzzing workbench where students describe a function in natural language and the system generates semantically meaningful edge-case inputs, runs them in a sandbox, and explains exactly what invariant each crash violated.",
+      "description": "Traditional fuzzing relies on random mutations, which miss semantic edge cases and produce opaque output that novices cannot learn from. Fuzz Whisperer inverts this: students describe a function or API in natural language (its contract, valid input ranges, expected behavior), and Claude generates targeted edge-case inputs organized by invariant type — off-by-one boundaries, null/empty inputs, type coercions, encoding edge cases, and ordering violations. The inputs execute in a sandboxed Docker container; crashes are returned with LLM-generated explanations of which stated invariant was violated and why. Each iteration prompts students to reflect on what surprised them, and Claude adapts the next batch accordingly. The assignment teaches fuzzing principles, defensive contract thinking, and LLM-assisted test design — skills directly applicable to security and software quality courses.",
+      "keyFeatures": [
+        "Natural language contract entry: preconditions, type expectations, valid ranges, and expected behavior",
+        "LLM-generated semantic fuzz inputs organized by invariant type (boundary, type, null, encoding, ordering)",
+        "Docker-sandboxed execution with pass, fail, crash, or timeout outcomes per input",
+        "LLM-generated crash explanation: which stated invariant was violated and a suggested fix direction",
+        "Iterative rounds where Claude adapts the next batch based on which inputs the student marks as surprising or already understood"
+      ],
+      "techStack": "React + Vite + Tailwind, Flask, Docker (execution sandbox), Claude API, SQLite or Supabase for run history and student session state",
+      "whyInteresting": "Fuzzing is a critical industry security skill that is rarely taught well in undergraduate courses because random mutation is opaque and boring. Fuzz Whisperer makes the reasoning visible: students see exactly why an edge case breaks a function, and the dialogue-style iteration makes it feel like a knowledgeable lab partner rather than a black box test runner.",
+      "inspiredBy": "Growing interest in AI-assisted security testing; the gap between academic fuzzing curricula and industry fuzz tools; GitHub trending security research repos on semantic-aware input generation"
+    },
+    {
+      "n": 4,
+      "title": "Debug Duck Misconception Mining: Classifying CS1 Misconceptions from Learning-by-Teaching Explanations",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Mine transcripts of students explaining code to an AI debug duck to classify CS1 misconceptions with higher fidelity than submission-error analysis alone, then generate targeted Socratic recovery hints.",
+      "description": "The 'Quack the Code' game-show tool (ITiCSE 2025) showed that undergraduate CS students willingly and repeatedly explain Java code to an LLM-powered debug duck, yet the authors did not analyze what those explanations reveal about student misconceptions. This research proposes to collect or synthetically generate a corpus of student-to-duck explanation transcripts, annotate them against an established CS1 misconception taxonomy (variable scope, off-by-one, loop termination, type coercion, method semantics), and develop an LLM-based classifier that extracts misconception labels from explanation text rather than from submission error types alone. The central hypothesis is that student explanations expose plausible-but-wrong conceptual theories that code errors cannot surface: a student who misunderstands variable scope may produce the same error pattern as one with an off-by-one error, but their explanations diverge sharply. Misconception labels from the classifier are then used to generate targeted Socratic recovery hints, extending Pisan's SIGCSE 2021 solution-free hint work with a richer upstream signal. The study requires no human subjects if using anonymized existing logs or LLM-generated synthetic transcripts calibrated to known misconception patterns.",
+      "papers": [
+        {
+          "title": "Quack the Code: A Computer Game Show Offers Learning Through Teaching AI in Undergraduate Software Engineering",
+          "authors": "Kathleen Marie Kelly, Bo Wu, Christine Liebe",
+          "venue": "ITiCSE 2025",
+          "year": 2025,
+          "doi": "10.1145/3724363.3729096",
+          "url": "https://doi.org/10.1145/3724363.3729096",
+          "abstract": "Quack the Code is a game-show-themed learning tool where students teach an LLM-powered 'debug duck' while competing in an AI-hosted game. Offered to undergraduate CS students (N=25) over a 16-week semester, the game was used repeatedly near quiz and exam periods. Focus groups highlighted positive reactions to AI interactivity and customization; most students (87%) preferred non-competitive play and focused on Java Basics.",
+          "relevance": "This is the direct source paper: Quack the Code deploys an LLM debug duck that receives student code explanations but does not mine those explanations for misconception signals. This research fills that gap by treating explanation transcripts as the primary data source for misconception classification and targeted hint generation."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "Teach AI How to Code: Using Large Language Models as Teachable Agents for Programming Education",
+          "authors": "Nischal Ashok Kumar, Aashish Ghimire, John Prather, Edward Gehringer",
+          "venue": "CHI 2024",
+          "year": 2024,
+          "url": "https://doi.org/10.1145/3613904.3642349",
+          "relevance": "Introduces AlgoBo, a teachable LLM agent that simulates misconceptions and periodically shifts to questioner mode, demonstrating that LBT with LLMs exposes student knowledge gaps in CS1. Directly contextualizes why student explanations to a debug duck are a rich signal source for misconception detection."
+        },
+        {
+          "title": "Playing Dumb to Get Smart: Creating and Evaluating an LLM-based Teachable Agent within University Computer Science Classes",
+          "authors": "Dominic Dingel et al.",
+          "venue": "CHI 2025",
+          "year": 2025,
+          "url": "https://doi.org/10.1145/3706598.3713644",
+          "relevance": "Evaluates MatlabTutee, an LLM-based teachable agent in a university CS course, providing empirical evidence that students' teaching interactions improve learning outcomes and confirming that explanation transcripts carry pedagogically meaningful content worth mining."
+        },
+        {
+          "title": "Turning 500+ Students into Teachers: A Semester-Long Study of an AI Teachable Agent in an Undergraduate Algorithms Course",
+          "authors": "Yann Hicke, Anmol Agarwal, Priam Vyas et al.",
+          "venue": "L@S 2026",
+          "year": 2026,
+          "url": "https://doi.org/10.1145/3774398.3811623",
+          "relevance": "Large-scale (500+ student) deployment of a teachable agent in an undergraduate algorithms course, establishing ecological validity of LBT at CS course scale. The interaction logs at this scale represent an ideal corpus for the misconception mining pipeline proposed here."
+        },
+        {
+          "title": "Generating Hints for Programming Problems Without a Solution",
+          "authors": "Elena Suciu, Victor Giang, Tianlong Zhao, Patricia Runandy, Tien Dang",
+          "venue": "SIGCSE 2021 Student Research Competition (Advisor: Yusuf Pisan)",
+          "year": 2021,
+          "url": "https://dl.acm.org/doi/10.1145/3408877.3432413",
+          "relevance": "Pisan-supervised work demonstrating that solution-free hints for CS programming problems are feasible. This research extends that line by grounding hint generation in misconception labels extracted from student explanation transcripts, giving the hint generator a richer and more specific signal than the problem statement alone."
+        }
+      ],
+      "researchPlan": {
+        "overview": "This study asks whether transcripts of students explaining code to an LLM debug duck expose CS1 misconceptions with higher classification accuracy and richer category coverage than submission-error-type analysis. The pipeline runs: collect or synthesize explanation transcripts, annotate for misconception type, train a classifier, compare against an error-type baseline, then generate and expert-rate targeted Socratic recovery hints. No human subjects are required if the corpus is built from anonymized existing logs or LLM-synthesized transcripts.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review and taxonomy selection",
+            "deliverable": "Annotated bibliography of LBT-with-LLMs, CS1 misconception taxonomies, and solution-free hint generation; operationalized six-category misconception taxonomy with coding guide"
+          },
+          {
+            "month": 2,
+            "goal": "Corpus construction",
+            "deliverable": "500+ explanation transcripts: real anonymized logs from Quack the Code authors or collaborators, supplemented by synthetic transcripts generated with student-persona LLMs calibrated to each misconception category"
+          },
+          {
+            "month": 3,
+            "goal": "Annotation and classifier development",
+            "deliverable": "Inter-rater-reliable annotation of 200 transcripts (kappa >= 0.70); prompt-engineered LLM classifier achieving >= 75% macro-F1 on held-out 100-transcript test set"
+          },
+          {
+            "month": 4,
+            "goal": "Baseline comparison experiment",
+            "deliverable": "Head-to-head comparison of explanation-based classifier vs. submission-error-type baseline on same student cohort; quantify how many misconceptions are uniquely surfaced by explanation text vs. error patterns"
+          },
+          {
+            "month": 5,
+            "goal": "Socratic hint generation and expert rating",
+            "deliverable": "Hint generator conditioned on misconception label and problem context; expert rating study (n >= 5 CS instructors) comparing specificity and pedagogical appropriateness vs. generic solution-free hints"
+          },
+          {
+            "month": 6,
+            "goal": "Paper writing and submission",
+            "deliverable": "Submitted full paper targeting SIGCSE TS 2027 or ICER 2027"
+          }
+        ],
+        "targetVenues": ["SIGCSE", "ICER", "EDM", "L@S"],
+        "resources": "Anonymized Jolly Feedback submission logs (available via Pisan's existing infrastructure); Claude API for classification and hint generation; potential collaboration with Quack the Code authors (Kelly, Wu, Liebe) for transcript access; 1-2 undergraduate research assistants for annotation; no special compute beyond Claude API",
+        "risks": [
+          {
+            "risk": "Student explanation transcripts from existing deployed systems are unavailable or too small for reliable classification",
+            "mitigation": "Generate synthetic transcripts using student-persona LLMs calibrated to a published CS1 misconception taxonomy; validate synthetic-to-real alignment with a small expert review panel before classification training"
+          },
+          {
+            "risk": "Students produce surface-level code restatements rather than conceptual explanations, making misconception signals noisy",
+            "mitigation": "Design structured elicitation prompts requiring students to explain WHY code works; add a Socratic follow-up turn that probes shallow explanations with 'what would happen if you changed X?'"
+          },
+          {
+            "risk": "Misconception labels extracted from explanations may not map to actionable hints without the original problem context",
+            "mitigation": "Include problem title and detected error type as additional classifier inputs; evaluate hint quality conditioned on both misconception label and problem context in the expert rating study"
+          }
+        ],
+        "humanSubjects": false
+      }
+    }
+  ]
+}

@@ -314,3 +314,7 @@
 | 2026-08-09 | Packet Story | Teaching Tool | 1-2 Weeks |
 | 2026-08-09 | Code Carbon Lens | Teaching Tool | Multi-week |
 | 2026-08-09 | Cross-Tool Critical AI Literacy: Building a Benchmark for Negative Expertise Transfer in CS Education | Research | Research |
+| 2026-08-10 | API Schema Drift Sentinel | Side Project | Weekend |
+| 2026-08-10 | Research Radar | Teaching Tool | 1-2 Weeks |
+| 2026-08-10 | Fuzz Whisperer | Classroom Assignment | Multi-week |
+| 2026-08-10 | Debug Duck Misconception Mining: Classifying CS1 Misconceptions from Learning-by-Teaching Explanations | Research | Research |
