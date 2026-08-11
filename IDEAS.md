@@ -318,3 +318,7 @@
 | 2026-08-10 | Research Radar | Teaching Tool | 1-2 Weeks |
 | 2026-08-10 | Fuzz Whisperer | Classroom Assignment | Multi-week |
 | 2026-08-10 | Debug Duck Misconception Mining: Classifying CS1 Misconceptions from Learning-by-Teaching Explanations | Research | Research |
+| 2026-08-11 | Code Review Gauntlet | Side Project | Weekend |
+| 2026-08-11 | Exam Reflection Aggregator | Teaching Tool | 1-2 Weeks |
+| 2026-08-11 | Dataset Ethics Audit Pipeline | Classroom Assignment | Multi-week |
+| 2026-08-11 | Automated AI-Resistance Scoring and Problem Generation for CS1/CS2 Programming Assessments | Research | Research |

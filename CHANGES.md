@@ -175,3 +175,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 
 2026-08-08 [code] Created ideas/2026-08-08.json with 4 ideas: Lint-to-Learn, JS Event Loop Visualizer, Game Feel Lab, From Pen-and-Paper Traces to Targeted Hints: An LLM Misconception Classifier for Control-Flow Errors (research, ITiCSE 2025 doi:10.1145/3724363.3729044)
 2026-08-09 [code] Created ideas/2026-08-09.json with 4 ideas: Procedural Sound Sketchpad, Packet Story, Code Carbon Lens, Cross-Tool Critical AI Literacy: Building a Benchmark for Negative Expertise Transfer in CS Education (research, ITiCSE 2025 doi:10.1145/3724363.3729067)
+
+2026-08-11 [code] Created ideas/2026-08-11.json with 4 ideas: Code Review Gauntlet, Exam Reflection Aggregator, Dataset Ethics Audit Pipeline, Automated AI-Resistance Scoring and Problem Generation for CS1/CS2 (research, SIGCSE TS 2026 doi:10.1145/3770761.3777272)

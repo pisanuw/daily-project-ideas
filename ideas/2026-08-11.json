@@ -1,0 +1,164 @@
+{
+  "date": "2026-08-11",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Code Review Gauntlet",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "An infinite-supply browser game where you race to spot bugs, security holes, and code smells in AI-generated code snippets before the timer runs out and the AI reveals everything you missed.",
+      "description": "Code Review Gauntlet generates a fresh, calibrated code puzzle every round using the Claude API: a snippet containing 1-3 planted defects ranging from off-by-one errors and SQL injection to subtle race conditions. Players click to annotate suspicious lines, then submit before the countdown hits zero. A post-round explainer names every defect, grades your annotation accuracy, and updates a personal skill profile showing which bug categories you most often miss. A daily challenge mode posts a shared global puzzle so players can compare scores. The gap between 'I know what good code looks like' and 'I can spot problems under pressure' is exactly where the game lives — and it is an infinite supply of real practice.",
+      "keyFeatures": [
+        "Infinite AI-generated puzzle library with calibrated difficulty tiers (CS1 syntax bugs → subtle security vulnerabilities)",
+        "Daily shared challenge with global leaderboard and streak tracking",
+        "Post-round annotated explainer showing every defect, its root cause, and fix",
+        "Personal radar chart tracking accuracy across bug categories (logic, security, style, performance, null-safety)"
+      ],
+      "techStack": "React + Vite + Tailwind, Claude API (puzzle generation + scoring), Supabase (leaderboard + streaks)",
+      "whyInteresting": "Code review is a high-value industry skill with almost no dedicated practice tooling. Gamifying it with AI-generated, never-repeated puzzles creates the same 'infinite drills' dynamic that made Duolingo work — and the post-round explainer doubles as a teaching moment.",
+      "inspiredBy": "Growing industry appetite for AI-assisted code review tools (Greptile, CodeRabbit) surfaced in 2026 developer productivity reports; HN discussion of AI coding assistants raising the floor but potentially lowering developers' defect-detection reflexes"
+    },
+    {
+      "n": 2,
+      "title": "Exam Reflection Aggregator",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "After each exam, students submit short free-text reflections on the problems they struggled with; Claude classifies each reflection into a misconception taxonomy and the instructor sees a class-wide heatmap with auto-suggested re-teaching exercises.",
+      "description": "Instructors configure a post-exam reflection form tied to each exam problem. Students submit 2-3 sentences explaining where they got stuck and what they think went wrong. Claude maps each explanation to a misconception category (e.g., 'off-by-one in loop bounds', 'pointer vs. value confusion', 'scope misunderstanding') using an instructor-editable taxonomy. The instructor dashboard shows a heatmap of which problems and which misconception clusters affected the most students, along with auto-suggested follow-up exercises for each cluster pulled from a curated exercise library or generated on the fly. The result turns qualitative self-reports into actionable class-level insight that goes far beyond a grade distribution chart.",
+      "keyFeatures": [
+        "Per-problem student reflection form with structured prompts ('What did you try? Where did you get stuck? What do you think the correct approach was?')",
+        "Claude-powered misconception classifier mapping free text to an editable taxonomy",
+        "Class-wide heatmap showing problem × misconception density",
+        "Auto-suggested follow-up exercises per misconception cluster, exportable to Canvas/LMS",
+        "Student-visible summary showing their personal misconception pattern across the course"
+      ],
+      "techStack": "React + Vite + Tailwind (frontend), Flask + Supabase (backend + storage), Claude API (classification + exercise generation), Canvas LMS API (optional grade sync)",
+      "whyInteresting": "Most exam postmortems stop at a histogram. This tool converts student self-knowledge — the most direct signal of where understanding broke down — into a structured misconception map the instructor can act on the very next class session.",
+      "inspiredBy": "Pisan's Jolly Feedback misconception modeling work; recent CS ed findings that AI-mediated help-seeking is eroding peer explanation, making instructor-driven re-teaching more important; ITiCSE 2025 'All Roads Lead to ChatGPT' paper on degraded peer learning"
+    },
+    {
+      "n": 3,
+      "title": "Dataset Ethics Audit Pipeline",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "Students build a CLI tool and React dashboard that ingests any tabular dataset and produces a structured ethics audit report covering demographic balance, historical bias, missing consent signals, and intersectionality gaps — with a remediation roadmap.",
+      "description": "Students receive a skeleton project with a defined CLI interface and test harness. They implement a multi-stage audit pipeline: a demographic balance checker (compares attribute distributions against census or domain baselines), a historical bias scanner (uses Claude to flag column names and value distributions associated with known stereotypes), a consent and provenance checker (inspects metadata for data-collection documentation), and an intersectionality analyzer (checks whether protected attribute combinations are underrepresented). A Flask API exposes the pipeline; a React dashboard visualizes results with side-by-side before/after statistics for each suggested remediation. The final deliverable is a reusable open-source tool that the instructor can adopt for future courses.",
+      "keyFeatures": [
+        "Multi-stage audit pipeline: demographic balance, historical bias, consent/provenance, intersectionality",
+        "Claude API integration for narrative generation per audit finding and natural-language remediation suggestions",
+        "React dashboard with before/after dataset statistics and downloadable ethics report (Markdown/PDF)",
+        "Unit-test scaffold enforcing a defined pipeline interface so peer reviews can swap implementations",
+        "Rubric-aligned evaluation: correctness of bias detection, quality of narrative, actionability of remediations"
+      ],
+      "techStack": "Python (audit pipeline), Flask (API), React + Vite + Tailwind (dashboard), Claude API (narrative generation + bias flagging), Pandas + Faker (test data generation)",
+      "whyInteresting": "AI ethics is easy to discuss abstractly and hard to operationalize concretely. Building an actual audit tool forces students to define what 'bias in data' means precisely, while producing a reusable artifact that demonstrates responsible AI development skills valued by employers.",
+      "inspiredBy": "EU AI Act transparency requirements; ACM Code of Ethics Section 2.5; growing industry demand for AI ethics tooling; inspired by projects like Google's Know Your Data and IBM AI Fairness 360, but scoped to a buildable multi-week assignment"
+    },
+    {
+      "n": 4,
+      "title": "Automated AI-Resistance Scoring and Problem Generation for CS1/CS2 Programming Assessments",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Operationalizes the Erez et al. executable exam taxonomy into a validated automated pipeline that scores existing CS programming problems on AI-resistance and generates AI-resistant variants, giving educators a data-driven tool for maintaining assessment integrity in the GenAI era.",
+      "description": "Erez et al. (SIGCSE TS 2026) introduced a taxonomy distinguishing AI-resistant, AI-accepting, and AI-cooperative programming problems, but leave open how to efficiently identify and generate such problems at scale. This project builds an automated pipeline: (1) an LLM-based classifier that scores any programming problem along the taxonomy dimensions, with LLM solve rates as empirical ground truth; (2) an audit module applied to existing course archives (e.g., Pisan's Jolly Feedback problem set) to quantify which problem types are most vulnerable to AI-assisted cheating; and (3) a problem transformer that generates AI-resistant variants by applying principled strategies such as adding execution-tracing requirements, embedding personalized runtime context, or restructuring tasks around debugging rather than generation. Validating resistance empirically by testing Claude and GPT-4 solve rates on original versus generated problems provides an objective quality signal that bypasses the need for student participants. The deliverable is a validated tool and a set of educator design guidelines ready for SIGCSE or ITiCSE publication.",
+      "papers": [
+        {
+          "title": "Executable Exams in the Era of Generative AI: Revisiting Taxonomy, Implementation, and Prospects",
+          "authors": "Yael Erez, Chris Bourke, Orit Hazzam",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770761.3777272",
+          "url": "https://doi.org/10.1145/3770761.3777272",
+          "abstract": "Executable exams — assessments where students write code in development environments with digital validation — offer a format more aligned with actual programming practice than paper-based methods. The emergence of generative AI tools like ChatGPT and GitHub Copilot has transformed programming education and directly challenges traditional executable exam designs. The paper introduces two critical new taxonomy characteristics: generative AI tool usage (unrestricted, limited, filtered, and restricted) and problem design in the GenAI era (AI-resistant, AI-accepting, and AI-cooperative question types), illustrated with case studies and survey data from CS educators.",
+          "relevance": "This paper's AI-resistant/AI-accepting/AI-cooperative taxonomy provides the foundational classification scheme that the proposed pipeline operationalizes into an automated scoring and problem-generation system, directly extending the paper's contribution from conceptual framework to empirical tool."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "Designing LLM-Resistant Programming Assignments: Insights and Strategies for CS Educators",
+          "authors": "Leo Porter, Daniel Zingaro, et al.",
+          "venue": "SIGCSE TS 2025",
+          "year": 2025,
+          "url": "https://dl.acm.org/doi/abs/10.1145/3641554.3701872",
+          "relevance": "Provides empirical evidence of LLM solve rates on Nifty Assignments and proposes design strategies for LLM resistance, supplying both a benchmark dataset and prior design heuristics that the automated generator can encode and extend."
+        },
+        {
+          "title": "ACM Task Force on Generative AI and Programming Assessment: Final Report",
+          "authors": "ACM Education Council Task Force",
+          "venue": "ACM, 2026",
+          "year": 2026,
+          "url": "https://acm-education-genai-task-force.github.io/ACM_Taskforce_GenAI_Report_16Feb26.pdf",
+          "relevance": "Authoritative community consensus document on how GenAI is reshaping programming assessment; provides the policy context and vocabulary within which the automated scoring tool would be evaluated and deployed."
+        },
+        {
+          "title": "Evaluating Large Language Models Trained on Code (HumanEval)",
+          "authors": "Mark Chen, Jerry Tworek, Heewoo Jun, et al.",
+          "venue": "arXiv, 2021",
+          "year": 2021,
+          "url": "https://arxiv.org/abs/2107.03374",
+          "relevance": "Introduces the HumanEval benchmark and pass@k evaluation methodology for measuring LLM solve rates on programming problems — the same empirical validation technique used to ground-truth the AI-resistance classifier in this research."
+        },
+        {
+          "title": "Beyond the Benefits: A Systematic Review of the Harms and Consequences of Generative AI in Computing Education",
+          "authors": "Various (systematic review)",
+          "venue": "arXiv, 2025",
+          "year": 2025,
+          "url": "https://arxiv.org/pdf/2510.04443",
+          "relevance": "Comprehensive review of documented harms including assessment validity erosion and over-reliance; situates the problem this research addresses within the broader landscape of GenAI risks in CS education and supports the motivation for automated AI-resistance tooling."
+        }
+      ],
+      "researchPlan": {
+        "overview": "The project operationalizes the Erez et al. taxonomy into a three-stage automated pipeline: a classifier that scores problems on AI-resistance using empirical LLM solve rates as ground truth, an audit module that analyzes existing course archives, and a problem transformer that generates validated AI-resistant variants. The entire pipeline avoids human-subjects requirements by grounding validation in measurable LLM behavior rather than student experiments.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review on AI-resistant assessment design and coding benchmarks; manually annotate 200 CS1/CS2 problems from Nifty Assignments and open problem banks with Erez taxonomy labels; measure LLM solve rates (Claude + GPT-4) as calibration ground truth",
+            "deliverable": "Annotated problem dataset with empirical LLM solve rates and refined taxonomy annotation rubric"
+          },
+          {
+            "month": 2,
+            "goal": "Train and evaluate LLM-based classifier for AI-resistance scoring; compare classifier predictions against empirical solve rates; analyze which problem features (task type, constraint structure, context specificity) most predict AI-resistance",
+            "deliverable": "Validated classifier with feature-importance report and confusion matrix across taxonomy categories"
+          },
+          {
+            "month": 3,
+            "goal": "Apply classifier to audit Pisan's existing Jolly Feedback course problem set (CSS 142/143/342/343); produce a vulnerability report quantifying what fraction of current assessments are AI-solvable and which pedagogical goals are most exposed",
+            "deliverable": "Course audit report with per-problem resistance scores and summary heat map by problem type"
+          },
+          {
+            "month": 4,
+            "goal": "Build AI-resistant problem transformer encoding four strategies: add execution-tracing subtasks, embed personalized runtime context, shift from generation to debugging framing, and require multi-step justification; generate AI-resistant variants for the 50 most vulnerable problems in the audit",
+            "deliverable": "Problem transformer prototype with 50 paired (original, AI-resistant variant) problem sets"
+          },
+          {
+            "month": 5,
+            "goal": "Evaluate generated variants on LLM solve rate delta (target: 30+ percentage point reduction), semantic validity (embedding similarity to original learning objective), and CS educator expert panel rating on pedagogical quality",
+            "deliverable": "Evaluation report with solve rate deltas, validity scores, and expert ratings; revised transformer incorporating feedback"
+          },
+          {
+            "month": 6,
+            "goal": "Write paper: methodology, classifier, audit results, generator evaluation, and educator design guidelines distilled from the transformation strategies",
+            "deliverable": "Submitted paper draft plus open-source release of classifier and transformer"
+          }
+        ],
+        "targetVenues": ["SIGCSE TS", "ITiCSE", "ICER", "EDM"],
+        "resources": "Claude API and OpenAI API access for classification, generation, and solve-rate evaluation; Nifty Assignments database and open CS1/CS2 problem collections; Pisan's existing Jolly Feedback course archive (CSS 142/143/342/343 problem sets); one undergraduate research assistant for annotation work.",
+        "risks": [
+          {
+            "risk": "LLMs improve rapidly during the study period, shifting what counts as AI-resistant before the pipeline is validated",
+            "mitigation": "Anchor resistance criteria to problem-design properties (requires execution tracing, personalized context, debugging orientation) rather than to current LLM capability thresholds; re-evaluate solve rates at submission time"
+          },
+          {
+            "risk": "Classifier reliability depends on annotation quality, and human annotators may disagree on taxonomy labels",
+            "mitigation": "Use empirical LLM solve rate as an objective surrogate label, reducing reliance on subjective annotation; report inter-rater reliability where manual labels are used"
+          },
+          {
+            "risk": "Problem transformer may sacrifice pedagogical quality for AI-resistance, producing problems that test resistance rather than learning outcomes",
+            "mitigation": "Include CS educator expert validity ratings in evaluation criteria alongside solve rate deltas; treat pedagogical preservation as a hard constraint in the transformer, not just a soft preference"
+          }
+        ],
+        "humanSubjects": false
+      }
+    }
+  ]
+}
