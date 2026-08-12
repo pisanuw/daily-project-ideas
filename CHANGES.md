@@ -177,3 +177,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-08-09 [code] Created ideas/2026-08-09.json with 4 ideas: Procedural Sound Sketchpad, Packet Story, Code Carbon Lens, Cross-Tool Critical AI Literacy: Building a Benchmark for Negative Expertise Transfer in CS Education (research, ITiCSE 2025 doi:10.1145/3724363.3729067)
 
 2026-08-11 [code] Created ideas/2026-08-11.json with 4 ideas: Code Review Gauntlet, Exam Reflection Aggregator, Dataset Ethics Audit Pipeline, Automated AI-Resistance Scoring and Problem Generation for CS1/CS2 (research, SIGCSE TS 2026 doi:10.1145/3770761.3777272)
+
+2026-08-12 [doc] Created ideas/2026-08-12.json with 4 ideas: Terminal Historian, Test Coverage Narrator, Observable Algorithm Visualizer, Longitudinal CS Concept Retention in Interview-Prep Aligned Curricula (ITiCSE 2025 anchor paper)

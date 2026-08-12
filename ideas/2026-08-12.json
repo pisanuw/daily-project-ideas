@@ -1,0 +1,167 @@
+{
+  "date": "2026-08-12",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Terminal Historian",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A Python CLI tool that silently records every terminal session into a local SQLite database and answers natural-language questions like 'How did I fix that PostgreSQL connection error last Tuesday?' using Claude API.",
+      "description": "Terminal Historian hooks into your shell via a tiny init-file addition and streams each command, its output, the working directory, exit code, and a timestamp into a local SQLite database. Nothing leaves your machine. After a session ends, a background job sends the session transcript to Claude to produce a compact AI-generated summary and a set of tags (languages, tools, topics, resolution status). A companion CLI — 'hist ask \"how did I compile that Rust project last week\"' — embeds the question and retrieves the most semantically relevant session chunks, then passes them to Claude for a precise conversational answer. A second subcommand, 'hist timeline', renders an ASCII weekly calendar of your terminal activity color-coded by topic. The key distinction from version control tools (Commit Narrator) or process monitors (Process Narrator) is the audience: this is retrospective search over raw shell work, not code-change explanations or live process explanations.",
+      "keyFeatures": [
+        "Shell hook capturing commands, output, cwd, exit codes, and timestamps into local SQLite — no cloud sync",
+        "Post-session AI summarization and tagging via Claude API (topics, tools, whether a problem was resolved)",
+        "Natural-language query interface ('hist ask') using embedding-based retrieval over session chunks",
+        "ASCII weekly timeline view color-coded by detected topic cluster",
+        "Privacy-first: redacts lines matching secret patterns (API keys, passwords) before AI processing"
+      ],
+      "techStack": "Python (shell hook + CLI), SQLite (local storage), Claude API (summarization + NL query answering), sentence-transformers or Claude embeddings (semantic retrieval)",
+      "whyInteresting": "Developer memory is leaky. Everyone has spent 30 minutes recreating a configuration fix they already solved two weeks ago. Terminal Historian turns your own shell history into a searchable knowledge base with AI-powered retrieval — the same information you already produced, made findable.",
+      "inspiredBy": "Reddit threads on personal knowledge management tools; HN discussions of local-first AI tools like OpenClaw and Jan; frustration with bash history truncation and lack of context around past commands"
+    },
+    {
+      "n": 2,
+      "title": "Test Coverage Narrator",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "A VS Code extension that runs test coverage on student code and generates a plain-English explanation of each uncovered code path, why it matters pedagogically, and three concrete suggested test cases for that exact gap.",
+      "description": "Test Coverage Narrator adds a 'Explain Coverage Gaps' command to any Python or JavaScript project with a test suite. When invoked, it runs the existing tests with coverage instrumentation, collects the list of uncovered lines and branches, and sends each gap to Claude along with the surrounding function code. Claude returns a three-part response: (1) a plain-English explanation of what scenario would trigger that code path, (2) a pedagogical note on why testing it matters (error handling? edge case? state invariant?), and (3) three test stubs in the same language as the project, ready to paste. The VS Code panel shows a prioritized list of coverage gaps ordered by 'teachability' — gaps where the missing test also teaches a general principle get ranked highest. The tool complements existing coverage reporters (Istanbul, coverage.py) by replacing raw line numbers with a learning conversation, directly supporting Pisan's toolchain-first pedagogy where the tool itself teaches the concept.",
+      "keyFeatures": [
+        "One-click 'Explain Coverage Gaps' command integrated into VS Code test panel",
+        "Works with Python (pytest-cov) and JavaScript (c8/Istanbul) out of the box",
+        "Per-gap panel showing: what scenario triggers this path, why it matters, and 3 ready-to-paste test stubs",
+        "Teachability ranking that surfaces gaps most useful for learning general testing principles first",
+        "Diff-aware mode: only explains gaps introduced since the last commit, focusing students on their own code"
+      ],
+      "techStack": "TypeScript (VS Code extension API), pytest-cov / c8 (coverage runners), Claude API (gap explanation + test generation), Tree-sitter (code context extraction)",
+      "whyInteresting": "Coverage percentages tell students what is untested but not why it matters or how to fix it. This tool transforms an opaque metric into a conversation that teaches testing judgment — the difference between knowing your coverage score and understanding what coverage is protecting.",
+      "inspiredBy": "Pisan's toolchain-first pedagogy research; student confusion about coverage reports in CSS 143/343; recent VS Code AI extension ecosystem growth; the gap between 'I have 60% coverage' and 'I understand what I'm not testing'"
+    },
+    {
+      "n": 3,
+      "title": "Observable Algorithm Visualizer",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "A browser environment where students implement standard algorithms in JavaScript and a code instrumentation layer automatically generates step-by-step animated visualizations driven by the student's actual code execution, not hardcoded animations.",
+      "description": "Observable Algorithm Visualizer gives students a React sandbox with a thin instrumentation API: they import a handful of functions — highlight(index), swap(i, j), compare(a, b), setPhase(label) — and call them inside their sorting or graph algorithm implementation. The sandbox records every instrumentation call in execution order, then replays the log as an animated visualization where array bars or graph nodes respond directly to the student's code decisions. Because the visualization is driven by the student's own execution trace rather than a canonical reference implementation, incorrect algorithms produce visibly wrong animations — making bugs immediately legible. A diff view compares the student's trace log against a correct reference trace, highlighting the first divergence. Instructors configure which algorithms are in scope, the visualization components available (arrays, graphs, trees, queues), and the automated grading rubric that checks both correctness of output and correctness of the trace sequence. The assignment scales from a single sort (week 1) to a full suite (BFS, DFS, Dijkstra, quicksort) over a multi-week project. This is distinct from Algorithm Cinema (a passive side project viewer) and Algorithm Race (competitive speed focus).",
+      "keyFeatures": [
+        "Thin instrumentation API (highlight, swap, compare, setPhase) students call inside their own algorithm code",
+        "Replay engine that animates visualizations from the student's actual execution trace, not reference animations",
+        "Diff view comparing student trace against correct reference trace, with first-divergence highlighted",
+        "Instructor configurator: algorithm scope, available visualization components, rubric weights",
+        "Automated grading: output correctness, trace correctness, and instrumentation usage quality"
+      ],
+      "techStack": "React + Vite + Tailwind (student sandbox + visualization), Supabase (submission storage + grading logs), Flask (trace evaluation backend), Claude API (feedback on trace divergences in plain English)",
+      "whyInteresting": "Most algorithm visualizers show a pre-built animation of the correct algorithm — students watch but never build. Flipping the model so the student's own code drives the animation makes bugs visible as visual anomalies and creates a tight feedback loop between writing code and seeing its behavior unfold step by step.",
+      "inspiredBy": "SIGCSE 2026 work on codeless visualization modules; Pisan's data structures curriculum for CSS 342/343; the gap between students who pass tests and students who understand what their algorithm actually does; Observable notebooks as a model for live-code environments"
+    },
+    {
+      "n": 4,
+      "title": "Longitudinal CS Concept Retention in Interview-Prep Aligned Curricula: Tracing CSS 342/343 Students Through Degree Completion",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Extends a large-scale retrospective evaluation of technical interview preparation activities by applying its methodology to UW Bothell's CSS 342/343 interview-aligned curriculum, using de-identified transcript and grade records to test whether interview-prep-focused courses produce deeper CS concept retention or interview-optimized surface skill.",
+      "description": "Dempsey et al. (ITiCSE 2025) analyzed 3,526 students across 12 semesters and found that structured technical interview preparation activities in a Data Structures and Algorithms course were perceived as useful but insufficient on their own — yet the study measured only immediate student perceptions, not longitudinal concept retention. This project extends that methodology by using UW Bothell's existing de-identified academic records to ask a harder question: do students who completed CSS 342/343 (Pisan's interview-prep-aligned curriculum) retain foundational CS concepts at higher rates than students in traditional curricula, as measured by subsequent performance in upper-division courses and graduation-proximate technical skill assessments? The study uses a natural experiment structure: UW Bothell students who took CSS 342/343 versus transfer students who completed equivalent requirements at other institutions. No new human subjects are required — all data comes from existing de-identified transcript records already held by the registrar. The outcome variables include grades in courses taken after the intervention (CSS 390/490, capstone, electives), time-to-graduation, and performance on department-administered exit assessments. A qualitative thematic analysis of the open-ended survey data collected by Dempsey et al. is reproduced locally at scale using Claude to code responses, validating AI-assisted qualitative analysis against human coding as a secondary contribution. This directly addresses the open empirical question Pisan identified in his research agenda: whether interview-aligned curriculum produces deeper understanding or interview-optimized surface skill, and whether that distinction has equity implications for first-generation and underrepresented students.",
+      "papers": [
+        {
+          "title": "Retrospective Evaluation of Technical Interview Preparation Activities offered in a Data Structures and Algorithms Course",
+          "authors": "Michael Dempsey, Fatima Abu Deeb, Gertrude Eguabor, Srishti Patel, Hamzeh Roumani",
+          "venue": "ITiCSE 2025",
+          "year": 2025,
+          "doi": "10.1145/3724363.3729102",
+          "url": "https://doi.org/10.1145/3724363.3729102",
+          "abstract": "A retrospective evaluation of technical interview preparation activities embedded in a Data Structures and Algorithms course, drawing on data from 3,526 students across 12 semesters. Students rated the activities as useful but insufficient preparation for real technical interviews, and the study identifies open questions about longitudinal concept retention that the in-course evaluation cannot address.",
+          "relevance": "This is the anchor paper: its retrospective methodology and large student cohort establish the baseline finding (useful but insufficient) and identify the longitudinal gap this project fills by extending the evaluation into UW Bothell's interview-prep-aligned CSS 342/343 curriculum."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "\"I Value LeetCode Over My Coursework\": CS Students' Preparation Strategies and Perceptions of Technical Interviews",
+          "authors": "Various",
+          "venue": "ICSE 2025",
+          "year": 2025,
+          "doi": "10.1145/3786580.3786991",
+          "url": "https://doi.org/10.1145/3786580.3786991",
+          "relevance": "Documents students deprioritizing coursework for self-directed interview prep, providing motivation for why curriculum-integrated approaches (like CSS 342/343) matter — and why understanding their actual retention effects is urgent."
+        },
+        {
+          "title": "Innovative Courses that Broaden Awareness of CS Careers and Prepare Students for Technical Interviews",
+          "authors": "Various",
+          "venue": "NSF PAGES",
+          "year": 2024,
+          "url": "https://par.nsf.gov/biblio/10454888-innovative-courses-broaden-awareness-cs-careers-prepare-students-technical-interviews",
+          "relevance": "Reviews structured curriculum-integrated interview preparation programs, providing comparative context for evaluating UW Bothell's approach and identifying design features correlated with student outcomes."
+        },
+        {
+          "title": "Context-Specific Instruction: A Longitudinal Study on Debugging Skill Acquisition and Retention for Novice Programmers",
+          "authors": "Various",
+          "venue": "arXiv",
+          "year": 2025,
+          "url": "https://arxiv.org/pdf/2509.22420",
+          "relevance": "Methodological model: demonstrates that longitudinal trace-through-curriculum designs using existing course records can produce valid retention findings without new human-subjects data collection, validating the approach used here."
+        },
+        {
+          "title": "Surveying the Importance of Integrating Technical Interviews into Computer Science Curriculums and Increasing Awareness in the Academy",
+          "authors": "Various",
+          "venue": "ResearchGate / CS Education",
+          "year": 2023,
+          "url": "https://www.researchgate.net/publication/372907818_Surveying_the_Importance_of_Integrating_Technical_Interviews_into_Computer_Science_Curriculums_and_Increasing_Awareness_in_the_Academy",
+          "relevance": "Establishes the field-level consensus that technical interview curriculum integration is understudied, directly motivating the longitudinal empirical design and framing this project's contribution within the broader gap in the literature."
+        }
+      ],
+      "researchPlan": {
+        "overview": "A natural-experiment longitudinal study using de-identified UW Bothell transcript records to test whether CSS 342/343 (interview-prep-aligned) produces better concept retention in upper-division courses than equivalent transfer prerequisites. A secondary contribution validates Claude-assisted qualitative coding against human coding on the Dempsey et al. open-ended survey methodology.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "IRB application for secondary use of de-identified registrar data; literature review on longitudinal CS concept retention, technical interview curriculum integration, and equity outcomes in CS persistence; replicate Dempsey et al. student perception survey locally with 1-2 recent CSS 342/343 cohorts",
+            "deliverable": "IRB approval, literature synthesis, and locally collected perception survey baseline"
+          },
+          {
+            "month": 2,
+            "goal": "Obtain and clean de-identified transcript dataset: CSS 342/343 completers versus equivalent-transfer students (2018-2024 cohorts); define outcome variables (upper-division GPA, time-to-graduation, exit assessment scores, retention to graduation); build comparison groups using propensity score matching on incoming GPA, demographics, and prior CS experience",
+            "deliverable": "Clean matched-comparison dataset with propensity scores and covariate balance report"
+          },
+          {
+            "month": 3,
+            "goal": "Run primary quantitative analysis: regression models predicting upper-division course performance and graduation outcomes by curriculum pathway; interaction effects with first-generation and underrepresented student indicators; report effect sizes and confidence intervals",
+            "deliverable": "Quantitative results report with effect size tables and equity interaction analysis"
+          },
+          {
+            "month": 4,
+            "goal": "Collect open-ended survey responses from 50-100 CSS 342/343 alumni (Dempsey et al. methodology); apply human thematic coding followed by Claude-assisted coding using a structured codebook; compute Claude vs. human inter-rater agreement (Cohen's kappa) to validate AI-assisted qualitative analysis",
+            "deliverable": "Qualitative codebook, coded dataset with kappa scores, and thematic findings report"
+          },
+          {
+            "month": 5,
+            "goal": "Integrate quantitative and qualitative findings; identify whether interview-aligned curriculum produces deeper retention (supported by upper-division performance) or surface skill (perception scores high but no upper-division benefit); surface equity patterns for first-generation and underrepresented students",
+            "deliverable": "Integrated findings report with policy recommendations for curriculum design and advising"
+          },
+          {
+            "month": 6,
+            "goal": "Write paper: natural experiment design, matched-comparison results, qualitative validation of AI-assisted coding, equity findings, and implications for interview-prep curriculum integration; secondary methods paper on Claude-assisted qualitative coding validity",
+            "deliverable": "Submitted paper draft (SIGCSE TS or ICER) plus replication package"
+          }
+        ],
+        "targetVenues": ["SIGCSE TS", "ICER", "ITiCSE", "Computers & Education"],
+        "resources": "UW Bothell registrar de-identified transcript data (IRB secondary-use approval required); Dempsey et al. survey instrument for local replication; Claude API for qualitative coding validation; one graduate research assistant for human coding and alumni survey administration.",
+        "risks": [
+          {
+            "risk": "Registrar data access may be delayed or scoped down, limiting sample size or covariate availability",
+            "mitigation": "Begin IRB application and registrar liaison in month 1; design analysis to work with smaller matched cohorts if needed; supplement with voluntary alumni survey if administrative data is restricted"
+          },
+          {
+            "risk": "Propensity score matching may not fully eliminate selection bias — students who chose CSS 342/343 may differ from transfer students in unmeasured ways",
+            "mitigation": "Report sensitivity analyses using multiple matching specifications; frame conclusions as associations rather than causal claims; use instrumental variable approaches if a valid instrument is found (e.g., enrollment timing due to seat availability)"
+          },
+          {
+            "risk": "Claude-assisted qualitative coding validation may show poor agreement, undermining the secondary methods contribution",
+            "mitigation": "Treat this as a finding either way — low agreement is itself a publishable result about the limits of AI qualitative coding; include human coding as the primary analysis regardless of agreement level"
+          }
+        ],
+        "humanSubjects": true,
+        "humanSubjectsNote": "Primary quantitative analysis uses de-identified existing registrar records (IRB secondary-use exemption likely). Qualitative component (alumni survey) requires standard IRB review. No students are recruited as subjects for primary outcome measurement."
+      }
+    }
+  ]
+}

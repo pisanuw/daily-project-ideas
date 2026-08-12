@@ -322,3 +322,8 @@
 | 2026-08-11 | Exam Reflection Aggregator | Teaching Tool | 1-2 Weeks |
 | 2026-08-11 | Dataset Ethics Audit Pipeline | Classroom Assignment | Multi-week |
 | 2026-08-11 | Automated AI-Resistance Scoring and Problem Generation for CS1/CS2 Programming Assessments | Research | Research |
+
+| 2026-08-12 | Terminal Historian | Side Project | Weekend |
+| 2026-08-12 | Test Coverage Narrator | Teaching Tool | 1-2 Weeks |
+| 2026-08-12 | Observable Algorithm Visualizer | Classroom Assignment | Multi-week |
+| 2026-08-12 | Longitudinal CS Concept Retention in Interview-Prep Aligned Curricula: Tracing CSS 342/343 Students Through Degree Completion | Research | Research |
