@@ -1,0 +1,172 @@
+{
+  "date": "2026-08-13",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Shortcut Sprint",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A Duolingo-style web app that drills keyboard shortcuts for developer tools through spaced repetition. Shows a task prompt, waits for the correct keycombo, and schedules reviews so muscle memory sticks.",
+      "description": "Shortcut Sprint presents a task description ('go to definition', 'split editor right') and waits for the user to type the matching shortcut. Correct presses advance the SM-2 spaced-repetition schedule; wrong presses show the answer immediately and reset the interval. A bundled library covers VS Code, Figma, Chrome DevTools, and Vim out of the box, but instructors can upload custom JSON shortcut sets for any course tool. A daily streak and a per-tool radar chart provide just enough gamification to maintain the habit. Because the app works entirely in the browser for the practice loop, latency is zero and offline use is possible after first load. The project doubles as a live demonstration of Pisan's toolchain-first pedagogy: students who practice shortcuts daily in week one retain them through the semester.",
+      "keyFeatures": [
+        "Task-prompt to keycombo input loop with instant visual feedback",
+        "SM-2 spaced repetition scheduler storing progress in Supabase",
+        "Bundled shortcut libraries for VS Code, Figma, Chrome DevTools, Vim",
+        "Custom shortcut set upload via JSON for course-specific toolchains",
+        "Daily streak tracker and per-tool mastery radar chart"
+      ],
+      "techStack": "React + Vite, Tailwind CSS, Supabase (auth + progress), Web Keyboard API",
+      "whyInteresting": "Keyboard shortcut fluency is a genuine bottleneck for students new to professional toolchains, yet no tool addresses it with SRS rigor. A weekend project with immediate personal utility, easy to demo, and directly applicable as a day-one classroom exercise for toolchain-first courses.",
+      "inspiredBy": "HN/Reddit developer-productivity discussions in 2026 emphasizing the gap between knowing shortcuts exist and actually using them; Pisan's toolchain-first pedagogy (Creative Education 2024) that introduces professional tools from day one"
+    },
+    {
+      "n": 2,
+      "title": "Rubric Alignment Checker",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "Paste an assignment prompt and its rubric side by side: get an LLM-powered report flagging misaligned criteria, unmeasurable items, and Bloom's level inconsistencies before students ever see the work.",
+      "description": "Instructors paste the assignment description and grading rubric into a split-panel editor. Claude API analyzes the pair and surfaces three classes of issues: (1) rubric criteria that the assignment prompt never mentions or sets up, leaving students unable to meet them without guessing; (2) rubric items whose evidence cannot be observed in a code or written submission ('demonstrates professionalism'); and (3) Bloom's level mismatches where the prompt asks students to 'describe' but the rubric grades 'applies'. Each flagged item includes a one-sentence explanation and a suggested rewrite. A diff view shows original versus revised rubric side by side. Results can be exported as PDF or pushed directly to a Canvas assignment draft via the LMS API. The tool also checks for rubric coverage gaps: concepts mentioned in the assignment prompt that have no corresponding rubric criterion.",
+      "keyFeatures": [
+        "Split-panel editor for assignment description and rubric",
+        "Three-class issue detection: misalignment, unobservability, Bloom's level mismatch",
+        "Coverage gap check: assignment concepts with no rubric criterion",
+        "Per-item suggested rewrites with one-sentence rationale",
+        "Diff view (original vs. revised) plus PDF export and Canvas API push"
+      ],
+      "techStack": "React + Vite, Tailwind CSS, Flask (Python), Claude API, Canvas LMS REST API",
+      "whyInteresting": "Misaligned rubrics are a pervasive, invisible problem that students notice ('I did everything in the prompt but lost points') but instructors rarely catch before deployment. The tool makes assessment design auditable and explainable, directly extending Pisan's specification and contract grading work (CSS 385).",
+      "inspiredBy": "ITiCSE 2025 discussions on assessment quality and fair grading; Pisan's contract-grading pedagogy at UW Bothell; the 'Improving the Reliability of Grading Written-Response Coding Questions' paper (SIGCSE TS 2026, doi:10.1145/3770762.3772613)"
+    },
+    {
+      "n": 3,
+      "title": "Supply Chain Risk Atlas",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "Students build a full-stack tool that ingests a project dependency file and renders an interactive supply-chain risk map: vulnerabilities, license conflicts, and maintenance health visualized as a force-directed graph with LLM-generated remediation advice per node.",
+      "description": "Students upload a package.json, requirements.txt, or pom.xml. Their system fetches vulnerability data from the OSV API, license metadata from ClearlyDefined, and maintenance signals (last-commit, issue-response time, contributor count) from GitHub. A D3.js force-directed graph renders each dependency as a node colored by risk tier (green, amber, red); clicking a node opens a panel with a Claude API-generated plain-English summary of the vulnerability and a concrete remediation suggestion. Transitive dependencies propagate risk upward through the graph so students see how a single deeply-nested vulnerability ripples to the top-level project. A 'risk score' badge for the whole project lets teams compare before and after remediation. The assignment teaches REST API integration, data pipeline design, interactive visualization, software supply-chain security, and LLM-augmented reporting in one coherent deliverable, all topics relevant to professional software engineering.",
+      "keyFeatures": [
+        "Multi-format package file ingestion (npm, pip, Maven)",
+        "Vulnerability lookup via OSV API with CVSS score display",
+        "License metadata and compatibility check via ClearlyDefined API",
+        "Maintenance health signals from GitHub API (last commit, open issues, contributor count)",
+        "D3.js force-directed risk graph with color-coded risk tiers",
+        "LLM remediation report per dependency node via Claude API",
+        "Transitive dependency risk propagation visualization"
+      ],
+      "techStack": "React + Vite, Tailwind CSS, D3.js, Node.js or Python backend, Claude API, OSV API, GitHub REST API, ClearlyDefined API",
+      "whyInteresting": "Software supply-chain security is a critical, underemphasized topic in CS curricula despite major real-world incidents. The project is concrete (students can run it on their own course projects), multi-domain (security, APIs, visualization, LLMs), and produces a genuinely useful artifact. Complexity scales: a minimum viable version can be done in two weeks; adding transitive propagation and LLM-generated reports extends it to a full term project.",
+      "inspiredBy": "2026 developer-tool trends highlighting supply-chain risk and AI-augmented security tooling; GitHub trending AI/security repositories (analyticsvidhya 2026 report); software engineering education gap identified in recent SIGCSE discussions"
+    },
+    {
+      "n": 4,
+      "title": "Structure-Mapping Auditing for LLM-Generated Programming Analogies: Toward Misconception-Safe Automated Explanation in CS1",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "LLM-generated analogies for CS1 concepts are increasingly used in instruction, but no framework verifies that their source-to-target mappings are structurally sound. This research builds and validates a Structure-Mapping Theory-grounded auditor that flags and repairs analogy-induced misconceptions before classroom deployment.",
+      "description": "The ITiCSE 2025 paper 'Multimodal Analogy Generation in Programming Education' demonstrates that LLMs can produce analogy-based explanations and animations for CS1 topics, but its prototype contains no verification that generated analogies preserve structural fidelity: correct mapping of relations (not just surface attributes) between source and target domains. Poorly mapped analogies are a documented source of new misconceptions, particularly for novice programmers learning recursion, pointers, and concurrency. Drawing on Gentner's Structure-Mapping Theory (the theoretical foundation for Pisan's own 1998-2000 analogy-based requirements elaboration work at ICSE 2000), this project would design an automatic auditing pipeline: an LLM-based tool that decomposes each generated analogy into relational tuples, checks source-target structural consistency, and either flags mismatches for instructor review or triggers an LLM repair loop. Phase 1 is entirely computational (no IRB): generate large analogy batches for 10 CS1 topics, audit them, measure false-positive/negative rates against expert-rater ground truth. Phase 2 integrates the auditor into the ANVIL pipeline (the 2026 extension of the ITiCSE prototype) as a reusable safeguard. The research operationalizes a 30-year-old theoretical framework with modern LLMs, and its deliverable is directly applicable to any LLM analogy-generation system in CS education.",
+      "papers": [
+        {
+          "title": "Multimodal Analogy Generation in Programming Education",
+          "authors": "JetBrains Research Belgrade, Delft University of Technology Delft",
+          "venue": "ITiCSE 2025",
+          "year": 2025,
+          "doi": "10.1145/3724389.3730781",
+          "url": "https://doi.org/10.1145/3724389.3730781",
+          "abstract": "Engaging students with effective learning materials continues to be a significant challenge in programming education. Analogies are commonly used to simplify complex topics, enabling learners to relate unfamiliar concepts to familiar ones. This work presents a prototype of a novel AI tool that generates analogy-based explanations and corresponding video animations for programming education, leveraging LLMs for analogy generation and a structured animation workflow for visualization.",
+          "relevance": "Anchor paper for this research: it demonstrates the feasibility of LLM-generated multimodal programming analogies but leaves structural fidelity — whether the source-to-target mappings are pedagogically correct — entirely unverified, which is precisely the gap this project addresses."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "ANVIL: Analogies and Videos for Lecturers",
+          "authors": "Yuri Noviello et al.",
+          "venue": "arxiv preprint / Springer LNCS 2026",
+          "year": 2026,
+          "url": "https://arxiv.org/abs/2605.16295",
+          "relevance": "Extended pipeline that builds on the ITiCSE 2025 prototype, adding automated LLM evaluation of textual analogies and fidelity checks for animations. The structural auditor developed in this research would integrate directly into the ANVIL pipeline as an additional validation stage."
+        },
+        {
+          "title": "Designing and Evaluating AI-Generated Multimodal Analogy-Based Explanations",
+          "authors": "Yuri Noviello et al.",
+          "venue": "AIED 2025, Springer CCIS vol. 2590",
+          "year": 2025,
+          "url": "https://link.springer.com/chapter/10.1007/978-3-031-99261-2_51",
+          "relevance": "Companion evaluation paper for the ITiCSE 2025 prototype, assessing educator perceptions of AI-generated analogy quality. Establishes that educators view the tool as a starting point for lesson planning, not a final product — motivating the need for automated structural validation before classroom deployment."
+        },
+        {
+          "title": "Unlocking Scientific Concepts: How Effective Are LLM-Generated Analogies for Student Understanding and Classroom Practice?",
+          "authors": "Various",
+          "venue": "CHI 2025",
+          "year": 2025,
+          "url": "https://doi.org/10.1145/3706598.3714313",
+          "relevance": "Provides the key empirical grounding: LLM analogies can produce creative and memorable explanations but their pedagogical effectiveness depends critically on structural correctness; the paper identifies structurally flawed mappings as the primary failure mode, directly motivating the proposed auditing framework."
+        },
+        {
+          "title": "Achieving Effective Learning Outcomes through the Use of Analogies in Teaching Computer Science",
+          "authors": "Various",
+          "venue": "MDPI Mathematics, 2023",
+          "year": 2023,
+          "url": "https://www.mdpi.com/2227-7102/11/15/3340",
+          "relevance": "Establishes the evidence base for analogy effectiveness in CS education and documents how incorrect structural mappings in hand-crafted analogies lead to persistent misconceptions, providing the educational rationale for automatic structural verification."
+        }
+      ],
+      "researchPlan": {
+        "overview": "The research proceeds in two phases: (1) build and validate a computational Structure-Mapping Theory auditor for LLM-generated CS1 analogies using expert-rater ground truth (no IRB needed); (2) integrate the auditor into the ANVIL pipeline and prepare a case-study evaluation of its impact on analogy quality across 10 canonical CS1 topics. The entire arc from design to submitted paper fits within six months for a small team.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review on Structure-Mapping Theory, existing analogy evaluation methods, and the ITiCSE 2025 / ANVIL pipeline",
+            "deliverable": "Annotated bibliography, SMT decomposition schema (relational tuple format), and 10 CS1 target topics selected (recursion, pointers, arrays, loops, concurrency, etc.)"
+          },
+          {
+            "month": 2,
+            "goal": "Build the automated SMT auditor: LLM pipeline that decomposes an analogy into relational tuples and checks source-target structural consistency",
+            "deliverable": "Working auditor prototype with unit tests; initial batch of 50 analogies generated and audited for 5 CS1 topics"
+          },
+          {
+            "month": 3,
+            "goal": "Expert-rater ground truth collection: 3-5 CS educators independently score a stratified sample of audited analogies for structural correctness",
+            "deliverable": "Inter-rater agreement scores (Cohen's kappa), auditor precision/recall vs. expert ground truth, false-positive/negative analysis"
+          },
+          {
+            "month": 4,
+            "goal": "Scale up: generate 200+ analogies for all 10 CS1 topics using the ITiCSE 2025 / ANVIL pipeline with and without the auditor; measure structural quality improvement",
+            "deliverable": "Comparative analysis report: proportion of structurally sound analogies with vs. without auditor; categorized error taxonomy"
+          },
+          {
+            "month": 5,
+            "goal": "Integrate auditor into ANVIL pipeline as an optional validation stage; build instructor-facing review UI for flagged analogies",
+            "deliverable": "ANVIL+Auditor open-source release; case-study narrative with 3 worked examples showing auditor catch, flag, and repair"
+          },
+          {
+            "month": 6,
+            "goal": "Write and submit the research paper",
+            "deliverable": "Submitted paper draft targeting SIGCSE TS 2027 or AIED 2027; open-source auditor repository on GitHub"
+          }
+        ],
+        "targetVenues": [
+          "SIGCSE TS",
+          "AIED",
+          "ICER",
+          "ITiCSE"
+        ],
+        "resources": "No specialized compute required beyond Claude API access (already used in the group); ANVIL codebase is open source; expert rater recruitment requires 3-5 CS colleagues willing to score ~30 analogies each (low burden); no special datasets needed as analogies are generated on demand. A motivated undergraduate or master's student could own Phase 1.",
+        "risks": [
+          {
+            "risk": "LLM-based SMT decomposition may itself be unreliable, producing noisy relational tuples that make the auditor's false-positive rate too high to be useful",
+            "mitigation": "Validate the decomposition step separately against human-parsed tuples for 20 analogies before scaling; if LLM decomposition is too noisy, fall back to a structured prompt that asks the LLM to directly rate structural correctness on a Likert scale (a simpler but still theory-grounded approach)"
+          },
+          {
+            "risk": "Expert raters may disagree on what counts as a 'correct' structural mapping in CS analogies, producing low inter-rater agreement and undermining the ground truth",
+            "mitigation": "Develop a concise rater guide with 5 worked examples (2 clearly correct, 2 clearly wrong, 1 borderline) calibrated in a 30-minute group session before independent scoring; use Krippendorff's alpha as the agreement metric, which handles ordinal ratings more robustly than kappa"
+          },
+          {
+            "risk": "The auditor flags too many analogies as structurally flawed, creating an unusable tool if instructors must manually review every output",
+            "mitigation": "Implement a tiered output: 'auto-pass' (confidence above threshold), 'review suggested' (borderline), 'repair triggered' (confident failure with LLM-generated alternative); tune thresholds on the Month 3 expert dataset to achieve a false-positive rate below 20%"
+          }
+        ],
+        "humanSubjects": false
+      }
+    }
+  ]
+}

@@ -327,3 +327,7 @@
 | 2026-08-12 | Test Coverage Narrator | Teaching Tool | 1-2 Weeks |
 | 2026-08-12 | Observable Algorithm Visualizer | Classroom Assignment | Multi-week |
 | 2026-08-12 | Longitudinal CS Concept Retention in Interview-Prep Aligned Curricula: Tracing CSS 342/343 Students Through Degree Completion | Research | Research |
+| 2026-08-13 | Shortcut Sprint | Side Project | Weekend |
+| 2026-08-13 | Rubric Alignment Checker | Teaching Tool | 1-2 Weeks |
+| 2026-08-13 | Supply Chain Risk Atlas | Classroom Assignment | Multi-week |
+| 2026-08-13 | Structure-Mapping Auditing for LLM-Generated Programming Analogies: Toward Misconception-Safe Automated Explanation in CS1 | Research | Research |
