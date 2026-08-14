@@ -181,3 +181,4 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-08-11 [code] Created ideas/2026-08-11.json with 4 ideas: Code Review Gauntlet, Exam Reflection Aggregator, Dataset Ethics Audit Pipeline, Automated AI-Resistance Scoring and Problem Generation for CS1/CS2 (research, SIGCSE TS 2026 doi:10.1145/3770761.3777272)
 
 2026-08-12 [doc] Created ideas/2026-08-12.json with 4 ideas: Terminal Historian, Test Coverage Narrator, Observable Algorithm Visualizer, Longitudinal CS Concept Retention in Interview-Prep Aligned Curricula (ITiCSE 2025 anchor paper)
+2026-08-14 [doc] Created ideas/2026-08-14.json with 4 ideas: Prompt Diff, Class Mood Ring, From-Scratch Neural Net with Live Visualization, Full-Stack Thinking vs. Library-First Learning (SIGCSE TS 2026 anchor paper doi:10.1145/3770762.3772595)

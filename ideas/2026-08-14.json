@@ -1,0 +1,172 @@
+{
+  "date": "2026-08-14",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Prompt Diff",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A single-page app that runs your prompt five times in parallel via the Claude API, then renders outputs side-by-side with a semantic similarity heatmap and visual diff, so you can see exactly how much a prompt's wording changes its behavior.",
+      "description": "Prompt Diff surfaces the hidden non-determinism in LLM outputs by making it visual. You type a prompt, hit Run x5, and the app fires five simultaneous Claude API calls. Results appear in a grid; a cosine-similarity heatmap (computed client-side from sentence embeddings) colors each pair from green (highly similar) to red (divergent). A token-level diff view highlights where runs disagree word by word. You can then edit the prompt and re-run, and a side panel overlays the old vs. new heatmap so you can measure whether your rewrite reduced variance or shifted meaning. A 'stability score' summarizes the average pairwise similarity so you can quickly judge prompt robustness. No backend needed beyond the Claude API key: everything runs in the browser. The project works equally well as a personal debugging tool and as a classroom demo for AI literacy, illustrating sampling temperature and stochastic generation concretely rather than abstractly.",
+      "keyFeatures": [
+        "Five-way parallel prompt execution with real-time streaming output",
+        "Cosine-similarity heatmap across all output pairs using client-side sentence embeddings",
+        "Token-level diff view highlighting divergences between any two selected runs",
+        "Before/after heatmap overlay for comparing prompt variants",
+        "Stability score summarizing average pairwise similarity per run batch"
+      ],
+      "techStack": "React + Vite, Tailwind CSS, Claude API (Haiku 4.5 for cost efficiency), transformers.js for client-side embeddings, diff-match-patch for token-level diffs",
+      "whyInteresting": "LLM non-determinism is widely discussed but rarely made visceral. Seeing five meaningfully different answers to the same prompt in a heatmap teaches more about temperature and sampling than any lecture. The tool is genuinely useful for prompt engineers, and its 'stability score' could serve as a lightweight rubric for AI-resistant assignment design, connecting to Pisan's interest in assessment integrity in the copilot era.",
+      "inspiredBy": "HN Show projects in 2026 exploring prompt sensitivity and LLM reliability; AI literacy discussions emphasizing that students need to experience non-determinism rather than just hear about it"
+    },
+    {
+      "n": 2,
+      "title": "Class Mood Ring",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "Students scan a QR code at class start and answer three quick questions: confidence level (1-5), one thing they are confused about, and one aha moment from the last session. A live instructor dashboard shows a confidence histogram, a confusion word cloud, and Claude-generated warm-up questions tailored to today's class mood.",
+      "description": "Class Mood Ring collects a pulse check in under 60 seconds per student and synthesizes it into actionable instructor intelligence before the session begins. The student view is a mobile-optimized form behind a QR code (new QR per class via Supabase short links): a 1-5 confidence slider, a 140-character confusion text box, and a 140-character aha moment box. Responses stream into a Supabase real-time channel; the instructor dashboard updates live. The confidence panel shows a histogram and mean; the confusion panel clusters submissions into 3-5 themes using Claude API and renders a word cloud sized by cluster weight; the aha panel surfaces 2-3 representative quotes. Most usefully, a 'Start Class With' panel shows Claude-generated warm-up questions, each targeting one confusion cluster, ready to paste into a slide or whiteboard. Instructors can optionally display the anonymized confusion clusters to the class ('you are not alone: 40% of you are confused about pointers') to normalize struggle and promote metacognitive awareness. Session data is stored per-course for longitudinal mood trend analysis (week-over-week confidence trajectory).",
+      "keyFeatures": [
+        "QR-code student entry form with confidence slider, confusion text, and aha moment fields",
+        "Supabase real-time live instructor dashboard with confidence histogram and mean",
+        "LLM-powered confusion clustering and word cloud (3-5 themes per session)",
+        "Claude-generated warm-up questions targeting the day's top confusion clusters",
+        "Optional anonymous class display of confusion themes to normalize struggle",
+        "Longitudinal confidence trend chart per course section"
+      ],
+      "techStack": "React + Vite, Tailwind CSS, Supabase (auth, real-time, Postgres), Claude API, QR code library (qrcode.js), D3.js for word cloud and histogram",
+      "whyInteresting": "Pre-class check-ins are a well-studied active-learning technique, but existing tools like Poll Everywhere or iClicker require preset questions. Class Mood Ring is open-text and AI-synthesized, so it catches unexpected confusions the instructor did not think to ask about. The warm-up question generation closes the feedback loop automatically, turning passive data collection into actionable pedagogy in one step.",
+      "inspiredBy": "Active learning engagement research showing pre-class mood surveys increase student participation; Curipod-style AI-assisted lesson tools trending in 2026; Pisan's interest in metacognitive awareness and formative feedback in CS courses"
+    },
+    {
+      "n": 3,
+      "title": "From-Scratch Neural Net with Live Visualization",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "Students implement a two-layer feedforward neural network in vanilla Python or TypeScript, then build a browser-based D3 visualization that animates forward-pass activations and gradient flow during backpropagation, culminating in a live-trainable demo on XOR or a 2D toy dataset.",
+      "description": "This assignment is a direct classroom application of the SIGCSE TS 2026 finding that students who build machine learning models from scratch score roughly 10% better on conceptual understanding than library-first students. The deliverable has two layers. Layer 1 (weeks 1-2): students implement, from scratch, a two-layer feedforward network including forward pass, sigmoid or ReLU activation, cross-entropy loss, and backpropagation via chain rule in pure Python (no NumPy, no PyTorch) or TypeScript. They write unit tests for each component. Layer 2 (weeks 3-4): students build a React + D3 frontend that consumes their network's internal state and visualizes it in real time: nodes sized by activation value, edges colored by weight sign and magnitude, a loss curve updating each epoch, and a decision-boundary overlay animating over a 2D scatter plot. The final demo lets visitors pause training mid-epoch, scrub backward through gradient history, and inspect any neuron's activation. The assignment teaches backpropagation conceptually (you cannot copy-paste what you have not internalized), professional toolchain discipline (code is tested before visualized), and data visualization design in one coherent arc.",
+      "keyFeatures": [
+        "Vanilla implementation of forward pass, sigmoid/ReLU, cross-entropy loss, and backprop via chain rule (no ML libraries)",
+        "Unit-tested network components with gradient-check tests",
+        "Real-time D3 visualization: node activations, edge weights, loss curve, and decision boundary",
+        "Pause, scrub, and inspect controls for mid-epoch exploration",
+        "Configurable architecture (hidden layer size, learning rate, activation function) via a sidebar panel",
+        "Demo mode: students train live in front of the class on XOR or a 2D dataset of their choosing"
+      ],
+      "techStack": "Pure Python or TypeScript (no ML libraries) for the network, React + Vite + D3.js for visualization, WebSockets or Supabase real-time to stream training state from Python backend to browser (if Python is chosen), Jest or pytest for unit tests",
+      "whyInteresting": "The assignment makes backpropagation unavoidable: you cannot graduate to the visualization step until your gradients are correct, because wrong gradients produce obviously broken training curves. The result is a portfolio piece that is both technically rigorous and visually compelling. Directly applicable to any introductory ML course or advanced CS2 curriculum, and aligns with Pisan's toolchain-first thesis that building from scratch produces more durable conceptual depth.",
+      "inspiredBy": "SIGCSE TS 2026 paper 'Transforming Confusion into Diffusion' (doi:10.1145/3770762.3772595) showing from-scratch ML instruction produces ~10% conceptual quiz improvement over library-first; Pisan's toolchain-first pedagogy (Creative Education 2024)"
+    },
+    {
+      "n": 4,
+      "title": "Full-Stack Thinking vs. Library-First Learning: Does Toolchain-First Pedagogy Build Durable Conceptual Depth in an AI-Copilot Era?",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "A retrospective cohort analysis of existing CSS 342/343 Jolly Feedback logs and grade records to test whether toolchain-first students show durable conceptual depth on AI-resistant assessments compared to earlier cohorts who used higher-level IDE abstractions, paralleling the SIGCSE TS 2026 from-scratch ML instruction RCT.",
+      "description": "The SIGCSE TS 2026 paper 'Transforming Confusion into Diffusion' (Cotrini, Thorgeirsson et al., ETH Zurich) reports a controlled experiment (N=208) comparing students who built transformers and diffusion models from scratch (FSML) against students who used PyTorch library-first instruction. FSML students scored approximately 10% higher on a conceptual understanding quiz and reported higher curiosity and more positive affect. This finding directly parallels Pisan's toolchain-first thesis (Creative Education 2024): that introducing professional tools (debuggers, profilers, version control, build systems) from day one in CSS 342/343 produces students who reason about their tools rather than treating them as black boxes. The proposed research asks: does Pisan's toolchain-first cohort show analogous conceptual depth gains on AI-resistant course assessments, as measured by archival exam data and Jolly Feedback interaction logs from UW Bothell CSS 342/343 across the 2020-2026 period? Because the data is already collected as part of normal course administration and Jolly Feedback logging, this study requires no new human subjects interaction, minimizing IRB burden. The design is a retrospective cohort analysis: toolchain-first semesters (post-2022 curriculum revision) vs. earlier semesters as a natural comparison group, with AI-resistant exam items coded by two independent raters. The study operationalizes 'conceptual depth' as performance on exam questions that require multi-step reasoning, novel problem decomposition, or tool-behavior prediction, categories shown to resist AI-generated answers. The research contributes an empirical data point to the rapidly growing literature on from-scratch vs. abstracted instruction in a copilot era, and provides a replicable analysis template for programs with similar archival Jolly Feedback data.",
+      "papers": [
+        {
+          "title": "Transforming Confusion into Diffusion: Advancing Machine Learning Education via Bottom-Up Instruction",
+          "authors": "Carlos Cotrini, Sverrir Thorgeirsson, et al. (ETH Zurich)",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770762.3772595",
+          "url": "https://doi.org/10.1145/3770762.3772595",
+          "abstract": "Controlled experiment (N=208) comparing bottom-up from-scratch instruction (FSML: students build transformers and diffusion models from fundamental components) against library-first instruction using PyTorch. FSML students scored approximately 10% higher on a conceptual understanding quiz and exhibited increased curiosity and more positive affect toward the subject. Results support from-scratch instruction as a pedagogically superior approach for building durable conceptual understanding in machine learning courses.",
+          "relevance": "Anchor paper: provides the closest experimental parallel to Pisan's toolchain-first thesis, demonstrating that from-scratch instruction produces measurable conceptual depth gains. The retrospective cohort design proposed here tests whether the same effect appears in Pisan's CSS 342/343 curriculum using archival data."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "Evolution of the Software Toolchain for Computer Science Students",
+          "authors": "Yusuf Pisan",
+          "venue": "Creative Education, 15(06):1223-1236",
+          "year": 2024,
+          "doi": "10.4236/ce.2024.156074",
+          "url": "https://doi.org/10.4236/ce.2024.156074",
+          "relevance": "Pisan's own toolchain-first pedagogy paper describing the CSS 342/343 curriculum design rationale and the hypothesis that professional tool fluency from day one builds more durable CS reasoning. The proposed study provides the empirical test of this hypothesis using archival course data."
+        },
+        {
+          "title": "Imagining Computing Education Assessment after Generative AI",
+          "authors": "Various",
+          "venue": "arxiv preprint",
+          "year": 2024,
+          "url": "https://arxiv.org/abs/2401.04601",
+          "relevance": "Proposes a taxonomy of AI-resistant assessment types in computing education, including oral exams, live coding, and multi-step reasoning questions that require tool-behavior prediction. Provides the coding framework for operationalizing 'AI-resistant' exam items in the retrospective cohort analysis."
+        },
+        {
+          "title": "From Coders to Critics: Empowering Students through Peer Assessment in the Age of AI Copilots",
+          "authors": "Various",
+          "venue": "arxiv preprint 2025",
+          "year": 2025,
+          "url": "https://arxiv.org/abs/2505.22093",
+          "relevance": "Examines how AI copilot availability changes what meaningful assessment looks like, arguing that process-oriented and explanatory tasks resist automation better than artifact-production tasks. Supports the study's focus on exam items requiring multi-step reasoning and tool-behavior prediction as the conceptual depth proxy."
+        },
+        {
+          "title": "Less Stress, Better Scores, Same Learning: The Dissociation of Performance and Learning in AI-Supported Programming Education",
+          "authors": "Various",
+          "venue": "Computers and Education: Artificial Intelligence, 2025",
+          "year": 2025,
+          "url": "https://doi.org/10.1016/j.caeai.2025.100392",
+          "relevance": "Documents the performance-learning dissociation: students using AI copilots produce better artifacts with less effort but report not understanding why suggestions work. Provides empirical motivation for the study's hypothesis that toolchain-first students, who build without AI abstraction layers, may show better conceptual understanding even if artifact quality is similar."
+        }
+      ],
+      "researchPlan": {
+        "overview": "Retrospective cohort analysis of archival CSS 342/343 data from UW Bothell (2020-2026) comparing toolchain-first semesters (post-2022 curriculum revision) against earlier cohorts. No new human subjects interaction required. The study uses existing Jolly Feedback interaction logs and final exam records. Two independent raters code exam items for AI-resistance, then regression analysis tests whether toolchain-first cohort membership predicts performance on AI-resistant items after controlling for year, section, and prior GPA.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Data extraction and cleaning: pull CSS 342/343 Jolly Feedback logs and final exam grades from 2020-2026; identify cohort boundary (toolchain-first revision date); confirm IRB exemption status for existing records analysis",
+            "deliverable": "Clean dataset with student-level records, cohort flag, exam scores, and Jolly Feedback interaction counts; IRB exemption documentation"
+          },
+          {
+            "month": 2,
+            "goal": "Exam item coding: two independent raters (Pisan + one colleague or graduate student) code each unique exam item from 2020-2026 final exams on AI-resistance (1-5 scale) and cognitive level (Bloom's taxonomy)",
+            "deliverable": "Coded exam item bank with inter-rater agreement scores (Cohen's kappa target > 0.7); final AI-resistance composite score per item"
+          },
+          {
+            "month": 3,
+            "goal": "Descriptive analysis: compute cohort-level performance distributions on AI-resistant vs. routine items; visualize year-over-year trend; check for confounds (instructor, class size, grade inflation)",
+            "deliverable": "Descriptive statistics table and trend charts; list of identified confounds to include as covariates"
+          },
+          {
+            "month": 4,
+            "goal": "Inferential analysis: run mixed-effects regression with cohort (toolchain-first vs. not) as primary predictor and AI-resistant item score as outcome; include covariates; conduct sensitivity analysis excluding pandemic semesters",
+            "deliverable": "Regression output tables, effect size estimates (Cohen's d), robustness checks; interpretation memo"
+          },
+          {
+            "month": 5,
+            "goal": "Design forward-looking instrument: draft a validated AI-resistance rubric for future CSS 342/343 exams to enable prospective replication; conduct brief structured interviews with 3-5 students from each cohort type to surface qualitative mechanisms",
+            "deliverable": "Draft AI-resistance rubric; brief qualitative theme report from student interviews (if interviews approved under IRB)"
+          },
+          {
+            "month": 6,
+            "goal": "Write and submit paper",
+            "deliverable": "Submitted paper targeting SIGCSE TS 2027 or ICER 2027; anonymized dataset and analysis code released on GitHub for replication"
+          }
+        ],
+        "targetVenues": [
+          "SIGCSE TS",
+          "ICER",
+          "ITiCSE"
+        ],
+        "resources": "Primary data source is existing Jolly Feedback logs and grade records already held by Pisan; no new data collection cost. Rater compensation: one colleague or graduate student, approximately 10 hours of exam item coding. No specialized compute required. The analysis runs in R or Python with standard regression libraries.",
+        "risks": [
+          {
+            "risk": "Curriculum and instructor changes between cohorts may confound the toolchain-first effect, making it impossible to isolate pedagogy from instructor variation",
+            "mitigation": "Include instructor fixed effects in regression; conduct sensitivity analysis restricted to semesters Pisan taught directly; if confounding is severe, reframe as a descriptive trend study rather than causal inference"
+          },
+          {
+            "risk": "Jolly Feedback logs from early semesters (2020-2021) may be incomplete or in an incompatible format, reducing the effective pre-toolchain comparison group",
+            "mitigation": "Audit log completeness in Month 1 before committing to the design; if early logs are sparse, shift the primary outcome to final exam scores only (which are stored separately in university records) and treat Jolly Feedback as a supplementary engagement covariate"
+          },
+          {
+            "risk": "Inter-rater agreement on AI-resistance coding may be too low (kappa < 0.6) if raters interpret 'AI-resistant' differently across question types",
+            "mitigation": "Run a 2-hour calibration session with 10 practice items (5 clearly AI-resistant, 5 clearly not) before independent coding; use a detailed operational definition distinguishing AI-resistant by reasoning type (multi-step tool-behavior prediction, novel decomposition) from surface features (essay vs. code)"
+          }
+        ],
+        "humanSubjects": false
+      }
+    }
+  ]
+}
