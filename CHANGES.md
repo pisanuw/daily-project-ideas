@@ -182,3 +182,4 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 
 2026-08-12 [doc] Created ideas/2026-08-12.json with 4 ideas: Terminal Historian, Test Coverage Narrator, Observable Algorithm Visualizer, Longitudinal CS Concept Retention in Interview-Prep Aligned Curricula (ITiCSE 2025 anchor paper)
 2026-08-14 [doc] Created ideas/2026-08-14.json with 4 ideas: Prompt Diff, Class Mood Ring, From-Scratch Neural Net with Live Visualization, Full-Stack Thinking vs. Library-First Learning (SIGCSE TS 2026 anchor paper doi:10.1145/3770762.3772595)
+2026-08-15 [doc] Created ideas/2026-08-15.json with 4 ideas: Stale PR Warden, Annotation Synthesis Engine, API Escape Room, Misconception-Routing RAG (SIGCSE TS 2026 anchor paper doi:10.1145/3770761.3777344)
