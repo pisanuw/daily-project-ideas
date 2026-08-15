@@ -334,3 +334,7 @@
 | 2026-08-14 | Class Mood Ring | Teaching Tool | 1-2 Weeks |
 | 2026-08-14 | From-Scratch Neural Net with Live Visualization | Classroom Assignment | Multi-week |
 | 2026-08-14 | Full-Stack Thinking vs. Library-First Learning: Does Toolchain-First Pedagogy Build Durable Conceptual Depth in an AI-Copilot Era? | Research | Research |
+| 2026-08-15 | Stale PR Warden | Side Project | Weekend |
+| 2026-08-15 | Annotation Synthesis Engine | Teaching Tool | 1-2 Weeks |
+| 2026-08-15 | API Escape Room | Classroom Assignment | Multi-week |
+| 2026-08-15 | Misconception-Routing RAG: Extending Course-Grounded CS1 Chatbots with Socratic Scaffolding and Instructor Concept Analytics | Research | Research |

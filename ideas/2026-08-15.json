@@ -1,0 +1,165 @@
+{
+  "date": "2026-08-15",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Stale PR Warden",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A GitHub App that detects stale open PRs and automatically posts AI-generated revival briefs, routing the right reviewers based on code ownership to kill PR rot before it kills momentum.",
+      "description": "Engineering teams lose momentum when pull requests sit untouched for days or weeks. Stale PR Warden installs as a GitHub App and runs on a nightly schedule: it scans every open PR older than a configurable threshold, uses Claude to generate a concise one-paragraph 'why this PR matters now' brief (summarizing the PR's intent, its current blockers, and its estimated merge cost), identifies the best reviewers from CODEOWNERS and git-blame data, and posts a gentle nudge comment tagging them. If a merge conflict is detected, it flags that too. The entire system can be stood up in a weekend, installed with one click, and then runs forever on a free-tier server.",
+      "keyFeatures": [
+        "Configurable staleness threshold per repository",
+        "Claude-generated revival brief per stale PR (intent, blockers, merge cost)",
+        "CODEOWNERS and git-blame-based reviewer routing",
+        "Merge conflict detection and auto-flagging",
+        "Webhook-driven with nightly scheduled sweeps"
+      ],
+      "techStack": "Probot/Octokit (Node.js GitHub App SDK), Claude API, Vercel or Railway for hosting",
+      "whyInteresting": "PR rot is one of the quietest team productivity killers: PRs accumulate, context fades, and reviewers feel guilty but still don't act. A tool that fights it automatically and can be installed in 30 seconds fills a gap no existing tool addresses cleanly. The Claude-generated brief is the key insight: a one-paragraph human-readable summary is far more persuasive than a staleness badge.",
+      "inspiredBy": "Trending GitHub developer-productivity tools (Gitar, Bumblebee) and August 2026 discussions of AI-assisted code-review automation on Hacker News and Product Hunt."
+    },
+    {
+      "n": 2,
+      "title": "Annotation Synthesis Engine",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "A real-time collaborative annotation layer for any text that synthesizes all student comments into a ready-to-run discussion guide before class, turning asynchronous reading homework into evidence-based discussion prep.",
+      "description": "When students read papers, articles, or code samples outside class, their individual reactions and confusions go unshared and unexamined. Annotation Synthesis Engine gives every student an annotated view of a shared text (pasted URL or uploaded PDF); they highlight passages and leave timestamped notes. An hour before class the instructor triggers synthesis: Claude clusters annotations by theme, ranks the most thought-provoking student questions, generates a paragraph-level confusion heatmap, and produces a ready-to-run discussion guide the instructor can walk into class with. The 'did everyone actually read it?' problem dissolves because the discussion guide is built from evidence of what students actually noticed and wondered about.",
+      "keyFeatures": [
+        "Annotation layer over any URL or uploaded PDF (PDF.js)",
+        "Real-time multi-user highlights and threaded comments (Supabase Realtime)",
+        "One-click AI synthesis into structured discussion guide",
+        "Paragraph-level confusion heatmap for instructors",
+        "Export to PDF or copy-paste-ready Markdown"
+      ],
+      "techStack": "React + Vite, Supabase (Realtime + Auth), Flask, Claude API, PDF.js",
+      "whyInteresting": "Discussion facilitation is one of the most time-consuming parts of teaching, but the raw material (what students actually noticed) is almost never captured. This tool makes preparation a 30-second Claude call and makes the quality of student reading visible for the first time.",
+      "inspiredBy": "NotebookLM's quiz generation feature (Google ISTE 2026 launch), active-learning research on pre-class reading accountability, and the need for discussion-prep tools that bridge async homework and synchronous class time."
+    },
+    {
+      "n": 3,
+      "title": "API Escape Room",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "A multi-team assignment where each team builds a text-adventure escape room fully exposed as a documented REST API, then consumes other teams' APIs to solve cross-team meta-puzzles, making API design feel urgently real.",
+      "description": "Students often learn REST API design in isolation, never feeling the real pressure of other developers depending on their design decisions. In the API Escape Room, each team of three to four students builds a small text-adventure game fully exposed as documented REST endpoints (GET /rooms, POST /actions, GET /inventory, and so on). A shared puzzle-master service validates that other teams' HTTP clients can traverse your rooms. Teams write OpenAPI specs because other teams will literally get stuck if the contract is wrong or the error messages are ambiguous. The final deliverable is a deployed game server, an OpenAPI spec, a React client that works against at least two other teams' APIs, and a post-mortem on the breaking changes they survived. A Claude-powered hint endpoint gives players Socratic hints rather than direct answers, so students also experience AI-scaffolded tutoring from the consumer side.",
+      "keyFeatures": [
+        "REST API game mechanics (rooms, actions, inventory, state)",
+        "Cross-team API consumption as a core grade component",
+        "OpenAPI spec as a required deliverable alongside code",
+        "Claude-powered Socratic hint endpoint baked into the game API",
+        "Deployment on free-tier hosting (Render, Railway, or Vercel) as the final step"
+      ],
+      "techStack": "Flask or Express, React + Vite (client), Supabase, OpenAPI/Swagger UI, Claude API",
+      "whyInteresting": "API design is abstract until you feel the pain of a breaking change when another team's code breaks. This assignment makes that pain educational and immediate. The escape-room format reframes debugging other teams' APIs as solving puzzles rather than writing boilerplate, and the multi-team dependency makes documentation a survival skill rather than an afterthought.",
+      "inspiredBy": "Game-based learning research; multi-team capstone project patterns; August 2026 Product Hunt launches around AI-assisted developer-tooling education."
+    },
+    {
+      "n": 4,
+      "title": "Misconception-Routing RAG: Extending Course-Grounded CS1 Chatbots with Socratic Scaffolding and Instructor Concept Analytics",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "This research adds a misconception-detection and Socratic routing layer on top of verified-source RAG chatbots like Alan, asking whether routing confused queries to guided questioning rather than direct answers reduces misconception persistence and improves learning outcomes in CS1.",
+      "description": "Grounding a CS1 chatbot in verified course materials, as Alan demonstrates, addresses hallucination and trust. However, grounding alone does not handle a deeper pedagogical challenge: when a student's question reveals a fundamental misconception, answering it directly may reinforce the wrong mental model. This research adds a misconception-routing layer above the RAG retrieval step. A lightweight classifier trained on CS1 query semantics and common error patterns distinguishes information-seeking queries (which receive direct grounded answers) from misconception-revealing queries (which trigger Socratic scaffolding: a sequence of guided questions and partial hints that lead the student toward the correct mental model without revealing it). An instructor-facing analytics module aggregates misconception-tagged queries into a real-time concept-confusion heatmap, giving the instructor class-wide awareness before and during office hours. The study compares a direct-RAG condition against the Socratic-routing condition on misconception persistence, resubmission rates, and student-reported satisfaction across two sections of an introductory programming course.",
+      "papers": [
+        {
+          "title": "Alan: A Classroom Deployment of An Educational Chatbot That Cites Resources",
+          "authors": "Yassine Berrachid et al., University of Toronto",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770761.3777344",
+          "url": "https://doi.org/10.1145/3770761.3777344",
+          "abstract": "Alan is a course-specific virtual teaching assistant built on a retrieval-augmented generation (RAG) framework that answers student questions using verified course resources such as lecture slides, lab handouts, notes, and recordings, citing sources directly in each response. Deployed in a large introductory programming course with over 250 students and more than 2,000 queries logged, a mixed-methods analysis shows students found Alan most helpful for conceptual and administrative questions, valuing its transparency and course alignment.",
+          "relevance": "Alan provides the empirical baseline and architectural model for a course-grounded RAG chatbot in CS1. This research extends Alan's grounding contribution by adding a pedagogical routing layer that differentiates information-seeking from misconception-revealing queries, addressing the one gap Alan explicitly leaves open: what to do when a student's question indicates a deeper conceptual problem rather than a simple information need."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "Integrating AI Tutors in a Programming Course (RAGMan)",
+          "authors": "Iris Ma, Kaiwen Sun, et al., University of Toronto",
+          "venue": "SIGCSE Virtual 2024",
+          "year": 2024,
+          "url": "https://dl.acm.org/doi/10.1145/3649165.3690094",
+          "relevance": "RAGMan deploys homework-specific RAG tutors in a 455-student CS1 course and reports a statistically significant reduction in course failures. It establishes that RAG-grounded chatbots improve outcomes, motivating the present research question of whether layering misconception-aware Socratic routing on top of RAG improves them further."
+        },
+        {
+          "title": "Can LLMs Identify Gaps and Misconceptions in Students' Code Explanations?",
+          "authors": "Juho Leinonen, Paul Denny, et al.",
+          "venue": "arXiv, 2025",
+          "year": 2025,
+          "url": "https://arxiv.org/abs/2501.10365",
+          "relevance": "Directly assesses whether LLMs can detect conceptual gaps and misconceptions from student code explanations, providing evidence for the feasibility of the misconception classifier at the core of this research and a methodology template for its construction."
+        },
+        {
+          "title": "Discerning Minds or Generic Tutors? Evaluating Instructional Guidance Capabilities in Socratic LLMs",
+          "authors": "Anonymous (arXiv preprint)",
+          "venue": "arXiv, 2025",
+          "year": 2025,
+          "url": "https://arxiv.org/abs/2508.06583",
+          "relevance": "Proposes the Perception-Orchestration-Elicitation (POE) framework for Socratic LLM tutors, arguing that effective instructional guidance requires inferring learner state before asking questions. This framework directly informs the Socratic routing strategy in this research and provides an evaluation rubric for the scaffolding quality."
+        },
+        {
+          "title": "McMining: Automated Discovery of Misconceptions in Student Code",
+          "authors": "Anonymous (arXiv preprint)",
+          "venue": "arXiv, 2025",
+          "year": 2025,
+          "url": "https://arxiv.org/abs/2510.08827",
+          "relevance": "Presents automated techniques for mining misconception taxonomies from student submission logs. Its taxonomy-building methodology is directly applicable to constructing the misconception category labels used to train the routing classifier in this research."
+        }
+      ],
+      "researchPlan": {
+        "overview": "The project builds a misconception-routing layer on top of an Alan-style RAG chatbot and runs a two-condition study in an introductory programming course (CSS 142 at UW Bothell). The direct-RAG condition serves as the baseline; the routing condition intercepts misconception-tagged queries and substitutes Socratic scaffolding. Jolly Feedback submission logs provide the misconception taxonomy and the resubmission outcome metric.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review on misconception detection, Socratic tutoring, and RAG chatbots; taxonomy design using Jolly Feedback submission logs",
+            "deliverable": "Annotated bibliography, initial misconception category taxonomy, refined research questions and hypotheses"
+          },
+          {
+            "month": 2,
+            "goal": "Build and evaluate misconception classifier; implement Socratic routing layer on top of Alan-style RAG backend; develop instructor concept-analytics dashboard",
+            "deliverable": "Working prototype with classifier accuracy report (precision/recall per misconception category)"
+          },
+          {
+            "month": 3,
+            "goal": "Pilot deployment with a small volunteer cohort (20-30 CSS 142 students); collect interaction logs; iterate on Socratic prompting strategy and classifier thresholds",
+            "deliverable": "Pilot analysis report with qualitative coding of sampled interactions"
+          },
+          {
+            "month": 4,
+            "goal": "Full deployment across two course sections (control: direct RAG; treatment: Socratic routing); data collection with IRB-compliant anonymization",
+            "deliverable": "Complete interaction log dataset; IRB documentation"
+          },
+          {
+            "month": 5,
+            "goal": "Quantitative analysis of resubmission rates, misconception persistence, and student-reported helpfulness; qualitative coding of Socratic interaction sequences",
+            "deliverable": "Analysis results with statistical tests; figures and tables for paper"
+          },
+          {
+            "month": 6,
+            "goal": "Write and submit paper; release open-source routing layer as a drop-in extension to Alan-style chatbots",
+            "deliverable": "Submitted paper draft; public GitHub repository with replication materials"
+          }
+        ],
+        "targetVenues": ["SIGCSE TS", "ICER", "AIED", "EDM"],
+        "resources": "Jolly Feedback submission logs (existing, multi-year) for taxonomy construction; CSS 142 course deployment for two sections (~80-100 students); Claude API (or open-source alternative via Ollama for privacy-first deployment); Supabase for interaction logging; one undergraduate RA for qualitative coding.",
+        "risks": [
+          {
+            "risk": "Classifier precision too low, causing frequent mis-routing that frustrates students seeking simple information",
+            "mitigation": "Start with a high-precision, low-recall classifier that only routes queries matching the top-confidence misconception patterns; add a fallback 'skip scaffolding' button so students can force a direct answer after two Socratic turns"
+          },
+          {
+            "risk": "IRB approval delay slowing the full deployment to month 4",
+            "mitigation": "Submit IRB application in month 1 alongside the literature review; design all data collection as opt-in and anonymous from the start so the protocol is IRB-ready without redesign"
+          },
+          {
+            "risk": "Small effect size requiring larger sample than two sections provide",
+            "mitigation": "Power analysis in month 1 using Jolly Feedback historical resubmission rates; if underpowered, treat the study as a pilot and plan a multi-section replication the following term"
+          }
+        ],
+        "humanSubjects": true
+      }
+    }
+  ]
+}
