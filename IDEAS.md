@@ -338,3 +338,7 @@
 | 2026-08-15 | Annotation Synthesis Engine | Teaching Tool | 1-2 Weeks |
 | 2026-08-15 | API Escape Room | Classroom Assignment | Multi-week |
 | 2026-08-15 | Misconception-Routing RAG: Extending Course-Grounded CS1 Chatbots with Socratic Scaffolding and Instructor Concept Analytics | Research | Research |
+| 2026-08-16 | Screenshot UI Diff Lens | Side Project | Weekend |
+| 2026-08-16 | Live Q&A Distiller | Teaching Tool | 1-2 Weeks |
+| 2026-08-16 | Socratic PR Mentor | Classroom Assignment | Multi-week |
+| 2026-08-16 | Mapping UTA Practice to LLM Office Hours: A Benchmark for Human-Aligned CS Tutoring | Research | Research |

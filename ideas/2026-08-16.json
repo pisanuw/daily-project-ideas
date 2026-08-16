@@ -1,0 +1,162 @@
+{
+  "date": "2026-08-16",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Screenshot UI Diff Lens",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "Drag two UI screenshots into a browser tool and get an AI-annotated visual diff that classifies every change by type: layout shift, color update, text edit, added element, or removed element.",
+      "description": "Screenshot UI Diff Lens goes beyond pixel-comparison tools by using Claude's vision capabilities to understand what changed semantically, not just where pixels differ. Users drag and drop two screenshots; the tool sends them to Claude Vision and receives a structured list of changes with bounding-box coordinates and type labels. An SVG overlay is rendered on the image pair, color-coded by change type. Users can click any annotation to see the AI's reasoning and export the result as a PNG or standalone HTML diff report for inclusion in a PR review or accessibility audit. Unlike pure pixel-diff tools, semantic classification avoids false positives from anti-aliasing or font hinting differences.",
+      "keyFeatures": [
+        "Drag-and-drop or paste screenshot pair in-browser with no third-party uploads",
+        "Claude Vision returns structured bounding-box + change-type JSON rendered as SVG overlay",
+        "Seven change-type labels: layout, color, text, element-added, element-removed, spacing, visibility",
+        "Export annotated pair as PNG or standalone HTML diff report"
+      ],
+      "techStack": "React + Vite + Tailwind, Claude Vision API, Canvas/SVG for overlay rendering",
+      "whyInteresting": "Visual regression testing is painful: pixel-diff tools generate noisy false positives from subpixel rendering, forcing engineers to eyeball every flagged image. An AI that names the TYPE of change is dramatically more useful for PR reviews, accessibility audits, and design handoffs.",
+      "inspiredBy": "2026 trend of AI-powered visual document analysis; need for semantic visual regression in design and dev workflows; GitHub trending fast PDF-to-Markdown Rust library (8600+ stars this week)"
+    },
+    {
+      "n": 2,
+      "title": "Live Q&A Distiller",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "Students submit questions to a session URL during lecture; AI clusters duplicates, ranks by urgency, and surfaces the most important question every two minutes so instructors can keep pace in large classes.",
+      "description": "Live Q&A Distiller replaces the chaos of real-time Piazza or Padlet Q&A in large lectures. Students open a URL on their phones or laptops (no login needed) and type questions; Supabase Realtime delivers each to the instructor dashboard within milliseconds. Claude clusters semantically similar questions, assigns urgency scores based on language cues, and presents the instructor with a prioritized queue showing merged clusters rather than raw duplicates. Instructors flag questions as answered live, hiding them from the student view. After the session, one click generates a clean Markdown FAQ document covering all answered and unanswered questions.",
+      "keyFeatures": [
+        "Anonymous session URL: students submit on any device with no login required",
+        "Supabase Realtime delivery and live cluster updates every 60 seconds via Claude API batch call",
+        "Instructor dashboard: priority queue with cluster size, urgency score, and representative text",
+        "Post-session one-click FAQ export in Markdown or Canvas-compatible HTML"
+      ],
+      "techStack": "React + Vite + Tailwind, Supabase (Realtime + PostgreSQL), Claude API, Flask for cluster batch endpoint",
+      "whyInteresting": "In a 150-student lecture, 40 students often ask the same question five different ways. No existing tool intelligently clusters them in real time. The Supabase + Claude combination makes this buildable in a week and useful immediately in any large class.",
+      "inspiredBy": "Classroom management pain points in large CS courses; Supabase Realtime capabilities; HN discussions on AI-powered feedback widget tools; 2026 trend of user-facing AI session tools"
+    },
+    {
+      "n": 3,
+      "title": "Socratic PR Mentor",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "A GitHub App that intercepts student pull requests and posts Socratic questions about the code; the PR cannot be merged until the student answers all questions to the AI's satisfaction.",
+      "description": "Socratic PR Mentor installs as a GitHub App on a course organization. When a student opens a PR, a webhook triggers a Flask endpoint that sends the diff to Claude and receives 3-5 Socratic questions targeting the most consequential code decisions: edge cases, naming choices, algorithmic complexity, or missing tests. Claude posts these as a required review comment and marks the PR 'awaiting-understanding.' The student replies in the thread; Claude evaluates the replies and either approves the understanding check or asks one targeted follow-up. Instructors access a dashboard showing question patterns across all class PRs for the week, giving a class-wide picture of recurring conceptual gaps. Students build the app itself as their multi-week project, learning GitHub API integration, webhook handling, LLM prompt engineering, and Docker deployment.",
+      "keyFeatures": [
+        "GitHub App webhook triggers on PR open/update and posts Socratic questions within 30 seconds",
+        "Required status check blocks merge until all questions answered and approved by Claude",
+        "Conversation history maintained per PR so Claude asks coherent follow-ups, not repeated questions",
+        "Instructor dashboard aggregates question topics and student response quality across all class PRs"
+      ],
+      "techStack": "Flask (webhook handler) + React + Vite (dashboard), GitHub REST/GraphQL API, Claude API, PostgreSQL for conversation history, Docker for deployment",
+      "whyInteresting": "PR review is the real-world skill that separates junior from senior engineers, yet most CS courses grade the final artifact rather than the reasoning behind it. Blocking merge on a Socratic conversation forces students to articulate WHY their code works the way it does before they ship it.",
+      "inspiredBy": "SE education research on code review as a learning activity; Socratic tutoring tradition in CS courses; 2026 trend of AI agents embedded inside developer workflows (Command Center, Bullet YC S26)"
+    },
+    {
+      "n": 4,
+      "title": "Mapping UTA Practice to LLM Office Hours: A Benchmark for Human-Aligned CS Tutoring",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Ciego et al. (SIGCSE TS 2026) empirically identified six pedagogical moves that effective UTAs use during CS office hours; this research uses those six moves as a design specification and evaluation rubric to determine how faithfully LLM-powered CS tutoring systems can replicate human UTA behavior.",
+      "description": "Undergraduate teaching assistants employ an identifiable repertoire of six pedagogical practices in CS office hours: asking open-ended questions, hands-on demonstrating, prompting, referencing resources, explaining, and expressing affect. Ciego et al. identified these through 37.5 hours of ethnographic observation across 52 tutoring sessions. This research operationalizes the six practices as (1) a prompt-template library for a Claude-powered office hours assistant and (2) an annotation rubric for evaluating existing and simulated tutoring transcripts. Using anonymized historical office hours logs and a simulation pipeline, we measure which practices LLMs replicate with high fidelity, which systematically fail (e.g., expressing affect or hands-on demonstration), and how targeted prompt engineering or tool augmentation closes identified gaps. The study avoids new human subjects by operating entirely on pre-existing or simulated transcripts, making IRB unnecessary for the core study.",
+      "papers": [
+        {
+          "title": "Exploring Undergraduate Computing Tutors' Pedagogical Practices",
+          "authors": "Esse Ciego, Skyler Steiert, and colleagues, University of Florida",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770762.3772542",
+          "url": "https://doi.org/10.1145/3770762.3772542",
+          "abstract": "With the rapid increase in students majoring in computing, undergraduate teaching assistants have become a key resource for managing large courses. Our ethnographically informed study with seven UTAs observed 52 tutoring sessions over 37.5 hours and identified six pedagogical practices: asking open-ended questions, hands-on demonstrating, prompting, referencing resources, explaining, and expressing affect. Tutors relied on explanations, questions, and resource references to teach concepts, and on hands-on demonstrations and affect expressions to support debugging.",
+          "relevance": "Provides the empirically grounded taxonomy of six UTA pedagogical practices that serves simultaneously as the design specification for the LLM tutoring system and as the evaluation rubric for measuring human-alignment of AI-generated tutoring responses."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "Beyond Traditional Teaching: Large Language Models as Simulated Teaching Assistants in Computer Science",
+          "authors": "David et al.",
+          "venue": "SIGCSE TS 2024",
+          "year": 2024,
+          "url": "https://doi.org/10.1145/3626252.3630789",
+          "relevance": "Establishes feasibility and desiderata for LLM-powered virtual TAs in CS, including the importance of pedagogical alignment and student trust; provides the closest prior system to which the practice-aligned LLM assistant will be compared."
+        },
+        {
+          "title": "CS Teaching Assistant Perceptions on LLM-Generated Faded Worked Examples for Feedback Training",
+          "authors": "Multiple authors",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "url": "https://doi.org/10.1145/3770762.3772582",
+          "relevance": "Reports how human TAs perceive and use LLM-generated instructional materials, revealing that TAs prioritize productivity over pedagogical scaffolding; directly relevant to understanding where LLM tutoring fits in the office-hours workflow and how human TAs will interact with a practice-aligned system."
+        },
+        {
+          "title": "CourseAssist: Pedagogically Appropriate AI Tutor for Computer Science Education",
+          "authors": "Bhowmick et al.",
+          "venue": "ACM GCCE 2024",
+          "year": 2024,
+          "url": "https://doi.org/10.1145/3649409.3691094",
+          "relevance": "Demonstrates a RAG-based tutoring system that aligns LLM responses with course-specific learning objectives; provides a baseline architecture and pedagogical-appropriateness framing that the practice-aligned system will extend and benchmark against."
+        },
+        {
+          "title": "How Do Students Interact with an LLM-powered Virtual Teaching Assistant in Different Educational Settings?",
+          "authors": "Nie et al.",
+          "venue": "arXiv preprint",
+          "year": 2024,
+          "url": "https://arxiv.org/abs/2407.17429",
+          "relevance": "Empirically characterizes student interaction patterns with LLM virtual TAs across settings, identifying cognitive demand distribution; provides behavioral baselines against which the six-practice-aligned system's interaction patterns can be compared."
+        }
+      ],
+      "researchPlan": {
+        "overview": "Using the six-practice taxonomy from Ciego et al. as both design specification and evaluation rubric, this project builds a prompt-template library for each practice, applies it to Claude to generate responses to real and simulated CS office hours scenarios, and quantitatively measures fidelity per practice using automated rubric scoring and expert annotation. The simulation-based design keeps the study free from human subjects requirements while producing publishable empirical findings about which UTA practices are currently within LLM reach and which require tool augmentation or alternative approaches.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review of LLM tutoring systems; develop operational definitions and annotation scheme for each of the six UTA practices; establish inter-annotator reliability target",
+            "deliverable": "Annotated bibliography + six-practice coding rubric with worked examples and anchor responses"
+          },
+          {
+            "month": 2,
+            "goal": "Curate dataset of anonymized CS office hours transcripts from existing course logs (Jolly Feedback data, publicly available CS tutoring datasets); manually annotate 200 transcript turns with six-practice labels",
+            "deliverable": "Annotated transcript dataset (200+ turns) with inter-rater reliability score >= 0.70 kappa"
+          },
+          {
+            "month": 3,
+            "goal": "Design and implement six prompt-template families for Claude (one per practice); run baseline evaluation of Claude's zero-shot and few-shot performance on each practice type using the annotated dataset as ground truth",
+            "deliverable": "Prompt library + baseline practice-alignment scores (precision/recall per practice class)"
+          },
+          {
+            "month": 4,
+            "goal": "Identify the two lowest-performing practices; design targeted interventions (tool augmentation, structured output, chain-of-thought); re-evaluate and analyze failure modes qualitatively",
+            "deliverable": "Intervention design document + updated alignment scores + qualitative failure-mode analysis"
+          },
+          {
+            "month": 5,
+            "goal": "Prototype integrated office hours assistant embedding the best-performing templates; evaluate on held-out scenario set; write results and discussion sections",
+            "deliverable": "Working prototype + results section draft with tables and analysis"
+          },
+          {
+            "month": 6,
+            "goal": "Finalize paper including related work, methodology, results, and limitations; submit to target venue",
+            "deliverable": "Submitted paper draft"
+          }
+        ],
+        "targetVenues": ["SIGCSE TS 2027", "ICER 2027", "EDM 2027", "AIED 2027"],
+        "resources": "Anonymized office hours transcripts from CSS courses (existing Jolly Feedback logs or new semester collection), Claude API access (estimated 2-5M tokens for annotation and simulation), two student research assistants for annotation, Python NLP toolchain for automated rubric scoring.",
+        "risks": [
+          {
+            "risk": "Existing transcript data may lack sufficient detail (only final answer recorded, not the full dialogue) to reliably annotate all six practices.",
+            "mitigation": "Contact instructors at partner institutions for richer transcripts; use open CS tutoring datasets published in ICER/EDM proceedings; design one structured office hours observation protocol for the following semester as a supplementary source."
+          },
+          {
+            "risk": "The six-practice rubric may have low inter-rater reliability for abstract categories like 'expressing affect,' reducing validity of automated scoring.",
+            "mitigation": "Conduct reliability pilot with three annotators on 50 turns before committing to full annotation; merge low-reliability categories or decompose them into more behavioral, observable sub-categories if kappa falls below 0.65."
+          },
+          {
+            "risk": "LLM evaluation on simulated scenarios may not transfer to real student interactions, limiting external validity of results.",
+            "mitigation": "Include at least one semester of passive observational data where an instructor reviews LLM suggestions without deploying them to students, validating that the simulation pipeline generates ecologically valid scenarios."
+          }
+        ],
+        "humanSubjects": false
+      }
+    }
+  ]
+}
