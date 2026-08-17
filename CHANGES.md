@@ -185,3 +185,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-08-15 [doc] Created ideas/2026-08-15.json with 4 ideas: Stale PR Warden, Annotation Synthesis Engine, API Escape Room, Misconception-Routing RAG (SIGCSE TS 2026 anchor paper doi:10.1145/3770761.3777344)
 
 2026-08-16 [doc] Created ideas/2026-08-16.json with 4 ideas: Screenshot UI Diff Lens, Live Q&A Distiller, Socratic PR Mentor, Mapping UTA Practice to LLM Office Hours (SIGCSE TS 2026 anchor paper doi:10.1145/3770762.3772542)
+
+2026-08-17 [doc] Created ideas/2026-08-17.json with 4 ideas: Migration Diff Narrator, Error Taxonomy Mapper, Network Protocol Animator, Disability Persona Agents for Inclusive SE Education (SIGCSE TS 2026 paper 10.1145/3770761.3777291)
