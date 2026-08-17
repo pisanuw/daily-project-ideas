@@ -1,0 +1,157 @@
+{
+  "date": "2026-08-17",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Migration Diff Narrator",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "Paste two SQL schema or TypeScript interface versions into a browser tool and get an annotated breaking-change diff with one-sentence AI-narrated migration guidance per change.",
+      "description": "Migration Diff Narrator is a zero-backend browser tool that compares two versions of a SQL schema (CREATE TABLE, ALTER TABLE) or TypeScript interface and produces a structured, annotated diff. Paste the 'before' and 'after' into Monaco editor panes; Claude API returns a JSON list of classified changes: column renamed, field dropped, type narrowed, NOT NULL added, index removed, and so on. Each change gets a severity badge (safe / caution / breaking) and a one-sentence migration note, e.g., 'Add a DEFAULT before applying NOT NULL to avoid locking a large table.' Results render as a color-coded side-by-side diff with collapsible change cards. A single Export button generates a Markdown summary suitable for pasting into a PR description or migration PR checklist. No API keys are stored server-side: the user supplies their own Claude API key, stored only in localStorage.",
+      "keyFeatures": [
+        "Side-by-side Monaco panes for SQL schema or TypeScript interface paste",
+        "Claude API classifies every change: renamed, dropped, type-changed, constraint-added, index-dropped",
+        "Severity badge per change: safe / caution / breaking, with one-sentence migration note",
+        "Export as Markdown migration checklist for PR descriptions",
+        "Client-side only: user-supplied API key stored in localStorage, no server"
+      ],
+      "techStack": "React + Vite + Tailwind, Monaco Editor, Claude API (client-side), no backend",
+      "whyInteresting": "Schema changes are the most hazardous part of any deployment, yet the diff between two migration files is usually just raw SQL that reviewers must mentally parse. A tool that names the change type and explains the migration risk in one sentence turns a five-minute review into a ten-second scan. The zero-backend constraint makes it instantly shareable as a static Netlify deploy.",
+      "inspiredBy": "Developer pain deciphering breaking schema changes across PR reviews; Prisma and similar ORM migration tools exposing the need for human-readable change narration; HN discussions on schema-as-code and database versioning ergonomics"
+    },
+    {
+      "n": 2,
+      "title": "Error Taxonomy Mapper",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "Upload a semester of student compile errors and runtime exceptions; an LLM clusters them into a named misconception taxonomy and renders a class-wide heatmap showing which error types peak at which assignment.",
+      "description": "Error Taxonomy Mapper helps instructors see class-wide error patterns rather than individual student struggles. An instructor uploads a CSV or plaintext dump of error messages (compiler output, exception tracebacks, or Canvas submission logs) for each assignment in a course. A Flask backend batches the errors through Claude API, which assigns each one to a named misconception category: null-dereference, off-by-one, scope confusion, type mismatch, missing-base-case, uninitialized variable, and so on, creating new categories if the predefined set does not cover a cluster. The React frontend renders a D3.js heatmap where rows are error categories, columns are assignments, and cell intensity reflects how many students hit that error on that assignment. Clicking a cell reveals representative raw errors and a one-paragraph instructor note on how to address the misconception in lecture or lab. Semester-to-semester comparison mode overlays two heatmaps for longitudinal analysis.",
+      "keyFeatures": [
+        "CSV or plaintext error log upload per assignment; batch Claude API classification into named misconception categories",
+        "D3.js heatmap: rows = error categories, columns = assignments, intensity = student count",
+        "Click-through to representative raw errors and a generated instructor intervention note",
+        "Semester comparison: overlay two heatmaps to track whether interventions reduced a category",
+        "Export heatmap as SVG and taxonomy as Markdown for course retrospectives"
+      ],
+      "techStack": "Flask (batch processing endpoint), React + Vite + Tailwind, D3.js for heatmap, Claude API, SQLite for session storage",
+      "whyInteresting": "CS instructors know anecdotally which errors are common, but rarely have quantitative evidence across a full semester. A heatmap that shows 'null-dereference errors spike on Assignment 4 every year' gives actionable signal for redesigning that specific lab or adding a targeted pre-lecture warm-up. The taxonomy itself can be published as a dataset for CS education researchers.",
+      "inspiredBy": "CS1/CS2 research showing student misconceptions cluster into 6-8 recurring types; instructor desire to see class-wide patterns rather than individual tickets; Claude API batch processing making taxonomy generation practical without manual annotation"
+    },
+    {
+      "n": 3,
+      "title": "Network Protocol Animator",
+      "category": "Teaching Tool",
+      "complexity": "Multi-week",
+      "summary": "An interactive web platform that animates TCP handshake, HTTP/1.1 vs. HTTP/2, UDP, and DNS resolution as step-by-step packet flows, with instructor controls to pause, rewind, and inject faults like packet loss or reordering.",
+      "description": "Network Protocol Animator makes packet-level networking tangible for students who struggle to visualize abstract protocol state machines from textbook diagrams. The platform renders each protocol as a timeline-based animation: two or three nodes (client, server, DNS resolver) exchange labeled packets as animated arrows, with headers expanding on hover to show flags, sequence numbers, and payloads. A control panel lets the instructor pause at any frame, step forward or backward, and inject faults: drop a specific packet, duplicate an ACK, spike RTT, or reorder segments. Each fault triggers the correct protocol response (retransmit, fast-retransmit, QUIC stream recovery) so students see fault tolerance in action. An annotation layer lets instructors type callouts that appear on the timeline, turning the animator into a lecture slide. Students can run the animator in free-explore mode, tweak parameters, and export the annotated sequence as an SVG diagram or shareable URL. Scenarios include TCP three-way handshake, TCP four-way teardown, HTTP/1.1 pipelining, HTTP/2 multiplexing, DNS recursive resolution, and TLS 1.3 handshake.",
+      "keyFeatures": [
+        "Six built-in scenarios: TCP handshake/teardown, HTTP/1.1, HTTP/2 multiplexing, DNS, TLS 1.3",
+        "Fault injection panel: drop packet, duplicate ACK, spike RTT, reorder segments",
+        "Instructor annotation layer: text callouts on any frame, saved with a shareable URL",
+        "Step-forward / step-backward / timeline scrub with per-frame header detail on hover",
+        "Export annotated sequence as SVG or PNG for slides; shareable URL encodes scenario + fault state"
+      ],
+      "techStack": "React + Vite + Tailwind, Framer Motion for packet animations, Zustand for simulation state machine, SVG for packet arrows, Flask for scenario YAML serving and shareable URL encoding",
+      "whyInteresting": "Wireshark captures real packets but overwhelms students with noise before they understand the protocol. A curated animator that shows only the pedagogically relevant frames, lets instructors break things deliberately, and exports slides cuts the gap between 'I read about TCP' and 'I understand why three-way handshake exists.' Nothing open-source combines fault injection with instructor annotation in a shareable browser tool.",
+      "inspiredBy": "Student confusion about packet-level networking in UW CSE courses; SIGCSE discussions on active-learning tools for networking; gap in open-source protocol visualizers that support fault injection and instructor annotation"
+    },
+    {
+      "n": 4,
+      "title": "Disability Persona Agents for Inclusive Software Engineering Education",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Extend the RIT accessible-design elective model into a reusable, open-source platform of Claude-powered AI agents that simulate users with diverse disabilities, deployable across any CS course to make inclusive requirements gathering a routine practice rather than a specialized topic.",
+      "description": "Mehta et al. (SIGCSE TS 2026) demonstrated that AI agents simulating users with disabilities can replace or supplement human usability testing in an upper-level accessibility elective, yielding gains in student empathy and inclusive design competency. This research asks whether the same pedagogical mechanism scales beyond a single specialized course. The proposed platform provides a library of configurable disability persona agents (visual, cognitive, motor, auditory, and neurodivergent impairments) that any CS instructor can embed into a requirements-gathering lab, a software engineering project course, or an HCI assignment. Students interview the agents, receive authentic disability-perspective feedback on their designs, and revise accordingly. The core research questions are: (1) Do students who engage with AI disability personas across multiple course contexts produce more accessible software artifacts than control groups using WCAG guidelines alone? (2) Which persona interaction patterns most effectively shift student mental models toward inclusive design? (3) What are the risks of AI-mediated disability representation, and how can persona co-design with disability community members mitigate stereotype reinforcement? A two-semester study across 3-4 UW CSE courses provides the empirical base; a released open-source platform is the secondary deliverable.",
+      "papers": [
+        {
+          "title": "Fostering Accessible Design Skills with AI-Agents and Experiential Labs",
+          "authors": "Rochester Institute of Technology, Department of Software Engineering",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770761.3777291",
+          "url": "https://doi.org/10.1145/3770761.3777291",
+          "abstract": "Accessibility remains underrepresented in undergraduate computing curricula, despite its critical role in modern software development. This poster presents an upper-level elective in Accessible Software Engineering that addresses this gap by (1) integrating accessibility principles through web-based experiential labs and (2) leveraging AI agents that simulate users with diverse disabilities to support empathetic, role-based learning. Student feedback and project outcomes demonstrated substantial gains in accessibility awareness, technical competence, and human-centered design skills.",
+          "relevance": "Establishes the core pedagogical mechanism -- AI agents simulating disability users -- and provides preliminary evidence of efficacy. The proposed research extends this single-course intervention into a multi-course platform study with a control condition and longitudinal assessment."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "Teaching about Accessibility in Computer Science Education",
+          "authors": "ACM Inroads Editorial",
+          "venue": "ACM Inroads, 2025",
+          "year": 2025,
+          "url": "https://doi.org/10.1145/3729877",
+          "relevance": "Surveys how accessibility is currently taught across CS curricula and documents the gap: most coverage is confined to HCI electives, leaving mainstream SE and PL courses untouched. Provides the motivation for a cross-course intervention."
+        },
+        {
+          "title": "Creativity and Curb Cuts: Experiences in Our First Offering of a Front End Development and Accessibility Focused CS Course",
+          "authors": "Unknown (RESPECT 2025)",
+          "venue": "RESPECT 2025",
+          "year": 2025,
+          "url": "https://dl.acm.org/doi/10.1145/3704637.3734783",
+          "relevance": "Documents a CS course explicitly centered on accessible front-end development and notes that even experienced students overlook accessible design. Provides a direct curricular parallel and highlights the persistence of accessibility blind spots without dedicated intervention."
+        },
+        {
+          "title": "LLM Agents for Education: Advances and Applications",
+          "authors": "Unknown (arXiv 2025)",
+          "venue": "arXiv, 2025",
+          "year": 2025,
+          "url": "https://arxiv.org/abs/2503.11733",
+          "relevance": "Surveys how LLM-based agents are applied across educational domains: personalized tutoring, feedback generation, and experiential scaffolding. Provides theoretical grounding for using agentic AI personas as interactive pedagogical actors rather than static content generators."
+        }
+      ],
+      "researchPlan": {
+        "overview": "Build and empirically evaluate an open-source platform of Claude-powered AI disability persona agents deployable across CS courses. A two-semester study at UW CSE compares accessibility design quality and awareness in students who use the persona agents against a control group using WCAG guideline reading. A released platform is the secondary deliverable.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review and research design",
+            "deliverable": "Annotated bibliography of accessible design pedagogy, disability persona methods, and LLM agent-in-education studies; refined research questions and study protocol; IRB application submitted"
+          },
+          {
+            "month": 2,
+            "goal": "Persona platform v1: 4-6 disability persona agents with configurable context and dialogue API",
+            "deliverable": "Working Claude-backed persona library (visual, cognitive, motor, auditory, neurodivergent) with instructor configuration UI and an integration guide for embedding in existing course labs"
+          },
+          {
+            "month": 3,
+            "goal": "Pilot deployment in one software engineering project course",
+            "deliverable": "Pilot study data: pre/post accessibility awareness survey, rubric-graded design artifact quality scores, student reflection log; IRB approval received"
+          },
+          {
+            "month": 4,
+            "goal": "Pilot analysis and persona refinement; co-design workshop with disability community members",
+            "deliverable": "Revised persona scripts co-designed with disability community members; analysis report on which interaction patterns shift student mental models; updated platform with scenario templates for requirements gathering, usability testing, and design critique"
+          },
+          {
+            "month": 5,
+            "goal": "Broader deployment across 2-3 course types with control condition",
+            "deliverable": "Full study dataset: treatment (persona agents) vs. control (WCAG reading) across CS1 lab, SE project course, and HCI elective; accessibility audit rubric scoring of student artifacts"
+          },
+          {
+            "month": 6,
+            "goal": "Analysis, paper writing, and platform open-source release",
+            "deliverable": "Draft paper for SIGCSE or ASSETS submission; open-source platform on GitHub with documentation; dataset deposited in ACM Digital Library supplemental materials"
+          }
+        ],
+        "targetVenues": ["SIGCSE", "ASSETS", "ITiCSE", "CHI"],
+        "resources": "Claude API credits (~$500 for student interactions across two semesters), 1-2 student research assistants, IRB for classroom study, 3-4 course instructor collaborators at UW CSE, optional disability community advisory panel for co-design workshop",
+        "risks": [
+          {
+            "risk": "AI personas may reinforce stereotypes about disability groups if scripted without community input, causing harm rather than empathy gains",
+            "mitigation": "Co-design persona scripts with disability community members in Month 4; add explicit framing in all student-facing materials that personas are illustrative scenarios, not representative of all people with a given disability; release personas with community-reviewed documentation"
+          },
+          {
+            "risk": "IRB process delays classroom study into a second academic year",
+            "mitigation": "Submit IRB application in Month 1 using simulated design exercises that do not require new human subjects; classroom deployment in Month 3 is Phase 2 contingent on approval; core platform development and pilot design proceed in parallel"
+          },
+          {
+            "risk": "Students treat AI persona feedback as authoritative ground truth rather than one perspective among many, reducing critical design thinking",
+            "mitigation": "Scaffold lab instructions to position persona interaction as one of several evaluation methods; require students to also consult WCAG guidelines and peer feedback; measure critical reasoning in reflection prompts as a secondary outcome"
+          }
+        ],
+        "humanSubjects": true
+      }
+    }
+  ]
+}

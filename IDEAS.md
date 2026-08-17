@@ -342,3 +342,7 @@
 | 2026-08-16 | Live Q&A Distiller | Teaching Tool | 1-2 Weeks |
 | 2026-08-16 | Socratic PR Mentor | Classroom Assignment | Multi-week |
 | 2026-08-16 | Mapping UTA Practice to LLM Office Hours: A Benchmark for Human-Aligned CS Tutoring | Research | Research |
+| 2026-08-17 | Migration Diff Narrator | Side Project | Weekend |
+| 2026-08-17 | Error Taxonomy Mapper | Teaching Tool | 1-2 Weeks |
+| 2026-08-17 | Network Protocol Animator | Teaching Tool | Multi-week |
+| 2026-08-17 | Disability Persona Agents for Inclusive Software Engineering Education | Research | Research |
