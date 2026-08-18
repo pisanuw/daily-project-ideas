@@ -1,0 +1,165 @@
+{
+  "date": "2026-08-18",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "AI Override Tracker",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A VS Code extension that logs every time a developer edits or reverts AI-generated code, then surfaces a personal AI reliability dashboard showing where the assistant helps vs. hinders.",
+      "description": "As AI code assistants become ubiquitous, developers have little insight into how reliably the AI actually helps them. AI Override Tracker records each developer override of AI-generated code, prompting a quick one-tap categorization: semantic fix, logic error, hallucinated API, style preference, or context mismatch. After a week of sessions, a React web dashboard shows a radar chart of AI reliability by task type (debugging, boilerplate, algorithm, tests), average override rate, and the most common failure categories. Educators can aggregate reports across a class to measure how well students are critically evaluating AI output. The extension writes to a local JSON log and syncs to Supabase for the web view.",
+      "keyFeatures": [
+        "VS Code extension that intercepts AI suggestion acceptance/edit events",
+        "One-tap override categorization (logic error, hallucination, style, etc.)",
+        "Weekly radar chart showing AI reliability by task type",
+        "Classroom aggregate view for instructors to compare student AI interaction patterns",
+        "Local-first JSON log with optional Supabase sync"
+      ],
+      "techStack": "VS Code Extension API, React + Vite, Supabase, Recharts for radar/charts",
+      "whyInteresting": "Developers adopt AI assistants wholesale with no empirical sense of where they fail for their specific workflow and skill level. This tool turns every override into a data point, giving individuals and instructors a concrete signal rather than gut feeling. The aggregate classroom view is particularly novel for AI literacy instruction.",
+      "inspiredBy": "Builder Radar Aug 2026 discussion of AI code validation tools (Hoplite, Ito) and the growing trend of tracking AI output quality rather than just accepting suggestions"
+    },
+    {
+      "n": 2,
+      "title": "Reactive Data Flow Animator",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "A browser-based classroom tool that takes React hooks or RxJS code and renders an animated graph showing how data flows through the reactive chain, step by step.",
+      "description": "Students learning React hooks or reactive programming consistently struggle to build a mental model of how state changes propagate through useEffect, useMemo, and useCallback dependencies. The Reactive Data Flow Animator lets an instructor paste a component's code into a web editor, then automatically parses the reactive dependencies and renders an animated directed graph: nodes are state atoms and effects, edges show data flow, and playback controls step through a simulated trigger event. Students click any node to see its current value and which upstream changes caused it to re-run. A shareable link lets students replay the instructor's demo asynchronously. Built on a lightweight parser plus D3 for the animated graph.",
+      "keyFeatures": [
+        "Paste React hooks or RxJS code and auto-detect reactive dependencies",
+        "Animated directed graph with step-through playback",
+        "Click any node to inspect its value and upstream triggers",
+        "Shareable read-only link for async student review",
+        "Side-by-side code panel highlights the active line during animation"
+      ],
+      "techStack": "React + Vite, D3.js for animated graph, Babel parser for AST analysis, Framer Motion for transitions",
+      "whyInteresting": "The JS Event Loop Visualizer shows the call stack, not data dependencies. Reactivity is a distinct and widely misunderstood concept that benefits from its own animation model. This fills a real gap in teaching modern React and streaming patterns, and the shareable link makes it usable in large lecture halls and async courses alike.",
+      "inspiredBy": "Common student confusion about useEffect dependency arrays in CSS 385 and similar web courses; gap between the existing JS Event Loop Visualizer and the distinct problem of reactive data propagation"
+    },
+    {
+      "n": 3,
+      "title": "Competitive Prompt Engineering Lab",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "A multi-week assignment where students iteratively engineer prompts against a fixed benchmark test suite, studying which strategies improve AI code generation quality and why.",
+      "description": "Students are given a fixed set of coding benchmark tasks with automated test cases (e.g., implement a graph algorithm, parse a config format, write a data pipeline). Their goal is to engineer prompts that make Claude or Gemini produce code passing the maximum number of tests, iterating over three rounds. A Flask + React leaderboard tracks each team's best score, prompt length, and number of iterations. Students document their prompt evolution in a lab notebook and write a final reflection analyzing what strategies worked: few-shot examples, chain-of-thought, constraint specification, persona framing, etc. The lab teaches prompt engineering as an empirical discipline, not a collection of tips, while giving students hands-on experience evaluating LLM output quality systematically.",
+      "keyFeatures": [
+        "Fixed benchmark suite of 10-15 coding tasks with automated test cases",
+        "Prompt submission portal with immediate test-case feedback and score",
+        "Live leaderboard showing team rankings, best score, and prompt iteration count",
+        "Lab notebook template for documenting prompt evolution and hypotheses",
+        "Instructor dashboard comparing class-wide prompt strategies and failure patterns"
+      ],
+      "techStack": "Flask + React + Vite, Claude API and Gemini API, Supabase for leaderboard and submission storage, Docker for sandboxed code execution",
+      "whyInteresting": "Most prompt engineering instruction is anecdotal. This assignment gives students a controlled experiment with measurable outcomes, turning intuitions into falsifiable hypotheses. The competitive framing drives genuine iteration, and the cross-team comparison reveals strategy diversity that sparks rich discussion. Docker sandboxing makes it safe to run student-generated code.",
+      "inspiredBy": "HN Aug 2026 discussions of AI code validation pipelines; the education trend of treating prompt engineering as an empirical skill; absence of a structured lab format for comparing prompt strategies against a common benchmark"
+    },
+    {
+      "n": 4,
+      "title": "From Tournament to Transfer: Measuring Whether Adversarial Test-Writing in CS2 Builds Lasting TDD Habits",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Extends a gamified adversarial testing tournament (Dungeon Master, SIGCSE 2026) with a controlled study measuring whether competitive test-writing changes the quality of students' tests, their mutation scores, and whether TDD habits persist post-course.",
+      "description": "Code, Test, Battle (SIGCSE TS 2026) introduced Dungeon Master, a semester-long system where CS2 students build hero characters whose capabilities mirror OOP concepts, and battle opponents using both algorithm correctness and adversarial unit tests. The preliminary study (N=25) showed high engagement and concept clarity but included no control group and no learning-outcome measurement. This research extends that system with a mixed-methods controlled study: one CS2 section uses adversarial tournaments while a matched section uses standard TDD instruction with the same programming tasks. Primary outcomes are mutation score (how many seeded bugs student tests catch), boundary-case coverage, test-suite size, and resubmission rate. A longitudinal component follows both cohorts into a subsequent software engineering course to measure whether tournament participants write better tests six months later, addressing the transfer question that gamification research rarely asks. The study requires no additional human subjects beyond standard course participation and can be conducted entirely on existing CS2 assignments with mutation-testing infrastructure (PIT for Java).",
+      "papers": [
+        {
+          "title": "Code, Test, Battle: Gamifying CS2 Through Adversarial Programming Tournaments",
+          "authors": "Rifat Sabbir Mansur et al.",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770761.3777362",
+          "url": "https://doi.org/10.1145/3770761.3777362",
+          "abstract": "We present Dungeon Master, a gamified tournament-based learning system that transforms CS2 curriculum into a progressive, competitive, collaborative experience. Student teams build hero characters throughout the semester, with each programming concept manifested as character capabilities: basic objects evolve into specialized classes using inheritance, manage inventories through collections, and execute battle strategies via recursive algorithms. The system features dual competition: automated tournaments where student-designed heroes battle using implemented algorithms, and adversarial testing where teams write unit tests to validate their code while exposing opponent flaws. Preliminary deployment (N=25) demonstrates high satisfaction with engagement (5/5), concept clarity (4.3/5), and collaborative learning (4.8/5).",
+          "relevance": "Provides the system design, preliminary engagement data, and motivating rationale for adversarial test-tournaments in CS2, but lacks a control group and learning-outcome measurement — exactly the gap this research fills. Aligns directly with Pisan's toolchain-first pedagogy (TDD is a core toolchain skill) and his interest in game-based CS education."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "Gamekins: Gamifying Software Testing in Jenkins",
+          "authors": "Philipp Straubinger, Gordon Fraser",
+          "venue": "ICSE-Companion 2022 / IEEE",
+          "year": 2022,
+          "url": "https://dl.acm.org/doi/10.1145/3510454.3516862",
+          "relevance": "Foundational gamified testing tool that integrates into CI pipelines; provides the closest prior art for measuring whether gamification improves test quality metrics (coverage, mutation score), offering both design patterns and a baseline comparison for tournament-style approaches."
+        },
+        {
+          "title": "Gamification in Test-Driven Development Practice",
+          "authors": "Wei Ren, Ita Richardson",
+          "venue": "ACM Gamify Workshop 2023",
+          "year": 2023,
+          "url": "https://dl.acm.org/doi/abs/10.1145/3617553.3617889",
+          "relevance": "Examines whether gamification elements specifically improve TDD adoption and quality; provides a framework for measuring TDD habit formation that can be adapted to compare adversarial-tournament participants against a control group in the proposed study."
+        },
+        {
+          "title": "Engaging Developers in Exploratory Unit Testing through Gamification",
+          "authors": "Philipp Straubinger, Gordon Fraser",
+          "venue": "ACM Gamify Workshop 2024",
+          "year": 2024,
+          "url": "https://arxiv.org/abs/2408.04918",
+          "relevance": "Shows that gamified challenges increase exploratory test diversity (boundary cases, edge inputs) even when coverage stays constant — directly relevant to measuring whether adversarial framing in Dungeon Master produces qualitatively different tests rather than just more tests."
+        },
+        {
+          "title": "Code Critters: A Block-Based Testing Game",
+          "authors": "Gordon Fraser et al.",
+          "venue": "ICSE-Companion 2023",
+          "year": 2023,
+          "url": "https://arxiv.org/abs/2304.02246",
+          "relevance": "Demonstrates game-based test-writing for K-12 settings, validating the pedagogical principle that adversarial framing (killing mutants) motivates boundary-case thinking — provides a theoretical grounding for the adversarial testing mechanism in the proposed study."
+        }
+      ],
+      "researchPlan": {
+        "overview": "A controlled two-section study comparing adversarial test-tournaments (Dungeon Master-style) to standard TDD instruction in CS2, measuring test quality via mutation score and boundary-case coverage. A six-month longitudinal component in a subsequent course tests whether tournament participants show durable TDD habits, addressing the transfer gap in gamified CS education research.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review on gamified testing, TDD pedagogy, and mutation testing infrastructure; finalize RQs and IRB submission (standard course-data exemption); configure PIT mutation testing on existing CS2 assignments",
+            "deliverable": "Annotated bibliography, refined RQ document, IRB exemption confirmation, and working PIT integration on a sample assignment"
+          },
+          {
+            "month": 2,
+            "goal": "Implement lightweight Dungeon Master clone adapted to UW Bothell CSS 343 C++ assignments; train TAs on tournament administration; design control-group TDD rubric and both-section pre-survey",
+            "deliverable": "Deployable tournament system, TA training materials, pre-survey instrument"
+          },
+          {
+            "month": 3,
+            "goal": "Run both sections through first two assignment cycles; collect test suites, mutation scores, boundary-case coverage, and engagement surveys after each cycle",
+            "deliverable": "Raw dataset (test suites + scores) for cycles 1-2, interim descriptive statistics"
+          },
+          {
+            "month": 4,
+            "goal": "Run final assignment cycle; conduct qualitative coding of test-naming and comment patterns to capture strategic thinking; administer post-survey",
+            "deliverable": "Full dataset, coded qualitative sample, statistical comparison draft (t-tests or Mann-Whitney on mutation scores)"
+          },
+          {
+            "month": 5,
+            "goal": "Administer longitudinal follow-up survey and pull test-suite metrics from both cohorts' CSS 480 (Software Engineering) submissions to measure transfer; analyze results",
+            "deliverable": "Longitudinal data analysis, draft findings section, limitation discussion"
+          },
+          {
+            "month": 6,
+            "goal": "Write and revise full paper; prepare artifact (tournament system open-source release); submit to target venue",
+            "deliverable": "Submitted paper and open-source repository with tournament system and replication package"
+          }
+        ],
+        "targetVenues": ["SIGCSE TS", "ITiCSE", "ICER", "ITICSE Working Group"],
+        "resources": "Two sections of CSS 343 (C++ Data Structures, ~35 students each); PIT mutation testing framework (open source, Java — may need porting or equivalent for C++: llvm-mutate or custom scripts); existing CS2 assignment infrastructure; one TA for tournament event facilitation; optional: $500 AWS credits for sandboxed tournament execution",
+        "risks": [
+          {
+            "risk": "Section-assignment bias: students who self-select into the tournament section may already be more motivated test-writers, inflating tournament outcomes",
+            "mitigation": "Use random or instructor-assigned section placement; administer a pre-course testing-attitude survey to verify group equivalence at baseline"
+          },
+          {
+            "risk": "Tournament novelty effect: engagement boost may be due to novelty rather than adversarial framing, making longitudinal transfer the only reliable outcome measure",
+            "mitigation": "Run the tournament for the full semester (not a one-week intervention) to let novelty decay; treat the longitudinal CSS 480 comparison as the primary outcome and tournament-term scores as secondary"
+          },
+          {
+            "risk": "C++ mutation testing tooling is immature compared to Java/Python; PIT does not support C++",
+            "mitigation": "Use llvm-mutate or a custom script applying a fixed set of mutation operators (AOR, ROR, boundary shifts); pilot on one assignment in month 1 and scope mutation types to what the tooling reliably supports"
+          }
+        ],
+        "humanSubjects": false
+      }
+    }
+  ]
+}

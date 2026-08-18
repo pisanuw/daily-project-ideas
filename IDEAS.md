@@ -346,3 +346,7 @@
 | 2026-08-17 | Error Taxonomy Mapper | Teaching Tool | 1-2 Weeks |
 | 2026-08-17 | Network Protocol Animator | Teaching Tool | Multi-week |
 | 2026-08-17 | Disability Persona Agents for Inclusive Software Engineering Education | Research | Research |
+| 2026-08-18 | AI Override Tracker | Side Project | Weekend |
+| 2026-08-18 | Reactive Data Flow Animator | Teaching Tool | 1-2 Weeks |
+| 2026-08-18 | Competitive Prompt Engineering Lab | Classroom Assignment | Multi-week |
+| 2026-08-18 | From Tournament to Transfer: Measuring Whether Adversarial Test-Writing in CS2 Builds Lasting TDD Habits | Research | Research |

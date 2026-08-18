@@ -187,3 +187,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-08-16 [doc] Created ideas/2026-08-16.json with 4 ideas: Screenshot UI Diff Lens, Live Q&A Distiller, Socratic PR Mentor, Mapping UTA Practice to LLM Office Hours (SIGCSE TS 2026 anchor paper doi:10.1145/3770762.3772542)
 
 2026-08-17 [doc] Created ideas/2026-08-17.json with 4 ideas: Migration Diff Narrator, Error Taxonomy Mapper, Network Protocol Animator, Disability Persona Agents for Inclusive SE Education (SIGCSE TS 2026 paper 10.1145/3770761.3777291)
+
+2026-08-18 [doc] Created ideas/2026-08-18.json with 4 ideas: AI Override Tracker, Reactive Data Flow Animator, Competitive Prompt Engineering Lab, From Tournament to Transfer (SIGCSE TS 2026 doi:10.1145/3770761.3777362)
