@@ -1,0 +1,165 @@
+{
+  "date": "2026-08-19",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Dev Flow Soundtrack",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A browser extension and dashboard that monitors your coding activity (git commits, tab switches, idle gaps) and curates a Spotify playlist matching your detected coding state. Detects focus, debug, and exploration modes to switch between playlist moods automatically.",
+      "description": "Developers often play music while coding but manually switching playlists breaks flow. Dev Flow Soundtrack installs as a lightweight browser extension that tracks signals like commit frequency, file-switch rate, and idle time to classify your current coding state into one of three modes: deep focus, debugging, or exploration. A small Claude API call classifies ambiguous signals. The paired dashboard lets you configure which playlist or mood profile maps to each state and shows a session timeline of how your coding mood shifted. Integration with the Spotify Web API handles playback control. The result is a playful yet genuinely useful tool that keeps music contextually matched to what you are doing, with no manual intervention.",
+      "keyFeatures": [
+        "Chrome/Firefox extension with activity tracking (commits, tab switches, idle time)",
+        "Three-mode classification: deep focus, debugging, exploration",
+        "Spotify Web API integration for automatic playlist switching",
+        "Dashboard timeline showing mood shifts across the session",
+        "Claude API for disambiguating edge-case activity patterns"
+      ],
+      "techStack": "React + Vite (dashboard), Chrome Extension (Manifest V3), Spotify Web API, Claude API, Tailwind CSS",
+      "whyInteresting": "Nothing like this exists in the productivity tool space -- combining behavioral coding signals with music psychology is novel and makes a great portfolio demo. It is fun to build and easy to explain to non-technical audiences.",
+      "inspiredBy": "Natively (local AI productivity app trending on GitHub 2026), dev experience tooling trend, discussion in r/SideProject about developer focus and flow state"
+    },
+    {
+      "n": 2,
+      "title": "First-Day Gap Radar",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "A teaching tool that generates an adaptive prerequisite diagnostic quiz from an instructor's topic list, then produces per-student gap cards and a class-wide heat map showing which prerequisites need extra reinforcement before the quarter begins.",
+      "description": "On the first day of a CS course, instructors rarely know which prerequisites students have actually retained. First-Day Gap Radar lets an instructor paste or upload their course topic list; Claude generates a 10-question adaptive diagnostic covering assumed prior knowledge. Students take the quiz in class or asynchronously, and the tool produces two outputs: a per-student gap card (which topics are weak) and a class-wide heat map sorted by gap severity. Instructors can configure the quiz difficulty and map topics to suggested review resources. Results export to CSV or sync directly with Canvas via its API. The tool deliberately targets the beginning-of-term information gap that mastery learning dashboards typically miss because they focus on in-course performance.",
+      "keyFeatures": [
+        "Claude-generated adaptive diagnostic quiz from an instructor-supplied topic list",
+        "Per-student gap card linking weak topics to review resources",
+        "Class-wide heat map sorted by prerequisite gap severity",
+        "Canvas LMS API integration for roster import and grade passback",
+        "CSV export for offline analysis"
+      ],
+      "techStack": "React + Vite (student and instructor UI), Flask (backend), Supabase (student responses), Claude API (quiz generation), Canvas REST API",
+      "whyInteresting": "Mastery learning research shows instructors lack visibility into entry-level gaps before they compound. This tool closes that visibility gap in a single class period, before any remediation can happen, making it a high-leverage early intervention.",
+      "inspiredBy": "SIGCSE TS 2026 paper on instructor dashboards for mastery learning, Stack Overflow 2026 developer survey showing prerequisite gaps as a recurring bottleneck in technical courses, AutoMCQ (ITiCSE 2025)"
+    },
+    {
+      "n": 3,
+      "title": "Build Your Own Database Engine",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "A structured multi-week assignment where students implement a minimal relational database from scratch: a B-tree storage engine, a SQL parser for a core subset of SQL, and a naive query optimizer. Students finish with a working database they can query from Python.",
+      "description": "Database textbooks describe B-trees, query planning, and the storage layer abstractly, but students rarely implement them. This assignment scaffolds the work into four weekly milestones: (1) a page-based file storage layer with a B-tree index, (2) a tokenizer and recursive-descent parser for SELECT, INSERT, UPDATE, and DELETE, (3) a table scan + index scan executor, and (4) a simple cost-based query optimizer that chooses between full-table scans and index lookups. Students test each layer with automated unit tests and a final integration test suite that runs real SQL queries. The project is language-agnostic but Python with no external DB libraries is recommended. Students come away having internalized how data actually reaches disk and why indexes matter, rather than treating the database as a black box.",
+      "keyFeatures": [
+        "Page-based file storage layer with B-tree index implementation",
+        "Recursive-descent SQL parser for SELECT, INSERT, UPDATE, DELETE",
+        "Table scan and index scan query executor",
+        "Naive cost-based query optimizer",
+        "Automated unit + integration test harness students must pass"
+      ],
+      "techStack": "Python (recommended, no external DB libraries), pytest, optional Rust variant for advanced students",
+      "whyInteresting": "Building a database from scratch is one of the most effective ways to shatter the abstraction wall around a technology students use every day. The project scales in ambition (add transactions, add joins) and produces a genuinely impressive portfolio artifact.",
+      "inspiredBy": "ITiCSE 2025 paper on extracting notional machines for databases, SIGCSE TS 2026 paper on SQL validated assessment, the broader build-from-scratch pedagogy pattern popularized by the CS:APP course"
+    },
+    {
+      "n": 4,
+      "title": "Faculty Co-Design Protocol for LLM Socratic Hint Calibration in CS1",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "A replicable co-design framework that partners CS1 instructors with researchers to calibrate LLM-generated Socratic hints to institution-specific misconception patterns, extending the ITS co-design methodology from cybersecurity workforce training into introductory programming education.",
+      "description": "Existing LLM-based CS1 tutors apply generic prompting strategies, but their hint quality depends heavily on the specific misconception patterns at a given institution -- patterns only course instructors can identify from years of grading and office hours. This research extends the faculty co-design methodology established for cybersecurity intelligent tutoring systems (SIGCSE TS 2026) into CS1 programming education, replacing generic hint templates with instructor-validated Socratic hint trees grounded in local submission data. The co-design protocol involves structured curriculum analysis workshops with instructors, mining of existing submission logs to surface high-frequency error patterns, and iterative hint strategy refinement cycles before any live deployment. The primary contribution is the protocol itself: a documented, step-by-step process any CS department can follow to calibrate an LLM tutor to their course context without requiring ML expertise. Evaluation compares hint acceptance rates and next-attempt correctness between institution-calibrated and generic hint strategies across two CS1 course sections.",
+      "papers": [
+        {
+          "title": "Partnering with Community College Faculty to Co-Design Intelligent Tutoring Systems for Cybersecurity Workforce Training",
+          "authors": "Marshall An, Mahboobeh Mehrvarz, Leah Teffera, Matthew Kisow, Bruce M. McLaren, Christopher Bogart",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770762.3772524",
+          "url": "https://doi.org/10.1145/3770762.3772524",
+          "abstract": "This experience report describes a partnership between community college faculty and learning scientists to co-design Intelligent Tutoring Systems (ITSs) addressing challenges in cybersecurity workforce training. The co-design approach combined collaborative reflection on student difficulties from prior course offerings with systematic curricular analysis to identify high-impact intervention points. The resulting ITSs incorporate instructional principles grounded in learning science, including timely hints and feedback, and task-loop adaptivity offering repeated practice until mastery.",
+          "relevance": "Provides the anchor co-design methodology -- structured curricular analysis and iterative classroom deployment -- that this research transposes from cybersecurity ITS to LLM-powered CS1 programming tutors. The paper's treatment of identifying high-impact intervention points and mitigating gaming behaviors directly informs the proposed co-design protocol."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "Iris: An AI-Driven Virtual Tutor for Computer Science Education",
+          "authors": "Patrick Bassner, Stephan Krusche, et al.",
+          "venue": "ITiCSE 2024",
+          "year": 2024,
+          "url": "https://doi.org/10.1145/3649217.3653543",
+          "relevance": "Describes a deployed LLM-based virtual tutor integrated into a university CS course, offering a concrete baseline architecture against which the co-design-calibrated hint strategy can be evaluated."
+        },
+        {
+          "title": "Next-Step Hint Generation for Introductory Programming Using Large Language Models",
+          "authors": "Kasper Roest, Hieke Keuning, Johan Jeuring",
+          "venue": "ITiCSE 2024",
+          "year": 2024,
+          "url": "https://dl.acm.org/doi/10.1145/3649217.3653584",
+          "relevance": "Establishes the state of the art in LLM hint generation for CS1, including limitations of generic prompting -- precisely the gap that institution-specific co-design aims to close."
+        },
+        {
+          "title": "Exploring Student Behaviors and Motivations Using AI TAs with Optional Guardrails",
+          "authors": "Siddharth Mishra-Sharma, Shyan Akmal, et al.",
+          "venue": "arXiv 2025",
+          "year": 2025,
+          "url": "https://arxiv.org/abs/2504.11146",
+          "relevance": "Documents how student interaction patterns with AI tutors vary by course context and learner motivation, supporting the argument that generic tutors underperform relative to those calibrated to a specific institutional setting."
+        },
+        {
+          "title": "A Survey of LLM-Based Applications in Programming Education",
+          "authors": "Various",
+          "venue": "ACL HCI+NLP Workshop 2025",
+          "year": 2025,
+          "url": "https://aclanthology.org/2025.hcinlp-1.21.pdf",
+          "relevance": "Provides a broad map of LLM applications in programming education, contextualizing the proposed co-design research within the larger landscape and highlighting the gap in institution-calibrated tutoring approaches."
+        }
+      ],
+      "researchPlan": {
+        "overview": "The research produces a replicable co-design protocol for calibrating LLM Socratic hint strategies to CS1 programming courses, validated through a two-section comparative study contrasting institution-calibrated hints against generic prompting. The work is structured to generate the protocol artifact first from submission-log analysis (no new IRB required), then validate it in a small consented deployment.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review and protocol scoping: study co-design ITS literature, Socratic hint research, and submission-log mining methods",
+            "deliverable": "Annotated bibliography and draft co-design protocol (v0.1) with identified gaps"
+          },
+          {
+            "month": 2,
+            "goal": "Curriculum analysis workshops with 2-3 CS1 instructors using existing submission logs to surface high-frequency misconception patterns",
+            "deliverable": "Institution-specific misconception taxonomy (25-40 patterns) and heat-mapped error frequency report"
+          },
+          {
+            "month": 3,
+            "goal": "Design and implement institution-calibrated Socratic hint trees grounded in the misconception taxonomy; build LLM hint-generation pipeline with instructor review loop",
+            "deliverable": "Working hint pipeline with per-misconception Socratic prompt templates, reviewed and signed off by participating instructors"
+          },
+          {
+            "month": 4,
+            "goal": "Pilot deployment in one CS1 lab section (consented students); log hint requests, acceptance rates, and next-attempt correctness",
+            "deliverable": "Pilot data set with interaction logs and preliminary analysis comparing calibrated vs. generic hints"
+          },
+          {
+            "month": 5,
+            "goal": "Full comparative analysis across two sections; refine co-design protocol based on what worked and what required mid-cycle adjustment",
+            "deliverable": "Statistical comparison of hint outcomes, finalized co-design protocol document (v1.0)"
+          },
+          {
+            "month": 6,
+            "goal": "Write up findings and submit paper",
+            "deliverable": "Submitted paper draft with protocol, evaluation results, and replication package"
+          }
+        ],
+        "targetVenues": ["SIGCSE TS", "ITiCSE", "ICER", "AIED"],
+        "resources": "Access to historical CS1 submission logs (typically available without new IRB if anonymized and pre-existing), 2-3 willing CS1 instructor collaborators, Claude or GPT-4o API for hint generation, one TA or undergraduate research assistant for workshop facilitation, IRB protocol for the pilot deployment section.",
+        "risks": [
+          {
+            "risk": "Instructor availability for multi-session co-design workshops may be limited during the academic term",
+            "mitigation": "Schedule workshops during summer or intersession; use asynchronous review tools (shared docs, annotated submission samples) so instructors can contribute in small time blocks"
+          },
+          {
+            "risk": "Submission logs may be incomplete or in non-standardized formats across different course offerings",
+            "mitigation": "Begin with a single instructor's well-documented course; build a log normalization script before broadening to multiple instructors"
+          },
+          {
+            "risk": "Small consented sample size in pilot deployment may limit statistical power for the comparative evaluation",
+            "mitigation": "Frame the pilot as a formative evaluation rather than a confirmatory study; target process metrics (hint acceptance rate, workshop iteration count) alongside outcome metrics, and power a follow-up study based on pilot effect sizes"
+          }
+        ],
+        "humanSubjects": true
+      }
+    }
+  ]
+}

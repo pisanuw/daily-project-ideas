@@ -350,3 +350,7 @@
 | 2026-08-18 | Reactive Data Flow Animator | Teaching Tool | 1-2 Weeks |
 | 2026-08-18 | Competitive Prompt Engineering Lab | Classroom Assignment | Multi-week |
 | 2026-08-18 | From Tournament to Transfer: Measuring Whether Adversarial Test-Writing in CS2 Builds Lasting TDD Habits | Research | Research |
+| 2026-08-19 | Dev Flow Soundtrack | Side Project | Weekend |
+| 2026-08-19 | First-Day Gap Radar | Teaching Tool | 1-2 Weeks |
+| 2026-08-19 | Build Your Own Database Engine | Classroom Assignment | Multi-week |
+| 2026-08-19 | Faculty Co-Design Protocol for LLM Socratic Hint Calibration in CS1 | Research | Research |
