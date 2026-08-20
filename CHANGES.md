@@ -199,3 +199,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-08-20 note Pathfinding Playground (2026-07-26 n1) marked implemented: live at pathfinding-playground-pisanuw.netlify.app, repo github.com/pisanuw/pathfinding-playground
 
 2026-08-20 code Footer source link fixed: bitbucket.org -> github.com/pisanuw/daily-project-ideas (repo moved to GitHub)
+
+2026-08-20 [note] Schema Storyteller deploy still blocked (3rd run): NETLIFY_AUTH_TOKEN secret invalid; session egress denies all Netlify hosts (403). Owner must rotate the token.
