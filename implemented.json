@@ -44,8 +44,10 @@
         "date": "2026-08-17",
         "n": 1
       },
-      "placeholder": true,
-      "notes": "In progress since 2026-08-20"
+      "notes": "Built in one session, fully client-side: parses two versions of SQL DDL (CREATE/ALTER/INDEX, Postgres and MySQL enums) or TypeScript interfaces into a shared IR, diffs them with rename detection for tables and columns, and classifies every change safe/caution/breaking with a one-sentence migration note; exports a Markdown PR checklist. A deterministic rule set replaces the suggested Claude API calls, so verdicts are instant, offline, and reproducible. 74 vitest tests, 97% statement coverage; lint/typecheck/build green. Deployed via the GitHub Actions deploy workflow (site created first try, page verified 200), siteId pinned afterward.",
+      "url": "https://migration-diff-narrator.netlify.app",
+      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/migration-diff-narrator",
+      "implementedOn": "2026-08-20"
     }
   ]
 }
