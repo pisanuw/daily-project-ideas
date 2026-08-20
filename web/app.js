@@ -26,6 +26,14 @@
     return a.date < b.date ? 1 : -1;
   }
 
+  // Implemented projects sort by when they shipped, not when they were proposed.
+  function byImplementedDesc(a, b) {
+    var da = a.implementedOn || a.date;
+    var db = b.implementedOn || b.date;
+    if (da === db) return byDateDesc(a, b);
+    return da < db ? 1 : -1;
+  }
+
   function peppersFor(tierKey) {
     var t = DATA.tiers.filter(function (x) { return x.key === tierKey; })[0];
     return t ? t.peppers : '';
@@ -76,7 +84,7 @@
 
   // ---- Section ----
   function section(tier, ideas) {
-    var sorted = ideas.slice().sort(byDateDesc);
+    var sorted = ideas.slice().sort(tier.key === 'implemented' ? byImplementedDesc : byDateDesc);
     var countWord = tier.key === 'research' ? (sorted.length === 1 ? ' idea' : ' ideas') : (sorted.length === 1 ? ' project' : ' projects');
     var head = el('div', { class: 'section__head' }, [
       el('span', { class: 'section__peppers', text: tier.peppers }),

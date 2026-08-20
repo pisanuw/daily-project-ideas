@@ -211,3 +211,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-08-20 code Implemented cards and modals now show both dates (proposed + implemented); backfilled implementedOn 2026-05-21 for Code Blindfold/accessibility-lens.
 
 2026-08-20 note Shortcut Sprint (2026-08-13 n1) marked implemented: live at shortcut-sprint.netlify.app, repo Claude-capstone/shortcut-sprint. SM-2 trainer, localStorage instead of Supabase; deploy worked first try, siteId pinned.
+
+2026-08-20 code Implemented section now sorts by implementedOn (newest shipped first), falling back to proposal date for ties and missing values; other tiers unchanged.
