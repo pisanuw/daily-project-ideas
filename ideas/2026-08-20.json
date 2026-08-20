@@ -1,0 +1,164 @@
+{
+  "date": "2026-08-20",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Schema Storyteller",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "Paste any database schema and get a plain-English narrative of what the data model means, who the actors are, and what constraints or indexes might be missing.",
+      "description": "Developers onboarding to a new codebase spend hours reverse-engineering what a database schema actually represents in business terms. Schema Storyteller is a React + Vite single-page app where you paste SQL DDL, a Prisma schema, or a JSON Schema and Claude returns a readable entity-relationship narrative, business-domain vocabulary suggestions for cryptically named tables or columns, and a natural-language list of potentially missing constraints, indexes, or foreign keys. No backend required — the Claude API call runs client-side. The output can be exported as a Markdown file to drop into team documentation.",
+      "keyFeatures": [
+        "Accepts SQL DDL, Prisma schema, and JSON Schema formats via paste or drag-and-drop",
+        "Generates plain-English entity descriptions and relationship narratives",
+        "Flags missing indexes, constraints, and nullable fields with natural-language explanations",
+        "One-click Markdown export for team documentation or onboarding wikis"
+      ],
+      "techStack": "React + Vite + Tailwind, Claude API (client-side, no backend), file drag-and-drop",
+      "whyInteresting": "Every developer has stared at a schema trying to figure out what 'tbl_ref_xmapping' actually means. This turns the reverse-engineering that currently lives in developers' heads into a shareable artifact, and it is buildable in an afternoon with a clear pedagogical and practical payoff.",
+      "inspiredBy": "GitHub trending DevToys pattern (developer utility consolidation), HN Ask: What developer tool do you wish existed in 2026?"
+    },
+    {
+      "n": 2,
+      "title": "Concept Coverage Lens",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "Upload a set of student code submissions for any programming assignment and get a per-student concept heatmap showing which CS concepts were demonstrated versus which were expected.",
+      "description": "Instructors reviewing 30-60 student submissions rarely have time to notice whether a student solved a recursion problem with an imperative loop or bypassed a required data structure entirely. Concept Coverage Lens is a Flask + React dashboard where the instructor specifies the expected concepts for an assignment (e.g., recursion, linked list traversal, Big-O awareness) and uploads a batch of student code files. Claude analyzes each submission, maps the demonstrated CS concepts to a rubric, and generates a per-student heatmap alongside a class-wide gap report. An optional Canvas API integration lets instructors pull submissions without manual downloading. The report is exportable as a CSV for gradebook use.",
+      "keyFeatures": [
+        "Instructor specifies expected concepts; Claude maps each submission against them",
+        "Per-student concept heatmap highlights missing or underdeveloped skills",
+        "Class-wide gap report shows which concepts most students bypassed or misapplied",
+        "Optional Canvas API integration for automated batch submission retrieval",
+        "CSV export for gradebook integration"
+      ],
+      "techStack": "Flask, React + Vite + Tailwind, Claude API, Canvas LMS API (optional), Supabase for session storage",
+      "whyInteresting": "Automated graders tell instructors whether code passes tests, not whether students understood the underlying concept. This fills that gap and is directly useful for CS1/CS2 and DS&A courses where instructors suspect students are solving problems with the wrong conceptual tools.",
+      "inspiredBy": "Need for scalable formative insight in large CS courses; Pisan's Jolly Feedback work revealing gaps between test-pass and conceptual understanding"
+    },
+    {
+      "n": 3,
+      "title": "Multi-Persona Code Review Simulator",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "Students submit code to a panel of AI reviewers with distinct personas — Security Hawk, Performance Optimizer, Style Purist, and Grumpy Senior — then must respond to each review and iterate, building code-review soft skills alongside technical ones.",
+      "description": "Real-world code review is as much a communication skill as a technical one, but most CS courses lack structured practice. Students build and submit a feature or module; Claude plays four reviewer personas with distinct foci and communication styles: the Security Hawk identifies injection and boundary risks, the Performance Optimizer flags O(n^2) loops and memory waste, the Style Purist enforces readability conventions, and the Grumpy Senior challenges design decisions with short skeptical comments. Each student must respond in writing — defending a choice or committing to a fix — before re-submitting. The platform tracks response quality over multiple iterations. The classroom assignment can be the platform itself (students build it) or the content inside it (students use it as a grading stage). Built with React + Supabase + Claude API.",
+      "keyFeatures": [
+        "Four fixed reviewer personas with distinct focus areas and communication styles",
+        "Students must respond to each review comment (defend or commit to fix) before re-submitting",
+        "Diff view between submission versions to track what changed and whether review concerns were addressed",
+        "Instructor dashboard showing response quality patterns across the class",
+        "Configurable persona prompts so instructors can add domain-specific reviewers (e.g., Accessibility Auditor)"
+      ],
+      "techStack": "React + Vite + Tailwind, Supabase (auth + storage + real-time), Claude API, Monaco Editor for code display",
+      "whyInteresting": "Code review is a top-cited skill gap in new-grad developers, yet it is almost never practiced in structured academic settings. This simulator gives students safe repetitions of an inherently adversarial but collegial process, and it scales without a TA per student.",
+      "inspiredBy": "HN Show: Juggler (open-source GUI coding agent), industry surveys on new-grad soft-skill deficits in code review"
+    },
+    {
+      "n": 4,
+      "title": "Socratic Tutoring at the Proof-Concept Boundary: Extending and Evaluating LLM-Based CS Theory Tutoring for Data Structures and Algorithm Analysis",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "The CHIRON system showed LLMs are only marginally viable as CS theory tutors, especially on proof-based questions. This research extends that evaluation framework to data structures and algorithm analysis, adds a symbolic consistency checker for complexity claims, and compares Socratic vs. direct-answer tutoring modes on learning outcomes.",
+      "description": "CHIRON (SIGCSE TS 2026) evaluated GPT-4 as a tutor for automata theory, computability, and complexity using a five-criterion rubric, finding strong performance on conceptual explanation but systematic failure on proof-based questions such as reductions. Data structures and algorithm analysis (DS&A) courses present an analogous landscape: LLMs explain sorting algorithms fluently but generate incorrect Big-O complexity analyses, flawed loop-invariant proofs, and inconsistent recurrence derivations. This research (1) replicates and extends the CHIRON rubric to 18-20 DS&A subtopics using a question bank matched to Pisan's CSS 342/343 curriculum, (2) adds a symbolic consistency-checking layer — inspired by Pisan's functional-roles-of-equations work — that validates LLM-generated complexity claims against ground-truth recurrences before delivery to the student, and (3) runs a within-subjects comparison of Socratic mode vs. direct-answer mode on student engagement and error correction in a short DS&A lab. The result is both an empirical benchmark for LLM DS&A tutoring and a prototype correction mechanism grounded in symbolic reasoning, extending the composed-AI-tutor agenda Pisan has pursued across his career.",
+      "papers": [
+        {
+          "title": "Viability of Large Language Models as CS Theory Tutors",
+          "authors": "Three authors; United States Military Academy (West Point)",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770761.3777358",
+          "url": "https://doi.org/10.1145/3770761.3777358",
+          "abstract": "CHIRON is an LLM-based tutoring system that uses Socratic interaction rather than direct answers to maximize student learning. The authors evaluated GPT-4 across 18 Theory of Computing subtopics (regular languages, context-free languages, Turing machines, decidability), using 10 average-student questions per subtopic scored on accuracy, completeness, clarity, pedagogical scaffolding, and follow-up quality. Overall results showed only marginal viability, with LLMs excelling at conceptual explanation but failing systematically on proof-based categories such as reductions.",
+          "relevance": "CHIRON establishes a replicable evaluation rubric and benchmark for LLM CS theory tutoring and directly identifies proof-based reasoning as the unresolved failure mode — the exact gap this research extends to DS&A courses where loop invariants, recurrences, and complexity proofs present the same challenge."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "Discerning Minds or Generic Tutors? Evaluating Instructional Guidance Capabilities in Socratic LLMs",
+          "authors": "Multiple authors",
+          "venue": "arXiv preprint",
+          "year": 2025,
+          "url": "https://arxiv.org/pdf/2508.06583",
+          "relevance": "Provides a rigorous evaluation taxonomy for Socratic LLM tutoring capabilities across multiple dimensions, supplying complementary metrics beyond CHIRON's five-criterion rubric and situating the DS&A extension within the current state of the art on pedagogical assessment of AI tutors."
+        },
+        {
+          "title": "The Promise and Limits of LLMs in Constructing Proofs and Hints for Logic Problems in Intelligent Tutoring Systems",
+          "authors": "Multiple authors",
+          "venue": "arXiv preprint",
+          "year": 2025,
+          "url": "https://arxiv.org/pdf/2505.04736",
+          "relevance": "Directly characterizes where LLMs succeed and fail when generating step-by-step hints for proof-structured problems in ITSs, providing both motivating evidence for the symbolic consistency-checker component and a methodological prior for evaluating hint quality in structured symbolic domains."
+        },
+        {
+          "title": "LeanTutor: Towards a Verified AI Mathematical Proof Tutor",
+          "authors": "Multiple authors",
+          "venue": "arXiv preprint",
+          "year": 2025,
+          "url": "https://arxiv.org/pdf/2506.08321",
+          "relevance": "Demonstrates one architectural approach to combining LLM conversational fluency with automated verification (Lean theorem prover) for proof tutoring — a proof of concept for the symbolic-checker design this research adapts to algorithm complexity claims, where verified recurrences and Big-O bounds replace formal proofs."
+        },
+        {
+          "title": "PEARL: Training Socratic Tutors with Pedagogically Aligned Reinforcement Learning",
+          "authors": "Multiple authors",
+          "venue": "arXiv preprint",
+          "year": 2026,
+          "url": "https://arxiv.org/pdf/2605.29582",
+          "relevance": "Provides a principled training and evaluation framework for Socratic tutoring agents, offering both a comparison system against which the CHIRON-extended DS&A tutor can be benchmarked and a methodology for assessing whether the Socratic mode outperforms direct-answer delivery on learning outcomes."
+        }
+      ],
+      "researchPlan": {
+        "overview": "This six-month program replicates and extends the CHIRON evaluation framework from CS theory to data structures and algorithm analysis, adds a symbolic consistency checker for LLM-generated complexity claims, and tests whether Socratic vs. direct-answer mode affects student error correction in a real CSS 342 lab setting. The arc moves from benchmark construction to prototype development to controlled in-course evaluation, targeting SIGCSE or ICER for submission.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Replicate CHIRON rubric, map CSS 342/343 syllabus to 18-20 DS&A subtopics, and build a 10-question-per-subtopic question bank covering sorting, trees, graphs, recurrences, loop invariants, and Big-O proofs",
+            "deliverable": "Annotated question bank (180-200 questions) + rubric adaptation document mapping CHIRON criteria to DS&A context"
+          },
+          {
+            "month": 2,
+            "goal": "Run baseline LLM evaluation: query Claude Sonnet 5 and GPT-4o with each question in both Socratic and direct modes; three raters score all responses using the extended rubric",
+            "deliverable": "Scored evaluation dataset with inter-rater reliability report; identified top-failure subtopics (expected: recurrences, loop invariants)"
+          },
+          {
+            "month": 3,
+            "goal": "Design and implement the symbolic consistency checker: a module that parses LLM complexity claims (Big-O expressions, Master Theorem categorization, recurrence solutions) and validates them against a ground-truth lookup table or CAS (SymPy); flag inconsistent responses before delivery",
+            "deliverable": "Working consistency-checker prototype; ablation study showing false-positive and false-negative rates on Month 2 dataset"
+          },
+          {
+            "month": 4,
+            "goal": "Re-evaluate the LLM+checker pipeline on the same question bank; measure claim-error reduction; identify remaining failure modes (narrative reasoning, induction-step errors) not caught by syntactic checking",
+            "deliverable": "Comparative accuracy report (LLM alone vs. LLM+checker); revised failure taxonomy for DS&A tutoring"
+          },
+          {
+            "month": 5,
+            "goal": "Deploy a minimal tutoring interface in one CSS 342 lab session; students use Socratic mode for half the session and direct-answer mode for the other half on matched complexity problems; collect error-correction rates and brief exit surveys",
+            "deliverable": "Pilot dataset (n~25-35 students); preliminary results on Socratic vs. direct mode effect on error identification"
+          },
+          {
+            "month": 6,
+            "goal": "Synthesize evaluation results, consistency-checker analysis, and pilot data; write and submit paper",
+            "deliverable": "Submitted paper draft for SIGCSE TS 2027 or ICER 2027"
+          }
+        ],
+        "targetVenues": ["SIGCSE TS", "ICER", "AIED", "EDM"],
+        "resources": "Access to CSS 342/343 course for question-bank alignment and one lab-session pilot (minimal disruption); Claude API and OpenAI API credits for evaluation runs; SymPy or Wolfram Alpha API for the complexity consistency checker; two student research assistants for rubric scoring and inter-rater reliability; existing Jolly Feedback submission logs for supplementary misconception context if needed.",
+        "risks": [
+          {
+            "risk": "LLM APIs improve rapidly, making a static evaluation snapshot feel stale by submission time",
+            "mitigation": "Design the question bank and rubric as a reusable benchmark artifact (publish alongside the paper); re-run evaluation on latest model at Month 4 to include a two-model comparison, which is itself a contribution"
+          },
+          {
+            "risk": "The symbolic consistency checker has high false-positive rates, incorrectly flagging valid complexity claims",
+            "mitigation": "Start with only unambiguous claim types (Master Theorem case assignments, polynomial Big-O comparisons) and report precision/recall explicitly; scope the checker narrowly so it adds value even if coverage is incomplete"
+          },
+          {
+            "risk": "One lab session is too short to observe statistically meaningful differences between Socratic and direct modes",
+            "mitigation": "Frame the pilot as a feasibility and direction-finding study (not a causal claim); use the session to calibrate effect size for a powered follow-up, which is itself reportable as a research contribution"
+          }
+        ],
+        "humanSubjects": true
+      }
+    }
+  ]
+}

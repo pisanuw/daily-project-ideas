@@ -354,3 +354,7 @@
 | 2026-08-19 | First-Day Gap Radar | Teaching Tool | 1-2 Weeks |
 | 2026-08-19 | Build Your Own Database Engine | Classroom Assignment | Multi-week |
 | 2026-08-19 | Faculty Co-Design Protocol for LLM Socratic Hint Calibration in CS1 | Research | Research |
+| 2026-08-20 | Schema Storyteller | Side Project | Weekend |
+| 2026-08-20 | Concept Coverage Lens | Teaching Tool | 1-2 Weeks |
+| 2026-08-20 | Multi-Persona Code Review Simulator | Classroom Assignment | Multi-week |
+| 2026-08-20 | Socratic Tutoring at the Proof-Concept Boundary: Extending and Evaluating LLM-Based CS Theory Tutoring for Data Structures and Algorithm Analysis | Research | Research |
