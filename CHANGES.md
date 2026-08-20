@@ -195,3 +195,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-08-19 [note] Marked 2026-06-19-1 Game Palette Inspector implemented in implemented.json (live game-palette-inspector.netlify.app, repo pisanuw/c1)
 
 2026-08-20 [doc] Created ideas/2026-08-20.json with 4 ideas: Schema Storyteller, Concept Coverage Lens, Multi-Persona Code Review Simulator, Socratic Tutoring at the Proof-Concept Boundary (SIGCSE TS 2026 CHIRON paper doi:10.1145/3770761.3777358)
+
+2026-08-20 note Pathfinding Playground (2026-07-26 n1) marked implemented: live at pathfinding-playground-pisanuw.netlify.app, repo github.com/pisanuw/pathfinding-playground
