@@ -44,9 +44,21 @@
       live + ' ideas and counting · last updated ' + when;
   }
 
+  // Implemented projects carry two dates: when the idea was proposed and when
+  // it was built. Everything else has just the proposal date.
+  function dateTags(idea) {
+    if (idea.implementedOn) {
+      return [
+        el('span', { class: 'tag tag--date', text: 'proposed ' + idea.date }),
+        el('span', { class: 'tag tag--date', text: 'implemented ' + idea.implementedOn }),
+      ];
+    }
+    return [el('span', { class: 'tag tag--date', text: idea.date })];
+  }
+
   // ---- Card ----
   function card(idea) {
-    var tags = [el('span', { class: 'tag tag--date', text: idea.date })];
+    var tags = dateTags(idea);
     if (idea.category) tags.push(el('span', { class: 'tag', text: idea.category }));
     if (idea.implemented && idea.url) tags.push(el('span', { class: 'tag tag--live', text: 'Live ↗' }));
 
@@ -135,7 +147,7 @@
     var tags = [];
     if (idea.complexity) tags.push(el('span', { class: 'tag', text: idea.complexity }));
     if (idea.category) tags.push(el('span', { class: 'tag', text: idea.category }));
-    tags.push(el('span', { class: 'tag tag--date', text: idea.date }));
+    dateTags(idea).forEach(function (t) { tags.push(t); });
 
     var extraClass = idea.tierKey === 'research' ? 'detail detail--research' : 'detail';
     var frag = el('div', { class: extraClass }, [
