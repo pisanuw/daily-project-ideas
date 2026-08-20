@@ -38,6 +38,14 @@
       "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/schema-storyteller",
       "implementedOn": "2026-08-20",
       "notes": "Fully client-side schema explainer: paste SQL DDL, a Prisma schema, or JSON Schema and get a plain-English entity-relationship narrative, vocabulary suggestions for cryptic names, and a rule-based review of missing keys/indexes/constraints, exportable as Markdown. A hand-written parser and fixed rule set replace the idea's suggested LLM calls, so output is free, offline, and reproducible. 71 vitest tests, 88.88% coverage; lint/typecheck/build green. Deploy was blocked for 4 runs by a stale NETLIFY_AUTH_TOKEN repo secret; once the owner rotated it, the remaining failure was a deploy-runner bug (empty functionsDir resolved to the project root, so the CLI bundled the whole repo as functions). Fixed in deploy.mjs, deployed via GitHub Actions, and the CI runner verified the live page returns 200 and renders."
+    },
+    {
+      "ref": {
+        "date": "2026-08-17",
+        "n": 1
+      },
+      "placeholder": true,
+      "notes": "In progress since 2026-08-20"
     }
   ]
 }
