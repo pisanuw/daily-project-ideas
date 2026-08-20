@@ -45,8 +45,10 @@
         "date": "2026-08-13",
         "n": 1
       },
-      "placeholder": true,
-      "notes": "In progress since 2026-08-20"
+      "url": "https://shortcut-sprint.netlify.app",
+      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/shortcut-sprint",
+      "implementedOn": "2026-08-20",
+      "notes": "Built in one session, fully client-side: SM-2 spaced repetition drills bundled shortcut sets for VS Code, Chrome DevTools, Figma, and Vim (multi-chord sequences like Ctrl+K Ctrl+S and ciw included), plus custom JSON set upload with strict validation. Key capture derives two candidate chords per keypress (physical event.code and produced event.key), so both Ctrl+Shift+[ and Vim's $ match; browser-reserved combos (Ctrl+W/T/N) are excluded since a web page cannot capture them. localStorage replaces the suggested Supabase backend, so there are no accounts and no server. Per-tool mastery radar chart and daily streak. 78 vitest tests, 98.6% statement coverage; lint/typecheck/build green. Deployed via the GitHub Actions deploy workflow (site created first try, page verified 200), siteId pinned afterward."
     },
     {
       "ref": {

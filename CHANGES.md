@@ -209,3 +209,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-08-20 note Migration Diff Narrator (2026-08-17 n1) marked implemented: live at migration-diff-narrator.netlify.app, repo Claude-capstone/migration-diff-narrator. Deploy worked first try with the rotated token.
 
 2026-08-20 code Implemented cards and modals now show both dates (proposed + implemented); backfilled implementedOn 2026-05-21 for Code Blindfold/accessibility-lens.
+
+2026-08-20 note Shortcut Sprint (2026-08-13 n1) marked implemented: live at shortcut-sprint.netlify.app, repo Claude-capstone/shortcut-sprint. SM-2 trainer, localStorage instead of Supabase; deploy worked first try, siteId pinned.
