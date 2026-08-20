@@ -201,3 +201,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-08-20 code Footer source link fixed: bitbucket.org -> github.com/pisanuw/daily-project-ideas (repo moved to GitHub)
 
 2026-08-20 [note] Schema Storyteller deploy still blocked (3rd run): NETLIFY_AUTH_TOKEN secret invalid; session egress denies all Netlify hosts (403). Owner must rotate the token.
+
+2026-08-20 note Schema Storyteller deploy blocked 4th run: CI Deploy #20 (siteId pinned) now fails with single clean 'Unauthorized: could not retrieve project' = stale NETLIFY_AUTH_TOKEN secret; MCP-relayed CLI deploy 403 (egress denies Netlify). Owner must rotate the token.
