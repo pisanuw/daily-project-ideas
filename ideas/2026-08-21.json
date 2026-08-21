@@ -1,0 +1,162 @@
+{
+  "date": "2026-08-21",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "HAR Detective",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "Drag-drop a browser HAR file and get an AI-powered analysis of your full HTTP session: waterfalls, N+1 patterns, missing cache headers, and a plain-English performance summary in seconds.",
+      "description": "Debugging slow or misbehaving web apps often means staring at a wall of network requests in DevTools. HAR Detective accepts any exported HAR (HTTP Archive) file, renders an interactive waterfall timeline, and then runs Claude over the structured request/response data to identify actionable problems: repeated calls to the same endpoint (N+1 patterns), uncached static assets, large JSON payloads, redirect chains, and suspiciously sequential API calls that could be parallelized. The output is a short readable report with ranked issues and copy-paste remediation suggestions. Everything runs client-side; no HAR data is stored on a server. This is a one-person weekend build that immediately impresses in a portfolio and solves a real daily pain for frontend and full-stack developers.",
+      "keyFeatures": [
+        "Drag-and-drop HAR import with interactive waterfall visualization",
+        "AI-powered pattern detection: N+1 calls, missing cache headers, large payloads, redirect chains",
+        "Plain-English ranked issue report with remediation suggestions",
+        "Fully client-side: no file upload to a server"
+      ],
+      "techStack": "React + Vite + Tailwind, Claude API (Haiku 4.5 for cost), local JSON parsing, lightweight canvas/SVG waterfall renderer",
+      "whyInteresting": "Every developer who builds web apps has wrestled with network sessions that are hard to read. A one-file HAR import that produces an AI digest is immediately useful, shareable as a portfolio demo, and fills a genuine gap that neither Lighthouse nor WebPageTest covers for arbitrary session analysis.",
+      "inspiredBy": "HN top stories August 2026 trend around developer productivity and AI-powered analysis tools; personal experience debugging API sessions in browser DevTools"
+    },
+    {
+      "n": 2,
+      "title": "Semester Mirror",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "Students write end-of-semester reflections that are locked until next semester, when incoming students see anonymized peer wisdom and instructors receive an AI-synthesized confusion map.",
+      "description": "At the end of each semester, students answer three prompts: what concept confused them most, what finally made it click, and what they would tell their past self at week one. Their responses are anonymized, stored, and locked. When the new cohort arrives, they unlock a 'Mirror from last semester' view: a curated feed of advice from real peers who survived the course, plus an AI-synthesized 'Where people struggled most' dashboard for the instructor. Claude clusters recurring pain points across submissions, identifies concepts that appeared as both confusion sources and breakthroughs, and flags topics that need earlier or different treatment. The capsule metaphor creates a sense of community across cohorts, reduces first-week anxiety, and gives instructors an evidence-based picture of where the course is failing students, all without any additional grading burden.",
+      "keyFeatures": [
+        "Three-question end-of-semester reflection form with anonymous storage",
+        "Time-locked capsule that opens at the start of next semester for incoming students",
+        "AI-synthesized confusion cluster map for instructors",
+        "Peer wisdom feed curated and deduped by Claude before display"
+      ],
+      "techStack": "React + Vite + Tailwind, Flask backend, Supabase (time-gated row policies for the lock/unlock), Claude API",
+      "whyInteresting": "Builds intergenerational community across course cohorts, reduces the blank-page anxiety of week one, and turns reflection data into actionable curriculum insight with zero grading overhead. Could run across multiple sections or multiple years to accumulate richer signal over time.",
+      "inspiredBy": "Research showing that peer social support in CS education is eroded by over-reliance on AI tools; interest in building positive social bonds between student cohorts"
+    },
+    {
+      "n": 3,
+      "title": "NPC Voice Auditor",
+      "category": "Game Development",
+      "complexity": "Multi-week",
+      "summary": "Upload your game dialogue scripts and character voice profiles; AI flags every line that sounds out-of-character, knows too much, or breaks the world's language rules, then suggests a corrected version.",
+      "description": "Maintaining consistent character voices across a game with dozens of NPCs and hundreds of dialogue lines is one of the most time-consuming parts of narrative game development. NPC Voice Auditor lets you define a voice profile for each character: formality level, vocabulary constraints, emotional baseline, era/dialect, and what facts they are allowed to know in-world. You then upload dialogue files in JSON, CSV, Twine, or ink format. Claude reads every line in context and flags four categories of inconsistency: voice drift (the character suddenly sounds like someone else), knowledge violations (an NPC references something they couldn't know yet), anachronism (modern idioms in a historical setting), and tonal breaks (comic relief character delivering a tragic soliloquy). Each flag comes with a suggested rewrite that preserves the intended meaning. A filtering and search UI lets writers review flags by character, severity, or scene. This is a multi-week build because of format parsing, the review UI, and prompt engineering for voice-coherent rewrites.",
+      "keyFeatures": [
+        "Character voice profile editor: formality, vocabulary, knowledge constraints, emotional tone",
+        "Multi-format import: JSON, CSV, Twine, ink, plain text",
+        "Four-category inconsistency detection: voice drift, knowledge violations, anachronism, tonal breaks",
+        "Suggested rewrites with diff view; filter by character, scene, severity"
+      ],
+      "techStack": "React + Vite + Tailwind, Claude API (Sonnet 5 for nuanced voice matching), Flask for file parsing, IndexedDB for session persistence",
+      "whyInteresting": "Narrative consistency is a known pain point for game writers working in large teams or over long development cycles, yet no dedicated tool exists for it. Connects game development with AI-assisted writing, and the technical challenge of embedding character knowledge graphs into prompts is genuinely novel.",
+      "inspiredBy": "Game AI and believable agent research; indie game developer forums discussing voice-consistency problems in large dialogue trees; GitHub trending game dev tools 2026"
+    },
+    {
+      "n": 4,
+      "title": "Hypothesis Habit Trainer: LLM-Scaffolded Systematic Debugging in Game-Based CS Learning",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Building on the Block-N-Key hypothesis testing game, this research designs an LLM hint engine that detects students' confirmation bias, hypothesis-tracking failures, and falsification gaps in real time and delivers targeted Socratic scaffolding without revealing the answer.",
+      "description": "Block-N-Key (Agrawal, Rallabhandi & Ragavan, ITiCSE 2025) showed that a two-player rule-guessing game successfully engages children in hypothesis generation and testing, but revealed three persistent failure modes: students defaulted to confirming rather than falsifying hypotheses, could not form Boolean-compound hypotheses, and did not systematically track what they had already ruled out. These gaps map precisely onto the qualitative-reasoning skills that expert debuggers use: constraint propagation, falsification-first search, and working-memory support for hypothesis chains. This research proposes augmenting Block-N-Key with an LLM hint engine that (a) classifies the current hypothesis-testing strategy from game-state logs, (b) detects the specific failure mode (confirmation bias, complexity ceiling, tracking failure), and (c) delivers a targeted, Socratic next-step hint without revealing the rule. The system generates hints without a reference answer, directly extending Pisan's SIGCSE 2021 solution-free hint work. A taxonomy of game-state-to-hint mappings is the primary artifact; a within-subjects evaluation with K-8 students comparing the hinted and un-hinted game measures hypothesis complexity, falsification rate, and rule-discovery time. The research avoids building a new game from scratch, reducing implementation risk while producing a transferable scaffold architecture applicable to any rule-discovery or debugging environment.",
+      "papers": [
+        {
+          "title": "Block-N-Key: A Game for Teaching Systematic Hypothesis Testing",
+          "authors": "Shravani Agrawal, Indu Rallabhandi, Sruti Srinivasa Ragavan",
+          "venue": "ITiCSE 2025",
+          "year": 2025,
+          "doi": "10.1145/3724363.3729035",
+          "url": "https://doi.org/10.1145/3724363.3729035",
+          "abstract": "Hypothesis formation and testing is central to debugging computer programs or algorithms. The authors developed Block-N-Key, a two-player rule-guessing game for school children, and evaluated it with 10 children aged 8-12. Students were able to systematically generate and test hypotheses, but needed guidance on: (1) generating complex hypotheses using Boolean operations, (2) using falsification rather than confirmation alone, and (3) systematically tracking prior hypotheses to support limited working memory.",
+          "relevance": "Provides the concrete failure taxonomy (confirmation bias, complexity ceiling, hypothesis-tracking failure) that drives the proposed LLM hint engine design, and offers an existing game artifact as an extension platform rather than a ground-up build."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "Decoding Debugging Instruction: A Systematic Literature Review of Debugging Interventions",
+          "authors": "Eleanor O'Rourke et al.",
+          "venue": "ACM Transactions on Computing Education",
+          "year": 2024,
+          "url": "https://dl.acm.org/doi/10.1145/3690652",
+          "relevance": "Comprehensive review of what debugging instruction works and why; shows that hypothesis-testing skills are consistently under-taught and that systematic approaches outperform trial-and-error, grounding the case for the hint intervention."
+        },
+        {
+          "title": "LLM-Based Student Plan Generation for Adaptive Scaffolding in Game-Based Learning Environments",
+          "authors": "Multiple authors",
+          "venue": "AIED 2024 Workshop Proceedings",
+          "year": 2024,
+          "url": "https://www.researchgate.net/publication/382347980_LLM-Based_Student_Plan_Generation_for_Adaptive_Scaffolding_in_Game-Based_Learning_Environments",
+          "relevance": "Direct technical precedent for using LLMs to generate adaptive scaffolding actions from game state logs in a learning environment, validating the feasibility of the proposed architecture."
+        },
+        {
+          "title": "Data-Driven Hints in Intelligent Tutoring Systems",
+          "authors": "Multiple authors",
+          "venue": "arXiv preprint",
+          "year": 2026,
+          "url": "https://arxiv.org/pdf/2603.07311",
+          "relevance": "Reviews data-driven and LLM-based hint generation approaches, identifying the trade-offs between next-step hints and conceptual scaffolding; directly informs the hint taxonomy design for this research."
+        },
+        {
+          "title": "Failing to Falsify: Evaluating and Mitigating Confirmation Bias in Language Models",
+          "authors": "Multiple authors",
+          "venue": "arXiv preprint",
+          "year": 2026,
+          "url": "https://arxiv.org/pdf/2604.02485",
+          "relevance": "Studies confirmation bias specifically in LLMs, raising the methodological concern that an LLM hint engine may itself exhibit the same confirmation bias it is designed to mitigate in students; informs mitigation strategies in prompt design."
+        }
+      ],
+      "researchPlan": {
+        "overview": "The project augments Block-N-Key with an LLM hint module, derives a misconception-to-hint taxonomy from pilot observations, and conducts a within-subjects experiment measuring falsification rate and hypothesis complexity with and without hints. The 6-month arc moves from taxonomy construction to IRB-approved evaluation to a short paper ready for SIGCSE or ITiCSE.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature synthesis and taxonomy draft: map the three Block-N-Key failure modes (confirmation bias, complexity ceiling, hypothesis-tracking failure) onto existing debugging misconception frameworks and Socratic hint principles",
+            "deliverable": "Annotated bibliography plus a draft hint taxonomy with 15-20 game-state patterns mapped to hint types"
+          },
+          {
+            "month": 2,
+            "goal": "Extend Block-N-Key prototype with a game-state logger and a prompt-driven LLM hint API; implement the taxonomy as a classifier that selects hint type from logged state",
+            "deliverable": "Working prototype with logging and Claude-powered hint delivery; demo video for internal review"
+          },
+          {
+            "month": 3,
+            "goal": "Pilot with 6-8 children (if IRB approved) or with CS students role-playing as children; refine taxonomy from think-aloud observations; verify hint relevance and non-giveaway property",
+            "deliverable": "Refined taxonomy, pilot observation notes, updated prompts"
+          },
+          {
+            "month": 4,
+            "goal": "Main evaluation: within-subjects design (N=20-30 children or CS1 students), measuring falsification rate, hypothesis complexity score, and time-to-rule-discovery with vs. without the hint module",
+            "deliverable": "Collected dataset, preliminary statistical analysis"
+          },
+          {
+            "month": 5,
+            "goal": "Analysis and paper draft: quantitative results, qualitative coding of hint-student interaction logs, limitations, and discussion of transferability to real debuggers",
+            "deliverable": "Full paper draft with results section"
+          },
+          {
+            "month": 6,
+            "goal": "Revision, submission preparation, and release of the open-source hint taxonomy and extended Block-N-Key prototype",
+            "deliverable": "Submitted paper and public GitHub repository with game + hint module"
+          }
+        ],
+        "targetVenues": ["ITiCSE", "SIGCSE", "ICER", "EDM"],
+        "resources": "Existing Block-N-Key game prototype (contact authors for collaboration or reimplement the simple rule-guessing mechanic); Claude API for hint generation; access to K-8 students or CS1 students for evaluation; IRB approval if minors are included (note: evaluation with CS1 adults avoids K-12 IRB complexity); 1 undergraduate research assistant for logging and annotation.",
+        "risks": [
+          {
+            "risk": "LLM hint engine itself exhibits confirmation bias (as flagged by arXiv 2604.02485), generating hints that steer students toward confirming rather than falsifying",
+            "mitigation": "Include explicit anti-confirmation-bias instructions in the system prompt; evaluate hint quality on the falsification dimension during the pilot; add a rule-based override that forces a falsification hint after three consecutive confirmation-style student moves"
+          },
+          {
+            "risk": "Block-N-Key game authors do not share their implementation, requiring a ground-up replication that delays the timeline by 4-6 weeks",
+            "mitigation": "The game mechanic is simple enough (classify blocks by a hidden rule) to re-implement in React in 1-2 weeks; an independent reimplementation also gives full control over the logging format"
+          },
+          {
+            "risk": "Recruiting K-8 children requires school partnership and parental consent, adding IRB and logistical overhead that may push the evaluation beyond 6 months",
+            "mitigation": "Run the primary evaluation with CS1 undergraduate students playing the game in a debugging-skill context; add a K-8 pilot as a secondary, optional component only if a school partnership is already in place"
+          }
+        ],
+        "humanSubjects": true
+      }
+    }
+  ]
+}

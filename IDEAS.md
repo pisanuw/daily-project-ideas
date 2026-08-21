@@ -358,3 +358,7 @@
 | 2026-08-20 | Concept Coverage Lens | Teaching Tool | 1-2 Weeks |
 | 2026-08-20 | Multi-Persona Code Review Simulator | Classroom Assignment | Multi-week |
 | 2026-08-20 | Socratic Tutoring at the Proof-Concept Boundary: Extending and Evaluating LLM-Based CS Theory Tutoring for Data Structures and Algorithm Analysis | Research | Research |
+| 2026-08-21 | HAR Detective | Side Project | Weekend |
+| 2026-08-21 | Semester Mirror | Teaching Tool | 1-2 Weeks |
+| 2026-08-21 | NPC Voice Auditor | Game Development | Multi-week |
+| 2026-08-21 | Hypothesis Habit Trainer: LLM-Scaffolded Systematic Debugging in Game-Based CS Learning | Research | Research |
