@@ -85,8 +85,10 @@
         "date": "2026-07-30",
         "n": 1
       },
-      "placeholder": true,
-      "notes": "In progress since 2026-08-21"
+      "notes": "Built in one session, fully client-side with zero runtime dependencies: a hand-written tokenizer, recursive-descent parser, three-valued-logic expression evaluator, and staged executor replay a SELECT one stage at a time (FROM, JOIN, WHERE, GROUP BY, HAVING, SELECT, DISTINCT, ORDER BY, LIMIT), showing the actual rows merging, being struck out, and collapsing into groups at every step. A deterministic narrator generated from real execution stats replaces the idea's optional Claude API narrator, and CSS animations replace Framer Motion, so explanations always match the screen and the app is free and offline. Honest SQL semantics (Kleene AND/OR, COUNT(x) vs COUNT(*), NULLs-last ordering), CSV paste with type inference, bundled demo tables and queries, URL-hash share links. 86 vitest tests, 99.7% statement coverage; lint/typecheck/build green. Deployed via the GitHub Actions deploy workflow (runner verified the live page returns 200), siteId pinned afterward.",
+      "url": "https://sql-replay.netlify.app",
+      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/sql-replay",
+      "implementedOn": "2026-08-21"
     },
     {
       "ref": {
