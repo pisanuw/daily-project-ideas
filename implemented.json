@@ -65,8 +65,10 @@
         "date": "2026-08-11",
         "n": 1
       },
-      "placeholder": true,
-      "notes": "In progress since 2026-08-21"
+      "notes": "Built in one session, fully client-side: a timed bug-spotting game where 1-3 defects are planted into realistic JavaScript/Python/SQL snippets and you click the lines you would flag in review. A seeded mutation engine (11 hand-written clean templates, 51 catalogued single-line defects with title, root cause, and fix) replaces the idea's suggested Claude API generation, and a date-seeded daily challenge plus a localStorage profile (per-category accuracy radar, streaks, best score) replace the Supabase leaderboard, so rounds are deterministic, offline, and free. Scoring rewards full sweeps: 100 per defect, -25 per false flag, time bonus only when everything is found. 46 vitest tests, 99.8% statement coverage; lint/typecheck/build green; end-to-end flow verified in headless Chromium. Deployed via the GitHub Actions deploy workflow (site created first try, page verified 200), siteId pinned afterward.",
+      "url": "https://code-review-gauntlet.netlify.app",
+      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/code-review-gauntlet",
+      "implementedOn": "2026-08-21"
     },
     {
       "ref": {
