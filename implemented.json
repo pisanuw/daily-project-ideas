@@ -85,8 +85,10 @@
         "date": "2026-08-09",
         "n": 1
       },
-      "placeholder": true,
-      "notes": "In progress since 2026-08-21"
+      "notes": "Built in one session, fully client-side: a deterministic word-to-DSP lexicon (20 base sounds, 18 modifiers with synonyms) replaces the idea's suggested Claude API code generation, and a pure sample-by-sample DSP engine (swept oscillators, seeded white/pink/brown noise, ADSR envelopes, RBJ biquad filters with block-rate sweeps, feedback echo, tanh drive, bit crush, peak normalization) replaces Web Audio graphs, so the browser just plays the rendered buffer and tests assert on the exact samples the user hears. Same description always yields the same sound (seed hashed from the words); a Variation button re-rolls only the seed. Oscilloscope, per-layer signal-chain view, tuning sliders (pitch/length/brightness/echo/volume), and 16/24-bit WAV export at 22050/44100/48000 Hz. 59 vitest tests, 100% statement coverage; lint/typecheck/build green; UI verified end-to-end in headless Chromium. Deployed via the GitHub Actions deploy workflow (site created first try, page verified 200), siteId pinned afterward.",
+      "url": "https://sound-sketchpad.netlify.app",
+      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/sound-sketchpad",
+      "implementedOn": "2026-08-21"
     }
   ]
 }
