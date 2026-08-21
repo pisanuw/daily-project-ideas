@@ -213,3 +213,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-08-20 note Shortcut Sprint (2026-08-13 n1) marked implemented: live at shortcut-sprint.netlify.app, repo Claude-capstone/shortcut-sprint. SM-2 trainer, localStorage instead of Supabase; deploy worked first try, siteId pinned.
 
 2026-08-20 code Implemented section now sorts by implementedOn (newest shipped first), falling back to proposal date for ties and missing values; other tiers unchanged.
+
+2026-08-21 note UI Diff Lens (2026-08-16 n1) marked implemented: live at ui-diff-lens.netlify.app, repo Claude-capstone/ui-diff-lens. Deterministic 7-type screenshot diff instead of Claude Vision; deploy worked first try, siteId pinned.

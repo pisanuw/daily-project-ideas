@@ -65,8 +65,10 @@
         "date": "2026-08-16",
         "n": 1
       },
-      "placeholder": true,
-      "notes": "In progress since 2026-08-21"
+      "notes": "Built in one session, fully client-side: a perceptual YIQ pixel diff with anti-aliasing detection (pixelmatch algorithm), grid-BFS region clustering, and a 7-type heuristic classifier (element-added/removed via local-background analysis, layout/spacing via a full-coverage displacement search, visibility via least-squares opacity fit, color via edge-map correlation, text via edge density) replace the suggested Claude Vision calls, so results are deterministic and screenshots never leave the browser. SVG overlay with filterable legend and per-region evidence, annotated PNG and standalone HTML report export, built-in sample pair covering all seven change types (verified end-to-end in headless Chromium). 56 vitest tests, 96.4% statement coverage; lint/typecheck/build green. Deployed via the GitHub Actions deploy workflow (site created first try, page verified 200), siteId pinned afterward.",
+      "url": "https://ui-diff-lens.netlify.app",
+      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/ui-diff-lens",
+      "implementedOn": "2026-08-21"
     }
   ]
 }
