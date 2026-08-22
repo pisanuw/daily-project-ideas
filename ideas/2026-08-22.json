@@ -1,0 +1,162 @@
+{
+  "date": "2026-08-22",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Dotfile Surgeon",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A CLI that diagnoses years of accumulated shell-dotfile config debt and regenerates a clean, annotated setup using a local LLM.",
+      "description": "Most developers accumulate hundreds of lines of dead aliases, duplicate PATH exports, deprecated settings, and conflicting environment variables across .zshrc, .bashrc, .gitconfig, .vimrc, and related files. Dotfile Surgeon scans those files, runs static analysis to flag problems (unused aliases, duplicate exports, deprecated syntax), then calls a local Ollama model or Claude API to generate a merged, annotated replacement with a short comment on every kept block explaining why it is there. An optional Vite dashboard shows a color-coded diff between the old and proposed config. Because the tool works offline by default, sensitive tokens never leave the machine.",
+      "keyFeatures": [
+        "Static analysis pass: detects dead aliases, duplicate exports, deprecated shell syntax, and unreachable conditional blocks",
+        "LLM-powered merge and annotation: produces one consolidated file with inline comments",
+        "Privacy-first: uses Ollama locally by default; Claude API is opt-in",
+        "Optional Vite diff dashboard showing old vs. new side-by-side with color coding"
+      ],
+      "techStack": "Python or Node.js CLI, Ollama (local LLM) or Claude API, React + Vite (optional dashboard)",
+      "whyInteresting": "Every developer has dotfile debt, and there is no good tool to clean it up automatically. The project is immediately useful, naturally shareable, and demonstrates LLM integration, CLI tooling, and static analysis skills in one compact package.",
+      "inspiredBy": "HN August 2026 'Ask HN: What are you working on?' thread trend toward personal AI-assisted developer-workflow tools; the Alint declarative repo-hygiene project featured in HN that month"
+    },
+    {
+      "n": 2,
+      "title": "Inclusive Syllabus Auditor",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "Upload any course syllabus and receive an AI-generated report scoring it on UDL principles, accessibility language, grading flexibility, and belonging indicators, with sentence-level revision suggestions.",
+      "description": "The syllabus is the first signal students use to judge whether a course was designed with them in mind. Inclusive Syllabus Auditor accepts a PDF or plain-text syllabus, applies a rubric derived from Universal Design for Learning (UDL) guidelines and recent SIGCSE research on belonging and neurodiversity in computing education, and produces a structured report with a score per dimension (representation, flexibility, communication, belonging) and specific edit suggestions tied to the exact sentences that need work. A live scoring panel updates as instructors paste in edits. A diff mode lets instructors compare two versions of a syllabus to quantify improvement. The tool is useful in faculty workshops, teaching-center consultations, and self-directed course redesign.",
+      "keyFeatures": [
+        "UDL rubric covering representation, action/expression, engagement, and belonging language",
+        "Sentence-level suggestions with plain-English rationale for each change",
+        "Live score dashboard that updates as text is edited",
+        "Diff mode: compare two syllabus versions and see dimension-by-dimension change"
+      ],
+      "techStack": "React + Vite, Flask, Claude API, PDF.js for parsing uploaded PDFs",
+      "whyInteresting": "SIGCSE and equity research consistently finds that syllabi communicate implicit messages about who belongs. A lightweight tool instructors can run in two minutes during a course-design session closes a gap no existing syllabus-writing guide addresses at scale.",
+      "inspiredBy": "ITiCSE 2025 and SIGCSE TS 2026 papers on neurodiversity, belonging, and equity in CS education; faculty co-design research on inclusive pedagogy interventions"
+    },
+    {
+      "n": 3,
+      "title": "Event Log Time Machine",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "Students build a journal app using event sourcing: every change is an immutable log entry, and a time-travel UI lets them rewind the app to any past state, teaching distributed-systems patterns through a complete, tangible project.",
+      "description": "Event sourcing is a foundational pattern in financial ledgers, audit-compliant systems, and collaborative editing tools, but it is almost never taught at the undergraduate level because its benefits only become apparent at scale. This 2-3 week assignment scaffolds students through building a notes or journal app where all state changes are append-only events in a SQLite log. The frontend derives current state by replaying the event stream; a time-travel slider lets users scrub back to any past moment. Students implement basic CQRS (a separate read model for fast queries) and discover the tradeoffs between event-sourced and mutable-state architectures firsthand. An optional extension adds multi-user conflict resolution using last-write-wins or custom strategies. The assignment fits a software engineering elective or an OS course like CSS 430.",
+      "keyFeatures": [
+        "Append-only SQLite event store; no in-place updates allowed",
+        "Time-travel UI slider that replays the event log to any point in history",
+        "CQRS read-model cache that reconstructs current state efficiently",
+        "Optional extension: multi-user events with configurable conflict resolution"
+      ],
+      "techStack": "React + Vite + TypeScript, Node.js (Express) or Flask, SQLite event store",
+      "whyInteresting": "Event sourcing is ubiquitous in production distributed systems and almost absent from CS curricula. A self-contained assignment that makes time-travel debugging tangible gives students a concrete mental model that transfers directly to real-world engineering work.",
+      "inspiredBy": "HN August 2026 developer discussion of durable, audit-ready system design patterns; gap in undergraduate curriculum between introductory databases and full distributed-systems courses"
+    },
+    {
+      "n": 4,
+      "title": "Interaction-Pattern-Aware Hint Generation: Designing LLM Next-Step Hints That Respond to Student Behavior Archetypes in CS1",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Students follow predictable behavior archetypes when AI hints fall short; this research designs LLM prompting strategies calibrated to each archetype, producing hints that guide students through their actual responses rather than assuming passive receipt.",
+      "description": "A 2026 SIGCSE study identified 16 distinct interaction scenarios students use when engaging with AI-powered next-step hints, including adapting partial hints, modifying code to regenerate hint variations, and cycling the same hint repeatedly. These patterns reveal that hint quality is not solely about accuracy but about anticipating the student's next action after receiving the hint. This research proposes collapsing the 16 scenarios into 4-6 behavior archetypes, mapping each archetype to characteristic failure modes in existing LLM-generated hints, and developing targeted LLM prompting strategies for each. Evaluation uses expert raters and LLM-as-judge on a CS1 problem set, requiring no human-subjects approval for the core study. A secondary analysis of Pisan's Jolly Feedback submission logs validates whether the archetypes appear in institution-specific log data, creating a bridge to deploying the strategies in CSS 142 and 143.",
+      "papers": [
+        {
+          "title": "Understanding Student Interaction with AI-Powered Next-Step Hints: Strategies and Challenges",
+          "authors": "JetBrains Research; Utrecht University",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770762.3772544",
+          "url": "https://doi.org/10.1145/3770762.3772544",
+          "abstract": "This study investigates how students interact with an AI-driven next-step hint system in an in-IDE learning environment. Using process mining on a dataset from 34 students solving Kotlin tasks, the authors identified 16 common interaction scenarios. Semi-structured interviews revealed strategies for managing unhelpful hints, such as adapting partial hints or modifying code to generate variations of the same hint.",
+          "relevance": "Directly grounds the research by providing an empirical taxonomy of student hint interaction behaviors in an AI-driven tutoring context, establishing the archetypes this proposal seeks to use as design targets for LLM hint prompting."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "Bridging Gaps Between Student and Expert Evaluations of AI-Generated Programming Hints",
+          "authors": "Various (L@S 2025)",
+          "venue": "L@S 2025 (ACM Conference on Learning @ Scale)",
+          "year": 2025,
+          "url": "https://doi.org/10.1145/3698205.3733932",
+          "relevance": "Establishes that student and expert evaluations of hint quality diverge, motivating the need for interaction-aware design: a hint that scores well on expert criteria may still be ignored or misused by a student in a particular behavioral state."
+        },
+        {
+          "title": "Generating Hints for Programming Problems Without a Solution",
+          "authors": "Suciu, Giang, Zhao, Runandy, Dang (advisor: Pisan)",
+          "venue": "SIGCSE 2021 Student Research Competition",
+          "year": 2021,
+          "url": "https://dl.acm.org/doi/10.1145/3408877.3439588",
+          "relevance": "Pisan's own prior work on solution-free hint generation provides the direct lineage for this proposal and supplies the experimental infrastructure (problem sets, hint evaluation protocol) that this research can extend."
+        },
+        {
+          "title": "Data-Driven Hints in Intelligent Tutoring Systems",
+          "authors": "Various",
+          "venue": "arXiv preprint, 2025",
+          "year": 2025,
+          "url": "https://arxiv.org/abs/2603.07311",
+          "relevance": "Surveys data-driven approaches to hint generation in ITS and situates next-step hint quality within the broader ITS literature, clarifying what prior systems got right and where LLM-based hints diverge."
+        },
+        {
+          "title": "The Effects of Structured LLM-Generated Feedback on Programming Assignment Performance",
+          "authors": "Various",
+          "venue": "arXiv preprint, 2025",
+          "year": 2025,
+          "url": "https://arxiv.org/abs/2605.16933",
+          "relevance": "Provides empirical evidence that the structure and specificity of LLM-generated programming feedback matters for student outcomes, supporting the hypothesis that hint format—calibrated to interaction archetype—affects downstream behavior."
+        }
+      ],
+      "researchPlan": {
+        "overview": "The study runs in two stages. Stage 1 is archetype development and offline hint evaluation (months 1-4, no human subjects): the 16 source-paper interaction scenarios are coded into 4-6 archetypes, archetype-targeted LLM prompting strategies are developed, and expert raters compare their pedagogical quality against generic LLM hints on a held-out CS1 problem set. Stage 2 (months 4-6) mines Pisan's Jolly Feedback submission logs to validate archetype signatures, producing a deployable classifier and a deployed hint intervention for CSS 142.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review and archetype taxonomy development",
+            "deliverable": "Annotated coding of the 16 source-paper interaction scenarios into 4-6 behavior archetypes, with inter-rater agreement on at least 20 coded hint sessions"
+          },
+          {
+            "month": 2,
+            "goal": "Failure-mode mapping and prompt strategy design",
+            "deliverable": "Archetype-to-failure-mode mapping table and a set of LLM system prompts and chain-of-thought scaffolds tailored to each archetype"
+          },
+          {
+            "month": 3,
+            "goal": "Hint generation and expert evaluation",
+            "deliverable": "200+ hint pairs (generic vs. archetype-targeted) for 20 CS1 Java problems, rated by 2 expert raters on pedagogical quality dimensions; inter-rater reliability report"
+          },
+          {
+            "month": 4,
+            "goal": "Jolly Feedback log analysis",
+            "deliverable": "Archetype signature classifier applied to 2+ years of CSS 142 submission logs; frequency distribution of archetypes by problem type and student performance quartile"
+          },
+          {
+            "month": 5,
+            "goal": "Integration and write-up",
+            "deliverable": "Draft paper: introduction, related work, archetype taxonomy, evaluation results, and log analysis; presented at internal research seminar for feedback"
+          },
+          {
+            "month": 6,
+            "goal": "Revision and submission",
+            "deliverable": "Submitted paper to SIGCSE TS or L@S; open-source release of archetype taxonomy, coding guide, and prompt library"
+          }
+        ],
+        "targetVenues": ["SIGCSE TS", "L@S (Learning @ Scale)", "ICER", "EDM (Educational Data Mining)"],
+        "resources": "Jolly Feedback submission logs from CSS 142 and 143 (already owned); Claude API for hint generation; 2 expert raters (Pisan + one grad student or UTA); 20-problem CS1 problem set drawn from existing course materials; no new IRB required for Stage 1.",
+        "risks": [
+          {
+            "risk": "The 16 interaction scenarios from the source paper were observed in a Kotlin in-IDE environment; they may not transfer cleanly to a Java/C++ Canvas-submission context",
+            "mitigation": "Begin Stage 2 log analysis early (month 4 overlap) to validate which archetypes appear in Jolly Feedback data before finalizing taxonomy"
+          },
+          {
+            "risk": "Expert evaluation is costly and rater availability is limited",
+            "mitigation": "Use LLM-as-judge (with GPT-4 or Claude as the evaluator) as a first-pass filter to reduce the manual rating set to the most informative or borderline cases"
+          },
+          {
+            "risk": "Jolly Feedback logs may lack the granular timestamped re-submission sequences needed to infer interaction archetypes",
+            "mitigation": "Supplement with Canvas submission metadata (timestamps, attempt counts) and optionally instrument Jolly Feedback to log hint-request events for a future semester"
+          }
+        ],
+        "humanSubjects": false
+      }
+    }
+  ]
+}

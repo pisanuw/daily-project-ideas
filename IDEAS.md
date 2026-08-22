@@ -362,3 +362,7 @@
 | 2026-08-21 | Semester Mirror | Teaching Tool | 1-2 Weeks |
 | 2026-08-21 | NPC Voice Auditor | Game Development | Multi-week |
 | 2026-08-21 | Hypothesis Habit Trainer: LLM-Scaffolded Systematic Debugging in Game-Based CS Learning | Research | Research |
+| 2026-08-22 | Dotfile Surgeon | Side Project | Weekend |
+| 2026-08-22 | Inclusive Syllabus Auditor | Teaching Tool | 1-2 Weeks |
+| 2026-08-22 | Event Log Time Machine | Classroom Assignment | Multi-week |
+| 2026-08-22 | Interaction-Pattern-Aware Hint Generation: Designing LLM Next-Step Hints That Respond to Student Behavior Archetypes in CS1 | Research | Research |
