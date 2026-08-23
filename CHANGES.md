@@ -223,3 +223,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-08-21 note SQL Replay (2026-07-30 n1) marked implemented: live at sql-replay.netlify.app, repo Claude-capstone/sql-replay. Rule-based narrator from execution stats replaces the optional Claude narrator; deploy verified 200 by the CI runner, siteId pinned.
 
 2026-08-21 [doc] Created ideas/2026-08-21.json with 4 ideas: HAR Detective, Semester Mirror, NPC Voice Auditor, Hypothesis Habit Trainer (Block-N-Key ITiCSE 2025 doi:10.1145/3724363.3729035)
+
+2026-08-23 note HAR Detective (2026-08-21 n1) marked implemented: live at har-detective.netlify.app, repo Claude-capstone/har-detective. Ten deterministic detectors replace the Claude API analysis; first deploy failed on a gitignored lockfile, retriggered and verified 200, siteId pinned.

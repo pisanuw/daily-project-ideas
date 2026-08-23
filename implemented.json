@@ -105,8 +105,10 @@
         "date": "2026-08-21",
         "n": 1
       },
-      "placeholder": true,
-      "notes": "In progress since 2026-08-23"
+      "notes": "Built in one session, fully client-side: a forgiving HAR parser (skips malformed entries with warnings, wire-size fallbacks for Chrome/Firefox export quirks) feeds ten deterministic detectors (N+1 endpoint templates, cache-header audit, missing compression, redirect chains reconstructed hop by hop, serialized API waterfalls, duplicate fetches, 4xx/5xx groups, TTFB outliers, oversized payloads, HTTP/1.x connection churn) that replace the idea's suggested Claude API analysis, so reports are instant, reproducible, and the HAR never leaves the browser. Findings are ranked by severity and estimated impact, each with evidence and a copy-paste fix; SVG waterfall with phase segments, type filters, and per-finding highlighting; Markdown report export; a bundled synthetic session trips every detector. 56 vitest tests, 100% statement coverage; lint/typecheck/build green; verified end-to-end in headless Chromium. Deployed via the GitHub Actions deploy workflow: the first run failed because package-lock.json was gitignored at the repo root and npm ci had nothing to install from; force-added the lockfile, retriggered, site created and the runner verified the live page returns 200; siteId pinned afterward.",
+      "url": "https://har-detective.netlify.app",
+      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/har-detective",
+      "implementedOn": "2026-08-23"
     }
   ]
 }
