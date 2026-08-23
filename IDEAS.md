@@ -366,3 +366,7 @@
 | 2026-08-22 | Inclusive Syllabus Auditor | Teaching Tool | 1-2 Weeks |
 | 2026-08-22 | Event Log Time Machine | Classroom Assignment | Multi-week |
 | 2026-08-22 | Interaction-Pattern-Aware Hint Generation: Designing LLM Next-Step Hints That Respond to Student Behavior Archetypes in CS1 | Research | Research |
+| 2026-08-23 | Prompt Genome | Side Project | Weekend |
+| 2026-08-23 | Participation Equity Radar | Teaching Tool | 1-2 Weeks |
+| 2026-08-23 | Mini-Compiler Workbench | Classroom Assignment | Multi-week |
+| 2026-08-23 | Socratic AI Scaffolding for Peer Code Review: Mining Reviewer Dialogues for CS1 Misconception Signals | Research | Research |

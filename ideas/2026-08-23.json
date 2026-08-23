@@ -1,0 +1,165 @@
+{
+  "date": "2026-08-23",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Prompt Genome",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A visual prompt-engineering workbench that deconstructs AI prompts into labeled 'genes' (role, context, constraint, format, example) and lets you swap or mutate individual genes to systematically improve output quality.",
+      "description": "Prompt engineering is still more art than science. Prompt Genome treats each prompt as a DNA strand made of typed genes: a role definition, background context, output constraints, format instructions, few-shot examples, and a persona. The UI renders each gene as a color-coded segment. Users can click any gene to edit it, duplicate it, or run a mutation where the AI suggests three alternative phrasings. Side-by-side diff mode shows how changing one gene shifts the model's response. A library of reusable genes can be saved and tagged for reuse across projects. The tool is especially useful for teaching prompt engineering in a structured, systematic way.",
+      "keyFeatures": [
+        "Drag-and-drop gene segmentation of any pasted prompt",
+        "One-click gene mutation with three AI-generated alternatives",
+        "Side-by-side diff of original vs. mutated prompt responses",
+        "Shareable gene library with tagging and search",
+        "Export to plain text, Markdown, or JSON schema for programmatic use"
+      ],
+      "techStack": "React + Vite, Tailwind CSS, Claude API, localStorage for gene library",
+      "whyInteresting": "Prompt engineering is taught informally but rarely structured. Giving prompts a typed, gene-like anatomy makes iteration visible and teachable, turning a black-box guessing game into a deliberate, reviewable process.",
+      "inspiredBy": "2026 trend toward systematic prompt optimization tooling; inspired by genetic algorithm UIs and Anthropic's prompt improvement guidance"
+    },
+    {
+      "n": 2,
+      "title": "Participation Equity Radar",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "A lightweight classroom tool that lets instructors log student participation in real time, then generates an equity dashboard showing patterns, wait-time statistics, and AI-generated facilitation suggestions for the next class.",
+      "description": "Research consistently shows that a small fraction of students dominate verbal participation while others rarely speak, often along gender and demographic lines. Participation Equity Radar gives instructors a simple one-click log: tap a student's name to mark a contribution type (answer, question, side comment, etc.) during class. After class, the dashboard shows who contributed how often and for how long, a participation Gini coefficient, wait-time distribution, and cold-call frequency. The Claude API then generates two or three specific facilitation moves for next class (e.g., 'Try think-pair-share before calling on any individual for this topic'). The data lives only on the instructor's device unless they opt into a course-level Supabase store.",
+      "keyFeatures": [
+        "One-tap participation logger with contribution-type tagging",
+        "Equity dashboard with Gini coefficient and per-student heat maps",
+        "Wait-time analysis showing average silent pauses before calling on students",
+        "AI-generated facilitation suggestions grounded in the class's participation data",
+        "Optional Supabase backend for multi-section or longitudinal tracking"
+      ],
+      "techStack": "React + Vite, Tailwind CSS, Supabase (optional), Claude API, Chart.js",
+      "whyInteresting": "Equity in classroom participation is a documented problem with no lightweight digital tool designed specifically for CS instructors. This fills a real gap: quick to build, immediately useful, and grounded in active learning and equity research.",
+      "inspiredBy": "CS education equity research; active learning facilitation literature; inspired by discussion of participation patterns in ITiCSE 2025 and SIGCSE 2026 inclusion papers"
+    },
+    {
+      "n": 3,
+      "title": "Mini-Compiler Workbench",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "A multi-week course project in which students implement a complete compiler pipeline from scratch: lexer, recursive-descent parser, AST, type checker, and a bytecode virtual machine, culminating in a working language that compiles and runs a reference program.",
+      "description": "Most CS students use compilers but never build one. Mini-Compiler Workbench is a staged assignment sequence where each lab builds on the previous: Lab 1 implements a regex-based lexer for a toy language; Lab 2 adds a recursive-descent parser producing an explicit AST; Lab 3 implements a structural type checker; Lab 4 generates bytecode for a stack-based VM; Lab 5 builds the VM itself. A reference language spec is provided that supports variables, arithmetic, conditionals, while-loops, and functions. Each lab has an autograded test suite. The final deliverable is a demo that compiles and runs Fibonacci, merge sort, and a student-chosen program. Students may use TypeScript, Python, or Java.",
+      "keyFeatures": [
+        "Five modular labs with clear interfaces so each stage can be graded independently",
+        "Reference language specification with a grammar and sample programs",
+        "Autograded test suite for each lab stage (lexer tokens, parser AST shapes, VM execution traces)",
+        "Stretch goals: garbage collection, closures, or a REPL mode",
+        "Written reflection prompt comparing their VM design decisions to real-world VMs (CPython, JVM)"
+      ],
+      "techStack": "TypeScript or Python (student choice), GitHub Actions for CI, Node.js or Python test harness",
+      "whyInteresting": "Building a compiler end-to-end is the deepest systems-programming exercise a CS undergraduate can do. It unifies parsing theory, type systems, code generation, and runtime design in a single project students can demo with pride. The modular lab structure makes it practical in a 5-6 week window without sacrificing depth.",
+      "inspiredBy": "Classic compiler courses (Crafting Interpreters, Stanford CS143); GitHub trending teaching repos for compilers and interpreters in 2026"
+    },
+    {
+      "n": 4,
+      "title": "Socratic AI Scaffolding for Peer Code Review: Mining Reviewer Dialogues for CS1 Misconception Signals",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Peer code reviewers in CS1 produce shallow feedback because they lack expertise. This research proposes inserting Socratic LLM prompts into the review workflow and mining the resulting reviewer-AI dialogues as a dual signal for misconceptions in both the submitter's code and the reviewer's own mental model.",
+      "description": "Peer code review (PCR) is increasingly popular in CS1 courses but consistently produces low-quality, engagement-driven commentary rather than substantive critique, because novice reviewers do not know what to look for. This research extends the social-annotation-based PCR approach demonstrated by Perkins et al. (SIGCSE TS 2026) by inserting a lightweight LLM scaffold into the review pipeline: whenever a reviewer posts a comment, the system responds with one Socratic follow-up question (e.g., 'Why might that variable name confuse a reader unfamiliar with the task?') drawn from a pedagogically constrained prompt that encodes the assignment's learning objectives. The resulting reviewer-AI dialogues are then analyzed by a second LLM classifier to detect two distinct signals: (1) misconceptions in the submitter's code, inferred from what the reviewer identified and how, and (2) misconceptions in the reviewer's own mental model, inferred from gaps or errors in their reasoning. This dual-signal framing is novel: existing PCR systems treat review text only as feedback to the submitter, never as a diagnostic window into the reviewer's understanding. The research does not require new human subjects in its first phase, which operates over historical PCR log exports from courses that already use Perusall or similar annotation platforms.",
+      "papers": [
+        {
+          "title": "Scaling Engagement: Leveraging Social Annotation and AI for Peer Code Review",
+          "authors": "University of California, Irvine (Irvine, CA, USA)",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770762.3772652",
+          "url": "https://doi.org/10.1145/3770762.3772652",
+          "abstract": "Peer code review activities enhance programming ability, conceptual understanding, and community, while improving debugging ability and code quality. Problems, however, can include lack of engagement and poor review quality. The authors developed a novel collaborative, engaging, and scalable code review activity using the social annotation app Perusall, which automatically placed students into groups, graded submissions with AI/ML, and synced grades to the LMS. Students found collaborative code reviews helpful; they learned from others and improved their ability to find bugs and readability issues.",
+          "relevance": "This paper establishes the baseline: social annotation with AI grading can scale peer code review and improve engagement. The research idea extends it by adding Socratic LLM scaffolding to the reviewer side and mining dialogues for misconception signals, turning the review workflow into a diagnostic tool rather than only a feedback delivery mechanism."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "AI-Assisted Code Review as a Scaffold for Code Quality and Self-Regulated Learning: An Experience Report",
+          "authors": "Multiple (arXiv preprint)",
+          "venue": "arXiv, 2025",
+          "year": 2025,
+          "url": "https://arxiv.org/html/2604.23251v1",
+          "relevance": "Demonstrates LLM-Reviewer, a custom tool that integrates an LLM as an additional code reviewer within pull-request workflows, providing structured comments that help students focus reviews and discuss code quality. Directly informs the scaffolded-reviewer design in this research."
+        },
+        {
+          "title": "CS1-LLM: Integrating LLMs into CS1 Instruction",
+          "authors": "Vadaparty et al.",
+          "venue": "ITiCSE 2024, ACM",
+          "year": 2024,
+          "url": "https://dl.acm.org/doi/10.1145/3649217.3653584",
+          "relevance": "Shows that CS1 students who used generative AI tools performed equally well on code tracing and explaining benchmarks as students in traditional courses. Provides baseline evidence that LLM integration in CS1 does not harm fundamental skill acquisition, supporting the safety of adding LLM scaffolding to the review workflow."
+        },
+        {
+          "title": "A Survey of LLM-Based Applications in Programming Education",
+          "authors": "Multiple (arXiv preprint)",
+          "venue": "arXiv / HCI-NLP Workshop, 2025",
+          "year": 2025,
+          "url": "https://arxiv.org/pdf/2510.03719",
+          "relevance": "Comprehensive survey of how LLMs are being used in CS1 and CS2 education, including automated feedback, hint generation, and code review. Situates the proposed research within the broader LLM-in-CS-education landscape and identifies peer review scaffolding as an underexplored modality."
+        },
+        {
+          "title": "Combating Harms of Generative AI in CS1 with Code Review Interviews and a Flipped Classroom",
+          "authors": "Multiple (arXiv preprint)",
+          "venue": "arXiv, 2025",
+          "year": 2025,
+          "url": "https://arxiv.org/html/2605.21374",
+          "relevance": "Proposes code review interviews as a mechanism to ensure students genuinely understand AI-generated code they submit. Highlights how code review, when structured, can function as both a learning activity and an integrity mechanism, supporting the argument that structured PCR with Socratic scaffolding can deepen understanding rather than replace it."
+        }
+      ],
+      "researchPlan": {
+        "overview": "The project proceeds in two phases: Phase 1 mines de-identified historical peer review logs from courses already using Perusall or Canvas annotation to build and validate a misconception classifier; Phase 2 deploys the live Socratic scaffold in one CS1 section and evaluates reviewer learning outcomes. Phase 1 alone is publishable as a methodology paper and requires no new human subjects.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review on peer code review quality, Socratic tutoring with LLMs, and misconception detection in programming; gather de-identified historical PCR log exports",
+            "deliverable": "Annotated bibliography (30+ papers) and cleaned dataset of historical reviewer comments"
+          },
+          {
+            "month": 2,
+            "goal": "Design and implement Socratic follow-up prompt templates; validate that generated questions are pedagogically appropriate using rubric-based human rating on a sample",
+            "deliverable": "Prompt library (50+ Socratic questions categorized by error type) and inter-rater reliability report"
+          },
+          {
+            "month": 3,
+            "goal": "Build and evaluate LLM misconception classifier on historical PCR data; compare dual-signal detection (reviewer comments + AI dialogue) against single-signal (code analysis only)",
+            "deliverable": "Classifier with precision/recall evaluation and misconception taxonomy draft"
+          },
+          {
+            "month": 4,
+            "goal": "Deploy Socratic scaffold as a Perusall integration or lightweight overlay in one live CS1 section; collect reviewer-AI dialogues",
+            "deliverable": "Live deployment running; 200+ annotated reviewer-AI dialogue turns"
+          },
+          {
+            "month": 5,
+            "goal": "Analyze live data: compare review quality before and after scaffolding; measure reviewer misconception detection rate; qualitative coding of dialogue themes",
+            "deliverable": "Analysis report with quantitative comparisons and qualitative themes"
+          },
+          {
+            "month": 6,
+            "goal": "Write and submit paper; prepare open-source release of Socratic scaffold tool",
+            "deliverable": "Submitted paper draft and public GitHub repository"
+          }
+        ],
+        "targetVenues": ["SIGCSE TS", "ITiCSE", "ICER", "EDM"],
+        "resources": "De-identified historical PCR log exports from Canvas/Perusall (already available if instructor opts in); Claude API for Socratic scaffolding and classification; one CS1 section for live pilot (requires instructor collaboration and IRB for Phase 2); one undergraduate RA for annotation; Perusall free-tier or lightweight web overlay for deployment",
+        "risks": [
+          {
+            "risk": "Socratic follow-up questions may increase reviewer cognitive load to the point of disengagement, reducing review completion rates",
+            "mitigation": "A/B test Socratic vs. no-scaffold conditions; make follow-up questions optional and measure completion rates; start with one follow-up per session maximum"
+          },
+          {
+            "risk": "Historical PCR logs may not contain enough misconception-rich dialogue to train a reliable classifier",
+            "mitigation": "Supplement with synthetic dialogues generated by prompting an LLM to role-play novice reviewers with known misconceptions; validate synthetic data against labeled real examples"
+          },
+          {
+            "risk": "Integration with Perusall requires API access that may not be available for free-tier accounts",
+            "mitigation": "Build a standalone lightweight web overlay that wraps Perusall in an iframe, or use Canvas annotation exports offline; neither requires Perusall API cooperation"
+          }
+        ],
+        "humanSubjects": true
+      }
+    }
+  ]
+}
