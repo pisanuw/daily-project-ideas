@@ -370,3 +370,7 @@
 | 2026-08-23 | Participation Equity Radar | Teaching Tool | 1-2 Weeks |
 | 2026-08-23 | Mini-Compiler Workbench | Classroom Assignment | Multi-week |
 | 2026-08-23 | Socratic AI Scaffolding for Peer Code Review: Mining Reviewer Dialogues for CS1 Misconception Signals | Research | Research |
+| 2026-08-24 | Dependency Pulse | Side Project | Weekend |
+| 2026-08-24 | Test Oracle Trainer | Teaching Tool | 1-2 Weeks |
+| 2026-08-24 | Consensus Game | Classroom Assignment | Multi-week |
+| 2026-08-24 | LLM Buggy-Machine Agents for Scalable Software Testing Role-Play | Research | Research |

@@ -1,0 +1,154 @@
+{
+  "date": "2026-08-24",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Dependency Pulse",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A GitHub Action that scans your project dependencies each week, fetches their changelogs, and posts an LLM-summarized digest highlighting breaking changes and security fixes -- zero ongoing maintenance once deployed.",
+      "description": "Dependency Pulse runs as a scheduled GitHub Action. It reads your package.json, requirements.txt, or Cargo.toml, fetches release notes for any packages that published new versions since the last run, and sends the output through Claude to produce a structured digest: breaking changes flagged first, security patches noted, new features summarized in plain English. The digest is posted as a GitHub issue or sent via email. Once configured it fires every Monday morning so you always know what changed in your dependency tree without manually reading a dozen changelogs.",
+      "keyFeatures": [
+        "Supports npm, pip, and Cargo dependency formats",
+        "LLM-summarized changelog highlights with severity labels (breaking / security / feature)",
+        "Delivered as a GitHub issue or email with links to full release notes",
+        "Configurable schedule and filter (dev deps, prod deps, or both)"
+      ],
+      "techStack": "GitHub Actions (YAML), Node.js or Python, Claude API (claude-sonnet-5), GitHub REST API, optional SendGrid for email",
+      "whyInteresting": "Dependency drift is a silent productivity killer every developer ignores until it bites them. This solves a real pain point and requires zero ongoing maintenance once deployed. It also makes a clean portfolio piece showcasing GitHub Actions automation and LLM-powered summarization pipelines.",
+      "inspiredBy": "Hacker News 'Ask HN: What are you working on? (August 2026)' thread mentioning change-monitoring pipelines that watch sources and post notifications when information changes"
+    },
+    {
+      "n": 2,
+      "title": "Test Oracle Trainer",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "A classroom tool where instructors upload a program with hidden injected bugs and students write tests to find them, earning Claude-powered Socratic hints for bugs they haven't caught yet.",
+      "description": "An instructor uploads a buggy program along with a private bug manifest listing the injected faults. Students interact through a web UI: they write test cases, submit them, and see pass/fail results against the buggy implementation. A dashboard shows how many hidden bugs the student has found without revealing which ones remain. After a configurable number of failed attempts on a particular bug, Claude generates a Socratic hint -- a leading question that nudges the student toward the uncaught fault without giving it away. Class-wide coverage statistics let the instructor spot systemic blind spots in how the cohort thinks about testing.",
+      "keyFeatures": [
+        "Instructor-facing bug manifest editor; student-facing test console with sandboxed execution",
+        "Bug-discovery tracker showing per-student and class-wide coverage without spoiling progress",
+        "Claude-powered Socratic hint engine triggered after N failed submission rounds",
+        "Post-session report showing which bugs were hardest to find and most-missed edge cases"
+      ],
+      "techStack": "React + Vite + Tailwind, Flask, Docker (sandboxed code execution per submission), Supabase, Claude API",
+      "whyInteresting": "Most testing education either tells students exactly what to test or hides mutation testing results entirely. This puts students in the detective role with adaptive coaching, building systematic testing intuition. Directly applicable to any CS2 or software engineering course and pairs well with existing autograders.",
+      "inspiredBy": "ITiCSE 2025 role-play software testing research ('There's a Bug in your Ice-cream') and GitHub trending tools for automated code comprehension questioning"
+    },
+    {
+      "n": 3,
+      "title": "Consensus Game",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "A real-time multiplayer browser game where players are nodes in a distributed network trying to reach consensus while an adversary player injects faults, built by students as a capstone for a distributed systems unit.",
+      "description": "Students build and then play Consensus Game as a multi-week capstone assignment. Honest-node players must agree on a single value within a time limit by passing messages through a shared channel; one adversary player can intercept, delay, duplicate, or drop messages to prevent agreement. The game visualizes the network topology and message flow in real time. Students first analyze their replays to diagnose why consensus failed, then extend the codebase to add a simple Raft-like leader election as a countermeasure. The project combines distributed-systems theory, multiplayer networking, and game design in one deliverable students are proud to demo.",
+      "keyFeatures": [
+        "Real-time multiplayer lobby with role assignment (honest node vs. adversary)",
+        "Visual network graph showing live message flow and per-node consensus state",
+        "Adversary control panel: drop, delay, duplicate, or corrupt messages in flight",
+        "Post-game replay viewer with annotated timeline for post-mortem analysis"
+      ],
+      "techStack": "React + Vite + Tailwind, Supabase Realtime (WebSocket channels), Node.js REST API for lobby/game orchestration",
+      "whyInteresting": "Distributed systems is notoriously hard to make visceral -- playing the adversary and watching consensus collapse is an experience that sticks in a way that slides about Paxos never do. The assignment also forces students to think adversarially, a transferable security mindset. The resulting game makes a compelling portfolio artifact.",
+      "inspiredBy": "MeetingMayhem (ITiCSE 2025, adversarial web game for CS education) and Hacker News discussion on local-first multi-agent collaboration tools"
+    },
+    {
+      "n": 4,
+      "title": "LLM Buggy-Machine Agents for Scalable Software Testing Role-Play",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Replace the human 'buggy machine' partner in software testing role-plays with an LLM agent that maintains consistent, learnable fault behavior, enabling asynchronous individual practice at scale.",
+      "description": "Oza et al. (ITiCSE 2025) demonstrated that role-plays -- where one student acts as a tester and another plays a 'buggy ice-cream machine' with hidden faults -- significantly improve testing confidence and engagement. The bottleneck is scalability: sessions require synchronous human partners and careful instructor coordination. This research proposes replacing the human machine role with an LLM agent given a system prompt describing a small program and a set of injected bugs it must consistently exhibit. The core scientific question is whether the LLM can maintain believable, consistent fault behavior across many student queries without accidentally self-correcting or over-hinting -- a 'believability' challenge that maps directly onto Pisan's prior work on agents that justify their actions. A secondary question is whether students who practice with the LLM machine show comparable gains in testing confidence and bug-discovery skill to those in human-partner role-plays.",
+      "papers": [
+        {
+          "title": "There's a Bug in your Ice-cream: Teaching Software Testing with Role-plays",
+          "authors": "Faculty of IT, Monash University, Melbourne",
+          "venue": "ITiCSE 2025",
+          "year": 2025,
+          "doi": "10.1145/3724363.3729115",
+          "url": "https://doi.org/10.1145/3724363.3729115",
+          "abstract": "Role-play activities where students took on the role of either a tester or a buggy ice-cream machine had a statistically significant positive effect on students' confidence in software testing skills, resulted in significantly positive student sentiment, and a strong perception that the role-plays were helpful to their learning. The activities required only a short case study and instructor-prepared bug descriptions.",
+          "relevance": "This paper establishes the educational value and methodology of human role-play for software testing education, and identifies scalability -- needing human partners -- as the primary deployment barrier. That is precisely the gap this research proposes to close by replacing the human machine with a consistently-buggy LLM agent."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "MeetingMayhem: A Web-Based Educational Game Focused on Adversarial Thinking",
+          "authors": "Shan Huang, Geoffrey L. Herman, Linda Oliva, Marc Olano, Alan T. Sherman",
+          "venue": "ITiCSE 2025",
+          "year": 2025,
+          "url": "https://doi.org/10.1145/3724389.3731269",
+          "relevance": "Demonstrates web-based adversarial role-play games as an effective scalable CS education format; informs the interface design and evaluation methodology for an LLM-backed buggy-machine system."
+        },
+        {
+          "title": "Towards Valid Student Simulation with Large Language Models",
+          "authors": "Various",
+          "venue": "arXiv, 2025",
+          "year": 2025,
+          "url": "https://arxiv.org/abs/2601.05473",
+          "relevance": "Examines whether LLMs can simulate student behavior with consistent competence levels, surfacing the same fidelity challenges (role-breaking, over-competence) that a bug-consistent 'machine' agent must also solve."
+        },
+        {
+          "title": "Simulating Classroom Education with LLM-Empowered Agents",
+          "authors": "Various",
+          "venue": "arXiv, 2024",
+          "year": 2024,
+          "url": "https://arxiv.org/abs/2406.19226",
+          "relevance": "Presents a multi-agent classroom simulation framework using LLMs in fixed pedagogical roles; provides architectural precedent for constraining an LLM to a stable, consistent character (the buggy machine) within an educational interaction."
+        }
+      ],
+      "researchPlan": {
+        "overview": "The study designs and evaluates an LLM-backed 'buggy program' agent for asynchronous, solo software testing practice. Using a within-subjects crossover design, CS students alternate between a human-machine and an LLM-machine role-play session across two comparable bug scenarios, measuring testing confidence, bugs discovered, and qualitative perceptions of the LLM partner. A separate consistency-evaluation harness measures how often the LLM agent breaks character by inadvertently revealing or self-correcting its injected faults.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review and system prompt engineering",
+            "deliverable": "Annotated bibliography, initial LLM buggy-machine prompt templates, and a scenario library of 6 small Python programs with injected fault sets of varying difficulty"
+          },
+          {
+            "month": 2,
+            "goal": "Build the LLM buggy-machine web platform and run automated consistency evaluation",
+            "deliverable": "Deployed web-based role-play interface; consistency-evaluation report measuring bug-disclosure rate and character-break frequency across 200 automated probe sessions"
+          },
+          {
+            "month": 3,
+            "goal": "Pilot study with a small cohort (n=15-20) and refine prompts based on failure modes",
+            "deliverable": "Pilot data report, revised prompt templates, and updated scenario library"
+          },
+          {
+            "month": 4,
+            "goal": "Full within-subjects study in a software testing or SE course (n=40-60)",
+            "deliverable": "Collected data: pre/post testing-confidence surveys, bug-discovery logs, and post-session interviews"
+          },
+          {
+            "month": 5,
+            "goal": "Analysis: confidence gains, bug-discovery rates, LLM fidelity, and student experience themes",
+            "deliverable": "Draft results section with statistical tests and thematic coding of qualitative data"
+          },
+          {
+            "month": 6,
+            "goal": "Finalize and submit paper",
+            "deliverable": "Submitted paper draft; open-source release of platform code and scenario library on GitHub"
+          }
+        ],
+        "targetVenues": ["ITiCSE", "SIGCSE", "AIED", "ICER"],
+        "resources": "Access to a software testing or introductory SE course (CSS 385 or equivalent) for participant recruitment; Claude API credits for LLM agent calls during study sessions; one undergraduate RA to help build the platform and administer the pilot; the existing Jolly Feedback test-runner infrastructure can anchor the sandboxed code execution component.",
+        "risks": [
+          {
+            "risk": "The LLM agent frequently breaks character by correcting its own injected bugs when a student probes it cleverly, undermining role-play fidelity",
+            "mitigation": "Develop the consistency-evaluation harness in month 2 before any student exposure; use structured output generation with explicit bug-state tracking in the prompt to suppress character breaks"
+          },
+          {
+            "risk": "Insufficient within-course participants to detect a meaningful effect size given the crossover design",
+            "mitigation": "Run the study across two consecutive course offerings or partner with a second instructor; the month 3 pilot provides a power estimate to calibrate sample-size targets before the main study"
+          },
+          {
+            "risk": "Novelty effect inflates LLM-condition ratings because students find the AI partner interesting regardless of educational quality",
+            "mitigation": "Include a delayed retention test two weeks post-session measuring actual bug-finding performance on a new unseen program, which novelty effects cannot explain"
+          }
+        ],
+        "humanSubjects": true
+      }
+    }
+  ]
+}
