@@ -1,0 +1,163 @@
+{
+  "date": "2026-08-25",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Code Analogy Forge",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "Paste any code snippet or CS concept and instantly get multiple analogies calibrated to different audience levels, from curious child to non-technical manager.",
+      "description": "Code Analogy Forge lets you select a target audience (curious child, high school student, CS undergraduate, or non-technical adult), paste any code or concept, and get 2-3 sharply framed analogies with concrete imagery. Each analogy card shows the concept mapped to a domain the audience already understands (cooking, city planning, sports). You can save your best analogies to a personal library (Supabase), copy them to clipboard, and share a read-only URL. The tool is aimed at CS instructors writing blog posts or slide decks, developers explaining work to stakeholders, and Stack Overflow contributors who want a human-friendly opening sentence.",
+      "keyFeatures": [
+        "Audience-level toggle: child / high school student / CS undergrad / non-technical adult",
+        "3 analogies per request, each from a different domain (cooking, sports, city planning, etc.)",
+        "Personal analogy library with tagging and search, backed by Supabase",
+        "Shareable read-only URL for each saved analogy"
+      ],
+      "techStack": "React + Vite + Tailwind, Claude API (claude-sonnet-5 for creative output), Supabase (auth + saved analogies)",
+      "whyInteresting": "Teaching analogies are one of the most time-consuming parts of writing lectures and blog posts, yet they are rarely reused or shared. A focused single-purpose tool that generates them on demand with explicit audience calibration fills a gap that general-purpose AI chat handles poorly because it doesn't force the user to name the audience first.",
+      "inspiredBy": "Recurring friction of preparing lecture slides and trying to explain return values, recursion, or async to students who need a mental hook before the formal definition"
+    },
+    {
+      "n": 2,
+      "title": "Spec Ambiguity Scanner",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "Paste an assignment specification and get an AI-generated confusion map that flags ambiguous phrasing, predicts which sentences will generate the most office-hours questions, and suggests concrete rewrites.",
+      "description": "Instructors paste any programming assignment description into Spec Ambiguity Scanner and receive a highlighted document where each flagged phrase is annotated with a predicted confusion type (unclear precondition, ambiguous output format, missing edge-case definition, vague grading criterion) and a suggested rewrite. A dashboard view shows an estimated confusion score per section. Instructors can accept rewrites with one click or dismiss them. Optionally, after a course runs, actual office-hours questions can be uploaded to compare predicted vs. observed confusion hot spots, providing a feedback loop for next-semester improvements. Built as a lightweight single-page app with a Flask API backend.",
+      "keyFeatures": [
+        "Inline annotation of assignment text with confusion type labels and severity scores",
+        "Suggested rewrites for each flagged phrase, editable in-place",
+        "Overall confusion score per section (intro, requirements, deliverables, grading)",
+        "Optional post-course upload of real student questions to compare predicted vs. actual confusion"
+      ],
+      "techStack": "React + Vite + Tailwind (frontend), Flask (backend API), Claude API for analysis, SQLite for session storage",
+      "whyInteresting": "Instructors spend significant office-hours time answering questions that stem from ambiguous specifications, not from conceptual difficulty. An AI tool that proactively audits spec clarity before a course runs shifts quality control upstream and builds a concrete, improvable data trail across semesters.",
+      "inspiredBy": "Observation that most TA queue questions in CS courses trace back to the same three ambiguous sentences in the assignment description, repeated each term"
+    },
+    {
+      "n": 3,
+      "title": "Physics Puzzle Engine Lab",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "Students build a 2D physics engine from scratch using the Canvas API, then use it to author five puzzle levels that each demonstrate a specific physics behavior.",
+      "description": "Over six weeks students implement a small but complete 2D physics engine: AABB collision detection, discrete impulse resolution, axis-aligned friction, simple joint constraints, and a basic broadphase. They write every algorithm themselves (no physics libraries) in plain JavaScript with the Canvas API. In the final two weeks they use their engine to design five puzzle levels, each targeting one mechanic (stacking, sliding, swinging, bouncing, domino chains). A required design document explains the physics decisions made for each level. The dual deliverable teaches game architecture and applied geometry/math simultaneously, and the puzzle design phase requires students to reason about emergent behavior rather than just pass unit tests.",
+      "keyFeatures": [
+        "Engine milestone: AABB detection + impulse resolution by week 2",
+        "Engine milestone: friction, restitution, joints by week 4",
+        "Level design milestone: five playable puzzle levels by week 5",
+        "Written design document explaining physics parameter choices for each level",
+        "Optional stretch: integrate a Claude API 'playtest critic' that describes what a player would experience"
+      ],
+      "techStack": "Vanilla JS + Canvas API (engine), React + Vite wrapper (UI shell), optional Flask backend for level submission",
+      "whyInteresting": "Game physics is one of the best motivational contexts for teaching linear algebra, collision geometry, and impulse math because the results are immediately visible and tactile. Building the engine before using it prevents the abstraction trap where students use a library without understanding it, and puzzle design forces reasoning about emergent system behavior.",
+      "inspiredBy": "GitHub trending: interactive simulation and physics-based game engines consistently rank among the most starred learning projects; connects to Pisan's game development interests and prior work on game mechanics"
+    },
+    {
+      "n": 4,
+      "title": "From Student Words to Misconception Labels: LLM Classification of Return-Keyword Explanations for Targeted Feedback in CS1 Java",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Train and evaluate an LLM classifier that maps students' free-text explanations of function return semantics to a validated misconception taxonomy, then deliver Socratic feedback matched to each class inside an existing automated feedback pipeline.",
+      "description": "Tilanterä et al. (ITiCSE 2025) identified at least four distinct misconceptions about the Java `return` keyword through qualitative analysis of 3,000+ free-text responses from 617 CS1 students, including a newly discovered one: that `return` and `void` are mutually exclusive. The paper explicitly calls for automated targeted feedback grounded in these misconception classes. This research builds and evaluates exactly that system: an LLM classifier (zero-shot, few-shot, and fine-tuned variants) that labels student free-text explanations with the paper's taxonomy, followed by a Socratic feedback generator that produces a targeted hint for each class without revealing the correct answer. The classifier is evaluated against a human-annotated holdout set drawn from Pisan's existing Jolly Feedback submission logs for CSS 142. A pilot A/B study compares misconception-matched feedback against generic error messages on the metric of return-related error recurrence across resubmission attempts. Because the work uses anonymized historical submission data and integrates into an already-IRB-covered deployment, no new human-subjects approval is needed. The contribution is a closed-loop system that moves the Tilanterä et al. taxonomy from a paper artifact into a deployable, evidence-backed feedback layer.",
+      "papers": [
+        {
+          "title": "Focus on Return: Terms Novices Use to Describe Functions in Java",
+          "authors": "Technical University of Darmstadt (Tilanterä et al.)",
+          "venue": "ITiCSE 2025",
+          "year": 2025,
+          "doi": "10.1145/3724363.3729065",
+          "url": "https://doi.org/10.1145/3724363.3729065",
+          "abstract": "This work extends research on the `return` keyword by investigating which terms novices use when describing code snippets of functions and which difficulties and misconceptions occur. Qualitative analysis of over 3,000 free-text responses from 617 undergraduate CS1 students reveals that `return` itself is rarely mentioned explicitly, that its function-ending role is even more rarely noted, and that a new misconception emerges: some students state that `return` and `void` are mutually exclusive.",
+          "relevance": "Provides the validated misconception taxonomy (4+ classes) and the empirical dataset that the proposed LLM classifier will be trained and evaluated against, and explicitly calls for future work on automated targeted feedback grounded in these classes."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "Can LLMs Identify Gaps and Misconceptions in Students' Code Explanations?",
+          "authors": "Various (arXiv preprint)",
+          "venue": "arXiv, 2025",
+          "year": 2025,
+          "url": "https://arxiv.org/abs/2501.10365",
+          "relevance": "Demonstrates that fine-tuned LLMs outperform zero-shot prompting for identifying gaps in student self-explanations of code, directly informing the classifier design and evaluation methodology of this research."
+        },
+        {
+          "title": "McMining: Automated Discovery of Misconceptions in Student Code",
+          "authors": "Various (arXiv preprint)",
+          "venue": "arXiv, 2025",
+          "year": 2025,
+          "url": "https://arxiv.org/abs/2510.08827",
+          "relevance": "Introduces an LLM-based pipeline (MCMINER) for automatically discovering programming misconceptions in student code, identifying 41 novel misconceptions; provides a complementary approach and baseline for misconception discovery versus targeted classification."
+        },
+        {
+          "title": "Using Targeted Feedback to Address Common Student Misconceptions in Introductory Programming: A Data-Driven Approach",
+          "authors": "Yizhou Qian, James D. Lehman",
+          "venue": "SAGE Open, 2019",
+          "year": 2019,
+          "url": "https://journals.sagepub.com/doi/full/10.1177/2158244019885136",
+          "relevance": "Pre-LLM evidence that misconception-targeted (rather than generic) feedback messages in a CS1 Java context increased the probability that students corrected errors; establishes the pedagogical baseline this research aims to replicate and extend at scale."
+        },
+        {
+          "title": "Identifying and Validating Java Misconceptions Toward a CS1 Concept Inventory",
+          "authors": "Various",
+          "venue": "ACM, 2019",
+          "year": 2019,
+          "url": "https://dl.acm.org/doi/pdf/10.1145/3304221.3319771",
+          "relevance": "A broader CS1 Java misconception taxonomy that contextualizes the return-specific findings from Tilanterä et al. and provides additional validated misconception categories the classifier design should be aware of."
+        }
+      ],
+      "researchPlan": {
+        "overview": "The project moves the Tilanterä et al. misconception taxonomy into a deployed feedback loop in three phases: (1) building and evaluating an LLM classifier against human-annotated Jolly Feedback logs, (2) authoring and piloting Socratic feedback templates for each misconception class, and (3) running a pilot A/B comparison to measure whether misconception-matched feedback reduces return-related error recurrence across resubmission attempts in CSS 142.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review on return-related misconceptions, LLM-based misconception classification methods, and targeted CS1 feedback; curate anonymized return-related submissions from Jolly Feedback logs; human-annotate a 200-response gold-standard set using the Tilanterä et al. taxonomy",
+            "deliverable": "Annotated evaluation dataset (200 labeled responses) and refined research questions"
+          },
+          {
+            "month": 2,
+            "goal": "Implement and evaluate zero-shot and few-shot LLM classifiers (Claude sonnet, GPT-4o) on the annotated set; compute per-class precision/recall; identify failure modes and ambiguous category boundaries",
+            "deliverable": "Classifier evaluation report with confusion matrix and inter-rater reliability scores"
+          },
+          {
+            "month": 3,
+            "goal": "Fine-tune an open-source LLM (Llama 3 8B or Mistral 7B) on the annotated dataset using supervised fine-tuning; compare against zero/few-shot baselines; select best-performing model for deployment",
+            "deliverable": "Fine-tuned classifier checkpoint, comparison table, and deployment decision memo"
+          },
+          {
+            "month": 4,
+            "goal": "Design Socratic feedback templates for each of the 4+ misconception classes (without revealing answers); integrate classifier + templates into Jolly Feedback pipeline as an optional feedback layer; conduct cognitive walkthrough with 2-3 instructor volunteers",
+            "deliverable": "Integrated prototype in Jolly Feedback, feedback template library, instructor walkthrough notes"
+          },
+          {
+            "month": 5,
+            "goal": "Pilot A/B study in CSS 142: half of return-related errors receive misconception-matched feedback, half receive existing generic feedback; measure return-error recurrence across resubmission attempts",
+            "deliverable": "Pilot data: per-student resubmission counts, error recurrence rates by misconception class and feedback condition"
+          },
+          {
+            "month": 6,
+            "goal": "Statistical analysis of pilot data; qualitative thematic analysis of student responses to each feedback class; write and submit paper draft",
+            "deliverable": "Submitted conference paper draft"
+          }
+        ],
+        "targetVenues": ["SIGCSE TS", "ITiCSE", "ICER", "EDM"],
+        "resources": "Anonymized Jolly Feedback submission logs for CSS 142 (already collected); Claude API or GPT-4o for zero-shot/few-shot baseline; one GPU-hour batch for fine-tuning (Colab or university HPC); 2-3 student research assistants for annotation; no new data collection infrastructure required.",
+        "risks": [
+          {
+            "risk": "The Tilanterä et al. taxonomy was developed from a European institution using a simplified Python subset; it may not transfer directly to Pisan's US CSS 142 Java context.",
+            "mitigation": "Begin with an open-coding pass on Jolly Feedback logs before forcing the taxonomy; extend or split categories as needed and document divergences explicitly."
+          },
+          {
+            "risk": "The 200-response annotated set may be too small for reliable fine-tuning, especially for the rarer misconception classes.",
+            "mitigation": "Use few-shot prompting as the primary deployment path if fine-tuned F1 does not exceed few-shot baseline by a meaningful margin; reserve fine-tuning for the largest misconception class only."
+          },
+          {
+            "risk": "A/B pilot sample size in a single section of CSS 142 may be insufficient for statistically significant results within one semester.",
+            "mitigation": "Pre-register effect size and power calculation; frame the paper as a feasibility study with directional findings, not a definitive RCT, and plan a follow-up across two semesters."
+          }
+        ],
+        "humanSubjects": false
+      }
+    }
+  ]
+}

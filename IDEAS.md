@@ -374,3 +374,7 @@
 | 2026-08-24 | Test Oracle Trainer | Teaching Tool | 1-2 Weeks |
 | 2026-08-24 | Consensus Game | Classroom Assignment | Multi-week |
 | 2026-08-24 | LLM Buggy-Machine Agents for Scalable Software Testing Role-Play | Research | Research |
+| 2026-08-25 | Code Analogy Forge | Side Project | Weekend |
+| 2026-08-25 | Spec Ambiguity Scanner | Teaching Tool | 1-2 Weeks |
+| 2026-08-25 | Physics Puzzle Engine Lab | Classroom Assignment | Multi-week |
+| 2026-08-25 | From Student Words to Misconception Labels: LLM Classification of Return-Keyword Explanations for Targeted Feedback in CS1 Java | Research | Research |
