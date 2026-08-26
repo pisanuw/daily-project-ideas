@@ -1,0 +1,156 @@
+{
+  "date": "2026-08-26",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Session Story",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A local CLI that reads your git log and file change timestamps from a coding session and calls Claude API to write a developer journal entry in your own voice, saved to a local SQLite store.",
+      "description": "Session Story is a Python CLI tool you run at the end of a coding session. Point it at a git repo with an optional time window (for example, '--since 2h') and it pulls the git log with short diffs, file modification timestamps, and any shell history from that period. It compresses that data into a structured prompt and calls claude-sonnet-5, which returns a 150-300 word first-person journal entry ('Today I refactored the auth module and discovered the root cause was...'). The entry is saved to a local SQLite file. A companion minimal React+Vite web UI lets you browse the last 30 days of entries, tag them with a project label, and search by keyword. Everything runs on your machine; nothing is persisted to a server. The CLI has a '--dry-run' flag that shows the prompt before sending it, so you know exactly what leaves your machine. Optional shell alias 'story' makes the whole workflow a single command.",
+      "keyFeatures": [
+        "Git log + short diff summarization within a configurable time window",
+        "Claude-generated first-person narrative (150-300 words) matching your repo's commit tone",
+        "Local SQLite journal with project tagging and keyword search",
+        "Minimal React+Vite web UI for browsing the 30-day history",
+        "--dry-run flag shows the prompt before any API call"
+      ],
+      "techStack": "Python CLI (Click), Claude API (claude-sonnet-5), SQLite (local journal), React + Vite + Tailwind (optional web UI)",
+      "whyInteresting": "AI-assisted coding sessions in 2026 produce code at 3-5x the old pace but leave no narrative trail. Most developers have no record of what decisions they made or why. A tool that auto-generates a human-readable journal entry from git artifacts creates a searchable memory layer with zero manual writing, and because it reads the diff it can produce entries more specific than anything a developer would write by hand after a long session.",
+      "inspiredBy": "Observation that Cursor and Claude Code sessions produce working code but no reflection artifact; indie hackers reporting they cannot reconstruct why they made certain architecture choices two weeks later"
+    },
+    {
+      "n": 2,
+      "title": "Pair Review Roulette",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "A web app for structured in-class peer code review: the instructor pastes submission URLs, the app auto-pairs students, shows code side-by-side with inline comment anchors, runs a countdown timer, and delivers a Claude-generated reflection synthesis to each author after the session.",
+      "description": "The instructor creates a review session by pasting GitHub gist or raw file URLs for each student submission. Pair Review Roulette randomly assigns reviewer and author roles, ensuring no self-review and balancing load across the class. Each pair lands on a side-by-side code view with line-anchored comment boxes and a visible countdown timer (default 15 minutes, configurable). After time expires, each author receives a synthesis card that Claude generates by reading all reviewer comments and (a) grouping them into 2-3 themes, (b) flagging the single most actionable item, and (c) posing one Socratic question the author should answer in a written paragraph before the next class. The instructor dashboard shows which pairs are active, which have submitted comments, and when the session ends it exports all comments as a CSV for gradebook use. Sessions persist in Supabase so a page refresh or phone switch does not lose work. The whole app is designed for on-a-laptop classroom use: no install, join by code.",
+      "keyFeatures": [
+        "Instructor session creator with paste-in URL list for all student submissions",
+        "Random pairing engine with no self-review and configurable group sizes",
+        "Side-by-side code view with line-anchored inline comment boxes",
+        "Countdown timer with visible 2-minute alert and auto-lock at zero",
+        "Claude-generated post-session synthesis: theme grouping, top action item, one Socratic question",
+        "Instructor dashboard with live pair status and CSV export"
+      ],
+      "techStack": "React + Vite + Tailwind (frontend), Flask (backend), Supabase (sessions + real-time comment sync), Claude API (claude-sonnet-5 for synthesis)",
+      "whyInteresting": "Peer code review is one of the most valuable professional skills but it is almost never done well in CS courses because it has no structure, no time pressure, and no follow-up. This tool adds all three in a setup that takes an instructor under 90 seconds. The Claude synthesis card is the key: it forces students to act on at least one piece of feedback before the next session, which is the step that makes review pedagogically useful rather than performative.",
+      "inspiredBy": "CS instructors running ad-hoc peer review in Slack threads or Google Docs with no structure or record; professional code review tools like GitHub PR review that are too heavyweight for a 15-minute in-class exercise"
+    },
+    {
+      "n": 3,
+      "title": "Type-Safe API Contract Lab",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "Students design a REST API in OpenAPI 3.1, generate a TypeScript server via codegen, write a Python client with Pydantic runtime validation, and build a Hypothesis fuzz test suite, learning contract-first development in an era where AI can write implementation but not specifications.",
+      "description": "Over three weeks students build a complete API ecosystem for a domain they choose from a provided list (game leaderboard, library catalog, recipe box, mood tracker). Week 1: they author an OpenAPI 3.1 spec in a provided YAML editor with live Swagger UI preview. A CI GitHub Actions job rejects specs that have missing operationIds, no request/response examples, or undocumented 4xx error codes. The spec is frozen at end of Week 1 and cannot be changed for the rest of the lab. Week 2: they run openapi-generator-cli to scaffold a TypeScript Express server, fill in handler logic (AI tools allowed but the frozen spec is the contract), and write Jest integration tests that validate all responses against the spec's JSON Schema. Week 3: they author a Python client using httpx and Pydantic models generated from the same spec, then write a Hypothesis-based fuzz test suite that must find at least one spec violation in their own server (a property-based test that sends random valid inputs and asserts the response matches the spec). A required design document of at least 800 words explains the rationale for every 4xx status code and every edge case their spec explicitly covers. The final deliverable is a GitHub repository with the spec, server, client, fuzz tests, and design doc, all passing in CI.",
+      "keyFeatures": [
+        "Week 1: OpenAPI 3.1 spec authoring with live Swagger UI preview and CI linter enforcing completeness",
+        "Spec freeze at end of Week 1: no modifications after this checkpoint",
+        "Week 2: TypeScript Express server scaffolded from spec via openapi-generator-cli; Jest integration tests validating responses against spec",
+        "Week 3: Python httpx + Pydantic client generated from same spec; Hypothesis fuzz test suite that must surface at least one spec violation",
+        "Required design document explaining all 4xx codes and edge case decisions",
+        "GitHub Actions CI enforcing spec linting, test passing, and doc word count"
+      ],
+      "techStack": "OpenAPI 3.1 + Swagger UI, Node.js + TypeScript + Express (server), Python + httpx + Pydantic + Hypothesis (client + fuzz), GitHub Actions CI, optional React + Vite spec editor wrapper",
+      "whyInteresting": "AI code generators produce syntactically correct implementations but cannot write precise API contracts: they confuse the surface form of a spec with the intent behind it. A lab that freezes the spec before any implementation begins teaches the one skill AI assistants cannot substitute. The fuzz testing phase makes contract precision concrete: a vague spec has gaps that Hypothesis will reliably find, turning underspecification from an abstract complaint into a failing test the student has to fix.",
+      "inspiredBy": "Observation in Pisan's toolchain-first pedagogy work (CE 2024) that students who define the artifact before writing the code reason better about the system as a whole; professional API-first development practices; property-based testing literature showing contract violations are best found by automated input generation"
+    },
+    {
+      "n": 4,
+      "title": "From Submission Log to Reflection Prompt: LLM-Generated Metacognitive Scaffolds from Automated Grader Data in CS1",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Design and evaluate an LLM pipeline that reads automated grader submission logs and generates personalized Socratic reflection prompts for CS1 students, testing whether structured log-derived prompts produce richer metacognitive reflection than generic post-assignment questions.",
+      "description": "Bransford et al.'s 2026 SIGCSE paper demonstrates that having students record and compare programming sessions with and without generative AI, then apply the DEAL (Describe, Examine, Articulate Learning) reflection framework, produces measurable gains in metacognitive skill. The method works but requires students to install screen-recording software, remember to start recordings, and watch 30+ minutes of footage: a setup cost that limits adoption in large CS1 courses. Automated graders already capture a dense event log for free: each submission carries a timestamp, a pass/fail vector across test cases, a line-count delta, and an error type (compilation, test, timeout). This research asks whether a carefully prompted LLM can read a student's submission sequence and generate Socratic reflection prompts as pedagogically effective as those a student would derive from watching their own recording. The pipeline works in three stages. First, a classifier maps the raw event sequence to a small set of interpretable log signal types (for example, burst-submit-after-pause indicates possible external help or confusion breakthrough; rapid-line-growth-then-test-pass indicates a large copy-paste; 15-plus compile-error-cycles before first test pass indicates syntax-level confusion rather than algorithmic confusion). Second, Claude (claude-sonnet-5) reads the signal type labels and generates three Socratic prompts tailored to what the log shows, without revealing the signal interpretation to the student. Third, students submit a written reflection paragraph in response to their assigned prompt. Jolly Feedback's existing submission logs for CSS 142 at UW provide the raw data (anonymized, already approved for research under existing IRB). A pilot A/B study assigns half of CSS 142 students to log-derived prompts and half to a matched set of generic reflection questions ('What was the hardest part of this assignment?') and measures reflection quality using a simplified DEAL rubric coded by two independent raters. A secondary analysis compares the log-derived prompts from a sample of 20 students to what a TA independently identified as the pedagogical moment of interest from watching those students' screen recordings, testing whether the log signal captures the same moments the video reveals.",
+      "papers": [
+        {
+          "title": "A 'watch your replay videos' Reflection Assignment on Learning about Programming, Critical AI Use and Limitations, and Reflection",
+          "authors": "University of Maine Orono (Bransford et al.)",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770762.3772668",
+          "url": "https://doi.org/10.1145/3770762.3772668",
+          "abstract": "Generative AI is disrupting computing education. Most interventions focus on teaching GenAI use rather than helping students understand how AI changes their programming process. We designed and deployed a novel comparative video reflection assignment adapting the Describe, Examine, then Articulate Learning (DEAL) framework. In an introductory software engineering course, students recorded themselves programming during their team project two times: first without, then with using generative AI. Students then analyzed their own videos using a scaffolded set of reflection questions, including questions on their programming process and their help-seeking from humans, the internet, and AI. We conducted a qualitative thematic analysis of the reflections, finding students developed insights about planning, debugging, and help-seeking behaviors that transcended AI use. Students reported learning to slow down and understand before writing or generating code, recognized patterns in their problem-solving approaches, and articulated specific process improvements. Students also learned and reflected on AI limits and downsides, and strategies to use AI more critically, including better prompting but also to benefit their learning instead of just completing tasks. Unexpectedly, the comparative reflection also scaffolded reflection on programming not involving AI use, and even led to students spontaneously setting future goals to adopt video and other regular reflection. This work demonstrates structured reflection on programming session videos can develop metacognitive skills essential for programming with and without generative AI and also lifelong learning in our evolving field.",
+          "relevance": "Provides the foundational evidence that structured reflection on programming process data builds metacognitive skills in computing students, and establishes DEAL as the reflection framework. Also identifies the key limitation this research addresses: video recording is high-cost for large courses and requires out-of-band setup. The paper explicitly frames metacognitive skill development as the goal, which this research pursues through a lower-friction data source (automated grader logs)."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "Examining Discourse in a Large Online Education Program: A Machine-in-the-Loop Approach",
+          "authors": "Georgia Institute of Technology (Deng et al.)",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770762.3772514",
+          "url": "https://doi.org/10.1145/3770762.3772514",
+          "relevance": "Demonstrates a machine-in-the-loop methodology combining LLMs with qualitative coding for large-scale educational data analysis, directly informing the signal classification pipeline and the approach to scaling reflection prompt generation across hundreds of student submissions."
+        },
+        {
+          "title": "Exploring Undergraduate Computing Tutors' Pedagogical Practices",
+          "authors": "University of Florida (Ciego et al.)",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770762.3772542",
+          "url": "https://doi.org/10.1145/3770762.3772542",
+          "relevance": "Ethnographic study identifying six verified UTA pedagogical practices (open-ended questioning, prompting, demonstrating, referencing resources, explaining, expressing affect). The open-ended questioning and prompting practices map directly to the Socratic prompt types this research generates, providing an empirical anchor for what effective human-generated reflection triggers look like."
+        },
+        {
+          "title": "Can LLMs Identify Gaps and Misconceptions in Students' Code Explanations?",
+          "authors": "Various (arXiv preprint)",
+          "venue": "arXiv, 2025",
+          "year": 2025,
+          "url": "https://arxiv.org/abs/2501.10365",
+          "relevance": "Shows that LLMs can identify pedagogically meaningful gaps in student self-explanations of code, establishing the feasibility of LLM-based interpretation of student programming artifacts. Informs the prompt generation stage and provides a baseline for evaluating whether log-derived prompts match expert human identification of student gaps."
+        }
+      ],
+      "researchPlan": {
+        "overview": "The project tests whether automated grader submission logs can substitute for session recordings as raw material for LLM-generated Socratic reflection prompts. It proceeds in three phases: (1) building and validating a log signal classifier and prompt generator, (2) running a pilot A/B study in CSS 142, and (3) comparing log-derived prompts to TA observations from matched screen recordings.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review on metacognitive reflection in CS education, DEAL framework application, and learning analytics from submission data; extract and anonymize 1000+ submission sequences from Jolly Feedback logs for CSS 142; define a taxonomy of 6-8 log signal types with operational definitions and examples; human-annotate 150 sequences to build a gold-standard signal classification set",
+            "deliverable": "Annotated sequence dataset (150 labeled sequences), signal type taxonomy document, and refined research questions"
+          },
+          {
+            "month": 2,
+            "goal": "Implement LLM pipeline in two stages: (a) zero-shot and few-shot classifier mapping raw sequences to signal types, evaluated on annotated set; (b) Socratic prompt generator conditioned on signal type; generate prompts for a held-out set of 100 sequences; 3 expert instructors rate prompt relevance, specificity, and pedagogical value blind against generic prompts on a 5-point scale",
+            "deliverable": "Pipeline implementation, expert rating results comparing log-derived vs. generic prompts, inter-rater reliability scores"
+          },
+          {
+            "month": 3,
+            "goal": "Pilot A/B study in one section of CSS 142 (approximately 40 students): after each of 3 assignments, half of students receive log-derived Socratic prompts and half receive matched generic questions; students submit 150-200 word written reflections; two independent raters code reflections using a simplified DEAL rubric (specificity of description, depth of examination, clarity of articulation)",
+            "deliverable": "Coded reflection dataset with inter-rater reliability, preliminary group comparison on DEAL rubric scores"
+          },
+          {
+            "month": 4,
+            "goal": "Screen recording comparison: recruit 20 volunteer students who agreed to record one assignment session; one TA reviews each recording and notes the 1-2 most pedagogically significant moments; compare TA observations to the log-derived prompt generated for the same student-assignment pair; measure overlap rate and types of moments captured vs. missed by the log",
+            "deliverable": "Overlap analysis report, typology of moments the log captures well vs. misses, recommended log enrichments"
+          },
+          {
+            "month": 5,
+            "goal": "Statistical analysis of A/B reflection quality data; thematic analysis of qualitative reflection content by group; synthesize findings into a coherent argument for or against log-based prompt generation as a scalable substitute; write and submit paper",
+            "deliverable": "Submitted conference paper draft with quantitative A/B results and qualitative reflection analysis"
+          }
+        ],
+        "targetVenues": ["SIGCSE TS", "ITiCSE", "LAK", "EDM"],
+        "resources": "Jolly Feedback submission logs for CSS 142 (existing, anonymized); Claude API (claude-sonnet-5) for signal classification and prompt generation; 2 student RAs for sequence annotation and DEAL rubric coding; volunteer student screen recordings (20 students, 1 session each); no new data collection infrastructure required beyond a consent form for the screen recording sub-study.",
+        "risks": [
+          {
+            "risk": "Submission logs from Jolly Feedback may lack the temporal granularity or error type detail needed to distinguish meaningful signal types (e.g., compilation errors vs. test failures vs. timeouts may not be separately logged).",
+            "mitigation": "Audit the Jolly Feedback log schema in month 1; if key fields are missing, add lightweight event-type tagging to Jolly Feedback before the pilot semester. The classifier can degrade gracefully to coarser signal types if fine-grained data is unavailable."
+          },
+          {
+            "risk": "Students in the log-derived prompt condition may have more variable prompt quality (because some sessions produce sparse logs with few signal events) than the generic prompt control, confounding the comparison.",
+            "mitigation": "Add a fallback rule: if a student's session has fewer than 5 submission events, assign a generic prompt and exclude that student from the main comparison; report the exclusion rate separately as a finding about log data sufficiency."
+          },
+          {
+            "risk": "Coding student reflections with the DEAL rubric requires significant RA time and may produce low inter-rater reliability if the rubric is not adapted for the CS1 programming context.",
+            "mitigation": "Develop a CS1-adapted DEAL rubric with concrete anchors in month 1; run a calibration pass with both RAs on 20 reflections before the main coding; target kappa > 0.65 before proceeding to full coding."
+          }
+        ],
+        "humanSubjects": true
+      }
+    }
+  ]
+}

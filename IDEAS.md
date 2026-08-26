@@ -378,3 +378,7 @@
 | 2026-08-25 | Spec Ambiguity Scanner | Teaching Tool | 1-2 Weeks |
 | 2026-08-25 | Physics Puzzle Engine Lab | Classroom Assignment | Multi-week |
 | 2026-08-25 | From Student Words to Misconception Labels: LLM Classification of Return-Keyword Explanations for Targeted Feedback in CS1 Java | Research | Research |
+| 2026-08-26 | Session Story | Side Project | Weekend |
+| 2026-08-26 | Pair Review Roulette | Teaching Tool | 1-2 Weeks |
+| 2026-08-26 | Type-Safe API Contract Lab | Classroom Assignment | Multi-week |
+| 2026-08-26 | From Submission Log to Reflection Prompt: LLM-Generated Metacognitive Scaffolds from Automated Grader Data in CS1 | Research | Research |
