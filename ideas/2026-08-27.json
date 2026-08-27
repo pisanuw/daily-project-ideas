@@ -1,0 +1,155 @@
+{
+  "date": "2026-08-27",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Persona Bench",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A single-page web app where you paste one prompt and instantly see responses from four to six named AI personas (teacher, devil's advocate, domain expert, skeptic, beginner) side-by-side in a grid, exposing how framing and role assignment shape outputs.",
+      "description": "Persona Bench is a React + Vite web app backed by a lightweight Flask proxy that holds the Claude API key server-side. The user types one prompt into a shared input box, selects which personas to run (checkboxes for a preset roster), and clicks 'Run All.' The app fires parallel Claude API calls, each with a different system prompt that defines the persona's role, voice, and constraints. Responses stream into a four-to-six-column grid in real time so the user can watch them diverge. Each column header shows the persona name and a one-line description of that persona's goal; mousing over a column highlights the exact system prompt used so there is no black box. A 'diff mode' toggle color-codes words or phrases that appear in one column but not the others, making divergence immediately visible. The full session (input, all system prompts, all responses) can be exported as a JSON file for later analysis. A preset library ships with six ready-to-use persona sets: CS pedagogy (teacher, confused student, TA, rubric-grader, code-reviewer), product decisions (PM, engineer, designer, skeptic, user), and general reasoning (Socratic tutor, devil's advocate, first-principles thinker, analogist, domain expert). Users can also write and save custom persona sets in localStorage. No login, no database: the app is fully stateless beyond the in-browser session.",
+      "keyFeatures": [
+        "Parallel Claude API calls per persona, responses streaming into a side-by-side grid",
+        "System prompt transparency: hover any column header to see the exact persona prompt",
+        "Diff mode highlights words and phrases that differ across columns",
+        "JSON export of the full session (input, system prompts, all outputs)",
+        "Six preset persona sets (CS pedagogy, product decisions, general reasoning, and more)",
+        "Custom persona builder with localStorage persistence"
+      ],
+      "techStack": "React + Vite + Tailwind (frontend), Flask (API proxy, keeps API key server-side), Claude API (claude-sonnet-5 with streaming)",
+      "whyInteresting": "Prompt engineers and CS educators both know that the system prompt dominates LLM output tone and framing, but it is almost impossible to viscerally feel that in a standard chat interface where you run one prompt at a time. Persona Bench makes the divergence simultaneous and visual. For educators it becomes a live demonstration tool: one student question, five 'tutors' with different pedagogical stances, all visible at once. For researchers it is a rapid qualitative instrument for exploring how role framing affects helpfulness, bias, and reasoning style across dozens of prompts in one sitting.",
+      "inspiredBy": "Discussions on HN and the AI education community about how system prompts are invisible in deployed products; CS instructors wanting a quick way to show students that 'the AI' is not a fixed oracle but a function of its framing"
+    },
+    {
+      "n": 2,
+      "title": "Bug Olympics",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "A competitive in-class game where students race to fix a live queue of seeded buggy code snippets, with a real-time Supabase leaderboard, per-bug time tracking, and a post-round heat map showing which error types slowed the whole class down.",
+      "description": "Bug Olympics turns debugging practice into a 20-minute classroom event. The instructor creates a session by uploading a JSON file of 8-12 buggy code snippets: each snippet includes a description of the intended behavior, one or more seeded bugs (logical error, off-by-one, wrong return type, missing null check), and a hidden test suite. When the instructor presses 'Start,' all students see the first snippet simultaneously in a Monaco editor embedded in the browser. Students fix the code and click 'Submit.' A server-side sandboxed runner (Python subprocess with a 5-second timeout) executes the hidden tests and returns pass/fail. A correct fix retires the snippet for that student and advances them to the next one. Time-to-fix is recorded per student per snippet. A Supabase real-time channel powers a live leaderboard showing each student's handle, number of snippets completed, and current streak of correct first-attempts. After all students finish or the round timer expires (default 20 minutes), the instructor sees a heat map: rows are snippets, columns are error-type tags (logical, syntax, API misuse, off-by-one), and cell color encodes median time-to-fix across the class. Snippets that took more than twice the class median get flagged automatically with a 'revisit' badge for use in the next lecture. The student view also shows a personal bar chart of their time-per-bug after the round ends, so individuals can compare their weakest error types to the class distribution. No account creation: students join by entering a session code and a chosen handle.",
+      "keyFeatures": [
+        "Instructor snippet uploader: JSON file with buggy code, intended behavior description, and hidden test suite",
+        "Monaco editor in the browser for in-session code editing and submission",
+        "Server-side sandboxed test runner (Python subprocess, 5-second timeout) for immediate pass/fail feedback",
+        "Supabase real-time leaderboard: handle, snippets completed, first-attempt streak",
+        "Post-round heat map: median time-to-fix by snippet and error-type tag",
+        "Personal bar chart of time-per-bug shown to each student after the round"
+      ],
+      "techStack": "React + Vite + Tailwind (frontend with Monaco editor), Flask (backend + sandboxed test runner), Supabase (real-time leaderboard + session state)",
+      "whyInteresting": "Debugging is the skill CS courses spend the least structured time on despite being the activity students do most. A timed competitive format creates urgency that mimics the real feel of debugging under pressure, and the post-round heat map gives the instructor actionable data: not just 'students struggled with pointers' but 'the off-by-one snippet took the class 3x longer than the API misuse snippet, and 40% of students needed more than two attempts.' That precision turns a game into a diagnostic.",
+      "inspiredBy": "Competitive programming platforms (Codeforces, LeetCode) that create engagement through time pressure; CS instructor feedback that debugging labs are too passive; heat map analytics in tools like GitHub Copilot usage dashboards"
+    },
+    {
+      "n": 3,
+      "title": "Whiteboard-to-Code Studio",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "Students photograph or upload hand-drawn flowcharts, pseudocode, or UML sketches; a Gemini vision model converts them into runnable Python or Java function stubs with docstrings; a second pass flags potential logic gaps and emits structured design feedback before any implementation begins.",
+      "description": "Whiteboard-to-Code Studio is a three-week assignment designed around the principle that design artifacts should precede code. Week 1: students select a domain problem from a provided list (binary search tree, simple text tokenizer, basic graph traversal, 2D grid pathfinder) and produce a hand-drawn design artifact: a flowchart, annotated pseudocode, or a sequence diagram on paper or a whiteboard. They photograph or scan the artifact and upload it to the Studio web app. A Gemini 1.5 Pro vision call reads the image and outputs a structured JSON describing the detected functions or procedures, their input/output types, and any decision branches. The student reviews this interpretation in the UI and corrects obvious OCR or inference errors using a simple structured editor (not free text). Week 2: the corrected structured JSON is passed to a second prompt that generates Python or Java function stubs with typed signatures and docstrings describing the intended contract. A third prompt reads all stubs together and emits a 'gap report': a bulleted list of potential logic issues (for example, 'no base case detected for the recursive branch,' 'ambiguous termination condition in the loop,' 'return type inconsistency between branches'). Students must address every flagged gap in a design revision document before they are allowed to start writing implementation code. The implementation phase is unlocked by the instructor reviewing the gap response document. Week 3: students implement the stubs and submit with a self-assessment comparing their final code to the original design artifact, noting what changed and why. Automated tests run on submission. The instructor sees each student's artifact image, the Gemini interpretation, the gap report, the gap response document, and the final implementation side-by-side in a dashboard.",
+      "keyFeatures": [
+        "Image upload of hand-drawn flowcharts, pseudocode, or UML sketches with Gemini 1.5 Pro vision interpretation",
+        "Structured JSON editor for correcting the vision model's function and branch interpretation",
+        "Automatic Python or Java function stub generation from corrected structured JSON",
+        "Gap report: bulleted list of potential logic issues detected before any implementation starts",
+        "Implementation-phase unlock gated on instructor review of the student's gap response document",
+        "Instructor dashboard showing artifact image, interpretation, gap report, gap response, and implementation side-by-side"
+      ],
+      "techStack": "React + Vite + Tailwind (frontend), Flask (backend + orchestration), Gemini API (Gemini 1.5 Pro for vision + stub generation), Supabase (session state + file storage)",
+      "whyInteresting": "Every design-before-coding pedagogy (design recipe, test-first development, spec-first APIs) runs into the same problem: students can fake compliance by writing code first and drawing the diagram backward. Whiteboard-to-Code Studio makes the design artifact the literal first input to the system: the code cannot exist until the drawing does. The gap report gives students substantive feedback on their design logic without a human TA reading every diagram, which is what makes the approach scalable to courses of 80 or more students. In an era when AI can write implementation in seconds, the only defensible learning objective for an intro course is design reasoning: this assignment structurally forces that reasoning to happen.",
+      "inspiredBy": "Pisan's toolchain-first pedagogy work (CE 2024) showing students who define artifacts before writing code reason better about the system; Felleisen's How to Design Programs design recipe; CS instructor frustration that pseudocode assignments are always written post-hoc"
+    },
+    {
+      "n": 4,
+      "title": "Error-Type Priority Routing for LLM-Generated CS1 Feedback: Should the Tutor Address Syntax or Concept First?",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Build and evaluate an LLM feedback pipeline that classifies CS1 submission errors as syntactical, conceptual, or strategic, then routes each error type to a differently framed hint, testing whether prioritizing conceptual hints over syntactical corrections improves learning outcomes for struggling students.",
+      "description": "Liding et al. (ITiCSE 2025) analyzed 346 coding attempts across three CS1 quizzes and found that among the bottom-performing 15% of students (those requiring 10 or more attempts), syntactical errors declined sharply in the first 10 submissions while conceptual and strategic errors remained flat throughout. This creates a concrete routing question for any LLM-based tutoring system: when a student's submission log shows all three error types present simultaneously, which type should the LLM address first? Current automated feedback systems (including Pisan's Submit! and Jolly Feedback pipelines) treat all errors as equal and either surface all of them or prioritize the first failing test. This research builds a three-class error classifier on top of CSS 142 submission logs (syntactical: compilation failures, missing semicolons, undeclared variables; conceptual: wrong algorithm, incorrect loop logic, misunderstanding of return semantics; strategic: poor decomposition, copy-paste without adaptation, skipping edge cases) and trains a priority router that decides which error class to address first based on the student's attempt count and the composition of their current error set. Two routing strategies are compared in a within-subjects design across multiple assignments: 'syntax-first' (match what most compilers and linters do: fix the code so it runs before addressing logic) and 'concept-first' (address the deepest logical misunderstanding even if the code does not yet compile, using natural language hints that do not require working code as context). The LLM hint generator (claude-sonnet-5) receives the error class label, the student's attempt count, and the current failing submission as input, and generates a Socratic hint calibrated to the priority class. Outcome measures are: time to first passing submission, total attempt count after hint delivery, and a post-assignment comprehension probe (three short written questions about the algorithm). A secondary analysis replicates the Liding et al. finding on UW CSS 142 data and extends it by testing whether the syntactical error decline curve appears in Pisan's courses, establishing an empirical base for which the routing intervention is designed.",
+      "papers": [
+        {
+          "title": "Tracking the Progression of Errors Across Successive CS1 Code Submissions",
+          "authors": "Zhixian Christopher Liding, Nimisha Roy, Rodrigo Borela, Petros Panagiotopoulos, Mahesh Balan Uthirasamy, David A. Joyner (Georgia Institute of Technology)",
+          "venue": "ITiCSE 2025",
+          "year": 2025,
+          "doi": "10.1145/3724389.3730809",
+          "url": "https://doi.org/10.1145/3724389.3730809",
+          "abstract": "This study investigates the progression of error types across successive code submissions in a CS1 course, using LLM-based few-shot classification to categorize errors as syntactical, conceptual, or strategic. Analyzing 346 coding attempts across three quizzes, the study finds that among the bottom-performing 15% of students (10+ attempts), syntactical errors decline sharply in the first ten attempts while conceptual and strategic errors remain flat. The results raise the question of whether LLM-generated feedback should prioritize accelerating syntactical corrections or address higher-level logical errors earlier in the debugging process.",
+          "relevance": "Provides the foundational empirical result that motivates the routing intervention: the differential decay rate of error types across attempts establishes that syntax and concept errors are not equivalent targets for feedback timing. The open research question the paper explicitly poses ('should LLM feedback prioritize syntax or concept first?') is the direct basis for this study's experimental design."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "Next-Step Hints for Complex Coding Problems Using Large Language Models",
+          "authors": "SIGCSE TS 2026 (paper-158)",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770762.3772544",
+          "url": "https://doi.org/10.1145/3770762.3772544",
+          "relevance": "Establishes that LLMs can generate educationally useful next-step hints for coding problems. Informs the hint generation stage of the pipeline and provides a baseline methodology for evaluating hint quality against human-authored hints."
+        },
+        {
+          "title": "Can LLMs Identify Gaps and Misconceptions in Students' Code Explanations?",
+          "authors": "Various (arXiv preprint)",
+          "venue": "arXiv, 2025",
+          "year": 2025,
+          "url": "https://arxiv.org/abs/2501.10365",
+          "relevance": "Demonstrates that LLMs can identify pedagogically meaningful gaps in student programming artifacts, supporting the feasibility of the error-class-conditioned hint generator."
+        },
+        {
+          "title": "LLM-Generated Hints for CS1 Misconceptions in Pisan's Submit! System",
+          "authors": "Pisan (SIGCSE 2021, internal report)",
+          "venue": "SIGCSE 2021",
+          "year": 2021,
+          "relevance": "Pisan's prior work on hint generation within the Submit! system establishes the deployment infrastructure and IRB context for CSS 142 intervention studies, reducing setup cost for this study."
+        }
+      ],
+      "researchPlan": {
+        "overview": "The project replicates the Liding et al. error-progression finding on UW CSS 142 data, then builds and A/B-tests a priority routing layer that decides whether an LLM tutor should address syntax or concept errors first, based on a student's attempt count and current error composition.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Replicate the Liding et al. error-type progression analysis on anonymized Jolly Feedback submission logs from CSS 142 (at least two past semesters); confirm whether the syntactical-decay curve appears in UW data; define operational rules for syntactical vs. conceptual vs. strategic classification using few-shot Claude prompts on actual CSS 142 submission pairs; produce an annotated dataset of 200 student-assignment sessions with human-verified error-type labels",
+            "deliverable": "Error-type annotated dataset (200 sessions), replication analysis report comparing UW error decay curves to Liding et al. findings, few-shot classifier prompt set with precision/recall on held-out 50-session validation split"
+          },
+          {
+            "month": 2,
+            "goal": "Build the priority router: a rule-based module that reads (attempt count, error class composition) and outputs a routing decision (syntax-first or concept-first); build the hint generator using claude-sonnet-5 with two separate system prompts, one calibrated for syntax-targeted Socratic hints and one for concept-targeted Socratic hints; run an expert rating study in which 3 CS instructors blind-rate 40 hint pairs (syntax-first vs. concept-first for the same submission) on pedagogical relevance and specificity",
+            "deliverable": "Priority router implementation, hint generator with two routing modes, expert rating results and inter-rater reliability scores"
+          },
+          {
+            "month": 3,
+            "goal": "Pilot A/B study in one section of CSS 142 (approximately 40 students, 3 assignments): students who trigger the tutor system (3 or more failed attempts on a problem) are randomly assigned to syntax-first or concept-first routing for that assignment; measure time to first pass, total attempt count after hint delivery, and post-assignment comprehension probe scores; instructor and TAs are blind to routing condition",
+            "deliverable": "Pilot dataset with outcome measures, preliminary between-condition comparison, qualitative analysis of 20 sampled hint-response pairs"
+          },
+          {
+            "month": 4,
+            "goal": "Extend the study to a second CSS 142 section or a second assignment set; perform subgroup analysis: does routing preference differ for students who start as high-attempt vs. low-attempt users? Does it differ by error composition (majority-syntactical session vs. majority-conceptual session)?; thematic analysis of student free-text responses to comprehension probes",
+            "deliverable": "Extended dataset, subgroup analysis report, thematic codes for comprehension probe responses"
+          },
+          {
+            "month": 5,
+            "goal": "Statistical analysis across full A/B dataset; write and submit paper to SIGCSE TS or ITiCSE addressing: (1) replication of error-type progression in a different institution, (2) routing intervention design and implementation, (3) A/B outcome results, (4) recommendations for error-type priority in LLM tutoring systems",
+            "deliverable": "Submitted conference paper"
+          }
+        ],
+        "targetVenues": ["SIGCSE TS", "ITiCSE", "EDM", "ICER"],
+        "resources": "Jolly Feedback and Submit! submission logs for CSS 142 (existing, anonymized, approved under existing IRB); Claude API (claude-sonnet-5) for error classification and hint generation via local claude CLI; 1-2 student RAs for annotation and comprehension probe coding; no new data collection infrastructure required for the replication phase; a consent and IRB amendment for the A/B randomization phase is the main setup cost.",
+        "risks": [
+          {
+            "risk": "CSS 142 submission logs may not capture error type at the token level (only pass/fail per test case), making it hard to distinguish syntactical from conceptual errors without reading the code.",
+            "mitigation": "Use the LLM classifier directly on the submitted code diff rather than on log metadata; the classifier reads the code and identifies the primary error type from the code itself, not from log fields. This is the approach Liding et al. used, so it has a proven template to adapt."
+          },
+          {
+            "risk": "Small CSS 142 section sizes (typically 30-40 students) may produce underpowered A/B results, especially if only a fraction of students trigger the tutor (3 or more failed attempts).",
+            "mitigation": "Run across two sections if available; use a within-subjects component where each student receives both routing modes across different assignments with a washout period; report effect sizes and confidence intervals rather than binary significance, framing the pilot as effect-size estimation for a larger follow-on study."
+          },
+          {
+            "risk": "Students who receive concept-first hints on a submission that does not yet compile may find the feedback confusing or irrelevant because the conceptual hint references code behavior they cannot run.",
+            "mitigation": "Add a pre-condition: if the submission is a pure compilation failure (no tests ran), always route to syntax-first regardless of attempt count; reserve concept-first routing for submissions that at least partially execute. This boundary is easy to implement and reflects the Liding et al. finding that syntactical errors do decline early, so pure compilation failures are most common at low attempt counts where syntax-first is most likely correct anyway."
+          }
+        ],
+        "humanSubjects": true
+      }
+    }
+  ]
+}

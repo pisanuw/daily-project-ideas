@@ -382,3 +382,7 @@
 | 2026-08-26 | Pair Review Roulette | Teaching Tool | 1-2 Weeks |
 | 2026-08-26 | Type-Safe API Contract Lab | Classroom Assignment | Multi-week |
 | 2026-08-26 | From Submission Log to Reflection Prompt: LLM-Generated Metacognitive Scaffolds from Automated Grader Data in CS1 | Research | Research |
+| 2026-08-27 | Persona Bench | Side Project | Weekend |
+| 2026-08-27 | Bug Olympics | Teaching Tool | 1-2 Weeks |
+| 2026-08-27 | Whiteboard-to-Code Studio | Classroom Assignment | Multi-week |
+| 2026-08-27 | Error-Type Priority Routing for LLM-Generated CS1 Feedback: Should the Tutor Address Syntax or Concept First? | Research | Research |
