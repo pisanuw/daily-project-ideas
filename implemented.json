@@ -125,8 +125,10 @@
         "date": "2026-08-23",
         "n": 1
       },
-      "placeholder": true,
-      "notes": "In progress since 2026-08-27"
+      "notes": "Built in one session, fully client-side: a rule-based classifier (explicit section labels plus sentence-level cue patterns, each gene showing the evidence for its label) segments any pasted prompt into typed genes (role, persona, context, task, constraint, format, example), replacing the idea's suggested Claude API parsing; three hand-written deterministic mutations per gene type (e.g. Harden it / Soften it / Make it checkable, with case-aware word swaps like should-to-must) replace 'AI suggests three alternatives'; and a word-level LCS diff of the prompt itself replaces model-response diffing, since without API calls there are no responses to compare. A 12-rule lint scores the genome 0-100 (missing task, vague wording, brevity-vs-depth conflicts, negative-only constraints, duplicates, and more); genes can be edited, reclassified, reordered, and duplicated; a localStorage library keeps reusable genes with tags and search (replacing the implied server store); share links carry the whole genome in the URL hash; export as text, Markdown, or JSON. 87 vitest tests, 98.98% statement coverage; lint/typecheck/build green; verified end-to-end in headless Chromium. Deployed via the GitHub Actions deploy workflow (site created first try, runner verified the page returns 200), siteId pinned afterward.",
+      "url": "https://prompt-genome.netlify.app",
+      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/prompt-genome",
+      "implementedOn": "2026-08-27"
     }
   ]
 }
