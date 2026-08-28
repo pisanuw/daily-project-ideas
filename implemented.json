@@ -125,8 +125,10 @@
         "date": "2026-08-02",
         "n": 1
       },
-      "placeholder": true,
-      "notes": "In progress since 2026-08-28"
+      "notes": "Built in one session, fully client-side: the real TypeScript compiler (pinned 5.6.3) runs in a Web Worker over an in-memory file system with the full ES2022 lib.d.ts reference closure (57 files) bundled as raw text, so analysis is exact, offline, and nothing pasted leaves the browser. A post-order AST walk turns inference into a narrated story: literal types and let/const widening, generic calls showing declared signature, inferred binding (T = string, recovered defensively from internal signature state with graceful fallback), and resolved signature, unannotated callback parameters typed from context, control-flow narrowing with declared-vs-here detail, inferred return types, and compiler diagnostics threaded in right after the step where inference went astray. Hover any expression for its exact type, click to jump to its step, autoplay, major-steps filter, 8 pinned examples, URL-hash share links. The idea named no LLM, so nothing needed replacing; React was swapped for the monorepo's vanilla TS + Vite house pattern. One honest cost: the compiler-in-a-worker bundle is ~1 MB gzipped on first load. 62 vitest tests, 97.6% statement coverage; lint/typecheck/build green; verified end-to-end in headless Chromium. Deployed via the GitHub Actions deploy workflow (site created first try, runner verified the page returns 200), siteId pinned afterward.",
+      "url": "https://type-witness.netlify.app",
+      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/type-witness",
+      "implementedOn": "2026-08-28"
     },
     {
       "ref": {

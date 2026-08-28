@@ -231,3 +231,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-08-27 note Prompt Genome (2026-08-23 n1) marked implemented: live at prompt-genome.netlify.app, repo Claude-capstone/prompt-genome. Rule-based segmentation, template mutations, and prompt diffing replace Claude API; deploy worked first try, siteId pinned.
 
 2026-08-28 note Claimed Type Witness (2026-08-02 n1) as in progress: in-browser TypeScript inference visualizer, next Claude-capstone build.
+
+2026-08-28 note Type Witness (2026-08-02 n1) marked implemented: live at type-witness.netlify.app, repo Claude-capstone/type-witness. Real TS compiler in a Web Worker narrates inference step by step; no LLM to replace; deploy worked first try, siteId pinned.
