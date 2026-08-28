@@ -1,0 +1,162 @@
+{
+  "date": "2026-08-28",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Shadow Diff",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A developer tool that shows you what an AI would have done differently for the same code change, turning every PR into a silent side-by-side lesson.",
+      "description": "Shadow Diff takes your current git diff or PR branch, sends the original file and the task description to Claude, and generates an alternative implementation. It then renders a three-pane view: your version, the AI shadow version, and a semantic diff highlighting the key divergences in approach. The goal is not to replace your code but to surface where your solution differs from the AI's preferred patterns, giving you a calibration signal for when to follow AI suggestions and when your human judgment is correct. It also logs your divergence patterns over time so you can spot your own recurring blind spots.",
+      "keyFeatures": [
+        "Three-pane diff view: original, your change, AI shadow change",
+        "Semantic diff that names the design pattern or principle behind each divergence",
+        "Personal divergence log tracking which kinds of changes you consistently handle differently than AI",
+        "CLI mode for quick comparisons without a browser"
+      ],
+      "techStack": "React + Vite, Claude API, simple-git (Node), diff2html for rendering",
+      "whyInteresting": "AI code generation is now ubiquitous, but developers rarely see their own work compared directly to what the AI would have done. Shadow Diff makes this comparison immediate and persistent, building a calibration habit that keeps developers actively evaluating AI output rather than accepting it passively.",
+      "inspiredBy": "HN Show HN discussion of Stage (code review bottleneck tool) and the August 2026 'What are you working on?' thread noting the shift from writing to reviewing code as the primary bottleneck"
+    },
+    {
+      "n": 2,
+      "title": "Explanation Parallax",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "A classroom tool where students type their own explanation of a concept or code snippet, then instantly see it compared side-by-side with an LLM explanation and a misconception-targeted expert explanation, differences highlighted.",
+      "description": "Explanation Parallax draws on self-explanation research showing that articulating understanding in one's own words is one of the most effective learning strategies. Students submit a free-text explanation of a concept, function, or algorithm. The tool generates two comparison columns: a general LLM explanation and an instructor-authored misconception-targeted explanation. Color-coded highlights show where the student explanation omits, contradicts, or adds to each reference. The instructor dashboard aggregates class-wide explanation gaps, revealing which concepts are systematically under-explained so the instructor can intervene before the next lecture. Students can revise and re-compare in multiple rounds.",
+      "keyFeatures": [
+        "Three-column view: student explanation, LLM explanation, misconception-targeted expert explanation",
+        "Color-coded gap highlighting showing omissions, contradictions, and additions",
+        "Revision tracking so students can see how their explanations improve across rounds",
+        "Instructor dashboard aggregating class-wide explanation gaps by concept"
+      ],
+      "techStack": "React + Vite, Supabase (student responses and session data), Claude API, Tailwind CSS",
+      "whyInteresting": "The ITiCSE 2025 research on LLM-scaffolded self-explanation found that students benefited most when they could compare their thinking to an expert's. This tool makes that process immediate, structured, and scalable to large classes without manual instructor review for every submission.",
+      "inspiredBy": "ITiCSE 2025 paper on enhancing self-explanation with LLMs, and findings that students rarely revise explanations without structured comparison prompts"
+    },
+    {
+      "n": 3,
+      "title": "Algorithm Quest Narrator",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "Students build an AI dungeon master that presents classic algorithm and data structure problems as narrative adventures, adapts difficulty to player performance, and engages in Socratic dialogue without giving away solutions.",
+      "description": "Algorithm Quest Narrator is a multi-week capstone assignment in which students build a game-narrative AI tutor from scratch. The system wraps algorithm problems (graph traversal, dynamic programming, sorting) in D&D-style quest narratives and uses an LLM to adapt problem difficulty, generate new narrative variants of classic problems, and run Socratic questioning when a player is stuck. Students must design a state machine for quest progression, write prompt engineering constraints that prevent the DM from revealing answers, implement performance tracking to drive difficulty adjustment, and evaluate the DM's pedagogical effectiveness with a small test group. The assignment teaches prompt engineering, agent design, state machines, and pedagogy simultaneously.",
+      "keyFeatures": [
+        "Story-wrapped algorithm problems that preserve the underlying CS concepts",
+        "Adaptive difficulty engine tied to player submission history",
+        "Socratic dialogue mode that asks clarifying questions rather than revealing answers",
+        "Instructor-facing prompt audit log showing every DM response and student reaction"
+      ],
+      "techStack": "React + Vite (frontend), Flask or FastAPI (backend), Claude API, Supabase (game state and performance tracking)",
+      "whyInteresting": "Building an educational game forces students to encode algorithmic knowledge in multiple representations at once, producing deeper understanding than simply solving algorithm problems. The assignment also gives students hands-on experience with prompt safety, pedagogical design, and agent state management, all of which are core skills for the AI-era workforce.",
+      "inspiredBy": "ITiCSE 2025 paper on game-embedded multilingual CS1 improving computational thinking, and Pisan's own GONDOLA project delivering context-sensitive feedback inside role-play scenarios"
+    },
+    {
+      "n": 4,
+      "title": "CT Signature Mining: LLM-Based Detection of Multilingual-Game Pedagogy Impact in CS1 Submission Logs",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Can LLMs detect evidence of enhanced computational thinking directly from code submission logs, making it possible to retroactively compare CS1 pedagogies without direct student assessment? This research builds and validates automated CT-signature detectors for educational data mining.",
+      "description": "A multilingual, game-embedded CS1 pedagogy has been shown to improve code comprehension, abstract reasoning, and cross-language transfer compared to single-language instruction (Fostering CT in CS1, ITiCSE 2025). However, measuring these gains typically requires dedicated cognitive assessments that most institutions did not administer. This research operationalizes computational thinking into detectable submission-artifact signatures: decomposition quality, abstraction-layer consistency, cross-concept transfer indicators, and problem-reformulation flexibility. LLM classifiers are trained and calibrated to detect these signatures in ProgSnap2-format submission logs without new student participation. The validated detectors are then applied to publicly available CS1 datasets from traditional and innovative courses, enabling a scalable, retroactive comparison of pedagogical impact. A final deliverable is an open-source instructor dashboard that shows real-time CT-signature feedback during an active CS1 course, letting instructors see whether their pedagogy is building deep or surface-level computational thinking week by week.",
+      "papers": [
+        {
+          "title": "Fostering Computational Thinking in CS1 through Multilingual",
+          "authors": "M University Commerce, M University Commerce, M University Commerce, M University Commerce, M University Commerce",
+          "venue": "ITiCSE 2025",
+          "year": 2025,
+          "doi": "10.1145/3724363.3729066",
+          "url": "https://doi.org/10.1145/3724363.3729066",
+          "abstract": "This paper presents a novel pedagogy designed to enhance computational thinking by simultaneously introducing students to multiple programming languages and embedding game development throughout the curriculum. A quasi-experimental study across multiple semesters found that the multilingual, game-based approach not only improves students' interest and motivation but also enhances their computational thinking abilities, particularly in code comprehension, problem-solving, and applying concepts across different programming languages.",
+          "relevance": "Provides the pedagogical claim this research aims to operationalize and validate through log-based evidence: that multilingual, game-embedded CS1 produces measurable CT improvements, which this work re-casts as detectable signatures in submission artifacts."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "ProgSnap2: A Flexible Format for Programming Process Data",
+          "authors": "Thomas W. Price, Yihuan Dong, Dragan Lipovac",
+          "venue": "ITiCSE 2020",
+          "year": 2020,
+          "url": "https://dl.acm.org/doi/10.1145/3341525.3387373",
+          "relevance": "Defines the standardized submission-log format used to store and share CS1 programming process data across institutions; the CT signature detectors will be designed around ProgSnap2's MainTable schema so they work across publicly available datasets."
+        },
+        {
+          "title": "KOALA: Customizable IDE Data Collection Tool",
+          "authors": "JetBrains Research",
+          "venue": "ITiCSE 2025",
+          "year": 2025,
+          "url": "https://doi.org/10.1145/3724389.3730770",
+          "relevance": "Provides a complementary data-collection pipeline (JetBrains IDEs, ProgSnap2 export) that could be deployed in future multilingual courses to capture richer behavioral signals (edit events, debug actions, tool window usage) for training and validating CT signature models."
+        },
+        {
+          "title": "CS1-LLM: Integrating LLMs into CS1 Instruction",
+          "authors": "Russell et al.",
+          "venue": "ITiCSE 2024",
+          "year": 2024,
+          "url": "https://dl.acm.org/doi/10.1145/3649217.3653584",
+          "relevance": "Demonstrates how LLMs have already been integrated into CS1 contexts; this work extends that thread by using LLMs not as student-facing tutors but as automated raters of code-submission artifacts for research purposes."
+        },
+        {
+          "title": "How Novices Use LLM-based Code Generators to Solve CS1 Coding Tasks in a Self-Paced Learning Environment",
+          "authors": "Denny et al.",
+          "venue": "Koli Calling 2023",
+          "year": 2023,
+          "url": "https://dl.acm.org/doi/fullHtml/10.1145/3631802.3631806",
+          "relevance": "Shows how novices' code submission patterns shift when LLM tools are available, providing a baseline for distinguishing AI-assisted versus independently developed CT signatures in submission logs, an important confound to control for in any post-2023 dataset."
+        }
+      ],
+      "researchPlan": {
+        "overview": "This project builds LLM-powered classifiers that detect computational thinking signatures in CS1 submission logs, validates them against ground-truth assessments from the multilingual-game CS1 study, and deploys them as an open-source instructor dashboard. The outcome is both a validated measurement instrument for CS education research and a practical real-time feedback tool for instructors evaluating their own course's CT outcomes.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review and CT signature taxonomy design",
+            "deliverable": "Annotated bibliography + taxonomy document defining four CT signature dimensions (decomposition, abstraction, transfer, flexibility) with code-artifact indicators for each"
+          },
+          {
+            "month": 2,
+            "goal": "Prompt engineering for LLM-based CT signature detection and inter-rater calibration",
+            "deliverable": "Calibrated prompt library with measured agreement (Cohen's kappa) between LLM classifiers and human expert raters on a held-out sample of CS1 submissions"
+          },
+          {
+            "month": 3,
+            "goal": "Dataset acquisition and preprocessing",
+            "deliverable": "Cleaned ProgSnap2 datasets from at least two CS1 course types (traditional and multilingual/game) with metadata for course pedagogy, language, and institution type"
+          },
+          {
+            "month": 4,
+            "goal": "CT signature profile comparison across pedagogical approaches",
+            "deliverable": "Statistical comparison report showing which signature dimensions differ between traditional and multilingual-game courses, with effect sizes and confidence intervals"
+          },
+          {
+            "month": 5,
+            "goal": "Instructor dashboard prototype and pilot deployment in an active CS1 section",
+            "deliverable": "Working web dashboard showing real-time CT signature distributions for a live course; pilot feedback report from at least one instructor"
+          },
+          {
+            "month": 6,
+            "goal": "Paper writing and revision",
+            "deliverable": "Submitted conference paper draft with full methods, results, and open-source repository for the signature detectors and dashboard"
+          }
+        ],
+        "targetVenues": ["ICER", "EDM", "SIGCSE", "LAK"],
+        "resources": "Public ProgSnap2-format datasets (CSEDM Data Challenge, CodeWorkout); Claude API for LLM classifiers (using the local claude CLI per project policy); Pisan's existing Jolly Feedback submission log infrastructure; one undergraduate or graduate research assistant for human-rating calibration; Python/pandas/sklearn for statistical analysis.",
+        "risks": [
+          {
+            "risk": "LLM CT signature classifiers may have poor validity — rated differently by different human experts, making the ground truth noisy",
+            "mitigation": "Use a multi-expert calibration process with at least three raters and adjudicate disagreements; report only dimensions with kappa > 0.6"
+          },
+          {
+            "risk": "Public CS1 datasets may not include multilingual or game-embedded courses, making the comparison impossible without author cooperation",
+            "mitigation": "Contact the ITiCSE 2025 paper authors early (month 1) to request their anonymized dataset; design the study to include any language-diverse or project-heavy course as a proxy if needed"
+          },
+          {
+            "risk": "AI code generation tools (Copilot, Claude) contaminate student submissions in post-2023 datasets, confounding CT signature measurement",
+            "mitigation": "Use datasets from before 2023 where possible, or apply AI-detection pre-filters; include AI-use status as a covariate in analyses using newer data"
+          }
+        ],
+        "humanSubjects": false
+      }
+    }
+  ]
+}

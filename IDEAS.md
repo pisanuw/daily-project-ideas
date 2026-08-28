@@ -386,3 +386,7 @@
 | 2026-08-27 | Bug Olympics | Teaching Tool | 1-2 Weeks |
 | 2026-08-27 | Whiteboard-to-Code Studio | Classroom Assignment | Multi-week |
 | 2026-08-27 | Error-Type Priority Routing for LLM-Generated CS1 Feedback: Should the Tutor Address Syntax or Concept First? | Research | Research |
+| 2026-08-28 | Shadow Diff | Side Project | Weekend |
+| 2026-08-28 | Explanation Parallax | Teaching Tool | 1-2 Weeks |
+| 2026-08-28 | Algorithm Quest Narrator | Classroom Assignment | Multi-week |
+| 2026-08-28 | CT Signature Mining: LLM-Based Detection of Multilingual-Game Pedagogy Impact in CS1 Submission Logs | Research | Research |
