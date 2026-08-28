@@ -229,3 +229,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-08-25 note Code Analogy Forge (2026-08-25 n1) marked implemented: live at code-analogy-forge.netlify.app, repo Claude-capstone/code-analogy-forge. Curated 14x3x4 analogy corpus + deterministic detector replace Claude API, localStorage replaces Supabase; deploy worked first try, siteId pinned.
 
 2026-08-27 note Prompt Genome (2026-08-23 n1) marked implemented: live at prompt-genome.netlify.app, repo Claude-capstone/prompt-genome. Rule-based segmentation, template mutations, and prompt diffing replace Claude API; deploy worked first try, siteId pinned.
+
+2026-08-28 note Claimed Type Witness (2026-08-02 n1) as in progress: in-browser TypeScript inference visualizer, next Claude-capstone build.
