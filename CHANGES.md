@@ -233,3 +233,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-08-28 note Claimed Type Witness (2026-08-02 n1) as in progress: in-browser TypeScript inference visualizer, next Claude-capstone build.
 
 2026-08-28 note Type Witness (2026-08-02 n1) marked implemented: live at type-witness.netlify.app, repo Claude-capstone/type-witness. Real TS compiler in a Web Worker narrates inference step by step; no LLM to replace; deploy worked first try, siteId pinned.
+
+2026-08-29 [doc] Created ideas/2026-08-29.json with 4 ideas: CSS Cascade Combat, Bug Witness Investigation, Build-Your-Own Vector Search Engine, Visual Flowchart Differencing for Misconception Classification (CodeFlow SIGCSE 2026 doi:10.1145/3770761.3777175)

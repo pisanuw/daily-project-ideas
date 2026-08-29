@@ -390,3 +390,7 @@
 | 2026-08-28 | Explanation Parallax | Teaching Tool | 1-2 Weeks |
 | 2026-08-28 | Algorithm Quest Narrator | Classroom Assignment | Multi-week |
 | 2026-08-28 | CT Signature Mining: LLM-Based Detection of Multilingual-Game Pedagogy Impact in CS1 Submission Logs | Research | Research |
+| 2026-08-29 | CSS Cascade Combat | Side Project | Weekend |
+| 2026-08-29 | Bug Witness Investigation | Teaching Tool | 1-2 Weeks |
+| 2026-08-29 | Build-Your-Own Vector Search Engine | Classroom Assignment | Multi-week |
+| 2026-08-29 | Visual Flowchart Differencing for Misconception Classification: A SKETCHY-Inspired Approach to Targeted CS1 Feedback | Research | Research |

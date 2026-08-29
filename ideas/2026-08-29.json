@@ -1,0 +1,154 @@
+{
+  "date": "2026-08-29",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "CSS Cascade Combat",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A browser puzzle game where players write CSS selectors to beat the cascade. Real-time rendering shows which rules win and why, turning CSS specificity from a perennial frustration into a learnable skill.",
+      "description": "CSS specificity and cascade order frustrate developers at every level, yet no gamified tool for mastering them exists. CSS Cascade Combat presents a live DOM element already styled by a set of opponent rules, and the player must write a new CSS rule (selector plus declaration) that achieves a target style by winning the cascade. Each puzzle level focuses on one concept: pseudo-class weight, !important, cascade layers, :is() specificity normalization, or inline styles. An in-panel breakdown walks through the exact resolution steps after each attempt, so failure teaches as much as success. A sandbox mode lets players experiment freely with instant computed-style feedback, and a streak-based scoring system rewards concise, elegant selectors over brute-force !important spam.",
+      "keyFeatures": [
+        "30+ puzzle levels organized by specificity concept (type selectors, class, ID, pseudo-class, layers, !important)",
+        "Live browser rendering with specificity score displayed for every competing rule side by side",
+        "Post-attempt cascade walkthrough explaining the resolution order using the actual cascade algorithm steps",
+        "Sandbox mode for free-form selector experimentation with instant computed-style and specificity feedback"
+      ],
+      "techStack": "React + Vite + Tailwind; browser-native CSS rendering via Shadow DOM (no external CSS parser needed); localStorage for puzzle progress and scores",
+      "whyInteresting": "CSS specificity is one of the top pain points in front-end development, yet it is teachable in a session if the feedback loop is tight enough. Shadow DOM isolation makes the implementation clean: each puzzle loads its own style sheet inside a shadow root so the game's own CSS never interferes with the puzzle state. A classroom edition that generates puzzles from real student project bugs is a natural follow-on.",
+      "inspiredBy": "https://news.ycombinator.com/item?id=49378768 (Show HN: Huzzah, a novel approach to coding with AI) and recurring CSS specificity frustration threads on r/webdev and r/SideProject"
+    },
+    {
+      "n": 2,
+      "title": "Bug Witness Investigation",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "An interrogation-style debugging game where CS students question AI witness characters to deduce a bug's root cause, building systematic diagnostic thinking through narrative gameplay.",
+      "description": "Inspired by the voice-driven murder mystery genre trending on Hacker News, Bug Witness Investigation casts each debugging scenario as a case. Three AI witness characters hold partial, non-overlapping knowledge: the function body knows what values it received and what execution path it took; the caller knows what it passed in and what it expected back; the test harness knows only what it observed externally. Students ask questions in natural language and each character answers truthfully within its knowledge scope while refusing to speculate beyond it. When students correctly identify the bug type and location and write the fix, a postmortem screen maps the error to a named CS1 or CS2 misconception. Instructors add new scenarios by pasting buggy and correct code into a guided form; the system generates the witness personas automatically from the code diff.",
+      "keyFeatures": [
+        "Three witness archetypes per scenario (function body, caller, test harness) with disjoint knowledge scopes enforced by separate system prompts",
+        "25+ pre-built scenarios covering off-by-one errors, null dereference, mutation aliasing, type confusion, and missing base cases",
+        "Postmortem screen linking the discovered bug to a named misconception with a suggested follow-up exercise",
+        "Instructor scenario builder: paste buggy and correct code, answer three questions, and the tool generates the witness personas and scenario metadata"
+      ],
+      "techStack": "React + Vite + Tailwind; Claude API for witness character dialogue (separate system prompt per witness enforcing knowledge scope); Supabase for scenario library and student attempt logs",
+      "whyInteresting": "Students develop stronger debugging habits when they must ask precise diagnostic questions rather than receive a hint. The three-witness structure prevents any single character from giving away the answer, and the narrative framing sustains engagement through hard scenarios. Directly inspired by WhoDunnitAI and the HN voice murder mystery project, which showed that interrogation mechanics drive deep engagement even for technically difficult problems.",
+      "inspiredBy": "https://news.ycombinator.com/item?id=49238851 (Show HN: Voice driven murder mystery, Interview AI suspects with your voice, Hacker News August 2026)"
+    },
+    {
+      "n": 3,
+      "title": "Build-Your-Own Vector Search Engine",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "Students implement a complete vector similarity search engine from flat brute-force cosine search to HNSW approximate nearest-neighbor search, wrapped in a Flask API, learning the algorithms and tradeoffs underlying every modern RAG and semantic search system.",
+      "description": "As retrieval-augmented generation becomes central to AI applications, CS students need to understand how vector search actually works rather than just calling an SDK. This four-milestone assignment builds understanding from the ground up: implement cosine similarity and a flat in-memory embedding store; add a simple inverted-file index for metadata filtering; implement the Hierarchical Navigable Small World (HNSW) graph for approximate nearest-neighbor search with tunable recall-speed tradeoffs; and wrap the engine in a Flask HTTP API with file-based persistence, then benchmark it against ChromaDB or Qdrant on a 100K-snippet Wikipedia embedding dataset. Students submit benchmark plots (Recall@K vs. query latency) as part of their deliverable, forcing them to reason about the tradeoffs their design choices create. A C++ variant using the CSS 342/343 toolchain adds an optional systems-programming dimension.",
+      "keyFeatures": [
+        "Four scaffolded milestones: flat cosine search, inverted-file index, HNSW graph, and REST API with persistence",
+        "Pre-embedded benchmark dataset (Wikipedia 100K snippets, 384-dimensional sentence-transformer embeddings) ready to download",
+        "Benchmarking harness computing Recall@1/5/10 and median query latency against a reference database",
+        "Optional C++ variant using Eigen for vector math and Google Test for unit testing, compatible with the CSS 342/343 toolchain"
+      ],
+      "techStack": "Python (NumPy for vector math, Flask for API, SQLite or flat-file persistence); optional C++ variant with Eigen + GTest; pytest-benchmark for performance measurement",
+      "whyInteresting": "Vector search is the invisible infrastructure behind AI assistants, recommendation engines, and RAG pipelines, yet most curricula treat it as a black box. Students who implement HNSW understand greedy graph traversal, layer-based recall, and recall-precision tradeoffs in a concrete, verifiable context. Inspired by the surge in AI education repositories trending on GitHub in August 2026, including a comprehensive open-source AI agent architecture textbook calling explicitly for hands-on infrastructure assignments.",
+      "inspiredBy": "https://ossinsight.io/trending/ai (GitHub trending AI repositories, August 2026) and the trending ai-agent-book open-source textbook on GitHub with 90+ hands-on infrastructure projects"
+    },
+    {
+      "n": 4,
+      "title": "Visual Flowchart Differencing for Misconception Classification: A SKETCHY-Inspired Approach to Targeted CS1 Feedback",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Extends LLM-generated flowchart feedback by adding a structural differencing layer that classifies the topology of deviation between a student's control-flow graph and the correct solution, then delivers misconception-specific targeted hints grounded in the visual deviation pattern.",
+      "description": "CodeFlow (SIGCSE TS 2026, Zheng and Shi) demonstrates that translating student code into flowcharts for visual comparison with correct solutions is a promising formative feedback strategy, but the system stops at highlighting errors without classifying the type of logical misconception that produced the structural deviation. This research proposes a two-phase extension: a structural differencing phase that compares student and correct flowcharts using a vocabulary of graph-topology deviations (missing conditional branches, inverted predicate direction, misplaced assignment nodes, extra or absent loop-back edges) directly analogous to the visual routines vocabulary from Pisan's SKETCHY system for domain-independent graph interpretation; and a misconception classification phase that maps each deviation pattern to a canonical CS1 misconception type (off-by-one, missing initialization, confused operator precedence, aliasing confusion). Classified misconceptions then drive targeted, misconception-specific LLM feedback rather than generic error descriptions. The primary evaluation uses archived CS1 submission logs from Jolly Feedback to compare the precision of flowchart-differencing-derived misconception labels against expert-annotated ground truth, then measures whether misconception-targeted visual feedback produces higher-quality student revisions than generic LLM text feedback on the same submission set, all without requiring live human-subjects collection.",
+      "papers": [
+        {
+          "title": "CodeFlow: LLM-Generated Flowchart Feedback for Programming Students",
+          "authors": "Kehao Zheng, Yang Shi",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770761.3777175",
+          "url": "https://doi.org/10.1145/3770761.3777175",
+          "abstract": "CodeFlow translates student-written code into flowcharts, allowing learners to visualize and compare the logic flow of their incorrect submissions to correct solutions. The flowchart feedback highlights syntax errors and logic errors directly within the flowchart, offering an intuitive way for students to pinpoint issues without revealing full solutions. The authors hypothesize that bridging flowcharts and coding enables students to gain a deeper understanding of program structure and enhance their debugging experience.",
+          "relevance": "CodeFlow establishes the core pipeline this research extends: LLM-driven code-to-flowchart translation plus visual comparison highlighting errors. The proposed structural differencing and misconception classification layer directly addresses the gap CodeFlow leaves open: the system shows where the flowcharts differ but does not name or explain the underlying misconception responsible for that structural deviation."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "A Visual Routines Based Model of Graph Understanding",
+          "authors": "Yusuf Pisan",
+          "venue": "Proceedings of the 17th Annual Conference of the Cognitive Science Society",
+          "year": 1995,
+          "url": "https://qrg.northwestern.edu/papers/Files/QRG_Dist_Files/QRG_1995/Pisan_1995_Visual_Routines_Based_Model_Graphic_Understanding.pdf",
+          "relevance": "The SKETCHY system's visual-routines vocabulary (slope, intersection, region, change-of-slope, label-binding) for domain-independent line-graph interpretation is the direct conceptual ancestor of the proposed flowchart-topology deviation vocabulary. This prior work provides the theoretical grounding for treating control-flow graph structural differences as classifiable visual patterns rather than requiring domain-specific program analysis."
+        },
+        {
+          "title": "Automated Identification of Logical Errors in Programs: Advancing Scalable Analysis of Student Misconceptions",
+          "authors": "Muntasir Hoq, Ananya Rao, Reisha Jaishankar, Krish Piryani, Nithya Janapati, Jessica Vandenberg, Bradford Mott, Narges Norouzi, James Lester, Bita Akram",
+          "venue": "18th International Conference on Educational Data Mining (EDM 2025), Palermo, Italy",
+          "year": 2025,
+          "url": "https://educationaldatamining.org/EDM2025/proceedings/2025.EDM.long-papers.85/index.html",
+          "relevance": "Proposes a scalable AST-embedding approach (Subtree-based Attention Neural Network, SANN) for identifying logical error patterns in student code without requiring rubrics or reference solutions. This AST-based structural method is complementary to the proposed flowchart-differencing approach: where SANN operates on abstract syntax trees and produces latent vectors, the flowchart-differencing method operates on interpretable control-flow graphs whose deviations can be shown directly to students as visual feedback."
+        },
+        {
+          "title": "Code as Anchor, Memory and Metaphor as Support: Learner Experiences with Multi-View Visualizations",
+          "authors": "N. Sibia, J. Wen, A. Richardson, Y. Jain, K. Malik, B. Simion, A. Petersen, A. Bernuy, C. Nobre, M. Liut",
+          "venue": "ACM Conference on International Computing Education Research (ICER 2026)",
+          "year": 2026,
+          "url": "https://dl.acm.org/doi/10.1145/3765964.3811662",
+          "relevance": "A within-subjects study with 19 undergraduates found that students spent nearly half their time anchored on code despite available memory and metaphor visual scaffolds, with novices engaging minimally with non-code views. This motivates deriving visual feedback directly from the code's own control-flow structure rather than adding a separate metaphorical representation, keeping the visual tightly coupled to the student's primary cognitive anchor."
+        }
+      ],
+      "researchPlan": {
+        "overview": "The research constructs a flowchart-topology deviation vocabulary from existing CS1 misconception literature, builds and validates a classifier mapping deviation patterns to misconception types using Jolly Feedback submission archives, and compares misconception-targeted visual feedback against generic LLM feedback on revision quality using the same archived data — all without requiring live human-subjects collection.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review and vocabulary construction",
+            "deliverable": "Annotated bibliography plus a canonical flowchart-deviation vocabulary of 15-25 pattern types mapped to a CS1 misconception taxonomy, reviewed with one CS1 instructor"
+          },
+          {
+            "month": 2,
+            "goal": "Implement code-to-flowchart conversion and structural differencing algorithm",
+            "deliverable": "Python module: source code to AST to control-flow graph, plus pairwise graph-topology comparison with labeled deviation types; validated on 50 hand-labeled submission pairs"
+          },
+          {
+            "month": 3,
+            "goal": "Build and validate misconception classifier from deviation patterns",
+            "deliverable": "Classifier achieving at least 70% precision against expert-annotated Jolly Feedback submissions; confusion matrix and error analysis report"
+          },
+          {
+            "month": 4,
+            "goal": "Integrate misconception-targeted LLM feedback generation",
+            "deliverable": "End-to-end pipeline: deviation detected, misconception classified, targeted hint generated via LLM; 200-submission sample with hints rated by two instructors on specificity and accuracy"
+          },
+          {
+            "month": 5,
+            "goal": "Offline evaluation comparing flowchart-differencing feedback against generic LLM feedback",
+            "deliverable": "Analysis report comparing revision success rate and number of subsequent submissions between targeted and generic feedback conditions on matched archived submission pairs"
+          },
+          {
+            "month": 6,
+            "goal": "Write and submit paper",
+            "deliverable": "Full paper draft submitted to a target venue; supplementary replication package including vocabulary, classifier, and anonymized evaluation dataset"
+          }
+        ],
+        "targetVenues": ["SIGCSE", "EDM", "AIED", "ICER"],
+        "resources": "Jolly Feedback submission logs from CSS 142/143 (existing data, no new collection needed); one student research assistant for misconception annotation; cloud compute for embedding and LLM-hint-generation experiments; Claude API for targeted hint generation.",
+        "risks": [
+          {
+            "risk": "The flowchart-generation step may fail for syntactically ill-formed student submissions, reducing the applicable dataset size.",
+            "mitigation": "Apply an LLM-based minimal repair pass before flowchart generation, and report the recovery rate as a research finding; restrict the primary study to compilable submissions if recovery quality is unreliable."
+          },
+          {
+            "risk": "The deviation vocabulary may not cover a sufficient fraction of real student errors, leaving many submissions unclassifiable.",
+            "mitigation": "Seed the vocabulary from established CS1 error taxonomies (Hristova et al. 2003; Brown and Altadmri 2014 Blackbox study) and track the uncategorized-submission rate explicitly as a secondary research question with implications for vocabulary extension."
+          },
+          {
+            "risk": "Offline revision-quality metrics computed from archived submissions may not fully predict whether live students actually benefit from the feedback differently.",
+            "mitigation": "Limit claims to what the archive can support; frame a live A/B study in a future semester as planned follow-on work that avoids immediate IRB requirements while providing a clear incremental contribution."
+          }
+        ],
+        "humanSubjects": false
+      }
+    }
+  ]
+}
