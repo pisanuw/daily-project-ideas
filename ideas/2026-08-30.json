@@ -1,0 +1,154 @@
+{
+  "date": "2026-08-30",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "LLM Diff",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A CLI tool that compares two prompts or system-prompt versions by running both against a shared set of test inputs and producing a semantic diff showing exactly how outputs changed.",
+      "description": "Prompt engineering is now a first-class development activity, but developers have no equivalent of 'git diff' for understanding how a prompt change alters model behavior across a range of inputs. LLM Diff fixes this: you provide two prompt files (or two git-tracked versions of a system prompt) and a JSON test suite of sample inputs, and the tool runs both prompts against each input using the local claude CLI, then renders a side-by-side semantic diff. Columns show which test cases flipped (pass to fail or vice versa), which outputs changed length or tone, and which safety refusals appeared or disappeared. A summary header scores the change as a regression, improvement, or neutral refactor. The tool is designed to run in CI so prompt changes get the same review discipline as code changes: open a PR, CI runs LLM Diff against the golden test suite, and reviewers see the semantic delta before approving.",
+      "keyFeatures": [
+        "Side-by-side output diff per test case with a pass/fail flip detector and overall regression/improvement summary",
+        "Git integration: compare HEAD prompt against a branch version using 'llmdiff HEAD feature/new-system-prompt test-suite.json'",
+        "CI mode that exits non-zero on regression (configurable threshold) so prompt PRs fail the build on output degradation",
+        "Aggregate statistics: output length distribution, refusal rate, and format consistency score across all test cases"
+      ],
+      "techStack": "Node.js + TypeScript; local claude CLI for model calls (no API key required); diff library for unified output rendering; Jest for the test harness runner",
+      "whyInteresting": "Prompt versioning is the invisible craft behind every LLM-powered product, yet teams iterate blindly: they change a prompt and hope. LLM Diff brings the same feedback discipline that unit tests brought to code, applied to the one layer of AI systems that currently has no automated regression safety net. The CI integration closes a real gap: today's code review tools show diffs of prompt text but not diffs of prompt behavior.",
+      "inspiredBy": "https://news.ycombinator.com/item?id=47864393 (Scoring Show HN submissions for AI design patterns) and the GitHub trending claude-code-templates and awesome-claude-skills repositories showing the growing need for prompt lifecycle tooling"
+    },
+    {
+      "n": 2,
+      "title": "Stack Trace Theater",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "A browser tool that animates Python and Java stack traces as frame-by-frame call stack walkthroughs, with LLM-generated plain-English explanations at each level so novices understand not just what failed but why.",
+      "description": "Stack traces are the primary error communication channel in CS1 and CS2, yet novices consistently misread them: they fix the bottom frame instead of the root cause, they ignore the exception type, and they panic at long chains of framework calls. Stack Trace Theater takes a pasted traceback and renders it as an animated call stack: frames arrive one at a time from the outermost call to the error site, each frame showing the source file, line number, and local variable state. Hovering over any frame reveals an LLM-generated one-sentence explanation of what that function was trying to do and why it reached this point. An interactive mode lets students step forward and backward through the call chain at their own pace. A class mode collects the most-pasted tracebacks across an active course section so instructors can see which error patterns recur and address them in the next lab. The tool supports Python tracebacks (including common library frames from Flask, NumPy, and Pytest) and JVM stack traces (Java and Kotlin).",
+      "keyFeatures": [
+        "Animated frame-by-frame call stack walkthrough with forward/back stepping and variable state display at each frame",
+        "LLM-generated one-sentence plain-English explanation per frame, tuned to CS1/CS2 vocabulary level",
+        "Library-frame collapse: well-known framework internals (Flask routing, NumPy ufunc dispatch) collapse by default with a one-line summary, keeping focus on student code",
+        "Instructor dashboard aggregating the most-common error types pasted during an active course section"
+      ],
+      "techStack": "React + Vite + Tailwind; Framer Motion for stack animation; claude CLI (local, no API key) for frame explanations; Python traceback parser in Python, JVM trace parser in Node.js",
+      "whyInteresting": "The stack trace is the first place a novice programmer looks when something breaks and the place they understand least. Every CS1 instructor has seen students delete the error message and start guessing changes. Stack Trace Theater makes the error message the lesson: each session builds the reading skill rather than bypassing it. The library-frame collapse solves the specific pain of framework stack explosions that bury the student's own code six frames down.",
+      "inspiredBy": "https://news.ycombinator.com/item?id=46345827 (Ask HN: What developer tool do you wish existed in 2026?) and recurring complaints in r/learnprogramming and r/cs50 about incomprehensible stack traces in introductory courses"
+    },
+    {
+      "n": 3,
+      "title": "Build Your Own LLM Router",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "Students implement a production-quality LLM gateway supporting model selection by cost tier, streaming responses, per-user cost budgeting, retry with backoff, and a live admin dashboard, then benchmark it against an open-source reference implementation.",
+      "description": "As LLM API calls become standard infrastructure in software products, CS students need hands-on experience with the systems concerns that surround them: latency, cost, fault tolerance, and observability. This four-milestone assignment asks students to build an LLM router from scratch. In the first milestone they implement a FastAPI proxy that routes requests to different providers based on a cost-tier configuration file, validating request schemas and returning unified response objects. In the second milestone they add streaming response support using server-sent events, with a configurable timeout and retry policy. In the third milestone they implement per-user cost budgeting backed by a SQLite ledger: requests are metered by token count, budgets are enforced per user, and the gateway returns a 429 with remaining budget when the limit is hit. In the fourth milestone students build a React admin dashboard showing real-time request volume, cost burn rate by user, provider latency distributions, and error rates. The final deliverable includes a benchmarking report comparing their gateway's throughput and latency tail to OmniRoute on a shared load-test harness. An optional extension adds multi-key rotation and circuit-breaker logic for providers that return 5xx errors.",
+      "keyFeatures": [
+        "Four milestones: cost-tier routing proxy, streaming SSE support, per-user cost budgeting ledger, and real-time admin dashboard",
+        "Shared benchmark harness measuring requests per second, P95 latency, and budget enforcement accuracy against a reference implementation",
+        "Instructor-provided stub configurations for multiple providers so the assignment works in development without live API keys",
+        "Optional extension: multi-key rotation pool and circuit-breaker state machine for providers returning 5xx errors"
+      ],
+      "techStack": "Python (FastAPI + asyncio for the gateway, SQLite for cost ledger, httpx for upstream calls); React + Vite for the admin dashboard; pytest-benchmark and Locust for load testing",
+      "whyInteresting": "LLM routing is now a canonical systems-programming problem: it combines API design, streaming protocols, database-backed rate limiting, and observability in one coherent application. Students who build this assignment can read an OmniRoute or LiteLLM codebase and understand every abstraction. The cost-budgeting milestone is especially novel: it forces students to reason about economic constraints on software behavior, a skill that pure algorithmic coursework never requires.",
+      "inspiredBy": "https://github.com/OmniRoute/OmniRoute (GitHub trending: local AI gateway unifying 290+ LLM providers behind a single API) and AI gateway architecture discussions in the HN Ask: What are you working on? August 2026 thread (news.ycombinator.com/item?id=49233423)"
+    },
+    {
+      "n": 4,
+      "title": "AI Coding Tools as SEPT On-Ramps: Measuring Toolchain Adoption Sequence Shifts Before and After the Copilot Era",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Extends a SIGCSE TS 2026 study of SEPT adoption in engineering education by asking whether AI coding assistants accelerate, delay, or bypass standard professional toolchain practices, using submission logs and longitudinal surveys to map adoption sequence changes across the Copilot era.",
+      "description": "A 2026 SIGCSE study at Franklin W. Olin College of Engineering found that mechanical engineering undergrads using software engineering practices and tools (SEPTs) such as version control, automated testing, and continuous integration adopt them at uneven rates and with significant misconceptions about their purpose. Separately, the 2024-2026 wave of AI coding assistants (GitHub Copilot, Claude Code, Cursor) has changed what novice developers do first when starting a project: many now prompt before they type, and some bypass file structure and version control entirely when an AI offers to scaffold the whole project. This research asks whether AI coding assistants function as SEPT on-ramps (lowering the friction to starting with git and tests because the AI sets them up automatically) or as SEPT detours (reducing student motivation to learn professional practices they feel the AI handles for them). The study combines a longitudinal survey of CS and engineering students across three semesters with log-based analysis of IDE and git activity to map the order in which students first use each SEPT in a new project. Adoption sequence graphs for pre-Copilot, Copilot-available, and Claude Code cohorts are compared using sequence alignment distance metrics, and regression analysis identifies which practices show the largest adoption-order shifts. Instructors at three institutions pilot two curriculum interventions: a toolchain-first lab sequence that explicitly requires students to set up version control and CI before requesting any AI assistance, and a reflection exercise where students audit which practices in their project were set up by AI versus by themselves. The primary research question is whether toolchain-first instruction closes the gap between AI-assisted and unaided SEPT adoption profiles.",
+      "papers": [
+        {
+          "title": "Understanding Software Engineering Practices and Tools in Engineering Education",
+          "authors": "Ramzey Burdette, Michelle Jarvie-Eggart, Titilayo Oshinowo, Stephanos Matsumoto",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770762.3772667",
+          "url": "https://doi.org/10.1145/3770762.3772667",
+          "abstract": "This study examines how mechanical engineering undergraduates adopt software engineering practices and tools (SEPTs) such as version control, automated testing, and CI/CD in their coursework. The authors find that adoption rates are uneven across practices, that students frequently hold misconceptions about the purpose of each tool, and that curricula that make SEPTs central rather than incidental produce stronger adoption outcomes.",
+          "relevance": "Establishes the baseline SEPT adoption profile in engineering education that this research extends into the AI coding-assistant era. The adoption-rate and misconception findings provide the dependent variables and measurement vocabulary for comparing pre-Copilot and post-Copilot toolchain adoption sequences."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "Gen AI in Computing Education: A Gap Analysis of Pedagogical Practices and Industry Expectations",
+          "authors": "Arnel B. Ocay, Maria Mercedes T. Rodrigo",
+          "venue": "ITiCSE 2025",
+          "year": 2025,
+          "url": "https://doi.org/10.1145/3724389.3730793",
+          "relevance": "Documents the gap between what CS programs teach about GenAI tools and what industry expects students to know about integrating them into professional practice. The industry expectations include proficiency with SEPTs used alongside AI assistants, directly framing the research question about whether AI tools substitute for or reinforce toolchain learning."
+        },
+        {
+          "title": "KOALA: Customizable IDE Data Collection Tool",
+          "authors": "JetBrains Research",
+          "venue": "ITiCSE 2025",
+          "year": 2025,
+          "url": "https://doi.org/10.1145/3724389.3730770",
+          "relevance": "Provides the behavioral data collection infrastructure (ProgSnap2 export from JetBrains IDEs) used to capture the detailed IDE-activity logs from which SEPT adoption sequences are reconstructed, including the first git commit, first test run, and first CI configuration event in each student project."
+        },
+        {
+          "title": "Teaching Software Documentation through an Asynchronous Module: An Experience Report",
+          "authors": "University of Toronto",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "url": "https://doi.org/10.1145/3770762.3772538",
+          "relevance": "Reports on teaching one specific SEPT (software documentation) through a self-paced module, showing that isolated SEPT instruction outside project context produces shallow adoption. This motivates the toolchain-first lab intervention design, which embeds SEPT instruction inside real project workflows rather than standalone modules."
+        }
+      ],
+      "researchPlan": {
+        "overview": "This research maps how AI coding assistant availability changes the order and depth of SEPT adoption in CS and engineering courses, using longitudinal surveys and IDE activity logs from three semesters. Two curriculum interventions are piloted to determine whether explicit toolchain-first instruction recovers adoption patterns that AI tools would otherwise bypass.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review and adoption sequence operationalization",
+            "deliverable": "Annotated bibliography plus a SEPT adoption codebook defining the first-use event for each of 10 canonical practices (version control, branching, automated tests, CI/CD, linting, code review, dependency management, documentation, containerization, issue tracking) in IDE and git logs"
+          },
+          {
+            "month": 2,
+            "goal": "Instrument design and IRB approval",
+            "deliverable": "Longitudinal survey instrument measuring SEPT adoption self-efficacy and AI-tool usage patterns; IRB protocol submitted and approved for three participating institutions"
+          },
+          {
+            "month": 3,
+            "goal": "Baseline data collection and log extraction",
+            "deliverable": "Parsed SEPT adoption sequences from one semester of KOALA IDE logs and git histories at two institutions; inter-rater agreement on adoption-event detection above 0.80"
+          },
+          {
+            "month": 4,
+            "goal": "Sequence analysis and cohort comparison",
+            "deliverable": "Adoption sequence distance matrices and adoption-order shift report comparing pre-Copilot, Copilot-available, and Claude Code cohorts; regression model identifying which practices show the largest shifts"
+          },
+          {
+            "month": 5,
+            "goal": "Curriculum intervention pilot",
+            "deliverable": "Toolchain-first lab sequence and AI-audit reflection exercise deployed in two CS and engineering sections; pre/post survey comparison and adoption log analysis for each intervention group"
+          },
+          {
+            "month": 6,
+            "goal": "Write and submit paper",
+            "deliverable": "Full paper draft submitted to a target venue; open-source SEPT adoption event detector released with the ProgSnap2 log parser and sequence alignment code"
+          }
+        ],
+        "targetVenues": ["SIGCSE", "ICER", "ITiCSE", "ASEE"],
+        "resources": "KOALA IDE plugin deployed in participating sections; git activity log export from three institutions (Olin, UW CSS, partner institution); longitudinal survey via Qualtrics; claude CLI for automated SEPT-event coding of git commit messages and CI configuration files; one graduate research assistant for inter-rater calibration.",
+        "risks": [
+          {
+            "risk": "Students opt out of IDE logging at rates that make cohort comparison underpowered.",
+            "mitigation": "Pre-enroll opt-in during course registration; offer course credit for participation; design the study to remain meaningful with 60% participation by reporting effect sizes rather than raw adoption rates."
+          },
+          {
+            "risk": "AI coding tool usage is self-reported and therefore underestimated, confounding the comparison between cohorts.",
+            "mitigation": "Supplement self-report with automated AI-use signals detectable in logs: unusually large initial commits, boilerplate file structures generated before any hand-typed code, and Claude Code session markers in git history."
+          },
+          {
+            "risk": "The toolchain-first intervention raises student workload enough to harm course satisfaction, making it unsustainable.",
+            "mitigation": "Design each lab to complete the SEPT setup in under 20 minutes using AI-assisted scaffolding, making AI tools the mechanism for lowering the setup barrier rather than banning them during setup."
+          }
+        ],
+        "humanSubjects": true
+      }
+    }
+  ]
+}

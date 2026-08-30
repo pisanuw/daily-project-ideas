@@ -394,3 +394,7 @@
 | 2026-08-29 | Bug Witness Investigation | Teaching Tool | 1-2 Weeks |
 | 2026-08-29 | Build-Your-Own Vector Search Engine | Classroom Assignment | Multi-week |
 | 2026-08-29 | Visual Flowchart Differencing for Misconception Classification: A SKETCHY-Inspired Approach to Targeted CS1 Feedback | Research | Research |
+| 2026-08-30 | LLM Diff | Side Project | Weekend |
+| 2026-08-30 | Stack Trace Theater | Teaching Tool | 1-2 Weeks |
+| 2026-08-30 | Build Your Own LLM Router | Classroom Assignment | Multi-week |
+| 2026-08-30 | AI Coding Tools as SEPT On-Ramps: Measuring Toolchain Adoption Sequence Shifts Before and After the Copilot Era | Research | Research |
