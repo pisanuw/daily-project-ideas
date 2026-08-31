@@ -398,3 +398,7 @@
 | 2026-08-30 | Stack Trace Theater | Teaching Tool | 1-2 Weeks |
 | 2026-08-30 | Build Your Own LLM Router | Classroom Assignment | Multi-week |
 | 2026-08-30 | AI Coding Tools as SEPT On-Ramps: Measuring Toolchain Adoption Sequence Shifts Before and After the Copilot Era | Research | Research |
+| 2026-08-31 | Colorblind Sim Canvas | Side Project | Weekend |
+| 2026-08-31 | AI Ethics Case Forge | Teaching Tool | 1-2 Weeks |
+| 2026-08-31 | Agentic Scrum Sim | Classroom Assignment | Multi-week |
+| 2026-08-31 | Slip-or-Misconception: LLM Classification of Code-Tracing Errors for Differentiated Feedback in CS1 | Research | Research |

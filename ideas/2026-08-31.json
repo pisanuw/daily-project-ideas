@@ -1,0 +1,155 @@
+{
+  "date": "2026-08-31",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Colorblind Sim Canvas",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A web tool that applies colorblindness simulation filters to any image or URL screenshot, then uses Claude Vision to narrate what becomes ambiguous and suggest precise CSS or design fixes. Bridges the gap between passing automated WCAG checks and being genuinely usable by colorblind users.",
+      "description": "Colorblind Sim Canvas lets designers and developers upload an image or paste a URL and instantly view it through eight colorblindness simulation modes. Unlike pure color-filter plugins, it feeds the simulated image to Claude Vision, which narrates exactly which UI elements become indistinguishable ('the red Submit button merges with the orange warning badge under deuteranopia') and proposes specific CSS variable or Tailwind color-token swaps. The result is a developer-readable accessibility report that combines empathy-building simulation with actionable remediation hints. Instructors can also use it to generate accessibility teaching examples in minutes without hand-crafting scenarios.",
+      "keyFeatures": [
+        "Eight colorblindness simulation modes via CSS/WebGL filters (deuteranopia, protanopia, tritanopia, achromatopsia, and more)",
+        "Claude Vision narration identifying ambiguous elements and the specific visual confusion they create for each simulation mode",
+        "Line-level CSS or Tailwind color-token fix suggestions alongside each flagged issue",
+        "Side-by-side comparison view and one-click shareable accessibility report export"
+      ],
+      "techStack": "React + Vite + Tailwind, Canvas API / WebGL for simulation shaders, Claude API (vision + text), optional Flask backend for URL screenshot capture via Playwright",
+      "whyInteresting": "Most accessibility checkers report violations in technical terms without conveying what colorblind users actually experience. Combining perceptual simulation with LLM narration closes the empathy gap and makes remediation actionable, making it useful for product teams, solo developers, and accessibility-focused design instructors alike.",
+      "inspiredBy": "Pisan's established interest in accessibility tools and CS education; 2026 trend toward LLM-augmented developer tooling; community discussion about the limits of automated WCAG checkers that pass color-contrast rules but still produce confusing UIs"
+    },
+    {
+      "n": 2,
+      "title": "AI Ethics Case Forge",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "An instructor-facing tool that generates rich, discipline-specific AI ethics case studies on demand, complete with named stakeholders, Bloom's-leveled discussion questions, and a grading rubric. Turns ethics from an afterthought into a repeatable, customizable teaching activity for any CS specialization.",
+      "description": "Instructors specify a course topic (game development, data science, hiring systems), an ethical principle (fairness, accountability, privacy), and a target Bloom's taxonomy level. AI Ethics Case Forge generates a grounded scenario with two to four named stakeholders holding conflicting interests, four to six discussion questions spanning the specified Bloom's levels, and a rubric aligned to each question. All outputs are live-editable in a split-pane preview before exporting as Markdown, Canvas-compatible HTML, or a shareable link. A remix panel lets instructors reuse prior cases with different stakeholder configurations or adjust the scenario framing for different student demographics, making it practical to vary cases across semesters without starting from scratch.",
+      "keyFeatures": [
+        "Topic + ethical principle + Bloom's level configurator with preset examples for common CS specializations including game dev, data science, and web engineering",
+        "Scenario generator with two to four named stakeholders and explicitly conflicting interests appropriate to the specified domain",
+        "Bloom's-leveled discussion question set spanning recall through evaluation and creation",
+        "Rubric generator aligned to each discussion question with editable criteria weights",
+        "Export to Markdown, Canvas-compatible HTML, and shareable link; remix panel for quick case variations across semesters"
+      ],
+      "techStack": "React + Vite + Tailwind, Flask + Supabase (case history and sharing), Claude API",
+      "whyInteresting": "Ethics is widely recognized as essential in CS programs but instructors rarely have time to craft high-quality, discipline-specific case studies from scratch. This tool makes ethical reasoning a first-class, repeatable teaching activity across game development, web engineering, data science, and AI courses, saving an instructor an hour or more per case while producing better-structured material than generic templates.",
+      "inspiredBy": "ITiCSE 2025 paper 'A Serious Game to Cultivate Ethical Thinking' (DOI 10.1145/3724389.3731299) on the challenges of pedagogically entangling ethics into CS programs; 2026 trend toward AI ethics literacy in computing curricula; Pisan's interest in AI ethics and educational tool design"
+    },
+    {
+      "n": 3,
+      "title": "Agentic Scrum Sim",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "Students build a multi-agent system where AI agents play Product Owner, Developer, QA Tester, and Scrum Master roles to simulate a software development sprint. Observing coordination failures and successes teaches agentic system design and real software process skills simultaneously.",
+      "description": "In this three to four week project, student teams implement four AI agents that interact asynchronously to refine a user story backlog, produce stub implementations, file bug reports, and run a retrospective. Each agent has a distinct system prompt, a defined set of tools, and a message inbox. Students instrument the simulation to log all agent-to-agent messages and then analyze where coordination breaks down: for example, the QA agent flagging issues the Developer's instructions never addressed, or the Scrum Master failing to resolve a stalemate between PO and Dev over scope. A structured reflection asks students to compare the simulated sprint to real Agile practice and propose specific prompt or tool changes that improved agent collaboration across runs. The assignment teaches multi-agent orchestration, software process fundamentals, and the limits of AI autonomous reasoning through a scenario grounded in industry practice students will encounter in internships.",
+      "keyFeatures": [
+        "Four-agent simulation (Product Owner, Developer, QA Tester, Scrum Master) with asynchronous message-passing architecture and configurable tool access per role",
+        "Configurable user story seed and sprint length with student-defined acceptance criteria",
+        "Color-coded agent message log viewer showing the full inter-agent conversation thread in real time",
+        "Auto-generated sprint retrospective summary that prompts student reflection on coordination failures and prompt-engineering lessons"
+      ],
+      "techStack": "Python + Flask backend, React + Vite frontend, Claude API with tool use and structured JSON outputs, Supabase for agent state and message log persistence",
+      "whyInteresting": "Multi-agent orchestration is one of the fastest-growing skills in software engineering and hard to teach with toy demos. Grounding the assignment in Scrum, a process students will encounter in internships, makes abstract agentic concepts concrete and surfaces realistic coordination challenges that reveal where AI agency breaks down in ways that pure chatbot demos never do.",
+      "inspiredBy": "2026 multi-agent systems trend (OpenMAIC, SimClass research); Pisan's long-standing interest in multi-agent systems, believable agent design, and game agents that justify their actions; gap between agent framework tutorials and realistic process-grounded assignments; SimClass multi-agent classroom simulation research"
+    },
+    {
+      "n": 4,
+      "title": "Slip-or-Misconception: LLM Classification of Code-Tracing Errors for Differentiated Feedback in CS1",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "An LLM pipeline that classifies a student's code-tracing error as a transient cognitive slip or a genuine misconception, then routes to differentiated feedback: a re-read nudge for slips, a targeted Socratic hint for misconceptions. Validated on archived CSS 142 submission data and tested in a classroom deployment for outcome measurement.",
+      "description": "Tracing errors in CS1 have two distinct causes: cognitive slips (transient attention failures that would self-correct with a second look) and misconceptions (systematically wrong mental models requiring conceptual remediation). Torrey (SIGCSE 2026) demonstrates that distinguishing them by self-explanation prompts alone is insufficient, but engaging students in analyzing their own errors shows promise. This research extends that finding by building an LLM classifier that combines the student's tracing response, a brief prompted self-explanation, and their submission-history pattern (slips are inconsistent across similar problems; misconceptions recur) to predict error type. The classifier is validated against instructor-coded labels on archived CSS 142 exam data, then integrated into the Jolly Feedback pipeline to route slip-classified errors to a re-read prompt and misconception-classified errors to a Socratic hint targeting the inferred mental model. A controlled classroom deployment measures whether differentiated feedback reduces time-to-correct-answer and resubmission count compared to uniform feedback, directly testing whether the slip/misconception distinction is pedagogically actionable at scale with LLM-driven automation.",
+      "papers": [
+        {
+          "title": "Detecting Cognitive Slips in Novice Code Tracing",
+          "authors": "Lisa Torrey",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770761.3777257",
+          "url": "https://doi.org/10.1145/3770761.3777257",
+          "abstract": "Novice programmers sometimes trace code incorrectly due to misconceptions. However, tracing errors do not always reflect flawed mental models, since they can also be caused by cognitive slips. Instructors may wish to respond differently to errors caused by slips rather than misconceptions, but these errors can be difficult to tell apart. This paper describes one instructor's search for an effective way to detect slips, finding that engaging students in analyzing their own errors shows more promise than asking for sketches or explanations alone.",
+          "relevance": "This paper establishes the core pedagogical problem: the slip/misconception distinction matters for feedback design but is practically hard to detect at scale. Extending the instructor-driven detection approach to an automated LLM classifier that operates on submission logs is the direct research contribution, and the paper's finding that self-explanation analysis shows promise motivates the classifier's input features."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "Misconceptions in Programming: Intuitive Reasoning and Tracing Task Performance Across Experience Levels",
+          "authors": "Multiple authors",
+          "venue": "ICER 2025",
+          "year": 2025,
+          "url": "https://dl.acm.org/doi/full/10.1145/3702652.3744209",
+          "relevance": "Provides empirical grounding for how misconceptions manifest in code-tracing tasks across experience levels, supplying the behavioral signatures the LLM classifier must learn to distinguish from cognitive slips, and establishing that misconception type affects tracing performance systematically."
+        },
+        {
+          "title": "McMining: Automated Discovery of Misconceptions in Student Code",
+          "authors": "Multiple authors",
+          "venue": "arXiv 2025",
+          "year": 2025,
+          "url": "https://arxiv.org/pdf/2510.08827",
+          "relevance": "Demonstrates that LLM-based tools can automatically discover programming misconceptions with high accuracy (82% on a 1,063-sample benchmark) and surface novel misconceptions not in existing taxonomies, supporting the technical feasibility of automated misconception classification for the proposed classifier."
+        },
+        {
+          "title": "Evaluating GPT as Automated Analyzer for Detecting Students' Erroneous Mental Models in Programming Education",
+          "authors": "Multiple authors",
+          "venue": "Universal Access in the Information Society, Springer",
+          "year": 2026,
+          "url": "https://link.springer.com/article/10.1007/s10209-026-01320-z",
+          "relevance": "Shows that GPT-class models can detect erroneous mental models in programming but are insufficient for fully autonomous deployment, motivating the hybrid human-calibrated approach (instructor-coded training data, confidence thresholds for uncertain cases) in the proposed research plan."
+        }
+      ],
+      "researchPlan": {
+        "overview": "The project builds and validates an LLM-based classifier for distinguishing cognitive slips from misconceptions in code-tracing errors, then deploys differentiated feedback in a live CS1 course using the Jolly Feedback infrastructure Pisan already maintains. The arc runs from retrospective log analysis (no IRB needed) through a classroom deployment study (IRB required for the A/B component), producing both a validated classifier artifact and a causal measurement of whether error-type-aware feedback improves student outcomes.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review and coding scheme development",
+            "deliverable": "Annotated bibliography, slip/misconception coding rubric with inter-rater reliability pilot on 50 archived CSS 142 tracing responses to calibrate the scheme before full labeling"
+          },
+          {
+            "month": 2,
+            "goal": "Dataset construction and manual labeling",
+            "deliverable": "Labeled dataset of 400+ tracing errors with prompted self-explanations drawn from archived CSS 142 exam data across at least four assignment types, with inter-rater agreement metrics"
+          },
+          {
+            "month": 3,
+            "goal": "LLM classifier development and evaluation",
+            "deliverable": "Zero-shot, few-shot, and chain-of-thought classifier variants with accuracy and precision/recall on a held-out test set; ablation study isolating the contribution of self-explanation vs. submission-history consistency signals"
+          },
+          {
+            "month": 4,
+            "goal": "Feedback routing integration and IRB preparation",
+            "deliverable": "Differentiated feedback module integrated into Jolly Feedback pipeline with configurable routing thresholds; IRB application submitted for the classroom deployment study"
+          },
+          {
+            "month": 5,
+            "goal": "Classroom deployment and data collection",
+            "deliverable": "A/B deployment in CSS 142 comparing differentiated vs. uniform feedback; collected resubmission count, time-to-correct-answer, and brief post-assignment exit survey data from participating students"
+          },
+          {
+            "month": 6,
+            "goal": "Analysis and paper writing",
+            "deliverable": "Submitted paper draft reporting classifier evaluation results, classroom outcome measurements, and implications for automated feedback systems that distinguish error type at scale"
+          }
+        ],
+        "targetVenues": ["SIGCSE", "ICER", "EDM", "ITiCSE"],
+        "resources": "Archived CSS 142 exam and submission log data available via existing Jolly Feedback infrastructure; Claude API access for classifier calls (local claude CLI to avoid per-token billing); one undergraduate research assistant for manual coding in months 1-2; IRB approval needed for the classroom deployment phase in month 5; no specialized compute beyond standard API access",
+        "risks": [
+          {
+            "risk": "The slip/misconception boundary is inherently fuzzy for some tracing errors, reducing inter-rater reliability and classifier training signal quality",
+            "mitigation": "Conduct the inter-rater pilot in month 1 to identify ambiguous error categories and exclude them from the training set; use confidence thresholds so the classifier routes uncertain cases to a neutral 'try again' prompt rather than forcing a binary classification"
+          },
+          {
+            "risk": "LLM classifier may rely on superficial linguistic patterns in self-explanations rather than genuine error-type signals, limiting generalizability across assignment types",
+            "mitigation": "Include submission-history consistency features as a non-linguistic signal; validate on a held-out set from an assignment type not represented in training; report performance separately by assignment type to surface any overfitting"
+          },
+          {
+            "risk": "IRB approval may delay the classroom deployment study beyond the available course offering window",
+            "mitigation": "Submit IRB application in month 4 while completing integration work; the classifier paper can be submitted using retrospective validation results alone if IRB is delayed, with classroom outcomes as a follow-up study in the next course offering"
+          }
+        ],
+        "humanSubjects": true
+      }
+    }
+  ]
+}
