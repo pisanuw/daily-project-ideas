@@ -1,0 +1,160 @@
+{
+  "date": "2026-09-01",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Env Whisperer",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A web app that scans any public GitHub repo for all environment variables, uses an LLM to infer each variable's purpose from surrounding code context, and exports a clean documented .env.example with inline comments. Solves the universal developer onboarding pain of undocumented env vars.",
+      "description": "Env Whisperer takes a public GitHub repo URL and walks every source file to collect all references to environment variables (process.env.X, os.getenv, settings.X, and similar patterns across JS/TS, Python, Go, and Ruby). It then feeds each variable name alongside its surrounding code context to Claude, which infers a human-readable description ('DATABASE_URL: PostgreSQL connection string used by the ORM for all database reads and writes'), flags variables that look like secrets (API keys, tokens, passwords), and drafts a fully commented .env.example file the developer can download immediately. A secondary view groups variables by subsystem (auth, database, email, third-party APIs) so onboarding developers understand the configuration landscape at a glance before touching a single file.",
+      "keyFeatures": [
+        "GitHub URL input with multi-language environment variable detection across JS/TS, Python, Go, and Ruby codebases",
+        "LLM-powered purpose inference using surrounding code context to generate plain-English inline comments for each variable",
+        "Secrets risk detector that flags variables whose names suggest credentials, tokens, or keys and warns not to commit them",
+        "Downloadable .env.example with subsystem groupings (auth, database, email, third-party APIs) and one-click clipboard copy"
+      ],
+      "techStack": "React + Vite + Tailwind, Flask backend, GitHub Contents API for file traversal, Claude API",
+      "whyInteresting": "Every developer has lost time on a new project trying to reverse-engineer what .env variables are needed and what they mean. Env Whisperer turns a tedious archaeology task into a one-click artifact, and the LLM narration makes the result genuinely useful rather than just a flat list of variable names. It is small enough to ship in a weekend and useful enough that developers would bookmark it."
+    },
+    {
+      "n": 2,
+      "title": "Refactor Rungs",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "A web tool that takes a working-but-messy student code submission and generates a step-by-step guided refactoring ladder. Students climb one rung at a time with AI hints when stuck and a structural autograder that confirms each improvement without revealing the final answer.",
+      "description": "Instructors paste a canonical 'smelly but correct' solution (or pull one from student submissions) and configure which refactoring skills to target: naming, function extraction, duplication removal, early returns, or type annotations. Refactor Rungs generates a personalized ladder of three to six rungs tailored to that specific code's issues, presenting each rung as a focused challenge ('This function does three things. Extract the part that validates the input into its own function.'). Students submit each rung's code and a lightweight structural analyzer checks whether the targeted improvement was actually applied (function count changed, variable names improved, duplication reduced) without caring about stylistic choices. If a student is stuck, they can request a Socratic hint that asks a guiding question rather than giving the answer. An instructor dashboard shows class-wide rung completion heatmaps to identify which refactoring concepts students find hardest.",
+      "keyFeatures": [
+        "Instructor-configurable refactoring skill targets (naming, extraction, duplication, early returns, type annotations) applied to any pasted code submission",
+        "LLM-generated three to six rung ladder with per-rung challenge descriptions specific to the actual code flaws present",
+        "Structural autograder that checks whether the targeted improvement was applied using AST-level analysis rather than style matching",
+        "Socratic hint system that asks guiding questions rather than revealing the solution, with instructor dashboard showing class-wide rung completion heatmaps"
+      ],
+      "techStack": "React + Vite + Tailwind, Flask + Supabase (student progress, session state), Claude API, tree-sitter or ast module for structural analysis",
+      "whyInteresting": "Code quality is one of the hardest skills to teach in CS courses because students lack vocabulary for what is wrong and correctness-focused autograders offer no guidance on structure. Refactor Rungs makes code quality teachable by turning it into a scaffolded progression with immediate structural feedback, which is more pedagogically sound than rubric comments and scales to large classes."
+    },
+    {
+      "n": 3,
+      "title": "Belief Propagation Lab",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "Students build a multi-agent social network simulation where LLM-powered agents with belief states interact, post claims, and spread information. Students implement and compare moderation strategies and visualize belief propagation to learn multi-agent design, graph algorithms, and AI ethics simultaneously.",
+      "description": "In this three to four week project, student teams implement a simulated social network where each node is an LLM-powered agent with a belief state: a set of facts it holds as true, a set it holds as partially uncertain, and a set it has not yet encountered. Agents interact asynchronously, post claims to a shared feed, and update their belief states based on the perceived credibility of the source and the plausibility of the claim relative to what they already believe. Students implement and compare at least two moderation strategies: algorithmic flagging (flag claims that contradict a ground-truth fact set), reach throttling (reduce the spread velocity of flagged content), and counter-messaging (have a fact-checking agent post corrections). A D3.js graph visualization shows belief states propagating across the network in real time. The final reflection asks students to analyze which moderation strategy was most effective at containing a seeded misconception without suppressing true claims, connecting the simulation results to real-world content moderation debates. The assignment teaches multi-agent orchestration, graph data structures, LLM tool use, and applied AI ethics in one integrated project.",
+      "keyFeatures": [
+        "Agent belief state model with three-tier knowledge representation (confirmed, uncertain, unknown) and LLM-driven belief update logic on each incoming claim",
+        "Asynchronous message-passing architecture with configurable network topologies (random, small-world, scale-free) and seeded misconception injection",
+        "Three implementable moderation strategies (algorithmic flagging, reach throttling, counter-messaging) with student-selectable combinations and per-run effectiveness metrics",
+        "Real-time D3.js belief propagation graph and per-agent belief history log for post-run analysis and structured reflection prompts"
+      ],
+      "techStack": "React + Vite + Tailwind, Flask, Claude API or Gemini API for agent reasoning, D3.js for graph visualization, Supabase for agent state and message log persistence",
+      "whyInteresting": "Multi-agent orchestration is one of the fastest-growing skills in software engineering but existing course assignments use toy demos disconnected from real consequences. Grounding the project in belief propagation and misinformation makes the coordination challenges feel meaningful, and comparing moderation strategies gives students a concrete framework for thinking about AI governance that goes beyond abstract ethics discussion."
+    },
+    {
+      "n": 4,
+      "title": "LLM-Generated Targeted Feedback for Algorithm Simulation Misconceptions in CS2: Extending Validated Misconception Taxonomies from Graph Algorithm Traces",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "An LLM-based feedback pipeline that takes a student's algorithm simulation trace for Dijkstra's algorithm, classifies the trace against a validated misconception taxonomy, and generates a misconception-specific Socratic hint. Validated on archived VAS trace data from CSS 342 and deployed A/B in a live data structures course.",
+      "description": "Tilanterä et al. (ITiCSE 2025) used 712 algorithm simulation traces from 289 students to identify four classified misconception types in Dijkstra's algorithm execution and explicitly called for automated targeted feedback for visual algorithm simulation (VAS) exercises based on those validated misconceptions. This research answers that call by building a two-stage pipeline: a lightweight classifier that maps a student's VAS trace to one of the four misconception types (or to a slip or a novel error), followed by a misconception-specific LLM prompt template that generates a Socratic hint targeting the inferred mental model error without revealing the correct algorithm step. The classifier combines trace-level features (which node was selected next, which distances were updated, order of relaxation steps) with a brief student self-explanation to distinguish systematic misconceptions from transient cognitive slips. The pipeline is validated on archived CSS 342/343 data structures submission logs, then deployed in a controlled A/B study comparing misconception-targeted hints to generic 'try again' prompts on time-to-correct-trace and resubmission count. A secondary contribution is a prompt engineering methodology for algorithm simulation feedback that generalizes beyond Dijkstra's to other graph algorithms taught in CS2.",
+      "papers": [
+        {
+          "title": "Investigating Students' Misconceptions of Dijkstra's Algorithm: Exploration of Algorithm Simulation Traces",
+          "authors": "Artturi Tilanterä, Ari Korhonen, Otto Seppälä, Teemu Taivainen",
+          "venue": "ITiCSE 2025",
+          "year": 2025,
+          "doi": "10.1145/3724363.3729081",
+          "url": "https://doi.org/10.1145/3724363.3729081",
+          "abstract": "Visual algorithm simulations (VAS) provide students the opportunity to practice the execution of algorithms step-by-step. This study investigated what kinds of misconceptions students have of Dijkstra's algorithm by analyzing VAS exercise traces. We analyzed 712 VAS exercise traces from 289 students and modeled their errors as algorithms. We found four classified misconceptions that together explain 16% of incorrect traces. We discovered and describe four new misconceptions of Dijkstra's algorithm: (1) selecting the node with the smallest distance from start, (2) selecting the node with the smallest edge weight from the current node, (3) not updating distances through the current node, and (4) updating only adjacent unvisited nodes. These misconceptions can be used as the basis for automated targeted feedback for VAS exercises based on validated misconceptions.",
+          "relevance": "This paper is the direct motivation and primary input artifact for the proposed research. It provides the validated four-type misconception taxonomy that the classifier will be trained to detect, the VAS trace data format the classifier must process, and an explicit research call for automated targeted feedback based on these misconceptions. The proposed research extends Tilanterä et al.'s offline analysis into a live feedback pipeline."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "How Do Learners With Varying Skills Perceive Misconception Indicators and Feedback?",
+          "authors": "Multiple authors",
+          "venue": "ITiCSE 2025",
+          "year": 2025,
+          "doi": "10.1145/3724363.3729073",
+          "url": "https://doi.org/10.1145/3724363.3729073",
+          "relevance": "Establishes that individual learners with different skill levels respond differently to misconception indicators and feedback, motivating the classifier's use of skill-level features and personalizing hint tone by inferred student level rather than applying uniform Socratic templates."
+        },
+        {
+          "title": "LLM-based Cognitive Models of Students with Misconceptions",
+          "authors": "Multiple authors",
+          "venue": "arXiv 2025",
+          "year": 2025,
+          "url": "https://arxiv.org/abs/2410.12294",
+          "relevance": "Demonstrates that LLMs can be prompted to simulate students with specific misconceptions, providing a synthetic data generation technique for augmenting the training set when archived VAS traces for specific misconception types are sparse."
+        },
+        {
+          "title": "ALGOGEN: Tool-Generated Verifiable Traces for Reliable Algorithm Visualization",
+          "authors": "Multiple authors",
+          "venue": "arXiv 2025",
+          "year": 2025,
+          "url": "https://arxiv.org/abs/2605.12159",
+          "relevance": "Provides a methodology for generating and verifying ground-truth algorithm traces that can serve as the correct-execution baseline the classifier uses to identify deviations characteristic of each misconception type."
+        },
+        {
+          "title": "JSAV: The JavaScript Algorithm Visualization Library",
+          "authors": "Ville Karavirta, Clifford A. Shaffer",
+          "venue": "ACM Symposium on Document Engineering",
+          "year": 2013,
+          "url": "https://dl.acm.org/doi/10.1145/2462476.2462487",
+          "relevance": "The foundational reference for the JSAV/OpenDSA VAS infrastructure that most CS2 courses (including CSS 342/343) use for algorithm simulation exercises. Understanding the trace data format JSAV generates is prerequisite to building the classifier pipeline."
+        }
+      ],
+      "researchPlan": {
+        "overview": "The project builds a two-stage feedback pipeline: a VAS trace classifier that maps student Dijkstra's algorithm simulation errors to a validated four-type misconception taxonomy, followed by LLM prompt templates that generate misconception-specific Socratic hints. The work proceeds from retrospective trace analysis (no IRB needed) through an IRB-approved A/B classroom deployment, producing a validated classifier artifact, a generalizable prompt engineering methodology for algorithm simulation feedback, and a causal measure of whether targeted misconception feedback improves student outcomes in a live CS2 course.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review and trace data acquisition",
+            "deliverable": "Annotated bibliography, formal description of the four Tilanterä et al. misconception types translated into trace-level feature predicates, and a sample of archived CSS 342/343 VAS trace logs from the Jolly Feedback infrastructure sufficient to cover all four misconception types plus slip and novel-error categories"
+          },
+          {
+            "month": 2,
+            "goal": "Dataset construction and manual labeling",
+            "deliverable": "Labeled dataset of 300 or more VAS traces across the four misconception types plus slip and novel-error categories, with inter-rater agreement metrics from a second coder and a formal coding rubric document"
+          },
+          {
+            "month": 3,
+            "goal": "Classifier development and evaluation",
+            "deliverable": "Trace-feature-based classifier and LLM-assisted classifier variants with accuracy and per-class precision/recall on a held-out test set; ablation study isolating contribution of trace features versus self-explanation text; synthetic data augmentation experiment using LLM-simulated misconception traces for underrepresented categories"
+          },
+          {
+            "month": 4,
+            "goal": "Misconception-specific prompt template design and IRB preparation",
+            "deliverable": "Four misconception-specific Socratic hint prompt templates validated for pedagogical soundness against the Tilanterä et al. misconception descriptions, plus a generic slip prompt and a novel-error prompt; IRB application submitted for the classroom deployment study; integration of classifier and prompt templates into Jolly Feedback pipeline"
+          },
+          {
+            "month": 5,
+            "goal": "Classroom deployment and data collection",
+            "deliverable": "A/B deployment in CSS 342 or CSS 343 comparing misconception-targeted Socratic hints to generic 'try again' prompts; collected resubmission count, time-to-correct-trace, and brief post-assignment exit survey from participating students"
+          },
+          {
+            "month": 6,
+            "goal": "Analysis, generalization, and paper writing",
+            "deliverable": "Submitted paper draft reporting classifier evaluation, classroom outcome measurements, and a generalizable prompt engineering methodology for algorithm simulation feedback applicable beyond Dijkstra's to BFS, Prim's, and Bellman-Ford"
+          }
+        ],
+        "targetVenues": ["SIGCSE", "ICER", "EDM", "ITiCSE"],
+        "resources": "Archived CSS 342/343 VAS trace logs available via existing Jolly Feedback infrastructure; Claude API access via local claude CLI (no per-token billing); one undergraduate research assistant for manual trace coding in months 1 to 2; IRB approval needed for classroom deployment in month 5; no specialized compute beyond standard API access",
+        "risks": [
+          {
+            "risk": "Archived CSS 342/343 VAS trace logs may not contain sufficient examples of all four Tilanterä et al. misconception types, limiting classifier training signal for rare misconception categories",
+            "mitigation": "Use LLM-simulated misconception trace generation (per the arXiv 2410.12294 approach) to augment underrepresented categories; validate synthetic traces against the trace-feature predicates derived from Tilanterä et al. before including them in the training set; report per-class performance separately to surface any categories with insufficient real data"
+          },
+          {
+            "risk": "The four Tilanterä et al. misconceptions were identified in a Finnish university context using OpenDSA/JSAV; CSS 342/343 students may exhibit different misconception distributions due to prior instruction differences",
+            "mitigation": "Treat the four categories as a starting taxonomy rather than an exhaustive list; include a novel-error category in the classifier; report what fraction of CSS 342/343 errors map to the known taxonomy versus novel patterns as a secondary finding"
+          },
+          {
+            "risk": "IRB approval may delay classroom deployment beyond the available course offering window",
+            "mitigation": "Submit IRB application in month 4 while completing integration work; classifier validation paper can be submitted using retrospective data alone if IRB is delayed, with classroom outcomes as a follow-up study in the next course offering"
+          }
+        ],
+        "humanSubjects": true
+      }
+    }
+  ]
+}

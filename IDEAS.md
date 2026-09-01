@@ -402,3 +402,7 @@
 | 2026-08-31 | AI Ethics Case Forge | Teaching Tool | 1-2 Weeks |
 | 2026-08-31 | Agentic Scrum Sim | Classroom Assignment | Multi-week |
 | 2026-08-31 | Slip-or-Misconception: LLM Classification of Code-Tracing Errors for Differentiated Feedback in CS1 | Research | Research |
+| 2026-09-01 | Env Whisperer | Side Project | Weekend |
+| 2026-09-01 | Refactor Rungs | Teaching Tool | 1-2 Weeks |
+| 2026-09-01 | Belief Propagation Lab | Classroom Assignment | Multi-week |
+| 2026-09-01 | LLM-Generated Targeted Feedback for Algorithm Simulation Misconceptions in CS2: Extending Validated Misconception Taxonomies from Graph Algorithm Traces | Research | Research |
