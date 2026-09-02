@@ -1,0 +1,165 @@
+{
+  "date": "2026-09-02",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Cron Cartographer",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A web app that renders any cron expression as an interactive calendar heatmap, showing exactly when jobs fire over the next 30, 90, or 365 days. Also converts natural language to cron syntax.",
+      "description": "Cron expressions are notoriously opaque: '15 4 * * 1-5' tells you nothing at a glance about when a job actually runs. Cron Cartographer parses cron, RRULE, and GitHub Actions schedule syntax and renders a color-coded calendar heatmap with exact fire times shown on hover. A natural-language input bar lets developers type 'every weekday at 4:15am' and get the cron expression back. A timezone picker shows the schedule in any zone. The whole app is a single static page with no backend, shareable via URL-encoded state.",
+      "keyFeatures": [
+        "Interactive heatmap calendar with 30/90/365-day preview of all job firings",
+        "Natural language to cron expression conversion via Claude API",
+        "Supports standard cron, RRULE, and GitHub Actions schedule: syntax",
+        "Timezone-aware rendering with any-zone picker",
+        "Shareable URLs with schedule encoded in query params"
+      ],
+      "techStack": "React + Vite, cronstrue / cron-parser npm packages, Claude API (NL-to-cron), Tailwind CSS",
+      "whyInteresting": "Every developer who uses cron eventually wishes they could just see a calendar. This fills that gap in a polished, shareable tool that doubles as a quick reference for schedule syntax and is instantly useful the first time someone opens it.",
+      "inspiredBy": "Recurring developer frustration with cron opacity; trending discussion of scheduling tools on Hacker News and dev.to in mid-2026"
+    },
+    {
+      "n": 2,
+      "title": "Solution Mosaic",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "After a programming assignment deadline, instructors upload all student solution files and see them automatically clustered by algorithmic approach in a visual mosaic, making class-wide debrief sessions instant to prepare.",
+      "description": "Running a meaningful post-assignment debrief in a class of 50+ is hard: reading every submission before class takes hours. Solution Mosaic uses AST-level structural similarity plus LLM embedding to cluster solutions into 3-7 distinct approach groups (for example, 'recursive with helper,' 'iterative with stack,' 'built-in sort shortcut'), then renders each cluster as a card in a visual mosaic grid. Instructors click a cluster to see a representative example and a generated explanation of that approach's tradeoffs. An export button produces a one-page 'discussion guide' with side-by-side approach comparisons ready to paste into slides. Supports Python, Java, and C++ via Tree-sitter parsers.",
+      "keyFeatures": [
+        "AST structural similarity plus LLM semantic embedding for approach clustering",
+        "Visual mosaic grid with one representative example per cluster",
+        "Auto-generated tradeoff explanation for each approach group",
+        "One-click export of a slide-ready discussion guide",
+        "Tree-sitter parsers for Python, Java, and C++"
+      ],
+      "techStack": "Flask + Python (backend), React + Vite (frontend), Tree-sitter (AST parsing), Claude API (semantic clustering and explanations), Supabase (optional session storage)",
+      "whyInteresting": "Instructors know that showing multiple solution approaches side-by-side is one of the richest learning moments in any CS course, but preparing it across 50+ submissions is expensive. Solution Mosaic makes the prep instant and scales to large class sizes.",
+      "inspiredBy": "Research on peer learning and solution diversity in CS1; growing interest in AI-assisted grading workflows and post-submission analytics in 2026"
+    },
+    {
+      "n": 3,
+      "title": "Build Your Own Type Inferencer",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "Students implement a Hindley-Milner type inference engine for a small functional language, guided by a step-through visual debugger that animates constraint generation, unification, and the final type environment in real time.",
+      "description": "Type inference is one of the most elegant algorithms in programming languages, yet it is rarely taught hands-on because the implementation is intricate. This multi-week project gives students a scaffolded starter language (a subset of ML with let, lambda, and if/then/else), a specification of the HM constraint-generation rules, and a React-based visual debugger that animates each step: which constraints were generated for each AST node, which pairs the unifier is resolving, and what the substitution set looks like after each step. Students fill in the key functions (generate_constraints, unify, apply_substitution) in Python or JavaScript, run their implementation against a test suite of 30+ typed and ill-typed programs, and compare their output against a reference implementation. A stretch goal adds let-polymorphism. Appropriate for upper-division PL courses or graduate PL seminars.",
+      "keyFeatures": [
+        "Scaffolded mini-ML starter language with AST defined and parser provided",
+        "Step-through visual debugger for constraint generation and unification steps",
+        "Test suite of 30+ typed and ill-typed programs with expected types or type errors",
+        "Reference implementation for self-checking and debugging",
+        "Stretch goals: let-polymorphism (generalization and instantiation) and algebraic data types"
+      ],
+      "techStack": "Python or JavaScript (student implementation), React + Vite (visual debugger), no external AI APIs required",
+      "whyInteresting": "Understanding type inference from the inside demystifies both type checkers and the code analysis that LLM coding tools perform under the hood. The visual debugger turns abstract substitution sets into something tangible, and students ship a real artifact that production compilers use.",
+      "inspiredBy": "Trending GitHub repos on type system implementations; renewed interest in formal methods pedagogy as a counterweight to AI-assisted coding in CS curricula"
+    },
+    {
+      "n": 4,
+      "title": "From Linter Flags to Learning Moments: LLM-Enhanced Code Quality Feedback in Toolchain-First CS1 Courses",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "This research mines historical CS1 submission logs to build a misconception taxonomy for code quality in toolchain-first C++ courses, then designs and expert-evaluates an LLM explanation layer that translates raw linter diagnostics into principle-grounded, misconception-targeted feedback messages.",
+      "description": "Automated code quality checkers (clang-tidy, clang-format) give CS1 students immediate style feedback, but raw flags like 'line too long' or 'missing space' convey rules without reasoning, leaving the underlying misconception intact. This research extends the approach from the SIGCSE 2026 automated code quality checker by adding an LLM intermediary that translates each static analysis flag into a two-sentence pedagogical explanation grounded in code quality principles plus a concrete fix-it suggestion. The core contribution is a misconception taxonomy for code quality in C++ CS1, mined from 2+ years of historical Jolly Feedback submission logs and clustered by LLM into categories such as naming convention confusion, over-commenting, DRY violations, magic number usage, and premature optimization. A secondary study evaluates whether LLM-generated explanations outperform raw linter output on expert-judged clarity, actionability, and pedagogical alignment. This work directly extends Pisan's toolchain-first pedagogy and Jolly Feedback infrastructure, and avoids new human subjects by relying on already-collected, anonymized submission data.",
+      "papers": [
+        {
+          "title": "Automating Code Quality Feedback in an Introductory CS Course",
+          "authors": "Authors at California Institute of Technology, Pasadena",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770761.3777265",
+          "url": "https://doi.org/10.1145/3770761.3777265",
+          "abstract": "Writing high-quality code is one of the most important skills for programmers, affecting how easy a codebase is to work with both for the original creator and future editors. Grading code quality by hand is a long and intensive process that takes away valuable teaching assistant time that could be spent directly working with students. We explore automating this process by creating a code quality checker specifically designed for beginners, to give speedy, detailed, and specific feedback so students can practice writing good code in real time and internalize the rules of code quality.",
+          "relevance": "This paper provides the direct foundation for automated code quality checking in CS1; this research extends it by adding an LLM explanation layer grounded in an empirically-derived misconception taxonomy from historical submission logs, turning rule flags into learning moments."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "Nurturing Code Quality: Leveraging Static Analysis and Large Language Models for Software Quality in Education",
+          "authors": "Various",
+          "venue": "ACM Transactions on Computing Education, 2025",
+          "year": 2025,
+          "url": "https://dl.acm.org/doi/full/10.1145/3722229",
+          "relevance": "Demonstrates that combining static analysis with LLM critique substantially reduces code quality violations in student code, providing empirical support for the combined static + LLM approach proposed here."
+        },
+        {
+          "title": "Static Analysis as a Feedback Loop: Enhancing LLM-Generated Code Beyond Correctness",
+          "authors": "Various",
+          "venue": "arXiv preprint 2508.14419, 2025",
+          "year": 2025,
+          "url": "https://arxiv.org/abs/2508.14419",
+          "relevance": "Shows that iterative static analysis-driven prompting reduces security, readability, and reliability issues dramatically, motivating the use of static analysis flags as structured priors for LLM explanation generation."
+        },
+        {
+          "title": "Feedback-Generation for Programming Exercises With GPT-4",
+          "authors": "Various",
+          "venue": "arXiv preprint 2403.04449, 2024",
+          "year": 2024,
+          "url": "https://arxiv.org/abs/2403.04449",
+          "relevance": "Establishes baseline methodology and evaluation rubrics for LLM-generated feedback quality on programming exercises, applicable to assessing explanation quality for code quality diagnostics."
+        },
+        {
+          "title": "A Classroom Study of LLM-Generated Feedback Intervention in Introductory Programming",
+          "authors": "Various",
+          "venue": "arXiv preprint 2606.08807, 2026",
+          "year": 2026,
+          "url": "https://arxiv.org/abs/2606.08807",
+          "relevance": "Provides a classroom-level empirical study of LLM feedback effectiveness in CS1, offering methodological grounding for evaluating explanation-enriched code quality feedback impact."
+        }
+      ],
+      "researchPlan": {
+        "overview": "The research proceeds in two phases: first, mining historical Jolly Feedback submission logs to build an empirically-grounded misconception taxonomy for code quality in C++ CS1 (no new human subjects needed); then designing and expert-evaluating an LLM explanation layer that maps static analysis flags to taxonomy categories and generates actionable, principle-grounded two-sentence feedback messages. The result is both a reusable taxonomy and a tested Jolly Feedback extension.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review and data preparation: survey automated code quality feedback systems, LLM feedback generation, and CS1 misconception taxonomies; extract and anonymize 2+ years of Jolly Feedback submission logs from CSS 142",
+            "deliverable": "Annotated bibliography (30+ papers) + cleaned submission log dataset with code quality violations flagged by clang-tidy and clang-format"
+          },
+          {
+            "month": 2,
+            "goal": "Run clang-tidy and clang-format analysis pipeline across the full historical dataset; count and categorize violation frequency, co-occurrence patterns, and persistence across resubmissions within the same student",
+            "deliverable": "Violation frequency report and co-occurrence heatmap; preliminary 15-20 raw violation clusters as candidate misconception categories"
+          },
+          {
+            "month": 3,
+            "goal": "LLM-assisted taxonomy construction: prompt Claude to group raw violations into 6-10 named misconception categories; iteratively refine categories through three rounds of expert review with Pisan and one other CS educator",
+            "deliverable": "Code quality misconception taxonomy v1 with named categories, definitions, boundary cases, and canonical examples drawn from the dataset"
+          },
+          {
+            "month": 4,
+            "goal": "Design LLM explanation generator: build prompt templates that map each taxonomy category to a two-sentence explanation plus one actionable fix-it suggestion; blind expert evaluation of 50 sampled explanation pairs (LLM vs. raw flag) on clarity, actionability, and pedagogical alignment",
+            "deliverable": "Prompt template library + expert evaluation rubric + inter-rater agreement and quality scores for 50 sampled explanations"
+          },
+          {
+            "month": 5,
+            "goal": "Refine taxonomy and explanation templates based on expert feedback; build end-to-end pipeline (clang-tidy flag to taxonomy classification to LLM explanation) integrated with Jolly Feedback; present demo to CSS 142 instructor team",
+            "deliverable": "Working Jolly Feedback integration + instructor demo feedback notes + revised taxonomy v2 with inter-rater reliability statistics"
+          },
+          {
+            "month": 6,
+            "goal": "Write and submit paper describing the misconception taxonomy, explanation generator design, and expert-judged quality evaluation",
+            "deliverable": "Submitted paper draft (8-10 pages) to SIGCSE TS or TOCE, plus open-source taxonomy artifact and Jolly Feedback extension code"
+          }
+        ],
+        "targetVenues": ["SIGCSE TS", "ITiCSE", "ICER", "ACM Transactions on Computing Education (TOCE)"],
+        "resources": "Historical CSS 142 Jolly Feedback submission logs (already collected); clang-tidy and clang-format (free, already part of the toolchain-first stack); Claude API for clustering and explanation generation; 1 capstone or graduate student for data pipeline; 2 CS faculty as expert reviewers for taxonomy validation.",
+        "risks": [
+          {
+            "risk": "Historical submission logs may require IRB review even for anonymized data",
+            "mitigation": "Consult UW IRB early; fully anonymize all student identifiers before any analysis; if needed, limit to aggregate statistics only rather than individual submission traces"
+          },
+          {
+            "risk": "LLM-generated explanations may be inconsistent in quality or hallucinate code quality rationale not grounded in the taxonomy",
+            "mitigation": "Constrain all explanations to a fixed template anchored to taxonomy category definitions; validate all generated explanations against a curated expert reference set before the blind evaluation"
+          },
+          {
+            "risk": "Clang-tidy rule set may not map cleanly to pedagogically meaningful misconceptions for CS1 beginners",
+            "mitigation": "Restrict the analysis to the curated subset of clang-tidy checks already active in CSS 142; add lightweight custom checks aligned to Pisan's toolchain-first criteria for any gaps"
+          }
+        ],
+        "humanSubjects": false
+      }
+    }
+  ]
+}

@@ -235,3 +235,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-08-28 note Type Witness (2026-08-02 n1) marked implemented: live at type-witness.netlify.app, repo Claude-capstone/type-witness. Real TS compiler in a Web Worker narrates inference step by step; no LLM to replace; deploy worked first try, siteId pinned.
 
 2026-08-29 [doc] Created ideas/2026-08-29.json with 4 ideas: CSS Cascade Combat, Bug Witness Investigation, Build-Your-Own Vector Search Engine, Visual Flowchart Differencing for Misconception Classification (CodeFlow SIGCSE 2026 doi:10.1145/3770761.3777175)
+
+2026-09-02 [doc] Created ideas/2026-09-02.json with 4 ideas: Cron Cartographer, Solution Mosaic, Build Your Own Type Inferencer, From Linter Flags to Learning Moments (Automating Code Quality Feedback SIGCSE 2026 doi:10.1145/3770761.3777265)

@@ -406,3 +406,7 @@
 | 2026-09-01 | Refactor Rungs | Teaching Tool | 1-2 Weeks |
 | 2026-09-01 | Belief Propagation Lab | Classroom Assignment | Multi-week |
 | 2026-09-01 | LLM-Generated Targeted Feedback for Algorithm Simulation Misconceptions in CS2: Extending Validated Misconception Taxonomies from Graph Algorithm Traces | Research | Research |
+| 2026-09-02 | Cron Cartographer | Side Project | Weekend |
+| 2026-09-02 | Solution Mosaic | Teaching Tool | 1-2 Weeks |
+| 2026-09-02 | Build Your Own Type Inferencer | Classroom Assignment | Multi-week |
+| 2026-09-02 | From Linter Flags to Learning Moments: LLM-Enhanced Code Quality Feedback in Toolchain-First CS1 Courses | Research | Research |
