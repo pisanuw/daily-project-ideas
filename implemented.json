@@ -145,8 +145,10 @@
         "date": "2026-09-02",
         "n": 1
       },
-      "placeholder": true,
-      "notes": "In progress since 2026-09-02"
+      "notes": "Built in one session, fully client-side with zero runtime dependencies: a hand-written five-field cron parser (names, steps, wrap-around ranges like FRI-MON, @shortcuts, vixie dom/dow union semantics), an RFC 5545 RRULE subset (FREQ/INTERVAL/BYDAY with 1MO and -1FR ordinals/BYMONTHDAY/BYMONTH/BYHOUR/BYMINUTE/COUNT/UNTIL), GitHub Actions on.schedule snippet extraction, and a deterministic rule-based English-to-cron converter that annotates every assumption and returns an honest null replace the suggested Claude API call and the cronstrue/cron-parser packages. Time-zone math builds exact offset-transition tables from the browser's IANA data (transitions binary-searched to the minute), so the dual-zone pickers convert exactly: spring-forward gap firings are reported as skipped like system cron, and ambiguous fall-back times fire once at the earlier instant. 30/90/365-day calendar heatmap with per-day fire times, plain-English schedule descriptions, next-25 table in both zones, query-param share links. 74 vitest tests, 92% statement coverage; lint/typecheck/build green; verified end-to-end in headless Chromium. Deployed via the GitHub Actions deploy workflow (site created first try, runner verified the page returns 200), siteId pinned afterward.",
+      "url": "https://cron-cartographer.netlify.app",
+      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/cron-cartographer",
+      "implementedOn": "2026-09-02"
     }
   ]
 }
