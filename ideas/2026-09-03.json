@@ -1,0 +1,24 @@
+{
+  "date": "2026-09-03",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Summit Navigator",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A mobile-first, thumb-friendly conference schedule app for the inaugural ACM AI Leadership Summit (Atlanta, Aug 30 to Sep 2, 2026), with day tabs, track filters, search, a personal starred agenda, and a live now/next view.",
+      "description": "Conference programs are usually published as long desktop-oriented pages that are painful to use in a hallway between sessions. Summit Navigator turns the detailed program of the ACM AI Leadership Summit (https://aisummit.acm.org/detailed-program) into a mobile-first schedule browser: sticky day tabs for the four summit days, sessions grouped by time block, color-coded track chips, full-text search across titles and speakers, and a star button that builds a personal agenda persisted in localStorage. A now/next banner uses the device clock and the conference timezone (America/New_York) to highlight what is currently on and what starts next, and every time can be flipped between conference time and the visitor's local timezone. The whole thing is a static client-side app: the schedule lives in one documented JSON file, so any conference can be dropped in by replacing the data file.",
+      "keyFeatures": [
+        "Mobile-first layout with sticky day tabs and one-thumb navigation",
+        "Sessions grouped by time block with color-coded track chips and room labels",
+        "Full-text search plus track filtering",
+        "Starred sessions build a personal 'My agenda' view persisted in localStorage",
+        "Now/next banner driven by the conference timezone, with a conference-time/local-time toggle",
+        "Single documented schedule.json so the app is reusable for any conference"
+      ],
+      "techStack": "TypeScript + Vite, vanilla DOM, vitest; fully client-side, no backend and no paid APIs",
+      "whyInteresting": "Every attendee has squinted at a desktop program table on a phone while walking to the next room. A schedule app that is actually pleasant on a 390px screen, works offline once loaded, and needs zero accounts is immediately useful, and separating the schedule data from the app makes it a reusable template for future conferences.",
+      "inspiredBy": "Direct request: build a mobile-first, easy-to-navigate schedule app from the ACM AI Leadership Summit detailed program at https://aisummit.acm.org/detailed-program"
+    }
+  ]
+}
