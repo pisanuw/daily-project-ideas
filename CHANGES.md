@@ -243,3 +243,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-09-03 [doc] Created ideas/2026-09-03.json with 1 idea: Summit Navigator, a mobile-first ACM AI Leadership Summit schedule app requested directly by the user
 
 2026-09-03 note Claimed Summit Navigator (2026-09-03 n1) as in progress: mobile-first ACM AI Leadership Summit schedule app, next Claude-capstone build.
+
+2026-09-03 note Summit Navigator (2026-09-03 n1) marked implemented: live at summit-navigator.netlify.app, repo Claude-capstone/summit-navigator. Bundled schedule reconstructed from public ACM announcements (program page blocked by egress policy); deploy worked first try, siteId pinned.
