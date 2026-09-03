@@ -410,3 +410,7 @@
 | 2026-09-02 | Solution Mosaic | Teaching Tool | 1-2 Weeks |
 | 2026-09-02 | Build Your Own Type Inferencer | Classroom Assignment | Multi-week |
 | 2026-09-02 | From Linter Flags to Learning Moments: LLM-Enhanced Code Quality Feedback in Toolchain-First CS1 Courses | Research | Research |
+| 2026-09-03 | Summit Navigator | Side Project | Weekend |
+| 2026-09-03 | Live Exam Beacon | Teaching Tool | 1-2 Weeks |
+| 2026-09-03 | Chaos Tester's Toolkit | Classroom Assignment | Multi-week |
+| 2026-09-03 | Routine-Grounded Chain-of-Thought for Multi-Modal CS Assessment: Can Visual Decomposition Close the Higher-Order Thinking Gap? | Research | Research |

@@ -19,6 +19,149 @@
       "techStack": "TypeScript + Vite, vanilla DOM, vitest; fully client-side, no backend and no paid APIs",
       "whyInteresting": "Every attendee has squinted at a desktop program table on a phone while walking to the next room. A schedule app that is actually pleasant on a 390px screen, works offline once loaded, and needs zero accounts is immediately useful, and separating the schedule data from the app makes it a reusable template for future conferences.",
       "inspiredBy": "Direct request: build a mobile-first, easy-to-navigate schedule app from the ACM AI Leadership Summit detailed program at https://aisummit.acm.org/detailed-program"
+    },
+    {
+      "n": 2,
+      "title": "Live Exam Beacon",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "A real-time class-wide analytics dashboard for instructors during in-progress coding exams, showing a problem failure heatmap, submission timeline, and automatic alerts when a question is failing for more than 30% of students.",
+      "description": "During a large coding exam, instructors have no idea whether the class is on pace or whether a misworded problem is silently tripping up half the room until after the fact. Live Exam Beacon listens to autograder webhooks (Gradescope, Canvas SpeedGrader, Jolly Feedback) and projects a real-time dashboard: a grid of problem tiles that turn red as fail rates climb, a rolling submission timeline showing how many students have submitted each problem, and a configurable alert threshold that triggers a pop-up message when more than N% of the class fails the same test case. Instructors can click any red tile to see which specific test is failing most often, then decide whether to give a verbal clarification to the room without revealing the answer. Nothing changes for students; all analytics happen server-side from the webhook stream. A post-exam report is auto-generated with per-problem difficulty, median time-to-first-pass, and a ranked list of the most-missed test cases.",
+      "keyFeatures": [
+        "Real-time problem failure heatmap updated from autograder webhooks (Gradescope, Canvas, Jolly Feedback)",
+        "Rolling submission timeline curve showing class-wide progress per problem minute by minute",
+        "Configurable alert threshold (default 30%) that flags problems failing for too many students",
+        "Drill-down view showing which specific test case within a problem is failing most",
+        "Auto-generated post-exam report with per-problem difficulty metrics and most-missed test cases"
+      ],
+      "techStack": "React + Vite + Tailwind (dashboard), Flask + Supabase (webhook ingestion and live state), Server-Sent Events for real-time push, no student-facing changes",
+      "whyInteresting": "Instructors teaching 60+ student sections often have a hunch something is wrong mid-exam but no data to act on. Live Exam Beacon gives them a real-time instrument panel so they can catch a bad problem in the first 15 minutes instead of discovering it in the grade distribution a week later. It plugs into existing autograder infrastructure and requires no student behavior change.",
+      "inspiredBy": "Instructor frustration with discovering problem ambiguities only after grading; the 'flight instrument' metaphor from production monitoring dashboards applied to classroom assessment"
+    },
+    {
+      "n": 3,
+      "title": "Chaos Tester's Toolkit",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "Students build a three-node HTTP key-value store, then implement a deterministic chaos testing harness that kills nodes, delays messages, and partitions the network. They observe real CAP theorem trade-offs in their own system and write a failure mode postmortem.",
+      "description": "Distributed systems theory is easy to read and hard to believe until your own code breaks in front of you. In this three to four week assignment, student pairs build a minimal key-value store (put/get/delete over HTTP) replicated across three nodes using a simple quorum protocol. They then implement a chaos testing harness that injects three adversarial scenarios deterministically: sudden node termination, configurable message delay, and a hard network partition splitting nodes into two groups. A React dashboard visualizes node health, write propagation, and data divergence in real time as chaos events fire. Students run at least five pre-specified scenarios, record what consistency guarantees broke and which survived, compare against their pre-experiment predictions, and write a 2-3 page failure mode postmortem structured like a production incident report. A stretch goal adds leader election so the system can recover from a partition. The assignment teaches fault-tolerant systems design, HTTP programming, CAP theorem, and technical writing through hands-on experimentation with their own code rather than a textbook case study.",
+      "keyFeatures": [
+        "Scaffold: 3-node HTTP key-value store with a simple read-repair quorum protocol and configurable replication factor",
+        "Chaos harness with three injectable failure modes: node kill, message delay (configurable milliseconds), and network partition by node group",
+        "Real-time React dashboard showing node health, per-node key-value state, write propagation lag, and partition event log",
+        "5 pre-specified adversarial scenario scripts that students run and annotate with observed vs. predicted behavior",
+        "Structured failure mode postmortem template (incident summary, timeline, root cause, CAP analysis, what changed after recovery)",
+        "Stretch goal: Raft-style leader election so the majority partition re-elects a leader and resumes writes"
+      ],
+      "techStack": "Python (Flask) or Go for the node implementation, Python or shell for the chaos harness, React + Vite for the visualization dashboard, no cloud required; everything runs on localhost with multiple ports",
+      "whyInteresting": "CAP theorem is one of those ideas every CS student nods at in a lecture and then forgets because they have never broken a real system over it. Watching their own quorum reads return stale data during a partition makes the trade-off visceral and memorable. The postmortem format teaches students to communicate about failures the way engineers in production systems do, which is a skill rarely practiced in coursework.",
+      "inspiredBy": "Netflix Chaos Monkey and chaos engineering practices in industry; SIGCSE discussions on teaching distributed systems empirically rather than through proofs"
+    },
+    {
+      "n": 4,
+      "title": "Routine-Grounded Chain-of-Thought for Multi-Modal CS Assessment: Can Visual Decomposition Close the Higher-Order Thinking Gap?",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "LLMs score well on lower-order multi-modal CS exercises but fail when a task requires generating or analyzing diagrams at higher Bloom's levels. This research applies Pisan's SKETCHY visual routines framework as a structured chain-of-thought scaffold to test whether decomposing CS diagrams into primitive visual operations closes that performance gap.",
+      "description": "Ouh et al. (ITiCSE 2025) benchmark ChatGPT-4o on 120 multi-modal CS exercises spanning class diagrams, sequence diagrams, UI mockups, charts, workflow diagrams, and object-flow diagrams, finding strong performance at lower Bloom's taxonomy levels but significant failure on tasks requiring new diagram generation or cross-modal synthesis. This failure profile directly implicates a missing structured vocabulary for visual reasoning: exactly what Pisan's SKETCHY system (1994-95) provided, a domain-independent set of visual routines (slope, intersection, region, label-binding, change-of-slope) that interpret graphs without domain knowledge. This research builds on that prior work by (1) developing a CS-education visual routine taxonomy that maps SKETCHY primitives and new diagram-specific primitives to the six artifact categories in the Ouh et al. benchmark, (2) constructing chain-of-thought prompt templates that decompose multi-modal CS exercises into sequential routine applications, and (3) running a controlled experiment comparing routine-grounded, standard chain-of-thought, and zero-shot prompting on the benchmark exercise categories using Claude and GPT-4o. The expected contributions are a reusable prompt methodology that improves LLM accuracy on multi-modal CS exercises and a theoretical account of why LLMs underperform at higher Bloom's taxonomy levels on diagram tasks, grounded in the visual routines framework. No human subjects are needed for the core experiment; a secondary expert evaluation of generated diagram quality involves CS educators rating AI outputs, which is professional review rather than a human subjects study.",
+      "papers": [
+        {
+          "title": "Evaluating ChatGPT to Answer Multi-Modal Exercises in Computer Science Education",
+          "authors": "Eng Lieh Ouh, Kar Way Tan, Siaw Ling Lo, Benjamin Kok Siew Gan",
+          "venue": "ITiCSE 2025",
+          "year": 2025,
+          "doi": "10.1145/3724363.3729056",
+          "url": "https://doi.org/10.1145/3724363.3729056",
+          "abstract": "This study investigates ChatGPT-4o's ability to answer multi-modal assessment exercises in computer science (CS) courses. We evaluate ChatGPT-4o's answers to 120 multi-modal CS exercises in programming, software design, human-computer interaction, statistical analysis, process analysis, and simulation. Our comparisons show that ChatGPT-4o performs well for exercises with class and sequence diagrams, but performs worse for exercises designed to assess students at the higher levels of Bloom's taxonomy. Exercises requiring higher order cognitive thinking, including generating new multi-modal artifacts, are suitable for take-home assignments as LLMs cannot yet reliably solve them.",
+          "relevance": "This paper directly motivates the research by establishing that LLMs fail at multi-modal CS exercises at higher Bloom's taxonomy levels and identifies artifact generation as the key failure mode. The six diagram categories and the Bloom's taxonomy framing provide the experimental baseline that routine-grounded prompting will be tested against."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "Unlocking UML Class Diagram Understanding in Vision Language Models",
+          "authors": "Multiple authors",
+          "venue": "arXiv preprint 2605.11634",
+          "year": 2025,
+          "url": "https://arxiv.org/abs/2605.11634",
+          "relevance": "Establishes that even state-of-the-art vision-language models struggle with UML class diagram understanding, supporting the claim that structured decomposition scaffolds are needed rather than general scaling."
+        },
+        {
+          "title": "Prior Bias in Vision Language Models on UML Diagram Interpretation",
+          "authors": "Multiple authors",
+          "venue": "arXiv preprint 2607.02853",
+          "year": 2026,
+          "url": "https://arxiv.org/abs/2607.02853",
+          "relevance": "Identifies systematic prior biases in how VLMs interpret UML diagrams, providing a mechanism-level account of failure consistent with the visual routines hypothesis: models rely on prior knowledge rather than reading the diagram structure."
+        },
+        {
+          "title": "Benchmarking and Evaluating VLMs for Software Architecture Diagram Understanding",
+          "authors": "Multiple authors",
+          "venue": "arXiv preprint 2604.04009",
+          "year": 2025,
+          "url": "https://arxiv.org/abs/2604.04009",
+          "relevance": "Provides a broader benchmark for VLM performance on software architecture diagrams, including component and deployment diagrams, contextualizing the Ouh et al. findings within a larger multi-diagram evaluation landscape."
+        },
+        {
+          "title": "MATHVERSE: Does Your Multi-modal LLM Truly See the Diagrams in Visual Math Problems?",
+          "authors": "Renrui Zhang, Dongzhi Jiang, Yichi Zhang, et al.",
+          "venue": "ECCV 2024 / Springer LNCS",
+          "year": 2024,
+          "url": "https://link.springer.com/chapter/10.1007/978-3-031-73242-3_10",
+          "relevance": "Demonstrates that multi-modal LLMs often bypass visual content in math problems by relying on textual context, establishing a benchmark methodology and the 'diagram bypass' failure mode that motivates forcing models to explicitly apply visual decomposition steps."
+        }
+      ],
+      "researchPlan": {
+        "overview": "The research extends Ouh et al.'s benchmark study by introducing a structured visual routine decomposition vocabulary derived from Pisan's SKETCHY work and applying it as a chain-of-thought scaffold for multi-modal CS exercise prompting. The project proceeds without new human subjects by using the existing benchmark or a reconstructed equivalent, progresses through vocabulary development and prompt engineering, and culminates in a controlled experiment and expert evaluation comparing routine-grounded against baseline prompting strategies.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review and visual routine taxonomy development: survey multimodal LLM benchmarking, CS diagram understanding, and chain-of-thought prompting; map SKETCHY primitives (slope, intersection, region, label-binding, change-of-slope) to the six Ouh et al. diagram categories and identify new primitives needed for UML, workflow, and UI artifacts",
+            "deliverable": "Annotated bibliography (25+ papers) and Visual Routine Taxonomy v1 covering the six diagram categories with 15-25 named primitives, illustrated with examples from CS exercises"
+          },
+          {
+            "month": 2,
+            "goal": "Benchmark dataset construction: assemble or reconstruct 80-120 multi-modal CS exercises across the six diagram categories at three Bloom's levels (remember/understand, apply/analyze, evaluate/create), ensuring 10+ exercises per cell; annotate each exercise with the visual routines it requires",
+            "deliverable": "Benchmark dataset with 80-120 annotated exercises, routine-requirement labels per exercise, and a codebook for annotation decisions"
+          },
+          {
+            "month": 3,
+            "goal": "Prompt template development and pilot: author routine-grounded chain-of-thought prompt templates for each diagram category; run pilot on 30 exercises comparing routine-grounded, standard CoT, and zero-shot prompting with Claude and GPT-4o; refine templates based on pilot failure analysis",
+            "deliverable": "Prompt template library (6 diagram-category templates x 3 Bloom's level variants) plus pilot accuracy results and qualitative error analysis document"
+          },
+          {
+            "month": 4,
+            "goal": "Full controlled experiment: run the three prompting conditions (routine-grounded, standard CoT, zero-shot) on the full benchmark across both models; collect outputs for evaluate/create exercises for expert rating; analyze accuracy differences by diagram category and Bloom's level",
+            "deliverable": "Full experiment results table with per-category and per-Bloom's-level accuracy, plus a set of 50 artifact-generation outputs across conditions for expert rating"
+          },
+          {
+            "month": 5,
+            "goal": "Expert evaluation of generated artifacts: recruit 3-4 CS educators to rate generated diagrams on correctness, notation compliance, and clarity using a structured rubric; compute inter-rater agreement; analyze whether routine-grounded prompting closes the artifact-generation quality gap",
+            "deliverable": "Expert rating data with inter-rater agreement statistics, artifact quality scores per condition, and a qualitative analysis of the most common remaining failure modes"
+          },
+          {
+            "month": 6,
+            "goal": "Write and submit paper: draft the full paper covering the visual routine taxonomy, the prompt methodology, and the controlled experiment results; position as a methods contribution that revives a 30-year-old visual reasoning framework for the multimodal LLM era",
+            "deliverable": "Submitted paper (10-12 pages) to ITiCSE or SIGCSE TS, plus open-release benchmark dataset and prompt template library"
+          }
+        ],
+        "targetVenues": ["ITiCSE", "SIGCSE TS", "AIED", "ICER"],
+        "resources": "Multi-modal CS exercise set (reconstructed from public course materials or per-request from Ouh et al.); Claude API and GPT-4o API access via local claude CLI and OpenAI SDK; 3-4 CS educator expert evaluators (reachable via UW Bothell CS colleagues or SIGCSE network); no specialized compute required beyond standard API access; estimated API cost under $200 for the full experiment.",
+        "risks": [
+          {
+            "risk": "The SKETCHY visual routine vocabulary was designed for line graphs in thermodynamics and economics; extending it to UML class diagrams, sequence diagrams, and UI mockups may require so many new primitives that the SKETCHY connection becomes superficial rather than substantive.",
+            "mitigation": "Treat SKETCHY as a design philosophy (domain-independent, composable, hierarchical) rather than a fixed vocabulary; use the SKETCHY primitives where they apply and document new diagram-specific primitives transparently; the contribution is the extension methodology, not a strict replication of SKETCHY."
+          },
+          {
+            "risk": "LLM performance improvements from routine-grounded prompting may be marginal or model-specific, reducing the publishability of the contribution.",
+            "mitigation": "Report per-category and per-Bloom's-level breakdowns; even a null result comparing models is publishable as a benchmark contribution; reframe toward the diagnostic value of the taxonomy if overall gains are small, showing which diagram types and Bloom's levels benefit most from structured decomposition."
+          },
+          {
+            "risk": "Reconstructing the Ouh et al. exercise set accurately may be difficult without access to the original exercises, reducing comparability with the baseline paper.",
+            "mitigation": "Contact the Ouh et al. authors directly for the exercise set; if unavailable, construct an equivalent benchmark from publicly available CS course materials (OpenDSA, UCSD CSE courses, MIT 6.031 problem sets) and describe the construction methodology explicitly so results are reproducible independently of the original set."
+          }
+        ],
+        "humanSubjects": false
+      }
     }
   ]
 }
