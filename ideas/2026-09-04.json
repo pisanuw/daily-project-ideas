@@ -1,0 +1,165 @@
+{
+  "date": "2026-09-04",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Diff-to-Concept Map",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "Paste a GitHub PR URL or raw git diff and get an interactive visual map of software engineering concepts present in the change. Turns code reviews into learning opportunities.",
+      "description": "Diff-to-Concept Map takes a GitHub pull request URL (or a pasted raw diff) and uses Claude to identify the software engineering concepts embedded in the change: design patterns introduced, paradigm shifts (e.g., callbacks to async/await), coupling/cohesion changes, SOLID principle violations fixed or introduced, and architectural boundaries crossed. Results are rendered as an interactive concept card wall (React + Vite) with brief explanations of why each concept appears. Developers use it to deepen their review before approving, and instructors use it to turn student PRs into concept-labeling exercises.",
+      "keyFeatures": [
+        "Accepts GitHub PR URLs (fetches diff via GitHub API) or pasted raw diff text",
+        "Claude identifies named software engineering concepts with line-level citations in the diff",
+        "Interactive concept card wall with expandable explanations and diff line links",
+        "Export as a structured JSON for LMS or course integration",
+        "Optional 'concept quiz' mode that hides labels and asks the reviewer to guess each concept"
+      ],
+      "techStack": "React + Vite + Tailwind, GitHub REST API (public PRs, no auth needed), Claude API (claude-sonnet-5)",
+      "whyInteresting": "Code review culture is improving but depth is still shallow. This makes the conceptual content of a diff legible at a glance, helping junior developers learn patterns in context and giving instructors a zero-effort way to annotate student PRs with concept labels.",
+      "inspiredBy": "GitHub AI Code Review Tools 2026 trend (morphllm.com/github-ai-code-review); Gater PR comprehension quiz tool (usegater.app); general frustration that code reviews surface style issues but miss architectural concepts"
+    },
+    {
+      "n": 2,
+      "title": "Pair Programming Matchmaker",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "Instructors paste a class roster with GitHub usernames; the tool analyzes recent repos and generates data-driven pair programming recommendations based on complementary code skills.",
+      "description": "Pair Programming Matchmaker takes a CSV of student GitHub usernames, calls the GitHub API to retrieve each student's recent public activity (commit frequency, languages used, test file presence, README quality, issue engagement), summarizes each student's skill profile using Claude, and then recommends pairings that balance complementary strengths: a strong tester with a weaker tester, a documentation writer with a code-heavy student, and so on. Instructors see a visual skill-cluster map and a one-click exportable pairing list. They can lock pairs they want to keep and regenerate recommendations for the rest.",
+      "keyFeatures": [
+        "CSV upload of student GitHub usernames with one-click batch GitHub API analysis",
+        "Claude-generated skill profile card per student: languages, test coverage signals, commit patterns, documentation quality",
+        "Complementary skill pairing algorithm with instructor overrides",
+        "Visual skill cluster map using D3 or a simple SVG force graph",
+        "Export pairing list as CSV or Canvas-compatible group import JSON"
+      ],
+      "techStack": "React + Vite + Tailwind, GitHub REST API, Claude API, Supabase (optional persistence for multiple sections), Flask backend for batch GitHub calls",
+      "whyInteresting": "Pair programming is widely recommended but instructors assign pairs randomly or by gut feel. GitHub activity provides real skill signals that make complementary pairings more principled, improving the pedagogical value of the exercise without requiring a survey or quiz.",
+      "inspiredBy": "Trending discussions about AI-assisted team formation in CS courses; GitHub Octoverse data on collaboration patterns; instructor pain points discussed in SIGCSE 2026 papers on scaling large CS courses"
+    },
+    {
+      "n": 3,
+      "title": "Browser OS Scheduler Lab",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "Students build a fully browser-native OS process scheduler simulation using Web Workers and SharedArrayBuffer, then add a Claude-powered inspector that explains scheduling decisions in plain English.",
+      "description": "Browser OS Scheduler Lab is a 3-week classroom assignment for OS or systems programming courses. Students implement three scheduling algorithms (First-Come-First-Served, Round Robin with configurable quantum, and Priority Scheduling with aging) entirely in the browser using Web Workers as simulated processes and SharedArrayBuffer as shared memory. A React dashboard visualizes the ready queue, wait times, and CPU utilization in real time. In week 3, students integrate the Claude API to build an 'OS Inspector' chat panel: the inspector is given the scheduler's decision log and can answer natural-language questions like 'Why did process P3 wait so long?' with pedagogically accurate explanations. Students submit a performance benchmark report comparing their three algorithms on a standard workload, plus a short reflection on what the AI inspector revealed about their implementation.",
+      "keyFeatures": [
+        "Web Workers as simulated processes with configurable arrival times, burst times, and priorities",
+        "SharedArrayBuffer for shared state (process table, ready queue) with Atomics for safe concurrent access",
+        "Real-time Gantt chart and metrics dashboard (average wait time, turnaround, CPU utilization) in React",
+        "Claude-powered OS Inspector that ingests the decision log and answers natural-language questions",
+        "Configurable workload generator for stress-testing and performance comparison reports"
+      ],
+      "techStack": "React + Vite + Tailwind (dashboard), Web Workers + SharedArrayBuffer + Atomics (simulation engine), Claude API (claude-haiku-4-5 for cost-effective inspector), Supabase (optional: store benchmark results for class comparison)",
+      "whyInteresting": "OS scheduling is notoriously abstract, and traditional simulators are desktop apps students set up once and ignore. A browser-native implementation removes friction and the AI inspector forces students to articulate scheduling behavior in natural language, which deepens understanding in the same way rubber duck debugging does. The AI layer also teaches prompt design as part of the assignment.",
+      "inspiredBy": "SIGCSE TS 2026 experience reports on systems programming education; indie devs trend toward building fully browser-native apps with Web Workers (2026 Hacker News discussions); Pisan's CSS 342/343 toolchain-first OS focus"
+    },
+    {
+      "n": 4,
+      "title": "KC-Targeted LLM Hint Generation: Closing the Loop Between Curriculum Alignment and Adaptive Formative Feedback in CS1",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Extends a SIGCSE 2026 KC-alignment pipeline to a full hint-generation system: when a student's submission fails, the system routes the failure to a specific Knowledge Component, then generates a KC-conditioned LLM hint, testing whether explicit curriculum grounding produces more pedagogically precise hints than KC-agnostic prompting.",
+      "description": "Curriculum-aware automated feedback is an open problem: most LLM-based hint systems prompt the model with code and error messages but without grounding in the course's conceptual structure. Bainapalepu et al. (SIGCSE TS 2026) demonstrate that constrained LLMs can align CS1 textbook sections with exercises via a Knowledge Component ontology as reliably as human annotators. This research project closes the loop: using their KC-alignment pipeline to tag course exercises and autograder test cases with KCs, then routing submission failures to the relevant KC, and generating KC-conditioned LLM hints that name the specific conceptual gap. A blinded expert annotation study compares KC-conditioned hints against KC-agnostic hints on five pedagogical quality dimensions (specificity, non-revealing, scaffolding quality, accuracy, relevance), directly extending Pisan's solution-free hint generation work (Suciu et al., SIGCSE 2021) with an explicit curriculum-grounding layer. A second phase tests whether KC-conditioned hints reduce resubmission counts in CSS 142 compared to KC-agnostic hints, using existing Jolly Feedback infrastructure.",
+      "papers": [
+        {
+          "title": "Knowledge Component-Driven Alignment of CS1 Textbooks and Exercises",
+          "authors": "Sai Teja Bainapalepu, Monalisa Mondal, Jinit Desai, Krishna Mohan Bathula",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770761.3777243",
+          "url": "https://doi.org/10.1145/3770761.3777243",
+          "abstract": "A reproducible pipeline assigns Knowledge Components (KCs) to CS1 textbook sections and exercise problems, respects prerequisite order to avoid inserting problems too early, and generates tips for not-yet-taught concepts. Three KC assignment strategies are compared: embedding-only, embedding with an LLM tie-breaker, and direct LLM assignment. Direct LLM assignment matches or exceeds human annotators. Constrained LLMs can enrich CS1 textbooks with curriculum-aware practice problems aligned to the course's KC ontology.",
+          "relevance": "Provides the KC-alignment pipeline that is the prerequisite infrastructure for KC-conditioned hint generation. Shows that LLMs can assign KCs as reliably as human annotators, validating the feasibility of automated KC tagging for Pisan's submission logs."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "LLM-KCI: Leveraging Large Language Models to Identify Programming Knowledge Components",
+          "authors": "Multiple authors, Georgia Tech and collaborators",
+          "venue": "SIGCSE TS 2025",
+          "year": 2025,
+          "url": "https://doi.org/10.1145/3641555.3705215",
+          "relevance": "Directly precedes the source paper on KC identification, establishing that GPT-4 can identify relevant KCs in programming assignments, and identifying the key limitation that problem-level KC match with expert annotations remains imperfect — a gap KC-conditioned hint generation must account for."
+        },
+        {
+          "title": "Use of Large Language Models for Extracting Knowledge Components in CS1 Programming Exercises",
+          "authors": "Multiple authors",
+          "venue": "SIGCSE TS 2024",
+          "year": 2024,
+          "url": "https://doi.org/10.1145/3626253.3635592",
+          "relevance": "Establishes the lineage of LLM-based KC extraction for CS1, providing baseline accuracy metrics and methodology that the source paper improves upon and that KC-targeted hint generation will inherit."
+        },
+        {
+          "title": "Generating Hints for Programming Problems Without a Solution",
+          "authors": "Suciu, Giang, Zhao, Runandy, Dang (advisor: Pisan)",
+          "venue": "SIGCSE 2021 Student Research Competition",
+          "year": 2021,
+          "url": "https://sigcse2021.sigcse.org/",
+          "relevance": "Pisan's own solution-free hint generation work, which this research directly extends: the SIGCSE 2021 SRC showed feasibility of generating hints from problem statements alone; KC-conditioned hints add a curriculum grounding layer that the 2021 work lacked."
+        },
+        {
+          "title": "Enhancing LLM-Based Feedback: Insights from Intelligent Tutoring Systems and the Learning Sciences",
+          "authors": "Multiple authors",
+          "venue": "arXiv preprint (2024)",
+          "year": 2024,
+          "url": "https://arxiv.org/abs/2405.04645",
+          "relevance": "Surveys the gap between ITS theory (which is KC-grounded) and current LLM feedback tools (which are not), providing the theoretical motivation for why KC-conditioned prompting should outperform KC-agnostic LLM hints on pedagogical quality dimensions."
+        }
+      ],
+      "researchPlan": {
+        "overview": "The project applies a KC-alignment pipeline to an existing intro CS course's materials and submission logs, generates two families of hints (KC-conditioned and KC-agnostic), and compares them via expert annotation in a controlled quality study, then optionally deploys the better approach in a live course. The result is both a validated hint-generation methodology and an empirical benchmark of KC-grounding value for LLM tutors in CS1.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Apply KC-alignment pipeline to CSS 142 course materials: syllabus, assignment specs, Jolly Feedback test cases. Produce a KC-tagged exercise catalog.",
+            "deliverable": "KC ontology (20-40 KCs) with textbook-to-KC and test-case-to-KC mappings; annotated bibliography"
+          },
+          {
+            "month": 2,
+            "goal": "Mine existing Jolly Feedback submission logs for common failure patterns; tag each failure with the relevant KC via the alignment pipeline. Sample 200 representative failure cases.",
+            "deliverable": "KC-annotated failure dataset of 200 cases with inter-annotator reliability report (Claude vs. instructor)"
+          },
+          {
+            "month": 3,
+            "goal": "Implement KC-conditioned and KC-agnostic hint generation pipelines using Claude API. Generate two hint variants for each of the 200 failure cases.",
+            "deliverable": "400-hint dataset (200 KC-conditioned, 200 KC-agnostic) with generation logs and cost analysis"
+          },
+          {
+            "month": 4,
+            "goal": "Recruit 3-4 CS education expert raters (faculty + experienced TAs). Conduct blinded expert annotation study rating all 400 hints on 5 pedagogical quality dimensions (specificity, non-revealing, scaffolding, accuracy, relevance).",
+            "deliverable": "Rated hint dataset with inter-rater reliability statistics; preliminary analysis comparing KC-conditioned vs. KC-agnostic on each dimension"
+          },
+          {
+            "month": 5,
+            "goal": "Statistical analysis, ablation study (which KC types benefit most from grounding), and write-up of study 1 results. If Phase 2 (live course A/B test) is approved by IRB, begin protocol design.",
+            "deliverable": "Complete analysis report with effect sizes; IRB protocol draft (if pursuing Phase 2)"
+          },
+          {
+            "month": 6,
+            "goal": "Finalize paper draft targeting SIGCSE or ICER. Include full methodology, quality study results, limitations, and Phase 2 pilot data if available.",
+            "deliverable": "Submitted conference paper draft"
+          }
+        ],
+        "targetVenues": ["SIGCSE TS", "ICER", "EDM (Educational Data Mining)", "L@S (Learning at Scale)"],
+        "resources": "Existing Jolly Feedback submission logs from CSS 142 (no new data collection needed for Phase 1), Claude API (claude-sonnet-5 or claude-haiku-4-5 for cost control), 3-4 CS education expert raters for annotation study (faculty colleagues or experienced TAs), Python scripting for KC pipeline integration. Phase 2 (live deployment) would require IRB approval and coordination with CSS 142 instructor.",
+        "risks": [
+          {
+            "risk": "KC-conditioned hints may not outperform KC-agnostic hints if LLMs already infer the relevant concept from code context alone.",
+            "mitigation": "Design ablation study that isolates the KC grounding contribution; even a null result is publishable and scientifically valuable, and hints the field toward leaner prompting strategies."
+          },
+          {
+            "risk": "Expert rater availability and annotation fatigue may reduce inter-rater reliability across 400 hints.",
+            "mitigation": "Limit each rater to 100 hints (randomly sampled) and use pairwise overlap to compute Krippendorff's alpha; use an LLM-as-annotator condition as a reliability baseline."
+          },
+          {
+            "risk": "KC-alignment pipeline may produce noisy KC assignments for complex multi-concept exercises, contaminating the KC-conditioning condition.",
+            "mitigation": "Filter the 200-case sample to exercises with high-confidence single-KC assignments; conduct sensitivity analysis comparing single-KC vs. multi-KC cases separately."
+          }
+        ],
+        "humanSubjects": false
+      }
+    }
+  ]
+}
