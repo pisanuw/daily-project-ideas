@@ -1,0 +1,165 @@
+{
+  "date": "2026-09-05",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Micro-Benchmark Narrator",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "Paste two JavaScript implementations in a side-by-side editor, run head-to-head benchmarks in a Web Worker, and get Claude's plain-English explanation of exactly why one is faster.",
+      "description": "Micro-Benchmark Narrator is a browser-based performance comparison sandbox. You enter two (or more) JavaScript implementations of the same function in a Monaco editor, hit Run, and the tool executes thousands of iterations in a Web Worker to produce reliable ops/sec figures without blocking the main thread. Claude then explains the performance delta in concrete terms: is it V8 JIT compilation differences, hidden-class deoptimization, memory allocation pressure, or algorithmic complexity? Results display as a race-track dial and a per-implementation flame bar. You can share a URL that encodes the code and results for discussion or teaching. The tool helps developers build performance intuition and gives CS students a concrete way to understand why micro-optimizations do or do not matter.",
+      "keyFeatures": [
+        "Side-by-side Monaco editor supporting two or more implementations",
+        "Benchmark engine running in a Web Worker to avoid main-thread interference",
+        "Claude-generated explanation citing specific V8 and algorithmic reasons",
+        "Race-track dial and flame-style bar chart for visual comparison",
+        "Shareable URL encoding code and benchmark results"
+      ],
+      "techStack": "React + Vite + Tailwind, Monaco Editor, Web Workers, Claude API",
+      "whyInteresting": "Performance intuition is one of the hardest things to build as a developer. jsPerf-style tools show you numbers; this shows you why. Turning V8 internals into a readable story is exactly what LLMs are good at, and it makes an otherwise dry topic genuinely engaging.",
+      "inspiredBy": "Trending developer tooling focus on AI-assisted code understanding; the explanatory gap in existing microbenchmark tools like jsPerf and Benchmark.js"
+    },
+    {
+      "n": 2,
+      "title": "Discrete Math Proof Coach",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "Students write mathematical proofs for CS theory problems and receive Socratic coaching on logical gaps and missing steps without ever being given the answer.",
+      "description": "Discrete Math Proof Coach is a web tool for CS theory and algorithms courses. Students select a proof strategy (induction, direct proof, contradiction, pigeonhole) from a structured template, then write their argument in a guided editor. Claude analyses the submitted proof for logical gaps, missing base cases, incorrect inference steps, and naming inconsistencies, and responds with targeted Socratic questions rather than corrections. A proof-health meter shows Soundness, Completeness, and Clarity scores updated after each revision. Instructors can create custom problem sets, configure a maximum hint count per session, and export student proof logs to Canvas as assignment artifacts. The tool is especially valuable in courses where discrete math is a prerequisite for algorithms and students get almost no interactive feedback outside office hours.",
+      "keyFeatures": [
+        "Proof-type templates for induction, direct proof, contradiction, and pigeonhole arguments",
+        "Socratic feedback mode: targeted questions instead of direct corrections",
+        "Proof-health meter scoring Soundness, Completeness, and Clarity",
+        "Instructor dashboard to create problems and cap hint usage per student",
+        "Session log export to Canvas as a structured assignment artifact"
+      ],
+      "techStack": "React + Vite + Tailwind, Flask, Claude API",
+      "whyInteresting": "Writing proofs is notoriously hard to teach at scale. Students receive almost no interactive feedback except in office hours. This tool scales coaching without giving away answers, building on the hints-without-solutions tradition from CS education research.",
+      "inspiredBy": "The persistent gap between how much proof-writing practice CS students need and how little feedback they receive; the SIGCSE 2021 hints-without-solutions line of work"
+    },
+    {
+      "n": 3,
+      "title": "Student Capstone Portfolio Hub",
+      "category": "Teaching Tool",
+      "complexity": "Multi-week",
+      "summary": "A structured showcase platform where students publish capstone projects with AI-assisted documentation, and instructors review, grade, and surface exemplary work to future cohorts.",
+      "description": "Student Capstone Portfolio Hub guides students through a multi-section documentation wizard: problem statement, design decisions, demo video link, GitHub link, and an honest reflection on what they would do differently. Claude helps draft each section through a conversational prompt-and-refine loop without writing the content for them. Instructors see all submissions in a filterable gallery, leave rubric-aligned comments, and can pin exemplary projects to an Inspiration Board visible to next year's students. Supabase stores submissions with privacy controls (public, cohort-only, or instructor-only per section). An RSS feed lets the program announce new exemplary projects. The hub replaces the ad-hoc folder-of-PDFs approach most programs use today and turns capstone work into a living institutional library.",
+      "keyFeatures": [
+        "Guided multi-section documentation wizard with Claude-assisted prompt-and-refine drafting",
+        "Public gallery filterable by topic area, technology stack, and cohort year",
+        "Rubric-aligned instructor review and comment interface",
+        "Inspiration Board for pinning exemplary projects visible to future students",
+        "Per-section privacy controls and optional RSS feed for program announcements"
+      ],
+      "techStack": "React + Vite + Tailwind, Flask, Supabase, Claude API",
+      "whyInteresting": "Capstone projects are often the best work students produce, yet the documentation is weak and the work disappears after grading. This platform turns capstone portfolios into a living library that motivates current students and gives future ones concrete exemplars at the program's own standard.",
+      "inspiredBy": "The common instructor frustration with shallow capstone documentation; growing employer expectations that CS graduates maintain a public portfolio of real projects"
+    },
+    {
+      "n": 4,
+      "title": "From Mastery Analytics to Adaptive Hints: Closing the Instructor-Dashboard Loop with LLM-Generated Concept-Targeted Feedback in CS1",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Mastery learning dashboards tell instructors which students are not achieving concept mastery but provide no automated remediation. This research closes that loop by triggering LLM-generated hints grounded in each student's specific failure pattern, and measures whether dashboard-grounded hints outperform generic LLM feedback on time-to-mastery.",
+      "description": "Open-source mastery learning dashboards, such as the system presented at SIGCSE TS 2026 by the UC Berkeley group, give instructors concept-level visibility into student mastery trajectories across large CS1 courses. However, the dashboard stops at analytics: instructors must decide how to intervene individually, which is impractical at scale. This research proposes and evaluates a feedback loop that connects the mastery dashboard to an LLM hint engine: when a student fails a concept checkpoint twice or more, the system automatically generates a short, solution-free, concept-targeted hint grounded in the student's specific error pattern (drawn from submission history), not a generic prompt. A three-condition study (no LLM hint, generic LLM hint, dashboard-grounded LLM hint) measures time-to-mastery and resubmission rate in a live CS1 course. The work extends Pisan's prior SIGCSE 2021 hints-without-solutions proof-of-concept by adding the mastery-state grounding and rigorous outcome evaluation that was absent in the earlier feasibility study.",
+      "papers": [
+        {
+          "title": "An Instructor Dashboard to Support Mastery Learning",
+          "authors": "Dan Garcia et al. (UC Berkeley)",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770761.3777343",
+          "url": "https://doi.org/10.1145/3770761.3777343",
+          "abstract": "Mastery learning promises more equitable outcomes in large CS courses, yet instructors lack a full array of tools to support their implementation. Popular Learning Analytics Dashboards and adaptive platforms excel at grade analytics but offer limited support for custom mastery policies. We present an open-source, instructor-focused dashboard integrated into a custom LMS for high-enrollment CS courses featuring a data pipeline that gathers scores from multiple sources and provides a view into equitable grading policies such as retakes, resubmissions, and flexible deadlines.",
+          "relevance": "This paper supplies the mastery analytics infrastructure that the proposed research extends. It identifies exactly when and where students fail to achieve mastery, which becomes the trigger signal for dashboard-grounded LLM hint generation. The open-source release also makes replication and local deployment feasible without building new infrastructure."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "Towards Just-in-Time Adaptive Feedback: Enhancing Student Learning via Knowledge-Grounded LLM",
+          "authors": "Anon et al.",
+          "venue": "arXiv preprint",
+          "year": 2026,
+          "url": "https://arxiv.org/abs/2605.26405",
+          "relevance": "Demonstrates that grounding LLM feedback in structured course knowledge (rather than generic prompting) measurably improves hint quality and learning outcomes, directly supporting the dashboard-grounded design proposed here."
+        },
+        {
+          "title": "SPHERE: Scaling Personalized Feedback in Programming Classrooms with Structured Review of LLM Outputs",
+          "authors": "Anon et al.",
+          "venue": "arXiv preprint",
+          "year": 2024,
+          "url": "https://arxiv.org/abs/2410.16513",
+          "relevance": "Describes a scalable LLM feedback pipeline for programming education including a validation stage that checks outputs for solution leakage and vagueness before delivery. A comparable safety stage is a requirement for the hint engine proposed here."
+        },
+        {
+          "title": "Mastery Learning in CS1: An Invitation to Procrastinate? Reflecting on Six Years of Mastery Learning",
+          "authors": "Norbert Szirbik et al.",
+          "venue": "ITiCSE 2021",
+          "year": 2021,
+          "url": "https://dl.acm.org/doi/10.1145/3430665.3456321",
+          "relevance": "Documents a key failure mode of mastery learning at scale: without automated prompts, students delay re-attempts. The proposed LLM hint generation directly addresses this by providing an automated, personalized nudge grounded in the student's specific error pattern rather than a generic reminder."
+        },
+        {
+          "title": "A High-Transparency Approach to Mastery Learning in CS1: Mitigating Procrastination Despite Liberal Self-Pacing",
+          "authors": "Gabrielle Hansen, Guttorm Sindre",
+          "venue": "ITiCSE 2025",
+          "year": 2025,
+          "url": "https://dl.acm.org/doi/10.1145/3724363.3729023",
+          "relevance": "The most recent large-scale mastery learning deployment with transparent assessment, finding that procrastination persists even with liberal policies and clear expectations. The LLM hint loop proposed here is a complementary automated intervention targeting the same failure mode."
+        }
+      ],
+      "researchPlan": {
+        "overview": "The research instruments a live CS1 course with the SIGCSE 2026 open-source mastery dashboard, then layers an LLM hint engine that fires when a student fails a concept checkpoint twice. A three-condition experiment (no hint, generic hint, dashboard-grounded hint) measures time-to-mastery and resubmission rate, providing the first controlled evaluation of mastery-state-grounded LLM hints in a real introductory CS course and extending Pisan's prior SIGCSE 2021 feasibility work to a rigorous causal study.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review on mastery learning and LLM feedback in CS education; adapt and deploy the open-source SIGCSE 2026 dashboard into the local LMS; IRB consultation on whether live hint delivery qualifies as educational practice or research",
+            "deliverable": "Annotated bibliography (20+ papers), running dashboard instance, IRB decision memo"
+          },
+          {
+            "month": 2,
+            "goal": "Build the LLM hint engine: prompt design for concept-targeted solution-free hints, error-pattern extraction from Jolly Feedback submission logs, two-stage safety filter (generate then check for solution leakage)",
+            "deliverable": "Working hint-generation pipeline validated on historical CSS 142 submission data"
+          },
+          {
+            "month": 3,
+            "goal": "Pilot deployment in one course section across three rotated conditions (within-subjects: each student encounters all three conditions on different concept checkpoints); collect submission timestamps, attempt counts, and mastery-achievement rates",
+            "deliverable": "Pilot dataset (target n >= 60 students, 3+ checkpoints each)"
+          },
+          {
+            "month": 4,
+            "goal": "Statistical analysis: time-to-mastery (Kaplan-Meier curves per condition), resubmission rate comparison, qualitative coding of student responses to hint types",
+            "deliverable": "Analysis report with effect size estimates and qualitative theme summary"
+          },
+          {
+            "month": 5,
+            "goal": "Write paper: frame around DT-1 and DT-2 research agenda; connect to SIGCSE 2021 predecessor; address threats to validity; draft discussion of implications for mastery learning system design",
+            "deliverable": "Complete draft reviewed by co-authors"
+          },
+          {
+            "month": 6,
+            "goal": "Revise and submit paper; release open-source replication package (dashboard + hint engine + anonymized dataset + reproducible analysis notebooks)",
+            "deliverable": "Submitted paper and public replication artifact on GitHub"
+          }
+        ],
+        "targetVenues": ["SIGCSE TS", "ICER", "ITiCSE", "EDM"],
+        "resources": "One CS1 course section (30-60+ students) already instrumented with Jolly Feedback or Canvas; historical submission logs from CSS 142 for prompt calibration; Claude API (covered by department subscription or small compute grant); one undergraduate RA for data collection and qualitative coding; access to the open-source dashboard codebase from the SIGCSE 2026 paper.",
+        "risks": [
+          {
+            "risk": "IRB classification: automatic hint delivery in a live course may require human-subjects approval even if all conditions are available to all students",
+            "mitigation": "Consult UW IRB in month 1; design the study as a sequential within-subjects rotation so no student is denied any condition, which typically qualifies for educational-practice exemption under 45 CFR 46.104(d)(1)"
+          },
+          {
+            "risk": "LLM hint quality is inconsistent and some hints may inadvertently reveal solutions or be too vague to be useful",
+            "mitigation": "Implement a two-stage pipeline: generate candidate hint with Claude, then pass through a second call that scores it on solution-leakage risk and specificity; manually review a 10% random sample each week and retune the prompt"
+          },
+          {
+            "risk": "Small course section limits statistical power for detecting differences between three conditions",
+            "mitigation": "Use a within-subjects design with multiple concept checkpoints per student to increase effective sample size; report Bayesian credible intervals alongside frequentist tests to make effect sizes interpretable at small n; plan a replication in a second semester"
+          }
+        ],
+        "humanSubjects": true
+      }
+    }
+  ]
+}

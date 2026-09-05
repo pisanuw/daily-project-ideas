@@ -418,3 +418,7 @@
 | 2026-09-04 | Pair Programming Matchmaker | Teaching Tool | 1-2 Weeks |
 | 2026-09-04 | Browser OS Scheduler Lab | Classroom Assignment | Multi-week |
 | 2026-09-04 | KC-Targeted LLM Hint Generation: Closing the Loop Between Curriculum Alignment and Adaptive Formative Feedback in CS1 | Research | Research |
+| 2026-09-05 | Micro-Benchmark Narrator | Side Project | Weekend |
+| 2026-09-05 | Discrete Math Proof Coach | Teaching Tool | 1-2 Weeks |
+| 2026-09-05 | Student Capstone Portfolio Hub | Teaching Tool | Multi-week |
+| 2026-09-05 | From Mastery Analytics to Adaptive Hints: Closing the Instructor-Dashboard Loop with LLM-Generated Concept-Targeted Feedback in CS1 | Research | Research |

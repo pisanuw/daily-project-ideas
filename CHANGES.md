@@ -245,3 +245,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-09-03 note Claimed Summit Navigator (2026-09-03 n1) as in progress: mobile-first ACM AI Leadership Summit schedule app, next Claude-capstone build.
 
 2026-09-03 note Summit Navigator (2026-09-03 n1) marked implemented: live at summit-navigator.netlify.app, repo Claude-capstone/summit-navigator. Bundled schedule reconstructed from public ACM announcements (program page blocked by egress policy); deploy worked first try, siteId pinned.
+
+2026-09-05 [doc] Created ideas/2026-09-05.json with 4 ideas: Micro-Benchmark Narrator, Discrete Math Proof Coach, Student Capstone Portfolio Hub, From Mastery Analytics to Adaptive Hints (Mastery Dashboard SIGCSE 2026 doi:10.1145/3770761.3777343)
