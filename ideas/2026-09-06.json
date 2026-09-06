@@ -1,0 +1,165 @@
+{
+  "date": "2026-09-06",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Assembly Whisperer",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "Paste vintage game or system code in 68000 assembly, BASIC, Pascal, or early C and get a layered annotation: plain-English section summary, modern pseudocode, and a one-screen modern equivalent in Python or JavaScript.",
+      "description": "Assembly Whisperer is a browser-based code archaeology tool aimed at game preservation enthusiasts, retro computing hobbyists, and CS history learners. You paste a snippet of vintage code into a Monaco editor, select the source language and era, and Claude works through the code in three layers: first a plain-English explanation of what each block does, then a modern pseudocode equivalent that strips away hardware-specific idioms, and finally a runnable Python or JavaScript snippet that replicates the logic in a contemporary style. A sidebar shows a 'Software Archaeology Card' with historical context: the era, the machine, common patterns used, and a list of modern language features that now handle the same concerns automatically. Results are shareable via a compact URL that encodes the source, annotations, and card. The tool is deliberately read-only, never modifying or 'improving' the original code, honoring it as a historical artifact.",
+      "keyFeatures": [
+        "Monaco editor with syntax highlighting for 68000 assembly, BASIC, Pascal, and early C",
+        "Three-layer output: plain-English summary, modern pseudocode, and runnable Python or JavaScript equivalent",
+        "Software Archaeology Card with era, machine, and pattern context",
+        "Shareable URL encoding input and all three annotation layers",
+        "Read-only ethos: original code is preserved and displayed alongside annotations"
+      ],
+      "techStack": "React + Vite + Tailwind, Monaco Editor, Claude API",
+      "whyInteresting": "Retro game preservation and porting are having a cultural moment. The classic question 'what does this old code actually do?' is exactly the kind of layered semantic interpretation task that LLMs handle well, and wrapping it in an archaeology metaphor makes it engaging for both hobbyists and CS history courses. There is no dedicated tool for this; people currently paste into generic chat UIs and get unsatisfying responses.",
+      "inspiredBy": "Hacker News trending story 'Porting my 1993 Amiga game to Godot, with an LLM reading the 68000 assembly' (September 2026); growing game preservation and retro computing communities on r/coolgithubprojects"
+    },
+    {
+      "n": 2,
+      "title": "AI Dialogue Scaffold",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "Before students send a question to ChatGPT or Claude, this tool classifies it and either routes them through three Socratic guiding questions or transparently forwards the query with a reflective follow-up, making AI help-seeking visible and intentional rather than reflexive.",
+      "description": "AI Dialogue Scaffold sits between students and their preferred AI tool, adding a brief classification step. A student pastes the question they are about to send; Claude classifies it into one of four buckets: Conceptual (they should struggle productively first), Factual Lookup (acceptable to retrieve directly), Debugging (a rubber-duck pass first), or Design (a peer conversation would be more valuable). For Conceptual and Design questions the tool withholds forwarding and instead returns three targeted guiding questions. For Factual and Debugging questions it routes the original query and appends a short 'did you actually understand this response?' check. Every interaction is logged to a student dashboard that shows a weekly breakdown by question type and a class-level heatmap for the instructor. Instructors can configure thresholds (e.g., require two minutes of reflection before forwarding Conceptual questions) and can download anonymized logs for research. The tool does not block AI use but makes the choice to use it a moment of deliberate reflection rather than a reflex.",
+      "keyFeatures": [
+        "Four-category classification: Conceptual, Factual Lookup, Debugging, and Design",
+        "Socratic gate for Conceptual and Design questions: three guiding questions before forwarding",
+        "Transparent forwarding for Factual and Debugging with a comprehension follow-up",
+        "Student dashboard showing weekly question-type breakdown and reflection compliance",
+        "Instructor heatmap and anonymized log export for course-level analytics"
+      ],
+      "techStack": "React + Vite + Tailwind, Flask, Supabase, Claude API",
+      "whyInteresting": "Research from ITiCSE 2025 found that students now redirect peer questions to AI instead of asking classmates, eroding the social learning fabric of CS classrooms. This tool does not ban AI use but makes the decision conscious, nudging students toward the kind of help that actually builds understanding. It is one of the few tools that operates at the moment of help-seeking rather than after the fact.",
+      "inspiredBy": "ITiCSE 2025 paper 'All Roads Lead to ChatGPT: How Generative AI is Eroding Social Interactions and Student Learning Communities'; growing instructor concern about reflexive AI use replacing productive struggle"
+    },
+    {
+      "n": 3,
+      "title": "Agent Configuration Observatory",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "Students design and run multiple AI agents with different tool access, memory strategies, and model choices on an identical benchmark task, then compare their behavior side-by-side in a live visual dashboard and write a structured comparative analysis report.",
+      "description": "Agent Configuration Observatory is a multi-week classroom assignment that teaches students to think systematically about AI agent design rather than just accepting default tool behavior. Students define a shared benchmark task (e.g., 'debug this program and explain each step' or 'plan and draft a short technical specification'), then configure three to five agent variants that differ along orthogonal dimensions: available tools (web search, code execution, file access), memory type (none, short-term, persistent), and model choice (Claude, Gemini, or a local open-source model). The observatory dashboard runs all variants in parallel and displays side-by-side panels showing the tool calls made, the reasoning trace, errors encountered, token cost, and wall-clock time. Students annotate each panel with observations during the run and export a structured comparison log. The final deliverable is a 1500-word analysis report that explains which configuration performed best for the task, where the failure modes emerged, and what configuration choices they would make for a production deployment. The project is scaffolded across three phases: design and justify configurations (week 1), run and annotate the live comparison (week 2), and write and peer-review the analysis (week 3).",
+      "keyFeatures": [
+        "Agent configuration builder with orthogonal control over tools, memory type, and model choice",
+        "Live side-by-side observatory dashboard showing tool calls, traces, errors, cost, and latency",
+        "Annotation layer so students can tag observations during or after a run",
+        "Structured comparison log export for use in the final analysis report",
+        "Three-phase scaffolding: design, observe, analyze with built-in peer review"
+      ],
+      "techStack": "React + Vite + Tailwind, Flask, Claude API, Gemini API, optional local model via Ollama",
+      "whyInteresting": "Most students learn about agents by using a single default configuration and never question the choices. This assignment forces them to see agent behavior as a product of explicit design decisions and to develop the empirical habits needed to evaluate AI systems rather than just use them. It teaches evaluation methodology, cost awareness, and comparative reasoning all in one project.",
+      "inspiredBy": "Growing ecosystem of agent frameworks (Browser-use, Mem0, AutoGPT, LocalAI) trending on GitHub in 2026; the need to teach students agent evaluation skills rather than just agent use skills"
+    },
+    {
+      "n": 4,
+      "title": "Role-Bounded AI Collaborative Agents for Software Engineering Courses: Preserving Peer Dynamics in the Agent Era",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Unbounded GenAI use in collaborative SE projects is dissolving the peer interactions that produce learning. This research designs and evaluates a set of role-bounded AI agents with constrained capabilities to test whether structured AI roles can support team projects while preserving the peer dynamics that unbounded LLM access erodes.",
+      "description": "A 2025 ITiCSE position paper proposed that AI could take on any role in collaborative software development, from requirements clarifier to code reviewer, but left empirical evaluation of those futures open. This research operationalizes four such roles as bounded AI agents, each with a restricted capability set: a Requirements Clarifier that only asks questions about ambiguous specs, a Code Critic that comments on submitted PRs but never suggests implementations, a Test Oracle that generates test cases on request but not production code, and a Design Doc Reviewer that poses clarifying questions. Student software engineering teams are assigned to one of three conditions: baseline (no AI), unbounded GenAI (free ChatGPT or Claude access), or bounded role agents. The study measures peer interaction frequency and quality, code quality via automated metrics, post-project conceptual assessment, and student perceptions of collaboration. Building on Pisan's prior work in believable game agents that justify their actions, GONDOLA's requirements engineering scenario-tutor, and the Jolly Feedback automated feedback infrastructure, the bounded agents are designed to be transparent about why they are declining to answer certain queries, making their limitations pedagogically explicit rather than opaque. The central hypothesis is that bounded agents support learning outcomes comparable to unbounded GenAI while significantly preserving the peer interaction patterns that unbounded use erodes.",
+      "papers": [
+        {
+          "title": "The Role of Generative AI in Software Student CollaborAItion",
+          "authors": "University of Toronto, UC Berkeley, Temple University, Juho Leinonen (Aalto University)",
+          "venue": "ITiCSE 2025",
+          "year": 2025,
+          "doi": "10.1145/3724363.3729040",
+          "url": "https://doi.org/10.1145/3724363.3729040",
+          "abstract": "Collaboration is a crucial part of computing education. The increase in AI capabilities over the last couple of years is bound to profoundly affect all aspects of systems and software engineering, including collaboration. In this position paper, we consider a scenario where AI agents would be able to take on any role in collaborative processes in computing education. We outline these roles, the activities and group dynamics that software development currently include, and discuss if and in what way AI could facilitate these roles and activities. We present scenarios suggesting how AI can be integrated into existing collaborations, contrasted by design fictions that demonstrate the new possibilities and challenges for computing education in the AI era.",
+          "relevance": "This paper is the direct inspiration: it proposes specific AI agent roles for collaborative SE education but does not empirically evaluate them. The proposed research operationalizes and tests exactly the roles and scenarios the paper describes, using Pisan's agent-design and requirements-engineering expertise as the implementation foundation."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "Human-Human-AI Triadic Programming: Uncovering the Role of AI Agent and the Value of Human Partner in Collaborative Learning",
+          "authors": "Anon et al.",
+          "venue": "arXiv preprint 2601.12134",
+          "year": 2025,
+          "url": "https://arxiv.org/pdf/2601.12134",
+          "relevance": "Provides an empirical baseline for how AI performs as a collaborative teammate in pair programming. The triadic (human-human-AI) framing maps directly onto the three-condition study design and supplies outcome measures to borrow or contrast."
+        },
+        {
+          "title": "Artificial Intelligence Agents in Computer-Supported Collaborative Learning: A Systematic Literature Review",
+          "authors": "Anon et al.",
+          "venue": "Computers and Education: Artificial Intelligence (ScienceDirect)",
+          "year": 2026,
+          "url": "https://www.sciencedirect.com/science/article/pii/S2666920X2600041X",
+          "relevance": "Systematic review of AI agent roles in collaborative learning contexts, providing a taxonomy of agent functions and a summary of measured outcomes that frames the literature gap the proposed research fills."
+        },
+        {
+          "title": "CodeEdu: A Multi-Agent Collaborative Platform for Personalized Coding Education",
+          "authors": "Anon et al.",
+          "venue": "arXiv preprint 2507.13814",
+          "year": 2025,
+          "url": "https://arxiv.org/pdf/2507.13814",
+          "relevance": "Demonstrates a multi-agent architecture for coding education where each agent has a specialized pedagogical role, providing an implementation reference for the bounded agent system to be built in this study."
+        },
+        {
+          "title": "'All Roads Lead to ChatGPT': How Generative AI is Eroding Social Interactions and Student Learning Communities",
+          "authors": "Irene Hou, Owen Man, et al. (Temple University)",
+          "venue": "ITiCSE 2025",
+          "year": 2025,
+          "url": "https://doi.org/10.1145/3724363.3729024",
+          "relevance": "Provides the motivating empirical finding for the research: unbounded GenAI use redirects help-seeking away from peers and causes social isolation. This establishes the baseline problem that bounded role agents are designed to address."
+        }
+      ],
+      "researchPlan": {
+        "overview": "The research designs four role-bounded AI agents for software engineering team projects, deploys them in a three-condition controlled study, and measures whether bounded roles preserve the peer interaction patterns and learning outcomes that unbounded GenAI access erodes. The project extends Pisan's prior work on believable justifying agents and requirements engineering scenario tutors into the collaborative SE education setting, and produces an open-source bounded-agent framework for reuse by other CS education researchers.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review on AI in CSCL, collaborative SE education, and bounded agent design; define the four agent roles and their capability constraints; consult UW IRB on study design and consent procedures",
+            "deliverable": "Annotated bibliography (25+ papers), agent role specification document, IRB protocol submission"
+          },
+          {
+            "month": 2,
+            "goal": "Implement the four bounded agents using Claude API with system-prompt constraints and refusal explanations; integrate with GitHub for PR review and issue comment delivery; validate role boundaries against adversarial student prompts",
+            "deliverable": "Working bounded agent system deployed as a GitHub App; boundary-test report"
+          },
+          {
+            "month": 3,
+            "goal": "Run three-condition pilot in one software engineering course section (target n >= 45 students across three teams per condition); collect interaction logs, GitHub activity metrics, and mid-project student surveys",
+            "deliverable": "Pilot dataset: interaction logs, GitHub metrics, mid-project survey responses"
+          },
+          {
+            "month": 4,
+            "goal": "Administer post-project conceptual assessment and final student survey; code peer-interaction transcripts for quality and frequency; run automated code quality analysis on final project submissions",
+            "deliverable": "Complete dataset with peer-interaction codes, assessment scores, code quality metrics, and survey data"
+          },
+          {
+            "month": 5,
+            "goal": "Statistical analysis: ANOVA on learning outcomes and code quality across three conditions; thematic coding of student perceptions; connect results to believable-agent design principles from Pisan's prior game AI work",
+            "deliverable": "Analysis report with effect sizes and qualitative theme summary; draft paper sections 1-4"
+          },
+          {
+            "month": 6,
+            "goal": "Complete paper draft, peer review, revise, and submit; release bounded-agent framework and anonymized dataset as open-source replication package",
+            "deliverable": "Submitted paper and public GitHub replication artifact (bounded agent system + analysis notebooks)"
+          }
+        ],
+        "targetVenues": ["SIGCSE TS", "ITiCSE", "ICER", "AIED"],
+        "resources": "One software engineering course section with 45-60 students willing to use the bounded agent system; GitHub organization for student team repositories; Claude API access (department subscription or small compute grant); one undergraduate or MS RA for qualitative coding; IRB approval for the three-condition study; existing Jolly Feedback infrastructure for submission log comparison.",
+        "risks": [
+          {
+            "risk": "Students in the bounded-agent condition will circumvent role constraints by asking free-form AI tools outside the study system, contaminating the comparison",
+            "mitigation": "Include a brief weekly survey asking students to self-report any AI tool use outside the study system; use GitHub commit timing and PR comment patterns as indirect evidence of out-of-system AI use; analyze contamination-flagged cases separately in the statistical model"
+          },
+          {
+            "risk": "The four bounded roles may not cover the range of help students need, making the bounded-agent condition effectively a no-AI condition rather than a constrained-AI condition",
+            "mitigation": "Conduct a two-week formative pilot with one team before the main study to identify missing role coverage; add a catch-all 'scoping' agent that tells students which bounded role to consult or acknowledges the question is out of scope with an explanation, ensuring no team is left without any AI assistance"
+          },
+          {
+            "risk": "Small course section limits statistical power to detect differences between three conditions on code quality outcomes",
+            "mitigation": "Pre-register the study and primary hypotheses to control for multiple comparisons; use a within-team repeated-measures design for the post-project assessment; report Bayesian credible intervals alongside frequentist tests; plan a replication in the following semester"
+          }
+        ],
+        "humanSubjects": true
+      }
+    }
+  ]
+}

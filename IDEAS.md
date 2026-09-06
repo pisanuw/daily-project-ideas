@@ -422,3 +422,7 @@
 | 2026-09-05 | Discrete Math Proof Coach | Teaching Tool | 1-2 Weeks |
 | 2026-09-05 | Student Capstone Portfolio Hub | Teaching Tool | Multi-week |
 | 2026-09-05 | From Mastery Analytics to Adaptive Hints: Closing the Instructor-Dashboard Loop with LLM-Generated Concept-Targeted Feedback in CS1 | Research | Research |
+| 2026-09-06 | Assembly Whisperer | Side Project | Weekend |
+| 2026-09-06 | AI Dialogue Scaffold | Teaching Tool | 1-2 Weeks |
+| 2026-09-06 | Agent Configuration Observatory | Classroom Assignment | Multi-week |
+| 2026-09-06 | Role-Bounded AI Collaborative Agents for Software Engineering Courses: Preserving Peer Dynamics in the Agent Era | Research | Research |
