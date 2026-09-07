@@ -426,3 +426,7 @@
 | 2026-09-06 | AI Dialogue Scaffold | Teaching Tool | 1-2 Weeks |
 | 2026-09-06 | Agent Configuration Observatory | Classroom Assignment | Multi-week |
 | 2026-09-06 | Role-Bounded AI Collaborative Agents for Software Engineering Courses: Preserving Peer Dynamics in the Agent Era | Research | Research |
+| 2026-09-07 | Prompt Surgeon | Side Project | Weekend |
+| 2026-09-07 | Notional Machine Animator | Teaching Tool | 1-2 Weeks |
+| 2026-09-07 | Behavior Tree Lab | Classroom Assignment | Multi-week |
+| 2026-09-07 | Creativity Feedback at Scale: Extending LLM-Based Assessment from Elementary Flow-Based to University CS1/CS2 Programming Artifacts | Research | Research |

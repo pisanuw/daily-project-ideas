@@ -1,0 +1,168 @@
+{
+  "date": "2026-09-07",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Prompt Surgeon",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A web tool that gives your AI prompt a five-dimension diagnostic checkup, flags structural weaknesses, and assembles a 'healed' prompt from the accepted patches in one view.",
+      "description": "Prompt Surgeon accepts any prompt and runs a structured analysis across five diagnostic dimensions: task clarity (is the instruction unambiguous?), role definition (is there a useful system persona?), context sufficiency (does the model have the background it needs?), output format spec (does it know what to return?), and constraint completeness (are edge cases or exclusions specified?). Each dimension gets a color-coded health score (green/yellow/red) and a suggested one-sentence fix. The user can accept or reject each patch, and the final 'healthy prompt' is assembled live alongside the original for a before/after comparison. A shareable URL lets instructors use the diagnosis as a teaching artifact in prompt-engineering lessons.",
+      "keyFeatures": [
+        "Five-dimension prompt health scorecard with color-coded indicators",
+        "Per-issue patch suggestions you can accept or reject individually",
+        "Live before/after comparison of original vs. assembled healed prompt",
+        "Shareable result URL for classroom prompt-engineering discussions"
+      ],
+      "techStack": "React + Vite + Tailwind, Claude API (structured JSON output scoring each dimension)",
+      "whyInteresting": "Students using AI tools routinely write weak prompts and attribute poor results to the model rather than the request; a concrete, dimension-by-dimension diagnosis makes the gap tangible and teachable. It is also a clean portfolio demo of structured LLM output and local-state UI.",
+      "inspiredBy": "JetBrains 2026 developer survey (93% of developers use AI tools regularly but prompt quality varies widely); ProductHunt 2026 trend of developer productivity tooling built on structured LLM output"
+    },
+    {
+      "n": 2,
+      "title": "Notional Machine Animator",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "A step-through code execution visualizer where students see memory boxes, the call stack, and heap arrows update expression by expression, then compare their predicted model to what actually happened.",
+      "description": "Notional Machine Animator accepts a short Python program and builds an animated execution trace: variables appear as labeled memory boxes, function calls push named frames onto a visible call stack, and list or dict values appear as arrows pointing to heap objects. Students step forward one expression at a time and can pause to type or draw their prediction before each step; the tool then highlights where their mental model diverges from actual execution. Instructors can author 'misconception challenge' snippets centered on classic surprises (aliasing, mutable default arguments, scoping rules) and share them via URL. At the end of a trace, a side-by-side 'my model vs. reality' diff summarizes every point of divergence.",
+      "keyFeatures": [
+        "Expression-by-expression animated execution with named memory boxes and a visible call stack",
+        "Predict-before-reveal mode: students submit their expected state before each step",
+        "Misconception challenge library: instructors author and share tricky snippets via URL",
+        "End-of-trace divergence summary comparing student prediction to actual execution"
+      ],
+      "techStack": "React + Vite + Tailwind, Pyodide (Python via WebAssembly) for in-browser execution tracing, SVG for animated memory diagrams",
+      "whyInteresting": "Wrong execution models are the root cause of most novice debugging failures; Python Tutor (Guo 2013) pioneered the space but lacks a prediction mode and instructor-authored misconception challenges. The predict-before-reveal mechanic turns passive watching into active hypothesis testing, which is far more effective for repairing mental models.",
+      "inspiredBy": "ITiCSE 2025 paper 'Extracting Notional Machines for Databases' (doi:10.1145/3724389.3731277) surfacing the value of making execution models explicit; the broader notional machines literature in CS education"
+    },
+    {
+      "n": 3,
+      "title": "Behavior Tree Lab",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "Students build a browser-based behavior tree editor and animated runtime debugger for game AI, learning how NPCs reason by constructing the reasoning system from scratch.",
+      "description": "Behavior Tree Lab is a multi-week web capstone where students implement a complete behavior tree engine: node types (sequence, selector, decorator, action leaf), a JSON schema for tree definitions, and an animated runtime that highlights which node is currently being evaluated, why it succeeded or failed, and which world-state flags drove the decision. Students design a game scenario (a guard patrol, a monster hunt), author their tree in a visual drag-and-drop editor, and watch it execute against a live 2D canvas game board. A 'sabotage mode' lets teams inject adversarial world-state mid-run to find holes in their tree's logic. JSON import/export lets teams share and critique each other's designs.",
+      "keyFeatures": [
+        "Visual drag-and-drop behavior tree editor with a node type palette",
+        "Animated runtime with per-node success/failure badges and world-state inspector",
+        "JSON import/export for sharing and peer-critiquing tree designs",
+        "Sabotage mode: inject arbitrary world-state during a live run to stress-test the tree",
+        "Mini 2D canvas game board showing the NPC acting on tree decisions in real time"
+      ],
+      "techStack": "React + Vite + Tailwind, HTML5 Canvas for the game board, D3.js for the tree visualization panel",
+      "whyInteresting": "Behavior trees are the industry standard for game AI (used in Halo, The Sims, most AAA titles) yet rarely taught explicitly. Building the engine makes the NPC's decision process fully transparent and directly bridges AI theory to interactive software, aligning with Pisan's long-running work on believable game agents and agent justification.",
+      "inspiredBy": "Pisan's research on agents that justify their actions (FUZZ-IEEE 2001) and believable exploration AI; 2026 GitHub trend of agent explainability and orchestration tools"
+    },
+    {
+      "n": 4,
+      "title": "Creativity Feedback at Scale: Extending LLM-Based Assessment from Elementary Flow-Based to University CS1/CS2 Programming Artifacts",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "This research asks whether LLMs can reliably assess and deliver formative creativity feedback on university CS1/CS2 programming submissions, extending recent K-12 flow-based findings to imperative Java and C++ code using Pisan's existing Jolly Feedback submission corpus.",
+      "description": "The source paper demonstrates that GPT-4o can assess four dimensions of creativity (originality, complexity, efficiency, emotional expressiveness) in elementary students' flow-based music programs, achieving 82.4% agreement within ±1.0 of human scores using ECD-based few-shot prompting. The proposed research takes the natural next step: does this assessment transfer to the text-based, multi-concept programs that CS1/CS2 students produce? Pisan's Jolly Feedback system provides a ready-made corpus of Java/C++ submissions across multiple cohorts, enabling both an inter-rater reliability study (human expert vs. LLM on adapted rubric) and a classroom quasi-experiment delivering creativity-targeted formative feedback alongside standard correctness feedback. The key open questions are: whether the four-dimension rubric adapts meaningfully to imperative code, whether LLM creativity scores achieve acceptable inter-rater agreement (κ ≥ 0.6, Spearman ρ ≥ 0.5) with human raters, and whether students who receive creativity feedback demonstrate greater solution diversity on subsequent assignments. A confirmatory finding would justify integrating creativity feedback into Jolly Feedback's automated pipeline, giving CS1/CS2 instructors a scalable tool for developing more creative problem-solvers.",
+      "papers": [
+        {
+          "title": "Exploring the Use of LLMs for Assessing Creativity in Student Programming Artifacts",
+          "authors": "University of Florida, School of Teaching and Learning (authors not individually parsed in index)",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770761.3777335",
+          "url": "https://doi.org/10.1145/3770761.3777335",
+          "abstract": "This study investigates whether GPT-4o can reliably assess creativity in student-generated code. Using 383 flow-based music programs from 194 upper-elementary students, each rated by five human experts across four dimensions (originality, complexity, efficiency, emotional expressiveness), the authors evaluate three prompting strategies. ECD-based few-shot prompting yields the best performance (MAE = 0.582, 82.4% agreement within ±1.0 of human scores), while zero-shot prompting achieves the highest correlation with human scores (Spearman's ρ = 0.53).",
+          "relevance": "Establishes that LLMs can assess four-dimensional code creativity with moderate reliability in a K-12 block/flow-based context; this research proposes replicating and extending the methodology to university CS1/CS2 imperative code using Pisan's existing Jolly Feedback corpus."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "Exploring Automated Assessment of Primary Students' Creativity in a Flow-Based Music Programming Environment",
+          "authors": "University of Florida research group",
+          "venue": "Journal of Learning Analytics, Vol. 12, No. 2, 2025",
+          "year": 2025,
+          "url": "https://learning-analytics.info/index.php/JLA/article/view/8835",
+          "relevance": "The journal-length predecessor to the source paper; establishes the ECD-framework-based approach alongside the LLM-based approach for automated creativity scoring in the same dataset, providing methodological grounding for the rubric adaptation proposed here."
+        },
+        {
+          "title": "Are CS1 Students More Creative than LLM in Solving a Problem? Preliminary Results on a Comparison of Code Diversity",
+          "authors": "SIGCSE TS 2026 poster authors",
+          "venue": "SIGCSE TS 2026 V.2",
+          "year": 2026,
+          "url": "https://doi.org/10.1145/3770761.3777221",
+          "relevance": "Directly motivates the proposed research: students show significantly greater solution diversity than LLMs on CS1 problems, confirming that real creativity to assess exists in CS1/CS2 submissions and that LLM-generated solutions are not creative baselines."
+        },
+        {
+          "title": "Rubric Is All You Need: Improving LLM-Based Code Evaluation With Question-Specific Rubrics",
+          "authors": "ICER 2025 authors",
+          "venue": "ICER 2025",
+          "year": 2025,
+          "url": "https://doi.org/10.1145/3702652.3744220",
+          "relevance": "Shows that question-specific rubrics materially improve LLM-based code evaluation quality over holistic prompts; informs the rubric decomposition strategy for adapting the four creativity dimensions to CS1/CS2 assignment types."
+        },
+        {
+          "title": "From Code to Rubrics: A Multimodal Evaluation of LLM Systems for Automated Feedback Generation",
+          "authors": "WWW 2026 authors",
+          "venue": "Companion Proceedings of the ACM Web Conference 2026",
+          "year": 2026,
+          "url": "https://doi.org/10.1145/3774905.3795458",
+          "relevance": "Compares single-prompt vs. multi-agent LLM architectures for rubric-grounded automated feedback on student code, providing methodological options for delivering creativity feedback at scale in Jolly Feedback's pipeline."
+        }
+      ],
+      "researchPlan": {
+        "overview": "The research proceeds in two phases: a non-human-subjects reliability study using existing Jolly Feedback logs (months 1-3) to validate the adapted rubric and LLM scoring, followed by a classroom quasi-experiment (months 4-5) delivering creativity feedback to CS1/CS2 students and measuring subsequent solution diversity. The goal is a publishable finding on whether LLM creativity assessment scales from elementary block-based to university text-based code, with a deployable Jolly Feedback integration as a practical deliverable.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Adapt four-dimension creativity rubric for Python/Java/C++ imperative code; sample 200 Jolly Feedback submissions spanning CS1 and CS2 topics; recruit two expert raters for human scoring",
+            "deliverable": "Adapted rubric document + human-rated 200-submission dataset with inter-rater reliability baseline"
+          },
+          {
+            "month": 2,
+            "goal": "Run LLM-based assessment (GPT-4o and Claude) using zero-shot, ECD few-shot, and human-exemplar few-shot prompting strategies on the 200-submission dataset; compute Spearman ρ, Cohen's κ, and MAE vs. human raters",
+            "deliverable": "Reliability analysis report comparing all prompting strategies across four creativity dimensions"
+          },
+          {
+            "month": 3,
+            "goal": "Identify which dimensions and which code types yield acceptable reliability; refine rubric and prompting strategy; prototype Jolly Feedback integration that appends a creativity scorecard to standard test-result emails",
+            "deliverable": "Refined rubric + working Jolly Feedback prototype producing creativity feedback"
+          },
+          {
+            "month": 4,
+            "goal": "Design quasi-experimental study (experimental: correctness + creativity feedback; control: correctness-only); obtain IRB approval (likely exempt); deploy in one CSS 142 or CSS 143 section",
+            "deliverable": "IRB approval + study protocol + baseline diversity measurement on pre-study submissions"
+          },
+          {
+            "month": 5,
+            "goal": "Run classroom study for one assignment cycle; collect post-feedback submissions; measure AST-level solution diversity and student self-report on creative confidence",
+            "deliverable": "Dataset of pre/post submissions with diversity metrics and survey responses"
+          },
+          {
+            "month": 6,
+            "goal": "Analyze results, compare solution diversity between conditions, write paper",
+            "deliverable": "Submitted paper draft to ICER or SIGCSE"
+          }
+        ],
+        "targetVenues": [
+          "ICER",
+          "SIGCSE",
+          "EDM",
+          "AIED"
+        ],
+        "resources": "Existing Jolly Feedback submission logs (Java/C++, multiple years) as primary dataset; two human expert raters for months 1-2 (could be graduate students or senior undergraduates calibrated with source paper rubric); Claude or GPT-4o API access for LLM scoring (~$30-60 for 200 submissions at current pricing); one CSS 142/143 section for months 4-5; IRB amendment to existing Jolly Feedback protocol.",
+        "risks": [
+          {
+            "risk": "The four-dimension creativity rubric (designed for flow-based music programs) may not translate cleanly to imperative code: 'emotional expressiveness' in particular may be undefined for a sorting algorithm.",
+            "mitigation": "In month 1, involve two external CS education researchers in rubric adaptation workshops; allow dimension dropping or renaming if inter-rater agreement on that dimension is unacceptably low (κ < 0.4)."
+          },
+          {
+            "risk": "LLM-based creativity scores may correlate with code length or complexity rather than genuine creativity, confounding the measurement.",
+            "mitigation": "Include code length and cyclomatic complexity as control variables in the reliability analysis; test whether LLM scores remain significant after controlling for these proxies."
+          },
+          {
+            "risk": "Classroom quasi-experiment may lack statistical power if assigned-section sizes are small (CSS 142/143 sections typically 30-45 students).",
+            "mitigation": "Pool two sections or two assignment cycles; use a within-subjects design where all students receive creativity feedback on one assignment and not another, controlling for individual differences."
+          }
+        ],
+        "humanSubjects": true
+      }
+    }
+  ]
+}
