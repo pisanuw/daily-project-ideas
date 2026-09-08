@@ -1,0 +1,124 @@
+[
+  {
+    "n": 1,
+    "title": "MCP Discovery Feed",
+    "category": "Side Project",
+    "complexity": "Weekend",
+    "summary": "Real-time dashboard that monitors GitHub for new MCP server releases, scores them by star velocity, and lets developers preview schemas and wishlist tools.",
+    "description": "Developers tracking the fast-moving MCP ecosystem spend hours manually searching GitHub for new servers. MCP Discovery Feed aggregates new MCP server repositories in real time, ranks them by recent star velocity, and lets visitors browse a filterable card feed. Each card shows the tool's purpose, JSON schema preview, and a one-click install command copy. A localStorage wishlist lets developers bookmark tools to revisit.",
+    "keyFeatures": [
+      "GitHub API polling for repos tagged 'mcp-server' with star-velocity ranking",
+      "JSON schema viewer showing available tool definitions inline",
+      "One-click install command generator (npx / pip / cargo)",
+      "localStorage wishlist with export to a plain text list",
+      "Category filters: AI, DevOps, Data, Productivity"
+    ],
+    "techStack": ["React", "Vite", "Tailwind CSS", "GitHub API", "localStorage"],
+    "whyInteresting": "MCP adoption is accelerating in 2026 but discovery remains fragmented. This fills a real gap for AI agent developers without requiring any backend infrastructure, making it deployable as a pure static site.",
+    "inspiredBy": "GitHub trending surge in AI agent tool registries and local-first developer tooling trends in 2026"
+  },
+  {
+    "n": 2,
+    "title": "Live Refactor Wall",
+    "category": "Teaching Tool",
+    "complexity": "1-2 Weeks",
+    "summary": "Classroom projection tool that connects to the teacher's VS Code, shows student code alongside an AI-generated refactor, and lets the class vote in real time whether to accept each suggestion.",
+    "description": "Instructors teaching code quality often lack a participatory way to demonstrate refactoring decisions. Live Refactor Wall streams a selected code snippet from VS Code to a shared class display. Claude instantly proposes a refactored version with diff highlighting. Students join via a room code on their phones and vote Accept or Reject with an optional one-word reason. The aggregate vote and top reasons appear on the projection in real time, turning passive demos into classroom dialogue.",
+    "keyFeatures": [
+      "VS Code extension that sends the active selection to the backend on demand",
+      "Claude API call for refactored version with structured diff output",
+      "WebSocket broadcast to all connected student browsers",
+      "Real-time Accept/Reject vote with reason tag cloud",
+      "Session replay log exportable as a Markdown discussion summary"
+    ],
+    "techStack": ["React", "Vite", "Tailwind CSS", "Flask", "WebSocket", "Claude API", "VS Code Extension API"],
+    "whyInteresting": "Refactoring judgment is hard to teach passively. Making it a live class vote surfaces diverse student intuitions and gives instructors immediate formative data on what reasoning students are applying."
+  },
+  {
+    "n": 3,
+    "title": "Pair-to-Solo Bridge",
+    "category": "Side Project",
+    "complexity": "Multi-week",
+    "summary": "Analyzes pair programming session logs to identify which partner understood which concepts, then auto-generates personalized follow-up exercises for each student.",
+    "description": "After pair programming sessions, instructors have no easy way to know which partner truly grasped each concept versus who was along for the ride. Pair-to-Solo Bridge takes session transcripts and git diffs, uses Claude to infer understanding signals per contributor, and generates a short personalized exercise set for each student targeting their specific gaps. Students receive a private link to their exercise set; instructors see an aggregate heatmap of which concepts the cohort still needs.",
+    "keyFeatures": [
+      "Transcript upload (audio via Whisper or text paste) with speaker diarization",
+      "Git diff parsing to attribute lines and identify who drove each change",
+      "Claude API inference of per-student concept coverage from combined signals",
+      "Personalized exercise generation with difficulty calibrated to inferred level",
+      "Instructor dashboard with cohort concept-coverage heatmap",
+      "Supabase for student records, exercise history, and access-controlled links"
+    ],
+    "techStack": ["React", "Vite", "Tailwind CSS", "Flask", "Supabase", "Claude API", "Whisper API"],
+    "whyInteresting": "Pair programming's learning benefits depend on both students engaging, but that is hard to verify. This bridges the gap between the collaborative session and individual mastery, making pair programming pedagogically accountable."
+  },
+  {
+    "n": 4,
+    "title": "CSTutorBench Personalization Gap: Submission-History-Grounded LLM Tutoring for CS1",
+    "category": "Research",
+    "complexity": "Multi-week",
+    "summary": "Extend the CSTutorBench evaluation framework by adding a submission-history adapter that grounds LLM tutoring responses in each student's prior attempt patterns, then measure whether this closes the personalization gap the benchmark identified.",
+    "description": "CSTutorBench (SIGCSE TS 2026) benchmarks LLMs as CS tutors across accuracy, clarity, personalization, and interactive scaffolding. Its key finding is that LLMs approach human performance on accuracy and clarity but fall notably short on personalization. This project builds a lightweight personalization adapter on top of an existing LLM tutor: it retrieves the student's recent submission history from Jolly Feedback (Pisan's CSS 142/143 infrastructure), constructs a misconception profile, and injects it as structured context before each tutoring turn. The same CSTutorBench rubric is then re-applied to measure the delta, and the adapter design is reported as a reusable component.",
+    "keyFeatures": [
+      "Jolly Feedback submission-log parser producing per-student misconception profiles",
+      "Context-injection layer wrapping any CSTutorBench-compatible LLM tutor",
+      "Automated re-evaluation on CSTutorBench's personalization and scaffolding dimensions",
+      "Ablation: profile depth (last 3 vs last 10 submissions) vs personalization score",
+      "Qualitative analysis of 20 student sessions comparing baseline and adapted tutor responses"
+    ],
+    "techStack": ["Python", "Claude API", "Jolly Feedback submission logs", "CSTutorBench evaluation harness", "Pandas", "Jupyter"],
+    "whyInteresting": "Personalization is the acknowledged weak spot of LLM tutors, and submission history is an underused signal that CS courses already collect. Closing this gap with existing infrastructure offers a publishable, replicable contribution grounded in real classroom data.",
+    "papers": [
+      {
+        "doi": "10.1145/3770761.3777333",
+        "title": "CSTutorBench: Benchmarking Large Language Models for CS Tutoring",
+        "venue": "SIGCSE TS 2026",
+        "relevance": "Primary benchmark framework; identifies the personalization gap this project directly addresses"
+      }
+    ],
+    "additionalRefs": [
+      {
+        "url": "https://arxiv.org/abs/2606.20138",
+        "title": "Learning to Prompt: Improving Student Engagement with Adaptive LLM-based High-School Tutoring",
+        "relevance": "Adaptive prompting strategies for personalized LLM tutoring"
+      },
+      {
+        "url": "https://arxiv.org/abs/2503.06424",
+        "title": "Training LLM-based Tutors to Improve Student Learning Outcomes in Dialogues",
+        "relevance": "Fine-tuning and scaffolding techniques for LLM tutors in dialogue settings"
+      },
+      {
+        "url": "https://arxiv.org/abs/2605.26405",
+        "title": "Towards Just-in-Time Adaptive Feedback: Enhancing Student Learning via Knowledge-Grounded LLM",
+        "relevance": "Knowledge-grounded feedback closely parallels the submission-history grounding approach here"
+      },
+      {
+        "url": "https://dl.acm.org/doi/10.1145/3613905.3651122",
+        "title": "Empowering Personalized Learning through a Conversation-based Tutoring System with Student Modeling",
+        "venue": "CHI 2024",
+        "relevance": "Student modeling for personalization in conversational tutoring systems"
+      }
+    ],
+    "researchPlan": {
+      "milestones": [
+        "M1 (2 weeks): Parse Jolly Feedback logs into misconception-profile schema; validate on 3 past cohorts",
+        "M2 (3 weeks): Implement context-injection adapter; integrate with CSTutorBench harness",
+        "M3 (4 weeks): Run baseline vs adapted evaluation; compute personalization delta",
+        "M4 (2 weeks): Qualitative coding of 20 sessions; ablation study on profile depth",
+        "M5 (3 weeks): Write up and submit to ICER or SIGCSE"
+      ],
+      "targetVenues": ["ICER 2027", "SIGCSE TS 2027", "EDM 2027", "AIED 2027"],
+      "resources": [
+        "Jolly Feedback submission logs (CSS 142/143, existing infrastructure)",
+        "CSTutorBench evaluation harness (open source)",
+        "Claude API via subscription (no extra billing)"
+      ],
+      "risks": [
+        "Jolly Feedback logs may need anonymization review before use in a study",
+        "CSTutorBench harness may require adaptation for the injection layer",
+        "Personalization delta may be small if the benchmark rubric is coarse-grained"
+      ],
+      "humanSubjects": false
+    }
+  }
+]

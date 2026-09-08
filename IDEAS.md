@@ -430,3 +430,7 @@
 | 2026-09-07 | Notional Machine Animator | Teaching Tool | 1-2 Weeks |
 | 2026-09-07 | Behavior Tree Lab | Classroom Assignment | Multi-week |
 | 2026-09-07 | Creativity Feedback at Scale: Extending LLM-Based Assessment from Elementary Flow-Based to University CS1/CS2 Programming Artifacts | Research | Research |
+| 2026-09-08 | MCP Discovery Feed | Side Project | Weekend |
+| 2026-09-08 | Live Refactor Wall | Teaching Tool | 1-2 Weeks |
+| 2026-09-08 | Pair-to-Solo Bridge | Side Project | Multi-week |
+| 2026-09-08 | CSTutorBench Personalization Gap: Submission-History-Grounded LLM Tutoring for CS1 | Research | Research |
