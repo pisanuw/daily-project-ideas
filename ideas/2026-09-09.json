@@ -1,0 +1,131 @@
+[
+  {
+    "n": 1,
+    "title": "Voice Journal with AI Weekly Synthesis",
+    "category": "Side Project",
+    "complexity": "Weekend",
+    "summary": "A progressive web app where users record 30-90 second daily audio notes. At week's end Claude synthesizes recurring themes, mood patterns, and standout moments into a personal narrative digest.",
+    "description": "Journaling fatigue hits when writing feels like a chore. Voice Journal lowers the barrier to a single tap: users hit record, speak freely for under two minutes, and stop. The Web Speech API transcribes on-device; entries are stored in IndexedDB keyed by date. Every Sunday a summary job sends the week's transcripts to Claude with a prompt asking for recurring themes, emotional arcs, and a few memorable quotes. The digest arrives as a private card the user can star, annotate, or export to Markdown. No account required; all audio stays local and only text leaves the device.",
+    "keyFeatures": [
+      "One-tap recording with in-browser Web Speech API transcription",
+      "Offline-first IndexedDB store with optional encrypted export",
+      "Weekly Claude synthesis: themes, mood arc, memorable moments, open questions",
+      "Timeline view with per-day word clouds derived from transcripts",
+      "Markdown and JSON export for migration or backup",
+      "PWA installable on iOS and Android"
+    ],
+    "techStack": ["React", "Vite", "Tailwind CSS", "Web Speech API", "IndexedDB", "Claude API"],
+    "whyInteresting": "Voice removes the blank-page friction that stops most journaling habits. Running synthesis on a week's worth of casual speech rather than polished prose surfaces patterns the user would not notice day-to-day, turning raw audio habits into genuine self-knowledge.",
+    "inspiredBy": "Discussions in r/SideProject about low-friction wellness tools and the 2026 surge in on-device speech APIs making client-side transcription viable without a backend"
+  },
+  {
+    "n": 2,
+    "title": "Code Critique Flipbook",
+    "category": "Developer Tool",
+    "complexity": "1-2 Weeks",
+    "summary": "Paste a code snippet and step through an AI-generated sequence of focused critique cards, each proposing one improvement with a before/after diff and a plain-English rationale.",
+    "description": "Bulk code review feedback overwhelms beginners and wastes experts' time. Code Critique Flipbook decomposes critique into atomic, ordered cards: naming clarity first, then structure, then algorithmic efficiency, then edge-case safety. Each card shows a minimal diff and one paragraph explaining the why. Users flip through at their own pace, accepting or skipping each suggestion. Accepted changes accumulate into a downloadable patch file. A final summary card tallies accepted improvements and links to relevant docs. The tool is designed for CS instructors demoing code quality in class and individual developers who want structured self-review.",
+    "keyFeatures": [
+      "Code paste or file upload with syntax highlighting via CodeMirror",
+      "Claude API call that returns critiques as a structured JSON array ordered by category",
+      "Flipbook card UI with animated before/after diff highlighting",
+      "Accept/Skip per card with running accepted-patch accumulation",
+      "Final unified diff export as a .patch file",
+      "Shareable read-only link to a critique sequence for classroom demos"
+    ],
+    "techStack": ["React", "Vite", "Tailwind CSS", "CodeMirror", "Claude API", "diff library"],
+    "whyInteresting": "Structured, sequential critique teaches the reasoning process behind code review rather than dumping all feedback at once. The flipbook format makes it equally useful as an interactive classroom tool and a personal self-review ritual."
+  },
+  {
+    "n": 3,
+    "title": "Podcast Knowledge Graph",
+    "category": "Side Project",
+    "complexity": "Multi-week",
+    "summary": "Add RSS feeds for your favorite podcasts; the app transcribes episodes, extracts concepts and claims, and builds a personal searchable knowledge graph you can query in natural language across all your listening history.",
+    "description": "Podcast listeners accumulate hundreds of hours of insights they can rarely retrieve. Podcast Knowledge Graph fetches episode audio from RSS feeds, transcribes them with Whisper, and sends transcript chunks to Claude to extract named entities (people, books, tools, concepts) and factual claims. Each entity becomes a node; co-occurrence within an episode becomes an edge. A Flask backend stores the graph in SQLite with full-text search on transcripts. Users query via a chat interface: Claude retrieves relevant transcript chunks plus graph neighbors and returns sourced answers with episode title and timestamp links. A concept map view shows the most connected nodes across all feeds.",
+    "keyFeatures": [
+      "RSS feed importer with episode metadata and audio download queue",
+      "Whisper API transcription with speaker-turn segmentation",
+      "Claude API entity and claim extraction into a structured graph schema",
+      "Natural-language query interface backed by vector similarity plus graph traversal",
+      "Concept map visualization using D3 force-directed layout",
+      "Deep-link playback: answers include episode timestamp URLs",
+      "Supabase for multi-device sync and user-specific feed libraries"
+    ],
+    "techStack": ["React", "Vite", "Tailwind CSS", "Flask", "SQLite", "Supabase", "Whisper API", "Claude API", "D3.js"],
+    "whyInteresting": "Long-form audio is the one medium that has resisted searchability. Building a personal knowledge graph over your own listening history turns passive consumption into a queryable second brain without requiring any note-taking discipline from the user."
+  },
+  {
+    "n": 4,
+    "title": "LLM Hint Augmentation for Equity-Guided TA Tutoring: Closing the Loop Between Proactive Outreach and Submission-History-Grounded Feedback",
+    "category": "Research",
+    "complexity": "Multi-week",
+    "summary": "Extend equity-guided proactive TA tutoring by adding an LLM layer that generates submission-history-grounded hint sequences for at-risk CS1 students, then measure whether TA sessions backed by AI-generated misconception profiles improve retention and assignment performance.",
+    "description": "Patterson et al. (ITiCSE 2025) show that proactively pairing at-risk CS1 students with TAs improves retention, but TA sessions currently rely on generic conversation with no automated diagnosis of the specific errors each student is repeating. This project extends the equity-guided tutoring model by wiring Jolly Feedback submission logs into an LLM pipeline: before each TA-student session, the system analyses the student's last 5-10 submissions, identifies recurring syntactic, conceptual, and strategic error patterns, and generates a one-page misconception profile plus a ranked sequence of Socratic hints the TA can use. TAs are randomly assigned to use the AI-generated profile or to conduct sessions as usual. The study measures session duration, student satisfaction, and assignment-score delta over the following two weeks. A secondary analysis asks whether the hint sequences the LLM generates resemble the solution-free hints Pisan's earlier work validated as pedagogically effective.",
+    "keyFeatures": [
+      "Submission log ingestion from Jolly Feedback (CSS 142/143) with per-student error-pattern extraction",
+      "LLM pipeline classifying errors as syntactic, conceptual, or strategic following Liding et al. taxonomy",
+      "Misconception profile generator: top 3 recurring patterns with example submissions",
+      "Hint sequence generator producing 3-5 Socratic hints ordered from least to most revealing",
+      "TA-facing dashboard displaying profile and hints before each scheduled session",
+      "Pre/post assignment score comparison between profile-aided and control TA groups",
+      "Qualitative coding of TA session notes to measure profile utility"
+    ],
+    "techStack": ["Python", "Claude API", "Jolly Feedback submission logs", "Flask", "React", "Pandas", "Jupyter"],
+    "whyInteresting": "Equity tutoring closes the outreach gap but not the diagnosis gap. Grounding TA sessions in a student's actual error history transforms reactive help-seeking into evidence-based tutoring, and connects two strands of Pisan's research (automated feedback systems and solution-free hint generation) into a single pipeline that could scale to any submission-log-enabled CS course.",
+    "papers": [
+      {
+        "doi": "10.1145/3724363.3729055",
+        "url": "https://doi.org/10.1145/3724363.3729055",
+        "title": "Equity-Guided Tutoring: a Scalable, TA-Run Approach",
+        "venue": "ITiCSE 2025",
+        "abstract": "Patterson et al. describe a prototype equity-guided tutoring program at Northeastern that proactively identifies at-risk CS1 students using early assessment data and matches them with TAs before they fall too far behind. Failure-to-retain rates in cumulative CS1 courses can reach double digits; the hypothesis is that targeted early intervention catches students who fell slightly behind before the cumulative structure compounds their difficulty. The paper reports on program design, TA training, and initial retention outcomes.",
+        "relevance": "Primary paper: provides the equity-guided tutoring infrastructure this research extends with LLM misconception profiling and hint generation"
+      }
+    ],
+    "additionalRefs": [
+      {
+        "url": "https://dl.acm.org/doi/10.1145/3408877.3432546",
+        "title": "Generating Next-Step Hints for Programming Problems using Large Language Models",
+        "venue": "SIGCSE 2021",
+        "relevance": "Pisan et al. foundational work on solution-free, next-step hint generation that the LLM hint sequences in this study are designed to replicate and extend"
+      },
+      {
+        "url": "https://doi.org/10.1145/3724389.3730809",
+        "title": "Tracking the Progression of Errors Across Successive CS1 Code Submissions",
+        "venue": "ITiCSE 2025",
+        "relevance": "Liding et al. provide the syntactic/conceptual/strategic error taxonomy used to classify submission patterns in this study's misconception profiler"
+      },
+      {
+        "url": "https://doi.org/10.1145/3626252.3630853",
+        "title": "Generative AI in CS1: A Quantitative Study of Instructor Perspectives",
+        "venue": "SIGCSE TS 2024",
+        "relevance": "Provides context on instructor attitudes toward AI-assisted feedback, informing TA adoption and trust considerations in the study design"
+      }
+    ],
+    "researchPlan": {
+      "milestones": [
+        "M1 (2 weeks): Obtain IRB approval for TA-student session study; anonymize and parse Jolly Feedback submission logs into misconception-profile schema",
+        "M2 (3 weeks): Build error classification pipeline using Claude API with Liding et al. taxonomy; validate on 3 past CSS 142 cohorts",
+        "M3 (2 weeks): Implement hint-sequence generator and TA dashboard; pilot with 2 TAs on 5 sessions each",
+        "M4 (4 weeks): Run randomized study across one full CSS 142 offering: profile-aided vs control TA sessions",
+        "M5 (3 weeks): Analyse assignment-score delta, session duration, and TA feedback; code qualitative notes",
+        "M6 (3 weeks): Write up and submit to ITiCSE 2026 or SIGCSE TS 2027"
+      ],
+      "targetVenues": ["ITiCSE 2026", "SIGCSE TS 2027", "ICER 2027", "AIED 2027"],
+      "resources": [
+        "Jolly Feedback submission logs (CSS 142/143, existing UW infrastructure)",
+        "Claude API via subscription (no additional billing)",
+        "3-4 volunteer TAs in one CSS 142 section",
+        "IRB approval for observational session study"
+      ],
+      "risks": [
+        "Submission log access may require data governance review before IRB submission",
+        "TA adoption: TAs may ignore profiles if they feel micromanaged; training and framing matter",
+        "Small sample size in a single-section study may limit statistical power for assignment-score analysis",
+        "Hint quality may degrade for students with very few submissions at intervention time"
+      ],
+      "humanSubjects": true
+    }
+  }
+]

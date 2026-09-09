@@ -434,3 +434,7 @@
 | 2026-09-08 | Live Refactor Wall | Teaching Tool | 1-2 Weeks |
 | 2026-09-08 | Pair-to-Solo Bridge | Side Project | Multi-week |
 | 2026-09-08 | CSTutorBench Personalization Gap: Submission-History-Grounded LLM Tutoring for CS1 | Research | Research |
+| 2026-09-09 | Voice Journal with AI Weekly Synthesis | Side Project | Weekend |
+| 2026-09-09 | Code Critique Flipbook | Developer Tool | 1-2 Weeks |
+| 2026-09-09 | Podcast Knowledge Graph | Side Project | Multi-week |
+| 2026-09-09 | LLM Hint Augmentation for Equity-Guided TA Tutoring: Closing the Loop Between Proactive Outreach and Submission-History-Grounded Feedback | Research | Research |

@@ -251,3 +251,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-09-07 [doc] Created ideas/2026-09-07.json with 4 ideas: Prompt Surgeon, Notional Machine Animator, Behavior Tree Lab, Creativity Feedback at Scale (LLM Creativity Assessment SIGCSE 2026 doi:10.1145/3770761.3777335)
 
 2026-09-08 [doc] Created ideas/2026-09-08.json with 4 ideas: MCP Discovery Feed, Live Refactor Wall, Pair-to-Solo Bridge, CSTutorBench Personalization Gap (SIGCSE TS 2026 doi:10.1145/3770761.3777333)
+
+2026-09-09 [doc] Created ideas/2026-09-09.json with 4 ideas: Voice Journal with AI Weekly Synthesis, Code Critique Flipbook, Podcast Knowledge Graph, LLM Hint Augmentation for Equity-Guided TA Tutoring (ITiCSE 2025 doi:10.1145/3724363.3729055)
