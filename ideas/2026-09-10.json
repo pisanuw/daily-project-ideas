@@ -1,0 +1,167 @@
+{
+  "date": "2026-09-10",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "AI API Change Radar",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A personal dashboard that monitors changelogs from the AI tools and SDKs you depend on, highlights breaking changes, and tells you exactly what code patterns need updating.",
+      "description": "In 2026, AI APIs evolve weekly: model names change, endpoints get deprecated, SDK breaking changes arrive faster than any developer can track manually. AI API Change Radar is a lightweight web app where you register the AI libraries in your project (Claude SDK, OpenAI, LangChain, Vercel AI SDK, Supabase) and it polls their GitHub releases and changelogs on a schedule. When something changes, it highlights the breaking change, explains what code pattern it affects, and generates a short checklist of what to update. The result is a personalized 'what changed while you were building' feed that keeps you ahead of silent breakage without reading every release note.",
+      "keyFeatures": [
+        "Register libraries to watch via GitHub repo slug or npm package name",
+        "Automated polling of GitHub Releases API and changelog files",
+        "Claude API-powered impact analysis: 'this change affects code using pattern X'",
+        "One-click update checklist generated per breaking change",
+        "Optional daily digest delivered as an email or webhook"
+      ],
+      "techStack": "React + Vite, Tailwind, GitHub Releases API, node-cron, Claude API (impact analysis), Supabase (user library lists)",
+      "whyInteresting": "AI APIs are now a first-class dependency in most projects, but no changelog-aggregation tool targets this domain specifically. The impact-analysis layer turns raw release notes into actionable update steps, which is the part every developer actually needs.",
+      "inspiredBy": "Rapid AI SDK evolution in 2026; developers manually tracking breaking changes across Claude, OpenAI, LangChain, and Vercel AI SDK simultaneously; GitHub Trending AI repositories digest (September 2026)"
+    },
+    {
+      "n": 2,
+      "title": "Oral Code Explanation Grader",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "Students record a short voice walkthrough of their code before submission; an LLM checks whether their explanation matches what the code actually does and flags significant mismatches for instructors.",
+      "description": "A growing challenge in CS courses is distinguishing between code students wrote and code they borrowed from AI tools. Oral Code Explanation Grader adds a lightweight voice-explanation step to any programming submission: students record a 2-3 minute audio walkthrough of their solution directly in the browser. The tool transcribes the recording with Whisper and uses Claude to evaluate whether the explanation accurately accounts for the code's logic, key algorithmic choices, and edge-case handling. It generates dual scores -- code quality and explanation quality -- and flags students whose verbal explanation significantly contradicts or cannot account for their own submission. Instructors see a class-wide alignment dashboard where mismatches are sorted by severity, letting them prioritize follow-up conversations.",
+      "keyFeatures": [
+        "Browser-based audio recording (no uploads, MediaRecorder API)",
+        "Whisper transcription of the spoken walkthrough",
+        "LLM comparison of explanation against code behavior and structure",
+        "Dual score output: code quality + explanation-code alignment",
+        "Instructor dashboard sorted by alignment gap, with transcript excerpts",
+        "Canvas LMS webhook trigger on assignment submission"
+      ],
+      "techStack": "React + Vite, Tailwind, Whisper API (speech-to-text), Claude API (alignment analysis), Flask + Supabase backend, Canvas LMS Webhooks",
+      "whyInteresting": "Provides scalable, low-overhead oral assessment that surfaces AI-assisted submissions without requiring in-person viva voce exams, while simultaneously giving students practice in technical communication -- a skill most CS courses undervalue.",
+      "inspiredBy": "'Chatbot-Based Assessment of Code Understanding in Automated Programming Assessment Systems' (arXiv 2025); academic integrity challenges from AI coding tools in CS1/CS2 courses"
+    },
+    {
+      "n": 3,
+      "title": "Build Your Own AI Coding Assistant",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "Students build a VS Code extension backed by a local Ollama model that provides code completion, inline explanation, and refactoring suggestions, then benchmark it against GitHub Copilot on a shared problem set.",
+      "description": "This multi-week assignment teaches students how AI coding tools work internally by having them build one from scratch. Students implement a VS Code extension that calls a locally running Ollama model to (1) complete code from the cursor position, (2) explain selected code in plain English, and (3) suggest a refactoring improvement for a selected block. The key engineering challenges -- managing context windows, writing effective system prompts, streaming responses without freezing the editor, and surfacing results in VS Code's UI model -- are the same ones that underlie Copilot, Cursor, and Cline. The capstone is a structured benchmark week: each student's extension is evaluated on a shared set of completion and explanation tasks alongside GitHub Copilot, making the quality gap (or lack thereof) concrete and attributable to prompt and context decisions, not just model capability.",
+      "keyFeatures": [
+        "VS Code Extension API with TypeScript: code lens, inline completion, webview settings panel",
+        "Ollama integration for local inference (no API key required, no cost)",
+        "Context window management: students decide what to include with each request",
+        "Streaming completion with abort control to keep the editor responsive",
+        "Shared benchmark suite: 20 completion tasks + 10 explanation tasks scored automatically",
+        "Comparison report: student assistant vs Copilot across benchmark dimensions"
+      ],
+      "techStack": "TypeScript, VS Code Extension API, Ollama (local LLM), React webview for settings, Jest benchmark runner, GitHub Actions for autograding",
+      "whyInteresting": "Students who use Copilot every day rarely understand what is happening under the hood. Building the tool demystifies LLM integration, teaches prompt engineering under real constraints, and produces a portfolio piece. The Copilot benchmark creates genuine curiosity and competitive motivation that keeps students engaged across multiple weeks.",
+      "inspiredBy": "2026 surge in domain-specific agent tools; OpenCode, Cursor, and Cline as coding agent platforms students use daily without understanding; GitHub Trending AI repositories (September 2026)"
+    },
+    {
+      "n": 4,
+      "title": "Teach-Back at Scale: Using Submission Logs and LLM Student Simulation to Individualize Final Assessments in CS1",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "This research proposes automating the two key bottlenecks in individualized teach-back finals -- personalized topic assignment via submission-log mining, and student-audience simulation via LLM -- to make Lee's (ITiCSE 2025) teaching-based assessment tractable for large CS1 enrollments.",
+      "description": "Lee's ITiCSE 2025 poster 'Flipping the Final' demonstrates that having CS1 students prepare a mini-lecture on their specific weak topic is more engaging and effective than traditional exams, but explicitly leaves scalability as an open question: how can an instructor manage 100+ personalized assessments? This research extends that work along two axes. First, automated weak-area identification: Jolly Feedback or autograder submission logs are analyzed with LLM clustering to assign each student a teach-back topic grounded in their own error history rather than generic topic sampling. Second, LLM audience simulation: rather than requiring a human audience for each mini-lecture, an LLM-powered 'simulated student' asks Socratic follow-up questions, probes for edge cases, and generates a rubric-grounded explanation-quality score. The central research question is whether LLM-mediated teach-back finals preserve the learning and engagement benefits Lee observed while becoming tractable for sections of 50-150 students. Phase 1 (no IRB) mines existing submission logs; Phase 2 pilots the live simulation with volunteer students.",
+      "papers": [
+        {
+          "title": "Flipping the Final: Individualized Learning through a Teaching-Based Assessment",
+          "authors": "Sing Chun Lee",
+          "venue": "ITiCSE 2025",
+          "year": 2025,
+          "doi": "10.1145/3724389.3730798",
+          "url": "https://doi.org/10.1145/3724389.3730798",
+          "abstract": "This poster presents a teaching-based final exam that promotes individualized learning. Students are assigned a challenging topic related to their weaknesses and tasked with preparing a mini-lecture, designing a quiz, and creating an exam-level problem with a rubric. Subjective feedback on engagement, confidence, and perceived learning outcomes suggests that students found this approach more effective and engaging than traditional exams. Future work will explore scalability.",
+          "relevance": "This paper introduces the core pedagogical intervention -- topic-targeted teach-back finals -- and explicitly names scalability as the next open challenge, making it the direct motivator for LLM-assisted individualization at course scale."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "Teach2Learn: Assessing the Learning among CS1 Students on How Well They Can Teach LLM-Simulated Students",
+          "authors": "Prasanna Karthik Vairam, Shivam Garg, et al., University of California, Merced",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "url": "https://doi.org/10.1145/3770761.3777348",
+          "relevance": "Demonstrates that LLM-simulated peer audiences can produce meaningful learning signals in CS1 teach-back settings (N=87, two in-class pilots), validating the audience simulation component proposed here."
+        },
+        {
+          "title": "Socratic Mind: Scalable Oral Assessment Powered By AI",
+          "authors": "Jui-Tse Hung, Bhargav Parchure, Shivam Sahai, et al.",
+          "venue": "ACM Learning at Scale 2024",
+          "year": 2024,
+          "url": "https://dl.acm.org/doi/abs/10.1145/3657604.3664661",
+          "relevance": "Establishes that AI-powered oral assessment can scale to large courses with validity comparable to human-conducted viva voce exams, directly supporting the feasibility of LLM-graded teach-back at enrollment scale."
+        },
+        {
+          "title": "Playing Dumb to Get Smart: Creating and Evaluating an LLM-based Teachable Agent within University Computer Science Classes",
+          "authors": "Ananya Singha, Ashish Gurung, Juho Kim, et al.",
+          "venue": "CHI 2025",
+          "year": 2025,
+          "url": "https://dl.acm.org/doi/10.1145/3706598.3713644",
+          "relevance": "Evaluates MatlabTutee, an LLM teachable agent in a university CS course, showing that students explain concepts more deeply when teaching an LLM that simulates a confused learner -- the same mechanism this research aims to leverage."
+        },
+        {
+          "title": "Chatbot-Based Assessment of Code Understanding in Automated Programming Assessment Systems",
+          "authors": "Turinawe et al.",
+          "venue": "arXiv preprint 2025",
+          "year": 2025,
+          "url": "https://arxiv.org/abs/2604.07304",
+          "relevance": "Reviews conversational LLM assessment architectures for verifying student code understanding, providing a technical baseline for designing the rubric-grounded explanation-quality scorer."
+        }
+      ],
+      "researchPlan": {
+        "overview": "The project extends Lee's small-scale teach-back finals by automating personalized topic assignment via submission log mining and student audience simulation via LLM, making individualized final exams tractable for 50-150 student CS1 sections. It leverages Pisan's existing Jolly Feedback infrastructure and multi-year submission archives, making Phase 1 (log analysis) achievable without IRB. The study measures whether LLM-graded teach-back outcomes correlate with traditional exam performance and whether the format reduces misconception persistence on post-course assessments.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review on teach-back learning, LLM student simulation, and oral assessment; refine research questions; obtain anonymized Jolly Feedback submission log archive",
+            "deliverable": "Annotated bibliography (20+ papers) + refined RQs + data access agreement"
+          },
+          {
+            "month": 2,
+            "goal": "Build pipeline to cluster Jolly Feedback errors by conceptual cause and generate a ranked weak-area list per student; validate cluster labels with instructor review",
+            "deliverable": "Weak-area classification pipeline with instructor-validated taxonomy (no IRB required)"
+          },
+          {
+            "month": 3,
+            "goal": "Implement LLM-simulated audience prototype with Socratic question scaffold; develop explanation-quality rubric grounded in CS1 misconception categories; pilot with 10 volunteer students",
+            "deliverable": "Working prototype + inter-rater reliability report between LLM and human grader"
+          },
+          {
+            "month": 4,
+            "goal": "Run full pilot in one CS1 section (~30 students) as supplementary final alongside traditional exam; collect audio recordings, transcripts, LLM scores, and student reflection surveys",
+            "deliverable": "Complete dataset: paired traditional and teach-back scores + qualitative reflections"
+          },
+          {
+            "month": 5,
+            "goal": "Quantitative analysis (score correlation, misconception persistence pre/post); qualitative coding of student and instructor experience feedback; identify failure modes of LLM audience simulation",
+            "deliverable": "Analysis report with statistical findings and failure-mode taxonomy"
+          },
+          {
+            "month": 6,
+            "goal": "Write and submit paper targeting SIGCSE TS 2027 or ITiCSE 2027; release open-source tool and dataset (anonymized)",
+            "deliverable": "Submitted paper + public repository with pipeline code and anonymized logs"
+          }
+        ],
+        "targetVenues": ["SIGCSE TS 2027", "ITiCSE 2027", "ICER 2027", "EDM 2027"],
+        "resources": "Jolly Feedback submission logs (existing archive owned by Pisan's lab), Claude API for simulation and rubric grading (~$50/month during active experiment), one undergraduate RA for months 3-5 (browser submission UI and data collection), standard laptop for inference, microphone for audio recording in browser",
+        "risks": [
+          {
+            "risk": "LLM-simulated audience may not ask sufficiently probing Socratic questions, reducing the diagnostic value of the assessment",
+            "mitigation": "Develop a structured question scaffold that constrains the LLM to generate questions targeting specific misconception categories identified in the student's topic assignment, rather than open-ended dialogue"
+          },
+          {
+            "risk": "Submission log clustering may surface surface-level syntax errors rather than underlying conceptual misconceptions, producing shallow topic assignments",
+            "mitigation": "Use Jolly Feedback error categories as a starting filter, then apply LLM-assisted semantic clustering on error messages and test failure patterns; validate cluster-to-concept mapping with two instructor reviewers before deploying topic assignments"
+          },
+          {
+            "risk": "Students may disengage or feel anxious with the LLM audience format, introducing confounds in the comparison with traditional exams",
+            "mitigation": "Provide a 15-minute practice session with the LLM audience before the graded event; include anxiety self-report items in the reflection survey to allow post-hoc statistical control"
+          }
+        ],
+        "humanSubjects": true
+      }
+    }
+  ]
+}

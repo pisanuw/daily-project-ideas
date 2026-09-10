@@ -438,3 +438,7 @@
 | 2026-09-09 | Code Critique Flipbook | Developer Tool | 1-2 Weeks |
 | 2026-09-09 | Podcast Knowledge Graph | Side Project | Multi-week |
 | 2026-09-09 | LLM Hint Augmentation for Equity-Guided TA Tutoring: Closing the Loop Between Proactive Outreach and Submission-History-Grounded Feedback | Research | Research |
+| 2026-09-10 | AI API Change Radar | Side Project | Weekend |
+| 2026-09-10 | Oral Code Explanation Grader | Teaching Tool | 1-2 Weeks |
+| 2026-09-10 | Build Your Own AI Coding Assistant | Classroom Assignment | Multi-week |
+| 2026-09-10 | Teach-Back at Scale: Using Submission Logs and LLM Student Simulation to Individualize Final Assessments in CS1 | Research | Research |
