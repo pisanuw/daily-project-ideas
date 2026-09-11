@@ -1,0 +1,168 @@
+{
+  "date": "2026-09-11",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Meeting Debrief Bot",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "Paste a meeting transcript and get an instant structured debrief: decisions made, action items with owners, parking lot topics, unanswered questions, and an efficiency score for whether the meeting could have been an email.",
+      "description": "Meeting fatigue is real, and the worst part is that the decisions and follow-ups from a meeting disappear into a wall of chat messages. Meeting Debrief Bot is a pure-frontend React + Vite + Tailwind app where you paste a raw transcript (from Zoom, Teams, Google Meet, or any other recorder) and hit 'Debrief.' Claude processes it and returns a structured report with five sections: (1) Decisions Made, (2) Action Items with assigned owners and due dates when mentioned, (3) Parking Lot items that were tabled, (4) Questions That Went Unanswered, and (5) an 'Email Score' from 0-100 reflecting how much of the meeting's content could have been communicated asynchronously. The app runs entirely in the browser -- no backend, no account, no transcript stored anywhere -- making it safe to use with sensitive internal calls. Users can copy each section to clipboard or export the whole debrief as Markdown.",
+      "keyFeatures": [
+        "Paste-and-go transcript input, no file upload or account required",
+        "Structured five-section debrief: Decisions, Action Items, Parking Lot, Open Questions, Email Score",
+        "Action items extracted with owner names and due dates when present in transcript",
+        "Email Score (0-100) with a one-sentence rationale explaining the rating",
+        "Copy individual sections or export full debrief as Markdown",
+        "Entirely client-side: no transcript leaves the browser"
+      ],
+      "techStack": "React + Vite, Tailwind, Claude API (client-side via user-supplied key)",
+      "whyInteresting": "Almost every meeting-summary tool requires a recording upload or a calendar integration. A pure-frontend, paste-and-go tool removes all friction and trust barriers, making it useful for sensitive meetings where cloud recording is not an option. The Email Score turns the debrief into a gentle nudge toward better meeting hygiene without being preachy.",
+      "inspiredBy": "Proliferation of AI meeting-summary tools in 2026 that require full calendar and recording access; demand for lightweight offline-capable alternatives that work with existing transcript exports from Zoom or Teams"
+    },
+    {
+      "n": 2,
+      "title": "Assignment Autopsy",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "After an assignment closes, import submission data from Gradescope or Canvas and let Claude identify which test cases stumped the most students, surface error-pattern misconceptions, and generate concrete suggestions for improving the next offering.",
+      "description": "Instructors spend hours reviewing assignment results but rarely have time to do the systematic analysis that would improve the next offering. Assignment Autopsy is a React + Flask tool that ingests a CSV or API export from Gradescope or Canvas after an assignment closes and runs three analysis passes with Claude. First, it produces a test-case difficulty ranking: which unit tests failed most often, and is the failure rate consistent with a single misunderstood concept or spread across topics? Second, it clusters compiler or runtime error messages from failed submissions into semantic categories, then labels each cluster with the likely underlying misconception (for example, off-by-one errors in array indexing vs. confusion about loop termination). Third, it drafts three to five concrete suggestions for the assignment's next iteration: which problem statement was ambiguous, which starter code scaffolded poorly, and which test case should be converted into a public example. The output is a PDF-ready Autopsy Report the instructor can share with TAs or keep for course revision planning.",
+      "keyFeatures": [
+        "CSV upload or Gradescope/Canvas API token for submission data import",
+        "Test-case difficulty ranking with pass/fail rates and per-question histograms",
+        "Error-message clustering by semantic meaning, labeled with suspected misconceptions",
+        "LLM-generated three-to-five suggestions for the next offering",
+        "Exportable Autopsy Report in PDF and Markdown formats",
+        "Runs locally: student submission data never leaves the instructor's machine"
+      ],
+      "techStack": "React + Vite, Tailwind, Flask, Claude API (analysis), Gradescope API / Canvas API, pandas (server-side clustering), WeasyPrint (PDF export)",
+      "whyInteresting": "Most instructors have a strong intuition about which parts of an assignment were hard, but rarely have time to verify that intuition with data. Automating the post-mortem turns a 4-hour manual task into a 10-minute review, and grounding the suggestions in actual submission patterns rather than instructor memory produces more targeted improvements.",
+      "inspiredBy": "CS instructor workflows for post-assignment review; Gradescope's built-in analytics as a starting point that lacks LLM-powered misconception labeling; research on error pattern analysis in introductory programming (ITiCSE 2025 proceedings)"
+    },
+    {
+      "n": 3,
+      "title": "API Mashup Studio",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "Students build a React web app that integrates three or more public APIs and adds a Claude-powered natural-language query layer, so users can ask cross-API questions in plain English instead of navigating separate data panels.",
+      "description": "API integration is a core skill for modern software engineers, yet most introductory web courses limit students to a single API call per project. API Mashup Studio is a multi-week assignment that requires students to connect at least three public APIs from a provided menu (options include OpenWeatherMap, NASA Astronomy Picture of the Day, Open Library, Spotify, GitHub, CoinGecko, USGS Earthquake Feed, and Open Trivia DB) and build a coherent user-facing app around the intersection of their data. The distinguishing requirement is a Claude-powered natural-language query bar: users type a question in plain English (for example, 'Was the weather in Seattle good enough to go outside on the day NASA posted its most recent Mars image?') and the app orchestrates the necessary API calls, combines the results, and returns a synthesized answer. This teaches API authentication and rate limiting, React state management across async data sources, prompt engineering for tool-calling, and data visualization. The capstone demo requires students to live-demo three cross-API queries that a classmate proposes on the spot.",
+      "keyFeatures": [
+        "Integration of three or more public REST APIs from a provided menu of options",
+        "Claude API natural-language query layer with tool-use calls dispatching to the integrated APIs",
+        "React state management for concurrent async data fetching and loading states",
+        "At least two data visualizations (chart, map, timeline, or calendar) built with a charting library",
+        "Live demo with three classmate-proposed cross-API queries answered in real time",
+        "README documenting API authentication setup, prompt design decisions, and known limitations"
+      ],
+      "techStack": "React + Vite, Tailwind, Claude API (tool-use mode), public REST APIs of student's choice, Recharts or Chart.js for visualizations",
+      "whyInteresting": "The natural-language query requirement forces students to think about their APIs as tools that an LLM can invoke, which is the mental model behind every modern AI agent. Students choose their own API combination, creating genuine ownership and wildly varied demos. The live classmate-query capstone creates stakes and surprise that make the final class session memorable.",
+      "inspiredBy": "Growing industry demand for engineers who understand LLM tool-use and API orchestration; Claude's tool-use API as a teachable architecture pattern; lack of multi-API, agent-style assignments in standard web development curricula"
+    },
+    {
+      "n": 4,
+      "title": "Solve or Evaluate? Replicating GenAI-Solution Grading Equivalence in CS1 and Probing AI Evaluation Fluency as a Distinct Pedagogical Outcome",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "An RCT in CS1 that replicates the surprising SIGCSE 2026 finding that grading ChatGPT solutions performs equivalently to solving problems directly, tests whether the equivalence holds for novices, and measures AI evaluation fluency as an independent construct worth teaching.",
+      "description": "Tzanetakis et al. (SIGCSE TS 2026) found that upper-division algorithms students who graded and corrected ChatGPT-generated solutions performed equivalently on course exams to students who solved the same problems from scratch. This result is striking because it suggests that critical evaluation of AI output may be a viable substitute for traditional problem-solving practice. But the study population was expert-relative: students already fluent in algorithms. The critical question for CS education is whether the equivalence holds for novices in CS1, where students are still forming fundamental mental models of computation, and where AI-generated code is much harder to evaluate critically without prior knowledge. This research proposes a 6-month randomized crossover study in one or two CS1 sections that (1) replicates the Tzanetakis et al. design at the novice level, (2) measures a new construct, AI Evaluation Fluency, capturing students' ability to identify errors and limitations in AI-generated code independently of their traditional programming skill, and (3) tests whether AI evaluation practice transfers to traditional programming performance or produces a distinct, complementary competency. The study uses a within-subjects crossover design so every student experiences both conditions across different assignment sets, controlling for individual ability differences.",
+      "papers": [
+        {
+          "title": "Is Solving Better Than Evaluating GenAI Solutions?",
+          "authors": "George Tzanetakis, Manuela Bautista, Fatemeh Aghaz",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770761.3777361",
+          "url": "https://doi.org/10.1145/3770761.3777361",
+          "abstract": "We present a study where upper-division algorithms students either solved programming problems directly or graded and corrected ChatGPT-generated solutions for the same problems. Counterintuitively, students in the evaluation condition performed equivalently on subsequent course assessments, suggesting that critical evaluation of AI output may be a viable learning activity. The result raises questions about whether this equivalence generalizes to novice populations and whether AI evaluation skill is itself a teachable outcome.",
+          "relevance": "This is the direct motivating paper. Its finding of performance equivalence between solving and evaluating AI output is surprising, its population (upper-division algorithms) limits generalizability to novices, and it explicitly names CS1 replication and AI evaluation fluency as open research directions."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "When AI Is Wrong on Purpose: How Students Respond to Buggy GenAI Code",
+          "authors": "Denny et al.",
+          "venue": "arXiv preprint 2026",
+          "year": 2026,
+          "url": "https://arxiv.org/abs/2607.05068",
+          "relevance": "Examines how CS students detect and respond to intentionally flawed AI-generated code, directly informing the design of the AI Evaluation Fluency construct and the error-injection methodology for the evaluation condition."
+        },
+        {
+          "title": "Less stress, better scores, same learning: Comparing AI-assisted and traditional programming assessments",
+          "authors": "Muñoz-Merino et al.",
+          "venue": "Computers and Education: Artificial Intelligence",
+          "year": 2025,
+          "url": "https://doi.org/10.1016/j.caeai.2025.100375",
+          "relevance": "Reports that AI-assisted assessments reduce student stress while maintaining learning outcomes equivalent to traditional assessments, providing affective-outcome context for interpreting stress and engagement differences between solve and evaluate conditions."
+        },
+        {
+          "title": "AI Literacy in K-12 and Higher Education in the Wake of Generative AI",
+          "authors": "Yan et al.",
+          "venue": "ICER 2025",
+          "year": 2025,
+          "url": "https://doi.org/10.1145/3702652.3744217",
+          "relevance": "Frames AI evaluation skill as a component of broader AI literacy that CS education should treat as a first-class learning outcome, supporting the theoretical grounding of the AI Evaluation Fluency construct proposed in this study."
+        },
+        {
+          "title": "Knowledge Markers: An AI-Agnostic Concept for the Design of Programming Courses",
+          "authors": "Prather et al.",
+          "venue": "arXiv preprint 2026",
+          "year": 2026,
+          "url": "https://arxiv.org/abs/2604.06331",
+          "relevance": "Proposes AI-agnostic knowledge markers as a framework for assessing genuine understanding independently of AI-generated output, providing a principled basis for distinguishing AI Evaluation Fluency from traditional programming competency in the measurement design."
+        }
+      ],
+      "researchPlan": {
+        "overview": "A within-subjects crossover RCT in CS1 that replicates Tzanetakis et al. (SIGCSE TS 2026) with novices, testing whether the solve-vs-evaluate performance equivalence holds at the introductory level. The study also introduces and validates AI Evaluation Fluency as a distinct measurable construct, using a purpose-built rubric and error-injection task battery. Pisan's existing CS1 infrastructure at UW makes this feasible without new course design: the evaluation condition replaces existing homework problems with matched evaluation tasks on AI-generated solutions for the same specifications.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review on AI evaluation in education, AI literacy frameworks, and CS1 intervention designs; draft AI Evaluation Fluency rubric (4 dimensions: error detection, error explanation, correction quality, limitation awareness); IRB application",
+            "deliverable": "Annotated bibliography (20+ papers) + rubric draft + IRB application submitted"
+          },
+          {
+            "month": 2,
+            "goal": "Develop matched evaluation task battery: for each CS1 assignment topic (loops, lists, functions, recursion, dictionaries), generate 3-4 AI solutions with seeded errors of varying subtlety; pilot rubric with 2 raters on 20 responses, compute inter-rater reliability",
+            "deliverable": "Evaluation task battery (40+ tasks) + rubric with inter-rater reliability >= 0.75 kappa"
+          },
+          {
+            "month": 3,
+            "goal": "IRB approval and study launch in one CS1 section (~40 students); crossover design: Group A solves weeks 4-6, evaluates weeks 7-9; Group B evaluates weeks 4-6, solves weeks 7-9; both groups take identical midterm at week 8",
+            "deliverable": "Study running; midterm data collected from both groups"
+          },
+          {
+            "month": 4,
+            "goal": "Administer AI Evaluation Fluency post-test and traditional programming post-test to all students at week 12; collect reflection surveys on perceived difficulty, learning, and strategy",
+            "deliverable": "Complete dataset: paired solve/evaluate homework scores, midterm, post-tests, surveys"
+          },
+          {
+            "month": 5,
+            "goal": "Statistical analysis: mixed ANOVA for exam performance by condition; confirmatory factor analysis for AI Evaluation Fluency construct validity; regression testing transfer between conditions; qualitative coding of student reflections",
+            "deliverable": "Analysis report with statistical findings, construct validity evidence, and transfer results"
+          },
+          {
+            "month": 6,
+            "goal": "Write and submit paper targeting SIGCSE TS 2027 or ICER 2027; publish task battery, rubric, and anonymized data as open educational resources",
+            "deliverable": "Submitted paper + public repository with materials and anonymized dataset"
+          }
+        ],
+        "targetVenues": ["SIGCSE TS 2027", "ICER 2027", "ITiCSE 2027", "ACM L@S 2027"],
+        "resources": "One CS1 section (~40 students, existing course), Claude API for generating AI solution variants and seeded errors (~$30/month during task development), undergraduate RA for months 3-4 (task administration and data collection), standard statistical software (R or Python scipy)",
+        "risks": [
+          {
+            "risk": "CS1 novices may lack the prerequisite knowledge to meaningfully evaluate AI-generated solutions, making the evaluation condition trivially harder and confounding the performance comparison",
+            "mitigation": "Pair evaluation tasks with worked examples showing how to read unfamiliar code; include a scaffolded 'evaluation guide' for the first two weeks of the evaluation condition that gradually fades; track time-on-task to detect excessive difficulty as an early warning"
+          },
+          {
+            "risk": "Students in the evaluation condition may copy corrected AI solutions for the matched traditional assessments, contaminating the solve condition's independence",
+            "mitigation": "Use the crossover design so each student is their own control across different topic sets; ensure evaluation tasks and traditional assessments test the same concepts but with different problem specifications and no overlap in AI-solution code"
+          },
+          {
+            "risk": "AI Evaluation Fluency may not emerge as a distinct factor from traditional programming competency, undermining the contribution's novelty",
+            "mitigation": "Design the fluency rubric with two dimensions that are logically independent of coding ability (limitation awareness and error explanation) and two that partially overlap (error detection, correction quality); report both confirmatory and exploratory factor analyses transparently"
+          }
+        ],
+        "humanSubjects": true
+      }
+    }
+  ]
+}

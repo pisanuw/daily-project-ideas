@@ -442,3 +442,7 @@
 | 2026-09-10 | Oral Code Explanation Grader | Teaching Tool | 1-2 Weeks |
 | 2026-09-10 | Build Your Own AI Coding Assistant | Classroom Assignment | Multi-week |
 | 2026-09-10 | Teach-Back at Scale: Using Submission Logs and LLM Student Simulation to Individualize Final Assessments in CS1 | Research | Research |
+| 2026-09-11 | Meeting Debrief Bot | Side Project | Weekend |
+| 2026-09-11 | Assignment Autopsy | Teaching Tool | 1-2 Weeks |
+| 2026-09-11 | API Mashup Studio | Classroom Assignment | Multi-week |
+| 2026-09-11 | Solve or Evaluate? Replicating GenAI-Solution Grading Equivalence in CS1 and Probing AI Evaluation Fluency as a Distinct Pedagogical Outcome | Research | Research |
