@@ -446,3 +446,7 @@
 | 2026-09-11 | Assignment Autopsy | Teaching Tool | 1-2 Weeks |
 | 2026-09-11 | API Mashup Studio | Classroom Assignment | Multi-week |
 | 2026-09-11 | Solve or Evaluate? Replicating GenAI-Solution Grading Equivalence in CS1 and Probing AI Evaluation Fluency as a Distinct Pedagogical Outcome | Research | Research |
+| 2026-09-12 | Agent Run Logbook | Side Project | Weekend |
+| 2026-09-12 | Quantum Circuit Sandbox | Teaching Tool | 1-2 Weeks |
+| 2026-09-12 | State Machine Story Engine | Classroom Assignment | Multi-week |
+| 2026-09-12 | From Binary Ethics to Moral Ambiguity: LLM-Generated Multi-Stakeholder Dilemmas for University AI Ethics Games | Research | Research |

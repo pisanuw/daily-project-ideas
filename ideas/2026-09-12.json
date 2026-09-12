@@ -1,0 +1,167 @@
+{
+  "date": "2026-09-12",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Agent Run Logbook",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A browser tool that captures, visualizes, and replays AI agent execution sessions - every tool call, token cost, and decision branch - so developers can debug what their agents actually did.",
+      "description": "As AI agent frameworks (LangGraph, CrewAI, HydraFusion) become mainstream in 2026, debugging 'what did my agent do and why' is a daily frustration. Agent Run Logbook wraps any agent session and records a structured log: tool calls with full inputs and outputs, model invocations with token counts and latency, decision branching, and final outcomes. A React+Vite frontend renders these logs as an interactive timeline with per-step cost breakdowns and replay capability - step forward and backward through the execution. Everything stores locally in IndexedDB so no server is required. A simple Python proxy snippet instruments any LangChain/LangGraph session in three lines of code.",
+      "keyFeatures": [
+        "Three-line Python proxy that records any LangGraph or LiteLLM session to a local JSON log",
+        "Interactive timeline view with per-step token costs and latency bars",
+        "Step-forward/backward replay mode to inspect state at any point in the run",
+        "Full-text search across all recorded runs with filter by tool name, model, or cost range"
+      ],
+      "techStack": "React + Vite + Tailwind, IndexedDB for local storage, Python (Flask) proxy shim for LangGraph/LiteLLM",
+      "whyInteresting": "Multi-model agent orchestration is now standard developer workflow; observability for what agents actually did is the missing piece and a natural portfolio demo for any AI developer.",
+      "inspiredBy": "September 2026 wave of AI agent tools including HydraFusion, LangGraph 1.2 durable execution, and CrewAI A2A enterprise integration; Hacker News August 2026 'What are you working on' thread"
+    },
+    {
+      "n": 2,
+      "title": "Quantum Circuit Sandbox",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "An interactive browser-based quantum circuit builder where CS students drag-and-drop quantum gates, watch state vectors and probability histograms update live, and get plain-English explanations of every gate - no installation required.",
+      "description": "Quantum computing is entering CS curricula but remains intimidating because visualizing multi-qubit states is hard. Quantum Circuit Sandbox runs a statevector simulator entirely in the browser: students place H, CNOT, X, Z, and phase gates on a drag-and-drop grid, then see the full state vector and a probability histogram update step by step with no server round-trip. Single-qubit gates also show a Bloch sphere rendering. Each gate has a plain-English tooltip ('puts the qubit in equal superposition of 0 and 1'). Built-in worked examples (Bell state, GHZ, quantum teleportation, Grover's two-qubit search) give students starting points without needing lecture context first. Circuits export as Qiskit Python code for students who want to run on real IBM hardware.",
+      "keyFeatures": [
+        "Drag-and-drop gate palette (H, X, Y, Z, CNOT, Toffoli, S, T, Rz) on an n-qubit wire grid",
+        "Live statevector table and probability histogram updated after each gate placement",
+        "Bloch sphere visualization for any single-qubit subsystem",
+        "One-click export to Qiskit Python code; six built-in worked example circuits"
+      ],
+      "techStack": "React + Vite + Tailwind, math.js for statevector arithmetic, SVG/Canvas for Bloch sphere and histogram, no backend needed",
+      "whyInteresting": "Quantum computing is a CS2023 curriculum recommendation; every instructor needs a zero-install classroom tool, and none of the existing options (IBM Composer, Quirk) are built for classroom embedding or plain-language explanation.",
+      "inspiredBy": "QuantAid (SIGCSE TS 2026) showing strong demand for accessible quantum CS education tools; IBM Q Experience and Quirk as interface references"
+    },
+    {
+      "n": 3,
+      "title": "State Machine Story Engine",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "Students implement a finite state machine engine from scratch in TypeScript, then use it to build and publish an original interactive narrative game - earning deep FSM intuition through a creative deliverable peers can play.",
+      "description": "Students learn FSMs abstractly (vending machine diagrams) without building anything that runs. This multi-week assignment has two phases: (1) implement an FSM engine in TypeScript supporting states, transitions, guards, action callbacks, nested states, and a history pseudo-state; (2) use the engine to build an original interactive narrative game with at least three characters, two distinct endings, and a puzzle that requires reaching a specific FSM state sequence. A provided React+Vite game shell handles all rendering and keyboard input so students focus purely on the engine. An automated test harness validates the engine before the game phase begins. Finished games are published to a class gallery on Supabase where students play and review each other's stories. The assignment teaches FSM theory, event-driven programming, model-view separation, and TypeScript typing in a single arc.",
+      "keyFeatures": [
+        "FSM engine specification: states, transitions with guard functions, entry/exit actions, nested states, history pseudo-state",
+        "Automated test harness (Jest) that validates engine correctness before the game phase",
+        "React+Vite game shell students drop their engine into with zero rendering work",
+        "Supabase-hosted class game gallery with peer-play and a one-paragraph review rubric"
+      ],
+      "techStack": "TypeScript + React + Vite + Tailwind, Jest for engine testing, Supabase for class game gallery and auth",
+      "whyInteresting": "Combining a core CS theory concept (FSMs) with a creative, peer-playable output keeps motivation high and produces a genuine portfolio piece; the model-view separation is learned in context rather than as an abstract principle.",
+      "inspiredBy": "Communicating StateCharts (CSC) paper at ITiCSE 2025 advocating statechart-based concurrency pedagogy; Ink and Twine as interaction models for the game shell design"
+    },
+    {
+      "n": 4,
+      "title": "From Binary Ethics to Moral Ambiguity: LLM-Generated Multi-Stakeholder Dilemmas for University AI Ethics Games",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Extending EvolveMoralMaze's proven game-based AI ethics learning from middle school to university CS by replacing binary choices with LLM-generated, specialization-tailored multi-stakeholder dilemmas - and measuring whether moral ambiguity training improves ethical reasoning transfer to real CS decisions.",
+      "description": "EvolveMoralMaze demonstrated at SIGCSE 2026 that a 10-minute ethics game significantly raised AI literacy in 117 middle school students, but its binary-choice structure inadvertently reinforced the 'perfect rules' misconception - the belief that every ethical dilemma has a clearly correct answer. University CS students deploying ML models, designing recommender systems, and handling user data face irresolvably multi-stakeholder tradeoffs where this misconception is professionally dangerous. This research extends the game framework to university CS education in three steps: (1) design a multi-stakeholder scenario template schema where each choice genuinely benefits some parties and harms others; (2) build an LLM-powered scenario generator that tailors dilemmas to students' CS specialization (ML ethics, security ethics, HCI ethics, data governance); (3) run a controlled comparative study measuring whether game-based exposure to morally ambiguous dilemmas improves ethical reasoning transfer over traditional case-study instruction, using a validated rubric. The system-building phase requires no human subjects; the evaluation uses a minimal-risk classroom protocol.",
+      "papers": [
+        {
+          "title": "Learning AI Ethics with EvolveMoralMaze: An Analysis of",
+          "authors": "The University of Texas Permian Basin (multiple authors)",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770761.3777224",
+          "url": "https://doi.org/10.1145/3770761.3777224",
+          "abstract": "We designed EvolveMoralMaze, an interactive game to teach middle school students (ages 11-14) about AI ethics, training data, and algorithmic bias. Both qualitative and quantitative data showed a large increase in students' self-reported understanding of AI. However, the game inadvertently reinforced the misconception that 'perfect rules' can solve ethical problems.",
+          "relevance": "Provides the validated game-based AI ethics learning framework and identifies the 'perfect rules' misconception as the key limitation this research addresses; its middle-school evaluation anchors the gap this work fills at the university level."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "Game-Based Learning as a Tool for Teaching Ethical AI to Youth",
+          "authors": "Multiple authors",
+          "venue": "European Conference on Games Based Learning (ECGBL), 2024",
+          "year": 2024,
+          "url": "https://papers.academic-conferences.org/index.php/ecgbl/article/download/2847/2621/10506",
+          "relevance": "Surveys game-based approaches for AI ethics education in K-12 and youth contexts, providing a benchmark for comparing the university-level extension and design patterns this work builds on."
+        },
+        {
+          "title": "Towards AI-assisted Board Game-based Learning: Assessing LLMs in Game Personalisation",
+          "authors": "Multiple authors",
+          "venue": "European Conference on Games Based Learning (ECGBL), 2024",
+          "year": 2024,
+          "url": "https://papers.academic-conferences.org/index.php/ecgbl/article/view/3055",
+          "relevance": "Directly evaluates LLM-driven personalization in game-based learning, providing evidence for feasibility of the LLM scenario generator and methodology for assessing personalization quality."
+        },
+        {
+          "title": "Dilemmas in AI Ethics: A Digital Game for Moral Reasoning and Collective Decision-Making",
+          "authors": "Multiple authors",
+          "venue": "Springer, 2026",
+          "year": 2026,
+          "url": "https://link.springer.com/chapter/10.1007/978-3-031-98417-4_31",
+          "relevance": "A contemporaneous 2026 game design for AI ethics that uses collective decision-making mechanics, offering a contrasting design approach and evaluation rubric that can inform multi-stakeholder scenario assessment."
+        },
+        {
+          "title": "A Serious Game for Introducing Software Engineering Ethics to University Students",
+          "authors": "Multiple authors",
+          "venue": "arXiv, 2019",
+          "year": 2019,
+          "url": "https://arxiv.org/abs/1903.01333",
+          "relevance": "Evaluated a storytelling-based ethics game with 144 university CS students and published validated pre/post instruments, providing the most directly comparable prior work for measuring ethical reasoning gains at the same audience level."
+        }
+      ],
+      "researchPlan": {
+        "overview": "The project builds and evaluates an LLM-powered AI ethics game for university CS students that replaces EvolveMoralMaze's binary choices with domain-specific multi-stakeholder dilemmas, then runs a controlled comparison against case-study instruction to measure whether moral ambiguity training improves ethical reasoning transfer. Months 1-3 are system-building with no human subjects; months 4-6 involve a minimal-risk classroom study.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review on game-based ethics education and moral development theory; taxonomy of university CS ethics scenarios by specialization (ML, security, HCI, data governance)",
+            "deliverable": "Annotated bibliography (20+ papers) + scenario taxonomy with 12 seed dilemmas across four CS specialization tracks"
+          },
+          {
+            "month": 2,
+            "goal": "Design multi-stakeholder scenario template schema; build and test LLM prompt pipeline (Claude API) for generating contextually tailored dilemmas; manual review protocol for factual accuracy",
+            "deliverable": "Scenario generator producing 20+ reviewed dilemmas across four CS tracks; prompt engineering report documenting calibration strategy"
+          },
+          {
+            "month": 3,
+            "goal": "Build browser-based game prototype (React+Vite) with LLM scenario generation backend; implement reflection mechanic requiring written justification before progressing",
+            "deliverable": "Deployed playable prototype with three scenario types; internal pilot with 5 volunteer students; revised UX based on pilot feedback"
+          },
+          {
+            "month": 4,
+            "goal": "IRB-minimal classroom study: pre/post measurement using the Values-in-Computing Ethical Reasoning rubric; compare game group vs. case-study-only control group across two CS course sections",
+            "deliverable": "Dataset (n=40-60 students); preliminary analysis of ethical reasoning pre/post scores and scenario engagement logs"
+          },
+          {
+            "month": 5,
+            "goal": "Full comparative analysis controlling for CS specialization, prior ethics exposure, and scenario domain; qualitative coding of written justifications for evidence of multi-stakeholder reasoning",
+            "deliverable": "Results section draft with quantitative analysis and representative qualitative excerpts"
+          },
+          {
+            "month": 6,
+            "goal": "Write and submit full paper; release game prototype as open-source for the community",
+            "deliverable": "Submitted paper to SIGCSE or ITiCSE; open-source repository with scenario generator and game shell"
+          }
+        ],
+        "targetVenues": [
+          "SIGCSE Technical Symposium",
+          "ITiCSE",
+          "FDG (Foundations of Digital Games)",
+          "AIED (Artificial Intelligence in Education)"
+        ],
+        "resources": "Claude API for scenario generation (minimal cost at research scale); React+Vite for game prototype; access to 2 CS course sections at UW Bothell for evaluation study (minimal-risk IRB); 1 undergraduate RA to assist with scenario review and coding",
+        "risks": [
+          {
+            "risk": "LLM-generated scenarios may contain factual errors or inadvertently biased framings that undermine student trust in the game",
+            "mitigation": "Implement a two-stage review pipeline: automated fact-check pass followed by instructor sign-off before any scenario enters the student-facing pool; log all Claude API calls for audit"
+          },
+          {
+            "risk": "Students may engage shallowly with the game (clicking through without reading) compared to face-to-face case-study discussion",
+            "mitigation": "Require a minimum 30-word written justification before each dilemma choice can be submitted; measure time-on-scenario and justification word count as engagement proxies; adjust game pacing based on pilot data"
+          },
+          {
+            "risk": "IRB approval process may delay the evaluation phase",
+            "mitigation": "Months 1-3 are purely system-building with no human subjects; submit IRB application at month 2 end to allow concurrent review during prototype build; use volunteer adult participants outside the class for a pre-IRB usability test"
+          }
+        ],
+        "humanSubjects": true
+      }
+    }
+  ]
+}
