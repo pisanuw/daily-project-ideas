@@ -450,3 +450,7 @@
 | 2026-09-12 | Quantum Circuit Sandbox | Teaching Tool | 1-2 Weeks |
 | 2026-09-12 | State Machine Story Engine | Classroom Assignment | Multi-week |
 | 2026-09-12 | From Binary Ethics to Moral Ambiguity: LLM-Generated Multi-Stakeholder Dilemmas for University AI Ethics Games | Research | Research |
+| 2026-09-13 | Dependency Obituary | Side Project | Weekend |
+| 2026-09-13 | Warmup Forge | Teaching Tool | 1-2 Weeks |
+| 2026-09-13 | Protocol Interop Lab | Classroom Assignment | Multi-week |
+| 2026-09-13 | From Rubric Refinement to Student Feedback: Using AI-Grader Discrepancy Signals to Generate Misconception-Targeted Formative Assessments in CS1 | Research | Research |

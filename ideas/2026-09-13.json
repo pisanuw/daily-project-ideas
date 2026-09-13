@@ -1,0 +1,165 @@
+{
+  "date": "2026-09-13",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Dependency Obituary",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "Paste a package.json, requirements.txt, or go.mod and get an instant health report for every dependency: maintenance status, pinned-version CVE count, a migration summary, and a clipboard-ready PR description for cleanup.",
+      "description": "Supply-chain hygiene is a constant low-priority chore that developers skip because it requires visiting multiple registries. Dependency Obituary runs entirely in the browser: paste your manifest, and it queries the npm registry, PyPI, and OSV.dev in parallel, then uses Claude to synthesize the results into three outputs. First, a per-package table showing last publish date, archived/unmaintained flag, CVE count at your pinned version, and latest stable release. Second, a 'decay score' (0-100) for the whole file, weighted by how many packages are deprecated or at-risk. Third, a clipboard-ready PR description listing what to upgrade and why, written in the house style that passes most PR reviewers without edits. Because everything runs client-side, the manifest never leaves the browser. One-page React app, zero backend.",
+      "keyFeatures": [
+        "Paste any package.json, requirements.txt, or go.mod and get results in under 5 seconds",
+        "Per-package health table: maintenance status, last-publish date, CVEs at pinned version via OSV.dev",
+        "Decay score (0-100) for the entire manifest with a one-line rationale",
+        "Clipboard-ready PR description summarizing what to upgrade and why",
+        "Entirely client-side: manifest data never leaves the browser"
+      ],
+      "techStack": "React + Vite + Tailwind, npm Registry API, PyPI API, OSV.dev API (all CORS-accessible from browser), Claude API for PR description generation",
+      "whyInteresting": "Every developer has a neglected requirements file; the friction of checking multiple registries means it never gets done. Making the full audit a single paste-and-click action, with a ready PR description, removes that friction completely. The privacy angle (client-side only) makes it safe to use with proprietary codebases where you wouldn't send your manifest to a third-party server.",
+      "inspiredBy": "Growing supply-chain security concerns in 2026; Hacker News discussions on 'left-pad era' supply-chain risks revisited; trend toward local-first tools that don't upload sensitive project metadata to third-party services"
+    },
+    {
+      "n": 2,
+      "title": "Warmup Forge",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "Before each class, students submit a 2-4 sentence natural-language explanation of today's concept; by the time class starts, Claude has clustered the responses and generated a ready-to-run 5-minute warmup activity targeting the most common misconception.",
+      "description": "Formative assessment research consistently shows that brief, low-stakes pre-class activities improve learning, but instructors rarely have time to read 30 free-text answers before the lecture begins. Warmup Forge automates the loop: the instructor creates a session with one concept name (e.g., 'pointer arithmetic') and shares a short URL. Students open it on their phones, type their explanation in under a minute, and submit. Five minutes before class, Claude clusters the submissions into 3-4 dominant mental models, labels the most common misconception with a brief explanation, and generates two outputs: a 5-minute warmup activity the instructor can run verbatim, and a Socratic opener question targeting the misconception. The instructor opens the dashboard, reads the one-sentence misconception summary, and runs the activity. No reading 40 responses. Session history in Supabase lets instructors track which misconceptions reappear across weeks, building a concept-level understanding of where students consistently struggle.",
+      "keyFeatures": [
+        "Student-facing: one URL, one text box, 60-second submission - no login required",
+        "Instructor dashboard showing 3-4 mental model clusters with representative quotes per cluster",
+        "Claude-generated 5-minute warmup activity and one Socratic opener question per session, tailored to the detected misconception",
+        "Supabase-backed session history: track misconception recurrence across lectures for a course",
+        "One-click copy of the warmup activity text for pasting into slides"
+      ],
+      "techStack": "React + Vite + Tailwind, Supabase (submissions and session history), Claude API (clustering and warmup generation), Flask for Claude API proxying",
+      "whyInteresting": "Every instructor knows students have misconceptions but has no fast way to identify which ones matter today. Warmup Forge turns a pedagogically sound but time-consuming practice (reading student explanations) into a 30-second dashboard check. The recurring-misconception history is the sleeper feature: seeing that 'loop termination' misfires in weeks 3, 5, and 8 is exactly the kind of data that drives curriculum redesign.",
+      "inspiredBy": "Research on just-in-time teaching and misconception-based instruction; Hecker and Slunt's work on pre-class preparation activities; gap between having access to AI analysis tools and having a workflow that makes them easy to use before a 8am class"
+    },
+    {
+      "n": 3,
+      "title": "Protocol Interop Lab",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "Students design and implement a custom agent-to-agent communication protocol, build two cooperating AI agents that use it to solve a shared problem, then test interoperability with a stranger's implementation on Interop Day.",
+      "keyFeatures": [
+        "Protocol spec deliverable: message schemas (Pydantic), handshake/session semantics, error recovery rules, and observability contract (structured JSON log format)",
+        "Two cooperating agents (Python, asyncio + WebSockets) that solve a shared problem chosen from a provided menu: collaborative sorting, distributed document summarization, or multi-agent code review",
+        "Automated test harness that validates the protocol against the spec before Interop Day",
+        "Interop Day: pairs exchange specs with a stranger and attempt to make agents communicate; gap analysis becomes the final reflection deliverable",
+        "Optional React + Vite flow-visualization dashboard showing message sequences and retry counts in real time"
+      ],
+      "description": "CS students build individual agents all semester but rarely design the protocol that lets two agents built by different people communicate reliably. Protocol Interop Lab has three graded phases. Phase 1 (week 1-2): design a protocol spec document covering message schemas using Pydantic, a handshake/session mechanism, error handling and retry semantics, and an observability contract (what structured JSON logs must contain). Phase 2 (week 3-5): implement two cooperating agents in Python using asyncio and WebSockets that use the spec to solve a shared problem from a provided menu. An automated test harness validates the protocol against the spec. Phase 3 (week 6 - Interop Day): pairs swap specs with a randomly assigned stranger and have 90 minutes to make their agents talk to each other using only the other pair's spec document. The gap analysis from Interop Day, which covers what broke, why, and how the spec should have been written, is the final reflection. Students learn protocol design, async Python, serialization, observability, and how to write specifications that are both precise enough to implement and unambiguous enough that a stranger can implement them correctly.",
+      "techStack": "Python (asyncio + WebSockets + Pydantic), Claude API (for agent reasoning), optional React + Vite for flow visualization, pytest for protocol test harness",
+      "whyInteresting": "Agent-to-agent communication is the core skill behind every multi-agent system, MCP server, and AI workflow in 2026, yet no standard CS assignment teaches protocol design at this level of rigor. The Interop Day mechanic creates genuine stakes: students discover in real time whether their spec was clear enough for a stranger to implement. The gap analysis assignment turns a failure-prone live test into the assignment's richest learning moment.",
+      "inspiredBy": "Growing industry demand for engineers who understand agent-to-agent protocols (MCP, A2A standards); Hacker News September 2026 discussions on self-hosted AI department agents and the need for reliable inter-agent communication; gap in CS curricula between single-agent assignments and multi-agent systems engineering"
+    },
+    {
+      "n": 4,
+      "title": "From Rubric Refinement to Student Feedback: Using AI-Grader Discrepancy Signals to Generate Misconception-Targeted Formative Assessments in CS1",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Extends AI-supported rubric grading from an instructor-facing tool into a student-facing misconception feedback pipeline, using the cases where AI and human graders disagree as signals to identify which rubric items reveal conceptual gaps, then generating targeted explanations that name the misconception without revealing the answer.",
+      "description": "Baicoianu et al. (SIGCSE TS 2026) demonstrated that AI grading of free-response questions against predefined rubric items enables iterative rubric refinement by surfacing human-AI disagreements, but the feedback loop is instructor-facing: students receive a score, not an explanation. This research closes that loop by repurposing rubric-AI agreement data as a misconception signal. The key insight is that when AI and a human grader disagree on whether a rubric item is satisfied, the student answer is ambiguous in a way that encodes a conceptual gap. Building on Pisan's Jolly Feedback infrastructure and multi-year submission logs from CSS 142/143, this project builds a four-stage pipeline: (1) mine a CS1 misconception taxonomy from Jolly Feedback logs using LLM-assisted error clustering; (2) map rubric failures to taxonomy entries; (3) generate per-student formative feedback that names the inferred misconception and suggests a next step without revealing the solution; (4) run an A/B study comparing resubmission cycles and exam performance under misconception-labeled feedback versus raw Jolly Feedback output. The system-building phases (1-3) require no human subjects; phase 4 uses a minimal-risk classroom protocol in an existing CS1 course.",
+      "papers": [
+        {
+          "title": "AI-Supported Grading and Rubric Refinement for Free Response Questions",
+          "authors": "University of Illinois Urbana-Champaign (multiple authors)",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770762.3772545",
+          "url": "https://doi.org/10.1145/3770762.3772545",
+          "abstract": "The paper employs an AI-based grading system integrated in PrairieLearn to automatically evaluate student submissions to free response questions using predefined rubric items. Direct comparison between AI-generated rubric applications and human judgments reveals alignment discrepancies that allow iterative rubric refinement. The authors argue that even experienced educators face difficulties articulating rubrics that are both specific and interpretable, and that AI grading discrepancies are a valuable signal for rubric improvement.",
+          "relevance": "This paper provides the grading infrastructure and the core insight that AI-human rubric disagreements are a meaningful signal. This research extends that signal from an instructor-facing rubric refinement tool to a student-facing misconception feedback pipeline: disagreements reveal not just rubric ambiguity but the conceptual gap in the student answer, which can be labeled and explained without revealing the solution."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "A Systematic Literature Review of Automated Feedback Generation for Programming Exercises",
+          "authors": "Hieke Keuning, Johan Jeuring, Bastiaan Heeren",
+          "venue": "ACM Transactions on Computing Education, Vol. 19, No. 1",
+          "year": 2019,
+          "url": "https://dl.acm.org/doi/10.1145/3231711",
+          "relevance": "The canonical survey of 101 automated feedback tools across 30 years of CS education research. Its central finding, that existing feedback identifies mistakes but rarely explains the conceptual cause or suggests a next step, is precisely the gap this research addresses. Pisan's Submit! system appears in this survey, grounding the proposed work in his prior contributions."
+        },
+        {
+          "title": "Rubric Is All You Need: Improving LLM-Based Code Evaluation With Question-Specific Rubrics",
+          "authors": "Multiple authors, UC San Diego",
+          "venue": "ICER 2025",
+          "year": 2025,
+          "url": "https://dl.acm.org/doi/10.1145/3702652.3744220",
+          "relevance": "Demonstrates that question-specific rubrics substantially improve LLM-based code evaluation reliability, providing empirical grounding for the rubric-to-misconception mapping pipeline proposed here. The paper's rubric specificity findings directly inform how the misconception taxonomy entries should be written to maximize LLM alignment."
+        },
+        {
+          "title": "Confusion-Aware Rubric Optimization for LLM-based Automated Grading",
+          "authors": "Multiple authors",
+          "venue": "arXiv preprint 2603.00451",
+          "year": 2026,
+          "url": "https://arxiv.org/abs/2603.00451",
+          "relevance": "Introduces confusion-aware rubric optimization, which iteratively refines rubric items based on cases where the LLM and human graders conflict. This directly parallels the discrepancy-as-signal approach proposed here and provides a methodological foundation for identifying which rubric items are likely to encode learnable misconceptions versus mere rubric ambiguity."
+        },
+        {
+          "title": "Generating Hints for Programming Problems Without a Solution",
+          "authors": "G. Suciu, K. Giang, Z. Zhao, E. Runandy, H. Dang (Advisor: Y. Pisan)",
+          "venue": "SIGCSE 2021 Student Research Competition",
+          "year": 2021,
+          "url": "https://dl.acm.org/doi/10.1145/3408877.3439701",
+          "relevance": "Pisan's 2021 SIGCSE SRC paper, which established the harder variant of the problem, generating hints from a problem statement alone without a reference solution. The misconception-targeted feedback pipeline proposed here is a direct successor: instead of generating hints from problem statement features, it generates feedback grounded in a validated misconception taxonomy derived from actual student submissions."
+        }
+      ],
+      "researchPlan": {
+        "overview": "The project builds a four-stage pipeline on top of Pisan's existing Jolly Feedback infrastructure: mine a CS1 misconception taxonomy from multi-year submission logs, map rubric failures to taxonomy entries, generate misconception-labeled formative feedback without revealing solutions, then run an A/B study in CSS 142 to measure whether named-misconception feedback reduces resubmission cycles compared to raw test output. Stages 1-3 are system-building with no human subjects; stage 4 is a minimal-risk classroom A/B study. The system-building phases produce reusable artifacts, the taxonomy and the mapping, that independently support DT-2 from the broader digital-tutor research agenda.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review on automated feedback, misconception taxonomy methods, and rubric-based LLM grading; extract a seed taxonomy of 20-30 CS1 misconception categories from Jolly Feedback error logs using LLM-assisted clustering; map taxonomy entries to Jolly Feedback rubric items for CSS 142 assignments",
+            "deliverable": "Annotated bibliography (20+ papers) + seed misconception taxonomy with category definitions + rubric-to-taxonomy mapping document"
+          },
+          {
+            "month": 2,
+            "goal": "Build the feedback generation pipeline: for each Jolly Feedback test failure, identify the relevant rubric item, look up the mapped misconception category, and prompt Claude to generate a 3-5 sentence explanation naming the misconception, explaining why the code exhibits it, and suggesting a next step without revealing the solution; calibrate prompt using 50 held-out submissions graded by an expert",
+            "deliverable": "Working feedback generation pipeline producing explanations for all CSS 142 rubric failure types; human-calibration report with accuracy metrics on held-out set"
+          },
+          {
+            "month": 3,
+            "goal": "Implement the AI-human discrepancy detection layer: replicate the source paper's approach on CSS 142 free-response quiz questions in PrairieLearn; identify rubric items where AI and human graders disagree at >20% rate; flag these as high-signal misconception indicators and verify that the flagged items correspond to known hard concepts",
+            "deliverable": "Discrepancy analysis report; updated misconception taxonomy with high-signal items marked; IRB application submitted"
+          },
+          {
+            "month": 4,
+            "goal": "IRB approval and A/B study launch in CSS 142: Group A receives misconception-labeled feedback from the pipeline; Group B receives standard Jolly Feedback output (pass/fail + test names); both groups are tracked on resubmission count per assignment and time-to-pass over the first 4 weeks of the study",
+            "deliverable": "Study running; 4-week interim dataset with resubmission and time-to-pass metrics for both groups"
+          },
+          {
+            "month": 5,
+            "goal": "Complete data collection through week 8 of study; administer final exam; analyze: resubmission cycles per assignment by condition, time-to-pass by condition, exam performance by condition; qualitative analysis of 30 randomly sampled misconception-labeled feedback messages for accuracy and pedagogical appropriateness",
+            "deliverable": "Complete dataset; analysis report with statistical findings and feedback quality assessment"
+          },
+          {
+            "month": 6,
+            "goal": "Write and submit paper; release misconception taxonomy, mapping rules, and prompt templates as open artifacts for other CS1 instructors; document Jolly Feedback integration as a replication kit",
+            "deliverable": "Submitted paper targeting SIGCSE TS 2027 or ICER 2027; public repository with taxonomy, mappings, prompt templates, and anonymized dataset"
+          }
+        ],
+        "targetVenues": ["SIGCSE Technical Symposium", "ICER", "ITiCSE", "EDM (Educational Data Mining)"],
+        "resources": "Existing Jolly Feedback infrastructure and multi-year CSS 142/143 submission logs (owned by Pisan); Claude API for feedback generation (estimated $20-50/month during pipeline development); PrairieLearn instance for free-response quiz A/B deployment; one undergraduate RA (months 3-5) for human calibration grading and qualitative feedback coding; minimal-risk IRB protocol (no deception, participants are enrolled students, both conditions receive legitimate educational feedback)",
+        "risks": [
+          {
+            "risk": "LLM-generated misconception labels may be inaccurate for edge-case student answers, leading to feedback that confuses rather than helps students",
+            "mitigation": "Calibrate the pipeline against expert-graded labels before deployment; add a confidence threshold below which the system falls back to standard Jolly Feedback output rather than generating a potentially incorrect misconception label; log all generated feedback for post-hoc audit"
+          },
+          {
+            "risk": "The misconception taxonomy built from CSS 142 logs may be too specific to Pisan's course structure and not generalize to the rubric items in the A/B study",
+            "mitigation": "Build the taxonomy at two levels of specificity: fine-grained (course-specific error patterns) and coarse-grained (conceptual categories that generalize across intro programming courses); map rubric items to the coarse-grained level for the study; test cross-assignment accuracy before launching the A/B"
+          },
+          {
+            "risk": "Students in both conditions may seek external help (office hours, AI tools) that confounds the resubmission comparison",
+            "mitigation": "Use resubmission timing patterns (time between submission and resubmission) as a secondary metric that is harder to confound; survey both groups at the end of the study on help-seeking behavior; include AI tool usage as a covariate in the analysis"
+          }
+        ],
+        "humanSubjects": true
+      }
+    }
+  ]
+}
