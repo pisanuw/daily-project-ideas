@@ -1,0 +1,111 @@
+[
+  {
+    "date": "2026-09-14",
+    "n": 1,
+    "title": "Voice Code Review",
+    "category": "Side Project",
+    "complexity": "Weekend",
+    "summary": "Dictate a code review by voice in the browser; Claude structures your spoken feedback into formatted GitHub PR comments with file and line references.",
+    "description": "A mobile-friendly browser tool that captures a developer's voice commentary on a pull request and converts it into structured review comments. The user opens the tool alongside a GitHub PR, presses record, and speaks naturally ('in auth.js around line 40, the token expiry check will miss leap-year edge cases'). The Web Speech API transcribes the stream in real time; when the user stops, Claude parses the transcript and emits a JSON block with file path, approximate line, severity label, and comment body. The output panel renders a preview and lets the user copy the structured markdown or paste it directly into GitHub. Useful for reviewers who think faster aloud than typed, and for voice-first accessibility workflows.",
+    "tech": ["React", "Vite", "Tailwind", "Web Speech API", "Claude API"],
+    "tags": ["code-review", "voice", "productivity", "accessibility", "github"],
+    "inspiredBy": "Hacker News 'Show HN' trend of voice-first developer productivity tools; IndieStartup.net August 2026 data showing accessibility tooling as the fastest-growing niche for solo developers.",
+    "why_now": "Web Speech API now has broad browser support and low latency. Claude's context window handles full PR diffs alongside transcripts, enabling accurate line attribution without a backend."
+  },
+  {
+    "date": "2026-09-14",
+    "n": 2,
+    "title": "Two-Language Concept Mirror",
+    "category": "Teaching Tool",
+    "complexity": "1-2 Weeks",
+    "summary": "Show the same CS concept implemented side-by-side in three languages; Claude explains conceptual equivalences and differences, not just syntax differences.",
+    "description": "A web app that presents a chosen CS concept (closures, iterators, async/await, inheritance, pattern matching) implemented in three languages simultaneously. The user selects a concept from a curated pack and sees runnable code panels for Python, JavaScript, and C++ (or another trio). Claude generates a prose explanation of how each language's design philosophy shapes the implementation, highlighting what is semantically equivalent and where the concepts genuinely diverge. Instructors can author and share 'concept packs' stored in Supabase, making it easy to create course-specific collections (a C++ course pack covering RAII, move semantics, and template metaprogramming alongside JavaScript and Python equivalents). Students click through examples at their own pace; instructors embed packs in their LMS. The goal is conceptual transfer, not translation.",
+    "tech": ["React", "Vite", "Tailwind", "Claude API", "Supabase"],
+    "tags": ["multi-language", "concept-mapping", "CS1", "CS2", "instructor-tools"],
+    "inspiredBy": "Recurring Hacker News threads comparing language idioms; GitHub trending repositories around polyglot learning tools in mid-2026.",
+    "why_now": "Students increasingly encounter multiple languages in their first two years. Existing side-by-side tools (Rosetta Code, etc.) focus on syntax; Claude can explain the deeper conceptual story in a single generation."
+  },
+  {
+    "date": "2026-09-14",
+    "n": 3,
+    "title": "Legacy Code Expedition",
+    "category": "Classroom Assignment",
+    "complexity": "Multi-week",
+    "summary": "Students receive an aged open-source codebase, use AI agents to map its architecture, identify modernization opportunities, implement one improvement, and write a critical retrospective on where AI helped and where it failed.",
+    "description": "A structured multi-week assignment sequence built around a real, aging open-source project (5-10 years old, chosen by the instructor from a curated list). Phase 1 (week 1): AI agents generate an architectural map and flag outdated patterns (deprecated APIs, missing type hints, no CI, etc.). Students must validate every AI claim against the actual source. Phase 2 (week 2): Each student identifies three modernization opportunities, each justified with evidence from the codebase and grounded in a software engineering principle. Phase 3 (weeks 3-4): Students implement one improvement with full tests and a working CI pipeline. Final deliverable: a technical retrospective that honestly categorizes AI assistance into 'accelerated work', 'introduced errors we caught', and 'led us astray'. The retrospective is the real learning artifact, teaching students to reason critically about AI-augmented workflows rather than treat AI output as ground truth. Designed for upper-division software engineering or CS2 courses.",
+    "tech": ["React", "Vite", "GitHub Actions", "Claude API", "any language matching the chosen codebase"],
+    "tags": ["legacy-code", "refactoring", "software-engineering", "AI-critique", "upper-division"],
+    "inspiredBy": "ITiCSE 2025 discussions of code quality defects in large student and open-source codebases; GitHub Copilot Workspace launch prompting debate about AI and technical debt.",
+    "why_now": "Industry demand for engineers who can navigate legacy systems is growing. The copilot era makes it urgent to teach when NOT to trust AI suggestions; legacy code is the highest-stakes proving ground."
+  },
+  {
+    "date": "2026-09-14",
+    "n": 4,
+    "title": "From Simulation to Reality: Measuring Transfer Fidelity of GLOW-Style Undergraduate TA Training at Teaching-Focused Institutions",
+    "category": "Research",
+    "complexity": "Research",
+    "summary": "Extend GLOW's GTA simulation framework to undergraduate TA training at a regional teaching-focused university, measuring whether rubric-anchored AI practice transfers to real office-hour performance and whether AI student personas are behaviorally faithful to real CS1 students.",
+    "description": "GLOW (Generating Learner Office-hour Walkthroughs) is a chat-based practice environment where Graduate Teaching Assistants rehearse office-hour conversations with AI-simulated student personas and receive feedback aligned to a behaviorally anchored rubric. Deployed at a large R1 CS department (N=266 GTAs), GLOW demonstrated consistent improvement across retries and identified persona-level weaknesses (Aggressive student personas were hardest). This project asks two tightly linked questions.\n\nQuestion 1 (transfer): Does GLOW-style simulation training transfer to actual teaching performance for undergraduate TAs at a regional teaching-focused university (UW Bothell context)? R1 GTAs are graduate students with deep content knowledge; UW Bothell undergraduate TAs are peer tutors whose content knowledge and pedagogical instincts are still developing. Does the rubric-anchored simulation paradigm generalize, or does it need adaptation?\n\nQuestion 2 (fidelity): Are the AI student personas behaviorally faithful to real CS1 students, or do they exhibit sycophantic problem-solving and surface-level misconception mimicry? Recent arXiv work raises the concern that LLM simulators say the right wrong things without holding the underlying misconception model.\n\nPhase 1 (months 1-2): IRB approval; record and transcribe 30-40 real undergraduate TA office-hour sessions from CS1 and CS2 sections. Code sessions using GLOW's behavioral rubric plus a misconception taxonomy.\n\nPhase 2 (months 3-4): Deploy a GLOW-adapted simulation environment for UW Bothell undergraduate TAs. Run a pre/post study: TAs complete simulation practice, then a blinded rater scores their real office hours using the same rubric.\n\nPhase 3 (months 5-6): Behavioral fidelity audit. Elicit the same scenarios from real CS1 students and from AI personas; compare misconception trajectories, persistence, and response to hints across human and AI participants. Analyze whether persona analytics (e.g., Aggressive student metrics from GLOW) predict real TA struggle with real student types.\n\nThe fidelity question connects to Pisan's long-standing interest in the gap between plausible and faithful AI explanations (tracing back to believable agents work from 2001 and forward to XAI faithfulness). If simulation personas are not faithful, TA training may rehearse the wrong interactions.",
+    "papers": [
+      {
+        "doi": "10.1145/3770761.3777354",
+        "title": "GLOW: AI-Simulated Students Improve GTA Readiness",
+        "authors": ["Ethan Dickey", "Ashok Saravanan", "Andres Bejarano", "et al."],
+        "venue": "SIGCSE TS 2026",
+        "relevance": "Primary source: GLOW is the simulation framework this project extends. Establishes rubric-anchored AI student simulation as viable for GTA training at scale (N=266); persona-level analytics pinpoint coaching gaps."
+      }
+    ],
+    "additionalRefs": [
+      {
+        "arxiv": "2605.12748",
+        "title": "Simulating Students or Sycophantic Problem Solving? On Misconception Faithfulness of LLM Simulators",
+        "venue": "arXiv 2025",
+        "relevance": "Directly challenges behavioral fidelity of LLM student simulators; frames Question 2 of this proposal."
+      },
+      {
+        "arxiv": "2609.01591",
+        "title": "StudentSim: Training LLM-based Student Simulators",
+        "venue": "arXiv 2026",
+        "relevance": "Provides methods for training more faithful LLM-based student simulators; informs Phase 3 methodology."
+      },
+      {
+        "doi": "10.1145/3770761.3777359",
+        "title": "Preparing Graduate Teaching Assistants with Structured Orientation and AI-Simulated Students",
+        "authors": ["Purdue GTA Training Group"],
+        "venue": "SIGCSE TS 2026",
+        "relevance": "Companion paper from the GLOW team; details the full orientation program in which GLOW is embedded."
+      },
+      {
+        "arxiv": "2404.06762",
+        "title": "Personality-aware Student Simulation for Conversational Intelligent Tutoring Systems",
+        "venue": "arXiv 2024",
+        "relevance": "Establishes prior art for persona-differentiated student simulation; informs the fidelity audit design."
+      }
+    ],
+    "researchPlan": {
+      "milestones": [
+        "Month 1-2: IRB approval for classroom observation and TA study; record and transcribe 30-40 real office-hour sessions; code with GLOW rubric and misconception taxonomy",
+        "Month 3: Adapt GLOW simulation environment for undergraduate TA context; design pre/post measurement instruments",
+        "Month 4: Deploy simulation training for one cohort of UW Bothell undergraduate TAs; blinded raters score real office hours pre and post",
+        "Month 5: Behavioral fidelity audit: elicit matched scenarios from real CS1 students and AI personas; compare misconception trajectories",
+        "Month 6: Statistical analysis (mixed-effects models; simulation vs. real-office-hour rubric scores; human vs. AI persona fidelity); write up for SIGCSE or ICER"
+      ],
+      "targetVenues": ["SIGCSE TS 2027", "ICER 2027", "ITiCSE 2027"],
+      "resources": [
+        "IRB approval (UW Bothell)",
+        "Access to CS1/CS2 office hours for observation and recording",
+        "Undergraduate TA cohort willing to use simulation training",
+        "GLOW codebase or equivalent simulation scaffold",
+        "Claude API for persona simulation",
+        "Blinded raters trained on behavioral rubric"
+      ],
+      "risks": [
+        "Undergraduate TA office hours may be less structured than GTA sessions, making rubric application harder; mitigate by piloting rubric with sample recordings before study launch",
+        "AI persona fidelity audit requires careful recruitment of real CS1 students to avoid confound with TA training effects; keep cohorts separate",
+        "GLOW codebase may not be publicly available; may need to reimplement from paper description",
+        "Small N at a single regional institution limits generalizability; frame as a replication-plus-extension study and report effect sizes with confidence intervals"
+      ],
+      "humanSubjects": true
+    }
+  }
+]

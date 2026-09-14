@@ -454,3 +454,7 @@
 | 2026-09-13 | Warmup Forge | Teaching Tool | 1-2 Weeks |
 | 2026-09-13 | Protocol Interop Lab | Classroom Assignment | Multi-week |
 | 2026-09-13 | From Rubric Refinement to Student Feedback: Using AI-Grader Discrepancy Signals to Generate Misconception-Targeted Formative Assessments in CS1 | Research | Research |
+| 2026-09-14 | Voice Code Review | Side Project | Weekend |
+| 2026-09-14 | Two-Language Concept Mirror | Teaching Tool | 1-2 Weeks |
+| 2026-09-14 | Legacy Code Expedition | Classroom Assignment | Multi-week |
+| 2026-09-14 | From Simulation to Reality: Measuring Transfer Fidelity of GLOW-Style Undergraduate TA Training at Teaching-Focused Institutions | Research | Research |
