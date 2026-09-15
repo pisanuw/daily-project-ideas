@@ -1,0 +1,165 @@
+{
+  "date": "2026-09-15",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Prompt Shrink Ray",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A web tool that intelligently compresses LLM prompts while preserving intent, showing token savings and estimated cost reduction in real time.",
+      "description": "Paste any LLM prompt and Prompt Shrink Ray decomposes it into sections (system instructions, examples, context, user message), rewrites each section for minimal verbosity, then reassembles it. A side-by-side diff shows what changed; token counters and a cost estimate update live. A semantic equivalence check prompts the original and compressed versions against a small test set and reports divergence. Aimed at developers who iteratively tune production prompts and want to push usage costs down without breaking intent.",
+      "keyFeatures": [
+        "Section-aware decomposition: detects and labels system, few-shot, and user blocks",
+        "One-click compression with adjustable aggressiveness slider (light/medium/aggressive)",
+        "Live token counter and per-model cost estimate for original vs. compressed",
+        "Semantic diff view highlighting removed or reworded content",
+        "Export compressed prompt as plain text or as a structured JSON prompt template"
+      ],
+      "techStack": "React + Vite + Tailwind, Claude API (haiku for compression, sonnet for equivalence check)",
+      "whyInteresting": "As multi-turn agent conversations grow complex, prompt costs compound quickly. Most developers optimize by feel; this gives a concrete budget meter and automated compression so the savings are measurable.",
+      "inspiredBy": "HN September 2026 thread on production LLM cost reduction and GitHub trending focus on agentic context management"
+    },
+    {
+      "n": 2,
+      "title": "Office Hours Queue Triage",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "A pre-office-hours question portal where students submit their question and code before arriving, and AI clusters similar issues so TAs walk in with a prioritized queue.",
+      "description": "Students visit a shareable link, paste their question, include a code snippet, and describe what they have already tried. Before office hours begins, the instructor or TA opens a dashboard that groups similar submissions (same bug, same concept, same assignment step), estimates time per cluster, and flags students who appear stuck on a fundamental misconception. During office hours the TA works the queue cluster by cluster, addressing multiple students at once. After the session, a summary email goes to students whose questions were not reached. Saves the first 10 minutes of every OH session that is currently spent asking students what they have already tried.",
+      "keyFeatures": [
+        "No-login student form: shareable URL per course section and per week",
+        "AI clustering of submissions by concept and error type with one-line cluster summaries",
+        "TA dashboard: sorted queue, estimated time per cluster, flag for at-risk students",
+        "Live check-in: TA marks a cluster as addressed; waiting students see their queue position",
+        "Post-session summary email to students whose questions were deferred"
+      ],
+      "techStack": "React + Vite + Tailwind, Supabase (real-time), Flask, Claude API (haiku for clustering and summaries)",
+      "whyInteresting": "Large CS classes with 100+ students per section have TAs who spend half of OH time just getting context. Pre-submission triaging is a zero-friction intervention: students already know what they want to ask; this just captures it ahead of time.",
+      "inspiredBy": "Common TA frustration in CS1/CS2 courses, HN September 2026 discussion on async-first developer workflows"
+    },
+    {
+      "n": 3,
+      "title": "Dev Career Map",
+      "category": "Side Project",
+      "complexity": "Multi-week",
+      "summary": "Analyzes a developer's public GitHub history to render a visual career timeline showing how skills emerged, peaked, and evolved across every repo they have touched.",
+      "description": "Connect a GitHub account and Dev Career Map scrapes commit histories, language distributions, dependency files, and README content across all public repos. It maps a timeline of skill emergence (when did TypeScript appear? when did the developer shift from REST to GraphQL?), clusters repos by domain (web, systems, ML, game dev), and identifies notable projects by star count or commit depth. Claude generates a 150-word portfolio narrative that can be embedded as a personal page or exported as a shareable link. A secondary view shows the dependency graph of frameworks the developer has used, colored by era. Useful for portfolio pages, job applications, and retrospective learning.",
+      "keyFeatures": [
+        "OAuth GitHub sign-in with read-only scope; no code is stored, only metadata",
+        "Interactive zoomable timeline: scroll through years, hover to see repo details",
+        "Skill emergence graph: languages and frameworks plotted by first use and last active date",
+        "Domain clustering: groups repos by inferred category with AI-assigned labels",
+        "Shareable public profile page with embeddable iframe and exported PNG/PDF timeline"
+      ],
+      "techStack": "React + Vite + Tailwind, Supabase (user profiles and cached metadata), GitHub REST API, Claude API (sonnet for narrative generation and domain classification)",
+      "whyInteresting": "GitHub profiles show what a developer has built but not the story of how they grew. A career map gives recruiters and the developer themselves a birds-eye view of their technical evolution in under 30 seconds.",
+      "inspiredBy": "GitHub Trending September 2026 discussions about developer portfolio tooling and career visibility"
+    },
+    {
+      "n": 4,
+      "title": "Two-Stage LLM Grading of Handwritten CS Exam Artifacts: Adapting a Mathematical Pipeline for Code Traces, Data Structure Diagrams, and Algorithm Analysis",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Adapts and evaluates a proven two-stage LLM autograding pipeline for CS-specific handwritten exam artifacts, including code traces, data structure state diagrams, and pseudocode, where the complexity of execution state and visual structure exceeds that of mathematical expressions.",
+      "description": "Levine et al. (SIGCSE TS 2026) demonstrated that a two-stage pipeline separating transcription from rubric evaluation achieves promising accuracy for handwritten mathematics with parameterized rubrics. CS instructors who rely on handwritten proctored exams face an analogous but harder problem: code trace tables, linked-list or tree diagrams, and algorithm pseudocode carry execution state, control-flow branching, and structural relationships that standard OCR pipelines cannot parse. This research extends the Levine et al. pipeline to three canonical CS artifact types, designing Stage-1 prompts that produce structured intermediate representations (variable-step tables for traces, adjacency or pointer notation for data structures, normalized pseudocode for algorithms) and Stage-2 prompts that evaluate each against a parameterized rubric. The study measures agreement with human graders across item types, identifies failure modes unique to each artifact category, and benchmarks grading-time reduction against a Gradescope baseline, following the methodology of the companion Fighting Fire with Fire study at the same venue. The results will inform whether a single unified pipeline or per-artifact specialized pipelines better serve CS assessment at scale.",
+      "papers": [
+        {
+          "title": "A Two-Stage LLM Pipeline for Handwritten Mathematics Autograding",
+          "authors": "Jacob Levine, Matt West, Mariana Silva",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770761.3777208",
+          "url": "https://doi.org/10.1145/3770761.3777208",
+          "abstract": "Using separate prompts to first extract text and then evaluate rubric items enables LLMs to distinguish fully correct solutions from those requiring further review, thereby reducing grader workload. Tested on handwritten multi-step student solutions graded via parameterized rubrics in PrairieLearn, this is the first work to attempt autograding complete handwritten solutions under the combination of parameterized rubrics and randomized questions. Preliminary results show progress toward pipelines that could reduce human grading effort at scale.",
+          "relevance": "Establishes the two-stage transcription-then-evaluation pipeline this research extends to CS artifact types. The parameterized-rubric approach directly maps to CS trace and diagram grading, and the preliminary gaps the authors identify (error detection accuracy) frame where CS-specific prompt design is most needed."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "Fighting Fire with Fire: LLM-Assisted Grading of Handwritten CS Assessments",
+          "authors": "University of California, Irvine",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "url": "https://doi.org/10.1145/3770762.3772615",
+          "relevance": "Companion SIGCSE 2026 paper showing that LLM-assisted grading of handwritten CS1 short-answer and free-response questions reduces overall grading time by 40% with negligible accuracy loss. Provides the CS-specific baseline and time-savings methodology this research will replicate and extend to more complex artifact types."
+        },
+        {
+          "title": "Automated Grading of Handwritten Mathematics Using Vision-Capable LLMs",
+          "authors": "Liu et al.",
+          "venue": "arXiv / Springer, 2025",
+          "year": 2025,
+          "url": "https://arxiv.org/abs/2605.19043",
+          "relevance": "Demonstrates that vision-capable LLMs (GPT-4V, MathPix pipeline) can transcribe handwritten math to LaTeX and check it against rubric rules, with >95% accuracy in constrained STEM contexts. Provides a vision-pipeline comparison point and shows the ceiling accuracy achievable when answers appear in predefined boxes, highlighting the harder open-layout setting this research addresses."
+        },
+        {
+          "title": "Advances in Auto-Grading with Large Language Models",
+          "authors": "Various",
+          "venue": "ACL BEA Workshop 2025",
+          "year": 2025,
+          "url": "https://aclanthology.org/2025.bea-1.35.pdf",
+          "relevance": "Surveys the state of LLM-based automated short-answer grading (ASAG), covering zero-shot and few-shot prompting regimes, rubric-construction strategies, and human-in-the-loop calibration. Provides the evaluation framework (rubric specificity vs. accuracy trade-off) and grading taxonomy this research uses to situate CS artifact grading within the broader autograding literature."
+        },
+        {
+          "title": "Human-in-the-Loop LLM Grading for Handwritten Mathematics Assessments",
+          "authors": "Various",
+          "venue": "arXiv, 2025",
+          "year": 2025,
+          "url": "https://arxiv.org/html/2603.13083",
+          "relevance": "Proposes GradeHITL, which pairs LLM autograding with human verification triggers based on LLM confidence scores, achieving near-human accuracy at significantly reduced grading cost. The confidence-triggered escalation model is directly applicable to CS trace grading, where execution-state errors are harder to detect automatically than typographic errors."
+        }
+      ],
+      "researchPlan": {
+        "overview": "The project adapts and empirically evaluates the Levine et al. two-stage LLM autograding pipeline for the three most common CS handwritten exam artifact types: variable-step code traces, pointer-based data structure diagrams, and algorithm pseudocode. Using anonymized historical exam images from CS1/CS2 courses (with IRB approval), we design Stage-1 intermediate representations and Stage-2 rubric prompts for each artifact type, then measure accuracy against expert-graded rubrics and time savings versus Gradescope.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review, artifact taxonomy, and IRB protocol preparation",
+            "deliverable": "Annotated bibliography, taxonomy of 3 CS artifact types with grading rubric templates, IRB application submitted"
+          },
+          {
+            "month": 2,
+            "goal": "Pipeline implementation for code-trace artifacts; Stage-1 prompt engineering for variable-step table extraction",
+            "deliverable": "Working pipeline for code traces; preliminary accuracy report on 50-item pilot dataset"
+          },
+          {
+            "month": 3,
+            "goal": "Extension to data structure diagrams (linked lists, binary trees); human-grader calibration study",
+            "deliverable": "Accuracy benchmarks for traces and diagrams vs. two human graders; inter-rater agreement report"
+          },
+          {
+            "month": 4,
+            "goal": "Extension to algorithm pseudocode and partial-credit rubric handling; failure-mode analysis",
+            "deliverable": "Failure taxonomy across all three artifact types; revised prompts addressing top failure modes"
+          },
+          {
+            "month": 5,
+            "goal": "Full grading-time study: compare LLM-assisted pipeline against Gradescope baseline on a live exam section",
+            "deliverable": "Time and accuracy measurements; TA perception survey results"
+          },
+          {
+            "month": 6,
+            "goal": "Paper writing, revision, and submission",
+            "deliverable": "Submitted conference paper with appendix of prompt templates and anonymized dataset"
+          }
+        ],
+        "targetVenues": ["SIGCSE", "ICER", "EDM", "AIED"],
+        "resources": "Anonymized historical exam image collections from CS1/CS2 courses (UW Bothell, with IRB consent); vision-capable LLM API access (Claude claude-sonnet-5, GPT-4o); one undergraduate RA for ground-truth rubric scoring and inter-rater reliability checks; Gradescope institutional license for baseline comparison; PrairieLearn access for randomized-question rubric parameterization.",
+        "risks": [
+          {
+            "risk": "IRB timeline delays access to historical exam images",
+            "mitigation": "Begin with synthetically generated handwritten artifacts (instructor-produced traces scanned at varied handwriting qualities) to develop and test prompts while IRB is pending; transition to real student data once approved"
+          },
+          {
+            "risk": "CS artifacts with execution-state errors are structurally ambiguous and Stage-1 transcription introduces compounding errors",
+            "mitigation": "Design Stage-1 to produce a structured JSON intermediate representation (not natural language) that makes ambiguity explicit; add a confidence flag that triggers human review for low-confidence extractions"
+          },
+          {
+            "risk": "Grading-time measurements are confounded by TA familiarity with the pipeline",
+            "mitigation": "Randomize which exam sections use LLM-assisted vs. baseline grading across multiple TAs; include a training session before measurements begin"
+          }
+        ],
+        "humanSubjects": true
+      }
+    }
+  ]
+}

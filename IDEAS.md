@@ -458,3 +458,7 @@
 | 2026-09-14 | Two-Language Concept Mirror | Teaching Tool | 1-2 Weeks |
 | 2026-09-14 | Legacy Code Expedition | Classroom Assignment | Multi-week |
 | 2026-09-14 | From Simulation to Reality: Measuring Transfer Fidelity of GLOW-Style Undergraduate TA Training at Teaching-Focused Institutions | Research | Research |
+| 2026-09-15 | Prompt Shrink Ray | Side Project | Weekend |
+| 2026-09-15 | Office Hours Queue Triage | Teaching Tool | 1-2 Weeks |
+| 2026-09-15 | Dev Career Map | Side Project | Multi-week |
+| 2026-09-15 | Two-Stage LLM Grading of Handwritten CS Exam Artifacts: Adapting a Mathematical Pipeline for Code Traces, Data Structure Diagrams, and Algorithm Analysis | Research | Research |
