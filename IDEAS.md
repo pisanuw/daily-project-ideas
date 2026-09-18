@@ -462,3 +462,7 @@
 | 2026-09-15 | Office Hours Queue Triage | Teaching Tool | 1-2 Weeks |
 | 2026-09-15 | Dev Career Map | Side Project | Multi-week |
 | 2026-09-15 | Two-Stage LLM Grading of Handwritten CS Exam Artifacts: Adapting a Mathematical Pipeline for Code Traces, Data Structure Diagrams, and Algorithm Analysis | Research | Research |
+| 2026-09-18 | Reasoning Chain Sketcher | Side Project | Weekend |
+| 2026-09-18 | Tutoring Response Trainer | Teaching Tool | 1-2 Weeks |
+| 2026-09-18 | Full-Stack ML from Scratch with Live Viz | Classroom Assignment | Multi-week |
+| 2026-09-18 | NLF-Scaffolded Decomposition Signals: Mining Natural Language Function Prompts to Classify CS1 Misconceptions and Route Adaptive Hints | Research | Research |

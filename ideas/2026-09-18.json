@@ -1,0 +1,165 @@
+{
+  "date": "2026-09-18",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Reasoning Chain Sketcher",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A web tool that renders an LLM's extended chain-of-thought as an interactive branching tree, letting you see reconsidered paths, dead ends, and the final answer trace side by side.",
+      "description": "Paste a question into Reasoning Chain Sketcher and it calls Claude's extended thinking API, captures every thinking block, then parses the stream into a directed graph of reasoning steps. Each node shows a short excerpt; clicking it expands the full thought. Branches that were reconsidered or abandoned are rendered in a muted color so the final path stands out. A step counter and a token cost meter sit in the header. The exported view is a static SVG so it can be embedded in a blog post or shared as a teaching artifact. Intended for educators who want to show students that model reasoning is not linear, and for developers debugging complex prompt chains.",
+      "keyFeatures": [
+        "Real-time streaming parse of Claude extended thinking blocks into a live graph",
+        "Interactive node expand/collapse with full thought text on click",
+        "Abandoned-branch dimming so the final reasoning path is immediately visible",
+        "Side-by-side view: raw thinking text on the left, rendered tree on the right",
+        "Export to SVG or shareable permalink with embedded graph JSON"
+      ],
+      "techStack": "React + Vite + Tailwind, Claude API (extended thinking), D3.js for tree layout",
+      "whyInteresting": "Most developers see LLM chain-of-thought only as scrolling text. Turning it into a navigable tree makes the reasoning process inspectable and teachable, which is useful for prompt debugging and for CS education contexts where showing students how a model reasons through a problem can scaffold their own problem-solving.",
+      "inspiredBy": "Hacker News September 2026 discussion on making LLM extended thinking interpretable; GitHub trending projects on LLM reasoning visualization"
+    },
+    {
+      "n": 2,
+      "title": "Tutoring Response Trainer",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "A deliberate-practice platform where instructors and TAs work through simulated student struggle scenarios and receive rubric-grounded feedback on their pedagogical response choices.",
+      "description": "Each session presents a vignette: a student is stuck on a specific concept (off-by-one errors, null pointer confusion, recursion base cases). The trainee types how they would respond. Claude evaluates the response against a rubric derived from evidence-based tutoring practices: did the response ask a probing question rather than giving the answer, did it identify the underlying misconception, was the language accessible? The trainee sees a score per rubric dimension with a short explanation and a model example response. A history panel tracks which pedagogical strategies the trainee relies on and which they underuse over multiple sessions. An admin view lets instructors build new scenario packs tied to their course topics and grading rubrics. The platform is grounded in the tutoring strategies documented in recent CS education research on undergraduate TA pedagogical practices.",
+      "keyFeatures": [
+        "Scenario library of 40+ CS1/CS2 struggle vignettes across topics (loops, recursion, pointers, OOP)",
+        "Rubric-grounded AI evaluation: probing vs. telling, misconception identification, language clarity",
+        "Per-session feedback with model response examples and dimension-by-dimension breakdown",
+        "Personal strategy radar chart showing which tutoring moves the trainee over- or underuses",
+        "Admin scenario builder: paste a student snippet + description, generate rubric draft via Claude"
+      ],
+      "techStack": "React + Vite + Tailwind, Supabase (user accounts, session history), Flask, Claude API (claude-sonnet-5 for rubric evaluation and model response generation)",
+      "whyInteresting": "TA training is typically a one-time orientation rather than deliberate practice. A low-stakes simulator that gives immediate rubric feedback lets new TAs build the pedagogical instincts that currently only develop after months of live office hours.",
+      "inspiredBy": "SIGCSE TS 2026 research on undergraduate computing tutor pedagogical practices; Reddit r/csed September 2026 thread on scaling TA quality"
+    },
+    {
+      "n": 3,
+      "title": "Full-Stack ML from Scratch with Live Viz",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "A scaffolded multi-week assignment where students implement a miniature transformer (no ML libraries) and watch their own training loop animate gradient magnitudes, weight distributions, and loss curves in a live browser dashboard.",
+      "description": "Students work in three phases over three to four weeks. Phase 1: implement matrix multiplication, softmax, and backpropagation by hand in Python, running against unit tests that verify numerical correctness. Phase 2: wire the components into a two-layer attention-based model and train it on a toy sequence prediction task (simple arithmetic or character-level text). Phase 3: integrate a provided WebSocket bridge so every gradient update streams to a React dashboard, which animates per-layer weight histograms, the attention heatmap, and the loss curve in real time. The assignment is intentionally bottoms-up: no PyTorch, no NumPy abstractions beyond raw arrays. The live visualization serves two purposes: it makes training feel tangible to students who have only seen ML as a black box, and it creates a natural debugging surface when gradients vanish or explode. Grading relies on passing test suites and a short written reflection on what the student observed in their own training run.",
+      "keyFeatures": [
+        "Phase 1 scaffolded starter code with 30+ unit tests covering forward and backward pass correctness",
+        "Phase 2 minimal transformer architecture constrained to under 500 lines of pure Python",
+        "Phase 3 WebSocket bridge that streams gradient and weight tensors to the browser each training step",
+        "Live dashboard: animated loss curve, per-layer weight histogram, 2D attention heatmap",
+        "Autograder that runs the student's training loop and checks loss convergence and unit test pass rate"
+      ],
+      "techStack": "Python (no ML libraries beyond NumPy), React + Vite + Tailwind (dashboard), WebSocket (bridge), GitHub Actions (autograder)",
+      "whyInteresting": "Most ML courses teach students to call library functions without understanding what is happening inside. Building a transformer from matrix math and watching it actually learn closes the gap between conceptual understanding and practical use, which is increasingly important as students enter a field dominated by black-box models.",
+      "inspiredBy": "SIGCSE TS 2026 paper on bottoms-up ML education; GitHub trending September 2026 projects on from-scratch neural network implementations"
+    },
+    {
+      "n": 4,
+      "title": "NLF-Scaffolded Decomposition Signals: Mining Natural Language Function Prompts to Classify CS1 Misconceptions and Route Adaptive Hints",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Extends the NLF (Natural Language Function) scaffolding tool from SIGCSE TS 2026 by building a misconception classifier over student NLF prompt logs, then routing LLM-generated hints based on detected misconception type, evaluated entirely through automated metrics on synthetic student personas without requiring human subjects.",
+      "description": "Yusuf et al. (SIGCSE TS 2026) showed that students using a Natural Language Functions tool, which generates callable stubs from natural language prompts, produced approximately three times more decomposition behaviors than a control group. Their qualitative findings identified a shift from verbal articulation to written expression, with students spending more time crafting prompts and less time verbalizing intent aloud. This research builds on that signal: if student NLF prompts reflect decomposition thinking, the linguistic patterns in those prompts should distinguish between common CS1 misconceptions (treating a problem as a single monolithic computation, misidentifying where abstraction boundaries belong, confusing data transformation with control flow). This project constructs a three-stage pipeline. Stage 1 uses a curated taxonomy of CS1 decomposition misconceptions, derived from the CS1-LLM and problem-decomposition literature, to generate a synthetic corpus of NLF prompts via LLM persona simulation: each persona represents a student at a specific misconception state and produces prompts consistent with that state. Stage 2 trains a lightweight misconception classifier on this synthetic corpus using prompt-feature extraction (verb choice, granularity signals, co-reference patterns). Stage 3 evaluates whether routing hints through a misconception-specific prompt template produces higher-quality explanatory hints than a generic hint prompt, measured by rubric-grounded LLM evaluation and embedding-space distance from expert explanations. Because the study relies entirely on synthetically generated prompts and automated evaluation metrics, no human subjects are required, making it executable within a single semester without IRB overhead. Results will inform how NLF tooling can be instrumented to detect student misconceptions in real time and personalize scaffolding.",
+      "papers": [
+        {
+          "title": "Describing Functionality in Natural Language May Improve Problem Decomposition",
+          "authors": "Yusuf et al.",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770762.3772513",
+          "url": "https://doi.org/10.1145/3770762.3772513",
+          "abstract": "A mixed-methods study examining whether a Natural Language Functions (NLF) tool that generates callable function stubs from natural language prompts supports CS1 problem decomposition. The experimental group (n=6) used NLFs while a control group (n=5) did not. Students with NLFs created approximately three times more decomposition behaviors. The study also identified a shift from verbal articulation to written expression through the prompt interface, with experimental students spending less time verbalizing intent and more time crafting prompts.",
+          "relevance": "The source paper. Establishes NLF prompts as behavioral signals of decomposition thinking, identifies the verbal-to-written articulation shift, and frames the open question of which prompt patterns distinguish productive from misconception-driven decomposition attempts. This research extends it by building a systematic misconception taxonomy over NLF prompt features and testing adaptive hint routing."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "Assessing Problem Decomposition in CS1 for the GenAI Era",
+          "authors": "Haldeman et al.",
+          "venue": "arXiv, 2025",
+          "year": 2025,
+          "url": "https://arxiv.org/pdf/2511.05764",
+          "relevance": "Develops a conceptual framework for teaching and assessing program decomposition in CS1 in the context of generative AI tools. Provides a decomposition taxonomy and rubric dimensions this research adopts to construct the synthetic misconception corpus, and situates NLF scaffolding within the broader challenge of measuring decomposition skill under GenAI assistance."
+        },
+        {
+          "title": "Automated Identification of Logical Errors in Programs: Advancing Scalable Analysis of Student Misconceptions",
+          "authors": "Various",
+          "venue": "EDM 2025",
+          "year": 2025,
+          "url": "https://arxiv.org/html/2505.10913v1",
+          "relevance": "Presents a scalable AST-embedding approach for detecting logical errors that evidence specific student misconceptions across a large submission log. Establishes that misconception-aware error detection is feasible at scale and informs the feature extraction strategy for Stage 2 of this pipeline, specifically how structural signals in student artifacts (prompts here, code there) can be mapped to misconception categories."
+        },
+        {
+          "title": "CS1-LLM: Integrating LLMs into CS1 Instruction",
+          "authors": "Vadaparty et al.",
+          "venue": "ITiCSE 2024",
+          "year": 2024,
+          "url": "https://dl.acm.org/doi/10.1145/3649217.3653584",
+          "relevance": "Documents the first systematic integration of LLMs into CS1 instruction, finding that larger effects emerged from LLM-scaffolded problem decomposition exercises and larger projects. Provides evidence that LLM-assisted decomposition practice is tractable in CS1 and gives this research a prior-work baseline for what good decomposition support looks like, against which the NLF prompt-routing approach can be compared."
+        },
+        {
+          "title": "The Correct Answer Trap: Pedagogically-Grounded Detection and Feedback for Hidden Misconceptions",
+          "authors": "Various",
+          "venue": "arXiv, 2026",
+          "year": 2026,
+          "url": "https://arxiv.org/html/2606.23205",
+          "relevance": "Shows that automated feedback systems relying on answer correctness can reinforce misconceptions when students reach the right answer through flawed reasoning. Motivates routing hints to misconception type rather than solution correctness, which is the core claim of Stage 3 of this pipeline: a hint tailored to the specific misconception should outperform a generic correctness-based hint even when the student has produced working code."
+        }
+      ],
+      "researchPlan": {
+        "overview": "This project builds and evaluates a three-stage pipeline that (1) generates a synthetic corpus of NLF prompts keyed to CS1 decomposition misconceptions via LLM persona simulation, (2) trains a lightweight misconception classifier over prompt-level features, and (3) tests whether routing LLM hints through misconception-specific templates produces higher-quality explanatory hints than a generic template, measured entirely through automated rubric evaluation. No human subjects are required because all student data is synthetic.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Misconception taxonomy construction and synthetic corpus generation",
+            "deliverable": "A five-category CS1 decomposition misconception taxonomy with operational definitions; 500 synthetic NLF prompts (100 per category) generated by LLM personas; inter-rater reliability check between two researchers on 50 manually labeled samples"
+          },
+          {
+            "month": 2,
+            "goal": "Feature extraction and classifier training",
+            "deliverable": "Prompt feature set (verb granularity, noun specificity, dependency depth, co-reference count) extracted from the synthetic corpus; trained logistic regression and fine-tuned small LLM classifier with 5-fold cross-validation accuracy report"
+          },
+          {
+            "month": 3,
+            "goal": "Hint template design and Stage 3 evaluation setup",
+            "deliverable": "Five misconception-specific hint prompt templates; expert-authored reference hints (10 per category); automated rubric for hint quality (misconception addressed, actionability, absence of answer give-away)"
+          },
+          {
+            "month": 4,
+            "goal": "Pipeline integration and comparative evaluation",
+            "deliverable": "End-to-end pipeline running on held-out synthetic prompts; comparison of misconception-routed vs. generic hint quality across all five categories; embedding-distance analysis against expert reference hints"
+          },
+          {
+            "month": 5,
+            "goal": "Ablation studies and failure analysis",
+            "deliverable": "Ablation report: classifier accuracy vs. hint quality correlation; failure taxonomy of misclassified prompts and degraded hints; revised classifier and template recommendations"
+          },
+          {
+            "month": 6,
+            "goal": "Paper writing and submission",
+            "deliverable": "Submitted conference paper with replication package: synthetic corpus, classifier weights, hint templates, evaluation scripts"
+          }
+        ],
+        "targetVenues": ["SIGCSE", "ICER", "EDM", "AIED"],
+        "resources": "LLM API access for persona simulation and hint generation (Claude claude-sonnet-5, claude-haiku-4-5); Python NLP library stack for feature extraction; one undergraduate RA for misconception taxonomy labeling and inter-rater check; no IRB required (no human subjects); compute cost estimated at under $50 total via haiku-class model for corpus generation.",
+        "risks": [
+          {
+            "risk": "Synthetic NLF prompt corpus may not reflect the linguistic variation of real student prompts, inflating classifier accuracy artificially",
+            "mitigation": "Design personas with explicit variation parameters (ESL student, verbose student, minimal student) and seed prompts from published CS1 assignment datasets rather than open-ended generation; validate taxonomy coverage against the qualitative codes reported in the source paper"
+          },
+          {
+            "risk": "LLM-based rubric evaluation of hint quality is circular when the same model generates the hints and grades them",
+            "mitigation": "Use a different model family for grading (GPT-4o for grading, Claude for generation, or vice versa); additionally measure embedding-space distance from expert-authored reference hints as a model-independent signal"
+          },
+          {
+            "risk": "Five misconception categories may be too coarse to distinguish meaningfully different hint needs",
+            "mitigation": "Pilot the taxonomy against the NLF study's qualitative codes first; collapse or split categories based on pilot inter-rater agreement before committing to the full corpus generation"
+          }
+        ],
+        "humanSubjects": false
+      }
+    }
+  ]
+}
