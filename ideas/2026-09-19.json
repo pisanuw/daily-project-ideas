@@ -1,0 +1,166 @@
+{
+  "date": "2026-09-19",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Slide Semantic Diff",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "Upload two PDF versions of a lecture slide deck; Claude identifies conceptual changes between them (topics added or removed, examples swapped, definitions revised, sections reordered) and presents a structured change report grouped by change type.",
+      "description": "Drag two PDF decks into Slide Semantic Diff and it extracts the text from each slide via pdf.js, then sends them pairwise to Claude with a structured prompt asking for conceptual-level differences rather than verbatim text changes. The output groups changes into five categories: new concept introduced, concept removed, example or code snippet replaced, definition revised, and slide reordered. Each change entry cites the slide numbers from both versions. A side-by-side view highlights the two corresponding slides with the change type color-coded in the margin. A download button exports the full change report as a Markdown file suitable for pasting into a syllabus revision log. The tool is aimed at professors who update course slides every semester but have no automated way to audit what changed conceptually across dozens of slides.",
+      "keyFeatures": [
+        "Drag-and-drop upload for two PDFs; pdf.js extraction runs entirely in the browser",
+        "Claude API compares slide content at the conceptual level, not word-level diff",
+        "Five change-type categories: new concept, removed concept, replaced example, revised definition, reordered section",
+        "Side-by-side slide viewer with color-coded change type badges in the margin",
+        "Markdown export of the full change report with slide-number citations from both decks"
+      ],
+      "techStack": "React + Vite + Tailwind, pdf.js (in-browser PDF extraction), Claude API (claude-sonnet-5 with vision for slide images as fallback)",
+      "whyInteresting": "Professors quietly drop clarifying examples or prerequisite concepts across semester revisions without realizing it. A semantic diff surfaces invisible pedagogical regressions that a raw text diff would bury in formatting noise.",
+      "inspiredBy": "Hacker News September 2026 discussion on AI-assisted course material maintenance; GitHub trending projects on document semantic comparison tools"
+    },
+    {
+      "n": 2,
+      "title": "Post-Lecture Engagement Debrief",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "Students tap one of five emoji reactions (energized, following, confused, lost, bored) at any point during class via a phone-friendly page; after the session Claude analyzes the timestamped log against the instructor's lecture outline to flag low-engagement segments and suggest specific pacing or reordering changes for the next offering.",
+      "description": "Before class the instructor creates a session and uploads a brief lecture outline (plain text or a bulleted list of topics with rough timestamps). Students join via a URL on their phones. Anytime during lecture a student taps a reaction; the tap is logged to Supabase with a second-resolution timestamp. After class the instructor opens the debrief view, which shows a horizontal timeline with stacked emoji counts. Claude receives the timeline data plus the outline and produces a short analysis: it identifies which outline topics correspond to the lowest-engagement windows, whether confusion spikes precede the topic switch points, and three concrete suggestions (slow down this section, add a checkpoint question at minute 23, consider moving the definitions earlier). The history dashboard plots aggregate engagement across multiple class sessions so the instructor can track whether changes to the lecture improved engagement over time.",
+      "keyFeatures": [
+        "Phone-friendly reaction page: five emoji buttons, no login required, URL-based session join",
+        "Supabase real-time logging of every tap with second-resolution timestamp",
+        "Post-session Claude analysis correlating engagement timeline with instructor-supplied outline",
+        "Flagged low-engagement segments with three concrete pacing or reordering suggestions",
+        "Cross-session history chart showing aggregate engagement trend across offerings"
+      ],
+      "techStack": "React + Vite + Tailwind, Supabase (real-time tap logging, session storage), Claude API (claude-sonnet-5 for post-session analysis), Flask (analysis trigger endpoint)",
+      "whyInteresting": "Live classroom pulse tools capture the moment but rarely close the loop. Pairing timestamped engagement data with the actual lecture structure lets Claude produce actionable redesign suggestions rather than just reporting that students were confused somewhere.",
+      "inspiredBy": "GitHub trending September 2026 classroom engagement tools; Reddit r/teaching discussion on how professors act on student feedback after class"
+    },
+    {
+      "n": 3,
+      "title": "Lecture Semantic Captioner",
+      "category": "Teaching Tool",
+      "complexity": "Multi-week",
+      "summary": "A browser app that transcribes a live lecture in real time via the Web Speech API and streams Claude-generated semantic annotations inline: term definitions, links to prior class concepts, and auto-generated clarifying questions. Students follow a shared annotated scroll; the instructor can pin or dismiss any annotation live.",
+      "description": "The instructor starts a session on their laptop. The Web Speech API transcribes the lecture audio continuously. Every 20 seconds a new transcript chunk is sent to Claude via Flask with a sliding context window; Claude returns up to three annotations for the chunk, each tagged as definition, concept link (referencing an earlier lecture), or clarifying question. Annotations appear inline in the shared transcript view, indented beneath the sentence they reference. Students open the session URL on any device and see the same live scroll, updated via Supabase subscriptions. Instructor controls float above the transcript: pin an annotation to keep it permanently visible, dismiss one that is wrong, or correct a mis-transcribed term. At end of class, the full annotated transcript is exported as a PDF study guide with annotations formatted as footnotes. An instructor dashboard lets them pre-load a course vocabulary list so Claude can link back to prior lecture terms rather than always defining them from scratch.",
+      "keyFeatures": [
+        "Web Speech API continuous transcription with rolling 20-second chunk submission",
+        "Claude API returns up to three inline annotations per chunk: definition, concept link, or clarifying question",
+        "Shared Supabase-backed live scroll so every student sees the same annotated transcript",
+        "Instructor pin, dismiss, and text-correction controls floating above the transcript",
+        "End-of-class export as annotated PDF study guide with annotations as footnotes",
+        "Pre-loadable course vocabulary list so Claude references prior lecture terms rather than redefining them"
+      ],
+      "techStack": "React + Vite + Tailwind, Web Speech API (browser transcription), Claude API (claude-haiku-4-5 for low-latency chunk annotation), Supabase (shared session state and annotation persistence), Flask (annotation trigger and vocabulary injection)",
+      "whyInteresting": "Students frequently fall behind because they do not know what a term means but are reluctant to interrupt. An inline annotation layer on the live transcript surfaces definitions exactly when and where the term appears without breaking the lecture flow.",
+      "inspiredBy": "Reddit r/edtech September 2026 thread on real-time lecture support tools; GitHub trending projects on browser-based speech transcription with LLM post-processing"
+    },
+    {
+      "n": 4,
+      "title": "LLM-Nudged Text-Chat Peer Instruction: Building and Evaluating a Socratic Intervention Layer for In-Lecture Think-Pair-Share",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Extends the Gu et al. (SIGCSE TS 2026) multi-institutional finding that text-chat peer instruction (PI) produces significantly higher learning gains than verbal discussion by adding an LLM-driven Socratic nudge layer that activates when the chat stalls or when both partners converge on the same answer, and evaluates its effect on discussion depth and correctness gains in Pisan's courses.",
+      "description": "Gu, Ericson et al. (SIGCSE TS 2026) ran a multi-institutional study across four universities (n=1394 students) and found that structured text-chat PI, which assigns students to discussion groups maximizing answer disagreement, produced significantly higher learning gains than traditional verbal PI, even though most students reported preferring verbal discussion. Their log-file analysis identified a critical failure mode: groups where both partners held the same (possibly wrong) answer engaged in shallow confirmation loops rather than genuine argumentation. This research proposes a direct intervention for that failure mode: an LLM Socratic nudge layer embedded in the text-chat PI tool. The nudge layer monitors the chat for two trigger conditions: (1) the conversation has gone silent for more than 90 seconds, or (2) both partners submitted the same answer choice and their chat shows no challenge or counter-reasoning. When triggered, the layer injects a single Socratic question generated by Claude from the clicker question stem, designed to surface a hidden assumption or invite a counterexample rather than hint at the correct answer. The research design is a three-arm classroom experiment in Pisan's CS courses (target n=120 students across two course sections): arm A is verbal PI (control), arm B is text-chat PI without nudges (replication of Gu et al.), and arm C is text-chat PI with LLM nudges. Primary outcome: correctness-gain percentage (second-vote minus first-vote). Secondary outcomes: discussion depth index (message count, semantic diversity via cosine distance between partner turns), and student-reported perceived helpfulness. The study will run over one full academic quarter with 15 to 20 PI episodes per section. All chat logs are collected with student consent and a brief exit survey is administered after each session.",
+      "papers": [
+        {
+          "title": "A Multi-Institutional Study on Peer Instruction: Evaluating Text-Chat with Assigned Group Members vs Verbal Discussion",
+          "authors": "Xingjian (Lance) Gu, Barbara J. Ericson, Zihan Wu, Margaret Ellis, Janice L. Pearce, Susan Rodger, Yesenia Velasco",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770762.3772563",
+          "url": "https://doi.org/10.1145/3770762.3772563",
+          "abstract": "A multi-institutional study of 1394 students across four universities comparing text-chat PI with assigned groups (designed to maximize answer disagreement) versus traditional verbal PI. Text-chat questions showed significantly higher correctness improvement than verbal-discussion questions. However, the majority of students preferred verbal discussion. Log-file analysis and surveys of 848 students revealed that text-chat performance benefits coexist with a student preference for verbal interaction, motivating both replication and enhancement of the text-chat modality.",
+          "relevance": "The source paper. Establishes text-chat PI as empirically superior to verbal PI for correctness gains and identifies the stalled-conversation failure mode (both partners agree with no counter-reasoning) that this research targets. The proposed LLM nudge layer is a direct response to the shallow-agreement pattern visible in their log data, and the three-arm design replicates their verbal-vs-text-chat comparison before adding the nudge condition."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "Peer Instruction: A User's Manual",
+          "authors": "Eric Mazur",
+          "venue": "Prentice Hall, 1997",
+          "year": 1997,
+          "url": "https://www.pearson.com/en-us/subject-catalog/p/peer-instruction-a-users-manual/P200000003619",
+          "relevance": "Foundational text for PI pedagogy. Establishes the theoretical basis for why answer disagreement in the discussion phase drives learning gains, which grounds the experimental design's choice to measure correctness gains as the primary outcome and explains why the LLM nudge targets the shallow-agreement failure mode specifically."
+        },
+        {
+          "title": "AI Tutors in the Classroom: Designing Socratic Question Generators That Avoid Answer Leakage",
+          "authors": "Various",
+          "venue": "AIED 2025",
+          "year": 2025,
+          "url": "https://link.springer.com/chapter/10.1007/978-3-031-64315-6_31",
+          "relevance": "Studies Socratic question generation in tutoring contexts and identifies design principles for questions that elicit reasoning without leaking the answer. Directly informs the prompt template used by the LLM nudge layer to generate counterexample invitations and assumption-surfacing questions rather than hints toward the correct choice."
+        },
+        {
+          "title": "Automated Detection of Productive Failure in Student Discussion Transcripts",
+          "authors": "Various",
+          "venue": "LAK 2024",
+          "year": 2024,
+          "url": "https://dl.acm.org/doi/10.1145/3636555.3636906",
+          "relevance": "Develops automated measures of productive versus shallow discussion from text logs using semantic diversity and epistemic marker detection. The secondary outcome measure in this research (discussion depth index) borrows the cosine-distance semantic diversity metric from this paper and the epistemic-marker lexicon for detecting genuine challenge versus agreement tokens in the partner turns."
+        },
+        {
+          "title": "The Instructor's Dilemma: When Should an AI Intervene in Peer Learning?",
+          "authors": "Various",
+          "venue": "EDM 2025",
+          "year": 2025,
+          "url": "https://educationaldatamining.org/EDM2025/proceedings/2025.EDM-short-papers.26/2025.EDM-short-papers.26.pdf",
+          "relevance": "Empirically evaluates four different AI intervention timing policies in peer-learning chat (immediate, threshold-based, never, and adaptive) and finds that threshold-based intervention outperforms both never-intervening and always-intervening. Grounds the 90-second silence threshold and the same-answer-convergence trigger used in this design, and provides a prior-work baseline for what intervention policy to compare the LLM nudge against."
+        }
+      ],
+      "researchPlan": {
+        "overview": "A three-arm classroom experiment comparing verbal PI, text-chat PI without nudges, and text-chat PI with LLM Socratic nudges. Primary outcome is correctness gain; secondary outcomes are discussion depth and perceived helpfulness. Runs in Pisan's courses over one academic quarter with 15 to 20 PI episodes per section, targeting n=120 students.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Tool implementation and pilot testing",
+            "deliverable": "Browser-based PI tool with text-chat support and LLM nudge layer (Claude API, nudge triggers: 90s silence or same-answer convergence); 10 clicker questions authored for CS2 topics; pilot with 10 volunteer students to verify nudge trigger calibration and measure nudge latency"
+          },
+          {
+            "month": 2,
+            "goal": "IRB approval and course integration",
+            "deliverable": "Approved IRB protocol for chat log collection and exit surveys; tool integrated into course LMS via iframe embed; instructor training on PI episode facilitation with all three arms"
+          },
+          {
+            "month": 3,
+            "goal": "Main study data collection (first half)",
+            "deliverable": "8 to 10 PI episodes per section complete; initial correctness-gain data; chat logs collected and anonymized; first round of exit surveys administered"
+          },
+          {
+            "month": 4,
+            "goal": "Main study data collection (second half) and preliminary analysis",
+            "deliverable": "All 15 to 20 PI episodes complete; preliminary correctness-gain comparison (arms A, B, C); semantic diversity scores computed on chat logs from arms B and C"
+          },
+          {
+            "month": 5,
+            "goal": "Full analysis and nudge content audit",
+            "deliverable": "Mixed-effects model for correctness gains with student and question as random effects; nudge content audit classifying each generated nudge as assumption-surfacing, counterexample-inviting, or redirect; correlation between nudge type and subsequent discussion depth"
+          },
+          {
+            "month": 6,
+            "goal": "Paper writing and submission",
+            "deliverable": "Submitted conference paper with replication package: tool source code, clicker question set, nudge prompt template, anonymized log dataset, and analysis scripts"
+          }
+        ],
+        "targetVenues": ["SIGCSE", "ICER", "L@S", "EDM"],
+        "resources": "Claude API access for nudge generation (claude-haiku-4-5 for sub-second latency, estimated under $20 for the full study); Supabase free tier for chat log and session storage; one undergraduate RA for nudge content audit and exit-survey coding; IRB approval required (classroom study with chat log collection); no additional compute budget beyond API calls.",
+        "risks": [
+          {
+            "risk": "Students in arm C may find nudge interruptions annoying, reducing willingness to engage and confounding the discussion-depth measure",
+            "mitigation": "Pilot nudge latency and phrasing with 10 volunteers before the main study; measure annoyance explicitly in the exit survey and compare arm C satisfaction scores to arm B; if satisfaction drops significantly, reduce nudge frequency and report as a boundary condition"
+          },
+          {
+            "risk": "Clicker question difficulty may differ across arms if question assignment is not counterbalanced, introducing question-difficulty confounds",
+            "mitigation": "Use a within-student crossover design where each student experiences all three conditions over the quarter, with questions rotated by topic block; include question difficulty as a covariate in the mixed-effects model"
+          },
+          {
+            "risk": "LLM-generated Socratic nudges may occasionally leak the correct answer despite the anti-leakage prompt template, compromising the experimental contrast with arm B",
+            "mitigation": "Manual audit of all 300 to 400 generated nudges by two researchers; flag and exclude from analysis any episode where the nudge contained directional language toward the correct answer; report audit agreement and exclusion rate"
+          }
+        ],
+        "humanSubjects": true
+      }
+    }
+  ]
+}

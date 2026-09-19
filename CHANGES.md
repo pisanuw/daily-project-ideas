@@ -2,6 +2,8 @@
 
 Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, doc, scope, code, note.
 
+2026-09-19 [code] Created ideas/2026-09-19.json with 4 ideas: Slide Semantic Diff, Post-Lecture Engagement Debrief, Lecture Semantic Captioner, LLM-Nudged Text-Chat Peer Instruction (SIGCSE TS 2026 doi:10.1145/3770762.3772563)
+
 2026-08-13 [code] Created ideas/2026-08-13.json with 4 ideas: Shortcut Sprint, Rubric Alignment Checker, Supply Chain Risk Atlas, Structure-Mapping Auditing for LLM-Generated Analogies (ITiCSE 2025 doi:10.1145/3724389.3730781)
 
 2026-08-10 [code] Created ideas/2026-08-10.json with 4 ideas: API Schema Drift Sentinel, Research Radar, Fuzz Whisperer, Debug Duck Misconception Mining (ITiCSE 2025 Quack the Code)

@@ -466,3 +466,7 @@
 | 2026-09-18 | Tutoring Response Trainer | Teaching Tool | 1-2 Weeks |
 | 2026-09-18 | Full-Stack ML from Scratch with Live Viz | Classroom Assignment | Multi-week |
 | 2026-09-18 | NLF-Scaffolded Decomposition Signals: Mining Natural Language Function Prompts to Classify CS1 Misconceptions and Route Adaptive Hints | Research | Research |
+| 2026-09-19 | Slide Semantic Diff | Side Project | Weekend |
+| 2026-09-19 | Post-Lecture Engagement Debrief | Teaching Tool | 1-2 Weeks |
+| 2026-09-19 | Lecture Semantic Captioner | Teaching Tool | Multi-week |
+| 2026-09-19 | LLM-Nudged Text-Chat Peer Instruction: Building and Evaluating a Socratic Intervention Layer for In-Lecture Think-Pair-Share | Research | Research |
