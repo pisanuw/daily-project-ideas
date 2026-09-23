@@ -125,6 +125,23 @@
         ],
         "humanSubjects": true
       }
+    },
+    {
+      "n": 5,
+      "title": "Conference Pocket Schedule (ACM AI Leadership Summit)",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A mobile-first, easy-to-navigate conference schedule app built from the ACM AI Leadership Summit's detailed program, so attendees can browse sessions, tracks, and speakers one-handed in a hallway.",
+      "description": "Requested directly: build a mobile-first, easy-to-navigate conference schedule app using the conference schedule at https://aisummit.acm.org/detailed-program. Day-by-day session lists, track filtering, speaker/title search, and a personal starred agenda, all usable on a phone between sessions with no login and no backend. Note for whoever picks this up next: this exact brief was already built and shipped on 2026-09-03 as 'Summit Navigator' (idea ref 2026-09-03 #1), live at https://summit-navigator.netlify.app and in Claude-capstone/summit-navigator - sticky day tabs, 11 track chips, full-text search, starred agenda, now/next banner, and a viewer-timezone toggle, all driven by one swappable schedule.json. Its README also already flags that the build environment could not reach aisummit.acm.org (network egress policy) at the time, so its bundled data is an unofficial reconstruction from ACM's public announcements rather than the live detailed-program page; the same egress restriction still applies in this environment. The only genuinely new work left under this brief is a data-only refresh: fetch the real detailed-program page from an environment that can reach aisummit.acm.org and drop it into summit-navigator's schedule.json. Do not build a second, separate app for this.",
+      "keyFeatures": [
+        "Day-by-day session list with sticky day tabs (already built in summit-navigator)",
+        "Track/category filter chips and full-text search across title/speaker/room (already built)",
+        "Starred personal agenda persisted locally (already built)",
+        "Remaining gap: replace the unofficial reconstructed schedule.json with the real aisummit.acm.org/detailed-program data once a build environment can reach that domain"
+      ],
+      "techStack": "Already implemented in Claude-capstone/summit-navigator: vanilla TypeScript + DOM, one schedule.json data file, Netlify static hosting, no backend, no paid API",
+      "whyInteresting": "Recording this here so the duplicate request is visible in the idea history instead of silently vanishing, and so the actual remaining task (a live-data refresh, not a rebuild) is explicit for the next run.",
+      "inspiredBy": "Direct request in the 2026-09-23 scheduled routine prompt"
     }
   ]
 }
