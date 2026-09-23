@@ -259,3 +259,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-09-10 [doc] Created ideas/2026-09-10.json with 4 ideas: AI API Change Radar, Oral Code Explanation Grader, Build Your Own AI Coding Assistant, Teach-Back at Scale (ITiCSE 2025 doi:10.1145/3724389.3730798)
 
 2026-09-18 [doc] Created ideas/2026-09-18.json with 4 ideas: Reasoning Chain Sketcher, Tutoring Response Trainer, Full-Stack ML from Scratch with Live Viz, NLF-Scaffolded Decomposition Signals (SIGCSE TS 2026 doi:10.1145/3770762.3772513)
+
+2026-09-23 [doc] Created ideas/2026-09-23.json with 4 ideas: Agent Blast Radius, Big-O Sonifier, Build Your Own Agent Orchestrator, Escalation-Aware Hybrid Feedback (SIGCSE TS 2026 doi:10.1145/3770761.3777342)

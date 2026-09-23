@@ -1,0 +1,130 @@
+{
+  "date": "2026-09-23",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Agent Blast Radius",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A local scanner that reads your installed AI agent and browser-extension configs and renders a one-page report of what each tool can actually touch.",
+      "description": "MCP servers, browser AI extensions, and coding agents are multiplying fast (GitHub's own trending page is now half agent-orchestration and agent-tooling repos), and most people have no idea how much filesystem, network, and credential access has quietly accumulated across their installed tools. Agent Blast Radius parses local config files (claude_desktop_config.json, .cursor/mcp.json, VS Code extension manifests, browser extension permission manifests) and computes a per-tool 'blast radius' score from declared capabilities: filesystem write scope, shell exec, network egress domains, and OAuth scopes. It renders a single static HTML report, color-coded from low to high risk, with a plain-English explanation of what each tool could do if compromised or simply misconfigured. Nothing leaves the machine.",
+      "keyFeatures": [
+        "Parses Claude Desktop, Cursor, and generic MCP server configs for declared tool permissions",
+        "Scans browser extension manifests for filesystem/network/host permissions",
+        "Computes a per-tool blast-radius score (filesystem write, shell exec, network egress, credential access)",
+        "Generates a single static HTML report with plain-English risk explanations, no network calls required"
+      ],
+      "techStack": "Node.js or Python CLI reading local JSON/manifest files, static HTML + vanilla JS report, no backend or external API calls",
+      "whyInteresting": "It is a genuinely useful personal security check that most developers have been meaning to do and never got around to, and building it doubles as a hands-on lesson in how agent permission models actually work under the hood.",
+      "inspiredBy": "GitHub trending (github.com/trending, checked 2026-09-23): superdesigndev/treg ('OpenRouter for agent tools') and mvt-project/mvt (mobile forensics toolkit for identifying device compromise) - the current wave of agent-tool proliferation and the parallel need to audit it"
+    },
+    {
+      "n": 2,
+      "title": "Big-O Sonifier",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "Converts an algorithm's live execution trace into sound, so students can hear the difference between O(n), O(n log n), and O(n^2) as the input size grows.",
+      "description": "Big-O teaching leans almost entirely on visual plots and abstract notation, which shuts out blind and low-vision students and is not especially intuitive for anyone else either. Big-O Sonifier instruments a handful of canonical algorithms (linear search, binary search, bubble sort, merge sort, and a couple of nested-loop patterns) so that every fundamental operation - comparison, swap, recursive call - emits a tone, mapped to pitch and rhythm. Running the same input size through two algorithms side by side produces two audibly different soundscapes: a sparse, rising arpeggio for O(log n) versus a dense, buzzing wall of sound for O(n^2), making asymptotic growth something you feel rather than just read off a chart. The app is accessible-first: every control works with a screen reader, and a text transcript of the operation count runs alongside the audio.",
+      "keyFeatures": [
+        "Instruments 6-8 canonical algorithms to emit audio events per fundamental operation",
+        "Side-by-side A/B playback comparing two algorithms on the same input size",
+        "Adjustable input-size slider that audibly changes tempo and density in real time",
+        "Full screen-reader-accessible controls plus a live text transcript of the operation count"
+      ],
+      "techStack": "React + Vite, Web Audio API for synthesis, Tailwind for UI, no backend needed",
+      "whyInteresting": "It reframes a notoriously abstract CS1/CS2 topic as something students can literally hear grow, and it is one of the few teaching tools that is accessibility-first by design instead of retrofitted after the fact.",
+      "inspiredBy": "General current push toward multimodal, sonification-based interfaces on developer trend sites (audio- and voice-first tools have been a recurring theme on GitHub trending and Show HN this year), applied to a long-standing gap in CS pedagogy"
+    },
+    {
+      "n": 3,
+      "title": "Build Your Own Agent Orchestrator",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "Students implement a minimal multi-agent orchestration runtime from scratch - task queue, tool registry, message passing, failure handling - to see what frameworks like AutoGen or Google's new ax runtime actually do under the hood.",
+      "description": "Agent-orchestration runtimes are trending hard right now (Google's ax jumped over 2,000 stars in a single day on GitHub trending, alongside agent-substrate/substrate), and students are increasingly reaching for these frameworks as black boxes without understanding the mechanics underneath: how tasks get queued and assigned, how tools are registered and invoked safely, how sub-agent results get merged back, and how failures and retries are handled. This multi-week assignment has students build a minimal orchestration runtime supporting at least three cooperating agent roles (for example a planner, a researcher, and a writer) that pass structured messages through a shared task queue, call a small registry of mock tools, and log a full execution trace. The final deliverable pairs a working demo scenario with a short writeup comparing their design choices to one real framework's architecture.",
+      "keyFeatures": [
+        "Task queue and scheduler supporting at least 3 cooperating agent roles",
+        "A tool registry with typed tool definitions and safe invocation boundaries",
+        "Structured inter-agent message passing with a shared conversation/task log",
+        "Failure handling: retries, timeouts, and a fallback/escalation path",
+        "A comparison writeup mapping design choices to a real orchestration framework"
+      ],
+      "techStack": "Python or TypeScript, Claude CLI for the underlying model calls (per course tooling policy), in-memory or SQLite task queue, no orchestration framework dependencies allowed for the core runtime",
+      "whyInteresting": "It demystifies the multi-agent frameworks students already use casually, turning 'import autogen' into a system they have actually built and can reason about - exactly the toolchain-first literacy the department already prioritizes.",
+      "inspiredBy": "GitHub trending (github.com/trending, checked 2026-09-23): google/ax ('Google's open agentic orchestration runtime') and agent-substrate/substrate"
+    },
+    {
+      "n": 4,
+      "title": "Escalation-Aware Hybrid Feedback: Learning When Automated Code Critique Should Hand Off to a Human TA",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Builds a confidence-driven escalation policy that decides, in real time, when AI-generated code feedback should stand alone versus route a student to a human TA, tested on the existing Jolly Feedback pipeline in CS142.",
+      "description": "A SIGCSE TS 2026 poster observing student behavior around human-LLM feedback in software engineering education finds that students still trust human feedback more than AI feedback, and it names three open questions: when and why students escalate from AI to human help, how transparency and explainability design affects that choice, and whether hybrid AI+human feedback actually improves learning outcomes over AI-only or human-only systems. This project operationalizes those questions on infrastructure already owned and deployed: Jolly Feedback, the CS142 automated-feedback pipeline built on instructor test scripts. It adds an escalation layer that scores each piece of AI-generated critique for confidence and explanation completeness, grounded in a misconception taxonomy mined from historical submission logs, routes low-confidence or high-stakes cases into a TA review queue with the AI's own reasoning attached, and A/B tests two feedback-transparency conditions against resubmission count and time-to-pass - outcome metrics Jolly Feedback already logs. The contribution is a concrete, deployable escalation policy plus an empirical answer, grounded in real classroom data rather than a lab study, to when hybrid human+AI feedback actually beats AI-only.",
+      "papers": [
+        {
+          "title": "Exploring Trust in Human-LLM Feedback Systems: Observation of Student Behaviour in Software Engineering Education",
+          "authors": "Yiwen Liao, Yuekang Li, Yuchao Jiang, Zixiu Guo",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770761.3777342",
+          "url": "https://doi.org/10.1145/3770761.3777342",
+          "abstract": "AI systems can deliver scalable, consistent feedback in large courses, yet students continue to view human feedback as more credible, actionable, and trustworthy than AI feedback. The study observes student behavior to understand when and why students escalate from AI to human support, how transparency and explainability design interventions affect trust and uptake, and whether hybrid AI+human feedback models improve learning outcomes over AI-only or human-only systems.",
+          "relevance": "Names the exact open problem - when and why students escalate, and whether transparency design changes that - that this project operationalizes into a deployable escalation policy on top of Pisan's own Jolly Feedback pipeline."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "A Systematic Literature Review of Automated Feedback Generation for Programming Exercises",
+          "authors": "Hieke Keuning, Johan Jeuring, Bastiaan Heeren",
+          "venue": "ACM Transactions on Computing Education, 19(1)",
+          "year": 2019,
+          "url": "https://doi.org/10.1145/3231711",
+          "relevance": "Finds that most existing automated-feedback tools stop at identifying mistakes rather than giving a next step or knowing when to hand off - the exact gap this project's escalation layer targets, and the same review Pisan's own research report already cites as corroborating Submit!'s outcomes."
+        },
+        {
+          "title": "CodeHelp: Using Large Language Models with Guardrails for Scalable Support in Programming Classes",
+          "authors": "Mark Liffiton, Brad E. Sheese, Jaromir Savelka, Paul Denny",
+          "venue": "Koli Calling International Conference on Computing Education Research, 2024",
+          "year": 2024,
+          "url": "https://doi.org/10.1145/3631802.3631830",
+          "relevance": "A deployed system showing how guardrailed LLM hints can scale student support without revealing solutions; its guardrail design is a candidate signal for this project's confidence/explanation-completeness scorer."
+        },
+        {
+          "title": "Closing the Loop: An Instructor-in-the-Loop AI Assistance System for Supporting Student Help-Seeking in Programming Education",
+          "authors": "(2025 preprint)",
+          "venue": "arXiv",
+          "year": 2025,
+          "url": "https://arxiv.org/abs/2510.14457",
+          "relevance": "The most direct prior system: an AI-hint tool that lets students manually escalate to an instructor when AI help falls short. This project's contribution is an automatic, confidence-driven escalation policy rather than a student-initiated one, grounded in Jolly Feedback's existing classroom deployment."
+        },
+        {
+          "title": "The Effects of Explanations in Automated Essay Scoring Systems on Student Trust and Motivation",
+          "authors": "(Journal of Learning Analytics)",
+          "venue": "Journal of Learning Analytics",
+          "year": 2023,
+          "url": "https://learning-analytics.info/index.php/JLA/article/view/7801",
+          "relevance": "Finds mixed evidence that explanations alone raise trust in automated scoring, motivating this project's A/B test of transparency conditions rather than assuming explanation automatically improves escalation behavior or outcomes."
+        }
+      ],
+      "researchPlan": {
+        "overview": "A six-month program that mines Jolly Feedback's CS142 submission logs to build a misconception-grounded confidence scorer, wraps it in an escalation policy that routes low-confidence AI critique to a TA review queue, and A/B tests two feedback-transparency conditions against resubmission count and time-to-pass across one course offering.",
+        "milestones": [
+          { "month": 1, "goal": "Literature review and problem scoping: catalog escalation/trust findings from the source paper and the CodeHelp / Closing-the-Loop systems; arrange access to de-identified historical Jolly Feedback submission logs", "deliverable": "Annotated bibliography + refined research questions + data-use agreement for historical logs" },
+          { "month": 2, "goal": "Mine historical submission logs to build an initial misconception taxonomy and hand-label a sample of AI critiques with confidence and explanation-completeness scores", "deliverable": "Misconception taxonomy v1 + labeled training set for the confidence scorer" },
+          { "month": 3, "goal": "Build the escalation scorer and TA review queue, wired into a Jolly Feedback fork and replayed offline against one past course offering", "deliverable": "Working escalation pipeline with measured precision/recall against instructor-flagged 'should have escalated' cases" },
+          { "month": 4, "goal": "IRB submission and design of the two-condition A/B transparency study (bare AI critique vs. critique with confidence/explanation surfaced); pilot with a small volunteer section", "deliverable": "Approved IRB protocol + pilot results informing the final study design" },
+          { "month": 5, "goal": "Deploy the live escalation-aware pipeline in CS142, running the A/B transparency conditions across sections for one term", "deliverable": "Deployment running in production with resubmission count and time-to-pass logged per condition" },
+          { "month": 6, "goal": "Analyze outcomes, compare hybrid vs. AI-only performance and the transparency conditions, and write up the results", "deliverable": "Submitted paper draft with escalation-policy precision/recall and the transparency A/B outcome comparison" }
+        ],
+        "targetVenues": ["SIGCSE", "ICER", "L@S", "EDM"],
+        "resources": "Access to de-identified historical Jolly Feedback / CS142 submission logs; the Claude CLI (per project cost policy) for misconception clustering and critique generation rather than a billed API key; a small TA review-queue web app; IRB approval for the live A/B deployment phase; one or two terms of CS142 sections and TA time for the review queue.",
+        "risks": [
+          { "risk": "Historical submission logs may be too sparse or inconsistently labeled to train a reliable confidence/misconception scorer.", "mitigation": "Start with a rule-based confidence heuristic (test coverage, critique length, known-misconception match) as a fallback before attempting a learned scorer, and validate it against instructor spot-checks before the live deployment phase." },
+          { "risk": "Live A/B deployment risks disrupting students' actual course experience if the escalation policy misfires with false negatives that leave real problems unescalated.", "mitigation": "Run the pipeline in shadow mode (logging escalation decisions without acting on them) for the first two weeks of deployment, with a TA spot-checking a sample before switching to live routing." },
+          { "risk": "TA time for the review queue may not scale if the confidence scorer over-escalates in early iterations.", "mitigation": "Cap the review queue at a fixed weekly TA-hour budget and tune the escalation threshold against that budget rather than an abstract accuracy target." }
+        ],
+        "humanSubjects": true
+      }
+    }
+  ]
+}
