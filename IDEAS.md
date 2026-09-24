@@ -474,3 +474,7 @@
 | 2026-09-23 | Big-O Sonifier | Teaching Tool | 1-2 Weeks |
 | 2026-09-23 | Build Your Own Agent Orchestrator | Classroom Assignment | Multi-week |
 | 2026-09-23 | Escalation-Aware Hybrid Feedback: Learning When Automated Code Critique Should Hand Off to a Human TA | Research | Research |
+| 2026-09-24 | Backyard Field Plate | Side Project | Weekend |
+| 2026-09-24 | Git Broken-State Gym | Teaching Tool | 1-2 Weeks |
+| 2026-09-24 | Build Your Own Node-Based Terminal Workspace | Classroom Assignment | Multi-week |
+| 2026-09-24 | Git State Misconceptions from Repository Traces: A Synthetic Benchmark for Diagnosing Broken Git Workflows and Generating Solution-Free Hints in Toolchain-First Courses | Research | Research |

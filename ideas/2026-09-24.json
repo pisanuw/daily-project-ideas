@@ -1,0 +1,132 @@
+{
+  "date": "2026-09-24",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Backyard Field Plate",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A browser app that listens through your laptop or phone mic, identifies bird calls on-device, and renders each sighting as a 19th-century naturalist plate in a growing field journal.",
+      "description": "Point an old phone or laptop at a window and leave the tab open. Audio is chunked into 3-second windows and classified in the browser with the open BirdNET model (TensorFlow.js export), so no audio ever leaves the device. When a species crosses a confidence threshold, the app logs the time and confidence, then asks an image model for a hand-colored engraving in the style of a Victorian ornithology plate, captioned with the species, date, and a one-line field note. The result is a scrollable, printable field journal of who visited your yard this week, with a daily digest view and a 'mystery calls' tray for low-confidence clips you can relabel.",
+      "keyFeatures": [
+        "On-device bird call classification with BirdNET in TensorFlow.js; audio never uploaded",
+        "Confidence threshold slider plus a 'mystery calls' tray for low-confidence clips with playback and manual relabel",
+        "Generated vintage engraving plate per new species, cached so each species is drawn once",
+        "Field journal timeline with daily and weekly digests and print-to-PDF layout",
+        "Kiosk mode for an always-on old tablet or e-ink-style grayscale display"
+      ],
+      "techStack": "React + Vite, Tailwind, TensorFlow.js with BirdNET weights, Web Audio API, Gemini image API (or a local Stable Diffusion endpoint), IndexedDB",
+      "whyInteresting": "It is a small, delightful build that touches real-time audio processing, on-device ML, and generative imagery in one weekend, and it is privacy-first by design. It also makes a strong portfolio piece and a good demo of edge inference for students.",
+      "inspiredBy": "Show HN (September 2026): an e-ink frame that hears birds and draws them as 1800s illustrations, https://hn.algolia.com/show-hn"
+    },
+    {
+      "n": 2,
+      "title": "Git Broken-State Gym",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "An in-browser Git practice gym where instructors author broken repositories (detached HEAD, merge conflict, committed secret, lost commit) and students repair them with real Git commands, auto-checked against a goal commit graph.",
+      "description": "Students rarely practice Git recovery until something goes wrong on a real team project. This tool runs isomorphic-git in the browser behind an xterm.js terminal, so each student gets a disposable repository with no install. Instructors write short YAML scenarios: a setup script that produces a broken state, a plain-language story ('you committed your API key and pushed'), and a goal predicate over the resulting commit graph, refs, and working tree. A live side-by-side commit graph shows how each command changes the DAG, and the checker explains which goal predicates are still unmet without revealing the command sequence. An instructor dashboard shows which scenarios students solve, how many commands they take, and which dangerous commands (reset --hard, force push) they reach for first.",
+      "keyFeatures": [
+        "Real Git semantics in the browser via isomorphic-git and a virtual filesystem, no server-side containers",
+        "YAML scenario format: setup script, story, goal predicates over refs, DAG shape, and working tree",
+        "Live commit-graph visualization that animates after every command",
+        "Solution-free goal checker that names unmet conditions rather than the fix",
+        "Instructor dashboard of command traces, attempt counts, and risky-command frequency, exportable as CSV"
+      ],
+      "techStack": "React + Vite, Tailwind, isomorphic-git, LightningFS, xterm.js, D3 for DAG rendering, Supabase for scenarios and command-trace logging",
+      "whyInteresting": "Git is part of every toolchain-first course, yet recovery skills are mostly learned by accident. A scenario gym gives deliberate practice on exactly the states that panic students, and the command traces it logs are a ready-made dataset for studying Git misconceptions.",
+      "inspiredBy": "SIGCSE TS 2026 panel 'Ways to Make Git Easier to Teach' (GitKit, The Shell Tutor), https://doi.org/10.1145/3770761.3777131"
+    },
+    {
+      "n": 3,
+      "title": "Build Your Own Node-Based Terminal Workspace",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "A multi-week systems-plus-web assignment where students build a PTY daemon and a canvas UI that arranges live shell sessions as connected nodes, with persistence and reattach like tmux.",
+      "description": "Students build a small cousin of the open-source node-based terminal managers trending on Product Hunt and HN. Milestone 1 is a Node daemon that spawns pseudo-terminals with node-pty, multiplexes them over one WebSocket, and keeps scrollback in a ring buffer so a browser can disconnect and reattach. Milestone 2 is a React Flow canvas where each node is an xterm.js session, edges pipe one session's output into another's input, and layouts persist across restarts. Milestone 3 adds a session protocol spec, authentication for the local socket, and resource limits. An optional stretch milestone adds an 'agent node' that can read a session's scrollback and propose (but never auto-run) commands, forcing students to design a permission boundary.",
+      "keyFeatures": [
+        "PTY daemon with multiplexed WebSocket protocol, scrollback ring buffer, and detach/reattach",
+        "Canvas UI with sessions as draggable nodes and output-to-input pipe edges",
+        "Written protocol spec plus conformance tests the instructor can run against every submission",
+        "Local-socket authentication and per-session CPU and memory limits",
+        "Stretch: agent node with a propose-then-confirm command boundary and audit log"
+      ],
+      "techStack": "Node.js, node-pty, ws, React + Vite, React Flow, xterm.js, Vitest, Playwright",
+      "whyInteresting": "It connects OS concepts students usually only read about (pseudo-terminals, signals, process groups) to a modern web UI they can show off. The conformance-test protocol spec also teaches specification-driven development, and the agent stretch goal gives a concrete, bounded discussion of AI tool permissions.",
+      "inspiredBy": "Product Hunt (September 2026) Nodeterm, an open-source node-based terminal manager, and Show HN Hydra, an agentic terminal with a PTY daemon, https://startupcorners.com/digest/product-digest-2026-09-19"
+    },
+    {
+      "n": 4,
+      "title": "Git State Misconceptions from Repository Traces: A Synthetic Benchmark for Diagnosing Broken Git Workflows and Generating Solution-Free Hints in Toolchain-First Courses",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Builds a benchmark of scripted broken Git repository states labeled by underlying misconception, then tests whether LLMs can diagnose the misconception and produce solution-free recovery hints, extending GitKit-style scaffolding toward automated Git tutoring.",
+      "description": "The ITiCSE 2025 GitKit poster reports new automated guidance in a scaffolded Git/GitHub environment and early data on how students acquire basic Git skills, but the guidance is rule-based and tied to one scripted workflow. This project generates a benchmark of broken repository states (detached HEAD work, divergent branches, half-resolved conflicts, wrong-branch commits, committed secrets, rewritten shared history) by replaying scripted command sequences that encode documented Git misconceptions, such as treating branches as copies or commits as diffs. Each state is paired with its generating misconception, the minimal recovery, and expert-written solution-free hints. We then evaluate LLMs, with and without a structured repository summary (reflog, DAG, status), on diagnosis accuracy and on hint quality measured against a rubric adapted from Pisan's 'hints without a solution' work. The result is a reusable benchmark and evidence about whether AI can serve as the Git layer of a toolchain-first tutor, with no human subjects required.",
+      "papers": [
+        {
+          "title": "Student Learning of Basic Git/GitHub Processes",
+          "authors": "Lori Postner, Darci Burdge, Heidi J. C. Ellis, Herman Jackson, Grant Braught, Karl R. Wurst, Ruth Lamprecht, Gregory W. Hislop",
+          "venue": "ITiCSE 2025",
+          "year": 2025,
+          "doi": "10.1145/3724389.3730805",
+          "url": "https://doi.org/10.1145/3724389.3730805",
+          "abstract": "This poster presents new developments related to GitKit, a scaffolded environment that supports both students and instructors in developing fundamental skills with Git-based platforms such as GitHub. It describes GitKit's purpose and facilities, including new capabilities, and preliminary data collection to analyze student skill development in learning GitHub tasks.",
+          "relevance": "Provides the scaffolded-environment model and the open question of how students' Git skills develop; this project turns that question into a labeled, machine-checkable benchmark and tests LLM-generated guidance beyond GitKit's scripted feedback."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "GitKit: Learning Free and Open Source Collaboration in Context",
+          "authors": "Grant Braught, Stoney Jackson, Cam Macdonell, Lori Postner, Wesley Shumar, Karl R. Wurst",
+          "venue": "SIGCSE TS 2024",
+          "year": 2024,
+          "url": "https://doi.org/10.1145/3626252.3630864",
+          "relevance": "Describes the GitKit environment and its built-in automated guidance, the baseline whose rule-based feedback this project compares against LLM diagnosis and hints."
+        },
+        {
+          "title": "Ways to Make Git Easier to Teach",
+          "authors": "SIGCSE TS 2026 panel (GitKit, The Shell Tutor, and two other approaches)",
+          "venue": "SIGCSE TS 2026 (V.2, panel)",
+          "year": 2026,
+          "url": "https://doi.org/10.1145/3770761.3777131",
+          "relevance": "Surveys four approaches to teaching Git, including The Shell Tutor's constraint-based tutoring in the command line, a direct design alternative to LLM hints that the benchmark can evaluate side by side."
+        },
+        {
+          "title": "Purposes, Concepts, Misfits, and a Redesign of Git",
+          "authors": "Santiago Perez De Rosso, Daniel Jackson",
+          "venue": "OOPSLA 2016",
+          "year": 2016,
+          "url": "https://doi.org/10.1145/2983990.2984018",
+          "relevance": "Catalogs conceptual misfits in Git's design (staging area, detached HEAD, stash) that explain why users form wrong mental models; its misfit list seeds the benchmark's misconception taxonomy."
+        },
+        {
+          "title": "Evolution of the Software Toolchain for Computer Science Students",
+          "authors": "Yusuf Pisan",
+          "venue": "Creative Education 15(6), 2024",
+          "year": 2024,
+          "url": "https://www.scirp.org/journal/ce/",
+          "relevance": "Argues that the toolchain (including GitHub and CI) deserves co-equal status with the language and anticipates AI as the next tool in the chain; this project tests that claim for the Git layer specifically."
+        }
+      ],
+      "researchPlan": {
+        "overview": "Months 1-2 build a Git misconception taxonomy and a scripted generator of broken repository states with ground-truth labels and expert solution-free hints. Months 3-4 evaluate several LLMs on diagnosis and hint quality under different repository-context encodings, against a rule-based GitKit-style baseline. Months 5-6 analyze failure modes, release the benchmark, and write up.",
+        "milestones": [
+          { "month": 1, "goal": "Literature review on Git learning and conceptual misfits; derive a misconception taxonomy (10-15 categories) from GitKit, Shell Tutor, Perez De Rosso and Jackson, and instructor experience", "deliverable": "Annotated bibliography and taxonomy with example command sequences per category" },
+          { "month": 2, "goal": "Build a generator that replays parameterized command scripts into broken repos and captures DAG, reflog, status, and remote state; author minimal recoveries and solution-free hints", "deliverable": "300-500 labeled broken-state instances with recovery scripts verified automatically" },
+          { "month": 3, "goal": "Run diagnosis experiments across 3-4 LLMs (including one open-weight local model) with raw terminal transcript vs. structured repository summary", "deliverable": "Diagnosis accuracy tables by misconception category and context encoding" },
+          { "month": 4, "goal": "Generate hints and score them with a rubric (correctness, no solution leakage, conceptual targeting, safety of suggested commands), including an automated replay check that suggested commands do not destroy work", "deliverable": "Hint-quality results with inter-rater reliability on a double-coded subset" },
+          { "month": 5, "goal": "Compare against a rule-based baseline; analyze where LLMs recommend destructive commands or misread shared-history states", "deliverable": "Failure-mode analysis and design guidelines for Git-aware tutors" },
+          { "month": 6, "goal": "Finalize paper and release the benchmark and generator as open source", "deliverable": "Submitted paper draft and public benchmark repository" }
+        ],
+        "targetVenues": ["SIGCSE TS", "ITiCSE", "Koli Calling", "AIED"],
+        "resources": "One undergraduate or MS research assistant for scenario authoring and rubric coding (about 10 hours per week); Git and a scripting harness; modest LLM API budget or the local claude CLI for the commercial model runs; one local open-weight model on a lab GPU; a second rater (colleague or TA) for reliability on a subset.",
+        "risks": [
+          { "risk": "Synthetic broken states may not match the states real students create.", "mitigation": "Ground every scenario in published misfits and instructor-collected anecdotes, and plan an IRB-exempt follow-up on archived, de-identified course repositories to check coverage." },
+          { "risk": "LLMs may leak full solutions or suggest destructive commands, making hint scoring noisy.", "mitigation": "Automatically replay suggested commands in a sandbox copy of each repo to flag data loss, and score leakage with an explicit rubric criterion." },
+          { "risk": "Rubric-based hint quality judgments may have low inter-rater agreement.", "mitigation": "Pilot the rubric on 50 items, refine definitions, and report Cohen's kappa on a double-coded 20 percent sample." }
+        ],
+        "humanSubjects": false
+      }
+    }
+  ]
+}
