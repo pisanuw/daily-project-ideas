@@ -1,0 +1,124 @@
+{
+  "date": "2026-09-25",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Semantic If Bench",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A playground where you write if-statements with plain-English conditions and race a small local 'decision model' against a chat LLM on latency, cost, and agreement.",
+      "description": "Agent code is full of tiny yes/no calls (does this email need a reply, does this evidence support the claim, should we retry) that get sent to a full chat model and parsed back into a boolean. Semantic If Bench lets you define a condition like `if (\"the student is asking for the answer, not a hint\")`, paste or upload a batch of test inputs, and run it three ways: a local open model reading the logits of the declared options in a single forward pass (the SemIf pattern), a small local model via Ollama with normal generation, and Claude with structured output. A results grid shows per-row decisions, disagreements highlighted, p50/p95 latency, and estimated cost per 1,000 calls, so you can see when a cheap readout is good enough and when it is not.",
+      "keyFeatures": [
+        "Condition editor with declared options (yes/no or multi-way) and a few-shot examples panel",
+        "Three runners side by side: logit readout on a local open model, local generation via Ollama, and Claude structured output",
+        "Disagreement view that surfaces only the rows where runners differ, with a one-click 'gold label' to build an eval set",
+        "Latency histogram and cost-per-1k estimate for each runner",
+        "Export the condition plus eval set as a small JSON fixture you can drop into a test suite"
+      ],
+      "techStack": "React + Vite, Tailwind, Flask (Python runner with transformers for logit readout), Ollama, Claude API, Recharts",
+      "whyInteresting": "Decision-native models are trending right now, and this turns the hype into a measurable question. It doubles as a great classroom demo of what an LLM 'answer' actually is (a distribution over tokens) and of why evaluation sets matter before swapping a model.",
+      "inspiredBy": "SemIf, 'Semantic ifs from open models, on a 3090 at home' (github.com/barretts/SemIf), and the Laya/Jev typed-decision repos on GitHub trending, week of 2026-09-22"
+    },
+    {
+      "n": 2,
+      "title": "Cipher Ladder",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "An instructor-configurable classical cryptanalysis course: students climb from Caesar to Vigenere to homophonic ciphers with live frequency, Kasiski, and index-of-coincidence tools, then compare their attack to an AI solver's.",
+      "description": "Instructors pick a ladder of challenges (Caesar, affine, monoalphabetic substitution, Vigenere, columnar transposition, homophonic) and supply plaintexts or let the tool pull public-domain passages. Students get an analysis workbench: letter and bigram frequency charts against English baselines, a Kasiski repeat finder, index-of-coincidence per key length, and a drag-to-map substitution board that updates the decryption live. Each rung unlocks only after a correct solve, and a post-solve 'AI debrief' shows how an LLM attacked the same ciphertext step by step, including where it went wrong, so students critique machine reasoning rather than copy it. An instructor dashboard shows which rung each student is stuck on and which tools they used.",
+      "keyFeatures": [
+        "Challenge ladder builder with per-rung cipher type, key, plaintext source, and hint budget",
+        "Analysis workbench: frequency and bigram charts, Kasiski examination, index of coincidence, interactive substitution board",
+        "Post-solve AI debrief comparing the student's path with an LLM's attempt, shown only after the student solves",
+        "Instructor dashboard of rung progress, time on rung, and tool usage per student",
+        "Accessible design: keyboard-only substitution board and screen-reader tables for every chart"
+      ],
+      "techStack": "React + Vite, Tailwind, Supabase (auth, progress, class rosters), Claude API for AI debriefs, D3 for charts",
+      "whyInteresting": "A frontier model cracking a centuries-old cipher made cryptanalysis front-page news this month, which is a perfect hook for discrete math, security, or CS0 courses. The ladder turns frequency analysis into a game with clear wins, and the delayed AI debrief models a healthy pattern: solve first, then critique the AI.",
+      "inspiredBy": "Hacker News weekly top 10 (2026-09-21): 'Fable 5.1 Solves the Cyphral Distich, a 370-year-old cipher' (github.com/headllines/hackernews-weekly/issues/355)"
+    },
+    {
+      "n": 3,
+      "title": "Surveillance Footprint Lab",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "Students build a local-only browser extension that records the third-party trackers and ad networks they encounter for a week, then visualize their personal surveillance graph and write an evidence-based policy brief.",
+      "description": "In phase one (weeks 1-2) students build a Manifest V3 extension that observes network requests, classifies third-party domains against open blocklists (EasyPrivacy, Disconnect), and stores everything in IndexedDB on the device only. Phase two (weeks 3-4) adds a dashboard: a force-directed graph of first-party sites linked to the trackers they load, a timeline of ad-network hits, and a 'who knows what' view that groups trackers by parent company. Phase three (week 5) is analysis and ethics: students aggregate anonymized counts (opt-in, domain-level only) across the class, compare against published measurement studies, and write a short policy brief on consent, dark patterns, or ad-fraud exposure. The rubric rewards careful data minimization as much as features.",
+      "keyFeatures": [
+        "Manifest V3 extension using webRequest observation with local-only IndexedDB storage and a one-click wipe",
+        "Tracker classification from open blocklists plus a parent-company rollup",
+        "Force-directed site-to-tracker graph and daily timeline dashboard",
+        "Opt-in, domain-level class aggregate with a documented privacy design review",
+        "Final deliverable: a 2-page policy brief citing their own data and at least one measurement study"
+      ],
+      "techStack": "JavaScript/TypeScript Chrome or Firefox extension (Manifest V3), IndexedDB, D3 for graph views, optional Flask + Supabase for the opt-in class aggregate",
+      "whyInteresting": "It combines real systems work (extension APIs, async storage, data visualization) with AI-ethics and privacy discussion grounded in each student's own data. Students finish with a portfolio piece and a much sharper intuition for how the ad ecosystem actually sees them.",
+      "inspiredBy": "Hacker News weekly top 10 (2026-09-21): Schneier, '25 years of mass surveillance is enough' and atomic14, 'Why is Google still serving dodgy ads?' (github.com/headllines/hackernews-weekly/issues/355)"
+    },
+    {
+      "n": 4,
+      "title": "Toolchain-Verified Error Hunts: Compiler-in-the-Loop LLM Generation of Cross-Language Programming Error Message Exercises",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Uses an LLM plus real compilers and interpreters to automatically generate, verify, and align 'error hunt' exercises for Java, Python, and C, producing a validated bank of programming-error-message lessons at a fraction of the hand-authoring cost.",
+      "description": "The ITiCSE 2025 'Error Messages are Here to Help!' work found a general lack of quality materials for teaching students to read programming error messages (PEMs) and hand-built 'error hunt' lessons in Java, Python, and C. This project automates and scales that effort: an LLM proposes short novice-style programs designed to trigger a target PEM, and the actual toolchain (javac, CPython, gcc/clang) acts as the oracle, rejecting any program that does not produce exactly the intended message at the intended line. Verified items are then aligned across languages by root cause (for example, an undeclared identifier in all three languages) to build a cross-language PEM concept map, and each item is scored for realism against real novice error distributions from the Blackbox dataset. Unlike prior work that uses LLMs to explain or enhance error messages, this keeps the original message intact and targets the skill of reading it, directly continuing toolchain-first pedagogy into the AI era without requiring human subjects.",
+      "papers": [
+        {
+          "title": "Error Messages are Here to Help!",
+          "authors": "Dennis J Bouvier, Ellie Lovellette, Eddie Antonio Santos, Brett A. Becker, Venu G. Dasigi, Jack Forden, Olga Glebova, Swaroop Joshi, Stan Kurkovsky, Seán Russell",
+          "venue": "ITiCSE 2025",
+          "year": 2025,
+          "doi": "10.1145/3724389.3731267",
+          "url": "https://doi.org/10.1145/3724389.3731267",
+          "abstract": "Programming Error Messages (PEMs) are often misunderstood by students who then miss the opportunity to benefit from them. We have developed and used 'error hunt' lessons using Java, Python, and C PEMs. A CompEd 2023 Working Group surveyed the current status of teaching and learning materials on PEMs, finding a general lack of quality materials, then developed lesson objectives and empirically tested several lessons.",
+          "relevance": "Provides the lesson objectives and the 'error hunt' activity format that the generator will reproduce at scale; its finding that quality PEM materials are scarce is the core motivation for automated, verified generation."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "Compiler Error Messages Considered Unhelpful: The Landscape of Text-Based Programming Error Message Research",
+          "authors": "Brett A. Becker, Paul Denny, Raymond Pettit, Durell Bouchard, Dennis J. Bouvier, Brian Harrington, Amir Kamil, Amey Karkare, Chris McDonald, Peter-Michael Osera, Janice L. Pearce, James Prather",
+          "venue": "ITiCSE Working Group Reports, 2019",
+          "year": 2019,
+          "url": "https://doi.org/10.1145/3344429.3372508",
+          "relevance": "The definitive survey of PEM research; supplies the taxonomy of error types and prior findings on which messages novices struggle with, used to select target PEMs."
+        },
+        {
+          "title": "Using Large Language Models to Enhance Programming Error Messages",
+          "authors": "Juho Leinonen, Arto Hellas, Sami Sarsa, Brent Reeves, Paul Denny, James Prather, Brett A. Becker",
+          "venue": "SIGCSE 2023",
+          "year": 2023,
+          "url": "https://doi.org/10.1145/3545945.3569770",
+          "relevance": "Representative of the 'LLM explains the error' approach (Codex explanations mostly comprehensible, correct fixes about 33% of the time); this project contrasts by using LLMs to generate practice for reading unmodified messages."
+        },
+        {
+          "title": "Blackbox: A Large Scale Repository of Novice Programmers' Activity",
+          "authors": "Neil C. C. Brown, Michael Kölling, Davin McCall, Ian Utting",
+          "venue": "SIGCSE 2014",
+          "year": 2014,
+          "url": "https://doi.org/10.1145/2538862.2538924",
+          "relevance": "Source of real novice Java compile-error frequencies used to weight target PEMs and to score whether generated buggy programs look like authentic novice mistakes."
+        }
+      ],
+      "researchPlan": {
+        "overview": "Build a compiler-in-the-loop pipeline that turns the Error Hunt lesson objectives into a large, verified, cross-language exercise bank, then evaluate generation yield, verification precision, and realism without recruiting students. The result is both an open item bank instructors can use immediately and a methodology paper on toolchain-as-oracle content generation.",
+        "milestones": [
+          { "month": 1, "goal": "Literature review; encode the Error Hunt lesson objectives and select 40-60 target PEMs per language, weighted by Blackbox frequencies and the Becker 2019 taxonomy", "deliverable": "Annotated bibliography, target PEM catalog, and refined research questions" },
+          { "month": 2, "goal": "Implement the generate-compile-verify loop with sandboxed javac, CPython, and gcc/clang; define exact-match and line-match verification rules", "deliverable": "Open-source pipeline with containerized toolchains and first verified items" },
+          { "month": 3, "goal": "Scale generation across two LLMs (one proprietary, one open) and measure yield, verification pass rate, and failure modes (wrong message, extra errors, unrealistic code)", "deliverable": "Yield and failure-mode analysis over roughly 3,000 candidate items" },
+          { "month": 4, "goal": "Cross-language alignment: cluster verified items by root cause and build a PEM concept map linking equivalent Java, Python, and C messages", "deliverable": "Cross-language PEM concept map and aligned item sets" },
+          { "month": 5, "goal": "Realism and quality evaluation: compare generated programs to Blackbox novice code with embedding and edit-distance metrics, plus expert (research team) rubric rating of a stratified sample", "deliverable": "Realism benchmark results and a released item bank with metadata" },
+          { "month": 6, "goal": "Write up methodology, results, and instructor-facing release notes", "deliverable": "Submitted paper and public error-hunt item bank" }
+        ],
+        "targetVenues": ["SIGCSE TS", "ITiCSE", "Koli Calling", "ACM TOCE"],
+        "resources": "Containerized compilers/interpreters (Java, Python, C) on a modest server or CI runners; Claude API (or local claude CLI) and one open-weights model via Ollama for generation; access to the Blackbox dataset (application to the BlueJ team); one undergraduate research assistant for pipeline engineering and rubric rating.",
+        "risks": [
+          { "risk": "LLM-generated buggy programs trigger cascading or additional errors, lowering verification yield", "mitigation": "Use iterative repair prompts that feed the actual compiler output back to the model, and accept only single-error programs; report yield honestly as a finding" },
+          { "risk": "Generated code is syntactically valid but unrealistic compared with genuine novice mistakes", "mitigation": "Seed prompts with anonymized Blackbox-style patterns and filter by a realism score against real novice code distributions" },
+          { "risk": "Blackbox data access is delayed", "mitigation": "Fall back to published PEM frequency tables and public novice datasets (e.g., CodeWorkout/ProgSnap2 releases) for weighting and realism scoring" }
+        ],
+        "humanSubjects": false
+      }
+    }
+  ]
+}

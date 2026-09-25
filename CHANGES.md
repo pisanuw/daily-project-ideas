@@ -275,3 +275,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-09-25 [note] Claimed Agent Blast Radius (2026-09-23 n1) as in progress: in-browser (drop-in files, nothing uploaded) scanner for MCP/agent configs and extension manifests, next Claude-capstone build.
 
 2026-09-25 [note] Agent Blast Radius (2026-09-23 n1) marked implemented: live at agent-blast-radius.netlify.app, repo Claude-capstone/agent-blast-radius. 95 vitest tests; first deploy failed (lockfile gitignored), fixed and runner verified 200, siteId pinned.
+
+2026-09-25 [doc] Created ideas/2026-09-25.json with 4 ideas: Semantic If Bench, Cipher Ladder, Surveillance Footprint Lab, Toolchain-Verified Error Hunts (ITiCSE 2025 doi:10.1145/3724389.3731267)

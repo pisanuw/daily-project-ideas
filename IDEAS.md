@@ -478,3 +478,7 @@
 | 2026-09-24 | Git Broken-State Gym | Teaching Tool | 1-2 Weeks |
 | 2026-09-24 | Build Your Own Node-Based Terminal Workspace | Classroom Assignment | Multi-week |
 | 2026-09-24 | Git State Misconceptions from Repository Traces: A Synthetic Benchmark for Diagnosing Broken Git Workflows and Generating Solution-Free Hints in Toolchain-First Courses | Research | Research |
+| 2026-09-25 | Semantic If Bench | Side Project | Weekend |
+| 2026-09-25 | Cipher Ladder | Teaching Tool | 1-2 Weeks |
+| 2026-09-25 | Surveillance Footprint Lab | Classroom Assignment | Multi-week |
+| 2026-09-25 | Toolchain-Verified Error Hunts: Compiler-in-the-Loop LLM Generation of Cross-Language Programming Error Message Exercises | Research | Research |
