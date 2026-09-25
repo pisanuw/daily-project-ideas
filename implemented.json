@@ -175,8 +175,10 @@
         "date": "2026-09-23",
         "n": 1
       },
-      "placeholder": true,
-      "notes": "In progress since 2026-09-25"
+      "notes": "Built in one session as a static, fully client-side web app rather than the idea's local CLI, so it deploys with zero install: you drop in (or paste) MCP configs (Claude Desktop, Cursor, Windsurf/Cline, VS Code mcp.json and settings, Claude Code ~/.claude.json and .mcp.json), Claude Code settings.json permissions, Chrome/Edge extension manifest.json files, and VS Code extension package.json files, and nothing is uploaded. Each tool gets a 0-100 blast-radius score across filesystem, shell/code exec, network egress, credentials, and browser data, with a plain-English explanation and the exact config evidence per capability. Known MCP servers are matched by launch command (filesystem path args classified as root/home/sensitive/scoped; Docker mounts, --privileged, and the Docker socket scored; remote servers by host with plain HTTP flagged); an unrecognized local server is scored as full-privilege code, not as safe. Hygiene findings cover plaintext secrets (env, headers, connection strings in args, known token prefixes; masked in output), unpinned npx/uvx packages and :latest images, auto-approved tools, bypassPermissions, enableAllProjectMcpServers, MV2, unsafe-eval CSP, and off-store update URLs. Downloadable self-contained HTML report. Limitation: it scores declared config only, never a server's code. 95 vitest tests, >99% statement coverage; lint/typecheck/build green. First deploy failed because the root .gitignore excludes lockfiles; after force-adding package-lock.json the GitHub Actions deploy workflow created the site and the runner verified the page.",
+      "url": "https://agent-blast-radius.netlify.app",
+      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/agent-blast-radius",
+      "implementedOn": "2026-09-25"
     }
   ]
 }

@@ -273,3 +273,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-09-25 [note] Routine again asked to add and build the ACM AI Leadership Summit schedule app; already shipped as Summit Navigator (2026-09-03 n1) and recorded as 2026-09-23 n5. aisummit.acm.org still egress-blocked, so no data refresh possible; no duplicate idea added.
 
 2026-09-25 [note] Claimed Agent Blast Radius (2026-09-23 n1) as in progress: in-browser (drop-in files, nothing uploaded) scanner for MCP/agent configs and extension manifests, next Claude-capstone build.
+
+2026-09-25 [note] Agent Blast Radius (2026-09-23 n1) marked implemented: live at agent-blast-radius.netlify.app, repo Claude-capstone/agent-blast-radius. 95 vitest tests; first deploy failed (lockfile gitignored), fixed and runner verified 200, siteId pinned.
