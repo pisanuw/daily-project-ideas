@@ -1,0 +1,131 @@
+{
+  "date": "2026-09-26",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Cutoff Probe",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "Estimate an LLM's real knowledge cutoff by asking it dated questions month by month and plotting where its answers fall off a cliff.",
+      "description": "Many labs never publish a model's training cutoff, and the published ones are often fuzzy. Cutoff Probe keeps a small, curated bank of dated facts (one to three per month: election results, sports finals, software releases, retracted claims) and asks each model the same questions with web search disabled. It plots accuracy by month and fits a simple step curve to estimate the effective cutoff, plus a 'confidently stale' rate: questions where the model answers an old value without hedging. The whole thing is a static React page plus a tiny Flask proxy so API keys stay server side.",
+      "keyFeatures": [
+        "Versioned JSON question bank with month, question, accepted answers, and a 'changed-since' flag for facts that were later updated",
+        "Side-by-side accuracy-by-month chart for Claude, Gemini, and local Ollama models, with an estimated cutoff marker",
+        "'Confidently stale' metric that counts outdated answers given without any uncertainty language",
+        "Shareable run permalink with the exact prompts, model IDs, and raw responses for reproducibility"
+      ],
+      "techStack": "React + Vite, Tailwind, Recharts, Flask proxy, Claude API, Gemini API, Ollama",
+      "whyInteresting": "It turns a vague vendor claim into a measurable, reproducible number, and it is a neat demo for students of why an assistant's confident answer about 'current' things can be wrong.",
+      "inspiredBy": "Show HN: How Stale Is Your AI? Release age and training cutoff for 20 models (https://stale.jock.pl/)"
+    },
+    {
+      "n": 2,
+      "title": "Data Structure City",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "An explorable 'city' where each building is a live data structure (hash map, B-tree, skip list, LRU cache) that visibly restructures as students send commands.",
+      "description": "Students type real commands (SET, GET, DEL, EXPIRE, range queries) into a console and watch the city react: buckets fill and trigger a rehash, a B-tree node splits and pushes a key upward, a skip list promotes a node, the LRU cache evicts its oldest resident. Each building exposes a cost meter so students see amortized versus worst-case behavior happen, not just read about it. Instructors can script 'tours' (a sequence of commands with pause points and a question at each stop) and share them by URL for lecture or homework.",
+      "keyFeatures": [
+        "Command console with a Redis-like mini language driving several data structure 'buildings' at once",
+        "Animated internals for rehashing, node splits and merges, skip-list promotion, and LRU eviction",
+        "Per-operation cost meter showing probes, comparisons, and memory moves, with a running amortized average",
+        "Instructor-authored guided tours saved as JSON and shared by link, with predict-then-reveal questions at each stop",
+        "Keyboard-only navigation and a text narration mode for screen reader users"
+      ],
+      "techStack": "React + Vite, Tailwind, SVG/Framer Motion (or three.js for a 3D view), Supabase for saved tours",
+      "whyInteresting": "CS2 students usually see these structures as static diagrams; watching a rehash or a B-tree split triggered by their own command makes amortized cost and invariants concrete.",
+      "inspiredBy": "Show HN: Redis City, explore how Redis works in an interactive 3D model (https://poltora.dev/redis)"
+    },
+    {
+      "n": 3,
+      "title": "Tiny Brains League",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "Students train the smallest neural network they can to play a simple strategy game, then compete on a class ladder where score is weighed against parameter count.",
+      "description": "The course provides a game engine (Connect Four, a small Othello board, or a grid resource game) and a fixed network interface; students must train a policy under a hard parameter budget (for example 5,000 weights) using self-play, supervised imitation of a scripted bot, or simple evolution. Submissions are exported as plain weight files, so the autograder runs them in a sandbox with no student code. A public ladder ranks bots by Elo, with a second leaderboard for Elo per thousand parameters. Final deliverables are a short write-up explaining training choices and an ablation showing what the budget forced them to give up.",
+      "keyFeatures": [
+        "Provided game engine and tiny inference runtime in Python and JavaScript, with weights submitted as JSON",
+        "Autograded round-robin ladder with Elo ratings and an efficiency leaderboard (Elo per 1k parameters)",
+        "Milestones: beat a random bot, beat the scripted heuristic bot, then climb the class ladder",
+        "Replay viewer for any match so students can study how their bot loses",
+        "Required ablation report comparing at least two budgets or training methods"
+      ],
+      "techStack": "Python (NumPy, optional PyTorch for training), Flask ladder server, React replay viewer, Supabase for submissions and ratings",
+      "whyInteresting": "A parameter cap makes students reason about representation and inductive bias instead of throwing compute at the problem, and the ladder keeps motivation high for a multi-week ML project.",
+      "inspiredBy": "Show HN: A competition for small neural networks that play strategy games (https://tinybrains.dev)"
+    },
+    {
+      "n": 4,
+      "title": "Do LLM Tutors Teach Like Good UTAs? Profiling Programming-Help Responses Against an Empirical Pedagogical Process Model",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Turn an ethnographic model of how undergraduate TAs teach in office hours into an automated coding scheme, then use it to measure and steer the pedagogical moves of LLM programming tutors, with no human subjects needed.",
+      "description": "Ciego, Steiert, and Kapoor identify six practices that undergraduate computing tutors use in office hours (open-ended questions, hands-on demonstrating, prompting, referencing resources, explaining, expressing affect) and model how tutors switch between them to balance efficiency against student independence. This project operationalizes that model as an annotation scheme for single help turns and multi-turn help sessions, validates an LLM classifier against a hand-coded gold set, and then profiles several LLM tutors (plain chat, 'Socratic' system prompts, and hint-only guardrails) on a corpus of synthetic CS1 help requests built from real buggy programs. The key question is whether LLM tutors collapse into 'explaining' and code-fixing (the behavior observed studies flag in human TAs) and whether conditioning generation on an explicit move plan, in the style of Bridge, produces move sequences closer to the UTA model without leaking solutions. It extends Pisan's solution-free hint work (SIGCSE 2021) by giving it a principled, empirically grounded target for what a good hint turn should do.",
+      "papers": [
+        {
+          "title": "Pedagogical Process Models of Undergraduate Computing Tutors",
+          "authors": "Esse Ciego, Skyler Steiert, Amanpreet Kapoor",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770761.3777166",
+          "url": "https://doi.org/10.1145/3770761.3777166",
+          "abstract": "An ethnographically informed study of seven UTAs at a large public university, observing 37.5 hours of office-hour interactions and conducting three hours of interviews. The analysis identified six core pedagogical practices: asking open-ended questions, hands-on demonstrating, prompting, referencing resources, explaining, and expressing affect, used to build a pedagogical model of how UTAs adapt in real time to balance efficiency and student independence.",
+          "relevance": "Supplies the empirically grounded move taxonomy and process model that this project converts into an automated coding scheme and a generation target for LLM tutors."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "Unifying AI Tutor Evaluation: An Evaluation Taxonomy for Pedagogical Ability Assessment of LLM-Powered AI Tutors",
+          "authors": "Kaushal Kumar Maurya, KV Aditya Srivatsa, Kseniia Petukhova, Ekaterina Kochmar",
+          "venue": "NAACL 2025",
+          "year": 2025,
+          "url": "https://aclanthology.org/2025.naacl-long.57/",
+          "relevance": "Closest existing evaluation framework (eight pedagogical dimensions, MRBench) but in math and focused on response quality rather than move sequences; provides methods for testing LLM-as-judge reliability."
+        },
+        {
+          "title": "Bridging the Novice-Expert Gap via Models of Decision-Making: A Case Study on Remediating Math Mistakes",
+          "authors": "Rose E. Wang, Qingyang Zhang, Carly Robinson, Susanna Loeb, Dorottya Demszky",
+          "venue": "NAACL 2024",
+          "year": 2024,
+          "url": "https://aclanthology.org/2024.naacl-long.120/",
+          "relevance": "Shows that conditioning an LLM on an explicit expert decision (error, strategy, intention) greatly improves remediation responses; this project applies the same idea with UTA moves as the decision space."
+        },
+        {
+          "title": "Inside the Mind of a CS Undergraduate TA: A Firsthand Account of Undergraduate Peer Tutoring in Computer Labs",
+          "authors": "Julia M. Markel, Philip J. Guo",
+          "venue": "SIGCSE 2021",
+          "year": 2021,
+          "url": "https://pg.ucsd.edu/",
+          "relevance": "Documents the gap between how TAs say they tutor and what they actually do (often fixing code directly), motivating a check on whether LLM tutors reproduce the same shortcut."
+        },
+        {
+          "title": "Interrelation between Teaching Assistants' Debugging Strategies and Adherence to Sound Tutoring Practices during Office Hours",
+          "authors": "Koli Calling 2024 authors (see DOI page)",
+          "venue": "Koli Calling 2024",
+          "year": 2024,
+          "url": "https://dl.acm.org/doi/10.1145/3699538.3699562",
+          "relevance": "Links TA debugging difficulty to weaker tutoring practice, suggesting a testable analogue for LLM tutors: do move profiles degrade on harder bugs?"
+        }
+      ],
+      "researchPlan": {
+        "overview": "Month 1-2 turns the UTA process model into a turn-level and session-level coding scheme and builds a synthetic CS1 help-request corpus from public buggy-program datasets. Months 3-4 validate an LLM classifier and profile several tutor configurations; months 5-6 test move-plan-conditioned generation and write up.",
+        "milestones": [
+          { "month": 1, "goal": "Literature review; translate the six UTA practices and transitions into a codebook with examples and edge cases", "deliverable": "Codebook v1 + refined research questions" },
+          { "month": 2, "goal": "Build ~300 synthetic help requests (buggy CS1 program + student message + prior turns) spanning syntax, logic, and conceptual bugs", "deliverable": "Released help-request corpus with bug metadata" },
+          { "month": 3, "goal": "Hand-code a 150-response gold set (two coders, kappa); prompt and calibrate an LLM move classifier", "deliverable": "Gold set + classifier with reported agreement against humans" },
+          { "month": 4, "goal": "Profile 4-6 tutor configurations: move distributions, transition matrices, solution-leak rate, and variation by bug difficulty", "deliverable": "Comparative profile report and figures" },
+          { "month": 5, "goal": "Implement move-plan-conditioned generation (planner picks next UTA move, generator realizes it) and compare to baselines", "deliverable": "Planner-generator prototype + ablation results" },
+          { "month": 6, "goal": "Finalize analysis and write paper", "deliverable": "Submitted paper draft + open-source codebook, corpus, and classifier" }
+        ],
+        "targetVenues": ["SIGCSE TS", "ICER", "AIED", "ITiCSE"],
+        "resources": "Public buggy-program datasets (e.g., CS1 submission corpora) or course archives with identifiers stripped; Claude and Gemini API budget (or local claude CLI for batch runs) for generation and classification; one or two undergraduate research assistants for gold-set coding; modest compute only.",
+        "risks": [
+          { "risk": "The UTA practices were defined for spoken, embodied interactions (e.g., hands-on demonstrating) and may not map cleanly to text turns.", "mitigation": "Define text analogues explicitly in the codebook (e.g., demonstrating = worked example on a different input) and report unmappable cases as a finding." },
+          { "risk": "LLM move classifier agreement with human coders is too low to trust at scale.", "mitigation": "Use the gold set to pick prompts, report per-class agreement, and fall back to human coding on low-agreement classes." },
+          { "risk": "Synthetic help requests may not reflect how real students ask for help.", "mitigation": "Seed requests from published help-request examples and real bug distributions; state the generalization limit and propose a follow-up classroom study." }
+        ],
+        "humanSubjects": false
+      }
+    }
+  ]
+}

@@ -482,3 +482,7 @@
 | 2026-09-25 | Cipher Ladder | Teaching Tool | 1-2 Weeks |
 | 2026-09-25 | Surveillance Footprint Lab | Classroom Assignment | Multi-week |
 | 2026-09-25 | Toolchain-Verified Error Hunts: Compiler-in-the-Loop LLM Generation of Cross-Language Programming Error Message Exercises | Research | Research |
+| 2026-09-26 | Cutoff Probe | Side Project | Weekend |
+| 2026-09-26 | Data Structure City | Teaching Tool | 1-2 Weeks |
+| 2026-09-26 | Tiny Brains League | Classroom Assignment | Multi-week |
+| 2026-09-26 | Do LLM Tutors Teach Like Good UTAs? Profiling Programming-Help Responses Against an Empirical Pedagogical Process Model | Research | Research |
