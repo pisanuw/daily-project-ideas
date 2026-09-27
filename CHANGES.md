@@ -279,3 +279,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-09-25 [doc] Created ideas/2026-09-25.json with 4 ideas: Semantic If Bench, Cipher Ladder, Surveillance Footprint Lab, Toolchain-Verified Error Hunts (ITiCSE 2025 doi:10.1145/3724389.3731267)
 
 2026-09-26 [doc] Created ideas/2026-09-26.json with 4 ideas: Cutoff Probe, Data Structure City, Tiny Brains League, LLM Tutors vs UTA Process Model (SIGCSE TS 2026 doi:10.1145/3770761.3777166)
+
+2026-09-27 [doc] Created ideas/2026-09-27.json with 4 ideas: Poster Grid Studio, SQL Counterexample Grader, System 1 vs System 2 Showdown, Clause-Anchored SQL DDL/DML Hints (SIGCSE TS 2026 doi:10.1145/3770762.3772599)

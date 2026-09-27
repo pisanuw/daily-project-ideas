@@ -486,3 +486,7 @@
 | 2026-09-26 | Data Structure City | Teaching Tool | 1-2 Weeks |
 | 2026-09-26 | Tiny Brains League | Classroom Assignment | Multi-week |
 | 2026-09-26 | Do LLM Tutors Teach Like Good UTAs? Profiling Programming-Help Responses Against an Empirical Pedagogical Process Model | Research | Research |
+| 2026-09-27 | Poster Grid Studio | Side Project | Weekend |
+| 2026-09-27 | SQL Counterexample Grader | Teaching Tool | 1-2 Weeks |
+| 2026-09-27 | System 1 vs System 2 Showdown | Classroom Assignment | Multi-week |
+| 2026-09-27 | Clause-Anchored LLM Hints for SQL DDL/DML: A Mutation Benchmark for Localized, Solution-Free Feedback on State-Changing Statements | Research | Research |

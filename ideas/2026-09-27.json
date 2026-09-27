@@ -1,0 +1,170 @@
+{
+  "date": "2026-09-27",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Poster Grid Studio",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "Paste a talk or event announcement and get a set of clean, typographically disciplined posters where an LLM only extracts the facts and a deterministic layout engine does the design.",
+      "description": "Most AI-generated event posters look bad because the model is asked to do typography, hierarchy, and imagery all at once. Poster Grid Studio splits the job: Claude or Gemini turns a messy announcement (email, Slack post, seminar blurb) into a strict JSON record (title, speaker, date, time, room, one-line hook, QR target). A small layout engine then renders that record into six to eight SVG poster variants built on classic Swiss-style grids, with type scales, color pairs, and a fixed hierarchy chosen from a curated rule set. No generative images are used by default; optional decoration comes from geometric patterns or a public-domain image picked by the user. Every variant exports to print-ready PDF and a square social card.",
+      "keyFeatures": [
+        "LLM extraction to a validated JSON schema, with an editable form so the human fixes facts before any layout happens",
+        "Deterministic grid layouts (modular, asymmetric, big-number date, speaker-portrait) with a lint panel that flags text overflow and low contrast",
+        "Auto QR code and accessible alt text generated from the same JSON record",
+        "One-click export to A3/letter PDF plus 1080x1080 and 1200x630 social images",
+        "Department theme presets (fonts, palette, logo placement) saved in localStorage"
+      ],
+      "techStack": "React + Vite, Tailwind, SVG layout engine in TypeScript, Claude API or Gemini API for extraction (via a tiny Flask or Netlify function proxy), pdf-lib, qrcode",
+      "whyInteresting": "It is a concrete demonstration of a good AI design principle: let the model do language understanding and let code do the parts that need consistency. Faculty and student clubs make posters constantly, and the output is immediately useful for seminars and course events.",
+      "inspiredBy": "HN weekly top 10 (2026-09-21): 'AI-generated posters don't have to be horrible' https://john.hartnup.uk/2026/06/07/ai-event-posters.html"
+    },
+    {
+      "n": 2,
+      "title": "SQL Counterexample Grader",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "An SQL autograder that, instead of just saying 'wrong result', generates the smallest database instance where the student's query and the reference query disagree and shows it side by side.",
+      "description": "Result-table grading on a fixed sample database misses many wrong queries (a missing DISTINCT or a LEFT vs INNER JOIN often produces the same rows on the instructor's data). SQL Counterexample Grader runs the student query and the reference against a battery of generated database instances, built with mutation-killing heuristics in the spirit of XData: NULLs in join columns, duplicate rows, empty groups, ties at LIMIT boundaries. When the two queries disagree, it shrinks the instance to a minimal counterexample (often three to five rows) and shows both result tables with the differing rows highlighted. An optional LLM layer writes a solution-free hint that points at the relevant clause and the relevant rows, never at the fix. Everything runs in the browser on SQLite compiled to WebAssembly, so instructors can host it statically.",
+      "keyFeatures": [
+        "Instance generator with targeted cases for NULLs, duplicates, empty groups, outer joins, and ORDER BY/LIMIT ties",
+        "Delta-debugging shrinker that reduces a disagreeing database to a minimal counterexample",
+        "Side-by-side result diff with highlighted rows and the clause most likely responsible",
+        "Optional solution-free hint from Claude API with a leakage check that rejects hints containing reference SQL fragments",
+        "Assignment pack format (schema, reference queries, point weights) exportable as JSON and a Canvas-friendly CSV of scores"
+      ],
+      "techStack": "React + Vite, Tailwind, sql.js (SQLite WASM), TypeScript instance generator, optional Flask proxy for Claude API hints, Supabase for storing assignment packs",
+      "whyInteresting": "It turns grading into teaching: a small concrete counterexample is the best explanation of why a query is wrong, and it closes the false-positive gap that plagues SQL online judges. It also fits the solution-free hint line of research directly.",
+      "inspiredBy": "Product Hunt launches, Sept 2026: Relium's pre-merge semantic checks for SQL/dbt changes (https://startupcorners.com/digest/product-digest-2026-09-19); XData (Chandra et al., VLDB Journal 2015)"
+    },
+    {
+      "n": 3,
+      "title": "System 1 vs System 2 Showdown",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "Students build a small encoder-based 'System 1' decision model and race it against a prompted LLM on typed decisions (yes/no, pick-one, score), measuring accuracy, latency, cost, and calibration.",
+      "description": "Recent trending projects argue that many 'agent' decisions (is this email urgent, which of four categories, does this commit touch auth) do not need autoregressive text generation at all. In this four-to-five week assignment, student teams pick a decision task from a provided menu (support-ticket routing, code review triage, forum post moderation, lab report rubric checks), label or synthesize a dataset, and build two systems: a fine-tuned small encoder with a classification head (System 1) and a prompted LLM with structured output (System 2). They then build a router that sends easy cases to System 1 and escalates uncertain ones to System 2, and evaluate the whole pipeline on a held-out test set. The final deliverable is a short paper-style report plus a live dashboard comparing the three configurations.",
+      "keyFeatures": [
+        "Milestone 1: dataset creation with LLM-assisted labeling and a human-audited 200-item gold set",
+        "Milestone 2: fine-tune a small encoder (e.g. ModernBERT or DistilBERT) on CPU or free Colab GPU and measure p50/p95 latency",
+        "Milestone 3: prompted LLM baseline with JSON schema output and cost-per-1k-decisions tracking",
+        "Milestone 4: confidence-based router with calibration plots (reliability diagrams, ECE) and an escalation-rate vs accuracy curve",
+        "Final: dashboard and a one-page 'when would you deploy which' recommendation grounded in their numbers"
+      ],
+      "techStack": "Python, Hugging Face Transformers, scikit-learn, Flask API, React + Vite + Recharts dashboard, Claude API or Gemini API (or local Ollama) for the System 2 baseline",
+      "whyInteresting": "It teaches an engineering judgment that is disappearing in the 'LLM for everything' era: when a 10 ms classifier beats a 2 s model call. Students practice dataset building, evaluation, calibration, and cost reasoning, and the router pattern maps straight onto real agent systems.",
+      "inspiredBy": "HN weekly top 10 (2026-09-21): 'Introducing System One Models and Jev' (https://typesafe.ai/blog/introducing-system-one-models-and-jev) and 'I built non-autoregressive decision models with RL' (https://laya.convaiinnovations.com/); GitHub trending 2026-09-27: deepopen"
+    },
+    {
+      "n": 4,
+      "title": "Clause-Anchored LLM Hints for SQL DDL/DML: A Mutation Benchmark for Localized, Solution-Free Feedback on State-Changing Statements",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Builds a synthetic benchmark of buggy CREATE/INSERT/UPDATE/DELETE submissions and tests whether anchoring LLM hints to a clause-driven grader's diagnosis makes feedback more accurate, better localized, and less likely to leak the solution than either the grader or the LLM alone.",
+      "description": "Hiemstra and colleagues show that clause-driven analysis can grade SQL DDL/DML statements, which produce no result table, and emit roughly one targeted suggestion per error; but their messages are terse and describe the syntactic difference, not the misconception behind it. This project builds a mutation benchmark by applying operators derived from the Taipalus et al. SQL error taxonomy and the Miedema et al. misconception list to reference DDL/DML solutions, then executes each mutant against a generated database to record the resulting state difference (schema diff, row-level delta). Three feedback conditions are compared offline: clause-driven messages alone, an unanchored LLM hint, and a hybrid in which the LLM receives the clause diagnosis plus the minimal state delta and must explain the likely misconception without revealing the fix. Evaluation uses automated metrics (clause localization accuracy, misconception label agreement with the mutation's ground truth, solution-leakage rate via SQL fragment matching) plus a small expert rating pass. The work directly instantiates the report's DT-1 (explanatory feedback over an existing autograder) and DT-2 (misconception-grounded student modeling) agenda in a domain, state-changing SQL, that LLM feedback research has largely ignored.",
+      "papers": [
+        {
+          "title": "Clause-Driven Automated Grading of SQL's DDL and DML Statements",
+          "authors": "Djoerd Hiemstra et al. (Radboud University Nijmegen)",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770762.3772599",
+          "url": "https://doi.org/10.1145/3770762.3772599",
+          "abstract": "SELECT statements produce a results table, which makes automatic grading relatively easy, but CREATE TABLE, INSERT, DELETE, and UPDATE do not. The authors extend their grading system to DDL and DML statements and describe clause-driven tailored feedback generation that produces precise, targeted feedback tied to specific SQL clauses or components, generating nearly one suggestion per error.",
+          "relevance": "Provides the symbolic diagnosis layer (clause-level error localization for state-changing statements) that the hybrid condition anchors LLM explanations to; its benchmark against existing graders is the baseline this project extends with misconception-level evaluation."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "Errors and Complications in SQL Query Formulation",
+          "authors": "Toni Taipalus, Mikko Siponen, Tero Vartiainen",
+          "venue": "ACM Transactions on Computing Education, 2018",
+          "year": 2018,
+          "url": "https://doi.org/10.1145/3231712",
+          "relevance": "DBMS-independent error taxonomy from 33,000+ student queries; supplies mutation operators and ground-truth error categories for the benchmark."
+        },
+        {
+          "title": "Identifying SQL Misconceptions of Novices: Findings from a Think-Aloud Study",
+          "authors": "Daphne Miedema, Efthimia Aivaloglou, George Fletcher",
+          "venue": "ICER 2021",
+          "year": 2021,
+          "url": "https://doi.org/10.1145/3446871.3469759",
+          "relevance": "Its 14 SQL misconceptions define the label set the LLM explanations are scored against, moving evaluation from 'which clause is wrong' to 'why the student wrote it'."
+        },
+        {
+          "title": "Data Generation for Testing and Grading SQL Queries (XData)",
+          "authors": "Bikash Chandra, Bhupesh Chawda, Biplab Kar, K. V. Reddy, Shetal Shah, S. Sudarshan",
+          "venue": "The VLDB Journal, 2015",
+          "year": 2015,
+          "url": "https://doi.org/10.1007/s00778-015-0395-0",
+          "relevance": "Mutation-killing database generation; adapted here to produce the database states on which DDL/DML mutants reveal their effect, yielding the minimal state delta fed to the LLM."
+        },
+        {
+          "title": "False Positives and Deceptive Errors in SQL Assessment: A Large-Scale Analysis of Online Judge Systems",
+          "authors": "J. Wang, S. Chen, Z. Tang, P. Lin, Y. Wang",
+          "venue": "ACM Transactions on Computing Education, 2024",
+          "year": 2024,
+          "url": "https://doi.org/10.1145/3654677",
+          "relevance": "Documents how result-based SQL graders accept wrong answers; motivates execution-based state comparison and provides a reference point for grader-correctness metrics."
+        }
+      ],
+      "researchPlan": {
+        "overview": "Months 1-2 build the DDL/DML mutation benchmark and a reimplementation (or adoption, if released) of clause-driven diagnosis. Months 3-4 run the three feedback conditions across two or three LLMs and score them automatically against mutation ground truth. Months 5-6 add a small expert rating pass, analyze failure modes, and write up for a CS education venue.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review on SQL grading and feedback; collect or author 40-60 reference DDL/DML exercises from open database course materials; define mutation operators mapped to Taipalus categories and Miedema misconceptions",
+            "deliverable": "Annotated bibliography, exercise set, and mutation operator specification with misconception labels"
+          },
+          {
+            "month": 2,
+            "goal": "Implement mutant generation and an execution harness (SQLite and PostgreSQL) that records schema diffs and minimal row-level state deltas; implement clause-level diagnosis following the source paper",
+            "deliverable": "Open benchmark of ~3,000 labeled mutants with state deltas and clause diagnoses"
+          },
+          {
+            "month": 3,
+            "goal": "Design prompts for unanchored and clause-anchored LLM hints; implement automatic metrics for localization, misconception agreement, and solution leakage",
+            "deliverable": "Evaluation pipeline and pilot results on 300 mutants"
+          },
+          {
+            "month": 4,
+            "goal": "Full runs across conditions and models (Claude, Gemini, one open-weight model via Ollama); ablate the state-delta input",
+            "deliverable": "Results tables, cost/latency comparison, and error analysis by misconception"
+          },
+          {
+            "month": 5,
+            "goal": "Expert rating of a stratified 150-item sample by 2-3 database instructors for correctness, helpfulness, and leakage; compute agreement with automatic metrics",
+            "deliverable": "Human-vs-automatic metric validity analysis"
+          },
+          {
+            "month": 6,
+            "goal": "Write paper and release benchmark and harness",
+            "deliverable": "Submitted paper draft plus public GitHub release of the benchmark"
+          }
+        ],
+        "targetVenues": [
+          "SIGCSE TS",
+          "ITiCSE",
+          "Koli Calling",
+          "EDM"
+        ],
+        "resources": "Open database course exercises (or UW Bothell course materials with instructor consent); SQLite/PostgreSQL in Docker; roughly USD 100-300 of LLM API credit or local claude CLI plus Ollama for the open-weight model; one undergraduate or MS research assistant for the harness; 2-3 database instructors for the rating pass.",
+        "risks": [
+          {
+            "risk": "Synthetic mutants may not reflect real student errors, limiting ecological validity",
+            "mitigation": "Ground operators in published error frequencies (Taipalus et al.) and, if available, validate on a small set of de-identified historical submissions under an existing exempt protocol"
+          },
+          {
+            "risk": "The source paper's grader may not be publicly available",
+            "mitigation": "Reimplement clause-level diagnosis with an SQL parser (sqlglot) and report it as a faithful approximation; contact the Radboud authors early"
+          },
+          {
+            "risk": "Leakage detection by fragment matching may miss paraphrased solutions",
+            "mitigation": "Combine lexical matching with an LLM-as-judge leakage check and validate both against the expert ratings"
+          }
+        ],
+        "humanSubjects": false
+      }
+    }
+  ]
+}
