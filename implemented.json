@@ -195,8 +195,10 @@
         "date": "2026-09-25",
         "n": 2
       },
-      "placeholder": true,
-      "notes": "In progress since 2026-09-28"
+      "notes": "Built in one session, fully client-side: a six-rung ladder (Caesar, affine, Vigenere, columnar transposition, monoalphabetic substitution, homophonic over two-digit symbols with frequency-proportional symbol counts) where each rung unlocks after a correct solve. The workbench has letter, bigram and trigram frequencies against English baselines, index of coincidence for periods 1-12 with English/random reference lines, a Kasiski table (repeated trigrams, distances, and which periods divide them), a per-column chart for Vigenere, symbol histograms and repeated pairs for homophonic, and keyboard-only substitution and symbol boards that decrypt live; every chart is an SVG with a data table for screen readers. Hints come from an instructor-set budget and each reveals one key fragment. The idea's LLM debrief is a deterministic solver per cipher (chi-squared over all shifts or all 312 affine keys, Kasiski vs IC then per-column Caesar, every read order for up to 7 columns then swap hill-climbing, frequency-seeded trigram hill-climb for substitution, simulated annealing with a letter-histogram penalty for homophonic) whose step log is shown beside the student's path with its accuracy, its own confidence, and the first letters it got wrong; the trigram model is trained on about 11k letters of 14 bundled public-domain passages, so confidence is discounted on short texts. Supabase auth and rosters are replaced by an instructor ladder builder that encodes the whole assignment in the URL fragment, localStorage progress with JSON export, and a dashboard that reads any number of exports (current rung, time per rung, hints, tools used, per-rung median time). 65 vitest tests, 100% statement coverage on the core; lint/typecheck/build green; end-to-end verified in headless Chromium at desktop and phone widths. Deployed via the GitHub Actions deploy workflow (site created first try; the runner's immediate check hit a 404 during DNS propagation, the page returned 200 within a minute and the live index.html matches the local build), siteId pinned afterward.",
+      "url": "https://cipher-ladder.netlify.app",
+      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/cipher-ladder",
+      "implementedOn": "2026-09-28"
     }
   ]
 }

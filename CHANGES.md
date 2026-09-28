@@ -291,3 +291,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-09-28 [note] Repo Weight Map (2026-09-28 n1) marked implemented: live at repo-weight-map.netlify.app, repo Claude-capstone/repo-weight-map. 40 vitest tests, 100% stmt coverage on core; deploy worked first try (runner verified 200), siteId pinned afterward.
 
 2026-09-28 [note] Claimed Cipher Ladder (2026-09-25 n2) as in progress: client-side cryptanalysis ladder (Caesar, affine, substitution, Vigenere, columnar, homophonic) with frequency/IC/Kasiski tools; deterministic solvers replace the AI debrief.
+
+2026-09-28 [note] Cipher Ladder (2026-09-25 n2) marked implemented: live at cipher-ladder.netlify.app, repo Claude-capstone/cipher-ladder. Deterministic solvers replace the LLM debrief, URL-encoded ladders and JSON exports replace Supabase. 65 vitest tests, 100% stmt coverage on core.
