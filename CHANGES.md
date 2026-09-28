@@ -283,3 +283,7 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-09-27 [doc] Created ideas/2026-09-27.json with 4 ideas: Poster Grid Studio, SQL Counterexample Grader, System 1 vs System 2 Showdown, Clause-Anchored SQL DDL/DML Hints (SIGCSE TS 2026 doi:10.1145/3770762.3772599)
 
 2026-09-28 [doc] Created ideas/2026-09-28.json with 4 ideas: Repo Weight Map, Project Pitch Census, Build Your Own Code Search Engine, Toolchain Progress Traces (SIGCSE TS 2026 doi:10.1145/3770761.3777301)
+
+2026-09-28 [note] Routine again asked to add and build the ACM AI Leadership Summit schedule app; already shipped as Summit Navigator (2026-09-03 n1), recorded as 2026-09-23 n5. aisummit.acm.org still blocked (Cloudflare challenge via curl, WebFetch, and headless Chromium), so no data refresh; no duplicate idea added.
+
+2026-09-28 [note] Claimed Repo Weight Map (2026-09-28 n1) as in progress: in-browser folder walker (nothing uploaded), squarified treemap by category, ecosystem-aware junk rules with a .gitignore diff, next Claude-capstone build.
