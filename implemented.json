@@ -185,8 +185,10 @@
         "date": "2026-09-28",
         "n": 1
       },
-      "placeholder": true,
-      "notes": "In progress since 2026-09-28"
+      "notes": "Built in one session, fully client-side: pick or drop a project folder and the browser walks it (File System Access API in Chromium, webkitdirectory input and drag-and-drop elsewhere; names and sizes only, nothing uploaded), draws a hand-written squarified treemap with click-to-zoom and breadcrumbs colored by ten categories (location before extension, so a PNG in node_modules is a dependency), and runs 19 ordered ecosystem-aware junk rules (venv via pyvenv.cfg, conda, __pycache__, egg-info, node_modules, .next, Maven target/ only next to a pom.xml, Gradle build/, .NET bin/obj only next to a .csproj, Unity Library/Temp/Build only under Assets+ProjectSettings, C/CMake objects, Cargo target, generic dist/build, coverage, logs, .DS_Store, editor swap files, Terraform, secrets, files over 10 MB). Each file counts toward its first matching rule; untick findings to refine a before/after estimate and the .gitignore block or unified diff against the existing .gitignore; standalone HTML report download; a deterministic 8,847-file synthetic student repo as the demo (?sample). History mode (large blobs only in git history plus the filter-repo command) was left out as beyond Weekend size. 40 vitest tests, 100% statement coverage on core; lint/typecheck/build green; end-to-end verified in headless Chromium at desktop and phone widths. Deployed via the GitHub Actions deploy workflow (site created first try, page verified 200 and the sample rendered in headless Chromium), siteId pinned afterward.",
+      "url": "https://repo-weight-map.netlify.app",
+      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/repo-weight-map",
+      "implementedOn": "2026-09-28"
     }
   ]
 }

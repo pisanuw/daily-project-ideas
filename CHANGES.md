@@ -287,3 +287,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-09-28 [note] Routine again asked to add and build the ACM AI Leadership Summit schedule app; already shipped as Summit Navigator (2026-09-03 n1), recorded as 2026-09-23 n5. aisummit.acm.org still blocked (Cloudflare challenge via curl, WebFetch, and headless Chromium), so no data refresh; no duplicate idea added.
 
 2026-09-28 [note] Claimed Repo Weight Map (2026-09-28 n1) as in progress: in-browser folder walker (nothing uploaded), squarified treemap by category, ecosystem-aware junk rules with a .gitignore diff, next Claude-capstone build.
+
+2026-09-28 [note] Repo Weight Map (2026-09-28 n1) marked implemented: live at repo-weight-map.netlify.app, repo Claude-capstone/repo-weight-map. 40 vitest tests, 100% stmt coverage on core; deploy worked first try (runner verified 200), siteId pinned afterward.
