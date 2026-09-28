@@ -281,3 +281,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-09-26 [doc] Created ideas/2026-09-26.json with 4 ideas: Cutoff Probe, Data Structure City, Tiny Brains League, LLM Tutors vs UTA Process Model (SIGCSE TS 2026 doi:10.1145/3770761.3777166)
 
 2026-09-27 [doc] Created ideas/2026-09-27.json with 4 ideas: Poster Grid Studio, SQL Counterexample Grader, System 1 vs System 2 Showdown, Clause-Anchored SQL DDL/DML Hints (SIGCSE TS 2026 doi:10.1145/3770762.3772599)
+
+2026-09-28 [doc] Created ideas/2026-09-28.json with 4 ideas: Repo Weight Map, Project Pitch Census, Build Your Own Code Search Engine, Toolchain Progress Traces (SIGCSE TS 2026 doi:10.1145/3770761.3777301)

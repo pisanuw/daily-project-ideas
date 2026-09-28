@@ -1,0 +1,162 @@
+{
+  "date": "2026-09-28",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Repo Weight Map",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "Drop a local project folder into the browser and see a zoomable treemap of what is bloating it, with one-click .gitignore fixes for committed venvs, node_modules, build outputs, and stray datasets.",
+      "description": "Student repos routinely balloon because someone committed a virtualenv, a 400 MB dataset, a .DS_Store storm, or an entire build directory, and nobody notices until the push fails or the clone takes ten minutes. Repo Weight Map uses the File System Access API to walk a folder entirely in the browser (nothing uploaded) and draws a squarified treemap colored by category: source, generated, dependency, binary, media, and data. A rules engine recognizes common junk patterns across ecosystems (Python, Node, Java, C++, Unity) and proposes .gitignore lines, while an optional git mode reads the .git directory to flag large blobs that live only in history and prints the exact git filter-repo command to remove them. Everything runs client side and deterministically, with no AI calls required.",
+      "keyFeatures": [
+        "Squarified treemap with click-to-zoom and breadcrumb navigation, colored by file category rather than extension",
+        "Junk detector with ecosystem-aware rules (venv, __pycache__, node_modules, target/, Library/, *.o) and a generated .gitignore diff to copy",
+        "History mode that lists the largest blobs reachable from HEAD but deleted from the working tree, with the filter-repo command to purge them",
+        "Before/after size estimate if all suggestions are applied",
+        "Shareable static report (HTML snapshot) a TA can ask a student to attach to a help request"
+      ],
+      "techStack": "React + Vite, Tailwind, d3-hierarchy (treemap layout), File System Access API, isomorphic-git or a small pack/idx reader for history mode",
+      "whyInteresting": "It is a satisfying weekend build with a real visualization algorithm at its core, and it solves a problem every CS instructor sees each term. It also doubles as a gentle lesson in what belongs in version control.",
+      "inspiredBy": "GitHub trending (2026-09-28): disktree, 'A treemap for finding and removing what fills your disk' https://github.com/marc-ko/daily-trending-repo/issues/564"
+    },
+    {
+      "n": 2,
+      "title": "Project Pitch Census",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "An instructor dashboard that ingests every student's term-project proposal, clusters them by theme, flags near-duplicates and overused tropes, and sends each student a short novelty and scope nudge before they commit.",
+      "description": "When forty students pitch capstone or term projects, instructors see the same five ideas (a to-do app, a chatbot wrapper, a Discord bot) and struggle to spot which proposals overlap or are wildly over-scoped. Project Pitch Census pulls proposals from a Canvas assignment or a CSV, embeds and clusters them, and renders a census view much like a subreddit survey: category counts, a scatter map of the proposal space, and a list of near-duplicate pairs with similarity scores. An LLM pass (Claude or Gemini) extracts structured fields from each pitch (problem, user, core feature, stack, data source) and rates scope against the course's time budget using an instructor-editable rubric. The instructor reviews and edits suggested nudges ('three other teams are building a study planner; consider narrowing to lab-report feedback') before releasing them, so no AI text reaches students unreviewed.",
+      "keyFeatures": [
+        "Canvas API or CSV import, with student names hidden from the LLM and re-attached locally",
+        "Theme clustering with a 2D map and per-cluster counts, plus a near-duplicate list above a tunable similarity threshold",
+        "Structured extraction of problem, user, core feature, stack, and data source into a sortable table",
+        "Scope estimator that compares each pitch to the course's week count and rubric, with a short rationale",
+        "Instructor-approved nudge drafts, exported back to Canvas comments or as a mail-merge CSV"
+      ],
+      "techStack": "React + Vite, Tailwind, Flask backend, Supabase (proposals, clusters, nudge drafts), Claude API or Gemini API for extraction and nudges, sentence embeddings (local or API), UMAP-js for the map",
+      "whyInteresting": "Project selection is where many capstones succeed or fail, yet instructors rarely have time to read every pitch against every other. A census view turns a pile of proposals into a class-level picture, and the review-before-release design models responsible AI use in teaching.",
+      "inspiredBy": "side-project-census, a year-to-date classification of 90,758 r/SideProject posts (29.2% AI-related, median one upvote) https://github.com/siropkin/side-project-census"
+    },
+    {
+      "n": 3,
+      "title": "Build Your Own Code Search Engine",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "Students build, in stages, a tool that answers 'where does this codebase do X?' starting from grep and BM25 over identifiers, then adding embeddings and call-graph expansion, and measure each stage on a shared benchmark of real queries.",
+      "description": "Coding agents now spend much of their effort just finding the right files, and tools like jevgrep sell 'find code by asking what it does.' This assignment makes students build that capability themselves and measure whether each layer actually helps. Milestone 1 tokenizes a repo into functions and splits camelCase and snake_case identifiers for a BM25 index. Milestone 2 adds docstring and comment fields and query expansion. Milestone 3 adds chunk embeddings (a small local model or an embedding API) and hybrid rank fusion. Milestone 4 builds a call graph with tree-sitter and propagates relevance to callers and callees. Every milestone is scored against a course-provided benchmark of natural-language queries with labeled target functions from two or three open-source repos, reporting recall@5 and MRR, and a final write-up asks students to explain where lexical search beats embeddings and vice versa.",
+      "keyFeatures": [
+        "Staged milestones (BM25, field boosting, embeddings with hybrid fusion, call-graph propagation) each with a runnable CLI",
+        "Instructor-provided benchmark of 100 or more labeled queries and an autograder that reports recall@5 and MRR per stage",
+        "tree-sitter parsing so the same pipeline works for Python, Java, and C++ repos",
+        "Optional agent integration: expose the search as an MCP tool and compare an agent's task success with and without it",
+        "Error-analysis report template that forces students to categorize failed queries"
+      ],
+      "techStack": "Python, tree-sitter, rank-bm25 or a hand-written BM25, sentence-transformers or an embedding API, networkx, pytest-based autograder; optional MCP server in Python",
+      "whyInteresting": "It connects classic information retrieval to the tooling behind today's coding agents, and the benchmark makes 'is the fancy approach better?' an empirical question students answer with their own numbers. It fits an IR, software engineering, or applied AI course.",
+      "inspiredBy": "GitHub trending (2026-09-28): jevgrep, 'Find code by asking what it does. A CLI for coding agents' https://github.com/marc-ko/daily-trending-repo/issues/564"
+    },
+    {
+      "n": 4,
+      "title": "Toolchain Progress Traces: Measuring Which Feedback Events Actually Move Student Code Forward in a Toolchain-First Course",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Generalizes a commit-based measure of office-hours success (static analysis errors, test correctness, coverage) into a feedback-event progress model, then uses archival toolchain-first repos to compare how CI failures, autograder reports, TA comments, and offline LLM hints line up with the next commit's progress.",
+      "description": "Zahn, Heckman, and Battestilli propose judging help-seeking by what students do next: compare the first commit after an office-hours visit with the prior commit on static analysis errors, staff test correctness, and statement coverage. A toolchain-first course already emits exactly these signals on every push (Clang-Tidy, Google Test, coverage in GitHub CI), so the measure can be extended from office hours to every feedback event a student receives: CI failures, Jolly Feedback autograder emails, and TA review comments. This project builds a reusable 'progress trace' pipeline over Pisan's archived C++ repos, validates the indicators against final project outcomes, and characterizes which feedback types, and which time windows, are followed by forward progress versus regression or no change. In a second, fully offline phase, an LLM generates solution-free hints at each 'stuck' commit and the study asks whether the hint targets the indicator that the student eventually fixed, giving a cheap, subject-free pre-screen for which hint strategies are worth a live A/B test. It turns toolchain-first pedagogy from a qualitative case study into a measurable feedback system and supplies the outcome metric that later DT-1 style interventions need.",
+      "papers": [
+        {
+          "title": "What Happens When Students Leave Office Hours? Measuring Post-Interaction Code Progress in CS2 Projects",
+          "authors": "Matthew Zahn, Sarah Heckman, Lina Battestilli",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770761.3777301",
+          "url": "https://doi.org/10.1145/3770761.3777301",
+          "abstract": "This study introduces preliminary work on a behavior-based measure of help-seeking success by exploring the relationship between office hour interactions and subsequent coding progress. The first GitHub commit in a post-interaction window was compared with the prior commit across reduction of static analysis errors, increase in teaching staff test correctness, and increase in statement coverage. Of 1806 interactions over six semesters, only 27.7% contained project changes in the window, and of those 33.9% showed forward progress, 17.6% regression, and 48.5% no change.",
+          "relevance": "Supplies the core measurement idea (commit-level toolchain indicators as evidence of help-seeking success) and explicitly calls for extending it beyond office hours; this project extends it to automated and LLM feedback events in a toolchain-first course."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "You asked, now what? Modeling Students' Help-Seeking and Coding Actions from Request to Resolution",
+          "authors": "Zhikai Gao, Bradley Erickson, Yiqiao Xu, Collin Lynch, Sarah Heckman, Tiffany Barnes",
+          "venue": "Journal of Educational Data Mining, 2022",
+          "year": 2022,
+          "url": "https://par.nsf.gov/biblio/10392254-you-asked-now-what-modeling-students-help-seeking-coding-actions-from-re-quest-resolution",
+          "relevance": "Links pre-request coding behavior to help-request types in the same CS2 context; provides a taxonomy of help requests (implementation, general debugging) to label feedback events by what they address."
+        },
+        {
+          "title": "Assessment of Self-Identified Learning Struggles in CS2 Programming Assignments",
+          "authors": "Matthew Zahn, Sarah Heckman, Lina Battestilli",
+          "venue": "ITiCSE 2023",
+          "year": 2023,
+          "url": "https://doi.org/10.1145/3587102.3588786",
+          "relevance": "Earlier work by the source authors cataloging CS2 project struggles; useful for mapping stuck episodes in the progress traces to struggle categories."
+        },
+        {
+          "title": "A New Metric to Quantify Repeated Compiler Errors for Novice Programmers",
+          "authors": "Brett A. Becker",
+          "venue": "ITiCSE 2016",
+          "year": 2016,
+          "url": "https://doi.org/10.1145/2899415.2899463",
+          "relevance": "Repeated Error Density (a successor to Jadud's Error Quotient) is the established compile-level struggle metric; comparing it with commit-level toolchain indicators shows what the richer CI signals add."
+        }
+      ],
+      "researchPlan": {
+        "overview": "Months 1-3 build and validate a progress-trace pipeline that replays archived student repos through the course toolchain and aligns every commit with preceding feedback events. Months 4-5 model which feedback types and time windows precede progress and run an offline LLM-hint alignment study at stuck commits. Month 6 writes up the measure, the findings, and a released anonymized-trace schema.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Scope and data audit: inventory archived toolchain-first C++ repos, CI logs, and Jolly Feedback email logs; obtain an IRB determination for secondary use of de-identified data; review help-seeking and progress-metric literature",
+            "deliverable": "Data inventory, de-identification script, annotated bibliography, and refined RQs"
+          },
+          {
+            "month": 2,
+            "goal": "Build the replay pipeline: check out each commit in a container, run Clang-Tidy, the staff Google Test suite, and coverage, and store per-commit indicator vectors",
+            "deliverable": "Open-source progress-trace tool plus a trace database covering at least two cohorts"
+          },
+          {
+            "month": 3,
+            "goal": "Align feedback events (CI failures, autograder emails, TA review comments) to commits and validate indicators against final grades and Becker's RED on compile logs where available",
+            "deliverable": "Validation report: correlation of trace-derived progress with outcomes, and indicator reliability"
+          },
+          {
+            "month": 4,
+            "goal": "Model event-to-progress: survival and multinomial models of forward, regression, or no-change by feedback type, content, and response window",
+            "deliverable": "Results tables and figures on which feedback types move code forward and when"
+          },
+          {
+            "month": 5,
+            "goal": "Offline LLM hint alignment: at stuck commits, generate solution-free hints with two or three prompting strategies and score whether each hint targets the indicator the student later fixed",
+            "deliverable": "Hint-alignment benchmark and comparison of prompting strategies"
+          },
+          {
+            "month": 6,
+            "goal": "Finalize paper and release artifacts",
+            "deliverable": "Submitted paper draft plus released trace schema and pipeline"
+          }
+        ],
+        "targetVenues": [
+          "SIGCSE TS",
+          "ICER",
+          "EDM",
+          "ITiCSE"
+        ],
+        "resources": "Archived toolchain-first C++ course repos and CI logs (2,200+ repos across cohorts), Jolly Feedback logs, Docker-based runners (a modest cloud or lab machine is enough), a small LLM budget for offline hint generation (or local models), and one or two undergraduate research assistants for pipeline engineering and event labeling.",
+        "risks": [
+          {
+            "risk": "Old commits fail to build under the current toolchain, leaving gaps in traces",
+            "mitigation": "Pin toolchain versions per cohort in container images and record build failure as its own indicator state rather than dropping the commit"
+          },
+          {
+            "risk": "Most feedback events are not followed by a commit in the window (the source paper saw only 27.7%), shrinking the analyzable sample",
+            "mitigation": "Treat 'no follow-up commit' as an outcome, use survival analysis over variable windows, and pool across cohorts"
+          },
+          {
+            "risk": "Secondary analysis of student code still needs an IRB determination and careful de-identification",
+            "mitigation": "Request an exempt or not-human-subjects determination in month 1, strip author metadata, and keep all LLM calls on de-identified code"
+          }
+        ],
+        "humanSubjects": false
+      }
+    }
+  ]
+}

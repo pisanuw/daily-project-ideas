@@ -490,3 +490,7 @@
 | 2026-09-27 | SQL Counterexample Grader | Teaching Tool | 1-2 Weeks |
 | 2026-09-27 | System 1 vs System 2 Showdown | Classroom Assignment | Multi-week |
 | 2026-09-27 | Clause-Anchored LLM Hints for SQL DDL/DML: A Mutation Benchmark for Localized, Solution-Free Feedback on State-Changing Statements | Research | Research |
+| 2026-09-28 | Repo Weight Map | Side Project | Weekend |
+| 2026-09-28 | Project Pitch Census | Teaching Tool | 1-2 Weeks |
+| 2026-09-28 | Build Your Own Code Search Engine | Classroom Assignment | Multi-week |
+| 2026-09-28 | Toolchain Progress Traces: Measuring Which Feedback Events Actually Move Student Code Forward in a Toolchain-First Course | Research | Research |
