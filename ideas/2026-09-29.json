@@ -1,0 +1,132 @@
+{
+  "date": "2026-09-29",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Reverse Minesweeper Studio",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "Paint a picture with mines and the app tells you whether the resulting Minesweeper board can be solved without a single guess, highlighting exactly where a player would be forced to gamble.",
+      "description": "Reverse Minesweeper Studio flips the classic game: instead of clearing mines, you draw them. Pixel-paint a heart, a name, or a logo onto a grid, pick a safe starting cell, and a client-side constraint solver plays the board from that opening using only logical deduction (single-cell rules, then subset and pairwise constraint reasoning, then a small exact solver over the frontier). When the solver gets stuck it paints the undecidable frontier in amber, shows the competing mine configurations that fit the visible numbers, and suggests the smallest mine edit that removes the ambiguity. Once a board is guess-free, it exports as a shareable URL that decodes into a playable puzzle, so friends can uncover your hidden drawing. A difficulty meter reports which deduction tiers were needed, so you can tune a board from 'beginner logic' to 'needs global mine count'.",
+      "keyFeatures": [
+        "Pixel-paint mine editor with a selectable safe opening cell",
+        "Tiered logical solver (trivial rules, subset reasoning, exact frontier enumeration) that never guesses",
+        "Amber highlighting of guess-forcing regions with the competing mine layouts shown side by side",
+        "Minimal-edit suggestion that makes an ambiguous board uniquely solvable",
+        "Shareable URL-encoded boards with a difficulty meter based on which deduction tiers were required"
+      ],
+      "techStack": "React + Vite, Tailwind, TypeScript constraint solver in a Web Worker, URL-hash board encoding, Netlify static hosting (no backend)",
+      "whyInteresting": "It is a compact, fully client-side showcase of constraint satisfaction and search that is fun to share, and the solver tiers double as a clean explanation of how humans actually reason about Minesweeper. Easy to finish in a weekend, easy to demo, and a natural stepping stone into CSP material in an AI course.",
+      "inspiredBy": "Reverse Minesweeper on Show HN (bestofshowhn.com/2026/7) plus the constraint-solving puzzle trend on HN"
+    },
+    {
+      "n": 2,
+      "title": "Elevator Algorithm Lab",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "A browser sandbox where students write an elevator dispatch policy in JavaScript, run it against instructor-authored traffic scenarios, and discover that SCAN and LOOK disk scheduling are literally elevator algorithms.",
+      "description": "Operating systems courses teach FCFS, SSTF, SCAN, and LOOK disk scheduling as abstract lists of cylinder numbers, and students rarely feel why starvation matters. Elevator Algorithm Lab makes the same ideas physical: a building with animated cars and waiting passengers, and a code panel where students implement a dispatch function that receives the event queue and returns the next floor. Instructors author scenarios as small JSON files (morning rush, lunch spike, one impatient passenger on floor 1 while everyone else rides between 30 and 40) and each run reports average wait, 95th-percentile wait, max wait (starvation), and energy (floors travelled). A side-by-side mode replays the same trace under two policies, and a 'disk view' toggle re-renders the identical run as a disk head sweeping across cylinders to make the mapping explicit. A class leaderboard stores only scores and policy hashes, and instructors can lock hidden scenarios for grading so students cannot overfit.",
+      "keyFeatures": [
+        "Animated multi-car building simulator driven by a student-written dispatch function in a sandboxed Web Worker",
+        "Instructor-authored JSON traffic scenarios, including hidden grading scenarios",
+        "Metrics for mean, p95 and max wait (starvation) plus energy, with deterministic seeded replays",
+        "Side-by-side policy comparison on the same trace and a 'disk view' that maps floors to cylinders",
+        "Class leaderboard and CSV export of per-student results for grading"
+      ],
+      "techStack": "React + Vite, Tailwind, Canvas/SVG animation, Web Worker sandbox for student code, Supabase (leaderboard and scenarios), Netlify",
+      "whyInteresting": "It turns a dry OS topic into a game with a real tradeoff between throughput and fairness, and the disk-view toggle gives students a durable mental model instead of a memorized table. Prior art like Elevator Saga proves students enjoy the format; this adds instructor control, fairness metrics, and the explicit bridge to scheduling theory.",
+      "inspiredBy": "Interactive 'Elevators' explainer on Show HN (bestofshowhn.com/2026/7) and the classic Elevator Saga coding game"
+    },
+    {
+      "n": 3,
+      "title": "Chokepoint Simulator",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "Students build a web app that loads a real trade or transport network, lets users close a node or link, and recomputes flows, reroutes, and bottlenecks with max-flow/min-cut and shortest-path algorithms.",
+      "description": "Graph algorithms become memorable when the graph is the world. In this multi-week assignment, teams ingest an open network dataset (country-to-country trade flows, a national rail or airline route map, or a city's transit graph), build a capacity-weighted directed graph, and implement the core algorithms themselves: Dijkstra for rerouting cost, Edmonds-Karp or Dinic for max flow between chosen regions, and min-cut extraction to name the true chokepoints. The front end is a map where a user clicks to 'close' a port, strait, station, or edge, and the app animates how flow redistributes, which destinations lose supply, and how much extra distance the reroutes cost. Milestones progress from data cleaning and graph construction, to correctness tests against networkx on small graphs, to performance work on the full dataset, to a written 'what-if' brief where each team defends one scenario with numbers. An optional stretch adds betweenness centrality to compare 'busy' nodes against 'critical' ones.",
+      "keyFeatures": [
+        "Ingestion pipeline turning an open dataset into a capacity-weighted directed graph",
+        "Student-implemented Dijkstra, max-flow (Edmonds-Karp or Dinic), and min-cut extraction with tests against networkx",
+        "Interactive map where closing a node or edge animates flow redistribution and reroute cost",
+        "Scenario comparison table (lost supply, added distance, new bottlenecks) exportable as CSV",
+        "Final 'what-if' brief that defends one disruption scenario with algorithmic evidence"
+      ],
+      "techStack": "Python + Flask API (algorithms, tests with pytest against networkx), React + Vite + Tailwind front end, MapLibre GL or deck.gl for the map, open data such as UN Comtrade extracts, OpenFlights routes, or GTFS feeds",
+      "whyInteresting": "Max-flow/min-cut is usually taught on toy graphs and forgotten; here students see it name real bottlenecks and must reason about data quality, modeling choices, and performance. The deliverable is a portfolio piece with a genuine policy flavor, and the algorithms are hand-written so AI assistants cannot shortcut the core learning goal without the tests catching it.",
+      "inspiredBy": "'I simulated closing the Strait of Hormuz on real oil trade data' on Show HN (bestofshowhn.com/2026/7)"
+    },
+    {
+      "n": 4,
+      "title": "How Far Along Am I? Benchmarking Solution-Free Progress Estimators for Partial CS1 Programs",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Builds an offline benchmark from public programming-process logs to test whether test-pass ratios, AST edit distance, or LLM judgments best estimate how close a partial student program is to a correct solution, the signal behind progress-bar feedback.",
+      "description": "Asad et al. (ITiCSE 2025) found that CS1 students valued progress-bar feedback across all confidence levels, while on-demand hints mainly appealed to confident students, which makes the progress signal itself a promising, low-risk form of solution-free feedback. Yet the paper studies perceptions, not whether the underlying progress estimate is accurate, monotone, or robust to students who are on a different but valid path. This project builds a benchmark from public ProgSnap2 datasets (e.g., CodeWorkout / CSEDM) in which ground-truth 'distance to done' is derived from each student's own eventual correct submission and remaining edit steps, then compares three estimator families: test-pass ratio, structural distance to the nearest correct solution (in the style of data-driven hint systems), and LLM-judged progress with and without a rubric. Key metrics are rank correlation with remaining work, monotonicity (does the bar go backwards when students make genuine progress?), fairness across solution strategies, and leakage (does the estimator implicitly reveal the solution?). The result directly informs Pisan's solution-free hint agenda and a Jolly Feedback progress layer without requiring new human-subjects data.",
+      "papers": [
+        {
+          "title": "A Comparison of On-Demand Hints and Progress Bar Feedback on Programming Exercises",
+          "authors": "Inaas Asad, Naaz Sibia, Angela Zavaleta Bernuy, Michael Liut, Thomas Price, Andrew Petersen",
+          "venue": "ITiCSE 2025",
+          "year": 2025,
+          "doi": "10.1145/3724389.3730787",
+          "url": "https://doi.org/10.1145/3724389.3730787",
+          "abstract": "In a 12-week CS1 course with 1,260 students, learners solving Python exercises were randomly assigned to receive either on-demand hints or visual progress bar feedback. This pilot study investigated students' perceptions of both systems. Students valued both, with more confident students preferring on-demand hints, while progress bars were consistently perceived as beneficial across confidence levels.",
+          "relevance": "Establishes progress-bar feedback as a broadly welcomed, solution-free support, but leaves open how the progress estimate should be computed and whether it is trustworthy; this project supplies that missing validation layer."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "Adaptive Immediate Feedback Can Improve Novice Programming Engagement and Intention to Persist in Computer Science",
+          "authors": "Samiha Marwan, Ge Gao, Susan Fisk, Thomas W. Price, Tiffany Barnes",
+          "venue": "ICER 2020",
+          "year": 2020,
+          "url": "https://doi.org/10.1145/3372782.3406264",
+          "relevance": "Shows that immediate, objective-level progress feedback in iSnap improved engagement and intention to persist, motivating accurate progress estimation as a target worth benchmarking."
+        },
+        {
+          "title": "Data-Driven Hint Generation in Vast Solution Spaces: a Self-Improving Python Programming Tutor",
+          "authors": "Kelly Rivers, Kenneth R. Koedinger",
+          "venue": "International Journal of Artificial Intelligence in Education, 2017",
+          "year": 2017,
+          "url": "https://doi.org/10.1007/s40593-015-0070-z",
+          "relevance": "Provides the canonical structural-distance-to-nearest-solution approach (ITAP) that serves as the data-driven baseline estimator in the benchmark."
+        },
+        {
+          "title": "ProgSnap2: A Flexible Format for Programming Process Data",
+          "authors": "Thomas W. Price, David Hovemeyer, Kelly Rivers, et al.",
+          "venue": "ITiCSE 2020",
+          "year": 2020,
+          "url": "https://doi.org/10.1145/3341525.3387373",
+          "relevance": "The standard log format for the public datasets used to derive ground-truth trajectories, making the benchmark reproducible and extensible to other courses."
+        },
+        {
+          "title": "CSEDM Data Challenge Dataset (CodeWorkout CS1 Java submissions)",
+          "authors": "CSEDM Data Challenge organizers (NC State / Virginia Tech)",
+          "venue": "EDM 2021 CSEDM Workshop dataset",
+          "year": 2021,
+          "url": "https://sites.google.com/ncsu.edu/csedm-dc-2021/dataset",
+          "relevance": "A public, de-identified set of submission trajectories on 50 short CS1 exercises, supplying the raw material for progress ground truth without new data collection."
+        }
+      ],
+      "researchPlan": {
+        "overview": "Define an operational ground truth for 'progress' from existing submission trajectories, then benchmark three estimator families on accuracy, monotonicity, strategy fairness, and solution leakage. The findings yield design guidance and an open benchmark for progress-bar feedback in CS1 tools such as Jolly Feedback.",
+        "milestones": [
+          { "month": 1, "goal": "Literature review on progress feedback, data-driven hints, and LLM grading; select datasets and define ground-truth progress (remaining edit distance to the student's own final correct solution, and remaining submissions)", "deliverable": "Annotated bibliography, refined RQs, and a ground-truth specification document" },
+          { "month": 2, "goal": "Build the pipeline: parse ProgSnap2 logs, normalize code, compute ground truth, and cluster correct solutions by strategy", "deliverable": "Reproducible benchmark dataset with train/test splits and strategy labels" },
+          { "month": 3, "goal": "Implement baseline estimators: test-pass ratio (with generated test suites) and AST/tree edit distance to nearest correct solution", "deliverable": "Baseline results on accuracy (Spearman), monotonicity, and per-strategy error" },
+          { "month": 4, "goal": "Implement LLM estimators (zero-shot, rubric-guided, and reference-free) via the local claude CLI; add a leakage probe that checks whether estimator explanations reveal solution fragments", "deliverable": "Full comparison table plus leakage analysis" },
+          { "month": 5, "goal": "Error analysis: where estimators regress, penalize alternative strategies, or reward superficial edits; test a hybrid estimator combining tests and structure", "deliverable": "Qualitative failure taxonomy and a hybrid estimator prototype" },
+          { "month": 6, "goal": "Write up and release the benchmark and code", "deliverable": "Submitted paper draft and public benchmark repository" }
+        ],
+        "targetVenues": ["EDM", "SIGCSE TS", "ITiCSE", "L@S"],
+        "resources": "Public ProgSnap2 datasets (CodeWorkout/CSEDM, optionally other shared CS1 logs), a workstation for AST/edit-distance computation, the local claude CLI for LLM estimators (subscription, no per-token API cost), and one undergraduate or MS research assistant for pipeline and error analysis.",
+        "risks": [
+          { "risk": "Ground-truth progress defined from edit distance may not reflect conceptual progress (e.g., large refactors that are real progress).", "mitigation": "Report multiple ground-truth definitions (edit distance, remaining submissions, remaining failing tests) and check agreement; hand-label a small stratified sample to validate." },
+          { "risk": "Public datasets are Java and short-exercise only, limiting generalizability.", "mitigation": "Frame results as short-exercise CS1 findings, design the pipeline to be language-agnostic, and add a second dataset if a Python ProgSnap2 set is obtainable." },
+          { "risk": "LLM estimator results may shift across model versions.", "mitigation": "Pin model versions, cache all outputs, and release prompts so results can be re-run and compared." }
+        ],
+        "humanSubjects": false
+      }
+    }
+  ]
+}

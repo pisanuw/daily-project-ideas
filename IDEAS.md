@@ -494,3 +494,7 @@
 | 2026-09-28 | Project Pitch Census | Teaching Tool | 1-2 Weeks |
 | 2026-09-28 | Build Your Own Code Search Engine | Classroom Assignment | Multi-week |
 | 2026-09-28 | Toolchain Progress Traces: Measuring Which Feedback Events Actually Move Student Code Forward in a Toolchain-First Course | Research | Research |
+| 2026-09-29 | Reverse Minesweeper Studio | Side Project | Weekend |
+| 2026-09-29 | Elevator Algorithm Lab | Teaching Tool | 1-2 Weeks |
+| 2026-09-29 | Chokepoint Simulator | Classroom Assignment | Multi-week |
+| 2026-09-29 | How Far Along Am I? Benchmarking Solution-Free Progress Estimators for Partial CS1 Programs | Research | Research |
