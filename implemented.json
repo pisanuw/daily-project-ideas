@@ -199,6 +199,16 @@
       "url": "https://cipher-ladder.netlify.app",
       "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/cipher-ladder",
       "implementedOn": "2026-09-28"
+    },
+    {
+      "ref": {
+        "date": "2026-09-30",
+        "n": 1
+      },
+      "notes": "Built in one session, fully client-side: quote-or-refuse course Q&A where every answer is a passage from the instructor's syllabus, specs or policies (PDF via pdf.js, Markdown or text), verified word for word after whitespace/typography folding (labelled relaxations: capitalization, in-order ellipsis) and highlighted in a side-by-side viewer; otherwise 'Not stated in the course documents' plus the question words the documents never use. The idea's Claude Haiku proposer is a deterministic BM25 sentence retriever with heading context, a course-logistics synonym table and numbered-item matching ('lab 3' finds 'labs 1 to 4', 'lab 6' finds 'lab 5 onward', a passage naming other lab numbers cannot answer), so there is no API key or server. A Check-a-quote mode verifies quotes pasted from a chatbot and word-diffs altered ones against the closest passage. Questions and 'did not answer' feedback are logged per browser, exported as JSON, and merged into an instructor gap report (by week, similar wording, missing words; Markdown/CSV). Course packs travel deflated in the URL fragment or as hosted JSON (?pack=). 91 vitest tests, 99.7% statement coverage on the core; lint/typecheck/build green; end-to-end verified in headless Chromium at desktop and phone widths, including a Chromium-printed two-page PDF. Deployed via the GitHub Actions deploy workflow from the feature branch; the live index.html references the same bundle as the local build.",
+      "url": "https://where-does-it-say.netlify.app",
+      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/where-does-it-say",
+      "implementedOn": "2026-09-30"
     }
   ]
 }
