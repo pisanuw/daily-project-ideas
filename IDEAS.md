@@ -498,3 +498,7 @@
 | 2026-09-29 | Elevator Algorithm Lab | Teaching Tool | 1-2 Weeks |
 | 2026-09-29 | Chokepoint Simulator | Classroom Assignment | Multi-week |
 | 2026-09-29 | How Far Along Am I? Benchmarking Solution-Free Progress Estimators for Partial CS1 Programs | Research | Research |
+| 2026-09-30 | Where Does It Say | Teaching Tool | Weekend |
+| 2026-09-30 | One-Shot Arcade Bench | Side Project | Multi-week |
+| 2026-09-30 | Orbit Crowd Lab | Classroom Assignment | 1-2 Weeks |
+| 2026-09-30 | Breakpoints Without Answers: A Trace-Divergence Benchmark for LLM Breakpoint Recommendations in CS1 Debugging | Research | Research |

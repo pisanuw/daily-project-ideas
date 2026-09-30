@@ -295,3 +295,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-09-28 [note] Cipher Ladder (2026-09-25 n2) marked implemented: live at cipher-ladder.netlify.app, repo Claude-capstone/cipher-ladder. Deterministic solvers replace the LLM debrief, URL-encoded ladders and JSON exports replace Supabase. 65 vitest tests, 100% stmt coverage on core.
 
 2026-09-29 [doc] Created ideas/2026-09-29.json with 4 ideas: Reverse Minesweeper Studio, Elevator Algorithm Lab, Chokepoint Simulator, Progress Estimators (ITiCSE 2025 doi:10.1145/3724389.3730787)
+
+2026-09-30 [doc] Created ideas/2026-09-30.json with 4 ideas: Where Does It Say, One-Shot Arcade Bench, Orbit Crowd Lab, Breakpoints Without Answers (ITiCSE 2025 doi:10.1145/3724389.3730777)

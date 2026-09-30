@@ -1,0 +1,170 @@
+{
+  "date": "2026-09-30",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Where Does It Say",
+      "category": "Teaching Tool",
+      "complexity": "Weekend",
+      "summary": "A course-document Q&A box that is only allowed to answer by pointing at the exact sentence in your syllabus, spec, or policy, highlighted in place, and says 'not in the documents' otherwise.",
+      "description": "Students ask the same logistics questions all term ('can I use AI on lab 3?', 'is the late penalty per day?'), and generic chatbots answer confidently even when the syllabus is silent. Where Does It Say inverts the usual chatbot: the instructor drops in the syllabus, assignment specs, and course policies (PDF or Markdown), and every answer must be a verbatim span from those files. The LLM proposes candidate quotes, a deterministic verifier checks each quote is an exact substring of the source (after whitespace normalization), and the UI scrolls to and highlights the span in a side-by-side document view. If no span verifies, the app says 'not stated in the course documents' and logs the question, so the instructor gets a weekly list of real gaps in their syllabus. A short one-line paraphrase is allowed only alongside a verified quote.",
+      "keyFeatures": [
+        "Quote-or-refuse answering: every answer is a verified verbatim span with a highlight in the source document",
+        "Exact-substring verifier that rejects paraphrased or hallucinated 'quotes' before they reach the student",
+        "Side-by-side document viewer that jumps to the cited sentence",
+        "'Not in the documents' log that becomes an instructor report of unanswered syllabus gaps",
+        "Static deploy: documents chunked at build time, one serverless function for the LLM call"
+      ],
+      "techStack": "React + Vite + Tailwind, pdf.js for rendering and text layer, Claude API (Haiku) via a Netlify function, simple BM25 retrieval in the browser",
+      "whyInteresting": "It is a weekend-sized build that teaches the most important habit for trustworthy LLM apps (verify the model's claims against ground truth in code), and the 'gaps' log is genuinely useful for revising a syllabus between terms.",
+      "inspiredBy": "Show HN: Sezwhere, ask any document 'where does it say that?' (news.ycombinator.com/show, Sept 2026)"
+    },
+    {
+      "n": 2,
+      "title": "One-Shot Arcade Bench",
+      "category": "Side Project",
+      "complexity": "Multi-week",
+      "summary": "A public leaderboard that asks several LLMs to one-shot the same small arcade games from a fixed spec, then auto-playtests every build with scripted inputs in a headless browser and scores what actually works.",
+      "description": "Model comparisons for code generation usually rely on unit tests or vibes; games are a sharper test because they need a game loop, input handling, collision, state, and rendering all working together. One-Shot Arcade Bench defines 10-15 short game specs (Snake, Breakout, Frogger-lite, Pac-Man-lite, Tetris-lite) each with a tiny test hook contract (window.__game exposes score, lives, player position). Each model gets one prompt per spec; the resulting single HTML file is loaded in Playwright, driven by scripted input sequences and a random-input fuzzer, and scored on objective checks: does it boot without console errors, does the player move on input, does score increase after a scripted pellet eat, does game over trigger on collision, does it hold 60 fps. Every run stores a video clip, the code, and a per-check breakdown, and the site shows side-by-side replays so viewers can see how models fail differently. A 'spec ambiguity' page records checks that most models fail the same way, which usually means the spec, not the model, is wrong.",
+      "keyFeatures": [
+        "Versioned game specs with a minimal window.__game test-hook contract",
+        "Playwright harness with scripted input traces plus a random-input fuzzer and console-error capture",
+        "Objective per-check scoring (boots, moves, scores, dies, frame rate) instead of human ratings",
+        "Side-by-side replay videos and code diffs across models for the same spec",
+        "Spec-ambiguity report that flags checks failed identically by most models"
+      ],
+      "techStack": "Node + Playwright for the harness, React + Vite + Tailwind leaderboard, Claude API / Gemini API / local models via a small adapter layer, GitHub Actions for scheduled runs, static JSON results",
+      "whyInteresting": "It turns a fun Show HN meme into a reproducible evaluation harness, and the same harness doubles as an autograder pattern for game-programming assignments: spec plus test hook plus scripted playtest.",
+      "inspiredBy": "Show HN: Pac-Bench, how well can models one-shot a Pac-Man game? and Show HN: TinyAIArena (news.ycombinator.com/show, Sept 2026)"
+    },
+    {
+      "n": 3,
+      "title": "Orbit Crowd Lab",
+      "category": "Classroom Assignment",
+      "complexity": "1-2 Weeks",
+      "summary": "Students render hundreds of thousands of real asteroids orbiting the Sun in the browser, starting from a naive per-object loop and working up through typed arrays, instancing, and a GPU shader, measuring frame time at each step.",
+      "description": "A recent Show HN rendered 526k asteroids and every tracked satellite in real time, which is a perfect performance-engineering assignment hiding inside a pretty demo. Students download a slice of the public Minor Planet Center orbital elements (MPCORB) and implement Kepler's equation to propagate each body's position from its orbital elements. Stage 1 is a naive version (one object and one draw call per asteroid) that collapses at a few thousand bodies; Stage 2 moves elements into Float32Arrays and uses a single instanced draw; Stage 3 moves the Kepler solve itself into a vertex shader (or WebGPU compute shader) so the CPU only sends time. At each stage students record frame time versus body count in a built-in profiler panel and write a short report explaining where the bottleneck moved. Stretch goals: time scrubbing, color by orbit family, and picking a single asteroid to show its name and orbit.",
+      "keyFeatures": [
+        "Real orbital data from the Minor Planet Center, parsed into typed arrays",
+        "Kepler's equation solver (Newton iteration) implemented on CPU, then ported to a shader",
+        "Three required performance stages with a built-in frame-time vs. body-count chart",
+        "Autograder checks positions against reference values for a set of named asteroids at fixed dates",
+        "Report template asking students to explain each bottleneck shift with their own measurements"
+      ],
+      "techStack": "Vanilla TypeScript or React + Vite, Three.js (InstancedMesh) or raw WebGL2, optional WebGPU compute, Vitest for the Kepler solver tests",
+      "whyInteresting": "It teaches data-oriented design, the CPU/GPU boundary, and honest measurement with a result students are proud to show, and the numerical core (Kepler's equation) gives a crisp, autogradable correctness check.",
+      "inspiredBy": "Show HN: Real-time Solar System with 526k asteroids and all tracked satellites (news.ycombinator.com/show, Sept 2026)"
+    },
+    {
+      "n": 4,
+      "title": "Breakpoints Without Answers: A Trace-Divergence Benchmark for LLM Breakpoint Recommendations in CS1 Debugging",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Builds an automatic, no-human-subjects benchmark that scores whether LLM-recommended breakpoints actually land where a buggy student program first diverges from a correct one, and whether the accompanying explanation leaks the fix.",
+      "description": "The ITiCSE 2025 AI Debugging Assistant poster proposes recommending breakpoints and explaining them step by step inside the IDE, but there is no shared way to judge whether a recommended breakpoint is a good one. This project defines ground truth mechanically: pair each incorrect CS1 submission with its closest correct solution (as Refactory does), execute both on the failing test, and locate the first program point where variable state diverges. LLM breakpoint recommendations (several models and prompting strategies, with and without program slicing) are then scored on distance to the divergence point, whether the explanation directs attention to the diverging variable, and whether it leaks the repair, reusing the 'hints without a solution' framing from Pisan's SIGCSE 2021 work. The result is a reusable benchmark and a clear answer to whether breakpoint-style hints can be both well-localized and solution-free, which positions the debugger itself as a toolchain-first teaching instrument in the copilot era.",
+      "papers": [
+        {
+          "title": "AI Debugging Assistant: Enhancing Debugging",
+          "authors": "JetBrains Research (Berlin and Belgrade) team; the extended version lists Elizaveta Artser, Daniil Karol, Anna Potriasaeva, Aleksei Rostovskii, Katsiaryna Dzialets, Ekaterina Koshchenko, Xiaotian Su, April Yi Wang, Anastasiia Birillo (exact poster author subset not verified)",
+          "venue": "ITiCSE 2025",
+          "year": 2025,
+          "doi": "10.1145/3724389.3730777",
+          "url": "https://doi.org/10.1145/3724389.3730777",
+          "abstract": "Debugging is an essential skill in programming education, but current debugging approaches lack interactivity and personalization for students. The authors introduce an AI Debugging Assistant integrated into JetBrains IDEs that analyzes students' errors in real time and guides them through debugging by recommending breakpoints and explaining them at each step.",
+          "relevance": "Supplies the intervention (LLM-recommended, explained breakpoints) whose quality this project measures offline; the poster invites discussion of effectiveness but does not provide an automatic evaluation of breakpoint placement or solution leakage."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "Enhancing Debugging Skills with AI-Powered Assistance: A Real-Time Tool for Debugging Support",
+          "authors": "Elizaveta Artser, Daniil Karol, Anna Potriasaeva, Aleksei Rostovskii, Katsiaryna Dzialets, Ekaterina Koshchenko, Xiaotian Su, April Yi Wang, Anastasiia Birillo",
+          "venue": "ICSE SEET 2026 (arXiv:2601.02504)",
+          "year": 2026,
+          "url": "https://arxiv.org/abs/2601.02504",
+          "relevance": "Extended version of the source tool, describing its RAG plus program-slicing plus heuristics pipeline; gives the baseline design the benchmark should reproduce and compare against."
+        },
+        {
+          "title": "Re-factoring based Program Repair applied to Programming Assignments",
+          "authors": "Yang Hu, Umair Z. Ahmed, Sergey Mechtaev, Ben Leong, Abhik Roychoudhury",
+          "venue": "ASE 2019",
+          "year": 2019,
+          "url": "https://discovery.ucl.ac.uk/10091878/1/ase19.pdf",
+          "relevance": "Provides a public dataset of about 1,800 incorrect Python CS1 submissions with correct solutions, plus the control-flow alignment method needed to compute buggy-vs-correct trace divergence as ground truth."
+        },
+        {
+          "title": "Are Automated Debugging Techniques Actually Helping Programmers?",
+          "authors": "Chris Parnin, Alessandro Orso",
+          "venue": "ISSTA 2011",
+          "year": 2011,
+          "url": "https://web.eecs.umich.edu/~weimerw/2018-481/readings/debugging-helping.pdf",
+          "relevance": "Classic warning that fault-localization rankings do not automatically translate into programmer help; motivates scoring explanation quality and leakage, not just location accuracy."
+        },
+        {
+          "title": "Debugging: A Review of the Literature from an Educational Perspective",
+          "authors": "Renée McCauley, Sue Fitzgerald, Gary Lewandowski, Laurie Murphy, Beth Simon, Lynda Thomas, Carol Zander",
+          "venue": "Computer Science Education 18(2), 2008",
+          "year": 2008,
+          "url": "https://exhibit.xavier.edu/computer_science_faculty/5",
+          "relevance": "Frames novice debugging as a process (hypothesize, localize, repair); used to define rubric levels for whether an explanation supports localization without doing the repair."
+        }
+      ],
+      "researchPlan": {
+        "overview": "Month 1-2 build the ground-truth pipeline (buggy/correct alignment, trace capture, first-divergence detection) on the Refactory dataset plus mutation-seeded CS1 programs. Months 3-4 generate breakpoint recommendations from several LLMs and prompting/slicing variants and score them on localization and leakage. Months 5-6 analyze which bug types defeat breakpoint hints and write up the benchmark.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review on novice debugging, fault localization, and solution-free hints; scope bug classes and pick datasets",
+            "deliverable": "Annotated bibliography, refined research questions, and dataset plan (Refactory plus seeded mutants)"
+          },
+          {
+            "month": 2,
+            "goal": "Build trace-divergence ground truth: align buggy and closest correct programs, run failing tests with sys.settrace, detect first diverging line and variable",
+            "deliverable": "Open-source divergence tool and a labeled set of ~1,000 programs with divergence points"
+          },
+          {
+            "month": 3,
+            "goal": "Generate breakpoint recommendations with explanations across 3-4 LLMs and variants (plain prompt, with test output, with static slice, with dynamic slice)",
+            "deliverable": "Recommendation corpus with metadata and cost per recommendation"
+          },
+          {
+            "month": 4,
+            "goal": "Score recommendations: line distance to divergence, variable match, and a validated LLM-judge plus author-coded sample for solution leakage",
+            "deliverable": "Scoring harness, inter-rater agreement on leakage rubric, first results tables"
+          },
+          {
+            "month": 5,
+            "goal": "Error analysis by bug type (off-by-one, wrong condition, missing return, state mutation) and by program length; test whether slicing closes the gap",
+            "deliverable": "Analysis notebook and figures identifying where breakpoint hints fail"
+          },
+          {
+            "month": 6,
+            "goal": "Finalize paper and release benchmark",
+            "deliverable": "Submitted paper draft plus public benchmark repo"
+          }
+        ],
+        "targetVenues": [
+          "SIGCSE TS",
+          "ITiCSE",
+          "ICER",
+          "Koli Calling"
+        ],
+        "resources": "Refactory dataset (public) and optionally anonymized historical CS1 submissions from Pisan's own courses; modest LLM API budget (roughly 10-20k calls) or local open-weight models; one undergraduate or MS research assistant for Python tracing tooling and leakage coding; no special compute beyond a laptop and CI runners.",
+        "risks": [
+          {
+            "risk": "First-divergence point is ill-defined when the buggy and correct programs are structurally different",
+            "mitigation": "Restrict the primary benchmark to pairs with control-flow alignment (Refactory's matching), and report a separate 'unaligned' subset scored by variable-value divergence only"
+          },
+          {
+            "risk": "Leakage judgments are subjective and an LLM judge may be biased toward its own family",
+            "mitigation": "Use a short explicit rubric, double-code a stratified sample by hand, report agreement, and use a judge model from a different family than the recommenders"
+          },
+          {
+            "risk": "Offline localization accuracy may not reflect learning benefit",
+            "mitigation": "Frame claims as necessary-condition evidence, and design (but do not run) a follow-up classroom study as future work"
+          }
+        ],
+        "humanSubjects": false
+      }
+    }
+  ]
+}
