@@ -299,3 +299,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-09-30 [doc] Created ideas/2026-09-30.json with 4 ideas: Where Does It Say, One-Shot Arcade Bench, Orbit Crowd Lab, Breakpoints Without Answers (ITiCSE 2025 doi:10.1145/3724389.3730777)
 
 2026-09-30 [note] Where Does It Say (2026-09-30 n1) marked implemented: live at where-does-it-say.netlify.app, repo Claude-capstone/where-does-it-say. BM25 proposer + exact-substring verifier replace Haiku; 91 vitest tests, 99.7% stmt coverage.
+
+2026-10-01 [note] Claimed Elevator Algorithm Lab (2026-09-29 n2) as in progress: client-side elevator dispatch sandbox with SCAN/LOOK disk view, deterministic seeded scenarios, next Claude-capstone build.
