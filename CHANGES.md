@@ -303,3 +303,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-10-01 [note] Claimed Elevator Algorithm Lab (2026-09-29 n2) as in progress: client-side elevator dispatch sandbox with SCAN/LOOK disk view, deterministic seeded scenarios, next Claude-capstone build.
 
 2026-10-01 [note] Elevator Algorithm Lab (2026-09-29 n2) marked implemented: live at elevator-algorithm-lab.netlify.app, repo Claude-capstone/elevator-algorithm-lab. Supabase replaced by local leaderboard + share links; 53 vitest tests, 100% stmt coverage.
+
+2026-10-01 [doc] Created ideas/2026-10-01.json with 4 ideas: Page Wrecker, State Space Atlas, Lag Compensation Arena, Executable Buggy Tracers (ITiCSE 2025 doi:10.1145/3724389.3730797)

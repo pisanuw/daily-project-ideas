@@ -502,3 +502,7 @@
 | 2026-09-30 | One-Shot Arcade Bench | Side Project | Multi-week |
 | 2026-09-30 | Orbit Crowd Lab | Classroom Assignment | 1-2 Weeks |
 | 2026-09-30 | Breakpoints Without Answers: A Trace-Divergence Benchmark for LLM Breakpoint Recommendations in CS1 Debugging | Research | Research |
+| 2026-10-01 | Page Wrecker | Side Project | Weekend |
+| 2026-10-01 | State Space Atlas | Teaching Tool | 1-2 Weeks |
+| 2026-10-01 | Lag Compensation Arena | Classroom Assignment | Multi-week |
+| 2026-10-01 | Executable Buggy Tracers: Turning a Control-Structure Misconception Taxonomy into Runnable Student Models for Distractor Generation and Trace-Error Diagnosis | Research | Research |

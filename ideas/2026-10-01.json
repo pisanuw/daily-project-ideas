@@ -1,0 +1,132 @@
+{
+  "date": "2026-10-01",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Page Wrecker",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A bookmarklet that turns any webpage into a destructible physics platformer: headings, images, and paragraphs become solid blocks you can run on, shoot, and knock over.",
+      "description": "Inspired by a Show HN game that converts webpages into destructible platformers, Page Wrecker is a single script you drop into the bookmarks bar. On activation it walks the visible DOM, collects bounding boxes for block-level elements (headings, images, buttons, paragraphs, table cells), and creates a matching static rigid body for each in a 2D physics world drawn on a transparent canvas overlay. A small character spawns at the top of the page; the player jumps between real page elements, and a projectile or ground-pound turns a hit element into a dynamic body that falls, while the original DOM node is hidden and its screenshot texture tumbles away. A score counts the 'mass' of the page destroyed, and a reset restores the page exactly. The weekend scope is one character, one weapon, and a scoring rule; extensions include element-type behaviors (links bounce, images shatter) and a shareable 'wreck replay'.",
+      "keyFeatures": [
+        "DOM walker that converts visible block elements into physics bodies with matching bounds",
+        "Canvas overlay with a playable character, jumping, and a single destructive action",
+        "Hit elements detach and fall using a cached snapshot texture while the real node is hidden",
+        "Destruction score by element area and type, with a one-click restore of the original page",
+        "Runs fully client-side as a bookmarklet; nothing is sent anywhere"
+      ],
+      "techStack": "Vanilla TypeScript bundled by Vite into a single bookmarklet file, Matter.js or Planck.js for 2D physics, html2canvas-style element snapshots, Canvas 2D",
+      "whyInteresting": "It is instantly demoable on any site, it forces real thinking about the DOM box model and coordinate spaces, and it is a fun way to show students that every webpage is just a tree of rectangles.",
+      "inspiredBy": "Show HN: DOMolition, a game that turns webpages into destructible platformers (news.ycombinator.com/shownew, Oct 2026)"
+    },
+    {
+      "n": 2,
+      "title": "State Space Atlas",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "An AI-course teaching tool that computes and draws the entire state graph of small sliding-block puzzles like Klotski, so students can watch BFS, DFS, and A* explore it and see why heuristics matter.",
+      "description": "Search algorithms are usually taught on toy grids, where students never see the shape of the space they are searching. State Space Atlas takes a compact puzzle (Klotski, 8-puzzle, Rush Hour, Towers of Hanoi) and exhaustively enumerates every reachable state, then lays the graph out with a force-directed or layered (distance-from-start) layout, typically 10k to 30k nodes. Students pick an algorithm and watch the frontier spread over the atlas in real time, with counters for nodes expanded, frontier size, and peak memory. A heuristic editor lets students write their own heuristic in a small JavaScript function; the tool checks admissibility against true distances (which it knows, because it has the whole graph) and highlights any state where the heuristic overestimates. Instructors can load a custom puzzle definition and export a challenge: 'write a heuristic that expands fewer than N nodes on this start state'.",
+      "keyFeatures": [
+        "Exhaustive state enumeration with symmetry reduction and canonical state hashing",
+        "WebGL graph view of the full space, colored by distance to goal, with dead-end clusters visible",
+        "Step-by-step or animated BFS, DFS, IDDFS, greedy, and A* with live expansion counters",
+        "Student heuristic editor with automatic admissibility and consistency checks against true distances",
+        "Instructor puzzle loader and exportable 'beat this node count' challenges"
+      ],
+      "techStack": "React + Vite, TypeScript, Web Workers for enumeration, Sigma.js or regl for large-graph WebGL rendering, Vitest for solver and heuristic checks",
+      "whyInteresting": "Seeing the whole space turns abstract claims (exponential frontier, admissibility, consistency) into something students can point at, and the known true distances make heuristic quality fully auto-checkable without an LLM.",
+      "inspiredBy": "Show HN: Depuzzled, a compact Klotski puzzle solver in C++ (news.ycombinator.com/shownew, Oct 2026)"
+    },
+    {
+      "n": 3,
+      "title": "Lag Compensation Arena",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "A networking assignment where students build an authoritative-server multiplayer tank game on a real city map, then add client prediction, server reconciliation, interpolation, and lag compensation while a built-in network simulator injects latency and packet loss.",
+      "description": "A Show HN multiplayer game where players destroy buildings on a world map with tanks is a perfect hook for teaching netcode, a topic most students only meet as 'it feels laggy'. Students receive a starter with OpenStreetMap building footprints for a few city blocks and a naive client that sends inputs and waits for the server. Milestone 1 builds the authoritative server simulation over WebSockets with a fixed tick rate; Milestone 2 adds client-side prediction and server reconciliation with input sequence numbers; Milestone 3 adds entity interpolation for remote players; Milestone 4 implements server-side lag compensation (rewinding hitboxes to the shooter's view time) and documents the fairness trade-offs. A provided network simulator proxy adds configurable latency, jitter, and loss, and a replay tool records both client and server views side by side so students can show, with evidence, that each technique fixes a specific artifact.",
+      "keyFeatures": [
+        "Starter kit with OSM building footprints converted to destructible polygons",
+        "Authoritative fixed-tick server with input sequence numbers and state snapshots",
+        "Network conditions proxy (latency, jitter, packet loss) controllable from a debug panel",
+        "Side-by-side client vs. server replay viewer for diagnosing rubber-banding and unfair hits",
+        "Autograded scenarios: scripted bots under 150 ms latency must see bounded position error and consistent hit registration"
+      ],
+      "techStack": "TypeScript on Node.js (ws) for the server, React + Vite + Canvas or PixiJS for the client, osmtogeojson for map data, Vitest plus a headless bot harness for grading",
+      "whyInteresting": "It covers distributed systems ideas (authority, clocks, consistency vs. responsiveness) through something students already care about, and every technique has a visible, measurable before and after.",
+      "inspiredBy": "Show HN: World Strike, a multiplayer map where players destroy buildings with tanks (news.ycombinator.com/shownew, Oct 2026); Gabriel Gambetta's Fast-Paced Multiplayer article series"
+    },
+    {
+      "n": 4,
+      "title": "Executable Buggy Tracers: Turning a Control-Structure Misconception Taxonomy into Runnable Student Models for Distractor Generation and Trace-Error Diagnosis",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Encodes each misconception in a recent taxonomy of how students misread conditionals and loops as a small 'buggy interpreter', then uses those interpreters to generate tracing questions with principled distractors and to diagnose which misconception explains a wrong answer, benchmarking LLMs against the executable models.",
+      "description": "Eckert and Kautz's ITiCSE 2025 poster proposes a taxonomy of misconceptions and difficulties students have when reading and tracing simple control structures, explicitly as a basis for assessment tools. This project makes the taxonomy executable: for a restricted Python subset, each taxonomy entry (for example 'else branch also runs', 'loop body executes once', 'condition re-checked only at the end', 'while treated as if') becomes a modified interpreter rule, in the tradition of Brown and Burton's BUGGY models for arithmetic and the recent MalruleLib for mathematics. Running a program under each buggy interpreter yields the exact wrong trace a student holding that misconception would produce, which gives (1) automatically generated tracing items whose distractors each map to one named misconception, (2) a diagnostic engine that infers the most likely misconception set from a student's answers across items, and (3) solution-free hints that target the inferred rule rather than the answer. A second contribution is a benchmark asking whether LLMs can predict misconception-consistent wrong traces and diagnose the misconception from a trace, measuring the gap between executable and LLM-simulated student models.",
+      "papers": [
+        {
+          "title": "How Students (Mis)understand Simple Control Structures – An Attempt at a Taxonomy",
+          "authors": "Dimitri Eckert, Christian Kautz",
+          "venue": "ITiCSE 2025",
+          "year": 2025,
+          "doi": "10.1145/3724389.3730797",
+          "url": "https://doi.org/10.1145/3724389.3730797",
+          "abstract": "Being able to read and correctly trace code is an essential skill in computer science. This poster presents a taxonomy of the misconceptions and difficulties concerning this skill. The taxonomy was developed with the aim of creating a good basis for developing effective assessment tools and teaching interventions.",
+          "relevance": "Supplies the empirically grounded misconception catalogue (from student quizzes and interviews) that this project operationalizes; the authors name assessment tools as the intended use, which is exactly what executable models enable."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "How Students (Mis)understand Conditionals and Loops -- A Taxonomy",
+          "authors": "Dimitri Eckert, Christian Kautz",
+          "venue": "arXiv preprint 2605.26966, 2026",
+          "year": 2026,
+          "url": "https://arxiv.org/abs/2605.26966",
+          "relevance": "The extended version of the source poster, built with the Extended Taxonomy Design Process; it provides the full category definitions needed to write one interpreter rule per misconception."
+        },
+        {
+          "title": "Diagnostic Models for Procedural Bugs in Basic Mathematical Skills",
+          "authors": "John Seely Brown, Richard R. Burton",
+          "venue": "Cognitive Science 2(2), 1978",
+          "year": 1978,
+          "url": "https://doi.org/10.1207/s15516709cog0202_4",
+          "relevance": "The classic BUGGY approach: represent each misconception as a perturbation of a correct procedure and diagnose students by which perturbation reproduces their answers. This project transfers that method from subtraction to program tracing."
+        },
+        {
+          "title": "MalruleLib: Large-Scale Executable Misconception Reasoning with Step Traces for Modeling Student Thinking in Mathematics",
+          "authors": "Xinghe Chen, Naiming Liu, Shashank Sonkar",
+          "venue": "arXiv preprint 2601.03217, 2026",
+          "year": 2026,
+          "url": "https://arxiv.org/abs/2601.03217",
+          "relevance": "A modern analogue in mathematics: 101 misconceptions encoded as executable procedures, with a benchmark showing LLMs lose accuracy at predicting misconception-consistent answers on rephrased problems. Provides the benchmark design to mirror for code tracing."
+        },
+        {
+          "title": "Simulating Students or Sycophantic Problem Solving? On Misconception Faithfulness of LLM Simulators",
+          "authors": "Heejin Do, Shashank Sonkar, Mrinmaya Sachan",
+          "venue": "arXiv preprint 2605.12748, 2026",
+          "year": 2026,
+          "url": "https://arxiv.org/abs/2605.12748",
+          "relevance": "Shows LLM student simulators tend to drop their misconceptions sycophantically; motivates using executable interpreters as ground truth and measuring how faithfully LLMs simulate a given control-flow misconception."
+        }
+      ],
+      "researchPlan": {
+        "overview": "First, formalize the taxonomy as a set of buggy interpreter rules over a small Python subset and validate that each rule reproduces the example errors reported by Eckert and Kautz. Then build an item generator and Bayesian diagnoser on top of the interpreters, and finally benchmark LLMs on predicting and diagnosing misconception-consistent traces, comparing them to the executable models.",
+        "milestones": [
+          { "month": 1, "goal": "Read the full taxonomy and related control-flow misconception literature; define the Python subset (if/elif/else, while, for over range, break/continue, simple assignment and print)", "deliverable": "Annotated bibliography, mapping table from taxonomy categories to candidate interpreter perturbations, refined research questions" },
+          { "month": 2, "goal": "Implement a reference tracer plus one buggy interpreter per mappable misconception; flag categories that are not procedural (e.g., reading difficulties) as out of scope", "deliverable": "Open-source 'buggy tracer' library with unit tests reproducing the taxonomy's published examples" },
+          { "month": 3, "goal": "Build the item generator: search over program templates for items where buggy interpreters disagree with each other and with the correct trace, maximizing diagnostic power", "deliverable": "Generated item bank with per-distractor misconception labels and information-gain scores" },
+          { "month": 4, "goal": "Implement a Bayesian diagnoser over answer patterns (allowing slips and multiple co-occurring misconceptions) and evaluate it on simulated students with known misconception sets", "deliverable": "Diagnoser with recovery-accuracy curves versus number of items administered" },
+          { "month": 5, "goal": "Benchmark several open and frontier LLMs on (a) predicting the wrong trace given a named misconception and (b) diagnosing the misconception from a wrong trace, including rephrased programs", "deliverable": "Benchmark release and results table comparing LLM and executable-model performance" },
+          { "month": 6, "goal": "Write up the method, item bank, and benchmark; outline a follow-up classroom validation study", "deliverable": "Submitted paper draft plus public dataset and code" }
+        ],
+        "targetVenues": ["SIGCSE TS", "ITiCSE", "Koli Calling", "AIED"],
+        "resources": "One graduate or senior undergraduate research assistant with interpreter or compiler background; a Python sandbox for running buggy interpreters; modest LLM API or local-model budget for the benchmark (local open-weight models via the claude CLI or Ollama can keep cost low); optionally an existing anonymized set of CS1 tracing-exam answers for later validation.",
+        "risks": [
+          { "risk": "Some taxonomy categories describe reading or vocabulary difficulties rather than a consistent alternative procedure, so they cannot be expressed as interpreter rules.", "mitigation": "Explicitly scope the work to the procedurally expressible subset, report coverage, and treat non-procedural categories as a separate label for the LLM diagnosis task only." },
+          { "risk": "Simulated students drawn from the buggy interpreters may be too clean, overstating diagnoser accuracy.", "mitigation": "Inject slips, mixed misconceptions, and inconsistent application rates; plan a follow-up validation on real anonymized exam answers." },
+          { "risk": "The poster's short format may leave category definitions ambiguous.", "mitigation": "Use the extended arXiv version of the taxonomy and contact the authors to confirm interpretations of edge cases." }
+        ],
+        "humanSubjects": false
+      }
+    }
+  ]
+}
