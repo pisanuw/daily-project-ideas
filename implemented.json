@@ -215,8 +215,10 @@
         "date": "2026-09-29",
         "n": 2
       },
-      "placeholder": true,
-      "notes": "In progress since 2026-10-01"
+      "notes": "Built in one session, fully client-side: students write dispatch(car, state) in JavaScript and it runs in a Web Worker (killed after 8 s) against seeded scenarios in an animated SVG building with two to three cars, door time and capacity. Six built-in scenarios (textbook disk trace, morning rush, lunch spike, starvation trap, quiet evening, cylinder storm) plus instructor JSON with deterministic generators (up-peak, down-peak, lunch, interfloor) and a hidden flag for grading; disk scenarios are kind: disk. Metrics: mean, p95 and max wait (unserved count until max time), mean ride, energy (floors travelled = head movement), finish time, stops, served/unserved. Side-by-side compare replays two policies in sync; the disk view redraws the same run as cylinder across, time down. Six presets (FCFS, SSTF, SCAN, LOOK, C-LOOK, zoned LOOK) as readable source; tests pin the textbook head-movement numbers 640/236/236/208/326. Supabase replaced by a localStorage leaderboard (names, scores, policy hash only) with CSV/JSON export and import, and share links that deflate the policy and scenario into the URL fragment. Cars go straight to the floor the policy names (no en-route stops), which keeps the model identical to disk scheduling. 53 vitest tests, 100% statement coverage on core; lint/typecheck/build green; verified in headless Chromium at desktop and phone widths. Deployed via the GitHub Actions deploy workflow (site created first try, runner verified 200), siteId pinned afterward.",
+      "url": "https://elevator-algorithm-lab.netlify.app",
+      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/elevator-algorithm-lab",
+      "implementedOn": "2026-10-01"
     }
   ]
 }

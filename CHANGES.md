@@ -301,3 +301,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-09-30 [note] Where Does It Say (2026-09-30 n1) marked implemented: live at where-does-it-say.netlify.app, repo Claude-capstone/where-does-it-say. BM25 proposer + exact-substring verifier replace Haiku; 91 vitest tests, 99.7% stmt coverage.
 
 2026-10-01 [note] Claimed Elevator Algorithm Lab (2026-09-29 n2) as in progress: client-side elevator dispatch sandbox with SCAN/LOOK disk view, deterministic seeded scenarios, next Claude-capstone build.
+
+2026-10-01 [note] Elevator Algorithm Lab (2026-09-29 n2) marked implemented: live at elevator-algorithm-lab.netlify.app, repo Claude-capstone/elevator-algorithm-lab. Supabase replaced by local leaderboard + share links; 53 vitest tests, 100% stmt coverage.
