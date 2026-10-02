@@ -235,8 +235,10 @@
         "date": "2026-10-01",
         "n": 2
       },
-      "placeholder": true,
-      "notes": "In progress since 2026-10-02"
+      "notes": "Built in one session, fully client-side: a Web Worker enumerates every reachable state of Towers of Hanoi (1-8 disks, 3-5 pegs), sliding tiles up to the 8-puzzle (181,440 states, farthest start at 31 moves), the classic Klotski (13,011 states with same-shape pieces merged and mirror reduction, 25,955 without; 116 single-step moves optimal) and Rush Hour boards, then a second BFS from the goals gives exact distance-to-goal for every state. Layered layout (column = distance from start, barycentre-ordered within columns) or radial, drawn on a 2D canvas with an offscreen edge cache; colour by distance, heuristic value or heuristic error; hover previews the state, click to inspect or make it the new start. BFS, DFS, graph-variant IDDFS, greedy and A* run as steppable searches with expanded/frontier/peak-memory/generated counters, all testing the goal at expansion for fair comparison, and a run table compares them on one atlas. Students write the body of a JavaScript heuristic; the checker evaluates it on every state and reports admissibility (overestimate count and worst margin), consistency, h(goal)=0 and informedness, outlining violations on the atlas. Presets include a deliberately inadmissible Manhattan x2 and an admissible-but-inconsistent Hanoi heuristic. Instructors export puzzle + algorithm + expansion target as a base64url challenge link that judges the student's run. Canvas 2D replaces the suggested Sigma.js/regl; no LLM anywhere. Space capped at 400k states. 65 vitest tests, 99.6% statement coverage on core; lint/typecheck/build green; verified in headless Chromium at desktop and phone widths. Deployed via the GitHub Actions deploy workflow (site created first try, runner verified 200), siteId pinned afterward.",
+      "url": "https://state-space-atlas.netlify.app",
+      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/state-space-atlas",
+      "implementedOn": "2026-10-02"
     }
   ]
 }
