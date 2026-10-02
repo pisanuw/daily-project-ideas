@@ -225,8 +225,10 @@
         "date": "2026-09-29",
         "n": 1
       },
-      "placeholder": true,
-      "notes": "In progress since 2026-10-02"
+      "notes": "Built in one session, fully client-side: drag to paint mines on a 4x4 to 40x40 canvas grid, pick a safe opening (or let Best start try up to 80 openings in a Web Worker), and a four-tier solver plays the board from that opening without ever guessing: single-cell rules, pairwise overlap bounds (1-2 and subset patterns), exhaustive per-component frontier enumeration with a 250k-node budget, then the global mine count (which is what clears a walled box). Solved means every safe cell is opened; the solver runs against the real board and throws if it ever flags a safe cell or opens a mine, swept over 120 random boards in tests. Stuck cells are amber, cells no number reaches are pale, Layout A/B overlays two mine placements for the smallest ambiguous region that both fit every visible number, and a worker ranks single-cell edits near the trouble (guess-free first, then cells uncovered, then easier tier). A slider replays the deduction step by step; the difficulty meter reports the hardest tier used. Boards travel in the URL fragment (about 270 characters at 40x40) and open in a play mode with flags, long-press, chording and a reveal of the drawing on a win. Vanilla TypeScript and canvas instead of the suggested React/Tailwind. Limitation: fixes are single-cell edits only, so some boards need fixing one step at a time. 40 vitest tests, 99.9% statement coverage on core; lint/typecheck/build green; verified in headless Chromium at desktop and phone widths. Deployed via the GitHub Actions deploy workflow (site created first try, runner verified 200), siteId pinned afterward.",
+      "url": "https://reverse-minesweeper-studio.netlify.app",
+      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/reverse-minesweeper-studio",
+      "implementedOn": "2026-10-02"
     }
   ]
 }

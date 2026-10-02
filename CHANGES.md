@@ -309,3 +309,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-10-02 [note] Routine again asked to add and build the ACM AI Leadership Summit schedule app; already shipped as Summit Navigator (2026-09-03 n1), recorded as 2026-09-23 n5. aisummit.acm.org still 403 (Cloudflare challenge via curl and WebFetch); no duplicate idea added.
 
 2026-10-02 [note] Claimed Reverse Minesweeper Studio (2026-09-29 n1) as in progress: client-side mine painter with a tiered no-guess solver, ambiguity highlighting and shareable URL boards, next Claude-capstone build.
+
+2026-10-02 [note] Reverse Minesweeper Studio (2026-09-29 n1) marked implemented: live at reverse-minesweeper-studio.netlify.app, repo Claude-capstone/reverse-minesweeper-studio. Four-tier no-guess solver, single-edit fix search; 40 vitest tests, 99.9% stmt coverage.
