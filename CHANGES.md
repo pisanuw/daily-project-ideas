@@ -313,3 +313,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-10-02 [note] Reverse Minesweeper Studio (2026-09-29 n1) marked implemented: live at reverse-minesweeper-studio.netlify.app, repo Claude-capstone/reverse-minesweeper-studio. Four-tier no-guess solver, single-edit fix search; 40 vitest tests, 99.9% stmt coverage.
 
 2026-10-02 [doc] Created ideas/2026-10-02.json with 4 ideas: Buried Lede Meter, Roster Redactor, Stego Arms Race, From Struggle Score to Hint Trigger (SIGCSE TS 2026 doi:10.1145/3770761.3777330)
+
+2026-10-02 [note] Claimed State Space Atlas (2026-10-01 n2) as in progress: exhaustive state graphs of Hanoi, sliding tiles, Klotski and Rush Hour drawn in the browser, animated BFS/DFS/IDDFS/greedy/A* with a heuristic admissibility checker, next Claude-capstone build.
