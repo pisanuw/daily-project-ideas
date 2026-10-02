@@ -1,0 +1,126 @@
+{
+  "date": "2026-10-02",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Buried Lede Meter",
+      "category": "Teaching Tool",
+      "complexity": "Weekend",
+      "summary": "Paste a TA reply, course announcement, or AI tutor answer and get an 'answer-first' score: where the actual answer sits, how much preamble hides it, and a rewrite that leads with what the reader needs.",
+      "description": "Inspired by a trending agent skill whose whole purpose is to stop coding agents from 'burying the answer', Buried Lede Meter checks any short explanatory text for the same problem. A deterministic analyzer splits the text into sentences and flags preamble (restating the question, hedges, apologies, 'great question'), locates the first actionable sentence (an imperative, a code block, a number, a yes/no), and reports its position as a percentage of the text. It also measures scannability: paragraph length, sentences over 30 words, nested caveats, and whether lists are used for steps. An optional Claude call produces an answer-first rewrite with a strict rule that it may only reorder and trim, never add facts, and the UI shows a word-level diff so the author can check nothing was invented. Weekend scope is the analyzer, the score card, and the diff; a second pass could add a batch mode for an LMS announcement export.",
+      "keyFeatures": [
+        "Deterministic 'answer position' metric: how far into the text the first actionable sentence appears",
+        "Preamble and hedge detector with highlighted spans and counts",
+        "Scannability checks (wall-of-text paragraphs, long sentences, steps not formatted as a list)",
+        "Optional reorder-and-trim rewrite with a word-level diff that proves no new claims were added",
+        "Side-by-side mode to compare two answers to the same question (e.g., TA vs. AI tutor)"
+      ],
+      "techStack": "React + Vite + Tailwind, a small rule-based NLP module (sentence splitter, regex and word-list classifiers), jsdiff for the diff view, optional Claude API (Haiku) call behind a toggle",
+      "whyInteresting": "Students with ADHD, dyslexia, or second-language readers pay the highest cost for buried answers, and both TAs and AI tutors do it constantly. A measurable, mostly deterministic score makes the habit visible and gives a concrete accessibility lesson about writing for the reader.",
+      "inspiredBy": "ayghri/i-have-adhd, a GitHub Trending agent skill for ADHD-friendly, answer-first output (gittrend.io weekly report 2026-W37)"
+    },
+    {
+      "n": 2,
+      "title": "Roster Redactor",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "A fully in-browser tool that finds and blurs student names, emails, IDs, and faces in screenshots and photos before an instructor drops them into slides, so sharing an example of student work does not leak who wrote it.",
+      "description": "Instructors constantly screenshot student code, forum posts, Zoom galleries, whiteboard photos, and gradebook views to use as examples, and each one is a small privacy leak. Roster Redactor takes an image, runs OCR in the browser, and matches recognized words against an optional class roster (names, preferred names, NetIDs, student numbers) plus generic patterns such as emails and ID-shaped numbers. It also runs an on-device face detector for photos and video-call grids. Every detection becomes an editable box with a reason label; the instructor can accept, remove, or draw extra boxes, then choose blur, pixelate, solid bar, or a consistent pseudonym ('Student A') rendered over the text. Nothing leaves the browser, including the roster, which is the main design constraint and the main thing that makes it trustworthy.",
+      "keyFeatures": [
+        "In-browser OCR with roster matching (fuzzy match on names, nicknames, and IDs) and email/ID regex detectors",
+        "On-device face detection for photos and video-call screenshots",
+        "Editable detection boxes with reason labels and manual add/remove",
+        "Redaction styles: blur, pixelate, black bar, or consistent pseudonym overlay",
+        "Batch mode for a folder of screenshots, with a per-image audit list of what was redacted",
+        "Zero network calls after load; roster stays in memory only"
+      ],
+      "techStack": "React + Vite + Tailwind, Tesseract.js for OCR, MediaPipe Face Detection (WASM), Fuse.js for fuzzy roster matching, Canvas 2D for rendering redactions, File System Access API for batch export",
+      "whyInteresting": "It solves a real FERPA-adjacent problem every instructor has, it is a good showcase of what can run entirely client-side, and the roster-matching and OCR-confidence tradeoffs (missed names vs. over-redaction) make a nice discussion of precision and recall with real stakes.",
+      "inspiredBy": "r/SideProject post: 'Built a free tool to automatically blur faces, license plates, and text in images' (reddit.com/r/SideProject, via gummysearch.com/r/SideProject)"
+    },
+    {
+      "n": 3,
+      "title": "Stego Arms Race",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "A multi-week security assignment where student teams build steganography encoders that hide messages in images and audio, then build steganalysis detectors and attack each other's submissions on a shared leaderboard.",
+      "description": "Inspired by an r/coolgithubprojects post about an engine that hides files inside JPEGs, MP4s, and audio, this assignment turns steganography into a structured red-team/blue-team exercise. In phase 1 (weeks 1-2) teams implement LSB embedding in PNG and WAV with a provided harness, then a smarter scheme (random-walk embedding keyed by a password, or embedding in JPEG DCT coefficients). In phase 2 (weeks 3-4) teams build detectors: visual bit-plane inspection, the chi-square attack on pairs of values, and RS steganalysis, all scored against a hidden test set of clean and stego images at several payload rates. In phase 3 (weeks 5-6) the course server publishes every team's stego outputs and every team runs its detector against the others, producing a leaderboard of 'stealth' (how rarely you are detected at a given payload) versus 'sight' (how well you detect others). A final short report asks each team to explain one detection they lost and why the statistics gave them away.",
+      "keyFeatures": [
+        "Starter harness with image/audio I/O, payload framing, and a capacity calculator",
+        "Graded checkpoints for LSB, keyed random-walk, and optional JPEG-domain embedding",
+        "Detector milestones: bit-plane viewer, chi-square attack, RS analysis, with ROC curves on a hidden test set",
+        "Cross-team tournament server that runs every detector on every team's stego outputs",
+        "Stealth vs. sight leaderboard plotted by payload rate",
+        "Reflection report template focused on explaining one lost detection"
+      ],
+      "techStack": "Python (NumPy, Pillow, SciPy) for student code, a Flask tournament server with SQLite, a small React + Vite + Tailwind leaderboard with ROC plots, GitHub Classroom for submissions",
+      "whyInteresting": "Steganography makes abstract ideas (bit manipulation, file formats, hypothesis testing, ROC curves, adversarial thinking) tangible and competitive. The arms-race structure means students must understand why a scheme leaks statistically, not just implement it, and the assignment works in security, systems, or data science courses.",
+      "inspiredBy": "r/coolgithubprojects post: 'I built a steganography engine that hides files inside JPEGs, MP4s, and audio using ML' (via gummysearch.com/r/coolgithubprojects)"
+    },
+    {
+      "n": 4,
+      "title": "From Struggle Score to Hint Trigger: A Keystroke Replay Benchmark for Timing Solution-Free Hints in CS1",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Replays public CS1 keystroke logs to test when a tutor should step in: compares TrackIt-style rule thresholds, learned detectors, and LLM judges on how early and how accurately they flag unproductive struggle, then checks whether hints generated at those moments stay solution-free.",
+      "description": "TrackIt (SIGCSE TS 2026) shows that rule-based keystroke indicators (long pauses, frequent deletions, low insert-delete ratios, paste events) line up with students' self-reported struggle, but it scores struggle after the fact and stops short of deciding when to intervene. This project reframes struggle detection as a hint-timing problem and evaluates it offline by replaying the two public, deidentified CS1 keystroke datasets released by Edwards et al., so no new human-subjects data is needed. For each replayed session we label proxy outcomes from the log itself (abandonment, very long time-to-correct, repeated failing runs) and measure each detector's lead time, false-alarm rate, and alarm burden per hour. At each trigger point an LLM generates a hint under the 'hints without a solution' constraint from Pisan's SIGCSE 2021 work, and an automated leakage checker plus a small expert-rated sample measure whether hints given earlier are more or less likely to give away the answer. The contribution is a reusable benchmark and a concrete recommendation for when proactive, solution-free hints should fire in tools like Jolly Feedback.",
+      "papers": [
+        {
+          "title": "TrackIt: An Interactive Rule-Based Tool for Detecting Struggling Programming Students",
+          "authors": "Authors from Kansas and Nebraska institutions (names not captured in the proceedings index)",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770761.3777330",
+          "url": "https://doi.org/10.1145/3770761.3777330",
+          "abstract": "TrackIt is a rule-based system that detects struggling programming students by analyzing keystroke data together with self-reported survey responses, applying predefined thresholds and scoring rules to place students in five struggle levels. It was validated in an introductory Python course with 40 students, 547 lab logs, and 130 homework keystroke logs. Long pauses, frequent deletions, low insert-delete ratios, and copy-paste events aligned closely with students' self-reports, especially on challenging assignments.",
+          "relevance": "Supplies the interpretable keystroke indicators and threshold-based struggle score that become the baseline hint-trigger policy; this project tests whether those rules fire early enough, and often enough but not too often, to drive real-time proactive hints."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "Review of CSEDM Data and Introduction of Two Public CS1 Keystroke Datasets",
+          "authors": "John Edwards, Kaden Hart, Raj Shrestha",
+          "venue": "Journal of Educational Data Mining 15(1), 2023",
+          "year": 2023,
+          "url": "https://doi.org/10.5281/zenodo.7646659",
+          "relevance": "Provides the two public, deidentified CS1 keystroke datasets (CC BY 4.0) that make an offline replay benchmark possible without collecting new student data."
+        },
+        {
+          "title": "Adaptive Immediate Feedback Can Improve Novice Programming Engagement and Intention to Persist in Computer Science",
+          "authors": "Samiha Marwan, Ge Gao, Susan Fisk, Thomas W. Price, Tiffany Barnes",
+          "venue": "ICER 2020",
+          "year": 2020,
+          "url": "https://doi.org/10.1145/3372782.3406264",
+          "relevance": "Shows that feedback triggered from edit patterns and idle time can improve engagement and persistence; it motivates proactive triggering and gives a comparison policy based on idle time and code state."
+        },
+        {
+          "title": "Extending the Hint Factory for the Assistance Dilemma: A Novel, Data-driven HelpNeed Predictor for Proactive Problem-solving Help",
+          "authors": "Mehak Maniktala, Christa Cody, Amy Isvik, Nicholas Lytle, Min Chi, Tiffany Barnes",
+          "venue": "Journal of Educational Data Mining, 2020",
+          "year": 2020,
+          "url": "https://par.nsf.gov/biblio/10277371-extending-hint-factory-assistance-dilemma-novel-data-driven-helpneed-predictor-proactive-problem-solving-help",
+          "relevance": "Frames the assistance dilemma (when to give unsolicited help) and shows a data-driven HelpNeed predictor in a logic tutor; this project ports that framing to keystroke-level programming data with LLM-generated hints."
+        }
+      ],
+      "researchPlan": {
+        "overview": "Build a replay harness over public CS1 keystroke logs, define log-derived proxy labels for unproductive struggle, and benchmark rule-based (TrackIt-style), learned, and LLM-judge trigger policies on lead time and false alarms. Then generate solution-free hints at each policy's trigger points and measure whether timing changes hint quality and answer leakage, ending with a recommended trigger policy and a released benchmark.",
+        "milestones": [
+          { "month": 1, "goal": "Literature review on keystroke analytics, the assistance dilemma, and proactive hints; obtain and profile the Edwards et al. datasets; define proxy struggle labels", "deliverable": "Annotated bibliography, dataset profile, and a written labeling spec with inter-rater check on 50 sessions" },
+          { "month": 2, "goal": "Build the replay harness that reconstructs code snapshots at any timestamp and streams keystroke features; reimplement TrackIt-style indicators and thresholds", "deliverable": "Open-source replay harness plus a TrackIt-style baseline detector with per-session alarm timelines" },
+          { "month": 3, "goal": "Train learned detectors (gradient boosting on windowed features, small sequence model) and an LLM judge that sees the code snapshot plus feature summary; evaluate all on lead time, precision, and alarms per hour", "deliverable": "Detector comparison tables and lead-time vs. false-alarm curves" },
+          { "month": 4, "goal": "Generate solution-free hints at each policy's trigger points with an open-weight model and Claude; build an automated leakage checker (does applying the hint's suggestions complete the solution?)", "deliverable": "Hint corpus tied to trigger points, with automated leakage and specificity scores" },
+          { "month": 5, "goal": "Expert rating of a stratified hint sample (2-3 instructors as raters, not subjects); analyze how timing affects hint usefulness and leakage", "deliverable": "Rated sample, agreement statistics, and a recommended trigger policy with thresholds" },
+          { "month": 6, "goal": "Write up and release the benchmark", "deliverable": "Submitted paper draft plus public benchmark (harness, labels, detectors, hint corpus)" }
+        ],
+        "targetVenues": ["SIGCSE TS", "EDM", "LAK", "ITiCSE"],
+        "resources": "The two public Edwards et al. CS1 keystroke datasets (CC BY 4.0); a laptop or single GPU for gradient boosting and a small sequence model; a local open-weight LLM (via Ollama) plus the local claude CLI for hint generation and judging; 2-3 instructors or senior TAs for a few hours of hint rating; one undergraduate RA for the replay harness.",
+        "risks": [
+          { "risk": "Log-derived proxy labels for struggle may not match what students actually felt, so detector accuracy could be measured against the wrong target", "mitigation": "Report results under several label definitions, validate labels by hand on a sample, and treat TrackIt's published indicator-to-self-report alignment as an external sanity check" },
+          { "risk": "Public datasets may lack assignment specs or tests needed to judge whether a hint leaks the solution", "mitigation": "Restrict hint experiments to problems with recoverable specs, and write reference solutions and tests for those problems so the leakage checker can execute hint-applied code" },
+          { "risk": "LLM judges and hint generators may be too slow or costly to run at every candidate trigger point", "mitigation": "Use the cheap rule-based detector as a gate and invoke the LLM only on candidate windows; use local open-weight models for bulk runs and reserve the claude CLI for a comparison subset" }
+        ],
+        "humanSubjects": false
+      }
+    }
+  ]
+}

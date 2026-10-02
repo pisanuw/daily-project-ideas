@@ -506,3 +506,7 @@
 | 2026-10-01 | State Space Atlas | Teaching Tool | 1-2 Weeks |
 | 2026-10-01 | Lag Compensation Arena | Classroom Assignment | Multi-week |
 | 2026-10-01 | Executable Buggy Tracers: Turning a Control-Structure Misconception Taxonomy into Runnable Student Models for Distractor Generation and Trace-Error Diagnosis | Research | Research |
+| 2026-10-02 | Buried Lede Meter | Teaching Tool | Weekend |
+| 2026-10-02 | Roster Redactor | Teaching Tool | 1-2 Weeks |
+| 2026-10-02 | Stego Arms Race | Classroom Assignment | Multi-week |
+| 2026-10-02 | From Struggle Score to Hint Trigger: A Keystroke Replay Benchmark for Timing Solution-Free Hints in CS1 | Research | Research |
