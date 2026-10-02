@@ -305,3 +305,7 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-10-01 [note] Elevator Algorithm Lab (2026-09-29 n2) marked implemented: live at elevator-algorithm-lab.netlify.app, repo Claude-capstone/elevator-algorithm-lab. Supabase replaced by local leaderboard + share links; 53 vitest tests, 100% stmt coverage.
 
 2026-10-01 [doc] Created ideas/2026-10-01.json with 4 ideas: Page Wrecker, State Space Atlas, Lag Compensation Arena, Executable Buggy Tracers (ITiCSE 2025 doi:10.1145/3724389.3730797)
+
+2026-10-02 [note] Routine again asked to add and build the ACM AI Leadership Summit schedule app; already shipped as Summit Navigator (2026-09-03 n1), recorded as 2026-09-23 n5. aisummit.acm.org still 403 (Cloudflare challenge via curl and WebFetch); no duplicate idea added.
+
+2026-10-02 [note] Claimed Reverse Minesweeper Studio (2026-09-29 n1) as in progress: client-side mine painter with a tiered no-guess solver, ambiguity highlighting and shareable URL boards, next Claude-capstone build.
