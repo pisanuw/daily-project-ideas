@@ -245,8 +245,10 @@
         "date": "2026-10-03",
         "n": 2
       },
-      "placeholder": true,
-      "notes": "In progress since 2026-10-03"
+      "notes": "Built in one session, fully client-side in vanilla TypeScript + SVG (no React/Tailwind). The Enigma I core reproduces the textbook vectors, the double step, and the 1930 instruction-manual message with ring settings, plugboard and UKW-A. Every keypress returns its nine-hop signal path, drawn through plugboard, rotors and reflector with the full wiring faint behind it; cycle decompositions of each rotor and of the whole stack are shown. Crib sliding marks impossible offsets (letter enciphering to itself), the menu graph gets a fundamental cycle basis with loops coloured, and the Bombe runs in a Web Worker over up to 60 rotor orders x 17,576 positions: loops through the test letter are a fixed-point prefilter on the composed scramblers (Turing's test), survivors are propagated with Welchman's diagonal board, and a checking-machine pass rejects stops whose implied plugs conflict or whose other menu components die. The full search takes about a second in the browser (precomputed per-rotor-order scrambler tables, generation-tagged visited buffers). A tracer follows one hypothesis implication by implication, with the diagonal board switchable off. Challenge links carry ciphertext, crib and lightly scrambled settings; the generator guarantees no middle-rotor turnover inside the crib and the page grades a pasted decryption letter by letter. Stops report core positions at ring A, so random-ring challenges decrypt through the crib and drift after a turnover. 55 vitest tests, 98.8% statement coverage; lint/typecheck/build green. Deployed by the auto-discovering GitHub Actions deploy workflow to Netlify.",
+      "url": "https://bombe-bench.netlify.app",
+      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/bombe-bench",
+      "implementedOn": "2026-10-03"
     }
   ]
 }
