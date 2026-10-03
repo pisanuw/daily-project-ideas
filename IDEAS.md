@@ -510,3 +510,7 @@
 | 2026-10-02 | Roster Redactor | Teaching Tool | 1-2 Weeks |
 | 2026-10-02 | Stego Arms Race | Classroom Assignment | Multi-week |
 | 2026-10-02 | From Struggle Score to Hint Trigger: A Keystroke Replay Benchmark for Timing Solution-Free Hints in CS1 | Research | Research |
+| 2026-10-03 | Before the Sun Burns Out | Side Project | Weekend |
+| 2026-10-03 | Bombe Bench | Teaching Tool | 1-2 Weeks |
+| 2026-10-03 | Build Your Own Fantasy Console | Classroom Assignment | Multi-week |
+| 2026-10-03 | Predict the Damage: A Container-Verified Benchmark of LLM Reasoning About Shell Command Consequences for Solution-Free Linux Tutoring | Research | Research |

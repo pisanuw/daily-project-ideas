@@ -1,0 +1,127 @@
+{
+  "date": "2026-10-03",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Before the Sun Burns Out",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "Pick an algorithm and an input size, and watch its running time land on a log-scale timeline of the far future, from 'before your coffee cools' to 'after the last star dies'.",
+      "description": "Inspired by a Show HN 'Timeline of the Far Future' page, this weekend project turns growth rates into a gut feeling. The user chooses an algorithm (or a raw complexity class such as n log n, n^3, 2^n, n!), an input size n, and a machine speed (a laptop, a GPU, the whole world's compute). The app computes the operation count with big-number arithmetic and places a marker on a zoomable logarithmic timeline annotated with real events: a blink, a lecture, a semester, a human lifetime, recorded history, the Sun becoming a red giant, the last stars burning out. A slider on n animates the marker so students see 2^n leave the solar system somewhere between n=60 and n=90 while n^2 barely moves. A 'race' mode places several algorithms on the same timeline, and a share link encodes the scenario so instructors can drop a specific comparison into lecture slides.",
+      "keyFeatures": [
+        "Exact operation counts with BigInt and log-space math, so n! at n=200 still renders",
+        "Zoomable log timeline annotated with about 40 everyday and cosmic reference events",
+        "Machine presets from a 1 MHz 6502 to an estimate of all compute on Earth",
+        "Race mode that drops several algorithms on the same timeline at once",
+        "Animated n slider showing the moment each class crosses a human or cosmic boundary",
+        "Shareable URL encoding of every scenario for lecture slides"
+      ],
+      "techStack": "React + Vite + Tailwind, D3 for the log-scale axis and zoom, native BigInt, no backend (static Netlify deploy)",
+      "whyInteresting": "Students can recite that exponential is bad without feeling it. Putting 2^n next to the death of the Sun makes the difference between tractable and intractable memorable, and it is small, polished, and very shareable as a portfolio piece.",
+      "inspiredBy": "Show HN: 'Timeline of the Far Future' (news.ycombinator.com/show, early October 2026)"
+    },
+    {
+      "n": 2,
+      "title": "Bombe Bench",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "An in-browser Enigma you can open up and step through rotor by rotor, paired with a working Turing-Welchman Bombe that breaks messages from a crib so students see how a known-plaintext attack really worked.",
+      "description": "A trending Show HN 3D Enigma model shows how much people enjoy taking the machine apart, but most simulators stop at encryption. Bombe Bench pairs an accurate Enigma (rotors I-V, reflectors B/C, ring settings, plugboard, double-stepping) with the attack that broke it. Each keypress lights the current path through plugboard, three rotors, reflector, and back, with the wiring drawn as a permutation diagram. In attack mode the student enters ciphertext and a guessed crib; the tool slides the crib to discard impossible positions (Enigma never maps a letter to itself), builds the menu graph of letter pairs, highlights loops, and then runs a simulated Bombe over all rotor orders and positions, showing how each loop prunes plugboard hypotheses via contradiction. Instructors can generate challenge messages with hidden settings and a shareable link, turning the history lesson into a lab on permutations, graph cycles, and search-space pruning.",
+      "keyFeatures": [
+        "Historically accurate Enigma I with double-stepping, ring settings, and plugboard",
+        "Signal-path visualization per keypress, plus permutation and cycle view of each rotor",
+        "Crib dragging with automatic elimination of positions where a letter would encrypt to itself",
+        "Menu graph builder that finds loops and explains why loops are what make the attack work",
+        "Simulated Bombe run in a Web Worker with a live count of surviving hypotheses",
+        "Instructor challenge generator with hidden settings and shareable links"
+      ],
+      "techStack": "React + Vite + Tailwind, TypeScript Enigma and Bombe core with Vitest, SVG for wiring and menu graphs, Web Workers for the search, static deploy",
+      "whyInteresting": "It connects discrete math (permutations, cycle structure), graph algorithms, and search pruning to one of the most famous stories in computing history. Existing classroom tools cover classical ciphers well, but almost none let students run the Bombe themselves and watch contradictions eliminate the key space.",
+      "inspiredBy": "Show HN: 'A working 3D model of an Enigma machine' (news.ycombinator.com/show, early October 2026)"
+    },
+    {
+      "n": 3,
+      "title": "Build Your Own Fantasy Console",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "Student teams design and implement a tiny PICO-8-style fantasy console: an instruction set, a VM with memory-mapped graphics and sound, an assembler, a sprite editor, and a cartridge format, then ship a playable game on it.",
+      "description": "Inspired by Pyxel (a retro Python game engine with built-in art and sound editors) and a Show HN space game with an embedded RISC-V emulator, this assignment has students build the whole stack of a retro machine. Weeks 1-2: design a small 16-bit ISA from a provided spec skeleton and implement the fetch-decode-execute VM with a test suite of instruction-level traces. Weeks 3-4: add memory-mapped I/O for a 128x128 16-color framebuffer, a sprite sheet region, a gamepad register, and a square-wave sound channel, and write a two-pass assembler with labels and macros. Weeks 5-6: build a browser sprite and tile editor that saves into the cartridge's memory regions, define a .cart file format (code, sprites, map, sfx), and write a game in their own assembly. Final week: cartridges are swapped between teams, which tests whether each team's spec was precise enough for another team's VM to run it.",
+      "keyFeatures": [
+        "Starter ISA spec template, trace-based autograder for instruction semantics",
+        "Memory-mapped framebuffer, sprites, input, and a simple sound channel",
+        "Two-pass assembler with labels, macros, and helpful error messages",
+        "In-browser sprite and tile editor writing directly into cartridge memory",
+        "Cartridge file format and a cross-team cartridge swap as the final compatibility test",
+        "Optional extension: a tiny high-level language compiled to the team's ISA"
+      ],
+      "techStack": "TypeScript or Python for the VM and assembler, HTML Canvas and Web Audio for display and sound, React + Vite for the editor, GitHub Classroom with a trace-replay autograder",
+      "whyInteresting": "It covers architecture, assemblers, file formats, and spec writing in one artifact that ends with a game students can show friends. The cartridge swap makes specification precision a graded, felt requirement rather than an abstract one, and the project scales from a CS2 systems unit to a full computer organization course.",
+      "inspiredBy": "Show HN: 'Pyxel - A Python retro game engine with built-in art and sound editors' and 'Our space game has a built-in RISC-V emulator that runs Linux' (news.ycombinator.com/show, early October 2026)"
+    },
+    {
+      "n": 4,
+      "title": "Predict the Damage: A Container-Verified Benchmark of LLM Reasoning About Shell Command Consequences for Solution-Free Linux Tutoring",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Builds a benchmark where every shell command in a Linux-learning challenge is actually executed in a sandbox, then tests whether LLM tutors correctly predict its effect on files, permissions, and processes before giving students solution-free hints.",
+      "description": "The Linux Luminarium (SIGCSE TS 2026 best paper) teaches Linux through small, setup-free challenges, including deliberately destructive 'shenanigan' scenarios such as fork bombs and rm -rf /. Students increasingly ask AI assistants what a command will do before running it, yet nobody has measured whether those explanations correctly predict the resulting system state. This project builds a container-verified benchmark: for a few thousand commands drawn from Luminarium-style challenges and NL2Bash, each command is run in a disposable container and the before/after difference is captured as a structured state change (files created, modified, deleted, permission bits, environment, processes, exit status). LLMs are then scored on predicting that state change qualitatively (what changes, in which direction, under which preconditions), echoing qualitative-process-style consistency checking, and on producing hints that steer a student toward a challenge goal without stating the command. The result is a reusable tool for toolchain-first courses and a measurement of where AI help for the command line is trustworthy and where it is dangerously confident.",
+      "papers": [
+        {
+          "title": "The Linux Luminarium: Learning Linux by Leveraging Lightweight Labs and Ludicrous Lessons",
+          "authors": "Yan Shoshitaishvili, Adam Doupe, Connor Nelson",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770762",
+          "url": "https://doi.org/10.1145/3770762",
+          "abstract": "Learning Linux typically demands initial setup overhead, creating a paradox where newcomers must already somewhat understand Linux environments to effectively learn about them. The authors developed an online interactive curriculum that divides core Linux concepts into small, focused challenges, and add intentionally playful and destructive scenarios such as deploying forkbombs and executing 'doomsday' commands like rm -rf / so students experience the system consequences of mismanagement.",
+          "relevance": "Supplies the challenge structure and the central pedagogical claim (understanding consequences of commands) that the benchmark operationalizes; its container-per-challenge infrastructure is exactly what makes ground-truth state capture cheap. Note: the DOI listed in the papers index (10.1145/3770762) is the proceedings-level DOI; the paper-specific DOI should be confirmed in the ACM DL."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "NL2Bash: A Corpus and Semantic Parser for Natural Language Interface to the Linux Operating System",
+          "authors": "Xi Victoria Lin, Chenglong Wang, Luke Zettlemoyer, Michael D. Ernst",
+          "venue": "LREC 2018",
+          "year": 2018,
+          "url": "https://aclanthology.org/L18-1491/",
+          "relevance": "About 9,000 English-to-Bash pairs of commonly used commands; a source of realistic commands to execute and label with ground-truth state changes beyond the Luminarium challenges."
+        },
+        {
+          "title": "InterCode: Standardizing and Benchmarking Interactive Coding with Execution Feedback",
+          "authors": "John Yang, Akshara Prabhakar, Karthik Narasimhan, Shunyu Yao",
+          "venue": "NeurIPS 2023 Datasets and Benchmarks",
+          "year": 2023,
+          "url": "https://arxiv.org/abs/2306.14898",
+          "relevance": "Provides a Docker-based Bash execution environment and evaluation harness that can be reused for capturing before/after filesystem state; its focus is generating commands, whereas this project evaluates predicting and explaining consequences for learners."
+        },
+        {
+          "title": "pwn.college DOJO (open-source challenge infrastructure behind the Linux Luminarium)",
+          "authors": "pwn.college team, Arizona State University",
+          "venue": "GitHub repository, ongoing",
+          "year": 2026,
+          "url": "https://github.com/pwncollege/dojo",
+          "relevance": "Open-source infrastructure for container-per-challenge learning environments; enables replicating Luminarium-style challenges and running commands safely at scale without building a sandbox from scratch."
+        }
+      ],
+      "researchPlan": {
+        "overview": "Build a sandboxed executor that turns any shell command plus a starting filesystem into a structured state-change record, assemble a labeled benchmark from Luminarium-style challenges and NL2Bash, then evaluate several LLMs on consequence prediction and solution-free hinting. The output is a public benchmark, a taxonomy of LLM failure modes on the command line, and a verified hint pipeline that only shows hints whose claims match executed reality.",
+        "milestones": [
+          { "month": 1, "goal": "Literature review (LLM shell agents, NL2Bash, CS-ed Linux instruction, solution-free hints) and design of the state-change schema (files, permissions, links, env, processes, exit codes)", "deliverable": "Annotated bibliography, refined RQs, and a versioned state-change JSON schema" },
+          { "month": 2, "goal": "Build the executor: disposable containers with seeded filesystems, filesystem and process snapshotting, and safe handling of destructive commands with time and resource limits", "deliverable": "Open-source executor with tests on 200 hand-checked commands" },
+          { "month": 3, "goal": "Assemble the benchmark: recreate about 100 Luminarium-style challenge states, add NL2Bash commands, inject realistic novice mistakes (wrong flags, wrong quoting, wrong working directory), and record ground-truth state changes", "deliverable": "Benchmark v1 (target 3,000 command/state items) with a dangerous-command subset" },
+          { "month": 4, "goal": "Evaluate 4-6 open and commercial LLMs on qualitative consequence prediction and on hint generation scored for correctness and solution leakage", "deliverable": "Results tables and a failure-mode taxonomy (missed side effects, wrong preconditions, overconfident safety claims)" },
+          { "month": 5, "goal": "Build an execution-verified hint pipeline that runs the model's claimed consequences against the executor and suppresses or repairs hints that disagree with reality", "deliverable": "Verified-hint prototype with ablation comparing raw vs. verified hints" },
+          { "month": 6, "goal": "Finalize paper and release benchmark, executor, and evaluation scripts", "deliverable": "Submitted paper draft plus public dataset and code release" }
+        ],
+        "targetVenues": ["SIGCSE TS", "ITiCSE", "Koli Calling", "AIED"],
+        "resources": "Docker or Podman on a single workstation or modest cloud VM; Luminarium challenge descriptions and the open-source pwn.college DOJO; NL2Bash dataset; local open-weight models via the claude CLI or Ollama for low-cost runs plus limited commercial API budget for comparison; one undergraduate RA for challenge recreation and label spot-checking.",
+        "risks": [
+          { "risk": "Destructive commands (fork bombs, rm -rf, chmod on system dirs) could escape the sandbox or exhaust the host", "mitigation": "Run as unprivileged users in rootless containers with cgroup PID, memory, and time limits; snapshot from a read-only base image; never mount host paths" },
+          { "risk": "State diffs are noisy (timestamps, caches, PIDs), making 'correct prediction' hard to score", "mitigation": "Normalize volatile fields, score at a qualitative level (created/deleted/changed and direction) rather than exact values, and validate the scorer on a hand-labeled subset" },
+          { "risk": "Results may not generalize from the benchmark to what students actually ask", "mitigation": "Seed novice-mistake variants from published Linux misconception lists and course forum categories; a later human-subjects study can validate with real student questions" }
+        ],
+        "humanSubjects": false
+      }
+    }
+  ]
+}

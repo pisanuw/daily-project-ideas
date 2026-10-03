@@ -317,3 +317,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-10-02 [note] Claimed State Space Atlas (2026-10-01 n2) as in progress: exhaustive state graphs of Hanoi, sliding tiles, Klotski and Rush Hour drawn in the browser, animated BFS/DFS/IDDFS/greedy/A* with a heuristic admissibility checker, next Claude-capstone build.
 
 2026-10-02 [note] State Space Atlas (2026-10-01 n2) marked implemented: live at state-space-atlas.netlify.app, repo Claude-capstone/state-space-atlas. Exhaustive state graphs with canvas atlas, five steppable searches, heuristic admissibility/consistency checker, challenge links; 65 vitest tests, 99.6% stmt coverage.
+
+2026-10-03 [doc] Created ideas/2026-10-03.json with 4 ideas: Before the Sun Burns Out, Bombe Bench, Build Your Own Fantasy Console, Predict the Damage (SIGCSE TS 2026 doi:10.1145/3770762)
