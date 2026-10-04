@@ -323,3 +323,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-10-03 [note] Claimed Bombe Bench (2026-10-03 n2) as in progress: in-browser Enigma I with signal-path view, crib menu builder and a Turing-Welchman Bombe simulation, next Claude-capstone build.
 
 2026-10-03 [note] Bombe Bench (2026-10-03 n2) marked implemented: live at bombe-bench.netlify.app, repo Claude-capstone/bombe-bench. Enigma I with signal-path view, crib menu with loops, Web Worker Bombe with diagonal board and checking pass, challenge links; 55 vitest tests, 98.8% stmt coverage.
+
+2026-10-04 [doc] Created ideas/2026-10-04.json with 4 ideas: Bits per Question, Stroke Budget, Brick by Constraint, Solver-Checked Simplification Hints (SIGCSE TS 2026 doi:10.1145/3770761.3777356)

@@ -1,0 +1,135 @@
+{
+  "date": "2026-10-04",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Bits per Question",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "Play 20 Questions against a fixed set of 500 things while every yes/no question you ask is scored live in bits of information gained, then watch an LLM and a greedy entropy bot play the same round.",
+      "description": "Inspired by a Show HN where four LLMs play 20 Questions for real money, this weekend project turns the game into a tangible lesson in information theory. The secret object comes from a closed universe (about 500 animals, foods or programming languages) stored as a table of boolean attributes, so every question is ultimately a predicate over that table. When the player types a question, a small model call maps it to an existing attribute (or a combination like 'has fur AND lives in water'); the app then shows the candidate set shrinking, the split ratio, and the bits gained (the entropy reduction, with 1 bit as the ideal 50/50 split). After the round, a replay compares the human's question sequence against a greedy max-entropy bot (which wins in about 9 questions on 500 items) and an LLM that plays free-form, revealing which questions were wasted. A daily seed lets friends compare bits-per-question scores.",
+      "keyFeatures": [
+        "Closed-universe attribute table (CSV) so every question has an exact, checkable answer",
+        "Live candidate-set view with split ratio and bits gained per question",
+        "Natural-language question mapped to attribute predicates with a visible, editable interpretation",
+        "Greedy max-entropy bot and LLM opponent replayed on the same secret for comparison",
+        "Daily seed and shareable score card (questions used, average bits per question)",
+        "Teacher mode that swaps in a custom attribute table (e.g., sorting algorithms, data structures)"
+      ],
+      "techStack": "React + Vite + Tailwind, Claude Haiku API for question-to-predicate mapping (with a keyword fallback so it works offline), pure JS entropy math, static Netlify deploy",
+      "whyInteresting": "Entropy and binary search are usually taught as formulas; here students feel why 'Is it bigger than a breadbox?' beats 'Is it a cat?'. The closed universe also makes LLM play measurable instead of anecdotal, and the custom-table mode doubles as a review game for any course topic.",
+      "inspiredBy": "Show HN: Four LLMs play 20 questions for real money, live (https://aquarium.money/twenty), Hacker News Show front page, October 2026"
+    },
+    {
+      "n": 2,
+      "title": "Stroke Budget",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "An AI agents lab where students design the painting tool API an LLM agent uses to reproduce a target image under a fixed stroke budget, then see how tool design, not prompting, changes the result.",
+      "description": "Inspired by the Show HN 'Giving Opus 5.5 a simulated paint canvas' (stillwet.art), this tool makes tool design the object of study in an AI agents unit. The instructor provides target images (a flag, a simple still life, a pixel sprite) and a simulated canvas with wet-paint physics. Students define the agent's tools as JSON schemas: maybe a single 'stroke(points, color, width)', maybe higher-level 'fill_region', 'gradient' or 'erase' tools, maybe a 'look' tool that returns a downsampled view of the canvas. The agent runs a loop with a hard budget of tool calls, and the app scores the result against the target with SSIM and a perceptual color distance. A run viewer replays every call with the agent's stated intent beside it, so students can see where the agent misread the canvas or wasted strokes. A class leaderboard ranks tool sets (not prompts) on the same targets, and the instructor can lock the system prompt so that tool design is the only variable.",
+      "keyFeatures": [
+        "Simulated canvas with brush, fill and wet-blend primitives rendered on HTML canvas",
+        "Student-authored tool schemas validated before a run, with a locked or editable system prompt",
+        "Hard tool-call budget and token accounting per run",
+        "Similarity scoring (SSIM plus perceptual color distance) against the target image",
+        "Step-by-step replay showing each tool call, its arguments and the agent's stated intent",
+        "Class leaderboard comparing tool sets across a shared set of targets"
+      ],
+      "techStack": "React + Vite + Tailwind, HTML canvas for rendering, Flask backend that proxies Claude API tool-use calls (keeps keys server-side), Supabase for runs and leaderboard, ssim.js for scoring",
+      "whyInteresting": "Most agent assignments let students tweak prompts and hope. This one isolates the tool interface, the part of agent engineering that matters most in practice, and gives a visual, objective score. Painting is also inherently fun to watch, which makes it a strong demo for lecture.",
+      "inspiredBy": "Show HN: Giving Opus 5.5 a simulated paint canvas (https://stillwet.art/), Hacker News Show front page, October 2026"
+    },
+    {
+      "n": 3,
+      "title": "Brick by Constraint",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "A multi-week graph algorithms assignment: students turn a voxel shape into a buildable LEGO model, using union-find for connectivity, a search over brick layouts, and a stability check, then export a real LDraw file.",
+      "description": "Inspired by the Show HN open-source LEGO AI generator (ldraw-nova), this assignment sequence uses brick building as a concrete setting for graphs, search and optimization. Students start from a voxelized shape (provided .vox files or a simple heightmap) and must cover each layer with standard bricks (1x1 to 2x8). Milestone 1 builds a layer-by-layer greedy tiler and exports LDraw so the result renders in a three.js viewer. Milestone 2 models stud connections as a graph and uses union-find to detect pieces that float or split into disconnected components. Milestone 3 improves the layout with local search or simulated annealing, rewarding staggered seams across layers (the way real builders interlock bricks) and penalizing brick count. Milestone 4 adds a simple load-path stability check (does every brick have a supported path to the ground?) and generates step-by-step building instructions by topological ordering. An optional extension asks an LLM to propose a shape from a text prompt, with the student's solver deciding whether it is buildable.",
+      "keyFeatures": [
+        "Voxel import (.vox or heightmap) and a three.js LDraw viewer for instant visual feedback",
+        "Greedy per-layer brick tiler as a baseline with brick-count and seam metrics",
+        "Union-find connectivity check that highlights floating and disconnected pieces",
+        "Local search or simulated annealing to stagger seams and cut brick count",
+        "Support-graph stability check and auto-generated build steps via topological sort",
+        "Autograder with hidden shapes scoring validity, connectivity, brick count and seam quality"
+      ],
+      "techStack": "Python (NumPy) or TypeScript solver, three.js with an LDraw loader for rendering, pytest/vitest autograder, optional Claude API for text-to-voxel shapes",
+      "whyInteresting": "Union-find, local search and topological sort usually arrive as separate abstract exercises; here they combine into one tangible artifact students can show (or actually build). The objective function is open-ended, so strong students can keep improving while everyone gets a working baseline early.",
+      "inspiredBy": "Show HN: Made an open-source Lego AI generator (https://github.com/anteloc/ldraw-nova), Hacker News Show front page, October 2026"
+    },
+    {
+      "n": 4,
+      "title": "Solver-Checked Simplification Hints: An SMT-Grounded Benchmark for LLM Feedback on Overcomplicated Conditionals in Novice Code",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Uses Z3 as ground truth to measure whether LLMs correctly detect, explain and hint at redundant or unreachable conditions in novice code without handing over the rewritten solution, and whether their proposed simplifications are actually equivalent.",
+      "description": "The source SIGCSE TS 2026 paper defines five issues with conditionals in novice Python code (trivial conditions, unreachable elif/else branches, implicit non-equality, always-true conditions with a missing else, and redundant condition parts) and detects them precisely with the Z3 SMT solver. This project turns those detectors into an oracle for evaluating LLM tutors: we mine instances from a public novice-code corpus, inject controlled variants with mutation operators, and ask LLMs to (a) flag the issue, (b) explain it in novice language, (c) give a solution-free hint, and (d) optionally propose a simplification. Z3 verifies detection against ground truth and checks every proposed rewrite for semantic equivalence over the condition's variables, catching the plausible but wrong simplifications LLMs are known to produce. A second contribution is a hybrid feedback pipeline where Z3 finds and localizes the issue and the LLM only explains it, compared against LLM-only feedback. This extends Pisan's automated critiquing line (Submit!, Jolly Feedback) toward feedback that explains why code quality matters while staying verifiably correct.",
+      "papers": [
+        {
+          "title": "Detecting Overcomplicated Conditions in Student Code Automatically",
+          "authors": "Masaryk University Brno authors (author names not captured in the proceedings index)",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770761.3777356",
+          "url": "https://doi.org/10.1145/3770761.3777356",
+          "abstract": "Conditional statements, one of the first programming constructs novices encounter, can already exhibit numerous issues, and identifying and explaining them manually is time-consuming. The authors introduce five issues found in novice code and present automatic detectors for each, using the Z3 SMT solver to determine whether sets of conditions are satisfiable and thus identify unnecessary or redundant conditions. They also analyze the prevalence of these issues in a large dataset of novice code.",
+          "relevance": "Provides the issue taxonomy and an exact, solver-based detector that can serve as ground truth and as an equivalence checker for LLM-generated feedback and rewrites."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "Code Quality Defects Across Introductory Programming Topics",
+          "authors": "Tomáš Effenberger, Radek Pelánek",
+          "venue": "SIGCSE 2022",
+          "year": 2022,
+          "url": "https://doi.org/10.1145/3478431.3499415",
+          "relevance": "Catalog of 32 code quality defects over 114,000 Python solutions from the same research group; supplies a broader taxonomy and evidence that students keep making defects without targeted feedback."
+        },
+        {
+          "title": "Code Quality Issues in Student Programs",
+          "authors": "Hieke Keuning, Bastiaan Heeren, Johan Jeuring",
+          "venue": "ITiCSE 2017",
+          "year": 2017,
+          "url": "https://research.ou.nl/en/publications/code-quality-issues-in-student-programs/",
+          "relevance": "Shows that students rarely fix quality issues and that existing analysis tools have little effect, motivating explanatory rather than flag-only feedback."
+        },
+        {
+          "title": "FalconCode: A Multiyear Dataset of Python Code Samples from an Introductory Computer Science Course",
+          "authors": "Adrian de Freitas, Joel Coffman, Michelle de Freitas, Justin Wilson, Troy Weingart",
+          "venue": "SIGCSE TS 2023",
+          "year": 2023,
+          "url": "https://sigcse2023.sigcse.org/details/sigcse-ts-2023-papers/100/FalconCode-A-Multiyear-Dataset-of-Python-Code-Samples-from-an-Introductory-Computer-",
+          "relevance": "Over 1.5 million de-identified novice Python programs with prompts and test cases, available on request, giving a source of real conditional issues without new human-subjects data collection."
+        },
+        {
+          "title": "Z3: An Efficient SMT Solver",
+          "authors": "Leonardo de Moura, Nikolaj Bjørner",
+          "venue": "TACAS 2008",
+          "year": 2008,
+          "url": "https://doi.org/10.1007/978-3-540-78800-3_24",
+          "relevance": "The solver used both for issue detection and for checking that LLM-proposed condition rewrites are logically equivalent to the originals."
+        }
+      ],
+      "researchPlan": {
+        "overview": "Reimplement the five Z3 detectors for Python, build a benchmark of real and mutation-injected conditional issues, and evaluate several LLMs on detection, explanation, solution-free hinting and rewrite correctness against the solver oracle. Then compare LLM-only feedback with a hybrid pipeline in which Z3 localizes the issue and the LLM explains it.",
+        "milestones": [
+          { "month": 1, "goal": "Literature review on code quality feedback and LLM program repair; reimplement the five Z3 detectors over Python ASTs and validate them on the paper's examples", "deliverable": "Annotated bibliography, refined RQs, and an open-source detector library with unit tests" },
+          { "month": 2, "goal": "Mine conditional issues from FalconCode (or another public corpus) and write mutation operators that inject each issue type into clean code", "deliverable": "Benchmark v1: about 2,000 labeled snippets with issue type, location and Z3 witness" },
+          { "month": 3, "goal": "Run 3-4 LLMs (frontier and open-weight) on detection, localization and proposed simplification; check every rewrite for equivalence with Z3", "deliverable": "Detection/localization accuracy and wrong-rewrite rate per issue type and model" },
+          { "month": 4, "goal": "Evaluate explanation and solution-free hint quality using a rubric (correct, localized, non-revealing, novice-appropriate) applied by two researchers on a sample plus a calibrated LLM judge", "deliverable": "Hint-quality rubric, inter-rater agreement, and judge validation results" },
+          { "month": 5, "goal": "Build and evaluate the hybrid pipeline (Z3 localizes, LLM explains) against LLM-only feedback on the same benchmark", "deliverable": "Comparative results and a drop-in feedback module for a Jolly Feedback style autograder" },
+          { "month": 6, "goal": "Finalize paper and release benchmark and tools", "deliverable": "Submitted paper draft plus public benchmark and detector repository" }
+        ],
+        "targetVenues": ["SIGCSE TS", "ITiCSE", "Koli Calling", "EDM"],
+        "resources": "Access to a public novice Python corpus (FalconCode by request, or similar); Z3 via the z3-solver Python package; API budget for Claude and one other frontier model (roughly a few hundred dollars) plus a local open-weight model on a single GPU; one undergraduate or MS research assistant for mutation operators and rubric rating.",
+        "risks": [
+          { "risk": "Dataset access is delayed or its license restricts redistribution of derived snippets", "mitigation": "Use mutation-injected issues on synthetic and openly licensed solutions for the public release, and report real-corpus results only in aggregate" },
+          { "risk": "Rubric-based hint quality ratings are subjective and an LLM judge may be biased toward its own family", "mitigation": "Double-rate a stratified sample, report Cohen's kappa, and use a judge model from a different family than the models under test" },
+          { "risk": "Python semantics (short-circuiting, mixed types, floating point, side-effecting calls) break the pure logical encoding", "mitigation": "Restrict the benchmark to conditions over int/bool variables and pure comparisons, as in the source paper, and flag excluded cases explicitly" }
+        ],
+        "humanSubjects": false
+      }
+    }
+  ]
+}
