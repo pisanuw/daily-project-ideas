@@ -518,3 +518,7 @@
 | 2026-10-04 | Stroke Budget | Teaching Tool | 1-2 Weeks |
 | 2026-10-04 | Brick by Constraint | Classroom Assignment | Multi-week |
 | 2026-10-04 | Solver-Checked Simplification Hints: An SMT-Grounded Benchmark for LLM Feedback on Overcomplicated Conditionals in Novice Code | Research | Research |
+| 2026-10-05 | Brocot Gear Finder | Side Project | Weekend |
+| 2026-10-05 | Turtle Target Practice | Teaching Tool | 1-2 Weeks |
+| 2026-10-05 | Build Your Own Multitrack Audio Editor | Classroom Assignment | Multi-week |
+| 2026-10-05 | Diagram-Grounded Pointer Drills: Execution-Verified Generation of C Pointer Exercises with Misconception-Tagged Distractors and Memory-Diagram Hints | Research | Research |

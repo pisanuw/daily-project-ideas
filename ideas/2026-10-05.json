@@ -1,0 +1,162 @@
+{
+  "date": "2026-10-05",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Brocot Gear Finder",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "Type a target gear ratio (say, one turn per 24 hours, or a pendulum beat to a minute hand) and the app finds integer tooth-count gear trains that hit it, then animates the meshing gears in SVG.",
+      "description": "Inspired by a Show HN about a 30-minute pendulum clock built from trash, this weekend project tackles the problem every clockmaker hits: real gears have whole-number teeth, so most ratios can only be approximated. The 19th-century answer was Achille Brocot's tables, built on what is now the Stern-Brocot tree. The app walks that tree (and the continued-fraction expansion of the target) to list the best rational approximations under constraints the user sets: tooth counts between 8 and 120, at most 3 stages, and a maximum error in seconds per day. Each candidate train is factored into stages, scored by error and part count, and rendered as an animated SVG gear assembly with correct pitch radii so the user can watch the output shaft drift (or not) against an ideal reference hand. A share link encodes the train so makers can send a design to a friend or a laser cutter.",
+      "keyFeatures": [
+        "Stern-Brocot tree and continued-fraction search for best rational approximations within tooth-count limits",
+        "Factoring a ratio into 1-3 compound gear stages with error reported in seconds per day",
+        "Animated SVG gear train with correct pitch radii plus a drift view against an ideal hand",
+        "Presets for clock trains, planetary orrery periods and bicycle gearing",
+        "Export of gear profiles as SVG for laser cutting and a URL-encoded share link"
+      ],
+      "techStack": "React + Vite, Tailwind, plain SVG animation, no backend",
+      "whyInteresting": "It is a tangible, physical hook for number theory that CS students rarely see applied: the Stern-Brocot tree, mediants and continued fractions solve a real engineering problem, and the result is a pretty, shareable toy that runs entirely in the browser.",
+      "inspiredBy": "Show HN: Glashütte Trash Clock, a 30-minute pendulum clock made from trash (niklasroy.com/gtc), Hacker News Show front page, October 2026"
+    },
+    {
+      "n": 2,
+      "title": "Turtle Target Practice",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "Instructors post a target drawing; students write Python turtle code in the browser and get a stroke-level overlay of what is missing, extra or misplaced, without ever seeing the reference solution.",
+      "description": "Inspired by a Show HN beginner course where students learn Python by making their code draw, this tool turns drawing exercises into self-checking practice. Student code runs client-side in Pyodide with an instrumented turtle module that records every segment, arc and fill as geometry rather than pixels. The checker compares the student's segment list to the instructor's (normalized for start position, drawing order and tiny floating-point drift) and paints a three-color overlay: green for matched strokes, red for missing ones, orange for extra or misplaced ones. Feedback stays solution-free: instead of showing code, it reports facts like 'your square closes but the second side is 10 units short' or 'the pattern repeats 5 times, the target repeats 6', which nudges students toward loops, functions and parameters. Instructors get a gallery of class attempts grouped by the kind of mismatch, so the most common wrong drawing becomes the next lecture example.",
+      "keyFeatures": [
+        "In-browser Python via Pyodide with an instrumented turtle that records geometry, not pixels",
+        "Order-insensitive segment matching with tolerance, producing a matched/missing/extra overlay",
+        "Solution-free textual feedback derived from geometric differences (lengths, angles, repeat counts)",
+        "Instructor authoring: draw or code a target, set tolerance, publish by link",
+        "Class gallery clustering attempts by mismatch type for discussion in lecture"
+      ],
+      "techStack": "React + Vite, Tailwind, Pyodide, Canvas/SVG, Supabase (targets and attempts), optional Claude API for phrasing feedback",
+      "whyInteresting": "Drawing gives novices instant visual feedback, but a picture alone does not say what is wrong. Comparing geometry instead of pixels makes the feedback precise and solution-free, and it fits directly into CS1 weeks on loops and functions.",
+      "inspiredBy": "Show HN: Build with Python, a beginner course where your code draws (scimigo.com), and Show HN: Pyxel retro game engine, Hacker News Show front page, October 2026"
+    },
+    {
+      "n": 3,
+      "title": "Build Your Own Multitrack Audio Editor",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "Students build a browser-based, non-destructive multitrack audio editor: waveform rendering, clip edit lists, undo/redo, a mixer with gain and pan, and WAV export.",
+      "description": "Inspired by Audionaut, an open-source cross-platform multitrack editor that hit the Hacker News front page, this multi-week assignment uses audio as a vehicle for core data structures and systems ideas. Milestone 1 decodes files with the Web Audio API and draws zoomable waveforms using precomputed min/max peak pyramids (a lesson in multi-resolution summaries). Milestone 2 adds non-destructive editing: each track is an edit list of clips pointing into immutable buffers, the audio analog of a piece table, so cut, split, trim and move never copy samples. Milestone 3 implements undo/redo with the command pattern and a playhead scheduler that stays sample-accurate across clip boundaries. Milestone 4 adds a mixer (gain, pan, mute, solo, simple fades) and offline rendering to a WAV file the students encode by hand from the RIFF header up. A grading harness feeds scripted edit sequences and compares rendered output against reference renders sample by sample, so correctness is objective.",
+      "keyFeatures": [
+        "Peak-pyramid waveform rendering that stays smooth from full song to single samples",
+        "Edit-list clips over immutable buffers (a piece table for audio) with split, trim and move",
+        "Command-pattern undo/redo and a sample-accurate playback scheduler",
+        "Mixer with gain, pan, mute/solo and crossfades, plus offline render to hand-encoded WAV",
+        "Autograder that replays edit scripts and diffs rendered samples against a reference"
+      ],
+      "techStack": "TypeScript, Vite, Web Audio API (AudioContext, OfflineAudioContext), Canvas, Vitest for the grading harness",
+      "whyInteresting": "It is a real application students already use, yet every milestone maps to a course concept (immutability, piece tables, command pattern, scheduling, binary file formats), and sample-exact output makes automated grading clean and fair.",
+      "inspiredBy": "Show HN: Audionaut, an open-source cross-platform multitrack audio editor (github.com/kvoltmer/Audionaut), Hacker News Show front page, October 2026"
+    },
+    {
+      "n": 4,
+      "title": "Diagram-Grounded Pointer Drills: Execution-Verified Generation of C Pointer Exercises with Misconception-Tagged Distractors and Memory-Diagram Hints",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Turn a hand-built set of C pointer drills into an unbounded, execution-verified exercise generator whose wrong answers come from runnable pointer misconception models, and benchmark whether LLM hints grounded in a ground-truth memory diagram diagnose errors better than code-only hints.",
+      "description": "Guerzhoy's Pointer Drills (ITiCSE 2025) argues that students should get used to C pointers through many small exercises, like algebra drills, but the drills are hand-written and finite, with no diagnosis when a student answers wrong. This project builds a generator that produces drill variants from templates (single objects, malloc'd blocks, arrays of pointers), compiles and runs each one under AddressSanitizer to obtain the verified answer, and extracts a ground-truth memory diagram from the execution. Wrong-answer distractors are produced by executable misconception models drawn from the pointer literature (for example confusing p+1 with byte offsets, treating *p++ as (*p)++, or assuming arrays are copied on assignment), so every distractor is tagged with the misconception that produces it. Using these tagged wrong answers as synthetic student responses, the project benchmarks LLM hint generators in three conditions (code only, code plus verified answer, code plus memory diagram) on misconception identification and solution leakage. The result is a reusable drill bank, a misconception-labeled benchmark, and evidence about whether diagrammatic grounding makes LLM tutoring more faithful, without requiring human subjects.",
+      "papers": [
+        {
+          "title": "Getting Used to Pointers with Pointer Drills",
+          "authors": "Michael Guerzhoy",
+          "venue": "ITiCSE 2025",
+          "year": 2025,
+          "doi": "10.1145/3724389.3731268",
+          "url": "https://doi.org/10.1145/3724389.3731268",
+          "abstract": "Experienced C programmers write pointer code the way fluent users of math and language write: they do not necessarily always need to reason from first principles. We propose learning to use pointers the way students learn algebra in school: doing a large number of small exercises. We aimed to produce a large number of short exercises that would be comprehensive in introducing students to different ways of using pointers in C, in the context of operating on an object, a block of objects, or a block of pointers to objects.",
+          "relevance": "Supplies the pedagogical premise (drill-based fluency) and the exercise taxonomy that the generator templates extend; the open gap is scale, verification and diagnosis of wrong answers, which this project addresses."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "Student difficulties with pointer concepts in C",
+          "authors": "Michelle Craig, Andrew Petersen",
+          "venue": "Proceedings of the Australasian Computer Science Week Multiconference (ACSW), 2016",
+          "year": 2016,
+          "url": "https://doi.org/10.1145/2843043.2843348",
+          "relevance": "Empirical catalog of pointer errors students make in C; the source for the executable misconception models that generate tagged distractors."
+        },
+        {
+          "title": "Learning the interaction between pointers and scope in C++",
+          "authors": "Amruth N. Kumar",
+          "venue": "ITiCSE 2001",
+          "year": 2001,
+          "url": "https://doi.org/10.1145/377435.377466",
+          "relevance": "Earlier problem-generation tutor (problets) for pointers showing large pre/post gains from repeated generated problems; the closest prior system and a baseline for the template approach."
+        },
+        {
+          "title": "Online Python Tutor: Embeddable Web-Based Program Visualization for CS Education",
+          "authors": "Philip J. Guo",
+          "venue": "SIGCSE 2013",
+          "year": 2013,
+          "url": "https://doi.org/10.1145/2445196.2445368",
+          "relevance": "Establishes execution-trace-derived memory diagrams (which Python Tutor also produces for C) as a teaching representation; this project uses the same kind of diagram as grounding input for LLM hints."
+        }
+      ],
+      "researchPlan": {
+        "overview": "Months 1-2 build the template-based drill generator with compile-and-run verification and memory-diagram extraction. Months 3-4 implement executable pointer misconception models and assemble a tagged benchmark of synthetic wrong answers. Months 5-6 evaluate LLM hint generators across grounding conditions and write up the drill bank, benchmark and findings.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Review pointer misconception literature and the Pointer Drills set; define drill templates and the misconception catalog",
+            "deliverable": "Annotated bibliography, 10-15 drill templates, catalog of 12+ pointer misconceptions with operational definitions"
+          },
+          {
+            "month": 2,
+            "goal": "Build the generator: instantiate templates, compile with clang and AddressSanitizer, record verified answers and extract memory diagrams via a gdb/lldb trace",
+            "deliverable": "Open-source generator producing 1,000+ verified drills with JSON memory diagrams"
+          },
+          {
+            "month": 3,
+            "goal": "Implement misconception models as alternative interpreters or source rewrites that produce the answer a student holding that belief would give",
+            "deliverable": "Executable misconception library with unit tests and per-drill tagged distractors"
+          },
+          {
+            "month": 4,
+            "goal": "Assemble benchmark (drill, wrong answer, misconception label) and check distractor quality: discriminability, overlap between misconceptions, and agreement with misconceptions coded by hand on a sample",
+            "deliverable": "Released benchmark plus a distractor quality report"
+          },
+          {
+            "month": 5,
+            "goal": "Benchmark LLM hint generation (open and hosted models) under code-only, code+answer and code+memory-diagram conditions; score misconception identification, hint faithfulness and solution leakage",
+            "deliverable": "Results tables, error analysis and a scoring rubric for leakage"
+          },
+          {
+            "month": 6,
+            "goal": "Finalize paper and release artifacts",
+            "deliverable": "Submitted paper draft plus public drill bank, benchmark and generator"
+          }
+        ],
+        "targetVenues": [
+          "SIGCSE TS",
+          "ITiCSE",
+          "Koli Calling",
+          "AIED"
+        ],
+        "resources": "Linux machine with clang, AddressSanitizer and gdb; local open models via Ollama plus modest Claude CLI usage for comparison runs; one undergraduate RA for template authoring and labeling a validation sample; no student data required.",
+        "risks": [
+          {
+            "risk": "Misconception models may produce identical wrong answers for different beliefs, making labels ambiguous",
+            "mitigation": "Compute per-drill discriminability and keep only drills where target misconceptions diverge, or label items with a set of consistent misconceptions"
+          },
+          {
+            "risk": "Synthetic wrong answers may not reflect what real students write",
+            "mitigation": "Ground each model in a published error catalog and, as follow-up, compare against anonymized historical exam answers under an exempt protocol"
+          },
+          {
+            "risk": "Memory-diagram extraction from debuggers is brittle across compilers and optimization levels",
+            "mitigation": "Compile at -O0 with a fixed toolchain in a container and restrict templates to constructs the tracer handles reliably"
+          }
+        ],
+        "humanSubjects": false
+      }
+    }
+  ]
+}
