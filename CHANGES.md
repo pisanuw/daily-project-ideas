@@ -327,3 +327,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-10-04 [doc] Created ideas/2026-10-04.json with 4 ideas: Bits per Question, Stroke Budget, Brick by Constraint, Solver-Checked Simplification Hints (SIGCSE TS 2026 doi:10.1145/3770761.3777356)
 
 2026-10-05 [doc] Created ideas/2026-10-05.json with 4 ideas: Brocot Gear Finder, Turtle Target Practice, Build Your Own Multitrack Audio Editor, Diagram-Grounded Pointer Drills (ITiCSE 2025 doi:10.1145/3724389.3731268)
+
+2026-10-06 [doc] Created ideas/2026-10-06.json with 4 ideas: Nearest Representable, Heap Arena Replay, Build Your Own Spreadsheet Engine, Fault-Seeded Answer Sets (SIGCSE TS 2026 doi:10.1145/3770762.3772613)

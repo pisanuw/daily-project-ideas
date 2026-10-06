@@ -522,3 +522,7 @@
 | 2026-10-05 | Turtle Target Practice | Teaching Tool | 1-2 Weeks |
 | 2026-10-05 | Build Your Own Multitrack Audio Editor | Classroom Assignment | Multi-week |
 | 2026-10-05 | Diagram-Grounded Pointer Drills: Execution-Verified Generation of C Pointer Exercises with Misconception-Tagged Distractors and Memory-Diagram Hints | Research | Research |
+| 2026-10-06 | Nearest Representable | Side Project | Weekend |
+| 2026-10-06 | Heap Arena Replay | Teaching Tool | 1-2 Weeks |
+| 2026-10-06 | Build Your Own Spreadsheet Engine | Classroom Assignment | Multi-week |
+| 2026-10-06 | Fault-Seeded Answer Sets for Stress-Testing CS1 Written-Response Rubrics: Predicting Inter-Rater Unreliability Before Grading Begins | Research | Research |

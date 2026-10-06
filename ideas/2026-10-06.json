@@ -1,0 +1,132 @@
+{
+  "date": "2026-10-06",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Nearest Representable",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A playful IEEE-754 explorer where you type any number, watch it snap to the nearest float on a zoomable number line, and play short 'float golf' puzzles about why 0.1 + 0.2 misbehaves.",
+      "description": "Inspired by recent Show HN interactive explainers (how browsers work, a 2D/3D walk through GPT-2's internals), this is a single-page explorable for the most misunderstood number format in computing. Type a decimal and the page shows the sign, exponent and mantissa bits for float16, float32 and float64 side by side, the exact decimal value actually stored, and the error. A zoomable number line draws the representable neighbors as tick marks, so students can see the gaps double at every power of two and vanish into subnormals near zero. Bits are clickable: flip one and the value updates live. A 'float golf' mode serves short puzzles (find a number where x + 1 == x, make a loop that never terminates, sum a list in two orders and get two answers) with a timer and shareable results.",
+      "keyFeatures": [
+        "Live bit-level view for float16, float32 and float64 with click-to-flip bits",
+        "Exact stored decimal value and absolute/relative error, computed with BigInt arithmetic",
+        "Zoomable number line showing representable neighbors, ULP gaps and the subnormal region",
+        "Expression sandbox that evaluates step by step and shows rounding at each operation",
+        "'Float golf' puzzle mode with shareable URL-encoded results"
+      ],
+      "techStack": "React + Vite, Tailwind, TypeScript (DataView/Float32Array for bit access, BigInt for exact decimals), Canvas for the number line, Netlify",
+      "whyInteresting": "Every CS student hits a floating-point surprise, and most explanations are static diagrams. Making the gaps visible and the bits touchable turns a lecture-slide topic into something students can poke at in five minutes, and it is fully client-side with no API costs.",
+      "inspiredBy": "Show HN: An interactive guide to how browsers work (news.ycombinator.com/item?id=46488654) and Show HN: Interactive 3D and 2D Visualization of GPT-2 (news.ycombinator.com/item?id=47441593)"
+    },
+    {
+      "n": 2,
+      "title": "Heap Arena Replay",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "Paste or generate a malloc/free trace and watch a simulated heap allocate, split, coalesce and fragment under first-fit, best-fit, next-fit and segregated free lists, with auto-generated quiz questions for systems courses.",
+      "description": "Memory allocators are taught in nearly every systems course, but students usually see them as a static box-and-arrow figure. This tool replays an allocation trace step by step on a byte-accurate heap strip that shows headers, footers, padding, free-list pointers and boundary tags. Instructors can switch the policy mid-replay and compare fragmentation, utilization and search cost across policies on the same trace. A quiz generator picks a random point in a trace and asks 'which address will the next malloc(24) return under best-fit?' or 'how many blocks coalesce on this free?', checking answers against the simulator so every question is verified. Students can upload their own allocator's trace output (a simple text format) to diff their heap against the reference implementation, which makes debugging a malloc lab far less painful.",
+      "keyFeatures": [
+        "Byte-accurate heap visualization with headers, footers, alignment padding and free-list links",
+        "Pluggable policies: first-fit, next-fit, best-fit, explicit and segregated free lists, with/without immediate coalescing",
+        "Side-by-side policy comparison with utilization and fragmentation charts over time",
+        "Simulator-verified quiz generator for exams and practice, exportable to Canvas QTI",
+        "Trace diff mode that highlights the first step where a student allocator diverges from the reference"
+      ],
+      "techStack": "React + Vite, Tailwind, TypeScript simulator core (pure functions, easily unit tested), SVG heap strip, Recharts, optional Supabase for instructor-published traces",
+      "whyInteresting": "It targets a concept that is notoriously hard to debug (a malloc lab) and gives instructors an endless supply of correct, auto-checked questions. Because the simulator is deterministic, every quiz answer and every trace diff is provably right, with no LLM needed.",
+      "inspiredBy": "Show HN interactive systems explainers and a dev.to post on free, no-login web tools students actually need (dev.to/yuval728/i-built-a-free-web-app-with-tools-students-actually-need-4nf2)"
+    },
+    {
+      "n": 3,
+      "title": "Build Your Own Spreadsheet Engine",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "A staged course project where students build a working spreadsheet: formula tokenizer and parser, dependency graph, topological recalculation, cycle detection, undo/redo and a React grid on top.",
+      "description": "Spreadsheets are the most widely used programming environment in the world, and building one touches parsing, graphs, incremental computation and UI. Milestone 1 is a tokenizer and recursive-descent parser for formulas (=A1+SUM(B1:B5)*2) producing an AST, tested against a provided suite. Milestone 2 adds cell references, ranges and a dependency graph, with recalculation in topological order and #CYCLE! errors reported via cycle detection. Milestone 3 makes recalculation incremental: editing one cell recomputes only its transitive dependents, and students measure the speedup on a 10,000-cell benchmark sheet. Milestone 4 adds a virtualized React grid, copy/paste with relative reference adjustment, and undo/redo via the command pattern. An optional stretch adds CSV import/export or a tiny function library (IF, VLOOKUP, AVERAGE) with type errors like #VALUE!.",
+      "keyFeatures": [
+        "Formula grammar with a provided test suite and a reference AST printer for self-checking",
+        "Dependency graph with topological recalculation and cycle detection",
+        "Incremental recompute benchmark that students instrument and report on",
+        "Relative/absolute reference rewriting on copy/paste ($A$1 vs A1)",
+        "Command-pattern undo/redo and a virtualized grid UI"
+      ],
+      "techStack": "TypeScript, React + Vite, Tailwind, Vitest for the staged autograder suites; optional Python/Flask variant for a backend-only version",
+      "whyInteresting": "Each milestone maps to a core CS idea (grammars, DAGs, topological sort, memoization, design patterns) that students usually meet in isolation, and the end product is something everyone understands and can demo. The staged test suites make it autogradable while still leaving real design decisions to students.",
+      "inspiredBy": "Recurring r/coolgithubprojects and Show HN 'I built X from scratch' posts, plus the build-your-own trend in GitHub trending learning repositories"
+    },
+    {
+      "n": 4,
+      "title": "Fault-Seeded Answer Sets for Stress-Testing CS1 Written-Response Rubrics: Predicting Inter-Rater Unreliability Before Grading Begins",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Generate synthetic written-response coding answers with known, seeded partial-understanding faults, grade them with an ensemble of LLM graders under a draft rubric, and use the resulting disagreement to flag rubric items that will have low human inter-rater reliability before a single real exam is graded.",
+      "description": "Jin et al. (SIGCSE TS 2026) showed that a rubric-based, double-grading protocol for written-response coding questions reaches high reliability (ICC 0.89 to 0.97), but only after ICC analysis exposed two items with poor agreement that needed rubric clarification and regrading. This project moves that diagnosis earlier: before an exam is administered, an LLM generates a fault-seeded answer set for each question, where every answer carries a known injected flaw (off-by-one loop bound, missing base case, correct logic with wrong syntax, partially traced output) and an intended partial score. An ensemble of LLM graders, varied by model, prompt and temperature, grades the set under the draft rubric, and disagreement plus deviation from the intended score is used to locate the rubric criteria that are ambiguous. The system then proposes rubric rewrites and re-runs the stress test to show that agreement improves. Because ground truth comes from the seeded faults and the original paper's published rubric protocol, the core benchmark needs no student data, and it extends Pisan's long line of automated feedback work (Submit!, Jolly Feedback) toward assessment design itself.",
+      "papers": [
+        {
+          "title": "Improving the Reliability of Grading Written-Response Coding Questions in a Large CS1 Course",
+          "authors": "Wei Jin, Xin Xu, Hyesung Park, Evelyn Brannock, Tacksoo Im",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770762.3772613",
+          "url": "https://doi.org/10.1145/3770762.3772613",
+          "abstract": "Presents an empirical evaluation of a rubric-based, question-focused, double-grading protocol for written-response coding questions in pre- and post-tests from a large introductory programming course, with adjudication triggered when grader scores differ by more than 20%. ICC analysis identified two items with initially low inter-rater reliability; after rubric clarification and regrading, ICC ranged from 0.892 to 0.967.",
+          "relevance": "Provides the grading protocol, the ICC-as-diagnostic framing and the key observation that rubric ambiguity, not grader effort, drove unreliability. This project automates and front-loads that diagnosis using synthetic answers and LLM grader ensembles."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "Rubric-Conditioned LLM Grading: Alignment, Uncertainty, and Robustness",
+          "authors": "Haotian Deng, Chris Farber, Jiyoon Lee, David Tang",
+          "venue": "arXiv preprint 2601.08843, 2025",
+          "year": 2025,
+          "url": "https://arxiv.org/abs/2601.08843",
+          "relevance": "Finds that LLM-judge alignment with experts degrades as rubric granularity increases and that models are sensitive to synonym substitution, which motivates using LLM disagreement as a signal of rubric fragility."
+        },
+        {
+          "title": "SimGrade: Using Code Similarity Measures for More Accurate Human Grading",
+          "authors": "Sonja Johnson-Yu, Nicholas Bowman, Mehran Sahami, Chris Piech",
+          "venue": "Educational Data Mining (EDM), 2021",
+          "year": 2021,
+          "url": "https://arxiv.org/abs/2403.14637",
+          "relevance": "A complementary, non-LLM approach to human grading consistency on programming exams via submission ordering; serves as a baseline perspective on where inconsistency comes from."
+        },
+        {
+          "title": "Automated Grading and Feedback Tools for Programming Education: A Systematic Review",
+          "authors": "Marcus Messer, Neil C. C. Brown, Michael Kölling, Miaojing Shi",
+          "venue": "ACM Transactions on Computing Education, 2024",
+          "year": 2024,
+          "url": "https://arxiv.org/abs/2306.11722",
+          "relevance": "Shows most tools assess correctness via tests or reference comparison, leaving written and partial-understanding answers under-served; positions the project within the automated assessment literature."
+        },
+        {
+          "title": "A Guideline of Selecting and Reporting Intraclass Correlation Coefficients for Reliability Research",
+          "authors": "Terry K. Koo, Mae Y. Li",
+          "venue": "Journal of Chiropractic Medicine, 2016",
+          "year": 2016,
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4913118/",
+          "relevance": "Standard reference for choosing and reporting ICC forms; needed to make the predicted-versus-observed reliability comparison methodologically sound."
+        }
+      ],
+      "researchPlan": {
+        "overview": "Build a fault taxonomy and generator for CS1 written-response answers, measure how LLM grader-ensemble disagreement on seeded answers tracks rubric ambiguity, then test whether automated rubric rewrites reduce that disagreement. An optional final phase validates predictions against historical, de-identified double-graded exams if an IRB exemption is obtained.",
+        "milestones": [
+          { "month": 1, "goal": "Literature review; collect public CS1 written-response questions and rubrics (textbooks, past exams, the source paper's described items); define a fault taxonomy for partial understanding", "deliverable": "Annotated bibliography, 40-question item bank with draft rubrics, fault taxonomy v1" },
+          { "month": 2, "goal": "Build the fault-seeded answer generator with execution checks so code-bearing answers really exhibit the seeded fault", "deliverable": "Open-source generator and ~4,000 labeled synthetic answers with intended scores" },
+          { "month": 3, "goal": "Grade answer sets with an ensemble of LLM graders (open-weight and hosted models, prompt variants); compute per-criterion ICC and deviation from intended score", "deliverable": "Grader-ensemble harness and per-item 'predicted reliability' report" },
+          { "month": 4, "goal": "Deliberately introduce known ambiguities into otherwise clear rubrics (vague partial-credit language, overlapping criteria) to test whether the stress test detects them", "deliverable": "Detection precision/recall on injected rubric ambiguities" },
+          { "month": 5, "goal": "LLM-proposed rubric rewrites with re-run stress tests; analyze which rewrite types (examples, anchor answers, criterion splitting) raise agreement", "deliverable": "Rewrite effectiveness study and instructor-facing rubric linter prototype" },
+          { "month": 6, "goal": "Write up; optionally validate against historical de-identified double-graded items", "deliverable": "Submitted paper draft plus released benchmark and tool" }
+        ],
+        "targetVenues": ["SIGCSE TS", "ITiCSE", "EDM", "Koli Calling"],
+        "resources": "Public CS1 question banks and rubrics; LLM access (prefer open-weight models run locally plus the subscription claude CLI to keep costs low); a sandboxed Python/Java runner for execution checks; one undergraduate RA for fault-taxonomy validation and spot-checking generated answers.",
+        "risks": [
+          { "risk": "Synthetic answers may not reflect the messiness of real student writing, so predicted ambiguity may not transfer.", "mitigation": "Seed style variation (terse, verbose, mixed pseudocode) and, if possible, validate on a small set of historical de-identified exams under an exempt determination." },
+          { "risk": "LLM graders may share systematic biases, agreeing with each other while all being wrong.", "mitigation": "Score against intended seeded scores, not only inter-model agreement, and include models from different families plus a deterministic test-based grader where applicable." },
+          { "risk": "Rubric rewrites may raise agreement simply by collapsing partial credit into all-or-nothing scoring.", "mitigation": "Track score resolution (number of distinct score levels used) alongside ICC and reject rewrites that reduce it." }
+        ],
+        "humanSubjects": false
+      }
+    }
+  ]
+}
