@@ -255,8 +255,10 @@
         "date": "2026-10-06",
         "n": 2
       },
-      "placeholder": true,
-      "notes": "In progress since 2026-10-06"
+      "notes": "Built in one session, fully client-side: a word-accurate CS:APP-style heap (boundary tags, prologue/epilogue, padding, pred/succ pointers in free payloads) replaying malloc-lab or C-style traces under first/next/best/worst fit on implicit, explicit or segregated lists with immediate, deferred or no coalescing, realloc with keep/shrink/absorb/move, and policy switches mid-replay. Compare tab runs eight policies on the same trace with utilization, fragmentation and search-cost charts; the quiz generator reads answers off the simulator and exports Markdown or a Canvas QTI zip (dependency-free zip writer); diff mode finds the first op where a student allocator's addresses diverge and flags misalignment, overlap and bounds bugs. React/Tailwind/Recharts/Supabase replaced by plain TypeScript, SVG and URL share links. Fixed arena with no sbrk, so malloc-lab utilization scoring is not reproduced. 57 vitest tests, 99.1% stmt coverage.",
+      "url": "https://heap-arena-replay.netlify.app",
+      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/heap-arena-replay",
+      "implementedOn": "2026-10-06"
     }
   ]
 }

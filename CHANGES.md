@@ -331,3 +331,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-10-06 [doc] Created ideas/2026-10-06.json with 4 ideas: Nearest Representable, Heap Arena Replay, Build Your Own Spreadsheet Engine, Fault-Seeded Answer Sets (SIGCSE TS 2026 doi:10.1145/3770762.3772613)
 
 2026-10-06 [note] Claimed Heap Arena Replay (2026-10-06 n2) as in progress: byte-accurate malloc/free replay with first/next/best-fit and segregated lists, simulator-verified quizzes and trace diff, next Claude-capstone build.
+
+2026-10-06 [note] Heap Arena Replay (2026-10-06 n2) marked implemented: live at heap-arena-replay.netlify.app, repo Claude-capstone/heap-arena-replay. Word-accurate heap replay, eight policies compared, simulator-verified quiz with QTI export, student trace diff; 57 vitest tests, 99.1% stmt coverage.
