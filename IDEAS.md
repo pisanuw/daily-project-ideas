@@ -526,3 +526,7 @@
 | 2026-10-06 | Heap Arena Replay | Teaching Tool | 1-2 Weeks |
 | 2026-10-06 | Build Your Own Spreadsheet Engine | Classroom Assignment | Multi-week |
 | 2026-10-06 | Fault-Seeded Answer Sets for Stress-Testing CS1 Written-Response Rubrics: Predicting Inter-Rater Unreliability Before Grading Begins | Research | Research |
+| 2026-10-07 | Phantom API | Side Project | Weekend |
+| 2026-10-07 | Peer Pick Ledger | Teaching Tool | 1-2 Weeks |
+| 2026-10-07 | Build Your Own Micropolis | Classroom Assignment | Multi-week |
+| 2026-10-07 | Round-Trip Narration Fidelity: A Reconstruction Benchmark for Screen-Reader Descriptions of Program State | Research | Research |
