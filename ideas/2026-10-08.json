@@ -1,0 +1,124 @@
+{
+  "date": "2026-10-08",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Program Alarm 1202",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A playable simulation of the Apollo Guidance Computer's priority Executive during the lunar landing: you fly the descent while a faulty radar switch steals cycles, and you watch Margaret Hamilton's restart design shed low-priority jobs so landing guidance survives.",
+      "description": "Inspired by the news of Margaret Hamilton's death and the MIT obituary's account of the 1202 alarms on Apollo 11, this turns the most famous software-reliability story into something you can poke at. A simplified Executive runs a handful of named jobs (landing guidance, display updates, radar processing, telemetry) with priorities, a small fixed pool of job slots and work areas, and a cycle budget per tick. A toggle reproduces the rendezvous-radar switch fault that consumed spare cycles; as load climbs, jobs queue up, the slot pool runs dry, and the alarm fires. Then the restart logic kicks in: everything is flushed, only restart-protected high-priority jobs are re-established, and guidance keeps running. A comparison mode runs the same scenario with a naive round-robin scheduler that has no restart protection, so you can watch it miss guidance deadlines and crash the lander.",
+      "keyFeatures": [
+        "Tick-by-tick Executive simulation with a job table, priority queue and slot/work-area pool shown as live gauges",
+        "Cycle-steal slider modeling the radar fault, with the 1201/1202 alarm triggered by real resource exhaustion rather than a script",
+        "Restart-protection view that highlights which jobs survive a software restart and why",
+        "Side-by-side naive scheduler that fails the landing under the same load, with a deadline-miss timeline",
+        "DSKY-style display and a short narrated replay pulled from the public Apollo 11 transcript timestamps"
+      ],
+      "techStack": "React + Vite, Tailwind, a pure TypeScript scheduler core with Vitest tests, Canvas for the descent view, Netlify",
+      "whyInteresting": "A one-weekend build that pays tribute to Hamilton while making priority scheduling, graceful degradation and restart semantics concrete; it doubles as a 10-minute demo for an OS or software engineering lecture.",
+      "inspiredBy": "Hacker News front page 2026-10-07, 'Margaret Hamilton has died' (https://news.mit.edu/2026/margaret-hamilton-computing-pioneer-dies-1007)"
+    },
+    {
+      "n": 2,
+      "title": "Modulo Bias Microscope",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "Students paste a sampling function (pick a random element, shuffle, weighted choice) and the tool shows, exactly and statistically, how far its output distribution drifts from the one they intended, with a gallery of classic randomness bugs.",
+      "description": "Inspired by the HN-discussed post 'When random is not actually random enough', which shows how `random() % N` silently favors some outcomes and argues for stating weights explicitly, this tool makes distribution bugs visible. Student code (JavaScript in a Web Worker, or Python via Pyodide) is run two ways: exhaustively against a deliberately tiny random source (for example 8 bits) so the exact output probabilities can be computed and compared to the target, and by millions of draws from a full-width source with a chi-square test and a histogram overlay. A bug gallery covers modulo bias, the naive shuffle that swaps with any index (n^n paths for n! permutations), off-by-one ranges, and floating-point cumulative weights that never select the last item. Instructors can define an exercise as a target distribution plus a function signature, and the autograder uses the exact mode where possible and a statistical mode with a stated false-fail rate otherwise.",
+      "keyFeatures": [
+        "Exact-mode analysis that enumerates every value of a narrow random source and reports per-outcome probability error as a fraction",
+        "Statistical mode with chi-square p-value, histogram vs. target overlay, and a permutation-frequency heat map for shuffles",
+        "Bug gallery with side-by-side broken and fixed implementations (rejection sampling, Fisher-Yates, integer-weight choice)",
+        "Instructor exercise builder: target weights, function signature, and an autograder with configurable false-fail probability",
+        "Shareable permalinks encoding the student's code so it can be dropped into a forum post or office-hours queue"
+      ],
+      "techStack": "React + Vite, Tailwind, Web Workers, Pyodide for Python, jStat or a small hand-written chi-square routine, Netlify",
+      "whyInteresting": "Randomness bugs pass every example-based unit test, which makes them an ideal lesson in why some properties need distributional testing; the exact mode turns a fuzzy statistics topic into arithmetic students can verify by hand.",
+      "inspiredBy": "Hacker News front page 2026-10-07, 'When random is not actually random enough' (https://ersc.io/blog/when-random-isnt-random-enough)"
+    },
+    {
+      "n": 3,
+      "title": "Build Your Own Wikipedia Museum",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "A multi-week team project where students turn Wikidata and Wikimedia Commons into a walkable, accessible 3D museum: data pipeline, procedural floor plans, first-person navigation and an audio-guide mode for screen-reader users.",
+      "description": "Inspired by the Show HN 'walkable 3D art history museum built from Wikipedia' (and its comment thread asking for curated exhibitions, IIIF deep zoom, WebXR and better layouts), this breaks the idea into a staged assignment that touches data engineering, procedural generation, 3D graphics and accessibility. Week 1 is a SPARQL pipeline against Wikidata that pulls artworks with creator, date, movement and a Commons image, filtered to public-domain licenses and cached locally. Week 2 groups works into exhibitions and generates a floor plan as a graph of rooms (BSP or constraint-based layout) with a guaranteed visitor path. Weeks 3 and 4 build the Three.js scene: hanging rules, lighting, placards, collision, and texture level-of-detail. The final milestone is an accessibility layer: full keyboard navigation, an audio-guide mode that exposes the museum as an ordered list of rooms and works for screen readers, and reduced-motion teleport movement.",
+      "keyFeatures": [
+        "Wikidata SPARQL ingestion with license filtering and a reproducible local cache so the class is not hammering Wikimedia",
+        "Procedural floor-plan generator with testable invariants (every room reachable, chronological path exists, wall space fits the works)",
+        "Three.js first-person scene with collision, placards, and progressive image loading from thumbnails to full resolution",
+        "Accessibility track: keyboard-only play, screen-reader audio-guide mode, adjustable walk speed, and teleport movement",
+        "Stretch goals: user-curated wings saved to Supabase, IIIF deep zoom, WebXR mode"
+      ],
+      "techStack": "Vite, Three.js, TypeScript, Wikidata SPARQL endpoint, Wikimedia Commons API, optional Supabase for saved exhibitions, Netlify",
+      "whyInteresting": "Each milestone is gradeable on its own (pipeline correctness, layout invariants, frame rate, accessibility audit), real open data replaces toy datasets, and the accessibility milestone forces students to design a non-visual version of an inherently visual experience.",
+      "inspiredBy": "Show HN: A walkable 3D art history museum built from Wikipedia (https://news.ycombinator.com/item?id=49992057)"
+    },
+    {
+      "n": 4,
+      "title": "Pattern-Breaking Variants: Measuring Whether Generated Exercise Diversity Defeats Surface-Level Solvers in CS1",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Builds a panel of deliberately shallow automated solvers to measure which exercise transformations actually break surface pattern-matching, giving instructors a student-free way to tell cosmetic variants from conceptually deep ones.",
+      "description": "Maeda's SIGCSE TS 2026 paper encodes LLM-derived generation strategies as a DSL of probabilistic transformations in code comments, and reports that the resulting diversity helped lower-performing students by stopping them from memorizing surface patterns. What remains unmeasured is which transformations do the work: renaming identifiers or changing the cover story is cheap but may be defeated by the same template-matching it is meant to prevent, while shifting a boundary, inverting a condition, or changing a variable's role (accumulator to most-wanted holder) may force real understanding. This project builds a panel of surface-level solvers (a nearest-neighbor retrieval solver that edits a previously seen solution, small code models given only seed exercises and solutions, and a frontier model as an upper bound) and defines each variant's surface-solvability as the fraction of shallow solvers that pass its hidden tests. Transformations are then ranked by depth, and a lightweight predictor lets the DSL warn instructors when a generated variant is merely cosmetic. The framing extends Pisan's functional-roles view of equations to code: a variant is deep when it changes the role a construct plays in the solution, not just its surface form.",
+      "papers": [
+        {
+          "title": "Enhancing Programming Education for Lower-Performing Students through DSL-Based Problem Generation",
+          "authors": "Atsuhiko Maeda",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770761.3777191",
+          "url": "https://doi.org/10.1145/3770761.3777191",
+          "abstract": "This paper proposes a domain-specific language (DSL) that extracts generation strategies from LLMs and formalizes them into a controllable system for creating diverse programming exercises, using XML-style tags in code comments to specify probabilistic transformations while preserving instructor oversight. A quasi-experimental study with 86 students showed significant overall improvement, with notable benefits for lower-performing students but no difference for higher performers. Interviews suggested that DSL diversity forces students to abandon superficial pattern recognition.",
+          "relevance": "Supplies the transformation DSL and the central claim (diversity defeats pattern recognition) that this project tests transformation by transformation, without needing a new student cohort."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "Automatic Generation of Programming Exercises and Code Explanations Using Large Language Models",
+          "authors": "Sami Sarsa, Paul Denny, Arto Hellas, Juho Leinonen",
+          "venue": "ICER 2022",
+          "year": 2022,
+          "url": "https://doi.org/10.1145/3501385.3543957",
+          "relevance": "Established that LLMs can steer concepts and contextual themes of generated exercises via keywords; this project asks whether such theme changes are deep or merely cosmetic."
+        },
+        {
+          "title": "Computational Blueprints: Generating Isomorphic Mathematics Problems with Large Language Models",
+          "authors": "Jeong-Hoon Kim, Jinwoo Nam, Geunsik Jo",
+          "venue": "EMNLP 2025 Industry Track",
+          "year": 2025,
+          "url": "https://arxiv.org/abs/2511.07932",
+          "relevance": "Has the LLM write a reusable generator program rather than item text, the same design move as Maeda's DSL; it offers a structural-consistency framing for deciding which variants count as isomorphic."
+        },
+        {
+          "title": "Categorization and Representation of Physics Problems by Experts and Novices",
+          "authors": "Michelene T. H. Chi, Paul J. Feltovich, Robert Glaser",
+          "venue": "Cognitive Science, 1981",
+          "year": 1981,
+          "url": "https://doi.org/10.1207/s15516709cog0502_2",
+          "relevance": "The classic finding that novices group problems by surface features and experts by underlying principles; it grounds the surface vs. deep transformation taxonomy and links to Pisan's QPT/functional-roles background."
+        }
+      ],
+      "researchPlan": {
+        "overview": "Reimplement a Maeda-style transformation DSL over a corpus of CS1 exercises, generate thousands of tagged variants with hidden tests, and run a panel of deliberately shallow solvers to measure surface-solvability per transformation. The output is a depth ranking of transformations, a public benchmark, and a predictor that flags cosmetic variants inside the generator.",
+        "milestones": [
+          { "month": 1, "goal": "Literature review on exercise generation, isomorphic items and surface vs. deep features; reimplement the DSL transformation set and draft a transformation taxonomy (lexical, contextual, structural, role-changing)", "deliverable": "Annotated bibliography, taxonomy document, and a working DSL interpreter" },
+          { "month": 2, "goal": "Assemble 60-100 seed CS1 exercises with reference solutions from open sources (e.g., CodeWorkout, open textbooks) and generate tagged variants with hidden test suites validated against reference solutions", "deliverable": "Variant corpus (several thousand items) with per-variant transformation tags and passing reference solutions" },
+          { "month": 3, "goal": "Build the shallow-solver panel: retrieval-plus-edit solver, small open code models prompted only with seed pairs, and a frontier model ceiling", "deliverable": "Solver harness with reproducible runs and per-variant pass/fail logs" },
+          { "month": 4, "goal": "Compute surface-solvability, rank transformations by depth, and analyze interactions (e.g., cosmetic plus structural combinations)", "deliverable": "Depth ranking, statistical analysis, and error case studies" },
+          { "month": 5, "goal": "Train a lightweight predictor of variant depth from transformation tags and AST diff features; integrate it as a DSL lint warning", "deliverable": "Open-source DSL extension with a depth warning and predictor evaluation" },
+          { "month": 6, "goal": "Write up results and release the benchmark", "deliverable": "Submitted paper draft plus public benchmark and code release" }
+        ],
+        "targetVenues": ["SIGCSE TS", "ITiCSE", "EDM", "AIED"],
+        "resources": "Open CS1 exercise sources; a GPU workstation or modest cloud credits for small open code models; the local claude CLI for the frontier-model ceiling and for drafting variants; one undergraduate research assistant for validating seed exercises and test suites.",
+        "risks": [
+          { "risk": "Shallow solvers may be too strong (modern small models solve nearly everything) or too weak, flattening the depth signal", "mitigation": "Calibrate the panel on seed exercises first and include solvers with controlled capability (retrieval-only, small models with restricted context) so pass rates spread across variants" },
+          { "risk": "Machine surface-solvability may not match what struggling students experience", "mitigation": "Frame results as a necessary-condition screen; validate against Maeda's published transformation examples and propose a follow-up classroom study as future work" },
+          { "risk": "Generated variants may have incorrect hidden tests, inflating apparent depth", "mitigation": "Require every variant's tests to pass an independently written reference solution and to fail mutated solutions before inclusion" }
+        ],
+        "humanSubjects": false
+      }
+    }
+  ]
+}

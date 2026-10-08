@@ -530,3 +530,7 @@
 | 2026-10-07 | Peer Pick Ledger | Teaching Tool | 1-2 Weeks |
 | 2026-10-07 | Build Your Own Micropolis | Classroom Assignment | Multi-week |
 | 2026-10-07 | Round-Trip Narration Fidelity: A Reconstruction Benchmark for Screen-Reader Descriptions of Program State | Research | Research |
+| 2026-10-08 | Program Alarm 1202 | Side Project | Weekend |
+| 2026-10-08 | Modulo Bias Microscope | Teaching Tool | 1-2 Weeks |
+| 2026-10-08 | Build Your Own Wikipedia Museum | Classroom Assignment | Multi-week |
+| 2026-10-08 | Pattern-Breaking Variants: Measuring Whether Generated Exercise Diversity Defeats Surface-Level Solvers in CS1 | Research | Research |
