@@ -337,3 +337,7 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-10-07 [doc] Created ideas/2026-10-07.json with 4 ideas: Phantom API, Peer Pick Ledger, Build Your Own Micropolis, Round-Trip Narration Fidelity (SIGCSE TS 2026 doi:10.1145/3770761.3777157)
 
 2026-10-08 [doc] Created ideas/2026-10-08.json with 4 ideas: Program Alarm 1202, Modulo Bias Microscope, Build Your Own Wikipedia Museum, Pattern-Breaking Variants (SIGCSE TS 2026 doi:10.1145/3770761.3777191)
+
+2026-10-09 [note] Routine re-requested the ACM AI Summit schedule app (3rd time); already shipped as Summit Navigator and aisummit.acm.org still 403s, so logged as 2026-10-08 n5, not rebuilt.
+
+2026-10-09 [note] Claimed Program Alarm 1202 (2026-10-08 n1) as in progress: AGC Executive simulation with cycle-stealing radar fault, 1202 alarm from real slot exhaustion, restart protection vs naive scheduler.

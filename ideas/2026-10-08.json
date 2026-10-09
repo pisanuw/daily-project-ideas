@@ -103,22 +103,75 @@
       "researchPlan": {
         "overview": "Reimplement a Maeda-style transformation DSL over a corpus of CS1 exercises, generate thousands of tagged variants with hidden tests, and run a panel of deliberately shallow solvers to measure surface-solvability per transformation. The output is a depth ranking of transformations, a public benchmark, and a predictor that flags cosmetic variants inside the generator.",
         "milestones": [
-          { "month": 1, "goal": "Literature review on exercise generation, isomorphic items and surface vs. deep features; reimplement the DSL transformation set and draft a transformation taxonomy (lexical, contextual, structural, role-changing)", "deliverable": "Annotated bibliography, taxonomy document, and a working DSL interpreter" },
-          { "month": 2, "goal": "Assemble 60-100 seed CS1 exercises with reference solutions from open sources (e.g., CodeWorkout, open textbooks) and generate tagged variants with hidden test suites validated against reference solutions", "deliverable": "Variant corpus (several thousand items) with per-variant transformation tags and passing reference solutions" },
-          { "month": 3, "goal": "Build the shallow-solver panel: retrieval-plus-edit solver, small open code models prompted only with seed pairs, and a frontier model ceiling", "deliverable": "Solver harness with reproducible runs and per-variant pass/fail logs" },
-          { "month": 4, "goal": "Compute surface-solvability, rank transformations by depth, and analyze interactions (e.g., cosmetic plus structural combinations)", "deliverable": "Depth ranking, statistical analysis, and error case studies" },
-          { "month": 5, "goal": "Train a lightweight predictor of variant depth from transformation tags and AST diff features; integrate it as a DSL lint warning", "deliverable": "Open-source DSL extension with a depth warning and predictor evaluation" },
-          { "month": 6, "goal": "Write up results and release the benchmark", "deliverable": "Submitted paper draft plus public benchmark and code release" }
+          {
+            "month": 1,
+            "goal": "Literature review on exercise generation, isomorphic items and surface vs. deep features; reimplement the DSL transformation set and draft a transformation taxonomy (lexical, contextual, structural, role-changing)",
+            "deliverable": "Annotated bibliography, taxonomy document, and a working DSL interpreter"
+          },
+          {
+            "month": 2,
+            "goal": "Assemble 60-100 seed CS1 exercises with reference solutions from open sources (e.g., CodeWorkout, open textbooks) and generate tagged variants with hidden test suites validated against reference solutions",
+            "deliverable": "Variant corpus (several thousand items) with per-variant transformation tags and passing reference solutions"
+          },
+          {
+            "month": 3,
+            "goal": "Build the shallow-solver panel: retrieval-plus-edit solver, small open code models prompted only with seed pairs, and a frontier model ceiling",
+            "deliverable": "Solver harness with reproducible runs and per-variant pass/fail logs"
+          },
+          {
+            "month": 4,
+            "goal": "Compute surface-solvability, rank transformations by depth, and analyze interactions (e.g., cosmetic plus structural combinations)",
+            "deliverable": "Depth ranking, statistical analysis, and error case studies"
+          },
+          {
+            "month": 5,
+            "goal": "Train a lightweight predictor of variant depth from transformation tags and AST diff features; integrate it as a DSL lint warning",
+            "deliverable": "Open-source DSL extension with a depth warning and predictor evaluation"
+          },
+          {
+            "month": 6,
+            "goal": "Write up results and release the benchmark",
+            "deliverable": "Submitted paper draft plus public benchmark and code release"
+          }
         ],
-        "targetVenues": ["SIGCSE TS", "ITiCSE", "EDM", "AIED"],
+        "targetVenues": [
+          "SIGCSE TS",
+          "ITiCSE",
+          "EDM",
+          "AIED"
+        ],
         "resources": "Open CS1 exercise sources; a GPU workstation or modest cloud credits for small open code models; the local claude CLI for the frontier-model ceiling and for drafting variants; one undergraduate research assistant for validating seed exercises and test suites.",
         "risks": [
-          { "risk": "Shallow solvers may be too strong (modern small models solve nearly everything) or too weak, flattening the depth signal", "mitigation": "Calibrate the panel on seed exercises first and include solvers with controlled capability (retrieval-only, small models with restricted context) so pass rates spread across variants" },
-          { "risk": "Machine surface-solvability may not match what struggling students experience", "mitigation": "Frame results as a necessary-condition screen; validate against Maeda's published transformation examples and propose a follow-up classroom study as future work" },
-          { "risk": "Generated variants may have incorrect hidden tests, inflating apparent depth", "mitigation": "Require every variant's tests to pass an independently written reference solution and to fail mutated solutions before inclusion" }
+          {
+            "risk": "Shallow solvers may be too strong (modern small models solve nearly everything) or too weak, flattening the depth signal",
+            "mitigation": "Calibrate the panel on seed exercises first and include solvers with controlled capability (retrieval-only, small models with restricted context) so pass rates spread across variants"
+          },
+          {
+            "risk": "Machine surface-solvability may not match what struggling students experience",
+            "mitigation": "Frame results as a necessary-condition screen; validate against Maeda's published transformation examples and propose a follow-up classroom study as future work"
+          },
+          {
+            "risk": "Generated variants may have incorrect hidden tests, inflating apparent depth",
+            "mitigation": "Require every variant's tests to pass an independently written reference solution and to fail mutated solutions before inclusion"
+          }
         ],
         "humanSubjects": false
       }
+    },
+    {
+      "n": 5,
+      "title": "Conference Pocket Schedule (ACM AI Summit, repeat request)",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A mobile-first, easy-to-navigate conference schedule app built from the ACM AI Summit detailed program. Repeat of a request already shipped as Summit Navigator.",
+      "description": "Requested directly (scheduled routine, 2026-10-09): create a mobile-first, easy-to-navigate conference schedule app using the conference schedule at https://aisummit.acm.org/detailed-program. This is the third time this brief has been requested: it was built and shipped on 2026-09-03 as Summit Navigator (idea ref 2026-09-03 #1, https://summit-navigator.netlify.app, Claude-capstone/summit-navigator) and logged as a duplicate on 2026-09-23 (idea ref 2026-09-23 #5). The only open work is a data refresh with the real detailed program, and on 2026-10-09 aisummit.acm.org still returned HTTP 403 to the build environment, so that refresh is still blocked. Not rebuilt as a second app.",
+      "keyFeatures": [
+        "Sticky day tabs, track chips, full-text search, starred agenda, now/next banner (already built in summit-navigator)",
+        "Remaining gap: replace the reconstructed schedule.json with the real detailed-program data once the page is reachable or the data is supplied"
+      ],
+      "techStack": "Already implemented in Claude-capstone/summit-navigator: vanilla TypeScript, one schedule.json, Netlify static hosting",
+      "whyInteresting": "Recorded so the repeat request is visible in the idea history and the real remaining task (a data refresh, not a rebuild) stays explicit.",
+      "inspiredBy": "Direct request in the 2026-10-09 scheduled routine prompt"
     }
   ]
 }
