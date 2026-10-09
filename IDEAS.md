@@ -534,3 +534,7 @@
 | 2026-10-08 | Modulo Bias Microscope | Teaching Tool | 1-2 Weeks |
 | 2026-10-08 | Build Your Own Wikipedia Museum | Classroom Assignment | Multi-week |
 | 2026-10-08 | Pattern-Breaking Variants: Measuring Whether Generated Exercise Diversity Defeats Surface-Level Solvers in CS1 | Research | Research |
+| 2026-10-09 | Four Ghosts, Four Targets | Side Project | Weekend |
+| 2026-10-09 | Fork Count | Teaching Tool | 1-2 Weeks |
+| 2026-10-09 | Build Your Own Plate Solver | Classroom Assignment | Multi-week |
+| 2026-10-09 | The Toolchain Coverage Gap: Which Code-Quality Defects in Existing-Codebase Assignments Do Linters Catch, What Can LLM Reviewers Add, and What Do AI Contributors Introduce? | Research | Research |

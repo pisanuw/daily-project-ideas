@@ -1,0 +1,132 @@
+{
+  "date": "2026-10-09",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Four Ghosts, Four Targets",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A browser Pac-Man maze that draws each ghost's live target tile and decision rule, so you can watch the 1980 arcade AI think, including Pinky's famous overflow bug.",
+      "description": "The original Pac-Man ghosts do not path-find: at every intersection each ghost picks the neighbouring tile closest (straight-line) to a target tile, never reverses, and breaks ties up > left > down > right. Blinky targets Pac-Man, Pinky targets four tiles ahead (and, because of an arcade overflow bug, four up and four left when Pac-Man faces up), Inky doubles the vector from Blinky to two tiles ahead, and Clyde chases until he is within eight tiles, then retreats to his corner. This weekend build recreates the 28x31 maze on a canvas, runs the scatter/chase/frightened timer from level 1, and overlays each ghost's target tile, candidate moves and the distances it compared. A 'ghost cam' pause lets you step one tick at a time and a toggle swaps in BFS ghosts so you can feel why the dumb greedy rule produces more interesting play than optimal pursuit.",
+      "keyFeatures": [
+        "Faithful target-tile rules for Blinky, Pinky, Inky and Clyde with the up-direction overflow bug on a toggle",
+        "Scatter/chase/frightened mode timeline for level 1 with the forced reversal on mode change",
+        "Per-ghost overlay: target tile, candidate exits, compared distances and the chosen move",
+        "Single-tick stepper and a 'drive Pac-Man to the tile' mode to set up classic tricks like ditching Clyde",
+        "Swap any ghost to BFS or A* pursuit and compare capture time and how often ghosts bunch up"
+      ],
+      "techStack": "React + Vite, HTML Canvas, TypeScript, Vitest for the targeting rules",
+      "whyInteresting": "It is a tiny, well-documented game AI that teaches a big lesson: personality and good play come from simple local rules plus deliberate imperfection, not from optimal search. It is also a ready-made demo for a game-AI lecture.",
+      "inspiredBy": "Show HN: Jevman, AI decision models play Pac-Man (news.ycombinator.com/show, Oct 2026); Chad Birch, 'Understanding Pac-Man Ghost Behavior' (gameinternals.com)"
+    },
+    {
+      "n": 2,
+      "title": "Fork Count",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "Paste a short fork/exec/wait/printf snippet and see every process it creates, every possible output interleaving, and which outputs are impossible, with auto-generated 'how many times is hello printed?' quizzes.",
+      "description": "Students in systems courses are routinely asked to predict the output of code like `for (i=0;i<3;i++) fork(); printf(\"x\");` and almost always reason about it wrong, especially with buffered stdout, wait() ordering and exit(). Fork Count interprets a small C subset (fork, wait, waitpid, exit, execlp stubs, printf with and without newline, fflush, getpid, loops and if on fork's return value), builds the process tree, and enumerates every legal interleaving the scheduler could produce, deduplicated into the set of possible outputs. Students propose an output and the tool says whether it is reachable, and if not, which happens-before edge (a wait, a parent-before-child print) rules it out. A stdio buffering toggle shows the classic duplicated-output effect when a buffer is copied at fork. Instructors get a generator that mutates templates into new exam questions whose answers are verified by the enumerator.",
+      "keyFeatures": [
+        "Interpreter for a fork/wait/exit/printf C subset with full stdio buffer semantics (line-buffered vs fully-buffered)",
+        "Animated process tree with pids, parent links, zombie and orphan states",
+        "Exhaustive interleaving enumeration with partial-order reduction, showing the set of distinct reachable outputs",
+        "'Is this output possible?' checker that names the happens-before edge that forbids an impossible answer",
+        "Question generator that mutates templates and exports verified items as QTI or Markdown"
+      ],
+      "techStack": "React + Vite, TypeScript, a small hand-written parser and interpreter, D3 for the process tree, Vitest",
+      "whyInteresting": "Fork-output questions are on nearly every OS exam and nearly every student guesses. A tool that proves which outputs are reachable, and explains why the others are not, turns a trick question into a lesson on concurrency and partial orders.",
+      "inspiredBy": "Show HN: Procinsh, a 3D Linux process inspector (news.ycombinator.com/show, Oct 2026)"
+    },
+    {
+      "n": 3,
+      "title": "Build Your Own Plate Solver",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "Students build a blind astrometry engine: give it a photo of the night sky and it finds exactly where in the sky the camera was pointing, using star detection, geometric hashing of star quads and a bright-star catalog.",
+      "description": "Plate solving is how astrophotography apps and telescope mounts figure out where they are pointing, and the core algorithm is a beautiful multi-week CS project. Milestone 1 detects stars in an image (background subtraction, thresholding, connected components, centroiding). Milestone 2 builds the index: for a bright-star catalog (Yale Bright Star or Hipparcos subset), form quads of nearby stars and compute a scale- and rotation-invariant hash code from their relative positions, stored in a k-d tree. Milestone 3 hashes quads from the image, queries the index for near matches, and proposes a pointing hypothesis. Milestone 4 verifies a hypothesis by projecting the catalog through the fitted transform and scoring how many predicted stars actually appear, then reports RA/Dec, field rotation and pixel scale and overlays constellation lines. Stretch goals: tolerate lens distortion, run in the browser via WebAssembly, or pair with phone orientation sensors to narrow the search.",
+      "keyFeatures": [
+        "Star detection with centroiding on real phone and DSLR sky photos",
+        "Quad-based geometric hash codes invariant to translation, rotation and scale",
+        "k-d tree index over the catalog with tolerance-based nearest-neighbour lookup",
+        "Hypothesis verification with a likelihood score and false-positive control",
+        "Overlay of constellation lines and star names on the solved image, plus a graded test set of images with known pointing"
+      ],
+      "techStack": "Python (NumPy, Pillow) or C++ for the core, Flask or a React + Vite front end for the overlay viewer, public star catalog data",
+      "whyInteresting": "It ties together image processing, computational geometry, hashing, spatial indexes and probabilistic verification in one project with an unambiguous, satisfying correctness check: the constellations line up or they do not.",
+      "inspiredBy": "Show HN: AstroHelm, use your phone camera to aim a telescope (news.ycombinator.com/show, Oct 2026); Lang et al., 'Astrometry.net: Blind astrometric calibration of arbitrary astronomical images', Astronomical Journal 2010"
+    },
+    {
+      "n": 4,
+      "title": "The Toolchain Coverage Gap: Which Code-Quality Defects in Existing-Codebase Assignments Do Linters Catch, What Can LLM Reviewers Add, and What Do AI Contributors Introduce?",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Map each defect category from the Řechtáčková catalog to whether off-the-shelf linters, an LLM reviewer, or neither can detect it in contributions to an existing code base, then measure whether AI coding agents introduce the same defects students do.",
+      "description": "Shah et al. (ITiCSE 2025) found that upper-division students contributing to an open-source code base frequently introduced Poor Design, Poor Documentation, Poor Formatting and Unused Code defects, often by copy-pasting from elsewhere in the repository, and they noted the tool support for each defect. This project turns that observation into a measurable 'toolchain coverage map': for every defect type, does a standard toolchain (ruff/pylint, clang-tidy, duplicate-code detectors) catch it, does an LLM reviewer given repository context catch it, or does it fall through both? We build a benchmark by seeding catalog defects into real feature-sized changes in open-source projects (and by mining public student-authored pull requests), then evaluate tool and LLM detection with precision and recall against expert labels. Finally we have AI coding agents complete the same modify-a-feature and add-a-feature tasks and compare their defect profile with the student profile from the source paper. The result directly informs Pisan's toolchain-first pedagogy in the copilot era: which quality skills the toolchain already teaches, which an LLM reviewer could scaffold, and which still need human instruction.",
+      "papers": [
+        {
+          "title": "Identifying Students' Code Quality Defects in Large Code Bases",
+          "authors": "Anshul Shah, Thomas Rexin, Gonzalo Allen-Perez, et al.",
+          "venue": "ITiCSE 2025",
+          "year": 2025,
+          "doi": "10.1145/3724363.3729074",
+          "url": "https://doi.org/10.1145/3724363.3729074",
+          "abstract": "In an upper-division software engineering course, 48 students modified an existing feature and implemented a new feature in an open-source code base. Using the code quality defect framework of Řechtáčková et al., a manual review found that students created defects related to Poor Design, Poor Documentation, Poor Formatting and Unused Code at a high frequency, and copy-pasting from other files introduced Unused Code and Poor Design defects. The authors also characterize each defect's severity, tool support and language independence.",
+          "relevance": "Supplies the defect taxonomy, the existing-codebase task framing and the per-defect 'tool support' dimension that this project turns into a quantitative linter-versus-LLM coverage map and an AI-contributor comparison."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "Catalog of Code Quality Defects in Introductory Programming (ITiCSE 2024) and Code Quality Defects in Introductory Programming (TOCE 2025)",
+          "authors": "Anna Řechtáčková, Radek Pelánek, Tomáš Effenberger",
+          "venue": "ITiCSE 2024; ACM Transactions on Computing Education 25(4), 2025",
+          "year": 2024,
+          "url": "https://doi.org/10.1145/3649217.3653638",
+          "relevance": "The 80-defect catalog with educator-rated reporting priority; it is the labeling scheme for the benchmark and lets the coverage map be weighted by how much each defect matters to teachers."
+        },
+        {
+          "title": "Code Quality Issues in Student Programs",
+          "authors": "Hieke Keuning, Bastiaan Heeren, Johan Jeuring",
+          "venue": "ITiCSE 2017",
+          "year": 2017,
+          "url": "https://doi.org/10.1145/3059009.3059061",
+          "relevance": "Large-scale PMD analysis of Blackbox Java code showing students rarely fix quality issues, especially modularization ones, and that analysis tools had little effect; the baseline claim this project tests for modern linters and LLM reviewers."
+        },
+        {
+          "title": "Hyperstyle: A Tool for Assessing the Code Quality of Solutions to Programming Assignments",
+          "authors": "Anastasiia Birillo, Ilya Vlasov, Artyom Burylov, et al.",
+          "venue": "SIGCSE 2022",
+          "year": 2022,
+          "url": "https://doi.org/10.1145/3478431.3499294",
+          "relevance": "An education-oriented aggregator of professional linters; a strong 'best available toolchain' baseline against which LLM-reviewer added coverage is measured."
+        },
+        {
+          "title": "SWE-bench: Can Language Models Resolve Real-World GitHub Issues?",
+          "authors": "Carlos E. Jimenez, John Yang, Alexander Wettig, et al.",
+          "venue": "ICLR 2024",
+          "year": 2024,
+          "url": "https://arxiv.org/abs/2310.06770",
+          "relevance": "Established methodology and harness for having AI agents make changes inside real repositories; reused to generate AI-contributor patches whose defect profile is compared with students'."
+        }
+      ],
+      "researchPlan": {
+        "overview": "First build a labeled benchmark of feature-sized changes to real Python and C++ code bases containing seeded and naturally occurring catalog defects. Then measure detection coverage of a standard toolchain, an LLM reviewer with repository context, and their combination, per defect category. Finally compare the defect profiles of AI-agent contributions with the student profile reported by Shah et al. to identify which quality skills remain uniquely human to teach.",
+        "milestones": [
+          { "month": 1, "goal": "Literature review, select 4-6 open-source Python and C++ repositories with feature-sized tasks, map the Řechtáčková catalog to existing-codebase defects", "deliverable": "Annotated bibliography, task list and defect-to-detector mapping draft" },
+          { "month": 2, "goal": "Build the seeding tool (copy-paste with unused code, duplicated logic, missing docs, inconsistent formatting, poor decomposition) and mine public student PRs from course-project repositories", "deliverable": "Benchmark v1: about 400 changes with defect labels, inter-rater agreement on a 20% sample" },
+          { "month": 3, "goal": "Run the toolchain baseline (ruff, pylint, clang-tidy, jscpd, Hyperstyle) and an LLM reviewer given the diff plus surrounding repository context", "deliverable": "Per-category precision/recall table and the first coverage map" },
+          { "month": 4, "goal": "Generate AI-agent patches for the same modify-feature and add-feature tasks; label their defects with the same scheme", "deliverable": "Student-versus-AI defect profile comparison with statistical tests" },
+          { "month": 5, "goal": "Analyze which categories fall through both detectors and which the LLM reviewer handles only with repository context; derive pedagogy recommendations for toolchain-first courses", "deliverable": "Coverage gap analysis and a released benchmark plus reviewer prompts" },
+          { "month": 6, "goal": "Write and submit the paper", "deliverable": "Submitted paper draft with open benchmark artifact" }
+        ],
+        "targetVenues": ["SIGCSE TS", "ITiCSE", "ICER", "Koli Calling"],
+        "resources": "Public open-source repositories and public course-project pull requests; static analysis tools (all free); LLM access via the local claude CLI for the reviewer and the coding agent; one or two student research assistants for defect labeling (about 60 hours each); modest CPU for running linters at scale.",
+        "risks": [
+          { "risk": "Seeded defects may be easier to detect than natural student defects, inflating coverage numbers.", "mitigation": "Report seeded and naturally occurring (mined PR) subsets separately and calibrate seeding against the defect frequencies reported by Shah et al." },
+          { "risk": "LLM reviewer output is verbose and hard to map to discrete catalog categories, making precision ambiguous.", "mitigation": "Constrain the reviewer to a structured output keyed to catalog IDs with line spans, and have two raters adjudicate a sample of disagreements." },
+          { "risk": "AI-agent patches may fail tests, confounding quality comparisons with correctness.", "mitigation": "Compare quality only on patches that pass the task's tests, and report pass rates separately." }
+        ],
+        "humanSubjects": false
+      }
+    }
+  ]
+}
