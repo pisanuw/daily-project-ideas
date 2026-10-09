@@ -265,8 +265,10 @@
         "date": "2026-10-08",
         "n": 1
       },
-      "placeholder": true,
-      "notes": "In progress since 2026-10-09"
+      "notes": "Built in one session, fully client-side in vanilla TypeScript and canvas: a simplified AGC Executive with priorities and the real pools of 7 core sets and 5 VAC areas runs SERVICER, landing radar, downlink, DSKY refresh and the crew's V16N68 monitor every 2 s. A radar cycle-steal slider makes low-priority jobs starve and keep their slots until a request fails and 1202 (or 1201 when VAC areas run out first) fires from real exhaustion; the restart flushes everything and re-establishes only restart-protected jobs at their last phase, so guidance keeps flying a 1D descent. At the default 15% steal with the monitor on it lands with five alarms; a halt-on-overflow Executive aborts at the first and naive round-robin misses guidance deadlines and lands hard. Compare tab with guidance timelines and a steal sweep, DSKY panel, Apollo 11 timeline tab, share links. Job sizes are invented to match the real load level, not taken from Luminary. 36 vitest tests, 100% statement coverage on the core. Deployed via the GitHub Actions deploy workflow, siteId pinned afterward.",
+      "url": "https://program-alarm-1202.netlify.app",
+      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/program-alarm-1202",
+      "implementedOn": "2026-10-09"
     }
   ]
 }
