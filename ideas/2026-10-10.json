@@ -1,0 +1,170 @@
+{
+  "date": "2026-10-10",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Poincaré Paint",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A drawing toy that lives in the Poincaré disk: every stroke you make is instantly replicated across a hyperbolic {p,q} tiling, so doodles become Escher-style Circle Limit patterns you can drag and re-center.",
+      "description": "Pick a tiling such as {7,3} or {5,4}, then draw with the mouse or a stylus inside the disk. Each stroke is stored in the fundamental triangle and redrawn under every group element out to a depth limit, using Möbius transformations so lines become geodesic arcs and shapes shrink correctly toward the boundary. Dragging the canvas applies a hyperbolic translation, which shows why the disk has no center and why the edge is infinitely far away. A 'straight line' brush draws true geodesics, and a measuring tool shows hyperbolic distance and angle sum of any triangle you sketch, making it double as a geometry explainer. Finished pieces export as SVG or a shareable URL that encodes the strokes.",
+      "keyFeatures": [
+        "Selectable {p,q} tilings with live reflection-group generation to a configurable depth",
+        "Strokes stored once in the fundamental domain and replicated by Möbius maps",
+        "Drag to apply a hyperbolic translation (re-centering) with smooth animation",
+        "Geodesic brush plus distance and triangle angle-sum readouts",
+        "SVG export and stroke-encoded share links, no backend"
+      ],
+      "techStack": "React + Vite, TypeScript, Canvas 2D (or WebGL for deep tilings), complex-number Möbius helpers, Vitest",
+      "whyInteresting": "It is a weekend-sized build with a real math core (group generation, Möbius transforms, numerical precision near the boundary) and an output people love to share. It also doubles as a classroom demo for non-Euclidean geometry and transformation composition.",
+      "inspiredBy": "Show HN: an infinite-canvas notes app in the non-Euclidean Poincaré disk (hnrss.org/show, 2026)"
+    },
+    {
+      "n": 2,
+      "title": "Cache Miss Theater",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "Pick or type a small loop nest over arrays, configure a cache, and watch every load land as a hit, compulsory, capacity or conflict miss on an animated set-associative cache, with simulator-verified 'predict the miss rate' questions.",
+      "description": "Students in architecture and systems courses are told that loop order and blocking matter, but rarely see why. Cache Miss Theater parses a tiny C-like subset (nested for loops, 1D and 2D array reads and writes with affine indices, element size and base address) and generates the exact address trace. That trace is replayed through a configurable cache (size, line size, associativity, LRU/FIFO/random, write-allocate or not), with an animated grid of sets and ways and a memory-layout strip that highlights which array element brought each line in. Every miss is classified with the 3C model by also running fully-associative and infinite caches in parallel. Side-by-side mode compares two versions of the same kernel (row vs column order, interchanged loops, blocked matrix multiply) and plots miss rate as the block size is varied. Instructors get a generator that perturbs templates into new exam questions whose answers come straight from the simulator.",
+      "keyFeatures": [
+        "Affine loop-nest parser that emits exact address traces with array and index provenance",
+        "Configurable set-associative cache with LRU, FIFO and random replacement and write policies",
+        "3C miss classification via parallel fully-associative and infinite-cache runs",
+        "Side-by-side kernel comparison and block-size sweep chart",
+        "Question generator with simulator-verified answers, exported as QTI or Markdown"
+      ],
+      "techStack": "React + Vite, TypeScript, hand-written parser and cache simulator, D3 or Canvas for the set/way grid, Vitest",
+      "whyInteresting": "Cache questions appear on nearly every architecture exam and are tedious to hand-check. A tool that both animates the mechanism and proves the answer lets instructors generate unlimited correct practice and lets students see why matrix multiply blocking works.",
+      "inspiredBy": "GitHub trending 'from scratch' learning repos (e.g. rohitg00/ai-engineering-from-scratch, codecrafters-io/build-your-own-x) and recurring HN discussion of 'What Every Programmer Should Know About Memory'"
+    },
+    {
+      "n": 3,
+      "title": "Build Your Own RISC-V Emulator That Boots",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "A staged course project where students write an RV32IMA emulator in TypeScript or C, add a UART, timer and traps, and finish by booting a provided mini-kernel and shell in the browser.",
+      "description": "Inspired by browser projects that embed whole machines (v86, Pyodide) in a page, this assignment walks students up the stack one checkpoint at a time. Week 1: registers, memory and the RV32I decoder, verified against the official riscv-tests suite. Week 2: the M and A extensions plus a disassembler and single-step debugger view. Week 3: memory-mapped UART and CLINT timer, CSRs, and machine-mode traps and interrupts. Week 4: run a provided tiny kernel (a cooperative scheduler with a shell, a few hundred lines of C cross-compiled ahead of time) and get a prompt in an xterm.js terminal. Stretch goals include Sv32 paging, a simple disk device, or a JIT for hot basic blocks. Every checkpoint has an autograder that runs instruction-level conformance tests and compares UART output against golden traces.",
+      "keyFeatures": [
+        "Four checkpoints, each autograded by riscv-tests conformance and golden UART traces",
+        "Built-in step debugger: registers, CSRs, disassembly and memory view",
+        "Memory-mapped UART and timer devices with interrupt delivery",
+        "Provided cross-compiled mini-kernel and shell as the final boot target",
+        "Stretch tracks: Sv32 virtual memory, block device, basic-block JIT"
+      ],
+      "techStack": "TypeScript (browser) or C (native), Vite, xterm.js, riscv-gnu-toolchain for building the provided kernel, riscv-tests, GitHub Classroom autograder",
+      "whyInteresting": "Seeing your own emulator print a shell prompt is one of the most motivating moments in a systems course, and it ties together ISA, devices, interrupts and OS bring-up. RISC-V's small, open specification keeps it tractable in a month while the stretch goals give strong students real depth.",
+      "inspiredBy": "Show HN: Loft Day, a browser game that runs v86 Linux and Pyodide in a single HTML file (hn.svelte.dev/item/49343029); codecrafters-io/build-your-own-x"
+    },
+    {
+      "n": 4,
+      "title": "Comment Once, Apply Safely: Benchmarking LLM Propagation of TA Design Feedback Across Open-Ended Programming Submissions",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Builds a replay benchmark from archived TA comments on open-ended CS2 projects and measures when an LLM can correctly carry a comment written for one submission over to others, versus applying it where it does not fit.",
+      "description": "Rump (ITiCSE 2025) proposes automation that supports, rather than replaces, human feedback on open-ended programming assignments, keeping assignments open while improving consistency and efficiency. A concrete mechanism for that is feedback propagation: a TA writes a design comment once, and the system finds other submissions where it applies and adapts the wording to their code. Codewebs and OverCode showed propagation works for small functional exercises using syntactic and semantic similarity, but open-ended projects with design-quality comments (decomposition, naming, responsibility, duplication) have no shared reference solution, so similarity breaks down. This project builds a retrospective benchmark from de-identified archived submissions and TA comments in prior CSS 143 offerings, defines propagation as a precision-critical retrieval-plus-adaptation task, and compares embedding retrieval, static-analysis anchors, and LLM judges with a 'does not apply' abstention option. The key output is a calibrated precision/recall curve showing how many TA comments can be propagated at a given false-application rate, which directly informs the DT-1 explanatory feedback layer over Jolly Feedback.",
+      "papers": [
+        {
+          "title": "Automation Support for Giving Feedback in Learning Programming by Doing",
+          "authors": "Arthur Rump",
+          "venue": "ITiCSE 2025",
+          "year": 2025,
+          "doi": "10.1145/3724389.3731300",
+          "url": "https://doi.org/10.1145/3724389.3731300",
+          "abstract": "Providing effective feedback on open-ended programming assignments is a challenge, particularly at scale. The work intends to develop an approach leveraging automation to support the feedback process, without requiring changes to assignments that enable full automation, aiming to improve the consistency and efficiency of giving feedback.",
+          "relevance": "States the problem (human-in-the-loop automation for open-ended assignment feedback) that this project turns into a measurable propagation benchmark with an explicit precision requirement."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "Codewebs: Scalable Homework Search for Massive Open Online Programming Courses",
+          "authors": "Andy Nguyen, Christopher Piech, Jonathan Huang, Leonidas Guibas",
+          "venue": "WWW 2014",
+          "year": 2014,
+          "url": "https://ir.webis.de/anthology/2014.wwwconf_conference-2014.46/",
+          "relevance": "The canonical feedback-propagation system: instructors annotate a few submissions per cluster and comments spread through a similarity network. Serves as the similarity-based baseline that open-ended design comments are expected to break."
+        },
+        {
+          "title": "OverCode: Visualizing Variation in Student Solutions to Programming Problems at Scale",
+          "authors": "Elena L. Glassman, Jeremy Scott, Rishabh Singh, Philip J. Guo, Robert C. Miller",
+          "venue": "ACM TOCHI 22(2), 2015",
+          "year": 2015,
+          "url": "https://doi.org/10.1145/2699751",
+          "relevance": "Clusters normalized solutions so an instructor can give feedback per cluster; a second baseline and a source of the canonicalization ideas used for static-analysis anchors."
+        },
+        {
+          "title": "Atelier: Tutor-Moderated Comments in Programming Education",
+          "authors": "Ansgar Fehnker, Angelika Mader, Arthur Rump",
+          "venue": "EC-TEL 2021",
+          "year": 2021,
+          "url": "https://researchers.mq.edu.au/en/publications/atelier-tutor-moderated-comments-in-programming-education/",
+          "relevance": "The source author's prior tool for sharing and reusing tutor comments on student code; it motivates the comment-reuse workflow the benchmark evaluates and shows TA inconsistency is a real cost."
+        },
+        {
+          "title": "Automated Grading and Feedback Tools for Programming Education: A Systematic Review",
+          "authors": "Marcus Messer, Neil C. C. Brown, Michael Kölling, Miaojing Shi",
+          "venue": "ACM Transactions on Computing Education 24(1), 2024",
+          "year": 2024,
+          "url": "https://arxiv.org/abs/2306.11722",
+          "relevance": "Finds that tools mostly grade correctness, rarely maintainability or design, and are seldom evaluated on reproducible datasets; this project targets exactly that design-feedback and dataset gap."
+        }
+      ],
+      "researchPlan": {
+        "overview": "Assemble a de-identified corpus of open-ended CS2 submissions with their original TA comments, turn each comment into a propagation query with gold labels of where else it applies, then compare similarity, static-analysis and LLM propagators under a precision-first metric. Finish with an error analysis of which comment types are safely propagatable and a tool prototype that plugs into Jolly Feedback.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review on feedback propagation and design-quality feedback; secure IRB exempt determination; export and de-identify archived CSS 143 submissions and TA comments",
+            "deliverable": "Annotated bibliography, IRB determination, de-identified corpus with comment-to-line anchors"
+          },
+          {
+            "month": 2,
+            "goal": "Build gold labels: for a sample of comments, two annotators mark every other submission where the comment applies; derive a comment-type taxonomy (decomposition, naming, duplication, encapsulation, correctness-adjacent)",
+            "deliverable": "Labeled propagation set with inter-rater agreement and taxonomy"
+          },
+          {
+            "month": 3,
+            "goal": "Implement baselines: AST-normalized clustering (OverCode-style), embedding retrieval, and static-analysis anchors (linters, clone detection, metrics)",
+            "deliverable": "Baseline precision/recall curves per comment type"
+          },
+          {
+            "month": 4,
+            "goal": "Implement LLM propagators (retrieve-then-judge with abstention, and adapt-the-wording step) using local CLI-driven models; measure false-application rate and adaptation fidelity",
+            "deliverable": "LLM results table and calibrated abstention thresholds"
+          },
+          {
+            "month": 5,
+            "goal": "Error analysis: which comment types propagate safely, and how many TA-minutes the best propagator would save at a fixed 95% precision",
+            "deliverable": "Error taxonomy and time-savings estimate; Jolly Feedback plug-in prototype"
+          },
+          {
+            "month": 6,
+            "goal": "Write and submit paper; release benchmark tooling and a synthetic-code version of the dataset",
+            "deliverable": "Submitted paper and public benchmark repository"
+          }
+        ],
+        "targetVenues": [
+          "SIGCSE TS",
+          "ITiCSE",
+          "EDM",
+          "L@S"
+        ],
+        "resources": "Archived CSS 143 submissions and TA comments (3-5 offerings), two graduate or senior undergraduate annotators for about 60 hours each, a laptop GPU or the local claude CLI for LLM runs, standard static-analysis tools (Checkstyle, PMD, clone detectors).",
+        "risks": [
+          {
+            "risk": "Archived TA comments are sparse, inconsistent, or not anchored to code lines",
+            "mitigation": "Recover anchors by fuzzy matching against submission text, and supplement with a small set of comments re-authored by the research team on the same submissions."
+          },
+          {
+            "risk": "Gold labels for 'where does this comment apply' are subjective, giving low agreement",
+            "mitigation": "Restrict to comment types with agreement above a threshold, report kappa per type, and treat low-agreement types as a finding about propagatability."
+          },
+          {
+            "risk": "Data sharing restrictions prevent releasing the real corpus",
+            "mitigation": "Release the pipeline plus a synthetic corpus generated by mutating public reference solutions with the same comment taxonomy."
+          }
+        ],
+        "humanSubjects": true
+      }
+    }
+  ]
+}

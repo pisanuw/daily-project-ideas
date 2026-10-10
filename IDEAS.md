@@ -538,3 +538,7 @@
 | 2026-10-09 | Fork Count | Teaching Tool | 1-2 Weeks |
 | 2026-10-09 | Build Your Own Plate Solver | Classroom Assignment | Multi-week |
 | 2026-10-09 | The Toolchain Coverage Gap: Which Code-Quality Defects in Existing-Codebase Assignments Do Linters Catch, What Can LLM Reviewers Add, and What Do AI Contributors Introduce? | Research | Research |
+| 2026-10-10 | Poincaré Paint | Side Project | Weekend |
+| 2026-10-10 | Cache Miss Theater | Teaching Tool | 1-2 Weeks |
+| 2026-10-10 | Build Your Own RISC-V Emulator That Boots | Classroom Assignment | Multi-week |
+| 2026-10-10 | Comment Once, Apply Safely: Benchmarking LLM Propagation of TA Design Feedback Across Open-Ended Programming Submissions | Research | Research |
