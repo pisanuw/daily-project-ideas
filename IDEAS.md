@@ -542,3 +542,7 @@
 | 2026-10-10 | Cache Miss Theater | Teaching Tool | 1-2 Weeks |
 | 2026-10-10 | Build Your Own RISC-V Emulator That Boots | Classroom Assignment | Multi-week |
 | 2026-10-10 | Comment Once, Apply Safely: Benchmarking LLM Propagation of TA Design Feedback Across Open-Ended Programming Submissions | Research | Research |
+| 2026-10-11 | Jamo Blocks | Side Project | Weekend |
+| 2026-10-11 | Edit Graph Lab | Teaching Tool | 1-2 Weeks |
+| 2026-10-11 | Build Your Own BSP Level Renderer | Classroom Assignment | Multi-week |
+| 2026-10-11 | Construction-Trace Feedback: Verified, Solution-Free Hints for Student Closure Constructions in Automata Theory | Research | Research |

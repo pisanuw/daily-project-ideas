@@ -1,0 +1,124 @@
+{
+  "date": "2026-10-11",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Jamo Blocks",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A Hangul playground where you drag consonant and vowel pieces into a syllable frame and watch the block assemble, along with the exact Unicode arithmetic that turns three jamo into one code point.",
+      "description": "Korean Hangul is one of the few writing systems whose Unicode encoding is a formula: every precomposed syllable equals 0xAC00 + (initial × 21 + medial) × 28 + final. Jamo Blocks makes that visible. Users drag an initial consonant, a vowel and an optional final consonant into a frame; the block reflows between its six layout shapes (vertical vowel, horizontal vowel, with and without a final) and a side panel shows the index lookups, the arithmetic, the resulting code point, its UTF-8 and UTF-16 bytes, and the NFC/NFD forms. A 'decompose' mode does the reverse for any pasted Korean text, and a typing mode implements the standard 2-beolsik automaton so learners can see why a keystroke sometimes moves a final consonant into the next syllable. A short quiz asks users to predict the code point or the block shape before revealing it.",
+      "keyFeatures": [
+        "Drag-and-drop syllable builder with the six Hangul block layouts rendered live",
+        "Step-by-step Unicode composition and decomposition (code point, UTF-8, UTF-16, NFC vs NFD)",
+        "2-beolsik keyboard automaton with a visible state diagram, including final-consonant migration",
+        "Paste-any-text decomposer that colors each jamo by role",
+        "Predict-the-code-point and predict-the-shape quiz with shareable links"
+      ],
+      "techStack": "React + Vite, TypeScript, CSS grid for block layouts, String.prototype.normalize, Vitest",
+      "whyInteresting": "It is a small, satisfying build that teaches two things at once: a beautifully designed writing system and how Unicode, normalization and encodings really work. The input automaton is also a neat real-world finite-state machine for a theory or systems class.",
+      "inspiredBy": "Show HN: Happy Hangul Day! An RNN for Generating Korean Handwriting Strokes (news.ycombinator.com/item?id=50015833, Oct 2026)"
+    },
+    {
+      "n": 2,
+      "title": "Edit Graph Lab",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "An interactive visualizer for the diff algorithms behind git and every code-review tool: watch Myers' algorithm explore the edit graph diagonal by diagonal, compare it with patience and histogram diff, and answer simulator-checked 'what will the diff be?' questions.",
+      "description": "Students use diff every day but rarely see that it is a shortest-path search. Edit Graph Lab takes two short texts (lines or characters) and draws the edit graph as a grid, with diagonals for matches. Myers' O(ND) algorithm is animated as its furthest-reaching D-paths expand, with the V array shown beside the grid, and the final path is mapped back to a unified diff. A comparison mode runs LCS dynamic programming, Myers, patience diff and histogram diff on the same input and highlights where they produce different (equally short but less readable) hunks, using classic cases such as moved functions and repeated braces. Instructors can author or auto-generate exercises (predict the edit distance, predict which hunk patience diff will choose, fill in the V array for step D) whose answers come from the reference implementations, exported as QTI or Markdown.",
+      "keyFeatures": [
+        "Edit-graph grid with animated Myers furthest-reaching paths and a live V-array panel",
+        "Side-by-side LCS DP table, Myers, patience and histogram diff on the same input",
+        "Unified-diff rendering with hunk headers mapped back to graph paths",
+        "Curated 'readability trap' examples where minimal diffs look wrong to humans",
+        "Exercise generator with reference-implementation answers and QTI/Markdown export"
+      ],
+      "techStack": "React + Vite, TypeScript, SVG for the edit graph, hand-written diff implementations cross-checked against the 'diff' npm package in Vitest",
+      "whyInteresting": "Diff connects algorithms (shortest paths, dynamic programming, greedy search) to a tool every student already uses, which makes it a strong hook for an algorithms or software-tools course. Verified exercise generation turns it into unlimited practice instead of a one-off demo.",
+      "inspiredBy": "Show HN: Diffle, a keyboard-centric diff viewer with LSP support (news.ycombinator.com/item?id=50006930, Oct 2026)"
+    },
+    {
+      "n": 3,
+      "title": "Build Your Own BSP Level Renderer",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "A staged assignment in which students write a browser renderer for real Quake 1 shareware maps: parse the BSP file, walk the tree front to back, cull with the PVS, and texture surfaces with lightmaps, all on a software framebuffer before optionally porting to WebGL.",
+      "description": "Quake's level format is a compact tour of core CS: binary parsing, binary space partitioning trees, visibility sets compressed with run-length encoding, and perspective-correct texture mapping. Over five milestones students (1) parse the BSP lumps from the freely distributed shareware pak0.pak and draw a wireframe, (2) traverse the BSP tree to find the camera's leaf and render faces front to back, (3) decompress the potentially visible set and measure how much it culls, (4) rasterize textured, lightmapped polygons into a canvas ImageData buffer, and (5) add collision against the clip hulls so a player can walk the level. Each milestone ships with a reference screenshot set and an automated test harness that compares frame hashes and face counts from fixed camera poses, so grading is mostly mechanical. A stretch milestone ports the rasterizer to WebGL and compares frame times.",
+      "keyFeatures": [
+        "Binary lump parser for vertices, edges, faces, nodes, leaves, textures and lightmaps",
+        "Front-to-back BSP traversal with camera-leaf lookup",
+        "RLE-compressed PVS decoding with a culling statistics overlay",
+        "Software rasterizer with perspective-correct texturing and lightmap blending",
+        "Clip-hull collision and walkable first-person camera, plus an autograder comparing frames from fixed poses"
+      ],
+      "techStack": "TypeScript or JavaScript, Canvas 2D ImageData framebuffer, optional WebGL2, Node test harness with pixel-hash comparisons, Quake shareware data files",
+      "whyInteresting": "Students get a famous, visually rewarding result while practicing binary I/O, trees, compression, linear algebra and rasterization in one coherent project. The fixed-pose autograder keeps a large graphics assignment gradable at scale.",
+      "inspiredBy": "Show HN: Quake ported to safe Rust, playable in browser (news.ycombinator.com/item?id=50016312, Oct 2026) and codecrafters-io/build-your-own-x"
+    },
+    {
+      "n": 4,
+      "title": "Construction-Trace Feedback: Verified, Solution-Free Hints for Student Closure Constructions in Automata Theory",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Builds a benchmark of buggy student-style closure constructions (product, complement, concatenation, Kleene star) and tests whether LLM hints grounded in an algorithm's step trace and an equivalence-checker counterexample can name the faulty construction step without giving away the answer.",
+      "description": "Morazán and colleagues built step-through visualizations of the closure-property construction algorithms in FSM, but students who must carry out a construction themselves still get little targeted feedback when they get it wrong. Classic automata tutors return a counterexample string or a grade, and a 2026 benchmark shows LLMs are unreliable at building automata themselves, so neither alone diagnoses which step of a construction went wrong. This project mutates correct constructions to produce a labeled corpus of realistic faults (missing epsilon transitions in star, wrong accepting-state set in a product for union vs. intersection, complementing an incomplete DFA) and then compares three feedback generators: counterexample only, LLM with the problem statement, and LLM grounded in the reference construction trace plus a verified counterexample. A symbolic checker verifies that each hint names the correct faulty step and that it does not leak the full solution. The result is a solution-free, verifiable hint layer that fits Pisan's earlier work on solution-free hint generation and extends it from code to formal models.",
+      "papers": [
+        {
+          "title": "Visualizing Construction Algorithms for Closure Properties of Regular Languages",
+          "authors": "Tijana Minić, Marco T. Morazán, Andrés M. Garced, David Anthony K. Fields",
+          "venue": "ITiCSE 2025",
+          "year": 2025,
+          "doi": "10.1145/3724363.3729120",
+          "url": "https://doi.org/10.1145/3724363.3729120",
+          "abstract": "For some students, it is difficult to bridge the gap between the formal description of a construction algorithm and the use of the algorithm in practice. The authors integrated five dynamic visualization tools for union, concatenation, Kleene star, complement and intersection into FSM, a programming language for the automata theory classroom; each tool steps through a construction algorithm and generates transition diagrams with informative messages. Student data from a US and a European university suggests the tools are well received and help students understand the constructions.",
+          "relevance": "Supplies the step-level structure of each construction (what is added at each step and why) that this project uses as the grounding trace for diagnosing student faults and producing hints."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "How Can Automatic Feedback Help Students Construct Automata?",
+          "authors": "Loris D'Antoni, Dileep Kini, Rajeev Alur, Sumit Gulwani, Mahesh Viswanathan, Björn Hartmann",
+          "venue": "ACM Transactions on Computer-Human Interaction 22(2), 2015",
+          "year": 2015,
+          "url": "https://doi.org/10.1145/2723163",
+          "relevance": "Establishes counterexample and conceptual-hint feedback for DFA construction with 377 students; serves as the non-LLM baseline the new step-level hints are compared against."
+        },
+        {
+          "title": "Automata Tutor v3",
+          "authors": "Loris D'Antoni, Martin Helfrich, Jan Kretinsky, Emanuel Ramneantu, Maximilian Weininger",
+          "venue": "CAV 2020",
+          "year": 2020,
+          "url": "https://doi.org/10.1007/978-3-030-53291-8_1",
+          "relevance": "Provides grading and feedback for conversions between equivalent models at scale and is a source of problem formats and equivalence-checking machinery to reuse."
+        },
+        {
+          "title": "Beyond Memorization: Testing LLM Reasoning on Unseen Theory of Computation Tasks",
+          "authors": "Shelat, Raval, Roy, Gaur",
+          "venue": "arXiv:2601.13392, 2026",
+          "year": 2026,
+          "url": "https://arxiv.org/abs/2601.13392",
+          "relevance": "Shows LLM DFA-construction accuracy drops to roughly 21-59% on unseen problems and that hint-based self-correction fails on globally inconsistent automata, motivating symbolic verification rather than trusting the LLM's own reasoning."
+        }
+      ],
+      "researchPlan": {
+        "overview": "First build a fault taxonomy and mutation engine for the five closure constructions and generate a labeled corpus with verified counterexamples. Then compare counterexample-only, ungrounded-LLM and trace-grounded-LLM feedback on diagnosis accuracy and solution leakage, using automated checkers rather than students. Finish with a released benchmark and a paper, leaving a classroom study as follow-up.",
+        "milestones": [
+          { "month": 1, "goal": "Literature review of automata feedback tools and FSM's construction visualizations; draft a fault taxonomy from textbook exercises and TA experience", "deliverable": "Annotated bibliography, taxonomy of 15-25 construction faults, refined research questions" },
+          { "month": 2, "goal": "Implement reference constructions with step traces and a mutation engine that injects each fault type; integrate an equivalence checker that returns shortest counterexamples", "deliverable": "Open-source generator plus a corpus of about 1,500 labeled faulty constructions" },
+          { "month": 3, "goal": "Build the three feedback conditions and an automatic checker that scores whether a hint names the faulty step and whether it leaks the correct automaton", "deliverable": "Feedback pipeline and scoring harness with a validated rubric (two-rater agreement on a 150-item sample)" },
+          { "month": 4, "goal": "Run the comparison across two or three LLMs and the five constructions; analyze which faults stay hard", "deliverable": "Results tables, per-fault error analysis, cost and latency figures" },
+          { "month": 5, "goal": "Ablations: trace granularity, counterexample length, and a symbolic 'critic' that rejects hints contradicting the trace", "deliverable": "Ablation results and a recommended hint-generation recipe" },
+          { "month": 6, "goal": "Finalize paper and release benchmark", "deliverable": "Submitted paper draft plus public dataset and code" }
+        ],
+        "targetVenues": ["SIGCSE TS", "ITiCSE", "AIED", "EDM"],
+        "resources": "One graduate or senior undergraduate student with automata background; a regular-language library (for example automata-lib in Python or FSM in Racket) for constructions and equivalence; LLM access via the local claude CLI plus a small budget for one or two comparison models; a TA for 150-item rubric validation.",
+        "risks": [
+          { "risk": "Synthetic mutations may not resemble real student errors", "mitigation": "Derive the taxonomy from textbook errata, published automata misconception studies and anonymized past exam answers already graded by the instructor (no new data collection), and report taxonomy coverage." },
+          { "risk": "Automatic leakage scoring may be too strict or too lenient", "mitigation": "Define leakage operationally (the hint lets a checker reconstruct an equivalent automaton without the student's work) and validate it against two human raters on a sample." },
+          { "risk": "Constructions on large automata produce traces too long for useful prompts", "mitigation": "Restrict to exercise-sized inputs (at most 6 states per operand) and summarize traces to the steps that touch the counterexample path." }
+        ],
+        "humanSubjects": false
+      }
+    }
+  ]
+}
