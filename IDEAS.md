@@ -546,3 +546,7 @@
 | 2026-10-11 | Edit Graph Lab | Teaching Tool | 1-2 Weeks |
 | 2026-10-11 | Build Your Own BSP Level Renderer | Classroom Assignment | Multi-week |
 | 2026-10-11 | Construction-Trace Feedback: Verified, Solution-Free Hints for Student Closure Constructions in Automata Theory | Research | Research |
+| 2026-10-12 | Expansion Order | Side Project | Weekend |
+| 2026-10-12 | Lockstep Lab | Teaching Tool | 1-2 Weeks |
+| 2026-10-12 | Build Your Own Static Recompiler | Classroom Assignment | Multi-week |
+| 2026-10-12 | Cold-Start README Audits: Seeded-Defect Evaluation of LLM Agents as Novice Followers for Feedback on Student Project Documentation | Research | Research |

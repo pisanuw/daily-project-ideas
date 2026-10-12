@@ -1,0 +1,170 @@
+{
+  "date": "2026-10-12",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Expansion Order",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "Paste a shell command line and step through exactly what Bash does to it: brace, tilde, parameter, command substitution, arithmetic, word splitting, globbing and quote removal, one stage at a time, ending with the argv the program really receives.",
+      "description": "A recent HN thread showed how a quoted tilde in PATH silently leaves a literal '~' in the variable, and the comments proved that even experienced users disagree about when tilde expansion happens. Expansion Order makes the POSIX/Bash word-expansion pipeline visible. The user pastes a line (with an editable fake environment: HOME, PATH, IFS, a mock directory tree for globbing) and the tool tokenizes it, then shows each expansion stage as a separate row, highlighting which words changed and which quotes protected them. The final row is the argv array, so the classic bugs (unquoted variables splitting on spaces, globs matching nothing, tilde after a colon in assignments, $@ vs $*) become concrete. A 'predict the argv' quiz mode, and a cross-check that runs the same line in a real bash -c with printf '%s\\n' for verification during development, keep it honest.",
+      "keyFeatures": [
+        "Stage-by-stage expansion table from raw tokens to final argv, with changed words highlighted",
+        "Editable mock environment: variables, IFS, and a fake file tree for glob matching",
+        "Assignment-context rules (tilde after ':' in PATH=...) shown separately from command-word rules",
+        "Curated gallery of real footguns: quoted tilde in PATH, unquoted $var with spaces, rm $dir/*, \"$@\" vs $*",
+        "Predict-the-argv quiz with shareable URL-encoded challenges"
+      ],
+      "techStack": "React + Vite, TypeScript, hand-written shell lexer and expansion engine, Vitest with a golden-file suite generated from real bash 5 output",
+      "whyInteresting": "Every CS student writes shell commands and almost none can explain what happens between typing and execution. It is a compact, satisfying parser-and-interpreter build, and it doubles as a reference tool for a systems or toolchain course.",
+      "inspiredBy": "HN discussion of 'The tilde in your PATH may not be your HOME' (news.ycombinator.com/item?id=50042425, disconnect3d.pl, Oct 2026)"
+    },
+    {
+      "n": 2,
+      "title": "Lockstep Lab",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "A browser lab for teaching deterministic lockstep and rollback netcode: two or more simulated RTS clients run side by side over a configurable fake network, and students watch exactly when and why their states desync.",
+      "description": "Classic RTS games such as Total Annihilation kept thousands of units in sync by sending only player inputs and running identical simulations on every machine, which only works if the simulation is perfectly deterministic. Lockstep Lab runs a tiny unit-movement simulation in several panes, connected by a simulated network with adjustable latency, jitter and packet loss. Instructors can toggle sources of nondeterminism (floating-point math vs fixed point, unordered map iteration, Math.random without a shared seed, frame-rate-dependent physics) and students see the per-tick state hashes diverge, with a diff view pinpointing the first differing unit and field. A second mode compares input-delay lockstep against GGPO-style rollback with prediction, plotting perceived input lag and resimulation cost. Exercises ask students to fix a deliberately nondeterministic simulation step until hashes stay identical for 10,000 ticks.",
+      "keyFeatures": [
+        "Side-by-side client panes with per-tick state hashes and a first-divergence diff",
+        "Fake network with latency, jitter, loss and reordering sliders",
+        "Toggleable nondeterminism sources: floats vs fixed point, unseeded RNG, map iteration order, variable timestep",
+        "Lockstep vs rollback comparison with input-lag and resimulation-cost charts",
+        "Autograded 'make it deterministic' exercises checked by long seeded replays"
+      ],
+      "techStack": "React + Vite, TypeScript, Web Workers per client, fixed-point math library, Canvas 2D, Vitest replay tests",
+      "whyInteresting": "Determinism is a deep idea that connects game development, distributed systems and reproducible builds, and it is very hard to teach from slides. Seeing two worlds drift apart because of one float rounding difference sticks with students.",
+      "inspiredBy": "HN front page: 'Total Annihilation, rebuilt for modern computers' (news.ycombinator.com/item?id=50045984, Oct 2026)"
+    },
+    {
+      "n": 3,
+      "title": "Build Your Own Static Recompiler",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "A staged compilers assignment in which students translate CHIP-8 (then a small 6502 subset) ROMs ahead of time into WebAssembly, using their own interpreter as the oracle that proves every recompiled program behaves identically.",
+      "description": "Static recompilation, recently used to run PS2 games in the browser as WebAssembly, is a great capstone for a compilers or architecture course because correctness is unambiguous: the recompiled game must behave exactly like the original. Milestones: (1) write a reference CHIP-8 interpreter with a deterministic trace format; (2) disassemble ROMs and recover basic blocks and a control-flow graph, discovering why indirect jumps and self-modifying code make this undecidable in general; (3) emit WebAssembly text per basic block with a dispatcher loop, then compile with wabt; (4) add optimizations (block chaining, register promotion to Wasm locals, dead flag elimination) and measure speedups; (5) handle the hard cases with a fallback to the interpreter. The autograder runs both engines on public-domain ROMs with scripted inputs and compares register, memory and framebuffer traces tick by tick, reporting the first divergence.",
+      "keyFeatures": [
+        "Reference interpreter with canonical execution traces used as the correctness oracle",
+        "Disassembler with basic-block discovery and CFG visualization",
+        "WebAssembly code generator with dispatcher loop and block chaining",
+        "Optimization milestone with measured speedups against the interpreter",
+        "Trace-diff autograder that pinpoints the first divergent instruction"
+      ],
+      "techStack": "TypeScript or Rust, WebAssembly text format with wabt/binaryen, Canvas for display, Node test harness with trace diffing, public-domain CHIP-8 ROMs",
+      "whyInteresting": "Students build an interpreter and a compiler for the same machine and see concretely why JITs and recompilers exist. Differential testing against their own interpreter teaches a professional verification technique while keeping grading mechanical.",
+      "inspiredBy": "Show HN: PS2 games statically recompiled to WebAssembly (news.ycombinator.com/item?id=50052251, github.com/snuri00/ps2-web-recomp, Oct 2026)"
+    },
+    {
+      "n": 4,
+      "title": "Cold-Start README Audits: Seeded-Defect Evaluation of LLM Agents as Novice Followers for Feedback on Student Project Documentation",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Builds a benchmark of student-style project READMEs with seeded, ACCEU-labelled defects (missing prerequisite, stale command, unstated assumption) and measures whether a deliberately context-limited LLM agent, following the README in a fresh container, can detect and explain them without fixing them for the student.",
+      "description": "The SIGCSE TS 2026 documentation module paper defines five quality dimensions (accuracy, clarity, completeness, ease of use, up-to-dateness) but leaves assessment to instructors and peers. Industry practice, and a widely discussed October 2026 essay, show the most effective README test is watching a newcomer follow it, which does not scale to a class of 200. This project treats an LLM agent constrained to act like a novice (no repo browsing beyond the README, no guessing missing steps, logging every point of confusion) as a scalable 'cold-start follower' in a disposable container. We construct a benchmark by taking working instructor-made reference projects, generating README variants with seeded defects mapped to the ACCEU dimensions and to the Aghajani documentation-issue taxonomy, and measuring per-dimension detection recall, false alarms on clean READMEs, and whether the agent's feedback localizes the defect without rewriting the README. The work extends Pisan's solution-free hint line and toolchain-first pedagogy to documentation, a professional skill that copilots make more, not less, important.",
+      "papers": [
+        {
+          "title": "Teaching Software Documentation through an Asynchronous Module: An Experience Report",
+          "authors": "University of Toronto authors (see DOI)",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770762.3772538",
+          "url": "https://doi.org/10.1145/3770762.3772538",
+          "abstract": "Presents a lightweight, self-paced online module for teaching software documentation in an introductory software design course. Its central feature is the ACCEU framework, which defines five dimensions of documentation quality: accuracy, clarity, completeness, ease of use, and up-to-dateness, grounded in prior research and industry practice.",
+          "relevance": "Supplies the quality dimensions used to label seeded defects and score agent feedback; the proposed work adds the scalable, automated assessment of those dimensions that the experience report leaves to manual review."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "Beyond pip install: Evaluating LLM Agents for the Automated Installation of Python Projects (Installamatic)",
+          "authors": "Louis Milliken et al.",
+          "venue": "SANER 2025",
+          "year": 2025,
+          "url": "https://arxiv.org/abs/2412.06294",
+          "relevance": "Shows an agent that searches repository documentation to install projects, succeeding on 55% of 40 repositories at least once; the proposed work inverts the goal, using agent failure as a signal about documentation quality rather than something to work around."
+        },
+        {
+          "title": "EnvBench: A Benchmark for Automated Environment Setup",
+          "authors": "Aleksandra Eliseeva et al.",
+          "venue": "ICLR 2025 DL4C Workshop",
+          "year": 2025,
+          "url": "https://arxiv.org/abs/2503.14443",
+          "relevance": "Provides container-based evaluation methodology and evidence that unconstrained agents often succeed by improvising, which motivates the 'no guessing' novice constraint in the proposed follower."
+        },
+        {
+          "title": "Software Documentation Issues Unveiled",
+          "authors": "Emad Aghajani et al.",
+          "venue": "ICSE 2019",
+          "year": 2019,
+          "url": "https://doi.org/10.1109/ICSE.2019.00122",
+          "relevance": "A taxonomy of 162 documentation issue types mined from real projects; used to choose realistic seeded defects and to check that the benchmark covers the most frequent content issues (completeness, correctness, up-to-dateness)."
+        },
+        {
+          "title": "Categorizing the Content of GitHub README Files",
+          "authors": "Gede Artha Azriadi Prana, Christoph Treude, et al.",
+          "venue": "Empirical Software Engineering, 2019",
+          "year": 2019,
+          "url": "https://doi.org/10.1007/s10664-018-9660-3",
+          "relevance": "Section-level README categories (What, Why, How, ...) and the finding that many READMEs omit purpose and status inform both the README templates and a 'missing What' defect class."
+        }
+      ],
+      "researchPlan": {
+        "overview": "Months 1-2 build reference projects, a seeded-defect generator and a containerized follower harness; months 3-4 compare follower configurations (unconstrained agent, novice-constrained agent, static LLM review with no execution) on detection and feedback quality; months 5-6 analyze per-ACCEU-dimension strengths and failure modes and write up the benchmark.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review; select 15-20 instructor-authored reference projects (Python, Java, C++ with CMake, Flask + Supabase) and write clean READMEs verified by a scripted install",
+            "deliverable": "Annotated bibliography, reference corpus with passing scripted installs"
+          },
+          {
+            "month": 2,
+            "goal": "Define defect operators mapped to ACCEU and the Aghajani taxonomy (drop prerequisite, stale version, wrong path, unstated env var, ambiguous step, missing 'What') and generate variants",
+            "deliverable": "Seeded-defect benchmark (~600 README variants) with ground-truth labels and locations"
+          },
+          {
+            "month": 3,
+            "goal": "Build the follower harness: disposable Docker container, README-only context, command logging, structured confusion reports",
+            "deliverable": "Open-source harness plus baseline runs with an unconstrained agent"
+          },
+          {
+            "month": 4,
+            "goal": "Run novice-constrained follower and static (non-executing) LLM review; score detection recall, false-alarm rate on clean READMEs, localization accuracy and solution-leakage of feedback",
+            "deliverable": "Comparison tables per ACCEU dimension and defect operator"
+          },
+          {
+            "month": 5,
+            "goal": "Error analysis: which defects agents silently repair by improvisation, which dimensions (clarity, ease of use) resist automated detection; small rubric-based rating of feedback usefulness by the research team",
+            "deliverable": "Failure-mode taxonomy and feedback-quality ratings"
+          },
+          {
+            "month": 6,
+            "goal": "Write and submit paper; release benchmark and harness for courses to reuse",
+            "deliverable": "Submitted paper draft and public artifact"
+          }
+        ],
+        "targetVenues": [
+          "SIGCSE TS",
+          "ITiCSE",
+          "ICSE SEET",
+          "Koli Calling"
+        ],
+        "resources": "Docker host or cloud VMs for a few thousand short container runs; LLM access via the local claude CLI (subscription) plus one open-weight model for replicability; 1 undergraduate research assistant to author reference projects and validate seeded defects; no student data required.",
+        "risks": [
+          {
+            "risk": "Agents improvise around missing steps (e.g. pip installing an unmentioned dependency), masking real documentation defects",
+            "mitigation": "Enforce a README-only policy in the harness, log every command not traceable to the README, and count any untraceable command as a detected gap"
+          },
+          {
+            "risk": "Seeded defects are cleaner than real student mistakes, inflating detection rates",
+            "mitigation": "Ground operators in the Aghajani taxonomy and in anonymized patterns from past course READMEs reviewed by the instructor; report results on a small held-out set of naturally flawed open-source READMEs"
+          },
+          {
+            "risk": "Clarity and ease-of-use are subjective and lack ground truth",
+            "mitigation": "Restrict quantitative claims to verifiable dimensions (completeness, accuracy, up-to-dateness) and treat clarity findings as exploratory with inter-rater agreement among the team"
+          }
+        ],
+        "humanSubjects": false
+      }
+    }
+  ]
+}

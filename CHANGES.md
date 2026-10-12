@@ -349,3 +349,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-10-10 [doc] Created ideas/2026-10-10.json with 4 ideas: Poincare Paint, Cache Miss Theater, Build Your Own RISC-V Emulator, Comment Once Apply Safely (ITiCSE 2025 doi:10.1145/3724389.3731300)
 
 2026-10-11 [doc] Created ideas/2026-10-11.json with 4 ideas: Jamo Blocks, Edit Graph Lab, Build Your Own BSP Level Renderer, Construction-Trace Feedback (ITiCSE 2025 doi:10.1145/3724363.3729120)
+
+2026-10-12 [doc] Created ideas/2026-10-12.json with 4 ideas: Expansion Order, Lockstep Lab, Build Your Own Static Recompiler, Cold-Start README Audits (SIGCSE TS 2026 doi:10.1145/3770762.3772538)
