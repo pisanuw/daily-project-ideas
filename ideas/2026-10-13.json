@@ -1,0 +1,170 @@
+{
+  "date": "2026-10-13",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Mnemonic Unpacker",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "Paste an x86 SIMD mnemonic such as vfmadd231pd, vpunpckhqdq or vcvttps2dq and see it split into its parts, with an animated lane diagram showing exactly which elements move, multiply, round or saturate.",
+      "description": "A recent HN post traced the strange history of vfmaddrnd231pd, an FMA variant that appeared in three revisions of Intel's manual and then vanished, and the comments agreed that x86 vector mnemonics are named for encoders, not humans. Mnemonic Unpacker is a small grammar-driven decoder for AVX/AVX2/AVX-512 names: it splits a mnemonic into prefix (v), operation family (fmadd, punpck, cvt), operand-order digits (132/213/231), modifiers (h/l, t for truncation, s for saturation, us for unsigned) and element type suffix (ps, pd, ss, sd, b/w/d/q). Each part links to a plain-English explanation, and an animated 128/256/512-bit lane diagram shows source and destination registers with example values flowing through the operation. A 'build a mnemonic' mode lets users pick the operation from menus and see the name assemble, and a quiz shows a lane animation and asks for the instruction name.",
+      "keyFeatures": [
+        "Grammar-based mnemonic parser covering the main AVX families (FMA, unpack, shuffle, convert, compare, blend, pack)",
+        "Animated lane diagrams for 128, 256 and 512-bit registers with editable example values",
+        "Operand-order explainer for the 132/213/231 FMA forms showing which register is overwritten",
+        "Reverse mode: choose operation, element type and modifiers, get the mnemonic",
+        "Name-that-instruction quiz with shareable URL challenges"
+      ],
+      "techStack": "React + Vite, TypeScript, SVG/Framer Motion lane animations, JSON instruction table derived from the public uops.info / Intel XED instruction lists, Vitest",
+      "whyInteresting": "SIMD is increasingly important (ML kernels, codecs, games) yet its naming is a wall for students reading compiler output in Compiler Explorer. A weekend parser plus a good animation turns an opaque string into a readable sentence, and it pairs naturally with an architecture or performance course.",
+      "inspiredBy": "HN front page: 'Who is vfmaddrnd231pd?' (news.ycombinator.com/item?id=50063138, purplesyringa.moe/blog/who-is-vfmaddrnd231pd/, Oct 2026)"
+    },
+    {
+      "n": 2,
+      "title": "In-Band",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "A browser lab that simulates a 1970s telephone trunk with DTMF, MF and 2600 Hz supervision tones, so students can seize a trunk with a blue box and then see that the same flaw (control mixed with data) is behind SQL injection and prompt injection.",
+      "description": "Phreak.ing, an 'Internet phone switch' on the HN front page, verifies visitors by having them play touch tones into the microphone, and the thread drifted into nostalgia about 2600 magazine. In-Band turns that history into a security lesson. Students get a simulated toll network: a caller, a local office, a long-distance trunk and a far-end switch, all exchanging audio generated with the Web Audio API. A Goertzel-filter decoder (whose code students can open and edit) detects DTMF digits and the 2600 Hz idle tone; sending 2600 Hz from the caller side makes the far end think the call ended and leaves the trunk waiting for KP...ST multifrequency digits, which is exactly how blue boxes worked. Later modules show the fix (out-of-band signaling, SS7-style separate channel) and then three modern analogues side by side: SQL string concatenation vs parameterized queries, terminal escape sequences in logs, and an LLM agent reading a web page that contains instructions. Each module ends with the same question: where do control and data share a channel?",
+      "keyFeatures": [
+        "Web Audio tone generator and live spectrogram for DTMF, MF (KP/ST) and 2600 Hz supervision",
+        "Editable Goertzel detector with adjustable thresholds and twist, plus noise and line-loss sliders",
+        "Simulated trunk state machine (idle, seized, routing, connected) visualized as the attack proceeds",
+        "Out-of-band signaling mode that makes the same attack fail, with an explanation of why",
+        "Paired modern labs: SQL injection, log escape-sequence injection, and LLM prompt injection, each with the same 'control vs data channel' diagram"
+      ],
+      "techStack": "React + Vite, TypeScript, Web Audio API with AudioWorklet, Canvas spectrogram, XState for switch state machines, sql.js for the SQL injection module, optional Claude API call for the prompt-injection module",
+      "whyInteresting": "In-band signaling is the cleanest historical example of a design flaw that keeps coming back, and hearing a trunk drop when you play a tone is memorable in a way slides are not. It fits a security, networking or AI ethics course, and touches signal processing, state machines and LLM agent safety in one tool.",
+      "inspiredBy": "HN front page: 'Phreak.ing - Internet Phone Switch' (news.ycombinator.com/item?id=50063417, phreak.ing, Oct 2026)"
+    },
+    {
+      "n": 3,
+      "title": "Build Your Own Resumable Download Manager",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "A staged networking assignment in which students build a GetRight-style download manager with HTTP range requests, parallel segments, validators and checksums, graded against a chaos server that drops connections, rotates URLs and silently changes files mid-download.",
+      "description": "A front-page post about making big Firefox downloads resumable reminded HN that this problem was solved by download managers decades ago and then forgotten, and the comments listed every way it can go wrong: one-time URLs that return 410 Gone, servers that ignore Range, files that change between attempts and produce silently corrupt splices. Milestones: (1) a single-connection HTTP/1.1 client over raw sockets that streams to a .part file and survives Ctrl-C; (2) resumption with Range, handling 206, 200 (Range ignored), 416 and 410 correctly; (3) safe resumption using If-Range with ETag or Last-Modified, plus a final SHA-256 check against a published digest; (4) N parallel segments with dynamic work stealing when one segment is slow; (5) a persistent job journal so downloads continue after a process crash. The instructor provides a Flask or Go 'chaos server' with scripted misbehaviors (mid-stream resets, throttling, wrong Content-Length, changed ETag, expiring signed URLs), and the autograder runs each student's client against every scenario and checks the final bytes, the number of bytes re-downloaded, and whether corruption was detected rather than written.",
+      "keyFeatures": [
+        "Raw-socket HTTP/1.1 client milestone before any library is allowed",
+        "Correct handling of 206, 200, 416, 410 and changed validators via If-Range",
+        "Parallel segmented download with work stealing and a progress UI",
+        "Crash-safe job journal and resume across process restarts",
+        "Chaos-server autograder that scores correctness, wasted bytes and corruption detection"
+      ],
+      "techStack": "Python or Go for the client, instructor chaos server in Flask (or Go net/http) with scripted fault profiles, Docker Compose for grading, optional React dashboard for progress, pytest-based autograder",
+      "whyInteresting": "Students use HTTP every day but rarely see status codes and validators matter. This assignment makes partial failure, idempotency and integrity checking concrete, and the chaos server teaches defensive client design that transfers directly to distributed systems work.",
+      "inspiredBy": "HN front page: 'Making big downloads resumable in Firefox' (news.ycombinator.com/item?id=50061791, lunarwatcher.codeberg.page/til/firefox/resumable-big-downloads.html, Oct 2026)"
+    },
+    {
+      "n": 4,
+      "title": "Strategy Hijacking in LLM Programming Hints: Measuring Whether AI Tutors Steer CS1 Students Away From Valid Non-Canonical Solutions",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Builds an offline benchmark from public CS1 submission logs to measure how often LLM next-step hints abandon a student's own valid strategy in favor of the model's preferred solution, and tests strategy-conditioned hinting as a fix.",
+      "description": "Fang et al. (SIGCSE TS 2026) found that CS1 students solve the same problem with substantially more diverse approaches than GPT-4, which raises a direct question for AI tutors: when a student is midway through a correct but unusual approach, does an LLM hint help them finish it, or quietly push them toward the model's canonical solution? This project clusters correct solutions in a public CS1 dataset (CodeWorkout, Java) into strategy families, then replays each student's intermediate incorrect submissions through several LLM hint generators and classifies whether the hinted edit stays within the student's strategy, switches strategy, or reveals a full solution. It then compares a baseline prompt against strategy-conditioned prompts that receive exemplars from the student's own strategy cluster (an LLM descendant of Ask-Elle's strategy-aware hints and of the solution-free hinting framed in Suciu et al., SIGCSE 2021). The work needs no new human-subjects data and yields a reusable 'strategy preservation' metric that hint-quality evaluations currently lack.",
+      "papers": [
+        {
+          "title": "Are CS1 Students More Creative than LLM in Solving a Problem?",
+          "authors": "Lu Fang et al. (Teachers College, Columbia University); full author list not available in the index",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770761.3777221",
+          "url": "https://doi.org/10.1145/3770761.3777221",
+          "abstract": "Proposes an analytical workflow for comparing the diversity of problem-solving approaches in student code with LLM output, evaluated on 999 student Java submissions from two CS1 questions and matched zero-shot GPT-4 solutions. Students consistently showed greater diversity in problem-solving methods than the LLM, especially on more complex tasks, and the authors point to simulated students and pedagogy that promotes diverse approaches as future directions.",
+          "relevance": "Supplies the core observation (LLMs have a narrow strategy repertoire relative to students) and a code-diversity workflow; this project asks what that narrowness does when the LLM is the tutor giving hints rather than the solver."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "Next-Step Hint Generation for Introductory Programming Using Large Language Models",
+          "authors": "Lianne Roest, Hieke Keuning, Johan Jeuring",
+          "venue": "Australasian Computing Education Conference (ACE), 2024",
+          "year": 2024,
+          "url": "https://arxiv.org/abs/2312.10055",
+          "relevance": "Reports that LLM next-step hints are usually personalised to the student's code but can be misleading; provides the StAP-tutor prompt designs used here as a baseline hint generator."
+        },
+        {
+          "title": "One Step at a Time: Combining LLMs and Static Analysis to Generate Next-Step Hints for Programming Tasks",
+          "authors": "Anastasiia Birillo, Elizaveta Artser, Anna Potriasaeva, Ilya Vlasov, Katsiaryna Dzialets, Yaroslav Golubev, Igor Gerasimov, Hieke Keuning, Timofey Bryksin",
+          "venue": "Koli Calling, 2024",
+          "year": 2024,
+          "url": "https://doi.org/10.1145/3699538.3699556",
+          "relevance": "Derives subgoals from the student's current code before generating a hint, the closest existing mechanism for preserving strategy; serves as a second baseline and a source of subgoal representations."
+        },
+        {
+          "title": "Ask-Elle: an Adaptable Programming Tutor for Haskell Giving Automated Feedback",
+          "authors": "Alex Gerdes, Bastiaan Heeren, Johan Jeuring, L. Thomas van Binsbergen",
+          "venue": "International Journal of Artificial Intelligence in Education 27, 2017",
+          "year": 2017,
+          "url": "https://doi.org/10.1007/s40593-015-0080-x",
+          "relevance": "Classic strategy-aware tutor that organizes next-step hints across multiple teacher-specified solution strategies; the strategy-conditioned LLM condition is a data-driven, LLM-era version of this idea."
+        },
+        {
+          "title": "CodeWorkout dataset (Second CSEDM Data Challenge, ProgSnap2 format)",
+          "authors": "CSEDM Data Challenge organizers; data via CMU DataShop",
+          "venue": "Educational Data Mining workshop dataset, 2021",
+          "year": 2021,
+          "url": "https://pslcdatashop.web.cmu.edu/",
+          "relevance": "Public CS1 Java dataset with every intermediate submission (246 students, 50 problems), providing the incorrect-then-correct trajectories needed to replay hints offline without new data collection."
+        }
+      ],
+      "researchPlan": {
+        "overview": "First build a strategy taxonomy from correct CS1 solutions and a classifier that labels any partial program with its likely strategy. Then replay real intermediate submissions through several LLM hint generators, measuring strategy preservation, correctness and solution leakage, and finally test whether strategy-conditioned prompting closes the gap.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review on LLM hinting, strategy-aware tutors and code-diversity metrics; obtain and clean the CodeWorkout ProgSnap2 data; pick 10-15 problems with at least three distinct strategies",
+            "deliverable": "Annotated bibliography, refined RQs, cleaned trajectory dataset"
+          },
+          {
+            "month": 2,
+            "goal": "Cluster correct solutions into strategy families using AST/control-flow features plus LLM-assisted labeling, validated by two coders on a sample",
+            "deliverable": "Strategy taxonomy per problem with inter-rater agreement and a labeled exemplar set"
+          },
+          {
+            "month": 3,
+            "goal": "Train and validate a partial-program strategy classifier; build the replay harness that sends intermediate submissions to hint generators and applies the hinted edit",
+            "deliverable": "Classifier accuracy report and open-source replay harness"
+          },
+          {
+            "month": 4,
+            "goal": "Run baseline generators (plain prompt, StAP-tutor style, subgoal-first) across models; measure strategy preservation, hint correctness, and leakage",
+            "deliverable": "Strategy-hijacking rates by problem, strategy rarity and model"
+          },
+          {
+            "month": 5,
+            "goal": "Implement and evaluate strategy-conditioned hinting using exemplars from the student's cluster; analyze which rare strategies remain unsupported",
+            "deliverable": "Comparison of baseline vs conditioned hinting with error analysis"
+          },
+          {
+            "month": 6,
+            "goal": "Write up the benchmark, metric and findings; release data splits and harness",
+            "deliverable": "Submitted paper draft plus public benchmark release"
+          }
+        ],
+        "targetVenues": [
+          "SIGCSE TS",
+          "ITiCSE",
+          "EDM",
+          "AIED"
+        ],
+        "resources": "Public CodeWorkout ProgSnap2 data (no new collection); LLM access via the local claude CLI plus one open-weight model run locally for reproducibility; one undergraduate or MS research assistant for strategy coding (~8 h/week); modest compute for AST feature extraction and clustering.",
+        "risks": [
+          {
+            "risk": "Strategy clusters are subjective or too coarse to show meaningful hijacking",
+            "mitigation": "Define strategies operationally (loop structure, data structures, library use), report agreement, and fall back to a continuous distance from the student's own final solution as a second metric"
+          },
+          {
+            "risk": "Dataset problems are too short for diverse strategies to exist",
+            "mitigation": "Pre-screen problems by measured solution diversity, and add a small set of longer public problems from other public ProgSnap2 datasets if needed"
+          },
+          {
+            "risk": "Hint-to-edit translation is ambiguous for natural-language hints",
+            "mitigation": "Use a fixed LLM 'novice follower' to apply hints, validate it on a hand-labeled sample, and analyze code hints and text hints separately"
+          }
+        ],
+        "humanSubjects": false
+      }
+    }
+  ]
+}

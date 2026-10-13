@@ -550,3 +550,7 @@
 | 2026-10-12 | Lockstep Lab | Teaching Tool | 1-2 Weeks |
 | 2026-10-12 | Build Your Own Static Recompiler | Classroom Assignment | Multi-week |
 | 2026-10-12 | Cold-Start README Audits: Seeded-Defect Evaluation of LLM Agents as Novice Followers for Feedback on Student Project Documentation | Research | Research |
+| 2026-10-13 | Mnemonic Unpacker | Side Project | Weekend |
+| 2026-10-13 | In-Band | Teaching Tool | 1-2 Weeks |
+| 2026-10-13 | Build Your Own Resumable Download Manager | Classroom Assignment | Multi-week |
+| 2026-10-13 | Strategy Hijacking in LLM Programming Hints: Measuring Whether AI Tutors Steer CS1 Students Away From Valid Non-Canonical Solutions | Research | Research |
