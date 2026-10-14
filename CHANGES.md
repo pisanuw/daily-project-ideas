@@ -353,3 +353,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-10-12 [doc] Created ideas/2026-10-12.json with 4 ideas: Expansion Order, Lockstep Lab, Build Your Own Static Recompiler, Cold-Start README Audits (SIGCSE TS 2026 doi:10.1145/3770762.3772538)
 
 2026-10-13 [doc] Created ideas/2026-10-13.json with 4 ideas: Mnemonic Unpacker, In-Band, Build Your Own Resumable Download Manager, Strategy Hijacking in LLM Hints (SIGCSE TS 2026 doi:10.1145/3770761.3777221)
+
+2026-10-14 [doc] Created ideas/2026-10-14.json with 4 ideas: Outguess Me, Net Units, Build Your Own Borrow Checker, Mechanism or Tinkering QP critic (SIGCSE TS 2026 doi:10.1145/3770761.3777322)

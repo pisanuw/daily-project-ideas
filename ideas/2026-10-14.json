@@ -1,0 +1,170 @@
+{
+  "date": "2026-10-14",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Outguess Me",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A two-key browser game where a tiny n-gram model predicts your next keypress before you make it, showing in real time how far your 'random' choices are from a coin flip.",
+      "description": "Inspired by the 'How random are you?' Show HN, Outguess Me is a polished take on Scott Aaronson's classic 'oracle' demo. You press F or J as unpredictably as you can; before each press the page commits to a hidden prediction from a 5-gram frequency table of your own history, then reveals whether it was right. Most people drift to 60-70% predictability within 100 presses. After the run, the page explains why: a panel shows the n-gram table that beat you, your longest run, your alternation rate (people over-alternate), and an estimate of entropy per keypress compared with the ideal 1 bit. A 'hard mode' swaps in a mixture of 1- to 6-gram predictors weighted by recent accuracy, and a share link encodes your score and sequence in the URL so friends can compare without a backend.",
+      "keyFeatures": [
+        "Commit-then-reveal predictions using a hash shown before each keypress, so the oracle cannot cheat",
+        "Live accuracy chart against a 50% coin-flip band with a binomial confidence interval",
+        "Post-game breakdown: n-gram table, run lengths, alternation rate, and estimated bits of entropy per press",
+        "Hard mode with a weighted mixture of n-gram experts, plus a 'paste a sequence' mode to test generated strings",
+        "Backend-free share links that encode the sequence and score in the URL hash"
+      ],
+      "techStack": "React + Vite, Tailwind, TypeScript, Web Crypto (SHA-256 commitments), Recharts; no server, deploy on Netlify",
+      "whyInteresting": "It is a one-evening build that delivers a genuinely surprising personal result, and it doubles as a 10-minute classroom hook for probability, entropy, online learning, and why humans make bad random number generators (and bad passwords).",
+      "inspiredBy": "HN front page: 'Show HN: How random are you?' (news.ycombinator.com/item?id=50074909, specr.net, Oct 2026)"
+    },
+    {
+      "n": 2,
+      "title": "Net Units",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "An instructor dashboard that measures how much code each student (or AI) added to solve a task, in AST 'coding units' rather than lines, so a class can discuss bloat, abstraction, and readability with numbers on the screen.",
+      "description": "The Parsimony benchmark on Show HN ranks AI models by how much net code they add to solve SWE-bench tasks, counting syntax elements (statements, calls, names, literals) instead of lines so cramming does not help. Net Units brings that idea into a code-review lesson. The instructor uploads a starter repo plus a set of solutions (student submissions, a reference solution, and three Claude-generated solutions prompted for terse, balanced, and defensive styles). The tool parses every diff with tree-sitter, counts net coding units per file and function, adds cyclomatic complexity and a duplication score, and plots each solution on a 'size vs. tests passed' scatter. Clicking a point opens a side-by-side diff with the units highlighted. A 'guess the author' mode hides labels so students vote on which solutions were AI-written before the reveal, and an anonymized export lets the class annotate where extra code earned its keep (tests, error handling) and where it did not.",
+      "keyFeatures": [
+        "tree-sitter based net coding-unit counter for Python, Java, C++ and JavaScript, subtracting deleted code",
+        "Size vs. tests-passed scatter with cyclomatic complexity and duplication overlays",
+        "Side-by-side diff viewer that highlights counted units per hunk",
+        "One-click generation of terse, balanced and defensive AI baselines via the Claude API, cached per assignment",
+        "Anonymous 'guess the author' voting round and an annotation export for discussion sections"
+      ],
+      "techStack": "React + Vite, Tailwind, Flask backend, py-tree-sitter, radon/lizard for complexity, Supabase for assignments and votes, Claude API for baseline solutions",
+      "whyInteresting": "Students increasingly ship AI-generated code that works but is twice as long as it needs to be. Giving them a concrete, game-resistant measure of 'how much did you add?' turns a vague style complaint into a discussion about abstraction, review cost, and when extra code is justified.",
+      "inspiredBy": "HN Show: 'Parsimony, an open-source benchmark for how much code AI models add' (news.ycombinator.com/item?id=50077619, lasu.dev, Oct 2026)"
+    },
+    {
+      "n": 3,
+      "title": "Build Your Own Borrow Checker",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "A staged compilers or PL course project where students implement ownership, moves, and borrow checking for a tiny Rust-like language, ending with a fuzzing hunt for unsound programs their own checker wrongly accepts.",
+      "description": "This week Rust developers reported an 11-year-old borrow-checker unsoundness bug involving the implicit drop at the end of a nested block, a reminder that checkers are programs too. In this project students build one for MiniRust, a small language with structs, references, Box, and explicit scopes. Milestone 1 is a parser and type checker. Milestone 2 adds move semantics and use-after-move errors. Milestone 3 implements lexical lifetimes, then Milestone 4 replaces them with a non-lexical, liveness-based analysis over a control-flow graph (the NLL idea), including implicit drops at scope exit. Milestone 5 is the twist: students write a reference interpreter that detects actual use-after-free at runtime, then fuzz random programs to find cases their static checker accepts but the interpreter catches, and write up each soundness bug like a real compiler issue.",
+      "keyFeatures": [
+        "Starter parser and pretty-printer for MiniRust so students focus on analysis, not syntax",
+        "Graded test suite of accept/reject programs with expected error spans, in the style of rustc UI tests",
+        "CFG visualizer that shows live borrows and loans at each program point",
+        "Runtime-checking interpreter as a ground-truth oracle for memory safety",
+        "Differential fuzzing milestone with a required soundness-bug report and minimized reproducer"
+      ],
+      "techStack": "Rust or Python (instructor choice), Lark or a handwritten parser, Graphviz/React Flow for CFG views, proptest or Hypothesis for program fuzzing, GitHub Classroom autograding",
+      "whyInteresting": "It turns ownership from a rule students memorize into an analysis they build, covers dataflow and liveness in a motivating setting, and the fuzzing milestone teaches the difference between a checker that is conservative and one that is sound, which is exactly the lesson of the real Rust bug.",
+      "inspiredBy": "HN front page: '11 year old unsoundness bugs found in Rust borrow checker' (news.ycombinator.com/item?id=50069499, github.com/rust-lang/rust/issues/164250, Oct 2026)"
+    },
+    {
+      "n": 4,
+      "title": "Mechanism or Tinkering? A Qualitative-Process Critic for Classifying and Giving Feedback on Student Edits to Unpacked Blocks in Ecosystem Models",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Builds a ground-truth benchmark of synthetic edits to an unpacked eutrophication model and tests whether LLMs, alone or paired with a Qualitative Process Theory influence-graph critic, can tell scientifically meaningful mechanism changes from parameter tinkering and give solution-free hints.",
+      "description": "Fuhrmann et al. (SIGCSE TS 2026) found that letting high school students 'unpack' domain-specific blocks led to richer eutrophication models, but that more complex code edits did not always reflect deeper scientific reasoning, and the classification of 36 edits was done by hand. This project automates that judgment. We re-implement the algae, bacteria, fish, nutrient and oxygen model in a small block DSL, generate thousands of systematic edits (parameter changes, sign flips, added or removed processes such as photosynthesis or decomposition, debugging-only changes), and label each one by construction using a QPT-style influence graph (direct influences and qualitative proportionalities) plus simulation behavior signatures. We then compare three critics: an LLM reading the code diff, an LLM given diff plus simulation traces, and a hybrid where the LLM extracts the edit's influence graph and a symbolic QP checker vetoes inconsistent causal claims before a solution-free hint is generated. This tests, without human subjects, the 'LLM proposes, symbolic critic vetoes' design at the heart of Pisan's functional-roles and QPT work, applied to computational modeling in science classrooms.",
+      "papers": [
+        {
+          "title": "Unpacking Blocks in Domain-Specific Modeling Environments to Support Science and Computing Learning",
+          "authors": "Tamar Fuhrmann et al. (Columbia University, MIT, Concord Consortium, Tecnologico de Monterrey)",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770761.3777322",
+          "url": "https://doi.org/10.1145/3770761.3777322",
+          "abstract": "Reports classroom use of block unpacking, a feature that lets high-level primitives be opened, inspected, and modified, in a four-day high school biology unit on eutrophication involving algae, bacteria, fish, nutrients, and oxygen. 36 unpacking modifications by five focal students were classified as parameter or code-structure changes and examined for scientific reasoning. Unpacking produced more diverse and expressive models, but more complex edits did not always correspond to deeper scientific reasoning.",
+          "relevance": "Supplies the domain model, the edit taxonomy (parameter vs. structure, informed vs. uninformed by science), and the open problem: telling mechanism-level reasoning from tinkering currently requires manual analysis, which a QP-grounded critic could automate and turn into feedback."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "Qualitative Process Theory",
+          "authors": "Kenneth D. Forbus",
+          "venue": "Artificial Intelligence 24(1-3), 1984",
+          "year": 1984,
+          "url": "https://doi.org/10.1016/0004-3702(84)90038-9",
+          "relevance": "Provides the direct-influence and qualitative-proportionality vocabulary used to label edits and build the symbolic consistency checker; it is also the foundation of Pisan's own doctoral work."
+        },
+        {
+          "title": "DynaLearn: An Intelligent Learning Environment for Learning Conceptual Knowledge",
+          "authors": "Bert Bredeweg, Jochem Liem, Wouter Beek, Floris Linnebank, et al.",
+          "venue": "AI Magazine 34(4), 2013",
+          "year": 2013,
+          "url": "https://ojs.aaai.org/index.php/aimagazine/article/view/2489",
+          "relevance": "The closest prior system that gives feedback on learner-built qualitative models in environmental science; shows QR-based diagnosis is feasible but predates LLMs and uses a dedicated modeling language rather than unpackable blocks."
+        },
+        {
+          "title": "Can Large Language Models Implement Agent-Based Models? An ODD-based Replication Study",
+          "authors": "Nuno Fachada, Daniel Fernandes, Carlos M. Fernandes, Joao P. Matos-Carvalho",
+          "venue": "Ecological Modelling 517, 2026 (arXiv:2602.10140)",
+          "year": 2026,
+          "url": "https://arxiv.org/abs/2602.10140",
+          "relevance": "Shows that LLM-written ecological ABMs can run yet be behaviorally unfaithful, motivating behavior-signature checks rather than trusting LLM reading of code alone."
+        },
+        {
+          "title": "SageModeler (Building Models project)",
+          "authors": "Concord Consortium and Michigan State CREATE for STEM Institute",
+          "venue": "Tool and project site",
+          "year": 2019,
+          "url": "https://concord.org/building-models",
+          "relevance": "A widely used semi-quantitative systems modeling tool from a co-author institution; its node-and-link influence representation is a natural target format for the LLM extraction step and a second domain for generalization."
+        }
+      ],
+      "researchPlan": {
+        "overview": "Months 1-2 build the eutrophication block DSL, the QP influence-graph labeler, and an edit generator that yields a labeled benchmark. Months 3-4 evaluate diff-only, trace-augmented, and hybrid LLM-plus-QP critics on classification and on hint quality judged by automatic checks. Months 5-6 test generalization to a second model (predator-prey or SageModeler-style climate model) and write up.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review on QR-based modeling tutors and LLM causal reasoning; reconstruct the eutrophication model and unpackable primitives from the paper and Concord materials",
+            "deliverable": "Annotated bibliography, DSL interpreter with the five-species model, refined RQs"
+          },
+          {
+            "month": 2,
+            "goal": "Write the QP influence-graph extractor for DSL code and an edit generator covering parameter, sign, add-process, remove-process, and debugging-only edits; compute behavior signatures (equilibria, monotonic trends, extinction) per edit",
+            "deliverable": "Benchmark v1 of 2,000+ edits with construction-based labels and simulation traces"
+          },
+          {
+            "month": 3,
+            "goal": "Evaluate LLM critics (Claude, Gemini, one open-weight model) reading only the diff vs. diff plus traces on edit classification and causal explanation",
+            "deliverable": "Baseline results tables and an error taxonomy of LLM causal mistakes"
+          },
+          {
+            "month": 4,
+            "goal": "Build the hybrid: LLM extracts claimed influences, symbolic QP checker vetoes contradictions, LLM then writes a solution-free hint; measure classification accuracy, veto rate, and hint leakage of the fix",
+            "deliverable": "Hybrid critic prototype and comparison against baselines"
+          },
+          {
+            "month": 5,
+            "goal": "Generalization study on a second domain (predator-prey or a SageModeler-style influence diagram) and ablations on influence-graph granularity",
+            "deliverable": "Cross-domain results and released benchmark plus code"
+          },
+          {
+            "month": 6,
+            "goal": "Finalize paper and invite the original authors to pilot the critic on their classroom logs as a follow-up",
+            "deliverable": "Submitted paper draft"
+          }
+        ],
+        "targetVenues": [
+          "AIED",
+          "SIGCSE TS",
+          "International Workshop on Qualitative Reasoning (QR)",
+          "ITiCSE"
+        ],
+        "resources": "One graduate or senior undergraduate RA for the DSL and edit generator; Claude and Gemini API budget of a few hundred dollars (or local claude CLI for development runs); one open-weight model on a single GPU; no classroom data needed for the core study. Optional collaboration with the Columbia/Concord authors for later validation on real edits.",
+        "risks": [
+          {
+            "risk": "Synthetic edits may not resemble what students actually do, making the benchmark unrealistic",
+            "mitigation": "Seed edit types from the 36 edits described in the paper and published curriculum materials, and contact the authors for anonymized examples to validate distribution"
+          },
+          {
+            "risk": "Ground-truth 'scientific validity' labels may be contestable for some edits (e.g., plausible but simplified mechanisms)",
+            "mitigation": "Use a three-way label (consistent, contradictory, behavior-neutral) defined strictly by the QP model and report agreement with a small expert-labeled subset"
+          },
+          {
+            "risk": "LLMs may already perform near ceiling on a small textbook ecosystem, leaving little room for the hybrid",
+            "mitigation": "Include counterintuitive edits (delays, saturating terms, sign flips with compensating changes) and a less familiar second domain to stress causal reasoning"
+          }
+        ],
+        "humanSubjects": false
+      }
+    }
+  ]
+}

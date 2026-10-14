@@ -554,3 +554,7 @@
 | 2026-10-13 | In-Band | Teaching Tool | 1-2 Weeks |
 | 2026-10-13 | Build Your Own Resumable Download Manager | Classroom Assignment | Multi-week |
 | 2026-10-13 | Strategy Hijacking in LLM Programming Hints: Measuring Whether AI Tutors Steer CS1 Students Away From Valid Non-Canonical Solutions | Research | Research |
+| 2026-10-14 | Outguess Me | Side Project | Weekend |
+| 2026-10-14 | Net Units | Teaching Tool | 1-2 Weeks |
+| 2026-10-14 | Build Your Own Borrow Checker | Classroom Assignment | Multi-week |
+| 2026-10-14 | Mechanism or Tinkering? A Qualitative-Process Critic for Classifying and Giving Feedback on Student Edits to Unpacked Blocks in Ecosystem Models | Research | Research |
