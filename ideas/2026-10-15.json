@@ -1,0 +1,132 @@
+{
+  "date": "2026-10-15",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Tamerlane Board",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A browser version of 14th-century Timur's (Tamerlane) chess with giraffes, war engines and a citadel, plus a 'piece lab' that lets you invent a fairy piece and immediately play against an engine that understands it.",
+      "description": "Timur's Chess on Show HN revived a medieval variant played on a larger board with exotic pieces: a giraffe that steps diagonally then slides at least three squares straight, war engines that must jump, and a citadel square that can rescue a king. Tamerlane Board is a weekend take that separates the rules from the engine. Every piece is described in a tiny movement notation (Betza-style: leaper, rider, must-jump, minimum distance), so the move generator, the highlight overlay, and a small alpha-beta engine all read the same piece definitions. The fun part is the piece lab: you type a definition like 'one diagonal step then rook-slide of 3 or more', see its reachable squares animate on an empty board, drop it into a standard or Timur setup, and play a few games against the engine to see whether it is overpowered. A 'history card' for each historical piece explains its origin and its descendants (for example the war engine as a likely ancestor of the xiangqi cannon).",
+      "keyFeatures": [
+        "Data-driven move generator: all pieces defined in a compact Betza-like notation, no per-piece code",
+        "Piece lab with live reachable-square animation and an auto-computed rough material value from mobility",
+        "Small alpha-beta engine with iterative deepening that works for any defined piece set",
+        "Historical Timur setup plus classic chess, so you can swap one piece and compare",
+        "Shareable variant links that encode the board and piece definitions in the URL"
+      ],
+      "techStack": "React + Vite, Tailwind, TypeScript, engine in a Web Worker; optional Claude API to turn a plain-English piece description into notation; static deploy on Netlify",
+      "whyInteresting": "It is a compact, satisfying game-dev build where the elegant part is the abstraction: once movement is data, inventing pieces costs nothing. It also makes a nice demo of search, evaluation and move generation for a game-AI lecture.",
+      "inspiredBy": "HN: 'Show HN: Timur's Chess - A 14th century chess variant with giraffes' (news.ycombinator.com/item?id=50043948, timurschess.com, Oct 2026)"
+    },
+    {
+      "n": 2,
+      "title": "Strictly C",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "A portability lab for systems courses that compiles each student's C code under several compilers, standards, and architectures, then explains every place where the program relied on undefined, unspecified, or implementation-defined behavior.",
+      "description": "The HN essay 'Your C is not standard C' and its thread (signed shifts, char signedness, GCC extensions, FENV_ACCESS) make a point most students never hear: code that works on their laptop is often not C, it is GCC-on-x86-64. Strictly C turns this into an assignment check. Students submit code; a Flask backend builds it in containers with gcc and clang at -std=c99, c11 and c23 with -pedantic-errors, runs it with UBSan and ASan, and also cross-runs it under QEMU on a big-endian and a 32-bit target with signed and unsigned char. Differences in output or warnings are grouped into findings such as 'relies on char being signed' or 'left shift of negative value', each linked to the relevant standard clause and a short, human-written explanation. The instructor view aggregates findings across a section so a lecture can start with 'here are the 5 non-portable habits this class has', and an optional Claude pass rewrites each finding as a question for the student instead of a fix.",
+      "keyFeatures": [
+        "Build matrix across gcc/clang, C99/C11/C23, -pedantic-errors, x86-64, 32-bit ARM and big-endian MIPS via QEMU",
+        "UBSan/ASan runs with diffed outputs across targets to catch behavior that only changes elsewhere",
+        "Curated finding catalog that maps compiler and sanitizer messages to standard clauses and plain-language explanations",
+        "Section-level dashboard of the most common non-portable habits",
+        "Socratic mode that turns each finding into a question rather than a patch"
+      ],
+      "techStack": "React + Vite, Tailwind, Flask, Docker with gcc/clang and qemu-user, Supabase for submissions and findings, Claude API for optional Socratic rewording",
+      "whyInteresting": "It fits a toolchain-first systems course perfectly: the tools themselves become the teacher, and students learn that 'it compiles and runs' is a statement about one implementation, not about the language.",
+      "inspiredBy": "HN: 'Your C is not standard C' (sebsite.pw/w/20261012-notstdc.html, news.ycombinator.com/item?id=50071546, Oct 2026)"
+    },
+    {
+      "n": 3,
+      "title": "Build Your Own Persistent P2P Tunnel",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "A staged networking project where students build a paired, encrypted file-sharing tunnel that discovers its public address, punches through NATs, and falls back to a relay, then measure how often each path actually works.",
+      "description": "Flipflop on Show HN uses Iroh to keep a tunnel alive between trusted devices so sharing a file needs no setup after the first pairing, and the comments show how hard NAT traversal still is in practice. In this assignment students build the core of such a tool themselves in Python or Go. Milestone 1: a reliable framed protocol over UDP with acknowledgements and retransmission. Milestone 2: a tiny STUN-like rendezvous server so peers learn their public address and port. Milestone 3: UDP hole punching with simultaneous open, tested against a provided Docker lab that emulates full-cone, restricted and symmetric NATs with iptables. Milestone 4: pairing with a short code, a Noise or libsodium handshake, and an end-to-end encrypted relay fallback the server cannot read. Milestone 5: chunked, resumable file transfer and a measurement report on which NAT combinations get a direct path, how long hole punching takes, and the throughput cost of relaying.",
+      "keyFeatures": [
+        "Docker NAT lab with configurable NAT types so every student can reproduce hard cases on one machine",
+        "Rendezvous and relay servers written by students, with a reference relay for comparison",
+        "Short-code pairing and an authenticated encrypted handshake (Noise IK or libsodium box)",
+        "Resumable chunked transfers with integrity hashes",
+        "Final measurement milestone with a connectivity matrix and latency and throughput plots"
+      ],
+      "techStack": "Python (asyncio) or Go, Docker + iptables NAT emulation, PyNaCl/libsodium or noise-protocol libraries, matplotlib for the report, GitHub Classroom autograding of protocol milestones",
+      "whyInteresting": "It covers transport reliability, NAT, rendezvous, cryptographic handshakes and measurement in one project that ends in a tool students would actually use, and the NAT lab turns a usually hand-waved topic into something they can see fail and fix.",
+      "inspiredBy": "HN: 'Show HN: Flipflop, Iroh-powered persistent tunnels for filesharing' (news.ycombinator.com/item?id=50099136, github.com/andunieee/flipflop, Oct 2026)"
+    },
+    {
+      "n": 4,
+      "title": "Hint Ladders for Refactoring: Measuring Correctness and Solution Leakage of Graduated LLM Hints on Code-Quality Exercises",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Builds a benchmark of code-quality refactoring exercises and evaluates graduated, solution-free LLM hints for whether each rung is correct, behavior-safe, and how much of the answer it gives away, using simulated solvers instead of students.",
+      "description": "Oliveira and Keuning's ITiCSE 2025 study shows students using ChatGPT on refactoring exercises often ask for the whole program to be refactored at once, which skips the learning the exercise was meant to produce. Rule-based refactoring tutors (Keuning et al.) give layered hints but need hand-authored rules per smell, while LLM hint generators scale but can mislead or leak the solution. This project builds a benchmark of working-but-smelly Java and Python exercises with behavior-preserving tests and reference refactorings, then has LLMs generate four-rung hint ladders (smell name, location, strategy, partial code). Each rung is scored automatically for correctness (does the named smell exist according to a static detector), safety (does following it preserve tests), and leakage (how much a weak simulated solver's success jumps after seeing it). The result is a reusable, IRB-free method for calibrating solution-free hint granularity, a direct successor to Pisan's SIGCSE 2021 solution-free hint work and the Submit!/Jolly Feedback critique line.",
+      "papers": [
+        {
+          "title": "\"Can You Refactor This for Me?\": Investigating How Students Use ChatGPT in Code Refactoring Exercises",
+          "authors": "Eduardo Carneiro Oliveira, Hieke Keuning",
+          "venue": "ITiCSE 2025",
+          "year": 2025,
+          "doi": "10.1145/3724389.3730789",
+          "url": "https://doi.org/10.1145/3724389.3730789",
+          "abstract": "LLMs are increasingly used in programming education, but little research has explored their use in teaching and learning code refactoring. Using a grounded-theory approach on 41 student-LLM conversations (318 interactions) from C# refactoring exercises that were functionally correct but contained code quality issues, the authors find students use the LLM in various modes, from requesting a refactoring of the entire program at once to long discussions of refactoring possibilities.",
+          "relevance": "Documents the failure mode the research targets (whole-solution requests replacing reasoning) and supplies the exercise design (working code with quality issues) that the benchmark generalizes."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "A Tutoring System to Learn Code Refactoring",
+          "authors": "Hieke Keuning, Bastiaan Heeren, Johan Jeuring",
+          "venue": "SIGCSE 2021",
+          "year": 2021,
+          "url": "https://doi.org/10.1145/3408877.3432526",
+          "relevance": "Rule-based refactoring tutor with increasingly detailed hints and test-based behavior checks; provides the hint-ladder structure and a rule-based baseline for comparison."
+        },
+        {
+          "title": "Student Refactoring Behaviour in a Programming Tutor",
+          "authors": "Hieke Keuning, Bastiaan Heeren, Johan Jeuring",
+          "venue": "Koli Calling 2020",
+          "year": 2020,
+          "url": "https://research.ou.nl/en/publications/student-refactoring-behaviour-in-a-programming-tutor/",
+          "relevance": "Reports that 133 students struggled most with simplifying complex control flow, which guides which smell categories the benchmark should over-sample."
+        },
+        {
+          "title": "Next-Step Hint Generation for Introductory Programming Using Large Language Models",
+          "authors": "Lianne Roest, Hieke Keuning, Johan Jeuring",
+          "venue": "Australasian Computing Education Conference (ACE), 2024",
+          "year": 2024,
+          "url": "https://arxiv.org/abs/2312.10055",
+          "relevance": "Shows LLM next-step hints are usually specific but sometimes misleading; motivates the automatic correctness and safety scoring of each hint rung."
+        },
+        {
+          "title": "SmellBench: Towards Fine-Grained Evaluation of Code Agents on Refactoring Tasks",
+          "authors": "SmellBench authors",
+          "venue": "arXiv preprint, 2026",
+          "year": 2026,
+          "url": "https://arxiv.org/abs/2606.05574",
+          "relevance": "Injects code smells into repositories and evaluates agents beyond functional correctness; offers a smell-injection approach for scaling the benchmark and a contrast to its LLM-as-judge scoring."
+        }
+      ],
+      "researchPlan": {
+        "overview": "First build a benchmark of smelly-but-correct exercises with tests, smell detectors and reference refactorings. Then generate hint ladders from several LLMs and a rule-based baseline, and score every rung for correctness, behavior safety, and solution leakage using simulated solvers. Finally, derive guidelines for the hint granularity that is helpful without giving the answer away.",
+        "milestones": [
+          { "month": 1, "goal": "Literature review on refactoring tutors, LLM hint generation and leakage metrics; define smell taxonomy and hint-rung schema", "deliverable": "Annotated bibliography, smell taxonomy (about 12 smells), and refined research questions" },
+          { "month": 2, "goal": "Build 120 exercises in Java and Python (seeded from textbook and CS1/CS2 code plus smell injection) with behavior tests, detector configs (PMD, Pylint, Ruff) and reference refactorings", "deliverable": "Versioned benchmark repository with harness that checks tests and smell presence" },
+          { "month": 3, "goal": "Generate four-rung hint ladders with 3-4 LLMs (frontier and small open-weight) under solution-free prompts, plus a rule-based baseline in the style of Keuning's tutor", "deliverable": "Hint corpus of roughly 2,000 rungs with metadata" },
+          { "month": 4, "goal": "Automatic scoring: smell correctness via detectors, safety by applying hint-guided edits and re-running tests, leakage as the success gain of weak simulated solvers per rung", "deliverable": "Scoring pipeline and first results tables" },
+          { "month": 5, "goal": "Validate automatic scores against expert rating of a 200-rung stratified sample by two instructors; analyze which smells and rungs leak most", "deliverable": "Agreement statistics and analysis of leakage by smell type and rung" },
+          { "month": 6, "goal": "Write up guidelines for hint granularity and release the benchmark", "deliverable": "Submitted paper draft plus open benchmark and scoring code" }
+        ],
+        "targetVenues": ["SIGCSE TS", "ITiCSE", "Koli Calling", "AIED"],
+        "resources": "Claude and Gemini API access (or local claude CLI) and a GPU or hosted endpoint for small open-weight models; one or two undergraduate research assistants for exercise authoring; PMD, Pylint/Ruff and test harness in Docker; about 10 hours of instructor time for expert rating.",
+        "risks": [
+          { "risk": "Simulated solvers may not reflect how real students use hints, so leakage scores may not transfer", "mitigation": "Use several solver strengths and report leakage curves rather than a single number; frame results as a calibration method and plan a later classroom study" },
+          { "risk": "Static smell detectors disagree with what instructors consider a quality issue", "mitigation": "Restrict to smells with high detector-instructor agreement on a pilot set and report the expert-validated subset separately" },
+          { "risk": "Benchmark exercises leak into model training data once released", "mitigation": "Keep a held-out set generated by smell injection with a private seed and refresh it per release" }
+        ],
+        "humanSubjects": false
+      }
+    }
+  ]
+}

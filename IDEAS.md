@@ -558,3 +558,7 @@
 | 2026-10-14 | Net Units | Teaching Tool | 1-2 Weeks |
 | 2026-10-14 | Build Your Own Borrow Checker | Classroom Assignment | Multi-week |
 | 2026-10-14 | Mechanism or Tinkering? A Qualitative-Process Critic for Classifying and Giving Feedback on Student Edits to Unpacked Blocks in Ecosystem Models | Research | Research |
+| 2026-10-15 | Tamerlane Board | Side Project | Weekend |
+| 2026-10-15 | Strictly C | Teaching Tool | 1-2 Weeks |
+| 2026-10-15 | Build Your Own Persistent P2P Tunnel | Classroom Assignment | Multi-week |
+| 2026-10-15 | Hint Ladders for Refactoring: Measuring Correctness and Solution Leakage of Graduated LLM Hints on Code-Quality Exercises | Research | Research |
