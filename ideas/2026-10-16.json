@@ -1,0 +1,170 @@
+{
+  "date": "2026-10-16",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Track Switch",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A trolley-problem perturbation lab: write one dilemma, auto-generate dozens of reworded, reordered and re-weighted variants, run them through several LLMs, and see on a heatmap exactly which framing changes flip each model's choice.",
+      "description": "Zach Landes' 'Jev meets the Trolley Problem' ran 5,240 trolley setups through decision models and found that wording, track order, and who sits on the side track (a stranger, the developer, the model's own server) changed the answers, including one model that saved its own server over twenty people. Track Switch turns that study into a weekend toy anyone can poke at. You write a base dilemma as a small template with slots (count on each track, who is on the side track, which track is described first, active vs passive phrasing). The app expands the template into a factorial set of variants, sends each one several times to Claude, Gemini, and an optional local model, forces a choice from a fixed option list, and records the choice distribution. The result is a grid where each cell shows how often a model switches tracks, so a self-interest effect or an order effect jumps out visually. A 'flip finder' highlights the minimal pair of variants that differ in one slot but get opposite answers, which is the shareable screenshot.",
+      "keyFeatures": [
+        "Slot-based dilemma templates that expand into a full factorial set of variants",
+        "Forced-choice runner with repeated sampling per variant and per model, stored with exact prompts",
+        "Heatmap of switch rates by slot value, with per-slot effect sizes",
+        "Flip finder that surfaces minimal pairs differing in one slot but answered oppositely",
+        "Shareable read-only result pages so a run can be dropped into an AI ethics discussion"
+      ],
+      "techStack": "React + Vite, Tailwind, small Flask proxy for Claude API and Gemini API calls (optional Ollama for local models), Supabase for runs and results, deploy on Netlify + Render",
+      "whyInteresting": "It makes a subtle AI ethics point (models are not consistent moral agents, and their choices depend on framing and self-reference) concrete in an afternoon, and the template-and-factorial design is a nice small lesson in experimental design.",
+      "inspiredBy": "HN: 'Jev meets the Trolley Problem' (zachlandes.com/trolley-problem, news.ycombinator.com/item?id=50106023, Oct 2026)"
+    },
+    {
+      "n": 2,
+      "title": "Pluck Lab",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "A browser instrument you strum from the keyboard where every sound is synthesized live by Karplus-Strong, with the delay line, filter, and spectrum on screen so a media-computation or signals lecture can show why a buffer of noise turns into a guitar string.",
+      "description": "Guitoro on Show HN (566 points) is a virtual guitar played from the QWERTY keyboard: home-row keys pick chords, H and J strum down and up. It uses recorded samples. Pluck Lab keeps the same playable keyboard layout but synthesizes every string with the Karplus-Strong algorithm in an AudioWorklet, which is short enough for students to read in one sitting: fill a delay line with noise, repeatedly average adjacent samples, and feed it back. The teaching view slows the process down and draws the delay buffer as it circulates, shows the spectrum sharpening into harmonics, and exposes the parameters (delay length vs pitch, averaging filter vs decay, pick position, fractional delay for tuning) as sliders. Prepared lecture 'scenes' walk through why pitch is quantized without fractional delay, why higher notes die faster, and how a strum is just six strings started a few milliseconds apart. Students can then open a small code panel and replace the filter function themselves, hearing the result immediately.",
+      "keyFeatures": [
+        "Keyboard chord-and-strum layout (chord rows plus up/down strum keys) driving six synthesized strings",
+        "Live delay-line visualization and FFT spectrum for each string, with a slow-motion mode",
+        "Parameter sliders for delay length, damping filter, pick position, and fractional-delay tuning",
+        "Guided lecture scenes that each isolate one concept (pitch quantization, decay, strum timing)",
+        "Editable filter function in an in-page code panel, hot-swapped into the AudioWorklet"
+      ],
+      "techStack": "React + Vite, Tailwind, Web Audio API with AudioWorklet, Canvas for buffer and spectrum views, static deploy on Netlify; optional Claude API to explain a student's edited filter in plain language",
+      "whyInteresting": "Karplus-Strong is one of the most satisfying algorithms to teach: twenty lines of code, a queue, and a low-pass filter produce a convincing guitar. Making it playable turns a DSP aside into a memorable lab for data structures, media computation, or intro signals.",
+      "inspiredBy": "HN: 'Show HN: Guitoro, a virtual guitar you strum with your keyboard' (guitoro.com, news.ycombinator.com/item?id=50077020, Oct 2026)"
+    },
+    {
+      "n": 3,
+      "title": "Build Your Own FORTRAN I Compiler",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "For Fortran's 70th birthday, students build a compiler for a FORTRAN I subset that targets a simulated IBM 704 with only three index registers, and reproduce the original team's bet that compiled code could rival hand-written assembly.",
+      "description": "The first Fortran manual appeared 70 years ago (15 October 1956), and Backus's team's real achievement was not the language but an optimizing compiler good enough that 704 programmers would accept it. In this assignment students recreate that story at small scale. They are given a 704-like simulator (36-bit words, accumulator and MQ, three index registers, cycle counts per instruction) and a FORTRAN I subset: fixed-form statements, integer and floating variables, one- and two-dimensional arrays, arithmetic IF, GO TO, and DO loops. Milestone 1 is a fixed-form lexer and parser. Milestone 2 translates arithmetic expressions, first with the original trick of inserting parentheses to encode precedence, then with a modern precedence-climbing parser for comparison. Milestone 3 compiles DO loops and subscripted array references, which is where the original's index-register work mattered. Milestone 4 allocates the three index registers using estimated execution frequencies (from loop nesting, then from profiling runs) and measures spill cost. Milestone 5 pits each student's output against provided hand-written 704 assembly on a benchmark set and reports the cycle-count ratio, mirroring the 1957 claim.",
+      "keyFeatures": [
+        "Provided IBM 704-style simulator with cycle-accurate counts and only three index registers",
+        "FORTRAN I subset spec with a test suite of period-appropriate numerical programs",
+        "Two expression translators (historical parenthesization trick vs precedence climbing) compared side by side",
+        "Frequency-guided index-register allocation with measured spill cost",
+        "Final benchmark against hand-written assembly with a cycle-ratio leaderboard"
+      ],
+      "techStack": "Python or Rust for the compiler, provided 704 simulator in Python, pytest or cargo test autograding via GitHub Classroom, optional React + Vite visualizer for register allocation",
+      "whyInteresting": "It teaches parsing, code generation and register allocation under a harsh constraint that makes optimization feel necessary rather than academic, and it connects students to the history of why compilers exist at all.",
+      "inspiredBy": "HN: 'Celebrating 70 Years of Fortran' (fortran-lang.org/news/2026/09-15-Fortran-birthday, news.ycombinator.com/item?id=50104726, Oct 2026); Backus et al., 'The FORTRAN Automatic Coding System' (WJCC 1957)"
+    },
+    {
+      "n": 4,
+      "title": "Do LLM Tutors Share Students' Continuation Misconceptions? A Reference-Interpreter Benchmark for LLM Tracing and Explanation of Delimited Continuations",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Builds a benchmark of shift/reset tracing problems, labeled with the student misconception categories from SIGCSE 2026 work, and measures whether LLM tutors make the same mistakes, detect them in student traces, and explain them correctly, using a reference interpreter as ground truth.",
+      "description": "Strömbäck, Cong and Ikemori (SIGCSE TS 2026) used thematic analysis of student tracing answers to catalog how upper-level students misunderstand delimited continuations (for example how much context shift captures, what happens when a captured continuation is invoked twice or not at all, and how reset interacts with the result). Their categories are exactly what an LLM tutor would need to diagnose, but advanced control-flow topics are where LLM code reasoning is weakest and least studied: benchmarks like CRUXEval cover simple Python, not control operators. This project builds a parameterized generator of small shift/reset programs (in Racket's racket/control and a Pyret-like surface syntax), computes ground-truth results and step traces with a reference interpreter, and labels each program with which of the paper's misconception categories it exercises. We then measure three things for several LLMs: (1) tracing accuracy per category, and whether wrong LLM answers match the answer a specific student misconception would produce; (2) diagnosis accuracy on synthetic student traces generated by misconception-specific buggy evaluators; and (3) explanation correctness, checked by verifying the evaluation steps an LLM claims against the reference trace. The result is a no-human-subjects benchmark that tells instructors whether an LLM tutor is safe to deploy for this topic and which misconception categories need a symbolic checker instead.",
+      "papers": [
+        {
+          "title": "Students' Understanding of (Delimited) Continuations",
+          "authors": "Filip Strömbäck, Youyou Cong, Kazuki Ikemori",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770762.3772526",
+          "url": "https://doi.org/10.1145/3770762.3772526",
+          "abstract": "Continuations, particularly delimited continuations, enable manipulation of control flow and are useful for implementing new control structures, yet little research exists on teaching them. The paper investigates students' understanding of continuations using thematic analysis and identifies mistakes students tend to make when tracing programs that use continuations, in a course that uses a continuation extension of Pyret. The findings consist of categories describing common views of continuations and sets of mistakes tied to particular misinterpretations, offered as a starting point for misconception research and concept inventories.",
+          "relevance": "Supplies the misconception categories and the tracing-task format that the benchmark is organized around; the project turns its qualitative categories into executable, labeled test items and asks whether LLM tutors share or can diagnose them."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "Abstracting Control",
+          "authors": "Olivier Danvy, Andrzej Filinski",
+          "venue": "ACM Conference on LISP and Functional Programming (LFP), 1990",
+          "year": 1990,
+          "url": "https://doi.org/10.1145/91556.91622",
+          "relevance": "Defines shift and reset through the CPS translation, which gives the reference interpreter its formal semantics and the ground truth for every generated trace."
+        },
+        {
+          "title": "CRUXEval: A Benchmark for Code Reasoning, Understanding and Execution",
+          "authors": "Alex Gu, Baptiste Rozière, Hugh Leather, Armando Solar-Lezama, Gabriel Synnaeve, Sida I. Wang",
+          "venue": "ICML 2024",
+          "year": 2024,
+          "url": "https://arxiv.org/abs/2401.03065",
+          "relevance": "Establishes the input/output-prediction methodology for measuring LLM program execution reasoning on short Python functions; this project extends that methodology to non-local control flow, where it has not been applied."
+        },
+        {
+          "title": "Continuations for All: Language Design Considerations for Accessible Continuations",
+          "authors": "Youyou Cong and colleagues",
+          "venue": "SPLASH-E 2025",
+          "year": 2025,
+          "url": "https://2025.splashcon.org/details/splash-2025-SPLASH-E/1/Continuations-for-All-Language-Design-Considerations-for-Accessible-Continuations",
+          "relevance": "Companion work from the same group on how surface syntax affects learnability of continuations, motivating the comparison of Racket-style and Pyret-style surface syntax in the benchmark."
+        },
+        {
+          "title": "Notional Machines and Introductory Programming Education",
+          "authors": "Juha Sorva",
+          "venue": "ACM Transactions on Computing Education, 2013",
+          "year": 2013,
+          "url": "https://doi.org/10.1145/2483710.2483713",
+          "relevance": "Frames misconceptions as faulty notional machines, which justifies implementing each misconception category as a buggy evaluator that generates the synthetic student traces."
+        }
+      ],
+      "researchPlan": {
+        "overview": "Formalize the paper's misconception categories as executable buggy evaluators, generate a labeled benchmark of shift/reset tracing items with a reference interpreter, and evaluate several LLMs on tracing, diagnosis, and explanation. The output is a public benchmark plus guidance on which continuation topics an LLM tutor can be trusted with and where a symbolic checker must back it up.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Read the source paper and continuation semantics literature; map each misconception category to a precise operational deviation; contact the authors about sharing anonymized task templates",
+            "deliverable": "Category-to-semantics mapping document and refined research questions"
+          },
+          {
+            "month": 2,
+            "goal": "Implement the reference interpreter (CPS-based) and one buggy evaluator per misconception category; build the parameterized program generator with difficulty controls (nesting depth, multiple invocations, discarded continuations)",
+            "deliverable": "Open-source generator and interpreters with unit tests against Racket's racket/control"
+          },
+          {
+            "month": 3,
+            "goal": "Generate and validate the benchmark (about 600 items across categories and two surface syntaxes); hand-check a sample for clarity",
+            "deliverable": "Benchmark v1 with per-item ground truth, step traces, and misconception labels"
+          },
+          {
+            "month": 4,
+            "goal": "Run tracing and diagnosis evaluations on 4 to 6 LLMs (via local claude CLI, Gemini, and open-weight models) with and without chain-of-thought; match wrong answers to buggy-evaluator outputs",
+            "deliverable": "Results tables: accuracy per category, misconception-match rate, diagnosis F1"
+          },
+          {
+            "month": 5,
+            "goal": "Evaluate explanation correctness by extracting claimed evaluation steps and checking them against reference traces; prototype a hybrid tutor that routes weak categories to the symbolic checker",
+            "deliverable": "Explanation-fidelity metric, hybrid tutor prototype, and error analysis"
+          },
+          {
+            "month": 6,
+            "goal": "Write and submit the paper; release benchmark and tooling",
+            "deliverable": "Submitted paper draft and public repository"
+          }
+        ],
+        "targetVenues": [
+          "SIGCSE TS",
+          "ITiCSE",
+          "Koli Calling",
+          "SPLASH-E"
+        ],
+        "resources": "One graduate or senior undergraduate student with functional programming background; Racket and a small Python harness; LLM access through the local claude CLI plus Gemini free tier and open-weight models on a single GPU workstation; optional collaboration with the source paper's authors for task templates.",
+        "risks": [
+          {
+            "risk": "The paper's misconception categories may be too coarse or interpretive to implement as precise buggy evaluators",
+            "mitigation": "Implement only categories with a clear operational reading, document the rest as qualitative, and seek author input on ambiguous cases"
+          },
+          {
+            "risk": "Frontier LLMs may score near ceiling on short programs, making the benchmark uninformative",
+            "mitigation": "Use the generator's difficulty knobs (nesting, multi-shot continuations, interleaved resets) to produce a hard split, and report accuracy as a function of difficulty"
+          },
+          {
+            "risk": "Synthetic student traces may not resemble real student errors",
+            "mitigation": "Present the diagnosis results as an upper bound and, if the authors share anonymized answers, validate on a small real sample in a follow-up study"
+          }
+        ],
+        "humanSubjects": false
+      }
+    }
+  ]
+}

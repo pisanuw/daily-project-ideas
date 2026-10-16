@@ -562,3 +562,7 @@
 | 2026-10-15 | Strictly C | Teaching Tool | 1-2 Weeks |
 | 2026-10-15 | Build Your Own Persistent P2P Tunnel | Classroom Assignment | Multi-week |
 | 2026-10-15 | Hint Ladders for Refactoring: Measuring Correctness and Solution Leakage of Graduated LLM Hints on Code-Quality Exercises | Research | Research |
+| 2026-10-16 | Track Switch | Side Project | Weekend |
+| 2026-10-16 | Pluck Lab | Teaching Tool | 1-2 Weeks |
+| 2026-10-16 | Build Your Own FORTRAN I Compiler | Classroom Assignment | Multi-week |
+| 2026-10-16 | Do LLM Tutors Share Students' Continuation Misconceptions? A Reference-Interpreter Benchmark for LLM Tracing and Explanation of Delimited Continuations | Research | Research |
