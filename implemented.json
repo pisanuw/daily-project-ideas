@@ -275,8 +275,10 @@
         "date": "2026-10-14",
         "n": 1
       },
-      "placeholder": true,
-      "notes": "In progress since 2026-10-16"
+      "notes": "Built in one session, fully client-side in plain TypeScript and SVG (no React/Tailwind/Recharts). Easy mode is Aaronson's oracle: a 6-gram table (five previous presses predict the sixth) with back-off to shorter contexts and a bet-on-a-switch default; hard mode is a weighted-majority mixture of 1- to 6-gram experts (weight x0.8 per miss, 1% floor so a benched expert can recover). Before each press the page shows SHA-256 of 'outguess-me:<F|J>:<nonce>' via Web Crypto, then reveals the guess and nonce and re-verifies the hash. Live hit-rate chart against a 95% coin-flip band; post-game breakdown with Wilson CI, one-sided binomial p-value, the 6-gram table, run-length histogram vs a fair coin, alternation rate, longest run vs log2(n), and Krichevsky-Trofimov bits per press for context orders 0-5. Paste-any-two-symbol-sequence mode, a 200-coin-flip control from crypto.getRandomValues, and share links that pack the presses in the URL hash and recompute the score by replay on open. Limitation: the commitment only guards against a dishonest page, since oracle and player share the browser tab, and 50-100 presses leave a wide coin band. 43 vitest tests, 100% statement coverage on core; lint/typecheck/build green. Deployed via the GitHub Actions deploy workflow, siteId pinned afterward.",
+      "url": "https://outguess-me.netlify.app",
+      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/outguess-me",
+      "implementedOn": "2026-10-16"
     }
   ]
 }

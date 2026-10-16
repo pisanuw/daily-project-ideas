@@ -359,3 +359,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-10-15 [doc] Created ideas/2026-10-15.json with 4 ideas: Tamerlane Board, Strictly C, Build Your Own Persistent P2P Tunnel, Hint Ladders for Refactoring (ITiCSE 2025 doi:10.1145/3724389.3730789)
 
 2026-10-16 [note] Claimed Outguess Me (2026-10-14 n1) as in progress: F/J predictability game with n-gram oracle, SHA-256 commit-reveal, entropy breakdown, hard-mode expert mixture.
+
+2026-10-16 [note] Outguess Me (2026-10-14 n1) marked implemented: live at outguess-me.netlify.app, repo Claude-capstone/outguess-me. 6-gram and mixture oracles, SHA-256 commit-reveal, entropy breakdown; 43 tests, 100% stmt coverage.
