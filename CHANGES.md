@@ -357,3 +357,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-10-14 [doc] Created ideas/2026-10-14.json with 4 ideas: Outguess Me, Net Units, Build Your Own Borrow Checker, Mechanism or Tinkering QP critic (SIGCSE TS 2026 doi:10.1145/3770761.3777322)
 
 2026-10-15 [doc] Created ideas/2026-10-15.json with 4 ideas: Tamerlane Board, Strictly C, Build Your Own Persistent P2P Tunnel, Hint Ladders for Refactoring (ITiCSE 2025 doi:10.1145/3724389.3730789)
+
+2026-10-16 [note] Claimed Outguess Me (2026-10-14 n1) as in progress: F/J predictability game with n-gram oracle, SHA-256 commit-reveal, entropy breakdown, hard-mode expert mixture.
