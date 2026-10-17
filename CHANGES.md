@@ -363,3 +363,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-10-16 [note] Outguess Me (2026-10-14 n1) marked implemented: live at outguess-me.netlify.app, repo Claude-capstone/outguess-me. 6-gram and mixture oracles, SHA-256 commit-reveal, entropy breakdown; 43 tests, 100% stmt coverage.
 
 2026-10-16 [doc] Created ideas/2026-10-16.json with 4 ideas: Track Switch, Pluck Lab, Build Your Own FORTRAN I Compiler, LLM Continuation Misconceptions (SIGCSE TS 2026 doi:10.1145/3770762.3772526)
+
+2026-10-17 [doc] Created ideas/2026-10-17.json with 4 ideas: Mode Collapse, 23:59:60, Build Your Own Bot Ladder for a Tiny RTS, Speakable Error Messages (SIGCSE TS 2026 doi:10.1145/3770762.3772507)

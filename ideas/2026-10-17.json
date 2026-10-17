@@ -1,0 +1,124 @@
+{
+  "date": "2026-10-17",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Mode Collapse",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A daily guessing game where you predict what most LLMs answer to an open prompt (or find an answer none of them give), built on hundreds of pre-sampled model responses that expose how alike AI 'creativity' really is.",
+      "description": "Wonderhop on Show HN is a daily word game where you either give the most common answer to a prompt (Sky) or a rare one nobody else gave (Abyss). Mode Collapse swaps the crowd for a panel of language models. Each night a script sends seven open prompts ('name a fruit', 'pick a number from 1 to 10', 'invent a fantasy city name', 'name a famous scientist') to Claude, Gemini, and a local model, sampling each one 50 times at default temperature, then normalizes and clusters the answers. During the day players get 30 seconds per prompt. In Sky mode they score by guessing the models' most frequent answer, and in Abyss mode they score for a valid answer that no model produced. The reveal screen shows the full answer distribution per model, so players see the famous patterns firsthand ('7', 'Elara', 'Marie Curie') and the differences between vendors. A share card lists your score plus the single most lopsided prompt of the day.",
+      "keyFeatures": [
+        "Nightly batch sampler that queries several models 50 times per prompt and stores raw and normalized answers",
+        "Answer normalizer (case, plurals, synonyms via a small alias table plus an LLM tie-breaker) that clusters responses",
+        "Sky and Abyss modes with timed rounds and a popularity or rarity based score per answer",
+        "Reveal view with per-model bar charts and an entropy score showing how collapsed each prompt was",
+        "Wordle-style share card and an archive of past days for classroom discussion"
+      ],
+      "techStack": "React + Vite, Tailwind, Supabase for daily prompts and answer distributions, a scheduled Python script calling the Claude API and Gemini API (optional Ollama), static deploy on Netlify",
+      "whyInteresting": "Homogenized LLM output is a real AI ethics and creativity concern, and this makes it something you feel in two minutes a day. It is also a tidy weekend build: one batch job, one table, one game screen.",
+      "inspiredBy": "HN: 'Show HN: Wonderhop, a daily game: guess what most people say, or what none do' (wonderhop.io, news.ycombinator.com/item?id=50080246, Oct 2026)"
+    },
+    {
+      "n": 2,
+      "title": "23:59:60",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "An interactive timekeeping lab for systems and databases courses that plots UTC, TAI, GPS time, and UT1 together, then runs real leap-second and continuous-UTC scenarios against JavaScript, Python, and Postgres time code so students see exactly where each one breaks.",
+      "description": "In October 2026 the CGPM decided that continuous UTC takes effect on 20 May 2027, ending leap seconds and letting UT1-UTC drift up to an hour. That is a good moment to teach why time is hard. 23:59:60 has three panels. The first is a timeline of time scales since 1972: TAI, UTC with its 27 leap-second steps, GPS time, Unix time, and UT1, with a slider into the future showing UT1-UTC growing after 2027 and an optional negative leap second scenario. The second is a 'smear vs step' simulator comparing how a POSIX clock, a 24-hour linear smear (as used by large cloud providers), and a monotonic clock report the seconds around 2016-12-31T23:59:60, with a log of events whose ordering flips. The third is a test bench: students pick a library (JS Date, Temporal, Python datetime, Postgres timestamptz) and the tool shows precomputed outputs for edge-case inputs (23:59:60, negative leap second, duration across a leap) with a short explanation of each result. Instructors can attach exercises such as 'fix this rate limiter so it survives a step backwards'.",
+      "keyFeatures": [
+        "Zoomable timeline of TAI, UTC, GPS, Unix, and UT1 with the historical leap-second table and a post-2027 continuous-UTC projection",
+        "Smear vs step vs monotonic simulator that replays an event log and highlights reordered or duplicated timestamps",
+        "Library test bench with precomputed outputs for leap-second and negative-leap-second edge cases across languages",
+        "Exercise mode with small buggy snippets (timeouts, rate limiters, log merging) and hidden tests",
+        "Optional Claude API explainer that walks through why a given library produced a given output"
+      ],
+      "techStack": "React + Vite, Tailwind, D3 for timelines, a small Python/Node script that precomputes library outputs into JSON, Pyodide for in-browser Python exercises, static deploy on Netlify",
+      "whyInteresting": "Time handling bugs show up in every systems, networking, and database course, and the leap-second decision is current news students can read about. Seeing two clocks disagree about the order of events teaches more than a slide on monotonic clocks.",
+      "inspiredBy": "HN: 'BIPM decides to stop adding leap seconds to UTC' (bipm.org/en/cgpm-2026/resolution-5, news.ycombinator.com/item?id=50105777, Oct 2026)"
+    },
+    {
+      "n": 3,
+      "title": "Build Your Own Bot Ladder for a Tiny RTS",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "Students build a small deterministic real-time strategy engine with fog of war, write scripted bots for it, run a seeded round-robin ladder, and finally give an LLM coding agent one hour to write a bot and see where it lands.",
+      "description": "StarSkirmish Bench gives each frontier model one hour in its coding harness to write a StarCraft: Brood War bot, then ranks the bots against a fixed roster of human-written bots; the best model still wins only 7% of games against the strongest ones. This assignment rebuilds that pipeline at classroom scale. In weeks 1-2 students implement a deterministic, tick-based RTS on a grid (one resource, workers, two combat units, buildings, fog of war) with a seeded RNG and a replay file format. In week 3 they define a bot API (observe visible state, issue commands, per-tick time budget) and write the demo bots: a rusher, a turtler, and a scout-then-counter bot. In week 4 they build the ladder runner: round-robin across maps and seeds, Elo or win-rate tables, and a browser replay viewer. In the final week each team gives a coding agent the same skeleton, docs, and practice opponents under a fixed time limit, adds its bot to the fixed roster, and writes a short report on what the agent got right, where it failed (scouting, build order, unit control), and whether practice against strong bots helped, which is the benchmark's own headline finding.",
+      "keyFeatures": [
+        "Deterministic tick-based engine with fog of war, seeded RNG, and a compact replay format",
+        "Sandboxed bot API with per-tick time budgets so slow bots lose turns instead of hanging the match",
+        "Ladder runner with round-robin scheduling across maps and seeds, win-rate tables, and confidence intervals",
+        "Browser replay viewer with scrubbing and per-player vision overlay",
+        "Agent-bot experiment with a fixed time budget, practice tiers, and a reflection report"
+      ],
+      "techStack": "Python or TypeScript engine, bots as subprocesses speaking JSON over stdin/stdout, React + Canvas replay viewer, GitHub Actions or a small Flask service to run ladder batches, optional Claude Code or Gemini CLI for the agent round",
+      "whyInteresting": "It combines simulation, determinism, API design, sandboxing, and experimental methodology in one project, and it ends with a fair, evidence-based look at what coding agents can and cannot do. Game AI and RTS scouting also connect directly to classic believable-agent research.",
+      "inspiredBy": "HN: 'Show HN: Gemini 4 Argon plays StarCraft' (starskirmish.com/bench/v0-2, news.ycombinator.com/item?id=50118688, Oct 2026)"
+    },
+    {
+      "n": 4,
+      "title": "Speakable Error Messages: An Audio-First Benchmark for LLM Explanations of Notebook Errors for Screen-Reader Users",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Builds a seeded-error corpus of Python notebook failures and an automated rubric for whether LLM-generated error explanations work when heard through a screen reader (location anchoring, no visual references, short spoken length, correct fix), then compares prompting strategies without human subjects.",
+      "description": "JupyterVoxD showed that reading errors aloud in real time and jumping straight to the error location cut debugging time for blind and visually impaired (BVI) students by 72.5% in Google Colab. It relies on the raw Python message, though, and LLM error explanations, now common in course tools, are written for sighted readers: they refer to 'the red arrow above', paste whole tracebacks, quote code with caret markers, and run for paragraphs that take a minute to hear. This project defines 'speakable' error feedback and measures it at scale. We seed realistic errors (syntax, name, type, index, shape mismatches, stale-cell state) into public student-style notebooks, collect explanations from several LLMs under different prompts (default, screen-reader-aware, structured 'where/what/try' templates), and score them automatically on location correctness (cell and line), visual-reference count, estimated speech duration under typical TTS rates, traceback verbosity, and whether the suggested fix actually runs. The result is an open benchmark and a recommended prompt or output format that tools such as JupyterVoxD, Jolly Feedback-style autograders, or course chatbots can adopt.",
+      "papers": [
+        {
+          "title": "Debugging Support for Students with Blindness and Visual Impairments on Notebook-based Programming Environments",
+          "authors": "Godsalvation F. Oguibe, Lauryn Castro Hernandez, Katherine Holloway",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770762.3772507",
+          "url": "https://doi.org/10.1145/3770762.3772507",
+          "abstract": "Students with blindness or visual impairments face significant barriers when navigating to error messages, locating errors in code, and verifying fixes, especially in Jupyter-style notebooks where errors appear in a separate block below the code. The authors built JupyterVoxD for Google Colab, providing real-time error message reading, direct navigation to the error location, and quick syntax checks. Evaluation showed an average 72.5% reduction in time-to-debug.",
+          "relevance": "Establishes that location-anchored, spoken error feedback is what helps BVI students debug; this project asks whether LLM-generated explanations meet that bar and how to make them do so."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "Using Large Language Models to Enhance Programming Error Messages",
+          "authors": "Juho Leinonen, Arto Hellas, Sami Sarsa, Brent Reeves, Paul Denny, James Prather, Brett A. Becker",
+          "venue": "SIGCSE 2023",
+          "year": 2023,
+          "url": "https://doi.org/10.1145/3545945.3569770",
+          "relevance": "Baseline for LLM error-message enhancement and its evaluation of explanation and fix quality; our rubric adds the audio and navigation dimensions it does not cover."
+        },
+        {
+          "title": "Compiler Error Messages Considered Unhelpful: The Landscape of Text-Based Programming Error Message Research",
+          "authors": "Brett A. Becker, Paul Denny, Raymond Pettit, Durell Bouchard, Dennis J. Bouvier, Brian Harrington, Amir Kamil, Amey Karkare, Chris McDonald, Peter-Michael Osera, Janice L. Pearce, James Prather",
+          "venue": "ITiCSE Working Group Reports, 2019",
+          "year": 2019,
+          "url": "https://doi.org/10.1145/3344429.3372508",
+          "relevance": "Supplies the established design guidelines for error messages (readability, cognitive load, context, hints) from which the speakable rubric is derived and extended."
+        },
+        {
+          "title": "Notably Inaccessible: Data Driven Understanding of Data Science Notebook (In)Accessibility",
+          "authors": "Venkatesh Potluri, Sudheesh Singanamalla, Nussara Tieanklin, Jennifer Mankoff",
+          "venue": "ASSETS 2023",
+          "year": 2023,
+          "url": "https://arxiv.org/abs/2308.03241",
+          "relevance": "Large-scale automated accessibility analysis of 100,000 Jupyter notebooks with an open dataset and pipeline (github.com/make4all/notebooka11y), usable as the source of realistic notebooks for error seeding."
+        }
+      ],
+      "researchPlan": {
+        "overview": "Derive a speakable-feedback rubric from error-message guidelines and the JupyterVoxD design, build a seeded-error notebook corpus with ground-truth locations and fixes, then benchmark several LLMs and prompting strategies with fully automated metrics. The output is an open benchmark and a recommended audio-first explanation format, with an optional small follow-up study with BVI students as future work.",
+        "milestones": [
+          { "month": 1, "goal": "Literature review on error-message design, LLM error enhancement, and screen-reader programming; draft the speakable rubric", "deliverable": "Annotated bibliography and a rubric with operational definitions for each metric" },
+          { "month": 2, "goal": "Build the corpus: sample notebooks, inject 8-10 error categories including out-of-order cell execution, record ground-truth cell, line, and fix", "deliverable": "Seeded-error corpus of about 1,000 failing notebooks with metadata" },
+          { "month": 3, "goal": "Implement automated scorers: location match, visual-reference detector, TTS duration estimate, traceback verbosity, fix execution check", "deliverable": "Scoring pipeline with validation on a hand-labeled sample of 100 explanations" },
+          { "month": 4, "goal": "Run LLMs (Claude, Gemini, an open-weight model) under default, screen-reader-aware, and structured prompts", "deliverable": "Result tables per model, prompt, and error category" },
+          { "month": 5, "goal": "Error analysis and design of a recommended output format; prototype it as a JupyterVoxD-style extension that speaks a structured explanation", "deliverable": "Recommended format, prototype, and failure taxonomy" },
+          { "month": 6, "goal": "Write and submit the paper; release corpus, scorers, and prompts", "deliverable": "Submitted paper and public benchmark repository" }
+        ],
+        "targetVenues": ["SIGCSE TS", "ITiCSE", "ASSETS", "Koli Calling"],
+        "resources": "Public notebook data (e.g., the notebooka11y pipeline), a sandbox to execute notebooks safely, modest API budget or local claude CLI for generation, an open-weight model on a single GPU, an offline TTS engine for duration estimates, and one undergraduate RA for labeling the validation sample. Advice from an accessibility researcher or a BVI programmer is valuable for rubric review.",
+        "risks": [
+          { "risk": "Automated metrics may not reflect what actually helps BVI learners", "mitigation": "Ground each metric in the JupyterVoxD findings and published guidelines, have accessibility experts review the rubric, and frame a small user study as planned follow-up work" },
+          { "risk": "Seeded errors may be less realistic than real student errors", "mitigation": "Base the error mix on published distributions of novice Python errors and include stateful notebook errors that are specific to notebooks" },
+          { "risk": "LLM fixes that run may still change intended behavior", "mitigation": "Check fixes against the original unseeded notebook outputs, not only for absence of exceptions" }
+        ],
+        "humanSubjects": false
+      }
+    }
+  ]
+}

@@ -566,3 +566,7 @@
 | 2026-10-16 | Pluck Lab | Teaching Tool | 1-2 Weeks |
 | 2026-10-16 | Build Your Own FORTRAN I Compiler | Classroom Assignment | Multi-week |
 | 2026-10-16 | Do LLM Tutors Share Students' Continuation Misconceptions? A Reference-Interpreter Benchmark for LLM Tracing and Explanation of Delimited Continuations | Research | Research |
+| 2026-10-17 | Mode Collapse | Side Project | Weekend |
+| 2026-10-17 | 23:59:60 | Teaching Tool | 1-2 Weeks |
+| 2026-10-17 | Build Your Own Bot Ladder for a Tiny RTS | Classroom Assignment | Multi-week |
+| 2026-10-17 | Speakable Error Messages: An Audio-First Benchmark for LLM Explanations of Notebook Errors for Screen-Reader Users | Research | Research |
