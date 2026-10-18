@@ -365,3 +365,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-10-16 [doc] Created ideas/2026-10-16.json with 4 ideas: Track Switch, Pluck Lab, Build Your Own FORTRAN I Compiler, LLM Continuation Misconceptions (SIGCSE TS 2026 doi:10.1145/3770762.3772526)
 
 2026-10-17 [doc] Created ideas/2026-10-17.json with 4 ideas: Mode Collapse, 23:59:60, Build Your Own Bot Ladder for a Tiny RTS, Speakable Error Messages (SIGCSE TS 2026 doi:10.1145/3770762.3772507)
+
+2026-10-18 [doc] Created ideas/2026-10-18.json with 4 ideas: Gloss Glyphs, Pull the Pin, Build Your Own Diagram Layout Engine, Green but Hollow (SIGCSE TS 2026 doi:10.1145/3770762.3772551)

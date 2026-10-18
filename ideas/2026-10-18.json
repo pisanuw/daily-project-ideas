@@ -1,0 +1,170 @@
+{
+  "date": "2026-10-18",
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Gloss Glyphs",
+      "category": "Side Project",
+      "complexity": "Weekend",
+      "summary": "A browser tool that compiles your own word list into an OpenType font that draws tiny annotations above words purely through ligatures, so any plain text field shows pronunciations, translations, or definitions with no markup or scripts.",
+      "description": "Furifont on HN is a Japanese font that shows furigana above kanji using only OpenType substitution, and the thread was full of debate about how far font shaping can be pushed and how wrong readings hurt learners. Gloss Glyphs generalizes the trick. You paste or upload a glossary (word, annotation), for example English words with IPA, Spanish words with English glosses, CS jargon with two-word definitions, or ASCII characters with their hex codes. The app runs fontTools in Pyodide to take an open-source base font, generate a composite glyph per entry (the base word plus a scaled annotation drawn above it), and emit a GSUB 'liga' or 'calt' lookup that swaps the word's letter sequence for that glyph. A live preview textarea uses the compiled font immediately, a coverage panel lists which glossary entries collide or overlap (prefix conflicts like 'cat' inside 'category'), and you download a .woff2 or .otf. The lookup table viewer shows the generated feature code so curious users can see exactly how the substitution works.",
+      "keyFeatures": [
+        "Glossary editor with CSV import and presets (IPA, hex codes, short translations)",
+        "In-browser font compiler using fontTools via Pyodide that builds composite annotated glyphs and a GSUB ligature lookup",
+        "Collision checker that flags prefix and substring conflicts and lets you require word boundaries via contextual rules",
+        "Live preview textarea and download as .woff2/.otf with a size report",
+        "Feature-code viewer that shows the generated .fea source next to the glyph it produces"
+      ],
+      "techStack": "React + Vite, Tailwind, Pyodide with fontTools, an OFL base font (e.g. Inter or Noto Sans), static deploy on Netlify",
+      "whyInteresting": "It is a small, self-contained weekend build that teaches how text shaping really works (glyphs, lookups, contextual substitution) and produces something genuinely useful for language learners and for slides where you cannot add markup. The collision checker turns the HN accuracy debate into something you can see.",
+      "inspiredBy": "HN: 'Furifont, a Japanese font that shows furigana' (furifont.antfu.me, news.ycombinator.com/item?id=50100994, Oct 2026)"
+    },
+    {
+      "n": 2,
+      "title": "Pull the Pin",
+      "category": "Teaching Tool",
+      "complexity": "1-2 Weeks",
+      "summary": "A chip-and-bus level simulator of a tiny 8-bit computer for architecture courses where instructors break chips, pins, and bus lines, and students diagnose the fault from symptoms like a hardware repair tech.",
+      "description": "antirez's Commodore 64 hardware simulator models the machine chip by chip and pin by pin so you can break parts and watch the consequences, and an HN commenter asked whether you could go the other way, from symptom to cause. Pull the Pin brings that idea to a computer organization course at classroom scale. The machine is a SAP-1 or Ben Eater style 8-bit computer (program counter, registers, ALU, RAM, address decoder, control ROM, shared bus) simulated at the signal level, with every chip drawn as a package with labelled pins. Instructors (or a random generator) inject faults: stuck-at-0 or stuck-at-1 pins, an open bus line, a shorted pair of data lines, a flipped control ROM bit, or a dead RAM chip. Students run test programs, probe pins with a virtual logic analyzer, and must name the faulty component and pin before a limited probe budget runs out. A reverse mode lists the set of faults consistent with the observations so far, which makes it a hands-on lesson in diagnosis by elimination, and a Claude API tutor gives Socratic hints that reference only what the student has already measured.",
+      "keyFeatures": [
+        "Signal-level simulation of an 8-bit bus computer with clickable chip packages and pin states",
+        "Fault injector supporting stuck-at, open, short, control-ROM bit flips, and dead chips, with seeded random challenge sets",
+        "Virtual logic analyzer and multimeter with a probe budget and timing diagrams",
+        "Consistent-fault set view that narrows candidates as observations are added",
+        "Instructor dashboard with challenge links, attempt logs, and optional LLM hints restricted to observed signals"
+      ],
+      "techStack": "React + Vite, Tailwind, TypeScript simulation core (event-driven, per-tick), SVG chip and wire rendering, Supabase for challenge sets and attempt logs, optional Claude API for hints, static deploy on Netlify",
+      "whyInteresting": "Digital logic courses teach how a working computer runs, but debugging a broken one forces students to reason about every signal path, which is what really builds the mental model. Fault diagnosis also ties neatly to model-based reasoning and explainable feedback.",
+      "inspiredBy": "HN: 'The Commodore 64 hardware simulator: break chips and pins, see the results' (github.com/antirez/c64-hw-simulator, news.ycombinator.com/item?id=50100366, Oct 2026)"
+    },
+    {
+      "n": 3,
+      "title": "Build Your Own Diagram Layout Engine",
+      "category": "Classroom Assignment",
+      "complexity": "Multi-week",
+      "summary": "Students parse a subset of Mermaid flowchart syntax and implement a full layered graph-drawing pipeline (cycle removal, layering, crossing minimization, coordinate assignment, edge routing) that emits themeable SVG, then add visual diffing between diagram versions.",
+      "description": "Pele, from the Obsidian team, renders Mermaid syntax as themeable SVG with its own layout engine, and the HN thread was mostly people complaining that complex Mermaid diagrams become unreadable and asking for visual diffing. This assignment has students build that engine. Week 1: a hand-written parser for a Mermaid flowchart subset (nodes, labels, shapes, edges with labels, subgraphs, direction) into a graph AST with good error messages. Week 2: the Sugiyama pipeline's first half, removing cycles with a greedy feedback-arc heuristic and assigning layers with longest-path and then network-simplex. Week 3: crossing minimization with barycenter and median heuristics plus transposition, with a crossing counter used as the score. Week 4: coordinate assignment (Brandes-Kopf or a simple priority method), text measurement, and orthogonal or spline edge routing, with subgraphs that keep their own direction. Week 5: theming through CSS variables (light and dark), and a diff mode that lays out two versions of a diagram with stable node positions and highlights added, removed, and changed nodes and edges. A class-wide benchmark of 50 graphs ranks teams by crossings, area, and edge length.",
+      "keyFeatures": [
+        "Recursive-descent parser for a Mermaid flowchart subset with line and column error reporting",
+        "Layered layout pipeline: cycle removal, layer assignment, crossing minimization, coordinate assignment",
+        "Edge routing with labels and subgraph clusters that respect their own direction",
+        "Themeable SVG output with CSS custom properties for light and dark modes",
+        "Stable-layout visual diff between two diagram versions and a shared benchmark scored by crossings, area, and edge length"
+      ],
+      "techStack": "TypeScript or Python, Node or browser runtime, SVG output, Vitest or pytest with golden-image snapshot tests, optional comparison against dagre and ELK on the shared benchmark",
+      "whyInteresting": "It combines parsing, classic graph algorithms (including an NP-hard step where heuristics matter), geometry, and visual design, and the result is a tool students actually use for documentation. The benchmark makes algorithm choices measurable rather than a matter of taste.",
+      "inspiredBy": "HN: 'Pele - Mermaid diagrams as themeable SVG' (pele.run, github.com/obsidianmd/pele, news.ycombinator.com/item?id=50132193, Oct 2026)"
+    },
+    {
+      "n": 4,
+      "title": "Green but Hollow: A Mutation-Scored Benchmark of AI-Generated Unit Tests for Toolchain-First C++ Data Structures Assignments",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Builds an automated benchmark that measures whether AI coding tools' unit tests for multi-file C++ CS2 assignments would actually catch the bugs students make, using mutation scores and misconception-seeded faulty implementations instead of coverage.",
+      "description": "Roy et al. (SIGCSE TS 2026) benchmarked AI tools across software engineering phases with five human evaluators and found that the tools struggled most with test coverage quality and cross-file coherence, but their metrics were human-judged proxies on a small task set. This project replaces the human evaluators with a fully automated, reproducible pipeline grounded in the toolchain-first course setting (Google Test, Clang-Tidy, Valgrind, GitHub CI). For a set of CS2-style multi-file C++ assignments (linked lists, BSTs, hash tables, rule-of-three classes), we ask several AI tools and agents to write test suites from the spec and starter code, then score each suite by line and branch coverage, Mull mutation score, and a 'student-bug kill rate' against a corpus of faulty implementations seeded from published CS2 misconception and bug catalogs (off-by-one traversals, shallow copies, missing destructor cleanup, unbalanced deletion cases). We quantify the gap between green coverage and real fault detection, characterize which bug classes AI tests miss, and test whether a mutation-score CI gate plus mutation feedback in the prompt closes the gap. The outcome informs what testing skills a toolchain-first course must still teach directly when students can generate tests on demand.",
+      "papers": [
+        {
+          "title": "Benchmarking AI Tools for Software Engineering Education: Insights into Design, Implementation, and Testing",
+          "authors": "Nimisha Roy, Oleksandr Horielko, Olufisayo Omojokun, et al.",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770762.3772551",
+          "url": "https://doi.org/10.1145/3770762.3772551",
+          "abstract": "This experience report presents a structured benchmarking of widely used AI tools (such as GitHub Copilot, GPT-4, Claude 3.5, Gemini 1.5, Testim, and Postman) across design, implementation, debugging, and testing, using standardized prompts and proxy metrics including human correction burden, hallucination frequency, output accuracy, and cross-file consistency. AI tools accelerated boilerplate generation and UML sketching but showed challenges in test coverage quality, cross-file coherence, and reliability under complex prompts.",
+          "relevance": "Its headline weakness (test quality and cross-file coherence) is exactly what this project measures, but with automated, mutation-based metrics on multi-file C++ assignments instead of human evaluator judgments, making the finding reproducible and extendable to new tools."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "On the Use of Mutation Analysis for Evaluating Student Test Suite Quality",
+          "authors": "James Perretta, Andrew DeOrio, Arjun Guha, Jonathan Bell",
+          "venue": "ISSTA 2022",
+          "year": 2022,
+          "url": "https://conf.researchr.org/details/issta-2022/issta-2022-technical-papers/6/On-the-Use-of-Mutation-Analysis-For-Evaluating-Student-Test-Suite-Quality",
+          "relevance": "Shows on 2,711 student submissions that mutation score correlates strongly with seeded-fault detection and moderately with detection of real faulty student implementations, which justifies using both metrics side by side here."
+        },
+        {
+          "title": "Mutation-Guided Unit Test Generation with a Large Language Model",
+          "authors": "Guancheng Wang, Qinghua Xu, Lionel Briand, Kui Liu",
+          "venue": "arXiv 2506.02954",
+          "year": 2025,
+          "url": "https://arxiv.org/abs/2506.02954",
+          "relevance": "Reports suites with full coverage but very low mutation scores and shows that feeding surviving mutants back into the prompt improves LLM tests; this project tests that intervention in the classroom C++ setting."
+        },
+        {
+          "title": "Mull it over: mutation testing based on LLVM",
+          "authors": "Alex Denisov, Stanislav Pankevich",
+          "venue": "IEEE ICST Workshops 2018",
+          "year": 2018,
+          "url": "https://arxiv.org/abs/1908.01540",
+          "relevance": "Mull is the open-source LLVM-level mutation tool for C/C++ that works with any test framework that exits 0 on success (including Google Test), making it the practical engine for the benchmark and for a CI gate."
+        },
+        {
+          "title": "Examplar: wheats and chaffs for evaluating student test suites (Brown CS173 course materials)",
+          "authors": "Shriram Krishnamurthi, John Wrenn, et al.",
+          "venue": "Brown University course system",
+          "year": 2018,
+          "url": "https://cs.brown.edu/courses/cs173/2018/early-testing.html",
+          "relevance": "Frames a test suite as a classifier that must accept correct implementations and reject buggy 'chaffs', the model this project uses for its misconception-seeded faulty implementation corpus."
+        }
+      ],
+      "researchPlan": {
+        "overview": "Assemble 8-10 multi-file C++ CS2 assignments with reference solutions and a misconception-seeded chaff corpus, run multiple AI tools under fixed prompts to generate test suites, and score them automatically on coverage, mutation score, and chaff kill rate. Then evaluate two interventions (mutation feedback in the prompt and a mutation-score CI gate) and publish the benchmark and artifacts.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review on AI test generation, mutation analysis in education, and CS2 bug catalogs; select assignments and fix the toolchain (CMake, Google Test, Mull, gcov, Valgrind)",
+            "deliverable": "Annotated bibliography, refined RQs, and a containerized evaluation harness running on one assignment"
+          },
+          {
+            "month": 2,
+            "goal": "Build the chaff corpus: 15-30 faulty implementations per assignment derived from published misconception catalogs, each verified to fail at least one instructor test",
+            "deliverable": "Versioned chaff corpus with bug-class labels and a validation report"
+          },
+          {
+            "month": 3,
+            "goal": "Generate test suites from 4-6 AI tools and agents (chat models, IDE assistants, CLI coding agents) with fixed prompts and repeated sampling",
+            "deliverable": "Dataset of AI-generated suites with build success, coverage, mutation score, and chaff kill rate"
+          },
+          {
+            "month": 4,
+            "goal": "Analyze the coverage-versus-fault-detection gap, missed bug classes, cross-file errors, and assertion strength",
+            "deliverable": "Results tables and a taxonomy of hollow-test patterns (no assertions, tautological oracles, wrong-file targets)"
+          },
+          {
+            "month": 5,
+            "goal": "Evaluate interventions: surviving-mutant feedback loops and a CI gate with a mutation-score threshold, measuring improvement per iteration and cost",
+            "deliverable": "Intervention results and a drop-in GitHub Actions workflow for toolchain-first courses"
+          },
+          {
+            "month": 6,
+            "goal": "Write and submit the paper; release benchmark, harness, and chaff corpus",
+            "deliverable": "Submitted paper draft plus public repository with replication package"
+          }
+        ],
+        "targetVenues": [
+          "SIGCSE TS",
+          "ITiCSE",
+          "Koli Calling",
+          "ICST (education or tools track)"
+        ],
+        "resources": "Existing CSS 342/343-style C++ assignments and reference solutions; Linux CI runners or a small server for Mull and Valgrind runs; API or subscription access to 4-6 AI coding tools (local CLI tools where possible to limit cost); one or two undergraduate research assistants to write and validate chaffs.",
+        "risks": [
+          {
+            "risk": "Seeded chaffs may not reflect real student bugs, weakening the 'student-bug kill rate' claim",
+            "mitigation": "Derive chaffs from published CS2 bug and misconception catalogs and, if IRB-exempt anonymized historical submissions become available later, validate a sample against them"
+          },
+          {
+            "risk": "AI tools change quickly, so results may date before publication",
+            "mitigation": "Release the automated harness so results can be re-run on new tools, and report model versions and dates for every run"
+          },
+          {
+            "risk": "Mutation testing on multi-file C++ can be slow or produce many equivalent mutants",
+            "mitigation": "Restrict mutation to student-edited files, use Mull's parallel execution, and manually sample surviving mutants to estimate the equivalent-mutant rate"
+          }
+        ],
+        "humanSubjects": false
+      }
+    }
+  ]
+}

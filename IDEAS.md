@@ -570,3 +570,7 @@
 | 2026-10-17 | 23:59:60 | Teaching Tool | 1-2 Weeks |
 | 2026-10-17 | Build Your Own Bot Ladder for a Tiny RTS | Classroom Assignment | Multi-week |
 | 2026-10-17 | Speakable Error Messages: An Audio-First Benchmark for LLM Explanations of Notebook Errors for Screen-Reader Users | Research | Research |
+| 2026-10-18 | Gloss Glyphs | Side Project | Weekend |
+| 2026-10-18 | Pull the Pin | Teaching Tool | 1-2 Weeks |
+| 2026-10-18 | Build Your Own Diagram Layout Engine | Classroom Assignment | Multi-week |
+| 2026-10-18 | Green but Hollow: A Mutation-Scored Benchmark of AI-Generated Unit Tests for Toolchain-First C++ Data Structures Assignments | Research | Research |
