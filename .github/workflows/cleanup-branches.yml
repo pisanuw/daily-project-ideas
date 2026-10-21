@@ -1,0 +1,44 @@
+# Deletes claude/* branches whose work is already on the default branch.
+#
+# Agent sessions are assigned a claude/<name> branch and push there; once their
+# commits reach the default branch the branch is dead weight. A branch is
+# deleted only when its tip is an ancestor of the default branch (nothing
+# unmerged is lost) and that tip is more than a day old, so a session that has
+# just started, or just pushed, keeps its branch. If a live session's branch is
+# deleted anyway, its next push simply recreates it.
+name: Clean up merged agent branches
+
+on:
+  schedule:
+    - cron: '17 9 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Delete merged claude/* branches
+        env:
+          DEFAULT: ${{ github.event.repository.default_branch }}
+        run: |
+          git fetch --prune origin '+refs/heads/*:refs/remotes/origin/*'
+          cutoff=$(( $(date +%s) - 86400 ))
+          for ref in $(git for-each-ref --format='%(refname:strip=3)' 'refs/remotes/origin/claude/'); do
+            tip=$(git rev-parse "origin/$ref")
+            if ! git merge-base --is-ancestor "$tip" "origin/$DEFAULT"; then
+              echo "keep $ref: has commits not on $DEFAULT"
+              continue
+            fi
+            if [ "$(git log -1 --format=%ct "$tip")" -gt "$cutoff" ]; then
+              echo "keep $ref: tip is less than a day old"
+              continue
+            fi
+            echo "delete $ref"
+            git push origin --delete "$ref"
+          done
