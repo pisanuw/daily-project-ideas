@@ -1,576 +1,580 @@
 # Project Ideas Index
 
-| Date | Idea | Category | Complexity |
-|------|------|----------|------------|
-| 2026-05-12 | Prompt Duel | Teaching Tool | Weekend |
-| 2026-05-12 | Code Blindfold | CS Education Tool | 1-2 Weeks |
-| 2026-05-12 | Ethical Lens | Classroom Assignment | Multi-week |
-| 2026-05-13 | Debate My Code | Side Project | Weekend |
-| 2026-05-13 | Live Classroom Pulse | Teaching Tool | 1-2 Weeks |
-| 2026-05-13 | Agent Arena | Classroom Assignment | Multi-week |
-| 2026-05-14 | Vibe Rubric | Side Project | Weekend |
-| 2026-05-14 | Socratic Debugger | Teaching Tool | 1-2 Weeks |
-| 2026-05-14 | Accessible Game Jam Platform | Classroom Assignment | Multi-week |
-| 2026-05-15 | Commit Narrator | Side Project | Weekend |
-| 2026-05-15 | Agent Memory Lab | Teaching Tool | 1-2 Weeks |
-| 2026-05-15 | Agentic Game Playtester | Classroom Assignment | Multi-week |
-| 2026-05-16 | Lecture-to-Flashcard Pipeline | Side Project | Weekend |
-| 2026-05-16 | AI Office Hours Bot | Teaching Tool | 1-2 Weeks |
-| 2026-05-16 | Personal Dev RAG Assistant | Classroom Assignment | Multi-week |
-| 2026-05-17 | Paper Reel | Side Project | Weekend |
-| 2026-05-17 | Spec Forge | Teaching Tool | 1-2 Weeks |
-| 2026-05-17 | Algorithm Race | Classroom Assignment | Multi-week |
-| 2026-05-18 | Ethics Diff | Side Project | Weekend |
-| 2026-05-18 | MCP Playground | Teaching Tool | 1-2 Weeks |
-| 2026-05-18 | Replay Board | Classroom Assignment | Multi-week |
-| 2026-05-19 | Skill Scout | Side Project | Weekend |
-| 2026-05-19 | Bias Lens | Teaching Tool | 1-2 Weeks |
-| 2026-05-19 | Accessibility Audit Bot | Classroom Assignment | Multi-week |
-| 2026-05-20 | Agent Audit Trail | Side Project | Weekend |
-| 2026-05-20 | Peer Review Simulator | Teaching Tool | Multi-week |
-| 2026-05-20 | Live Interview Coach | Classroom Assignment | 1-2 Weeks |
-| 2026-05-21 | README Roast | Side Project | Weekend |
-| 2026-05-21 | Curriculum Graph Builder | Teaching Tool | 1-2 Weeks |
-| 2026-05-21 | NPC Constitution | Classroom Assignment | Multi-week |
-| 2026-05-22 | Agent State Sketcher | Side Project | Weekend |
-| 2026-05-22 | Knowledge Gap Mapper | Teaching Tool | 1-2 Weeks |
-| 2026-05-22 | Security Escape Room | Classroom Assignment | Multi-week |
-| 2026-05-23 | PR Narrator | Side Project | Weekend |
-| 2026-05-23 | AI Pair Logger | Teaching Tool | 1-2 Weeks |
-| 2026-05-23 | Prompt Injection Dojo | Classroom Assignment | Multi-week |
-| 2026-05-24 | Review Vibe Meter | Side Project | Weekend |
-| 2026-05-24 | Multi-Agent Ethics Roundtable | Teaching Tool | 1-2 Weeks |
-| 2026-05-24 | Agent Skills Workshop | Classroom Assignment | Multi-week |
-| 2026-05-25 | Ollama Arena | Side Project | Weekend |
-| 2026-05-25 | AI Observation Journal | Teaching Tool | 1-2 Weeks |
-| 2026-05-25 | Adaptive Hint Engine | Classroom Assignment | Multi-week |
-| 2026-05-26 | Student Portfolio Diff | Side Project | Weekend |
-| 2026-05-26 | Classroom Trend Radar | Teaching Tool | 1-2 Weeks |
-| 2026-05-26 | Synthetic Bias Lab | Classroom Assignment | Multi-week |
-| 2026-05-27 | Algorithm Cinema | Side Project | Weekend |
-| 2026-05-27 | Behavior Facts Checker | Teaching Tool | 1-2 Weeks |
-| 2026-05-27 | API Cost Compass | Student Resource | Multi-week |
-| 2026-05-28 | Context Primer | Side Project | Weekend |
-| 2026-05-28 | Swipe to Ship | Classroom Assignment | 1-2 Weeks |
-| 2026-05-28 | Live Coding Observatory | Teaching Tool | Multi-week |
-| 2026-05-29 | Standup Snapshot | Side Project | Weekend |
-| 2026-05-29 | Agent Blueprint Canvas | Teaching Tool | Multi-week |
-| 2026-05-29 | Paper Debate Pod | Classroom Assignment | 1-2 Weeks |
-| 2026-05-30 | PR Impact Map | Side Project | Weekend |
-| 2026-05-30 | Agent Permission Dojo | Teaching Tool | 1-2 Weeks |
-| 2026-05-30 | CS Swipe Deck | Classroom Assignment | Multi-week |
-| 2026-05-31 | Honest Commit Checker | Side Project | Weekend |
-| 2026-05-31 | Pre-Lecture Q&A Predictor | Teaching Tool | 1-2 Weeks |
-| 2026-05-31 | Tiny Transformer Workshop | Classroom Assignment | Multi-week |
-| 2026-06-01 | Agent Tripwire | Side Project | Weekend |
-| 2026-06-01 | Misconception Mosaic | Teaching Tool | 1-2 Weeks |
-| 2026-06-01 | Source Watcher | Classroom Assignment | Multi-week |
-| 2026-06-02 | Local Model Router | Side Project | Weekend |
-| 2026-06-02 | Difficulty Dial | Teaching Tool | 1-2 Weeks |
-| 2026-06-02 | Model Card Studio | Classroom Assignment | Multi-week |
-| 2026-06-03 | Changelog Storyteller | Side Project | Weekend |
-| 2026-06-03 | Rubric Calibration Bench | Teaching Tool | 1-2 Weeks |
-| 2026-06-03 | LLM Behavior Observatory | Classroom Assignment | Multi-week |
-| 2026-06-04 | Error Autopsy | Side Project | Weekend |
-| 2026-06-04 | Study Buddy Matchmaker | Teaching Tool | 1-2 Weeks |
-| 2026-06-04 | Real-Time Accessibility Overlay | Classroom Assignment | Multi-week |
-| 2026-06-05 | Lecture Tape Deck | Side Project | Weekend |
-| 2026-06-05 | AI ROI Tracker | Teaching Tool | 1-2 Weeks |
-| 2026-06-05 | API Archaeologist | Classroom Assignment | Multi-week |
-| 2026-06-06 | Persona Review Panel | Side Project | Weekend |
-| 2026-06-06 | Demo Rescue Kit | Teaching Tool | 1-2 Weeks |
-| 2026-06-06 | Replication Lab | Classroom Assignment | Multi-week |
-| 2026-06-07 | Vibe Code Fingerprinter | Side Project | Weekend |
-| 2026-06-07 | Agent Workflow Diff | Teaching Tool | 1-2 Weeks |
-| 2026-06-07 | Personal MCP Context Server | Classroom Assignment | Multi-week |
-| 2026-06-08 | Agent Tool Heatmap | Side Project | Weekend |
-| 2026-06-08 | Grading Transparency Dashboard | Teaching Tool | 1-2 Weeks |
-| 2026-06-08 | Tiny Browser Renderer | Classroom Assignment | Multi-week |
-| 2026-06-09 | Claim Grounding Lens | Side Project | Weekend |
-| 2026-06-09 | Assignment Load Estimator | Teaching Tool | 1-2 Weeks |
-| 2026-06-09 | NPC Dialogue Architect | Classroom Assignment | Multi-week |
-| 2026-06-10 | CS History Clash | Side Project | Weekend |
-| 2026-06-10 | Repo Tour Guide | Teaching Tool | 1-2 Weeks |
-| 2026-06-10 | Multiplayer Code Golf Arena | Classroom Assignment | Multi-week |
-| 2026-06-11 | Devcontainer Sketch Pad | Side Project | Weekend |
-| 2026-06-11 | Code Review Council | Teaching Tool | 1-2 Weeks |
-| 2026-06-11 | Constraint Dungeon | Classroom Assignment | Multi-week |
-| 2026-06-12 | Voice Rubber Duck Debugger | Side Project | Weekend |
-| 2026-06-12 | Syllabus Semantic Diff | Teaching Tool | 1-2 Weeks |
-| 2026-06-12 | Multi-Agent Conversation Replay Studio | Classroom Assignment | Multi-week |
-| 2026-06-13 | Context Window Cartographer | Side Project | Weekend |
-| 2026-06-13 | Office Hours Replay Engine | Teaching Tool | 1-2 Weeks |
-| 2026-06-13 | AI Ethics Court Simulator | Classroom Assignment | Multi-week |
-| 2026-06-14 | Code Time Capsule | Side Project | Weekend |
-| 2026-06-14 | Visual Rubric Grader | Teaching Tool | 1-2 Weeks |
-| 2026-06-14 | Code Forensics Studio | Classroom Assignment | Multi-week |
-| 2026-06-15 | Agent Decision Tree Visualizer | Side Project | Weekend |
-| 2026-06-15 | TIL Board | Teaching Tool | 1-2 Weeks |
-| 2026-06-15 | Computer-Use Obstacle Course | Classroom Assignment | Multi-week |
-| 2026-06-16 | Prompt A/B Lab | Side Project | Weekend |
-| 2026-06-16 | Exit Ticket Bot | Teaching Tool | 1-2 Weeks |
-| 2026-06-16 | AI Podcast Studio | Classroom Assignment | Multi-week |
-| 2026-06-17 | Screenshot-to-Spec | Side Project | Weekend |
-| 2026-06-17 | Student Confusion Heatmap | Teaching Tool | 1-2 Weeks |
-| 2026-06-17 | Tiny 2D Game Engine | Classroom Assignment | Multi-week |
-| 2026-06-18 | Knowledge Constellation | Side Project | Weekend |
-| 2026-06-18 | Concept Short Factory | Teaching Tool | 1-2 Weeks |
-| 2026-06-18 | Personal API Gateway | Classroom Assignment | Multi-week |
-| 2026-06-19 | Game Palette Inspector | Side Project | Weekend |
-| 2026-06-19 | Teach-Back Video Studio | Teaching Tool | 1-2 Weeks |
-| 2026-06-19 | City Builder AI Stakeholder Sim | Classroom Assignment | Multi-week |
-| 2026-06-20 | Pixel Sort Canvas | Side Project | Weekend |
-| 2026-06-20 | Lesson Plan Autopsy | Teaching Tool | 1-2 Weeks |
-| 2026-06-20 | Behavior Tree Studio | Classroom Assignment | Multi-week |
-| 2026-06-21 | Lean-Back Lecture Player | Side Project | Weekend |
-| 2026-06-21 | AI Act Risk Classifier | Teaching Tool | 1-2 Weeks |
-| 2026-06-21 | Procedural World Lore Engine | Classroom Assignment | Multi-week |
-| 2026-06-22 | Dependency Storyteller | Side Project | Weekend |
-| 2026-06-22 | Live Code Annotation Station | Teaching Tool | 1-2 Weeks |
-| 2026-06-22 | Agents From Scratch Workshop | Classroom Assignment | Multi-week |
-| 2026-06-23 | Sprint Reflection Buddy | Side Project | Weekend |
-| 2026-06-23 | GPU Parallel Puzzler | Classroom Assignment | 1-2 Weeks |
-| 2026-06-23 | Classroom Automation Recipes | Teaching Tool | Multi-week |
-| 2026-06-24 | Isometric CS Campus | Side Project | Weekend |
-| 2026-06-24 | Live API Cost Meter | Teaching Tool | 1-2 Weeks |
-| 2026-06-24 | Execution Sound Map | Classroom Assignment | Multi-week |
-| 2026-06-25 | TypeScript Type Puzzle Arena | Side Project | Weekend |
-| 2026-06-25 | Agent Reliability Harness | Teaching Tool | 1-2 Weeks |
-| 2026-06-25 | Multi-Source Research Synthesizer | Classroom Assignment | Multi-week |
-| 2026-06-26 | Design System Scribe | Side Project | Weekend |
-| 2026-06-26 | Collaborative Debug Room | Teaching Tool | 1-2 Weeks |
-| 2026-06-26 | Model Distillation Lab | Classroom Assignment | Multi-week |
-| 2026-06-27 | Intent Drift Detector | Side Project | Weekend |
-| 2026-06-27 | Accessibility Challenge Arena | Teaching Tool | 1-2 Weeks |
-| 2026-06-27 | Agent Safety Ruleset Studio | Classroom Assignment | Multi-week |
-| 2026-06-28 | Doc DX Grader | Side Project | Weekend |
-| 2026-06-28 | Pair Programming Pulse | Teaching Tool | 1-2 Weeks |
-| 2026-06-28 | WebGPU Shader Studio | Classroom Assignment | Multi-week |
-| 2026-06-29 | Prompt Compression Studio | Side Project | Weekend |
-| 2026-06-29 | Assignment Scaffolder | Teaching Tool | 1-2 Weeks |
-| 2026-06-29 | Agentic Study Buddy Network | Classroom Assignment | Multi-week |
-| 2026-06-30 | Presentation Pacer | Side Project | Weekend |
-| 2026-06-30 | AI Research Methods Lab | Teaching Tool | 1-2 Weeks |
-| 2026-06-30 | Synthetic Learner Studio | Classroom Assignment | Multi-week |
-| 2026-07-01 | Agent Framework Scaffolder | Side Project | Weekend |
-| 2026-07-01 | Prompt History Grader | Teaching Tool | 1-2 Weeks |
-| 2026-07-01 | Video Scene Question Bank | Classroom Assignment | Multi-week |
-| 2026-07-01 | LLM-Driven Misconception Clustering for CS1 Feedback | Research | Research |
-| 2026-07-02 | Live Multiplayer Pixel Canvas | Side Project | Weekend |
-| 2026-07-02 | Assignment Error Profiler | Teaching Tool | 1-2 Weeks |
-| 2026-07-02 | Persistent NPC Memory Engine | Classroom Assignment | Multi-week |
-| 2026-07-02 | LLM-Mediated Asynchronous Checkoffs for Developer Tool Proficiency | Research | Research |
-| 2026-07-03 | CSS Animation Timeline Explorer | Side Project | Weekend |
-| 2026-07-03 | Bloom's Exam Question Classifier | Teaching Tool | 1-2 Weeks |
-| 2026-07-03 | AI Assistant Persona Studio | Classroom Assignment | Multi-week |
-| 2026-07-03 | Hint Interaction Profiling for Adaptive Hint Selection in CS1 | Research | Research |
-| 2026-07-04 | MCP Tool Inspector | Side Project | Weekend |
-| 2026-07-04 | Office Hours Analytics Dashboard | Teaching Tool | 1-2 Weeks |
-| 2026-07-04 | AI Red Team Lab | Classroom Assignment | Multi-week |
-| 2026-07-04 | LLM Error Progression Taxonomy for CS2 C++ Courses | Research | Research |
-| 2026-07-05 | Copilot Critical Lens | Side Project | Weekend |
-| 2026-07-05 | Social SOS Board | Teaching Tool | 1-2 Weeks |
-| 2026-07-05 | Natural Language Decomposer | Classroom Assignment | Multi-week |
-| 2026-07-05 | Skill-Adaptive Misconception Feedback: Calibrating LLM Explanation Depth to Student Proficiency in CS1 | Research | Research |
-| 2026-07-06 | Repo Time-Lapse Animator | Side Project | Weekend |
-| 2026-07-06 | Recurring Feedback Miner | Teaching Tool | 1-2 Weeks |
-| 2026-07-06 | Bounded Knowledge NPC Builder | Classroom Assignment | Multi-week |
-| 2026-07-06 | NLF-Scaffolded Decomposition Transfer: Does Natural Language Function Specification Build Lasting Problem-Decomposition Skills in CS1? | Research | Research |
-| 2026-07-07 | Accessibility-First UI Generator | Side Project | Weekend |
-| 2026-07-07 | Student Self-Assessment Calibrator | Teaching Tool | 1-2 Weeks |
-| 2026-07-07 | Procedural Game Balance Tester | Classroom Assignment | Multi-week |
-| 2026-07-07 | Negative Expertise Transfer: Do IDE Autocompletion Quizzes Build Lasting AI Code Evaluation Skills in CS1? | Research | Research |
-| 2026-07-08 | Mutation Test Narrator | Side Project | Weekend |
-| 2026-07-08 | Autograder Error Pulse | Teaching Tool | 1-2 Weeks |
-| 2026-07-08 | Code Archaeology Museum | Classroom Assignment | Multi-week |
-| 2026-07-08 | Routing-Aware LLM Grading of Handwritten CS Exams: Privacy-Preserving Calibration with Open-Source Models | Research | Research |
-| 2026-07-09 | Agent Spec Sketchpad | Side Project | Weekend |
-| 2026-07-09 | Assignment Spec Linter | Teaching Tool | 1-2 Weeks |
-| 2026-07-09 | Requirements Interview Bot | Classroom Assignment | Multi-week |
-| 2026-07-09 | LLM-Scaffolded Code Self-Explanation for Reducing Resubmission Cycles in CS1 | Research | Research |
-| 2026-07-10 | Thinking Lens | Side Project | Weekend |
-| 2026-07-10 | Algorithm Misconception Mirror | Teaching Tool | 1-2 Weeks |
-| 2026-07-10 | LLM Routing Testbed | Classroom Assignment | Multi-week |
-| 2026-07-10 | Misconception-Targeted LLM Feedback for Data Structures Algorithm Simulation | Research | Research |
-| 2026-07-11 | ARIA Navigator | Side Project | Weekend |
-| 2026-07-11 | Hypothesis Sandbox | Teaching Tool | 1-2 Weeks |
-| 2026-07-11 | RAG Course Companion Builder | Classroom Assignment | Multi-week |
-| 2026-07-11 | Comprehension-Gated Feedback: Do LLM-Generated Code Comprehension Quizzes Reduce Misconception Persistence in CS1? | Research | Research |
-| 2026-07-12 | Micro-Demo Maker | Side Project | Weekend |
-| 2026-07-12 | Pair Debugging Observatory | Teaching Tool | 1-2 Weeks |
-| 2026-07-12 | LLM Negotiation Arena | Classroom Assignment | Multi-week |
-| 2026-07-12 | GenAI-Scaffolded Mastery Learning for CS1: Can Adaptive Automated Feedback Finally Enable Bloom's Vision at Scale? | Research | Research |
-| 2026-07-13 | Proof Sketch Animator | Side Project | Weekend |
-| 2026-07-13 | TA Queue Intelligence | Teaching Tool | 1-2 Weeks |
-| 2026-07-13 | Debugging Theater | Classroom Assignment | Multi-week |
-| 2026-07-13 | In-Class Snapshot Profiling for LLM-Personalized Practice in CS Courses | Research | Research |
-| 2026-07-14 | Level Design Lens | Game Development | Weekend |
-| 2026-07-14 | Comparative LLM Explanation Bench | CS Education / AI Literacy | 1-2 Weeks |
-| 2026-07-14 | Living API Doc Generator | Developer Tools / Teaching | Multi-week |
-| 2026-07-14 | LLM-Client Simulation for Analogical Requirements Discovery | CS Education Research / Requirements Engineering | Research |
-| 2026-07-15 | Phaser Game Scaffolder | Side Project | Weekend |
-| 2026-07-15 | Live Accessibility Explainer | Teaching Tool | 1-2 Weeks |
-| 2026-07-15 | Collaborative Student Wiki | Classroom Assignment | Multi-week |
-| 2026-07-15 | Rubric-Grounded LLM Feedback for Code Readability in CS1: Scaling a Pilot and Closing the Structural-Formatting Gap | Research | Research |
-| 2026-07-16 | JSON Schema Factory | Side Project | Weekend |
-| 2026-07-16 | Concept Prerequisite Mapper | Teaching Tool | 1-2 Weeks |
-| 2026-07-16 | Personal Data Journalist | Classroom Assignment | Multi-week |
-| 2026-07-16 | Adaptive Hint Mode Router: Dynamic Selection Between Targeted and Socratic LLM Hints in CS1 | Research | Research |
-| 2026-07-17 | LLM Stream Cassette | Side Project | Weekend |
-| 2026-07-17 | Erroneous Code Example Forge | Teaching Tool | 1-2 Weeks |
-| 2026-07-17 | Browser-Native Socratic Tutor | Classroom Assignment | Multi-week |
-| 2026-07-17 | From Submission Logs to Tutor Configurations: Mining Institution-Specific Misconception Taxonomies for LLM-Grounded CS1 Tutoring | Research | Research |
-| 2026-07-18 | AI Game Boss Designer | Side Project | Weekend |
-| 2026-07-18 | Course Alignment Auditor | Teaching Tool | 1-2 Weeks |
-| 2026-07-18 | Agent Memory Architecture Studio | Classroom Assignment | Multi-week |
-| 2026-07-18 | Misconception-Targeted Code Ownership Quizzes: From Submission History to Individualized Comprehension Probes | Research | Research |
-| 2026-07-19 | ADR Auto-Scribe | Side Project | Weekend |
-| 2026-07-19 | GenAI Social Thermometer | Teaching Tool | 1-2 Weeks |
-| 2026-07-19 | Bus Factor Visualizer | Classroom Assignment | Multi-week |
-| 2026-07-19 | From Grading Traces to Learning Maps: Mining LLM Exam Grading Chains to Build Actionable CS1 Misconception Taxonomies | Research | Research |
-| 2026-07-20 | REST-to-MCP Wrapper | Side Project | Weekend |
-| 2026-07-20 | Test Design Mentor | Teaching Tool | 1-2 Weeks |
-| 2026-07-20 | Multi-Agent Game Production Studio | Classroom Assignment | Multi-week |
-| 2026-07-20 | Modality-Aware Hint Generation: Matching AI Tutor Output Format to Error Type in CS1 | Research | Research |
-| 2026-07-21 | Physics Sketch Sandbox | Side Project | Weekend |
-| 2026-07-21 | Codebase Concept Radar | Teaching Tool | 1-2 Weeks |
-| 2026-07-21 | Procedural Level Lab | Classroom Assignment | Multi-week |
-| 2026-07-21 | Adaptive Difficulty and Calibrated Hint Generation in Game-Based CS Learning | Research | Research |
-| 2026-07-22 | Regex Explainer Studio | Side Project | Weekend |
-| 2026-07-22 | AI-Exam Resistance Rater | Teaching Tool | 1-2 Weeks |
-| 2026-07-22 | Gameplay Postmortem Agent | Classroom Assignment | Multi-week |
-| 2026-07-22 | From Benchmark to Classroom: Closing the Personalization Gap in LLM-Based CS Tutoring Using Institution-Specific Interaction Data | Research | Research |
-| 2026-07-23 | City Livability Radar | Side Project | Weekend |
-| 2026-07-23 | Agent Skills Library Builder | Side Project | 1-2 Weeks |
-| 2026-07-23 | Socratic Error Cascade Visualizer | Teaching Tool | Multi-week |
-| 2026-07-23 | Closing the Feedback Loop: Real-Time Misconception Clusters to Targeted Student Hints in CS1 | Research | Research |
-| 2026-07-24 | Tilemap Story Generator | Side Project | Weekend |
-| 2026-07-24 | Bloom's Assessment Forge | Teaching Tool | 1-2 Weeks |
-| 2026-07-24 | MCP Tool Forge | Classroom Assignment | Multi-week |
-| 2026-07-24 | From Error Categories to Misconception Taxonomies: Grounding Local-LLM Socratic Tutoring in Institution-Specific CS1 Submission Data | Research | Research |
-| 2026-07-25 | Agent Sims | Side Project | Weekend |
-| 2026-07-25 | Two-Stage Exam Studio | Teaching Tool | 1-2 Weeks |
-| 2026-07-25 | Learnersourced Problem Factory | Classroom Assignment | Multi-week |
-| 2026-07-25 | From Detection to Reflection: Repurposing LLM Code Explainability Reports as Formative Feedback in CS1 | Research | Research |
-| 2026-07-26 | Pathfinding Playground | Side Project | Weekend |
-| 2026-07-26 | Spec-to-Test Oracle | Teaching Tool | 1-2 Weeks |
-| 2026-07-26 | Emergent NPC Society | Classroom Assignment | Multi-week |
-| 2026-07-26 | Repair-as-Diagnosis: Using LLM Program Repair Edits to Map CS1 Misconceptions and Generate Targeted Solution-Free Feedback | Research | Research |
-| 2026-07-27 | Spec Mutation Lab | Side Project | Weekend |
-| 2026-07-27 | Early Alert Canvas Compass | Teaching Tool | 1-2 Weeks |
-| 2026-07-27 | CRDT Clash | Classroom Assignment | Multi-week |
-| 2026-07-27 | Mistake or Misconception? Error-Type-Aware LLM Feedback Routing for CS1 Compiler Errors | Research | Research |
-| 2026-07-28 | Code Smell Sommelier | Side Project | Weekend |
-| 2026-07-28 | Concept Duel Arena | Teaching Tool | 1-2 Weeks |
-| 2026-07-28 | Gameplay Difficulty DNA | Side Project | Multi-week |
-| 2026-07-28 | From Generic to Grounded: Calibrating LLM-Generated Erroneous Code Examples to Institution-Specific CS1 Misconception Patterns | Research | Research |
-| 2026-07-29 | Dependency Health Scorecard | Side Project | Weekend |
-| 2026-07-29 | Code Reading Fluency Trainer | Teaching Tool | 1-2 Weeks |
-| 2026-07-29 | Generative Art Gallery | Classroom Assignment | Multi-week |
-| 2026-07-29 | Misconception-Seeded Exercise Synthesis | Research | Research |
-| 2026-07-30 | SQL Replay | Side Project | Weekend |
-| 2026-07-30 | Classroom CI/CD Pulse | Teaching Tool | 1-2 Weeks |
-| 2026-07-30 | WASM Performance Lab | Classroom Assignment | Multi-week |
-| 2026-07-30 | In-Lecture Misconception Radar: Closing the Feedback Loop from Open-Response Summarization to Individual Targeted Hints | Research | Research |
-| 2026-07-31 | Game Pitch Studio | Side Project | Weekend |
-| 2026-07-31 | Hint Token Economy | Teaching Tool | 1-2 Weeks |
-| 2026-07-31 | Socratic Agent Trio | Classroom Assignment | Multi-week |
-| 2026-07-31 | Player-Type-Adaptive Gamification for CS1 Programming Courses | Research | Research |
-| 2026-08-01 | Ambiguity Magnifier | Side Project | Weekend |
-| 2026-08-01 | Exam Question Equity Scanner | Teaching Tool | 1-2 Weeks |
-| 2026-08-01 | Federated Learning Privacy Lab | Classroom Assignment | Multi-week |
-| 2026-08-01 | Teach-Back Misconception Mining: From LLM-Peer Explanations to Targeted Socratic Recovery in CS1 | Research | Research |
-| 2026-08-02 | Type Witness | Side Project | Weekend |
-| 2026-08-02 | Expert Think-Aloud Studio | Teaching Tool | 1-2 Weeks |
-| 2026-08-02 | Self-Narrating Game Agent | Classroom Assignment | Multi-week |
-| 2026-08-02 | XAI-Grounded CS Feedback Transparency: From Black-Box Predictions to Legible Tutoring Decisions | Research | Research |
-| 2026-08-03 | Slide Critique Bot | Side Project | Weekend |
-| 2026-08-03 | Semantic Page Monitor | Side Project | 1-2 Weeks |
-| 2026-08-03 | Paper Argument Cartographer | Classroom Assignment | Multi-week |
-| 2026-08-03 | Misconception-Grounded LLM Student Personas for CS TA Training | Research | Research |
-| 2026-08-04 | Commit Predictor | Side Project | Weekend |
-| 2026-08-04 | Assignment Exemplar Engine | Teaching Tool | 1-2 Weeks |
-| 2026-08-04 | Process Narrator | Side Project | Multi-week |
-| 2026-08-04 | Contract-First LLM Feedback for CS2: Extending Pedagogical-Framework-Constrained Automated Assessment Beyond Functional CS1 | Research | Research |
-| 2026-08-05 | Video Quiz Sprinter | Side Project | Weekend |
-| 2026-08-05 | Parsons Problem Forge | Teaching Tool | 1-2 Weeks |
-| 2026-08-05 | Open-Source Onboarding Agent | Classroom Assignment | Multi-week |
-| 2026-08-05 | Student-to-System Feedback as a Misconception Signal: Closing the Two-Way Loop in Automated CS1 Assessment | Research | Research |
-| 2026-08-06 | Git Blame Explainer | Side Project | Weekend |
-| 2026-08-06 | Multimodal Analogy Studio | Teaching Tool | 1-2 Weeks |
-| 2026-08-06 | Team Contribution Equity Analyzer | Classroom Assignment | Multi-week |
-| 2026-08-06 | Institution-Specific Fine-Tuning of Open-Source LLMs for Compiler Error Explanation: Does Local Calibration Outperform General Fine-Tuning? | Research | Research |
+| Date | Title | Category | Complexity | Score | Rating |
+|------|-------|----------|------------|-------|--------|
+| 2026-05-12 | Prompt Duel | Teaching Tool | Weekend |  |  |
+| 2026-05-12 | Code Blindfold | CS Education Tool | 1-2 Weeks |  |  |
+| 2026-05-12 | Ethical Lens | Classroom Assignment | Multi-week |  |  |
+| 2026-05-13 | Debate My Code | Side Project | Weekend |  |  |
+| 2026-05-13 | Live Classroom Pulse | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-05-13 | Agent Arena | Classroom Assignment | Multi-week |  |  |
+| 2026-05-14 | Vibe Rubric | Side Project | Weekend |  |  |
+| 2026-05-14 | Socratic Debugger | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-05-14 | Accessible Game Jam Platform | Classroom Assignment | Multi-week |  |  |
+| 2026-05-15 | Commit Narrator | Side Project | Weekend |  |  |
+| 2026-05-15 | Agent Memory Lab | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-05-15 | Agentic Game Playtester | Classroom Assignment | Multi-week |  |  |
+| 2026-05-16 | Lecture-to-Flashcard Pipeline | Side Project | Weekend |  |  |
+| 2026-05-16 | AI Office Hours Bot | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-05-16 | Personal Dev RAG Assistant | Classroom Assignment | Multi-week |  |  |
+| 2026-05-17 | Paper Reel | Side Project | Weekend |  |  |
+| 2026-05-17 | Spec Forge | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-05-17 | Algorithm Race | Classroom Assignment | Multi-week |  |  |
+| 2026-05-18 | Ethics Diff | Side Project | Weekend |  |  |
+| 2026-05-18 | MCP Playground | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-05-18 | Replay Board | Classroom Assignment | Multi-week |  |  |
+| 2026-05-19 | Skill Scout | Side Project | Weekend |  |  |
+| 2026-05-19 | Bias Lens | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-05-19 | Accessibility Audit Bot | Classroom Assignment | Multi-week |  |  |
+| 2026-05-20 | Agent Audit Trail | Side Project | Weekend |  |  |
+| 2026-05-20 | Peer Review Simulator | Teaching Tool | Multi-week |  |  |
+| 2026-05-20 | Live Interview Coach | Classroom Assignment | 1-2 Weeks |  |  |
+| 2026-05-21 | README Roast | Side Project | Weekend |  |  |
+| 2026-05-21 | Curriculum Graph Builder | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-05-21 | NPC Constitution | Classroom Assignment | Multi-week |  |  |
+| 2026-05-22 | Agent State Sketcher | Side Project | Weekend |  |  |
+| 2026-05-22 | Knowledge Gap Mapper | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-05-22 | Security Escape Room | Classroom Assignment | Multi-week |  |  |
+| 2026-05-23 | PR Narrator | Side Project | Weekend |  |  |
+| 2026-05-23 | AI Pair Logger | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-05-23 | Prompt Injection Dojo | Classroom Assignment | Multi-week |  |  |
+| 2026-05-24 | Review Vibe Meter | Side Project | Weekend |  |  |
+| 2026-05-24 | Multi-Agent Ethics Roundtable | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-05-24 | Agent Skills Workshop | Classroom Assignment | Multi-week |  |  |
+| 2026-05-25 | Ollama Arena | Side Project | Weekend |  |  |
+| 2026-05-25 | AI Observation Journal | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-05-25 | Adaptive Hint Engine | Classroom Assignment | Multi-week |  |  |
+| 2026-05-26 | Student Portfolio Diff | Side Project | Weekend |  |  |
+| 2026-05-26 | Classroom Trend Radar | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-05-26 | Synthetic Bias Lab | Classroom Assignment | Multi-week |  |  |
+| 2026-05-27 | Algorithm Cinema | Side Project | Weekend |  |  |
+| 2026-05-27 | Behavior Facts Checker | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-05-27 | API Cost Compass | Student Resource | Multi-week |  |  |
+| 2026-05-28 | Context Primer | Side Project | Weekend |  |  |
+| 2026-05-28 | Swipe to Ship | Classroom Assignment | 1-2 Weeks |  |  |
+| 2026-05-28 | Live Coding Observatory | Teaching Tool | Multi-week |  |  |
+| 2026-05-29 | Standup Snapshot | Side Project | Weekend |  |  |
+| 2026-05-29 | Agent Blueprint Canvas | Teaching Tool | Multi-week |  |  |
+| 2026-05-29 | Paper Debate Pod | Classroom Assignment | 1-2 Weeks |  |  |
+| 2026-05-30 | PR Impact Map | Side Project | Weekend |  |  |
+| 2026-05-30 | Agent Permission Dojo | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-05-30 | CS Swipe Deck | Classroom Assignment | Multi-week |  |  |
+| 2026-05-31 | Honest Commit Checker | Side Project | Weekend |  |  |
+| 2026-05-31 | Pre-Lecture Q&A Predictor | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-05-31 | Tiny Transformer Workshop | Classroom Assignment | Multi-week |  |  |
+| 2026-06-01 | Agent Tripwire | Side Project | Weekend |  |  |
+| 2026-06-01 | Misconception Mosaic | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-06-01 | Source Watcher | Classroom Assignment | Multi-week |  |  |
+| 2026-06-02 | Local Model Router | Side Project | Weekend |  |  |
+| 2026-06-02 | Difficulty Dial | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-06-02 | Model Card Studio | Classroom Assignment | Multi-week |  |  |
+| 2026-06-03 | Changelog Storyteller | Side Project | Weekend |  |  |
+| 2026-06-03 | Rubric Calibration Bench | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-06-03 | LLM Behavior Observatory | Classroom Assignment | Multi-week |  |  |
+| 2026-06-04 | Error Autopsy | Side Project | Weekend |  |  |
+| 2026-06-04 | Study Buddy Matchmaker | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-06-04 | Real-Time Accessibility Overlay | Classroom Assignment | Multi-week |  |  |
+| 2026-06-05 | Lecture Tape Deck | Side Project | Weekend |  |  |
+| 2026-06-05 | AI ROI Tracker | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-06-05 | API Archaeologist | Classroom Assignment | Multi-week |  |  |
+| 2026-06-06 | Persona Review Panel | Side Project | Weekend |  |  |
+| 2026-06-06 | Demo Rescue Kit | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-06-06 | Replication Lab | Classroom Assignment | Multi-week |  |  |
+| 2026-06-07 | Vibe Code Fingerprinter | Side Project | Weekend |  |  |
+| 2026-06-07 | Agent Workflow Diff | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-06-07 | Personal MCP Context Server | Classroom Assignment | Multi-week |  |  |
+| 2026-06-08 | Agent Tool Heatmap | Side Project | Weekend |  |  |
+| 2026-06-08 | Grading Transparency Dashboard | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-06-08 | Tiny Browser Renderer | Classroom Assignment | Multi-week |  |  |
+| 2026-06-09 | Claim Grounding Lens | Side Project | Weekend |  |  |
+| 2026-06-09 | Assignment Load Estimator | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-06-09 | NPC Dialogue Architect | Classroom Assignment | Multi-week |  |  |
+| 2026-06-10 | CS History Clash | Side Project | Weekend |  |  |
+| 2026-06-10 | Repo Tour Guide | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-06-10 | Multiplayer Code Golf Arena | Classroom Assignment | Multi-week |  |  |
+| 2026-06-11 | Devcontainer Sketch Pad | Side Project | Weekend |  |  |
+| 2026-06-11 | Code Review Council | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-06-11 | Constraint Dungeon | Classroom Assignment | Multi-week |  |  |
+| 2026-06-12 | Voice Rubber Duck Debugger | Side Project | Weekend |  |  |
+| 2026-06-12 | Syllabus Semantic Diff | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-06-12 | Multi-Agent Conversation Replay Studio | Classroom Assignment | Multi-week |  |  |
+| 2026-06-13 | Context Window Cartographer | Side Project | Weekend |  |  |
+| 2026-06-13 | Office Hours Replay Engine | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-06-13 | AI Ethics Court Simulator | Classroom Assignment | Multi-week |  |  |
+| 2026-06-14 | Code Time Capsule | Side Project | Weekend |  |  |
+| 2026-06-14 | Visual Rubric Grader | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-06-14 | Code Forensics Studio | Classroom Assignment | Multi-week |  |  |
+| 2026-06-15 | Agent Decision Tree Visualizer | Side Project | Weekend |  |  |
+| 2026-06-15 | TIL Board | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-06-15 | Computer-Use Obstacle Course | Classroom Assignment | Multi-week |  |  |
+| 2026-06-16 | Prompt A/B Lab | Side Project | Weekend |  |  |
+| 2026-06-16 | Exit Ticket Bot | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-06-16 | AI Podcast Studio | Classroom Assignment | Multi-week |  |  |
+| 2026-06-17 | Screenshot-to-Spec | Side Project | Weekend |  |  |
+| 2026-06-17 | Student Confusion Heatmap | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-06-17 | Tiny 2D Game Engine | Classroom Assignment | Multi-week |  |  |
+| 2026-06-18 | Knowledge Constellation | Side Project | Weekend |  |  |
+| 2026-06-18 | Concept Short Factory | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-06-18 | Personal API Gateway | Classroom Assignment | Multi-week |  |  |
+| 2026-06-19 | Game Palette Inspector | Side Project | Weekend |  |  |
+| 2026-06-19 | Teach-Back Video Studio | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-06-19 | City Builder AI Stakeholder Sim | Classroom Assignment | Multi-week |  |  |
+| 2026-06-20 | Pixel Sort Canvas | Side Project | Weekend |  |  |
+| 2026-06-20 | Lesson Plan Autopsy | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-06-20 | Behavior Tree Studio | Classroom Assignment | Multi-week |  |  |
+| 2026-06-21 | Lean-Back Lecture Player | Side Project | Weekend |  |  |
+| 2026-06-21 | AI Act Risk Classifier | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-06-21 | Procedural World Lore Engine | Classroom Assignment | Multi-week |  |  |
+| 2026-06-22 | Dependency Storyteller | Side Project | Weekend |  |  |
+| 2026-06-22 | Live Code Annotation Station | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-06-22 | Agents From Scratch Workshop | Classroom Assignment | Multi-week |  |  |
+| 2026-06-23 | Sprint Reflection Buddy | Side Project | Weekend |  |  |
+| 2026-06-23 | GPU Parallel Puzzler | Classroom Assignment | 1-2 Weeks |  |  |
+| 2026-06-23 | Classroom Automation Recipes | Teaching Tool | Multi-week |  |  |
+| 2026-06-24 | Isometric CS Campus | Side Project | Weekend |  |  |
+| 2026-06-24 | Live API Cost Meter | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-06-24 | Execution Sound Map | Classroom Assignment | Multi-week |  |  |
+| 2026-06-25 | TypeScript Type Puzzle Arena | Side Project | Weekend |  |  |
+| 2026-06-25 | Agent Reliability Harness | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-06-25 | Multi-Source Research Synthesizer | Classroom Assignment | Multi-week |  |  |
+| 2026-06-26 | Design System Scribe | Side Project | Weekend |  |  |
+| 2026-06-26 | Collaborative Debug Room | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-06-26 | Model Distillation Lab | Classroom Assignment | Multi-week |  |  |
+| 2026-06-27 | Intent Drift Detector | Side Project | Weekend |  |  |
+| 2026-06-27 | Accessibility Challenge Arena | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-06-27 | Agent Safety Ruleset Studio | Classroom Assignment | Multi-week |  |  |
+| 2026-06-28 | Doc DX Grader | Side Project | Weekend |  |  |
+| 2026-06-28 | Pair Programming Pulse | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-06-28 | WebGPU Shader Studio | Classroom Assignment | Multi-week |  |  |
+| 2026-06-29 | Prompt Compression Studio | Side Project | Weekend |  |  |
+| 2026-06-29 | Assignment Scaffolder | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-06-29 | Agentic Study Buddy Network | Classroom Assignment | Multi-week |  |  |
+| 2026-06-30 | Presentation Pacer | Side Project | Weekend |  |  |
+| 2026-06-30 | AI Research Methods Lab | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-06-30 | Synthetic Learner Studio | Classroom Assignment | Multi-week |  |  |
+| 2026-07-01 | Agent Framework Scaffolder | Side Project | Weekend |  |  |
+| 2026-07-01 | Prompt History Grader | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-07-01 | Video Scene Question Bank | Classroom Assignment | Multi-week |  |  |
+| 2026-07-01 | LLM-Driven Misconception Clustering for CS1 Feedback | Research | Research |  |  |
+| 2026-07-02 | Live Multiplayer Pixel Canvas | Side Project | Weekend |  |  |
+| 2026-07-02 | Assignment Error Profiler | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-07-02 | Persistent NPC Memory Engine | Classroom Assignment | Multi-week |  |  |
+| 2026-07-02 | LLM-Mediated Asynchronous Checkoffs for Developer Tool Proficiency | Research | Research |  |  |
+| 2026-07-03 | CSS Animation Timeline Explorer | Side Project | Weekend |  |  |
+| 2026-07-03 | Bloom's Exam Question Classifier | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-07-03 | AI Assistant Persona Studio | Classroom Assignment | Multi-week |  |  |
+| 2026-07-03 | Hint Interaction Profiling for Adaptive Hint Selection in CS1 | Research | Research |  |  |
+| 2026-07-04 | MCP Tool Inspector | Side Project | Weekend |  |  |
+| 2026-07-04 | Office Hours Analytics Dashboard | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-07-04 | AI Red Team Lab | Classroom Assignment | Multi-week |  |  |
+| 2026-07-04 | LLM Error Progression Taxonomy for CS2 C++ Courses | Research | Research |  |  |
+| 2026-07-05 | Copilot Critical Lens | Side Project | Weekend |  |  |
+| 2026-07-05 | Social SOS Board | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-07-05 | Natural Language Decomposer | Classroom Assignment | Multi-week |  |  |
+| 2026-07-05 | Skill-Adaptive Misconception Feedback: Calibrating LLM Explanation Depth to Student Proficiency in CS1 | Research | Research |  |  |
+| 2026-07-06 | Repo Time-Lapse Animator | Side Project | Weekend |  |  |
+| 2026-07-06 | Recurring Feedback Miner | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-07-06 | Bounded Knowledge NPC Builder | Classroom Assignment | Multi-week |  |  |
+| 2026-07-06 | NLF-Scaffolded Decomposition Transfer: Does Natural Language Function Specification Build Lasting Problem-Decomposition Skills in CS1? | Research | Research |  |  |
+| 2026-07-07 | Accessibility-First UI Generator | Side Project | Weekend |  |  |
+| 2026-07-07 | Student Self-Assessment Calibrator | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-07-07 | Procedural Game Balance Tester | Classroom Assignment | Multi-week |  |  |
+| 2026-07-07 | Negative Expertise Transfer: Do IDE Autocompletion Quizzes Build Lasting AI Code Evaluation Skills in CS1? | Research | Research |  |  |
+| 2026-07-08 | Mutation Test Narrator | Side Project | Weekend |  |  |
+| 2026-07-08 | Autograder Error Pulse | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-07-08 | Code Archaeology Museum | Classroom Assignment | Multi-week |  |  |
+| 2026-07-08 | Routing-Aware LLM Grading of Handwritten CS Exams: Privacy-Preserving Calibration with Open-Source Models | Research | Research |  |  |
+| 2026-07-09 | Agent Spec Sketchpad | Side Project | Weekend |  |  |
+| 2026-07-09 | Assignment Spec Linter | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-07-09 | Requirements Interview Bot | Classroom Assignment | Multi-week |  |  |
+| 2026-07-09 | LLM-Scaffolded Code Self-Explanation for Reducing Resubmission Cycles in CS1 | Research | Research |  |  |
+| 2026-07-10 | Thinking Lens | Side Project | Weekend |  |  |
+| 2026-07-10 | Algorithm Misconception Mirror | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-07-10 | LLM Routing Testbed | Classroom Assignment | Multi-week |  |  |
+| 2026-07-10 | Misconception-Targeted LLM Feedback for Data Structures Algorithm Simulation | Research | Research |  |  |
+| 2026-07-11 | ARIA Navigator | Side Project | Weekend |  |  |
+| 2026-07-11 | Hypothesis Sandbox | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-07-11 | RAG Course Companion Builder | Classroom Assignment | Multi-week |  |  |
+| 2026-07-11 | Comprehension-Gated Feedback: Do LLM-Generated Code Comprehension Quizzes Reduce Misconception Persistence in CS1? | Research | Research |  |  |
+| 2026-07-12 | Micro-Demo Maker | Side Project | Weekend |  |  |
+| 2026-07-12 | Pair Debugging Observatory | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-07-12 | LLM Negotiation Arena | Classroom Assignment | Multi-week |  |  |
+| 2026-07-12 | GenAI-Scaffolded Mastery Learning for CS1: Can Adaptive Automated Feedback Finally Enable Bloom's Vision at Scale? | Research | Research |  |  |
+| 2026-07-13 | Proof Sketch Animator | Side Project | Weekend |  |  |
+| 2026-07-13 | TA Queue Intelligence | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-07-13 | Debugging Theater | Classroom Assignment | Multi-week |  |  |
+| 2026-07-13 | In-Class Snapshot Profiling for LLM-Personalized Practice in CS Courses | Research | Research |  |  |
+| 2026-07-14 | Level Design Lens | Game Development | Weekend |  |  |
+| 2026-07-14 | Comparative LLM Explanation Bench | CS Education / AI Literacy | 1-2 Weeks |  |  |
+| 2026-07-14 | Living API Doc Generator | Developer Tools / Teaching | Multi-week |  |  |
+| 2026-07-14 | LLM-Client Simulation for Analogical Requirements Discovery | CS Education Research / Requirements Engineering | Research |  |  |
+| 2026-07-15 | Phaser Game Scaffolder | Side Project | Weekend |  |  |
+| 2026-07-15 | Live Accessibility Explainer | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-07-15 | Collaborative Student Wiki | Classroom Assignment | Multi-week |  |  |
+| 2026-07-15 | Rubric-Grounded LLM Feedback for Code Readability in CS1: Scaling a Pilot and Closing the Structural-Formatting Gap | Research | Research |  |  |
+| 2026-07-16 | JSON Schema Factory | Side Project | Weekend |  |  |
+| 2026-07-16 | Concept Prerequisite Mapper | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-07-16 | Personal Data Journalist | Classroom Assignment | Multi-week |  |  |
+| 2026-07-16 | Adaptive Hint Mode Router: Dynamic Selection Between Targeted and Socratic LLM Hints in CS1 | Research | Research |  |  |
+| 2026-07-17 | LLM Stream Cassette | Side Project | Weekend |  |  |
+| 2026-07-17 | Erroneous Code Example Forge | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-07-17 | Browser-Native Socratic Tutor | Classroom Assignment | Multi-week |  |  |
+| 2026-07-17 | From Submission Logs to Tutor Configurations: Mining Institution-Specific Misconception Taxonomies for LLM-Grounded CS1 Tutoring | Research | Research |  |  |
+| 2026-07-18 | AI Game Boss Designer | Side Project | Weekend |  |  |
+| 2026-07-18 | Course Alignment Auditor | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-07-18 | Agent Memory Architecture Studio | Classroom Assignment | Multi-week |  |  |
+| 2026-07-18 | Misconception-Targeted Code Ownership Quizzes: From Submission History to Individualized Comprehension Probes | Research | Research |  |  |
+| 2026-07-19 | ADR Auto-Scribe | Side Project | Weekend |  |  |
+| 2026-07-19 | GenAI Social Thermometer | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-07-19 | Bus Factor Visualizer | Classroom Assignment | Multi-week |  |  |
+| 2026-07-19 | From Grading Traces to Learning Maps: Mining LLM Exam Grading Chains to Build Actionable CS1 Misconception Taxonomies | Research | Research |  |  |
+| 2026-07-20 | REST-to-MCP Wrapper | Side Project | Weekend |  |  |
+| 2026-07-20 | Test Design Mentor | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-07-20 | Multi-Agent Game Production Studio | Classroom Assignment | Multi-week |  |  |
+| 2026-07-20 | Modality-Aware Hint Generation: Matching AI Tutor Output Format to Error Type in CS1 | Research | Research |  |  |
+| 2026-07-21 | Physics Sketch Sandbox | Side Project | Weekend |  |  |
+| 2026-07-21 | Codebase Concept Radar | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-07-21 | Procedural Level Lab | Classroom Assignment | Multi-week |  |  |
+| 2026-07-21 | Adaptive Difficulty and Calibrated Hint Generation in Game-Based CS Learning | Research | Research |  |  |
+| 2026-07-22 | Regex Explainer Studio | Side Project | Weekend |  |  |
+| 2026-07-22 | AI-Exam Resistance Rater | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-07-22 | Gameplay Postmortem Agent | Classroom Assignment | Multi-week |  |  |
+| 2026-07-22 | From Benchmark to Classroom: Closing the Personalization Gap in LLM-Based CS Tutoring Using Institution-Specific Interaction Data | Research | Research |  |  |
+| 2026-07-23 | City Livability Radar | Side Project | Weekend |  |  |
+| 2026-07-23 | Agent Skills Library Builder | Side Project | 1-2 Weeks |  |  |
+| 2026-07-23 | Socratic Error Cascade Visualizer | Teaching Tool | Multi-week |  |  |
+| 2026-07-23 | Closing the Feedback Loop: Real-Time Misconception Clusters to Targeted Student Hints in CS1 | Research | Research |  |  |
+| 2026-07-24 | Tilemap Story Generator | Side Project | Weekend |  |  |
+| 2026-07-24 | Bloom's Assessment Forge | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-07-24 | MCP Tool Forge | Classroom Assignment | Multi-week |  |  |
+| 2026-07-24 | From Error Categories to Misconception Taxonomies: Grounding Local-LLM Socratic Tutoring in Institution-Specific CS1 Submission Data | Research | Research |  |  |
+| 2026-07-25 | Agent Sims | Side Project | Weekend |  |  |
+| 2026-07-25 | Two-Stage Exam Studio | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-07-25 | Learnersourced Problem Factory | Classroom Assignment | Multi-week |  |  |
+| 2026-07-25 | From Detection to Reflection: Repurposing LLM Code Explainability Reports as Formative Feedback in CS1 | Research | Research |  |  |
+| 2026-07-26 | Pathfinding Playground | Side Project | Weekend |  |  |
+| 2026-07-26 | Spec-to-Test Oracle | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-07-26 | Emergent NPC Society | Classroom Assignment | Multi-week |  |  |
+| 2026-07-26 | Repair-as-Diagnosis: Using LLM Program Repair Edits to Map CS1 Misconceptions and Generate Targeted Solution-Free Feedback | Research | Research |  |  |
+| 2026-07-27 | Spec Mutation Lab | Side Project | Weekend |  |  |
+| 2026-07-27 | Early Alert Canvas Compass | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-07-27 | CRDT Clash | Classroom Assignment | Multi-week |  |  |
+| 2026-07-27 | Mistake or Misconception? Error-Type-Aware LLM Feedback Routing for CS1 Compiler Errors | Research | Research |  |  |
+| 2026-07-28 | Code Smell Sommelier | Side Project | Weekend |  |  |
+| 2026-07-28 | Concept Duel Arena | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-07-28 | Gameplay Difficulty DNA | Side Project | Multi-week |  |  |
+| 2026-07-28 | From Generic to Grounded: Calibrating LLM-Generated Erroneous Code Examples to Institution-Specific CS1 Misconception Patterns | Research | Research |  |  |
+| 2026-07-29 | Dependency Health Scorecard | Side Project | Weekend |  |  |
+| 2026-07-29 | Code Reading Fluency Trainer | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-07-29 | Generative Art Gallery | Classroom Assignment | Multi-week |  |  |
+| 2026-07-29 | Misconception-Seeded Exercise Synthesis | Research | Research |  |  |
+| 2026-07-30 | SQL Replay | Side Project | Weekend |  |  |
+| 2026-07-30 | Classroom CI/CD Pulse | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-07-30 | WASM Performance Lab | Classroom Assignment | Multi-week |  |  |
+| 2026-07-30 | In-Lecture Misconception Radar: Closing the Feedback Loop from Open-Response Summarization to Individual Targeted Hints | Research | Research |  |  |
+| 2026-07-31 | Game Pitch Studio | Side Project | Weekend |  |  |
+| 2026-07-31 | Hint Token Economy | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-07-31 | Socratic Agent Trio | Classroom Assignment | Multi-week |  |  |
+| 2026-07-31 | Player-Type-Adaptive Gamification for CS1 Programming Courses | Research | Research |  |  |
+| 2026-08-01 | Ambiguity Magnifier | Side Project | Weekend |  |  |
+| 2026-08-01 | Exam Question Equity Scanner | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-08-01 | Federated Learning Privacy Lab | Classroom Assignment | Multi-week |  |  |
+| 2026-08-01 | Teach-Back Misconception Mining: From LLM-Peer Explanations to Targeted Socratic Recovery in CS1 | Research | Research |  |  |
+| 2026-08-02 | Type Witness | Side Project | Weekend |  |  |
+| 2026-08-02 | Expert Think-Aloud Studio | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-08-02 | Self-Narrating Game Agent | Classroom Assignment | Multi-week |  |  |
+| 2026-08-02 | XAI-Grounded CS Feedback Transparency: From Black-Box Predictions to Legible Tutoring Decisions | Research | Research |  |  |
+| 2026-08-03 | Slide Critique Bot | Side Project | Weekend |  |  |
+| 2026-08-03 | Semantic Page Monitor | Side Project | 1-2 Weeks |  |  |
+| 2026-08-03 | Paper Argument Cartographer | Classroom Assignment | Multi-week |  |  |
+| 2026-08-03 | Misconception-Grounded LLM Student Personas for CS TA Training | Research | Research |  |  |
+| 2026-08-04 | Commit Predictor | Side Project | Weekend |  |  |
+| 2026-08-04 | Assignment Exemplar Engine | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-08-04 | Process Narrator | Side Project | Multi-week |  |  |
+| 2026-08-04 | Contract-First LLM Feedback for CS2: Extending Pedagogical-Framework-Constrained Automated Assessment Beyond Functional CS1 | Research | Research |  |  |
+| 2026-08-05 | Video Quiz Sprinter | Side Project | Weekend |  |  |
+| 2026-08-05 | Parsons Problem Forge | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-08-05 | Open-Source Onboarding Agent | Classroom Assignment | Multi-week |  |  |
+| 2026-08-05 | Student-to-System Feedback as a Misconception Signal: Closing the Two-Way Loop in Automated CS1 Assessment | Research | Research |  |  |
+| 2026-08-06 | Git Blame Explainer | Side Project | Weekend |  |  |
+| 2026-08-06 | Multimodal Analogy Studio | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-08-06 | Team Contribution Equity Analyzer | Classroom Assignment | Multi-week |  |  |
+| 2026-08-06 | Institution-Specific Fine-Tuning of Open-Source LLMs for Compiler Error Explanation: Does Local Calibration Outperform General Fine-Tuning? | Research | Research |  |  |
 
-| 2026-08-07 | Pipeline Semantic Diff | Side Project | Weekend |
-| 2026-08-07 | Competency Passport | Teaching Tool | 1-2 Weeks |
-| 2026-08-07 | Citizen Science Observatory | Classroom Assignment | Multi-week |
-| 2026-08-07 | Anchor-and-Extension: Recovering Community Learning in LLM-Personalized CS1 Assignments | Research | Research |
+| 2026-08-07 | Pipeline Semantic Diff | Side Project | Weekend |  |  |
+| 2026-08-07 | Competency Passport | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-08-07 | Citizen Science Observatory | Classroom Assignment | Multi-week |  |  |
+| 2026-08-07 | Anchor-and-Extension: Recovering Community Learning in LLM-Personalized CS1 Assignments | Research | Research |  |  |
 
-| 2026-08-08 | Lint-to-Learn | Side Project | Weekend |
-| 2026-08-08 | JS Event Loop Visualizer | Teaching Tool | 1-2 Weeks |
-| 2026-08-08 | Game Feel Lab | Classroom Assignment | Multi-week |
-| 2026-08-08 | From Pen-and-Paper Traces to Targeted Hints: An LLM Misconception Classifier for Control-Flow Errors | Research | Research |
-| 2026-08-09 | Procedural Sound Sketchpad | Side Project | Weekend |
-| 2026-08-09 | Packet Story | Teaching Tool | 1-2 Weeks |
-| 2026-08-09 | Code Carbon Lens | Teaching Tool | Multi-week |
-| 2026-08-09 | Cross-Tool Critical AI Literacy: Building a Benchmark for Negative Expertise Transfer in CS Education | Research | Research |
-| 2026-08-10 | API Schema Drift Sentinel | Side Project | Weekend |
-| 2026-08-10 | Research Radar | Teaching Tool | 1-2 Weeks |
-| 2026-08-10 | Fuzz Whisperer | Classroom Assignment | Multi-week |
-| 2026-08-10 | Debug Duck Misconception Mining: Classifying CS1 Misconceptions from Learning-by-Teaching Explanations | Research | Research |
-| 2026-08-11 | Code Review Gauntlet | Side Project | Weekend |
-| 2026-08-11 | Exam Reflection Aggregator | Teaching Tool | 1-2 Weeks |
-| 2026-08-11 | Dataset Ethics Audit Pipeline | Classroom Assignment | Multi-week |
-| 2026-08-11 | Automated AI-Resistance Scoring and Problem Generation for CS1/CS2 Programming Assessments | Research | Research |
+| 2026-08-08 | Lint-to-Learn | Side Project | Weekend |  |  |
+| 2026-08-08 | JS Event Loop Visualizer | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-08-08 | Game Feel Lab | Classroom Assignment | Multi-week |  |  |
+| 2026-08-08 | From Pen-and-Paper Traces to Targeted Hints: An LLM Misconception Classifier for Control-Flow Errors | Research | Research |  |  |
+| 2026-08-09 | Procedural Sound Sketchpad | Side Project | Weekend |  |  |
+| 2026-08-09 | Packet Story | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-08-09 | Code Carbon Lens | Teaching Tool | Multi-week |  |  |
+| 2026-08-09 | Cross-Tool Critical AI Literacy: Building a Benchmark for Negative Expertise Transfer in CS Education | Research | Research |  |  |
+| 2026-08-10 | API Schema Drift Sentinel | Side Project | Weekend |  |  |
+| 2026-08-10 | Research Radar | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-08-10 | Fuzz Whisperer | Classroom Assignment | Multi-week |  |  |
+| 2026-08-10 | Debug Duck Misconception Mining: Classifying CS1 Misconceptions from Learning-by-Teaching Explanations | Research | Research |  |  |
+| 2026-08-11 | Code Review Gauntlet | Side Project | Weekend |  |  |
+| 2026-08-11 | Exam Reflection Aggregator | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-08-11 | Dataset Ethics Audit Pipeline | Classroom Assignment | Multi-week |  |  |
+| 2026-08-11 | Automated AI-Resistance Scoring and Problem Generation for CS1/CS2 Programming Assessments | Research | Research |  |  |
 
-| 2026-08-12 | Terminal Historian | Side Project | Weekend |
-| 2026-08-12 | Test Coverage Narrator | Teaching Tool | 1-2 Weeks |
-| 2026-08-12 | Observable Algorithm Visualizer | Classroom Assignment | Multi-week |
-| 2026-08-12 | Longitudinal CS Concept Retention in Interview-Prep Aligned Curricula: Tracing CSS 342/343 Students Through Degree Completion | Research | Research |
-| 2026-08-13 | Shortcut Sprint | Side Project | Weekend |
-| 2026-08-13 | Rubric Alignment Checker | Teaching Tool | 1-2 Weeks |
-| 2026-08-13 | Supply Chain Risk Atlas | Classroom Assignment | Multi-week |
-| 2026-08-13 | Structure-Mapping Auditing for LLM-Generated Programming Analogies: Toward Misconception-Safe Automated Explanation in CS1 | Research | Research || 2026-08-14 | Prompt Diff | Side Project | Weekend |
-| 2026-08-14 | Class Mood Ring | Teaching Tool | 1-2 Weeks |
-| 2026-08-14 | From-Scratch Neural Net with Live Visualization | Classroom Assignment | Multi-week |
-| 2026-08-14 | Full-Stack Thinking vs. Library-First Learning: Does Toolchain-First Pedagogy Build Durable Conceptual Depth in an AI-Copilot Era? | Research | Research |
-| 2026-08-15 | Stale PR Warden | Side Project | Weekend |
-| 2026-08-15 | Annotation Synthesis Engine | Teaching Tool | 1-2 Weeks |
-| 2026-08-15 | API Escape Room | Classroom Assignment | Multi-week |
-| 2026-08-15 | Misconception-Routing RAG: Extending Course-Grounded CS1 Chatbots with Socratic Scaffolding and Instructor Concept Analytics | Research | Research |
-| 2026-08-16 | Screenshot UI Diff Lens | Side Project | Weekend |
-| 2026-08-16 | Live Q&A Distiller | Teaching Tool | 1-2 Weeks |
-| 2026-08-16 | Socratic PR Mentor | Classroom Assignment | Multi-week |
-| 2026-08-16 | Mapping UTA Practice to LLM Office Hours: A Benchmark for Human-Aligned CS Tutoring | Research | Research |
-| 2026-08-17 | Migration Diff Narrator | Side Project | Weekend |
-| 2026-08-17 | Error Taxonomy Mapper | Teaching Tool | 1-2 Weeks |
-| 2026-08-17 | Network Protocol Animator | Teaching Tool | Multi-week |
-| 2026-08-17 | Disability Persona Agents for Inclusive Software Engineering Education | Research | Research |
-| 2026-08-18 | AI Override Tracker | Side Project | Weekend |
-| 2026-08-18 | Reactive Data Flow Animator | Teaching Tool | 1-2 Weeks |
-| 2026-08-18 | Competitive Prompt Engineering Lab | Classroom Assignment | Multi-week |
-| 2026-08-18 | From Tournament to Transfer: Measuring Whether Adversarial Test-Writing in CS2 Builds Lasting TDD Habits | Research | Research |
-| 2026-08-19 | Dev Flow Soundtrack | Side Project | Weekend |
-| 2026-08-19 | First-Day Gap Radar | Teaching Tool | 1-2 Weeks |
-| 2026-08-19 | Build Your Own Database Engine | Classroom Assignment | Multi-week |
-| 2026-08-19 | Faculty Co-Design Protocol for LLM Socratic Hint Calibration in CS1 | Research | Research |
-| 2026-08-20 | Schema Storyteller | Side Project | Weekend |
-| 2026-08-20 | Concept Coverage Lens | Teaching Tool | 1-2 Weeks |
-| 2026-08-20 | Multi-Persona Code Review Simulator | Classroom Assignment | Multi-week |
-| 2026-08-20 | Socratic Tutoring at the Proof-Concept Boundary: Extending and Evaluating LLM-Based CS Theory Tutoring for Data Structures and Algorithm Analysis | Research | Research |
-| 2026-08-21 | HAR Detective | Side Project | Weekend |
-| 2026-08-21 | Semester Mirror | Teaching Tool | 1-2 Weeks |
-| 2026-08-21 | NPC Voice Auditor | Game Development | Multi-week |
-| 2026-08-21 | Hypothesis Habit Trainer: LLM-Scaffolded Systematic Debugging in Game-Based CS Learning | Research | Research |
-| 2026-08-22 | Dotfile Surgeon | Side Project | Weekend |
-| 2026-08-22 | Inclusive Syllabus Auditor | Teaching Tool | 1-2 Weeks |
-| 2026-08-22 | Event Log Time Machine | Classroom Assignment | Multi-week |
-| 2026-08-22 | Interaction-Pattern-Aware Hint Generation: Designing LLM Next-Step Hints That Respond to Student Behavior Archetypes in CS1 | Research | Research |
-| 2026-08-23 | Prompt Genome | Side Project | Weekend |
-| 2026-08-23 | Participation Equity Radar | Teaching Tool | 1-2 Weeks |
-| 2026-08-23 | Mini-Compiler Workbench | Classroom Assignment | Multi-week |
-| 2026-08-23 | Socratic AI Scaffolding for Peer Code Review: Mining Reviewer Dialogues for CS1 Misconception Signals | Research | Research |
-| 2026-08-24 | Dependency Pulse | Side Project | Weekend |
-| 2026-08-24 | Test Oracle Trainer | Teaching Tool | 1-2 Weeks |
-| 2026-08-24 | Consensus Game | Classroom Assignment | Multi-week |
-| 2026-08-24 | LLM Buggy-Machine Agents for Scalable Software Testing Role-Play | Research | Research |
-| 2026-08-25 | Code Analogy Forge | Side Project | Weekend |
-| 2026-08-25 | Spec Ambiguity Scanner | Teaching Tool | 1-2 Weeks |
-| 2026-08-25 | Physics Puzzle Engine Lab | Classroom Assignment | Multi-week |
-| 2026-08-25 | From Student Words to Misconception Labels: LLM Classification of Return-Keyword Explanations for Targeted Feedback in CS1 Java | Research | Research |
-| 2026-08-26 | Session Story | Side Project | Weekend |
-| 2026-08-26 | Pair Review Roulette | Teaching Tool | 1-2 Weeks |
-| 2026-08-26 | Type-Safe API Contract Lab | Classroom Assignment | Multi-week |
-| 2026-08-26 | From Submission Log to Reflection Prompt: LLM-Generated Metacognitive Scaffolds from Automated Grader Data in CS1 | Research | Research |
-| 2026-08-27 | Persona Bench | Side Project | Weekend |
-| 2026-08-27 | Bug Olympics | Teaching Tool | 1-2 Weeks |
-| 2026-08-27 | Whiteboard-to-Code Studio | Classroom Assignment | Multi-week |
-| 2026-08-27 | Error-Type Priority Routing for LLM-Generated CS1 Feedback: Should the Tutor Address Syntax or Concept First? | Research | Research |
-| 2026-08-28 | Shadow Diff | Side Project | Weekend |
-| 2026-08-28 | Explanation Parallax | Teaching Tool | 1-2 Weeks |
-| 2026-08-28 | Algorithm Quest Narrator | Classroom Assignment | Multi-week |
-| 2026-08-28 | CT Signature Mining: LLM-Based Detection of Multilingual-Game Pedagogy Impact in CS1 Submission Logs | Research | Research |
-| 2026-08-29 | CSS Cascade Combat | Side Project | Weekend |
-| 2026-08-29 | Bug Witness Investigation | Teaching Tool | 1-2 Weeks |
-| 2026-08-29 | Build-Your-Own Vector Search Engine | Classroom Assignment | Multi-week |
-| 2026-08-29 | Visual Flowchart Differencing for Misconception Classification: A SKETCHY-Inspired Approach to Targeted CS1 Feedback | Research | Research |
-| 2026-08-30 | LLM Diff | Side Project | Weekend |
-| 2026-08-30 | Stack Trace Theater | Teaching Tool | 1-2 Weeks |
-| 2026-08-30 | Build Your Own LLM Router | Classroom Assignment | Multi-week |
-| 2026-08-30 | AI Coding Tools as SEPT On-Ramps: Measuring Toolchain Adoption Sequence Shifts Before and After the Copilot Era | Research | Research |
-| 2026-08-31 | Colorblind Sim Canvas | Side Project | Weekend |
-| 2026-08-31 | AI Ethics Case Forge | Teaching Tool | 1-2 Weeks |
-| 2026-08-31 | Agentic Scrum Sim | Classroom Assignment | Multi-week |
-| 2026-08-31 | Slip-or-Misconception: LLM Classification of Code-Tracing Errors for Differentiated Feedback in CS1 | Research | Research |
-| 2026-09-01 | Env Whisperer | Side Project | Weekend |
-| 2026-09-01 | Refactor Rungs | Teaching Tool | 1-2 Weeks |
-| 2026-09-01 | Belief Propagation Lab | Classroom Assignment | Multi-week |
-| 2026-09-01 | LLM-Generated Targeted Feedback for Algorithm Simulation Misconceptions in CS2: Extending Validated Misconception Taxonomies from Graph Algorithm Traces | Research | Research |
-| 2026-09-02 | Cron Cartographer | Side Project | Weekend |
-| 2026-09-02 | Solution Mosaic | Teaching Tool | 1-2 Weeks |
-| 2026-09-02 | Build Your Own Type Inferencer | Classroom Assignment | Multi-week |
-| 2026-09-02 | From Linter Flags to Learning Moments: LLM-Enhanced Code Quality Feedback in Toolchain-First CS1 Courses | Research | Research |
-| 2026-09-03 | Summit Navigator | Side Project | Weekend |
-| 2026-09-03 | Live Exam Beacon | Teaching Tool | 1-2 Weeks |
-| 2026-09-03 | Chaos Tester's Toolkit | Classroom Assignment | Multi-week |
-| 2026-09-03 | Routine-Grounded Chain-of-Thought for Multi-Modal CS Assessment: Can Visual Decomposition Close the Higher-Order Thinking Gap? | Research | Research |
-| 2026-09-04 | Diff-to-Concept Map | Side Project | Weekend |
-| 2026-09-04 | Pair Programming Matchmaker | Teaching Tool | 1-2 Weeks |
-| 2026-09-04 | Browser OS Scheduler Lab | Classroom Assignment | Multi-week |
-| 2026-09-04 | KC-Targeted LLM Hint Generation: Closing the Loop Between Curriculum Alignment and Adaptive Formative Feedback in CS1 | Research | Research |
-| 2026-09-05 | Micro-Benchmark Narrator | Side Project | Weekend |
-| 2026-09-05 | Discrete Math Proof Coach | Teaching Tool | 1-2 Weeks |
-| 2026-09-05 | Student Capstone Portfolio Hub | Teaching Tool | Multi-week |
-| 2026-09-05 | From Mastery Analytics to Adaptive Hints: Closing the Instructor-Dashboard Loop with LLM-Generated Concept-Targeted Feedback in CS1 | Research | Research |
-| 2026-09-06 | Assembly Whisperer | Side Project | Weekend |
-| 2026-09-06 | AI Dialogue Scaffold | Teaching Tool | 1-2 Weeks |
-| 2026-09-06 | Agent Configuration Observatory | Classroom Assignment | Multi-week |
-| 2026-09-06 | Role-Bounded AI Collaborative Agents for Software Engineering Courses: Preserving Peer Dynamics in the Agent Era | Research | Research |
-| 2026-09-07 | Prompt Surgeon | Side Project | Weekend |
-| 2026-09-07 | Notional Machine Animator | Teaching Tool | 1-2 Weeks |
-| 2026-09-07 | Behavior Tree Lab | Classroom Assignment | Multi-week |
-| 2026-09-07 | Creativity Feedback at Scale: Extending LLM-Based Assessment from Elementary Flow-Based to University CS1/CS2 Programming Artifacts | Research | Research |
-| 2026-09-08 | MCP Discovery Feed | Side Project | Weekend |
-| 2026-09-08 | Live Refactor Wall | Teaching Tool | 1-2 Weeks |
-| 2026-09-08 | Pair-to-Solo Bridge | Side Project | Multi-week |
-| 2026-09-08 | CSTutorBench Personalization Gap: Submission-History-Grounded LLM Tutoring for CS1 | Research | Research |
-| 2026-09-09 | Voice Journal with AI Weekly Synthesis | Side Project | Weekend |
-| 2026-09-09 | Code Critique Flipbook | Developer Tool | 1-2 Weeks |
-| 2026-09-09 | Podcast Knowledge Graph | Side Project | Multi-week |
-| 2026-09-09 | LLM Hint Augmentation for Equity-Guided TA Tutoring: Closing the Loop Between Proactive Outreach and Submission-History-Grounded Feedback | Research | Research |
-| 2026-09-10 | AI API Change Radar | Side Project | Weekend |
-| 2026-09-10 | Oral Code Explanation Grader | Teaching Tool | 1-2 Weeks |
-| 2026-09-10 | Build Your Own AI Coding Assistant | Classroom Assignment | Multi-week |
-| 2026-09-10 | Teach-Back at Scale: Using Submission Logs and LLM Student Simulation to Individualize Final Assessments in CS1 | Research | Research |
-| 2026-09-11 | Meeting Debrief Bot | Side Project | Weekend |
-| 2026-09-11 | Assignment Autopsy | Teaching Tool | 1-2 Weeks |
-| 2026-09-11 | API Mashup Studio | Classroom Assignment | Multi-week |
-| 2026-09-11 | Solve or Evaluate? Replicating GenAI-Solution Grading Equivalence in CS1 and Probing AI Evaluation Fluency as a Distinct Pedagogical Outcome | Research | Research |
-| 2026-09-12 | Agent Run Logbook | Side Project | Weekend |
-| 2026-09-12 | Quantum Circuit Sandbox | Teaching Tool | 1-2 Weeks |
-| 2026-09-12 | State Machine Story Engine | Classroom Assignment | Multi-week |
-| 2026-09-12 | From Binary Ethics to Moral Ambiguity: LLM-Generated Multi-Stakeholder Dilemmas for University AI Ethics Games | Research | Research |
-| 2026-09-13 | Dependency Obituary | Side Project | Weekend |
-| 2026-09-13 | Warmup Forge | Teaching Tool | 1-2 Weeks |
-| 2026-09-13 | Protocol Interop Lab | Classroom Assignment | Multi-week |
-| 2026-09-13 | From Rubric Refinement to Student Feedback: Using AI-Grader Discrepancy Signals to Generate Misconception-Targeted Formative Assessments in CS1 | Research | Research |
-| 2026-09-14 | Voice Code Review | Side Project | Weekend |
-| 2026-09-14 | Two-Language Concept Mirror | Teaching Tool | 1-2 Weeks |
-| 2026-09-14 | Legacy Code Expedition | Classroom Assignment | Multi-week |
-| 2026-09-14 | From Simulation to Reality: Measuring Transfer Fidelity of GLOW-Style Undergraduate TA Training at Teaching-Focused Institutions | Research | Research |
-| 2026-09-15 | Prompt Shrink Ray | Side Project | Weekend |
-| 2026-09-15 | Office Hours Queue Triage | Teaching Tool | 1-2 Weeks |
-| 2026-09-15 | Dev Career Map | Side Project | Multi-week |
-| 2026-09-15 | Two-Stage LLM Grading of Handwritten CS Exam Artifacts: Adapting a Mathematical Pipeline for Code Traces, Data Structure Diagrams, and Algorithm Analysis | Research | Research |
-| 2026-09-18 | Reasoning Chain Sketcher | Side Project | Weekend |
-| 2026-09-18 | Tutoring Response Trainer | Teaching Tool | 1-2 Weeks |
-| 2026-09-18 | Full-Stack ML from Scratch with Live Viz | Classroom Assignment | Multi-week |
-| 2026-09-18 | NLF-Scaffolded Decomposition Signals: Mining Natural Language Function Prompts to Classify CS1 Misconceptions and Route Adaptive Hints | Research | Research |
-| 2026-09-19 | Slide Semantic Diff | Side Project | Weekend |
-| 2026-09-19 | Post-Lecture Engagement Debrief | Teaching Tool | 1-2 Weeks |
-| 2026-09-19 | Lecture Semantic Captioner | Teaching Tool | Multi-week |
-| 2026-09-19 | LLM-Nudged Text-Chat Peer Instruction: Building and Evaluating a Socratic Intervention Layer for In-Lecture Think-Pair-Share | Research | Research |
-| 2026-09-23 | Agent Blast Radius | Side Project | Weekend |
-| 2026-09-23 | Big-O Sonifier | Teaching Tool | 1-2 Weeks |
-| 2026-09-23 | Build Your Own Agent Orchestrator | Classroom Assignment | Multi-week |
-| 2026-09-23 | Escalation-Aware Hybrid Feedback: Learning When Automated Code Critique Should Hand Off to a Human TA | Research | Research |
-| 2026-09-24 | Backyard Field Plate | Side Project | Weekend |
-| 2026-09-24 | Git Broken-State Gym | Teaching Tool | 1-2 Weeks |
-| 2026-09-24 | Build Your Own Node-Based Terminal Workspace | Classroom Assignment | Multi-week |
-| 2026-09-24 | Git State Misconceptions from Repository Traces: A Synthetic Benchmark for Diagnosing Broken Git Workflows and Generating Solution-Free Hints in Toolchain-First Courses | Research | Research |
-| 2026-09-25 | Semantic If Bench | Side Project | Weekend |
-| 2026-09-25 | Cipher Ladder | Teaching Tool | 1-2 Weeks |
-| 2026-09-25 | Surveillance Footprint Lab | Classroom Assignment | Multi-week |
-| 2026-09-25 | Toolchain-Verified Error Hunts: Compiler-in-the-Loop LLM Generation of Cross-Language Programming Error Message Exercises | Research | Research |
-| 2026-09-26 | Cutoff Probe | Side Project | Weekend |
-| 2026-09-26 | Data Structure City | Teaching Tool | 1-2 Weeks |
-| 2026-09-26 | Tiny Brains League | Classroom Assignment | Multi-week |
-| 2026-09-26 | Do LLM Tutors Teach Like Good UTAs? Profiling Programming-Help Responses Against an Empirical Pedagogical Process Model | Research | Research |
-| 2026-09-27 | Poster Grid Studio | Side Project | Weekend |
-| 2026-09-27 | SQL Counterexample Grader | Teaching Tool | 1-2 Weeks |
-| 2026-09-27 | System 1 vs System 2 Showdown | Classroom Assignment | Multi-week |
-| 2026-09-27 | Clause-Anchored LLM Hints for SQL DDL/DML: A Mutation Benchmark for Localized, Solution-Free Feedback on State-Changing Statements | Research | Research |
-| 2026-09-28 | Repo Weight Map | Side Project | Weekend |
-| 2026-09-28 | Project Pitch Census | Teaching Tool | 1-2 Weeks |
-| 2026-09-28 | Build Your Own Code Search Engine | Classroom Assignment | Multi-week |
-| 2026-09-28 | Toolchain Progress Traces: Measuring Which Feedback Events Actually Move Student Code Forward in a Toolchain-First Course | Research | Research |
-| 2026-09-29 | Reverse Minesweeper Studio | Side Project | Weekend |
-| 2026-09-29 | Elevator Algorithm Lab | Teaching Tool | 1-2 Weeks |
-| 2026-09-29 | Chokepoint Simulator | Classroom Assignment | Multi-week |
-| 2026-09-29 | How Far Along Am I? Benchmarking Solution-Free Progress Estimators for Partial CS1 Programs | Research | Research |
-| 2026-09-30 | Where Does It Say | Teaching Tool | Weekend |
-| 2026-09-30 | One-Shot Arcade Bench | Side Project | Multi-week |
-| 2026-09-30 | Orbit Crowd Lab | Classroom Assignment | 1-2 Weeks |
-| 2026-09-30 | Breakpoints Without Answers: A Trace-Divergence Benchmark for LLM Breakpoint Recommendations in CS1 Debugging | Research | Research |
-| 2026-10-01 | Page Wrecker | Side Project | Weekend |
-| 2026-10-01 | State Space Atlas | Teaching Tool | 1-2 Weeks |
-| 2026-10-01 | Lag Compensation Arena | Classroom Assignment | Multi-week |
-| 2026-10-01 | Executable Buggy Tracers: Turning a Control-Structure Misconception Taxonomy into Runnable Student Models for Distractor Generation and Trace-Error Diagnosis | Research | Research |
-| 2026-10-02 | Buried Lede Meter | Teaching Tool | Weekend |
-| 2026-10-02 | Roster Redactor | Teaching Tool | 1-2 Weeks |
-| 2026-10-02 | Stego Arms Race | Classroom Assignment | Multi-week |
-| 2026-10-02 | From Struggle Score to Hint Trigger: A Keystroke Replay Benchmark for Timing Solution-Free Hints in CS1 | Research | Research |
-| 2026-10-03 | Before the Sun Burns Out | Side Project | Weekend |
-| 2026-10-03 | Bombe Bench | Teaching Tool | 1-2 Weeks |
-| 2026-10-03 | Build Your Own Fantasy Console | Classroom Assignment | Multi-week |
-| 2026-10-03 | Predict the Damage: A Container-Verified Benchmark of LLM Reasoning About Shell Command Consequences for Solution-Free Linux Tutoring | Research | Research |
-| 2026-10-04 | Bits per Question | Side Project | Weekend |
-| 2026-10-04 | Stroke Budget | Teaching Tool | 1-2 Weeks |
-| 2026-10-04 | Brick by Constraint | Classroom Assignment | Multi-week |
-| 2026-10-04 | Solver-Checked Simplification Hints: An SMT-Grounded Benchmark for LLM Feedback on Overcomplicated Conditionals in Novice Code | Research | Research |
-| 2026-10-05 | Brocot Gear Finder | Side Project | Weekend |
-| 2026-10-05 | Turtle Target Practice | Teaching Tool | 1-2 Weeks |
-| 2026-10-05 | Build Your Own Multitrack Audio Editor | Classroom Assignment | Multi-week |
-| 2026-10-05 | Diagram-Grounded Pointer Drills: Execution-Verified Generation of C Pointer Exercises with Misconception-Tagged Distractors and Memory-Diagram Hints | Research | Research |
-| 2026-10-06 | Nearest Representable | Side Project | Weekend |
-| 2026-10-06 | Heap Arena Replay | Teaching Tool | 1-2 Weeks |
-| 2026-10-06 | Build Your Own Spreadsheet Engine | Classroom Assignment | Multi-week |
-| 2026-10-06 | Fault-Seeded Answer Sets for Stress-Testing CS1 Written-Response Rubrics: Predicting Inter-Rater Unreliability Before Grading Begins | Research | Research |
-| 2026-10-07 | Phantom API | Side Project | Weekend |
-| 2026-10-07 | Peer Pick Ledger | Teaching Tool | 1-2 Weeks |
-| 2026-10-07 | Build Your Own Micropolis | Classroom Assignment | Multi-week |
-| 2026-10-07 | Round-Trip Narration Fidelity: A Reconstruction Benchmark for Screen-Reader Descriptions of Program State | Research | Research |
-| 2026-10-08 | Program Alarm 1202 | Side Project | Weekend |
-| 2026-10-08 | Modulo Bias Microscope | Teaching Tool | 1-2 Weeks |
-| 2026-10-08 | Build Your Own Wikipedia Museum | Classroom Assignment | Multi-week |
-| 2026-10-08 | Pattern-Breaking Variants: Measuring Whether Generated Exercise Diversity Defeats Surface-Level Solvers in CS1 | Research | Research |
-| 2026-10-09 | Four Ghosts, Four Targets | Side Project | Weekend |
-| 2026-10-09 | Fork Count | Teaching Tool | 1-2 Weeks |
-| 2026-10-09 | Build Your Own Plate Solver | Classroom Assignment | Multi-week |
-| 2026-10-09 | The Toolchain Coverage Gap: Which Code-Quality Defects in Existing-Codebase Assignments Do Linters Catch, What Can LLM Reviewers Add, and What Do AI Contributors Introduce? | Research | Research |
-| 2026-10-10 | Poincaré Paint | Side Project | Weekend |
-| 2026-10-10 | Cache Miss Theater | Teaching Tool | 1-2 Weeks |
-| 2026-10-10 | Build Your Own RISC-V Emulator That Boots | Classroom Assignment | Multi-week |
-| 2026-10-10 | Comment Once, Apply Safely: Benchmarking LLM Propagation of TA Design Feedback Across Open-Ended Programming Submissions | Research | Research |
-| 2026-10-11 | Jamo Blocks | Side Project | Weekend |
-| 2026-10-11 | Edit Graph Lab | Teaching Tool | 1-2 Weeks |
-| 2026-10-11 | Build Your Own BSP Level Renderer | Classroom Assignment | Multi-week |
-| 2026-10-11 | Construction-Trace Feedback: Verified, Solution-Free Hints for Student Closure Constructions in Automata Theory | Research | Research |
-| 2026-10-12 | Expansion Order | Side Project | Weekend |
-| 2026-10-12 | Lockstep Lab | Teaching Tool | 1-2 Weeks |
-| 2026-10-12 | Build Your Own Static Recompiler | Classroom Assignment | Multi-week |
-| 2026-10-12 | Cold-Start README Audits: Seeded-Defect Evaluation of LLM Agents as Novice Followers for Feedback on Student Project Documentation | Research | Research |
-| 2026-10-13 | Mnemonic Unpacker | Side Project | Weekend |
-| 2026-10-13 | In-Band | Teaching Tool | 1-2 Weeks |
-| 2026-10-13 | Build Your Own Resumable Download Manager | Classroom Assignment | Multi-week |
-| 2026-10-13 | Strategy Hijacking in LLM Programming Hints: Measuring Whether AI Tutors Steer CS1 Students Away From Valid Non-Canonical Solutions | Research | Research |
-| 2026-10-14 | Outguess Me | Side Project | Weekend |
-| 2026-10-14 | Net Units | Teaching Tool | 1-2 Weeks |
-| 2026-10-14 | Build Your Own Borrow Checker | Classroom Assignment | Multi-week |
-| 2026-10-14 | Mechanism or Tinkering? A Qualitative-Process Critic for Classifying and Giving Feedback on Student Edits to Unpacked Blocks in Ecosystem Models | Research | Research |
-| 2026-10-15 | Tamerlane Board | Side Project | Weekend |
-| 2026-10-15 | Strictly C | Teaching Tool | 1-2 Weeks |
-| 2026-10-15 | Build Your Own Persistent P2P Tunnel | Classroom Assignment | Multi-week |
-| 2026-10-15 | Hint Ladders for Refactoring: Measuring Correctness and Solution Leakage of Graduated LLM Hints on Code-Quality Exercises | Research | Research |
-| 2026-10-16 | Track Switch | Side Project | Weekend |
-| 2026-10-16 | Pluck Lab | Teaching Tool | 1-2 Weeks |
-| 2026-10-16 | Build Your Own FORTRAN I Compiler | Classroom Assignment | Multi-week |
-| 2026-10-16 | Do LLM Tutors Share Students' Continuation Misconceptions? A Reference-Interpreter Benchmark for LLM Tracing and Explanation of Delimited Continuations | Research | Research |
-| 2026-10-17 | Mode Collapse | Side Project | Weekend |
-| 2026-10-17 | 23:59:60 | Teaching Tool | 1-2 Weeks |
-| 2026-10-17 | Build Your Own Bot Ladder for a Tiny RTS | Classroom Assignment | Multi-week |
-| 2026-10-17 | Speakable Error Messages: An Audio-First Benchmark for LLM Explanations of Notebook Errors for Screen-Reader Users | Research | Research |
-| 2026-10-18 | Gloss Glyphs | Side Project | Weekend |
-| 2026-10-18 | Pull the Pin | Teaching Tool | 1-2 Weeks |
-| 2026-10-18 | Build Your Own Diagram Layout Engine | Classroom Assignment | Multi-week |
-| 2026-10-18 | Green but Hollow: A Mutation-Scored Benchmark of AI-Generated Unit Tests for Toolchain-First C++ Data Structures Assignments | Research | Research |
+| 2026-08-12 | Terminal Historian | Side Project | Weekend |  |  |
+| 2026-08-12 | Test Coverage Narrator | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-08-12 | Observable Algorithm Visualizer | Classroom Assignment | Multi-week |  |  |
+| 2026-08-12 | Longitudinal CS Concept Retention in Interview-Prep Aligned Curricula: Tracing CSS 342/343 Students Through Degree Completion | Research | Research |  |  |
+| 2026-08-13 | Shortcut Sprint | Side Project | Weekend |  |  |
+| 2026-08-13 | Rubric Alignment Checker | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-08-13 | Supply Chain Risk Atlas | Classroom Assignment | Multi-week |  |  |
+| 2026-08-13 | Structure-Mapping Auditing for LLM-Generated Programming Analogies: Toward Misconception-Safe Automated Explanation in CS1 | Research | Research |  |  |
+| 2026-08-14 | Prompt Diff | Side Project | Weekend |  |  |
+| 2026-08-14 | Class Mood Ring | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-08-14 | From-Scratch Neural Net with Live Visualization | Classroom Assignment | Multi-week |  |  |
+| 2026-08-14 | Full-Stack Thinking vs. Library-First Learning: Does Toolchain-First Pedagogy Build Durable Conceptual Depth in an AI-Copilot Era? | Research | Research |  |  |
+| 2026-08-15 | Stale PR Warden | Side Project | Weekend |  |  |
+| 2026-08-15 | Annotation Synthesis Engine | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-08-15 | API Escape Room | Classroom Assignment | Multi-week |  |  |
+| 2026-08-15 | Misconception-Routing RAG: Extending Course-Grounded CS1 Chatbots with Socratic Scaffolding and Instructor Concept Analytics | Research | Research |  |  |
+| 2026-08-16 | Screenshot UI Diff Lens | Side Project | Weekend |  |  |
+| 2026-08-16 | Live Q&A Distiller | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-08-16 | Socratic PR Mentor | Classroom Assignment | Multi-week |  |  |
+| 2026-08-16 | Mapping UTA Practice to LLM Office Hours: A Benchmark for Human-Aligned CS Tutoring | Research | Research |  |  |
+| 2026-08-17 | Migration Diff Narrator | Side Project | Weekend |  |  |
+| 2026-08-17 | Error Taxonomy Mapper | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-08-17 | Network Protocol Animator | Teaching Tool | Multi-week |  |  |
+| 2026-08-17 | Disability Persona Agents for Inclusive Software Engineering Education | Research | Research |  |  |
+| 2026-08-18 | AI Override Tracker | Side Project | Weekend |  |  |
+| 2026-08-18 | Reactive Data Flow Animator | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-08-18 | Competitive Prompt Engineering Lab | Classroom Assignment | Multi-week |  |  |
+| 2026-08-18 | From Tournament to Transfer: Measuring Whether Adversarial Test-Writing in CS2 Builds Lasting TDD Habits | Research | Research |  |  |
+| 2026-08-19 | Dev Flow Soundtrack | Side Project | Weekend |  |  |
+| 2026-08-19 | First-Day Gap Radar | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-08-19 | Build Your Own Database Engine | Classroom Assignment | Multi-week |  |  |
+| 2026-08-19 | Faculty Co-Design Protocol for LLM Socratic Hint Calibration in CS1 | Research | Research |  |  |
+| 2026-08-20 | Schema Storyteller | Side Project | Weekend |  |  |
+| 2026-08-20 | Concept Coverage Lens | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-08-20 | Multi-Persona Code Review Simulator | Classroom Assignment | Multi-week |  |  |
+| 2026-08-20 | Socratic Tutoring at the Proof-Concept Boundary: Extending and Evaluating LLM-Based CS Theory Tutoring for Data Structures and Algorithm Analysis | Research | Research |  |  |
+| 2026-08-21 | HAR Detective | Side Project | Weekend |  |  |
+| 2026-08-21 | Semester Mirror | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-08-21 | NPC Voice Auditor | Game Development | Multi-week |  |  |
+| 2026-08-21 | Hypothesis Habit Trainer: LLM-Scaffolded Systematic Debugging in Game-Based CS Learning | Research | Research |  |  |
+| 2026-08-22 | Dotfile Surgeon | Side Project | Weekend |  |  |
+| 2026-08-22 | Inclusive Syllabus Auditor | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-08-22 | Event Log Time Machine | Classroom Assignment | Multi-week |  |  |
+| 2026-08-22 | Interaction-Pattern-Aware Hint Generation: Designing LLM Next-Step Hints That Respond to Student Behavior Archetypes in CS1 | Research | Research |  |  |
+| 2026-08-23 | Prompt Genome | Side Project | Weekend |  |  |
+| 2026-08-23 | Participation Equity Radar | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-08-23 | Mini-Compiler Workbench | Classroom Assignment | Multi-week |  |  |
+| 2026-08-23 | Socratic AI Scaffolding for Peer Code Review: Mining Reviewer Dialogues for CS1 Misconception Signals | Research | Research |  |  |
+| 2026-08-24 | Dependency Pulse | Side Project | Weekend |  |  |
+| 2026-08-24 | Test Oracle Trainer | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-08-24 | Consensus Game | Classroom Assignment | Multi-week |  |  |
+| 2026-08-24 | LLM Buggy-Machine Agents for Scalable Software Testing Role-Play | Research | Research |  |  |
+| 2026-08-25 | Code Analogy Forge | Side Project | Weekend |  |  |
+| 2026-08-25 | Spec Ambiguity Scanner | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-08-25 | Physics Puzzle Engine Lab | Classroom Assignment | Multi-week |  |  |
+| 2026-08-25 | From Student Words to Misconception Labels: LLM Classification of Return-Keyword Explanations for Targeted Feedback in CS1 Java | Research | Research |  |  |
+| 2026-08-26 | Session Story | Side Project | Weekend |  |  |
+| 2026-08-26 | Pair Review Roulette | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-08-26 | Type-Safe API Contract Lab | Classroom Assignment | Multi-week |  |  |
+| 2026-08-26 | From Submission Log to Reflection Prompt: LLM-Generated Metacognitive Scaffolds from Automated Grader Data in CS1 | Research | Research |  |  |
+| 2026-08-27 | Persona Bench | Side Project | Weekend |  |  |
+| 2026-08-27 | Bug Olympics | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-08-27 | Whiteboard-to-Code Studio | Classroom Assignment | Multi-week |  |  |
+| 2026-08-27 | Error-Type Priority Routing for LLM-Generated CS1 Feedback: Should the Tutor Address Syntax or Concept First? | Research | Research |  |  |
+| 2026-08-28 | Shadow Diff | Side Project | Weekend |  |  |
+| 2026-08-28 | Explanation Parallax | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-08-28 | Algorithm Quest Narrator | Classroom Assignment | Multi-week |  |  |
+| 2026-08-28 | CT Signature Mining: LLM-Based Detection of Multilingual-Game Pedagogy Impact in CS1 Submission Logs | Research | Research |  |  |
+| 2026-08-29 | CSS Cascade Combat | Side Project | Weekend |  |  |
+| 2026-08-29 | Bug Witness Investigation | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-08-29 | Build-Your-Own Vector Search Engine | Classroom Assignment | Multi-week |  |  |
+| 2026-08-29 | Visual Flowchart Differencing for Misconception Classification: A SKETCHY-Inspired Approach to Targeted CS1 Feedback | Research | Research |  |  |
+| 2026-08-30 | LLM Diff | Side Project | Weekend |  |  |
+| 2026-08-30 | Stack Trace Theater | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-08-30 | Build Your Own LLM Router | Classroom Assignment | Multi-week |  |  |
+| 2026-08-30 | AI Coding Tools as SEPT On-Ramps: Measuring Toolchain Adoption Sequence Shifts Before and After the Copilot Era | Research | Research |  |  |
+| 2026-08-31 | Colorblind Sim Canvas | Side Project | Weekend |  |  |
+| 2026-08-31 | AI Ethics Case Forge | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-08-31 | Agentic Scrum Sim | Classroom Assignment | Multi-week |  |  |
+| 2026-08-31 | Slip-or-Misconception: LLM Classification of Code-Tracing Errors for Differentiated Feedback in CS1 | Research | Research |  |  |
+| 2026-09-01 | Env Whisperer | Side Project | Weekend |  |  |
+| 2026-09-01 | Refactor Rungs | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-09-01 | Belief Propagation Lab | Classroom Assignment | Multi-week |  |  |
+| 2026-09-01 | LLM-Generated Targeted Feedback for Algorithm Simulation Misconceptions in CS2: Extending Validated Misconception Taxonomies from Graph Algorithm Traces | Research | Research |  |  |
+| 2026-09-02 | Cron Cartographer | Side Project | Weekend |  |  |
+| 2026-09-02 | Solution Mosaic | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-09-02 | Build Your Own Type Inferencer | Classroom Assignment | Multi-week |  |  |
+| 2026-09-02 | From Linter Flags to Learning Moments: LLM-Enhanced Code Quality Feedback in Toolchain-First CS1 Courses | Research | Research |  |  |
+| 2026-09-03 | Summit Navigator | Side Project | Weekend |  |  |
+| 2026-09-03 | Live Exam Beacon | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-09-03 | Chaos Tester's Toolkit | Classroom Assignment | Multi-week |  |  |
+| 2026-09-03 | Routine-Grounded Chain-of-Thought for Multi-Modal CS Assessment: Can Visual Decomposition Close the Higher-Order Thinking Gap? | Research | Research |  |  |
+| 2026-09-04 | Diff-to-Concept Map | Side Project | Weekend |  |  |
+| 2026-09-04 | Pair Programming Matchmaker | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-09-04 | Browser OS Scheduler Lab | Classroom Assignment | Multi-week |  |  |
+| 2026-09-04 | KC-Targeted LLM Hint Generation: Closing the Loop Between Curriculum Alignment and Adaptive Formative Feedback in CS1 | Research | Research |  |  |
+| 2026-09-05 | Micro-Benchmark Narrator | Side Project | Weekend |  |  |
+| 2026-09-05 | Discrete Math Proof Coach | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-09-05 | Student Capstone Portfolio Hub | Teaching Tool | Multi-week |  |  |
+| 2026-09-05 | From Mastery Analytics to Adaptive Hints: Closing the Instructor-Dashboard Loop with LLM-Generated Concept-Targeted Feedback in CS1 | Research | Research |  |  |
+| 2026-09-06 | Assembly Whisperer | Side Project | Weekend |  |  |
+| 2026-09-06 | AI Dialogue Scaffold | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-09-06 | Agent Configuration Observatory | Classroom Assignment | Multi-week |  |  |
+| 2026-09-06 | Role-Bounded AI Collaborative Agents for Software Engineering Courses: Preserving Peer Dynamics in the Agent Era | Research | Research |  |  |
+| 2026-09-07 | Prompt Surgeon | Side Project | Weekend |  |  |
+| 2026-09-07 | Notional Machine Animator | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-09-07 | Behavior Tree Lab | Classroom Assignment | Multi-week |  |  |
+| 2026-09-07 | Creativity Feedback at Scale: Extending LLM-Based Assessment from Elementary Flow-Based to University CS1/CS2 Programming Artifacts | Research | Research |  |  |
+| 2026-09-08 | MCP Discovery Feed | Side Project | Weekend |  |  |
+| 2026-09-08 | Live Refactor Wall | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-09-08 | Pair-to-Solo Bridge | Side Project | Multi-week |  |  |
+| 2026-09-08 | CSTutorBench Personalization Gap: Submission-History-Grounded LLM Tutoring for CS1 | Research | Research |  |  |
+| 2026-09-09 | Voice Journal with AI Weekly Synthesis | Side Project | Weekend |  |  |
+| 2026-09-09 | Code Critique Flipbook | Developer Tool | 1-2 Weeks |  |  |
+| 2026-09-09 | Podcast Knowledge Graph | Side Project | Multi-week |  |  |
+| 2026-09-09 | LLM Hint Augmentation for Equity-Guided TA Tutoring: Closing the Loop Between Proactive Outreach and Submission-History-Grounded Feedback | Research | Research |  |  |
+| 2026-09-10 | AI API Change Radar | Side Project | Weekend |  |  |
+| 2026-09-10 | Oral Code Explanation Grader | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-09-10 | Build Your Own AI Coding Assistant | Classroom Assignment | Multi-week |  |  |
+| 2026-09-10 | Teach-Back at Scale: Using Submission Logs and LLM Student Simulation to Individualize Final Assessments in CS1 | Research | Research |  |  |
+| 2026-09-11 | Meeting Debrief Bot | Side Project | Weekend |  |  |
+| 2026-09-11 | Assignment Autopsy | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-09-11 | API Mashup Studio | Classroom Assignment | Multi-week |  |  |
+| 2026-09-11 | Solve or Evaluate? Replicating GenAI-Solution Grading Equivalence in CS1 and Probing AI Evaluation Fluency as a Distinct Pedagogical Outcome | Research | Research |  |  |
+| 2026-09-12 | Agent Run Logbook | Side Project | Weekend |  |  |
+| 2026-09-12 | Quantum Circuit Sandbox | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-09-12 | State Machine Story Engine | Classroom Assignment | Multi-week |  |  |
+| 2026-09-12 | From Binary Ethics to Moral Ambiguity: LLM-Generated Multi-Stakeholder Dilemmas for University AI Ethics Games | Research | Research |  |  |
+| 2026-09-13 | Dependency Obituary | Side Project | Weekend |  |  |
+| 2026-09-13 | Warmup Forge | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-09-13 | Protocol Interop Lab | Classroom Assignment | Multi-week |  |  |
+| 2026-09-13 | From Rubric Refinement to Student Feedback: Using AI-Grader Discrepancy Signals to Generate Misconception-Targeted Formative Assessments in CS1 | Research | Research |  |  |
+| 2026-09-14 | Voice Code Review | Side Project | Weekend |  |  |
+| 2026-09-14 | Two-Language Concept Mirror | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-09-14 | Legacy Code Expedition | Classroom Assignment | Multi-week |  |  |
+| 2026-09-14 | From Simulation to Reality: Measuring Transfer Fidelity of GLOW-Style Undergraduate TA Training at Teaching-Focused Institutions | Research | Research |  |  |
+| 2026-09-15 | Prompt Shrink Ray | Side Project | Weekend |  |  |
+| 2026-09-15 | Office Hours Queue Triage | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-09-15 | Dev Career Map | Side Project | Multi-week |  |  |
+| 2026-09-15 | Two-Stage LLM Grading of Handwritten CS Exam Artifacts: Adapting a Mathematical Pipeline for Code Traces, Data Structure Diagrams, and Algorithm Analysis | Research | Research |  |  |
+| 2026-09-18 | Reasoning Chain Sketcher | Side Project | Weekend |  |  |
+| 2026-09-18 | Tutoring Response Trainer | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-09-18 | Full-Stack ML from Scratch with Live Viz | Classroom Assignment | Multi-week |  |  |
+| 2026-09-18 | NLF-Scaffolded Decomposition Signals: Mining Natural Language Function Prompts to Classify CS1 Misconceptions and Route Adaptive Hints | Research | Research |  |  |
+| 2026-09-19 | Slide Semantic Diff | Side Project | Weekend |  |  |
+| 2026-09-19 | Post-Lecture Engagement Debrief | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-09-19 | Lecture Semantic Captioner | Teaching Tool | Multi-week |  |  |
+| 2026-09-19 | LLM-Nudged Text-Chat Peer Instruction: Building and Evaluating a Socratic Intervention Layer for In-Lecture Think-Pair-Share | Research | Research |  |  |
+| 2026-09-23 | Agent Blast Radius | Side Project | Weekend |  |  |
+| 2026-09-23 | Big-O Sonifier | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-09-23 | Build Your Own Agent Orchestrator | Classroom Assignment | Multi-week |  |  |
+| 2026-09-23 | Escalation-Aware Hybrid Feedback: Learning When Automated Code Critique Should Hand Off to a Human TA | Research | Research |  |  |
+| 2026-09-24 | Backyard Field Plate | Side Project | Weekend |  |  |
+| 2026-09-24 | Git Broken-State Gym | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-09-24 | Build Your Own Node-Based Terminal Workspace | Classroom Assignment | Multi-week |  |  |
+| 2026-09-24 | Git State Misconceptions from Repository Traces: A Synthetic Benchmark for Diagnosing Broken Git Workflows and Generating Solution-Free Hints in Toolchain-First Courses | Research | Research |  |  |
+| 2026-09-25 | Semantic If Bench | Side Project | Weekend |  |  |
+| 2026-09-25 | Cipher Ladder | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-09-25 | Surveillance Footprint Lab | Classroom Assignment | Multi-week |  |  |
+| 2026-09-25 | Toolchain-Verified Error Hunts: Compiler-in-the-Loop LLM Generation of Cross-Language Programming Error Message Exercises | Research | Research |  |  |
+| 2026-09-26 | Cutoff Probe | Side Project | Weekend |  |  |
+| 2026-09-26 | Data Structure City | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-09-26 | Tiny Brains League | Classroom Assignment | Multi-week |  |  |
+| 2026-09-26 | Do LLM Tutors Teach Like Good UTAs? Profiling Programming-Help Responses Against an Empirical Pedagogical Process Model | Research | Research |  |  |
+| 2026-09-27 | Poster Grid Studio | Side Project | Weekend |  |  |
+| 2026-09-27 | SQL Counterexample Grader | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-09-27 | System 1 vs System 2 Showdown | Classroom Assignment | Multi-week |  |  |
+| 2026-09-27 | Clause-Anchored LLM Hints for SQL DDL/DML: A Mutation Benchmark for Localized, Solution-Free Feedback on State-Changing Statements | Research | Research |  |  |
+| 2026-09-28 | Repo Weight Map | Side Project | Weekend |  |  |
+| 2026-09-28 | Project Pitch Census | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-09-28 | Build Your Own Code Search Engine | Classroom Assignment | Multi-week |  |  |
+| 2026-09-28 | Toolchain Progress Traces: Measuring Which Feedback Events Actually Move Student Code Forward in a Toolchain-First Course | Research | Research |  |  |
+| 2026-09-29 | Reverse Minesweeper Studio | Side Project | Weekend |  |  |
+| 2026-09-29 | Elevator Algorithm Lab | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-09-29 | Chokepoint Simulator | Classroom Assignment | Multi-week |  |  |
+| 2026-09-29 | How Far Along Am I? Benchmarking Solution-Free Progress Estimators for Partial CS1 Programs | Research | Research |  |  |
+| 2026-09-30 | Where Does It Say | Teaching Tool | Weekend |  |  |
+| 2026-09-30 | One-Shot Arcade Bench | Side Project | Multi-week |  |  |
+| 2026-09-30 | Orbit Crowd Lab | Classroom Assignment | 1-2 Weeks |  |  |
+| 2026-09-30 | Breakpoints Without Answers: A Trace-Divergence Benchmark for LLM Breakpoint Recommendations in CS1 Debugging | Research | Research |  |  |
+| 2026-10-01 | Page Wrecker | Side Project | Weekend |  |  |
+| 2026-10-01 | State Space Atlas | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-10-01 | Lag Compensation Arena | Classroom Assignment | Multi-week |  |  |
+| 2026-10-01 | Executable Buggy Tracers: Turning a Control-Structure Misconception Taxonomy into Runnable Student Models for Distractor Generation and Trace-Error Diagnosis | Research | Research |  |  |
+| 2026-10-02 | Buried Lede Meter | Teaching Tool | Weekend |  |  |
+| 2026-10-02 | Roster Redactor | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-10-02 | Stego Arms Race | Classroom Assignment | Multi-week |  |  |
+| 2026-10-02 | From Struggle Score to Hint Trigger: A Keystroke Replay Benchmark for Timing Solution-Free Hints in CS1 | Research | Research |  |  |
+| 2026-10-03 | Before the Sun Burns Out | Side Project | Weekend |  |  |
+| 2026-10-03 | Bombe Bench | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-10-03 | Build Your Own Fantasy Console | Classroom Assignment | Multi-week |  |  |
+| 2026-10-03 | Predict the Damage: A Container-Verified Benchmark of LLM Reasoning About Shell Command Consequences for Solution-Free Linux Tutoring | Research | Research |  |  |
+| 2026-10-04 | Bits per Question | Side Project | Weekend |  |  |
+| 2026-10-04 | Stroke Budget | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-10-04 | Brick by Constraint | Classroom Assignment | Multi-week |  |  |
+| 2026-10-04 | Solver-Checked Simplification Hints: An SMT-Grounded Benchmark for LLM Feedback on Overcomplicated Conditionals in Novice Code | Research | Research |  |  |
+| 2026-10-05 | Brocot Gear Finder | Side Project | Weekend |  |  |
+| 2026-10-05 | Turtle Target Practice | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-10-05 | Build Your Own Multitrack Audio Editor | Classroom Assignment | Multi-week |  |  |
+| 2026-10-05 | Diagram-Grounded Pointer Drills: Execution-Verified Generation of C Pointer Exercises with Misconception-Tagged Distractors and Memory-Diagram Hints | Research | Research |  |  |
+| 2026-10-06 | Nearest Representable | Side Project | Weekend |  |  |
+| 2026-10-06 | Heap Arena Replay | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-10-06 | Build Your Own Spreadsheet Engine | Classroom Assignment | Multi-week |  |  |
+| 2026-10-06 | Fault-Seeded Answer Sets for Stress-Testing CS1 Written-Response Rubrics: Predicting Inter-Rater Unreliability Before Grading Begins | Research | Research |  |  |
+| 2026-10-07 | Phantom API | Side Project | Weekend |  |  |
+| 2026-10-07 | Peer Pick Ledger | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-10-07 | Build Your Own Micropolis | Classroom Assignment | Multi-week |  |  |
+| 2026-10-07 | Round-Trip Narration Fidelity: A Reconstruction Benchmark for Screen-Reader Descriptions of Program State | Research | Research |  |  |
+| 2026-10-08 | Program Alarm 1202 | Side Project | Weekend |  |  |
+| 2026-10-08 | Modulo Bias Microscope | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-10-08 | Build Your Own Wikipedia Museum | Classroom Assignment | Multi-week |  |  |
+| 2026-10-08 | Pattern-Breaking Variants: Measuring Whether Generated Exercise Diversity Defeats Surface-Level Solvers in CS1 | Research | Research |  |  |
+| 2026-10-09 | Four Ghosts, Four Targets | Side Project | Weekend |  |  |
+| 2026-10-09 | Fork Count | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-10-09 | Build Your Own Plate Solver | Classroom Assignment | Multi-week |  |  |
+| 2026-10-09 | The Toolchain Coverage Gap: Which Code-Quality Defects in Existing-Codebase Assignments Do Linters Catch, What Can LLM Reviewers Add, and What Do AI Contributors Introduce? | Research | Research |  |  |
+| 2026-10-10 | Poincaré Paint | Side Project | Weekend |  |  |
+| 2026-10-10 | Cache Miss Theater | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-10-10 | Build Your Own RISC-V Emulator That Boots | Classroom Assignment | Multi-week |  |  |
+| 2026-10-10 | Comment Once, Apply Safely: Benchmarking LLM Propagation of TA Design Feedback Across Open-Ended Programming Submissions | Research | Research |  |  |
+| 2026-10-11 | Jamo Blocks | Side Project | Weekend |  |  |
+| 2026-10-11 | Edit Graph Lab | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-10-11 | Build Your Own BSP Level Renderer | Classroom Assignment | Multi-week |  |  |
+| 2026-10-11 | Construction-Trace Feedback: Verified, Solution-Free Hints for Student Closure Constructions in Automata Theory | Research | Research |  |  |
+| 2026-10-12 | Expansion Order | Side Project | Weekend |  |  |
+| 2026-10-12 | Lockstep Lab | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-10-12 | Build Your Own Static Recompiler | Classroom Assignment | Multi-week |  |  |
+| 2026-10-12 | Cold-Start README Audits: Seeded-Defect Evaluation of LLM Agents as Novice Followers for Feedback on Student Project Documentation | Research | Research |  |  |
+| 2026-10-13 | Mnemonic Unpacker | Side Project | Weekend |  |  |
+| 2026-10-13 | In-Band | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-10-13 | Build Your Own Resumable Download Manager | Classroom Assignment | Multi-week |  |  |
+| 2026-10-13 | Strategy Hijacking in LLM Programming Hints: Measuring Whether AI Tutors Steer CS1 Students Away From Valid Non-Canonical Solutions | Research | Research |  |  |
+| 2026-10-14 | Outguess Me | Side Project | Weekend |  |  |
+| 2026-10-14 | Net Units | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-10-14 | Build Your Own Borrow Checker | Classroom Assignment | Multi-week |  |  |
+| 2026-10-14 | Mechanism or Tinkering? A Qualitative-Process Critic for Classifying and Giving Feedback on Student Edits to Unpacked Blocks in Ecosystem Models | Research | Research |  |  |
+| 2026-10-15 | Tamerlane Board | Side Project | Weekend |  |  |
+| 2026-10-15 | Strictly C | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-10-15 | Build Your Own Persistent P2P Tunnel | Classroom Assignment | Multi-week |  |  |
+| 2026-10-15 | Hint Ladders for Refactoring: Measuring Correctness and Solution Leakage of Graduated LLM Hints on Code-Quality Exercises | Research | Research |  |  |
+| 2026-10-16 | Track Switch | Side Project | Weekend |  |  |
+| 2026-10-16 | Pluck Lab | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-10-16 | Build Your Own FORTRAN I Compiler | Classroom Assignment | Multi-week |  |  |
+| 2026-10-16 | Do LLM Tutors Share Students' Continuation Misconceptions? A Reference-Interpreter Benchmark for LLM Tracing and Explanation of Delimited Continuations | Research | Research |  |  |
+| 2026-10-17 | Mode Collapse | Side Project | Weekend |  |  |
+| 2026-10-17 | 23:59:60 | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-10-17 | Build Your Own Bot Ladder for a Tiny RTS | Classroom Assignment | Multi-week |  |  |
+| 2026-10-17 | Speakable Error Messages: An Audio-First Benchmark for LLM Explanations of Notebook Errors for Screen-Reader Users | Research | Research |  |  |
+| 2026-10-18 | Gloss Glyphs | Side Project | Weekend |  |  |
+| 2026-10-18 | Pull the Pin | Teaching Tool | 1-2 Weeks |  |  |
+| 2026-10-18 | Build Your Own Diagram Layout Engine | Classroom Assignment | Multi-week |  |  |
+| 2026-10-18 | Green but Hollow: A Mutation-Scored Benchmark of AI-Generated Unit Tests for Toolchain-First C++ Data Structures Assignments | Research | Research |  |  |
+| 2026-10-21 | Code Viva | EdTech: Higher Ed | Multi-week | 20 |  |
+| 2026-10-21 | Alt Text Studio for CS Courses | EdTech: Higher Ed | Weekend MVP | 23 |  |
+| 2026-10-21 | PPR Rehearsal | EdTech: K-12 | Weekend MVP | 20 |  |

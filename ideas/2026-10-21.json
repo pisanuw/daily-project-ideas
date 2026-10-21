@@ -1,0 +1,441 @@
+{
+  "date": "2026-10-21",
+  "schemaVersion": 2,
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Code Viva",
+      "slug": "code-viva",
+      "category": "EdTech: Higher Ed",
+      "complexity": "Multi-week",
+      "summary": "For CS instructors who suspect submitted code is not the student's own understanding: Code Viva generates a short oral check about each student's actual submission and turns 30 hours of TA orals into a few hours of review.",
+      "problemStatement": "Instructors get polished take-home code from students who cannot explain it. Oral defenses work, but a 25 minute oral for 36 students with two graders costs roughly 30 hours of staff time, so most large CS courses cannot run them, and general AI oral tools ask about the topic rather than the specific lines a student submitted.",
+      "description": "The instructor connects a GitHub Classroom organization or uploads a Gradescope/Canvas submission export. For each student, Code Viva reads the submitted code and commit history, then generates 4 to 6 questions anchored to that student's own functions, variable names, design choices, and suspicious commits (for example a large paste late at night). Students answer in a timed text or voice session from a personal link, with follow-up questions when answers are vague. An instructor dashboard shows per-student transcripts, rubric-aligned proposed scores with quoted evidence, and a flag queue for students who should get a short human follow-up, so TAs spend time only where it matters.",
+      "targetCustomer": "Instructors and TAs of CS1, CS2, data structures, and upper-division programming courses with 60 to 400 students.",
+      "buyer": "Instructor on a personal card or course budget for a pilot; department chair or teaching-and-learning center for multi-course licenses.",
+      "whyNow": "In April 2026 the AP reported a 'massive shift toward in-person assessments' and faculty workshops on oral exams at Penn and Cornell, NYU Stern published a voice AI oral exam paper (March 2026, revised July 2026), and a SIGCSE TS 2026 lightning talk showed demand for code-specific orals inside a GitHub-native LMS. The generic tools exist, but code-grounded ones are still research prototypes.",
+      "founderFit": "Pisan teaches courses that use agentic coding tools, so he lives this exact integrity problem, can pilot on his own course data under his institution's rules, and can recruit SIGCSE colleagues (the community where the Dartmouth and TAMIGO prototypes were presented) as design partners.",
+      "problemEvidence": [
+        {
+          "url": "https://the-decoder.com/nyu-professor-fights-ai-cheating-with-ai-powered-oral-exams-that-cost-42-cents-per-student/",
+          "source": "The Decoder",
+          "date": "2026-01-04",
+          "summary": "NYU Stern ran AI oral exams for 36 students at about $0.42 each, versus an estimated 30 hours (about $750) for two human graders."
+        },
+        {
+          "url": "https://wtop.com/education/2026/04/perfect-homework-blank-stares-why-colleges-are-turning-to-oral-exams-to-combat-ai/",
+          "source": "AP via WTOP",
+          "date": "2026-04-22",
+          "summary": "Penn and Cornell faculty shifting to oral defenses; a Cornell instructor runs 20 minute defenses for 70 students with TAs, showing the staffing burden."
+        },
+        {
+          "url": "https://sigcse2026.sigcse.org/details/sigcse-ts-2026-lightning-talks/17/AI-Driven-Oral-Examinations-for-Code-Assessment-Evaluating-Understanding-Beyond-the-",
+          "source": "SIGCSE TS 2026",
+          "date": "2026-02-20",
+          "summary": "Dartmouth presenters built chat-based orals about students' own code because oral exams rarely scale to large courses."
+        },
+        {
+          "url": "https://arxiv.org/abs/2603.18221",
+          "source": "arXiv (Ipeirotis and Rizakos)",
+          "date": "2026-03-18",
+          "summary": "Voice AI oral exam system with multi-LLM grading tested on two cohorts; grading cost under one dollar per exam."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Viva (NYU Stern)",
+          "url": "https://viva.stern.nyu.edu/",
+          "price": "Free during alpha, with usage limits (3 exams, 50 students for new accounts)",
+          "gap": "General project or case discussion; the page does not mention reading code submissions, repos, or commit history, and future pricing and support are unknown."
+        },
+        {
+          "name": "Coraltalk",
+          "url": "https://www.getapp.com/all-software/a/coraltalk/",
+          "price": "$19.99 per user per a GetApp listing (vendor page not verified, unknown)",
+          "gap": "Rubric-graded AI oral assessments for any subject; no evidence of code-aware question generation or GitHub integration."
+        },
+        {
+          "name": "TAMIGO (research prototype)",
+          "url": "https://arxiv.org/pdf/2407.16805",
+          "price": "Not a product (research)",
+          "gap": "Shows LLM viva questions work for code, but is not available as a supported product and its authors report hallucinated feedback."
+        }
+      ],
+      "keyFeatures": [
+        "Per-student questions anchored to that student's own functions, names, and commits",
+        "Timed text or voice session from a no-account link",
+        "Proposed rubric scores with quoted transcript evidence and an instructor approval step",
+        "Flag queue that routes only unclear cases to a short human follow-up",
+        "GitHub Classroom import plus CSV/zip import from Gradescope or Canvas exports"
+      ],
+      "mvpScope": {
+        "features": [
+          "Zip or GitHub Classroom import",
+          "Question generation from code plus the assignment spec",
+          "Text-only timed session with up to 2 follow-ups",
+          "Instructor review dashboard with proposed scores and flags"
+        ],
+        "outOfScope": [
+          "Voice mode",
+          "LTI integration and grade passback",
+          "Proctoring or identity verification",
+          "Commit-history anomaly detection beyond simple stats"
+        ],
+        "buildEstimate": "4 to 6 weeks part time"
+      },
+      "techStack": "React + Vite + Tailwind, Supabase (auth, Postgres, storage, row-level security), Claude API for question generation and scoring, GitHub API, Flask worker for repo processing",
+      "pricing": {
+        "model": "Per-course subscription per term, with a department license",
+        "pricePoint": "$149 per course per term (up to 250 students); department license $1,500 per term",
+        "rationale": "Undercuts the roughly $750 of TA time per 36-student oral round reported by NYU while staying under typical instructor discretionary spending limits; Coraltalk's listed $19.99 per user suggests per-seat pricing is accepted, but per-student pricing is a hard sell to instructors."
+      },
+      "revenueSketch": "Estimate: 60 courses x $149 per term x 2 terms = about $17,900 per year in year one, plus 5 department licenses x $1,500 x 2 = $15,000; total about $33,000 ARR. Assumes roughly 5 percent conversion from about 1,200 instructor contacts via SIGCSE channels.",
+      "distribution": "Demo at a SIGCSE or CCSC workshop, a post on the SIGCSE members mailing list, and 5 free design-partner pilots with instructors met through SIGCSE, converting to paid in the next term; then a listing in GitHub Classroom teacher communities.",
+      "validationTest": {
+        "method": "Landing page with a 2 minute demo video using a public sample repo, plus 8 interviews with CS1/CS2 instructors from the SIGCSE network, asking them to run it on one past assignment.",
+        "successCriteria": "At least 3 of 8 instructors commit to a paid pilot at $149 for next term, or 40 waitlist sign-ups from instructor emails.",
+        "cost": "About 20 hours and under $50 in API costs."
+      },
+      "moat": "Accumulated library of question templates and calibrated rubrics per common CS assignment (linked lists, recursion, web APIs), instructor-validated scoring data, and integrations with GitHub Classroom and LMS exports that generic oral-exam tools lack.",
+      "compliance": [
+        "FERPA: submissions and transcripts are education records; sign a data processing agreement, use a model provider with no training on inputs, and keep data in the US",
+        "Accessibility: sessions must meet WCAG 2.1 AA (keyboard, screen reader, adjustable time limits) since public universities face the ADA Title II April 26, 2027 deadline",
+        "Accommodations: allow extended time and text alternatives to voice for students with disability accommodations",
+        "Institutional review: some universities require a vendor security review before course-wide use"
+      ],
+      "risks": [
+        {
+          "risk": "Students find AI orals stressful (83 percent in the NYU study), creating complaints",
+          "mitigation": "Default to low-stakes text sessions, allow practice runs, and position scores as flags for human follow-up rather than final grades."
+        },
+        {
+          "risk": "Free tools like NYU Viva absorb the market",
+          "mitigation": "Specialize deeply in code: repo import, commit evidence, CS rubrics, and TA workflow, which a general tool is unlikely to prioritize."
+        },
+        {
+          "risk": "LLM scoring errors or hallucinated feedback",
+          "mitigation": "Require quoted evidence for every proposed score and instructor approval before students see results."
+        }
+      ],
+      "scores": {
+        "pain": 4,
+        "willingnessToPay": 3,
+        "reachability": 4,
+        "competitiveGap": 3,
+        "feasibility": 3,
+        "complianceBurden": 3,
+        "total": 20
+      },
+      "inspiredBy": "https://sigcse2026.sigcse.org/details/sigcse-ts-2026-lightning-talks/17/AI-Driven-Oral-Examinations-for-Code-Assessment-Evaluating-Understanding-Beyond-the-"
+    },
+    {
+      "n": 2,
+      "title": "Alt Text Studio for CS Courses",
+      "slug": "alt-text-studio-for-cs-courses",
+      "category": "EdTech: Higher Ed",
+      "complexity": "Weekend MVP",
+      "summary": "For CS instructors facing the ADA Title II deadline: upload slide decks and Jupyter notebooks, get reviewed, CS-aware alt text for every code screenshot, plot, and data-structure diagram, and download fixed files.",
+      "problemStatement": "Campus remediation services will fix PDFs but explicitly do not write alt text for images, because the instructor must decide the instructional intent. CS lecture decks are full of code screenshots, trees, graphs, and plots, and generic auto alt text does not say what a student needs to know, so instructors face writing hundreds of descriptions by hand before the deadline.",
+      "description": "Instructors drag in .pptx and .ipynb files (and later PDFs). The tool finds every image without alt text, classifies it (code screenshot, terminal output, plot, data-structure or automaton diagram, UI screenshot), and drafts alt text in the style each type needs: code screenshots get an option to be replaced with real, selectable code text; plots get axis and trend descriptions; diagrams get structured descriptions (for example node and edge lists for a tree). The instructor reviews drafts in a fast keyboard-driven queue, edits the intent sentence, and downloads files with alt text written back into the original format, plus a short accessibility report per course.",
+      "targetCustomer": "CS and data science instructors at public US universities who own their slides and notebooks.",
+      "buyer": "Instructor on a personal card or professional development funds; department or accessibility office for bulk licenses ahead of the deadline.",
+      "whyNow": "DOJ's April 20, 2026 interim final rule moved the Title II deadline for large public entities to April 26, 2027, about six months away, without changing the WCAG 2.1 AA requirement, and campus remediation services are capped and exclude alt text and math, pushing the work onto faculty.",
+      "founderFit": "Pisan works in accessibility and CS education, knows what instructional intent means for a code or algorithm figure, and can reach CS instructors at public universities through SIGCSE before the deadline.",
+      "problemEvidence": [
+        {
+          "url": "https://blogs.uww.edu/catlst/?p=279",
+          "source": "UW-Whitewater CATLST blog",
+          "date": "2026-04-01",
+          "summary": "Campus PDF remediation is capped at 5 PDFs or 50 pages at a time, ends June 30, 2026, excludes math, and does not include alt text, which instructors must write."
+        },
+        {
+          "url": "https://campustechnology.com/articles/2026/04/27/doj-extends-deadline-for-ada-title-ii-compliance.aspx",
+          "source": "Campus Technology",
+          "date": "2026-04-27",
+          "summary": "Title II deadline moved to April 26, 2027 for large entities; WCAG 2.1 AA still required; 'the extension is not an invitation to wait.'"
+        },
+        {
+          "url": "https://curriculum-guide.datahub.berkeley.edu/workflows/accessibility",
+          "source": "UC Berkeley DataHub curriculum guide",
+          "date": "unknown",
+          "summary": "Notebooks lack alt text by default (matplotlib and seaborn add none), have unclear headings, and large notebooks can crash screen readers."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "jupyterlab-a11y-checker",
+          "url": "https://pypi.org/project/jupyterlab-a11y-checker",
+          "price": "Free, open source",
+          "gap": "Notebook-only and works inside JupyterLab; does not handle lecture slide decks or replace code screenshots with text."
+        },
+        {
+          "name": "Anthology Ally",
+          "url": "https://www.anthology.com/blog/anthology-ally-available-in-exclusive-deal-for-heitsa-members",
+          "price": "Institutional license, unknown",
+          "gap": "Flags missing alt text and scores courses inside the LMS but leaves writing CS-specific descriptions to the instructor; requires an institutional purchase."
+        },
+        {
+          "name": "Campus remediation services (e.g., Equidox-based)",
+          "url": "https://blogs.uww.edu/catlst/?p=279",
+          "price": "Free to faculty where offered, capacity-limited",
+          "gap": "Capped volume, temporary, and explicitly excludes alt text and math content."
+        }
+      ],
+      "keyFeatures": [
+        "Batch upload of .pptx and .ipynb with missing-alt-text inventory",
+        "Image-type classifier with CS-specific alt text templates",
+        "Replace code screenshots with real code text blocks",
+        "Keyboard-driven review queue with an instructor intent field",
+        "Write alt text back into the original files plus a per-course report"
+      ],
+      "mvpScope": {
+        "features": [
+          "Upload .pptx and .ipynb",
+          "Detect images lacking alt text",
+          "Draft alt text with Claude vision using CS templates",
+          "Review queue and download of fixed files"
+        ],
+        "outOfScope": [
+          "PDF remediation and tagging",
+          "Canvas course import",
+          "Math equation conversion",
+          "Video captions"
+        ],
+        "buildEstimate": "1 to 2 weekends"
+      },
+      "techStack": "React + Vite + Tailwind, Flask with python-pptx and nbformat for file rewriting, Claude API (vision) for drafts, Supabase for auth, Stripe for payments",
+      "pricing": {
+        "model": "Per-instructor subscription, plus department bundles",
+        "pricePoint": "$12/month or $59 per semester per instructor; department bundle of 20 seats for $600 per semester",
+        "rationale": "Priced like a personal productivity tool that an instructor can expense without procurement; far below an institutional Ally license, and comparable to teacher SaaS price points around $14/month seen in listings."
+      },
+      "revenueSketch": "Estimate: 300 instructors x $59 per semester x 2 semesters = $35,400 per year, plus 10 department bundles x $600 x 2 = $12,000; total about $47,000 per year, concentrated before the April 2027 deadline. Assumes demand drops after the deadline unless the product expands to new-course workflows.",
+      "distribution": "Free 10-image trial linked from a short SIGCSE mailing list post and a 'how we made our CS1 slides Title II compliant' talk or blog post; outreach to accessibility coordinators and teaching centers at public universities who already publish faculty guidance.",
+      "validationTest": {
+        "method": "Process 3 real public CS lecture decks by hand with the prompt pipeline, publish before/after examples on a landing page, and email 30 CS instructors at public universities.",
+        "successCriteria": "At least 10 trial sign-ups and 3 paid conversions within 2 weeks, or 2 departments asking for a bundle quote.",
+        "cost": "About 1 weekend and under $30 in API costs."
+      },
+      "moat": "CS-specific image taxonomy and description templates validated with blind and low-vision CS students and accessibility staff, plus reliable round-tripping of pptx and ipynb files, which generic alt text generators handle poorly.",
+      "compliance": [
+        "Accessibility: output must itself meet WCAG 2.1 AA and the app UI must be accessible",
+        "FERPA: minimal, since inputs are instructor-owned course materials, but slides can contain student names or screenshots; warn and allow redaction",
+        "Copyright: instructors upload only materials they own or are licensed to use",
+        "Data agreements: offer a no-retention mode and state that files are not used for model training"
+      ],
+      "risks": [
+        {
+          "risk": "Demand collapses after the April 2027 deadline or if the deadline moves again",
+          "mitigation": "Add ongoing workflows (new-lecture checks, a pre-upload linter) and target smaller institutions with an April 2028 deadline."
+        },
+        {
+          "risk": "AI alt text is wrong or misses instructional intent, creating false compliance",
+          "mitigation": "Require instructor review of every draft and capture intent in one sentence before export."
+        },
+        {
+          "risk": "Microsoft or LMS vendors ship better built-in alt text",
+          "mitigation": "Stay focused on CS-specific content types (code, diagrams, notebooks) that generic tools describe poorly."
+        }
+      ],
+      "scores": {
+        "pain": 4,
+        "willingnessToPay": 3,
+        "reachability": 4,
+        "competitiveGap": 3,
+        "feasibility": 5,
+        "complianceBurden": 4,
+        "total": 23
+      },
+      "inspiredBy": "https://blogs.uww.edu/catlst/?p=279"
+    },
+    {
+      "n": 3,
+      "title": "PPR Rehearsal",
+      "slug": "ppr-rehearsal",
+      "category": "EdTech: K-12",
+      "complexity": "Weekend MVP",
+      "summary": "For AP Computer Science Principles teachers: generate fresh, College Board style written response practice prompts about each student's own Personalized Project Reference, so classes get more than the three official practice sets.",
+      "problemStatement": "On the AP CSP exam, students answer written response prompts about the code in their own Personalized Project Reference, but official practice is limited to the Course and Exam Description examples and three AP Classroom sets, and teachers are told to provide additional practice prompts themselves. Writing personalized prompts for 30 different student programs is impractical.",
+      "description": "The teacher pastes or uploads each student's PPR code segments (list and procedure screenshots or text), with names removed. PPR Rehearsal generates many practice prompt sets in the four written response areas (program design and purpose, algorithm development, errors and testing, data and procedural abstraction), each referencing that student's actual list, procedure, and parameters. It also generates a teacher-side checklist of what a strong answer would cover, and checks whether the PPR is missing a required segment. The tool is teacher-operated only: students never log in, and it respects the College Board rule that teachers give no feedback on the Create task before it is submitted as final.",
+      "targetCustomer": "High school AP CSP teachers, many of whom are the only CS teacher in their school.",
+      "buyer": "Teacher on a personal card, reimbursed from classroom or professional development funds; school site license later.",
+      "whyNow": "The current exam format moved written responses to the end-of-course exam, tied to each student's own PPR, and College Board guidance tells teachers to supply additional practice prompts; meanwhile teachers already pay for AI planning tools at roughly $14/month.",
+      "founderFit": "Pisan understands CS assessment design and can reach AP CSP teachers through SIGCSE K-12 overlap, CSTA chapters, and university outreach or dual-enrollment partners; the tool is a small, focused build in his stack.",
+      "problemEvidence": [
+        {
+          "url": "https://apcentral.collegeboard.org/courses/ap-computer-science-principles/course/faq/about-ap-csp-exam",
+          "source": "College Board AP Central",
+          "date": "unknown",
+          "summary": "Teachers should provide additional written response practice prompts; official practice is the CED examples and three AP Classroom sets; no feedback before final submission."
+        },
+        {
+          "url": "https://apcentral.collegeboard.org/courses/ap-computer-science-principles/course/faq/assessment-details",
+          "source": "College Board AP Central",
+          "date": "unknown",
+          "summary": "Students answer two exam questions (four prompts) about the code in their Personalized Project Reference."
+        },
+        {
+          "url": "https://runestone.academy/ns/books/published/mobilecsp/Unit5-Algorithms-Procedural-Abstraction/Create-Written-Practice.html",
+          "source": "Mobile CSP on Runestone",
+          "date": "unknown",
+          "summary": "Curriculum authors already hand-build written response practice around a single sample project, showing the need but not personalization."
+        },
+        {
+          "url": "https://flippa.com/11990705-ai-edtech-saas-for-teachers-6-673-mrr-80k-arr-428-subscribers-growing-recurring-revenue",
+          "source": "Flippa listing",
+          "date": "unknown",
+          "summary": "Seller-reported AI edtech SaaS for teachers with roughly $6,700 MRR from about 428 subscribers (figures unverified and inconsistent across listing versions)."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "JuiceMind AP CSP curriculum",
+          "url": "https://juicemind.com/courses/ap-cs-principles",
+          "price": "unknown",
+          "gap": "AI feedback on written responses is bundled inside its own curriculum and IDE; teachers using Code.org, CodeHS, or other curricula must switch platforms."
+        },
+        {
+          "name": "AP Classroom practice sets",
+          "url": "https://apcentral.collegeboard.org/courses/ap-computer-science-principles/course/faq/about-ap-csp-exam",
+          "price": "Free with AP",
+          "gap": "Only three generic sets; prompts do not reference each student's own code."
+        },
+        {
+          "name": "Mobile CSP written response practice",
+          "url": "https://runestone.academy/ns/books/published/mobilecsp/Unit5-Algorithms-Procedural-Abstraction/Create-Written-Practice.html",
+          "price": "Free",
+          "gap": "Built around one sample app, not the student's program."
+        }
+      ],
+      "keyFeatures": [
+        "Paste or upload PPR segments with automatic name stripping",
+        "Unlimited personalized prompt sets across the four written response areas",
+        "Teacher answer checklists for each prompt",
+        "PPR completeness check for required list and procedure segments",
+        "Printable packets for in-class timed practice"
+      ],
+      "mvpScope": {
+        "features": [
+          "Text and image upload of PPR segments",
+          "Prompt generation in the four areas",
+          "Teacher checklist per prompt",
+          "Print-ready PDF packet per student"
+        ],
+        "outOfScope": [
+          "Student accounts or student-facing AI feedback",
+          "Automated scoring of student answers",
+          "LMS integrations",
+          "School site licensing and invoicing"
+        ],
+        "buildEstimate": "1 weekend"
+      },
+      "techStack": "React + Vite + Tailwind, Supabase (auth, storage), Claude API (vision for screenshot PPRs), Stripe",
+      "pricing": {
+        "model": "Per-teacher seasonal pass",
+        "pricePoint": "$39 per school year, or $9/month",
+        "rationale": "Below typical AI teacher tools (Lessona lists $13.99/month) and cheap enough to expense, matching a use concentrated in March to May."
+      },
+      "revenueSketch": "Estimate: 400 teachers x $39 per year = $15,600 per year. Assumes reaching about 4,000 AP CSP teachers (the actual teacher count is unknown) with 10 percent conversion. Treat as a side income product unless bundled with other AP CS tools.",
+      "distribution": "Free 5-student trial shared in AP CSP teacher communities (CSTA chapters, AP teacher Facebook and Discord groups), a session at a CSTA or regional CS teacher conference, and university K-12 outreach partners.",
+      "validationTest": {
+        "method": "Generate a sample packet from a public sample PPR, post it to 2 AP CSP teacher communities with a waitlist, and interview 5 AP CSP teachers.",
+        "successCriteria": "50 waitlist sign-ups and at least 3 of 5 teachers saying they would pay $39 before the spring exam season.",
+        "cost": "About 8 hours and $0 to $20."
+      },
+      "moat": "Weak on its own; a moat comes from a vetted prompt bank aligned to College Board scoring guidelines, teacher trust in the CS teacher community, and later bundling with other AP CS prep tools.",
+      "compliance": [
+        "FERPA and state student privacy laws: student code is an education record; strip names, keep the tool teacher-operated, and offer a signed student data privacy agreement for schools",
+        "COPPA: AP students are usually 14 or older, and students never create accounts, so minimal",
+        "College Board policy: product must not give feedback on Create task components before final submission; tool positions itself for exam-season practice",
+        "Trademark: avoid implying College Board endorsement; use 'AP' only descriptively"
+      ],
+      "risks": [
+        {
+          "risk": "College Board changes the exam format or bans third-party practice tied to PPRs",
+          "mitigation": "Keep prompts generic to learning objectives and monitor AP Central each fall."
+        },
+        {
+          "risk": "Small market and seasonal usage",
+          "mitigation": "Expand to AP CSA free-response practice and CS teacher end-of-year review."
+        },
+        {
+          "risk": "Teachers expect it free given free AI teacher tools",
+          "mitigation": "Offer a free tier of 5 students and charge for full-class packets and checklists."
+        }
+      ],
+      "scores": {
+        "pain": 3,
+        "willingnessToPay": 3,
+        "reachability": 3,
+        "competitiveGap": 3,
+        "feasibility": 5,
+        "complianceBurden": 3,
+        "total": 20
+      },
+      "inspiredBy": "https://apcentral.collegeboard.org/courses/ap-computer-science-principles/course/faq/about-ap-csp-exam"
+    }
+  ],
+  "runNotes": {
+    "searches": [
+      "r/Professors AI generated assignments grading workload 2026",
+      "Gradescope reviews cons Capterra",
+      "ADA Title II web accessibility rule April 2026 deadline universities course materials status",
+      "Indie Hackers edtech teacher tool MRR 2026",
+      "Inside Higher Ed faculty AI oral exams assessment 2026",
+      "Ask HN tool teachers wish existed programming course autograder",
+      "reddit Professors oral exams scheduling scaling large class AI",
+      "faculty remediate PDF slides accessibility Title II overwhelmed course materials 2026",
+      "Product Hunt education AI tool teachers paid plan launch 2026",
+      "EdSurge October 2026 AI teachers",
+      "Jupyter notebook accessibility screen reader WCAG course materials CS instructors",
+      "tool generate oral questions about student's own code submission viva programming course",
+      "r/Teachers reddit 2026 tool wish existed grading parent emails",
+      "acquire.com listing education SaaS teachers subscription revenue",
+      "AP CSP Create performance task written response questions about own code Personalized Project Reference 2026 exam",
+      "Federal Register interim final rule extension compliance dates ADA Title II web content accessibility 2026",
+      "AI oral assessment platform for instructors pricing Sherpa Socratic Mind viva voce",
+      "jupyterlab a11y-checker alt text notebook github",
+      "Anthology Ally pricing per institution; Pope Tech pricing",
+      "JuiceMind AP CSP create task pricing teachers",
+      "Classmoji GitHub learning management system Dartmouth"
+    ],
+    "rejectedCandidates": [
+      {
+        "title": "Department accessibility triage dashboard (Canvas course inventory)",
+        "total": 17,
+        "reason": "Anthology Ally and similar tools already report course accessibility to institutions; requires institutional sales."
+      },
+      {
+        "title": "Viva rehearsal coach for students",
+        "total": 19,
+        "reason": "Thin AI wrapper; NYU Viva already lets students practice for free."
+      },
+      {
+        "title": "Oral exam slot scheduler for TAs",
+        "total": 19,
+        "reason": "Scheduling is well served by existing calendar tools; little gap."
+      },
+      {
+        "title": "Math and formula PDF remediation",
+        "total": 19,
+        "reason": "Real pain (math excluded from campus remediation) but MathPix-style OCR is hard to build solo and has incumbents."
+      },
+      {
+        "title": "Gradescope rubric keyboard navigation extension",
+        "total": 18,
+        "reason": "Evidence is a single Capterra review; depends on a third party's UI and may conflict with its terms."
+      },
+      {
+        "title": "K-12 parent email drafter",
+        "total": 17,
+        "reason": "Crowded (Zo, OpenEduCat, MagicSchool); AI wrapper with no moat."
+      },
+      {
+        "title": "AI lesson plan generator",
+        "total": 16,
+        "reason": "Crowded and undercut by free offerings such as Claude for Teachers."
+      }
+    ],
+    "caveats": "Searches did not surface any recent Reddit (r/Professors, r/Teachers) threads directly, so pain evidence relies on news, campus guidance, and conference sources. Coraltalk's $19.99 price comes from a GetApp listing (page returned 403 on fetch). Flippa revenue figures are seller-reported and inconsistent. The Federal Register page could not be fetched (redirect); Title II dates were confirmed via Campus Technology. AP CSP teacher counts, JuiceMind pricing, and Ally pricing are unknown. Ideas 1 and 3 share a technique (questions about a student's own code) but target different customers (university instructors vs high school AP teachers)."
+  }
+}

@@ -367,3 +367,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-10-17 [doc] Created ideas/2026-10-17.json with 4 ideas: Mode Collapse, 23:59:60, Build Your Own Bot Ladder for a Tiny RTS, Speakable Error Messages (SIGCSE TS 2026 doi:10.1145/3770762.3772507)
 
 2026-10-18 [doc] Created ideas/2026-10-18.json with 4 ideas: Gloss Glyphs, Pull the Pin, Build Your Own Diagram Layout Engine, Green but Hollow (SIGCSE TS 2026 doi:10.1145/3770762.3772551)
+
+2026-10-21 [doc] Created ideas/2026-10-21.json (schemaVersion 2, commercial ideas): Code Viva, Alt Text Studio for CS Courses, PPR Rehearsal; IDEAS.md gains Score and Rating columns
