@@ -279,6 +279,16 @@
       "url": "https://outguess-me.netlify.app",
       "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/outguess-me",
       "implementedOn": "2026-10-16"
+    },
+    {
+      "ref": {
+        "date": "2026-10-21",
+        "n": 1
+      },
+      "notes": "Built in one session, fully client-side in plain TypeScript (no React/Tailwind, Supabase, Flask or Claude API). Import a Gradescope export, a Canvas submissions zip (nested zips unpacked) or one folder per student with an optional git log, or a GitHub Classroom assignment straight from the browser to api.github.com. A regex and brace-matching analyser finds each function's loops, guards, recursion, data structures, vague names and constants; commit stats flag one-commit submissions, bulk adds, late-night commits and deadline rushes (bot starter commits ignored). Templates produce 4 to 6 questions per student (recursion, edge, design, naming, scale, trace, spec, commit), varied by kind, at most two per function, seeded by student id. The timed text session runs from a link carrying the questions in the URL fragment, with up to two non-repeating follow-ups aimed at what a vague answer misses, extended-time multipliers, and paste/blur/restart tracking; students return a CVR1 response code. Review: 0-3 keyword rubric with quoted evidence (mostly pasted replies earn no credit), a flag queue, overrides, approval, and results/links CSV. Limitation: response codes are not signed. 79 vitest tests, 99.6% statement coverage on core.",
+      "url": "https://code-viva.netlify.app",
+      "repo": "https://github.com/pisanuw/Claude-capstone/tree/claude/zen-lovelace-j0ho5r/code-viva",
+      "implementedOn": "2026-10-21"
     }
   ]
 }
