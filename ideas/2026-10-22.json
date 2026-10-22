@@ -1,0 +1,457 @@
+{
+  "date": "2026-10-22",
+  "schemaVersion": 2,
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Grader Drift Report",
+      "slug": "grader-drift-report",
+      "category": "EdTech: Higher Ed",
+      "complexity": "Weekend MVP",
+      "summary": "For instructors who run a team of TAs: upload a grading export and see, within minutes, which graders are harsher or more lenient, which rubric items they apply differently, and which questions need adjudication before grades go out.",
+      "problemStatement": "When eight TAs split 400 submissions, students get different grades for the same work depending on who graded them, and instructors usually find out only through regrade requests. Research shows grader agreement on programming work is very low, and a shared rubric alone does not fix it, but nobody has time to compute inter-rater statistics by hand mid-semester.",
+      "description": "The instructor drags in a grading export (Gradescope evaluations or a generic CSV of submission, question, grader, score, and rubric items applied). The app runs entirely in the browser, strips student names, and produces a report: per-grader severity relative to the class (adjusted for which submissions each grader saw), per-rubric-item application rates by grader, ICC on any double-graded subset, and a short list of questions and graders that look out of line. A calibration mode lets the instructor pick five anonymized submissions that every TA grades before the real grading starts, then shows disagreements item by item so the team can fix the rubric before 400 students are affected. The report exports as a one-page PDF for TA meetings.",
+      "targetCustomer": "Instructors and head TAs of large CS courses (CS1, CS2, data structures, systems) with 3 or more graders per assignment.",
+      "buyer": "Instructor on a personal card or course budget at first; department (undergraduate program director) for a site license covering all multi-TA courses.",
+      "whyNow": "A SIGCSE TS 2026 paper (February 2026) showed ICC analysis can pinpoint unreliable questions in a large CS1 and that rubric clarification plus regrading fixes them, and a 2025 TOCE study found near-zero agreement among programming graders. The method is now published and credible, but no grading platform surfaces it to instructors.",
+      "founderFit": "Pisan has run multi-TA CS courses, knows the grading workflow and the SIGCSE literature behind the method, and can recruit design partners from SIGCSE attendees who teach large courses. The build is a small React app he can ship in a weekend.",
+      "problemEvidence": [
+        {
+          "url": "https://sigcse.cs.manchester.ac.uk/?p=3079",
+          "source": "Manchester SIGCSE journal club (on Messer, Brown, Kolling, Shi, TOCE 25(4))",
+          "date": "2025-10-06",
+          "summary": "28 graders on 40 CS1 Java assignments: Krippendorff's alpha 0.02 for correctness; only 1 of 22 graders gave a duplicated submission the same grade on every criterion; a shared rubric alone is not enough."
+        },
+        {
+          "url": "https://sigcse2026.sigcse.org/details/sigcse-ts-2026-Papers/116/Improving-the-Reliability-of-Grading-Written-Response-Coding-Questions-in-a-Large-CS1",
+          "source": "SIGCSE TS 2026 paper (Jin et al., Georgia Gwinnett College)",
+          "date": "2026-02-19",
+          "summary": "Double grading plus ICC flagged two low-reliability questions in a large CS1; after rubric clarification and regrading, ICC rose to 0.892 to 0.967."
+        },
+        {
+          "url": "https://research.gatech.edu/research-explores-fair-grading-large-cs-classes",
+          "source": "Georgia Tech Research news",
+          "date": "unknown",
+          "summary": "Grading code is subjective and inconsistency grows when multiple TAs grade the same problem; rubric training with 50 TAs reduced inconsistency (page date not confirmed, possibly 2023)."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Gradescope",
+          "url": "https://guides.gradescope.com/hc/en-us/articles/22239057709453",
+          "price": "unknown (institutional licensing)",
+          "gap": "Shows who graded each question (a Graded By column, per a University of Melbourne guide) and exports evaluations, but no grader-consistency or calibration analytics were found in this run's sources."
+        },
+        {
+          "name": "Crowdmark",
+          "url": "https://www.df.uzh.ch/static/ai-assisted-grading/tools/crowdmark",
+          "price": "$3.75 per student per course or $7 per user per year (University of Zurich guide, April 2022; current price unknown)",
+          "gap": "Markets consistency across TAs through reusable comments, but no grader-comparison statistics or calibration round were described."
+        },
+        {
+          "name": "Spreadsheets and ad hoc scripts",
+          "url": "https://www.ableweb.org/biologylabs/wp-content/uploads/volumes/vol-23/19-berkelhamer.pdf",
+          "price": "Free",
+          "gap": "Instructors can chart grades by section in Excel, but it takes hours, ignores which submissions each grader saw, and rarely happens mid-semester."
+        }
+      ],
+      "keyFeatures": [
+        "Browser-only processing of grading exports with automatic name stripping",
+        "Per-grader severity adjusted for submission assignment",
+        "Per-rubric-item application rates by grader",
+        "ICC on double-graded subsets with adjudication list",
+        "Pre-grading calibration round with item-level disagreement view",
+        "One-page PDF for TA meetings"
+      ],
+      "mvpScope": {
+        "features": [
+          "CSV upload (generic format plus Gradescope evaluations export if it includes grader names)",
+          "Per-grader severity and per-rubric-item rates",
+          "Flag list of outlier graders and questions",
+          "PDF export"
+        ],
+        "outOfScope": [
+          "Calibration round with TA logins",
+          "LMS or Gradescope API integration",
+          "AI explanations of why graders disagree",
+          "Department dashboards across courses"
+        ],
+        "buildEstimate": "1 to 2 weekends"
+      },
+      "techStack": "React + Vite + Tailwind, Papa Parse, client-side stats in TypeScript, Supabase (auth and billing metadata only, no student data), Stripe",
+      "pricing": {
+        "model": "Per-instructor annual subscription with a free first report; department site license",
+        "pricePoint": "$79/year per instructor; $600/year per department",
+        "rationale": "Priced well below per-student grading platforms (Crowdmark's 2022 figure was $3.75 per student per course) so an instructor can expense it, while one avoided regrade storm or grade appeal justifies the department license."
+      },
+      "revenueSketch": "Estimate: 150 instructors x $79/year = $11,850/year, plus 20 departments x $600/year = $12,000/year, about $24k ARR. Assumes 2 to 3 percent of instructors reached through SIGCSE channels convert after a free report.",
+      "distribution": "Free 'grader drift check' at SIGCSE-members and CSTA-adjacent mailing lists, a SIGCSE TS 2027 demo or lightning talk, and direct outreach to the authors and attendees of grading-reliability papers. Head TAs who see the report become champions for department licenses.",
+      "validationTest": {
+        "method": "Post a free hosted version that analyzes one anonymized export, announce it on the SIGCSE members list, and ask users for a 15-minute call.",
+        "successCriteria": "30 instructors upload a real export within 3 weeks and at least 5 say they would pay $79/year or ask their department to.",
+        "cost": "One weekend of build time and under $50 for hosting and a domain."
+      },
+      "moat": "Weak at first; it grows through a benchmark of anonymized grader-variance data across courses (which rubric patterns cause disagreement), SIGCSE credibility, and calibration packets instructors build and reuse each term.",
+      "compliance": [
+        "FERPA: grades are education records, so processing stays in the browser and names are stripped before any analysis; no student data is uploaded in the MVP.",
+        "Accessibility: report and charts must meet WCAG 2.1 AA (tables alongside charts, keyboard navigation).",
+        "Institutional agreements: none needed for the browser-only MVP; a server-side calibration feature would need a data processing agreement."
+      ],
+      "risks": [
+        {
+          "risk": "Gradescope export may not include grader identity in a usable form.",
+          "mitigation": "Support a generic CSV and document a two-minute manual step; confirm with 3 design partners before building the Gradescope parser."
+        },
+        {
+          "risk": "Gradescope or Crowdmark adds grader analytics.",
+          "mitigation": "Stay platform-agnostic and focus on calibration rounds and rubric diagnostics that incumbents do not prioritize."
+        },
+        {
+          "risk": "TAs feel surveilled.",
+          "mitigation": "Frame reports as rubric diagnostics, show results to the whole team, and default to anonymized grader labels."
+        }
+      ],
+      "scores": {
+        "pain": 4,
+        "willingnessToPay": 3,
+        "reachability": 5,
+        "competitiveGap": 4,
+        "feasibility": 5,
+        "complianceBurden": 4,
+        "total": 25
+      },
+      "inspiredBy": "https://sigcse2026.sigcse.org/details/sigcse-ts-2026-Papers/116/Improving-the-Reliability-of-Grading-Written-Response-Coding-Questions-in-a-Large-CS1"
+    },
+    {
+      "n": 2,
+      "title": "Agent Session Review",
+      "slug": "agent-session-review",
+      "category": "EdTech: Higher Ed",
+      "complexity": "Multi-week",
+      "summary": "For instructors who allow Claude Code or other coding agents in assignments: students submit their agent session transcripts with their repo, and the instructor gets a per-student summary of how the agent was used, linked to commits, with flags for over-reliance.",
+      "problemStatement": "Instructors who permit coding agents cannot see how students actually used them. Reading raw transcripts for a whole class is impossible, and the commit history alone shows what changed but not who decided it, so instructors cannot tell productive agent use from blind acceptance.",
+      "description": "A small CLI (and an optional Claude Code hook) exports the student's agent sessions for the assignment directory, redacts secrets and personal paths, and bundles them with the git log at submission time. The web app parses the transcripts (Claude Code JSONL first, other agents later), aligns each agent edit with the commits that contain it, and produces a per-student summary: what the student asked for, which diffs were accepted unchanged, whether tests were run, and where the student redirected or corrected the agent. Instructors see a class-level distribution and a short flag list (for example, assignment spec pasted verbatim then everything accepted), with access to the underlying evidence only for flagged students, as instructors requested in recent research. Summaries are generated with the Claude API under instructor-defined course policies.",
+      "targetCustomer": "University CS instructors and TAs teaching project or software engineering courses that permit or require agentic coding tools.",
+      "buyer": "Instructor on a course budget for a pilot; department for a site license once several courses adopt agent-permitted assignments.",
+      "whyNow": "Courses are now built around coding agents (Brown's Agentic Studio ran in spring 2026; Harvard CS2680 requires Claude Code in fall 2026), and two 2026 research prototypes (Editrail, MRDash) confirmed instructors lack visibility into student AI use and that summarized views are useful. No commercial product handles agent transcripts for university courses.",
+      "founderFit": "Pisan teaches courses that use agentic coding tools, so he is his own first user and knows the Claude Code transcript format. His SIGCSE network includes the instructors redesigning courses around agents who would be design partners.",
+      "problemEvidence": [
+        {
+          "url": "https://arxiv.org/abs/2601.20085v1",
+          "source": "arXiv (Editrail, Zhang et al.)",
+          "date": "2026-01-27",
+          "summary": "Instructor survey found many instructors lack visibility into how students use AI in their code; a prototype overlaying AI contributions on edit histories helped 12 instructors spot problematic use."
+        },
+        {
+          "url": "https://arxiv.org/html/2603.22674v1",
+          "source": "arXiv (MRDash, Ma et al.)",
+          "date": "2026-03-24",
+          "summary": "Reading student-AI transcripts at scale is impractical and raises privacy concerns; instructors rated session summaries 4.5/5 useful and asked for evidence access for at-risk students."
+        },
+        {
+          "url": "https://www.brown.edu/news/2026-06-11/agentic-studio-ai-programming",
+          "source": "Brown University News",
+          "date": "2026-06-11",
+          "summary": "Brown's Agentic Studio course used Claude Code; students kept journals of their agent use and defended design choices because 'students need to be accountable for their code.'"
+        },
+        {
+          "url": "https://cs2680.seas.harvard.edu/",
+          "source": "Harvard CS2680 course page",
+          "date": "unknown",
+          "summary": "Fall 2026 course requires Claude Code for Assignment 1; no exam, so assessment rests on assignments and projects built with agents."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Editrail (research prototype)",
+          "url": "https://arxiv.org/abs/2601.20085v1",
+          "price": "Not a commercial product",
+          "gap": "Research system built on edit histories; availability unknown, and it does not ingest coding-agent session transcripts."
+        },
+        {
+          "name": "CodeHS AI Hints App",
+          "url": "https://help.codehs.com/en/articles/16151290-using-the-ai-hints-app-to-monitor-manage-review-ai-usage",
+          "price": "unknown (part of CodeHS)",
+          "gap": "Shows usage of its own Karel AI hints to K-12 teachers; does not cover external agents such as Claude Code in university projects."
+        },
+        {
+          "name": "Codio",
+          "url": "https://softwarefinder.com/lms/codio",
+          "price": "$48 per learner per semester for higher ed (third-party listing; unconfirmed)",
+          "gap": "Full platform with learner insights and AI coaching inside Codio; no review of agent transcripts from students' own tools was found."
+        },
+        {
+          "name": "claude-code-transcripts (Simon Willison)",
+          "url": "https://feeds.simonwillison.net/2026/Jan/25/claude-code-transcripts/",
+          "price": "Free, open source",
+          "gap": "Publishes a single transcript as readable HTML; no class-level summaries, commit alignment, or flags."
+        }
+      ],
+      "keyFeatures": [
+        "Student CLI and Claude Code hook that export and redact sessions for one assignment",
+        "Transcript-to-commit alignment showing accepted, edited, and rejected agent diffs",
+        "Per-student summary under a course AI policy",
+        "Class distribution and flag list with evidence access only for flagged students",
+        "Exports to GitHub-based workflows (Classroom50, plain org repos) and Canvas grade comments"
+      ],
+      "mvpScope": {
+        "features": [
+          "CLI exporter for Claude Code JSONL with secret redaction",
+          "Upload page per assignment",
+          "Commit alignment and per-student summary",
+          "Instructor class view with flags"
+        ],
+        "outOfScope": [
+          "Other agents (Codex CLI, Copilot, Cursor)",
+          "Canvas LTI",
+          "Automated grading or penalties",
+          "Live monitoring during work"
+        ],
+        "buildEstimate": "4 to 6 weeks part time"
+      },
+      "techStack": "Node CLI, React + Vite + Tailwind, Flask or Supabase Edge Functions, Supabase (Postgres, storage, row-level security), Claude API for summaries",
+      "pricing": {
+        "model": "Per-course term license; department site license",
+        "pricePoint": "$149 per course per term (up to 150 students); $2,000/year per department",
+        "rationale": "Far below per-learner platforms (Codio is listed at $48 per learner per semester) and affordable from a course budget, while covering Claude API costs of summarizing transcripts."
+      },
+      "revenueSketch": "Estimate: 60 courses x $149 x 2 terms = $17,880/year, plus 10 departments x $2,000 = $20,000/year, about $38k ARR. Assumes adoption by instructors already running agent-permitted assignments, a small but growing group.",
+      "distribution": "Use it in Pisan's own courses first, then a SIGCSE TS 2027 workshop or poster on reviewing agent-assisted student work, the SIGCSE members list, and direct outreach to instructors of agent-centered courses (such as those at Brown and Harvard) as design partners.",
+      "validationTest": {
+        "method": "Run the CLI and a manual summary process on one of Pisan's own assignments, then show anonymized reports to 6 instructors who teach agent-permitted courses.",
+        "successCriteria": "4 of 6 instructors ask to use it on a real assignment next term and 2 agree to a paid pilot.",
+        "cost": "About 2 weeks of build time and under $100 in Claude API usage."
+      },
+      "moat": "Transcript parsers for several agents that track format changes, a library of course AI-policy templates mapped to flags, alignment logic that is fiddly to get right, and early credibility with SIGCSE instructors.",
+      "compliance": [
+        "FERPA: transcripts and code are education records; requires a data processing agreement for institutional licenses, encryption at rest, retention limits, and instructor-only access.",
+        "Student consent and privacy: students must see exactly what is exported, with automatic redaction of secrets, file paths, and personal data, and a summary-first view as recommended by MRDash.",
+        "Third-party AI processing: summaries sent to the Claude API need disclosure in the DPA and zero-retention settings where available.",
+        "Accessibility: instructor and student views must meet WCAG 2.1 AA."
+      ],
+      "risks": [
+        {
+          "risk": "Agent vendors change transcript formats or add their own education dashboards.",
+          "mitigation": "Keep parsers modular and support several agents so the product is the cross-tool layer."
+        },
+        {
+          "risk": "Students fake or omit transcripts.",
+          "mitigation": "Position it as process evidence paired with code review or oral checks, not detection; mismatches between transcripts and commits are themselves a signal."
+        },
+        {
+          "risk": "Institutional privacy review slows department sales.",
+          "mitigation": "Sell course-level pilots first with minimal retention, and prepare a standard DPA and HECVAT Lite early."
+        }
+      ],
+      "scores": {
+        "pain": 4,
+        "willingnessToPay": 3,
+        "reachability": 4,
+        "competitiveGap": 4,
+        "feasibility": 3,
+        "complianceBurden": 3,
+        "total": 21
+      },
+      "inspiredBy": "https://arxiv.org/abs/2601.20085v1"
+    },
+    {
+      "n": 3,
+      "title": "Letter Ledger",
+      "slug": "letter-ledger",
+      "category": "Micro-SaaS",
+      "complexity": "Weekend MVP",
+      "summary": "For professors who write dozens of recommendation letters a year: a request intake form with FERPA release, a deadline tracker, and running notes on students captured during the term, so each letter starts from real facts instead of a blank page.",
+      "problemStatement": "Professors who teach hundreds of students get letter requests by email with missing deadlines, no CV, and no reminder of who the student is. Many now refuse requests unless they personally remember the student, and deadlines slip when everything lives in an inbox.",
+      "description": "Each professor gets a personal request link. Students submit program links, deadlines, CV, statement, courses taken with semesters and grades, and a signed FERPA release, in one form the professor configures with their own policy. The dashboard shows requests by deadline, sends reminders to the professor and status updates to the student, and keeps a private notes timeline per student that the professor (or a TA) adds to during the term ('great question in office hours on hashing'). When it is time to write, the app assembles the facts into an outline and an optional draft in the professor's own style learned from letters they choose to upload, processed with a no-training API setting.",
+      "targetCustomer": "University faculty, especially in large-enrollment departments such as CS, who write 20 or more letters a year.",
+      "buyer": "Professor on a personal card or professional development funds.",
+      "whyNow": "Free AI letter generators (for example those listed in a March 2026 roundup) make drafting fast, but they need facts the professor no longer remembers, and campus AI guides warn against pasting student grades into public chatbots. The missing piece is structured, consented student information, not more text generation.",
+      "founderFit": "Pisan writes letters for CS students, knows the request volume in large CS programs, and can reach faculty through SIGCSE and department networks. It is a small Flask or Supabase app he can build in a weekend.",
+      "problemEvidence": [
+        {
+          "url": "https://web.cs.ucla.edu/~rrosario/letters.html",
+          "source": "UCLA CS faculty page",
+          "date": "unknown",
+          "summary": "As of December 2024 the professor is 'no longer widely available' for letters and requires two A-grade courses and that he actively remembers the student."
+        },
+        {
+          "url": "https://sites.coecis.cornell.edu/clarkson/?p=82",
+          "source": "Cornell CS faculty page (Clarkson)",
+          "date": "unknown",
+          "summary": "Teaches 700 to 1,000 students a year, asks for a photo, course list, CV, and summary of interactions, and warns letters may miss published deadlines."
+        },
+        {
+          "url": "https://science.psu.edu/news/reccenter-helps-faculty-staff-manage-letters-of-recommendation-for-students",
+          "source": "Penn State Eberly College of Science",
+          "date": "2022-12-14",
+          "summary": "Penn State built an internal tool because faculty juggle many requests in a busy inbox where 'deadlines can get missed'; it requires a FERPA release from students."
+        },
+        {
+          "url": "https://cooley.eeb.uconn.edu/rec_letters/",
+          "source": "UConn faculty page",
+          "date": "unknown",
+          "summary": "Professor states letters are 'not some simple thing that I can toss off in a few minutes' and sets conditions for requests."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Penn State RecCenter",
+          "url": "https://science.psu.edu/news/reccenter-helps-faculty-staff-manage-letters-of-recommendation-for-students",
+          "price": "Free, Penn State only",
+          "gap": "Tracks requests and reminders but is limited to one university and does not hold student notes or help write letters."
+        },
+        {
+          "name": "Interfolio Dossier",
+          "url": "https://product-help.interfolio.com/m/27438/l/266303-what-is-dossier",
+          "price": "Free for applicants; Dossier Deliver $59.99/year paid by applicants (per search summary of Interfolio help pages)",
+          "gap": "Serves applicants storing and sending letters, not professors managing requests, deadlines, or notes."
+        },
+        {
+          "name": "Free AI letter generators (AI Blaze and others)",
+          "url": "https://blaze.today/blog/ai-letter-of-recommendation/",
+          "price": "AI Blaze free; others unknown",
+          "gap": "Generate generic text from whatever is pasted in; no intake, FERPA release, deadline tracking, or student memory."
+        }
+      ],
+      "keyFeatures": [
+        "Personal request link with configurable policy and required FERPA release",
+        "Deadline dashboard with reminders and student status emails",
+        "Per-student notes timeline captured during the term",
+        "Fact outline and optional style-matched draft",
+        "Reuse of a letter across multiple programs with per-program tailoring"
+      ],
+      "mvpScope": {
+        "features": [
+          "Request form with file uploads and FERPA release checkbox",
+          "Deadline dashboard and email reminders",
+          "Per-student notes",
+          "Fact outline export"
+        ],
+        "outOfScope": [
+          "AI drafting in the professor's voice",
+          "Direct upload to application portals",
+          "Department or TA shared notes",
+          "Mobile app"
+        ],
+        "buildEstimate": "1 weekend for tracking; 1 more weekend for drafting"
+      },
+      "techStack": "React + Vite + Tailwind, Supabase (auth, Postgres, storage, row-level security), Resend for email, Claude API for outlines and drafts, Stripe",
+      "pricing": {
+        "model": "Per-professor subscription, free tier for 5 active requests",
+        "pricePoint": "$8/month or $60/year",
+        "rationale": "Similar to the $59.99/year applicants already pay Interfolio, and small enough for a personal card or PD funds during peak letter season."
+      },
+      "revenueSketch": "Estimate: 400 professors x $60/year = $24,000/year. Assumes letter season (October to January) drives most signups and about 10 percent of free users convert.",
+      "distribution": "Launch in October to December letter season through SIGCSE and department faculty lists, a post on r/Professors, and the free tier: every student request form shows 'powered by Letter Ledger' to other faculty the student also asks.",
+      "validationTest": {
+        "method": "Landing page with a 2-minute demo video, shared on the SIGCSE members list and with 10 colleagues during this letter season.",
+        "successCriteria": "100 waitlist signups in 3 weeks and 10 professors pre-pay $60 for a year.",
+        "cost": "One day of work and about $20 for a domain."
+      },
+      "moat": "Thin; the defensible part is the accumulated per-student notes and past letters each professor stores, which create switching costs, plus a built-in viral loop through student request forms.",
+      "compliance": [
+        "FERPA: letters referencing grades require written student consent; the intake form collects and stores a signed release, and data is visible only to the professor.",
+        "Data handling: student CVs and notes need encryption at rest, deletion on request, and an AI provider setting that disables training on inputs.",
+        "Accessibility: the student-facing form must meet WCAG 2.1 AA."
+      ],
+      "risks": [
+        {
+          "risk": "Professors will not pay for something they now do in email.",
+          "mitigation": "Generous free tier, annual price timed to letter season, and validation through pre-payment before building the drafting feature."
+        },
+        {
+          "risk": "Universities build or license their own tools, as Penn State did.",
+          "mitigation": "Offer a department plan and data export so it complements campus tools."
+        },
+        {
+          "risk": "AI drafting raises ethical concerns about authenticity.",
+          "mitigation": "Make drafting optional, outline-first, and based only on facts the professor and student supplied."
+        }
+      ],
+      "scores": {
+        "pain": 3,
+        "willingnessToPay": 2,
+        "reachability": 4,
+        "competitiveGap": 3,
+        "feasibility": 5,
+        "complianceBurden": 3,
+        "total": 20
+      },
+      "inspiredBy": "https://web.cs.ucla.edu/~rrosario/letters.html"
+    }
+  ],
+  "runNotes": {
+    "searches": [
+      "r/Professors reddit regrade requests workload 2026",
+      "Canvas LMS reviews cons instructors G2 2026",
+      "Starter Story teacher tool SaaS revenue 2026",
+      "indie hackers microsaas professors educators MRR",
+      "Inside Higher Ed October 2026 faculty AI course design",
+      "EdWeek Market Brief 2026 state AI guidance schools new requirements",
+      "Alabama HB 329 computer science graduation requirement AI instruction teachers shortage curriculum",
+      "Gradescope autograder setup frustrating instructors reviews",
+      "Ask HN tool wish existed teaching programming 2026",
+      "professors teaching assistants training grading consistency large CS courses 2026 problem",
+      "reddit r/Professors 2026 students AI coding agents assignments what to do",
+      "acquire.com education SaaS for teachers listing MRR 2026",
+      "zyBooks cost complaints students professors alternative 2026",
+      "EdSurge October 2026 higher education instructors",
+      "instructors grading student Claude Code session transcripts agent logs assignment submission",
+      "professors writing too many recommendation letters tracking requests tool",
+      "Product Hunt education launch 2026 teachers paid plan AI grading",
+      "r/Professors recommendation letters overwhelmed 2026",
+      "students submit AI chat logs prompts with assignment instructors review tool course policy 2026",
+      "TA grading inter-rater reliability calibration tool Gradescope SIGCSE 2026",
+      "AI recommendation letter writer for professors tool pricing",
+      "Interfolio Dossier pricing letters of recommendation",
+      "Gradescope export evaluations CSV grader column per question",
+      "grader calibration software moderation marking consistency universities Crowdmark pricing",
+      "tool for instructors to review student AI coding assistant usage logs Copilot Claude Code course analytics",
+      "Codio GitHub Classroom AI usage tracking instructors coding agent pricing 2026",
+      "GitHub Classroom deprecated August 2026 instructors alternatives"
+    ],
+    "rejectedCandidates": [
+      {
+        "title": "Lightweight GitHub Classroom replacement",
+        "total": 17,
+        "reason": "GitHub Classroom was retired on 2026-08-28, a real displacement, but free options (Classroom 50, Pawtograder, Classmoji, CodeGrade free tier) already fill the gap."
+      },
+      {
+        "title": "Canvas course navigation consistency checker",
+        "total": 18,
+        "reason": "G2 complaints about navigation are real, but institutions address it with templates and instructional designers; weak willingness to pay from instructors."
+      },
+      {
+        "title": "Gradescope autograder configuration generator",
+        "total": 17,
+        "reason": "Setup friction evidence came only from an aggregator review; depends on a third-party platform."
+      },
+      {
+        "title": "AI homework grading assistant",
+        "total": 15,
+        "reason": "Crowded (GradeX, Grade Coach, The Learning Mate, SubSchool); AI wrapper with no moat."
+      },
+      {
+        "title": "K-12 district AI policy builder (Maryland, Idaho, Oklahoma, Virginia mandates)",
+        "total": 14,
+        "reason": "Buyers are districts and boards, so the first sale needs procurement; free templates from states and nonprofits exist."
+      },
+      {
+        "title": "Teacher onboarding kit for Alabama's CS graduation requirement",
+        "total": 15,
+        "reason": "Needs a curriculum content team and competes with free Code.org materials; sale goes through districts."
+      },
+      {
+        "title": "K-12 student-AI chat summary dashboard",
+        "total": 14,
+        "reason": "Code.org AI Chat Lab and CodeHS already give teachers chat histories; minors raise COPPA burden."
+      },
+      {
+        "title": "Low-cost interactive CS textbook (zyBooks alternative)",
+        "total": 13,
+        "reason": "Content-heavy, needs a team, and no recent pricing complaints were found to confirm demand."
+      }
+    ],
+    "caveats": "Searches again did not surface r/Professors or r/Teachers threads directly, so pain evidence leans on research papers, course pages, and faculty policy pages. Several faculty letter-policy pages and the Georgia Tech grading article have no confirmed publication date. Gradescope pages (help center, Melbourne guide) and Code.org returned 403 on fetch, so whether the Gradescope evaluations export includes grader names is unconfirmed; the Crowdmark price is from a 2022 guide and the Codio price from a third-party listing. Interfolio's $59.99/year price comes from a search summary of its help pages, not a direct fetch. Proof-of-revenue searches (Indie Hackers, Starter Story, Acquire, Product Hunt) found no verified MRR for comparable professor tools, so willingness-to-pay scores are judgment calls. Overlap notes: Grader Drift Report addresses grading reliability like the 2026-10-06 research idea (Fault-Seeded Answer Sets) but targets course staff as paying customers rather than researchers; Agent Session Review and 2026-10-21 Code Viva both serve instructors facing AI-written code, but Code Viva checks understanding through questions while this gives visibility into the process."
+  }
+}

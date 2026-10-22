@@ -578,3 +578,6 @@
 | 2026-10-21 | Code Viva | EdTech: Higher Ed | Multi-week | 20 |  |
 | 2026-10-21 | Alt Text Studio for CS Courses | EdTech: Higher Ed | Weekend MVP | 23 |  |
 | 2026-10-21 | PPR Rehearsal | EdTech: K-12 | Weekend MVP | 20 |  |
+| 2026-10-22 | Grader Drift Report | EdTech: Higher Ed | Weekend MVP | 25 |  |
+| 2026-10-22 | Agent Session Review | EdTech: Higher Ed | Multi-week | 21 |  |
+| 2026-10-22 | Letter Ledger | Micro-SaaS | Weekend MVP | 20 |  |
