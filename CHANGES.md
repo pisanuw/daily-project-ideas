@@ -377,3 +377,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-10-22 [doc] Created ideas/2026-10-22.json (schemaVersion 2): Grader Drift Report (25), Agent Session Review (21), Letter Ledger (20)
 
 2026-10-22 [note] Claimed Build Your Own Diagram Layout Engine (2026-10-18 n3) as in progress: Mermaid-subset parser, Sugiyama layout, themeable SVG, visual diff, 5-10 examples.
+
+2026-10-22 [note] Diagram Layout Engine (2026-10-18 n3) marked implemented: live at diagram-layout-engine.netlify.app, repo Claude-capstone/diagram-layout-engine. Sugiyama pipeline, diff, benchmark; 88 tests.

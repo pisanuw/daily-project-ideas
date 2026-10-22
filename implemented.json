@@ -295,8 +295,10 @@
         "date": "2026-10-18",
         "n": 3
       },
-      "placeholder": true,
-      "notes": "In progress since 2026-10-22"
+      "notes": "Built in one session, fully client-side in plain TypeScript and SVG (no Mermaid, dagre or ELK). A hand-written recursive-descent parser covers a Mermaid flowchart subset (14 shapes, both label forms, chains, & groups, solid/thick/dotted/invisible links with o/x/< heads, longer links, nested subgraphs with their own direction, classDef/class/:::/style/linkStyle) and stops at the first error with line, column and a caret. Layout is the Sugiyama pipeline from scratch: greedy feedback arc set or DFS, longest-path or network-simplex layering, dummy nodes with labels on the middle one, barycenter or weighted-median sweeps with transposition scored by the Barth-Juenger-Mutzel accumulator tree, Brandes-Koepf or priority coordinates, then spline, polyline or orthogonal routing. Subgraphs are laid out bottom-up in their own direction; legs into them bend around sibling nodes. Six CSS-variable themes, SVG/PNG export, share links, a stable-layout diff (one union layout, added/removed/changed colouring), a stage-by-stage pipeline inspector and a 50-graph benchmark ranking five configurations (barycenter became the default because it had the fewest crossings). Ten bundled examples. Limitation: subgraphs are fixed boxes in their parent, so a heavily connected one can come out wider than dagre or ELK would draw it. 88 vitest tests (brute-force checks for network simplex and the crossing count), 98.9% statement coverage on the core. Deployed via the GitHub Actions deploy workflow, siteId pinned afterward.",
+      "url": "https://diagram-layout-engine.netlify.app",
+      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/diagram-layout-engine",
+      "implementedOn": "2026-10-22"
     }
   ]
 }
