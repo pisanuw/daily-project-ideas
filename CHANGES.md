@@ -375,3 +375,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-10-21 [code] Added .github/workflows/cleanup-branches.yml: daily deletion of claude/* branches already merged into main and over a day old.
 
 2026-10-22 [doc] Created ideas/2026-10-22.json (schemaVersion 2): Grader Drift Report (25), Agent Session Review (21), Letter Ledger (20)
+
+2026-10-22 [note] Claimed Build Your Own Diagram Layout Engine (2026-10-18 n3) as in progress: Mermaid-subset parser, Sugiyama layout, themeable SVG, visual diff, 5-10 examples.
