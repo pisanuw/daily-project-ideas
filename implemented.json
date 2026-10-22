@@ -299,6 +299,16 @@
       "url": "https://diagram-layout-engine.netlify.app",
       "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/diagram-layout-engine",
       "implementedOn": "2026-10-22"
+    },
+    {
+      "ref": {
+        "date": "2026-10-22",
+        "n": 3
+      },
+      "notes": "Built in one session, fully client-side in plain TypeScript (no React/Tailwind, Supabase, Resend, Stripe or Claude API). The professor's request link carries their policy (notice days, max programs, minimum grade on letter or 4.0 scales, required documents, conditions, questions) and an ECDH P-256 public key in the URL fragment. The student form collects programs with letter deadlines and submission methods, courses, documents and a typed-signature FERPA release naming records, purpose and programs (34 CFR 99.30), stored verbatim with a SHA-256; errors block, short notice and grade-rule misses warn. It seals everything (ephemeral ECDH, HKDF, AES-256-GCM) into one .ledger file the student emails. The dashboard files requests by email, re-checks policy and release, sorts letters by deadline with overdue/this-week flags, exports .ics reminders (stable UIDs, alarms at 7, 2 and 1 days) and CSV, and writes status emails as mailto drafts. Notes timeline with quick capture ('Name: note #oh'), a Markdown fact outline per program (grades only when released, paragraph 4 tailored per program, gap checklist), passphrase-encrypted backups, delete-student for deletion requests and a demo ledger. Limitation: a typed name does not prove identity, and data lives in one browser until backed up. 58 vitest tests, 100% statement coverage on core.",
+      "url": "https://letter-ledger.netlify.app",
+      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/letter-ledger",
+      "implementedOn": "2026-10-22"
     }
   ]
 }
