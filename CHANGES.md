@@ -380,4 +380,4 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 
 2026-10-22 [note] Diagram Layout Engine (2026-10-18 n3) marked implemented: live at diagram-layout-engine.netlify.app, repo Claude-capstone/diagram-layout-engine. 88 tests.
 
-2026-10-22 [note] Letter Ledger (2026-10-22 n3) marked implemented: live at letter-ledger.netlify.app, repo Claude-capstone/letter-ledger. Request link, FERPA release, deadlines, notes, outline; 58 tests.
+2026-10-22 [note] Letter Ledger (2026-10-22 n3) marked implemented: live at letter-ledger.netlify.app, repo Claude-capstone/letter-ledger. Link, FERPA release, deadlines, notes, outline; 58 tests.
