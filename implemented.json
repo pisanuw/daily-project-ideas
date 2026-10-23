@@ -335,8 +335,10 @@
         "date": "2026-10-23",
         "n": 1
       },
-      "placeholder": true,
-      "notes": "In progress since 2026-10-23"
+      "notes": "Built in one session as a static TypeScript app with no backend (no React/Tailwind, Supabase, Flask or Gemini API). A tolerant parser reads rubrics as lines or Markdown tables; rows tagged {tests} are scored by the share of the instructor's pytest tests that pass, run in Pyodide in a Web Worker with a 20 s limit, and the rest by a Claude judge with structured outputs. Each model makes three attempts: lazy paste (effort low), rubric-aware (medium) and a plan/write/self-check conversation (high). Report: model x style matrix, per-row lazy/mean/best with verdicts (meets it, partway, holds up) bucketed on the best attempt, editable scores, transcripts, a one-page HTML export, re-test diffs and term history that flags assignments that aged badly. Instructors bring their own API key (sent only to api.anthropic.com) or paste replies from any chat tool. Real demo on two samples recorded with the claude CLI: AI met correctness, edge cases and code quality on the CS1 lab, no attempt could engage the in-class debate the memo requires, and Haiku 5.5 sometimes declined to write graded work. Limitations: scores are a lower bound, the judge can be wrong, Python only, history is local until exported. 53 vitest tests, 99.8% statement coverage on core.",
+      "url": "https://assignment-stress-test.netlify.app",
+      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/assignment-stress-test",
+      "implementedOn": "2026-10-23"
     }
   ]
 }
