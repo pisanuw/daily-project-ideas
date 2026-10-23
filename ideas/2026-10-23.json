@@ -367,6 +367,117 @@
         "total": 20
       },
       "inspiredBy": "https://www.middleburycampus.com/article/2026/04/blue-books-are-here-to-stay-professors-react-to-ai"
+    },
+    {
+      "n": 4,
+      "title": "Verified Tell: Visual-Routine-Grounded Feedback on Student Chart Narratives",
+      "category": "Research",
+      "complexity": "Research",
+      "summary": "Extends Show-vs-Tell classification of student chart narratives by decomposing each interpretive sentence into checkable visual-routine claims (slope, extremum, crossing, change of trend) and verifying them against the chart's data, so feedback says whether a Tell is right, not just whether it is a Tell.",
+      "description": "Chen and colleagues' SIGCSE TS 2026 tool classifies each sentence of a student's chart narrative as Show (surface description) or Tell (interpretation), and their pilot surfaced tensions in giving nuanced feedback: a sentence can be confidently interpretive and still wrong. This project adds a verification layer. An LLM parses each Tell sentence into a small typed claim language derived from SKETCHY's visual routines (Pisan, 1995): slope sign, local extremum, intersection, region comparison, change of slope, and label binding. Each claim is then checked symbolically against the chart's underlying data series, producing three-way feedback (interpretive and supported, interpretive but contradicted, interpretive but unverifiable). Because charts can be generated from known data and student-style narratives can be synthesized with seeded errors, the whole pipeline can be built and benchmarked without human subjects, revisiting the PhD-era graph-understanding work as a grounding scaffold for modern multimodal tutors.",
+      "papers": [
+        {
+          "title": "Show or Tell? Piloting an AI Feedback Tool for Data Story Reading in Introductory Data Science",
+          "authors": "Lujie Karen Chen et al. (University of Maryland, Baltimore County); full author list not confirmed from the index",
+          "venue": "SIGCSE TS 2026",
+          "year": 2026,
+          "doi": "10.1145/3770761.3777192",
+          "url": "https://doi.org/10.1145/3770761.3777192",
+          "abstract": "Students generate a title and narrative in response to a given visualization; narratives are distinguished as Show (surface-level descriptions) or Tell (deeper interpretations that uncover trends, patterns, or anomalies). An AI-supported tool classifies student narratives at the sentence level as Show or Tell and invites students to critique and reflect on the AI's feedback. Findings suggest AI feedback helped students recognize the difference between descriptive and interpretive sense-making, while also surfacing tensions in providing nuanced feedback.",
+          "relevance": "Provides the classroom activity, the Show/Tell distinction, and the open problem (feedback on Tell sentences is not checked for correctness) that this project addresses with claim-level verification."
+        }
+      ],
+      "additionalRefs": [
+        {
+          "title": "A Visual Routines Based Model of Graph Understanding",
+          "authors": "Yusuf Pisan",
+          "venue": "Proceedings of the Cognitive Science Society, 1995",
+          "year": 1995,
+          "url": "https://qrg.northwestern.edu/papers/Files/QRG_Dist_Files/QRG_1995/Pisan_1995_Visual_Routines_Based_Model_Graphic_Understanding.pdf",
+          "relevance": "SKETCHY's domain-independent vocabulary of visual routines (slope, intersection, region, change of slope, label binding) becomes the typed claim language that Tell sentences are parsed into and verified against."
+        },
+        {
+          "title": "Show and Tell: Exploring Large Language Model's Potential in Formative Educational Assessment of Data Stories",
+          "authors": "Naren Sivakumar, Lujie Karen Chen, Pravalika Papasani, Vigna Majmundar, Jinjuan Heidi Feng, Louise Yarnall, Jiaqi Gong",
+          "venue": "IEEE VIS 2024 Workshop on Data Storytelling in an Era of Generative AI",
+          "year": 2024,
+          "url": "https://www.ieeevis.org/year/2024/program/paper_w-storygenai-7072.html",
+          "relevance": "Prior work by the same group using GPT-4o to generate and assess data-plot narratives; supplies a baseline LLM-only assessor to compare the verified pipeline against."
+        },
+        {
+          "title": "CharXiv: Charting Gaps in Realistic Chart Understanding in Multimodal LLMs",
+          "authors": "Zirui Wang, Mengzhou Xia, et al., Danqi Chen",
+          "venue": "NeurIPS 2024 Datasets and Benchmarks Track",
+          "year": 2024,
+          "url": "https://proceedings.neurips.cc/paper_files/paper/2024/hash/cdf6f8e9fd9aeaf79b6024caec24f15b-Abstract-Datasets_and_Benchmarks_Track.html",
+          "relevance": "Documents that multimodal LLMs lag humans on chart reasoning and are brittle to small chart changes, motivating symbolic verification over trusting the model's reading of the image."
+        },
+        {
+          "title": "VLAT: Development of a Visualization Literacy Assessment Test",
+          "authors": "Sukwon Lee, Sung-Hee Kim, Bum Chul Kwon",
+          "venue": "IEEE TVCG 23(1), 2017",
+          "year": 2017,
+          "url": "https://doi.org/10.1109/TVCG.2016.2598920",
+          "relevance": "Its task-by-chart-type blueprint (retrieve value, find extremum, determine range, find trend, find correlation, etc.) guides coverage of the synthetic benchmark and maps onto the visual-routine claim types."
+        }
+      ],
+      "researchPlan": {
+        "overview": "Define a typed claim language from SKETCHY's visual routines, build an LLM parser from Tell sentences to claims plus a symbolic verifier over chart data, and evaluate on a synthetic benchmark of charts and seeded-error narratives. Compare against LLM-only judging (text and multimodal) on claim-level accuracy, then package the verifier as a drop-in layer for Show/Tell feedback tools.",
+        "milestones": [
+          {
+            "month": 1,
+            "goal": "Literature review on data story reading, chart-QA benchmarks, and visual routines; define the claim language (6-8 claim types with arguments and tolerance rules)",
+            "deliverable": "Annotated bibliography, claim-language spec, and refined RQs (parse accuracy, verification accuracy, feedback usefulness proxy)"
+          },
+          {
+            "month": 2,
+            "goal": "Build a synthetic benchmark: generate ~500 line, bar, and scatter charts from known data (real open datasets plus controlled synthetic series) and narratives with seeded correct, contradicted, and unverifiable Tell claims",
+            "deliverable": "Versioned benchmark with gold claim annotations for a 150-item hand-checked subset"
+          },
+          {
+            "month": 3,
+            "goal": "Implement the sentence-to-claim parser (Claude via local CLI, structured output) and the symbolic verifier over data series",
+            "deliverable": "Open-source pipeline with unit tests per claim type and parse/verify accuracy on the dev split"
+          },
+          {
+            "month": 4,
+            "goal": "Baselines and ablations: LLM-only text judge, multimodal judge given only the chart image, and the verified pipeline; vary chart type and claim type",
+            "deliverable": "Results tables, error analysis of where image-only judging fails (scale, crossings, change of slope)"
+          },
+          {
+            "month": 5,
+            "goal": "Feedback generation: turn verification results into three-way sentence feedback that points to the chart region that supports or contradicts a claim, and evaluate with expert-rated rubric on a sample",
+            "deliverable": "Feedback templates, expert-rated quality scores, and a demo plug-in for a Show/Tell-style tool"
+          },
+          {
+            "month": 6,
+            "goal": "Write up and release",
+            "deliverable": "Submitted paper draft plus public benchmark and code"
+          }
+        ],
+        "targetVenues": [
+          "SIGCSE TS",
+          "ITiCSE",
+          "AIED",
+          "IEEE VIS (Education or VISxAI workshop)"
+        ],
+        "resources": "Open datasets (e.g., Our World in Data, NOAA) for chart generation; matplotlib/Vega-Lite rendering; local claude CLI for parsing and baselines (subscription, no API key); one undergraduate RA for gold annotation (~60 hours); optional outreach to the UMBC authors for anonymized Show/Tell narratives in a later phase.",
+        "risks": [
+          {
+            "risk": "Real student Tell sentences are vaguer than seeded synthetic ones (e.g., 'sales took off'), so parse accuracy on synthetic data overstates real performance",
+            "mitigation": "Include an 'unverifiable' label as a first-class outcome, add paraphrase and hedge augmentation, and collect a small public set of real narratives from published examples or collaborator data in a follow-up."
+          },
+          {
+            "risk": "Claim language too narrow for scatter plots and multi-series charts",
+            "mitigation": "Start with line charts (SKETCHY's scope), report coverage per chart type, and add correlation and cluster claims only after the line-chart pipeline is stable."
+          },
+          {
+            "risk": "Strong multimodal models may close the gap, making symbolic verification look unnecessary",
+            "mitigation": "Frame the contribution as faithful, explainable feedback (pointing to the evidence) and robustness under chart perturbation, which is a result either way."
+          }
+        ],
+        "humanSubjects": false
+      }
     }
   ],
   "runNotes": {
