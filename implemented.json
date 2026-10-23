@@ -315,8 +315,10 @@
         "date": "2026-10-05",
         "n": 1
       },
-      "placeholder": true,
-      "notes": "In progress since 2026-10-23"
+      "notes": "Built in one session, fully client-side in plain TypeScript (no React/Tailwind). The target is any arithmetic expression or a:b, parsed without eval. Instead of only walking the Stern-Brocot tree, trains come from an exhaustive search: a byte table marks every product of 1 to 3 tooth counts in range, and for each driver product D the numerators nearest target x D are tested, keeping one train per reduced ratio with the most even factorisation (8->24, 8->32 for 12). Sidereal time at 8 to 120 teeth checks about 25,000 trains in a quarter second and reaches 2.3 ppb (0.2 ms/day) in three stages. A panel shows the continued fraction, the run-length Stern-Brocot path and which convergents are buildable. The chosen train animates in SVG with 20 degree involute teeth phased to mesh, a dial shows drift against an ideal hand on a log time slider, share links live in the URL fragment, and an SVG cut sheet exports for laser cutting. Limitation: the layout is schematic (no clearance or undercut checks) and the search stops at 3 stages. 44 vitest tests, 100% statement coverage on core.",
+      "url": "https://brocot-gear-finder.netlify.app",
+      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/brocot-gear-finder",
+      "implementedOn": "2026-10-23"
     }
   ]
 }

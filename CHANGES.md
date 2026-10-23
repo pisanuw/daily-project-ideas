@@ -383,3 +383,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-10-22 [note] Letter Ledger (2026-10-22 n3) marked implemented: live at letter-ledger.netlify.app, repo Claude-capstone/letter-ledger. Link, FERPA release, deadlines, notes, outline; 58 tests.
 
 2026-10-23 [doc] Created ideas/2026-10-23.json (schemaVersion 2): Assignment Stress Test (25), ACR Draft for EdTech Vendors (23), Variant Exam Press (20)
+
+2026-10-23 [note] Brocot Gear Finder (2026-10-05 n1) marked implemented: live at brocot-gear-finder.netlify.app, repo Claude-capstone/brocot-gear-finder. 44 tests.
