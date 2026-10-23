@@ -325,8 +325,10 @@
         "date": "2026-10-09",
         "n": 2
       },
-      "placeholder": true,
-      "notes": "In progress since 2026-10-23"
+      "notes": "Built in one session as a static, fully client-side TypeScript app. A hand-written parser and interpreter for a fork/wait/exit/printf C subset runs each process by re-executing main() along its fork decisions, which reproduces the stdio buffer a child inherits. An exhaustive schedule search with eager invisible steps and a canonical-state symmetry reduction lists every possible output (16 identical processes need about 200 states), and a checker says whether a typed output is possible and, if not, which fork or wait edge rules it out. Also: a stepped process tree with zombie and orphan states, 13 classic examples, and a seeded exam-question generator with verified answers exported as Markdown or QTI 1.2. 94 tests including a brute-force soundness check. Limitations: no pointers, pipes, signals or helper functions, exec is a stub, and pids are one consistent numbering.",
+      "url": "https://fork-count.netlify.app/",
+      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/fork-count",
+      "implementedOn": "2026-10-23"
     }
   ]
 }
