@@ -385,3 +385,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-10-23 [doc] Created ideas/2026-10-23.json (schemaVersion 2): Assignment Stress Test (25), ACR Draft for EdTech Vendors (23), Variant Exam Press (20)
 
 2026-10-23 [note] Brocot Gear Finder (2026-10-05 n1) marked implemented: live at brocot-gear-finder.netlify.app, repo Claude-capstone/brocot-gear-finder. 44 tests.
+
+2026-10-23 [note] Claimed Fork Count (2026-10-09 n2) as in progress: fork/wait/exit/printf C-subset interpreter, process tree, interleaving enumeration, possibility checker, quiz generator.
