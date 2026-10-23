@@ -391,3 +391,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-10-23 [note] Fork Count (2026-10-09 n2) marked implemented: live at fork-count.netlify.app, repo Claude-capstone/fork-count. Interpreter, schedule search, checker, quiz export; 94 tests.
 
 2026-10-23 [doc] Added research idea n=4 to ideas/2026-10-23.json: Verified Tell (SIGCSE TS 2026 doi:10.1145/3770761.3777192)
+
+2026-10-23 [note] Claimed Assignment Stress Test (2026-10-23 n1) as in progress: rubric parser, 3 student-style prompts, judge scoring, pytest in Pyodide, report, term history.
