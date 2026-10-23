@@ -581,3 +581,6 @@
 | 2026-10-22 | Grader Drift Report | EdTech: Higher Ed | Weekend MVP | 25 |  |
 | 2026-10-22 | Agent Session Review | EdTech: Higher Ed | Multi-week | 21 |  |
 | 2026-10-22 | Letter Ledger | Micro-SaaS | Weekend MVP | 20 |  |
+| 2026-10-23 | Assignment Stress Test | EdTech: Higher Ed | Weekend MVP | 25 |  |
+| 2026-10-23 | ACR Draft for EdTech Vendors | Micro-SaaS | Multi-week | 23 |  |
+| 2026-10-23 | Variant Exam Press | EdTech: Higher Ed | Multi-week | 20 |  |

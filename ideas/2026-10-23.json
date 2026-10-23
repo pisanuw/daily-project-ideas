@@ -1,0 +1,440 @@
+{
+  "date": "2026-10-23",
+  "schemaVersion": 2,
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Assignment Stress Test",
+      "slug": "assignment-stress-test",
+      "category": "EdTech: Higher Ed",
+      "complexity": "Weekend MVP",
+      "summary": "For instructors redesigning take-home work: paste an assignment and rubric, and see how well current AI models actually score on it before students do.",
+      "problemStatement": "Instructors are told to 'test your assignment with AI' before assigning it, but doing that by hand across several models, then grading the outputs against their own rubric, takes an evening per assignment, so most never do it and find out from a stack of suspiciously polished submissions.",
+      "description": "The instructor pastes an assignment prompt and rubric (or uploads starter code plus autograder tests for programming work). The app runs the assignment through several current models using a range of student-style prompts, from a 'lazy prompt' copy-paste to a careful multi-turn attempt. It scores each output against the instructor's rubric (and, for code, runs the tests in a sandbox), then produces a one-page vulnerability report showing which rubric rows AI satisfies easily and which it does not. The instructor edits the assignment and re-runs, and the history is kept term over term so a course coordinator can see which assignments have aged badly as models improve.",
+      "targetCustomer": "University instructors and course coordinators who still use take-home writing or programming assignments, especially in large intro courses.",
+      "buyer": "Individual instructors on a personal card or professional development funds at first; later a center for teaching and learning (CTL) site license.",
+      "whyNow": "Faculty forums in fall 2026 describe AI cheating as overwhelming and many instructors have stopped reporting it, while campus checklists explicitly tell faculty to test prompts with AI tools. Existing teacher tools only suggest edits; none run and rubric-score the assignment.",
+      "founderFit": "Pisan teaches courses that use agentic coding tools, so he can build the code-execution harness that general tools skip, and SIGCSE contacts give him dozens of CS instructors with real assignments and autograders to pilot on.",
+      "problemEvidence": [
+        {
+          "url": "https://dailynous.com/2026/09/30/overwhelming-cheating/",
+          "source": "Daily Nous",
+          "date": "2026-09-30",
+          "summary": "Instructors report AI cheating so widespread that reporting is unmanageable; some write bait questions designed to elicit AI-specific wrong answers."
+        },
+        {
+          "url": "https://uca.edu/cetal/files/2025/08/Checklist-for-Creating-AI-Resistant-Assignments-and-Assessments.pdf",
+          "source": "University of Central Arkansas CETAL",
+          "date": "2025-08 (day unknown)",
+          "summary": "Faculty checklist asks whether instructors have tested prompts and assignments with AI tools, which is a manual step with no tooling."
+        },
+        {
+          "url": "https://ctl.jhsph.edu/blog/posts/introducing-assignment-assistant/",
+          "source": "Johns Hopkins Bloomberg School of Public Health CTL",
+          "date": "2026-02-10",
+          "summary": "A school built an internal tool to suggest AI-resistant changes to assignments, showing institutional demand; it analyzes rather than tests."
+        },
+        {
+          "url": "https://www.middleburycampus.com/article/2026/04/blue-books-are-here-to-stay-professors-react-to-ai",
+          "source": "Middlebury Campus",
+          "date": "2026-04 (day unknown)",
+          "summary": "Faculty, including in CS, are abandoning take-home exams; instructors who want to keep take-home work need evidence of which tasks still hold up."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "MagicSchool AI-Resistant Assignment Suggestions",
+          "url": "https://magicschool.ai/blog-posts/make-your-assignments-ai-resistant-this-year",
+          "price": "Free tier; Plus $8.33/user/month billed annually or $12.99 monthly (pricing page)",
+          "gap": "Returns three generic suggestions; does not run the assignment through models or score outputs against the instructor's rubric, and is K-12 oriented."
+        },
+        {
+          "name": "JHSPH Assignment Assistant",
+          "url": "https://ctl.jhsph.edu/blog/posts/introducing-assignment-assistant/",
+          "price": "Not sold; internal to one school",
+          "gap": "Analysis-only and unavailable outside JHSPH."
+        },
+        {
+          "name": "Manual testing in ChatGPT or Claude",
+          "url": "https://uca.edu/cetal/files/2025/08/Checklist-for-Creating-AI-Resistant-Assignments-and-Assessments.pdf",
+          "price": "Free to $20/month chat subscription",
+          "gap": "One model, one prompt, no rubric scoring, no code execution, no history across terms."
+        }
+      ],
+      "keyFeatures": [
+        "Multi-model, multi-prompt runs from lazy copy-paste to careful multi-turn attempts",
+        "Rubric-row scoring of AI outputs with the instructor's own rubric",
+        "Sandboxed autograder execution for programming assignments",
+        "Re-test diff after edits and term-over-term history",
+        "Shareable one-page report for a CTL or curriculum committee"
+      ],
+      "mvpScope": {
+        "features": [
+          "Paste prompt and rubric, run against 3 models with 3 prompt styles",
+          "Rubric-row score table and one-page PDF report",
+          "Python autograder execution for pytest-based assignments"
+        ],
+        "outOfScope": [
+          "LMS integration",
+          "Other languages' autograders",
+          "CTL dashboards and site licensing",
+          "Automatic assignment rewriting"
+        ],
+        "buildEstimate": "2 weekends"
+      },
+      "techStack": "React + Vite + Tailwind, Supabase (auth, history), Flask worker with container sandbox for tests, Claude API and Gemini API for runs and rubric scoring",
+      "pricing": {
+        "model": "Per-instructor subscription with a free tier of 2 assignments per term",
+        "pricePoint": "$9/month or $79/year",
+        "rationale": "Sits near MagicSchool Plus ($8.33 to $12.99/month), which teachers already pay for suggestion-only tools; model API cost per full run is an estimate that must be measured, and the free tier caps it."
+      },
+      "revenueSketch": "Estimate: 250 paying instructors x $79/year = about $19,750/year, plus 5 CTL licenses at an assumed $2,000/year = $10,000/year. All figures are assumptions, not measured demand.",
+      "distribution": "Free 'stress test your CS1 assignment' runs offered on the SIGCSE mailing list and at a SIGCSE TS 2027 workshop or birds-of-a-feather session; publish a public report of how frontier models score on well-known Nifty Assignments as a lead magnet.",
+      "validationTest": {
+        "method": "Run 10 assignments from 10 instructors by hand (scripted) and send each a report, then ask for $79/year pre-orders.",
+        "successCriteria": "At least 4 of 10 instructors change an assignment based on the report and 3 pre-order.",
+        "cost": "About 12 hours and under $50 in API calls."
+      },
+      "moat": "A growing, rubric-labeled dataset of how each model generation performs on real course assignments, plus the code-execution harness; this benchmark history is what CTLs would pay for and generic chat tools do not keep.",
+      "compliance": [
+        "FERPA: minimal, because no student work or identities are processed, only instructor-authored assignments",
+        "Copyright: instructor assignments may be institution-owned; terms must state they are not used for training",
+        "Accessibility: the app UI itself must meet WCAG 2.1 AA for faculty users"
+      ],
+      "risks": [
+        {
+          "risk": "Model vendors ship a free 'test my assignment' feature",
+          "mitigation": "Focus on rubric scoring, code execution and multi-term history, which a chat feature will not provide."
+        },
+        {
+          "risk": "API costs per run exceed what a $79/year plan covers",
+          "mitigation": "Cap runs per plan, cache results, and use cheaper models for rubric scoring after calibration."
+        },
+        {
+          "risk": "A good score creates false confidence that an assignment is AI-proof",
+          "mitigation": "Report states clearly that results are a lower bound on AI capability, not a guarantee."
+        }
+      ],
+      "scores": {
+        "pain": 4,
+        "willingnessToPay": 3,
+        "reachability": 5,
+        "competitiveGap": 3,
+        "feasibility": 5,
+        "complianceBurden": 5,
+        "total": 25
+      },
+      "inspiredBy": "https://dailynous.com/2026/09/30/overwhelming-cheating/"
+    },
+    {
+      "n": 2,
+      "title": "ACR Draft for EdTech Vendors",
+      "slug": "acr-draft-for-edtech-vendors",
+      "category": "Micro-SaaS",
+      "complexity": "Multi-week",
+      "summary": "For small edtech companies trying to sell to universities: generate an honest, defensible Accessibility Conformance Report (VPAT) draft from automated scans plus a guided manual review, for a fraction of agency cost.",
+      "problemStatement": "University procurement now asks for a VPAT before it will even consider a product, even for small purchases. Small vendors and indie edtech founders have no accessibility staff, and agency audits cost hundreds of dollars per screen before the report itself is written.",
+      "description": "The vendor enters their product URL and a list of key screens and user flows. The tool crawls each screen with a headless browser, runs automated WCAG 2.1 AA checks, and then walks the vendor through the criteria automation cannot judge (keyboard order, focus visibility, screen-reader labels, captions) with short, guided manual tests. It fills a VPAT 2.5 WCAG edition template with conformance levels and plain remarks, flags any criterion where the vendor's answer is unsupported by evidence, and exports a Word or PDF ACR. On each new release it re-scans and shows what changed, so the ACR stays current.",
+      "targetCustomer": "Founders and small product teams (1 to 20 people) at edtech and ed-adjacent SaaS companies selling to colleges and universities.",
+      "buyer": "The vendor itself, on a company card from its sales or engineering budget.",
+      "whyNow": "The DOJ ADA Title II rule still requires WCAG 2.1 AA from public universities, with deadlines moved to April 2027 and April 2028, and the rule reaches vendor-provided content, so procurement offices are tightening ACR requirements now.",
+      "founderFit": "Pisan works on accessibility, builds React apps, and sits on the buyer side at a public university, so he understands what procurement reviewers actually check. SIGCSE and CS education communities contain many small tool builders who face this exact gate.",
+      "problemEvidence": [
+        {
+          "url": "https://accessible.org/news/colleges-universities-requiring-vpats/",
+          "source": "Accessible.org",
+          "date": "2025-11-26",
+          "summary": "Vendor reports clients being asked for a VPAT for the first time and predicts selling to multiple universities without an ACR will be near impossible in 2026 (vendor source, no data cited)."
+        },
+        {
+          "url": "https://plantemoran.com/explore-our-thinking/insight/2026/04/doj-extends-ada-title-ii-web-accessibility-compliance-deadlines",
+          "source": "Plante Moran",
+          "date": "2026-04 (day unknown)",
+          "summary": "DOJ interim final rule of 2026-04-20 extends Title II deadlines by one year without changing the WCAG 2.1 AA standard."
+        },
+        {
+          "url": "https://binghamton.teamdynamix.com/TDClient/45/Portal/KB/Article/21334/Purchasing-Requirements-VPATs-and-ACRs",
+          "source": "Binghamton University purchasing KB",
+          "date": "unknown",
+          "summary": "A public university's purchasing page requires VPATs and ACRs from vendors."
+        },
+        {
+          "url": "https://www.tamucc.edu/information-technology/accessibility/vendor/vpat-ihe.php",
+          "source": "Texas A&M Corpus Christi IT",
+          "date": "unknown",
+          "summary": "Institution page tells vendors that higher education institutions need ACRs."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Accessible.org VPAT services",
+          "url": "https://accessible.org/services/vpat/",
+          "price": "WCAG edition ACR $350 plus required audit at $100 to $250 per page or screen (pricing page, 2026)",
+          "gap": "Done-for-you service priced per screen; costly for a 20-screen product and must be repurchased after major releases."
+        },
+        {
+          "name": "Deque axe Auditor",
+          "url": "https://www.gartner.com/reviews/product/axe-auditor",
+          "price": "Per-user annual subscription, quote-based; exact price unknown",
+          "gap": "Enterprise tool for trained accessibility auditors, not a guided path for a founder with no accessibility background."
+        },
+        {
+          "name": "accessiBe VPAT service",
+          "url": "https://accessibe.com/media/services-pdfs/vpat.pdf",
+          "price": "unknown (quoted by site size category)",
+          "gap": "Service engagement, not a self-serve, continuously updated report."
+        }
+      ],
+      "keyFeatures": [
+        "Headless-browser crawl of listed screens and flows with automated WCAG 2.1 AA checks",
+        "Guided manual tests for criteria automation cannot judge, with evidence capture",
+        "VPAT 2.5 WCAG edition export with honest conformance levels and remarks",
+        "Unsupported-claim warnings before export",
+        "Release-to-release re-scan and change log"
+      ],
+      "mvpScope": {
+        "features": [
+          "Scan up to 20 screens with axe-core via Playwright",
+          "Guided manual checklist for keyboard, focus and labels",
+          "WCAG edition ACR export to Word"
+        ],
+        "outOfScope": [
+          "Section 508 and EN 301 549 editions",
+          "Native mobile apps",
+          "Remediation code suggestions",
+          "Third-party attestation"
+        ],
+        "buildEstimate": "4 to 5 weeks part-time"
+      },
+      "techStack": "React + Vite + Tailwind, Supabase, Flask worker running Playwright and axe-core, Claude API for drafting remarks from evidence, docx generation",
+      "pricing": {
+        "model": "Per-product subscription, with a one-time report option",
+        "pricePoint": "$49/month per product, or $299 for a one-time report",
+        "rationale": "Undercuts a single agency WCAG ACR ($350 plus per-screen audit fees) while recurring value comes from keeping the ACR current across releases."
+      },
+      "revenueSketch": "Estimate: 60 subscribed products x $49/month = $2,940 MRR, plus 10 one-time reports a month x $299 = $2,990/month. Assumes a niche of small edtech vendors that has not been sized.",
+      "distribution": "Free automated scan as a lead magnet posted to indie and edtech founder communities (Indie Hackers, r/SaaS, edtech founder groups) and to SIGCSE tool builders; a short guide on 'what a university procurement reviewer reads in your ACR' written from the buyer side.",
+      "validationTest": {
+        "method": "Landing page with a free automated scan; interview 8 edtech founders who have been asked for a VPAT.",
+        "successCriteria": "5 of 8 confirm a lost or stalled deal over a missing ACR and 3 pay $299 for a concierge report.",
+        "cost": "About 15 hours and under $100."
+      },
+      "moat": "A library of guided manual tests tuned for common edtech UI patterns (code editors, quiz players, LMS embeds) and a buyer-side view of what procurement accepts; accumulated per-product evidence makes switching costly.",
+      "compliance": [
+        "Accessibility: the core product; must avoid implying certification or legal compliance, and state that the vendor is responsible for its claims",
+        "Legal: ACRs are representations to buyers, so terms need clear disclaimers and the tool should never auto-mark 'Supports' without evidence",
+        "FERPA: none, because no student data is processed"
+      ],
+      "risks": [
+        {
+          "risk": "Vendors use the tool to produce inflated ACRs, damaging trust",
+          "mitigation": "Require evidence for every 'Supports' and print an evidence appendix procurement can inspect."
+        },
+        {
+          "risk": "Accessibility agencies add cheap AI ACR generators",
+          "mitigation": "Compete on edtech-specific guided tests and continuous re-scans rather than one-time price."
+        },
+        {
+          "risk": "Market of small edtech vendors is smaller than assumed",
+          "mitigation": "Expand to any SaaS selling to public-sector buyers covered by Title II."
+        }
+      ],
+      "scores": {
+        "pain": 4,
+        "willingnessToPay": 4,
+        "reachability": 3,
+        "competitiveGap": 3,
+        "feasibility": 4,
+        "complianceBurden": 5,
+        "total": 23
+      },
+      "inspiredBy": "https://accessible.org/news/colleges-universities-requiring-vpats/"
+    },
+    {
+      "n": 3,
+      "title": "Variant Exam Press",
+      "slug": "variant-exam-press",
+      "category": "EdTech: Higher Ed",
+      "complexity": "Multi-week",
+      "summary": "For CS instructors moving back to in-person paper exams: write parameterized questions once, print a different version for every seat, and grade them in Gradescope with per-version answer keys.",
+      "problemStatement": "Instructors who moved exams back to paper to stop AI use now face neighbors copying in crowded lecture halls, and making several versions of a code-tracing or data-structures exam by hand (with matching keys) takes hours and introduces key errors.",
+      "description": "Instructors write questions in a small template language: code-tracing snippets with randomized constants and variable names, data-structure states with randomized inserts, multiple-choice with shuffled options. The tool executes each variant to compute its correct answer, checks that variants are equally difficult by simple measures, and generates print-ready PDFs (one version per seat, with seating map) plus a Gradescope-ready template and a per-version answer key. A question bank keeps items across terms, tagged by topic and past performance.",
+      "targetCustomer": "Instructors and head TAs of large CS1, CS2, data structures and systems courses that give in-person paper exams.",
+      "buyer": "Individual instructors (personal or course budget) at first; departments for a multi-course license.",
+      "whyNow": "Blue book sales have risen and CS faculty report switching away from take-home exams in 2026; students in some quantitative courses now write code by hand, which creates demand for many paper versions of code-heavy questions.",
+      "founderFit": "Pisan teaches large CS courses and knows the code-tracing and data-structure question styles SIGCSE instructors use; computing correct answers by executing code is a natural fit for his stack and a design partner pool exists in his network.",
+      "problemEvidence": [
+        {
+          "url": "https://www.middleburycampus.com/article/2026/04/blue-books-are-here-to-stay-professors-react-to-ai",
+          "source": "Middlebury Campus",
+          "date": "2026-04 (day unknown)",
+          "summary": "Faculty, including in a CS class with widespread cheating, are switching from take-home exams to blue books and handwritten code."
+        },
+        {
+          "url": "https://www.axios.com/2026/03/14/ai-blue-books-colleges-jobs",
+          "source": "Axios",
+          "date": "2026-03-14",
+          "summary": "Blue books are making a campus comeback in the AI era, with critics noting accommodation concerns."
+        },
+        {
+          "url": "https://dailynous.com/2026/09/30/overwhelming-cheating/",
+          "source": "Daily Nous",
+          "date": "2026-09-30",
+          "summary": "Instructors describe shifting to handwritten in-person exams as a response to AI cheating."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "PrairieLearn",
+          "url": "https://www.prairielearn.com/pricing",
+          "price": "Free tier; Basic $8 and Premium $16 per student per course (per search result summary of pricing page, not fetched)",
+          "gap": "Strong randomized question variants, but built for computer-based exams; I am uncertain how well it supports printed paper exams with per-seat versions."
+        },
+        {
+          "name": "Gradescope",
+          "url": "https://www.capterra.com.au/software/1021520/gradescope",
+          "price": "unknown (institutional licensing)",
+          "gap": "Grades paper exams well but does not author or generate executable question variants; reviewers note setup effort."
+        },
+        {
+          "name": "Word documents and hand-made versions",
+          "url": "https://www.chem.columbia.edu/sites/default/files/content/docs/Regrade_Request_Form.pdf",
+          "price": "Free",
+          "gap": "Manual versioning causes key errors, which then show up as regrade requests."
+        }
+      ],
+      "keyFeatures": [
+        "Template language for code-tracing, data-structure and multiple-choice questions",
+        "Execution-checked answer keys for every variant",
+        "Per-seat PDF versions with seating map",
+        "Gradescope-compatible template and per-version key export",
+        "Question bank with topic tags and past item statistics"
+      ],
+      "mvpScope": {
+        "features": [
+          "Python and Java code-tracing templates with randomized constants",
+          "Execution-computed keys",
+          "Per-version PDF export with answer keys"
+        ],
+        "outOfScope": [
+          "Direct Gradescope API integration",
+          "Item difficulty analytics",
+          "Shared departmental banks",
+          "Non-CS question types"
+        ],
+        "buildEstimate": "3 to 4 weeks part-time"
+      },
+      "techStack": "React + Vite + Tailwind, Supabase, Flask worker that executes variants in a sandbox, LaTeX or Typst for PDF generation, Claude API optional for drafting new templates",
+      "pricing": {
+        "model": "Per-instructor subscription; department license",
+        "pricePoint": "$15/month per instructor or $1,500/year per department",
+        "rationale": "Per-instructor price is below PrairieLearn's per-student fees for a 300-student course ($2,400 at Basic) because it covers only exam generation; department pricing matches typical small software budgets (assumption)."
+      },
+      "revenueSketch": "Estimate: 150 instructors x $15/month = $2,250 MRR, plus 10 departments x $1,500/year = $15,000/year. Assumptions untested.",
+      "distribution": "Free template packs for common CS1 and data-structures question styles shared on SIGCSE lists and the CS education Discord communities; demo at a SIGCSE TS 2027 session; department demos at Pisan's and partner institutions.",
+      "validationTest": {
+        "method": "Generate a versioned midterm for 5 instructors from their existing exams by hand-scripted tooling, then ask for a paid pilot next term.",
+        "successCriteria": "3 of 5 use the versions in a real exam and 2 agree to pay.",
+        "cost": "About 20 hours, no cash cost."
+      },
+      "moat": "A curated, execution-verified bank of CS exam templates contributed by design partners, and exam-day logistics (seating maps, accommodations versions) that generic quiz tools ignore.",
+      "compliance": [
+        "FERPA: low, because the core product holds instructor-authored questions; seating maps with student names should stay optional and local",
+        "Accessibility: must output large-print and screen-reader-friendly versions for students with accommodations",
+        "Institutional data agreements: likely needed only for department licenses that import rosters"
+      ],
+      "risks": [
+        {
+          "risk": "PrairieLearn or Gradescope adds print-variant generation",
+          "mitigation": "Specialize in CS code-tracing templates and paper logistics; integrate rather than compete with Gradescope grading."
+        },
+        {
+          "risk": "Variants differ in difficulty, raising fairness complaints",
+          "mitigation": "Constrain parameter ranges, report simple difficulty measures, and let instructors lock variants."
+        },
+        {
+          "risk": "The return to paper exams fades",
+          "mitigation": "Same templates can export to Canvas quiz banks for computer-based proctored exams."
+        }
+      ],
+      "scores": {
+        "pain": 3,
+        "willingnessToPay": 3,
+        "reachability": 5,
+        "competitiveGap": 2,
+        "feasibility": 4,
+        "complianceBurden": 3,
+        "total": 20
+      },
+      "inspiredBy": "https://www.middleburycampus.com/article/2026/04/blue-books-are-here-to-stay-professors-react-to-ai"
+    }
+  ],
+  "runNotes": {
+    "searches": [
+      "r/Professors frustrated tool wish existed 2026",
+      "Gradescope reviews cons instructors 2026",
+      "r/Teachers AI grading feedback workload October 2026",
+      "Indie Hackers edtech SaaS teachers MRR 2026",
+      "Starter Story teacher tool revenue per month",
+      "Inside Higher Ed October 2026 faculty AI",
+      "EdSurge October 2026 higher education",
+      "ADA Title II web accessibility rule deadline extension 2026 universities status",
+      "professors student accommodations extended time tracking spreadsheet nightmare Canvas",
+      "academic integrity case reporting process faculty burden AI cheating 2026",
+      "Ask HN tool for teachers wish existed",
+      "r/microsaas teachers paid tool launched revenue 2026",
+      "Product Hunt education tool for professors launch 2026 pricing",
+      "Maxient academic integrity faculty reporting form pricing",
+      "EdWeek Market Brief 2026 AI teachers buying",
+      "Canvas New Quizzes accommodations extra time all quizzes course level instructors complaint",
+      "r/instructionaldesign 2026 frustrating workflow tool",
+      "professors exam regrade requests managing volume large course 2026",
+      "Acquire.com listing edtech SaaS teachers for sale 2026",
+      "VPAT ACR cost small edtech vendor university procurement accessibility conformance report price",
+      "VPAT generator software self-serve tool pricing",
+      "test assignment against ChatGPT AI-resistant assignment checker tool for instructors",
+      "Symplicity Advocate academic integrity case management faculty",
+      "Deque axe Auditor pricing per user",
+      "return to in-person paper exams blue books AI 2026 professors computer science",
+      "PrairieLearn pricing hosted per student"
+    ],
+    "rejectedCandidates": [
+      {
+        "title": "Integrity Case Builder (faculty-side academic integrity case packets)",
+        "total": 19,
+        "reason": "Strong pain (Daily Nous 2026-09-30, Grinnell and Chapman caseloads) but faculty do not pay for case prep, institutions already license Maxient or Symplicity Advocate, and discipline records carry heavy FERPA burden."
+      },
+      {
+        "title": "Accommodation Sync for Canvas quizzes",
+        "total": 16,
+        "reason": "Canvas New Quizzes now has course-level accommodations and Accommodate HQ already exists; disability data adds compliance burden."
+      },
+      {
+        "title": "Regrade Desk",
+        "total": 17,
+        "reason": "Gradescope already handles structured regrade requests; low competitive gap."
+      },
+      {
+        "title": "K-12 AI teacher assistant",
+        "total": 14,
+        "reason": "OpenAI, Anthropic, Google and Microsoft now give free premium AI tools to verified K-12 teachers (per AI Weekly citing Chalkbeat), and it is an AI wrapper without a moat."
+      },
+      {
+        "title": "Extended-time exam window calculator",
+        "total": 12,
+        "reason": "Novelty utility with no paying buyer; spreadsheets and campus calculators exist."
+      },
+      {
+        "title": "AI-free skills certification for students",
+        "total": 13,
+        "reason": "Student buyer, unclear trust model, and depends on institutional recognition (network effect)."
+      },
+      {
+        "title": "CS bait-question bank",
+        "total": 18,
+        "reason": "Merged into Assignment Stress Test; a static bank decays as models improve."
+      }
+    ],
+    "caveats": "No Reddit threads were directly retrievable this run; r/Professors-style evidence comes from Daily Nous and campus press. Several evidence dates are month-only or unknown (campus KB pages). PrairieLearn prices come from a search result summary, not a fetched page, and its paper-exam support is unverified. Accessible.org is a VPAT vendor, so its demand claims are self-interested. All revenue sketches are assumptions. Variant Exam Press scored 20 and edged out Integrity Case Builder (19); the score gap is within judgment error."
+  }
+}
