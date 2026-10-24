@@ -345,8 +345,10 @@
         "date": "2026-10-10",
         "n": 2
       },
-      "placeholder": true,
-      "notes": "In progress since 2026-10-24"
+      "notes": "Built in one session as a static TypeScript app with no backend (no React or D3). A hand-written parser and interpreter run a C loop-nest subset (arrays of any element type and dimension, #define constants, for/while/if, min/max bounds) and record the exact address of every array access, with arrays row-major from 0x10000 on 64-byte boundaries and scalars in registers; an interpreter replaced the suggested affine-only analysis so blocked loops with min() bounds just work. The trace runs through a configurable set-associative cache (size, line, associativity, LRU/FIFO/seeded random, write-allocate, write-back) and every miss is classified compulsory, capacity or conflict by running an infinite and a fully associative LRU cache alongside. The theater animates a sets x ways grid with labelled lines and a per-array memory map; two kernels compare side by side; sweeps vary a #define or a cache parameter and plot miss rate; six question templates produce simulator-verified exam questions exported as Markdown or QTI 1.2. Eight presets (row vs column, ijk vs ikj, blocked matmul 3,744 to 1,008 misses, transpose, padding, stride, stencil, write policies). Limitations: one level of data cache, fixed evaluation order within a statement, array contents not simulated (no pointers or indirect indexing), QTI not yet tried in Canvas. 62 vitest tests, cache cross-checked against a naive reference, 99.7% statement coverage on core.",
+      "url": "https://cache-miss-theater.netlify.app",
+      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/cache-miss-theater",
+      "implementedOn": "2026-10-24"
     }
   ]
 }
