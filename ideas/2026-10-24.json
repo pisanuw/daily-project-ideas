@@ -1,0 +1,462 @@
+{
+  "date": "2026-10-24",
+  "schemaVersion": 2,
+  "ideas": [
+    {
+      "n": 1,
+      "title": "TA Practice Room",
+      "slug": "ta-practice-room",
+      "category": "EdTech: Higher Ed",
+      "complexity": "Multi-week",
+      "summary": "For CS departments that onboard dozens or hundreds of TAs each term: AI-simulated students let new TAs rehearse office-hours and lab situations before they meet real students, with a coordinator dashboard of readiness.",
+      "problemStatement": "New TAs walk into a busy lab with no practice handling a confused, stressed, or combative student, so they either give away answers or freeze, and the faculty coordinator only finds out from complaints weeks later. Live role-play with trained actors or faculty does not scale to 250 TAs a year.",
+      "description": "The coordinator picks scenarios from a CS-specific library (a passive CS1 student stuck on loops in a crowded lab, a student disputing a proof grade, a student who wants the answer two hours before a deadline) or writes new ones from course materials. Each TA runs text or voice conversations with an AI student persona that has a hidden misconception and an emotional state. A rubric-based reviewer scores the session on behaviors the department cares about (asking before telling, not leaking solutions, de-escalation, policy accuracy) and quotes the moments that drove each score. The coordinator sees cohort-level readiness, can flag TAs for a follow-up coaching conversation, and can export completion records for TA training requirements.",
+      "targetCustomer": "Faculty and staff who run TA orientation and training in CS departments (TA coordinators, teaching-track faculty, head TAs of large intro courses).",
+      "buyer": "The CS department, from its TA training or instructional budget; later a center for teaching and learning license covering all departments with large TA programs.",
+      "whyNow": "SIGCSE TS 2026 (February) reported a 266-GTA study at Purdue where AI-simulated student practice improved communication and adaptability over online modules alone, and Stanford's EducaSim (March 2026) showed simulated sections at 20,000-student scale. Departments have the evidence now but each is building its own scenarios and tooling.",
+      "founderFit": "Pisan teaches CS and supervises TAs himself, knows the office-hours failure modes first-hand, and his SIGCSE network includes TA-program coordinators and the authors of this exact line of work who could be design partners or early adopters.",
+      "problemEvidence": [
+        {
+          "url": "https://www.cs.purdue.edu/homes/abejara/promotion/poster%20-%20Preparing%20Graduate%20Teaching%20Assistants%20with%20Structured%20Orientation%20and%20AI-Simulated%20Students.pdf",
+          "source": "SIGCSE TS 2026 poster (Purdue CS)",
+          "date": "2026-02-18",
+          "summary": "More than 250 GTAs per year in one CS department; GTAs who did workshops plus AI-simulated student practice (n = 266) showed stronger communication than those with online modules alone."
+        },
+        {
+          "url": "https://www.cs.purdue.edu/homes/dickeye/samplefiles/GLOW_CS_training_scenarios_overview.pdf",
+          "source": "Purdue CS training scenarios overview",
+          "date": "2026-02-20",
+          "summary": "Department hand-built a scenario library (CS 180 to CS 373, aggressive and passive personas, time pressure), showing the scenario-authoring work each department currently does alone."
+        },
+        {
+          "url": "https://arxiv.org/abs/2603.11444",
+          "source": "arXiv (Stanford, EducaSim)",
+          "date": "2026-03-12",
+          "summary": "Generative-agent simulated small-group sections for CS1 teacher practice, deployed in a 20,000-student course; research prototype, not a product."
+        },
+        {
+          "url": "https://news.okstate.edu/articles/education-human-sciences/2016/experience-via-avatars",
+          "source": "Oklahoma State University news",
+          "date": "2016 (day unknown)",
+          "summary": "A university paid an annual Mursion simulator subscription (reported $6,000), showing institutions already pay for practice-teaching simulation."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Mursion",
+          "url": "https://www.digitalhumans.com/blog/9-best-ai-training-platforms-in-2026",
+          "price": "About $49 per 30-minute session (third-party estimate); enterprise pricing unknown",
+          "gap": "Generic teacher and workforce simulations with human or AI actors; no CS-specific scenarios, no code or proof content, priced per session rather than for a 250-TA cohort."
+        },
+        {
+          "name": "EducaSim (Stanford research)",
+          "url": "https://arxiv.org/abs/2603.11444",
+          "price": "Not sold (research prototype)",
+          "gap": "Simulates a small group section for one course; not packaged for departments, no coordinator dashboard or TA records."
+        },
+        {
+          "name": "In-house department builds (e.g., Purdue GTA orientation)",
+          "url": "https://www.cs.purdue.edu/homes/abejara/promotion/poster%20-%20Preparing%20Graduate%20Teaching%20Assistants%20with%20Structured%20Orientation%20and%20AI-Simulated%20Students.pdf",
+          "price": "Staff time, unknown",
+          "gap": "Each department must write personas, rubrics, and tooling itself; most departments lack the staff."
+        }
+      ],
+      "keyFeatures": [
+        "CS scenario library with personas, hidden misconceptions, and stress levels",
+        "Text and voice practice sessions with an AI student",
+        "Rubric scoring with quoted evidence (solution leakage, questioning, de-escalation, policy accuracy)",
+        "Scenario authoring from course materials and the course's own collaboration and AI policies",
+        "Coordinator dashboard: cohort readiness, flags for coaching, completion export"
+      ],
+      "mvpScope": {
+        "features": [
+          "15 text-based scenarios for CS1, CS2, discrete math, and data structures",
+          "Fixed department rubric with quoted evidence",
+          "Coordinator view of completions and scores, CSV export",
+          "Magic-link login for TAs (no student data involved)"
+        ],
+        "outOfScope": [
+          "Voice mode",
+          "LMS integration",
+          "Custom rubric builder",
+          "Non-CS disciplines"
+        ],
+        "buildEstimate": "4 to 6 weeks part time"
+      },
+      "techStack": "React + Vite + Tailwind, Supabase (auth, Postgres, row-level security per department), Claude API for personas and rubric scoring, optional Gemini for a second-opinion scorer",
+      "pricing": {
+        "model": "Per-department annual license by TA headcount",
+        "pricePoint": "$1,500/year up to 100 TAs; $3,000/year up to 300 TAs",
+        "rationale": "Below the historical Mursion subscription ($5,000 to $6,000/year) and far below building it in-house; fits a department discretionary budget without central procurement in many universities."
+      },
+      "revenueSketch": "Estimate: 40 CS departments x $2,000/year average = $80,000 ARR within two years, assuming SIGCSE outreach converts roughly 10% of 400 contacted departments. Assumptions unverified.",
+      "distribution": "SIGCSE TS 2027 demo or lightning talk and a workshop on TA training; direct outreach to authors of TA-training papers; pilots with 3 departments in Pisan's network for spring 2027 TA onboarding; CSTA and SIGCSE mailing lists.",
+      "validationTest": {
+        "method": "Build 3 scenarios in a clickable prototype, then demo to 8 TA coordinators from the SIGCSE network and ask for a paid pilot for winter or spring TA onboarding.",
+        "successCriteria": "3 of 8 coordinators agree to a paid pilot (any amount) or sign a letter of intent before January TA orientation.",
+        "cost": "About 2 weekends of building plus 8 calls; under $50 in API spend."
+      },
+      "moat": "A growing, CS-specific scenario and rubric library validated across departments, plus cohort benchmark data (how TAs at similar departments score), which a generic role-play tool or a one-off department build does not have.",
+      "compliance": [
+        "FERPA: no student records needed; TAs are employees and practice data is training data, but TA scores may count as personnel records, so keep them department-scoped and deletable.",
+        "Accessibility: practice UI must meet WCAG 2.1 AA (keyboard, screen reader, captions for any voice mode) because TAs with disabilities must be able to complete required training.",
+        "Institutional data agreements: some universities require a vendor security review even without student data; prepare a HECVAT Lite."
+      ],
+      "risks": [
+        {
+          "risk": "Departments treat TA training as free and build their own with ChatGPT.",
+          "mitigation": "Sell the vetted scenario library, scoring rubric, and coordinator reporting rather than the chat itself; offer a free single-scenario tier."
+        },
+        {
+          "risk": "AI personas feel fake, so TAs game the scoring.",
+          "mitigation": "Ground personas in real (anonymized) office-hours misconceptions from partner departments and have coordinators review a sample of transcripts each term."
+        },
+        {
+          "risk": "Large R1 departments with staff (like Purdue) are the most motivated but least likely to buy.",
+          "mitigation": "Target mid-size and teaching-focused departments that hire undergraduate TAs and lack instructional-design staff; invite R1 authors as scenario contributors."
+        }
+      ],
+      "scores": {
+        "pain": 4,
+        "willingnessToPay": 3,
+        "reachability": 5,
+        "competitiveGap": 4,
+        "feasibility": 4,
+        "complianceBurden": 4,
+        "total": 24
+      },
+      "inspiredBy": "https://www.cs.purdue.edu/homes/abejara/promotion/poster%20-%20Preparing%20Graduate%20Teaching%20Assistants%20with%20Structured%20Orientation%20and%20AI-Simulated%20Students.pdf"
+    },
+    {
+      "n": 2,
+      "title": "Slide-Aware Captions",
+      "slug": "slide-aware-captions",
+      "category": "EdTech: Higher Ed",
+      "complexity": "Weekend MVP",
+      "summary": "For instructors who record technical lectures: upload the auto-captions plus the slides and code, and get captions with the jargon fixed and only the doubtful lines left for a two-minute review.",
+      "problemStatement": "Auto-captions turn 'malloc', 'std::vector', and 'Dijkstra' into nonsense, campus guides say auto-captions are about 80% accurate against a 98% to 99% expectation, and fixing an hour of technical captions by hand takes an evening, while paying for human captioning costs about $1 per minute or more.",
+      "description": "The instructor uploads a caption file exported from Panopto, Zoom, Kaltura, or YouTube (WebVTT or SRT) along with that lecture's slides and any code shown. The app builds a lecture-specific vocabulary from slide text, code identifiers, and a reusable course glossary, then proposes corrections only where the caption text is a likely mishearing of a known term. Every change is shown as a diff with timestamps; low-confidence lines are queued for a quick listen-and-confirm pass. The fixed file is exported for re-upload, and the course glossary improves across the term so later lectures need less review.",
+      "targetCustomer": "University instructors in CS, math, engineering, and other jargon-heavy fields who post recorded lectures, plus the instructional designers and accessibility staff who help them.",
+      "buyer": "Individual instructors on a personal card at first; then departments or the campus accessibility office, from the same budget that currently pays per-minute human captioning.",
+      "whyNow": "The DOJ Title II rule still requires WCAG 2.1 AA for public universities; the April 2026 interim rule moved the deadline to April 26, 2027 for large entities, so campuses have about six months to bring course media into compliance. Panopto offers only a site-wide custom dictionary, and a request for per-folder dictionaries built from slides has sat in its feature tracker since 2023.",
+      "founderFit": "Pisan lectures on exactly the code-heavy material that ASR mangles, can test on his own recordings immediately, and has SIGCSE colleagues facing the same Title II deadline as a ready pilot group.",
+      "problemEvidence": [
+        {
+          "url": "https://edtechmagazine.com/higher/article/2025/06/guide-ada-title-ii-accessibility-rule-perfcon",
+          "source": "EdTech Magazine (Higher Ed)",
+          "date": "2026-04-21",
+          "summary": "DOJ interim final rule extended Title II compliance to April 26, 2027 (50,000+ population) and April 26, 2028 (smaller); standard and scope unchanged, including digital course materials."
+        },
+        {
+          "url": "https://teaching.missouri.edu/knowledge-base/accessibility-strategies/accessibility-skills-captions-and-transcripts",
+          "source": "University of Missouri Teaching for Learning Center",
+          "date": "unknown (page footer 2026)",
+          "summary": "Says automatic captions are about 80% accurate, cites a 98% accuracy standard, and tells instructors to check technical terms and proper nouns especially carefully."
+        },
+        {
+          "url": "https://community.panopto.com/discussion/comment/3936/",
+          "source": "Panopto Community feature request",
+          "date": "2023-07 (day unknown)",
+          "summary": "Users say a site-wide dictionary is too cumbersome and ask for folder or session dictionaries built from slide text; tagged 'Tracking' with no official delivery."
+        },
+        {
+          "url": "https://www.usu.edu/accessibility/captions/caption-pricing",
+          "source": "Utah State University accessibility office",
+          "date": "unknown",
+          "summary": "Departments pay 3Play Media $0.90 to $3.70 per minute for captions, plus a possible $1.00/minute difficult-audio surcharge, showing an existing paid budget line."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Panopto built-in ASR",
+          "url": "https://community.panopto.com/discussion/comment/3936/",
+          "price": "Included in institutional license (price unknown)",
+          "gap": "Only a site-wide custom dictionary maintained by admins; no per-lecture vocabulary from slides or code, no confidence-ranked review queue."
+        },
+        {
+          "name": "3Play Media (human captions)",
+          "url": "https://www.usu.edu/accessibility/captions/caption-pricing",
+          "price": "$0.90 to $3.70 per minute under one university contract",
+          "gap": "Accurate but costs roughly $45 to $110 per lecture hour and takes days; captioners still miss course-specific code identifiers without a glossary."
+        },
+        {
+          "name": "Rev",
+          "url": "https://sonix.ai/resources/rev-pricing/",
+          "price": "About $0.25/min AI and $1.99/min human per a competitor's blog (unverified)",
+          "gap": "General-purpose transcription; no ingestion of slides or code, no course glossary that improves over a term."
+        },
+        {
+          "name": "Sonix",
+          "url": "https://sonix.ai/resources/transcribe-panopto-videos-automatically/",
+          "price": "unknown",
+          "gap": "Supports custom vocabulary terms, but the user must type them in; does not mine them from slides and code or limit review to likely jargon errors."
+        }
+      ],
+      "keyFeatures": [
+        "Import WebVTT/SRT from Panopto, Zoom, Kaltura, YouTube",
+        "Lecture vocabulary mined from slides (PDF/PPTX) and code files",
+        "Targeted corrections with diff view and timestamps",
+        "Confidence-ranked review queue with audio jump-to",
+        "Course glossary that persists across the term",
+        "Export corrected captions plus an accuracy-estimate report"
+      ],
+      "mvpScope": {
+        "features": [
+          "Upload VTT/SRT plus PDF slides and code",
+          "Vocabulary extraction and LLM-proposed jargon fixes",
+          "Accept/reject diff UI",
+          "Export corrected VTT"
+        ],
+        "outOfScope": [
+          "Audio playback inside the app (use the platform's player)",
+          "Direct Panopto/Kaltura API integration",
+          "Speaker identification",
+          "Languages other than English"
+        ],
+        "buildEstimate": "1 to 2 weekends"
+      },
+      "techStack": "React + Vite + Tailwind, pdf.js for slide text, a small Flask or Supabase edge function for parsing PPTX and code, Claude API for constrained correction proposals, Supabase for glossaries and billing",
+      "pricing": {
+        "model": "Per-instructor subscription, plus department bundles",
+        "pricePoint": "$12/month per instructor or $600/year for a department of up to 20 instructors",
+        "rationale": "One lecture hour of human captions costs about $54 to $60 at $0.90 to $1.00 per minute, so a month of the tool costs less than a quarter of one captioned lecture; department bundle undercuts a single semester of 3Play spend for one course."
+      },
+      "revenueSketch": "Estimate: 300 instructors x $12/month = $3,600 MRR plus 20 departments x $600/year = $12,000 ARR, assuming SIGCSE and accessibility-office channels. Assumptions unverified.",
+      "distribution": "Free tier on the first two lectures; demos on SIGCSE mailing lists before the April 2027 deadline; outreach to campus accessibility offices and instructional designers who field caption complaints; a short post comparing raw versus fixed caption accuracy on a public CS lecture.",
+      "validationTest": {
+        "method": "Hand-run the pipeline on 3 public CS lecture videos, publish before/after word-error counts on a landing page, and offer paid early access to 10 instructors and 3 accessibility offices.",
+        "successCriteria": "30 waitlist signups from instructors and at least 1 accessibility office or department agreeing to a paid pilot.",
+        "cost": "One weekend and under $20 in API spend."
+      },
+      "moat": "Course and discipline glossaries that accumulate across users (shared CS vocabulary packs for common textbooks and courses) and per-instructor correction history, which make each new lecture cheaper to fix.",
+      "compliance": [
+        "Accessibility: the product exists to support ADA Title II and WCAG 2.1 AA; its own review UI must be WCAG 2.1 AA, and it should not claim legal compliance, only measured accuracy.",
+        "FERPA: lecture recordings may include student voices or names in Q&A; caption text can be an education record, so store minimal data, delete source files after export, and offer a data processing agreement.",
+        "Institutional data agreements: departments may require vendor security review; avoid storing audio to keep the review light."
+      ],
+      "risks": [
+        {
+          "risk": "Panopto or Kaltura ships slide-based vocabulary natively.",
+          "mitigation": "Stay platform-neutral (works with Zoom and YouTube too), and focus on code-aware correction and cross-course glossaries the platforms will not tailor to CS."
+        },
+        {
+          "risk": "LLM 'fixes' introduce new errors or hallucinated words.",
+          "mitigation": "Constrain edits to replacing phrases with known vocabulary terms that are phonetically close, show every edit as a diff, and route low-confidence ones to review."
+        },
+        {
+          "risk": "Instructors expect the accessibility office to handle captions and will not pay personally.",
+          "mitigation": "Sell department and accessibility-office bundles priced against existing per-minute captioning spend."
+        }
+      ],
+      "scores": {
+        "pain": 4,
+        "willingnessToPay": 4,
+        "reachability": 3,
+        "competitiveGap": 3,
+        "feasibility": 4,
+        "complianceBurden": 4,
+        "total": 22
+      },
+      "inspiredBy": "https://teaching.missouri.edu/knowledge-base/accessibility-strategies/accessibility-skills-captions-and-transcripts"
+    },
+    {
+      "n": 3,
+      "title": "AI Rules Board",
+      "slug": "ai-rules-board",
+      "category": "EdTech: Higher Ed",
+      "complexity": "Weekend MVP",
+      "summary": "For departments and teaching centers: instructors set an AI-use level for each assignment in a minute, students get one page showing the AI rules for every assignment in all their courses, and chairs see what policies are in use.",
+      "problemStatement": "Every instructor sets their own AI rules, often as a line in the syllabus, so a student taking four courses faces four inconsistent policies and worries about accidentally violating one, while teaching centers hand out icons and templates that instructors must paste into each assignment by hand.",
+      "description": "A department or teaching center chooses an AI-use scale (for example the AI Assessment Scale or a local three-level scheme) and writes the shared wording once. Instructors open a short form, list their assignments, and pick a level and optional notes for each, and the tool generates consistent badges and text to paste into Canvas or other LMS assignments (later, an LTI that inserts them automatically). Students get a single link showing every assignment across their enrolled courses with its AI level and what is allowed, without logging in to each course. The department sees an aggregate view (how many assignments allow AI, where policies are missing) to support curriculum and integrity discussions.",
+      "targetCustomer": "Instructors who set AI policies, and the students in their courses who need to follow them.",
+      "buyer": "Department chairs or centers for teaching and learning, from faculty-development or academic-integrity budgets.",
+      "whyNow": "An October 2026 essay notes universities still struggle with each instructor setting different AI rules, and student surveys show confusion about boundaries across courses. Teaching centers have converged on assignment-level labels (Penn State, BC Law, Ontario Tech) but distribute them as copy-paste snippets with no student-facing roll-up or reporting.",
+      "founderFit": "Pisan uses agentic coding tools in his own courses and writes assignment-level AI rules himself; CS departments are early, opinionated adopters, and his SIGCSE network can supply pilot departments and a shared CS-specific scale.",
+      "problemEvidence": [
+        {
+          "url": "https://jamesgmartin.center/2026/10/higher-ed-is-still-muddling-through-ai/",
+          "source": "James G. Martin Center",
+          "date": "2026-10-05",
+          "summary": "Because each instructor sets their own AI rules, students face different guidelines in each course, a problem universities still struggle with."
+        },
+        {
+          "url": "https://woh.arts.ubc.ca/navigating-ai-in-the-classroom-a-student-survey",
+          "source": "UBC Arts student survey",
+          "date": "2025-04 (day unknown)",
+          "summary": "480 students: 78% of courses had a written AI policy but only 54% of students heard the reasoning; many are unsure where boundaries lie across courses and fear accidental violations."
+        },
+        {
+          "url": "https://peer.asee.org/59375",
+          "source": "ASEE work-in-progress paper",
+          "date": "unknown",
+          "summary": "Engineering students are unclear on class AI policies, which are inconsistent across professors and universities."
+        },
+        {
+          "url": "https://eldig.psu.edu/gen-a-i-canvas-guidelines/",
+          "source": "Penn State eLDIG",
+          "date": "unknown",
+          "summary": "Teaching center offers green/yellow/red GenAI icons that instructors must copy into each Canvas assignment by hand, showing the manual workflow."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "AI Assessment Scale (Assignment Notice) Moodle plugin",
+          "url": "https://moodle.org/plugins/local_assignmentnotice",
+          "price": "Free",
+          "gap": "Moodle only; labels individual assignments but provides no cross-course student view or department reporting; US universities mostly run Canvas."
+        },
+        {
+          "name": "Penn State eLDIG GenAI Canvas icons",
+          "url": "https://eldig.psu.edu/gen-a-i-canvas-guidelines/",
+          "price": "Free",
+          "gap": "Copy-paste snippets per assignment; nothing tracks which assignments are labeled or shows students a combined view."
+        },
+        {
+          "name": "BC Law AI policy Canvas templates",
+          "url": "https://sites.bc.edu/bclawedtech/documentation/canvas/ai-policy-canvas-templates-for-faculty/",
+          "price": "Free (internal)",
+          "gap": "Course-level template module for one school; manual editing, no aggregation."
+        }
+      ],
+      "keyFeatures": [
+        "Department-chosen AI-use scale with shared wording",
+        "Per-assignment level picker that outputs consistent badges and text",
+        "Student page combining AI rules across all enrolled courses",
+        "Department dashboard of policy coverage and levels",
+        "Term-over-term history for curriculum review"
+      ],
+      "mvpScope": {
+        "features": [
+          "Scale editor and per-assignment level picker",
+          "Copyable accessible badge HTML for Canvas",
+          "Public course page and a student-built combined page from course links",
+          "Simple department summary table"
+        ],
+        "outOfScope": [
+          "LTI 1.3 auto-insertion",
+          "SIS enrollment sync",
+          "Integrity case tracking",
+          "Analytics on student AI use"
+        ],
+        "buildEstimate": "1 weekend for the MVP; 3 to 4 more weeks for the Canvas LTI"
+      },
+      "techStack": "React + Vite + Tailwind, Supabase (auth, Postgres, public read-only course pages), later LTI 1.3 for Canvas; no LLM required for the core, optional Claude API to suggest assignment-level wording from an assignment description",
+      "pricing": {
+        "model": "Free for individual instructors; paid department or campus plan",
+        "pricePoint": "$1,000/year per department; $6,000/year campus-wide",
+        "rationale": "Free tier spreads through instructors; departments pay for the dashboard, shared scale, and LTI, which costs less than a single faculty workshop series; competitors are free but manual."
+      },
+      "revenueSketch": "Estimate: 25 departments x $1,000/year + 3 campuses x $6,000/year = $43,000 ARR, assuming free instructor adoption drives department upgrades. Willingness to pay is the weakest assumption.",
+      "distribution": "Free tool announced on SIGCSE and CTL mailing lists; a shared 'CS AI-use scale' proposed at SIGCSE as an open standard with the tool as reference implementation; pilots with 3 CS departments in Pisan's network.",
+      "validationTest": {
+        "method": "Ship the free web MVP to 20 instructors in two departments for winter term and interview 2 chairs and 2 CTL directors about paying for the dashboard and LTI.",
+        "successCriteria": "15 of 20 instructors label all assignments, and at least 1 chair or CTL commits budget for an LTI pilot.",
+        "cost": "One weekend plus about 6 hours of interviews; near zero hosting."
+      },
+      "moat": "Becoming the shared scale and record of AI rules in a department (history across terms, student habit of checking one page), plus a CS-community scale that SIGCSE adopters reference.",
+      "compliance": [
+        "FERPA: keep it to policies, not student data; the student combined page is built from public course links, so no enrollment records are needed in the MVP. The LTI version would touch enrollment and needs a data agreement.",
+        "Accessibility: badges must not rely on color alone (text labels plus icons) and pages must meet WCAG 2.1 AA, given the April 2027 Title II deadline.",
+        "Academic freedom: the tool records each instructor's choice and must not impose a level."
+      ],
+      "risks": [
+        {
+          "risk": "Departments will not pay for something teaching centers give away free.",
+          "mitigation": "Keep the instructor tool free and charge only for the LTI, aggregation, and history; if no department pays within two terms, treat it as a lead generator for TA Practice Room and other paid products."
+        },
+        {
+          "risk": "Canvas or a major LMS adds native AI-policy fields.",
+          "mitigation": "Stay LMS-neutral and focus on the cross-course student view, which a single course's LMS settings do not provide."
+        },
+        {
+          "risk": "Faculty see labeling as surveillance or a mandate.",
+          "mitigation": "Position it as a communication aid, never store student AI usage, and let instructors keep any level they choose."
+        }
+      ],
+      "scores": {
+        "pain": 3,
+        "willingnessToPay": 2,
+        "reachability": 4,
+        "competitiveGap": 3,
+        "feasibility": 5,
+        "complianceBurden": 5,
+        "total": 22
+      },
+      "inspiredBy": "https://jamesgmartin.center/2026/10/higher-ed-is-still-muddling-through-ai/"
+    }
+  ],
+  "runNotes": {
+    "searches": [
+      "r/Professors office hours students don't come TA scheduling tool 2026",
+      "r/CSEducation teacher wish there was a tool October 2026",
+      "Indie Hackers teacher tool MRR 2026 educators SaaS revenue",
+      "Inside Higher Ed October 2026 faculty course",
+      "EdSurge October 2026 teachers AI tools",
+      "Starter Story edtech tool for teachers revenue per month",
+      "\"r/Professors\" 2026 syllabus course materials update every semester broken links textbook",
+      "Gradescope reviews cons G2 Capterra 2026",
+      "Ask HN tool teachers professors wish existed 2026",
+      "Inside Higher Ed faculty workload AI course redesign survey fall 2026",
+      "r/SaaS OR r/microsaas tool for teachers paying customers 2026",
+      "ABET accreditation assessment faculty burden student outcomes data collection tool computer science department",
+      "EdWeek Market Brief October 2026",
+      "professors course evaluations comments analysis tenure dossier tool 2026",
+      "Product Hunt education launch professors paid plan October 2026",
+      "EdWeek Market Brief AI guidelines K-12 what should they look like October 2026",
+      "faculty annual activity report Faculty180 Digital Measures data entry frustration professors",
+      "ABET continuous improvement course assessment report software pricing EvalTools 2026",
+      "students confused different AI policy every course syllabus 2026 survey",
+      "undergraduate teaching assistant training computer science 2026 role-play simulated students tutoring practice",
+      "graduate admissions committee AI-written statements of purpose flood applications faculty review 2026",
+      "computer science teacher shortage 2026 states graduation requirement CS teacher certification endorsement Praxis",
+      "AI simulated students practice teaching platform pricing Mursion TeachLivE teaching assistant training",
+      "AI Assessment Scale assignment level AI use labels instructors tool",
+      "AI tool analyze student course evaluation comments for faculty themes teaching statement pricing",
+      "ADA Title II web accessibility rule compliance date status universities October 2026 DOJ",
+      "auto captions lecture video accuracy technical terms faculty must correct captions Title II 2026 Panopto",
+      "high school computer science teacher grading programming assignments hours solo teacher AI feedback tool 2026",
+      "Rev captions pricing per minute 2026 human captions 3Play Media pricing education",
+      "Panopto automatic captions custom vocabulary dictionary technical terms feature",
+      "Canvas LTI AI use policy assignment label banner students AI permitted level tool",
+      "AI roleplay practice tutoring simulated student for tutors training product pricing 2026"
+    ],
+    "rejectedCandidates": [
+      {
+        "title": "Evaluation Comment Synthesizer (student evaluation comments to dossier teaching narrative)",
+        "total": 20,
+        "reason": "Teaching centers (Chapman, UCSF) publish free ChatGPT workflows and EvaluationKIT/Student Voice sell institutional text analytics; an AI wrapper with no data moat."
+      },
+      {
+        "title": "CS Endorsement Prep for K-12 teachers adding computer science",
+        "total": 20,
+        "reason": "Evidence of teacher shortage and certification gaps is from 2024 to 2025; several states have no CS certification test, so the market is fragmented."
+      },
+      {
+        "title": "ABET outcomes reporting for CS departments",
+        "total": 18,
+        "reason": "Burden documented only in older papers; incumbents (EvalTools, Watermark) and institution-level procurement; no recent signal found."
+      },
+      {
+        "title": "Faculty activity report auto-filler (DBLP/ORCID into Faculty180)",
+        "total": 17,
+        "reason": "Only old or anecdotal frustration evidence; individual faculty unlikely to pay and institutions already license the reporting system."
+      },
+      {
+        "title": "Studio manager for private music teachers",
+        "total": 17,
+        "reason": "Well served by existing studio-management tools; outside Pisan's education and CS advantages."
+      },
+      {
+        "title": "AI code feedback for solo high school CS teachers",
+        "total": 16,
+        "reason": "CodeHS AI grading (May 2025) and Code.org/Stanford AI TA already cover it inside platforms teachers use; minors' data raises compliance burden."
+      },
+      {
+        "title": "Graduate admissions statement triage",
+        "total": 14,
+        "reason": "No evidence of a faculty pain beyond consultant blogs; applicant PII and admissions fairness risk."
+      }
+    ],
+    "caveats": "Reddit (reddit.com) was blocked to both search and direct fetch in this run, so no r/Professors, r/Teachers, r/CSEducation, r/SaaS, or r/microsaas threads were used; pain signals come from papers, teaching-center pages, and essays instead. Proof-of-revenue signals were thin: Starter Story reports EssayGrader (AI essay grading for teachers) at about $80K/month based on July 2025 sources, and ReadySetClass lists a $24.99/month faculty course builder (2026-04-28 post); neither is cited as direct evidence for the three ideas. Mursion pricing is a third-party estimate and the $6,000/year figure is from 2016. Rev pricing comes from a competitor's blog. Panopto's current custom-dictionary capability beyond a site-wide list was not confirmed from Panopto documentation. Dates on the Missouri, USU, Penn State, and ASEE pages are unknown. All revenue sketches are estimates with unverified conversion assumptions."
+  }
+}

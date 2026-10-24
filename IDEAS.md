@@ -585,3 +585,6 @@
 | 2026-10-23 | ACR Draft for EdTech Vendors | Micro-SaaS | Multi-week | 23 |  |
 | 2026-10-23 | Variant Exam Press | EdTech: Higher Ed | Multi-week | 20 |  |
 | 2026-10-23 | Verified Tell: Visual-Routine-Grounded Feedback on Student Chart Narratives | Research | Research |  |  |
+| 2026-10-24 | TA Practice Room | EdTech: Higher Ed | Multi-week | 24 |  |
+| 2026-10-24 | Slide-Aware Captions | EdTech: Higher Ed | Weekend MVP | 22 |  |
+| 2026-10-24 | AI Rules Board | EdTech: Higher Ed | Weekend MVP | 22 |  |
