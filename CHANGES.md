@@ -397,3 +397,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-10-23 [note] Assignment Stress Test (2026-10-23 n1) marked implemented: live at assignment-stress-test.netlify.app, repo Claude-capstone/assignment-stress-test. Rubric judge + Pyodide pytest; 53 tests.
 
 2026-10-24 [doc] Created ideas/2026-10-24.json (schemaVersion 2): TA Practice Room (24), Slide-Aware Captions (22), AI Rules Board (22)
+
+2026-10-24 [note] Claimed Cache Miss Theater (2026-10-10 n2) as in progress: affine loop-nest parser, set-associative cache sim, 3C classification, side-by-side compare, question generator.
