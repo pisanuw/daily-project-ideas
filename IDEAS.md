@@ -588,3 +588,6 @@
 | 2026-10-24 | TA Practice Room | EdTech: Higher Ed | Multi-week | 24 |  |
 | 2026-10-24 | Slide-Aware Captions | EdTech: Higher Ed | Weekend MVP | 22 |  |
 | 2026-10-24 | AI Rules Board | EdTech: Higher Ed | Weekend MVP | 22 |  |
+| 2026-10-25 | Repo Roster | EdTech: Higher Ed | Multi-week | 21 |  |
+| 2026-10-25 | Outcome Ledger | EdTech: Higher Ed | Multi-week | 21 |  |
+| 2026-10-25 | Dossier Comment Reflector | Micro-SaaS | Weekend MVP | 22 |  |

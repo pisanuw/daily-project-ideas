@@ -1,0 +1,416 @@
+{
+  "date": "2026-10-25",
+  "schemaVersion": 2,
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Repo Roster",
+      "slug": "repo-roster",
+      "category": "EdTech: Higher Ed",
+      "complexity": "Multi-week",
+      "summary": "For CS instructors stranded by the GitHub Classroom shutdown: a hosted assignment-repo manager that provisions student repos, runs autograding, and pushes scores straight into the Canvas gradebook.",
+      "problemStatement": "GitHub Classroom was decommissioned in August 2026 and its LTI rosters and assignment names are being deleted. The free replacement needs a Team-tier GitHub org, a broad-access personal access token, and nightly score collection, and it exports scores as a CSV that the instructor still has to hand-load into Canvas every week.",
+      "description": "Instructors install a GitHub App on any organization they own (including a free one), link a Canvas course through LTI 1.3, and import the roster once. Each assignment is a template repo plus tests; Repo Roster provisions private student or team repos, tracks accept and last-commit status, and runs tests in GitHub Actions on push. Scores flow to the matching Canvas assignment automatically through LTI Assignment and Grade Services, with late-day and extension handling. A migration wizard reads the GitHub Classroom Export Utility JSON or CSV so an instructor can rebuild last term's course in minutes.",
+      "targetCustomer": "CS instructors and head TAs at universities and community colleges who ran assignments through GitHub Classroom (CS1 to software engineering), especially those without an institutional Codio or Gradescope autograder license.",
+      "buyer": "Instructor's personal card or discretionary funds at first; then the department, from its instructional software budget, for a site license covering all sections.",
+      "whyNow": "GitHub closed Classroom sign-ups on 2026-05-26 and decommissioned the site and APIs on 2026-08-28, mid-term-planning for spring 2027. Instructors are actively choosing replacements now, and the leading free option (Classroom 50) is young, CLI-first in places, and has no documented LMS grade sync.",
+      "founderFit": "Pisan teaches CS courses built on GitHub and agentic coding tools, so he feels the shutdown directly. His SIGCSE network is exactly the population that used GitHub Classroom, and he can recruit design partners at SIGCSE TS 2027 and on the SIGCSE mailing list while the migration pain is fresh.",
+      "problemEvidence": [
+        {
+          "url": "https://github.blog/changelog/2026-08-27-github-classroom-deprecated",
+          "source": "GitHub Changelog",
+          "date": "2026-08-27",
+          "summary": "Classroom website and APIs decommissioned; classroom names, out-of-repo tests, and LTI rosters to be permanently deleted."
+        },
+        {
+          "url": "https://github.blog/changelog/2026-05-26-github-classroom-sign-ups-are-no-longer-available",
+          "source": "GitHub Changelog",
+          "date": "2026-05-26",
+          "summary": "New GitHub Classroom sign-ups closed, so no instructor can start a new classroom."
+        },
+        {
+          "url": "https://bruceelgort.com/2026/07/20/github-classroom-is-gone-heres-the-free-tool-that-replaces-it/",
+          "source": "Instructor blog (Bruce Elgort)",
+          "date": "2026-07-20",
+          "summary": "Instructor 'scrambling for a replacement'; Classroom 50 needs a Team org and broad PAT access, exports scores only as CSV, and is 'genuinely young'."
+        },
+        {
+          "url": "https://dev.to/dagilleland/codehub-classroom-25fd",
+          "source": "DEV Community",
+          "date": "2026-08-31",
+          "summary": "Another instructor built a Windows-only desktop replacement after the sunset, showing instructors are building their own stopgaps."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Classroom 50 (Fifty Foundation)",
+          "url": "https://bruceelgort.com/2026/07/20/github-classroom-is-gone-heres-the-free-tool-that-replaces-it/",
+          "price": "Free (open source)",
+          "gap": "Requires a Team or Enterprise org and a broad PAT; scores collected nightly and exported as CSV; no documented Canvas grade passback."
+        },
+        {
+          "name": "Codio",
+          "url": "https://www.codio.com/pricing",
+          "price": "$48 per learner per semester (higher ed), instructors free",
+          "gap": "Moves students off GitHub into Codio's own IDE and courseware; per-learner cost needs institutional purchasing for a 200-student course."
+        },
+        {
+          "name": "CodeHub Classroom",
+          "url": "https://dev.to/dagilleland/codehub-classroom-25fd",
+          "price": "Free beta; paid one-time edition planned (price unknown)",
+          "gap": "Windows-only desktop beta, local JSON storage, no autograding or LMS sync described."
+        }
+      ],
+      "keyFeatures": [
+        "GitHub App provisioning on any org, no PAT",
+        "Canvas LTI 1.3 roster import and grade passback",
+        "Autograding in Actions with per-test points",
+        "Migration wizard from GitHub Classroom export",
+        "Late-day and extension rules applied before sync"
+      ],
+      "mvpScope": {
+        "features": [
+          "GitHub App that provisions individual repos from a template",
+          "Canvas LTI 1.3 launch, roster import, and grade passback for one assignment type",
+          "pytest and I/O tests run on push with a score dashboard"
+        ],
+        "outOfScope": [
+          "Team assignments",
+          "Moodle, Blackboard, and D2L",
+          "Plagiarism detection",
+          "In-browser IDE"
+        ],
+        "buildEstimate": "4 to 6 weeks part time"
+      },
+      "techStack": "React + Vite + Tailwind, Flask (GitHub App webhooks, LTI 1.3 tool), Supabase (Postgres, auth), GitHub Actions runners for tests",
+      "pricing": {
+        "model": "Per-instructor subscription with free tier for one course under 30 students",
+        "pricePoint": "$15/month per instructor, or $1,500/year department license",
+        "rationale": "Far below Codio's per-learner cost for a 200-student course (about $9,600 per semester at list), and priced for a personal card; the paid value over free Classroom 50 is grade sync and no Team-org setup."
+      },
+      "revenueSketch": "Estimate: 150 instructors x $15/month = $2,250 MRR, plus 10 department licenses x $1,500/year = $15,000/year. Assumes about 1 percent of former GitHub Classroom instructors convert; the size of that population is unknown.",
+      "distribution": "Post a migration guide on the SIGCSE mailing list and the GitHub Educator Community discussion, demo at a SIGCSE TS 2027 birds-of-a-feather session, and list in the Canvas LTI App Center (EduAppCenter). First 10 customers are SIGCSE contacts who used GitHub Classroom.",
+      "validationTest": {
+        "method": "Landing page with a 'migrate your GitHub Classroom course' waitlist, posted to SIGCSE-members and r/CSEducation, plus 6 interviews with former GitHub Classroom instructors.",
+        "successCriteria": "60 waitlist signups in 3 weeks and 3 of 6 interviewees agree to pay $15/month for spring 2027.",
+        "cost": "About 8 hours and $20 for a domain."
+      },
+      "moat": "LTI 1.3 certification, Canvas admin approvals at each school, and the stored assignment and test library create switching costs; being the tool that handled the GitHub Classroom migration builds trust in a tight community.",
+      "compliance": [
+        "FERPA: rosters and grades are education records; need a data processing agreement template and minimal data retention.",
+        "Institutional: Canvas LTI installs usually need campus IT approval, which slows department-wide rollout.",
+        "Accessibility: dashboard must meet WCAG 2.1 AA; public universities are subject to ADA Title II web accessibility rules (current deadline not verified this run)."
+      ],
+      "risks": [
+        {
+          "risk": "Classroom 50 adds Canvas grade sync for free.",
+          "mitigation": "Differentiate on zero-setup (no Team org or PAT), extensions handling, and support; or offer a hosted Classroom 50-compatible tier."
+        },
+        {
+          "risk": "GitHub Actions minute limits on free orgs for large courses.",
+          "mitigation": "Run tests on own runners for paid plans and price the department tier to cover compute."
+        }
+      ],
+      "scores": {
+        "pain": 4,
+        "willingnessToPay": 3,
+        "reachability": 4,
+        "competitiveGap": 3,
+        "feasibility": 4,
+        "complianceBurden": 3,
+        "total": 21
+      },
+      "inspiredBy": "https://github.blog/changelog/2026-08-27-github-classroom-deprecated"
+    },
+    {
+      "n": 2,
+      "title": "Outcome Ledger",
+      "slug": "outcome-ledger",
+      "category": "EdTech: Higher Ed",
+      "complexity": "Multi-week",
+      "summary": "For small computing departments preparing for ABET: pulls rubric scores already in Canvas and Gradescope, maps them to student outcomes, and drafts the Criterion 4 assessment tables and continuous-improvement log.",
+      "problemStatement": "Every accreditation cycle, faculty fill out per-course Excel scorecards mapping assignments to ABET student outcomes, and one overworked coordinator chases them, merges them, and writes the self-study tables. Enterprise assessment platforms cost enough to need a contract and a campus rollout, so small programs stay on spreadsheets.",
+      "description": "The coordinator defines the program's student outcomes and performance indicators once. Each instructor tags the rubric rows or Gradescope questions that measure an indicator, and Outcome Ledger pulls aggregate scores (no names) each term via the Canvas API or a Gradescope CSV. It computes attainment against program targets, flags indicators below threshold, and keeps a dated log of faculty actions taken in response. At review time it generates the outcome-by-term attainment tables and evidence index the self-study asks for, with Claude drafting narrative summaries the coordinator edits.",
+      "targetCustomer": "ABET coordinators and assessment committee chairs in computing programs (CS, IT, IS, cybersecurity) at teaching-focused universities and smaller departments.",
+      "buyer": "The department or college, from its accreditation or assessment budget (department chair or associate dean signs).",
+      "whyNow": "Revised ABET computing General Criteria (Program Educational Objectives and the comprehensive project, Criterion 5) take effect for reviews beginning Fall 2026, and new AI/ML program criteria were proposed for final action at the Fall 2026 meeting, so programs are re-mapping outcomes and evidence now.",
+      "founderFit": "Pisan has sat in CS department assessment work, knows how outcomes are actually measured in CS courses, and can recruit ABET coordinators through SIGCSE and the CSAB community. He can build the Canvas and Gradescope integrations himself.",
+      "problemEvidence": [
+        {
+          "url": "https://nemo.asee.org/public/conferences/374/papers/53474/view",
+          "source": "ASEE 2026 Annual Conference paper",
+          "date": "2026 (exact day unknown)",
+          "summary": "Program built an Excel scorecard workflow collected from many courses and faculty to survive a 2025 ABET review, showing the manual process programs use."
+        },
+        {
+          "url": "https://csab.org/revised-general-criteria-approved-for-implementation-effective-in-2026-several-program-criteria-changes-approved-for-a-year-of-review-feedback/",
+          "source": "CSAB",
+          "date": "2025-10-25",
+          "summary": "Revised General Criteria 2 and 5 effective for computing reviews starting Fall 2026; new AI/ML program criteria proposed."
+        },
+        {
+          "url": "https://scholarspace.manoa.hawaii.edu/items/e037c4b6-a879-4d8b-b6d5-12f54f581562/full",
+          "source": "University of Hawaii ScholarSpace",
+          "date": "unknown",
+          "summary": "Paper titled 'Easing the Burden of Program Assessment' describes building a web tool to measure student outcomes for ABET, showing a recurring home-grown need."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Watermark (incl. assessment and accreditation products)",
+          "url": "https://www.capterra.com/p/211854/Watermark/",
+          "price": "unknown (contact vendor)",
+          "gap": "Campus-wide platform sold to institutions; heavy for a single 10-faculty program that just needs ABET tables."
+        },
+        {
+          "name": "EvalTools",
+          "url": "https://in4obe.org/software-solutions-higher-ed/",
+          "price": "unknown (not published)",
+          "gap": "Full outcomes-based-education suite that pitches replacing the LMS and survey tools; more change than a small department wants."
+        },
+        {
+          "name": "Excel scorecards",
+          "url": "https://nemo.asee.org/public/conferences/374/papers/53474/view",
+          "price": "Free",
+          "gap": "Manual collection and merging each term; no automatic pull from the LMS or audit trail of improvement actions."
+        }
+      ],
+      "keyFeatures": [
+        "Outcome and indicator map per program",
+        "Canvas rubric and Gradescope CSV import (aggregates only)",
+        "Attainment dashboard with threshold flags",
+        "Continuous-improvement action log",
+        "Self-study table and evidence index export"
+      ],
+      "mvpScope": {
+        "features": [
+          "Outcome and indicator setup",
+          "Gradescope and Canvas gradebook CSV upload with column tagging",
+          "Attainment tables exported to Word and Excel"
+        ],
+        "outOfScope": [
+          "Live Canvas API sync",
+          "Engineering (EAC) criteria templates",
+          "Alumni and employer surveys"
+        ],
+        "buildEstimate": "3 to 5 weeks part time"
+      },
+      "techStack": "React + Vite + Tailwind, Supabase (Postgres, row-level security per program), Flask for CSV parsing and docx export, Claude API for narrative drafts",
+      "pricing": {
+        "model": "Per-program annual subscription",
+        "pricePoint": "$1,800/year per accredited program",
+        "rationale": "Under typical small-purchase thresholds so a chair can buy on a card or P-card, while enterprise competitors require quotes; price unknown for competitors so this is an assumption."
+      },
+      "revenueSketch": "Estimate: 60 programs x $1,800/year = $108,000 ARR. Assumes a small share of ABET-accredited computing programs; the total number of programs was not verified in this run.",
+      "distribution": "Present a lightning talk and BoF at SIGCSE TS 2027 and the ABET Symposium, post on the SIGCSE mailing list, and offer free setup for 5 programs with upcoming visits in exchange for testimonials.",
+      "validationTest": {
+        "method": "Interview 6 ABET coordinators from SIGCSE contacts, show a mock attainment report built from their anonymized spreadsheet.",
+        "successCriteria": "3 of 6 ask to pilot before their next review and 1 commits to a paid pilot at $900 for the first year.",
+        "cost": "About 12 hours, no cash."
+      },
+      "moat": "Programs accumulate multi-year outcome history and improvement logs in the tool, which is exactly what the next visit asks for, so switching mid-cycle is costly.",
+      "compliance": [
+        "FERPA: import aggregate scores only; drop names and IDs at upload.",
+        "Accreditation: generated narratives must be reviewed by faculty; tool should label AI drafts.",
+        "Accessibility: WCAG 2.1 AA for faculty-facing UI and exported documents."
+      ],
+      "risks": [
+        {
+          "risk": "Long sales cycles tied to accreditation calendars.",
+          "mitigation": "Target programs 12 to 24 months before a visit and sell on a card under purchase thresholds."
+        },
+        {
+          "risk": "Each program measures outcomes differently.",
+          "mitigation": "Start with CS programs only and a flexible indicator model; add templates as patterns emerge."
+        }
+      ],
+      "scores": {
+        "pain": 3,
+        "willingnessToPay": 4,
+        "reachability": 3,
+        "competitiveGap": 3,
+        "feasibility": 4,
+        "complianceBurden": 4,
+        "total": 21
+      },
+      "inspiredBy": "https://nemo.asee.org/public/conferences/374/papers/53474/view"
+    },
+    {
+      "n": 3,
+      "title": "Dossier Comment Reflector",
+      "slug": "dossier-comment-reflector",
+      "category": "Micro-SaaS",
+      "complexity": "Weekend MVP",
+      "summary": "For faculty going up for promotion or tenure: turns years of exported student course-survey comments into themes, representative quotes, and a draft of the required teaching reflection, in an afternoon instead of a week.",
+      "problemStatement": "Promotion dossiers now ask faculty to show how they used student comments to change their courses, sometimes in a two-page reflection with quotes, covering every year in rank. Faculty have to read hundreds of comments across many courses and terms, pick fair examples, and connect them to course changes, usually the same month the rest of the dossier is due.",
+      "description": "The faculty member uploads exported comment files (CSV, PDF, or pasted text) from their course evaluation system and tags each with course and term. The tool clusters comments into themes per course over time, shows how sentiment on each theme changed after a course redesign the user records, and picks representative quotes balanced across positive and critical comments. It then drafts a reflection in the faculty member's own words, linking each change to the comments that prompted it, within the page limit the user sets. Nothing is stored after export unless the user opts in.",
+      "targetCustomer": "Assistant and associate professors and teaching-track faculty preparing promotion, tenure, or post-tenure review dossiers.",
+      "buyer": "The faculty member on a personal card; later centers for teaching and learning or faculty affairs offices buying seats for each year's promotion cohort.",
+      "whyNow": "Institutions are rewriting dossier requirements for 2026-27 to emphasize reflection on student feedback rather than average ratings (Arizona's 2026-27 guidance requires a two-page reflection on how comments led to course changes), and faculty now routinely use AI for writing, but general chatbots cannot hold years of comments with course and term structure.",
+      "founderFit": "Pisan has been through academic review and has reviewed colleagues' dossiers, knows what committees look for, and can reach early users through SIGCSE and teaching-center contacts; the build is a small React plus Claude app squarely in his stack.",
+      "problemEvidence": [
+        {
+          "url": "https://facultyaffairs.arizona.edu/sites/default/files/2026-03/2026-27_06B_CSP_PT_Supporting_Documentation.pdf",
+          "source": "University of Arizona Faculty Affairs",
+          "date": "2026-03 (day unknown)",
+          "summary": "2026-27 dossier guidance requires a maximum two-page reflection on how student comments led to course changes during time in rank, with optional quotes."
+        },
+        {
+          "url": "https://cloud.wikis.utexas.edu/wiki/x/FqSvAQ",
+          "source": "UT Austin dossier guidance (G.6 Teaching)",
+          "date": "unknown",
+          "summary": "Full course survey results including comments must be included, covering the whole probationary period for tenure-track faculty."
+        },
+        {
+          "url": "https://committees.provost.ncsu.edu/evaluation-teaching/wp-content/uploads/sites/9/2018/02/2018-2-16-EOT-Minutes_VF.pdf",
+          "source": "NC State Evaluation of Teaching committee minutes",
+          "date": "2018-02-16",
+          "summary": "Campus built an internal comment selection tool for faculty going up for promotion, showing an older, recurring need for help summarizing comments."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Explorance MLY",
+          "url": "https://explorance.com/news/university-of-cape-town-speeds-up-analysis-of-open-ended-feedback-in-sasse-using-explorance-mly/",
+          "price": "unknown (institutional license)",
+          "gap": "Sold to institutions for survey-wide analytics; not a personal tool that writes a faculty member's dossier reflection."
+        },
+        {
+          "name": "General chat assistants (ChatGPT, Claude)",
+          "url": "https://www.jotform.com/blog/ai-prompts-for-teachers/",
+          "price": "About $20/month consumer plans (not confirmed this run)",
+          "gap": "No structure for course and term, no before-and-after view around course changes, no balanced quote selection, and faculty worry about pasting evaluations into consumer chat."
+        }
+      ],
+      "keyFeatures": [
+        "Multi-term comment import with course and term tags",
+        "Theme clustering and trend view across terms",
+        "Course-change timeline linked to comments",
+        "Balanced quote picker",
+        "Page-limited reflection draft"
+      ],
+      "mvpScope": {
+        "features": [
+          "CSV and pasted-text import",
+          "Themes per course per term",
+          "Reflection draft with quotes, editable and exportable to Word"
+        ],
+        "outOfScope": [
+          "PDF parsing of every vendor's evaluation format",
+          "Institutional seat management",
+          "Peer observation letters"
+        ],
+        "buildEstimate": "1 to 2 weekends"
+      },
+      "techStack": "React + Vite + Tailwind, Claude API for clustering and drafting, Supabase only for optional saved projects, Stripe for one-time payments",
+      "pricing": {
+        "model": "One-time purchase per dossier, plus annual seat packs for teaching centers",
+        "pricePoint": "$49 per dossier; $1,500/year for up to 50 faculty",
+        "rationale": "Dossiers are a once-in-several-years event, so a subscription fits poorly; $49 is under the cost of one hour of a faculty member's time and comparable to a few months of a chat subscription."
+      },
+      "revenueSketch": "Estimate: 600 dossiers x $49 = $29,400/year plus 10 teaching centers x $1,500 = $15,000/year. Assumes reach to a small share of faculty going up each year; the national count was not verified.",
+      "distribution": "Self-serve: SEO for 'teaching reflection student comments tenure', posts in r/Professors and faculty Substack newsletters, plus 3 teaching-center workshops arranged through Pisan's network ahead of spring dossier deadlines.",
+      "validationTest": {
+        "method": "Concierge test: offer 5 faculty preparing dossiers a free reflection draft built from their own comments, then ask for $49 for the self-serve version.",
+        "successCriteria": "4 of 5 say the draft saved over 5 hours and 2 pre-pay.",
+        "cost": "About 10 hours and $10 of API usage."
+      },
+      "moat": "Weak on technology; moat is in prompt and workflow tuned to real dossier requirements across institutions, a library of institution-specific templates, and teaching-center relationships.",
+      "compliance": [
+        "FERPA: evaluation comments are generally anonymous, but some contain names; strip names before sending to the model.",
+        "Institutional: some campuses restrict uploading evaluations to third-party AI; offer a no-retention mode and a data processing summary.",
+        "Ethics: label drafts as AI-assisted and keep quotes verbatim so committees are not misled.",
+        "Accessibility: WCAG 2.1 AA UI and accessible Word export."
+      ],
+      "risks": [
+        {
+          "risk": "Faculty just use a general chatbot.",
+          "mitigation": "Win on structure (multi-term trends, quote balance, page limits) and privacy guarantees, and price low."
+        },
+        {
+          "risk": "Committees view AI-drafted reflections negatively.",
+          "mitigation": "Position as analysis plus outline; the user writes the final text from the evidence board."
+        }
+      ],
+      "scores": {
+        "pain": 3,
+        "willingnessToPay": 2,
+        "reachability": 4,
+        "competitiveGap": 4,
+        "feasibility": 5,
+        "complianceBurden": 4,
+        "total": 22
+      },
+      "inspiredBy": "https://facultyaffairs.arizona.edu/sites/default/files/2026-03/2026-27_06B_CSP_PT_Supporting_Documentation.pdf"
+    }
+  ],
+  "runNotes": {
+    "searches": [
+      "r/Professors October 2026 frustrated tool wish existed",
+      "Gradescope reviews cons 2026",
+      "Indie Hackers teacher tool MRR 2026",
+      "Starter Story edtech micro saas revenue teachers 2026",
+      "Inside Higher Ed October 2026 faculty AI",
+      "EdSurge October 2026 higher education",
+      "ABET assessment data collection faculty burden tool course outcomes 2026",
+      "professors extension requests accommodations tracking spreadsheet overwhelmed 2026",
+      "team project peer evaluation free riders instructors tool CATME alternative 2026",
+      "Ask HN tool for teachers 2026",
+      "reddit Professors regrade requests grade complaints email AI generated students 2026",
+      "EdWeek Market Brief October 2026",
+      "Product Hunt education tool for professors paid plan 2026 launch",
+      "r/CSEducation 2026 autograder Gradescope alternative",
+      "GitHub Classroom 2026 changes deprecation instructors alternative",
+      "Canvas extra time accommodations every quiz new quizzes tedious instructors",
+      "Watermark AEFIS ABET assessment software pricing review faculty",
+      "Classroom 50 Fifty Foundation GitHub Classroom alternative LMS Canvas grade sync",
+      "ABET computing accreditation 2026 criteria changes student outcomes assessment programs",
+      "student course evaluation comments analysis faculty tenure dossier tool 2026",
+      "EvalTools ABET assessment software pricing",
+      "Explorance MLY student comment analysis course evaluations"
+    ],
+    "rejectedCandidates": [
+      {
+        "title": "Accommodation Extra-Time Sync for Canvas",
+        "total": 14,
+        "reason": "Canvas New Quizzes already offers course-wide accommodations per student (Boise State and BGSU guides); remaining gap is small."
+      },
+      {
+        "title": "Team Peer Evaluation with Free-Rider Detection",
+        "total": 16,
+        "reason": "Well served by CATME, SPARKPLUS, Team+, Peerceptiv; weak competitive gap."
+      },
+      {
+        "title": "AI-Email Regrade Request Triage",
+        "total": 13,
+        "reason": "No recent independent demand evidence found; risk of AI wrapper with no moat."
+      },
+      {
+        "title": "GitHub Classroom Data Rescue",
+        "total": 12,
+        "reason": "GitHub ships its own Classroom Export Utility; one-time need with no recurring revenue. Folded into Repo Roster as a migration wizard."
+      },
+      {
+        "title": "Phonics Practice SaaS for K-12 Teachers",
+        "total": 14,
+        "reason": "Proof of revenue exists (Flippa listing, about $6.7k to $7.9k MRR, 428 subscribers) but crowded K-12 market with COPPA burden and weak founder fit."
+      },
+      {
+        "title": "Gradescope Rubric Speed Extension",
+        "total": 13,
+        "reason": "Single dated complaint about collapsed rubrics; fragile dependence on Gradescope DOM and terms of service."
+      },
+      {
+        "title": "Classroom 50 Hosted Setup Service",
+        "total": 15,
+        "reason": "Services business that does not scale; merged into Repo Roster positioning."
+      },
+      {
+        "title": "ABET AI-Responsible-Use Curriculum Mapper",
+        "total": 15,
+        "reason": "AI responsible-use criterion is only proposed, with final action later; premature. Could become an Outcome Ledger feature."
+      }
+    ],
+    "caveats": "Reddit, Indie Hackers, and EdSurge searches returned little dated October 2026 content, so pain-point evidence leans on official changelogs, policy documents, and instructor blogs. Competitor prices for Watermark, EvalTools, and Explorance MLY are unpublished. The number of former GitHub Classroom instructors and ABET computing programs was not verified, so revenue sketches are assumptions. The CSAB post is dated 2025-10-25; sources disagree on whether final action on the AI/ML criteria is Fall 2026 or Fall 2027. Classroom 50's Canvas grade sync status is based on absence of mention, not confirmation. Dossier Comment Reflector is a faculty productivity tool rather than core educational software; the other two satisfy the educational constraint."
+  }
+}
