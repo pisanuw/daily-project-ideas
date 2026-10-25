@@ -3,3 +3,11 @@ dist/
 
 # Node
 node_modules/
+
+# Local Resend credentials (FROM_EMAIL, ADMIN_EMAIL, RESEND_API_KEY)
+.env
+
+# Verbatim user-message log: the instruction that produced it is gone (see
+# CHANGES.md 2026-10-25). Ignored so a session with stale instructions cannot
+# recreate and commit it.
+AI-log.md
