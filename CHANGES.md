@@ -401,3 +401,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-10-24 [note] Claimed Cache Miss Theater (2026-10-10 n2) as in progress: affine loop-nest parser, set-associative cache sim, 3C classification, side-by-side compare, question generator.
 
 2026-10-24 [note] Cache Miss Theater (2026-10-10 n2) marked implemented: live at cache-miss-theater.netlify.app, repo Claude-capstone/cache-miss-theater. Trace, cache sim, 3C, sweep, quiz; 62 tests.
+
+2026-10-25 [note] Claimed Edit Graph Lab (2026-10-11 n2) as in progress: edit-graph grid, animated Myers with V array, LCS/patience/histogram compare, unified diff, exercise export.
