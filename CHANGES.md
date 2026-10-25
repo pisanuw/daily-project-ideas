@@ -414,4 +414,4 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 
 2026-10-25 [code] Notify workflow runs at 16:10 and 17:10 UTC; --not-before-pacific-hour=9 drops the early one so the send stays 9:10am Pacific across the DST change on 2026-11-01.
 
-2026-10-25 [note] Live send verified: one test digest (Edit Graph Lab) accepted by Resend, so noreply@pisan.me is a verified sender; state restored so it does not re-send. First scheduled run 2026-10-26.
+2026-10-25 [note] Live send verified: one test digest (Edit Graph Lab) accepted by Resend, so noreply@pisan.me is verified; state restored so it cannot re-send. First scheduled run 2026-10-26.
