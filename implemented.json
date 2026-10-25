@@ -355,8 +355,10 @@
         "date": "2026-10-11",
         "n": 2
       },
-      "placeholder": true,
-      "notes": "In progress since 2026-10-25"
+      "notes": "Built in one session as a static TypeScript app with no backend, no LLM and no framework (plain DOM and SVG). The edit graph draws A across and B down with a diagonal for every shared token; forward greedy Myers (1986) runs in its quadratic-space form so each step can be replayed, with paths coloured by d, the V array shown as the paper's triangle, and a sentence per diagonal explaining its value (off-grid diagonals are summarised in one line). The final path becomes a GNU-style unified diff (inline diff in character mode) and hovering a hunk highlights its stretch of the path. A compare view runs LCS DP (with its table and traceback for inputs up to 24x24), Myers, patience (unique-line anchors via patience sorting) and histogram (rarest common run, after JGit) and outlines hunks that differ from Myers. Seven curated examples (ABCABBA/CBABAC, kitten/sitting, sliding braces, swapped functions, frobnitz, reordered list, blank-line prose), with notes describing what these implementations actually do. A seeded exercise generator (predict D, fill in V[k], spot the patience diff, count hunks) exports Markdown and QTI 1.2; share links live in the URL fragment. Limitations: raw algorithm output without git's indent-heuristic post-pass, forward Myers rather than git's bidirectional search (so it can pick a different minimal path than git), a simplified histogram tie rule, 600 tokens per side, QTI not yet tried in Canvas. 36 vitest tests; edit distances and generated patches cross-checked against the diff npm package; 99.4% statement coverage on core.",
+      "url": "https://edit-graph-lab.netlify.app",
+      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/edit-graph-lab",
+      "implementedOn": "2026-10-25"
     }
   ]
 }
