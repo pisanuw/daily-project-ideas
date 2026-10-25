@@ -405,3 +405,9 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-10-25 [note] Claimed Edit Graph Lab (2026-10-11 n2) as in progress: edit-graph grid, animated Myers with V array, LCS/patience/histogram compare, unified diff, exercise export.
 
 2026-10-25 [note] Edit Graph Lab (2026-10-11 n2) marked implemented: live at edit-graph-lab.netlify.app, repo Claude-capstone/edit-graph-lab. Myers animation, 4-algorithm compare, exercises; 36 tests.
+
+2026-10-25 [decision] Stopped AI-log.md logging: rule left CLAUDE.md in afd1a7f (2026-08-20) but a stale session copy re-ran it; file deleted and git-ignored, history kept (public repo, no secrets).
+
+2026-10-25 [scope] Email notifications added (was a non-goal): GitHub Actions daily 16:10 UTC runs notify-implemented.mjs, one Resend digest of new implemented projects to yusuf.pisan@gmail.com.
+
+2026-10-25 [code] notify-implemented.mjs: implemented = implementedOn set and not placeholder; notify-state.json records sent keys + lastSentOn; writeup follows pisanorg.github.io/yusuf/aiprojects.

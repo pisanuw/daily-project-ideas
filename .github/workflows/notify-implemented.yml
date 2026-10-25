@@ -1,0 +1,72 @@
+# Emails one digest of newly implemented projects, at most once a day.
+#
+# The send decision lives in scripts/notify-implemented.mjs: it compares
+# implemented.json against notify-state.json and exits quietly when nothing is
+# new, so a quiet day sends no email. The state file is committed back with
+# [skip ci] so the commit does not trigger this workflow again or a Netlify
+# rebuild.
+name: Notify implemented projects
+
+on:
+  schedule:
+    # 16:10 UTC = 9:10am PDT. GitHub cron has no DST, so this becomes 8:10am
+    # once Pacific goes back to PST; shift to '10 17 * * *' to hold 9am there.
+    # Scheduled runs can also be delayed when GitHub is busy.
+    - cron: '10 16 * * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Render the email to the log without sending'
+        type: boolean
+        default: false
+      force:
+        description: 'Send even if one already went out today'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+# Never let a manual run and the scheduled run send at the same time.
+concurrency:
+  group: notify-implemented
+  cancel-in-progress: false
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Send digest
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          FROM_EMAIL: ${{ secrets.FROM_EMAIL }}
+          ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
+        run: |
+          args=''
+          [ "${{ inputs.dry_run }}" = "true" ] && args="$args --dry-run"
+          [ "${{ inputs.force }}" = "true" ] && args="$args --force"
+          node scripts/notify-implemented.mjs $args
+
+      - name: Record what was sent
+        run: |
+          if git diff --quiet -- notify-state.json; then
+            echo "notify-state.json unchanged; nothing to commit"
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add notify-state.json
+          git commit -m 'Record implemented-project email [skip ci]'
+          # main may have moved while this ran (the daily idea routine pushes too).
+          for attempt in 1 2 3; do
+            git pull --rebase --autostash origin "${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}" && exit 0
+            echo "push attempt $attempt failed; retrying"
+            sleep 5
+          done
+          exit 1
