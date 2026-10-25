@@ -9,10 +9,12 @@ name: Notify implemented projects
 
 on:
   schedule:
-    # 16:10 UTC = 9:10am PDT. GitHub cron has no DST, so this becomes 8:10am
-    # once Pacific goes back to PST; shift to '10 17 * * *' to hold 9am there.
-    # Scheduled runs can also be delayed when GitHub is busy.
+    # Both fire; the script drops whichever lands before 9am Pacific and the
+    # once-a-day guard drops the other, so the send is 9:10am local year-round
+    # (16:10 UTC is 9:10am PDT, 17:10 UTC is 9:10am PST). GitHub can delay a
+    # scheduled run when it is busy.
     - cron: '10 16 * * *'
+    - cron: '10 17 * * *'
   workflow_dispatch:
     inputs:
       dry_run:
@@ -51,6 +53,9 @@ jobs:
           args=''
           [ "${{ inputs.dry_run }}" = "true" ] && args="$args --dry-run"
           [ "${{ inputs.force }}" = "true" ] && args="$args --force"
+          # Only the scheduled pair needs the Pacific-morning guard; a manual
+          # run should send when you ask for it.
+          [ "${{ github.event_name }}" = "schedule" ] && args="$args --not-before-pacific-hour=9"
           node scripts/notify-implemented.mjs $args
 
       - name: Record what was sent

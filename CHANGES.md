@@ -411,3 +411,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-10-25 [scope] Email notifications added (was a non-goal): GitHub Actions daily 16:10 UTC runs notify-implemented.mjs, one Resend digest of new implemented projects to yusuf.pisan@gmail.com.
 
 2026-10-25 [code] notify-implemented.mjs: implemented = implementedOn set and not placeholder; notify-state.json records sent keys + lastSentOn; writeup follows pisanorg.github.io/yusuf/aiprojects.
+
+2026-10-25 [code] Notify workflow runs at 16:10 and 17:10 UTC; --not-before-pacific-hour=9 drops the early one so the send stays 9:10am Pacific across the DST change on 2026-11-01.

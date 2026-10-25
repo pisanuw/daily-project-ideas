@@ -16,6 +16,7 @@
  *   node scripts/notify-implemented.mjs            # send if anything is new
  *   node scripts/notify-implemented.mjs --dry-run  # print, send nothing
  *   node scripts/notify-implemented.mjs --force    # ignore the once-a-day guard
+ *   node scripts/notify-implemented.mjs --not-before-pacific-hour=9
  *
  * Env (CI: GitHub secrets; local: .env, which is git-ignored):
  *   RESEND_API_KEY, FROM_EMAIL, ADMIN_EMAIL
@@ -34,6 +35,22 @@ const STATE_FILE = path.join(ROOT, 'notify-state.json');
 
 const DRY_RUN = process.argv.includes('--dry-run');
 const FORCE = process.argv.includes('--force');
+// GitHub cron is UTC and has no DST, so the workflow fires twice (16:10 and
+// 17:10 UTC) and this guard drops the run that lands before 9am Pacific. One
+// of the two is always 9:10am local, and the once-a-day guard eats the other.
+const NOT_BEFORE = (() => {
+  const arg = process.argv.find((a) => a.startsWith('--not-before-pacific-hour'));
+  if (!arg) return null;
+  const n = Number(arg.split('=')[1]);
+  return Number.isFinite(n) ? n : null;
+})();
+
+function pacificHour() {
+  const s = new Date().toLocaleString('en-US', {
+    timeZone: 'America/Los_Angeles', hour: 'numeric', hour12: false,
+  });
+  return Number(s);
+}
 
 // ---- env ------------------------------------------------------------------
 
@@ -295,6 +312,11 @@ async function main() {
     console.log('');
     console.log(text);
     console.log('--- end (dry run: nothing sent, state unchanged)');
+    return;
+  }
+
+  if (NOT_BEFORE !== null && pacificHour() < NOT_BEFORE && !FORCE) {
+    console.log(`Pacific hour is ${pacificHour()}, before ${NOT_BEFORE}; the later scheduled run will send.`);
     return;
   }
 
