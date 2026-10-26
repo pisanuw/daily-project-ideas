@@ -1,0 +1,475 @@
+{
+  "date": "2026-10-26",
+  "schemaVersion": 2,
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Migration Punch List",
+      "slug": "migration-punch-list",
+      "category": "EdTech: Higher Ed",
+      "complexity": "Weekend MVP",
+      "summary": "For instructors whose courses were just moved from Blackboard, D2L, or Moodle into Canvas: one scan produces a prioritized punch list of everything the migration broke, with one-click fixes for the common cases.",
+      "problemStatement": "The university copied my old Blackboard course into Canvas and told me to 'update dates, update the syllabus, and fix content that did not migrate.' Nobody tells me what did not migrate. I have to click through every quiz, assignment, rubric, and module to find rounded point values, missing rubrics, stub links, carried-over student replies, and release conditions that silently disappeared.",
+      "description": "The instructor connects a Canvas course with a personal access token (or later, an LTI install) and Migration Punch List walks the course through the Canvas API. It checks the known migration failure modes that campus guides list one by one: Course Migration Log stub entries, broken links and images, quizzes left unpublished, unsupported question types, rubrics not attached, weighted gradebook groups not rebuilt, calculated columns turned into assignments, leftover student discussion replies, nested folders flattened into text headers, and stale dates. Each finding becomes a punch-list item with a direct link to the page and, where safe, a one-click fix (bulk date shift, delete carried-over replies, publish or remove orphaned quizzes). A summary page shows progress so the instructor knows when the course is ready for students.",
+      "targetCustomer": "Faculty and adjuncts at institutions moving to Canvas in 2026 and 2027 (for example, campuses leaving Blackboard Original before its 31 December 2026 retirement), plus the instructional designers who support them.",
+      "buyer": "Initially the instructor on a personal card (one-time per-course or per-term fee); later the teaching and learning center or LMS transition project from its migration budget, which already funds vendors and support contracts that end with the transition.",
+      "whyNow": "UIC states that Anthology retires Blackboard Original on 31 December 2026, making Fall 2026 the last semester for teaching in it, and Spring 2027 the first all-Canvas term. Miami, MTSU, UMass Lowell, and Appalachian State publish transitions ending between Fall 2026 and Summer 2027, so thousands of instructors face the same cleanup in the next two terms.",
+      "founderFit": "Pisan builds React and Flask apps quickly and has shipped course tools before; a read-mostly Canvas API scanner is a short build. He can test it on real migrated courses through SIGCSE colleagues at campuses mid-transition, and the CS faculty he knows are early adopters who will try a token-based tool without waiting for IT.",
+      "problemEvidence": [
+        {
+          "url": "https://learning.uic.edu/lms-transition/lms-transition-timeline-and-scope/",
+          "source": "UIC Learning Technology Solutions",
+          "date": "unknown",
+          "summary": "Blackboard Original retires 31 December 2026; Fall 2026 is the last semester for active teaching in it and all courses are in Canvas by Spring 2027."
+        },
+        {
+          "url": "https://it.miami.edu/about-umit/projects-and-implementations/lms-project/course-migration-progress/index.html",
+          "source": "University of Miami IT",
+          "date": "unknown",
+          "summary": "Lists more than a dozen things faculty must fix by hand after migration: dates, rubrics, weighted gradebook, release conditions, carried-over discussion replies, broken links, external tools."
+        },
+        {
+          "url": "https://www.uml.edu/it/academic-technology/canvas-cleaning-up-migrated-content.aspx",
+          "source": "UMass Lowell Academic Technology",
+          "date": "unknown",
+          "summary": "Runs a 2026 workshop just on cleaning up migrated content: missing content areas, blogs and journals, unpublished quizzes, calculated columns turned into assignments."
+        },
+        {
+          "url": "https://uml.edu/myuml/submissions/2024/2024-06-27-06-59-44-umass-lowell-moving-to-canvas-as-ou.aspx",
+          "source": "UMass Lowell announcement",
+          "date": "2024-06-27",
+          "summary": "University copies prior semesters into Canvas, then faculty must update dates and syllabi and fix content that did not migrate; all courses in Canvas by Fall 2026."
+        },
+        {
+          "url": "https://its.gmu.edu/knowledge-base/canvas-course-migration-guide/",
+          "source": "George Mason ITS",
+          "date": "unknown",
+          "summary": "Each migrated course has a Course Migration Log whose 'Stub' entries mark Blackboard links or tools that did not migrate."
+        },
+        {
+          "url": "https://its.appstate.edu/node/894",
+          "source": "Appalachian State ITS",
+          "date": "unknown",
+          "summary": "Moodle to Canvas transition with all courses required in Canvas by Summer 2027, extending the demand window past Blackboard's retirement."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "K16 Solutions Scaffold Migration",
+          "url": "https://k16solutions.com/?p=3934",
+          "price": "unknown (institutional contract, no public pricing found)",
+          "gap": "Automates the bulk move for the institution, but the per-course cleanup that guides assign to faculty still remains."
+        },
+        {
+          "name": "Cidi Labs TidyUP",
+          "url": "https://cidilabs.com/?p=1824",
+          "price": "Annual institutional subscription priced by FTE; dollar amount unknown",
+          "gap": "Removes unused pages and unlinked files only; does not detect rounded points, missing rubrics, stub links, or gradebook problems, and must be bought at the account level."
+        },
+        {
+          "name": "Canvas built-in Link Validator and import issue list",
+          "url": "https://it.miami.edu/about-umit/projects-and-implementations/lms-project/course-migration-progress/index.html",
+          "price": "Free with Canvas",
+          "gap": "Covers broken links and import warnings only; the rest of the checklist is manual clicking."
+        }
+      ],
+      "keyFeatures": [
+        "Canvas API scan against a catalog of known Blackboard, D2L, and Moodle migration failure modes",
+        "Prioritized punch list with deep links and a 'ready for students' progress meter",
+        "Safe bulk fixes: date shift, delete carried-over student replies, publish or remove orphan quizzes",
+        "Migration Log stub parser that maps each stub to the item it broke",
+        "Exportable report an instructional designer can review with the instructor"
+      ],
+      "mvpScope": {
+        "features": [
+          "Personal access token connect for one course",
+          "Ten highest-frequency checks from campus guides (stubs, broken links, unpublished quizzes, unattached rubrics, gradebook weights, carried-over replies, stale dates)",
+          "Punch list with deep links",
+          "Bulk date shift"
+        ],
+        "outOfScope": [
+          "LTI 1.3 install and institution admin dashboard",
+          "Automatic quiz question rewriting",
+          "Accessibility remediation",
+          "D2L and Moodle specific checks beyond generic ones"
+        ],
+        "buildEstimate": "1 to 2 weekends"
+      },
+      "techStack": "React + Vite + Tailwind front end, Flask API proxy to the Canvas REST API, Supabase for accounts and saved scans (no student data stored)",
+      "pricing": {
+        "model": "Per-course pass for instructors, annual site license for teaching centers",
+        "pricePoint": "$19 per course per term, or $1,500 per year for a teaching center seat bundle",
+        "rationale": "Below the cost of one hour of instructional designer time; institutional tools like TidyUP are FTE-priced and require admin procurement, so a self-serve price lets individual faculty skip that queue."
+      },
+      "revenueSketch": "Estimate: 600 instructors x 2 courses x $19 over the Spring 2027 crunch = about $22,800, plus 5 teaching centers x $1,500 = $7,500. Assumes conversion from SIGCSE contacts and campus Canvas communities; demand falls after the transition wave, so this is a time-limited product unless it grows into general course health checks.",
+      "distribution": "Post in transition-campus Canvas user groups and teaching center newsletters, demo to instructional designers at two or three campuses mid-migration through SIGCSE contacts, and offer free scans to transition project teams who can recommend it to faculty.",
+      "validationTest": {
+        "method": "Build a read-only scanner for three checks, run it free on 10 migrated courses volunteered by contacts at transitioning campuses, and show a pricing page at the end of each report.",
+        "successCriteria": "Average of at least 8 real problems found per course, and 3 of 10 instructors (or one teaching center) commit to pay before Spring 2027 starts.",
+        "cost": "One weekend of building plus about 5 hours of outreach; $0 beyond hosting."
+      },
+      "moat": "A growing catalog of migration failure signatures learned from real scans across source LMSs, and relationships with transition project teams; weak against Instructure adding the same checks, so speed matters.",
+      "compliance": [
+        "FERPA: scans course structure, not grades; carried-over discussion replies contain student content, so process in memory and never store them",
+        "Institutional data agreements: personal tokens may violate some campus policies; publish a data handling page and offer an LTI path for campuses that require one",
+        "Accessibility: the report UI itself must meet WCAG 2.1 AA"
+      ],
+      "risks": [
+        {
+          "risk": "Demand window closes after Spring and Summer 2027",
+          "mitigation": "Price to recover build cost within one term and extend to term-to-term course copy checks, which recur every semester."
+        },
+        {
+          "risk": "Campus IT blocks personal access tokens",
+          "mitigation": "Ship an LTI 1.3 version for teaching centers and sell through them."
+        },
+        {
+          "risk": "Instructure ships better import diagnostics",
+          "mitigation": "Focus on fixes, not just detection, and on multi-LMS failure signatures Instructure has less incentive to cover."
+        }
+      ],
+      "scores": {
+        "pain": 4,
+        "willingnessToPay": 3,
+        "reachability": 3,
+        "competitiveGap": 3,
+        "feasibility": 5,
+        "complianceBurden": 4,
+        "total": 22
+      },
+      "inspiredBy": "https://it.miami.edu/about-umit/projects-and-implementations/lms-project/course-migration-progress/index.html"
+    },
+    {
+      "n": 2,
+      "title": "Integrity Case Builder",
+      "slug": "integrity-case-builder",
+      "category": "EdTech: Higher Ed",
+      "complexity": "Multi-week",
+      "summary": "For instructors of large courses who suspect unauthorized AI use: assemble a fair, well-documented case for each student, run individual meetings, and export a referral the integrity office will accept, instead of a rushed mass email.",
+      "problemStatement": "When I find 40 or 200 suspicious submissions, I have no process. The integrity office will not accept a detector screenshot; it wants the syllabus, the instructions, the student's work, a conversation summary, and at least three independent points of documentation. Building that by hand for every student takes weeks, so I either do not report at all or I send one blanket message and it blows up.",
+      "description": "Integrity Case Builder is an instructor-side case file, not a detector. The instructor imports the roster and the flagged submissions (from MOSS, their own checks, or manual notes), and the tool creates one case per student with a checklist matching the institution's evidence requirements: syllabus and AI policy at the time of the due date, assignment instructions, the submission, comparison work, and independent evidence points. It schedules and scripts individual informational conversations (with suggested content questions), records a neutral, timeline-ordered narrative in third person, and generates a notice letter that lists the specific flagged assignments. Cases that resolve at the instructor level are closed with a record; the rest export as a referral packet formatted for the campus system (Maxient forms or a PDF bundle).",
+      "targetCustomer": "Instructors and head TAs of large-enrollment courses, especially CS1, CS2, and systems courses with hundreds of students, who must handle many suspected AI cases per term.",
+      "buyer": "Department or college (chair's discretionary or course-support budget), with a personal-card tier for individual instructors.",
+      "whyNow": "In Spring 2026 a Purdue CS 240 instructor flagged 267 of 584 students and the hurried self-report process led to escalation, press coverage, and a public apology. GW reports integrity cases up 47 percent since 2023 with a growing backlog and shrinking panelist pool. Integrity offices such as Syracuse now explicitly reject detector-only cases, so instructors need structured documentation.",
+      "founderFit": "Pisan teaches large CS courses with agentic coding tools and knows the CS-specific evidence (commit history, similarity reports, oral explanations). His AI ethics interest makes a fairness-first, non-detector design credible, and SIGCSE has an active academic integrity community that can supply design partners and a workshop audience.",
+      "problemEvidence": [
+        {
+          "url": "https://turkeyland.net/thoughts/ai.php",
+          "source": "CS 240 Spring 2026 AI Retrospective (instructor blog)",
+          "date": "2026-09-25",
+          "summary": "267 of 584 students flagged; rushed self-report form, escalation to dean and press, re-enrollments, and the instructor wished for a process listing flagged assignments with individual meetings."
+        },
+        {
+          "url": "https://gwhatchet.com/2026/04/02/academic-integrity-cases-up-47-percent-since-2023-cesa-reports/",
+          "source": "GW Hatchet",
+          "date": "2026-04-02",
+          "summary": "Integrity reports up 47 percent since spring 2023, cases past semester end up 63 percent, faculty panelists down 30 percent, growing backlog."
+        },
+        {
+          "url": "https://class.syr.edu/wp-content/uploads/2025/02/Faculty-Submission-Guide-for-Academic-Integrity-Incident-Reports_Spring-2025.pdf",
+          "source": "Syracuse University CLASS faculty submission guide",
+          "date": "2025-02-07",
+          "summary": "Office cannot accept AI cases with only detector output; requires syllabus, assignment, instructions, and asks for at least three independent points of documentation plus a conversation summary."
+        },
+        {
+          "url": "https://www.frontiersin.org/journals/education/articles/10.3389/feduc.2025.1621743/full",
+          "source": "Frontiers in Education",
+          "date": "unknown",
+          "summary": "Faculty describe the burden of proof as very high, and cited work finds a quarter of non-reporting faculty blame the reporting workload."
+        },
+        {
+          "url": "https://www.chronicle.com/newsletter/teaching/2026-08-20",
+          "source": "Chronicle of Higher Education Teaching newsletter",
+          "date": "2026-08-20",
+          "summary": "Titled 'Has AI made the academic integrity council obsolete?'; full text paywalled and not verified in this run."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Maxient",
+          "url": "https://wpunj.edu/provost/assets/GUIDE%20FOR SUBMITTING ACADEMIC INTEGRITY VIOLATION REPORT FORMS IN MAXIENT.pdf",
+          "price": "unknown (institutional contract)",
+          "gap": "The conduct office's system of record: it receives referrals but does not help the instructor gather evidence, run meetings, or handle dozens of cases from one course."
+        },
+        {
+          "name": "Campus report forms (e.g., Syracuse MySlice incident form)",
+          "url": "https://class.syr.edu/wp-content/uploads/2025/02/Faculty-Submission-Guide-for-Academic-Integrity-Incident-Reports_Spring-2025.pdf",
+          "price": "Free to faculty",
+          "gap": "One form per student with free-text narrative; no batch workflow, checklist tracking, or meeting scheduling."
+        }
+      ],
+      "keyFeatures": [
+        "Per-student case file with an evidence checklist configurable to each campus's requirements",
+        "Batch import of flagged submissions from CSV, MOSS output, or manual notes",
+        "Meeting scheduler with question scripts and a neutral, timeline-ordered narrative template",
+        "Notice letters that list the specific flagged assignments and response deadlines",
+        "Referral export as a PDF bundle or field-mapped text for Maxient-style forms"
+      ],
+      "mvpScope": {
+        "features": [
+          "Roster and flagged-submission CSV import",
+          "Case checklist with Syracuse-style default requirements",
+          "Notice letter and meeting-summary templates",
+          "PDF referral packet export"
+        ],
+        "outOfScope": [
+          "Any AI or plagiarism detection",
+          "Direct Maxient integration",
+          "LMS integration",
+          "Student-facing portal"
+        ],
+        "buildEstimate": "3 to 4 weeks"
+      },
+      "techStack": "React + Vite + Tailwind, Supabase (Postgres with row-level security, encrypted storage for evidence files), Flask for PDF packet generation; optional Claude API only to tidy narrative wording on request, never to judge guilt",
+      "pricing": {
+        "model": "Per-course term license; department annual plan",
+        "pricePoint": "$49 per course per term; $1,200 per department per year",
+        "rationale": "A single mishandled mass case cost Purdue weeks of staff time and press attention; the price is small next to TA hours spent assembling packets, and below typical department software thresholds."
+      },
+      "revenueSketch": "Estimate: 40 departments x $1,200 = $48,000 ARR plus 150 individual courses x $49 x 2 terms = $14,700, about $62,700 per year. Assumes CS departments adopt first via SIGCSE contacts; unverified.",
+      "distribution": "SIGCSE TS 2027 birds-of-a-feather session and mailing list post on handling AI cases at scale, direct outreach to instructors who have written publicly about mass AI cases, and demos for CS department chairs and undergraduate directors.",
+      "validationTest": {
+        "method": "Publish a free evidence-checklist template and case-tracking spreadsheet, interview 8 large-course CS instructors about their last integrity cycle, and offer a paid concierge pilot.",
+        "successCriteria": "At least 5 of 8 report handling 10 or more cases a term, and 2 departments agree to a paid Spring 2027 pilot.",
+        "cost": "About 12 hours of interviews and template work; $0."
+      },
+      "moat": "Campus-specific evidence templates and export formats accumulated over time, plus trust from being explicitly not a detector; integrity offices recommending it to faculty would be hard to dislodge.",
+      "compliance": [
+        "FERPA: case files are education records with disciplinary content; requires encryption, access logging, retention and deletion controls, and a data processing agreement for department plans",
+        "Institutional policy: must follow each campus's process and not replace the conduct office; disclaimers that the tool does not determine responsibility",
+        "Accessibility: notice letters and portal pages must meet WCAG 2.1 AA",
+        "Ethics: no automated accusation; every evidence point is entered and reviewed by the instructor"
+      ],
+      "risks": [
+        {
+          "risk": "Perceived as a cheating-crackdown tool, harming adoption and students",
+          "mitigation": "Design around due process: individual meetings first, student response captured, and instructor-level resolution paths."
+        },
+        {
+          "risk": "Departments balk at storing disciplinary records with a small vendor",
+          "mitigation": "Offer a local-only mode (files never leave the browser) and short retention by default."
+        },
+        {
+          "risk": "Instructors will not pay personally",
+          "mitigation": "Sell to departments and integrity offices as a faculty support tool."
+        }
+      ],
+      "scores": {
+        "pain": 5,
+        "willingnessToPay": 2,
+        "reachability": 4,
+        "competitiveGap": 4,
+        "feasibility": 4,
+        "complianceBurden": 2,
+        "total": 21
+      },
+      "inspiredBy": "https://turkeyland.net/thoughts/ai.php"
+    },
+    {
+      "n": 3,
+      "title": "Extension Desk",
+      "slug": "extension-desk",
+      "category": "EdTech: Higher Ed",
+      "complexity": "Multi-week",
+      "summary": "For instructors and course staff drowning in extension requests: students request through one form, a course policy auto-approves the routine ones, and new due dates are written straight into Canvas and Gradescope.",
+      "problemStatement": "Every week I get extension emails and Google Form responses, then I have to decide, reply, and manually set a new due date in Canvas and again in Gradescope for each student. Tracking who has used their free extensions is a spreadsheet that the TAs keep breaking.",
+      "description": "Extension Desk gives each course a request page where students choose an assignment and request days. The instructor sets a policy (for example, four free 3-day extensions per term, plus documented cases routed to staff), and requests within policy are approved instantly. Approved extensions are written to Canvas assignment overrides and Gradescope extensions through their APIs, and the dashboard shows each student's remaining allowance, pending requests, and patterns such as many requests on one assignment. Documented accommodations (for example, a standing extra-days allowance) can be applied across all future assignments.",
+      "targetCustomer": "Instructors, head TAs, and course coordinators of medium and large university courses, especially CS courses that already use Canvas plus Gradescope.",
+      "buyer": "Department or college teaching budget; individual instructors on a per-course plan.",
+      "whyNow": "UC Berkeley built Flextensions in house and is still piloting it (Gradescope plus bCourses), and UTS built automated short extensions into its Canvas, showing institutions want this; elsewhere courses like Duke CompSci 334 and Stanford CS 278 still run extensions through Google Forms or custom pages.",
+      "founderFit": "Pisan teaches CS courses that use Canvas and Gradescope, so he is his own first tester, and Berkeley's published Flextensions research gives a credible design reference to cite to SIGCSE colleagues. The build is standard React plus Flask plus Supabase work against two documented APIs.",
+      "problemEvidence": [
+        {
+          "url": "https://rtl.berkeley.edu/resources/current-pilots/flextensions",
+          "source": "UC Berkeley Research, Teaching, and Learning",
+          "date": "unknown",
+          "summary": "Berkeley built and pilots Flextensions to centralize, approve, and track extension requests across Gradescope and bCourses (Canvas); free for Berkeley, no indication of availability elsewhere."
+        },
+        {
+          "url": "https://www2.eecs.berkeley.edu/Pubs/TechRpts/2023/EECS-2023-117.html",
+          "source": "UC Berkeley EECS technical report",
+          "date": "unknown",
+          "summary": "2023 report evaluating flexible extensions in large CS courses, including a CS161 case study."
+        },
+        {
+          "url": "https://educationexpress.uts.edu.au/collections/setting-up-assessments-in-canvas/resources/manage-extension-approvals/",
+          "source": "University of Technology Sydney",
+          "date": "unknown",
+          "summary": "UTS runs an Assignment Extensions dashboard in Canvas that auto-approves 72-hour extensions and updates due dates, another institution building its own."
+        },
+        {
+          "url": "https://courses.cs.duke.edu/spring26/compsci334/forms.php",
+          "source": "Duke CompSci 334 Spring 2026",
+          "date": "unknown",
+          "summary": "Spring 2026 course gives four free 3-day extensions and handles them, exam rescheduling, regrades, and accommodation notices through separate Google Forms."
+        },
+        {
+          "url": "https://teaching.berkeley.edu/node/471",
+          "source": "Berkeley Center for Teaching and Learning",
+          "date": "unknown",
+          "summary": "Describes instructors building dual-deadline and late-pass systems to avoid judging individual excuses at scale."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Gradescope extensions",
+          "url": "https://turnitin.gradescope.com/pricing",
+          "price": "Basic free; Institutional by quote",
+          "gap": "Per-student extensions exist inside Gradescope, but there is no student request intake, policy auto-approval, allowance tracking, or sync to Canvas."
+        },
+        {
+          "name": "Flextensions (UC Berkeley)",
+          "url": "https://rtl.berkeley.edu/resources/current-pilots/flextensions",
+          "price": "Free at Berkeley; not offered elsewhere as far as found",
+          "gap": "Pilot for one campus; no hosted product for other institutions."
+        },
+        {
+          "name": "Canvas per-student assignment overrides",
+          "url": "https://lts-help.its.virginia.edu/m/design-tips/l/1640032-how-do-i-give-specific-students-different-time-or-date-settings-on-a-quiz-or-assignment",
+          "price": "Free with Canvas",
+          "gap": "Manual, one assignment at a time, with no request workflow or policy."
+        }
+      ],
+      "keyFeatures": [
+        "Student request page with assignment picker and reason category",
+        "Policy engine: free-extension allowance, max days, auto-approve rules, staff review queue",
+        "Two-way write of approved dates to Canvas overrides and Gradescope extensions",
+        "Per-student allowance ledger and assignment hot-spot view",
+        "Standing accommodation rules applied to future assignments"
+      ],
+      "mvpScope": {
+        "features": [
+          "Canvas-only sync via instructor token",
+          "Request page and auto-approve policy",
+          "Allowance ledger and staff queue",
+          "Email confirmations"
+        ],
+        "outOfScope": [
+          "Gradescope sync (phase 2)",
+          "LTI 1.3 install",
+          "Disability office integration",
+          "Exam rescheduling"
+        ],
+        "buildEstimate": "3 to 4 weeks, plus 1 to 2 weeks for Gradescope"
+      },
+      "techStack": "React + Vite + Tailwind, Flask for Canvas and Gradescope API calls, Supabase (auth, Postgres, row-level security)",
+      "pricing": {
+        "model": "Per-course term license; department plan",
+        "pricePoint": "$29 per course per term; $900 per department per year",
+        "rationale": "Comparable institutions build this in house at much higher cost; the price is small next to TA hours spent on extension email, and Gradescope Basic users currently get none of this."
+      },
+      "revenueSketch": "Estimate: 60 departments x $900 = $54,000 ARR plus 200 courses x $29 x 2 terms = $11,600, about $65,600 per year. Assumes CS departments adopt through SIGCSE; unverified.",
+      "distribution": "Use in Pisan's own course first, then offer free Spring 2027 pilots to 10 large CS courses via SIGCSE mailing lists and the SIGCSE TS 2027 demo session, citing the Berkeley Flextensions results.",
+      "validationTest": {
+        "method": "Landing page with a 2-minute demo video, posted to SIGCSE members list and CS instructor communities, plus 6 interviews with large-course instructors about extension volume.",
+        "successCriteria": "40 signups for the pilot waitlist and 3 instructors willing to pay for Spring 2027.",
+        "cost": "About 8 hours; $0 to $20."
+      },
+      "moat": "Reliable two-way sync with Canvas and Gradescope is fiddly, and policy templates and instructor habits make switching costly once a term's ledger lives in the tool.",
+      "compliance": [
+        "FERPA: stores student names, enrollment, and extension history; reasons may include health information, so keep reasons as categories and avoid free-text medical details",
+        "Institutional data agreements: department plans will need a DPA and possibly a security review; LTI install requires campus LMS admin approval",
+        "Accessibility: student request page must meet WCAG 2.1 AA"
+      ],
+      "risks": [
+        {
+          "risk": "Gradescope or Canvas ships native request workflows",
+          "mitigation": "Stay cross-platform and policy-focused; native tools cover only their own system."
+        },
+        {
+          "risk": "Gradescope API access is unofficial or limited",
+          "mitigation": "Launch Canvas-only; add Gradescope via supported integration paths or CSV import."
+        },
+        {
+          "risk": "Berkeley open-sources or commercializes Flextensions",
+          "mitigation": "Reach out early to collaborate; compete on hosted setup and support."
+        }
+      ],
+      "scores": {
+        "pain": 4,
+        "willingnessToPay": 2,
+        "reachability": 4,
+        "competitiveGap": 3,
+        "feasibility": 4,
+        "complianceBurden": 3,
+        "total": 20
+      },
+      "inspiredBy": "https://rtl.berkeley.edu/resources/current-pilots/flextensions"
+    }
+  ],
+  "runNotes": {
+    "searches": [
+      "r/Professors 2026 frustrated tool wish existed grading late work extensions",
+      "Gradescope review complaints 2026 instructors",
+      "Indie Hackers edtech SaaS teachers revenue MRR 2026",
+      "Starter Story teacher tool business revenue 2026",
+      "Inside Higher Ed October 2026 faculty AI",
+      "EdSurge October 2026 higher education",
+      "reddit Professors extension requests tracking spreadsheet accommodations emails overwhelmed",
+      "ADA Title II web accessibility rule April 2026 deadline status universities update",
+      "Product Hunt education teachers AI tool paid launch 2026 grading feedback",
+      "Acquire.com edtech micro SaaS listing teachers profitable",
+      "Flextensions Berkeley extension requests Canvas Gradescope tool",
+      "instructors extra time accommodations Canvas quizzes Gradescope manually set each student burden 2026",
+      "Ask HN tool wish existed teachers professors 2026",
+      "EdWeek Market Brief 2026 teachers AI tools buying survey",
+      "Replit Teams for Education discontinued alternative coding course creators autograded exercises embed",
+      "zyBooks cost complaints students instructors 2026 alternative",
+      "Ohio school districts AI policy required July 1 2026 deadline",
+      "YC Requests for Startups 2026 education",
+      "academic integrity cases AI surge faculty time reporting process burden 2026",
+      "adjunct faculty teaching at multiple colleges different LMS Canvas Blackboard D2L juggling 2026",
+      "Maxient academic integrity instructor reporting software pricing faculty referral",
+      "Gradescope extensions late days course-wide accommodations multiplier feature",
+      "extension request management LTI Canvas app instructors approve extensions automatically",
+      "Blackboard to Canvas migration faculty cleanup broken content quizzes after migration tool",
+      "university transition to Canvas 2027 announced migration from Blackboard D2L Moodle faculty",
+      "K16 Solutions Scaffold course migration pricing Canvas",
+      "faculty academic integrity AI case documentation template evidence meeting student software tool instructors",
+      "Cidi Labs DesignPLUS Canvas course migration cleanup tool pricing"
+    ],
+    "rejectedCandidates": [
+      {
+        "title": "Coding exercise embeds for course creators after Replit Teams for Education",
+        "total": 17,
+        "reason": "Primary signal dates to 2023 and many alternatives (Codeanywhere, LabEx, Codio) now exist."
+      },
+      {
+        "title": "Ohio district AI vendor vetting workflow",
+        "total": 16,
+        "reason": "Ohio's July 2026 AI policy mandate is real, but the buyer is a district, requiring procurement for the first sale."
+      },
+      {
+        "title": "AI phonics or grading assistant for K-12 teachers",
+        "total": 16,
+        "reason": "Flippa listing shows teachers pay about $15 to $20 a month, but the space is crowded and it would be an AI wrapper without a moat."
+      },
+      {
+        "title": "Accommodation time-multiplier sync across Canvas and Gradescope",
+        "total": 16,
+        "reason": "Canvas New Quizzes and Gradescope now support course-level extra time natively; remaining gap folded into Extension Desk."
+      },
+      {
+        "title": "Unified grading inbox for adjuncts across multiple LMSs",
+        "total": 15,
+        "reason": "No direct evidence of demand found, low willingness to pay, and integration with several LMSs is heavy."
+      },
+      {
+        "title": "Static-analysis AI-use detector for programming assignments",
+        "total": 14,
+        "reason": "False-positive and due-process risks demonstrated by the Purdue CS 240 episode; also an arms race with no durable moat."
+      },
+      {
+        "title": "Anonymous live confusion Q&A for lectures",
+        "total": 13,
+        "reason": "Well served by Slido, Mentimeter, Poll Everywhere, and free tools like Piazza."
+      },
+      {
+        "title": "Late-penalty plus rubric plugin for Populi",
+        "total": 12,
+        "reason": "Single forum request on one niche LMS; too small."
+      }
+    ],
+    "caveats": "Reddit is blocked to this run's search and fetch tools, so no r/Professors or r/Teachers threads were used; pain signals come from university pages, campus news, and instructor blogs instead. Many university guide pages carry no publication date and are marked unknown. The Chronicle newsletter (2026-08-20) returned 403, so only its title was seen. The Tyton/D2L 2026 report page had no numeric findings. Competitor prices for K16, Cidi Labs TidyUP, Maxient, and Gradescope Institutional are not public. Whether Gradescope offers an official API for writing extensions was not verified. The DOJ extended the ADA Title II accessibility deadline to April 2027 per UPCEA and other sources, which was noted but not used as a primary signal. Revenue sketches are assumptions, not data."
+  }
+}

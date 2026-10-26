@@ -591,3 +591,6 @@
 | 2026-10-25 | Repo Roster | EdTech: Higher Ed | Multi-week | 21 |  |
 | 2026-10-25 | Outcome Ledger | EdTech: Higher Ed | Multi-week | 21 |  |
 | 2026-10-25 | Dossier Comment Reflector | Micro-SaaS | Weekend MVP | 22 |  |
+| 2026-10-26 | Migration Punch List | EdTech: Higher Ed | Weekend MVP | 22 |  |
+| 2026-10-26 | Integrity Case Builder | EdTech: Higher Ed | Multi-week | 21 |  |
+| 2026-10-26 | Extension Desk | EdTech: Higher Ed | Multi-week | 20 |  |
