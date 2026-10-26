@@ -417,3 +417,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-10-25 [note] Live send verified: one test digest (Edit Graph Lab) accepted by Resend, so noreply@pisan.me is verified; state restored so it cannot re-send. First scheduled run 2026-10-26.
 
 2026-10-26 [note] Claimed Lockstep Lab (2026-10-12 n2) as in progress: lockstep sim panes, fake network, nondeterminism toggles, first-divergence diff, rollback compare, exercises.
+
+2026-10-26 [note] Lockstep Lab (2026-10-12 n2) marked implemented: live at lockstep-lab.netlify.app, repo Claude-capstone/lockstep-lab. Lockstep/rollback, desync diff, exercises; 46 tests.

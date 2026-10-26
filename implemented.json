@@ -365,8 +365,10 @@
         "date": "2026-10-12",
         "n": 2
       },
-      "placeholder": true,
-      "notes": "In progress since 2026-10-26"
+      "notes": "Built in one session as a static TypeScript app with no backend, no LLM and no framework (plain DOM and Canvas). Two to four simulated RTS clients (wandering units, move commands, order-dependent separation) run in one main-thread simulation advanced in 1 ms steps, so a run is reproducible from its seed, over a seeded fake network with latency, jitter, loss and optional reordering; packets carry every unacknowledged input. Lockstep stalls (and the game clock waits) until all inputs for a tick arrive; rollback predicts no new command, runs ahead up to a prediction limit, and restores and re-simulates on a misprediction. Four nondeterminism toggles: float32 across two simulated platforms (per-op rounding vs extended precision, two libms) against Q16.16 fixed point, an unseeded RNG, Map insertion-order iteration, and frame-time timesteps at 60 vs 144 Hz. Confirmed ticks are FNV-1a hashed, a strip shows per-tick agreement and a diff names the first differing unit, field and bits. A sweep over input delays 0 to 8 plots input lag, stall time and re-simulation cost for both models; eight presets; five autograded exercises run student step functions in a Web Worker on two simulated machines for 10,000 ticks. Limitations: the platform float differences are simulated and exaggerated (the float preset diverges within the first ticks), the grader shadows only Math.random, sin, cos and tan, there is no GGPO-style time sync, and desync detection compares hashes directly rather than over the network. 46 vitest tests, including rollback confirming exactly lockstep's states over a 15%-loss network; 100% statement coverage on core.",
+      "url": "https://lockstep-lab.netlify.app",
+      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/lockstep-lab",
+      "implementedOn": "2026-10-26"
     }
   ]
 }
