@@ -398,8 +398,10 @@
         "date": "2026-06-04",
         "n": 2
       },
-      "placeholder": true,
-      "notes": "In progress since 2026-10-27"
+      "notes": "Built in one session as a static TypeScript app with no backend, no LLM and no framework, so student data never leaves the instructor's browser; the suggested Claude clustering and Flask/Supabase backend are replaced by deterministic code. A gradebook CSV (comma, tab or semicolon) is read with topics and maxima taken from headers such as 'Q3 [recursion] /5' and an editable column plan; blanks and excused cells are skipped, not zeroed. Per-topic mastery is the share of available points earned on attempted items, classified strong, getting there or gap against adjustable thresholds and shown in a colour-coded class table. Pairs maximise total complementarity (help both ways plus a reciprocity bonus, minus a shared-gap penalty) by exact subset DP up to 20 students and greedy matching plus pair swaps above (over 97% of optimum in tests), with one trio for odd classes and keep-apart constraints, compared against random pairing. Each group gets up to four sessions (strongest member leads, alternating leaders) with resource links from a small built-in library or the instructor's own, plus office-hours topics; each student gets a private printable card that never shows a groupmate's scores. Pairings CSV and Markdown exports. Limitations: the score treats a mastery difference as teaching value and ignores personalities and schedules, topics must be labelled by the instructor, only pairs (and one trio) are formed, the resource library is small, and there is no student login. 29 vitest tests, 100% statement coverage on core.",
+      "url": "https://study-buddy-matchmaker.netlify.app",
+      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/study-buddy-matchmaker",
+      "implementedOn": "2026-10-27"
     }
   ]
 }
