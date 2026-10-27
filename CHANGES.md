@@ -429,3 +429,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-10-27 [note] Released the In-Band (2026-10-13 n2) claim: the build was stopped partway by a safety check. Nothing was deployed and no code was pushed. Needs owner review before anyone retries it.
 
 2026-10-27 [note] Claimed Net Units (2026-10-14 n2) as in progress: client-side net coding-unit counter (Py/JS/Java/C++), complexity, duplication, size vs tests scatter, diff, guess-the-author.
+
+2026-10-27 [note] Net Units (2026-10-14 n2) marked implemented: live at net-units.netlify.app, repo Claude-capstone/net-units. Unit counter, diff, complexity, duplication, guessing; 39 tests.

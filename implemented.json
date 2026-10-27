@@ -388,8 +388,10 @@
         "date": "2026-10-14",
         "n": 2
       },
-      "placeholder": true,
-      "notes": "In progress since 2026-10-27"
+      "notes": "Built in one session as a static TypeScript app with no backend, no LLM and no framework. A hand-written lexer for Python, JavaScript/TypeScript, Java and C/C++ replaces the suggested tree-sitter: names, keywords, literals and operators count one coding unit each, while punctuation, comments and layout count zero, so cramming code onto fewer lines does not help. Each solution is line-diffed against the starter and its net units are the units on added lines minus those on deleted lines, per file and per function (scopes found by indentation in Python and brace matching elsewhere), alongside new branches (McCabe complexity after minus before) and the share of added units inside a 12-unit stretch that repeats with names normalized. A size vs tests-passed scatter with complexity or duplication overlays, a side-by-side diff that highlights every counted unit, a guess-the-author round with seeded codenames and show-of-hands tallies, and Markdown annotation and anonymized JSON exports round it out; assignments upload as folders and live in localStorage. The bundled Python sample has a reference, three student solutions and three AI-style baselines with real pytest pass counts. Limitations: the AI baselines are hand-written illustrations rather than model output, tests passed are entered by the instructor because the tool does not run code, the lexer is not a parser (regex literals and macros are approximated and function attribution is heuristic), and the diff is line-based with no move detection. 39 vitest tests, 99.6% statement coverage on core.",
+      "url": "https://net-units.netlify.app",
+      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/net-units",
+      "implementedOn": "2026-10-27"
     }
   ]
 }
