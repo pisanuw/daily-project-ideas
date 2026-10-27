@@ -377,9 +377,11 @@
       "summary": "A feature-rich falling-block puzzle game (Tetris-style) that runs entirely in the browser: modern guideline rules, several game modes, a CPU opponent, replays and stats.",
       "description": "Requested directly by the user rather than picked from the daily ideas list. A Tetris-style game built to a professional bar: SRS rotation with wall kicks, 7-bag randomizer, hold and next queue, ghost piece, lock delay, T-spin and combo scoring, multiple modes (Marathon, Sprint 40 lines, Ultra 2 minutes, Zen, Cheese/dig, and Versus against a CPU), configurable controls and handling (DAS/ARR), local high scores and stats, and sound.",
       "category": "Side Project",
-      "complexity": "1-2 Weeks",
-      "placeholder": true,
-      "notes": "In progress since 2026-10-27"
+      "complexity": "Implemented",
+      "notes": "Built in one session on a direct request (not from the ideas list) as a static TypeScript app with no backend, no LLM and no framework (plain DOM and Canvas). A deterministic 60 fps core implements guideline rules: SRS rotation with the published kick tables plus 180-degree turns, a seeded 7-bag, hold, ghost, 30-frame lock delay with 15 move resets, T-spin and mini detection, back-to-back, combos and perfect clears. Seven modes (Marathon, Sprint 40L, Ultra, Dig, Master 20G, Zen, Versus CPU) plus a date-seeded Daily Sprint; the CPU scores every hard-drop placement of its current and hold piece with El-Tetris weights and four difficulty levels, and versus exchanges garbage with cancelling. Rebindable keys with DAS/ARR/soft drop settings, gamepad and touch controls, four themes, Web Audio sound, top-10 records, lifetime stats, and exact replays stored as seed plus key log. Limitations: the CPU never tucks or sets up T-spins, records are per browser with no shared daily leaderboard, versus games are not replayable, and there is no ARE delay or IRS/IHS. 58 vitest tests (99% statement coverage on core), including a replay reproducing a game cell for cell and full CPU versus matches.",
+      "url": "https://tetromino-arcade.netlify.app",
+      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/tetromino-arcade",
+      "implementedOn": "2026-10-27"
     }
   ]
 }

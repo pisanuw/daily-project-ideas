@@ -421,3 +421,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-10-26 [note] Lockstep Lab (2026-10-12 n2) marked implemented: live at lockstep-lab.netlify.app, repo Claude-capstone/lockstep-lab. Lockstep/rollback, desync diff, exercises; 46 tests.
 
 2026-10-27 [note] Claimed Tetromino Arcade (standalone, user request, not from ideas list) as in progress: Tetris-style game with SRS, modes, CPU versus, replays, stats.
+
+2026-10-27 [note] Tetromino Arcade (standalone, user request) marked implemented: live at tetromino-arcade.netlify.app, repo Claude-capstone/tetromino-arcade. 7 modes, CPU versus, replays; 58 tests.
