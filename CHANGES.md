@@ -427,3 +427,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-10-27 [note] Claimed In-Band (2026-10-13 n2) as in progress: Web Audio trunk sim, Goertzel DTMF/MF/2600 Hz decoder, blue-box attack, out-of-band fix, SQL/log/prompt injection labs.
 
 2026-10-27 [note] Released the In-Band (2026-10-13 n2) claim: the build was stopped partway by a safety check. Nothing was deployed and no code was pushed. Needs owner review before anyone retries it.
+
+2026-10-27 [note] Claimed Net Units (2026-10-14 n2) as in progress: client-side net coding-unit counter (Py/JS/Java/C++), complexity, duplication, size vs tests scatter, diff, guess-the-author.
