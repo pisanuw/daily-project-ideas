@@ -423,3 +423,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-10-27 [note] Claimed Tetromino Arcade (standalone, user request, not from ideas list) as in progress: Tetris-style game with SRS, modes, CPU versus, replays, stats.
 
 2026-10-27 [note] Tetromino Arcade (standalone, user request) marked implemented: live at tetromino-arcade.netlify.app, repo Claude-capstone/tetromino-arcade. 7 modes, CPU versus, replays; 58 tests.
+
+2026-10-27 [note] Claimed In-Band (2026-10-13 n2) as in progress: Web Audio trunk sim, Goertzel DTMF/MF/2600 Hz decoder, blue-box attack, out-of-band fix, SQL/log/prompt injection labs.
