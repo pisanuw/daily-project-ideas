@@ -594,3 +594,6 @@
 | 2026-10-26 | Migration Punch List | EdTech: Higher Ed | Weekend MVP | 22 |  |
 | 2026-10-26 | Integrity Case Builder | EdTech: Higher Ed | Multi-week | 21 |  |
 | 2026-10-26 | Extension Desk | EdTech: Higher Ed | Multi-week | 20 |  |
+| 2026-10-27 | CS Add-On Prep | EdTech: K-12 | Multi-week | 23 |  |
+| 2026-10-27 | TA Match | EdTech: Higher Ed | Multi-week | 22 |  |
+| 2026-10-27 | Lab Front Door | Micro-SaaS | Weekend MVP | 22 |  |

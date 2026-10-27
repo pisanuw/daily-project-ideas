@@ -1,0 +1,460 @@
+{
+  "date": "2026-10-27",
+  "schemaVersion": 2,
+  "ideas": [
+    {
+      "n": 1,
+      "title": "CS Add-On Prep",
+      "slug": "cs-add-on-prep",
+      "category": "EdTech: K-12",
+      "complexity": "Multi-week",
+      "summary": "For licensed teachers who must add a computer science endorsement to teach newly required CS courses: Praxis 5652 practice built around running and tracing real code, with a study plan that targets each teacher's weak categories.",
+      "problemStatement": "My school needs someone to teach the required computer science course and I am the one who said yes. To keep teaching it I have to pass the Praxis Computer Science test, which says I will 'work with code', but the prep I can find is a generic study guide or a flashcard bank. I need practice that shows me why my trace of a loop was wrong, not just that it was wrong.",
+      "description": "CS Add-On Prep is a self-serve web app for in-service teachers preparing for the Praxis Computer Science (5652) exam or a similar state CS endorsement test. Every code question is generated from a parameterized template and executed in the browser (Pyodide for Python, a small JS sandbox), so answers are verified by execution rather than by a model's guess, and wrong answers come with a step-by-step trace showing where the teacher's reasoning diverged. A diagnostic sorts the teacher into the exam's content areas and builds a weekly plan around their weakest ones, with short explanations written for adults who teach another subject. Non-code items (impacts of computing, data, networks) are hand-reviewed question banks, with Claude used only to draft explanations that a human checks before publishing.",
+      "targetCustomer": "Licensed K-12 teachers (often math, science, business, or CTE) adding a computer science endorsement in states that accept Praxis 5652, such as Virginia, Arkansas, Utah, Connecticut, and Wyoming, and teachers in states like North Carolina whose new graduation requirement creates demand for CS-qualified staff.",
+      "buyer": "The teacher on a personal card at first (test prep is a familiar personal purchase, like the $130 exam fee); later, district CS coordinators or state-funded PD programs buying seat packs from PD or Title II budgets, and teacher-prep programs that already fund 240 Tutoring access for their candidates.",
+      "whyNow": "North Carolina's computer science graduation requirement takes full effect in 2026-27 with no waivers, and NC lists Computer Science & IT as a shortage area. Several other states require a CS course to graduate and accept Praxis 5652 for an add-on endorsement, so the pool of out-of-field teachers who need to pass a CS content test is growing while prep options remain generic.",
+      "founderFit": "Pisan teaches CS and builds interactive React tools quickly, and code-tracing exercises verified by execution are squarely his expertise. The SIGCSE and CSTA communities include K-12 teacher-PD leaders and university CS-teacher-endorsement programs who can supply design partners and first cohorts.",
+      "problemEvidence": [
+        {
+          "url": "https://www.dpi.nc.gov/districts-schools/classroom-resources/computer-science-it-and-technology-education/computer-science-graduation-requirement",
+          "source": "NC Department of Public Instruction",
+          "date": "unknown",
+          "summary": "CS graduation requirement reaches full implementation in 2026-27 and no waivers are permitted for that year."
+        },
+        {
+          "url": "https://northcarolina.teach.org/areas-of-licensure",
+          "source": "Teach.org North Carolina",
+          "date": "unknown",
+          "summary": "Lists Computer Science & IT (CTE 6-12) as a shortage area for 2025-26; Computer Education is an add-on that requires another license first."
+        },
+        {
+          "url": "https://dese.ade.arkansas.gov/Offices/ar-comp-sci-initiative/computer-science-licensure-information",
+          "source": "Arkansas DESE",
+          "date": "unknown",
+          "summary": "Any teacher with a standard license can add the 4-12 CS endorsement by meeting the cut score on Praxis 5652."
+        },
+        {
+          "url": "https://desk.zoho.com/portal/codeva/en/kb/articles/computer-science-teaching-endorsement-in-virginia",
+          "source": "CodeVA knowledge base",
+          "date": "unknown",
+          "summary": "Virginia teachers can add the CS endorsement by passing Praxis 5652 (passing score 142 as of fall 2019, possibly outdated)."
+        },
+        {
+          "url": "https://www.wunc.org/education/2023-12-04/nc-students-must-study-computer-science-graduate-new-law-2026",
+          "source": "WUNC",
+          "date": "2023-12-04",
+          "summary": "NC superintendent said the state may need hundreds, if not thousands, more CS teachers to meet the requirement."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "240 Tutoring",
+          "url": "https://centenary.edu/academics/departments-schools/education/education-aspire/passing-the-praxis",
+          "price": "$39.99/month standard rate (per Centenary College page); not confirmed that it covers 5652",
+          "gap": "Broad Praxis catalog; no evidence of execution-verified code tracing or CS-specific trace feedback."
+        },
+        {
+          "name": "Mometrix Praxis Computer Science (5652)",
+          "url": "https://mometrix.com/academy/praxis-ii/computer-science",
+          "price": "Free practice test; paid study guide price unknown",
+          "gap": "Static question and book format with written explanations; no runnable code or adaptive plan."
+        },
+        {
+          "name": "ETS official practice test",
+          "url": "https://praxis.ets.org/test/5652.html",
+          "price": "$24.95 (per ETS page)",
+          "gap": "One practice form; useful for calibration but not a study tool."
+        },
+        {
+          "name": "OpenExamPrep",
+          "url": "https://open-exam-prep.com/study-guides/praxis-computer-science",
+          "price": "Free",
+          "gap": "Free guides and questions; quality and coverage unverified, no code execution."
+        }
+      ],
+      "keyFeatures": [
+        "Execution-verified code tracing questions with step-by-step divergence traces",
+        "Diagnostic that maps weaknesses to exam content areas",
+        "Weekly study plan sized to a working teacher's schedule",
+        "Timed full-length practice exams",
+        "Cohort dashboard for PD coordinators (later)"
+      ],
+      "mvpScope": {
+        "features": [
+          "Diagnostic plus 150 code-tracing items in Python generated from 30 templates",
+          "Trace-based feedback on wrong answers",
+          "One timed practice exam",
+          "Stripe checkout for a 3-month pass"
+        ],
+        "outOfScope": [
+          "Non-code content areas beyond a small reviewed bank",
+          "District seat management",
+          "Other state tests (CSET, TExES)",
+          "Mobile app"
+        ],
+        "buildEstimate": "3 to 4 weeks part time, mostly item-template authoring and review"
+      },
+      "techStack": "React + Vite + Tailwind, Pyodide for in-browser execution, Supabase (auth, progress), Stripe, Claude API for drafting explanations that are human-reviewed",
+      "pricing": {
+        "model": "Per-teacher time-boxed pass, plus seat packs for districts and teacher-prep programs",
+        "pricePoint": "$49 for 3 months; seat packs of 20 at $600",
+        "rationale": "Below three months of 240 Tutoring at its $39.99 standard rate and comparable to the $130 exam fee teachers already pay; seat pricing fits PD stipend budgets."
+      },
+      "revenueSketch": "Estimate: 600 individual passes/year x $49 = $29,400, plus 10 seat packs x $600 = $6,000, about $35,000/year. Assumes the number of teachers taking Praxis 5652 each year is in the low thousands (unknown, not verified).",
+      "distribution": "Partner with 2 or 3 university CS-teacher endorsement programs and state PD summer institutes found through SIGCSE and CSTA contacts; post free diagnostic in CSTA chapter channels and teacher Facebook groups; SEO on 'Praxis 5652 practice'.",
+      "validationTest": {
+        "method": "Publish a free 20-question execution-verified diagnostic with an email capture and a 'pre-order the full pass for $29' button; ask 3 endorsement program leads whether they would fund seats.",
+        "successCriteria": "300 diagnostic completions and 20 pre-orders in 6 weeks, or one program committing to a paid pilot cohort.",
+        "cost": "About 2 weekends of work and under $100 in ads and hosting."
+      },
+      "moat": "A large bank of parameterized, execution-verified code items with diagnostic data on where adult career-changers mis-trace code, plus relationships with endorsement programs that bundle the product.",
+      "compliance": [
+        "FERPA: not applicable to adult teachers buying for themselves; seat packs for programs need a simple data agreement.",
+        "COPPA: not applicable (adult users).",
+        "Accessibility: practice items and traces must meet WCAG 2.1 AA, including keyboard navigation and screen-reader-readable code.",
+        "ETS trademark: use 'Praxis' descriptively and avoid implying endorsement; never reproduce real test items."
+      ],
+      "risks": [
+        {
+          "risk": "Annual test-taker volume for 5652 may be too small to sustain revenue.",
+          "mitigation": "Generalize the item engine to other state CS tests and to AP CSA teacher prep; sell to endorsement programs rather than only individuals."
+        },
+        {
+          "risk": "States change which test they accept.",
+          "mitigation": "Map items to a content framework rather than one test and track state rules in a small admin table."
+        },
+        {
+          "risk": "Free AI chat tools are 'good enough' for motivated teachers.",
+          "mitigation": "Differentiate on verified correctness and structured diagnostic feedback that a chatbot does not give."
+        }
+      ],
+      "scores": {
+        "pain": 3,
+        "willingnessToPay": 4,
+        "reachability": 4,
+        "competitiveGap": 3,
+        "feasibility": 4,
+        "complianceBurden": 5,
+        "total": 23
+      },
+      "inspiredBy": "https://www.dpi.nc.gov/districts-schools/classroom-resources/computer-science-it-and-technology-education/computer-science-graduation-requirement"
+    },
+    {
+      "n": 2,
+      "title": "TA Match",
+      "slug": "ta-match",
+      "category": "EdTech: Higher Ed",
+      "complexity": "Multi-week",
+      "summary": "For CS department staff who place dozens or hundreds of TAs each term: collect applications, instructor requests, and schedules in one place and produce a constraint-checked assignment in minutes instead of a week of spreadsheet juggling.",
+      "problemStatement": "Every term I get 300 TA applications in a Google Form, instructor wish lists by email, and a course timetable from the registrar. I spend days in a spreadsheet matching people to sections, checking that nobody is over their hour cap, that they took the course, and that their own classes do not clash, and then the drops start and I redo it.",
+      "description": "TA Match gives departments a TA application form, an instructor request form (preferred TAs, required skills, number of hours), and a timetable import. A solver (constraint programming with a local-search improvement pass) proposes an assignment that respects hard constraints (hour caps, schedule clashes, eligibility such as having passed the course) and maximizes soft preferences from TAs and instructors. Coordinators can lock choices, see why a candidate was or was not placed, and re-solve when someone drops without reshuffling everyone. Exports go to CSV for HR and to a per-course roster email.",
+      "targetCustomer": "Undergraduate and graduate program coordinators, TA coordinators, and associate chairs in CS and other large-enrollment departments that hire many undergraduate TAs.",
+      "buyer": "The department, from its operating or instructional-support budget (a department-level purchase under typical small-software thresholds); later, colleges or graduate schools licensing it for several departments.",
+      "whyNow": "Undergraduate TA programs in CS have grown alongside enrollment, and departments keep building one-off tools for this: GWU CS had students build Easy Sched, Cardiff CS ran student projects on it in 2025, and a 2026 Chalmers thesis describes TA scheduling as spreadsheets and informal communication. Repeated homegrown builds signal a common pain with no product filling it.",
+      "founderFit": "Pisan works inside a CS department and knows the TA hiring cycle first hand; SIGCSE has an active community of people who run large undergraduate TA programs and can serve as design partners. The solver is a well-scoped algorithms problem he can build alone.",
+      "problemEvidence": [
+        {
+          "url": "https://odr.chalmers.se/items/12383c2a-7c7e-42a4-8bd3-6a98ad425366",
+          "source": "Chalmers bachelor's thesis",
+          "date": "2026 (exact date unknown)",
+          "summary": "TA scheduling is often managed through manual, unstructured processes such as spreadsheets and informal communication; LNS solvers improved schedule quality."
+        },
+        {
+          "url": "https://repository.iiitd.edu.in/jspui/handle/123456789/1622?mode=full",
+          "source": "IIIT Delhi project report",
+          "date": "2023 (exact date unknown)",
+          "summary": "Existing TA allocation relies on time-consuming Excel sheets and email; proposes dashboard and structured preference form."
+        },
+        {
+          "url": "https://pats.cs.cf.ac.uk/!archive_desc?p=1365",
+          "source": "Cardiff University School of Computer Science",
+          "date": "2025 (exact date unknown)",
+          "summary": "Student project on assigning teaching support staff with skill matching and limits on hours and days."
+        },
+        {
+          "url": "https://engineering.gwu.edu/easy-sched",
+          "source": "GW Engineering",
+          "date": "unknown",
+          "summary": "GWU CS department had a student team build a tool to score and assign TAs from applications, schedules, and time preferences."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Spreadsheets plus Google Forms",
+          "url": "https://odr.chalmers.se/items/12383c2a-7c7e-42a4-8bd3-6a98ad425366",
+          "price": "Free",
+          "gap": "No constraint checking, no re-solve after drops, no explanation of placements."
+        },
+        {
+          "name": "Yale Teaching Fellow System",
+          "url": "https://gsas.yale.edu/teaching-fellow-program/teaching-fellow-system-staff-and-faculty",
+          "price": "Not sold (internal institutional system)",
+          "gap": "Built for one institution; not available to other departments."
+        },
+        {
+          "name": "GWU Easy Sched",
+          "url": "https://engineering.gwu.edu/easy-sched",
+          "price": "Not sold (student project); availability unknown",
+          "gap": "Single-department student project with no indication of support or availability elsewhere."
+        }
+      ],
+      "keyFeatures": [
+        "TA application and instructor request forms",
+        "Timetable import and clash detection",
+        "Constraint solver with lock-and-re-solve",
+        "Placement explanations",
+        "CSV export for HR and roster emails"
+      ],
+      "mvpScope": {
+        "features": [
+          "CSV import of applications, requests, and timetable",
+          "Solver with hour caps, clashes, eligibility, and preferences",
+          "Lock and re-solve",
+          "CSV export"
+        ],
+        "outOfScope": [
+          "Built-in application forms (use CSV from Google Forms first)",
+          "SSO and HR system integration",
+          "Payroll and hours tracking",
+          "Multi-department admin"
+        ],
+        "buildEstimate": "4 to 6 weeks part time"
+      },
+      "techStack": "React + Vite + Tailwind, Flask with OR-Tools CP-SAT solver, Supabase (Postgres, auth)",
+      "pricing": {
+        "model": "Per-department annual license tiered by number of TA positions",
+        "pricePoint": "$1,500/year up to 100 TAs; $3,000/year up to 400",
+        "rationale": "Small enough to sit under department card or small-purchase limits; a few days of coordinator time per term costs more than the license."
+      },
+      "revenueSketch": "Estimate: 40 departments x average $2,000/year = $80,000 ARR. Assumes 40 of the several hundred US CS departments with undergraduate TA programs adopt within 3 years (unverified).",
+      "distribution": "Recruit 3 design-partner departments through SIGCSE contacts who run large TA programs; present at a SIGCSE TS 2027 BoF or lightning talk on TA program operations; follow up with free one-term pilots that convert to paid.",
+      "validationTest": {
+        "method": "Interview 8 TA coordinators about their current process and ask each for an anonymized past term's data; run the solver offline and show them the result.",
+        "successCriteria": "5 of 8 report spending 2 or more days per term on assignment, and 2 agree to a paid pilot for the next term.",
+        "cost": "About 2 weeks of evenings, $0 beyond time."
+      },
+      "moat": "Encoded department-specific rules (eligibility, union hour caps, course-specific skills) and historical assignment data that improves defaults each term; switching costs once embedded in the hiring cycle.",
+      "compliance": [
+        "FERPA: eligibility checks may use course grades, which are education records; process under a school-official exception with a data agreement, or let departments mark eligibility themselves so grades never leave campus.",
+        "Employment data: applicant information is HR data; keep minimal fields and support deletion after the term.",
+        "Accessibility: forms and coordinator UI must meet WCAG 2.1 AA (ADA Title II deadline for large public entities is now April 2027).",
+        "Institutional agreements: expect security questionnaires and a DPA before department purchases."
+      ],
+      "risks": [
+        {
+          "risk": "Departments treat this as a problem a student project can solve for free.",
+          "mitigation": "Position as maintained, supported software; offer migration from their homegrown tool and a price below one student's summer stipend."
+        },
+        {
+          "risk": "Procurement or IT security reviews slow first sales.",
+          "mitigation": "Start with CSV import and no SSO to keep data minimal; prepare a HECVAT Lite answer set early."
+        },
+        {
+          "risk": "Rules vary widely across institutions.",
+          "mitigation": "Make constraints configurable from a small set of primitives and learn from design partners before generalizing."
+        }
+      ],
+      "scores": {
+        "pain": 4,
+        "willingnessToPay": 3,
+        "reachability": 4,
+        "competitiveGap": 4,
+        "feasibility": 4,
+        "complianceBurden": 3,
+        "total": 22
+      },
+      "inspiredBy": "https://odr.chalmers.se/items/12383c2a-7c7e-42a4-8bd3-6a98ad425366"
+    },
+    {
+      "n": 3,
+      "title": "Lab Front Door",
+      "slug": "lab-front-door",
+      "category": "Micro-SaaS",
+      "complexity": "Weekend MVP",
+      "summary": "For faculty who get a steady stream of cold emails asking to join their lab: one structured intake page that collects comparable answers, groups and screens them, and sends kind, honest replies, so every applicant hears back and the PI spends minutes, not hours.",
+      "problemStatement": "I get hundreds of 'Dear Professor' emails asking for a PhD, postdoc, or undergraduate research spot, many clearly written by ChatGPT, and I cannot tell which students actually read my work. I feel bad ignoring them, but answering each one by hand when I have no funded position is not sustainable.",
+      "description": "Lab Front Door gives each PI a hosted 'Join the lab' page with a short structured form: position type, funding status, which paper or topic the applicant wants to build on and why, availability, and a CV upload. Submissions land in a triage board grouped by position type and current openings; a check flags answers that do not engage with the named paper, and an optional Claude summary condenses each applicant into three lines, always with the original text one click away. The PI sets lab status (full, open for funded students, open for undergrads) and the page and automatic replies update to match, so every applicant gets a timely, honest response. Inbound cold emails can be answered with a one-click template that points to the page.",
+      "targetCustomer": "Research faculty (especially in CS, AI, and other high-demand fields) and lab managers who receive cold inquiries from prospective PhD students, postdocs, and undergraduate researchers.",
+      "buyer": "The PI on a personal card or from a startup, discretionary, or grant budget; later departments buying for all faculty as part of graduate recruiting.",
+      "whyNow": "An October 2026 faculty post analyzing 272 cold requests describes inquiries changing after ChatGPT and the author rewriting his positions page to route everything through an interest form; another October 2026 post describes the backlash over templated AI-written applicant emails. Faculty are moving to forms, but a plain Google Form gives no triage, status-aware replies, or screening for engagement.",
+      "founderFit": "Pisan is faculty and lives this workflow, has shipped small Flask and Supabase tools, and can get the first users from colleagues in CS and AI who are most flooded. The build is small enough to ship in a weekend.",
+      "problemEvidence": [
+        {
+          "url": "https://theaiprof.substack.com/p/how-to-email-a-professor-for-a-phd",
+          "source": "The AI Prof (Substack)",
+          "date": "2026-10-19",
+          "summary": "272 cold requests from 2021 to 2026; 34% got replies; language shifted after ChatGPT; author moving all inquiries to an interest form."
+        },
+        {
+          "url": "https://annazhelnina.substack.com/p/my-genai-would-like-to-have-a-call",
+          "source": "Substack (Anna Zhelnina)",
+          "date": "2026-10-26",
+          "summary": "Discusses a LinkedIn complaint about PhD applicant emails sharing one AI-written structure, and the backlash it drew."
+        },
+        {
+          "url": "https://www.abroadsimplified.com/blogs/approach-professors-for-research-opportunities-a-complete-guide-for-graduate-students-2026-edition",
+          "source": "Abroad Simplified guide",
+          "date": "2026 (exact date unknown)",
+          "summary": "Claims PIs can receive dozens or hundreds of generic cold emails each week (unverified advice-site claim)."
+        },
+        {
+          "url": "https://planchart.wordpress.ncsu.edu/?p=215",
+          "source": "Planchart Lab, NC State",
+          "date": "unknown",
+          "summary": "Example of a lab routing interest through an inquiry form reviewed as opportunities arise."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Google Forms (DIY interest form)",
+          "url": "https://theaiprof.substack.com/p/how-to-email-a-professor-for-a-phd",
+          "price": "Free",
+          "gap": "Collects answers but offers no triage board, status-aware auto replies, or engagement screening."
+        },
+        {
+          "name": "Lab email subject-line conventions",
+          "url": "https://cuvic.kaist.ac.kr/contact/",
+          "price": "Free",
+          "gap": "Helps sort the inbox but still requires a manual reply to each email."
+        }
+      ],
+      "keyFeatures": [
+        "Hosted structured 'Join the lab' page",
+        "Triage board grouped by position type",
+        "Lab status that drives page text and automatic replies",
+        "Engagement check on the 'which paper and why' answer",
+        "One-click reply template for inbound cold emails"
+      ],
+      "mvpScope": {
+        "features": [
+          "Intake page with structured form and CV upload",
+          "Triage board with tags and status",
+          "Status-aware automatic acknowledgment emails",
+          "Stripe subscription"
+        ],
+        "outOfScope": [
+          "AI summaries and screening (add after validation)",
+          "Department multi-PI admin",
+          "Gmail add-on",
+          "Interview scheduling"
+        ],
+        "buildEstimate": "1 to 2 weekends"
+      },
+      "techStack": "React + Vite + Tailwind, Supabase (auth, storage, Postgres), Resend for email, Claude API for optional summaries",
+      "pricing": {
+        "model": "Per-PI subscription with a free tier for one open position type",
+        "pricePoint": "$8/month or $72/year",
+        "rationale": "Priced like a personal productivity tool; competing against free Google Forms means the price must be low and the time saved obvious."
+      },
+      "revenueSketch": "Estimate: 400 PIs x $72/year = $28,800 ARR, plus department plans later. Assumes about 5% conversion from a free tier of 8,000 faculty users (unverified).",
+      "distribution": "Launch with a free tier to CS and AI faculty through Pisan's network and SIGCSE lists; each public lab page carries a small 'Powered by Lab Front Door' link seen by the faculty colleagues of applicants; write a short post with data from early users.",
+      "validationTest": {
+        "method": "Build a landing page with a demo board and offer 20 faculty a free beta in exchange for a 15-minute call; ask at the end whether they would pay $72/year.",
+        "successCriteria": "10 of 20 install the page, 5 still use it after one month, and 3 pre-pay.",
+        "cost": "One weekend and under $50."
+      },
+      "moat": "Weak at first; grows through templates and screening tuned on real inquiry data, and through department plans that make it the standard intake for a whole faculty.",
+      "compliance": [
+        "FERPA: not applicable to external applicants who are not yet students; current students applying for undergraduate research may be covered, so avoid collecting grades and keep data minimal.",
+        "Data protection: international applicants mean GDPR considerations; provide deletion, retention limits, and a privacy notice.",
+        "Accessibility: the public intake page must meet WCAG 2.1 AA.",
+        "AI screening fairness: keep summaries assistive and show original text, avoiding automated rejection."
+      ],
+      "risks": [
+        {
+          "risk": "Faculty will not pay when a free Google Form works.",
+          "mitigation": "Lead with status-aware auto replies and triage, measure time saved, and sell department plans to graduate programs."
+        },
+        {
+          "risk": "Screening could unfairly filter non-native English speakers.",
+          "mitigation": "No automatic rejection; flag only non-engagement with the named paper, never writing style."
+        },
+        {
+          "risk": "Applicants game the structured form with AI too.",
+          "mitigation": "Ask for specific, verifiable answers (a named paper and a concrete follow-up question) and show the PI the raw text."
+        }
+      ],
+      "scores": {
+        "pain": 3,
+        "willingnessToPay": 2,
+        "reachability": 5,
+        "competitiveGap": 3,
+        "feasibility": 5,
+        "complianceBurden": 4,
+        "total": 22
+      },
+      "inspiredBy": "https://theaiprof.substack.com/p/how-to-email-a-professor-for-a-phd"
+    }
+  ],
+  "runNotes": {
+    "searches": [
+      "r/Professors October 2026 wish there was a tool",
+      "r/Teachers 2026 spend hours every week on paperwork tool",
+      "Indie Hackers teacher tool MRR 2026",
+      "Starter Story education business revenue tutoring app 2026",
+      "Inside Higher Ed October 2026 faculty workload",
+      "EdWeek Market Brief October 2026",
+      "Ask HN tool you wish existed for teaching programming 2026",
+      "zyBooks reviews G2 instructors cons",
+      "high school computer science graduation requirement 2026 teacher shortage states new requirement",
+      "Acquire.com edtech SaaS listing for sale 2026 teachers",
+      "state AI literacy law K-12 2026 requirement teachers curriculum deadline",
+      "r/CSEducation 2026 teachers autograder student code feedback",
+      "North Carolina computer science graduation requirement fall 2026 teachers not certified out of field",
+      "Praxis Computer Science 5652 study guide practice test teachers add-on licensure",
+      "ADA Title II web accessibility rule deadline 2026 DOJ status universities October",
+      "North Carolina computer science requirement 2026 teachers professional development shortage news",
+      "Replit Teams for Education discontinued alternative teachers autograded coding assignments",
+      "r/microsaas teachers tool revenue paying customers 2026",
+      "university department TA assignment matching courses spreadsheet tool teaching assistant allocation software",
+      "\"comprehension debt\" AI-generated code developers don't understand 2026",
+      "Praxis 5652 computer science required states teacher licensure add-on endorsement test",
+      "240 Tutoring Praxis Computer Science 5652 price",
+      "GitHub app quiz pull request author understand AI generated code comprehension check tool",
+      "teaching assistant hiring and assignment software for departments pricing TA application platform",
+      "Canvas New Quizzes migration complaints instructors 2026 classic quizzes sunset",
+      "Gradescope reviews cons instructors 2026 Capterra",
+      "professors flooded with AI-generated cold emails from students asking for research positions 2026",
+      "prospective student inquiry form for research lab form instead of emailing professor lab application tool"
+    ],
+    "rejectedCandidates": [
+      {
+        "title": "New Quizzes Readiness Scanner",
+        "total": 21,
+        "reason": "Instructure removes the New Quizzes toggles in early 2027 (blog 2026-10-20), but scanning Canvas courses for migration breakage is the same problem for the same customer as Migration Punch List (2026-10-26)."
+      },
+      {
+        "title": "PR Comprehension Gate",
+        "total": 19,
+        "reason": "Comprehension debt is a real 2026 theme, but Gater.app and several open-source pr-quiz Actions already do this; competitive gap scored 1."
+      },
+      {
+        "title": "Out-of-Field CS Teacher Day Coach",
+        "total": 17,
+        "reason": "Same NC teacher pool as CS Add-On Prep; likely needs district procurement and competes with free Code.org curricula and PD."
+      },
+      {
+        "title": "AI Literacy Unit Kits for Maryland and Louisiana",
+        "total": 15,
+        "reason": "Mandates are real but free curricula abound, buyers are districts, and Louisiana's law was reported by only one tracker."
+      },
+      {
+        "title": "Code-Native Grading Add-on for Gradescope",
+        "total": 16,
+        "reason": "Capterra complaint about PDF/image-only submissions is old (2022) and Gradescope's code autograder plus free tools like Otter-Grader cover much of it."
+      },
+      {
+        "title": "K-12 Teacher AI Materials Generator",
+        "total": 14,
+        "reason": "Crowded with free tools; an Acquire.com listing for such a toolkit showed -32% annual growth (listing now returns 410)."
+      },
+      {
+        "title": "Zybooks-Style Interactive CS Text Builder",
+        "total": 17,
+        "reason": "Single G2 review is thin evidence; free Runestone-style platforms exist and the build is multi-month with institutional adoption needed."
+      }
+    ],
+    "caveats": "Reddit, Indie Hackers, and Starter Story searches returned no usable recent threads; pain evidence leans on institutional pages, theses, and Substack posts. Annual Praxis 5652 test-taker volume is unknown. 240 Tutoring's 5652 coverage and direct price were not confirmed (the $39.99/month figure comes from a partner college page). No commercial TA assignment product was found, but one may exist. The Acquire.com teacher-toolkit listing returned HTTP 410 when fetched, so its figures are from the search snippet only. North Carolina's out-of-field CS teaching waiver status could not be confirmed. Revenue sketches are estimates with unverified adoption assumptions."
+  }
+}
