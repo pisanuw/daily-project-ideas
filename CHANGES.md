@@ -425,3 +425,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-10-27 [note] Tetromino Arcade (standalone, user request) marked implemented: live at tetromino-arcade.netlify.app, repo Claude-capstone/tetromino-arcade. 7 modes, CPU versus, replays; 58 tests.
 
 2026-10-27 [note] Claimed In-Band (2026-10-13 n2) as in progress: Web Audio trunk sim, Goertzel DTMF/MF/2600 Hz decoder, blue-box attack, out-of-band fix, SQL/log/prompt injection labs.
+
+2026-10-27 [note] Released the In-Band (2026-10-13 n2) claim: the build was stopped partway by a safety check. Nothing was deployed and no code was pushed. Needs owner review before anyone retries it.
