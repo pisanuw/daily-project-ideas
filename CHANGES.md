@@ -431,3 +431,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-10-27 [note] Claimed Net Units (2026-10-14 n2) as in progress: client-side net coding-unit counter (Py/JS/Java/C++), complexity, duplication, size vs tests scatter, diff, guess-the-author.
 
 2026-10-27 [note] Net Units (2026-10-14 n2) marked implemented: live at net-units.netlify.app, repo Claude-capstone/net-units. Unit counter, diff, complexity, duplication, guessing; 39 tests.
+
+2026-10-27 [note] Claimed Study Buddy Matchmaker (2026-06-04 n2) as in progress: client-side CSV topic profiles, complementary pairing by max-weight matching, study agendas, per-student cards. No LLM.
