@@ -1,0 +1,463 @@
+{
+  "date": "2026-10-28",
+  "schemaVersion": 2,
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Autograder Workbench",
+      "slug": "autograder-workbench",
+      "category": "Developer Tool",
+      "complexity": "Weekend MVP",
+      "summary": "For CS instructors who now build and maintain Gradescope autograders with far fewer TAs: run the exact grading container locally, replay last term's submissions against every change, and catch broken tests before students do.",
+      "problemStatement": "Every time I edit an autograder I upload a zip, wait for Gradescope to build the image, submit a test solution, and read the output in a browser. Running it on my laptop means bypassing the harness by hand. I used to have a TA who did this; now I have two TAs for ninety students and a broken test means a flood of regrade requests at midnight.",
+      "description": "Autograder Workbench is a local CLI plus a small web dashboard that wraps the Gradescope autograder format (setup.sh, run_autograder, results.json). It builds the same base image locally, mounts any submission into /autograder/submission, and shows results.json as the student would see it. Its core feature is a regression run: the instructor points it at a folder of past submissions (last term's export, a reference solution, and seeded wrong solutions), and every change to the tests is replayed against all of them, with a diff of scores and visibility per test so the instructor sees which students' grades would change. An optional Claude-assisted step proposes seeded buggy variants of the reference solution so a new assignment has a regression set from day one. It runs in CI (GitHub Actions) so autograders get reviewed like any other code.",
+      "targetCustomer": "University CS instructors and head TAs who write programming autograders for Gradescope (CS1, CS2, data structures, systems), especially in departments that cut TA headcount after enrollment fell.",
+      "buyer": "The instructor on a personal or professional-development card for the solo tier; the department (instructional technology or course-support budget) for a site license covering all course staff.",
+      "whyNow": "CS enrollment fell in 2025-26 at many schools and TA budgets follow enrollment: WashU's data structures course went from more than 90 TAs to 23, and one 90-student course has two TAs (Student Life, March 2026). Autograder maintenance that TAs used to absorb is moving back to instructors, while Gradescope's own docs still say local runs require bypassing its harness.",
+      "founderFit": "Pisan teaches courses with autograded programming work and agentic coding tools, knows the Gradescope and GitHub Actions workflow firsthand, and can recruit design partners from SIGCSE attendees who maintain autograders for large courses. The tool is a developer tool for educators, squarely in his stack.",
+      "problemEvidence": [
+        {
+          "url": "https://gradescope-autograders.readthedocs.io/en/latest/manual_docker/",
+          "source": "Gradescope autograder documentation",
+          "date": "unknown",
+          "summary": "Official docs say that to run an autograder image locally you currently need to bypass the Gradescope harness and call run_autograder by hand."
+        },
+        {
+          "url": "https://github.com/jmichaelmoore/autograder-core",
+          "source": "GitHub (instructor-built autograder core)",
+          "date": "unknown",
+          "summary": "An instructor-maintained shared autograder core with 174 commits exists largely to run grading 'exactly as gradescope would' locally, with debug mode and single-test runs, showing instructors build this tooling themselves."
+        },
+        {
+          "url": "https://www.studlife.com/news/2026/03/26/computer-science-major-sees-a-decline-in-major-enrollment-results-in-ta-cuts",
+          "source": "Student Life (WashU)",
+          "date": "2026-03-26",
+          "summary": "CS enrollment decline cut CSE 2407 TAs from more than 90 to 23, and a 90-student course has only two TAs, since TA allocation now follows enrollment."
+        },
+        {
+          "url": "https://startupfortune.com/computer-science-enrollment-falls-for-the-first-time-in-20-years-as-ai-reshapes-who-gets-hired/",
+          "source": "Startup Fortune",
+          "date": "2026-07-22",
+          "summary": "Reports CS and programming majors each down more than 10% in 2025-26 (secondary outlet; figures not verified against primary data)."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Gradescope (Institutional plan)",
+          "url": "https://turnitin.gradescope.com/pricing",
+          "price": "Institutional pricing by quote (unknown); programming assignments are not in the free Basic plan",
+          "gap": "Hosts and runs autograders but offers no local harness, no regression replay of past submissions, and no CI workflow for autograder changes."
+        },
+        {
+          "name": "PrairieLearn",
+          "url": "https://www.prairielearn.com/pricing",
+          "price": "Free for 20 students; Basic $8 per student per course; Premium $16 per student per course",
+          "gap": "A full assessment platform; adopting it means migrating the course off Gradescope, which most instructors with existing autograders will not do mid-year."
+        },
+        {
+          "name": "Otter-Grader (UC Berkeley, open source)",
+          "url": "https://pypi.org/project/otter-grader/0.4.3/",
+          "price": "Free (open source)",
+          "gap": "Focused on Jupyter and Python or R notebook assignments; not a general regression tool for arbitrary Gradescope autograders in C, C++, or Java."
+        },
+        {
+          "name": "Instructor-built cores (e.g., autograder-core)",
+          "url": "https://github.com/jmichaelmoore/autograder-core",
+          "price": "Free",
+          "gap": "Tied to one course's conventions, no dashboard, no score-diff across past submissions, and maintained by whoever wrote it."
+        }
+      ],
+      "keyFeatures": [
+        "Local run of any Gradescope-format autograder in the same base image, with results.json rendered as the student sees it",
+        "Regression replay: re-grade a folder of past or seeded submissions after every test change and diff per-test scores",
+        "Visibility check: flags tests whose output leaks hidden test names or expected values to students",
+        "GitHub Actions template so autograder changes are reviewed in pull requests",
+        "Optional generation of seeded buggy variants of the reference solution to bootstrap a regression set"
+      ],
+      "mvpScope": {
+        "features": [
+          "CLI that builds the base image and runs a single submission locally",
+          "Batch regression run over a submissions folder with a score-diff table (HTML report)",
+          "GitHub Actions template"
+        ],
+        "outOfScope": [
+          "Hosted grading of student submissions",
+          "LMS or Gradescope API integration for pulling submissions automatically",
+          "Support for non-Gradescope platforms (PrairieLearn, CodeGrade)"
+        ],
+        "buildEstimate": "2 weekends"
+      },
+      "techStack": "Python CLI wrapping Docker, static HTML report (React + Vite + Tailwind for the dashboard), GitHub Actions, optional Claude API for seeded-bug generation, Stripe for licenses",
+      "pricing": {
+        "model": "Open-core CLI; paid Pro tier per instructor, department site license",
+        "pricePoint": "$15/month per instructor (or $120/year); $1,500/year department license",
+        "rationale": "Priced well below platform tools (PrairieLearn charges $8 to $16 per student per course, so a 200-student course costs $1,600 or more per term), and small enough for a personal card or discretionary course-support funds. Assumption: instructors value hours saved during the term more than the price."
+      },
+      "revenueSketch": "Estimate: 150 paying instructors x $120/year = $18,000 ARR, plus 10 department licenses x $1,500 = $15,000, about $33,000 ARR at year two. Assumes a free CLI reaches roughly 1,500 instructors and 10% convert.",
+      "distribution": "Release the free CLI on GitHub and post to the SIGCSE mailing list and the SIGCSE Discord; run a SIGCSE TS 2027 workshop or affiliated event on autograder testing; demo to the department's own course staff and to colleagues at peer institutions who maintain large-course autograders.",
+      "validationTest": {
+        "method": "Publish a one-page landing page plus a 2-minute screen recording of a regression run, post to the SIGCSE list, and interview 6 instructors who maintain Gradescope autograders about how they test changes today.",
+        "successCriteria": "At least 40 waitlist signups from .edu addresses in two weeks and at least 3 of 6 interviewees say they would pay $120/year or ask their department to.",
+        "cost": "About 8 hours and under $50 (domain plus landing page hosting)."
+      },
+      "moat": "Modest: the moat is a library of regression sets and seeded-bug generators per common assignment (linked lists, malloc labs, shell labs) contributed by users, plus being the default tool taught at SIGCSE workshops. The core harness is easy to copy.",
+      "compliance": [
+        "FERPA: past student submissions are education records; the tool runs locally or in the instructor's own CI by default, so no student code leaves institutional control. Any hosted tier needs a data agreement.",
+        "Seeded-bug generation via an LLM must use only the reference solution, never student submissions, unless the institution approves that processing.",
+        "Accessibility: the HTML report should meet WCAG 2.1 AA (tables with headers, no color-only status)."
+      ],
+      "risks": [
+        {
+          "risk": "Gradescope ships its own local runner or regression feature.",
+          "mitigation": "Keep the tool format-agnostic so the same regression sets run on PrairieLearn or plain pytest harnesses, and lean into CI workflow features Gradescope is unlikely to build."
+        },
+        {
+          "risk": "Instructors will use the free CLI and never pay.",
+          "mitigation": "Put the score-diff dashboard, seeded-bug generation, and department reporting in Pro; sell site licenses to department chairs as TA-hour savings."
+        },
+        {
+          "risk": "Small market (instructors who write autograders).",
+          "mitigation": "Expand to bootcamps and online course creators who use the same autograder pattern; treat it as a profitable niche tool, not a venture-scale business."
+        }
+      ],
+      "scores": {
+        "pain": 3,
+        "willingnessToPay": 3,
+        "reachability": 5,
+        "competitiveGap": 3,
+        "feasibility": 5,
+        "complianceBurden": 5,
+        "total": 24
+      },
+      "inspiredBy": "https://gradescope-autograders.readthedocs.io/en/latest/manual_docker/"
+    },
+    {
+      "n": 2,
+      "title": "Proctor Witness Log",
+      "slug": "proctor-witness-log",
+      "category": "EdTech: Higher Ed",
+      "complexity": "Weekend MVP",
+      "summary": "For instructors and departments now required to proctor every in-person exam: a phone-first seat map and time-stamped incident log that turns what a proctor saw into a clean, consistent report for the honor or integrity office.",
+      "problemStatement": "Our faculty voted to proctor every in-person exam, and if I see something I am supposed to record it and file a report, and I may be asked to testify. In a 200-seat room I have a paper seating chart, a pen, and my memory. By the time I write it up, I cannot say exactly when it happened or who was sitting next to whom.",
+      "description": "Proctor Witness Log is a mobile web app for in-person exams. Before the exam, the instructor uploads a roster CSV and a room layout (or picks a template), and students are assigned or check in to seats by scanning a QR code at their desk. During the exam, proctors tap a seat to log an observation with a time stamp, category (device, talking, notes, early leave, restroom), free-text note, and optional photo of the room (not the student), and the app records which proctor logged it. Afterward, it produces a structured incident report per case (seat neighbors, timeline, proctor statements) formatted to the institution's honor or integrity office template, plus a room log showing start, end, and attendance. It deliberately records observations only and does not accuse, score, or surveil.",
+      "targetCustomer": "Faculty, TAs, and staff who proctor in-person exams in large university courses, and the department or exam-office coordinator who organizes proctors.",
+      "buyer": "The department (instructional or exam-administration budget) or a dean's office standardizing proctoring after a policy change; individual instructors can start on a free tier.",
+      "whyNow": "Princeton's faculty voted on 11 May 2026 to proctor all in-person exams from 1 July 2026, with proctors recording what they observe and reporting to the Honor Committee as witnesses. Universities are moving away from AI detectors toward in-person and proctored assessment, and surveys report 71% of instructors spend time monitoring cheating.",
+      "founderFit": "Pisan runs large in-person CS exams himself, can pilot in his own department's exams (the buyer is the department, not his students), and can reach exam coordinators in CS departments through SIGCSE. The build is a small React and Supabase app.",
+      "problemEvidence": [
+        {
+          "url": "https://www.dailyprincetonian.com/article/2026/5/princeton-news-adpol-proctoring-in-person-examinations-passed-faculty-133-years-precedent",
+          "source": "The Daily Princetonian",
+          "date": "2026-05-11",
+          "summary": "Faculty passed mandatory instructor supervision of all in-person exams from 1 July; proctors observe, record suspected violations, report to the Honor Committee, and may testify."
+        },
+        {
+          "url": "https://www.implicator.ai/universities-return-to-blue-books-and-proctors-as-ai-detectors-prove-unreliable/",
+          "source": "Implicator",
+          "date": "2026-05-18",
+          "summary": "Universities return to blue books and proctors as AI detectors prove unreliable; cites a Tyton survey where 71% of instructors report spending time monitoring cheating."
+        },
+        {
+          "url": "https://www.ufs.ac.za/templates/news-archive/campus-news/2026/may/ufs-shifts-academic-integrity-approach-in-ai-era",
+          "source": "University of the Free State news",
+          "date": "2026-05",
+          "summary": "UFS discontinues AI detection software across all faculties from 1 July 2026 and shifts toward oral, practical, and supervised assessment."
+        },
+        {
+          "url": "https://apcentral.collegeboard.org/media/pdf/ap-exam-seating-chart-directions-and-sample.pdf",
+          "source": "College Board AP exam seating chart directions",
+          "date": "unknown",
+          "summary": "Established testing practice: a seating chart per room, kept at least six months and attached to incident reports, still done on paper."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "ProctorU incident reports",
+          "url": "https://support.proctoru.com/hc/en-us/articles/360041137691",
+          "price": "unknown",
+          "gap": "Built for remote, webcam-proctored exams; no support for an instructor walking a physical lecture hall."
+        },
+        {
+          "name": "Talview proctor incident reporting",
+          "url": "https://docs.talview.com/center-and-proctor-administration/proctor/how-tos/how-to-report-an-incident",
+          "price": "unknown",
+          "gap": "Aimed at testing centers and enterprise assessment programs, sold by contract; not a lightweight tool a department can adopt for its own lecture-hall exams."
+        },
+        {
+          "name": "Paper seating charts and campus web forms",
+          "url": "https://apcentral.collegeboard.org/media/pdf/ap-exam-seating-chart-directions-and-sample.pdf",
+          "price": "Free",
+          "gap": "No time stamps, no link between seat map and incident, inconsistent write-ups that integrity offices then have to chase."
+        }
+      ],
+      "keyFeatures": [
+        "Roster upload and QR seat check-in that builds a live seat map",
+        "One-tap, time-stamped observations per seat, attributed to the logging proctor",
+        "Auto-generated incident report with seat neighbors, timeline, and proctor statements in the integrity office's format",
+        "Room log: start and end times, attendance, early leaves, restroom breaks",
+        "Retention settings and export, then deletion, to match institutional records policy"
+      ],
+      "mvpScope": {
+        "features": [
+          "Roster CSV upload and seat assignment on a grid template",
+          "Phone-friendly observation logging with time stamps and categories",
+          "PDF incident report export"
+        ],
+        "outOfScope": [
+          "Student QR self check-in (seats assigned by the instructor in v1)",
+          "LMS roster sync and SSO",
+          "Multi-room exam coordination and proctor scheduling"
+        ],
+        "buildEstimate": "1 to 2 weekends"
+      },
+      "techStack": "React + Vite + Tailwind (installable PWA), Supabase (Postgres, auth, row-level security, storage), PDF generation in the browser, Stripe",
+      "pricing": {
+        "model": "Free for a single instructor up to 3 exams per term; paid department plan",
+        "pricePoint": "$600/year per department (unlimited exams and proctors); $3,000/year campus plan with SSO",
+        "rationale": "Low enough to sit under typical department purchasing thresholds without a procurement cycle (assumption; thresholds vary by campus). Remote-proctoring vendors price per exam or by contract (unknown), so a flat in-person tool is an easy comparison."
+      },
+      "revenueSketch": "Estimate: 60 departments x $600/year = $36,000 ARR plus 5 campus plans x $3,000 = $15,000, about $51,000 ARR. Assumes adoption spreads department by department after a policy change like Princeton's.",
+      "distribution": "Pilot with Pisan's own department for its large in-person CS exams; offer it free to the first 10 CS departments contacted through SIGCSE and the CS department chairs community; target campuses that announced proctoring or anti-detector policy changes in 2026 with a short demo to the honor or integrity office.",
+      "validationTest": {
+        "method": "Show a clickable prototype (seat map plus generated report) to 5 instructors who proctor large exams and to 2 integrity or honor office staff, asking what they use now and what a report must contain.",
+        "successCriteria": "Integrity staff confirm the report format would save them follow-up, and at least 2 departments agree to a free pilot this term with a stated willingness to pay $600/year if it is used for finals.",
+        "cost": "About 12 hours of prototyping and interviews; $0."
+      },
+      "moat": "Report templates matched to specific integrity offices and honor codes, plus a record of use that integrity committees come to trust. Workflow fit, not technology, is the barrier.",
+      "compliance": [
+        "FERPA: rosters, seat assignments, and incident notes are education records; requires a data agreement for paid institutional use, role-based access, and retention limits matching the institution's records schedule.",
+        "Privacy and fairness: log observations, not inferences; no student photos or biometrics by default, to avoid surveillance concerns that already divide faculty and students.",
+        "Due process: reports must be exportable as-is and immutable after submission (with an audit trail) so they hold up in integrity hearings.",
+        "Accessibility: WCAG 2.1 AA for proctor-facing UI; accommodations (separate rooms, extra time) recorded without disclosing diagnoses."
+      ],
+      "risks": [
+        {
+          "risk": "Integrity offices prefer their own forms and will not accept outside reports.",
+          "mitigation": "Generate the report in the office's existing template; position the app as a note-taking aid that fills their form, not a replacement."
+        },
+        {
+          "risk": "Faculty or student pushback that it feels like surveillance.",
+          "mitigation": "No student-facing tracking beyond seat check-in, observation-only design, and transparent retention; publish a plain-language privacy page."
+        },
+        {
+          "risk": "Few institutions follow Princeton's full-proctoring mandate.",
+          "mitigation": "Proctored in-person exams are already common in large STEM courses regardless of policy; sell to those course coordinators first."
+        }
+      ],
+      "scores": {
+        "pain": 3,
+        "willingnessToPay": 2,
+        "reachability": 4,
+        "competitiveGap": 4,
+        "feasibility": 5,
+        "complianceBurden": 3,
+        "total": 21
+      },
+      "inspiredBy": "https://www.dailyprincetonian.com/article/2026/5/princeton-news-adpol-proctoring-in-person-examinations-passed-faculty-133-years-precedent"
+    },
+    {
+      "n": 3,
+      "title": "Pell Placement Tracker",
+      "slug": "pell-placement-tracker",
+      "category": "EdTech: Higher Ed",
+      "complexity": "Multi-week",
+      "summary": "For community college workforce and continuing-education offices chasing Workforce Pell approval: track completers of short-term programs through 180 days, collect placement evidence, and produce the completion and placement rates the state application asks for.",
+      "problemStatement": "To get a short-term program approved for Workforce Pell I have to show at least 70% completion and 70% job placement. Our noncredit programs live in a registration system that knows who enrolled and who finished, and nothing after that. We have been emailing graduates a survey and getting a handful of replies.",
+      "description": "Pell Placement Tracker imports completer lists from the college's noncredit registration export (CSV) and follows each completer through the placement window. It sends staged follow-ups by email and SMS at 30, 90, and 180 days with a two-question placement form, lets staff log employer verifications (a call, a letter, an apprenticeship agreement), and keeps every piece of evidence attached to the student and cohort. A program dashboard computes completion within 150% of program length and placement rates against the federal thresholds, shows which programs are close to qualifying, and checks program length and clock hours against the 150 to 599 hour and 8 to under 15 week rules. Reports export in the shape of the state application, starting with one state's form.",
+      "targetCustomer": "Directors and coordinators of workforce development, continuing education, and noncredit programs at community and technical colleges, plus their institutional research staff.",
+      "buyer": "The college's workforce or continuing-education division (operating or grant budget, often Perkins or state workforce funds; assumption, varies by state), with the institutional research office as co-sponsor.",
+      "whyNow": "Workforce Pell opened on 1 July 2026 under the final rule published 19 May 2026; colleges found few programs qualify, states opened approval windows (Illinois accepted applications from 15 July to 31 August 2026), and analyses of noncredit data show placement outcomes are often never captured, so colleges cannot prove the 70% thresholds.",
+      "founderFit": "This is a data-pipeline and workflow product that fits Pisan's Flask and Supabase skills, and as a UW faculty member in Washington he has a credible route to community college partners through transfer and CS pathway relationships (assumption: these relationships exist at the level needed). It is the weakest founder fit of the three and would need a co-founder or advisor from workforce education.",
+      "problemEvidence": [
+        {
+          "url": "https://www.hppr.org/npr-news/2026-06-30/workforce-pell-kicks-off-but-colleges-find-that-few-programs-qualify",
+          "source": "NPR (via HPPR)",
+          "date": "2026-06-30",
+          "summary": "Colleges find few programs qualify; many non-degree programs lack systems to track certificate earners and rely on surveys to reach graduates."
+        },
+        {
+          "url": "https://geniuslearning.com/blog/workforce-pell-is-here-is-your-noncredit-data-ready-to-prove-it/",
+          "source": "Genius Learning blog",
+          "date": "2026-09",
+          "summary": "Fewer than half of eight studied states tracked labor market or wage outcomes; 'You can't report outcomes you never captured in the first place.' (Date inferred from page; vendor content.)"
+        },
+        {
+          "url": "https://workshift.org/workforce-pell-is-here-noncredit-qualifies-with-caveats/",
+          "source": "Work Shift",
+          "date": "2026-05-21",
+          "summary": "Noncredit can qualify only if measured in clock hours and meeting 70% completion and placement and earnings tests; only about a fifth of a Texas noncredit sample met the 150-hour floor."
+        },
+        {
+          "url": "https://www.iccb.org/wp-content/uploads/2026/07/Illinois%20Workforce%20Pell%20Institutional%20Readiness%20Checklist_FINAL.pdf",
+          "source": "Illinois Community College Board readiness checklist",
+          "date": "2026-07",
+          "summary": "State checklist requires programs to demonstrate at least 70% completion and 70% job placement and asks institutions to assemble documentation with registrar, IR, and financial aid."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "WhereWeGo Workforce Pell Eligibility Check",
+          "url": "https://wherewego.org/insights/workforce-pell-eligibility-check",
+          "price": "Free",
+          "gap": "Checks whether a program meets the rules in four states; does not collect or store actual completer placement outcomes."
+        },
+        {
+          "name": "Genius CE",
+          "url": "https://geniuslearning.com/blog/workforce-pell-is-here-is-your-noncredit-data-ready-to-prove-it/",
+          "price": "unknown (demo only)",
+          "gap": "A full continuing-education registration system; adopting it means replacing the college's registration platform, and post-completion placement follow-up is not its focus."
+        },
+        {
+          "name": "Grouptrail",
+          "url": "https://www.grouptrail.com/grouptrail-supports-workforce-pell-grants",
+          "price": "unknown",
+          "gap": "Markets participation, attendance, and completion tracking; placement evidence collection after completion is not confirmed."
+        },
+        {
+          "name": "Generic survey tools (Qualtrics, Google Forms)",
+          "url": "https://www.hppr.org/npr-news/2026-06-30/workforce-pell-kicks-off-but-colleges-find-that-few-programs-qualify",
+          "price": "Often already licensed by the institution",
+          "gap": "One-off surveys with low response, no staged follow-up, no employer verification, and no rate calculation against the federal thresholds."
+        }
+      ],
+      "keyFeatures": [
+        "Completer import from registration CSV, cohort by program and term",
+        "Staged 30, 90, and 180 day follow-ups by email and SMS with a short placement form",
+        "Employer verification log with evidence attachments",
+        "Rate dashboard: completion within 150% of length and placement against 70% thresholds, plus clock-hour and week-length checks",
+        "State application export, starting with one state"
+      ],
+      "mvpScope": {
+        "features": [
+          "CSV import and cohort view",
+          "Email follow-up sequence with placement form",
+          "Completion and placement rate dashboard with CSV export"
+        ],
+        "outOfScope": [
+          "SMS (add after first pilot)",
+          "Unemployment insurance wage-record matching (state-run)",
+          "Direct integration with registration systems",
+          "Multi-state application templates"
+        ],
+        "buildEstimate": "4 to 6 weeks"
+      },
+      "techStack": "Flask API, Supabase (Postgres with row-level security, auth, storage), React + Vite + Tailwind dashboard, transactional email (e.g., Resend), Twilio later for SMS",
+      "pricing": {
+        "model": "Annual subscription per college, tiered by number of tracked programs",
+        "pricePoint": "$4,000/year for up to 10 programs; $8,000/year unlimited",
+        "rationale": "Cheaper than replacing a registration system (Genius CE, pricing unknown) or hiring a part-time staffer to chase graduates; each approved program can bring Pell-funded enrollments, so one approval can cover the cost (assumption, not verified)."
+      },
+      "revenueSketch": "Estimate: 25 colleges x $4,000/year = $100,000 ARR plus 5 at $8,000 = $40,000, about $140,000 ARR by year two. Assumes roughly 1% of US community and technical colleges adopt; sales cycles may be a semester or longer.",
+      "distribution": "Start with one state whose approval window is open; recruit 3 design-partner colleges through the state community college system's Workforce Pell working group and ACCT or AACC sessions; offer a free first-cohort pilot in exchange for case studies; then sell into peer colleges in the same state using the same state export.",
+      "validationTest": {
+        "method": "Interview 8 workforce or continuing-education directors in one state about how they will document placement, and show a mock dashboard with their own anonymized program list.",
+        "successCriteria": "At least 3 of 8 say placement documentation is their biggest blocker and 2 agree to a paid pilot (any amount) or a letter of intent for next fiscal year.",
+        "cost": "About 20 hours over three weeks; under $100."
+      },
+      "moat": "Accumulated state-specific application templates and placement definitions, follow-up message sequences tuned for response rates, and multi-year cohort data a college will not want to migrate.",
+      "compliance": [
+        "FERPA: completer contact data and outcomes are education records for credit programs and usually for noncredit too; requires a data processing agreement and the school-official exception, encryption, and access controls.",
+        "Institutional data agreements and security reviews (HECVAT) are likely before purchase.",
+        "SMS consent and CAN-SPAM or TCPA rules for follow-up messages.",
+        "Accessibility: the graduate-facing placement form must meet WCAG 2.1 AA and work on low-end phones.",
+        "Regulation is new and may change; placement definitions follow 34 CFR 690.93 and each state's manual, which must be re-verified before each release."
+      ],
+      "risks": [
+        {
+          "risk": "Long institutional sales cycles and procurement for a solo founder.",
+          "mitigation": "Price under common purchase thresholds (assumption), sell to one state cluster, and use design-partner pilots to create references."
+        },
+        {
+          "risk": "States build their own outcome tracking from wage records, reducing college-side need.",
+          "mitigation": "Position as the evidence layer colleges need before state data arrives (wage data lags), and support importing state matches when available."
+        },
+        {
+          "risk": "Workforce Pell rules or funding change.",
+          "mitigation": "Placement tracking is also required by Perkins and state workforce grants; keep the core generic and the Pell thresholds as one rule set."
+        }
+      ],
+      "scores": {
+        "pain": 4,
+        "willingnessToPay": 4,
+        "reachability": 2,
+        "competitiveGap": 3,
+        "feasibility": 3,
+        "complianceBurden": 2,
+        "total": 18
+      },
+      "inspiredBy": "https://www.hppr.org/npr-news/2026-06-30/workforce-pell-kicks-off-but-colleges-find-that-few-programs-qualify"
+    }
+  ],
+  "runNotes": {
+    "searches": [
+      "r/Professors October 2026 grading tool wish existed",
+      "Gradescope reviews cons G2",
+      "r/Teachers 2026 tool I wish existed for teachers",
+      "Indie Hackers teacher tool MRR 2026",
+      "Starter Story education SaaS revenue teachers",
+      "Inside Higher Ed October 2026 faculty AI",
+      "EdSurge October 2026",
+      "Inside Higher Ed faculty workload AI 2026 news October",
+      "reddit r/Professors complaint 2026 office hours students email no-show",
+      "Acquire.com listing education SaaS teachers for sale 2026",
+      "Ask HN tool you wish existed teaching programming 2026",
+      "r/instructionaldesign 2026 frustrating tool workflow",
+      "Product Hunt education launch October 2026 teachers paid plan",
+      "Workforce Pell July 2026 short-term programs approval requirements colleges",
+      "EdWeek Market Brief October 2026 teachers demand",
+      "Gradescope autograder Docker setup pain instructors alternative 2026",
+      "zyBooks reviews cost students complaint 2026",
+      "r/microsaas teachers tutors paying customers MRR 2026",
+      "Y Combinator Requests for Startups 2026 education",
+      "universities stop using AI detectors 2026 process-based writing verification",
+      "computer science department hiring adjunct shortage 2026 enrollment decline CS majors",
+      "\"autograder\" gradescope debugging frustrating TA reddit",
+      "Princeton proctoring in-person exams July 2026 faculty proctor burden honor code",
+      "in-person exam incident report app proctor seating chart software university",
+      "Workforce Pell software tool program eligibility outcomes tracking noncredit vendor"
+    ],
+    "rejectedCandidates": [
+      {
+        "title": "Oral Exam Scheduler for writing courses",
+        "total": 18,
+        "reason": "Tied with Pell Placement Tracker but too close to Code Viva (2026-10-21): same problem (verifying authorship through oral defense) for overlapping instructor customers."
+      },
+      {
+        "title": "TA Hours Allocator (TA budget planning after enrollment drops)",
+        "total": 17,
+        "reason": "Overlaps TA Match (2026-10-27) for the same department coordinator customer."
+      },
+      {
+        "title": "Paper Essay Feedback for K-12 teachers returning to pencil and paper",
+        "total": 16,
+        "reason": "Real trend (DonorsChoose survey, EdWeek Market Brief, 2026-09-03) but crowded with AI grading tools for handwritten work; no clear gap."
+      },
+      {
+        "title": "Tutor Session Recap (AI parent updates for independent tutors)",
+        "total": 15,
+        "reason": "Thin AI wrapper on top of existing tutor management tools, with only listicle-level revenue evidence."
+      },
+      {
+        "title": "CS Major Outcomes Page for departments facing enrollment decline",
+        "total": 13,
+        "reason": "Weak willingness to pay; mostly a marketing page departments can build themselves."
+      },
+      {
+        "title": "Early reading and arithmetic AI tutor (YC 'Primer' request)",
+        "total": 12,
+        "reason": "Minors and COPPA, crowded field, and buyer is parents or districts; poor founder fit."
+      },
+      {
+        "title": "Workforce Pell Eligibility Screener (program-rule checker only)",
+        "total": 14,
+        "reason": "A free tool (WhereWeGo) already covers the rule check; folded the useful part into Pell Placement Tracker."
+      },
+      {
+        "title": "zyBooks alternative for CS1 interactive text",
+        "total": 13,
+        "reason": "Needs a large content team, entrenched incumbent, and only one complaint found."
+      }
+    ],
+    "caveats": "Searches for recent r/Professors, r/Teachers, r/instructionaldesign, and Indie Hackers threads returned no first-hand posts this run, so pain evidence leans on news, documentation, and vendor content rather than direct customer complaints. Gradescope documentation and the autograder-core repository have no visible dates. Gradescope Institutional, ProctorU, Talview, Genius CE, and Grouptrail prices are not published (marked unknown). CS enrollment decline figures from Startup Fortune are secondary and unverified. Workforce Pell rules (hours, weeks, 70% thresholds) were confirmed from the Illinois ICCB checklist and Work Shift but should be re-checked against 34 CFR 690 and each state's manual. Department purchasing thresholds and Pisan's community college relationships are assumptions. Rejected-candidate scores were estimated without full competitor research."
+  }
+}

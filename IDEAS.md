@@ -597,3 +597,6 @@
 | 2026-10-27 | CS Add-On Prep | EdTech: K-12 | Multi-week | 23 |  |
 | 2026-10-27 | TA Match | EdTech: Higher Ed | Multi-week | 22 |  |
 | 2026-10-27 | Lab Front Door | Micro-SaaS | Weekend MVP | 22 |  |
+| 2026-10-28 | Autograder Workbench | Developer Tool | Weekend MVP | 24 |  |
+| 2026-10-28 | Proctor Witness Log | EdTech: Higher Ed | Weekend MVP | 21 |  |
+| 2026-10-28 | Pell Placement Tracker | EdTech: Higher Ed | Multi-week | 18 |  |
