@@ -408,8 +408,10 @@
         "date": "2026-10-16",
         "n": 2
       },
-      "placeholder": true,
-      "notes": "In progress since 2026-10-28"
+      "notes": "Built in one session as a static TypeScript app with no samples, no backend and no LLM. Every note is synthesized live by Karplus-Strong in an AudioWorklet (with a ScriptProcessor fallback): a delay line of seeded noise, a weighted two-point loop filter, a first-order allpass for fractional tuning, a comb-filtered pick position, and a strum as the chord's strings started a few milliseconds apart, played from the keyboard (home and bottom rows pick chords, H and J strum down and up, 1 to 6 pluck single strings). A seeded mirror of the watched string drives the views, so the delay line, its harmonics (a direct DFT of the one period the line holds) and the output can be slowed to one sample per frame without slowing the sound. Seven lecture scenes set up and play each idea: noise to note, pitch quantization (integer delays at 48 and 8 kHz versus the allpass), why high notes die faster with an equal-decay option, tone, pick position, strum timing, and writing your own filter. The suggested Claude explanation of a student's edited filter is replaced by a deterministic analysis: linearity and randomness checks, least-squares gain and phase delay at 48 frequencies, predicted ring times, and the delay the tuning subtracts, with the filter hot-swapped into the audio thread. Limitations: it is the textbook model (no body resonance, string stiffness or bends, and mono output), so it sounds like a plucked string rather than a recorded guitar; user filter code runs unsandboxed in the student's own tab; and browsers may refuse the requested low sample rates. 53 vitest tests, 100% statement coverage on core.",
+      "url": "https://pluck-lab.netlify.app",
+      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/pluck-lab",
+      "implementedOn": "2026-10-28"
     }
   ]
 }

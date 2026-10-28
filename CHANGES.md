@@ -437,3 +437,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-10-27 [note] Study Buddy Matchmaker (2026-06-04 n2) marked implemented: live at study-buddy-matchmaker.netlify.app, repo Claude-capstone/study-buddy-matchmaker. Mastery profiles, exact matching, agendas, private cards; 29 tests.
 
 2026-10-28 [note] Claimed Pluck Lab (2026-10-16 n2) as in progress: keyboard-strummed Karplus-Strong guitar, delay-line and spectrum views, tuning sliders, lecture scenes, editable filter.
+
+2026-10-28 [note] Pluck Lab (2026-10-16 n2) marked implemented: live at pluck-lab.netlify.app, repo Claude-capstone/pluck-lab. Live KS synthesis, slow-motion views, 7 scenes; 53 tests.
