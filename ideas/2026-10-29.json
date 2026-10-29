@@ -1,0 +1,479 @@
+{
+  "date": "2026-10-29",
+  "schemaVersion": 2,
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Reference Audit",
+      "slug": "reference-audit",
+      "category": "EdTech: Higher Ed",
+      "complexity": "Weekend MVP",
+      "summary": "For instructors who grade research papers and essays: upload a whole assignment's submissions and get every reference resolved against scholarly indexes, with fabricated or mismatched citations flagged and an evidence sheet ready for the integrity office.",
+      "problemStatement": "I now start grading by checking whether the references are real. Some are invented outright, others are real articles with the wrong journal, wrong pages, or quotes that are not in the source. Checking 80 bibliographies by hand takes longer than grading the papers, and AI detector scores do not hold up in an integrity case, but a citation that does not exist does.",
+      "description": "Reference Audit takes a folder of submissions (a Canvas or Gradescope bulk download of PDF and DOCX files), extracts each reference list, and resolves every entry deterministically against Crossref, OpenAlex, and Semantic Scholar by DOI, title, and author. Each reference gets a status: verified, metadata mismatch (wrong year, journal, pages, or authors), DOI points to an unrelated paper, or not found. For assigned course readings the instructor uploads once, it also checks that quoted passages and page numbers actually appear in the source. Results show a class-level dashboard sorted by severity, a per-student page an instructor can confirm in a few clicks, and an exportable evidence sheet (citation as written, closest real match, lookup links) for an academic integrity referral. An LLM is used only to parse messy reference strings, never to judge whether a source exists.",
+      "targetCustomer": "University and community college instructors and TAs who grade reference-based writing: research papers, lab reports, literature reviews, and capstone reports, in any discipline including CS ethics and software engineering courses.",
+      "buyer": "The instructor on a personal or professional-development card for the solo tier; a department, writing program, or teaching center for a multi-seat license.",
+      "whyNow": "Universities are dropping AI detection: Newcastle and Westminster announced Turnitin exits in October 2026, citing AI detectors' false-positive risk, and Washington State ended its Turnitin AI-detection contract. Instructors still need integrity evidence that holds up, and a nonexistent citation is objective in a way a detector score is not. Meanwhile conferences (ACL, EMNLP) made hallucinated references a desk-reject offense in 2026, which normalizes reference checking as a routine step.",
+      "founderFit": "Pisan grades project reports and teaches AI ethics, so he feels the problem directly, and the build is squarely in his stack (Flask or Supabase backend, public scholarly APIs, Claude for parsing only). SIGCSE colleagues who teach writing-intensive CS courses (ethics, capstone, HCI) are natural design partners, and the product sells to instructors in every discipline, not only CS.",
+      "problemEvidence": [
+        {
+          "url": "https://reddit.sentinel-team.org/posts/1q95nu1/snapshots/2026-01-12T11%3A20%3A41.523685Z",
+          "source": "r/Professors (archived snapshot)",
+          "date": "2025-04-26",
+          "summary": "Instructor finds real articles cited with the wrong journal and page numbers plus invented quotes; commenters treat wrong citations as fabrication regardless of AI use. Post date approximate (snapshot 2026-01-12, post 291 days earlier)."
+        },
+        {
+          "url": "https://reddit.sentinel-team.org/posts/1ql7xua/snapshots/2026-01-24T02%3A41%3A07.006122Z",
+          "source": "r/Professors (archived snapshot)",
+          "date": "2025-04-21",
+          "summary": "Instructor reports 'completely made up citations', including fake citations of the instructor's own research; commenters suggest rubric penalties and comparing reference overlap across submissions. Post date approximate."
+        },
+        {
+          "url": "https://aihola.com/article/ai-fake-citations-academic-research",
+          "source": "aihola (AI research news)",
+          "date": "2025-12-18",
+          "summary": "A Georgia State professor checks student citations every semester; GPT-4o-made DOIs for fabricated sources led to real but unrelated papers 64% of the time; human verification 'doesn't scale'."
+        },
+        {
+          "url": "https://www.timeshighereducation.com/news/more-universities-review-use-turnitin-over-data-privacy-fears",
+          "source": "Times Higher Education",
+          "date": "2026-10-09",
+          "summary": "Newcastle and Westminster are ending Turnitin; Westminster calls the plagiarism checker largely ineffective against generative AI and notes detector false-positive risk."
+        },
+        {
+          "url": "https://www.microns.io/startup-listings/citation-verification-platform",
+          "source": "Microns.io listing",
+          "date": "2025-02-18",
+          "summary": "A student-facing hallucinated-citation checker listed with a stated $2,758 MRR and 191 paying customers about 2.5 months after launch (figures internally inconsistent, unverified); says universities check fake citations manually."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "GPTZero citation checker",
+          "url": "https://gptzero.me/sources",
+          "price": "unknown (third-party listings say roughly $10 to $15/month, unconfirmed)",
+          "gap": "Built into an AI-detection product many universities are backing away from; per-document checks with a character limit, no assignment-level batch view, no check of quotes against assigned readings, and no integrity evidence export. Feature labeled beta."
+        },
+        {
+          "name": "Copyleaks Citation Checker",
+          "url": "https://docs.copyleaks.com/concepts/features/citation-checker",
+          "price": "unknown",
+          "gap": "Sold mainly via institutional and API contracts; an individual instructor cannot buy it for one course, and docs show no class-level grading workflow."
+        },
+        {
+          "name": "VerusCite",
+          "url": "https://andrewpwheeler.com/2026/08/05/veruscite-checking-academic-articles-for-hallucinations/",
+          "price": "$2 per paper (a later post title suggests $1, unconfirmed)",
+          "gap": "Designed for journal editors reviewing one manuscript at a time; per-paper pricing gets expensive for a 150-student section and has no roster or rubric view."
+        }
+      ],
+      "keyFeatures": [
+        "Bulk upload of a whole assignment (Canvas or Gradescope export)",
+        "Deterministic resolution against Crossref, OpenAlex, and Semantic Scholar with match evidence",
+        "Status per reference: verified, metadata mismatch, wrong DOI target, not found",
+        "Quote and page check against instructor-uploaded course readings",
+        "Class dashboard sorted by severity, plus cross-submission reference overlap",
+        "Integrity evidence sheet export (PDF and CSV)"
+      ],
+      "mvpScope": {
+        "features": [
+          "Upload a zip of PDF and DOCX submissions",
+          "Reference extraction (GROBID or Claude parsing) and Crossref plus OpenAlex lookup",
+          "Per-student status table with lookup links",
+          "CSV and PDF evidence export"
+        ],
+        "outOfScope": [
+          "Canvas LTI integration",
+          "Quote checking against course readings",
+          "Claim-support analysis",
+          "Non-English sources",
+          "Student-facing self-check mode"
+        ],
+        "buildEstimate": "2 weekends"
+      },
+      "techStack": "React + Vite + Tailwind front end, Flask worker with GROBID for reference parsing, Crossref, OpenAlex, and Semantic Scholar APIs, Claude API for parsing malformed references only, Supabase for auth, storage, and per-course results with automatic deletion.",
+      "pricing": {
+        "model": "Per-instructor subscription with a free trial assignment; department seat packs",
+        "pricePoint": "$12/month or $96/year per instructor; department pack of 10 seats at $800/year",
+        "rationale": "Below a typical per-paper editor tool once a course exceeds 50 papers per term, in line with consumer GPTZero tiers reported at $10 to $15/month, and within a professional-development card limit so no procurement is needed."
+      },
+      "revenueSketch": "Estimate: 300 instructors x $8/month blended (annual discounting) = $2,400 MRR, plus 10 department packs x $800/year (about $670/month), roughly $3,000 MRR after 18 months. Assumes 3% conversion from about 10,000 instructors reached via teaching-center newsletters, r/Professors, and conference demos.",
+      "distribution": "Run a free 'audit one assignment' offer through SIGCSE and CCSC contacts who teach writing-intensive CS courses, then through university teaching and learning centers and academic integrity offices, which already field fabricated-citation cases. A short write-up with anonymized aggregate findings (share of references that do not resolve) posted to r/Professors and Inside Higher Ed opinion pages drives self-serve signups.",
+      "validationTest": {
+        "method": "Build a CLI prototype in a weekend, then offer 10 instructors (5 CS, 5 other disciplines) a free audit of one past assignment's references in exchange for a 20-minute interview, with a $96/year pre-order link shown at the end.",
+        "successCriteria": "At least 7 of 10 find one or more confirmed fabricated or materially wrong citations, and at least 3 pre-order or ask their department to pay.",
+        "cost": "About 3 days of build plus interviews; under $50 in API costs."
+      },
+      "moat": "A growing labeled set of fabricated versus merely sloppy references (confirmed by instructors) improves matching thresholds and false-positive rates in ways a generic AI detector does not, and the course-readings index plus integrity-office report formats create workflow lock-in. Positioning as 'evidence, not detection' differentiates from AI-detector vendors.",
+      "compliance": [
+        "FERPA: submissions are education records; offer a data processing addendum, process files in US regions, delete uploads after 30 days by default, and never train on student work.",
+        "No minors in the primary market (higher ed), so COPPA does not apply; exclude K-12 at launch.",
+        "Accessibility: dashboard and evidence exports must meet WCAG 2.1 AA, since institutions will check before department purchases.",
+        "Integrity process: tool output is evidence for human review, not a finding; say so in the UI and report."
+      ],
+      "risks": [
+        {
+          "risk": "False positives on legitimate references outside index coverage (books, grey literature, non-English sources) could wrongly implicate students.",
+          "mitigation": "Use a separate 'not found in index' status distinct from 'confirmed mismatch', require instructor confirmation, and add WorldCat and Google Books lookups for books."
+        },
+        {
+          "risk": "GPTZero or Turnitin ships a strong batch citation checker inside the LMS.",
+          "mitigation": "Compete on trust (no AI-detection scoring, deterministic evidence) and on instructor-level self-serve pricing; target institutions leaving Turnitin."
+        },
+        {
+          "risk": "Students adapt by using AI tools that only cite real papers, shrinking the fabricated-citation signal.",
+          "mitigation": "Extend to claim-support checks against assigned readings and to quote verification, which remain a problem even with real references."
+        }
+      ],
+      "scores": {
+        "pain": 4,
+        "willingnessToPay": 3,
+        "reachability": 4,
+        "competitiveGap": 2,
+        "feasibility": 5,
+        "complianceBurden": 3,
+        "total": 21
+      },
+      "inspiredBy": "https://reddit.sentinel-team.org/posts/1q95nu1/snapshots/2026-01-12T11%3A20%3A41.523685Z"
+    },
+    {
+      "n": 2,
+      "title": "Tagging Doctor for LaTeX Courses",
+      "slug": "tagging-doctor-latex-courses",
+      "category": "EdTech: Higher Ed",
+      "complexity": "Multi-week",
+      "summary": "For math, CS, and engineering faculty whose lecture notes, problem sets, and Beamer slides are in LaTeX: diagnose what blocks an accessible tagged PDF, patch the sources automatically, and verify the result before the April 2027 Title II deadline.",
+      "problemStatement": "Our remediation office will not touch anything with equations, and Acrobat cannot fix a math PDF anyway. I have years of LaTeX notes and Beamer slides. I am told to 'turn on tagging', but my templates use packages that break, Beamer is not supported, and I have no idea whether the PDF that comes out is actually accessible.",
+      "description": "Tagging Doctor ingests a LaTeX project (zip upload, Git repo, or Overleaf Git link) and runs a compatibility scan: TeX Live version, document class, and every package against the LaTeX Project's tagging-status list, flagging blockers such as titlesec, tabu, or Beamer and proposing tested replacements. It then applies an automatic patch set on a branch: inserts \\DocumentMetadata with tagging and PDF 2.0, switches to LuaLaTeX with unicode-math where needed, adds alt text to every \\includegraphics and TikZ picture (drafted by Claude from the figure and surrounding text, approved by the instructor), and suggests \\MathMLintent annotations for ambiguous notation such as absolute values or derivatives. It compiles in a pinned container, validates the PDF with veraPDF against PDF/UA-2, and produces a per-course report a department can hand to its accessibility office. A Beamer path migrates slides to the new ltx-talk class or emits accessible HTML slides as a fallback.",
+      "targetCustomer": "Faculty and lecturers in math, statistics, CS, physics, and engineering at US public colleges and universities who author course materials in LaTeX, plus the instructional designers who support them.",
+      "buyer": "Individual faculty on a personal or professional-development card for a per-course fix; STEM departments or colleges from accessibility-compliance or instructional-technology budgets for a site license before April 2027.",
+      "whyNow": "DOJ's April 20, 2026 interim final rule moved the ADA Title II deadline for large public entities to April 26, 2027 without changing the WCAG 2.1 AA requirement, so departments now have a funded runway. LaTeX tagging only became production-ready with the November 2025 kernel and TeX Live 2026 (Overleaf, August 2026), but with caveats: many packages and templates fail, and Beamer is not compatible. The capability exists but the migration work is unsolved.",
+      "founderFit": "Pisan writes CS course materials, cares about accessibility, and is fluent in the toolchain (Docker, CI, Claude API for alt text). SIGCSE and CS department contacts are exactly the faculty with LaTeX course archives, and a working tool demoed at a SIGCSE workshop or department meeting reaches the first buyers directly. The product touches no student data, which keeps the sale simple.",
+      "problemEvidence": [
+        {
+          "url": "https://www.overleaf.com/blog/tex-live-2026-is-now-available",
+          "source": "Overleaf blog",
+          "date": "2026-08-18",
+          "summary": "Tagging is production-usable only for supported packages; Beamer is not tagging-compatible, titlesec and flowfram are incompatible, tabu is unsupported, and gallery templates may fail."
+        },
+        {
+          "url": "https://blogs.uww.edu/catlst/?p=279",
+          "source": "UW-Whitewater teaching center blog",
+          "date": "2026-04-01",
+          "summary": "Campus remediation service excludes materials with equations or chemical formulas and expects faculty to remediate most PDFs themselves."
+        },
+        {
+          "url": "https://peer.asee.org/turning-the-page-on-digital-math-content-engineering-accessible-pdfs-with-latex",
+          "source": "ASEE PEER (conference paper)",
+          "date": "unknown",
+          "summary": "Paper on how Title II compliance has exposed significant challenges with LaTeX PDFs containing equations; listed as 2026 in search results, page itself returned 403."
+        },
+        {
+          "url": "https://www.mondaq.com/unitedstates/media-entertainment-law/1782220/doj-extends-ada-title-ii-digital-accessibility-deadlines-by-one-year",
+          "source": "Mondaq (law firm analysis)",
+          "date": "unknown",
+          "summary": "DOJ's April 2026 interim final rule extends Title II digital accessibility deadlines by one year without changing the technical standard."
+        },
+        {
+          "url": "https://citt.it.ufl.edu/resources/course-development/accessible-course-design/accessibility-in-stem-courses",
+          "source": "University of Florida CITT",
+          "date": "unknown",
+          "summary": "Guidance tells STEM faculty to use a LaTeX release from November 2025 or later, generate a tagged PDF, then manually review and add missing alt text and tags."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Overleaf (built-in tagging)",
+          "url": "https://docs.overleaf.com/writing-and-editing/creating-accessible-pdfs",
+          "price": "Free tier exists; paid plan prices unknown",
+          "gap": "Compiles tagged PDFs if you set it up, but does not diagnose incompatible packages, migrate Beamer, write alt text, or verify PDF/UA conformance; old projects stay on old TeX Live."
+        },
+        {
+          "name": "Mathpix Snip",
+          "url": "https://mathpix.com/pricing",
+          "price": "Pro from $4.99/month",
+          "gap": "Converts PDFs and images into LaTeX or Markdown via OCR; it works on the output rather than the source, so every edit to the notes means redoing the conversion and re-checking."
+        },
+        {
+          "name": "Campus remediation services",
+          "url": "https://blogs.uww.edu/catlst/?p=279",
+          "price": "Free to faculty (institution-funded), capacity-limited",
+          "gap": "Often exclude math and formulas entirely and cap volume (for example 5 PDFs or 50 pages at a time)."
+        }
+      ],
+      "keyFeatures": [
+        "Compatibility scan of class and packages against the tagging status list",
+        "Automatic patch branch: DocumentMetadata, LuaLaTeX, unicode-math, package swaps",
+        "Claude-drafted alt text for figures and TikZ with instructor approval queue",
+        "MathMLintent suggestions for ambiguous notation",
+        "Pinned-container compile plus veraPDF PDF/UA-2 validation",
+        "Beamer to ltx-talk migration or accessible HTML slide fallback",
+        "Per-course compliance report for the accessibility office"
+      ],
+      "mvpScope": {
+        "features": [
+          "Zip or Git upload of a single-document LaTeX project",
+          "Package and class compatibility scan with suggested replacements",
+          "Automatic preamble patch and LuaLaTeX compile in Docker",
+          "Alt text drafting and approval for includegraphics",
+          "veraPDF validation report and patched source download"
+        ],
+        "outOfScope": [
+          "Beamer migration",
+          "MathMLintent suggestions",
+          "Overleaf Git sync",
+          "Department dashboard and SSO",
+          "HTML output"
+        ],
+        "buildEstimate": "4 to 6 weeks"
+      },
+      "techStack": "React + Vite + Tailwind front end, Flask job API, Docker workers with TeX Live 2026 and veraPDF, Supabase for auth, projects, and reports, Claude API (vision) for alt text drafts and package-replacement explanations.",
+      "pricing": {
+        "model": "Per-course credits for individuals; annual department site license",
+        "pricePoint": "$39 per course project (unlimited recompiles for a term) or $29/month; department license $2,500/year",
+        "rationale": "Costs less than a few hours of contracted remediation, sits on a faculty card without procurement, and the department license is under typical small-purchase thresholds while still being cheaper than staffing math remediation."
+      },
+      "revenueSketch": "Estimate: 400 faculty x $39 x 2 courses per year = $31,200 per year, plus 25 departments x $2,500 = $62,500 per year, about $7,800 MRR equivalent in the year before the April 2027 deadline. Assumes a few hundred STEM departments at large US public institutions are in scope; demand may drop after the deadline, so recurring value has to come from new and revised materials.",
+      "distribution": "Demo at a SIGCSE TS 2027 BoF or workshop (and the ASEE and MAA communities via contacts), offer free scans to the CS and math departments at Pisan's own institution, and partner with campus digital-accessibility offices, which already publish LaTeX guidance pages and need something to point faculty to. A free public 'compatibility scan' page doubles as SEO and lead capture.",
+      "validationTest": {
+        "method": "Ship the free compatibility scan only (upload zip, get a list of blockers and fixes), post it to SIGCSE-members, r/Professors, and two campus accessibility offices, and ask scan users whether they would pay $39 for an auto-patched, verified build.",
+        "successCriteria": "200 scans in four weeks, at least 30 email opt-ins for the paid tier, and at least 2 departments asking for a license quote.",
+        "cost": "About 1 week of build, under $100 hosting."
+      },
+      "moat": "An evolving, tested map of package and template fixes (which replacement works, which compile flags break) is accumulated from real course archives and is tedious to replicate; the verified-output report becomes the artifact accessibility offices ask for, which ties departments to the tool.",
+      "compliance": [
+        "Accessibility: the product's own UI and reports must meet WCAG 2.1 AA, and output claims must say 'validated against PDF/UA-2 by veraPDF' rather than 'compliant'.",
+        "FERPA: not applicable for course materials without student data; warn if uploads contain grades or names.",
+        "Institutional data agreements: department licenses may trigger a security questionnaire and VPAT; keep a VPAT and data retention policy ready.",
+        "Copyright: users must own or be licensed to modify uploaded materials; store sources only for the active job."
+      ],
+      "risks": [
+        {
+          "risk": "Overleaf or the LaTeX Project ships an integrated checker and fixer, shrinking the gap.",
+          "mitigation": "Focus on migration and verification across whole course archives (multi-file, Beamer, legacy templates) and on department reporting, which Overleaf is unlikely to build."
+        },
+        {
+          "risk": "Demand spikes before April 2027 then falls.",
+          "mitigation": "Sell annual licenses that cover every new or revised document, and extend to journal and thesis submission accessibility requirements."
+        },
+        {
+          "risk": "Automatic package swaps change document layout and anger faculty.",
+          "mitigation": "Always patch on a branch with a visual page-diff, and let faculty accept fixes one at a time."
+        }
+      ],
+      "scores": {
+        "pain": 4,
+        "willingnessToPay": 3,
+        "reachability": 4,
+        "competitiveGap": 4,
+        "feasibility": 3,
+        "complianceBurden": 5,
+        "total": 23
+      },
+      "inspiredBy": "https://www.overleaf.com/blog/tex-live-2026-is-now-available"
+    },
+    {
+      "n": 3,
+      "title": "Camera-Ready Preflight",
+      "slug": "camera-ready-preflight",
+      "category": "Micro-SaaS",
+      "complexity": "Weekend MVP",
+      "summary": "For researchers submitting to conferences that now desk-reject papers with unverifiable references: check every bibliography entry, figure alt text, and venue formatting rule before submission, and fix the BibTeX in place.",
+      "problemStatement": "One bad entry pasted from a chatbot or a sloppy BibTeX export can now get our paper desk-rejected and every co-author banned for two years. With six co-authors and a shared .bib file, nobody knows who added what, and I have no way to check 80 references the night before the deadline.",
+      "description": "Camera-Ready Preflight runs on a LaTeX project or compiled PDF. It resolves every .bib entry against DBLP, Crossref, OpenAlex, Semantic Scholar, and arXiv, flags entries that do not exist or have mismatched authors, titles, years, or venues, and offers a one-click corrected BibTeX entry from the authoritative source (with git blame on the .bib to show which co-author added it). It also checks venue-specific camera-ready rules that cause last-minute rejections: alt text present for every figure (required by ACM venues using TAPS), page limits, anonymization leaks in review versions, and tagging-ready preambles. It runs as a web app, a GitHub Action, and an Overleaf-friendly upload, and produces a shareable pass report for co-authors.",
+      "targetCustomer": "Graduate students, postdocs, and faculty submitting to ACM, ACL, and ML conferences, especially in computing education, NLP, and HCI where reference-checking and accessibility rules are now enforced.",
+      "buyer": "Individual researchers on a personal card, or a lab or PI from grant or discretionary funds for a lab plan.",
+      "whyNow": "In 2026 ACL flagged more than 100 accepted papers for nonexistent citations during camera-ready checks, and EMNLP 2026 announced it will screen every reference with GPTZero, with desk rejection and two-year submission bans for all authors. ACM venues increasingly require alt text and accessible camera-ready files. The penalty for an unchecked bibliography jumped from embarrassment to rejection.",
+      "founderFit": "Pisan publishes at SIGCSE and ITiCSE, knows ACM TAPS camera-ready workflows, and can reach authors through SIGCSE lists and as a reviewer and committee member. The reference-resolution engine is shared with Reference Audit (idea 1), so building both is cheaper than either alone.",
+      "problemEvidence": [
+        {
+          "url": "https://aiweekly.co/alerts/acl-2026-desk-rejects-100-papers-over-hallucinated-citations",
+          "source": "AI Weekly",
+          "date": "2026-08-03",
+          "summary": "ACL 2026 flagged over 100 accepted papers for citing literature that does not exist during camera-ready checks; papers were sent back to resubmission."
+        },
+        {
+          "url": "https://gptzero.me/news/emnlp-partners-with-gptzero/",
+          "source": "GPTZero news",
+          "date": "2026-06-14",
+          "summary": "EMNLP 2026 screens every bibliography entry; any unverifiable reference may mean desk rejection and bans for all authors through EMNLP 2027."
+        },
+        {
+          "url": "https://aihola.com/article/ai-fake-citations-academic-research",
+          "source": "aihola (AI research news)",
+          "date": "2025-12-18",
+          "summary": "GPTZero found obvious fabricated citations in 50 of 300 ICLR 2026 submissions that 3 to 5 expert reviewers had missed."
+        },
+        {
+          "url": "https://www.casrai.org/news/hallucinated-citation-detection-tools-what-they-can-and-cannot-do-2026",
+          "source": "CASRAI",
+          "date": "2026-08-06",
+          "summary": "An evaluation of five public reference checkers found none reliable enough to use unsupervised, citing extraction errors, database gaps, and inconsistent scores."
+        },
+        {
+          "url": "https://recsys.acm.org/recsys26/camera-ready/",
+          "source": "ACM RecSys 2026 camera-ready instructions",
+          "date": "unknown",
+          "summary": "Authors must provide meaningful alt text for figures in source files uploaded to ACM TAPS."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "VerusCite",
+          "url": "https://andrewpwheeler.com/2026/08/05/veruscite-checking-academic-articles-for-hallucinations/",
+          "price": "$2 per paper (possibly reduced to $1, unconfirmed)",
+          "gap": "Aimed at editors and reviewers checking a finished PDF; does not fix BibTeX in the author's source, attribute entries to co-authors, or check venue camera-ready rules."
+        },
+        {
+          "name": "GPTZero hallucination detector",
+          "url": "https://gptzero.me/sources",
+          "price": "unknown",
+          "gap": "The tool conferences use to screen authors, but it targets essays and prose and gives no BibTeX-level fixes, CI integration, or alt text and formatting checks."
+        },
+        {
+          "name": "Open-source checkers (RefChecker, HalRef, CheckIfExist, and others)",
+          "url": "https://www.casrai.org/news/hallucinated-citation-detection-tools-what-they-can-and-cannot-do-2026",
+          "price": "Free",
+          "gap": "Evaluated as unreliable unsupervised, require setup, and offer no corrected entries or co-author workflow."
+        }
+      ],
+      "keyFeatures": [
+        "BibTeX-level resolution against DBLP, Crossref, OpenAlex, Semantic Scholar, and arXiv",
+        "One-click corrected entries from the authoritative source",
+        "Co-author attribution via git history of the .bib",
+        "Alt text, page limit, and anonymization checks per venue profile",
+        "GitHub Action and shareable pass report"
+      ],
+      "mvpScope": {
+        "features": [
+          "Upload .bib or project zip",
+          "Resolve entries against DBLP, Crossref, and arXiv with status per entry",
+          "Suggested corrected BibTeX for mismatches",
+          "Figure alt text presence check for ACM acmart",
+          "Shareable report link"
+        ],
+        "outOfScope": [
+          "Overleaf integration",
+          "Venue rule library beyond ACM and ACL",
+          "Claim-support checks",
+          "Lab dashboards"
+        ],
+        "buildEstimate": "2 weekends"
+      },
+      "techStack": "React + Vite + Tailwind, Flask API, bibtexparser, DBLP, Crossref, OpenAlex, Semantic Scholar, and arXiv APIs, Supabase for accounts and reports, Stripe for payments, Claude API only for normalizing malformed entries, GitHub Action wrapper.",
+      "pricing": {
+        "model": "Pay per paper with a lab subscription option",
+        "pricePoint": "First paper free, then $5 per paper or $15/month per lab (unlimited papers, up to 10 members)",
+        "rationale": "Priced near editor tools (about $1 to $2 per paper) but justified by in-place fixes and camera-ready checks; trivially small next to the cost of a desk rejection or a two-year ban, and payable on a personal card."
+      },
+      "revenueSketch": "Estimate: 300 labs x $15/month = $4,500 MRR plus about 400 one-off papers a month x $5 = $2,000, roughly $6,500 MRR at maturity, with strong seasonality around deadlines. Assumes reaching a small fraction of the tens of thousands of authors submitting to ACL, EMNLP, NeurIPS, and ACM venues each year.",
+      "distribution": "Launch two weeks before a major deadline (an ACL Rolling Review cycle or SIGCSE TS camera-ready) with a free check, posted to SIGCSE-members, r/MachineLearning, and academic social media. Offer free lab plans to 10 labs Pisan knows in exchange for testimonials, and pitch program chairs of SIGCSE-family venues to link it from camera-ready instructions as an author-side self-check.",
+      "validationTest": {
+        "method": "Run the free checker on the public reference lists of 100 recent arXiv papers in CS education and NLP, publish aggregate results (what share have broken or mismatched entries), and attach a waitlist with a $15/month lab plan pre-order.",
+        "successCriteria": "At least 300 waitlist signups and 15 pre-orders before the next big deadline, or at least 1 program chair agreeing to link the tool.",
+        "cost": "About 1 weekend plus a blog post; under $50."
+      },
+      "moat": "Shares a reference-resolution engine and labeled error data with Reference Audit; venue rule profiles and a reputation as the author-side counterpart to conference screening build trust that a generic AI detector lacks. Seasonal deadline spikes reward a fast, reliable tool authors already have in CI.",
+      "compliance": [
+        "Confidentiality: unpublished manuscripts are sensitive; process in memory, delete after 7 days, and never train on uploads.",
+        "Accessibility: the web app and reports must meet WCAG 2.1 AA.",
+        "FERPA and COPPA: not applicable (no student records or minors).",
+        "Terms of use: respect DBLP, Crossref, and Semantic Scholar API rate limits and polite-pool rules."
+      ],
+      "risks": [
+        {
+          "risk": "Overleaf or the conferences' own screening vendor offers a free author-side check.",
+          "mitigation": "Differentiate on BibTeX fixes, CI integration, and multi-venue camera-ready checks, and keep a free tier to stay the default."
+        },
+        {
+          "risk": "Highly seasonal revenue with long gaps between deadlines.",
+          "mitigation": "Lab subscriptions billed annually, plus thesis and grant proposal reference checks for off-season use."
+        },
+        {
+          "risk": "False flags on legitimate but poorly indexed references (workshops, theses, technical reports).",
+          "mitigation": "Separate 'not found' from 'mismatch', allow manual verification notes, and add Google Scholar style fallbacks via user-provided links."
+        }
+      ],
+      "scores": {
+        "pain": 4,
+        "willingnessToPay": 3,
+        "reachability": 3,
+        "competitiveGap": 3,
+        "feasibility": 4,
+        "complianceBurden": 5,
+        "total": 22
+      },
+      "inspiredBy": "https://aiweekly.co/alerts/acl-2026-desk-rejects-100-papers-over-hallucinated-citations"
+    }
+  ],
+  "runNotes": {
+    "searches": [
+      "r/Professors October 2026 frustrating workflow wish there was a tool",
+      "r/CSEducation 2026 teaching programming students AI tool problem",
+      "Indie Hackers teacher SaaS revenue 2026 educators paying",
+      "r/SaaS edtech micro SaaS MRR teachers professors 2026",
+      "Inside Higher Ed October 2026 faculty",
+      "EdWeek Market Brief October 2026",
+      "fabricated AI citations student papers professors checking references 2026",
+      "ADA Title II web accessibility rule April 2026 deadline status universities extension",
+      "Starter Story education tool for teachers revenue per month 2026",
+      "Kahoot OR Top Hat OR zyBooks reviews 2026 instructors cons complaints",
+      "Ask HN 2026 tool you wish existed teachers education",
+      "r/Teachers 2026 spending hours every week on task tedious",
+      "EDUCAUSE Review 2026 faculty AI assessment challenges",
+      "hallucinated citation checker tool pricing reference verification bibliography",
+      "r/instructionaldesign 2026 SME course build pain tool",
+      "LaTeX lecture notes PDF accessibility Title II faculty math remediation 2026",
+      "Product Hunt education launch 2026 teachers paid plan pricing pro",
+      "Acquire.com education SaaS listing 2026 instructors MRR",
+      "Y Combinator requests for startups fall 2026 education",
+      "university cancels Turnitin OR Gradescope contract 2026 cost faculty alternative",
+      "MathPix pricing Snip plans per month",
+      "Overleaf accessibility tagged PDF support 2026 DocumentMetadata",
+      "r/Professors 2026 reference list fake sources checking each citation by hand grading",
+      "conference policy hallucinated references desk reject 2026 program chairs reviewers",
+      "r/learnprogramming 2026 vibe coding can't code without AI how to actually learn",
+      "computing education conference workshop camera-ready accessibility alt text ACM requirement 2026 authors",
+      "GPTZero hallucination check citations pricing plan",
+      "citation checker for teachers grading student essays fake references tool Canvas"
+    ],
+    "rejectedCandidates": [
+      {
+        "title": "Conference-side reference screening for small workshops (program chair tool)",
+        "total": 19,
+        "reason": "GPTZero already partners with EMNLP for this; small venues have little budget. Folded into Camera-Ready Preflight as a later tier."
+      },
+      {
+        "title": "Similarity-report replacement for universities leaving Turnitin",
+        "total": 14,
+        "reason": "Needs institutional procurement and a large document corpus; not a one-person build."
+      },
+      {
+        "title": "Instructional-design cleanup of AI-generated SME content",
+        "total": 17,
+        "reason": "Evidence is a single archived r/instructionaldesign remark; buyer and workflow unclear."
+      },
+      {
+        "title": "Standalone Beamer-to-accessible-slides converter",
+        "total": 20,
+        "reason": "Same customer and problem as Tagging Doctor; included there as a feature instead."
+      },
+      {
+        "title": "K-12 classroom incident write-up and parent email tool",
+        "total": 13,
+        "reason": "Involves minors' records and district approval; teachers note admins block unauthorized tools."
+      },
+      {
+        "title": "AI lesson-plan generator for K-12 teachers",
+        "total": 12,
+        "reason": "Crowded AI wrapper with no moat (PlanSpark at $6/month, Lessona at $13.99/month already exist)."
+      },
+      {
+        "title": "Phonics practice SaaS modeled on a Flippa listing with about $6.5K MRR",
+        "total": 14,
+        "reason": "Poor founder fit, young children (COPPA), and paid-ads acquisition."
+      }
+    ],
+    "caveats": "r/Professors evidence comes from archived snapshots; post dates were computed from snapshot dates and relative ages, so they are approximate and older than 60 days. The ASEE paper page returned 403, so its content and date rely on search snippets. GPTZero and Copyleaks prices were not confirmed. The Microns listing's revenue figures are internally inconsistent and unverified. YC's Fall 2026 education request text could not be found. No recent G2 or Capterra low-star reviews of edtech incumbents surfaced in this run. Revenue sketches are estimates."
+  }
+}
