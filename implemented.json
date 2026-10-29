@@ -418,8 +418,10 @@
         "date": "2026-10-18",
         "n": 2
       },
-      "placeholder": true,
-      "notes": "In progress since 2026-10-29"
+      "notes": "Built in one session as a static TypeScript app with no backend and no LLM. The machine is a Ben Eater style SAP-1 (8-bit bus with pull-downs, PC, MAR, 16 bytes of RAM, IR, A, B, ALU, flags, output register and a 512-word microcode ROM driving 16 control lines) simulated cycle by cycle at the signal level: 11 chip packages, 168 pins and 52 nets carrying 0, 1 or Z, with wired-AND bus contention and floating TTL inputs reading high. Faults are stuck nets, open pins (output no longer reaches the net, input floats), shorted adjacent bus lines, flipped microcode ROM bits and dead chips, 3,810 in all; challenges in three tiers draw only faults that make some test program show a wrong display. Students run four test programs or their own assembly for free, spend a probe budget capturing waveforms on a logic analyzer, and watch the set of consistent faults shrink: every catalog fault is simulated on each program in a Web Worker and compared by waveform hash. The suggested Claude tutor is replaced by a deterministic next-probe suggestion that minimizes the expected number of remaining faults, reasoning only from faults that fit what the student has measured. A sandbox shows every signal with healthy-versus-faulty diffs, and the instructor tab makes seeded or hand-picked challenge links and exports the local attempt log. Limitations: modules are idealized single packages rather than real 74LS parts and timing is cycle-level with no propagation delays, only single faults are modelled, and attempts stay in the browser that made them, with challenge links obfuscated rather than secret. 74 vitest tests, 99% statement coverage on core.",
+      "url": "https://pull-the-pin-lab.netlify.app",
+      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/pull-the-pin",
+      "implementedOn": "2026-10-29"
     }
   ]
 }

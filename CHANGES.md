@@ -441,3 +441,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-10-28 [note] Pluck Lab (2026-10-16 n2) marked implemented: live at pluck-lab.netlify.app, repo Claude-capstone/pluck-lab. Live KS synthesis, slow-motion views, 7 scenes; 53 tests.
 
 2026-10-29 [note] Claimed Pull the Pin (2026-10-18 n2) as in progress: signal-level SAP-1 style 8-bit computer, fault injector, probe budget, consistent-fault set. No LLM.
+
+2026-10-29 [note] Pull the Pin (2026-10-18 n2) marked implemented: live at pull-the-pin-lab.netlify.app, repo Claude-capstone/pull-the-pin. SAP-1 fault diagnosis, consistent-fault set; 74 tests.
