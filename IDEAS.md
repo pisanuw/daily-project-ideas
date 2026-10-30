@@ -603,6 +603,3 @@
 | 2026-10-29 | Reference Audit | EdTech: Higher Ed | Weekend MVP | 21 |  |
 | 2026-10-29 | Tagging Doctor for LaTeX Courses | EdTech: Higher Ed | Multi-week | 23 |  |
 | 2026-10-29 | Camera-Ready Preflight | Micro-SaaS | Weekend MVP | 22 |  |
-| 2026-10-30 | Paste-Safe Interactions | EdTech: Higher Ed | Weekend MVP | 22 |  |
-| 2026-10-30 | Agent Lab Preflight | Developer Tool | Weekend MVP | 22 |  |
-| 2026-10-30 | Quiz Migration Auditor | EdTech: Higher Ed | Multi-week | 20 |  |

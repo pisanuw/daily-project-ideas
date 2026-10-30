@@ -1,455 +1,204 @@
 {
   "date": "2026-10-30",
-  "schemaVersion": 2,
-  "ideas": [
-    {
-      "n": 1,
-      "title": "Paste-Safe Interactions",
-      "slug": "paste-safe-interactions",
-      "category": "EdTech: Higher Ed",
-      "complexity": "Weekend MVP",
-      "summary": "For academic instructional designers without a Storyline or DesignPLUS license: build branded flip cards, accordions, and click-to-reveal diagrams that survive the LMS editor and pass WCAG checks.",
-      "problemStatement": "I just need flip cards, accordions, and click-to-reveal pieces on my LMS pages. Articulate is more tool than I need and my organization will not pay for it, Genially charges almost as much to remove the watermark, Captivate will not let me change colors, and H5P looks too basic to match our design.",
-      "description": "A web builder where a designer picks an interaction pattern, enters content, and applies a saved brand theme. It exports in the safest form for the target: sanitizer-safe HTML and CSS (native details and summary elements, CSS-only toggles) to paste into Canvas, Brightspace, or Moodle pages, or a small SCORM or iframe package when scripting is needed. Every export runs automated accessibility checks (keyboard order, focus visibility, contrast, heading structure, reduced motion) and produces a short conformance note for the course file. No watermark on any paid plan.",
-      "targetCustomer": "Instructional designers and course developers at colleges, universities, and online program teams who build pages with SMEs and need light interactivity rather than full authoring.",
-      "buyer": "The designer on a personal card or a small team budget; later, a department or online learning unit.",
-      "whyNow": "Articulate moved all 360 subscriptions to an AI tier after March 31, 2026 at a reported $250 per year more, prompting designers to look for alternatives. Separately, the ADA Title II web accessibility deadline for large public entities is April 26, 2027 (per the DOJ April 2026 interim final rule, verified in the 2026-10-29 run), which raises the bar on interactive course content.",
-      "founderFit": "Pisan builds interactive web apps in React and Tailwind, works on accessibility, and can test exports against the Canvas editor directly; instructional design colleagues at his own institution are natural design partners.",
-      "problemEvidence": [
-        {
-          "url": "https://reddit.sentinel-team.org/posts/1rr7wa6/snapshots/2026-03-13T08%3A08%3A49.139221Z",
-          "source": "r/instructionaldesign (mirror snapshot)",
-          "date": "2026-03-12",
-          "summary": "Academic designer wants no-watermark, brandable flip cards and accordions in the LMS; Genially, Captivate, and H5P each fell short. Date approximate from the mirror's relative timestamp."
-        },
-        {
-          "url": "https://reddit.sentinel-team.org/posts/1rptwhp/snapshots/2026-03-13T08%3A08%3A49.139221Z",
-          "source": "r/instructionaldesign (mirror snapshot)",
-          "date": "2026-03-11",
-          "summary": "43-point thread: Articulate 360 renewals forced onto an AI tier at $250 per year more; designers ask for cheaper alternatives. Date approximate."
-        },
-        {
-          "url": "https://reddit.sentinel-team.org/subreddits/instructionaldesign/snapshots/2026-03-13T08%3A08%3A49.139221Z",
-          "source": "r/instructionaldesign snapshot",
-          "date": "2026-03-13",
-          "summary": "Same week also shows threads on SME review bottlenecks and fragmented production workflows, confirming designers' time pressure."
-        }
-      ],
-      "competitors": [
-        {
-          "name": "Articulate 360 (Storyline, Rise)",
-          "url": "https://www.articulatesupport.com/article/Articulate-Storyline-360-Version-History",
-          "price": "unknown base price; reported $250 per year increase for the AI tier",
-          "gap": "Full authoring suite, overkill and costly for a few page-level interactions."
-        },
-        {
-          "name": "DesignPLUS (Cidi Labs)",
-          "url": "https://support.cidilabs.com/knowledgebase/designplus",
-          "price": "unknown (institutional license)",
-          "gap": "Canvas-only and sold to institutions, so designers at schools without a license cannot buy it themselves."
-        },
-        {
-          "name": "Slate",
-          "url": "https://slatebuilder.io/notes/import-articulate-rise-courses-to-slate",
-          "price": "unknown",
-          "gap": "Positioned as a Rise replacement for whole courses rather than snippets that live inside existing LMS pages."
-        }
-      ],
-      "keyFeatures": [
-        "Flip card, accordion, tabs, click-to-reveal diagram, and simple branching patterns",
-        "Brand themes saved per program",
-        "Sanitizer-safe HTML export plus SCORM or iframe fallback",
-        "Built-in accessibility checks with a conformance note",
-        "No watermark"
-      ],
-      "mvpScope": {
-        "features": [
-          "Three patterns: accordion, flip card, click-to-reveal",
-          "One saved theme",
-          "Canvas-safe HTML export tested against the Canvas editor",
-          "Keyboard and contrast checks"
-        ],
-        "outOfScope": [
-          "SCORM packaging",
-          "Branching scenarios",
-          "Team libraries",
-          "LTI integration"
-        ],
-        "buildEstimate": "2 weekends"
-      },
-      "techStack": "React + Vite + Tailwind builder, axe-core for checks, Supabase for accounts and saved themes, Stripe for billing.",
-      "pricing": {
-        "model": "Per-designer subscription",
-        "pricePoint": "$9 per month or $79 per year",
-        "rationale": "Well below an Articulate seat and its reported $250 increase, and cheap enough for a designer to pay personally."
-      },
-      "revenueSketch": "Estimate: 300 designers x $79 per year = $23,700 ARR, plus 20 team plans x $500 = $10,000. Assumes conversion from instructional design communities and search traffic; unverified.",
-      "distribution": "Answer existing tool-request threads in r/instructionaldesign, post free templates in the Instructure Community, demo at a campus instructional design meetup, and list in the Canvas community resources.",
-      "validationTest": {
-        "method": "Publish a free single-pattern generator (accordion) with an email gate and a paid waitlist for themes and flip cards; share it in two designer communities.",
-        "successCriteria": "200 generator uses and 15 paid preorders within 3 weeks.",
-        "cost": "One weekend and about $20 for a domain."
-      },
-      "moat": "Tested knowledge of what each LMS editor strips, maintained as the editors change, plus an accessibility test suite designers can cite. Modest moat; speed and niche focus matter more.",
-      "compliance": [
-        "Accessibility: outputs must meet WCAG 2.1 AA; claims should be framed as automated checks, not certification.",
-        "FERPA: none; no student data is handled.",
-        "Institutional: none for self-serve; team plans may need a VPAT."
-      ],
-      "risks": [
-        {
-          "risk": "Crowded authoring market with many cheap tools.",
-          "mitigation": "Stay narrow: page-level, paste-safe, accessible snippets for academic LMS pages."
-        },
-        {
-          "risk": "LMS editors change what they strip and break exports.",
-          "mitigation": "Automated nightly tests against sandbox LMS instances and quick fixes."
-        },
-        {
-          "risk": "Designers can ask an LLM to write the HTML for free.",
-          "mitigation": "Sell guaranteed editor survival, themes, and accessibility checks rather than markup."
-        }
-      ],
-      "scores": {
-        "pain": 3,
-        "willingnessToPay": 4,
-        "reachability": 3,
-        "competitiveGap": 2,
-        "feasibility": 5,
-        "complianceBurden": 5,
-        "total": 22
-      },
-      "inspiredBy": "https://reddit.sentinel-team.org/posts/1rr7wa6/snapshots/2026-03-13T08%3A08%3A49.139221Z"
-    },
-    {
-      "n": 2,
-      "title": "Agent Lab Preflight",
-      "slug": "agent-lab-preflight",
-      "category": "Developer Tool",
-      "complexity": "Weekend MVP",
-      "summary": "For instructors running agentic coding courses and workshops: a one-command check that tells each student (and the instructor) exactly what is broken in their Claude Code or Codex setup before the first session.",
-      "problemStatement": "The first lab of my agentic coding course is lost to setup: Windows students on WSL 1, Node coming from the Windows PATH, projects under /mnt/c, npm permission errors, two half-working environments. I only find out who is not ready when they raise their hands.",
-      "description": "Students run one command (or a small downloadable app) with a course code. It checks OS and shell, WSL version, Node source and version, npm prefix permissions, git, the agent CLI install and authentication, project location, network or proxy reachability, and disk space, then prints plain-language fixes linked to vendor docs. Results go to an instructor dashboard that shows who is ready, who is blocked, and the most common failure, so TAs can triage before class. Instructors can add course-specific checks (required repos, extensions, versions) in a small config file.",
-      "targetCustomer": "University instructors and TAs teaching courses that use Claude Code, Codex, or similar CLIs, and paid cohort and workshop instructors teaching agentic coding to non-developers.",
-      "buyer": "Cohort and bootcamp instructors on a card; university instructors from a department or course budget.",
-      "whyNow": "Agentic coding moved into curricula in 2026: CodePath's Anthropic-backed curriculum (Howard running it for credit), UMass Lowell's Fall 2026 'AI Agents with Claude Code' course, and paid cohorts priced around $899. Vendor troubleshooting docs and campus IT pages list the same recurring WSL and PATH failures, and GitHub Classroom's retirement on August 28, 2026 removes one standard setup path.",
-      "founderFit": "Pisan teaches courses that use agentic coding tools, sees setup failures every term, and can recruit design partners among SIGCSE instructors adopting these tools.",
-      "problemEvidence": [
-        {
-          "url": "https://docs.claude.com/en/docs/claude-code/troubleshooting",
-          "source": "Claude Code documentation",
-          "date": "unknown",
-          "summary": "Documents recurring install issues: WSL picking up Windows Node, PATH and npm permission errors, slow cross-filesystem search."
-        },
-        {
-          "url": "https://support.wharton.upenn.edu/help/known-issue-claude-code-cannot-run-commands-on-windows",
-          "source": "Wharton IT support",
-          "date": "unknown",
-          "summary": "Campus IT known issue: Claude Code cannot run commands on Windows when the distro runs as WSL 1; advises WSL 2 and Linux home directories."
-        },
-        {
-          "url": "https://github.com/anthropics/claude-code/issues/38644",
-          "source": "GitHub issue, anthropics/claude-code",
-          "date": "unknown",
-          "summary": "Fresh WSL 1 Ubuntu install fails with 'Exec format error' (as summarized in search results)."
-        },
-        {
-          "url": "https://www.uml.edu/myuml/submissions/2026/2026-04-15-16-21-07-announcing-a-new-topics-course-ai.aspx",
-          "source": "UMass Lowell announcement",
-          "date": "2026-04-15",
-          "summary": "New Fall 2026 topics course 'AI Agents with Claude Code' for undergraduate and graduate students."
-        },
-        {
-          "url": "https://www.theregister.com/2026/02/13/anthropic_claudeifies_comp_sci_courses/",
-          "source": "The Register",
-          "date": "2026-02-13",
-          "summary": "Anthropic and CodePath bring Claude Code into CS curricula."
-        }
-      ],
-      "competitors": [
-        {
-          "name": "GitHub Codespaces (education benefit)",
-          "url": "https://docs.github.com/en/education/manage-coursework-with-github-classroom/integrate-github-classroom-with-an-ide/using-github-codespaces-with-github-classroom",
-          "price": "Free teacher allowance in public preview; overages billed after preview",
-          "gap": "Avoids local setup but not agent authentication, and many courses want students working locally; page also notes GitHub Classroom retires August 28, 2026."
-        },
-        {
-          "name": "Manual setup guides (e.g., DEV Community Windows guide)",
-          "url": "https://dev.to/xujfcn/claude-code-installation-guide-for-windows-git-path-environment-variables-powershell-wsl-and-1lag",
-          "price": "Free",
-          "gap": "Static instructions; no diagnosis of a specific machine and no instructor view of who is ready."
-        }
-      ],
-      "keyFeatures": [
-        "One-command environment check with plain-language fixes",
-        "Instructor readiness dashboard by student",
-        "Course-specific checks via config file",
-        "Top-failure summary for TAs",
-        "Re-check before each milestone"
-      ],
-      "mvpScope": {
-        "features": [
-          "Node-based CLI with 12 core checks for macOS, Linux, and WSL",
-          "Course code that posts results to a dashboard",
-          "Readiness table and failure counts"
-        ],
-        "outOfScope": [
-          "Native Windows PowerShell auto-fixes",
-          "LMS roster sync",
-          "Automatic repair",
-          "IDE extensions"
-        ],
-        "buildEstimate": "1 to 2 weekends"
-      },
-      "techStack": "Node CLI (npx), Supabase for results and auth, React + Vite + Tailwind dashboard.",
-      "pricing": {
-        "model": "Per-course or per-cohort license",
-        "pricePoint": "$39 per course term (up to 150 students); free for one course under 25 students",
-        "rationale": "Cohort courses charge hundreds per seat and lose session time to setup; $39 is trivial against one wasted session. No paid direct competitor was found."
-      },
-      "revenueSketch": "Estimate: 250 courses or cohorts per year x $39 = $9,750 per year in year one, plus 10 bootcamp or department plans x $500 = $5,000. Small; a side income unless it expands to general course environment checks.",
-      "distribution": "Use in Pisan's own courses, share on SIGCSE mailing lists and the SIGCSE TS affiliated events, post in r/CSEducation, and offer to cohort platforms' instructors (Maven, Thinkific course creators) teaching agentic coding.",
-      "validationTest": {
-        "method": "Ship a free open checker script, run it in one course, and offer the dashboard to 10 instructors teaching agentic coding.",
-        "successCriteria": "At least 4 of 10 instructors use it before their first session and 2 agree to pay for the next term.",
-        "cost": "One weekend, $0."
-      },
-      "moat": "Thin: a curated, continuously updated catalog of real failure signatures across tools and OS versions, built from usage data. Treat this as a low-cost, high-fit wedge rather than a defensible business.",
-      "compliance": [
-        "FERPA: dashboard ties machine diagnostics to student names, so collect minimal data (no file contents, no keys) and allow pseudonymous IDs.",
-        "Security: the CLI must never read or transmit API keys or tokens; open-source the checker for auditability.",
-        "Accessibility: CLI output and dashboard should work with screen readers."
-      ],
-      "risks": [
-        {
-          "risk": "Vendors fix install friction (native installers, doctor commands).",
-          "mitigation": "Focus on the instructor dashboard and course-specific checks, which vendor tools do not provide."
-        },
-        {
-          "risk": "Low willingness to pay among university instructors.",
-          "mitigation": "Free tier for small courses; target cohort businesses and bootcamps where lost session time costs money."
-        },
-        {
-          "risk": "Students wary of running a script that inspects their machine.",
-          "mitigation": "Open-source checker, explicit list of what is collected, and a local-only mode."
-        }
-      ],
-      "scores": {
-        "pain": 3,
-        "willingnessToPay": 2,
-        "reachability": 5,
-        "competitiveGap": 3,
-        "feasibility": 5,
-        "complianceBurden": 4,
-        "total": 22
-      },
-      "inspiredBy": "https://docs.claude.com/en/docs/claude-code/troubleshooting"
-    },
-    {
-      "n": 3,
-      "title": "Quiz Migration Auditor",
-      "slug": "quiz-migration-auditor",
-      "category": "EdTech: Higher Ed",
-      "complexity": "Multi-week",
-      "summary": "For teaching centers and faculty moving Canvas Classic Quizzes to New Quizzes: inventory every quiz and question bank, flag what will break, and verify each migrated quiz question by question.",
-      "problemStatement": "Our campus says Classic Quizzes go away on a set date, but there is no one-click way to move my question banks, Blueprint courses do not carry the migration, and after converting I have to open every quiz to check whether questions, points, images, and settings actually survived.",
-      "description": "Connects to Canvas through an admin or instructor API token (later an LTI 1.3 tool) and builds an inventory of Classic Quizzes, question banks, and question groups across a set of courses. A preflight report flags known risk patterns from campus guidance: banks linked by question groups, embedded images and file links, Blueprint-associated courses, third-party proctoring settings, and question types or features with no New Quizzes equivalent. After migration it reads the New Quizzes items API and produces a question-by-question diff against the original (count, points, answer keys, media), so staff fix only the quizzes that changed. Teaching centers get a campus dashboard showing which courses are done, risky, or untouched before their deadline.",
-      "targetCustomer": "Instructional technologists and teaching and learning center staff running a New Quizzes transition, plus faculty with large question banks in CS, STEM, nursing, and business.",
-      "buyer": "Teaching and learning center or academic technology office (institutional software or project budget); individual faculty or departments on a card for a self-serve tier.",
-      "whyNow": "Institutions are setting their own Classic Quizzes cutoffs in 2026 to 2028 (Messiah blocks new Classic Quizzes from May 11, 2026; Ithaca requires migration on course import from Summer 2027; Case Western ends creation in 2027 to 2028), while Canvas still offers no one-click bank-to-item-bank path. The migration work is landing on staff and faculty now.",
-      "founderFit": "Pisan teaches CS with Canvas and large question banks, knows the pain firsthand, can pilot with his own teaching center, and can reach CS and STEM faculty through SIGCSE, the community most likely to have thousands of auto-graded questions.",
-      "problemEvidence": [
-        {
-          "url": "https://www.messiah.edu/provost/_files/canvas-transition-to-new-quizzes.pdf",
-          "source": "Messiah University Provost (via search result)",
-          "date": "2025-12-10",
-          "summary": "Search snippet: new Classic Quizzes cannot be created after May 11, 2026, and older ones convert on copy or import; PDF metadata dated 2025-12-10."
-        },
-        {
-          "url": "https://help.ithaca.edu/TDClient/34/Portal/KB/Article/2188/New-Quizzes-Transition-Overview-and-Timeline",
-          "source": "Ithaca College IT knowledge base",
-          "date": "unknown",
-          "summary": "Phased timeline: bulk conversion on import in 2026, required migration on import Summer and Fall 2027, Classic quizzes unpublishable from Winter 2028."
-        },
-        {
-          "url": "https://case.edu/news/cwru-instructors-encouraged-move-canvas-new-quizzes",
-          "source": "Case Western Reserve University news",
-          "date": "unknown",
-          "summary": "Classic Quizzes will no longer be available for creation starting in 2027 to 2028, and faculty must migrate existing quizzes."
-        },
-        {
-          "url": "https://canvashelp.stanford.edu/hc/en-us/articles/4405462061843-Missing-or-Changed-Functionality-in-New-Quizzes",
-          "source": "Stanford Canvas Help (via search result)",
-          "date": "unknown",
-          "summary": "Lists missing or changed functionality, including item bank sharing defaults, no bulk download of file submissions, and no CSV export of responses."
-        },
-        {
-          "url": "https://community.canvaslms.com/t5/New-Quizzes-Discussion/Blueprint-Process-Does-Not-Migrate-Classic-Quizzes-to-New/m-p/636270",
-          "source": "Instructure Community",
-          "date": "unknown",
-          "summary": "Thread titled 'Blueprint Process Does Not Migrate Classic Quizzes to New Quizzes or Question Banks to Item Banks'."
-        },
-        {
-          "url": "https://LSS.AT.UFL.EDU/media/elearningufledu/files/Questions-Banks-to-Item-Banks.pdf",
-          "source": "University of Florida e-Learning (via search result)",
-          "date": "unknown",
-          "summary": "Guide states Canvas has no one-click tool to move a question bank into an item bank and describes a temporary-quiz workaround."
-        }
-      ],
-      "competitors": [
-        {
-          "name": "Canvas New Quizzes migration via course copy/import (built in)",
-          "url": "https://community.canvaslms.com:443/t5/The-Product-Blog/New-Quizzes-Migration-through-Course-Copy-Import-in-Production/ba-p/576786",
-          "price": "Included with Canvas",
-          "gap": "Converts content but does not audit what changed, and forum reports say bank and question group migration has been unreliable; no campus-wide progress view."
-        },
-        {
-          "name": "Campus help desks and manual checklists (e.g., Ohio University guidance)",
-          "url": "https://help.ohio.edu/TDClient/30/Portal/KB/Article/1012/Canvas-Quizzes-Classic-vs-New-Quizzes-and-Migration-Guidance",
-          "price": "Staff time",
-          "gap": "Tells faculty to review settings, questions, and banks by hand, quiz by quiz."
-        }
-      ],
-      "keyFeatures": [
-        "Cross-course inventory of Classic Quizzes, banks, and question groups",
-        "Preflight risk flags drawn from known migration failure patterns",
-        "Post-migration question-by-question diff (count, points, keys, media)",
-        "Campus dashboard of done, risky, and untouched courses",
-        "Exportable fix list per instructor"
-      ],
-      "mvpScope": {
-        "features": [
-          "Instructor API token login",
-          "Inventory and preflight report for one instructor's courses",
-          "Diff of a Classic quiz against its migrated New Quiz",
-          "CSV and HTML fix list"
-        ],
-        "outOfScope": [
-          "LTI 1.3 install and admin-wide scanning",
-          "Automatic repair of migrated quizzes",
-          "Brightspace, Moodle, or Blackboard support",
-          "Reading student responses"
-        ],
-        "buildEstimate": "3 to 4 weeks"
-      },
-      "techStack": "React + Vite + Tailwind front end, Flask back end calling the Canvas REST and New Quizzes APIs, Supabase for reports and account state; no LLM required for the core diff.",
-      "pricing": {
-        "model": "Self-serve instructor tier plus annual campus license",
-        "pricePoint": "$49 per instructor per migration term; campus license from $3,000 per year (assumption)",
-        "rationale": "Campus price is a small fraction of the staff hours spent opening quizzes one by one; instructor tier sits below typical conference registration so faculty can expense it. No confirmed competitor prices exist because no dedicated competitor was found."
-      },
-      "revenueSketch": "Estimate: 15 campus licenses x $3,000 = $45,000 per year, plus 300 instructors x $49 = $14,700 per year, during the 2026 to 2028 migration window. Assumes deadlines stay as announced; revenue is time-limited unless the diff engine extends to other LMS migrations.",
-      "distribution": "Pilot at Pisan's own teaching center, then demos at InstructureCon and regional Canvas user groups, a post in the Instructure Community New Quizzes forum, and SIGCSE contacts who can introduce their academic technology offices.",
-      "validationTest": {
-        "method": "Hand-run the diff on 10 real quizzes from 3 colleagues using a script and the Canvas API, publish a one-page report of what broke, and show it to 5 teaching center staff.",
-        "successCriteria": "At least 2 of 5 teaching centers request a paid pilot or a quote, and the script finds at least one silent change in the sample.",
-        "cost": "About 15 hours, $0."
-      },
-      "moat": "A growing catalog of real migration failure patterns and the diff logic across Classic and New Quizzes data models, plus early relationships with teaching centers during a time-boxed transition.",
-      "compliance": [
-        "FERPA: the MVP reads quiz content only, not student responses; if response data is added later, a campus data agreement is required.",
-        "Institutional review: campus licenses will trigger security questionnaires (HECVAT) and possibly an API token policy review.",
-        "Accessibility: the dashboard itself must meet WCAG 2.1 AA for campus purchase."
-      ],
-      "risks": [
-        {
-          "risk": "Instructure ships a native migration audit or fixes bank migration.",
-          "mitigation": "Sell the cross-course progress dashboard and diff evidence as the product; keep the build small so it pays back within the window."
-        },
-        {
-          "risk": "Campuses forbid personal API tokens.",
-          "mitigation": "Offer admin-installed LTI 1.3 for campus licenses after the MVP proves value."
-        },
-        {
-          "risk": "Demand ends once migration is complete.",
-          "mitigation": "Reuse the diff engine for course copy audits and LMS-to-LMS moves."
-        }
-      ],
-      "scores": {
-        "pain": 4,
-        "willingnessToPay": 3,
-        "reachability": 3,
-        "competitiveGap": 4,
-        "feasibility": 3,
-        "complianceBurden": 3,
-        "total": 20
-      },
-      "inspiredBy": "https://help.ithaca.edu/TDClient/34/Portal/KB/Article/2188/New-Quizzes-Transition-Overview-and-Timeline"
-    }
-  ],
+  "schemaVersion": 3,
+  "complete": true,
+  "ideas": [],
   "runNotes": {
+    "weekday": "Friday",
+    "focusSources": [
+      "r/AskAcademia",
+      "r/GradSchool",
+      "r/learnprogramming",
+      "Microns.io",
+      "Flippa"
+    ],
     "searches": [
-      "r/Professors October 2026 grading tool frustration",
-      "r/Teachers 2026 AI policy workload complaint tool",
-      "Indie Hackers edtech SaaS teachers revenue 2026",
-      "Inside Higher Ed October 2026 faculty AI",
-      "EdWeek Market Brief October 2026",
-      "Acquire.com edtech micro SaaS listing teachers",
-      "Ask HN tool I wish existed for teaching 2026",
-      "Gradescope review G2 cons 2026",
-      "r/CSEducation 2026 high school CS teacher need tool",
-      "Starter Story teacher tool $ MRR 2026",
-      "state AI guidance schools 2026 new requirement deadline",
-      "EDUCAUSE Review 2026 faculty workload course design AI",
-      "Canvas Classic Quizzes sunset New Quizzes migration 2026 faculty problems",
-      "oral exams scheduling professors AI 2026 scale large course",
-      "r/microsaas teacher product paying customers 2026",
-      "CATME peer evaluation alternative pricing 2026 team projects instructors",
-      "New Quizzes missing features complaints faculty question banks item banks 2026",
-      "teaching course with Claude Code Codex students cost seats instructors 2026",
-      "Product Hunt education teachers paid tool launched October 2026",
-      "r/instructionaldesign 2026 frustrated SME faculty course build tool",
-      "students installing Claude Code Windows WSL problems classroom workshop setup",
-      "Canvas question bank to item bank bulk migration tool third party",
-      "DesignPLUS Cidi Labs pricing Canvas accordion tabs accessible"
+      "r/GradSchool thesis formatting rejected graduate school format review 2026",
+      "reddit AskAcademia \"is there a tool\" professors 2026",
+      "microns.io listing education SaaS MRR teachers",
+      "flippa edtech SaaS for sale monthly revenue teachers tool 2026",
+      "r/learnprogramming 2026 frustrated tutorial hell AI wish there was",
+      "thesis dissertation accessibility requirement ADA Title II 2026 graduate school deposit tagged PDF",
+      "Instructure community idea conversation 2026 Canvas feature request votes instructors grading",
+      "DOJ ADA Title II web accessibility rule compliance date extension 2026 status",
+      "Gradescope reviews Capterra cons 2026 instructors",
+      "PrairieLearn GitHub discussions feature request most upvoted instructors 2026",
+      "cseducators.stackexchange.com 2026 question AI assignments tool",
+      "reddit GradSchool 2026 committee scheduling defense OR reimbursement conference travel",
+      "instructor give students LLM API keys course budget per-student spending limit class 2026",
+      "thesis format checker software automated ETD format review tool graduate school",
+      "Teachers Pay Teachers best sellers computer science coding resources 2026",
+      "HigherEdJobs 2026 thesis and dissertation coordinator format review accessibility job posting",
+      "AppSumo education category lifetime deal teachers professors reviews 2026",
+      "Indie Hackers edtech SaaS for professors university instructors revenue MRR 2026",
+      "NSF SBIR 2026 topic Learning and Cognitive Technologies America's Seed Fund status",
+      "Inside Higher Ed October 2026 graduate students theses accessibility remediation LaTeX",
+      "site:microns.io startup-listings education OR teachers OR students",
+      "professors paper exams return 2026 seating chart large lecture hall alternate seating tool",
+      "students run out of API credits course Claude Code Codex class instructors cost 2026 university",
+      "NSF PAPPG 2026 changes proposals returned without review compliance SciENcv",
+      "reddit.sentinel-team.org GradSchool 2026 dissertation formatting graduate school rejected margins",
+      "thesis formatting service price graduate students pay dissertation format editing per page 2026",
+      "Montezuma Publishing thesis review fee SDSU students format review cost",
+      "ProQuest ETD Administrator accessibility check 2026 automated format review feature graduate school",
+      "thesis formatting returned OR rejected graduate school students 2026 deposit deadline delayed graduation",
+      "GradSchool reddit format review thesis graduate school sent back again 2026",
+      "AI dissertation format checker upload check margins page numbers table of contents university guidelines tool",
+      "checks your thesis OR check your dissertation against your university's formatting guidelines software startup",
+      "Tyton Partners Time for Class 2026 faculty generative AI use findings",
+      "Canvas breach lessons faculty backup gradebook continuity plan September OR October 2026",
+      "CanvExporter Canvas export tool faculty NWeLearn 2026",
+      "Canvas LMS backup software instructors automatic export grades submissions third-party vendor pricing",
+      "HN Algolia: ask_hn professor students (2026); story thesis (2026); story teachers grading (2026)",
+      "Subagent (teaching-tool signals): community.canvaslms.com idea conversations 2026 instructors grading; github nbgrader OR otter-grader OR prairielearn feature request 2026; Canvas course backup tool for instructors 2026; standards-based grading software higher education Canvas integration pricing; GradeCraft pricing; HN Algolia teaching, grading, LMS, Canvas outage, Gradescope, PrairieLearn queries",
+      "Subagent (course LLM budgets): instructor students API keys course budget LLM classroom 2026; LiteLLM virtual keys students class budget; OpenRouter education provisioning keys; Vocareum GenAI gateway pricing; SIGCSE 2026 LLM API access students cost; plus HN Algolia and LiteLLM issue searches",
+      "Subagent (thesis competitors): thesis format checker university formatting rules automated tool; ProQuest Accessibility Checker ETD Administrator 2026; SciSpace thesis template pricing; Paperpal OR Trinka university guidelines; PAC 2024; axesPDF pricing; CommonLook pricing; FERPA school official exception; USETDA 2026; CGS 2026 annual meeting exhibitors"
+    ],
+    "unverifiedSignals": [
+      {
+        "url": "https://careers.csudh.edu/en-us/job/549617/project-thesis-and-dissertation-review-specialist",
+        "reason": "Job posting no longer shown on the fetched page."
+      },
+      {
+        "url": "https://www.careerbuilder.com/job-details/graduate-accessibility-student-assistant-auburn-university-al--091fe72e-2f00-4ca2-b706-1366430b0421",
+        "reason": "HTTP 403."
+      },
+      {
+        "url": "https://scispace.com/formats/george-mason-university/gmu-thesis-and-dissertation",
+        "reason": "HTTP 403; SciSpace university templates are a possible competitor whose features and price could not be verified."
+      },
+      {
+        "url": "https://grad.tamu.edu/degree-completion/thesis-and-dissertation/thesis-and-dissertation-digital-accessibility.html",
+        "reason": "HTTP 404."
+      },
+      {
+        "url": "https://nwelearn2026.sched.com/event/2ToF1",
+        "reason": "HTTP 403; search snippet describes a free open-source CanvExporter backup tool presented 2026-10-23."
+      },
+      {
+        "url": "https://latexformat.netlify.app/thesis-format-checker",
+        "reason": "HTTP 404."
+      },
+      {
+        "url": "https://www.cs.umd.edu/class/fall2026/cmsc389A/faq.html",
+        "reason": "HTTP 503 (subagent); snippet says students buy Claude Pro themselves."
+      },
+      {
+        "url": "https://its.umich.edu/computing/ai/codex-classroom",
+        "reason": "HTTP 403 (subagent)."
+      },
+      {
+        "url": "https://flippa.com/12300115",
+        "reason": "Listing body truncated; financials not visible."
+      }
     ],
     "rejectedCandidates": [
       {
-        "title": "Oral Exam Desk (scheduling, question pools, and rubric scoring for oral exams in any discipline)",
-        "total": 21,
-        "reason": "Strong 2026 signal (AP coverage of Cornell, NYU, UCSD), but too close to Code Viva (2026-10-21): same oral-defense problem for instructors."
-      },
-      {
-        "title": "SME Review Room (structured SME sign-off for course modules)",
-        "total": 18,
-        "reason": "Real bottleneck in r/instructionaldesign, but review tools (Articulate Review 360 and generic proofing tools) already serve it; weak gap."
-      },
-      {
-        "title": "Coursework Authentication Log (UK and Australian folio and NEA AI authentication)",
+        "title": "Thesis Deposit Preflight (format-manual and accessibility check before thesis deposit)",
         "total": 17,
-        "reason": "Tasmanian survey shows teachers cannot prove AI use, but buyers are schools with minors and the market is outside Pisan's network."
+        "reason": "Passed Steps 4 and 5 at 23, then rescored by the adversarial reviewer to pain 3, willingnessToPay 2, reachability 3, competitiveGap 3, feasibility 3, complianceBurden 3. Reasons: format review by the thesis office is free and fixes are moving upstream into templates (https://www.overleaf.com/blog/bridging-the-accessibility-gap-why-latexs-native-pdf-tagging-matters-now) or fewer review layers (https://www.senate.illinois.edu/2025-2026/20260427senate/EP26154_FINAL_20260427.pdf); schools name the accessibility checker that counts (Acrobat at UNM and Nevada, Reno; a university-paid YuJa Panorama report at KU), so a third-party report does not replace it; UC San Diego built a free in-house checker; ProQuest plans to expand its review tool into the author submission workflow with author-driven remediation (https://cgsnet.org/wp-content/uploads/2026/03/CGS-ProQuest-Webinar-Slides_2026-final-color-contrast.pdf); per-school and per-department rule upkeep and deadline-week false positives raise build risk. The reviewer's concern that manuscripts would go to the Claude API does not apply to the design, but correcting it would not lift the total to the gate."
       },
       {
-        "title": "Lesson Visuals Generator for teachers",
+        "title": "Instructor LMS Lifeboat (nightly Canvas gradebook, roster and submission backup)",
+        "total": 17,
+        "reason": "Pain is real and verified (May 2026 Canvas breach outage during finals, HN thread https://hn.algolia.com/api/v1/items/48056931; InstructureCon notes https://onedtech.philhillaa.com/p/instructurecon-conference-notes-2026), but WTP 2: Instructure is adding backup reminders and admin gradebook exports, free tools exist (Apify actor https://apify.com/plenteous_humidifier/canvas-complete-archive, CanvExporter unverified), complianceBurden 2 (copies grades and student emails off-platform), and no evidence dated within 90 days."
+      },
+      {
+        "title": "Paper quiz builder from a question bank",
         "total": 15,
-        "reason": "r/teachingresources wish, but an AI wrapper with no data or workflow moat in a crowded market."
+        "reason": "PrairieLearn marks it high impact and scheduled for later in 2026 (https://github.com/PrairieLearn/PrairieLearn/issues/2104); overlaps the 2026-10-23 idea Variant Exam Press for the same customer."
       },
       {
-        "title": "Gradescope keyboard grading companion (browser extension)",
-        "total": 16,
-        "reason": "Capterra complaints about slow navigation, but depends on another vendor's UI and terms; fragile."
+        "title": "Exam reference-sheet manager",
+        "total": 13,
+        "reason": "Niche; one GitHub issue (https://github.com/PrairieLearn/PrairieLearn/issues/15615) and PrairieTest is likely to absorb it."
       },
       {
-        "title": "District AI Policy Implementation Kit (Ohio, North Carolina)",
+        "title": "Randomized exam seating chart generator",
         "total": 14,
-        "reason": "Deadlines are real, but first sale requires district procurement; also overlaps AI Rules Board (2026-10-24)."
+        "reason": "Low WTP and a free SIGCSE prototype exists (https://luplab.cs.ucdavis.edu/assets/lupseat/lupseat_poster.pdf, not fetched); same customer as Variant Exam Press and Proctor Witness Log."
       },
       {
-        "title": "CI test-gating advisor (LLM suggests which tests block a merge)",
+        "title": "Accessible LaTeX thesis template modernizer for graduate schools",
         "total": 15,
-        "reason": "From an Ask HN wish, but not educational, crowded by test-impact tools, and weak founder fit."
+        "reason": "Same problem as the 2026-10-29 idea Tagging Doctor for LaTeX Courses (making LaTeX PDFs accessible); Iowa State and Overleaf now ship accessible templates for free."
       },
       {
-        "title": "Peer evaluation for team projects (CATME alternative)",
-        "total": 16,
-        "reason": "Could not confirm current CATME pricing or recent complaints; student evaluation data adds FERPA burden."
+        "title": "NSF proposal compliance preflight (SciENcv, research security documentation)",
+        "total": 15,
+        "reason": "Pain evidence came only from secondary news sites; sponsored-research offices already check proposals, and buyers are institutional."
       },
       {
-        "title": "Phonics practice SaaS for K-12 teachers",
-        "total": 14,
-        "reason": "Flippa listing proves teachers pay about $20 per month, but the space is unrelated to Pisan's expertise and network."
+        "title": "NSF GRFP eligibility pre-checker",
+        "total": 10,
+        "reason": "No paying buyer; the returned-without-review problem is an NSF policy decision, not a tool gap."
+      },
+      {
+        "title": "PhD funding-gap planner",
+        "total": 9,
+        "reason": "Real distress (https://reddit.sentinel-team.org/posts/1sguveb/snapshots/2026-04-09T18%3A03%3A02.100045Z) but no product gap and no budget."
+      },
+      {
+        "title": "Environment-setup coach for self-taught learners",
+        "total": 12,
+        "reason": "AI wrapper with no workflow or data moat; learners already use general chatbots for this (https://reddit.sentinel-team.org/posts/1tqgss2/snapshots/2026-05-29T10%3A06%3A20.546655Z)."
+      },
+      {
+        "title": "No-AI practice gym for learners escaping tutorial hell",
+        "total": 13,
+        "reason": "Crowded (Exercism, Boot.dev, Codecademy) and no evidence learners would pay for a new entrant."
+      },
+      {
+        "title": "AI phonics practice SaaS for teachers",
+        "total": 12,
+        "reason": "Revenue proof exists (https://flippa.com/11990705, about $7,858 MRR) but it is an AI wrapper in K-12 reading, outside the founder's fit, with no differentiator."
+      },
+      {
+        "title": "Thesis AI and plagiarism pre-checker for students",
+        "total": 11,
+        "reason": "AI detection is unreliable and crowded; the one comparable product shows tiny revenue (https://trustmrr.com/startup/thesisdraft, $214 MRR)."
       }
     ],
-    "caveats": "Recent (last 60 days) demand signals were scarce in search results; most evidence dates from December 2025 to April 2026 or is undated institutional guidance. Reddit evidence comes from a third-party mirror (reddit.sentinel-team.org) with approximate dates derived from relative timestamps. Stanford Canvas Help and the Messiah PDF body could not be read directly (403 and unreadable PDF); their content is from search snippets. Canvas's current bank-migration reliability is unverified. The Title II April 26, 2027 deadline was verified in the 2026-10-29 run, not re-verified today. All prices marked unknown were not confirmed; all revenue figures are estimates."
+    "watchlist": [
+      {
+        "title": "Gradebook reconciliation across PrairieLearn, Gradescope and Canvas",
+        "targetCustomer": "Instructors and coordinators of large courses that grade in several tools and post final grades to Canvas.",
+        "problemStatement": "Merging CSV exports with optional questions, per-student weight overrides and Canvas ID matching is done by hand or with homebrew scripts, and percentages come out wrong.",
+        "total": 20,
+        "missedGate": "pain 3 and willingnessToPay 2; only one independent evidence page.",
+        "evidence": [
+          "https://github.com/PrairieLearn/PrairieLearn/issues/14717"
+        ],
+        "firstSeen": "2026-10-30"
+      },
+      {
+        "title": "Alternative-grading layer for Canvas and autograders",
+        "targetCustomer": "CS and STEM instructors using specifications, standards-based or mastery grading on Canvas with PrairieLearn or Gradescope.",
+        "problemStatement": "LMSs and autograders only understand points, so instructors fake standards-based grades with zero-point assessments, hacky scripts and spreadsheets to handle learning targets, resubmission tokens and letter-grade bundles.",
+        "total": 19,
+        "missedGate": "pain 3 (one GitHub RFC with 2 thumbs-up plus a position paper); total below 22.",
+        "evidence": [
+          "https://github.com/PrairieLearn/PrairieLearn/issues/14285",
+          "https://vtechworks.lib.vt.edu/items/bbdb3a44-8683-4434-be3a-8b8a00218cae",
+          "https://available-inventions.umich.edu/product/gradecraft"
+        ],
+        "firstSeen": "2026-10-30"
+      },
+      {
+        "title": "Course LLM key broker",
+        "targetCustomer": "Instructors teaching courses that use LLM APIs or coding agents without a campus AI gateway.",
+        "problemStatement": "Instructors need per-student capped API keys with model allowlists and term-end revocation; today they share keys, script OpenRouter or LiteLLM, or make students pay, and student keys leak.",
+        "total": 19,
+        "missedGate": "pain 3 and willingnessToPay 2; campus gateways, Standard Compute, Anthropic per-user spend limits and OpenAI project limits are closing the gap.",
+        "evidence": [
+          "https://community.openai.com/t/recommended-way-to-deal-with-api-key-s-for-students-in-programming-courses/335259",
+          "https://www.s-anand.net/blog/leaked-key-sociology/",
+          "https://github.com/BerriAI/litellm/issues/28750",
+          "https://standardcompute.com/llm-api-for-classrooms"
+        ],
+        "firstSeen": "2026-10-30"
+      }
+    ],
+    "caveats": "No candidate cleared the quality gate, so this file has no ideas. Sixteen candidates were scored. Only Thesis Deposit Preflight passed the initial gate (23); the adversarial reviewer rescored it to 17, so it was moved to rejectedCandidates and, per the routine, not backfilled. Three candidates scored 19 or 20 but had pain 3 and went to the watchlist. The selection constraints (half educational, an instructor or institutional buyer, a Weekend MVP plus a Multi-week idea) could not be met because nothing qualified. This file replaces an earlier schemaVersion 2 file for the same date, regenerated at the user's request; its three ideas (Paste-Safe Interactions, Agent Lab Preflight, Quiz Migration Auditor) remain in git history at commit cbf31bf, and their rows were removed from IDEAS.md because the site and index read from this file. reddit.com, stackexchange.com and api.stackexchange.com could not be fetched, so Friday's Reddit focus sources were reached only through a mirror (reddit.sentinel-team.org) and search snippets; no Microns.io education listing was found. The ADA Title II web rule now takes effect April 26, 2027 for large public entities and April 26, 2028 for small ones (https://www.reedsmith.com/articles/doj-extends-digital-accessibility-compliance-dates-under-title-ii-of-the-ada/), and applies only to public institutions. Some pages fetched by subagents (Standard Compute, GitHub issues, HN items, Phil Hill's InstructureCon notes) were verified in this run; SciSpace pages returned 403 and their features and prices are unverified."
   }
 }
