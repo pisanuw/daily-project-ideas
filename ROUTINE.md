@@ -31,7 +31,6 @@ The number of ideas varies by day. Quality is fixed; quantity is not. A day with
 - Prefer fewer, well-evidenced claims over many vague ones.
 - Never pad. Do not lower the quality gate to reach a number of ideas.
 - Ideas must not depend on selling to Pisan's own students.
-- Do not use em dashes in any text you write. Use commas, colons, or parentheses.
 
 ---
 
@@ -370,7 +369,7 @@ python3 scripts/validate_ideas.py ideas/YYYY-MM-DD.json
 
 It must print `OK`. It checks the JSON structure, required fields, allowed
 values, score sums, the quality gate, evidence independence and recency, score
-rationales, review verdicts, the watchlist, and em dashes. Do not edit the
+rationales, review verdicts, and the watchlist. Do not edit the
 script to make a file pass.
 
 Then check manually:
@@ -411,8 +410,6 @@ YYYY-MM-DD [doc] Created ideas/YYYY-MM-DD.json (schemaVersion 3, N ideas): Title
 ```
 
 If no ideas were selected, write `(schemaVersion 3, 0 ideas): none cleared the gate`.
-
-Check that no line you added to IDEAS.md or CHANGES.md contains an em dash.
 
 ## Step 10: Commit and push
 
