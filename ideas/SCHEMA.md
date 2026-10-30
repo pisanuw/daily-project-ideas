@@ -99,9 +99,11 @@ version history:
 
 Validate a v3 file with `python3 scripts/validate_ideas.py ideas/YYYY-MM-DD.json`.
 
-The website reads only `title`, `category`, `complexity`, `summary`,
-`description`, `keyFeatures`, `techStack`, and `inspiredBy` from these files;
-the commercial fields are stored but not yet rendered. `Weekend MVP` maps to
+The website renders these ideas with a commercial detail layout: score
+breakdown (with rationales and review verdict for v3), problem, customer and
+buyer, demand evidence, competitors, MVP scope, business model, validation
+test, compliance, risks, and review findings. Cards show the score out of 30.
+`build.js` passes the fields through via its `COMMERCIAL_KEYS` list. `Weekend MVP` maps to
 the Weekend tier and `Multi-week` and `Multi-month` to the Multi-week tier.
 
 ## Idea index (`ideas/index.jsonl`)

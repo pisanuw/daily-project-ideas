@@ -117,6 +117,14 @@ function parseMarkdown(text) {
 
 // ---- Normalisation --------------------------------------------------------
 
+// Fields of the commercial idea schema that the detail modal renders.
+const COMMERCIAL_KEYS = [
+  'problemStatement', 'targetCustomer', 'buyer', 'whyNow', 'founderFit',
+  'problemEvidence', 'competitors', 'mvpScope', 'pricing', 'revenueSketch',
+  'distribution', 'validationTest', 'moat', 'compliance', 'risks',
+  'scores', 'scoreRationale', 'review',
+];
+
 function normalizeIdea(raw, date, n) {
   const complexity = raw.complexity || '';
   const description = raw.description || '';
@@ -143,6 +151,10 @@ function normalizeIdea(raw, date, n) {
   if (raw.papers) base.papers = raw.papers;
   if (raw.additionalRefs) base.additionalRefs = raw.additionalRefs;
   if (raw.researchPlan) base.researchPlan = raw.researchPlan;
+  // Preserve commercial-idea fields (schemaVersion 2 and 3, see ROUTINE.md).
+  for (const key of COMMERCIAL_KEYS) {
+    if (raw[key] !== undefined && raw[key] !== null && raw[key] !== '') base[key] = raw[key];
+  }
   return base;
 }
 

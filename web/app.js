@@ -68,6 +68,7 @@
   function card(idea) {
     var tags = dateTags(idea);
     if (idea.category) tags.push(el('span', { class: 'tag', text: idea.category }));
+    if (idea.scores && idea.scores.total) tags.push(el('span', { class: 'tag tag--score', text: 'Score ' + idea.scores.total + '/30' }));
     if (idea.implemented && idea.url) tags.push(el('span', { class: 'tag tag--live', text: 'Live ↗' }));
 
     var node = el('button', { class: 'card', type: 'button' }, [
@@ -150,6 +151,198 @@
     return el('div', { class: 'detail-block' }, [el('h3', { text: title }), bodyNode]);
   }
 
+  // ---- Commercial idea detail (schemaVersion 2 and 3) ----
+
+  var SCORE_LABELS = [
+    ['pain', 'Pain'],
+    ['willingnessToPay', 'Willingness to pay'],
+    ['reachability', 'Reachability'],
+    ['competitiveGap', 'Competitive gap'],
+    ['feasibility', 'Feasibility'],
+    ['complianceBurden', 'Compliance ease'],
+  ];
+
+  function isCommercial(idea) {
+    return !!(idea.scores || idea.problemStatement);
+  }
+
+  // Only http(s) links leave the page; anything else renders as plain text.
+  function safeUrl(u) {
+    var s = String(u || '').trim();
+    return /^https?:\/\/\S+$/i.test(s) ? s : '';
+  }
+
+  function hostOf(u) {
+    try { return new URL(u).hostname.replace(/^www\./, ''); } catch (e) { return u; }
+  }
+
+  function extLink(u, text) {
+    var href = safeUrl(u);
+    if (!href) return text ? document.createTextNode(text) : null;
+    return el('a', { href: href, target: '_blank', rel: 'noopener noreferrer', text: (text || hostOf(href)) + ' ↗' });
+  }
+
+  // Text with any bare URLs turned into short links (used for rationales and sources).
+  function linkified(text, cls) {
+    if (!text) return null;
+    var p = el('p', cls ? { class: cls } : {});
+    String(text).split(/(https?:\/\/[^\s,;)]+)/g).forEach(function (part) {
+      if (!part) return;
+      p.appendChild(safeUrl(part) ? extLink(part.replace(/[.]+$/, '')) : document.createTextNode(part));
+    });
+    return p;
+  }
+
+  function para(text, cls) {
+    return text ? el('p', cls ? { class: cls, text: text } : { text: text }) : null;
+  }
+
+  function defList(pairs) {
+    var rows = [];
+    pairs.forEach(function (pair) {
+      if (!pair[1]) return;
+      rows.push(el('dt', { text: pair[0] }));
+      rows.push(el('dd', { text: pair[1] }));
+    });
+    return rows.length ? el('dl', { class: 'deflist' }, rows) : null;
+  }
+
+  function list(items, cls) {
+    if (!items || !items.length) return null;
+    return el('ul', cls ? { class: cls } : {}, items.map(function (t) { return el('li', { text: t }); }));
+  }
+
+  function scorePanel(idea) {
+    var s = idea.scores;
+    if (!s) return null;
+    var why = idea.scoreRationale || {};
+    var rows = SCORE_LABELS.map(function (pair) {
+      var v = Math.max(0, Math.min(5, Number(s[pair[0]]) || 0));
+      var item = el('div', { class: 'score-item' }, [
+        el('div', { class: 'score-row' }, [
+          el('span', { class: 'score-row__label', text: pair[1] }),
+          el('span', { class: 'score-row__bar', 'aria-hidden': 'true' }, [
+            el('span', { class: 'score-row__fill', style: 'width:' + (v * 20) + '%' }),
+          ]),
+          el('span', { class: 'score-row__val', text: v + '/5' }),
+        ]),
+      ]);
+      var reason = linkified(why[pair[0]], 'score-item__why');
+      if (reason) item.appendChild(reason);
+      return item;
+    });
+
+    var head = [el('div', { class: 'score-total' }, [
+      el('span', { class: 'score-total__num', text: String(s.total) }),
+      el('span', { class: 'score-total__of', text: 'of 30' }),
+    ])];
+    if (idea.review && idea.review.verdict) {
+      head.push(el('span', {
+        class: 'tag tag--review',
+        text: idea.review.verdict === 'pass' ? 'Passed review' : 'Rescored in review',
+      }));
+    }
+    return el('div', { class: 'score-panel' }, [
+      el('div', { class: 'score-panel__head' }, head),
+      el('div', { class: 'score-panel__rows' }, rows),
+    ]);
+  }
+
+  function evidenceList(items) {
+    if (!items || !items.length) return null;
+    return el('div', { class: 'stack' }, items.map(function (e) {
+      var meta = [extLink(e.url, e.source || null)];
+      if (e.date && e.date !== 'unknown') meta.push(el('span', { text: e.date }));
+      if (e.author && e.author !== 'unknown') meta.push(el('span', { text: e.author }));
+      return el('div', { class: 'item' }, [
+        el('div', { class: 'item__meta' }, meta),
+        para(e.summary, 'item__body'),
+      ]);
+    }));
+  }
+
+  function competitorList(items) {
+    if (!items || !items.length) return null;
+    return el('div', { class: 'stack' }, items.map(function (c) {
+      return el('div', { class: 'item' }, [
+        el('div', { class: 'item__head' }, [
+          el('span', { class: 'item__title' }, [extLink(c.url, c.name)]),
+          c.price ? el('span', { class: 'tag', text: c.price }) : null,
+        ]),
+        para(c.gap ? 'Gap: ' + c.gap : '', 'item__body'),
+      ]);
+    }));
+  }
+
+  function mvpBlock(m) {
+    if (!m) return null;
+    var box = el('div', { class: 'stack' });
+    if (m.buildEstimate) box.appendChild(el('p', {}, [el('strong', { text: 'Build estimate: ' }), m.buildEstimate]));
+    if (m.features && m.features.length) {
+      box.appendChild(el('p', { class: 'sublabel', text: 'In the MVP' }));
+      box.appendChild(list(m.features));
+    }
+    if (m.outOfScope && m.outOfScope.length) {
+      box.appendChild(el('p', { class: 'sublabel', text: 'Deferred' }));
+      box.appendChild(list(m.outOfScope, 'dim'));
+    }
+    return box.childNodes.length ? box : null;
+  }
+
+  function businessBlock(idea) {
+    var p = idea.pricing || {};
+    var box = el('div', { class: 'stack' }, [
+      defList([
+        ['Pricing model', p.model],
+        ['Price point', p.pricePoint],
+        ['Why this price', p.rationale],
+        ['Revenue sketch', idea.revenueSketch],
+        ['First 10 customers', idea.distribution],
+        ['Moat', idea.moat],
+      ]),
+    ]);
+    return box.childNodes.length ? box : null;
+  }
+
+  function riskList(items) {
+    if (!items || !items.length) return null;
+    return el('ul', {}, items.map(function (r) {
+      return el('li', {}, [r.risk || '', r.mitigation ? el('span', { class: 'dim', text: ' Mitigation: ' + r.mitigation }) : null]);
+    }));
+  }
+
+  function renderCommercial(idea, frag) {
+    var v = idea.validationTest || {};
+    var blocks = [
+      scorePanel(idea),
+      detailSection('Problem', para(idea.problemStatement, 'problem')),
+      detailSection('What it is', para(idea.description)),
+      detailSection('Who it is for', defList([
+        ['Target customer', idea.targetCustomer],
+        ['Buyer', idea.buyer],
+        ['Why now', idea.whyNow],
+        ['Founder fit', idea.founderFit],
+      ])),
+      detailSection('Demand evidence', evidenceList(idea.problemEvidence)),
+      detailSection('Competitors', competitorList(idea.competitors)),
+      detailSection('Key features', list(idea.keyFeatures)),
+      detailSection('MVP scope', mvpBlock(idea.mvpScope)),
+      detailSection('Business model', businessBlock(idea)),
+      detailSection('Validation test', defList([
+        ['Method', v.method],
+        ['Go if', v.successCriteria],
+        ['Cost', v.cost],
+      ])),
+      detailSection('Compliance', list(idea.compliance)),
+      detailSection('Risks', riskList(idea.risks)),
+      detailSection('Adversarial review', para(idea.review && idea.review.findings)),
+      detailSection('Notes', para(idea.notes)),
+      detailSection('Tech stack', para(idea.techStack)),
+      detailSection('Inspired by', linkified(idea.inspiredBy, 'inspired')),
+    ];
+    blocks.forEach(function (b) { if (b) frag.appendChild(b); });
+  }
+
   function openModal(idea) {
     modalBody.innerHTML = '';
     var tags = [];
@@ -164,6 +357,24 @@
       el('div', { class: 'detail__tags' }, tags),
     ]);
 
+    if (isCommercial(idea)) {
+      renderCommercial(idea, frag);
+    } else {
+      renderLegacy(idea, frag);
+    }
+
+    var links = [];
+    if (idea.url) links.push(el('a', { class: 'btn-link', href: idea.url, target: '_blank', rel: 'noopener', text: 'View live project ↗' }));
+    if (idea.repo) links.push(el('a', { class: 'btn-link btn-link--ghost', href: idea.repo, target: '_blank', rel: 'noopener', text: 'Source code ↗' }));
+    if (links.length) frag.appendChild(el('div', { class: 'detail__links' }, links));
+
+    modalBody.appendChild(frag);
+    modal.hidden = false;
+    document.body.style.overflow = 'hidden';
+  }
+
+  // Side projects, classroom assignments, and research ideas (pre-2026-10-21).
+  function renderLegacy(idea, frag) {
     if (idea.description) frag.appendChild(detailSection('Description', el('p', { text: idea.description })));
     if (idea.notes) frag.appendChild(detailSection('Notes', el('p', { text: idea.notes })));
 
@@ -181,7 +392,7 @@
       idea.papers.forEach(function (p) {
         var paperEl = el('div', { class: 'research-paper' }, [
           el('div', { class: 'research-paper__title', text: p.title }),
-          el('div', { class: 'research-paper__meta', text: p.authors + ' — ' + p.venue + ' ' + p.year }),
+          el('div', { class: 'research-paper__meta', text: p.authors + ', ' + p.venue + ' ' + p.year }),
         ]);
         if (p.abstract) paperEl.appendChild(el('p', { class: 'research-paper__abstract', text: p.abstract }));
         if (p.relevance) paperEl.appendChild(el('p', { class: 'research-paper__relevance', text: 'Relevance: ' + p.relevance }));
@@ -198,7 +409,7 @@
       var refsDiv = el('div', { class: 'research-refs' });
       idea.additionalRefs.forEach(function (r) {
         var refEl = el('div', { class: 'research-ref' });
-        var meta = r.authors ? r.authors + ' — ' + r.venue : r.venue;
+        var meta = r.authors ? r.authors + ', ' + r.venue : r.venue;
         refEl.appendChild(el('div', { class: 'research-ref__title', text: r.title }));
         refEl.appendChild(el('div', { class: 'research-ref__meta', text: meta }));
         if (r.relevance) refEl.appendChild(el('p', { class: 'research-ref__relevance', text: r.relevance }));
@@ -220,7 +431,7 @@
           var li = el('li', {}, [
             el('strong', { text: liText }),
           ]);
-          if (m.deliverable) li.appendChild(document.createTextNode(' — ' + m.deliverable));
+          if (m.deliverable) li.appendChild(document.createTextNode(': ' + m.deliverable));
           milestoneList.appendChild(li);
         });
         planDiv.appendChild(milestoneList);
@@ -234,27 +445,18 @@
       if (plan.risks && plan.risks.length) {
         var riskList = el('ul', { class: 'research-plan__risks' });
         plan.risks.forEach(function (r) {
-          riskList.appendChild(el('li', { text: r.risk + ' — Mitigation: ' + r.mitigation }));
+          riskList.appendChild(el('li', { text: r.risk + ' Mitigation: ' + r.mitigation }));
         });
         planDiv.appendChild(el('div', {}, [el('strong', { text: 'Risks:' }), riskList]));
       }
 
       if (typeof plan.humanSubjects === 'boolean') {
-        var hsText = plan.humanSubjects ? 'Requires IRB approval (human subjects involved).' : 'No human subjects — no IRB required.';
+        var hsText = plan.humanSubjects ? 'Requires IRB approval (human subjects involved).' : 'No human subjects, so no IRB required.';
         planDiv.appendChild(el('p', { class: 'research-plan__irb', text: hsText }));
       }
 
       frag.appendChild(detailSection('3-6 Month Research Plan', planDiv));
     }
-
-    var links = [];
-    if (idea.url) links.push(el('a', { class: 'btn-link', href: idea.url, target: '_blank', rel: 'noopener', text: 'View live project ↗' }));
-    if (idea.repo) links.push(el('a', { class: 'btn-link btn-link--ghost', href: idea.repo, target: '_blank', rel: 'noopener', text: 'Source code ↗' }));
-    if (links.length) frag.appendChild(el('div', { class: 'detail__links' }, links));
-
-    modalBody.appendChild(frag);
-    modal.hidden = false;
-    document.body.style.overflow = 'hidden';
   }
 
   function closeModal() {

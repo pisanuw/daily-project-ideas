@@ -449,3 +449,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-10-30 [code] Added scripts/validate_ideas.py (v3 schema and gate checks) and scripts/build_index.py, which regenerates ideas/index.jsonl (603 ideas) for full-history dedup.
 
 2026-10-30 [doc] Updated ideas/SCHEMA.md (v2/v3, index, research marked legacy), README, BRIEFING, and the site description in build.js for the commercial, variable-count routine.
+
+2026-10-30 [code] Site renders commercial ideas: score card on each card; detail modal shows scores, rationale, evidence, competitors, MVP, pricing, validation, risks, review. Removed em dashes from UI copy.
