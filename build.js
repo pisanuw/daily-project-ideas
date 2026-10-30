@@ -230,7 +230,7 @@ const META = {
   title: 'Daily Project Ideas',
   tagline: 'A fresh batch of buildable software project ideas, every day.',
   description:
-    'Every morning a Claude Code routine scans Reddit, Hacker News, and GitHub for what people are actually building, then curates three concrete project ideas: side projects, teaching tools, and classroom assignments. Each idea is sized by effort using a chili-pepper scale, from a single weekend to a multi-week course project. The routine also generates one research idea grounded in recent CS education conference papers (SIGCSE, ITiCSE), complete with a 3-6 month research plan. Browse by tier below, or expand a card for the full brief.',
+    'Every morning a Claude Code routine looks for evidence of real demand (instructor complaints, feature requests, products people already pay for, policy changes, and CS education research) and turns it into commercially viable software ideas, mostly educational. Each idea has to clear a quality bar backed by cited evidence, so some days bring several ideas and some bring none. Ideas are sized by effort using a chili-pepper scale, from a single weekend to a multi-week build. Earlier ideas include side projects, classroom assignments, and research directions grounded in SIGCSE and ITiCSE papers. Browse by tier below, or expand a card for the full brief.',
 };
 
 // ---- Emit -----------------------------------------------------------------

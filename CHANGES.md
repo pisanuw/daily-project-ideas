@@ -443,3 +443,9 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-10-29 [note] Claimed Pull the Pin (2026-10-18 n2) as in progress: signal-level SAP-1 style 8-bit computer, fault injector, probe budget, consistent-fault set. No LLM.
 
 2026-10-29 [note] Pull the Pin (2026-10-18 n2) marked implemented: live at pull-the-pin-lab.netlify.app, repo Claude-capstone/pull-the-pin. SAP-1 fault diagnosis, consistent-fault set; 74 tests.
+
+2026-10-30 [decision] Routine moves to schemaVersion 3: 0 to 6 ideas per day behind a quality gate, adversarial review, near-miss watchlist, weekday source rotation. Full prompt in ROUTINE.md.
+
+2026-10-30 [code] Added scripts/validate_ideas.py (v3 schema and gate checks) and scripts/build_index.py, which regenerates ideas/index.jsonl (603 ideas) for full-history dedup.
+
+2026-10-30 [doc] Updated ideas/SCHEMA.md (v2/v3, index, research marked legacy), README, BRIEFING, and the site description in build.js for the commercial, variable-count routine.

@@ -78,9 +78,47 @@ picks up JSON automatically on the next build.
 
 ---
 
-## Research idea format (n=4 each day)
+## Commercial product ideas (schemaVersion 2 and 3)
 
-Each daily JSON file includes a fourth entry with `"complexity": "Research"`.
+Since 2026-10-21 the routine writes commercial product ideas instead of the
+format above. `ROUTINE.md` (Step 7) is the authoritative field list; the
+version history:
+
+- **schemaVersion 2** (from 2026-10-21 until v3 replaced it): exactly 3 ideas per day,
+  each with `problemStatement`, `targetCustomer`, `buyer`, `problemEvidence`,
+  `competitors`, `pricing`, `scores` (six criteria, `total` out of 30), and so
+  on. `complexity` is `Weekend MVP`, `Multi-week`, or `Multi-month`.
+- **schemaVersion 3** (introduced 2026-10-30): 0 to 6 ideas per day, each of which
+  cleared a quality gate (total at least 22, pain at least 4,
+  willingnessToPay at least 3, 2 independent evidence items, one within 90
+  days). Adds per idea `scoreRationale` (one cited line per score), `review`
+  (adversarial review verdict and findings), and `author` on each evidence
+  item. Adds at the top level `complete: true`, and in `runNotes`:
+  `weekday`, `focusSources`, `unverifiedSignals`, and `watchlist` (near
+  misses carried to the next run for up to 14 days).
+
+Validate a v3 file with `python3 scripts/validate_ideas.py ideas/YYYY-MM-DD.json`.
+
+The website reads only `title`, `category`, `complexity`, `summary`,
+`description`, `keyFeatures`, `techStack`, and `inspiredBy` from these files;
+the commercial fields are stored but not yet rendered. `Weekend MVP` maps to
+the Weekend tier and `Multi-week` and `Multi-month` to the Multi-week tier.
+
+## Idea index (`ideas/index.jsonl`)
+
+Derived file, one JSON object per line for every idea ever written (JSON and
+Markdown days): `date`, `n`, `slug`, `title`, `category`, `complexity`,
+`targetCustomer`, `problemStatement`. Regenerate it with
+`python3 scripts/build_index.py`; never edit it by hand. The routine uses it
+to deduplicate new ideas against the full history. `build.js` ignores it.
+
+---
+
+## Research idea format (legacy, n=4)
+
+Through 2026-10-18 each daily JSON file included a fourth entry with
+`"complexity": "Research"`. The commercial routine no longer generates these;
+the format is kept because older files and occasional manual additions use it.
 Research ideas are grounded in one or more conference papers and include a
 detailed research plan. They appear in a separate **Research Ideas** section
 on the website.

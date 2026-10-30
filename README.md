@@ -2,24 +2,17 @@
 
 **Live site: https://daily-project-ideas.netlify.app/**
 
-Automated daily project ideas curated by a Claude Code Remote Trigger.
+Automated daily product ideas curated by a Claude Code scheduled routine.
 
-Every day at 5am, Claude searches Reddit and the web for interesting project ideas and commits 3 new ones here. It also generates 1 research idea grounded in recent CS education conference papers (SIGCSE TS 2026, ITiCSE 2025), complete with source papers, additional references, and a 3-6 month research plan.
+Every day at 5am, Claude gathers demand signals (instructor complaints, feature
+requests, proof that people pay for similar tools, policy changes, funding
+solicitations, and CS education research) and turns them into commercially
+viable software ideas, with a preference for educational software. Each idea
+must clear a quality gate backed by cited evidence, so the count varies from 0
+to 6 a day. Near misses go on a watchlist and get a second look on later runs.
 
-## Sources (by priority)
-
-- [r/SideProject](https://www.reddit.com/r/SideProject/)
-- [r/sideprojects](https://www.reddit.com/r/sideprojects/)
-- [r/ProductHunters](https://www.reddit.com/r/ProductHunters/)
-- [r/coolgithubprojects](https://www.reddit.com/r/coolgithubprojects/)
-- [r/AI_Agents](https://www.reddit.com/r/AI_Agents/)
-
-## Idea Categories (by priority)
-
-1. Side projects
-2. Tools for teaching
-3. Classroom assignments
-4. Anything useful for students
+The full routine, including sources, scoring, the quality gate, and the
+adversarial review step, is in [ROUTINE.md](ROUTINE.md).
 
 ## Website
 
@@ -31,10 +24,15 @@ Multi-week 🌶️🌶️🌶️) plus an Implemented section. Build it with `no
 
 ## Structure
 
-- `ideas/YYYY-MM-DD.md` - Daily idea files (`.json` also supported, preferred — see `ideas/SCHEMA.md`)
-- `IDEAS.md` - Running index of all ideas
+- `ROUTINE.md` - The daily routine prompt (reference copy; the scheduled task runs its own copy)
+- `ideas/YYYY-MM-DD.json` - Daily idea files (older days may be `.md`; see `ideas/SCHEMA.md`)
+- `ideas/index.jsonl` - Derived index of every idea, used for deduplication (`scripts/build_index.py`)
+- `IDEAS.md` - Running table of all ideas with scores and a Rating column for feedback
+- `scripts/validate_ideas.py` - Validates a daily file against the schema and quality gate
+- `scripts/build_index.py` - Regenerates `ideas/index.jsonl`
+- `scripts/notify-implemented.mjs` - Daily email digest of newly implemented projects
 - `build.js` - Zero-dependency build: parses `ideas/` into `dist/`
 - `web/` - Static site source (HTML/CSS/JS), copied into `dist/` at build time
 - `implemented.json` - Hand-curated list of ideas that have been built
-- `research-papers/papers-index.json` - Extracted metadata for all papers from local proceedings
+- `research-papers/papers-index.json` - Paper metadata used by the older research-idea format
 - `DEPLOY.md` - How to preview locally and deploy to Netlify
