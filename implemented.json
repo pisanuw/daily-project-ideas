@@ -432,6 +432,16 @@
       "url": "https://leap-second-lab.netlify.app",
       "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/leap-second-lab",
       "implementedOn": "2026-10-31"
+    },
+    {
+      "ref": {
+        "date": "2026-10-10",
+        "n": 1
+      },
+      "notes": "Built in one session as a static TypeScript app with no backend. The {p,q} polygon centred at the origin splits into 2p right triangles with angles π/p, π/q and π/2, and the three mirrors of that triangle generate the tiling. Isometries are stored as SU(1,1) Möbius maps z ↦ (αz + β)/(β̄z + ᾱ), applied to z or z̄, and renormalised after every product. Tiles are generated breadth-first from the tile under the screen centre, up to a depth limit and a minimum on-screen size. Each stroke is folded into the fundamental triangle once and redrawn under every group element (or only the orientation-preserving coset in rotation mode), so freehand doodles become Circle Limit patterns and the geodesic brush draws arcs orthogonal to the rim. Widths are stored in hyperbolic units, so copies thin towards the boundary at the right rate. Dragging applies a pure hyperbolic translation, and after each step the view is swapped for an equivalent one composed with a group element, which keeps precision however far you travel (a test drags about 360 units). Double-clicking glides a point to the centre. A measure tool gives hyperbolic distance and a triangle's angles, angle sum and area. SVG export uses real arcs, and share links pack tiling, symmetry, view and strokes into a compact binary in the URL fragment. Batching shading fills and stroke copies took a {7,3} frame from about 900 ms to 70 ms in headless Chromium. Limitations: Canvas 2D only, with no WebGL path for very deep tilings; one width per stroke, so long strokes do not taper; freehand segments are polylines rather than geodesic pieces; measurement marks are not shared or exported; no pinch-zoom. 58 vitest tests, 100% statement coverage on core.",
+      "url": "https://poincare-paint-lab.netlify.app",
+      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/poincare-paint",
+      "implementedOn": "2026-10-31"
     }
   ]
 }
