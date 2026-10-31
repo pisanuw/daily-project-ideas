@@ -438,8 +438,10 @@
         "date": "2026-09-26",
         "n": 2
       },
-      "placeholder": true,
-      "notes": "In progress since 2026-10-31"
+      "notes": "Built in one session as a static TypeScript app with no backend and no LLM. One Redis-like console (SET with EX, GET, DEL, EXPIRE, TTL, TICK, RANGE, FILL, CAPACITY, SEED) drives four buildings at once: a separate-chaining hash map that doubles past load 0.75, a CLRS B-tree of minimum degree 2 (split on the way down on insert; borrow or merge on the way down on delete), a skip list with seeded p = 1/2 towers so every student sees the same city, and a 5-slot LRU cache (hash index plus recency list) that forgets on purpose. Each building reports structural events (rehash, collision, split, grow, merge, borrow, shrink, promote, evict), highlights the keys that moved, and keeps a cost meter of probes, comparisons and moves with last, amortized (running mean) and worst-case figures; RANGE shows ordered structures walking forward while the hash map and cache scan everything. TTLs use a logical clock swept on TICK. Five predict-then-reveal guided tours are built in, and instructors edit tour JSON in the page and share it in the URL fragment, replacing the suggested Supabase storage. Keyboard navigation between buildings, a polite live region, and a text narration mode that describes every building in words. Limitations: changes appear as highlights and event notes rather than tweened animation, there is no 3D view, the B-tree degree and initial bucket count are fixed, and the city holds at most 40 keys. 71 vitest tests (including a 600-step randomized B-tree invariant check and a test that every tour answer matches what the city does), 99.8% statement coverage on core.",
+      "url": "https://data-structure-city.netlify.app",
+      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/data-structure-city",
+      "implementedOn": "2026-10-31"
     },
     {
       "ref": {
