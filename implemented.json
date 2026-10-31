@@ -428,8 +428,10 @@
         "date": "2026-10-17",
         "n": 2
       },
-      "placeholder": true,
-      "notes": "In progress since 2026-10-31"
+      "notes": "Built in one session as a static TypeScript app with no backend and no LLM. A small leap-second-aware time library (TAI scale, the 27 IERS leap seconds, optional hypothetical negative leaps, 23:59:60.x labels, GPS week/time-of-week, the value a stepping kernel reports) drives four tabs. The timeline plots TAI, GPS, Unix and UT1 against UTC from 1972 with a continuous-UTC projection whose cutover date, excess length of day and growth are inputs. The step vs smear tab compares POSIX step, a 24-hour linear smear, UTC-SLS and a monotonic clock around 2016-12-31T23:59:60, and replays a seeded two-host request log that counts reordered lines, receives before sends, backwards clocks and mismeasured round trips. The library bench shows outputs recorded from real runs of Node Date, the Temporal polyfill, CPython and PostgreSQL 16 on ten edge cases (for example, Temporal clamps :60 to :59, and Postgres accepts :60 but rejects :60.5), each with a hand-written note in place of the suggested Claude explainer. Four fix-the-bug exercises (timeout, rate limiter, billing duration, log merge) run hidden tests in a Web Worker against a simulated stepping clock. Limitations: UT1 before the cutover is a schematic sawtooth, not IERS data, and the projection is a two-parameter model. The 2027-05-20 cutover default comes from the idea brief and is unverified (the 2022 CGPM resolution only says by or before 2035). The bench is recorded rather than live. The exercises are JavaScript only, with no Pyodide. 47 vitest tests, 99.7% statement coverage on core.",
+      "url": "https://leap-second-lab.netlify.app",
+      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/leap-second-lab",
+      "implementedOn": "2026-10-31"
     }
   ]
 }
