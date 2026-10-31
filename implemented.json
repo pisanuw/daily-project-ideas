@@ -438,8 +438,10 @@
         "date": "2026-10-09",
         "n": 1
       },
-      "placeholder": true,
-      "notes": "In progress since 2026-10-31"
+      "notes": "Built in one session as a static TypeScript app with no backend and no LLM. Four chasers on an original 28 x 31 maze (plus a 15 x 11 tracing maze) move by the documented arcade target-tile rule: at each tile take the exit closest in a straight line to a target, never turn back, break ties up > left > down > right. The Chaser targets the runner, the Ambusher four tiles ahead (four up and four left when facing up, with the overflow bug on a toggle), the Flanker doubles the vector from the Chaser to two tiles ahead, and Shy retreats to its corner inside eight tiles. The level 1 scatter/chase schedule, forced reversals, fright and level 1 speeds are modelled. A canvas overlay draws each target tile, the Flanker's construction, Shy's circle and the squared distance on every candidate exit; a Ghost cam table lists the next and last decision; the runner can be on autopilot, steered, driven to a clicked tile or parked; play steps one tick forward or back or to the next real decision. Six lesson scenarios cover a tie at distance 41, the overflow bug, the Flanker's vector, Shy never closing in, the mode-change reversal and a greedy Chaser that circles forever while a BFS ghost arrives in two seconds. A Web Worker races target-tile ghosts against BFS and A* pursuit: on the lab maze the shortest-path pack catches about twice as often but is bunched 87% of chase time against 67%, and on the small maze it catches less. Limitations: one autopilot opponent drives the comparison, so it is a demonstration rather than a benchmark; only level 1 is modelled; ghosts decide on arriving at a tile rather than one tile ahead, leave the house on a timer, and eaten ghosts return by shortest path; there are no dots, lives or score. 55 vitest tests, 99.6% statement coverage on core.",
+      "url": "https://four-ghosts-four-targets.netlify.app",
+      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/four-ghosts",
+      "implementedOn": "2026-10-31"
     }
   ]
 }

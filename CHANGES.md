@@ -469,3 +469,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-10-31 [doc] Extra run (random sources A5 A1 B1 C9 C8) on ideas/2026-10-31.json added 0 ideas: none cleared the gate
 
 2026-10-31 [note] Claimed Four Ghosts, Four Targets (2026-10-09 n1) as in progress: target-tile ghost AI lab with original mazes, step-through decisions, BFS/A* comparison. No LLM.
+
+2026-10-31 [note] Four Ghosts, Four Targets (2026-10-09 n1) marked implemented: live at four-ghosts-four-targets.netlify.app, repo Claude-capstone/four-ghosts. Original maze, BFS/A* race; 55 tests.
