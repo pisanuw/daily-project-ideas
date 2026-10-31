@@ -451,3 +451,15 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-10-30 [doc] Updated ideas/SCHEMA.md (v2/v3, index, research marked legacy), README, BRIEFING, and the site description in build.js for the commercial, variable-count routine.
 
 2026-10-30 [code] Site renders commercial ideas: score card on each card; detail modal shows scores, rationale, evidence, competitors, MVP, pricing, validation, risks, review.
+
+2026-10-30 [doc] Created ideas/2026-10-30.json (schemaVersion 3, 0 ideas): none cleared the gate
+
+2026-10-31 [code] Site footer: added a contact line (all-projects link, builder@pisan.me, funding note) matching the footer on the Claude-capstone apps; gave .footer its own spacing and divider.
+
+2026-10-31 [decision] Footer contact line now uses the owner's wording, same as the Claude-capstone apps, signed "Professor Yusuf Pisan".
+
+2026-10-31 [doc] Created ideas/2026-10-31.json (schemaVersion 3, 0 ideas): none cleared the gate
+
+2026-10-31 [note] Claimed 23:59:60 (2026-10-17 n2) as in progress: leap-second timekeeping lab, step vs smear simulator, recorded library bench. No LLM.
+
+2026-10-31 [note] 23:59:60 (2026-10-17 n2) marked implemented: live at leap-second-lab.netlify.app, repo Claude-capstone/leap-second-lab. Time scales, clocks, recorded bench; 47 tests.
