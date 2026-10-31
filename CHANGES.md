@@ -479,3 +479,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-10-31 [note] Tamerlane Board (2026-10-15 n1) marked implemented: live at tamerlane-board.netlify.app, repo Claude-capstone/tamerlane-board. Notation-driven pieces, engine, piece lab; 82 tests.
 
 2026-10-31 [note] Claimed GPU Parallel Puzzler (2026-06-23 n2) as in progress: simulated SIMT GPU, kernel puzzles, deterministic hints instead of Claude.
+
+2026-10-31 [note] Tiny Brains League (2026-09-26 n3) marked implemented: live at tiny-brains-league.netlify.app, repo Claude-capstone/tiny-brains-league. 5k-param Connect Four nets, BT-Elo ladder, replay; 46 tests.

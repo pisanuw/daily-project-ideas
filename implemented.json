@@ -448,8 +448,10 @@
         "date": "2026-09-26",
         "n": 3
       },
-      "placeholder": true,
-      "notes": "In progress since 2026-10-31"
+      "notes": "Built in one session as a static TypeScript app with no backend and no LLM. Connect Four 7x6 with a fixed network interface: an MLP with 84 inputs (mover's pieces, opponent's pieces), up to three hidden layers (relu or tanh) and 7 linear outputs, playing the legal column with the highest logit, under a 5,000-parameter budget. Submissions are plain JSON weight files validated for shape, finiteness and budget, so the ladder never runs student code. Two in-browser training methods run in a Web Worker: imitation of a house bot (Scripted heuristic, Lookahead-2 or Lookahead-4; every tied-best column as a soft target, mirrored data, Adam on a legal-masked softmax) and a truncation-selection evolution strategy that can fine-tune an imitation net. House bots are Random, a scripted win/block/avoid-blunder heuristic and depth-4 alpha-beta. The round-robin ladder plays fixed two-ply openings with colour swaps and rates bots with an order-independent Bradley-Terry fit on the Elo scale (Random pinned at 1000), plus an efficiency board of Elo above Random per 1k parameters. Milestone badges (90% vs Random, above 50% vs Scripted, ladder rank), a replay viewer with per-ply network probabilities and missed-win/missed-block/played-under-a-win flags, an experiment log that exports a Markdown or CSV ablation table, and a NumPy reference runtime checked against the browser by a 131-position parity fixture. The suggested Flask server, React viewer and Supabase storage are replaced by the browser and localStorage. Limitations: no shared server or accounts (the instructor runs the official ladder by loading every file into one browser), single-threaded JS training, Connect Four only, no built-in self-play. 46 vitest tests, 100% statement coverage on core.",
+      "url": "https://tiny-brains-league.netlify.app",
+      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/tiny-brains-league",
+      "implementedOn": "2026-10-31"
     },
     {
       "ref": {
