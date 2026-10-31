@@ -7,7 +7,12 @@
     "weekday": "Saturday",
     "focusSources": [
       "University procurement and RFP portals",
-      "HigherEdJobs and other higher-ed job postings"
+      "HigherEdJobs and other higher-ed job postings",
+      "A12 Ask HN",
+      "A8 K-12 and learner Reddit",
+      "B6 Verified revenue",
+      "C10 Change events",
+      "B3 Indie Hackers and Starter Story"
     ],
     "searches": [
       "university RFP 2026 software instructional technology request for proposals faculty",
@@ -45,7 +50,32 @@
       "subagent: Ask HN teaching programming course 2026 students AI tools instructors (plus HN Algolia comment searches)",
       "subagent: Qualtrics university license ending 2026 researchers survey alternative",
       "subagent: decodable texts generator teachers science of reading AI phonics scope and sequence complaint 2026",
-      "subagent: NVivo subscription price 2026 PhD students complaint Dedoose Delve alternative"
+      "subagent: NVivo subscription price 2026 PhD students complaint Dedoose Delve alternative",
+      "Ask HN tool for teachers \"I wish\" 2026",
+      "news.ycombinator.com Ask HN teaching programming students AI October 2026",
+      "hn.algolia ask_hn search_by_date: teachers",
+      "hn.algolia comments: \"I would pay\" students (since 2025-09)",
+      "hn.algolia comments: \"as a teacher\" (since 2025-09)",
+      "hn.algolia comments: \"I teach\" students (since 2025-09)",
+      "hn.algolia stories+comments: homeschool (since 2026-04)",
+      "hn.algolia ask_hn: students (since 2025-08)",
+      "hn.algolia comments: tutor (since 2025-09)",
+      "hn.algolia \"Ask HN\" teacher OR professor tool 2026 grading",
+      "r/Teachers is there an app 2026",
+      "r/CSEducation GitHub Classroom alternative 2026",
+      "reddit r/Teachers October 2026 spreadsheet workaround \"takes hours\" every week",
+      "r/CSEducation 2026 AP Computer Science teacher need tool autograder high school",
+      "r/learnprogramming \"is there a tool\" 2026",
+      "TrustMRR education app revenue",
+      "trustmrr.com/category/education (fetched)",
+      "Indie Hackers edtech MRR tutors teachers 2026",
+      "Starter Story teacher side business software revenue 2026",
+      "\"shutting down\" teachers tool October 2026 alternative",
+      "price increase teachers edtech free plan removed 2026",
+      "\"will be discontinued\" OR \"sunsetting\" classroom app teachers export data deadline 2026",
+      "Instructure Canvas Free-for-Teacher discontinued 2026 breach teachers alternative",
+      "\"Free-for-Teacher\" Canvas permanently discontinued export courses instructors",
+      "Kahoot OR Quizlet OR Blooket OR Gimkit OR Edpuzzle price increase teachers angry 2026"
     ],
     "unverifiedSignals": [
       {
@@ -79,6 +109,30 @@
       {
         "url": "https://apuo.ca/?p=19518",
         "reason": "Returned a bot-check page."
+      },
+      {
+        "url": "https://www.classcentral.com/report/duolingo-for-schools-shutting-down/",
+        "reason": "HTTP 403 on fetch."
+      },
+      {
+        "url": "https://xdaforums.com/t/closed-lego-ev3-classroom-app-discontinued-and-files-stuck-in-sandbox.4797889/",
+        "reason": "HTTP 403 on fetch."
+      },
+      {
+        "url": "https://community.instructure.com/en/discussion/666337/i-need-to-recover-all-my-courses-hosted-on-canvas-free-for-teachers-is-there-an-urgent-solution",
+        "reason": "Fetch returned only the page title; no date, author or replies."
+      },
+      {
+        "url": "https://news.ycombinator.com/item?id=49989791",
+        "reason": "HTTP 429 on fetch; only the Algolia listing (2026-10-07, 1 point, 0 comments) was seen."
+      },
+      {
+        "url": "https://www.reddit.com/r/CSEducation/top/.json?t=month&limit=40",
+        "reason": "reddit.com cannot be fetched from this session."
+      },
+      {
+        "url": "https://trustmrr.com/startup/exam-predictor",
+        "reason": "Search snippet claimed about $14k 30-day revenue; the fetched page shows $51 all-time and no subscriptions, so the snippet figure was discarded."
       }
     ],
     "rejectedCandidates": [
@@ -141,6 +195,61 @@
         "title": "Grade-cap (A-share) distribution tool for Canvas",
         "total": 12,
         "reason": "Driven by a single institution's 20% A cap (Harvard Crimson, Sept 2026); no broader demand."
+      },
+      {
+        "title": "Canvas Free-for-Teacher course rescue (convert stranded .imscc exports for independent educators)",
+        "total": 16,
+        "reason": "Real, recent pain (LMSpedia 2026-09-28 on the Oct 6 final export window and Canvas Lite's Veriff ID check; Brave Learn 2026-09-06; a Hall Attorneys class action), but Instructure's free Canvas Lite and ProfDesk ($5/month, imports .imscc directly, per https://bravelearn.com/canvas-free-for-teacher-is-gone-what-are-the-best-alternatives-in-2026/) already cover it, and the need is a one-time migration (competitiveGap 1, willingnessToPay 2)."
+      },
+      {
+        "title": "Whiteboard replacement for tutors after Microsoft Whiteboard dropped personal accounts",
+        "total": 13,
+        "reason": "Cutoff on 2026-09-25 is real (https://innvesti.com/reports/microsoft-whiteboard-personal-shutdown-alternatives-2026/) but cnvs.app, Excalidraw, tldraw and Whiteboard.fi are free; no gap."
+      },
+      {
+        "title": "Duolingo for Schools replacement for language teachers",
+        "total": 12,
+        "reason": "Class Central report could not be fetched; the shutdown is July 2027; Ellii, Busuu, Quizlet and others already pitch to displaced teachers; K-12."
+      },
+      {
+        "title": "LEGO EV3 Classroom stranded-project exporter",
+        "total": 11,
+        "reason": "Only evidence (XDA forum) returned 403; free MakeCode and Pybricks cover EV3 programming; no willingness to pay."
+      },
+      {
+        "title": "Deterministic math-fluency practice generator for homeschool parents",
+        "total": 13,
+        "reason": "Single HN Show HN thread (Mathy, about 2026-09-26) where one homeschool parent says AI generates poor question forms; Mathy itself is free, and IXL and Khan Academy dominate."
+      },
+      {
+        "title": "Handwritten-math markup tutor for homeschoolers",
+        "total": 11,
+        "reason": "Only one comment ('need to test it for homeschooling') on the Penmentor Show HN (https://news.ycombinator.com/item?id=50167604); a showcase, not demand."
+      },
+      {
+        "title": "Exercise kits for instructor-led Claude Code and coding-agent workshops",
+        "total": 14,
+        "reason": "One Ask HN post (2026-10-07, 0 comments, page not fetched); free vendor courses exist; no willingness-to-pay evidence."
+      },
+      {
+        "title": "Predicted AP/SAT practice exams for students",
+        "total": 9,
+        "reason": "TrustMRR shows Exam Predictor at $51 all-time revenue with no subscriptions (https://trustmrr.com/startup/exam-predictor); crowded student test-prep market."
+      },
+      {
+        "title": "IB essay and internal-assessment marking assistant",
+        "total": 13,
+        "reason": "Comparable product on TrustMRR earns about $422 MRR from 24 subscriptions (https://trustmrr.com/startup/marksyib), showing small demand; learner and K-12 market outside founder fit; no pain evidence fetched."
+      },
+      {
+        "title": "Grading help for adjunct lecturers without TA hours",
+        "total": 17,
+        "reason": "New HN comments (50234604, 50271296) sit in the same Berkeley-homework thread already cited by the watchlist entry 'Attempt-First Feedback Desk', so they add no independent evidence; folded into that entry."
+      },
+      {
+        "title": "Student cloud-compute credits after DigitalOcean ended its student promotion",
+        "total": 10,
+        "reason": "One HN post from 2026-06-12 with no comments; GitHub Student Developer Pack and cloud vendors' education credits remain."
       }
     ],
     "watchlist": [
@@ -227,6 +336,6 @@
         "firstSeen": "2026-10-30"
       }
     ],
-    "caveats": "No candidate cleared the quality gate, so this file has no ideas. Eighteen candidates were scored (including three carried from the watchlist); the best scored 21 (Orphaned Embed Rescue, held back by free replacements and a one-time migration need). Saturday's focus sources (university RFP portals and job postings) mostly surfaced enterprise solicitations (LMS, syllabus management, enterprise AI platforms, TAMU-RFP-26-5082) that fail the procurement rule, and samsearch.co RFP pages were behind a Cloudflare check. The three watchlist entries carried from 2026-10-30 got no new fetched evidence: PrairieLearn issue 14717 has had no comments since 2026-04-28, and the LLM key broker search found only an April 2026 blog and university gateway docs (not fetched). Stack Exchange, G2 and Capterra were blocked, and reddit was reached only through mirrors. Because nothing qualified, the selection constraints (half educational, an instructor or institutional buyer, a Weekend MVP plus a Multi-week idea) could not be met, and Steps 5 and 6 had no ideas to research or review. Watchlist evidence URLs were fetched by this run's research subagents or carried from the 2026-10-30 file; the Pickcode migration page and the Tufts page were fetched by subagents. Two consecutive days with zero qualifying ideas suggest the recency-plus-two-independent-sources gate is binding hard on niche higher-ed problems."
+    "caveats": "No candidate cleared the quality gate, so this file has no ideas. Eighteen candidates were scored (including three carried from the watchlist); the best scored 21 (Orphaned Embed Rescue, held back by free replacements and a one-time migration need). Saturday's focus sources (university RFP portals and job postings) mostly surfaced enterprise solicitations (LMS, syllabus management, enterprise AI platforms, TAMU-RFP-26-5082) that fail the procurement rule, and samsearch.co RFP pages were behind a Cloudflare check. The three watchlist entries carried from 2026-10-30 got no new fetched evidence: PrairieLearn issue 14717 has had no comments since 2026-04-28, and the LLM key broker search found only an April 2026 blog and university gateway docs (not fetched). Stack Exchange, G2 and Capterra were blocked, and reddit was reached only through mirrors. Because nothing qualified, the selection constraints (half educational, an instructor or institutional buyer, a Weekend MVP plus a Multi-week idea) could not be met, and Steps 5 and 6 had no ideas to research or review. Watchlist evidence URLs were fetched by this run's research subagents or carried from the 2026-10-30 file; the Pickcode migration page and the Tufts page were fetched by subagents. Two consecutive days with zero qualifying ideas suggest the recency-plus-two-independent-sources gate is binding hard on niche higher-ed problems. Extra run (random sources A12 A8 B6 C10 B3): added no ideas; none of 11 new candidates cleared the gate. Reddit could not be reached (reddit.com refused and search rarely surfaced mirrors), so A8 yielded no usable K-12 or learner threads; Ask HN was searched through the hn.algolia.com API, which worked but surfaced mostly showcases and opinion threads. The strongest new signal, the permanent end of Canvas Free-for-Teacher with a final export window of 2026-09-30 to 2026-10-06, is already served by free Canvas Lite and ProfDesk. One TrustMRR search snippet overstated a startup's revenue (about $14k versus $51 all-time on the fetched page), so TrustMRR figures were used only from fetched pages. The morning run recorded focusSources without IDs, so the random-source script could not exclude C3 and C4; neither was picked. The watchlist is unchanged because no new candidate scored 19 or higher."
   }
 }
