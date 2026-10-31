@@ -466,8 +466,10 @@
         "date": "2026-10-15",
         "n": 1
       },
-      "placeholder": true,
-      "notes": "In progress since 2026-10-31"
+      "notes": "Built in one session as a static TypeScript app with no backend and no LLM. Every piece, historical or invented, is one line of a Betza-like notation (atoms, riders, ranges such as B{2,}, a second leg such as the giraffe's F>R{3,}, and m/c/f/b/l/r/s/v/n/j/p/i modifiers) compiled once per variant into rays that the move generator, the highlight overlay and the engine all walk. Play: Timur chess on the 11x10 board with both citadels (a king entering the opponent's citadel draws; stalemate loses), against a negamax alpha-beta engine with iterative deepening and quiescence in a Web Worker, plus simplified classic chess. Piece lab: live animated reach with placeable blockers, a mobility-based value estimate, drop-in replacement in Timur or classic chess, six-game engine-vs-engine balance tests with alternating colours, and share links that encode the spec in the URL. A pieces tab gives each historical piece a history card. Limitations: no king swap, no extra royals (the prince is an ordinary king-mover), the pawn of pawns promotes straight to a prince, citadel ownership is an interpretation, classic chess has no castling or en passant, the Claude English-to-notation step is replaced by examples, and values are a heuristic. 82 vitest tests, 99% statement coverage on core.",
+      "url": "https://tamerlane-board.netlify.app",
+      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/tamerlane-board",
+      "implementedOn": "2026-10-31"
     }
   ]
 }
