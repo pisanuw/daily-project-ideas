@@ -284,6 +284,20 @@ button { font-family: inherit; font-size: inherit; line-height: inherit; color: 
 /* ---- Commercial idea detail ---- */
 .tag--score { color: var(--accent); border-color: var(--accent); }
 .tag--review { color: var(--weekend); border-color: var(--weekend); }
+.tag--provisional { color: var(--week12); border-color: var(--week12); }
+.tag--kind { color: var(--text-faint); font-size: 0.72rem; text-transform: lowercase; }
+
+/* Provisional ideas state their shortfall up front, next to the scores. */
+.gap-panel {
+  border: 1px solid var(--week12);
+  border-radius: var(--radius);
+  background: #fbbf2411;
+  padding: 0.9rem 1.1rem;
+  margin-bottom: 1.2rem;
+}
+.gap-panel__head { margin: 0 0 0.5rem; font-weight: 600; color: var(--week12); }
+.gap-panel .sublabel { margin-top: 0.7rem; }
+.gap-panel ul, .gap-panel p:last-child { margin-bottom: 0; }
 
 .score-panel {
   background: var(--bg);

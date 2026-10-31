@@ -96,13 +96,55 @@ version history:
   item. Adds at the top level `complete: true`, and in `runNotes`:
   `weekday`, `focusSources`, `unverifiedSignals`, and `watchlist` (near
   misses carried to the next run for up to 14 days).
+- **schemaVersion 3, revised 2026-11-01.** The first five v3 runs produced zero
+  ideas between them, so v3 gained a second tier instead of an all-or-nothing
+  gate. The version number did not change: the fields below are additions, and
+  older v3 files stay valid. Changes:
+  - `confidence` (required, `"validated"` or `"provisional"`). A validated idea
+    cleared the gate, whose numbers are unchanged. A provisional idea is the
+    run's best reviewed candidate when nothing cleared it, and it must still
+    pass every rejection rule, carry one fetched evidence item dated within 180
+    days, and have been researched and adversarially reviewed.
+  - `gateGap` (required on provisional ideas, forbidden on validated ones):
+    `missing`, a list naming every gate condition the idea misses, and
+    `closedBy`, what result would promote it. The site renders this as a panel
+    directly under the scores, so a provisional idea announces its own weakness.
+  - `kind` on each `problemEvidence` item: `"complaint"` (a named person
+    describing a problem), `"spend"` (a price, sales count, or install count on
+    something paid), or `"mandate"` (a rule, deadline, standard, or job posting
+    that forces work). `pain` above 3 now requires at least one complaint item,
+    which stops a market-size number from standing in for suffering.
+  - `runNotes.floorFailure` (optional, and only when `ideas` is empty): the
+    floor condition that stopped every candidate. The validator refuses an
+    empty `ideas` array without it, because every run is supposed to produce at
+    least one idea and a zero-idea day is a defect report.
+  - `category` gained five non-education values: `Accessibility & Compliance`,
+    `Research & Lab Tools`, `Small Business Ops`, `Civic & Public Sector`, and
+    `Creative & Prosumer`. At most 2 ideas in a day may share a category, and
+    at least one must still be `EdTech:` something.
+
+### Operational files added 2026-11-01
+
+These are not idea data, but the routine reads and writes them every run.
+
+| File | Written by | Purpose |
+|---|---|---|
+| `ideas/sources.json` | by hand | The source catalog. Each entry has an `id` (A1 to A14, B1 to B10, C1 to C11), the evidence `kind` it yields, a `status` (`ok`, `ok-curl`, `partial`, `blocked`, `unknown`), and `paths`: concrete URL templates with the client that was verified to work. Blocked IDs stay in the catalog so historical `focusSources` entries remain readable. |
+| `ideas/run-log.jsonl` | `scripts/log_run.py` | Append-only, one record per run: sources used with their search and fetch counts, every fetch with its outcome, the candidate funnel, where candidates died at the gate, and `floorFailure` if the run shipped nothing. |
+| `ideas/source-health.json` and `.md` | `scripts/source_health.py` | Derived from the run log. The avoid list, the reachable sources with their last working access path, the per-host outcome history, and the gate condition killing the most candidates. The routine reads this at Step 0. |
+
+The point of the run log is that a failed search costs something only once. An
+earlier run recorded Reddit as unreachable in prose, inside one day's caveats,
+and a later run the same day spent a quarter of its budget rediscovering it.
 
 Validate a v3 file with `python3 scripts/validate_ideas.py ideas/YYYY-MM-DD.json`.
 
 The website renders these ideas with a commercial detail layout: score
 breakdown (with rationales and review verdict for v3), problem, customer and
 buyer, demand evidence, competitors, MVP scope, business model, validation
-test, compliance, risks, and review findings. Cards show the score out of 30.
+test, compliance, risks, and review findings. Cards show the score out of 30,
+and a provisional idea also carries a "Provisional" chip on its card and a
+gap panel in its detail view.
 `build.js` passes the fields through via its `COMMERCIAL_KEYS` list. `Weekend MVP` maps to
 the Weekend tier and `Multi-week` and `Multi-month` to the Multi-week tier.
 

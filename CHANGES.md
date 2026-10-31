@@ -481,3 +481,21 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-10-31 [note] Claimed GPU Parallel Puzzler (2026-06-23 n2) as in progress: simulated SIMT GPU, kernel puzzles, deterministic hints instead of Claude.
 
 2026-10-31 [note] Tiny Brains League (2026-09-26 n3) marked implemented: live at tiny-brains-league.netlify.app, repo Claude-capstone/tiny-brains-league. 5k-param Connect Four nets, BT-Elo ladder, replay; 46 tests.
+
+2026-11-01 [decision] Routine always ships >=1 idea: gate numbers unchanged, but a run with no gate-clearing candidate ships its best reviewed one as confidence=provisional with a gateGap.
+
+2026-11-01 [decision] Higher-ed constraint relaxed: "half must be educational" becomes "at least one EdTech, max 2 per category", plus a weekday domain lens pointing most days outside education.
+
+2026-11-01 [code] Fixed the rule that emptied 2026-10-30: a review kill now continues down the ranked candidate list instead of ending the run. pain>3 now requires a complaint-kind evidence item.
+
+2026-11-01 [code] Added ideas/sources.json: 35 sources, each with a probe-verified access path and client. Reddit, G2, Capterra, Product Hunt, Indie Hackers and Canvas Community are unreachable.
+
+2026-11-01 [code] Added scripts/log_run.py and source_health.py: runs append fetch outcomes and funnel counts to ideas/run-log.jsonl, generating the Step 0 briefing ideas/source-health.md.
+
+2026-11-01 [doc] Backfilled the run log from the four zero-idea runs and added runNotes.floorFailure to both files. Funnel across them: 57 candidates, 1 cleared the gate, 0 shipped.
+
+2026-11-01 [code] Site shows the new tier (Provisional chip, gap panel, evidence kind); IDEAS.md gained a Confidence column; validate_ideas.py enforces both tiers and drops its em-dash check.
+
+2026-11-01 [code] Added scripts/probe_sources.py: curls every catalog probeUrl, requires an expect marker in the body, and rewrites each source's status. Run after the environment changes.
+
+2026-11-01 [note] Env moved to FullCloud, full internet. Re-probe: reachable sources 16 to 21 (A4 A6 B5 C3 C6 back). Sites still refusing: Reddit, G2, Capterra, Product Hunt, Indie Hackers.

@@ -7,12 +7,22 @@ Automated daily product ideas curated by a Claude Code scheduled routine.
 Every day at 5am, Claude gathers demand signals (instructor complaints, feature
 requests, proof that people pay for similar tools, policy changes, funding
 solicitations, and CS education research) and turns them into commercially
-viable software ideas, with a preference for educational software. Each idea
-must clear a quality gate backed by cited evidence, so the count varies from 0
-to 6 a day. Near misses go on a watchlist and get a second look on later runs.
+viable software ideas. Education is one domain among several, and a weekly
+domain lens points most days somewhere else: accessibility and compliance,
+small business operations, developer and research tooling, institutional
+back-office work, creative and prosumer tools.
+
+Every run produces at least one idea. Ideas that clear the quality gate ship as
+`validated`; when nothing clears it, the run's best reviewed candidate ships as
+`provisional` with the gate conditions it misses written on the front. Up to 6
+ideas a day. Near misses go on a watchlist and get a second look on later runs.
 
 The full routine, including sources, scoring, the quality gate, and the
-adversarial review step, is in [ROUTINE.md](ROUTINE.md).
+adversarial review step, is in [ROUTINE.md](ROUTINE.md). Each run appends what
+it tried to `ideas/run-log.jsonl`, including every fetch that failed, and
+`scripts/source_health.py` turns that into the briefing the next run reads
+before it spends a search. That is how the routine gets tuned from evidence
+rather than from guesses.
 
 ## Website
 
@@ -24,11 +34,20 @@ Multi-week 🌶️🌶️🌶️) plus an Implemented section. Build it with `no
 
 ## Structure
 
-- `ROUTINE.md` - The daily routine prompt (reference copy; the scheduled task runs its own copy)
+- `ROUTINE.md` - The daily routine prompt. The scheduled routine clones this repo and
+  follows this file, so editing it here changes the next run's behaviour. Verified
+  2026-11-01 against trigger `trig_01QcyJzAmLr3wVsQZwhoBkHK` ("Gather ideas"), whose
+  own prompt is only: fetch main, then read ROUTINE.md and follow it exactly.
 - `ideas/YYYY-MM-DD.json` - Daily idea files (older days may be `.md`; see `ideas/SCHEMA.md`)
 - `ideas/index.jsonl` - Derived index of every idea, used for deduplication (`scripts/build_index.py`)
-- `IDEAS.md` - Running table of all ideas with scores and a Rating column for feedback
-- `scripts/validate_ideas.py` - Validates a daily file against the schema and quality gate
+- `IDEAS.md` - Running table of all ideas with scores, confidence, and a Rating column for feedback
+- `ideas/sources.json` - Source catalog: each source's access path, the client that works, and whether it is reachable
+- `ideas/run-log.jsonl` - Append-only record of what each run tried: sources, every fetch and its outcome, the candidate funnel, and why a run shipped nothing
+- `ideas/source-health.md` - Generated briefing the routine reads before spending a search: what to avoid, what works, and where candidates die
+- `scripts/validate_ideas.py` - Validates a daily file against the schema, the quality gate, and the provisional floor
+- `scripts/log_run.py` - Appends one run record to `ideas/run-log.jsonl`
+- `scripts/source_health.py` - Rebuilds `ideas/source-health.{json,md}` from the run log
+- `scripts/probe_sources.py` - Re-measures every catalog source with curl; run with `--write` after the run environment changes
 - `scripts/build_index.py` - Regenerates `ideas/index.jsonl`
 - `scripts/notify-implemented.mjs` - Daily email digest of newly implemented projects
 - `build.js` - Zero-dependency build: parses `ideas/` into `dist/`

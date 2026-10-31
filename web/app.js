@@ -69,6 +69,7 @@
     var tags = dateTags(idea);
     if (idea.category) tags.push(el('span', { class: 'tag', text: idea.category }));
     if (idea.scores && idea.scores.total) tags.push(el('span', { class: 'tag tag--score', text: 'Score ' + idea.scores.total + '/30' }));
+    if (idea.confidence === 'provisional') tags.push(el('span', { class: 'tag tag--provisional', text: 'Provisional' }));
     if (idea.implemented && idea.url) tags.push(el('span', { class: 'tag tag--live', text: 'Live ↗' }));
 
     var node = el('button', { class: 'card', type: 'button' }, [
@@ -254,6 +255,7 @@
       var meta = [extLink(e.url, e.source || null)];
       if (e.date && e.date !== 'unknown') meta.push(el('span', { text: e.date }));
       if (e.author && e.author !== 'unknown') meta.push(el('span', { text: e.author }));
+      if (e.kind) meta.push(el('span', { class: 'tag tag--kind', text: e.kind }));
       return el('div', { class: 'item' }, [
         el('div', { class: 'item__meta' }, meta),
         para(e.summary, 'item__body'),
@@ -311,10 +313,30 @@
     }));
   }
 
+  // A provisional idea is a lead that did not clear the quality gate. Say so
+  // plainly, and say what would change that.
+  function gapBlock(idea) {
+    if (idea.confidence !== 'provisional') return null;
+    var g = idea.gateGap || {};
+    var box = el('div', { class: 'gap-panel' }, [
+      el('p', { class: 'gap-panel__head', text: 'This one did not clear the quality gate.' }),
+    ]);
+    if (g.missing && g.missing.length) {
+      box.appendChild(el('p', { class: 'sublabel', text: 'What is missing' }));
+      box.appendChild(list(g.missing));
+    }
+    if (g.closedBy) {
+      box.appendChild(el('p', { class: 'sublabel', text: 'What would promote it' }));
+      box.appendChild(para(g.closedBy));
+    }
+    return box;
+  }
+
   function renderCommercial(idea, frag) {
     var v = idea.validationTest || {};
     var blocks = [
       scorePanel(idea),
+      gapBlock(idea),
       detailSection('Problem', para(idea.problemStatement, 'problem')),
       detailSection('What it is', para(idea.description)),
       detailSection('Who it is for', defList([

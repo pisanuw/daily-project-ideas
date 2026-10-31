@@ -4,9 +4,10 @@
 Usage: python3 scripts/validate_ideas.py ideas/YYYY-MM-DD.json
 
 Prints OK and exits 0 when the file passes, otherwise prints one problem per
-line and exits 1. Checks structure, the quality gate, and evidence rules from
-ROUTINE.md. It cannot check that URLs appeared in the run's search results;
-the routine does that by hand.
+line and exits 1. Checks structure, the quality gate for validated ideas, the
+floor for provisional ones, and the evidence rules from ROUTINE.md. It cannot
+check that URLs appeared in the run's search results; the routine does that by
+hand.
 
 Entries with complexity "Research" are skipped: they follow the research
 format in ideas/SCHEMA.md, not the product-idea schema.
@@ -19,19 +20,27 @@ from urllib.parse import urlsplit
 
 SCORES = ["pain", "willingnessToPay", "reachability",
           "competitiveGap", "feasibility", "complianceBurden"]
-REQUIRED = ["n", "title", "slug", "category", "complexity", "summary",
-            "problemStatement", "description", "targetCustomer", "buyer",
-            "whyNow", "founderFit", "problemEvidence", "competitors",
+REQUIRED = ["n", "title", "slug", "category", "complexity", "confidence",
+            "summary", "problemStatement", "description", "targetCustomer",
+            "buyer", "whyNow", "founderFit", "problemEvidence", "competitors",
             "keyFeatures", "mvpScope", "techStack", "pricing",
             "revenueSketch", "distribution", "validationTest", "moat",
             "compliance", "risks", "scores", "scoreRationale", "review",
             "inspiredBy"]
 CATEGORIES = {"Micro-SaaS", "EdTech: Higher Ed", "EdTech: K-12",
-              "EdTech: Learners", "Developer Tool"}
+              "EdTech: Learners", "Developer Tool",
+              "Accessibility & Compliance", "Research & Lab Tools",
+              "Small Business Ops", "Civic & Public Sector",
+              "Creative & Prosumer"}
 COMPLEXITY = {"Weekend MVP", "Multi-week", "Multi-month"}
+CONFIDENCE = {"validated", "provisional"}
+EVIDENCE_KINDS = {"complaint", "spend", "mandate"}
 MAX_IDEAS = 6
+MAX_PROVISIONAL = 2
+MAX_PER_CATEGORY = 2
 MIN_TOTAL = 22
 RECENT_DAYS = 90
+FLOOR_DAYS = 180
 
 
 def parse_date(value):
@@ -48,6 +57,30 @@ def page_key(url):
     return f"{parts.netloc.lower()}{parts.path.rstrip('/')}"
 
 
+def check_evidence(idea, tag, today, errs):
+    """Returns (distinct_pages, has_complaint, newest_age_in_days)."""
+    evidence = idea.get("problemEvidence") or []
+    for e in evidence:
+        for field in ("url", "source", "author", "date", "summary", "kind"):
+            if not e.get(field):
+                errs.append(f"{tag}: an evidence item is missing {field}")
+        if e.get("kind") and e["kind"] not in EVIDENCE_KINDS:
+            errs.append(f"{tag}: evidence kind {e['kind']!r} is not one of "
+                        f"{sorted(EVIDENCE_KINDS)}")
+
+    pages = {page_key(e.get("url", "")) for e in evidence if e.get("url")}
+    authors = [e.get("author") for e in evidence]
+    known = [a for a in authors if a and a != "unknown"]
+    if len(evidence) >= 2 and len(known) == len(evidence) and len(set(known)) == 1:
+        errs.append(f"{tag}: all evidence is from one author")
+
+    has_complaint = any(e.get("kind") == "complaint" for e in evidence)
+    ages = [(today - d).days for d in
+            (parse_date(e.get("date")) for e in evidence) if d is not None]
+    youngest = min((a for a in ages if a >= 0), default=None)
+    return len(pages), has_complaint, youngest
+
+
 def check_idea(idea, expected_n, today, errs):
     tag = f"idea {expected_n}"
 
@@ -61,19 +94,19 @@ def check_idea(idea, expected_n, today, errs):
     if idea.get("complexity") not in COMPLEXITY:
         errs.append(f"{tag}: complexity {idea.get('complexity')!r} is not allowed")
 
+    confidence = idea.get("confidence")
+    if confidence not in CONFIDENCE:
+        errs.append(f"{tag}: confidence must be validated or provisional")
+
     scores = idea.get("scores") or {}
     values = [scores.get(k) for k in SCORES]
+    total = None
     if not all(isinstance(v, int) and 1 <= v <= 5 for v in values):
         errs.append(f"{tag}: every score must be an integer from 1 to 5")
     else:
-        if scores.get("total") != sum(values):
-            errs.append(f"{tag}: total {scores.get('total')} is not the sum {sum(values)}")
-        if sum(values) < MIN_TOTAL:
-            errs.append(f"{tag}: total {sum(values)} is below the gate of {MIN_TOTAL}")
-        if scores["pain"] < 4:
-            errs.append(f"{tag}: pain {scores['pain']} is below the gate of 4")
-        if scores["willingnessToPay"] < 3:
-            errs.append(f"{tag}: willingnessToPay {scores['willingnessToPay']} is below the gate of 3")
+        total = sum(values)
+        if scores.get("total") != total:
+            errs.append(f"{tag}: total {scores.get('total')} is not the sum {total}")
 
     rationale = idea.get("scoreRationale") or {}
     for k in SCORES:
@@ -85,21 +118,42 @@ def check_idea(idea, expected_n, today, errs):
     if not (idea.get("review") or {}).get("findings"):
         errs.append(f"{tag}: review.findings is empty")
 
-    evidence = idea.get("problemEvidence") or []
-    pages = {page_key(e.get("url", "")) for e in evidence if e.get("url")}
-    if len(pages) < 2:
-        errs.append(f"{tag}: needs evidence from at least 2 different pages")
-    authors = [e.get("author") for e in evidence]
-    known = [a for a in authors if a and a != "unknown"]
-    if len(evidence) >= 2 and len(known) == len(evidence) and len(set(known)) == 1:
-        errs.append(f"{tag}: all evidence is from one author")
-    for e in evidence:
-        for field in ("url", "source", "author", "date", "summary"):
-            if not e.get(field):
-                errs.append(f"{tag}: an evidence item is missing {field}")
-    dated = [parse_date(e.get("date")) for e in evidence]
-    if not any(d and 0 <= (today - d).days <= RECENT_DAYS for d in dated):
-        errs.append(f"{tag}: no evidence dated within {RECENT_DAYS} days")
+    pages, has_complaint, youngest = check_evidence(idea, tag, today, errs)
+
+    if isinstance(scores.get("pain"), int) and scores["pain"] >= 4 and not has_complaint:
+        errs.append(f"{tag}: pain is {scores['pain']} but no evidence item has "
+                    "kind complaint; pain above 3 needs someone describing the pain")
+
+    if confidence == "validated":
+        if total is not None and total < MIN_TOTAL:
+            errs.append(f"{tag}: validated but total {total} is below the gate of {MIN_TOTAL}")
+        if isinstance(scores.get("pain"), int) and scores["pain"] < 4:
+            errs.append(f"{tag}: validated but pain {scores['pain']} is below the gate of 4")
+        if isinstance(scores.get("willingnessToPay"), int) and scores["willingnessToPay"] < 3:
+            errs.append(f"{tag}: validated but willingnessToPay "
+                        f"{scores['willingnessToPay']} is below the gate of 3")
+        if pages < 2:
+            errs.append(f"{tag}: validated needs evidence from at least 2 different pages")
+        if not has_complaint:
+            errs.append(f"{tag}: validated needs at least one complaint evidence item")
+        if youngest is None or youngest > RECENT_DAYS:
+            errs.append(f"{tag}: validated needs evidence dated within {RECENT_DAYS} days")
+        if idea.get("gateGap") is not None:
+            errs.append(f"{tag}: gateGap must be absent on a validated idea")
+
+    elif confidence == "provisional":
+        gap = idea.get("gateGap") or {}
+        if not gap.get("missing"):
+            errs.append(f"{tag}: provisional needs gateGap.missing listing every "
+                        "gate condition it misses")
+        if not gap.get("closedBy"):
+            errs.append(f"{tag}: provisional needs gateGap.closedBy naming what "
+                        "would promote it to validated")
+        if youngest is None or youngest > FLOOR_DAYS:
+            errs.append(f"{tag}: provisional needs at least one evidence item "
+                        f"dated within {FLOOR_DAYS} days")
+        if pages < 1:
+            errs.append(f"{tag}: provisional needs at least one evidence page")
 
 
 def main(path):
@@ -107,8 +161,6 @@ def main(path):
     with open(path, encoding="utf-8") as fh:
         data = json.load(fh)
 
-    if "\u2014" in json.dumps(data, ensure_ascii=False):
-        errs.append("file contains an em dash")
     if data.get("schemaVersion") != 3:
         errs.append("schemaVersion must be 3")
     if data.get("complete") is not True:
@@ -119,20 +171,46 @@ def main(path):
         errs.append("date is missing or not YYYY-MM-DD")
         today = datetime.date.today()
 
+    run_notes = data.get("runNotes") or {}
     ideas = [i for i in data.get("ideas", [])
              if str(i.get("complexity", "")).lower() != "research"]
+
+    if not ideas:
+        if not run_notes.get("floorFailure"):
+            errs.append("no ideas: every run must produce at least one. If no "
+                        "candidate met the floor, runNotes.floorFailure must name "
+                        "the floor condition that stopped every one of them, and "
+                        "the run log must record it too")
     if len(ideas) > MAX_IDEAS:
         errs.append(f"{len(ideas)} ideas, maximum is {MAX_IDEAS}")
-    run_notes = data.get("runNotes") or {}
-    if len(ideas) < 3 and not run_notes.get("caveats"):
-        errs.append("fewer than 3 ideas but runNotes.caveats does not explain why")
 
     for i, idea in enumerate(ideas, 1):
         check_idea(idea, i, today, errs)
 
+    confidences = [i.get("confidence") for i in ideas]
+    provisional = confidences.count("provisional")
+    validated = confidences.count("validated")
+    if provisional > MAX_PROVISIONAL:
+        errs.append(f"{provisional} provisional ideas, maximum is {MAX_PROVISIONAL}")
+    if provisional and validated:
+        errs.append("a run that produced a validated idea must not also ship "
+                    "provisional ones")
+
     slugs = [i.get("slug") for i in ideas]
     if len(slugs) != len(set(slugs)):
         errs.append("two ideas share a slug")
+
+    counts = {}
+    for i in ideas:
+        counts[i.get("category")] = counts.get(i.get("category"), 0) + 1
+    for category, n in counts.items():
+        if n > MAX_PER_CATEGORY:
+            errs.append(f"{n} ideas share the category {category!r}, maximum is "
+                        f"{MAX_PER_CATEGORY}")
+    if ideas and not any(str(i.get("category", "")).startswith("EdTech:") for i in ideas):
+        if not run_notes.get("caveats"):
+            errs.append("no idea is educational software and runNotes.caveats does "
+                        "not explain why none qualified")
 
     for w in run_notes.get("watchlist", []):
         name = w.get("title", "?")

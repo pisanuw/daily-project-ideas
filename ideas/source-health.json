@@ -1,0 +1,779 @@
+{
+  "avoid": [
+    {
+      "id": "A1",
+      "name": "LMS idea boards",
+      "why": "Canvas Community 403s and renders title-only; the Moodle Jira path is HTTP 410."
+    },
+    {
+      "id": "A7",
+      "name": "Higher ed Reddit",
+      "why": "Reddit returns 403, a 'Welcome to Reddit' interstitial, or 'Blocked' on every path tried."
+    },
+    {
+      "id": "A8",
+      "name": "K-12 and learner Reddit",
+      "why": "Reddit, same as A7."
+    },
+    {
+      "id": "A9",
+      "name": "Direct-pay buyers",
+      "why": "Reddit half blocked with A7; the Well-Trained Mind forum 403s."
+    },
+    {
+      "id": "A10",
+      "name": "Incumbent review sites",
+      "why": "G2 and Capterra 403 both clients at the edge; that is the site's choice."
+    },
+    {
+      "id": "B3",
+      "name": "Indie Hackers and Starter Story",
+      "why": "indiehackers.com returns HTTP 403."
+    },
+    {
+      "id": "B4",
+      "name": "Founder subreddits",
+      "why": "Reddit, same as A7."
+    },
+    {
+      "id": "B7",
+      "name": "Product Hunt",
+      "why": "producthunt.com returns HTTP 403 without an API key."
+    },
+    {
+      "id": "C3",
+      "name": "Procurement and RFP portals",
+      "why": "RFP portals sit behind Cloudflare, and an RFP buyer fails the no-procurement rule anyway."
+    },
+    {
+      "id": "C4",
+      "name": "Job postings that describe manual work",
+      "why": "Reach job postings through a web search that surfaces individual posting URLs, then fetch those, rather than through a site search form."
+    },
+    {
+      "id": "C9",
+      "name": "Y Combinator requests and directory",
+      "why": "Used on 2026-10-31 to find competitors (Edexia W2025, Frizzle S2025)."
+    }
+  ],
+  "byHost": {
+    "api.stackexchange.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-10-30",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "allowlist": 1
+      },
+      "workingPaths": []
+    },
+    "apuo.ca": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-10-31",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "empty": 1
+      },
+      "workingPaths": []
+    },
+    "careers.csudh.edu": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-10-30",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "empty": 1
+      },
+      "workingPaths": []
+    },
+    "community.instructure.com": {
+      "attempts": 2,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-10-31",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "empty": 2
+      },
+      "workingPaths": []
+    },
+    "cseducators.stackexchange.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-10-31",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "allowlist": 1
+      },
+      "workingPaths": []
+    },
+    "flippa.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-10-30",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "empty": 1
+      },
+      "workingPaths": []
+    },
+    "grad.tamu.edu": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-10-30",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_404": 1
+      },
+      "workingPaths": []
+    },
+    "its.umich.edu": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-10-30",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_403": 1
+      },
+      "workingPaths": []
+    },
+    "latexformat.netlify.app": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-10-30",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_404": 1
+      },
+      "workingPaths": []
+    },
+    "news.ycombinator.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-10-31",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_429": 1
+      },
+      "workingPaths": []
+    },
+    "nwelearn2026.sched.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-10-30",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_403": 1
+      },
+      "workingPaths": []
+    },
+    "samsearch.co": {
+      "attempts": 2,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-10-31",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "empty": 2
+      },
+      "workingPaths": []
+    },
+    "scispace.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-10-30",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_403": 1
+      },
+      "workingPaths": []
+    },
+    "trustmrr.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-10-31",
+      "lastOk": "2026-10-31",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://trustmrr.com/startup/exam-predictor"
+      ]
+    },
+    "www.capterra.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-10-31",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_403": 1
+      },
+      "workingPaths": []
+    },
+    "www.careerbuilder.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-10-30",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_403": 1
+      },
+      "workingPaths": []
+    },
+    "www.chronicle.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-10-31",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_403": 1
+      },
+      "workingPaths": []
+    },
+    "www.classcentral.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-10-31",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_403": 1
+      },
+      "workingPaths": []
+    },
+    "www.cs.umd.edu": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-10-30",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_5xx": 1
+      },
+      "workingPaths": []
+    },
+    "www.dailycal.org": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-10-31",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_403": 1
+      },
+      "workingPaths": []
+    },
+    "www.nationgraph.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-10-31",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_404": 1
+      },
+      "workingPaths": []
+    },
+    "www.ndsmcobserver.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-10-31",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_403": 1
+      },
+      "workingPaths": []
+    },
+    "www.pulse.bot": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-10-31",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_5xx": 1
+      },
+      "workingPaths": []
+    },
+    "www.reddit.com": {
+      "attempts": 2,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-10-31",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "allowlist": 2
+      },
+      "workingPaths": []
+    },
+    "www.ru.nl": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-10-31",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_5xx": 1
+      },
+      "workingPaths": []
+    },
+    "xdaforums.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-10-31",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_403": 1
+      },
+      "workingPaths": []
+    }
+  },
+  "bySource": {
+    "A1": {
+      "candidates": 4,
+      "fetchFail": 1,
+      "fetchOk": 2,
+      "lastUsed": "2026-10-31",
+      "runs": 1,
+      "searches": 4,
+      "selected": 0
+    },
+    "A10": {
+      "candidates": 0,
+      "fetchFail": 1,
+      "fetchOk": 0,
+      "lastUsed": "2026-10-31",
+      "runs": 1,
+      "searches": 4,
+      "selected": 0
+    },
+    "A11": {
+      "candidates": 3,
+      "fetchFail": 1,
+      "fetchOk": 2,
+      "lastUsed": "2026-10-31",
+      "runs": 1,
+      "searches": 8,
+      "selected": 0
+    },
+    "A12": {
+      "candidates": 4,
+      "fetchFail": 1,
+      "fetchOk": 2,
+      "lastUsed": "2026-10-31",
+      "runs": 1,
+      "searches": 3,
+      "selected": 0
+    },
+    "A3": {
+      "candidates": 3,
+      "fetchFail": 0,
+      "fetchOk": 1,
+      "lastUsed": "2026-10-31",
+      "runs": 1,
+      "searches": 5,
+      "selected": 0
+    },
+    "A5": {
+      "candidates": 2,
+      "fetchFail": 1,
+      "fetchOk": 2,
+      "lastUsed": "2026-10-31",
+      "runs": 2,
+      "searches": 7,
+      "selected": 0
+    },
+    "A7": {
+      "candidates": 4,
+      "fetchFail": 3,
+      "fetchOk": 0,
+      "lastUsed": "2026-10-30",
+      "runs": 1,
+      "searches": 8,
+      "selected": 0
+    },
+    "A8": {
+      "candidates": 2,
+      "fetchFail": 2,
+      "fetchOk": 0,
+      "lastUsed": "2026-10-31",
+      "runs": 2,
+      "searches": 9,
+      "selected": 0
+    },
+    "B1": {
+      "candidates": 3,
+      "fetchFail": 0,
+      "fetchOk": 2,
+      "lastUsed": "2026-10-31",
+      "runs": 1,
+      "searches": 3,
+      "selected": 0
+    },
+    "B3": {
+      "candidates": 2,
+      "fetchFail": 1,
+      "fetchOk": 0,
+      "lastUsed": "2026-10-31",
+      "runs": 1,
+      "searches": 3,
+      "selected": 0
+    },
+    "B5": {
+      "candidates": 1,
+      "fetchFail": 1,
+      "fetchOk": 0,
+      "lastUsed": "2026-10-30",
+      "runs": 1,
+      "searches": 6,
+      "selected": 0
+    },
+    "B6": {
+      "candidates": 2,
+      "fetchFail": 0,
+      "fetchOk": 1,
+      "lastUsed": "2026-10-31",
+      "runs": 1,
+      "searches": 3,
+      "selected": 0
+    },
+    "C10": {
+      "candidates": 3,
+      "fetchFail": 2,
+      "fetchOk": 2,
+      "lastUsed": "2026-10-31",
+      "runs": 1,
+      "searches": 4,
+      "selected": 0
+    },
+    "C2": {
+      "candidates": 3,
+      "fetchFail": 0,
+      "fetchOk": 2,
+      "lastUsed": "2026-10-30",
+      "runs": 1,
+      "searches": 6,
+      "selected": 0
+    },
+    "C3": {
+      "candidates": 5,
+      "fetchFail": 5,
+      "fetchOk": 0,
+      "lastUsed": "2026-10-31",
+      "runs": 1,
+      "searches": 12,
+      "selected": 0
+    },
+    "C4": {
+      "candidates": 8,
+      "fetchFail": 4,
+      "fetchOk": 2,
+      "lastUsed": "2026-10-31",
+      "runs": 2,
+      "searches": 18,
+      "selected": 0
+    },
+    "C5": {
+      "candidates": 2,
+      "fetchFail": 0,
+      "fetchOk": 1,
+      "lastUsed": "2026-10-30",
+      "runs": 1,
+      "searches": 6,
+      "selected": 0
+    },
+    "C8": {
+      "candidates": 2,
+      "fetchFail": 3,
+      "fetchOk": 0,
+      "lastUsed": "2026-10-31",
+      "runs": 1,
+      "searches": 4,
+      "selected": 0
+    },
+    "C9": {
+      "candidates": 1,
+      "fetchFail": 0,
+      "fetchOk": 1,
+      "lastUsed": "2026-10-31",
+      "runs": 1,
+      "searches": 2,
+      "selected": 0
+    }
+  },
+  "disagreements": [
+    {
+      "catalogStatus": "blocked",
+      "id": "A1",
+      "logSays": "reachable",
+      "name": "LMS idea boards",
+      "why": "2 usable fetches in the window"
+    },
+    {
+      "catalogStatus": "ok-curl",
+      "id": "C3",
+      "logSays": "blocked",
+      "name": "Procurement and RFP portals",
+      "why": "5 attempts in the window, none usable"
+    },
+    {
+      "catalogStatus": "blocked",
+      "id": "C4",
+      "logSays": "reachable",
+      "name": "Job postings that describe manual work",
+      "why": "2 usable fetches in the window"
+    },
+    {
+      "catalogStatus": "blocked",
+      "id": "C9",
+      "logSays": "reachable",
+      "name": "Y Combinator requests and directory",
+      "why": "1 usable fetches in the window"
+    }
+  ],
+  "floorFailures": [
+    {
+      "floorFailure": "Thesis Deposit Preflight was the one candidate to clear the gate at 23. The adversarial reviewer rescored it to 17 and the no-backfill rule forbade researching the next candidate down, so the day ended at zero. The rule, not the evidence, produced the empty file.",
+      "runId": "2026-10-30#1"
+    },
+    {
+      "floorFailure": "Best candidate was Orphaned Embed Rescue at 21, one point under the gate of 22, held back by free replacements and a one-time migration need. With no provisional tier the run had no way to ship its best candidate. Saturday's focus sources (RFP portals, job postings) mostly surfaced enterprise solicitations that the no-procurement rejection rule kills by construction.",
+      "runId": "2026-10-31#1"
+    },
+    {
+      "floorFailure": "A8 yielded nothing because Reddit is unreachable, so a quarter of the run's source budget was spent on a dead source the morning run had already found dead. The strongest signal, the end of Canvas Free-for-Teacher, is already served by free Canvas Lite and ProfDesk.",
+      "runId": "2026-10-31#2"
+    },
+    {
+      "floorFailure": "Fresh Canvas pain was either already served (Atomic Search sells account-wide Find and Replace) or bound up with minors' data. EdSurge, EdWeek Market Brief and pulse.bot returned no usable October 2026 content through WebFetch.",
+      "runId": "2026-10-31#3"
+    }
+  ],
+  "funnel": {
+    "candidates": 57,
+    "passedGate": 1,
+    "passedRejectRules": 44,
+    "provisional": 0,
+    "reviewKilled": 1,
+    "validated": 0,
+    "watchlist": 11
+  },
+  "gateFailures": {
+    "painBelow4": 3,
+    "rejectRule": 13,
+    "reviewKill": 1,
+    "totalBelowMin": 40
+  },
+  "generated": "2026-11-01",
+  "prefer": [
+    {
+      "client": "webfetch",
+      "evidence": "complaint",
+      "id": "A11",
+      "name": "Accessibility practitioners",
+      "path": "https://webaim.org/discussion/archives",
+      "selectedIdeas": 0,
+      "status": "ok-curl"
+    },
+    {
+      "client": "webfetch",
+      "evidence": "complaint",
+      "id": "A12",
+      "name": "Ask HN and HN comments",
+      "path": "https://hn.algolia.com/api/v1/search_by_date?query={q}&tags=comment&hitsPerPage=20",
+      "selectedIdeas": 0,
+      "status": "ok"
+    },
+    {
+      "client": "webfetch",
+      "evidence": "complaint",
+      "id": "A13",
+      "name": "Discourse forums, any niche",
+      "path": "https://{host}/search.json?q={q}+after%3A{YYYY-MM-DD}",
+      "selectedIdeas": 0,
+      "status": "ok"
+    },
+    {
+      "client": "webfetch",
+      "evidence": "complaint",
+      "id": "A14",
+      "name": "Plugin and add-on support forums",
+      "path": "https://wordpress.org/support/plugin/{slug}/",
+      "selectedIdeas": 0,
+      "status": "ok"
+    },
+    {
+      "client": "webfetch",
+      "evidence": "complaint",
+      "id": "A2",
+      "name": "Other LMS and classroom forums",
+      "path": "https://discuss.openedx.org/latest.json",
+      "selectedIdeas": 0,
+      "status": "ok"
+    },
+    {
+      "client": "webfetch",
+      "evidence": "complaint",
+      "id": "A3",
+      "name": "Open-source teaching tools",
+      "path": "https://api.github.com/search/issues?q={q}+state%3Aopen+sort%3Areactions&per_page=10",
+      "selectedIdeas": 0,
+      "status": "ok"
+    },
+    {
+      "client": null,
+      "evidence": "complaint",
+      "id": "A4",
+      "name": "GitHub Education and Classroom discussions",
+      "path": null,
+      "selectedIdeas": 0,
+      "status": "ok-curl"
+    },
+    {
+      "client": "curl",
+      "evidence": "complaint",
+      "id": "A5",
+      "name": "Educator Stack Exchanges",
+      "path": "https://api.stackexchange.com/2.3/questions?site={cseducators|academia|matheducators}&order=desc&sort=creation&pagesize=20&filter=withbody",
+      "selectedIdeas": 0,
+      "status": "ok-curl"
+    },
+    {
+      "client": "webfetch",
+      "evidence": "complaint",
+      "id": "A6",
+      "name": "Edtech app and extension reviews",
+      "path": "https://chromewebstore.google.com/detail/{slug}/{id}/reviews",
+      "selectedIdeas": 0,
+      "status": "ok-curl"
+    },
+    {
+      "client": "webfetch",
+      "evidence": "spend",
+      "id": "B1",
+      "name": "Teachers Pay Teachers and Etsy",
+      "path": "https://www.teacherspayteachers.com/Browse/Search:{q}",
+      "selectedIdeas": 0,
+      "status": "ok"
+    },
+    {
+      "client": "webfetch",
+      "evidence": "spend",
+      "id": "B10",
+      "name": "WordPress plugin market data",
+      "path": "https://api.wordpress.org/plugins/info/1.2/?action=query_plugins&request[search]={q}&request[per_page]=10",
+      "selectedIdeas": 0,
+      "status": "ok"
+    },
+    {
+      "client": "webfetch",
+      "evidence": "spend",
+      "id": "B2",
+      "name": "AppSumo",
+      "path": "https://appsumo.com/software/{category}/",
+      "selectedIdeas": 0,
+      "status": "ok"
+    },
+    {
+      "client": "webfetch",
+      "evidence": "spend",
+      "id": "B5",
+      "name": "Acquisition marketplaces",
+      "path": "https://acquire.com/search/?industry=education",
+      "selectedIdeas": 0,
+      "status": "ok-curl"
+    },
+    {
+      "client": "curl",
+      "evidence": "spend",
+      "id": "B6",
+      "name": "Verified revenue dashboards",
+      "path": "https://trustmrr.com/",
+      "selectedIdeas": 0,
+      "status": "ok-curl"
+    },
+    {
+      "client": "curl",
+      "evidence": "spend",
+      "id": "B8",
+      "name": "Install counts for paid add-ons",
+      "path": "https://chromewebstore.google.com/detail/{id}",
+      "selectedIdeas": 0,
+      "status": "ok-curl"
+    },
+    {
+      "client": null,
+      "evidence": "mandate",
+      "id": "C10",
+      "name": "Change events: shutdowns, price rises, removed free tiers",
+      "path": null,
+      "selectedIdeas": 0,
+      "status": "ok"
+    },
+    {
+      "client": "webfetch",
+      "evidence": "mandate",
+      "id": "C11",
+      "name": "Federal award and grant data",
+      "path": "https://api.nsf.gov/services/v1/awards.json?keyword={q}&printFields=title,date,awardeeName,fundsObligatedAmt&rpp=10",
+      "selectedIdeas": 0,
+      "status": "ok"
+    },
+    {
+      "client": "webfetch",
+      "evidence": "mandate",
+      "id": "C2",
+      "name": "Education and computing research",
+      "path": "https://api.openalex.org/works?search={q}&per-page=10&sort=publication_date%3Adesc",
+      "selectedIdeas": 0,
+      "status": "ok"
+    },
+    {
+      "client": "webfetch",
+      "evidence": "mandate",
+      "id": "C5",
+      "name": "Policy and regulation trackers",
+      "path": "https://www.federalregister.gov/api/v1/documents.json?per_page=10&order=newest&conditions[term]={q}",
+      "selectedIdeas": 0,
+      "status": "ok"
+    },
+    {
+      "client": null,
+      "evidence": "mandate",
+      "id": "C6",
+      "name": "Accreditation and standards changes",
+      "path": null,
+      "selectedIdeas": 0,
+      "status": "ok-curl"
+    },
+    {
+      "client": "curl",
+      "evidence": "mandate",
+      "id": "C8",
+      "name": "Trade news",
+      "path": "https://www.edsurge.com/news",
+      "selectedIdeas": 0,
+      "status": "ok-curl"
+    }
+  ],
+  "runsInWindow": 4,
+  "windowDays": 45
+}
