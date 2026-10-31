@@ -467,3 +467,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-10-31 [doc] Extra run (random sources A12 A8 B6 C10 B3) on ideas/2026-10-31.json added 0 ideas: none cleared the gate
 
 2026-10-31 [doc] Extra run (random sources A5 A1 B1 C9 C8) on ideas/2026-10-31.json added 0 ideas: none cleared the gate
+
+2026-10-31 [note] Claimed Tamerlane Board (2026-10-15 n1) as in progress: Timur chess with data-driven piece notation, piece lab and alpha-beta engine. No LLM.
