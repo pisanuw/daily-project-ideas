@@ -477,3 +477,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-10-31 [note] Poincaré Paint (2026-10-10 n1) marked implemented: live at poincare-paint.netlify.app, repo Claude-capstone/poincare-paint. {p,q} reflection-group drawing toy, geodesic brush, drag re-centring, distance/angle-sum measuring, SVG + share links; 58 tests. No LLM.
 
 2026-10-31 [note] Tamerlane Board (2026-10-15 n1) marked implemented: live at tamerlane-board.netlify.app, repo Claude-capstone/tamerlane-board. Notation-driven pieces, engine, piece lab; 82 tests.
+
+2026-10-31 [note] Claimed GPU Parallel Puzzler (2026-06-23 n2) as in progress: simulated SIMT GPU, kernel puzzles, deterministic hints instead of Claude.
