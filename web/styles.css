@@ -42,6 +42,21 @@ button { font-family: inherit; font-size: inherit; line-height: inherit; color: 
 
 .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
 
+.footer {
+  margin-top: 48px;
+  padding-bottom: 40px;
+  color: var(--text-dim);
+  font-size: 14px;
+}
+/* Divider inside .wrap's padding, so it lines up with the content. */
+.footer::before {
+  content: "";
+  display: block;
+  border-top: 1px solid var(--border);
+  margin-bottom: 20px;
+}
+.footer p { margin: 0 0 8px; }
+
 /* ---- Hero ---- */
 .hero {
   background: radial-gradient(120% 140% at 50% 0%, #20242f 0%, var(--bg) 60%);
