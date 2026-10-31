@@ -471,3 +471,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-10-31 [note] Claimed Data Structure City (2026-09-26 n2) as in progress: hash map, B-tree, skip list, LRU buildings driven by a command console. No LLM.
 
 2026-10-31 [note] Data Structure City (2026-09-26 n2) marked implemented: live at data-structure-city.netlify.app, repo Claude-capstone/data-structure-city. 4 structures, cost meters, tours; 71 tests.
+
+2026-10-31 [note] Claimed Tamerlane Board (2026-10-15 n1) as in progress: Timur chess with data-driven piece notation, piece lab and alpha-beta engine. No LLM.
