@@ -34,7 +34,7 @@
           "probeUrl": "https://community.instructure.com/t5/forums/searchpage/tab/message?q=gradebook",
           "expect": "message-subject",
           "probeOutcome": "http_403",
-          "probeDetail": "236374B"
+          "probeDetail": "236353B"
         },
         {
           "url": "https://moodle.atlassian.net/rest/api/2/search?jql=project%3DMDL+ORDER+BY+votes+DESC",
@@ -96,8 +96,8 @@
           "result": "JSON items with total_count, title, created_at, reactions, user.",
           "probeUrl": "https://api.github.com/search/issues?q=autograder+in%3Atitle+state%3Aopen&per_page=5",
           "expect": "total_count",
-          "probeOutcome": "ok",
-          "probeDetail": "HTTP 200, 30029B"
+          "probeOutcome": "http_422",
+          "probeDetail": "177B"
         },
         {
           "url": "https://discourse.jupyter.org/search.json?q={q}+after%3A{YYYY-MM-DD}",
@@ -117,7 +117,7 @@
       "group": "A",
       "name": "GitHub Education and Classroom discussions",
       "evidence": "complaint",
-      "status": "ok-curl",
+      "status": "blocked",
       "lastVerified": "2026-11-01",
       "paths": [
         {
@@ -127,8 +127,8 @@
           "result": "Unprobed. GitHub Discussions need GraphQL with a token; issue search may not cover them.",
           "probeUrl": "https://api.github.com/search/issues?q=repo%3Acommunity%2Fcommunity+classroom&per_page=5",
           "expect": "total_count",
-          "probeOutcome": "ok",
-          "probeDetail": "HTTP 200, 102B"
+          "probeOutcome": "http_422",
+          "probeDetail": "177B"
         }
       ],
       "notes": "Probe once. If Discussions are unreachable without a token, mark blocked and rely on github.blog posts plus A3."
@@ -180,7 +180,7 @@
           "probeUrl": "https://chromewebstore.google.com/detail/kami/ecnphlgnajanjnkcmbpancdjoidceilk/reviews",
           "expect": "helpful",
           "probeOutcome": "ok",
-          "probeDetail": "HTTP 200, 693483B"
+          "probeDetail": "HTTP 200, 700035B"
         }
       ],
       "notes": "The Chrome Web Store detail page does return HTML to curl, so install counts may be recoverable (see B8), but review text is behind the consent interstitial. Do not budget searches here for complaints.",
@@ -211,8 +211,8 @@
           "result": "HTTP 200 but the body is a constant ~341KB 'Welcome to Reddit' interstitial, not JSON. A 200 here means blocked.",
           "probeUrl": "https://old.reddit.com/r/Professors/top/.json?t=month&limit=5",
           "expect": "created_utc",
-          "probeOutcome": "empty",
-          "probeDetail": "HTTP 200, 341334B, interstitial ('welcome to reddit')"
+          "probeOutcome": "http_403",
+          "probeDetail": "189907B"
         },
         {
           "url": "https://www.reddit.com/svc/shreddit/r/{sub}",
@@ -245,8 +245,8 @@
           "result": "Added 2026-11-01 as a probe target only.",
           "probeUrl": "https://old.reddit.com/r/Teachers/top/.json?t=month&limit=5",
           "expect": "created_utc",
-          "probeOutcome": "empty",
-          "probeDetail": "HTTP 200, 341166B, interstitial ('welcome to reddit')"
+          "probeOutcome": "http_403",
+          "probeDetail": "189907B"
         }
       ],
       "notes": "Same block as A7. Replaced in the rotation by A13 and A14.",
@@ -268,7 +268,7 @@
           "probeUrl": "https://forums.welltrainedmind.com/",
           "expect": "topic",
           "probeOutcome": "http_403",
-          "probeDetail": "5641B"
+          "probeDetail": "5620B"
         }
       ],
       "notes": "The Reddit half (r/homeschool, r/Tutoring, r/elearning) is blocked with A7, and the Well-Trained Mind forum 403s. The direct-pay buyer thesis survives through B1 (Teachers Pay Teachers, which is reachable) and A13.",
@@ -299,8 +299,8 @@
           "result": "HTTP 403.",
           "probeUrl": "https://www.capterra.com/p/165473/Gradescope/reviews/",
           "expect": "review",
-          "probeOutcome": "http_403",
-          "probeDetail": "5663B"
+          "probeOutcome": "http_404",
+          "probeDetail": "102041B"
         }
       ],
       "notes": "G2 and Capterra block automated clients at the edge. This is the site's choice; do not try to work around it.",
@@ -351,7 +351,7 @@
           "probeUrl": "https://hn.algolia.com/api/v1/search_by_date?query=%22wish%20there%20was%22&tags=comment&hitsPerPage=5",
           "expect": "created_at",
           "probeOutcome": "ok",
-          "probeDetail": "HTTP 200, 7007B"
+          "probeDetail": "HTTP 200, 7005B"
         },
         {
           "url": "https://hn.algolia.com/api/v1/search?query={q}&tags=ask_hn&hitsPerPage=20",
@@ -361,7 +361,7 @@
           "probeUrl": "https://hn.algolia.com/api/v1/search?query=tool&tags=ask_hn&hitsPerPage=5",
           "expect": "created_at",
           "probeOutcome": "ok",
-          "probeDetail": "HTTP 200, 14114B"
+          "probeDetail": "HTTP 200, 14128B"
         }
       ],
       "notes": "news.ycombinator.com/item returned HTTP 429 on 2026-10-31. Cite the HN item URL only if the item page itself fetched; otherwise cite the Algolia hit and say so. Algolia carries the date and author, which is what the gate needs."
@@ -444,7 +444,7 @@
           "probeUrl": "https://www.teacherspayteachers.com/Browse/Search:grading%20rubric",
           "expect": "Rating",
           "probeOutcome": "ok",
-          "probeDetail": "HTTP 200, 1159998B"
+          "probeDetail": "HTTP 200, 1159982B"
         }
       ],
       "notes": "Review counts on a paid listing are the spend signal. Two marketplace rules constrain any idea that sells here: TPT's AI-generated-resource ban and exclusive-seller tier (announced October 2026) and Etsy's rules on AI-generated patterns, recipes and instructions (2026-10-22). Verify both before relying on them."
@@ -465,7 +465,7 @@
           "probeUrl": "https://appsumo.com/software/education/",
           "expect": "review",
           "probeOutcome": "ok",
-          "probeDetail": "HTTP 200, 543155B"
+          "probeDetail": "HTTP 200, 542602B"
         }
       ],
       "notes": "A deal with hundreds of reviews is proof that a small tool in that shape sells."
@@ -507,8 +507,8 @@
           "result": "Added 2026-11-01 as a probe target only.",
           "probeUrl": "https://old.reddit.com/r/SaaS/top/.json?t=month&limit=5",
           "expect": "created_utc",
-          "probeOutcome": "empty",
-          "probeDetail": "HTTP 200, 341220B, interstitial ('welcome to reddit')"
+          "probeOutcome": "http_403",
+          "probeDetail": "189907B"
         }
       ],
       "notes": "r/SaaS and r/microsaas are blocked with A7. ID kept so historical focusSources entries stay readable.",
@@ -604,7 +604,7 @@
           "probeUrl": "https://chromewebstore.google.com/detail/ecnphlgnajanjnkcmbpancdjoidceilk",
           "expect": "users",
           "probeOutcome": "ok",
-          "probeDetail": "HTTP 200, 711338B"
+          "probeDetail": "HTTP 200, 718119B"
         },
         {
           "url": "https://marketplace.visualstudio.com/items?itemName={publisher}.{name}",
@@ -686,7 +686,7 @@
           "probeUrl": "https://api.openalex.org/works?search=computing%20education&per-page=5&sort=publication_date:desc",
           "expect": "publication_date",
           "probeOutcome": "ok",
-          "probeDetail": "HTTP 200, 86066B"
+          "probeDetail": "HTTP 200, 86067B"
         },
         {
           "url": "http://export.arxiv.org/api/query?search_query=all:{q}&sortBy=submittedDate&sortOrder=descending&max_results=10",
@@ -734,7 +734,7 @@
       "group": "C",
       "name": "Job postings that describe manual work",
       "evidence": "mandate",
-      "status": "blocked",
+      "status": "ok-curl",
       "lastVerified": "2026-11-01",
       "paths": [
         {
@@ -744,8 +744,8 @@
           "result": "Empty body; the search is a POST form.",
           "probeUrl": "https://www.higheredjobs.com/admin/search.cfm?JobCat=185",
           "expect": "job",
-          "probeOutcome": "empty",
-          "probeDetail": "HTTP 200, 926B, but 'job' is absent"
+          "probeOutcome": "ok",
+          "probeDetail": "HTTP 200, 91228B"
         },
         {
           "url": "https://www.higheredjobs.com/admin/search.cfm?JobCat={id}",
@@ -824,7 +824,7 @@
           "probeUrl": "https://www.edsurge.com/news",
           "expect": "article",
           "probeOutcome": "ok",
-          "probeDetail": "HTTP 200, 109378B"
+          "probeDetail": "HTTP 200, 110611B"
         },
         {
           "url": "https://www.insidehighered.com/news",
