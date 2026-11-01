@@ -15,12 +15,13 @@ format in ideas/SCHEMA.md, not the product-idea schema.
 
 import datetime
 import json
+import pathlib
 import sys
 from urllib.parse import urlsplit
 
 SCORES = ["pain", "willingnessToPay", "reachability",
           "competitiveGap", "feasibility", "complianceBurden"]
-REQUIRED = ["n", "title", "slug", "category", "complexity", "confidence",
+REQUIRED = ["n", "title", "slug", "category", "complexity", "confidence", "topic",
             "summary", "problemStatement", "description", "targetCustomer",
             "buyer", "whyNow", "founderFit", "problemEvidence", "competitors",
             "keyFeatures", "mvpScope", "techStack", "pricing",
@@ -34,6 +35,19 @@ CATEGORIES = {"Micro-SaaS", "EdTech: Higher Ed", "EdTech: K-12",
               "Creative & Prosumer"}
 COMPLEXITY = {"Weekend MVP", "Multi-week", "Multi-month"}
 CONFIDENCE = {"validated", "provisional"}
+# One topic per idea, for topic browsing. Read from the shared taxonomy so this
+# list cannot drift from build.js and scripts/tag_topics.py.
+TAXONOMY_FILE = pathlib.Path(__file__).resolve().parent.parent / "ideas" / "topics-taxonomy.json"
+TOPICS = set(json.loads(TAXONOMY_FILE.read_text(encoding="utf-8"))["topics"])
+COMPLEXITY = {"Weekend MVP", "Multi-week", "Multi-month"}
+CONFIDENCE = {"validated", "provisional"}
+# One topic per idea, for topic browsing. Mirrors build.js TOPIC_NAMES and
+# scripts/tag_topics.py TOPICS; all three must stay in step.
+TOPICS = {"Assessment & Grading", "AI Literacy & Ethics",
+          "Algorithms & Data Structures", "Systems & Hardware",
+          "Graphics & Simulation", "Music & Audio", "Games & Puzzles",
+          "Accessibility", "Math & Cryptography", "Writing & Language",
+          "Teaching Operations", "Developer Tooling", "Data & Visualization"}
 EVIDENCE_KINDS = {"complaint", "spend", "mandate"}
 MAX_IDEAS = 6
 MAX_PROVISIONAL = 2
@@ -93,6 +107,9 @@ def check_idea(idea, expected_n, today, errs):
         errs.append(f"{tag}: category {idea.get('category')!r} is not allowed")
     if idea.get("complexity") not in COMPLEXITY:
         errs.append(f"{tag}: complexity {idea.get('complexity')!r} is not allowed")
+    if idea.get("topic") not in TOPICS:
+        errs.append(f"{tag}: topic {idea.get('topic')!r} is not one of the "
+                    f"{len(TOPICS)} allowed topics")
 
     confidence = idea.get("confidence")
     if confidence not in CONFIDENCE:

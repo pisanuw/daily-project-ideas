@@ -16,6 +16,51 @@ const IDEAS_DIR = path.join(ROOT, 'ideas');
 const WEB_DIR = path.join(ROOT, 'web');
 const DIST_DIR = path.join(ROOT, 'dist');
 const IMPLEMENTED_FILE = path.join(ROOT, 'implemented.json');
+const TOPICS_FILE = path.join(IDEAS_DIR, 'topics.json');
+
+// One topic per idea, for topic browsing. The closed list lives in
+// ideas/topics-taxonomy.json so that build.js, scripts/tag_topics.py and
+// scripts/validate_ideas.py cannot drift apart.
+const TAXONOMY_FILE = path.join(IDEAS_DIR, 'topics-taxonomy.json');
+const TOPIC_NAMES = JSON.parse(fs.readFileSync(TAXONOMY_FILE, 'utf8')).topics;
+
+function topicSlug(name) {
+  return String(name)
+    .toLowerCase()
+    .replace(/&/g, 'and')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
+}
+
+// An idea's own `topic` field wins (the routine writes it); ideas/topics.json
+// covers the archive, which predates the field.
+function loadTopics() {
+  if (!fs.existsSync(TOPICS_FILE)) return {};
+  try {
+    return JSON.parse(fs.readFileSync(TOPICS_FILE, 'utf8'));
+  } catch (err) {
+    console.warn(`  warning: ${TOPICS_FILE} is not valid JSON, ignoring it`);
+    return {};
+  }
+}
+
+function applyTopics(ideas) {
+  const map = loadTopics();
+  const known = new Set(TOPIC_NAMES);
+  let off = 0;
+  for (const idea of ideas) {
+    const topic = known.has(idea.topic) ? idea.topic : map[idea.id];
+    if (topic && known.has(topic)) {
+      idea.topic = topic;
+      idea.topicSlug = topicSlug(topic);
+    } else {
+      if (topic) off += 1;
+      delete idea.topic;
+    }
+  }
+  if (off) console.warn(`  warning: ${off} ideas name a topic outside the list`);
+  return ideas;
+}
 
 // Complexity tiers shown on the landing page, in display order. The first
 // three map to the chili-pepper difficulty scale; "implemented" is special.
@@ -260,12 +305,21 @@ function copyDir(src, dest) {
 function build() {
   let ideas = loadIdeas();
   ideas = applyImplemented(ideas);
+  ideas = applyTopics(ideas);
+
+  const live = ideas.filter((i) => !i.placeholder);
+  const topics = TOPIC_NAMES.map((name) => ({
+    name,
+    slug: topicSlug(name),
+    count: live.filter((i) => i.topic === name).length,
+  })).filter((t) => t.count > 0);
 
   const payload = {
     generatedAt: new Date().toISOString(),
     meta: META,
     tiers: TIERS,
-    total: ideas.filter((i) => !i.placeholder).length,
+    topics,
+    total: live.length,
     ideas,
   };
 
@@ -280,6 +334,11 @@ function build() {
   for (const t of TIERS) counts[t.key] = ideas.filter((i) => i.tierKey === t.key && !i.placeholder).length;
   console.log(`Built dist/ from ${ideas.length} ideas.`);
   console.log('  Per tier:', counts);
+  const tagged = payload.ideas.filter((i) => i.topic && !i.placeholder).length;
+  console.log(`  Topics: ${payload.topics.length} in use, ${tagged}/${payload.total} ideas tagged`);
+  if (tagged < payload.total) {
+    console.log(`    ${payload.total - tagged} untagged; run python3 scripts/tag_topics.py`);
+  }
   console.log(`  data.js written, static files copied from web/.`);
 }
 

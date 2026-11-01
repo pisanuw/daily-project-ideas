@@ -9,15 +9,33 @@
   <link rel="stylesheet" href="styles.css" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%B6%EF%B8%8F%3C/text%3E%3C/svg%3E" />
 </head>
-<body>
+<body data-page="index">
+  <nav class="nav">
+    <div class="wrap nav__inner">
+      <a class="nav__brand" href="index.html">🌶️ Daily Project Ideas</a>
+      <div class="nav__links">
+        <a href="index.html" data-nav="index">Latest</a>
+        <a href="browse.html" data-nav="browse">Browse all</a>
+        <a href="topics.html" data-nav="topics">Topics</a>
+      </div>
+    </div>
+  </nav>
   <header class="hero">
     <div class="wrap">
       <h1 class="hero__title">🌶️ Daily Project Ideas</h1>
       <p class="hero__tagline" id="tagline"></p>
       <p class="hero__desc" id="description"></p>
       <p class="hero__meta" id="hero-meta"></p>
+      <p class="hero__cta">
+        <a class="btn" href="browse.html">Browse all ideas</a>
+        <a class="btn btn--ghost" href="topics.html">Browse by topic</a>
+      </p>
     </div>
   </header>
+
+  <div class="jumpbar" id="jumpbar" hidden>
+    <div class="wrap jumpbar__inner" id="jumpbar-links"></div>
+  </div>
 
   <main class="wrap" id="sections">
     <!-- Tier sections injected by app.js -->

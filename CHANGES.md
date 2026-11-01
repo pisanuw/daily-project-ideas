@@ -509,3 +509,13 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-01 [code] source-health.md lists failing paths inside reachable sources: A3 looked reachable on its Discourse path while its api.github.com path returned 422, hiding a dead GitHub vein.
 
 2026-11-01 [note] Some sites vary by geography: C4 HigherEdJobs served 91KB to the US run and a 926B stub to a European IP; A6's consent wall was GDPR, so both were misrecorded as blocked.
+
+2026-11-01 [code] Site split into three pages: Latest, Browse all (search, filter chips, pagination) and Topics. Filter and modal state lives in the URL, so Back works and ideas are linkable.
+
+2026-11-01 [code] Fixed the stuck landing page: the collapse control moved into the section head, lists grow 24 at a time instead of 3-to-144, and a sticky tier jump bar links the sections.
+
+2026-11-01 [decision] One topic per idea from a closed list of 13 in ideas/topics-taxonomy.json, read by build.js and both scripts. Category could not serve: 566 of 601 use legacy format labels.
+
+2026-11-01 [code] Tagged all 601 archived ideas via the local claude CLI into ideas/topics.json (scripts/tag_topics.py, 16 batches, none off-list). Routine now writes a topic; validator enforces it.
+
+2026-11-01 [code] Added scripts/smoke_pages.js, the repo's first automated check: runs the built pages against a DOM stub and asserts filtering and deep links work.

@@ -439,6 +439,22 @@ Allowed values:
 - `complexity`: "Weekend MVP", "Multi-week", "Multi-month"
 - `confidence`: "validated", "provisional"
 - `review.verdict`: "pass", "rescored"
+- `topic`, exactly one, from this closed list: "Assessment & Grading",
+  "AI Literacy & Ethics", "Algorithms & Data Structures", "Systems & Hardware",
+  "Graphics & Simulation", "Music & Audio", "Games & Puzzles", "Accessibility",
+  "Math & Cryptography", "Writing & Language", "Teaching Operations",
+  "Developer Tooling", "Data & Visualization"
+
+`topic` drives topic browsing on the site, so pick the single best fit and
+pick it by what the product **is about**, not by who buys it or what it is
+built with. Two traps: nearly every idea here touches AI, so reserve
+"AI Literacy & Ethics" for ideas whose subject is AI itself (a grading tool
+that calls an LLM is "Assessment & Grading"); and "Developer Tooling" is for
+ideas about the practice of programming (version control, debugging, testing,
+code review), not for anything that happens to be a web app. There is no
+"other": pick the closest topic even when the fit is loose. The same list lives
+in `scripts/tag_topics.py` and `build.js`; if a topic is ever added, update all
+three and re-run `python3 scripts/tag_topics.py`.
 
 **First run.** Number the ideas `n` from 1. Set `"complete": true` only when
 the file is fully written.
@@ -472,6 +488,7 @@ Format (all fields required for every idea; `gateGap` is required only when
       "category": "EdTech: Higher Ed",
       "complexity": "Weekend MVP",
       "confidence": "validated",
+      "topic": "Assessment & Grading",
       "summary": "1-2 sentence card blurb: who it is for and what it saves them.",
       "problemStatement": "The specific pain, described in the customer's own terms.",
       "description": "3-5 sentences: what the product does and how it works.",

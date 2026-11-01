@@ -123,6 +123,29 @@ version history:
     `Creative & Prosumer`. At most 2 ideas in a day may share a category, and
     at least one must still be `EdTech:` something.
 
+  - `topic` (required): exactly one topic from the closed list in
+    `ideas/topics-taxonomy.json`, chosen by what the product is about rather
+    than who buys it or what it is built with. It drives topic browsing on the
+    site. `scripts/validate_ideas.py` rejects anything off the list.
+
+### Topic files added 2026-11-01
+
+Topic browsing needed one topic per idea, and `category` could not supply it:
+566 of the 601 archived ideas carry one of four legacy *format* labels (Side
+Project, Teaching Tool, Classroom Assignment, Research), and the topical v3
+categories covered only 29. A keyword tagger was tried first and averaged 3.4
+matches per idea, too loose to browse by.
+
+| File | Written by | Purpose |
+|---|---|---|
+| `ideas/topics-taxonomy.json` | by hand | The closed list of 13 topics, in display order. `build.js`, `scripts/tag_topics.py` and `scripts/validate_ideas.py` all read it, so the list cannot drift between them. Renaming or adding a topic means re-running the tagger with `--retag`, because existing assignments were made against the old list. |
+| `ideas/topics.json` | `scripts/tag_topics.py` | `{"<idea id>": "<topic>"}` for the archive, where the id is `YYYY-MM-DD-N`. Generated with the local `claude` CLI in batches of 40. |
+
+The archive's topics live in `topics.json` rather than being written back into
+the daily files, because those files are an append-only record and a taxonomy
+that turns out wrong should be regenerable without rewriting them. New ideas
+carry their own `topic` field, and that always wins over `topics.json`.
+
 ### Operational files added 2026-11-01
 
 These are not idea data, but the routine reads and writes them every run.

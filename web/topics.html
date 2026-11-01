@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Topics · Daily Project Ideas</title>
+  <meta name="description" content="Every project idea sorted into one topic, from assessment and grading to music and audio." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%B6%EF%B8%8F%3C/text%3E%3C/svg%3E" />
+</head>
+<body data-page="topics">
+  <nav class="nav">
+    <div class="wrap nav__inner">
+      <a class="nav__brand" href="index.html">🌶️ Daily Project Ideas</a>
+      <div class="nav__links">
+        <a href="index.html" data-nav="index">Latest</a>
+        <a href="browse.html" data-nav="browse">Browse all</a>
+        <a href="topics.html" data-nav="topics">Topics</a>
+      </div>
+    </div>
+  </nav>
+  <header class="pagehead wrap">
+    <h1 class="pagehead__title">Browse by topic</h1>
+    <p class="pagehead__sub" id="topics-sub"></p>
+  </header>
+
+  <main class="wrap">
+    <div class="topicgrid" id="topicgrid"></div>
+  </main>
+
+  <footer class="footer wrap">
+    <p>
+      Curated automatically by a <a href="https://claude.com/claude-code">Claude Code</a> routine.
+      Source: <a href="https://github.com/pisanuw/daily-project-ideas">daily-project-ideas</a>.
+    </p>
+    <p>
+      I build apps like this one for fun and to learn. You can see all my projects at
+      <a href="https://pisanorg.github.io/yusuf/aiprojects.html">https://pisanorg.github.io/yusuf/aiprojects.html</a>.
+      If you have a project you’d like built, contact me at
+      <a href="mailto:builder@pisan.me?subject=Project%20idea%20(via%20daily-project-ideas)">builder@pisan.me</a>
+      and I might just do it 😉. Commercial/complex projects may require funding.
+    </p>
+    <p>Professor Yusuf Pisan</p>
+  </footer>
+
+  <!-- Detail modal -->
+  <div class="modal" id="modal" hidden>
+    <div class="modal__backdrop" data-close></div>
+    <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button class="modal__close" data-close aria-label="Close">&times;</button>
+      <div class="modal__body" id="modal-body"></div>
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

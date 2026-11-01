@@ -67,6 +67,7 @@
   // ---- Card ----
   function card(idea) {
     var tags = dateTags(idea);
+    if (idea.topic) tags.push(el('span', { class: 'tag tag--topic', text: idea.topic }));
     if (idea.category) tags.push(el('span', { class: 'tag', text: idea.category }));
     if (idea.scores && idea.scores.total) tags.push(el('span', { class: 'tag tag--score', text: 'Score ' + idea.scores.total + '/30' }));
     if (idea.confidence === 'provisional') tags.push(el('span', { class: 'tag tag--provisional', text: 'Provisional' }));
@@ -85,12 +86,20 @@
   }
 
   // ---- Section ----
+  // Two problems with the old fold: the only collapse control sat below every
+  // expanded card (167 of them in the Multi-week tier), and the jump was from 3
+  // straight to all of them. Now the control lives in the section head, where it
+  // is always reachable, and the list grows a page at a time.
+  var PAGE_STEP = 24;
+
   function section(tier, ideas) {
     var sorted = ideas.slice().sort(tier.key === 'implemented' ? byImplementedDesc : byDateDesc);
     var countWord = tier.key === 'research' ? (sorted.length === 1 ? ' idea' : ' ideas') : (sorted.length === 1 ? ' project' : ' projects');
+
+    var toggle = el('button', { class: 'section__toggle', type: 'button' });
     var head = el('div', { class: 'section__head' }, [
       el('span', { class: 'section__peppers', text: tier.peppers }),
-      el('h2', { class: 'section__title', text: tier.label }),
+      el('h2', { class: 'section__title', text: tier.label, id: 'tier-' + tier.key }),
       el('span', { class: 'section__count', text: sorted.length + countWord }),
       el('p', { class: 'section__blurb', text: tier.blurb }),
     ]);
@@ -103,44 +112,71 @@
       return sec;
     }
 
-    var latest = sorted.slice(0, INITIAL);
-    var rest = sorted.slice(INITIAL);
-    latest.forEach(function (i) { grid.appendChild(card(i)); });
+    var shown = Math.min(INITIAL, sorted.length);
+    var more = el('button', { class: 'fold-btn', type: 'button' });
+    var browseLink = el('a', {
+      class: 'fold-link',
+      href: 'browse.html?tier=' + encodeURIComponent(tier.key),
+      text: 'Search and filter all ' + sorted.length + ' \u2192',
+    });
+    var foot = el('div', { class: 'section__foot' }, [more, browseLink]);
 
-    if (rest.length > 0) {
-      var hiddenCards = rest.map(function (i) {
-        var c = card(i);
-        c.classList.add('hidden');
-        return c;
-      });
-      hiddenCards.forEach(function (c) { grid.appendChild(c); });
-
-      var btn = el('button', { class: 'fold-btn', type: 'button' });
-      var expanded = false;
-      function syncLabel() {
-        btn.textContent = expanded
-          ? '▲ Show fewer'
-          : '▼ Show all ' + sorted.length + ' ' + tier.label.toLowerCase() + ' projects (' + rest.length + ' more)';
-      }
-      btn.addEventListener('click', function () {
-        expanded = !expanded;
-        hiddenCards.forEach(function (c) { c.classList.toggle('hidden', !expanded); });
-        syncLabel();
-      });
-      syncLabel();
-      sec.appendChild(btn);
+    function paint() {
+      grid.innerHTML = '';
+      sorted.slice(0, shown).forEach(function (i) { grid.appendChild(card(i)); });
+      var left = sorted.length - shown;
+      more.hidden = left <= 0;
+      more.textContent = left > 0
+        ? '\u25bc Show ' + Math.min(PAGE_STEP, left) + ' more (' + left + ' left)'
+        : '';
+      toggle.hidden = shown <= INITIAL;
+      toggle.textContent = '\u25b2 Collapse';
     }
+
+    more.addEventListener('click', function () {
+      shown = Math.min(shown + PAGE_STEP, sorted.length);
+      paint();
+    });
+    toggle.addEventListener('click', function () {
+      shown = Math.min(INITIAL, sorted.length);
+      paint();
+      // Put the reader back at the section head rather than halfway down the page.
+      head.scrollIntoView({ block: 'start' });
+    });
+
+    head.insertBefore(toggle, head.querySelector('.section__blurb'));
+    sec.appendChild(foot);
+    paint();
     return sec;
+  }
+
+  // A bar of tier links, so a long page still lets you jump between sections.
+  function renderJumpbar(present) {
+    var bar = document.getElementById('jumpbar');
+    var host = document.getElementById('jumpbar-links');
+    if (!bar || !host) return;
+    present.forEach(function (tier) {
+      host.appendChild(el('a', {
+        class: 'jumpbar__link',
+        href: '#tier-' + tier.key,
+        text: tier.peppers + ' ' + tier.label,
+      }));
+    });
+    host.appendChild(el('a', { class: 'jumpbar__link jumpbar__link--top', href: '#', text: '\u2191 Top' }));
+    bar.hidden = false;
   }
 
   function renderSections() {
     var host = document.getElementById('sections');
+    var present = [];
     DATA.tiers.forEach(function (tier) {
       var ideas = DATA.ideas.filter(function (i) { return i.tierKey === tier.key; });
       // Hide a tier only if it's the special implemented or research tier and empty.
       if ((tier.key === 'implemented' || tier.key === 'research') && ideas.length === 0) return;
       host.appendChild(section(tier, ideas));
+      present.push(tier);
     });
+    renderJumpbar(present);
   }
 
   // ---- Modal ----
@@ -365,7 +401,15 @@
     blocks.forEach(function (b) { if (b) frag.appendChild(b); });
   }
 
-  function openModal(idea) {
+  // The site had no URL state at all, so the back button could not close a
+  // modal or undo anything, and no idea was linkable. Opening a card now pushes
+  // ?idea=<id>; Back pops it and closes the modal.
+  function openModal(idea, fromHistory) {
+    if (!fromHistory) {
+      var url = new URL(window.location.href);
+      url.searchParams.set('idea', idea.id);
+      window.history.pushState({ idea: idea.id }, '', url);
+    }
     modalBody.innerHTML = '';
     var tags = [];
     if (idea.complexity) tags.push(el('span', { class: 'tag', text: idea.complexity }));
@@ -481,9 +525,35 @@
     }
   }
 
-  function closeModal() {
+  function closeModal(fromHistory) {
     modal.hidden = true;
     document.body.style.overflow = '';
+    if (!fromHistory && new URL(window.location.href).searchParams.has('idea')) {
+      window.history.back();
+    }
+  }
+
+  function ideaById(id) {
+    return DATA.ideas.filter(function (i) { return i.id === id; })[0];
+  }
+
+  // One listener for both pages: the modal follows the ?idea= parameter.
+  window.addEventListener('popstate', function () {
+    var id = new URL(window.location.href).searchParams.get('idea');
+    var idea = id && ideaById(id);
+    if (idea) {
+      openModal(idea, true);
+    } else if (!modal.hidden) {
+      closeModal(true);
+    }
+    if (document.body.getAttribute('data-page') === 'browse') syncFromUrl();
+  });
+
+  // A shared link that names an idea opens straight into it.
+  function openFromUrl() {
+    var id = new URL(window.location.href).searchParams.get('idea');
+    var idea = id && ideaById(id);
+    if (idea) openModal(idea, true);
   }
 
   modal.addEventListener('click', function (e) {
@@ -493,7 +563,201 @@
     if (e.key === 'Escape' && !modal.hidden) closeModal();
   });
 
+  // ---- Browse page ----
+  // Filter state lives in the query string, so every change is a history entry,
+  // the back button works, and any view can be shared as a link.
+  var FILTERS = [
+    { key: 'tier', label: 'Effort', options: function () {
+        return DATA.tiers.map(function (t) { return { value: t.key, label: t.peppers + ' ' + t.label }; });
+      } },
+    { key: 'topic', label: 'Topic', options: function () {
+        return (DATA.topics || []).map(function (t) { return { value: t.slug, label: t.name + ' (' + t.count + ')' }; });
+      } },
+    { key: 'status', label: 'Status', options: function () {
+        return [
+          { value: 'implemented', label: '\ud83d\ude80 Built' },
+          { value: 'validated', label: 'Validated' },
+          { value: 'provisional', label: 'Provisional' },
+        ];
+      } },
+  ];
+  var PER_PAGE = 24;
+
+  function params() { return new URL(window.location.href).searchParams; }
+
+  function setParams(changes, replace) {
+    var url = new URL(window.location.href);
+    Object.keys(changes).forEach(function (k) {
+      if (changes[k]) url.searchParams.set(k, changes[k]);
+      else url.searchParams.delete(k);
+    });
+    url.searchParams.delete('idea');
+    window.history[replace ? 'replaceState' : 'pushState']({}, '', url);
+  }
+
+  function matches(idea, q, p) {
+    if (idea.placeholder) return false;
+    var tier = p.get('tier');
+    if (tier && idea.tierKey !== tier) return false;
+    var topic = p.get('topic');
+    if (topic && idea.topicSlug !== topic) return false;
+    var status = p.get('status');
+    if (status === 'implemented' && !idea.implemented) return false;
+    if (status === 'validated' && idea.confidence !== 'validated') return false;
+    if (status === 'provisional' && idea.confidence !== 'provisional') return false;
+    if (q) {
+      var hay = (idea.title + ' ' + (idea.summary || '') + ' ' + (idea.description || '') + ' ' +
+                 (idea.topic || '') + ' ' + (idea.category || '')).toLowerCase();
+      if (hay.indexOf(q) === -1) return false;
+    }
+    return true;
+  }
+
+  function renderFilters() {
+    var host = document.getElementById('filters');
+    if (!host || host.childNodes.length) return;
+    FILTERS.forEach(function (f) {
+      var opts = f.options();
+      if (!opts.length) return;
+      var row = el('div', { class: 'filterrow' }, [el('span', { class: 'filterrow__label', text: f.label })]);
+      opts.forEach(function (o) {
+        var chip = el('button', { class: 'chip', type: 'button', 'data-key': f.key, 'data-value': o.value, text: o.label });
+        chip.addEventListener('click', function () {
+          var change = {};
+          change[f.key] = params().get(f.key) === o.value ? '' : o.value;
+          change.page = '';
+          setParams(change);
+          syncFromUrl();
+        });
+        row.appendChild(chip);
+      });
+      host.appendChild(row);
+    });
+  }
+
+  function renderPager(total, page) {
+    var host = document.getElementById('pager');
+    host.innerHTML = '';
+    var pages = Math.ceil(total / PER_PAGE);
+    if (pages <= 1) return;
+    function pageBtn(n, label, disabled) {
+      var b = el('button', { class: 'pager__btn' + (n === page ? ' is-current' : ''), type: 'button', text: label || String(n) });
+      if (disabled) b.disabled = true;
+      else b.addEventListener('click', function () {
+        setParams({ page: n === 1 ? '' : String(n) });
+        syncFromUrl();
+        window.scrollTo(0, 0);
+      });
+      return b;
+    }
+    host.appendChild(pageBtn(page - 1, '\u2190 Prev', page === 1));
+    var from = Math.max(1, page - 2), to = Math.min(pages, page + 2);
+    if (from > 1) host.appendChild(pageBtn(1, '1'));
+    if (from > 2) host.appendChild(el('span', { class: 'pager__gap', text: '\u2026' }));
+    for (var n = from; n <= to; n++) host.appendChild(pageBtn(n));
+    if (to < pages - 1) host.appendChild(el('span', { class: 'pager__gap', text: '\u2026' }));
+    if (to < pages) host.appendChild(pageBtn(pages, String(pages)));
+    host.appendChild(pageBtn(page + 1, 'Next \u2192', page === pages));
+  }
+
+  function syncFromUrl() {
+    var p = params();
+    var q = (p.get('q') || '').trim().toLowerCase();
+    var page = Math.max(1, parseInt(p.get('page'), 10) || 1);
+
+    var box = document.getElementById('q');
+    if (box && box.value !== (p.get('q') || '')) box.value = p.get('q') || '';
+    var clear = document.getElementById('q-clear');
+    if (clear) clear.hidden = !q;
+
+    document.querySelectorAll('.chip').forEach(function (chip) {
+      var on = p.get(chip.getAttribute('data-key')) === chip.getAttribute('data-value');
+      chip.classList.toggle('is-on', on);
+      chip.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+
+    var hits = DATA.ideas.filter(function (i) { return matches(i, q, p); }).sort(byDateDesc);
+    var pages = Math.max(1, Math.ceil(hits.length / PER_PAGE));
+    if (page > pages) page = pages;
+
+    var grid = document.getElementById('results');
+    grid.innerHTML = '';
+    hits.slice((page - 1) * PER_PAGE, page * PER_PAGE).forEach(function (i) { grid.appendChild(card(i)); });
+    document.getElementById('no-results').hidden = hits.length > 0;
+
+    var active = ['tier', 'topic', 'status'].filter(function (k) { return p.get(k); });
+    document.getElementById('result-count').textContent =
+      hits.length + (hits.length === 1 ? ' idea' : ' ideas') +
+      (hits.length > PER_PAGE ? ' \u00b7 page ' + page + ' of ' + pages : '');
+    document.getElementById('reset').hidden = !active.length && !q;
+
+    var topic = p.get('topic');
+    var named = (DATA.topics || []).filter(function (t) { return t.slug === topic; })[0];
+    document.getElementById('browse-title').textContent = named ? named.name : 'Browse all ideas';
+    document.getElementById('browse-sub').textContent = named
+      ? 'Every idea filed under ' + named.name + '. Each idea has exactly one topic.'
+      : 'Search every idea, or narrow by effort, topic and status.';
+
+    renderPager(hits.length, page);
+  }
+
+  function initBrowse() {
+    renderFilters();
+    var box = document.getElementById('q');
+    var timer = null;
+    box.addEventListener('input', function () {
+      clearTimeout(timer);
+      timer = setTimeout(function () {
+        setParams({ q: box.value.trim(), page: '' }, true);
+        syncFromUrl();
+      }, 180);
+    });
+    document.getElementById('q-clear').addEventListener('click', function () {
+      box.value = '';
+      setParams({ q: '', page: '' });
+      syncFromUrl();
+      box.focus();
+    });
+    document.getElementById('reset').addEventListener('click', function () {
+      setParams({ q: '', tier: '', topic: '', status: '', page: '' });
+      syncFromUrl();
+    });
+    syncFromUrl();
+    openFromUrl();
+  }
+
+  // ---- Topics page ----
+  function initTopics() {
+    var host = document.getElementById('topicgrid');
+    var topics = DATA.topics || [];
+    var total = topics.reduce(function (a, t) { return a + t.count; }, 0);
+    document.getElementById('topics-sub').textContent = topics.length
+      ? total + ' ideas across ' + topics.length + ' topics. Each idea has exactly one topic, so the counts add up.'
+      : 'Topics have not been assigned yet.';
+    topics.forEach(function (t) {
+      host.appendChild(el('a', { class: 'topiccard', href: 'browse.html?topic=' + encodeURIComponent(t.slug) }, [
+        el('span', { class: 'topiccard__count', text: String(t.count) }),
+        el('span', { class: 'topiccard__name', text: t.name }),
+      ]));
+    });
+  }
+
+  function markNav() {
+    var page = document.body.getAttribute('data-page');
+    var link = document.querySelector('[data-nav="' + page + '"]');
+    if (link) link.classList.add('is-current');
+  }
+
   // ---- Go ----
-  renderHero();
-  renderSections();
+  markNav();
+  var PAGE = document.body.getAttribute('data-page');
+  if (PAGE === 'browse') {
+    initBrowse();
+  } else if (PAGE === 'topics') {
+    initTopics();
+  } else {
+    renderHero();
+    renderSections();
+    openFromUrl();
+  }
 })();
