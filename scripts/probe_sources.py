@@ -26,6 +26,7 @@ import json
 import re
 import subprocess
 import sys
+import time
 import datetime
 from concurrent.futures import ThreadPoolExecutor
 
@@ -33,6 +34,13 @@ SOURCES = "ideas/sources.json"
 UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36"
 TIMEOUT = 20
 MIN_BODY = 400  # with no `expect` marker, smaller than this is a stub
+
+# Outcomes that mean "ask again later" rather than "this source is dead". A single
+# probe is one sample: the routine's 2026-11-01 run got http_422 from
+# api.github.com on paths that answer 200 from other IPs, which would have
+# retired a working source if a soft failure counted as a block.
+SOFT = {"http_422", "http_429", "http_5xx", "timeout"}
+RETRY_PAUSE = 3  # seconds, before the single retry of a soft failure
 
 # Bodies that mean "blocked" despite a 200.
 INTERSTITIALS = [
@@ -43,6 +51,18 @@ INTERSTITIALS = [
 
 
 def probe_one(url, expect):
+    """Probe once, retrying a single time if the failure looks transient."""
+    outcome, detail = probe_once(url, expect)
+    if outcome in SOFT:
+        time.sleep(RETRY_PAUSE)
+        retry_outcome, retry_detail = probe_once(url, expect)
+        if retry_outcome == "ok":
+            return "ok", f"{retry_detail} (first attempt {outcome})"
+        return retry_outcome, f"{retry_detail} (twice, first was {outcome})"
+    return outcome, detail
+
+
+def probe_once(url, expect):
     """Return (outcome, detail)."""
     try:
         proc = subprocess.run(
@@ -84,11 +104,19 @@ def probe_one(url, expect):
 
 
 def status_from(outcomes):
-    """Collapse a source's path outcomes into a catalog status."""
+    """Collapse a source's path outcomes into a catalog status.
+
+    blocked is reserved for a refusal we can act on: a 403, a 404, or a 200
+    carrying an interstitial. When every path failed but only softly, the
+    honest answer is unknown, so the next probe looks again instead of the
+    source being quietly dropped from the rotation.
+    """
     if not outcomes:
         return "unknown"
     if any(o == "ok" for o in outcomes):
         return "ok-curl"  # curl reached it; only the routine can confirm WebFetch
+    if all(o in SOFT for o in outcomes):
+        return "unknown"
     return "blocked"
 
 

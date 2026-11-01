@@ -501,3 +501,11 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-01 [note] Env moved to FullCloud, full internet. Re-probe: reachable sources 16 to 21 (A4 A6 B5 C3 C6 back). Sites still refusing: Reddit, G2, Capterra, Product Hunt, Indie Hackers.
 
 2026-10-31 [note] GPU Parallel Puzzler (2026-06-23 n2) marked implemented: live at gpu-parallel-puzzler.netlify.app, repo Claude-capstone/gpu-parallel-puzzler. Simulated SIMT GPU, 12 levels; 36 tests.
+
+2026-11-01 [note] Routine's FullCloud probe agreed with the local baseline on 33 of 35 sources: datacenter egress is not penalised. Reddit, G2, Capterra, Product Hunt, Indie Hackers refuse both.
+
+2026-11-01 [code] probe_sources.py retries a soft failure (422, 429, 5xx, timeout) once and now reports unknown rather than blocked when every path fails only softly; a single 422 had retired A4.
+
+2026-11-01 [code] source-health.md lists failing paths inside reachable sources: A3 looked reachable on its Discourse path while its api.github.com path returned 422, hiding a dead GitHub vein.
+
+2026-11-01 [note] Some sites vary by geography: C4 HigherEdJobs served 91KB to the US run and a 926B stub to a European IP; A6's consent wall was GDPR, so both were misrecorded as blocked.

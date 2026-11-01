@@ -15,7 +15,6 @@ Generated 2026-11-01 from the last 45 days of `ideas/run-log.jsonl` (4 runs). Do
 | B4 Founder subreddits | Reddit, same as A7. |
 | B7 Product Hunt | producthunt.com returns HTTP 403 without an API key. |
 | C3 Procurement and RFP portals | RFP portals sit behind Cloudflare, and an RFP buyer fails the no-procurement rule anyway. |
-| C4 Job postings that describe manual work | Reach job postings through a web search that surfaces individual posting URLs, then fetch those, rather than through a site search form. |
 | C9 Y Combinator requests and directory | Used on 2026-10-31 to find competitors (Edexia W2025, Frizzle S2025). |
 
 ## Reachable sources, best first
@@ -30,7 +29,6 @@ Generated 2026-11-01 from the last 45 days of `ideas/run-log.jsonl` (4 runs). Do
 | A14 Plugin and add-on support forums | complaint | ok | 0 | `webfetch: https://wordpress.org/support/plugin/{slug}/` |
 | A2 Other LMS and classroom forums | complaint | ok | 0 | `webfetch: https://discuss.openedx.org/latest.json` |
 | A3 Open-source teaching tools | complaint | ok | 0 | `webfetch: https://api.github.com/search/issues?q={q}+state%3Aopen+sort%3Areactions&per_page=10` |
-| A4 GitHub Education and Classroom discussions | complaint | ok-curl | 0 | no verified path |
 | A5 Educator Stack Exchanges | complaint | ok-curl | 0 | `curl: https://api.stackexchange.com/2.3/questions?site={cseducators|academia|matheducators}&order=desc&sort=creation&pagesize=20&filter=withbody` |
 | A6 Edtech app and extension reviews | complaint | ok-curl | 0 | `webfetch: https://chromewebstore.google.com/detail/{slug}/{id}/reviews` |
 | B1 Teachers Pay Teachers and Etsy | spend | ok | 0 | `webfetch: https://www.teacherspayteachers.com/Browse/Search:{q}` |
@@ -42,9 +40,20 @@ Generated 2026-11-01 from the last 45 days of `ideas/run-log.jsonl` (4 runs). Do
 | C10 Change events: shutdowns, price rises, removed free tiers | mandate | ok | 0 | no verified path |
 | C11 Federal award and grant data | mandate | ok | 0 | `webfetch: https://api.nsf.gov/services/v1/awards.json?keyword={q}&printFields=title,date,awardeeName,fundsObligatedAmt&rpp=10` |
 | C2 Education and computing research | mandate | ok | 0 | `webfetch: https://api.openalex.org/works?search={q}&per-page=10&sort=publication_date%3Adesc` |
+| C4 Job postings that describe manual work | mandate | ok-curl | 0 | `webfetch: https://www.higheredjobs.com/search/advanced_action.cfm?JobCat={id}` |
 | C5 Policy and regulation trackers | mandate | ok | 0 | `webfetch: https://www.federalregister.gov/api/v1/documents.json?per_page=10&order=newest&conditions[term]={q}` |
 | C6 Accreditation and standards changes | mandate | ok-curl | 0 | no verified path |
 | C8 Trade news | mandate | ok-curl | 0 | `curl: https://www.edsurge.com/news` |
+
+## Reachable sources with a failing path
+
+These sources are not on the avoid list, because at least one of their paths works. The paths below are the ones that did not. If the failing path is the vein you came for, use the fallback or pick another source.
+
+| Source | Status | Failing path | Outcome | Working paths left |
+|---|---|---|---|---|
+| A3 Open-source teaching tools | ok | `https://api.github.com/search/issues?q=autograder+in%3Atitle+state%3Aopen&per_page=5` | http_422 (177B) | 1 |
+| A4 GitHub Education and Classroom discussions | unknown | `https://api.github.com/search/issues?q=repo%3Acommunity%2Fcommunity+classroom&per_page=5` | http_422 (177B) | 0 |
+| B5 Acquisition marketplaces | ok-curl | `https://acquire.com/search/?industry=education` | http_404 (453602B) | 1 |
 
 ## Hosts, as actually observed
 
@@ -105,6 +114,5 @@ A run producing nothing is a routine bug, not a quiet day. Each line above is on
 
 - **A1 LMS idea boards**: catalog says `blocked`, the log says `reachable` (2 usable fetches in the window). Update `ideas/sources.json` by hand.
 - **C3 Procurement and RFP portals**: catalog says `ok-curl`, the log says `blocked` (5 attempts in the window, none usable). Update `ideas/sources.json` by hand.
-- **C4 Job postings that describe manual work**: catalog says `blocked`, the log says `reachable` (2 usable fetches in the window). Update `ideas/sources.json` by hand.
 - **C9 Y Combinator requests and directory**: catalog says `blocked`, the log says `reachable` (1 usable fetches in the window). Update `ideas/sources.json` by hand.
 

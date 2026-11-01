@@ -1,6 +1,6 @@
 {
   "updated": "2026-11-01",
-  "note": "Source catalog for ROUTINE.md. Every entry names a concrete access path, not just a brand, so a run does not have to rediscover how to reach a source. Status is empirical: it records what a fetch actually returned. scripts/source_health.py refreshes status from ideas/run-log.jsonl; sources.json is the hand-maintained baseline. Each path may carry probeUrl (a concrete URL with the placeholders filled in) and expect (a string that must appear in the body for the fetch to count as usable). scripts/probe_sources.py uses those two fields to re-measure the catalog, which is what to run after the run environment changes.",
+  "note": "Source catalog for ROUTINE.md. Every entry names a concrete access path, not just a brand, so a run does not have to rediscover how to reach a source. Status is empirical: it records what a fetch actually returned. scripts/source_health.py refreshes status from ideas/run-log.jsonl; sources.json is the hand-maintained baseline. Each path may carry probeUrl (a concrete URL with the placeholders filled in) and expect (a string that must appear in the body for the fetch to count as usable). scripts/probe_sources.py uses those two fields to re-measure the catalog, which is what to run after the run environment changes. Statuses depend on where the probe ran. The 2026-11-01 baseline was measured from a European residential IP and then re-measured by the routine from its US cloud environment; the two agreed on every source but two. Where they disagree, the routine's measurement is the one that matters, because that is where the daily run happens. Two known geography effects: HigherEdJobs (C4) serves a stub to non-US addresses, and the Chrome Web Store (A6) redirects European traffic to a consent wall that US traffic does not see.",
   "statusMeanings": {
     "ok": "A verified path returns usable, dated content through the WebFetch tool.",
     "ok-curl": "Usable only through curl in Bash; the WebFetch allowlist or renderer fails on it.",
@@ -110,14 +110,14 @@
           "probeDetail": "HTTP 200, 1514B"
         }
       ],
-      "notes": "Unauthenticated GitHub search allows about 10 requests a minute. Reactions and comment counts are the demand signal; a long-open issue with many reactions is one complaint item, not several."
+      "notes": "Two paths, and only one of them was working as of 2026-11-01. The GitHub issue-search path answered HTTP 422 from the routine's environment (see A4); the Jupyter Discourse path works. Do not treat this source as a GitHub vein until a probe says the 422 has cleared, and check source-health.md, which now lists failing paths inside reachable sources. Reactions and comment counts are the demand signal; a long-open issue with many reactions is one complaint item, not several."
     },
     {
       "id": "A4",
       "group": "A",
       "name": "GitHub Education and Classroom discussions",
       "evidence": "complaint",
-      "status": "blocked",
+      "status": "unknown",
       "lastVerified": "2026-11-01",
       "paths": [
         {
@@ -131,7 +131,7 @@
           "probeDetail": "177B"
         }
       ],
-      "notes": "Probe once. If Discussions are unreachable without a token, mark blocked and rely on github.blog posts plus A3."
+      "notes": "api.github.com/search/issues answered HTTP 422 (177B) from the routine's environment on 2026-11-01 and HTTP 200 from a residential IP the same day, with and without advanced_search=true, so the query is not the problem and the cause is unidentified. Unauthenticated GitHub search allows only 10 requests a minute per IP, which a shared datacenter address can exhaust. Treat as unknown: probe once before relying on it, and fall back to A13. Discussions may also need GraphQL with a token, which is untested."
     },
     {
       "id": "A5",
@@ -183,7 +183,7 @@
           "probeDetail": "HTTP 200, 700035B"
         }
       ],
-      "notes": "The Chrome Web Store detail page does return HTML to curl, so install counts may be recoverable (see B8), but review text is behind the consent interstitial. Do not budget searches here for complaints.",
+      "notes": "Chrome Web Store review text sat behind a consent.google.com redirect when fetched from a European IP; that is a GDPR consent wall and US traffic may not see it, so the routine's own probe is the one to believe. The detail page returns HTML to curl and install counts may be recoverable (see B8). Re-probe from the routine's environment before writing this source off.",
       "blockedBecause": "Chrome Web Store reviews sit behind a consent.google.com redirect."
     },
     {
@@ -754,7 +754,7 @@
           "result": "HTTP 200 but only 1KB, so no listings."
         }
       ],
-      "notes": "Reach job postings through a web search that surfaces individual posting URLs, then fetch those, rather than through a site search form. A posting is a mandate signal: an institution is paying salary for a workflow."
+      "notes": "Reachable from the routine's US environment: it fetched 91KB on 2026-11-01 where a European IP got a 926B stub for the same URL, so this site varies its response by geography. Trust the routine's measurement over a local one. A posting is a mandate signal: an institution is paying salary for a workflow."
     },
     {
       "id": "C5",

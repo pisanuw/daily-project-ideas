@@ -163,6 +163,35 @@ def avoid_and_prefer(catalog, summary):
     return avoid, prefer
 
 
+def failing_paths(catalog):
+    """Paths that failed their last probe inside a source that counts as reachable.
+
+    A source is marked reachable if any one path works, so a dead primary path
+    can hide behind a working fallback. A run that follows the source expecting
+    the primary vein needs to know.
+    """
+    rows = []
+    for src in catalog["sources"]:
+        if src["status"] == "blocked":
+            continue  # already on the avoid list, nothing hidden
+        paths = src.get("paths") or []
+        probed = [p for p in paths if p.get("probeOutcome")]
+        if not probed or all(p["probeOutcome"] == "ok" for p in probed):
+            continue
+        working = [p for p in probed if p["probeOutcome"] == "ok"]
+        for p in probed:
+            if p["probeOutcome"] != "ok":
+                rows.append({
+                    "id": src["id"], "name": src["name"],
+                    "status": src["status"],
+                    "url": p.get("probeUrl") or p.get("url"),
+                    "outcome": p["probeOutcome"],
+                    "detail": p.get("probeDetail", ""),
+                    "fallbacks": len(working),
+                })
+    return rows
+
+
 def render_md(report):
     L = []
     L.append("# Source health")
@@ -199,6 +228,20 @@ def render_md(report):
         L.append(f"| {p['id']} {p['name']} | {p['evidence']} | {p['status']} "
                  f"| {p['selectedIdeas']} | {path} |")
     L.append("")
+
+    if report.get("failingPaths"):
+        L.append("## Reachable sources with a failing path")
+        L.append("")
+        L.append("These sources are not on the avoid list, because at least one of their "
+                 "paths works. The paths below are the ones that did not. If the failing "
+                 "path is the vein you came for, use the fallback or pick another source.")
+        L.append("")
+        L.append("| Source | Status | Failing path | Outcome | Working paths left |")
+        L.append("|---|---|---|---|---|")
+        for r in report["failingPaths"]:
+            L.append(f"| {r['id']} {r['name']} | {r['status']} | `{r['url']}` "
+                     f"| {r['outcome']} ({r['detail']}) | {r['fallbacks']} |")
+        L.append("")
 
     hosts = report["byHost"]
     if hosts:
@@ -274,6 +317,7 @@ def main(argv):
         "runsInWindow": len(runs),
         "avoid": avoid,
         "prefer": prefer,
+        "failingPaths": failing_paths(catalog),
         **summary,
     }
     with open(OUT_JSON, "w", encoding="utf-8") as fh:
@@ -289,6 +333,10 @@ def main(argv):
         print(f"OK: {len(runs)} runs in the last {args.days} days -> "
               f"{OUT_JSON}, {OUT_MD}")
         print(f"  avoid {len(avoid)} sources, prefer {len(prefer)}")
+        if report["failingPaths"]:
+            print(f"  {len(report['failingPaths'])} failing paths inside reachable sources:")
+            for r in report["failingPaths"]:
+                print(f"    {r['id']} {r['outcome']} on {r['url'][:62]}")
         if summary["gateFailures"]:
             top = next(iter(summary["gateFailures"].items()))
             print(f"  biggest candidate killer: {top[0]} ({top[1]})")

@@ -134,11 +134,28 @@ environment changed, when `source-health.md` shows the catalog and the log
 disagreeing, or when a focus source fails unexpectedly. Commit the updated
 `ideas/sources.json` with the day's work and note the flips in CHANGES.md.
 
-Two limits to keep in mind. It measures the **network**, not the WebFetch host
-allowlist, because it uses curl: a source it reaches that WebFetch refuses is
-`ok-curl`, and only the run log can tell you which ones those are. And a
-`blocked` verdict from it is strong evidence that the site itself is refusing,
-since the probe runs with plain egress and a browser user agent.
+Three limits to keep in mind.
+
+It measures the **network**, not the WebFetch host allowlist, because it uses
+curl: a source it reaches that WebFetch refuses is `ok-curl`, and only the run
+log can tell you which ones those are.
+
+A `blocked` verdict is strong evidence the site itself is refusing, because the
+probe runs with plain egress and a browser user agent. A status of `unknown`
+after a probe means every path failed but only softly (a 422, a rate limit, a
+5xx, a timeout), so it is worth one attempt rather than being written off.
+
+**Statuses depend on where the probe ran.** Some sites vary by geography:
+HigherEdJobs serves a stub to non-US addresses, and the Chrome Web Store sends
+European traffic to a consent wall. A status measured somewhere else may be
+wrong in either direction, so prefer a probe from this environment and say in
+the run log when you find one that disagrees.
+
+One more thing to check in `source-health.md`: the section **Reachable sources
+with a failing path**. A source counts as reachable if any one of its paths
+works, so a dead primary path can hide behind a working fallback. As of
+2026-11-01 A3 is marked reachable on its Jupyter Discourse path while its
+GitHub issue-search path returns 422, so A3 is not currently a GitHub vein.
 
 ## Step 1: Decide the run mode
 
