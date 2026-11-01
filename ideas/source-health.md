@@ -1,12 +1,11 @@
 # Source health
 
-Generated 2026-11-01 from the last 45 days of `ideas/run-log.jsonl` (4 runs). Do not edit by hand: regenerate with `python3 scripts/source_health.py`.
+Generated 2026-11-01 from the last 45 days of `ideas/run-log.jsonl` (5 runs). Do not edit by hand: regenerate with `python3 scripts/source_health.py`.
 
 ## Do not spend searches here
 
 | Source | Why |
 |---|---|
-| A1 LMS idea boards | Canvas Community 403s and renders title-only; the Moodle Jira path is HTTP 410. |
 | A7 Higher ed Reddit | Reddit returns 403, a 'Welcome to Reddit' interstitial, or 'Blocked' on every path tried. |
 | A8 K-12 and learner Reddit | Reddit, same as A7. |
 | A9 Direct-pay buyers | Reddit half blocked with A7; the Well-Trained Mind forum 403s. |
@@ -15,7 +14,6 @@ Generated 2026-11-01 from the last 45 days of `ideas/run-log.jsonl` (4 runs). Do
 | B4 Founder subreddits | Reddit, same as A7. |
 | B7 Product Hunt | producthunt.com returns HTTP 403 without an API key. |
 | C3 Procurement and RFP portals | RFP portals sit behind Cloudflare, and an RFP buyer fails the no-procurement rule anyway. |
-| C9 Y Combinator requests and directory | Used on 2026-10-31 to find competitors (Edexia W2025, Frizzle S2025). |
 
 ## Reachable sources, best first
 
@@ -23,6 +21,8 @@ Generated 2026-11-01 from the last 45 days of `ideas/run-log.jsonl` (4 runs). Do
 
 | Source | Yields | Status | selected | Access path |
 |---|---|---|---|---|
+| C10 Change events: shutdowns, price rises, removed free tiers | mandate | ok | 1 | no verified path |
+| A1 LMS idea boards | complaint | ok | 0 | `both: https://community.instructure.com/t5/forums/searchpage/tab/message?q={q}` |
 | A11 Accessibility practitioners | complaint | ok-curl | 0 | `webfetch: https://webaim.org/discussion/archives` |
 | A12 Ask HN and HN comments | complaint | ok | 0 | `webfetch: https://hn.algolia.com/api/v1/search_by_date?query={q}&tags=comment&hitsPerPage=20` |
 | A13 Discourse forums, any niche | complaint | ok | 0 | `webfetch: https://{host}/search.json?q={q}+after%3A{YYYY-MM-DD}` |
@@ -37,13 +37,13 @@ Generated 2026-11-01 from the last 45 days of `ideas/run-log.jsonl` (4 runs). Do
 | B5 Acquisition marketplaces | spend | ok-curl | 0 | `webfetch: https://acquire.com/search/?industry=education` |
 | B6 Verified revenue dashboards | spend | ok-curl | 0 | `curl: https://trustmrr.com/` |
 | B8 Install counts for paid add-ons | spend | ok-curl | 0 | `curl: https://chromewebstore.google.com/detail/{id}` |
-| C10 Change events: shutdowns, price rises, removed free tiers | mandate | ok | 0 | no verified path |
 | C11 Federal award and grant data | mandate | ok | 0 | `webfetch: https://api.nsf.gov/services/v1/awards.json?keyword={q}&printFields=title,date,awardeeName,fundsObligatedAmt&rpp=10` |
 | C2 Education and computing research | mandate | ok | 0 | `webfetch: https://api.openalex.org/works?search={q}&per-page=10&sort=publication_date%3Adesc` |
 | C4 Job postings that describe manual work | mandate | ok-curl | 0 | `webfetch: https://www.higheredjobs.com/search/advanced_action.cfm?JobCat={id}` |
 | C5 Policy and regulation trackers | mandate | ok | 0 | `webfetch: https://www.federalregister.gov/api/v1/documents.json?per_page=10&order=newest&conditions[term]={q}` |
 | C6 Accreditation and standards changes | mandate | ok-curl | 0 | no verified path |
 | C8 Trade news | mandate | ok-curl | 0 | `curl: https://www.edsurge.com/news` |
+| C9 Y Combinator requests and directory | mandate | ok | 0 | no verified path |
 
 ## Reachable sources with a failing path
 
@@ -51,55 +51,90 @@ These sources are not on the avoid list, because at least one of their paths wor
 
 | Source | Status | Failing path | Outcome | Working paths left |
 |---|---|---|---|---|
+| A1 LMS idea boards | ok | `https://community.instructure.com/t5/forums/searchpage/tab/message?q=gradebook` | http_403 (236353B) | 0 |
+| A1 LMS idea boards | ok | `https://moodle.atlassian.net/rest/api/2/search?jql=project%3DMDL&maxResults=3` | http_410 (218B) | 0 |
 | A3 Open-source teaching tools | ok | `https://api.github.com/search/issues?q=autograder+in%3Atitle+state%3Aopen&per_page=5` | http_422 (177B) | 1 |
 | A4 GitHub Education and Classroom discussions | unknown | `https://api.github.com/search/issues?q=repo%3Acommunity%2Fcommunity+classroom&per_page=5` | http_422 (177B) | 0 |
 | B5 Acquisition marketplaces | ok-curl | `https://acquire.com/search/?industry=education` | http_404 (453602B) | 1 |
+| C9 Y Combinator requests and directory | ok | `https://www.ycombinator.com/companies?query=education` | empty (HTTP 200, 41603B, but 'company' is absent) | 0 |
 
 ## Hosts, as actually observed
 
 | Host | usable/tried | Outcomes | Last usable |
 |---|---|---|---|
+| wordpress.org | 7/7 | ok 7 | 2026-11-01 |
+| hn.algolia.com | 6/6 | ok 6 | 2026-11-01 |
+| community.etsy.com | 1/3 | empty 2, ok 1 | 2026-11-01 |
+| github.com | 3/3 | ok 3 | 2026-11-01 |
+| meet.ribblr.com | 3/3 | ok 3 | 2026-11-01 |
+| webaim.org | 1/3 | empty 2, ok 1 | 2026-11-01 |
+| api.wordpress.org | 2/2 | ok 2 | 2026-11-01 |
 | community.instructure.com | 0/2 | empty 2 | never |
+| dsp.berkeley.edu | 2/2 | ok 2 | 2026-11-01 |
 | samsearch.co | 0/2 | empty 2 | never |
 | www.reddit.com | 0/2 | allowlist 2 | never |
+| api.github.com | 0/1 | http_403 1 | never |
 | api.stackexchange.com | 0/1 | allowlist 1 | never |
 | apuo.ca | 0/1 | empty 1 | never |
 | careers.csudh.edu | 0/1 | empty 1 | never |
+| coddy.tech | 0/1 | http_403 1 | never |
+| codeboard.io | 1/1 | ok 1 | 2026-11-01 |
+| community.home-assistant.io | 0/1 | http_403 1 | never |
+| community.openhab.org | 0/1 | empty 1 | never |
 | cseducators.stackexchange.com | 0/1 | allowlist 1 | never |
+| discuss.pixls.us | 1/1 | ok 1 | 2026-11-01 |
+| elementor.com | 0/1 | http_404 1 | never |
+| equalizedigital.com | 0/1 | http_403 1 | never |
+| erank.com | 1/1 | ok 1 | 2026-11-01 |
 | flippa.com | 0/1 | empty 1 | never |
+| forum.obsidian.md | 1/1 | ok 1 | 2026-11-01 |
+| getvela.com | 1/1 | ok 1 | 2026-11-01 |
 | grad.tamu.edu | 0/1 | http_404 1 | never |
+| help.pickcode.io | 1/1 | ok 1 | 2026-11-01 |
 | its.umich.edu | 0/1 | http_403 1 | never |
 | latexformat.netlify.app | 0/1 | http_404 1 | never |
 | news.ycombinator.com | 0/1 | http_429 1 | never |
 | nwelearn2026.sched.com | 0/1 | http_403 1 | never |
+| rtl.berkeley.edu | 1/1 | ok 1 | 2026-11-01 |
 | scispace.com | 0/1 | http_403 1 | never |
+| themarkup.org | 1/1 | ok 1 | 2026-11-01 |
+| tilt.colostate.edu | 1/1 | ok 1 | 2026-11-01 |
+| trinket.io | 1/1 | ok 1 | 2026-11-01 |
 | trustmrr.com | 1/1 | ok 1 | 2026-10-31 |
+| ucsb-ds.github.io | 1/1 | ok 1 | 2026-11-01 |
+| williamsrecord.com | 0/1 | http_403 1 | never |
 | www.capterra.com | 0/1 | http_403 1 | never |
 | www.careerbuilder.com | 0/1 | http_403 1 | never |
 | www.chronicle.com | 0/1 | http_403 1 | never |
 | www.classcentral.com | 0/1 | http_403 1 | never |
 | www.cs.umd.edu | 0/1 | http_5xx 1 | never |
 | www.dailycal.org | 0/1 | http_403 1 | never |
+| www.digitalcommerce360.com | 0/1 | http_403 1 | never |
+| www.etsy.com | 0/1 | empty 1 | never |
+| www.federalregister.gov | 1/1 | ok 1 | 2026-11-01 |
+| www.govinfo.gov | 1/1 | ok 1 | 2026-11-01 |
 | www.nationgraph.com | 0/1 | http_404 1 | never |
 | www.ndsmcobserver.com | 0/1 | http_403 1 | never |
 | www.pulse.bot | 0/1 | http_5xx 1 | never |
 | www.ru.nl | 0/1 | http_5xx 1 | never |
+| www.the-standard.org | 1/1 | ok 1 | 2026-11-01 |
+| www.valueaddedresource.net | 1/1 | ok 1 | 2026-11-01 |
 | xdaforums.com | 0/1 | http_403 1 | never |
 
 ## Where candidates die
 
 | Gate condition | Candidates lost |
 |---|---|
-| totalBelowMin | 40 |
-| rejectRule | 13 |
+| totalBelowMin | 52 |
+| rejectRule | 17 |
+| reviewKill | 5 |
 | painBelow4 | 3 |
-| reviewKill | 1 |
 
 The largest row is the one to argue about before changing anything else.
 
 ## Funnel over the window
 
-candidates 57 -> passedRejectRules 44 -> passedGate 1 -> reviewKilled 1 -> validated 0 -> provisional 0 -> watchlist 11
+candidates 78 -> passedRejectRules 61 -> passedGate 1 -> reviewKilled 5 -> validated 0 -> provisional 1 -> watchlist 16
 
 ## Runs that produced nothing
 
@@ -109,10 +144,4 @@ candidates 57 -> passedRejectRules 44 -> passedGate 1 -> reviewKilled 1 -> valid
 - `2026-10-31#3`: Fresh Canvas pain was either already served (Atomic Search sells account-wide Find and Replace) or bound up with minors' data. EdSurge, EdWeek Market Brief and pulse.bot returned no usable October 2026 content through WebFetch.
 
 A run producing nothing is a routine bug, not a quiet day. Each line above is one to fix.
-
-## Catalog disagrees with the log
-
-- **A1 LMS idea boards**: catalog says `blocked`, the log says `reachable` (2 usable fetches in the window). Update `ideas/sources.json` by hand.
-- **C3 Procurement and RFP portals**: catalog says `ok-curl`, the log says `blocked` (5 attempts in the window, none usable). Update `ideas/sources.json` by hand.
-- **C9 Y Combinator requests and directory**: catalog says `blocked`, the log says `reachable` (1 usable fetches in the window). Update `ideas/sources.json` by hand.
 

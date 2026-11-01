@@ -1,0 +1,391 @@
+{
+  "date": "2026-11-01",
+  "schemaVersion": 3,
+  "complete": true,
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Embed Rescue",
+      "slug": "embed-rescue",
+      "category": "EdTech: Higher Ed",
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Teaching Operations",
+      "summary": "For CS and physics instructors and open-textbook authors whose pages embedded Trinket or Codeboard snippets: find every dead or doomed embed and replace it with a self-hosted runnable snippet that cannot be shut down again.",
+      "problemStatement": "\"The interactive visualisations no longer load... the embedded area shows 'This Trinket is no longer available'\" and maintainers are asked for \"a migration path or alternative hosting option\". Codeboard embeds face the same fate on 2027-01-31.",
+      "description": "A command-line tool and small web app that crawls a course site or repository (GitHub Pages, Jupyter Book, MkDocs, Quarto, WordPress, a Canvas course export) and lists every Trinket and Codeboard embed with its status. Where code is recoverable (local copies, a Codeboard export taken before the deadline, an archived capture), it rewrites the embed as a client-side runnable snippet with the code committed to the author's own repo, using an in-browser Python runtime, and opens a pull request. Embeds it cannot recover are listed with their page context so the author can paste the code once. An optional monitor rechecks third-party embeds for link rot.",
+      "targetCustomer": "Instructors, open-textbook authors and course-site maintainers who embedded runnable Trinket or Codeboard snippets in pages they still teach from.",
+      "buyer": "The author on a personal card, or an open-textbook or OER grant budget; occasionally a department paying for a shared course site.",
+      "whyNow": "Trinket shut down on 2026-08-31 with exports gone (https://trinket.io/), and Codeboard's shutdown was extended to 2027-01-31 (https://codeboard.io/), so Codeboard users still have a window to export code before it is lost.",
+      "founderFit": "Pisan teaches CS, knows the SIGCSE and open-textbook community where these embeds live, and can build a static-site crawler and in-browser runtime rewrite alone.",
+      "problemEvidence": [
+        {
+          "url": "https://github.com/JMCanning78/datastructures-visualization/issues/313",
+          "source": "github.com",
+          "author": "AAdewunmi",
+          "date": "2026-09-01",
+          "kind": "complaint",
+          "summary": "Embedded Trinket data-structure visualisations on datastructures.live stopped loading after the shutdown; asks for a migration path. Still open with no maintainer reply."
+        },
+        {
+          "url": "https://trinket.io/",
+          "source": "trinket.io",
+          "author": "Trinket",
+          "date": "2026-08-31",
+          "kind": "mandate",
+          "summary": "Trinket shut down on 2026-08-31; trinkets, courses and downloads are no longer accessible and export tools went offline; the page points users to Pickcode, Dodona and Kita."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Coddy Trinket alternative",
+          "url": "https://coddy.tech/trinket-alternative",
+          "price": "unknown (page returned a Cloudflare challenge this run; described as free in search results)",
+          "gap": "Swaps one embed at a time by pasting a link; a Coddy staffer also fixes open-textbook repos by hand for free (boazbk/tcs PR #861), which removes most of this idea's gap."
+        },
+        {
+          "name": "Pickcode Pro",
+          "url": "https://help.pickcode.io/docs/transition-from-trinket/",
+          "price": "$500/teacher plus $5/student per semester",
+          "gap": "A hosted platform migration, not a site-wide scan and rewrite; embeds still depend on a third party that could shut down."
+        },
+        {
+          "name": "Dodona and Kita",
+          "url": "https://trinket.io/",
+          "price": "Free for teachers (as listed on trinket.io)",
+          "gap": "Free hosted replacements with migration help; no automated crawl of an author's pages."
+        },
+        {
+          "name": "codapi",
+          "url": "https://codapi.org/",
+          "price": "Self-hosted free; cloud about $5/month (per the reviewer's fetch)",
+          "gap": "Embeddable runnable snippets, but authors must find and rewrite every embed themselves."
+        }
+      ],
+      "keyFeatures": [
+        "Site and repo crawl that inventories Trinket and Codeboard embeds",
+        "Code recovery from local copies and pre-deadline Codeboard exports",
+        "Rewrite to self-hosted in-browser runnable snippets, opened as a pull request",
+        "Report of unrecoverable embeds with page context"
+      ],
+      "mvpScope": {
+        "features": [
+          "CLI that scans a static-site source tree or GitHub repo for Trinket and Codeboard iframes",
+          "Rewrite of Python embeds to a self-hosted in-browser runtime with the code committed",
+          "HTML report of what was found, fixed and left"
+        ],
+        "outOfScope": [
+          "Canvas course-export rewriting",
+          "Non-Python languages",
+          "Link-rot monitoring subscription",
+          "Archive scraping at scale"
+        ],
+        "buildEstimate": "3 to 4 weekends"
+      },
+      "techStack": "Python CLI, Pyodide-based static embed, GitHub API for pull requests, optional React + Vite report viewer",
+      "pricing": {
+        "model": "One-time per-site licence, with the CLI open source",
+        "pricePoint": "$49 per site up to 200 embeds",
+        "rationale": "Below Pickcode Pro's $500 per teacher, but the reviewer found that free tools and free hand-fixes undercut any price; this is a test price, not a finding."
+      },
+      "revenueSketch": "Estimate only: if 300 sites still carry dead or doomed embeds and 10% pay $49, that is about $1,470 one-time; the window effectively closes after 2027-01-31.",
+      "distribution": "Run the scanner across public SIGCSE, Open Textbook Library and computational-physics (PICUP) course sites, then open issues or pull requests offering the fix; announce on SIGCSE mailing lists before Codeboard's 2027-01-31 deadline.",
+      "validationTest": {
+        "method": "Scan 200 public CS and physics course sites and open textbooks for Trinket and Codeboard embeds, then email the 30 authors with the most dead embeds a free report and a $49 one-click fix offer.",
+        "successCriteria": "At least 30 sites with 10 or more dead or doomed embeds, and 5 authors who pay or pre-pay before 2027-01-31.",
+        "cost": "About 2 weekends of scanner work and $0 in spend."
+      },
+      "moat": "Weak: a crawl-and-rewrite tool is easy to copy and Coddy already fixes repos by hand for free. Any edge comes from the inventory of affected sites and getting to them before the Codeboard deadline.",
+      "compliance": [
+        "FERPA: none; the tool reads public course pages and author-owned repos, not student data.",
+        "Licensing: recovered code belongs to the page authors; archived third-party embeds and old trinket.io content may need permission before reuse.",
+        "Accessibility: replacement embeds should keep keyboard access and text alternatives at WCAG 2.1 AA."
+      ],
+      "risks": [
+        {
+          "risk": "Free replacements (Coddy, Dodona, Kita, codapi) and free hand-fixes absorb the demand.",
+          "mitigation": "Position as a one-shot whole-site audit and keep the CLI open source, charging only for automated pull requests."
+        },
+        {
+          "risk": "Trinket code is often unrecoverable now that exports are gone.",
+          "mitigation": "Focus on Codeboard users, who can still export before 2027-01-31, and on reporting rather than recovery for Trinket."
+        },
+        {
+          "risk": "A one-time job per site looks like consulting.",
+          "mitigation": "Keep it fully self-serve and stop if the validation test shows authors want it done for them."
+        }
+      ],
+      "scores": {
+        "pain": 3,
+        "willingnessToPay": 2,
+        "reachability": 3,
+        "competitiveGap": 1,
+        "feasibility": 3,
+        "complianceBurden": 3,
+        "total": 15
+      },
+      "scoreRationale": {
+        "pain": "Real but closing: an open complaint with no maintainer reply (https://github.com/JMCanning78/datastructures-visualization/issues/313); Trinket's own page says code and exports are already gone (https://trinket.io/).",
+        "willingnessToPay": "People fix this for free (boazbk/tcs PR #861, cited by the reviewer) and codapi's self-hosted version is free (https://codapi.org/); Pickcode's $500/teacher shows spending on hosted platforms, not on rescue (https://help.pickcode.io/docs/transition-from-trinket/).",
+        "reachability": "Affected sites are public and crawlable and sit in SIGCSE and physics-education circles (https://github.com/JMCanning78/datastructures-visualization/issues/313), but many authors have moved on or stopped maintaining their sites.",
+        "competitiveGap": "Trinket itself lists free replacements (https://trinket.io/) and Coddy offers a free swap tool (https://coddy.tech/trinket-alternative).",
+        "feasibility": "Crawling and rewriting embeds is straightforward, but recovery is unreliable now that Trinket exports are gone (https://trinket.io/).",
+        "complianceBurden": "No student data, but rewriting archived third-party embed content raises licensing questions (https://trinket.io/)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "The reviewer cut the total from 22 to 15 (pain 4 to 3, willingnessToPay 3 to 2, reachability 4 to 3, competitiveGap 2 to 1, feasibility 4 to 3, complianceBurden 5 to 3). Main findings: in boazbk/tcs PR #861 a Coddy staffer recovered code from Internet Archive copies and replaced Trinket embeds with free Coddy embeds, so the rescue is already offered free; codapi is free to self-host; Teach Computing repointed its own links; trinket-oss issue #168 is about course docs and LTI, not embeds, so it was dropped as evidence; Codeboard's grace period runs to 2027-01-31, after which there is no shutdown event left to sell against; a mostly hand-done per-site fix risks being consulting. Kept as provisional because it passes every rejection rule as a self-serve tool and has a usable complaint dated 2026-09-01."
+      },
+      "inspiredBy": "https://github.com/JMCanning78/datastructures-visualization/issues/313",
+      "gateGap": {
+        "missing": [
+          "total 15 is below 22",
+          "pain 3 is below 4",
+          "willingnessToPay 2 is below 3",
+          "only 1 complaint evidence item (one dead-embed report); the second item is the shutdown notice itself"
+        ],
+        "closedBy": "The validationTest's scan closes the largest gap, willingness to pay. If 5 of 30 authors with 10 or more dead or doomed embeds pay $49 before Codeboard's 2027-01-31 deadline, and the scan turns up further independent complaints, rescore willingnessToPay to 3 and pain to 4. Even then competitiveGap 1 keeps the total far below 22, so validation would also need evidence that free swaps leave whole-site rewrites unserved."
+      }
+    }
+  ],
+  "runNotes": {
+    "weekday": "Sunday",
+    "domainLens": "Creative, prosumer, and household",
+    "focusSources": [
+      "A11 Accessibility practitioners (WebAIM list archive empty after August 2025; A14 and A13 substituted)",
+      "B10 WordPress plugin market data",
+      "C6 Accreditation and standards changes",
+      "A13 Discourse forums, any niche (substitute for A11)",
+      "A14 Plugin and add-on support forums",
+      "A12 Ask HN and HN comments",
+      "C5 Policy and regulation trackers",
+      "C10 Change events: shutdowns, price rises, removed free tiers"
+    ],
+    "searches": [
+      "curl webaim.org/discussion/mail_archive?sort_by=2&srch_mnth=10&srch_yr=2026 (A11 WebAIM list, Oct 2026)",
+      "curl webaim.org/discussion/mail_archive?sort_by=2&srch_mnth=9&srch_yr=2026 (A11 WebAIM list, Sep 2026)",
+      "hn.algolia comments: \"alt text\" (A12)",
+      "hn.algolia comments: \"European Accessibility Act\" (A12)",
+      "hn.algolia comments: \"I would pay\" (A12)",
+      "hn.algolia comments: etsy photo / etsy AI (A12)",
+      "community.home-assistant.io search.json \"wish there was\" after:2026-09-01 (A13, household lens)",
+      "forum.obsidian.md search.json accessibility after:2026-08-01 (A13)",
+      "discuss.pixls.us search.json \"wish\" / \"would pay\" (A13, creative lens)",
+      "community.openhab.org search.json \"would pay\" (A13, household lens)",
+      "meet.ribblr.com search.json etsy / testers / AI pattern after:2026-09 (A13, creative lens)",
+      "api.wordpress.org query_plugins search=accessibility (B10)",
+      "api.wordpress.org query_plugins search=alt text (B10)",
+      "wordpress.org/support/plugin/wp-accessibility and pojo-accessibility topics and reviews (A14)",
+      "federalregister.gov documents term=web accessibility (C5)",
+      "European Accessibility Act enforcement small online shops complaint 2026",
+      "WCAG 3.0 working draft 2026 update (C6)",
+      "accessibility overlay lawsuit small business website October 2026",
+      "forum help elderly parent banking app confusing remote help 2026",
+      "site:wordpress.org/support accessibility plugin \"screen reader\" 2026 (A14)",
+      "Etsy sellers AI policy October 2026 patterns digital downloads change (C10)",
+      "Etsy unedited photo requirement sellers frustrated thousands of listings update forum",
+      "Etsy seller tool bulk edit listing photos price eRank EverBee Vela pricing (B)",
+      "community.etsy.com new image requirements unedited photo crop resize October 2026",
+      "site:community.etsy.com unedited photo policy",
+      "Etsy pattern sellers finished item real photo requirement designers reaction October 2026",
+      "pattern testing app for crochet knitting designers manage testers software",
+      "\"wish there was\" tool small Etsy seller photography listing workflow 2026",
+      "knitting crochet pattern designers AI stolen patterns Ravelry 2026 complaint",
+      "CSTA K-12 computer science standards revision 2026 draft public comment (C6)",
+      "ABET computing criteria changes 2026-2027 cycle programs must (C6)",
+      "indie authors EPUB accessibility European Accessibility Act Vellum Atticus alt text metadata 2026 (C6)",
+      "Ally accessibility plugin Elementor alternative lightweight WordPress agencies 2026",
+      "HHS Section 504 web accessibility deadline May 2026 small healthcare providers WCAG 2.1 compliance (C5)",
+      "accessibility widget HIPAA BAA healthcare website tracking pixel overlay data",
+      "Equalize Digital Accessibility Checker Pro pricing per year (B)",
+      "Elementor Ally pricing plans per month remediation (B)",
+      "Watchlist: Trinket Codeboard replacement embed migration November 2026",
+      "Watchlist: Canvas bulk find replace links across courses tool 2026 new",
+      "Watchlist: testing center capacity faculty proctor extended time exams own rooms fall 2026",
+      "Watchlist: merge Gradescope PrairieLearn Canvas grades script instructors 2026",
+      "Watchlist: agentic browser completes Canvas quiz online course detection October 2026",
+      "Watchlist: completion credit homework AI feedback no TA budget instructors 2026 tool",
+      "Watchlist: specifications grading software Canvas tokens resubmission tool 2026",
+      "Watchlist: per-student LLM API keys classroom budget caps instructors tool 2026"
+    ],
+    "unverifiedSignals": [
+      {
+        "url": "https://webaim.org/discussion/mail_archive?sort_by=2&srch_mnth=10&srch_yr=2026",
+        "reason": "HTTP 200 but 'Showing records 1 to 0 of 0': the WebAIM list archive index stops at August 2025, so A11's catalogued path yields nothing recent."
+      },
+      {
+        "url": "https://community.home-assistant.io/search.json?q=%22wish%20there%20was%22%20after%3A2026-09-01",
+        "reason": "Cloudflare 'Attention Required' page; recorded and not retried."
+      },
+      {
+        "url": "https://www.digitalcommerce360.com/2026/10/26/etsy-ai-policy/amp/",
+        "reason": "Cloudflare 'Attention Required' page."
+      },
+      {
+        "url": "https://community.etsy.com/t5/forums/searchpage/tab/message?q=unaltered%20photo",
+        "reason": "Empty body; the Etsy Community moved to /forum/ URLs and board pages beyond Announcements require login."
+      },
+      {
+        "url": "https://equalizedigital.com/accessibility-checker/pricing/",
+        "reason": "Cloudflare 'Attention Required' page; Equalize Pro price left unknown rather than taken from a snippet."
+      },
+      {
+        "url": "https://elementor.com/products/ally/pricing/",
+        "reason": "HTTP 200 'Page not found' (guessed path from the catalog habit; not retried)."
+      },
+      {
+        "url": "https://www.etsy.com/legal/policy/listing-image-requirements/253962679005",
+        "reason": "776-byte bot shell; Etsy's own policy text was read through Value Added Resource's report instead."
+      }
+    ],
+    "rejectedCandidates": [
+      {
+        "title": "AI alt-text generator plugin for WordPress",
+        "total": 13,
+        "reason": "Rejected as an AI wrapper with no moat: the WordPress plugin API search for 'alt text' (B10) returned at least ten AI alt-text plugins updated in October 2026, led by Alt Text AI at 20,000 installs."
+      },
+      {
+        "title": "Accessible PDF remediation for academic documents",
+        "total": 16,
+        "reason": "Rejected as a duplicate: HN user Telemakhos (2026-08-13) describes the ADA Title II PDF rush, but ideas/index.jsonl already holds Alt Text Studio for CS Courses (2026-10-21) and Tagging Doctor for LaTeX Courses for the same customer and problem."
+      },
+      {
+        "title": "AI-pattern checker for crochet and knitting buyers",
+        "total": 11,
+        "reason": "Rejected as a novelty with no paying buyer: Ribblr members (AmiByAddi 2026-10-23, Bperki 2026-10-26) complain about AI patterns, but buyers will not pay to vet a $5 pattern and Etsy now polices this itself."
+      },
+      {
+        "title": "Agency-grade lightweight replacement for the Ally accessibility plugin",
+        "total": 17,
+        "reason": "Complaints about Ally's upsells are real (Northwoods Dev Studio 2026-08-02), but the displaced users already have free options: WP Accessibility (60,000 installs, rating 96) and Editoria11y. Folded its privacy angle into the clinic idea instead."
+      },
+      {
+        "title": "EAA accessibility fixer for small EU WooCommerce shops",
+        "total": 16,
+        "reason": "Mandate is real (ACM Netherlands inspections, March 2026) but no complaint from a shop owner was found, microenterprises may be exempt, and overlays plus Equalize Digital already crowd the space."
+      },
+      {
+        "title": "EPUB accessibility metadata fixer for indie authors",
+        "total": 15,
+        "reason": "The EAA covers ebooks, but the Atticus help centre says microenterprises may claim exemption, DAISY's Ace checker is free, and no indie author complaint was found (pain 2)."
+      },
+      {
+        "title": "Guided banking helper for aging parents",
+        "total": 14,
+        "reason": "HN users lbreakjai and priyashunt (2026-10-09) would pay for one-button guidance, but free screen sharing already covers the remote-help case, bank-app automation brings fraud and liability exposure (complianceBurden 1), and acting inside banking apps needs device-level access."
+      },
+      {
+        "title": "Preconfigured family router (kid, guest and adult networks)",
+        "total": 12,
+        "reason": "One HN comment (internet_points 2026-10-12); needs hardware and support, and Firewalla and GL.iNet already sell this."
+      },
+      {
+        "title": "Pattern-testing manager with tester photo releases",
+        "total": 17,
+        "reason": "Etsy's 2026-10-22 rule makes finished-object photos from testers valuable, but Yarnpond, Knit Net and Ribblr already offer free tester-call tools; the Ribblr questions were about Ribblr's own UI."
+      },
+      {
+        "title": "ABET Criterion 5 capstone evidence tracker",
+        "total": 14,
+        "reason": "CSAB reports the Criterion 5 comprehensive-project change effective Fall 2026, but programs buy assessment tools through institutional procurement, which fails the first-sale rule."
+      },
+      {
+        "title": "CSTA 2026 standards crosswalk for K-12 CS teachers",
+        "total": 13,
+        "reason": "The 2026 CSTA PK-12 standards were released in July 2026, but no teacher complaint was found and CSTA publishes crosswalks itself."
+      },
+      {
+        "title": "Etsy Photo Rule Tracker (compliance queue for the 2026-10-22 unedited-photo rule)",
+        "total": 16,
+        "reason": "Review kill (proposed 22): Etsy's Open API returns only resized image URLs with no EXIF or edit history, so the app cannot tell which listings comply; uploads are re-encoded anyway; Etsy plans to extend its own detection guidance to existing listings for free; the job is one-time with no deadline; no seller complaint about the burden was found."
+      },
+      {
+        "title": "Quiet Access for Clinics (local-only accessibility plus tracker audit for small healthcare-practice sites)",
+        "total": 14,
+        "reason": "Review kill (proposed 20): Equalize Digital's free plugin already scans on the site's own server and generates a statement (10,000 installs, rating 98); Cookiebot offers a free healthcare tracker scan; the HHS 504 dates moved to 2027/2028 and AHA v. Becerra struck the unauthenticated-page part of HHS's tracking guidance; all three complaints were about one vendor (Ally) and are fixed by switching to a free plugin."
+      },
+      {
+        "title": "Shadow Gradebook (local-first merge of Canvas, Gradescope and PrairieLearn grades)",
+        "total": 15,
+        "reason": "Review kill (proposed 21; replaces the 2026-10-30 'Gradebook reconciliation' watchlist entry): finalgrade (PyPI, v0.2.4 August 2026) already runs in the browser and handles Gradescope and Canvas CSVs, drops, waivers and Canvas export; gradelib is MIT-licensed; PrairieLearn already passes grades to Canvas over LTI 1.3; the Canvas-breach complaints (HN, 2026-05-08) are one thread asking for backups."
+      },
+      {
+        "title": "Accommodated Exam Planner for departments",
+        "total": 12,
+        "reason": "Review rescored 20 to 12 and it fails the procurement rejection rule: storing which students have accommodations needs a university vendor contract and security review, so a $49 instructor purchase cannot be the first sale; PrairieTest and AIM faculty portals already schedule extended time (Berkeley DSP Fall 2026 pages confirm the mandate)."
+      }
+    ],
+    "watchlist": [
+      {
+        "title": "Cross-course content maintenance for Canvas design teams (bulk find, preview, replace and rollback for vendor-driven breakage)",
+        "targetCustomer": "Instructional designers and LMS admin teams who maintain content across dozens to thousands of Canvas courses.",
+        "problemStatement": "Vendor-side changes keep breaking content across many courses at once: Canvas's silent 2026-10-07 change to enhanceable_content tabs, Community guide links moving from /t5/ to /en/kb/, and LTI 1.3 migrations that leave embedded assignment links saying 'deleted'. Teams fix pages one at a time or with shared Tampermonkey scripts.",
+        "total": 21,
+        "missedGate": "competitiveGap 2: Atomic Search already sells account-wide Find & Replace for Canvas, and free community userscripts cover bulk search and link conversion; total below 22.",
+        "evidence": [
+          "https://community.instructure.com/en/discussion/667426/fix-or-alternative-to-class-enhanceable-content-tabs",
+          "https://community.instructure.com/en/discussion/667671/master-inventory-comprehensive-list-of-canvas-guide-titles-urls-for-link-remediation",
+          "https://community.instructure.com/en/discussion/667065/mcgraw-hill-lti-ltia-migration-broke-linked-course-assignment-links-in-pages-and-announcements",
+          "https://community.instructure.com/en/discussion/666768/bulk-find-replace-across-canvas-courses-with-tampermonkey",
+          "https://www.atomicjolt.com/post/streamline-course-updates-with-find-replace-in-atomic-search-for-canvas"
+        ],
+        "firstSeen": "2026-10-31"
+      },
+      {
+        "title": "Agent Exposure Audit for asynchronous online programs",
+        "targetCustomer": "Online program directors and instructional designers running asynchronous courses where proctoring is not feasible.",
+        "problemStatement": "Agentic browsers and cheap bots now complete Canvas New Quizzes and whole courses; quiz logs cannot prove it, and programs do not know which of their assessments an agent can finish unaided.",
+        "total": 20,
+        "missedGate": "willingnessToPay 3 and competitiveGap 3 (Cursive sells LMS agent detection; the existing Assignment Stress Test idea covers testing assignments against AI); only one fetched item is within 90 days; total below 22. 2026-11-01: the CSU TILT page confirms agents complete Canvas quizzes but is undated and recommends the LockDown Browser campuses already license.",
+        "evidence": [
+          "https://community.instructure.com/en/discussion/667216/help-with-detecting-bots-in-new-quizzes",
+          "https://www.pangram.com/it/blog/agentic-browsers-present-risks-to-universities",
+          "https://tilt.colostate.edu/new-ai-browsers-can-complete-canvas-quizzes/"
+        ],
+        "firstSeen": "2026-10-31"
+      },
+      {
+        "title": "Attempt-First Feedback Desk (AI first-pass feedback on ungraded practice with escalation to TAs)",
+        "targetCustomer": "Instructors of large CS and STEM courses who are moving homework to completion credit because of AI and have no grader budget.",
+        "problemStatement": "Homework is being de-graded, but instructors still want students to practice and get feedback; there is no grader budget, and students who used to come to office hours now go to general-purpose AI.",
+        "total": 19,
+        "missedGate": "willingnessToPay 2 (instructors cite no grader budget) and competitiveGap 2 (CS50 Duck, PingPong, Gradescope AI features); risks being an AI wrapper.",
+        "evidence": [
+          "https://thelastsoftwareengineer.substack.com/p/how-i-changed-teaching-after-ai-managed",
+          "https://news.ycombinator.com/item?id=49858507",
+          "https://news.ycombinator.com/item?id=50236951",
+          "https://news.ycombinator.com/item?id=50252085"
+        ],
+        "firstSeen": "2026-10-31"
+      },
+      {
+        "title": "Alternative-grading layer for Canvas and autograders",
+        "targetCustomer": "CS and STEM instructors using specifications, standards-based or mastery grading on Canvas with PrairieLearn or Gradescope.",
+        "problemStatement": "LMSs and autograders only understand points, so instructors fake standards-based grades with zero-point assessments, hacky scripts and spreadsheets to handle learning targets, resubmission tokens and letter-grade bundles.",
+        "total": 19,
+        "missedGate": "pain 3 (one GitHub RFC with 2 thumbs-up plus a position paper); total below 22.",
+        "evidence": [
+          "https://github.com/PrairieLearn/PrairieLearn/issues/14285",
+          "https://vtechworks.lib.vt.edu/items/bbdb3a44-8683-4434-be3a-8b8a00218cae",
+          "https://available-inventions.umich.edu/product/gradecraft"
+        ],
+        "firstSeen": "2026-10-30"
+      },
+      {
+        "title": "Course LLM key broker",
+        "targetCustomer": "Instructors teaching courses that use LLM APIs or coding agents without a campus AI gateway.",
+        "problemStatement": "Instructors need per-student capped API keys with model allowlists and term-end revocation; today they share keys, script OpenRouter or LiteLLM, or make students pay, and student keys leak.",
+        "total": 19,
+        "missedGate": "pain 3 and willingnessToPay 2; campus gateways, Standard Compute, Anthropic per-user spend limits and OpenAI project limits are closing the gap.",
+        "evidence": [
+          "https://community.openai.com/t/recommended-way-to-deal-with-api-key-s-for-students-in-programming-courses/335259",
+          "https://www.s-anand.net/blog/leaked-key-sociology/",
+          "https://github.com/BerriAI/litellm/issues/28750",
+          "https://standardcompute.com/llm-api-for-classrooms"
+        ],
+        "firstSeen": "2026-10-30"
+      }
+    ],
+    "caveats": "First run of 2026-11-01. A11's catalogued path (WebAIM list archive) returns 0 messages for September and October 2026; the archive index stops at August 2025, so A11 was replaced by A14 (WordPress accessibility-plugin forums) and A13 (Ribblr, pixls.us and Obsidian Discourse). Five candidates went through adversarial review: Etsy Photo Rule Tracker (killed), Quiet Access for Clinics (killed), Shadow Gradebook (killed), Accommodated Exam Planner (rescored to 12, fails the procurement rule) and Embed Rescue (rescored from 22 to 15). Embed Rescue ships as provisional because it is the only reviewed candidate that still meets the floor; it is a weak lead and is labelled as such. The constraints on selected sets apply only once 3 or more ideas are selected, so none applies to this single provisional. Its buyer is an author paying personally or from a grant, not a student. GitHub's REST API is blocked by this environment's proxy (curl to api.github.com returns 'GitHub access to this repository is not enabled for this session'), so GitHub evidence was read with WebFetch. Equalize Digital's and Coddy's pages returned Cloudflare challenges to curl, so their prices are left unknown."
+  }
+}

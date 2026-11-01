@@ -519,3 +519,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-01 [code] Tagged all 601 archived ideas via the local claude CLI into ideas/topics.json (scripts/tag_topics.py, 16 batches, none off-list). Routine now writes a topic; validator enforces it.
 
 2026-11-01 [code] Added scripts/smoke_pages.js, the repo's first automated check: runs the built pages against a DOM stub and asserts filtering and deep links work.
+
+2026-11-01 [doc] Created ideas/2026-11-01.json (schemaVersion 3, 1 idea): Embed Rescue (15, provisional). Synced A1, C3, C9 catalog status with run log.

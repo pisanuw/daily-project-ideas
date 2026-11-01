@@ -603,3 +603,4 @@
 | 2026-10-29 | Reference Audit | EdTech: Higher Ed | Weekend MVP | 21 | |  |
 | 2026-10-29 | Tagging Doctor for LaTeX Courses | EdTech: Higher Ed | Multi-week | 23 | |  |
 | 2026-10-29 | Camera-Ready Preflight | Micro-SaaS | Weekend MVP | 22 | |  |
+| 2026-11-01 | Embed Rescue | EdTech: Higher Ed | Multi-week | 15 | provisional |  |
