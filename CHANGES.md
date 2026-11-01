@@ -499,3 +499,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-01 [code] Added scripts/probe_sources.py: curls every catalog probeUrl, requires an expect marker in the body, and rewrites each source's status. Run after the environment changes.
 
 2026-11-01 [note] Env moved to FullCloud, full internet. Re-probe: reachable sources 16 to 21 (A4 A6 B5 C3 C6 back). Sites still refusing: Reddit, G2, Capterra, Product Hunt, Indie Hackers.
+
+2026-10-31 [note] GPU Parallel Puzzler (2026-06-23 n2) marked implemented: live at gpu-parallel-puzzler.netlify.app, repo Claude-capstone/gpu-parallel-puzzler. Simulated SIMT GPU, 12 levels; 36 tests.

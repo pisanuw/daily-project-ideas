@@ -478,8 +478,10 @@
         "date": "2026-06-23",
         "n": 2
       },
-      "placeholder": true,
-      "notes": "In progress since 2026-10-31"
+      "notes": "Built in one session as a static TypeScript app with no backend and no LLM; the GPU is simulated, not WebGPU, so every browser gives the same numbers. Students write kernels in a small CUDA-like language (let, if/else, for, while, return, shared arrays, sync(), selects, atomicAdd) and pick the launch; the simulator runs each warp of 32 lanes with an active mask, so divergent branches run both paths, loops run while any lane continues, and warps pause at barriers (a sync() reached by only some lanes is an error). A cost model charges per warp instruction, per 128-byte global segment, per queued shared-memory bank and per serialized atomic, spreads blocks over four SMs, and compares the result with a one-core CPU estimate. Every access is bounds-checked and race-checked (shared memory between barriers, global memory within and across blocks). Twelve levels cover indexing, bounds, block size, divergence, grid-stride loops, coalescing, races and atomics, shared-memory reduction, barrier placement, bank conflicts, tiling and privatized histograms; each run gets stars against a reference solution's par, counters, an SM timeline and a warp inspector with per-lane masks coloured by segment or bank. The suggested Claude hints are replaced by a deterministic diagnosis built from the simulator's counters and traces, pointing at lines; the Supabase dashboard is replaced by JSON progress exports that an instructor loads into a class table and CSV, plus a Markdown rubric. Limitations: the GPU is a teaching model with invented costs and no caches, latency hiding or 2D indices, so cycle counts compare a student's own versions rather than predict hardware; blocks run in a fixed order, so the race detector stands in for real nondeterminism; values are untyped, so / truncates whenever both operands are whole; exports are unsigned files. 36 vitest tests, 99.2% statement coverage on core.",
+      "url": "https://gpu-parallel-puzzler.netlify.app",
+      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/gpu-parallel-puzzler",
+      "implementedOn": "2026-10-31"
     }
   ]
 }
