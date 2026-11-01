@@ -488,8 +488,10 @@
         "date": "2026-10-08",
         "n": 2
       },
-      "placeholder": true,
-      "notes": "In progress since 2026-11-01"
+      "notes": "Built in one session as a static site with no backend and no LLM. Students paste a JavaScript sample(rng, ...args); exact mode enumerates every draw sequence from a 1-16 bit source odometer-style and reports each outcome's probability as a BigInt fraction (rng.next() % 6 on 8 bits gives 43/256 vs 42/256), with rejection loops cut at 2^-32 and judged given termination; statistical mode runs a chi-square test on a seeded 32-bit xoshiro128** stream. Seven-bug gallery with fixes, shuffle position heat map, permalinks, and instructor exercise links (encoded in the URL) graded exact-first with a chi-square fallback at a stated false-fail rate. The suggested Pyodide/Python mode was left out; exact mode is exponential in draws, so large shuffles fall back to statistics. 68 vitest tests.",
+      "url": "https://modulo-bias-microscope.netlify.app",
+      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/modulo-bias-microscope",
+      "implementedOn": "2026-11-01"
     }
   ]
 }

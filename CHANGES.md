@@ -523,3 +523,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-01 [doc] Created ideas/2026-11-01.json (schemaVersion 3, 1 idea): Embed Rescue (15, provisional). Synced A1, C3, C9 catalog status with run log.
 
 2026-11-01 [note] Claimed Modulo Bias Microscope (2026-10-08 n2) as in progress: exact enumeration over a narrow random source + chi-square, JavaScript only (no Pyodide), no LLM.
+
+2026-11-01 [note] Modulo Bias Microscope (2026-10-08 n2) marked implemented: live at modulo-bias-microscope.netlify.app, repo Claude-capstone/modulo-bias-microscope. Exact fractions + chi-square, 7-bug gallery, exercise links; 68 tests. No LLM.
