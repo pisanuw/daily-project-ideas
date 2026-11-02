@@ -1,6 +1,6 @@
 # Briefing
 
-- Purpose: Automated daily project idea curation via Claude Code Remote Trigger
+- Purpose: Automated daily project idea curation via Claude Code Remote Trigger. Since 2026-11-02 the site is framed as "ideas I could build for you": every idea modal ends with a mailto asking to build it, and the hero links to the built apps.
 - Current scope: Daily 5am routine (ROUTINE.md) gathers demand signals and commits 1 to 6 commercially viable product ideas (schemaVersion 3) to pisanuw/daily-project-ideas; a static website (Netlify) renders the ideas grouped by complexity
 - Routine quality controls (2026-10-30): 15 to 20 scored candidates, gate (total >= 22, pain >= 4, WTP >= 3, 2 independent evidence items, one within 90 days), adversarial review per idea, watchlist for near misses, weekday source rotation, full-history dedup via ideas/index.jsonl, scripts/validate_ideas.py before commit
 - Routine revision (2026-11-01), after the first five v3 runs produced zero ideas between them: the gate numbers are unchanged, but a run now always ships at least one idea. Ideas that clear the gate are `confidence: validated`; otherwise the best reviewed candidate ships as `provisional` with a `gateGap` naming what it misses. Three logic fixes: a killed idea no longer empties the day (continue down the ranked list), `pain` above 3 requires a complaint-kind evidence item, and the higher-ed constraint is relaxed from "half must be educational" to "at least one, at most 2 per category", with a weekday domain lens that points most days outside education

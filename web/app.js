@@ -433,10 +433,27 @@
     if (idea.url) links.push(el('a', { class: 'btn-link', href: idea.url, target: '_blank', rel: 'noopener', text: 'View live project ↗' }));
     if (idea.repo) links.push(el('a', { class: 'btn-link btn-link--ghost', href: idea.repo, target: '_blank', rel: 'noopener', text: 'Source code ↗' }));
     if (links.length) frag.appendChild(el('div', { class: 'detail__links' }, links));
+    frag.appendChild(buildThisCta(idea));
 
     modalBody.appendChild(frag);
     modal.hidden = false;
     document.body.style.overflow = 'hidden';
+  }
+
+  // Every idea ends with a way to ask for it. Implemented ones ask for
+  // "one like this"; the rest ask for the idea itself. The subject names the
+  // idea so the email says which card it came from.
+  var CONTACT_EMAIL = 'builder@pisan.me';
+  function buildThisCta(idea) {
+    var built = !!idea.url;
+    var subject = (built ? 'Something like ' : 'Build this: ') + idea.title + ' (' + idea.id + ')';
+    var href = 'mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent(subject);
+    return el('div', { class: 'detail__cta' }, [
+      el('p', { text: built
+        ? 'Want something like this for your own work?'
+        : 'Want this built, or something close to it?' }),
+      el('a', { class: 'btn-link', href: href, text: 'Email ' + CONTACT_EMAIL }),
+    ]);
   }
 
   // Side projects, classroom assignments, and research ideas (pre-2026-10-21).

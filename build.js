@@ -285,9 +285,9 @@ function applyImplemented(ideas) {
 
 const META = {
   title: 'Daily Project Ideas',
-  tagline: 'A fresh batch of buildable software project ideas, every day.',
+  tagline: 'Software I could build for you. New ideas every morning.',
   description:
-    'Every morning a Claude Code routine looks for evidence of real demand (complaints people post, products they already pay for, and rules or deadlines that force work) and turns it into commercially viable software ideas. Education is one domain among several; a weekly lens points most days at accessibility, small business operations, developer tooling, or back-office work instead. Each idea carries its evidence and a score out of 30. Ideas that clear the quality bar are marked validated; when nothing clears it, the day ships its best reviewed candidate as provisional, with the conditions it still misses stated on the card. Ideas are sized by effort using a chili-pepper scale, from a single weekend to a multi-week build. Earlier ideas include side projects, classroom assignments, and research directions grounded in SIGCSE and ITiCSE papers. Browse by tier below, or expand a card for the full brief.',
+    'Every morning a Claude Code routine goes looking for problems people already complain about or pay to solve, and writes up the best few as buildable software. Each idea carries its evidence and a score out of 30. Ideas that clear the quality bar are marked validated; the rest ship as provisional and say what they are missing. Ideas are sized by effort, from a single weekend to a multi-week build. See one you need, or something close to it? Email me and we can talk about building it. Some are already built: they are in the Implemented section, and the rest of my Claude-built apps are linked below.',
 };
 
 // ---- Emit -----------------------------------------------------------------
