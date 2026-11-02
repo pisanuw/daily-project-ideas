@@ -15,8 +15,8 @@ cd dist && python3 -m http.server 8000
 
 ## Deploy to Netlify (continuous, recommended)
 
-This is already set up — the site is live at https://daily-project-ideas.netlify.app/
-and auto-deploys from `main`. The steps below are for reference / re-connecting.
+This is already set up — the site is live at https://daily-project-ideas.pisan.me/ (canonical;
+https://daily-project-ideas.netlify.app/ also serves it) and auto-deploys from `main`. The steps below are for reference / re-connecting.
 
 1. Push this repo to a Git host Netlify can read (GitHub/GitLab/Bitbucket).
    This repo lives on GitHub at `pisanuw/daily-project-ideas`.

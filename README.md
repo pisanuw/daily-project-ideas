@@ -1,6 +1,6 @@
 # Daily Project Ideas
 
-**Live site: https://daily-project-ideas.netlify.app/**
+**Live site: https://daily-project-ideas.pisan.me/**
 
 Automated daily product ideas curated by a Claude Code scheduled routine.
 
@@ -26,7 +26,8 @@ rather than from guesses.
 
 ## Website
 
-Live at **https://daily-project-ideas.netlify.app/** (auto-deployed from `main`).
+Live at **https://daily-project-ideas.pisan.me/** (auto-deployed from `main`; https://daily-project-ideas.netlify.app/ also serves it). Each page
+declares the pisan.me address as canonical and carries Open Graph and Twitter card tags with `web/og-image.png`.
 
 Three pages: **Latest** shows the newest few per effort tier, **Browse all** searches
 and filters all 601, and **Topics** splits them into 13 topics with one topic per idea.

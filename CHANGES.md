@@ -533,3 +533,13 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-02 [decision] Small business is now the lens on two days: Thursday back office and solo professionals, Friday customer-facing (replacing Friday's no-lens day). Owner's customer priority puts small business first.
 
 2026-11-02 [note] Claude-capstone renamed to pisanuw/claude-built-apps; repo links in implemented.json and the hero button updated (GitHub redirects the old name).
+
+2026-11-02 [code] implemented.json: all 49 app URLs moved from netlify.app to <folder>.pisan.me per the migration map; two idea descriptions that link Summit Navigator updated too.
+
+2026-11-02 [code] notify-state.json gains the new Tetromino Arcade URL: it is the one standalone entry, keyed by URL not date#n, so the move would have re-sent its email.
+
+2026-11-02 [code] All three pages declare daily-project-ideas.pisan.me as canonical and carry Open Graph and Twitter card meta, with a 1200x630 hero image (web/og-image.png).
+
+2026-11-02 [decision] Kept the name Daily Project Ideas, since "project ideas" is what students and builders search for; only titles and meta descriptions now say "software I could build for you".
+
+2026-11-02 [doc] README, DEPLOY and the notify email footer point at daily-project-ideas.pisan.me; the netlify.app address still serves the site.
