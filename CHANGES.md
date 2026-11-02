@@ -563,3 +563,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-02 [code] build.js writes customer fields only to dist/data.js and full data to dist/notes/; edge function notes-auth guards /notes (NOTES_PASSWORD, fails closed); sections grouped by audience.
 
 2026-11-02 [doc] ideas/public.json: plain-language copy for the 29 business ideas; ROUTINE.md and the validator require a public block from 2026-11-03.
+
+2026-11-02 [plan] Claimed ACR Draft for EdTech Vendors (2026-10-23 #2) for the build routine; folder acr-draft.
