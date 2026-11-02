@@ -449,7 +449,13 @@
       el('div', { class: 'detail__tags' }, tags),
     ]);
 
-    if (isCommercial(idea)) {
+    if (!NOTES_MODE && idea.url) {
+      // A built app: what it does and a way to try it. The original idea's
+      // technical write-up is the owner's notes.
+      [para((idea.public && idea.public.summary) || idea.summary, 'detail__lead'),
+       detailSection('What it does', para(idea.notes))]
+        .forEach(function (b) { if (b) frag.appendChild(b); });
+    } else if (isCommercial(idea)) {
       renderCommercial(idea, frag);
     } else {
       renderLegacy(idea, frag);
