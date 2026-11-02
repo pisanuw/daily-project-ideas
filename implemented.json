@@ -558,8 +558,11 @@
         "date": "2026-10-23",
         "n": 2
       },
-      "placeholder": true,
-      "notes": "In progress since 2026-11-02"
+      "notes": "Fully client-side tool for small software vendors (edtech especially) asked for a VPAT before a university buys. The vendor describes the product, answers 12 yes/no product questions that settle Not Applicable criteria, and attaches axe-core 4.11.0 results per screen: a DevTools console snippet (loads axe from cdnjs, falls back to jsDelivr, copies results), an @axe-core/cli JSON file (one screen per page), or pasted page HTML that is stripped of scripts/handlers/javascript: links and scanned in a sandboxed iframe with the bundled axe-core. A guided review covers all 50 WCAG 2.1 A/AA criteria with plain-language tests, scan findings and outcome + evidence note. Fixed rules set level, remark and warnings: never Supports from a scan alone (clean + untested = Not Evaluated), a pass contradicted by scan failures becomes Partially Supports, every claim needs a note, Not Evaluated (not allowed for A/AA in VPAT 2.5) stamps the report DRAFT, 4.1.1 is Supports per the 2023 errata. Exports the VPAT 2.5 WCAG edition layout to Word (docx, lazy-loaded), HTML or print-to-PDF with screens-tested and evidence appendices; saved project files compare release to release. The idea's Playwright crawler, Supabase and Claude-drafted remarks were replaced by this browser-only, rule-based core. 48 vitest tests, 99% statement coverage; the app itself has zero axe WCAG 2.1 AA violations in light and dark mode. Deployed via the deploy workflow; the runner created the acr-draft.pisan.me CNAME.",
+      "publicNotes": "Helps small software companies write the accessibility report (a VPAT) that universities and public agencies ask for before they buy. You scan your key screens with a free checker, answer a short guided test for each accessibility rule, and download a finished report in Word, with the evidence behind every answer. It won't let you overstate your product: anything you haven't actually tested stays marked as a draft. Limitation: it can't do the hands-on testing for you, so the report is only as good as the checks you really carry out.",
+      "url": "https://acr-draft.pisan.me",
+      "repo": "https://github.com/pisanuw/claude-built-apps/tree/main/acr-draft",
+      "implementedOn": "2026-11-02"
     }
   ]
 }
