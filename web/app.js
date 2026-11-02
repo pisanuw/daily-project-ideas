@@ -368,7 +368,27 @@
     return box;
   }
 
+  // The public page is written for a possible customer: what the problem is,
+  // who it is for, and what the software would do. Scores, evidence,
+  // competitors, pricing and the review are Yusuf's working notes; they show
+  // only on the password-protected notes view (NOTES_MODE).
+  var NOTES_MODE = !!window.NOTES_MODE;
+
+  function renderPublic(idea, frag) {
+    var m = idea.mvpScope || {};
+    var blocks = [
+      para(idea.summary, 'detail__lead'),
+      detailSection('The problem', para(idea.problemStatement, 'problem')),
+      detailSection('Who it is for', para(idea.targetCustomer)),
+      detailSection('What it would do', list(idea.keyFeatures) || para(idea.description)),
+      detailSection('A first version would include', list(m.features)),
+      detailSection('About the build', para(idea.url ? idea.notes : '')),
+    ];
+    blocks.forEach(function (b) { if (b) frag.appendChild(b); });
+  }
+
   function renderCommercial(idea, frag) {
+    if (!NOTES_MODE) return renderPublic(idea, frag);
     var v = idea.validationTest || {};
     var blocks = [
       scorePanel(idea),
@@ -412,13 +432,13 @@
     }
     modalBody.innerHTML = '';
     var tags = [];
-    if (idea.complexity) tags.push(el('span', { class: 'tag', text: idea.complexity }));
+    if (idea.complexity && NOTES_MODE) tags.push(el('span', { class: 'tag', text: idea.complexity }));
     if (idea.category) tags.push(el('span', { class: 'tag', text: idea.category }));
     dateTags(idea).forEach(function (t) { tags.push(t); });
 
     var extraClass = idea.tierKey === 'research' ? 'detail detail--research' : 'detail';
     var frag = el('div', { class: extraClass }, [
-      el('div', { class: 'detail__peppers', text: peppersFor(idea.tierKey) }),
+      NOTES_MODE ? el('div', { class: 'detail__peppers', text: peppersFor(idea.tierKey) }) : null,
       el('h2', { class: 'detail__title', id: 'modal-title', text: idea.title }),
       el('div', { class: 'detail__tags' }, tags),
     ]);
