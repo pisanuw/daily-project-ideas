@@ -553,3 +553,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-02 [code] validate_ideas.py checks the small-business floor; optional smallBusiness boolean added to the schema for small-business buyers outside Small Business Ops.
 
 2026-11-02 [doc] Created ideas/2026-11-02.json (schemaVersion 3, 1 idea): Consent Leak Watch (16, provisional)
+
+2026-11-02 [note] Claimed Consent Leak Watch (2026-11-02 n1) as in progress: client-side HAR audit (no-choice and Reject-all captures), plugin attribution, scan diff; no headless scanner, no LLM.
