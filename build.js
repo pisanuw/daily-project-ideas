@@ -168,7 +168,52 @@ const COMMERCIAL_KEYS = [
   'problemEvidence', 'competitors', 'mvpScope', 'pricing', 'revenueSketch',
   'distribution', 'validationTest', 'moat', 'compliance', 'risks',
   'scores', 'scoreRationale', 'review', 'confidence', 'gateGap',
+  'smallBusiness', 'public',
 ];
+
+// ---- Audience -------------------------------------------------------------
+// The public site groups ideas by who they are for, not by effort: an effort
+// label tells a possible client the work is quick and cheap. Effort stays in
+// the owner's notes view.
+const AUDIENCES = [
+  { key: 'implemented', label: 'Already built', icon: '\u2705',
+    blurb: 'Ideas that are live now. Try one, or ask for one like it.' },
+  { key: 'small-business', label: 'For small businesses', icon: '\ud83c\udfea',
+    blurb: 'Tools for shops, trades, clinics, studios and solo professionals.' },
+  { key: 'teams', label: 'For startups and software teams', icon: '\ud83e\uddf0',
+    blurb: 'Products and internal tools for companies that build or sell software.' },
+  { key: 'education', label: 'For educators and schools', icon: '\ud83c\udf93',
+    blurb: 'Tools for teachers, departments, trainers and learners.' },
+  { key: 'more', label: 'More ideas: teaching and side projects', icon: '\ud83d\udca1',
+    blurb: 'Earlier ideas: classroom projects, side projects and research directions.' },
+];
+
+function audienceOf(idea) {
+  if (idea.implemented && !idea.placeholder) return 'implemented';
+  if (idea.public && AUDIENCES.some((a) => a.key === idea.public.audience)) return idea.public.audience;
+  if (!(idea.scores || idea.problemStatement) || idea.category === 'Research') return 'more';
+  const cat = idea.category || '';
+  if (cat === 'Small Business Ops' || idea.smallBusiness === true) return 'small-business';
+  if (cat.startsWith('EdTech') || cat === 'Research & Lab Tools') return 'education';
+  return 'teams';
+}
+
+// What a visitor's browser receives. Everything else (scores, evidence,
+// competitors, pricing, the review, effort) is the owner's working notes and
+// ships only in dist/notes/, behind the password.
+const PUBLIC_KEYS = [
+  'id', 'date', 'n', 'title', 'category', 'audience', 'summary', 'description',
+  'keyFeatures', 'implemented', 'implementedOn', 'placeholder', 'url', 'repo',
+  'notes', 'topic', 'topicSlug', 'problemStatement', 'targetCustomer', 'public',
+];
+
+function publicIdea(idea) {
+  const out = {};
+  for (const k of PUBLIC_KEYS) if (idea[k] !== undefined && idea[k] !== '') out[k] = idea[k];
+  if (idea.mvpScope && Array.isArray(idea.mvpScope.features)) out.mvpScope = { features: idea.mvpScope.features };
+  if (idea.implemented) out.notes = idea.publicNotes || '';
+  return out;
+}
 
 function normalizeIdea(raw, date, n) {
   const complexity = raw.complexity || '';
@@ -264,6 +309,7 @@ function applyImplemented(ideas) {
       base.url = proj.url || base.url;
       base.repo = proj.repo || base.repo;
       base.notes = proj.notes || base.notes;
+      base.publicNotes = proj.publicNotes || '';
       base.implementedOn = proj.implementedOn || '';
       base.placeholder = !!proj.placeholder;
     } else {
@@ -275,6 +321,7 @@ function applyImplemented(ideas) {
       idea.tierKey = 'implemented';
       idea.implementedOn = proj.implementedOn || '';
       idea.placeholder = !!proj.placeholder;
+      idea.publicNotes = proj.publicNotes || '';
       result.push(idea);
     }
   }
@@ -287,10 +334,27 @@ const META = {
   title: 'Daily Project Ideas',
   tagline: 'Software I could build for you. New ideas every morning.',
   description:
-    'Every morning a Claude Code routine goes looking for problems people already complain about or pay to solve, and writes up the best few as buildable software. Each idea carries its evidence and a score out of 30. Ideas that clear the quality bar are marked validated; the rest ship as provisional and say what they are missing. Ideas are sized by effort, from a single weekend to a multi-week build. See one you need, or something close to it? Email me and we can talk about building it. Some are already built: they are in the Implemented section, and the rest of my Claude-built apps are linked below.',
+    'Every morning a Claude Code routine looks for problems that small businesses, startups and educators complain about or already pay to solve, and writes up the best as software I could build. See one you need, or something close to it? Email me and we can talk about building it. Some are already built: try them in the first section.',
 };
 
 // ---- Emit -----------------------------------------------------------------
+
+// The owner's notes: the same page with every field, at /notes/, which the
+// edge function netlify/edge-functions/notes-auth.js puts behind a password.
+function writeNotes(payload) {
+  const dir = path.join(DIST_DIR, 'notes');
+  fs.mkdirSync(dir, { recursive: true });
+  let html = fs.readFileSync(path.join(WEB_DIR, 'index.html'), 'utf8');
+  html = html
+    .replace('<head>', '<head>\n  <meta name="robots" content="noindex, nofollow" />')
+    .replace('href="styles.css"', 'href="../styles.css"')
+    .replace('<script src="data.js"></script>', '<script>window.NOTES_MODE = true;</script>\n  <script src="data.js"></script>')
+    .replace('<script src="app.js"></script>', '<script src="../app.js"></script>')
+    .replace(/href="(index|browse|topics)\.html/g, 'href="../$1.html');
+  if (!html.includes('window.NOTES_MODE')) throw new Error('notes page: script tags not found in web/index.html');
+  fs.writeFileSync(path.join(dir, 'index.html'), html);
+  fs.writeFileSync(path.join(dir, 'data.js'), 'window.IDEAS_DATA = ' + JSON.stringify(payload) + ';\n');
+}
 
 function copyDir(src, dest) {
   fs.mkdirSync(dest, { recursive: true });
@@ -302,8 +366,19 @@ function copyDir(src, dest) {
   }
 }
 
+// Customer-facing copy for older ideas, keyed by id; a day file's own
+// `public` block wins (the routine writes one for every new idea).
+const PUBLIC_FILE = path.join(IDEAS_DIR, 'public.json');
+function applyPublicCopy(ideas) {
+  if (!fs.existsSync(PUBLIC_FILE)) return ideas;
+  const copy = JSON.parse(fs.readFileSync(PUBLIC_FILE, 'utf8'));
+  for (const i of ideas) if (!i.public && copy[i.id]) i.public = copy[i.id];
+  return ideas;
+}
+
 function build() {
   let ideas = loadIdeas();
+  ideas = applyPublicCopy(ideas);
   ideas = applyImplemented(ideas);
   ideas = applyTopics(ideas);
 
@@ -314,26 +389,38 @@ function build() {
     count: live.filter((i) => i.topic === name).length,
   })).filter((t) => t.count > 0);
 
+  for (const i of ideas) i.audience = audienceOf(i);
+
   const payload = {
     generatedAt: new Date().toISOString(),
     meta: META,
     tiers: TIERS,
+    audiences: AUDIENCES,
     topics,
     total: live.length,
     ideas,
+  };
+  const publicPayload = {
+    generatedAt: payload.generatedAt,
+    meta: META,
+    audiences: AUDIENCES,
+    topics,
+    total: live.length,
+    ideas: ideas.filter((i) => !i.placeholder).map(publicIdea),
   };
 
   fs.rmSync(DIST_DIR, { recursive: true, force: true });
   copyDir(WEB_DIR, DIST_DIR);
   fs.writeFileSync(
     path.join(DIST_DIR, 'data.js'),
-    'window.IDEAS_DATA = ' + JSON.stringify(payload, null, 2) + ';\n'
+    'window.IDEAS_DATA = ' + JSON.stringify(publicPayload) + ';\n'
   );
+  writeNotes(payload);
 
   const counts = {};
-  for (const t of TIERS) counts[t.key] = ideas.filter((i) => i.tierKey === t.key && !i.placeholder).length;
+  for (const a of AUDIENCES) counts[a.key] = ideas.filter((i) => i.audience === a.key && !i.placeholder).length;
   console.log(`Built dist/ from ${ideas.length} ideas.`);
-  console.log('  Per tier:', counts);
+  console.log('  Per audience:', counts);
   const tagged = payload.ideas.filter((i) => i.topic && !i.placeholder).length;
   console.log(`  Topics: ${payload.topics.length} in use, ${tagged}/${payload.total} ideas tagged`);
   if (tagged < payload.total) {

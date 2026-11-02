@@ -557,3 +557,9 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-02 [note] Claimed Consent Leak Watch (2026-11-02 n1) as in progress: client-side HAR audit (no-choice and Reject-all captures), plugin attribution, scan diff; no headless scanner, no LLM.
 
 2026-11-02 [note] Marked Consent Leak Watch (2026-11-02 n1) implemented: https://consent-leak-watch.netlify.app (client-side HAR audit; pisan.me CNAME pending).
+
+2026-11-02 [decision] Public site written for customers: idea pages show summary, problem, audience and benefits; scores, evidence, competitors, pricing, review and effort move to /notes/ behind a password.
+
+2026-11-02 [code] build.js writes customer fields only to dist/data.js and full data to dist/notes/; edge function notes-auth guards /notes (NOTES_PASSWORD, fails closed); sections grouped by audience.
+
+2026-11-02 [doc] ideas/public.json: plain-language copy for the 29 business ideas; ROUTINE.md and the validator require a public block from 2026-11-03.

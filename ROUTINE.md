@@ -454,9 +454,20 @@ Allowed values:
   "EdTech: Learners", "Developer Tool", "Accessibility & Compliance",
   "Research & Lab Tools", "Small Business Ops", "Civic & Public Sector",
   "Creative & Prosumer"
-- `smallBusiness`: optional boolean, the one optional field. Set it to `true`
-  when the buyer is a small business but the category is not "Small Business
-  Ops"; omit it otherwise.
+- `smallBusiness`: optional boolean. Set it to `true` when the buyer is a
+  small business but the category is not "Small Business Ops"; omit it
+  otherwise.
+- `public`: required from 2026-11-03. The only text the public site shows a
+  visitor (everything else is Yusuf's working notes, kept behind a password).
+  Write it for the buyer, a shop owner, a founder, an instructor, not for
+  Yusuf: plain words, no jargon or tool names, no scores, competitors, prices,
+  evidence, build-time or effort estimates.
+  `{"summary": one sentence on what it does for them, "problem": two or three
+  sentences in the second person ("You install a plugin and assume..."),
+  "forWhom": one sentence, "benefits": 3 to 5 short outcomes, not technical
+  features}`. Optional `"audience"`: "small-business", "teams" or
+  "education", when the category alone would file it under the wrong reader
+  (for example a Micro-SaaS sold to professors is "education").
 - `complexity`: "Weekend MVP", "Multi-week", "Multi-month"
 - `confidence`: "validated", "provisional"
 - `review.verdict`: "pass", "rescored"
@@ -492,7 +503,7 @@ exactly as they are: never change, reorder, or remove an earlier idea. Then:
   sources ...):", lists the picked IDs, and names the ideas it added by `n`.
 
 The schema is the same for both modes. Do not add fields other than the optional
-`smallBusiness`.
+`smallBusiness` and the `public` block.
 
 Format (all fields required for every idea; `gateGap` is required only when
 `confidence` is "provisional", and must be absent otherwise):
@@ -512,6 +523,12 @@ Format (all fields required for every idea; `gateGap` is required only when
       "confidence": "validated",
       "topic": "Assessment & Grading",
       "summary": "1-2 sentence card blurb: who it is for and what it saves them.",
+      "public": {
+        "summary": "One sentence for the buyer: what it does for them.",
+        "problem": "Two or three sentences in the second person, in plain words.",
+        "forWhom": "One sentence naming the reader.",
+        "benefits": ["Three to five outcomes", "not technical features", "no prices or estimates"]
+      },
       "problemStatement": "The specific pain, described in the customer's own terms.",
       "description": "3-5 sentences: what the product does and how it works.",
       "targetCustomer": "Who uses it day to day.",

@@ -218,7 +218,7 @@ const SCENARIOS = [
     why: 'expected the 9 Music & Audio ideas and a topic heading' },
   { name: 'browse ?q=chess', page: 'browse', query: '?q=chess',
     check: (c) => c.card > 0 && c.card < 24, why: 'expected a narrowed set of search hits' },
-  { name: 'browse ?tier=weekend&page=2', page: 'browse', query: '?tier=weekend&page=2',
+  { name: 'browse ?for=more&page=2', page: 'browse', query: '?for=more&page=2',
     check: (c) => c.card === 24 && /page 2 of/.test(c.resultText), why: 'expected a full second page' },
   { name: 'browse ?q=zzzznomatch', page: 'browse', query: '?q=zzzznomatch',
     check: (c) => c.card === 0, why: 'expected no cards' },
@@ -250,6 +250,18 @@ const built = JSON.parse((() => {
   return raw.slice(raw.indexOf('{'), raw.lastIndexOf('}') + 1);
 })());
 const firstId = built.ideas.filter((i) => !i.placeholder)[0].id;
+
+// The public data must carry no working notes: those ship only in
+// dist/notes/data.js, behind the password (netlify/edge-functions/notes-auth.js).
+const PRIVATE_KEYS = ['scores', 'scoreRationale', 'problemEvidence', 'competitors', 'pricing',
+  'revenueSketch', 'distribution', 'validationTest', 'moat', 'review', 'gateGap', 'confidence',
+  'whyNow', 'founderFit', 'buyer', 'risks', 'complexity', 'tierKey'];
+const leaked = built.ideas.filter((i) => PRIVATE_KEYS.some((k) => k in i) ||
+  (i.mvpScope && ('buildEstimate' in i.mvpScope || 'outOfScope' in i.mvpScope)));
+const notesRaw = fs.readFileSync(path.join(DIST, 'notes', 'data.js'), 'utf8');
+const leakOk = leaked.length === 0 && notesRaw.includes('"scores"');
+if (!leakOk) failures += 1;
+console.log(`${leakOk ? 'PASS' : 'FAIL'}  public data has no working notes (${leaked.length} leaking), notes data keeps them`);
 
 console.log('');
 for (const s of SCENARIOS) {

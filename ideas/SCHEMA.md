@@ -123,6 +123,11 @@ version history:
     `Creative & Prosumer`. At most 2 ideas in a day may share a category, and
     at least one must still be `EdTech:` something. Since 2026-11-02 that floor
     is a small-business buyer instead (see `smallBusiness`).
+  - `public` (object, required from 2026-11-03): the customer-facing copy the
+    public site shows: `summary`, `problem`, `forWhom`, `benefits` (3 to 5),
+    optional `audience` (small-business, teams, education). Ideas written
+    before then get theirs from `ideas/public.json`, keyed by idea id. Every
+    other field is the owner's notes, served only at /notes/ behind a password.
   - `smallBusiness` (optional boolean, added 2026-11-02): `true` when the buyer
     is a small business but the `category` is not `Small Business Ops`. A day
     needs at least one idea that is `Small Business Ops` or `smallBusiness:

@@ -6,3 +6,14 @@
 
 [build.environment]
   NODE_VERSION = "20"
+
+# /notes/ holds the owner's working notes (scores, evidence, competitors,
+# pricing). netlify/edge-functions/notes-auth.js guards it with HTTP Basic
+# auth; set NOTES_PASSWORD in the site's environment variables.
+[[edge_functions]]
+  path = "/notes"
+  function = "notes-auth"
+
+[[edge_functions]]
+  path = "/notes/*"
+  function = "notes-auth"

@@ -100,8 +100,37 @@ def check_evidence(idea, tag, today, errs):
     return len(pages), has_complaint, youngest
 
 
+# The customer-facing copy the public site shows (see ROUTINE.md Step 7).
+# Required for ideas written from this date on; older ideas get theirs from
+# ideas/public.json.
+PUBLIC_FROM = datetime.date(2026, 11, 3)
+PUBLIC_AUDIENCES = {"small-business", "teams", "education"}
+
+
+def check_public(idea, tag, today, errs):
+    pub = idea.get("public")
+    if pub is None:
+        if today >= PUBLIC_FROM:
+            errs.append(f"{tag}: missing public (the customer-facing summary, problem, "
+                        "forWhom and benefits)")
+        return
+    if not isinstance(pub, dict):
+        errs.append(f"{tag}: public must be an object")
+        return
+    for field in ("summary", "problem", "forWhom"):
+        if not isinstance(pub.get(field), str) or not pub.get(field).strip():
+            errs.append(f"{tag}: public.{field} is missing or empty")
+    benefits = pub.get("benefits")
+    if not isinstance(benefits, list) or not 3 <= len(benefits) <= 5 \
+            or not all(isinstance(b, str) and b.strip() for b in benefits):
+        errs.append(f"{tag}: public.benefits must be 3 to 5 non-empty strings")
+    if "audience" in pub and pub["audience"] not in PUBLIC_AUDIENCES:
+        errs.append(f"{tag}: public.audience must be one of {sorted(PUBLIC_AUDIENCES)}")
+
+
 def check_idea(idea, expected_n, today, errs):
     tag = f"idea {expected_n}"
+    check_public(idea, tag, today, errs)
 
     for field in REQUIRED:
         if idea.get(field) in (None, "", [], {}):

@@ -2,7 +2,10 @@
 (function () {
   'use strict';
 
-  var DATA = window.IDEAS_DATA || { meta: {}, tiers: [], ideas: [] };
+  var DATA = window.IDEAS_DATA || { meta: {}, audiences: [], ideas: [] };
+  // Set by the password-protected notes page (dist/notes/), which also loads
+  // the full data; the public page gets customer-facing fields only.
+  var NOTES_MODE = !!window.NOTES_MODE;
   var INITIAL = 3; // latest N shown per tier before the fold
 
   function el(tag, attrs, children) {
@@ -35,7 +38,7 @@
   }
 
   function peppersFor(tierKey) {
-    var t = DATA.tiers.filter(function (x) { return x.key === tierKey; })[0];
+    var t = (DATA.tiers || []).filter(function (x) { return x.key === tierKey; })[0];
     return t ? t.peppers : '';
   }
 
@@ -68,17 +71,19 @@
   function card(idea) {
     var tags = dateTags(idea);
     if (idea.topic) tags.push(el('span', { class: 'tag tag--topic', text: idea.topic }));
-    if (idea.category) tags.push(el('span', { class: 'tag', text: idea.category }));
-    if (idea.scores && idea.scores.total) tags.push(el('span', { class: 'tag tag--score', text: 'Score ' + idea.scores.total + '/30' }));
-    if (idea.confidence === 'provisional') tags.push(el('span', { class: 'tag tag--provisional', text: 'Provisional' }));
+    // Categories ("Micro-SaaS", "Teaching Tool") are the routine's filing labels,
+    // not something a visitor needs; the topic tag says what the idea is about.
+    if (idea.category && NOTES_MODE) tags.push(el('span', { class: 'tag', text: idea.category }));
+    if (NOTES_MODE && idea.scores && idea.scores.total) tags.push(el('span', { class: 'tag tag--score', text: 'Score ' + idea.scores.total + '/30' }));
+    if (NOTES_MODE && idea.confidence === 'provisional') tags.push(el('span', { class: 'tag tag--provisional', text: 'Provisional' }));
     if (idea.implemented && idea.url) tags.push(el('span', { class: 'tag tag--live', text: 'Live ↗' }));
 
     var node = el('button', { class: 'card', type: 'button' }, [
       el('div', { class: 'card__top' }, [
         el('h3', { class: 'card__title', text: idea.title }),
-        el('span', { class: 'card__peppers', text: peppersFor(idea.tierKey) }),
+        NOTES_MODE ? el('span', { class: 'card__peppers', text: peppersFor(idea.tierKey) }) : null,
       ]),
-      el('p', { class: 'card__summary', text: idea.summary || '' }),
+      el('p', { class: 'card__summary', text: (idea.public && idea.public.summary) || idea.summary || '' }),
       el('div', { class: 'card__foot' }, tags),
     ]);
     node.addEventListener('click', function () { openModal(idea); });
@@ -94,11 +99,11 @@
 
   function section(tier, ideas) {
     var sorted = ideas.slice().sort(tier.key === 'implemented' ? byImplementedDesc : byDateDesc);
-    var countWord = tier.key === 'research' ? (sorted.length === 1 ? ' idea' : ' ideas') : (sorted.length === 1 ? ' project' : ' projects');
+    var countWord = sorted.length === 1 ? ' idea' : ' ideas';
 
     var toggle = el('button', { class: 'section__toggle', type: 'button' });
     var head = el('div', { class: 'section__head' }, [
-      el('span', { class: 'section__peppers', text: tier.peppers }),
+      el('span', { class: 'section__peppers', text: tier.icon }),
       el('h2', { class: 'section__title', text: tier.label, id: 'tier-' + tier.key }),
       el('span', { class: 'section__count', text: sorted.length + countWord }),
       el('p', { class: 'section__blurb', text: tier.blurb }),
@@ -116,10 +121,11 @@
     var more = el('button', { class: 'fold-btn', type: 'button' });
     var browseLink = el('a', {
       class: 'fold-link',
-      href: 'browse.html?tier=' + encodeURIComponent(tier.key),
+      href: 'browse.html?for=' + encodeURIComponent(tier.key),
       text: 'Search and filter all ' + sorted.length + ' \u2192',
     });
-    var foot = el('div', { class: 'section__foot' }, [more, browseLink]);
+    // The notes page has no browse view of its own; browse shows public data.
+    var foot = el('div', { class: 'section__foot' }, NOTES_MODE ? [more] : [more, browseLink]);
 
     function paint() {
       grid.innerHTML = '';
@@ -159,7 +165,7 @@
       host.appendChild(el('a', {
         class: 'jumpbar__link',
         href: '#tier-' + tier.key,
-        text: tier.peppers + ' ' + tier.label,
+        text: tier.icon + ' ' + tier.label,
       }));
     });
     host.appendChild(el('a', { class: 'jumpbar__link jumpbar__link--top', href: '#', text: '\u2191 Top' }));
@@ -169,12 +175,11 @@
   function renderSections() {
     var host = document.getElementById('sections');
     var present = [];
-    DATA.tiers.forEach(function (tier) {
-      var ideas = DATA.ideas.filter(function (i) { return i.tierKey === tier.key; });
-      // Hide a tier only if it's the special implemented or research tier and empty.
-      if ((tier.key === 'implemented' || tier.key === 'research') && ideas.length === 0) return;
-      host.appendChild(section(tier, ideas));
-      present.push(tier);
+    DATA.audiences.forEach(function (aud) {
+      var ideas = DATA.ideas.filter(function (i) { return i.audience === aud.key && !i.placeholder; });
+      if (ideas.length === 0) return;
+      host.appendChild(section(aud, ideas));
+      present.push(aud);
     });
     renderJumpbar(present);
   }
@@ -372,17 +377,18 @@
   // who it is for, and what the software would do. Scores, evidence,
   // competitors, pricing and the review are Yusuf's working notes; they show
   // only on the password-protected notes view (NOTES_MODE).
-  var NOTES_MODE = !!window.NOTES_MODE;
-
   function renderPublic(idea, frag) {
     var m = idea.mvpScope || {};
+    var pub = idea.public || {};
+    var built = !!idea.url;
     var blocks = [
-      para(idea.summary, 'detail__lead'),
-      detailSection('The problem', para(idea.problemStatement, 'problem')),
-      detailSection('Who it is for', para(idea.targetCustomer)),
-      detailSection('What it would do', list(idea.keyFeatures) || para(idea.description)),
-      detailSection('A first version would include', list(m.features)),
-      detailSection('About the build', para(idea.url ? idea.notes : '')),
+      para(pub.summary || idea.summary, 'detail__lead'),
+      built ? detailSection('What it does', para(idea.notes)) : null,
+      detailSection('The problem', para(pub.problem || idea.problemStatement, 'problem')),
+      detailSection('Who it is for', para(pub.forWhom || idea.targetCustomer)),
+      detailSection(built ? 'What the idea asked for' : 'What it would do',
+        list(pub.benefits) || list(idea.keyFeatures) || para(idea.description)),
+      pub.benefits || built ? null : detailSection('A first version would include', list(m.features)),
     ];
     blocks.forEach(function (b) { if (b) frag.appendChild(b); });
   }
@@ -433,7 +439,7 @@
     modalBody.innerHTML = '';
     var tags = [];
     if (idea.complexity && NOTES_MODE) tags.push(el('span', { class: 'tag', text: idea.complexity }));
-    if (idea.category) tags.push(el('span', { class: 'tag', text: idea.category }));
+    if (idea.category && NOTES_MODE) tags.push(el('span', { class: 'tag', text: idea.category }));
     dateTags(idea).forEach(function (t) { tags.push(t); });
 
     var extraClass = idea.tierKey === 'research' ? 'detail detail--research' : 'detail';
@@ -479,7 +485,7 @@
   // Side projects, classroom assignments, and research ideas (pre-2026-10-21).
   function renderLegacy(idea, frag) {
     if (idea.description) frag.appendChild(detailSection('Description', el('p', { text: idea.description })));
-    if (idea.notes) frag.appendChild(detailSection('Notes', el('p', { text: idea.notes })));
+    if (idea.notes) frag.appendChild(detailSection(NOTES_MODE ? 'Notes' : 'What it does', el('p', { text: idea.notes })));
 
     if (idea.keyFeatures && idea.keyFeatures.length) {
       var ul = el('ul', {}, idea.keyFeatures.map(function (f) { return el('li', { text: f }); }));
@@ -604,18 +610,16 @@
   // Filter state lives in the query string, so every change is a history entry,
   // the back button works, and any view can be shared as a link.
   var FILTERS = [
-    { key: 'tier', label: 'Effort', options: function () {
-        return DATA.tiers.map(function (t) { return { value: t.key, label: t.peppers + ' ' + t.label }; });
+    { key: 'for', label: 'For', options: function () {
+        return DATA.audiences.map(function (a) { return { value: a.key, label: a.icon + ' ' + a.label }; });
       } },
     { key: 'topic', label: 'Topic', options: function () {
         return (DATA.topics || []).map(function (t) { return { value: t.slug, label: t.name + ' (' + t.count + ')' }; });
       } },
     { key: 'status', label: 'Status', options: function () {
-        return [
-          { value: 'implemented', label: '\ud83d\ude80 Built' },
-          { value: 'validated', label: 'Validated' },
-          { value: 'provisional', label: 'Provisional' },
-        ];
+        var opts = [{ value: 'implemented', label: '\ud83d\ude80 Built' }];
+        if (NOTES_MODE) opts.push({ value: 'validated', label: 'Validated' }, { value: 'provisional', label: 'Provisional' });
+        return opts;
       } },
   ];
   var PER_PAGE = 24;
@@ -634,8 +638,8 @@
 
   function matches(idea, q, p) {
     if (idea.placeholder) return false;
-    var tier = p.get('tier');
-    if (tier && idea.tierKey !== tier) return false;
+    var aud = p.get('for');
+    if (aud && idea.audience !== aud) return false;
     var topic = p.get('topic');
     if (topic && idea.topicSlug !== topic) return false;
     var status = p.get('status');
@@ -722,7 +726,7 @@
     hits.slice((page - 1) * PER_PAGE, page * PER_PAGE).forEach(function (i) { grid.appendChild(card(i)); });
     document.getElementById('no-results').hidden = hits.length > 0;
 
-    var active = ['tier', 'topic', 'status'].filter(function (k) { return p.get(k); });
+    var active = ['for', 'topic', 'status'].filter(function (k) { return p.get(k); });
     document.getElementById('result-count').textContent =
       hits.length + (hits.length === 1 ? ' idea' : ' ideas') +
       (hits.length > PER_PAGE ? ' \u00b7 page ' + page + ' of ' + pages : '');
@@ -733,7 +737,7 @@
     document.getElementById('browse-title').textContent = named ? named.name : 'Browse all ideas';
     document.getElementById('browse-sub').textContent = named
       ? 'Every idea filed under ' + named.name + '. Each idea has exactly one topic.'
-      : 'Search every idea, or narrow by effort, topic and status.';
+      : 'Search every idea, or narrow by who it is for and by topic.';
 
     renderPager(hits.length, page);
   }
@@ -756,7 +760,7 @@
       box.focus();
     });
     document.getElementById('reset').addEventListener('click', function () {
-      setParams({ q: '', tier: '', topic: '', status: '', page: '' });
+      setParams({ q: '', for: '', topic: '', status: '', page: '' });
       syncFromUrl();
     });
     syncFromUrl();
