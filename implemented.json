@@ -498,8 +498,10 @@
         "date": "2026-11-02",
         "n": 1
       },
-      "placeholder": true,
-      "notes": "In progress since 2026-11-02"
+      "notes": "Built in one session as a fully client-side tool for small WooCommerce/WordPress shops: the owner records two Chrome visits as HAR files (banner left alone, and after Reject all) and drops them in. It flags cookies and requests from about 25 advertising, analytics and embed services that fired before consent or after the rejection, splits the recording at the click by reading the banner's own consent cookie (Complianz, CookieYes, Cookiebot, OneTrust, Borlabs, Real Cookie Banner), and treats Google Consent Mode hits sent with consent denied as notes, not leaks. Each leak is traced to a plugin by following Chrome's _initiator chain to a /wp-content/plugins/<slug>/ file or by the WordPress handle id of the inline snippet, and it says plainly when a speed plugin (WP Rocket, Autoptimize, LiteSpeed...) or a PHP-set cookie hides the source. A saved check can be compared with a later one, naming the plugin that changed version behind a new leak. The idea's hosted headless-Chromium scanner with weekly rescans and email diffs was replaced by this do-it-yourself core, so nothing is uploaded and nothing runs on a schedule. 44 vitest tests, 100% statement coverage. Deployed via the GitHub Actions deploy workflow on netlify.app until the pisan.me CNAME exists.",
+      "url": "https://consent-leak-watch.netlify.app",
+      "repo": "https://github.com/pisanuw/claude-built-apps/tree/main/consent-leak-watch",
+      "implementedOn": "2026-11-02"
     }
   ]
 }

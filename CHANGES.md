@@ -555,3 +555,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-02 [doc] Created ideas/2026-11-02.json (schemaVersion 3, 1 idea): Consent Leak Watch (16, provisional)
 
 2026-11-02 [note] Claimed Consent Leak Watch (2026-11-02 n1) as in progress: client-side HAR audit (no-choice and Reject-all captures), plugin attribution, scan diff; no headless scanner, no LLM.
+
+2026-11-02 [note] Marked Consent Leak Watch (2026-11-02 n1) implemented: https://consent-leak-watch.netlify.app (client-side HAR audit; pisan.me CNAME pending).
