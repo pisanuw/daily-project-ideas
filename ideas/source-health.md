@@ -1,6 +1,6 @@
 # Source health
 
-Generated 2026-11-01 from the last 45 days of `ideas/run-log.jsonl` (5 runs). Do not edit by hand: regenerate with `python3 scripts/source_health.py`.
+Generated 2026-11-02 from the last 45 days of `ideas/run-log.jsonl` (6 runs). Do not edit by hand: regenerate with `python3 scripts/source_health.py`.
 
 ## Do not spend searches here
 
@@ -21,12 +21,12 @@ Generated 2026-11-01 from the last 45 days of `ideas/run-log.jsonl` (5 runs). Do
 
 | Source | Yields | Status | selected | Access path |
 |---|---|---|---|---|
+| A14 Plugin and add-on support forums | complaint | ok | 1 | `webfetch: https://wordpress.org/support/plugin/{slug}/` |
 | C10 Change events: shutdowns, price rises, removed free tiers | mandate | ok | 1 | no verified path |
 | A1 LMS idea boards | complaint | ok | 0 | `both: https://community.instructure.com/t5/forums/searchpage/tab/message?q={q}` |
 | A11 Accessibility practitioners | complaint | ok-curl | 0 | `webfetch: https://webaim.org/discussion/archives` |
 | A12 Ask HN and HN comments | complaint | ok | 0 | `webfetch: https://hn.algolia.com/api/v1/search_by_date?query={q}&tags=comment&hitsPerPage=20` |
 | A13 Discourse forums, any niche | complaint | ok | 0 | `webfetch: https://{host}/search.json?q={q}+after%3A{YYYY-MM-DD}` |
-| A14 Plugin and add-on support forums | complaint | ok | 0 | `webfetch: https://wordpress.org/support/plugin/{slug}/` |
 | A2 Other LMS and classroom forums | complaint | ok | 0 | `webfetch: https://discuss.openedx.org/latest.json` |
 | A3 Open-source teaching tools | complaint | ok | 0 | `webfetch: https://api.github.com/search/issues?q={q}+state%3Aopen+sort%3Areactions&per_page=10` |
 | A5 Educator Stack Exchanges | complaint | ok-curl | 0 | `curl: https://api.stackexchange.com/2.3/questions?site={cseducators|academia|matheducators}&order=desc&sort=creation&pagesize=20&filter=withbody` |
@@ -62,16 +62,23 @@ These sources are not on the avoid list, because at least one of their paths wor
 
 | Host | usable/tried | Outcomes | Last usable |
 |---|---|---|---|
-| wordpress.org | 7/7 | ok 7 | 2026-11-01 |
-| hn.algolia.com | 6/6 | ok 6 | 2026-11-01 |
+| hn.algolia.com | 18/22 | empty 4, ok 18 | 2026-11-02 |
+| wordpress.org | 16/16 | ok 16 | 2026-11-02 |
+| community.shopify.com | 9/9 | ok 9 | 2026-11-02 |
+| api.wordpress.org | 6/6 | ok 6 | 2026-11-02 |
+| www.federalregister.gov | 4/4 | ok 4 | 2026-11-02 |
 | community.etsy.com | 1/3 | empty 2, ok 1 | 2026-11-01 |
 | github.com | 3/3 | ok 3 | 2026-11-01 |
 | meet.ribblr.com | 3/3 | ok 3 | 2026-11-01 |
 | webaim.org | 1/3 | empty 2, ok 1 | 2026-11-01 |
-| api.wordpress.org | 2/2 | ok 2 | 2026-11-01 |
 | community.instructure.com | 0/2 | empty 2 | never |
+| dor.wa.gov | 1/2 | http_404 1, ok 1 | 2026-11-02 |
 | dsp.berkeley.edu | 2/2 | ok 2 | 2026-11-01 |
+| forum.bubble.io | 2/2 | ok 2 | 2026-11-02 |
+| forum.invoiceninja.com | 2/2 | ok 2 | 2026-11-02 |
+| forum.webflow.com | 0/2 | empty 2 | never |
 | samsearch.co | 0/2 | empty 2 | never |
+| themarkup.org | 2/2 | ok 2 | 2026-11-02 |
 | www.reddit.com | 0/2 | allowlist 2 | never |
 | api.github.com | 0/1 | http_403 1 | never |
 | api.stackexchange.com | 0/1 | allowlist 1 | never |
@@ -79,15 +86,20 @@ These sources are not on the avoid list, because at least one of their paths wor
 | careers.csudh.edu | 0/1 | empty 1 | never |
 | coddy.tech | 0/1 | http_403 1 | never |
 | codeboard.io | 1/1 | ok 1 | 2026-11-01 |
+| community.cloudflare.com | 0/1 | http_403 1 | never |
 | community.home-assistant.io | 0/1 | http_403 1 | never |
 | community.openhab.org | 0/1 | empty 1 | never |
+| complianz.io | 1/1 | ok 1 | 2026-11-02 |
+| consentcheck.online | 0/1 | http_404 1 | never |
 | cseducators.stackexchange.com | 0/1 | allowlist 1 | never |
 | discuss.pixls.us | 1/1 | ok 1 | 2026-11-01 |
 | elementor.com | 0/1 | http_404 1 | never |
 | equalizedigital.com | 0/1 | http_403 1 | never |
 | erank.com | 1/1 | ok 1 | 2026-11-01 |
 | flippa.com | 0/1 | empty 1 | never |
+| forum.ghost.org | 1/1 | ok 1 | 2026-11-02 |
 | forum.obsidian.md | 1/1 | ok 1 | 2026-11-01 |
+| forum.squarespace.com | 0/1 | http_403 1 | never |
 | getvela.com | 1/1 | ok 1 | 2026-11-01 |
 | grad.tamu.edu | 0/1 | http_404 1 | never |
 | help.pickcode.io | 1/1 | ok 1 | 2026-11-01 |
@@ -97,7 +109,7 @@ These sources are not on the avoid list, because at least one of their paths wor
 | nwelearn2026.sched.com | 0/1 | http_403 1 | never |
 | rtl.berkeley.edu | 1/1 | ok 1 | 2026-11-01 |
 | scispace.com | 0/1 | http_403 1 | never |
-| themarkup.org | 1/1 | ok 1 | 2026-11-01 |
+| sift-health.pages.dev | 1/1 | ok 1 | 2026-11-02 |
 | tilt.colostate.edu | 1/1 | ok 1 | 2026-11-01 |
 | trinket.io | 1/1 | ok 1 | 2026-11-01 |
 | trustmrr.com | 1/1 | ok 1 | 2026-10-31 |
@@ -107,12 +119,15 @@ These sources are not on the avoid list, because at least one of their paths wor
 | www.careerbuilder.com | 0/1 | http_403 1 | never |
 | www.chronicle.com | 0/1 | http_403 1 | never |
 | www.classcentral.com | 0/1 | http_403 1 | never |
+| www.cookiebot.com | 1/1 | ok 1 | 2026-11-02 |
+| www.cookieyes.com | 1/1 | ok 1 | 2026-11-02 |
 | www.cs.umd.edu | 0/1 | http_5xx 1 | never |
 | www.dailycal.org | 0/1 | http_403 1 | never |
 | www.digitalcommerce360.com | 0/1 | http_403 1 | never |
+| www.dor.wa.gov | 1/1 | ok 1 | 2026-11-02 |
 | www.etsy.com | 0/1 | empty 1 | never |
-| www.federalregister.gov | 1/1 | ok 1 | 2026-11-01 |
 | www.govinfo.gov | 1/1 | ok 1 | 2026-11-01 |
+| www.mondaq.com | 1/1 | ok 1 | 2026-11-02 |
 | www.nationgraph.com | 0/1 | http_404 1 | never |
 | www.ndsmcobserver.com | 0/1 | http_403 1 | never |
 | www.pulse.bot | 0/1 | http_5xx 1 | never |
@@ -125,16 +140,16 @@ These sources are not on the avoid list, because at least one of their paths wor
 
 | Gate condition | Candidates lost |
 |---|---|
-| totalBelowMin | 52 |
+| totalBelowMin | 66 |
 | rejectRule | 17 |
-| reviewKill | 5 |
+| reviewKill | 6 |
 | painBelow4 | 3 |
 
 The largest row is the one to argue about before changing anything else.
 
 ## Funnel over the window
 
-candidates 78 -> passedRejectRules 61 -> passedGate 1 -> reviewKilled 5 -> validated 0 -> provisional 1 -> watchlist 16
+candidates 94 -> passedRejectRules 77 -> passedGate 1 -> reviewKilled 6 -> validated 0 -> provisional 2 -> watchlist 24
 
 ## Runs that produced nothing
 

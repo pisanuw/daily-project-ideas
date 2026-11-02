@@ -1,0 +1,409 @@
+{
+  "date": "2026-11-02",
+  "schemaVersion": 3,
+  "complete": true,
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Consent Leak Watch",
+      "slug": "consent-leak-watch",
+      "category": "Accessibility & Compliance",
+      "smallBusiness": true,
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Data & Visualization",
+      "summary": "For small WooCommerce shops and the agencies that maintain them: a scheduled check that the cookie banner actually blocks trackers, which tells you which plugin broke it after an update.",
+      "problemStatement": "Shop owners install a consent plugin and assume it works. Then a plugin update, for example Meta for WooCommerce 3.7.6, starts setting _fbp or loading YouTube before the visitor has chosen anything, and nobody notices until a complaint or a demand letter arrives.",
+      "description": "The app loads the shop in headless Chromium as a new visitor and tests the no-choice and Reject-all paths on the home, product and content pages. It records the cookies and third-party requests that fire when they should not. Where the asset path allows, it attributes each leak to a plugin through /wp-content/plugins/<slug>/ paths and script handle ids, and it says plainly when an optimizer has minified that information away. It re-runs the scan weekly and whenever a plugin asset's ?ver= string changes, then emails a before/after diff. Checkout and cart flows are left out of the MVP to avoid creating orders on live shops.",
+      "targetCustomer": "Owners of small WooCommerce and WordPress shops with EU or California visitors, and 1 to 10 person web agencies on care plans for 10 to 100 client sites.",
+      "buyer": "The agency, from its care-plan margin (this is the realistic buyer), or the shop owner on a personal or business card.",
+      "whyNow": "In October 2026 Complianz users reported Meta for WooCommerce 3.7.6 setting _fbp before consent, with downgrading as the only workaround, and YouTube embeds loading before consent in BuddyBoss. California SB 690 (effective 2027-01-01) removes private pen-register CIPA suits but leaves section 631 wiretap claims intact. The one cheap monitor seen this year (ConsentCheck, $9/month) answered HTTP 404 on 2026-11-02.",
+      "founderFit": "Pisan ships web apps alone, already teaches with Playwright-style browser automation and agentic coding, and works on accessibility and AI ethics, so privacy-respecting web practice is close to his teaching. It needs no institutional sale.",
+      "problemEvidence": [
+        {
+          "url": "https://wordpress.org/support/topic/facebook-meta-pixel-_fbp-and-tiktok-tk_ai-cookies-created-before-giving-consent/",
+          "source": "wordpress.org",
+          "author": "mikyantonescu",
+          "date": "2026-10-06",
+          "kind": "complaint",
+          "summary": "Facebook _fbp and TikTok tk_ai cookies set before any consent on a WooCommerce shop running Complianz. Still unresolved, and the vendor's workaround is to downgrade the Meta plugin."
+        },
+        {
+          "url": "https://wordpress.org/support/topic/youtube-embeds-loaded-before-consent-buddyboss-integration/",
+          "source": "wordpress.org",
+          "author": "tonywebm",
+          "date": "2026-10-21",
+          "kind": "complaint",
+          "summary": "YouTube iframes inserted dynamically by BuddyBoss load before consent even with the Complianz YouTube blocker on."
+        },
+        {
+          "url": "https://www.cookieyes.com/pricing/",
+          "source": "cookieyes.com",
+          "author": "unknown",
+          "date": "2026-11-02",
+          "kind": "spend",
+          "summary": "CookieYes sells banners at $10, $25 and $55 per domain per month, with scheduled scanning only on the $25 and $55 tiers (price page read on 2026-11-02)."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "CookieYes",
+          "url": "https://www.cookieyes.com/pricing/",
+          "price": "$10 to $55 per domain per month",
+          "gap": "Scheduled scans catalogue cookies for the declaration. They do not verify the Reject path or name the plugin that leaked."
+        },
+        {
+          "name": "Cookiebot",
+          "url": "https://www.cookiebot.com/en/pricing/",
+          "price": "From EUR 7/month; daily scans +EUR 99/month",
+          "gap": "Daily scanning costs extra and audits its own declaration, not whether blocking survives other plugins' updates."
+        },
+        {
+          "name": "Complianz Premium",
+          "url": "https://complianz.io/pricing/",
+          "price": "$59/year for 1 site, $399/year for 25 sites",
+          "gap": "It is the CMP being checked. Its support threads show leaks it cannot see itself."
+        },
+        {
+          "name": "ConsentCheck",
+          "url": "https://hn.algolia.com/api/v1/items/47134492",
+          "price": "Free scan, $9/month monitoring (per its 2026-02-24 Show HN); site returned 404 on 2026-11-02",
+          "gap": "Closest match: real-browser reject/accept tests with weekly rescans. It is apparently offline and never offered plugin attribution."
+        },
+        {
+          "name": "Apify Cookie Consent Audit",
+          "url": "https://apify.com/mambalabs/cookie-consent-audit",
+          "price": "$0.05 per domain (reviewer reading)",
+          "gap": "A cheap scriptable pre/post-reject check, but agencies have to build the scheduling, diffing and reporting themselves."
+        },
+        {
+          "name": "Tagpipes Pulse",
+          "url": "https://tagpipes.com/docs/pulse-create-scan",
+          "price": "$149+/month (reviewer reading)",
+          "gap": "Does Baseline, Deny All and GPC scheduled scans at a price aimed at larger sites."
+        },
+        {
+          "name": "The Markup Blacklight",
+          "url": "https://themarkup.org/blacklight",
+          "price": "Free",
+          "gap": "One-off scan of the no-choice state only. No Reject path, no monitoring."
+        }
+      ],
+      "keyFeatures": [
+        "No-choice and Reject-all browser tests from EU and California egress",
+        "Plugin attribution from asset paths and handle ids, with an explicit 'cannot attribute' state",
+        "Re-scan triggered by plugin ?ver= changes, plus weekly",
+        "Before/after diff email naming the new leak",
+        "Agency dashboard across client sites with a white-label PDF"
+      ],
+      "mvpScope": {
+        "features": [
+          "Single-site free scan of home and 2 product pages, no-choice and Reject paths",
+          "Paid weekly and on-change rescans with email diff",
+          "Plugin attribution where paths survive"
+        ],
+        "outOfScope": [
+          "Cart and checkout flows",
+          "Shopify (its consent lives in a checkout sandbox)",
+          "Legal opinions or a 'compliant' badge",
+          "GPC and TCF string validation"
+        ],
+        "buildEstimate": "3 to 4 weekends"
+      },
+      "techStack": "React + Vite + Tailwind front end, Flask API, Supabase (Postgres + auth), Playwright Chromium workers on two small VPSs (one EU, one US-West) for geo egress, no paid API at runtime",
+      "pricing": {
+        "model": "Per-site subscription with an agency bundle",
+        "pricePoint": "$9/month per site, $39/month for 10 sites",
+        "rationale": "Below CookieYes Pro ($25 per domain) and at ConsentCheck's former $9 monitoring price. The reviewer judged $12 a hard sell for a check on a tool owners already pay for."
+      },
+      "revenueSketch": "Estimate only: 60 agencies x $39 + 100 single sites x $9 = $3,240 MRR after a year. Assumes the free scan converts about 2% of WordPress support-forum and agency-community traffic. Unvalidated.",
+      "distribution": "A free scan linked from answers in the wordpress.org support forums of Complianz, CookieYes and Meta for WooCommerce, where leak reports already arrive. Also WordPress agency communities (care-plan businesses) and a free WordPress.org plugin that only shows the latest scan in wp-admin.",
+      "validationTest": {
+        "method": "Build the free one-off scan only (one weekend) and run it on 30 WooCommerce shops whose owners posted consent problems on wordpress.org in the last 90 days. Send each owner or their agency the report with an offer of $9/month monitoring or $39/month for 10 sites.",
+        "successCriteria": "Promote if at least 5 of 30 find a real pre-consent or post-reject leak they did not know about, and at least 3 (including 1 agency) pay for monitoring within 30 days.",
+        "cost": "About 2 weekends and $10 of VPS time"
+      },
+      "moat": "Thin. Plugin attribution and on-update rescans are a feature lead, not a moat. The durable asset would be a growing map of plugin versions to known leaks, built from scans across many sites.",
+      "compliance": [
+        "GDPR: stores site URLs, scan output and customer emails, so it needs a privacy notice and a DPA template for EU agencies. Scans fetch only public pages.",
+        "Liability: reports must say they are technical findings, not legal advice, and never certify compliance.",
+        "Accessibility: the dashboard and PDF reports must meet WCAG 2.2 AA."
+      ],
+      "risks": [
+        {
+          "risk": "Optimizers (WP Rocket, Autoptimize, LiteSpeed) combine and minify assets, removing plugin paths and ?ver= strings, and PHP-set cookies have no script path at all.",
+          "mitigation": "Fall back to weekly rescans and label leaks 'unattributed' instead of guessing. Offer an optional companion plugin that reports plugin versions."
+        },
+        {
+          "risk": "Cloudflare, Wordfence and host WAFs block headless Chromium coming from VPS address ranges.",
+          "mitigation": "Have the owner allowlist the scanner's two static IPs and user agent during onboarding."
+        },
+        {
+          "risk": "Shop owners believe their paid CMP already handles this and will not pay for a second tool.",
+          "mitigation": "Sell to agencies, whose care plans need proof of work, and lead with a free scan that shows a concrete leak."
+        },
+        {
+          "risk": "Free or near-free scanners (Apify, ConsentStack, Blacklight) commoditise the scan.",
+          "mitigation": "Compete on monitoring, diffs and attribution, not on the scan itself."
+        }
+      ],
+      "scores": {
+        "pain": 3,
+        "willingnessToPay": 2,
+        "reachability": 3,
+        "competitiveGap": 2,
+        "feasibility": 3,
+        "complianceBurden": 3,
+        "total": 16
+      },
+      "scoreRationale": {
+        "pain": "Two independent October 2026 leak reports (https://wordpress.org/support/topic/facebook-meta-pixel-_fbp-and-tiktok-tk_ai-cookies-created-before-giving-consent/, https://wordpress.org/support/topic/youtube-embeds-loaded-before-consent-buddyboss-integration/). The reviewer found the GA4 thread (https://wordpress.org/support/topic/ga4-consent-remains-denied-after-accepting-cookies-complianz-7-5-6/) was a Free-vs-Premium limit, not a leak, so pain is 3.",
+        "willingnessToPay": "People pay for CMPs (https://www.cookieyes.com/pricing/, https://complianz.io/pricing/), but no evidence that anyone pays for a checker on top. The $9 monitor in https://hn.algolia.com/api/v1/items/47134492 now returns 404.",
+        "reachability": "Leak reports arrive in public wordpress.org support threads such as https://wordpress.org/support/topic/facebook-meta-pixel-_fbp-and-tiktok-tk_ai-cookies-created-before-giving-consent/, a self-serve channel, but agencies are scattered.",
+        "competitiveGap": "Real-browser reject tests exist free or cheap (https://apify.com/mambalabs/cookie-consent-audit, https://hn.algolia.com/api/v1/items/47134492). Only plugin attribution and on-update rescans are unserved.",
+        "feasibility": "Playwright on two VPSs is within one person's reach, as scanners like https://tagpipes.com/docs/pulse-create-scan show, but the reviewer found WAF blocking and asset optimizers make plugin attribution fragile.",
+        "complianceBurden": "Scans public pages only, but a false 'clean' report on a privacy product invites blame. Disclaimers are needed (see the vendor caveats in https://www.cookieyes.com/pricing/)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "The reviewer cut the total from 21 to 16 (pain 4 to 3, willingnessToPay 3 to 2, competitiveGap 3 to 2, feasibility 4 to 3, complianceBurden 4 to 3). Findings: Tagpipes Pulse ($149+/month) already runs scheduled Deny All and GPC scans; Apify's Cookie Consent Audit does pre/post-reject checks for $0.05 per domain; ConsentStack offers a free post-reject scanner; SureCookie (70,000 installs) scans inside wp-admin. Only the _fbp thread is a strong match. The GA4 thread was a Complianz Free limitation and has been dropped as evidence, and the Shopify thread is off-platform. Asset optimizers strip the plugin paths that attribution depends on, WAFs block VPS headless browsers, and checkout testing risks creating orders, so checkout was moved out of scope. Price lowered to $9 and $39."
+      },
+      "inspiredBy": "https://wordpress.org/support/topic/facebook-meta-pixel-_fbp-and-tiktok-tk_ai-cookies-created-before-giving-consent/",
+      "gateGap": {
+        "missing": [
+          "total 16 is below 22",
+          "pain 3 is below 4",
+          "willingnessToPay 2 is below 3"
+        ],
+        "closedBy": "The validationTest targets willingness to pay, the largest gap. If 3 of 30 recently affected shops or agencies pay for monitoring after seeing a concrete leak, raise willingnessToPay to 3. If 5 or more find leaks they did not know about and say so, raise pain to 4. Even then competitiveGap 2 leaves the total near 19, so validation would also need evidence that plugin attribution is what makes them pay."
+      }
+    }
+  ],
+  "runNotes": {
+    "weekday": "Monday",
+    "domainLens": "Accessibility and regulatory compliance for small businesses and startups: website accessibility, privacy notices, sales tax, licensing and permits",
+    "focusSources": [
+      "A13 Discourse forums, any niche",
+      "B10 WordPress plugin market data",
+      "C5 Policy and regulation trackers",
+      "A14 Plugin and add-on support forums",
+      "A12 Ask HN and HN comments"
+    ],
+    "searches": [
+      "Federal Register API: accessibility small business",
+      "Federal Register API: small entity compliance guide",
+      "Federal Register API: website disclosure consumers (rules)",
+      "WP plugin API: accessibility",
+      "WP plugin API: cookie consent",
+      "WP plugin API: privacy policy generator",
+      "WP plugin API: consent scanner",
+      "HN comments: ADA lawsuit / accessibility overlay / sales tax nexus / pay transparency / demand letter accessibility / privacy policy small business / business license renewal / certificate of insurance / cookie banner / before consent",
+      "Discourse search: forum.webflow.com, forum.bubble.io, forum.ghost.org, forum.invoiceninja.com, community.cloudflare.com, forum.squarespace.com",
+      "Discourse search community.shopify.com: ADA lawsuit, accessibility demand letter, cookie consent pixel, sales tax nexus",
+      "WordPress support forums: pojo-accessibility, accessibility-checker, complianz-gdpr, cookie-law-info",
+      "Web: small business ADA website demand letter 2026",
+      "Web: Illinois 200-transaction threshold removed 2026",
+      "Web: FCC TCPA revocation of consent small business 2026",
+      "Web: pay transparency lawsuits small employer Washington",
+      "Web: Washington ESSB 5814 services sales tax freelancers",
+      "Web: California AB 1404 website accessibility cure period",
+      "Web: CIPA pixel demand letters SB 690",
+      "Web: restaurant PDF menu accessibility lawsuit",
+      "Web: therapist website pixel HIPAA",
+      "Web: Washington My Health My Data small business",
+      "Web: site:wordpress.org/support HIPAA tracking pixel booking",
+      "Web: Freshpaint / HIPAA website scanner pricing",
+      "Watchlist (HN): canvas find replace; agentic browser quiz; AI feedback practice TA; ungrading specs grading; student API keys LLM"
+    ],
+    "unverifiedSignals": [
+      {
+        "url": "https://consentcheck.online/",
+        "reason": "HTTP 404 on 2026-11-02 (competitor apparently offline)."
+      },
+      {
+        "url": "https://community.cloudflare.com/search.json?q=ADA%20accessibility%20after%3A2026-06-01",
+        "reason": "HTTP 403 from the site."
+      },
+      {
+        "url": "https://forum.squarespace.com/search.json?q=accessibility%20after%3A2026-06-01",
+        "reason": "HTTP 403 from the site."
+      },
+      {
+        "url": "https://forum.webflow.com/search.json?q=accessibility%20after%3A2026-07-01",
+        "reason": "HTTP 200 with an HTML page, not JSON; not a Discourse search endpoint."
+      },
+      {
+        "url": "https://dor.wa.gov/taxes-rates/sales-use-tax-rates/lookup-tax-rate",
+        "reason": "HTTP 404 (guessed path, not used)."
+      }
+    ],
+    "rejectedCandidates": [
+      {
+        "title": "WA Service Tax Desk (ESSB 5814 service sales tax for freelancers)",
+        "total": 13,
+        "reason": "Killed in review: the one complaint (Invoice Ninja, 2026-10-17) is a configuration problem in an invoicing tool that already pulls location rates; DOR and invoicing apps calculate rates for free; taxability classification carries liability; most categories are repealed on 2029-01-01."
+      },
+      {
+        "title": "Sales-tax nexus tracker for small DTC sellers (Illinois threshold change)",
+        "total": 17,
+        "reason": "Free nexus checkers exist (Kintsugi, a free Shopify-community checker); no recent complaint."
+      },
+      {
+        "title": "Pay-transparency job-post checker for small multi-state employers",
+        "total": 17,
+        "reason": "No employer complaint, only an applicant's; writing the range down is the whole fix; Washington's law applies only at 15+ employees."
+      },
+      {
+        "title": "TCPA SMS opt-out ledger across texting tools",
+        "total": 16,
+        "reason": "No complaint evidence; the FCC's September 2026 order changes the rule again, and part of it is delayed to 2027-01-31."
+      },
+      {
+        "title": "CIPA demand-letter triage for small sites",
+        "total": 16,
+        "reason": "Legal-advice risk; SB 690 removes the pen-register theory from 2027-01-01; no complaint."
+      },
+      {
+        "title": "Shopify checkout consent-survival diagnostics",
+        "total": 18,
+        "reason": "One complaint (BulldogNL); a narrow, technical, mostly EU iDEAL case."
+      },
+      {
+        "title": "App-injected accessibility regression monitor for Shopify",
+        "total": 18,
+        "reason": "Evidence is vendor advice rather than complaints; crowded with free scanners."
+      },
+      {
+        "title": "Accessible PDF menu publisher for restaurants",
+        "total": 18,
+        "reason": "No restaurant-owner complaint fetched; restaurant website platforms already offer this."
+      },
+      {
+        "title": "Overlay replacement for small-business sites",
+        "total": 18,
+        "reason": "Crowded (Accessibility Checker, WP Accessibility, free WAVE/axe); the FTC accessiBe order hurts overlays but not checkers."
+      },
+      {
+        "title": "Embed cookie classifier for consent plugins (Substack and similar)",
+        "total": 17,
+        "reason": "A feature request for existing CMPs, not a product."
+      },
+      {
+        "title": "MHMDA consumer health privacy policy generator",
+        "total": 18,
+        "reason": "Mandate only, no complaint; Termly, Enzuzo and other generators cover it."
+      },
+      {
+        "title": "Business license and permit renewal tracker for trades",
+        "total": 14,
+        "reason": "No evidence found this run."
+      },
+      {
+        "title": "Certificate-of-insurance tracker for small general contractors",
+        "total": 14,
+        "reason": "No evidence found this run; served by myCOI, TrustLayer and others."
+      },
+      {
+        "title": "Consent Leak Watch (as originally scored)",
+        "total": 21,
+        "reason": "Rescored to 16 by the reviewer; shipped as provisional because the next candidate was killed and none remaining met the floor with a higher total."
+      }
+    ],
+    "watchlist": [
+      {
+        "title": "Cross-course content maintenance for Canvas design teams (bulk find, preview, replace and rollback for vendor-driven breakage)",
+        "targetCustomer": "Instructional designers and LMS admin teams who maintain content across dozens to thousands of Canvas courses.",
+        "problemStatement": "Vendor-side changes keep breaking content across many courses at once: Canvas's silent 2026-10-07 change to enhanceable_content tabs, Community guide links moving from /t5/ to /en/kb/, and LTI 1.3 migrations that leave embedded assignment links saying 'deleted'. Teams fix pages one at a time or with shared Tampermonkey scripts.",
+        "total": 21,
+        "missedGate": "competitiveGap 2: Atomic Search already sells account-wide Find & Replace for Canvas, and free community userscripts cover bulk search and link conversion; total below 22.",
+        "evidence": [
+          "https://community.instructure.com/en/discussion/667426/fix-or-alternative-to-class-enhanceable-content-tabs",
+          "https://community.instructure.com/en/discussion/667671/master-inventory-comprehensive-list-of-canvas-guide-titles-urls-for-link-remediation",
+          "https://community.instructure.com/en/discussion/667065/mcgraw-hill-lti-ltia-migration-broke-linked-course-assignment-links-in-pages-and-announcements",
+          "https://community.instructure.com/en/discussion/666768/bulk-find-replace-across-canvas-courses-with-tampermonkey",
+          "https://www.atomicjolt.com/post/streamline-course-updates-with-find-replace-in-atomic-search-for-canvas"
+        ],
+        "firstSeen": "2026-10-31"
+      },
+      {
+        "title": "ADA demand-letter remediation ledger for small Shopify and WordPress stores",
+        "targetCustomer": "Small online store owners who have received an ADA website demand letter or lawsuit",
+        "problemStatement": "Owners who are served do not know where to start, get pitched overlays, and have no dated record of good-faith fixes mapped to the allegations.",
+        "total": 20,
+        "missedGate": "No complaint dated within 180 days (the served owners posted in 2023 to 2025); competitiveGap 2 against remediation vendors and free axe/WAVE.",
+        "evidence": [
+          "https://community.shopify.com/t/232788",
+          "https://community.shopify.com/t/230778"
+        ],
+        "firstSeen": "2026-11-02"
+      },
+      {
+        "title": "Agent Exposure Audit for asynchronous online programs",
+        "targetCustomer": "Online program directors and instructional designers running asynchronous courses where proctoring is not feasible.",
+        "problemStatement": "Agentic browsers and cheap bots now complete Canvas New Quizzes and whole courses; quiz logs cannot prove it, and programs do not know which of their assessments an agent can finish unaided.",
+        "total": 20,
+        "missedGate": "willingnessToPay 3 and competitiveGap 3 (Cursive sells LMS agent detection; the existing Assignment Stress Test idea covers testing assignments against AI); only one fetched item is within 90 days; total below 22. 2026-11-01: the CSU TILT page confirms agents complete Canvas quizzes but is undated and recommends the LockDown Browser campuses already license.",
+        "evidence": [
+          "https://community.instructure.com/en/discussion/667216/help-with-detecting-bots-in-new-quizzes",
+          "https://www.pangram.com/it/blog/agentic-browsers-present-risks-to-universities",
+          "https://tilt.colostate.edu/new-ai-browsers-can-complete-canvas-quizzes/"
+        ],
+        "firstSeen": "2026-10-31"
+      },
+      {
+        "title": "Attempt-First Feedback Desk (AI first-pass feedback on ungraded practice with escalation to TAs)",
+        "targetCustomer": "Instructors of large CS and STEM courses who are moving homework to completion credit because of AI and have no grader budget.",
+        "problemStatement": "Homework is being de-graded, but instructors still want students to practice and get feedback; there is no grader budget, and students who used to come to office hours now go to general-purpose AI.",
+        "total": 19,
+        "missedGate": "willingnessToPay 2 (instructors cite no grader budget) and competitiveGap 2 (CS50 Duck, PingPong, Gradescope AI features); risks being an AI wrapper.",
+        "evidence": [
+          "https://thelastsoftwareengineer.substack.com/p/how-i-changed-teaching-after-ai-managed",
+          "https://news.ycombinator.com/item?id=49858507",
+          "https://news.ycombinator.com/item?id=50236951",
+          "https://news.ycombinator.com/item?id=50252085"
+        ],
+        "firstSeen": "2026-10-31"
+      },
+      {
+        "title": "Alternative-grading layer for Canvas and autograders",
+        "targetCustomer": "CS and STEM instructors using specifications, standards-based or mastery grading on Canvas with PrairieLearn or Gradescope.",
+        "problemStatement": "LMSs and autograders only understand points, so instructors fake standards-based grades with zero-point assessments, hacky scripts and spreadsheets to handle learning targets, resubmission tokens and letter-grade bundles.",
+        "total": 19,
+        "missedGate": "pain 3 (one GitHub RFC with 2 thumbs-up plus a position paper); total below 22.",
+        "evidence": [
+          "https://github.com/PrairieLearn/PrairieLearn/issues/14285",
+          "https://vtechworks.lib.vt.edu/items/bbdb3a44-8683-4434-be3a-8b8a00218cae",
+          "https://available-inventions.umich.edu/product/gradecraft"
+        ],
+        "firstSeen": "2026-10-30"
+      },
+      {
+        "title": "Course LLM key broker",
+        "targetCustomer": "Instructors teaching courses that use LLM APIs or coding agents without a campus AI gateway.",
+        "problemStatement": "Instructors need per-student capped API keys with model allowlists and term-end revocation; today they share keys, script OpenRouter or LiteLLM, or make students pay, and student keys leak.",
+        "total": 19,
+        "missedGate": "pain 3 and willingnessToPay 2; campus gateways, Standard Compute, Anthropic per-user spend limits and OpenAI project limits are closing the gap.",
+        "evidence": [
+          "https://community.openai.com/t/recommended-way-to-deal-with-api-key-s-for-students-in-programming-courses/335259",
+          "https://www.s-anand.net/blog/leaked-key-sociology/",
+          "https://github.com/BerriAI/litellm/issues/28750",
+          "https://standardcompute.com/llm-api-for-classrooms"
+        ],
+        "firstSeen": "2026-10-30"
+      },
+      {
+        "title": "Health-page tracker audit for small health and wellness practices (HIPAA, Washington MHMDA)",
+        "targetCustomer": "Therapists, clinics, med spas and wellness shops with booking or intake pages",
+        "problemStatement": "Third-party widgets and pixels send page URLs and IPs from health-intent pages, and vendors will not sign a BAA.",
+        "total": 19,
+        "missedGate": "Only 1 complaint (pain 3); Sift Health already sells this at $39/month draft pricing.",
+        "evidence": [
+          "https://wordpress.org/support/topic/elementor-ally-data-handling-baa-confirmation/",
+          "https://sift-health.pages.dev/pricing/"
+        ],
+        "firstSeen": "2026-11-02"
+      }
+    ],
+    "caveats": "No candidate cleared the gate. The top candidate, Consent Leak Watch (21), was rescored to 16 in adversarial review and ships as provisional. Selection rule 4 was followed: the next-ranked candidate, WA Service Tax Desk (20), was researched and killed in review. The ADA ledger (20) failed the floor because it had no evidence dated within 180 days, so it went to the watchlist. Competitor prices for Apify and Tagpipes are the reviewer's readings, not confirmed on a pricing page by this run. Only one idea shipped, so the Weekend MVP / Multi-week mix constraint does not apply. C5 Federal Register queries returned no small-business web rule; mandate evidence came from state law coverage (Washington ESSB 5814 and 6346, California SB 690 and AB 1404) found through web search. New A13 host: community.shopify.com is a Discourse site whose search.json works through curl."
+  }
+}

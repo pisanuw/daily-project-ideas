@@ -551,3 +551,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-02 [decision] ROUTINE.md: small business first. Mon and Sun lenses now small-business, 5+ small-business candidates per run, day floor is one small-business idea (replaces EdTech floor).
 
 2026-11-02 [code] validate_ideas.py checks the small-business floor; optional smallBusiness boolean added to the schema for small-business buyers outside Small Business Ops.
+
+2026-11-02 [doc] Created ideas/2026-11-02.json (schemaVersion 3, 1 idea): Consent Leak Watch (16, provisional)

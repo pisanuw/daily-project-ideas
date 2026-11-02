@@ -65,17 +65,18 @@
       "workingPaths": []
     },
     "api.wordpress.org": {
-      "attempts": 2,
+      "attempts": 6,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-01",
-      "lastOk": "2026-11-01",
-      "ok": 2,
+      "lastAttempt": "2026-11-02",
+      "lastOk": "2026-11-02",
+      "ok": 6,
       "outcomes": {
-        "ok": 2
+        "ok": 6
       },
       "workingPaths": [
         "curl https://api.wordpress.org/plugins/info/1.2/?action=query_plugins&request[search]=accessibility&request[per_page]=15",
-        "curl https://api.wordpress.org/plugins/info/1.2/?action=query_plugins&request[search]=alt%20text&request[per_page]=15"
+        "curl https://api.wordpress.org/plugins/info/1.2/?action=query_plugins&request[search]=alt%20text&request[per_page]=15",
+        "curl https://api.wordpress.org/plugins/info/1.2/?action=query_plugins&request[search]=cookie+consent&request[per_page]=15"
       ]
     },
     "apuo.ca": {
@@ -124,6 +125,17 @@
         "curl https://codeboard.io/"
       ]
     },
+    "community.cloudflare.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-02",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_403": 1
+      },
+      "workingPaths": []
+    },
     "community.etsy.com": {
       "attempts": 3,
       "evidenceItems": 0,
@@ -171,6 +183,45 @@
       },
       "workingPaths": []
     },
+    "community.shopify.com": {
+      "attempts": 9,
+      "evidenceItems": 2,
+      "lastAttempt": "2026-11-02",
+      "lastOk": "2026-11-02",
+      "ok": 9,
+      "outcomes": {
+        "ok": 9
+      },
+      "workingPaths": [
+        "curl https://community.shopify.com/search.json?q=ADA%20lawsuit%20after%3A2026-05-01",
+        "curl https://community.shopify.com/search.json?q=accessibility%20demand%20letter%20after%3A2026-03-01",
+        "curl https://community.shopify.com/search.json?q=cookie%20consent%20pixel%20after%3A2026-08-01"
+      ]
+    },
+    "complianz.io": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-02",
+      "lastOk": "2026-11-02",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://complianz.io/pricing/"
+      ]
+    },
+    "consentcheck.online": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-02",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_404": 1
+      },
+      "workingPaths": []
+    },
     "cseducators.stackexchange.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -193,6 +244,20 @@
       },
       "workingPaths": [
         "curl https://discuss.pixls.us/search.json?q=%22wish%22%20after%3A2026-08-15"
+      ]
+    },
+    "dor.wa.gov": {
+      "attempts": 2,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-02",
+      "lastOk": "2026-11-02",
+      "ok": 1,
+      "outcomes": {
+        "http_404": 1,
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://dor.wa.gov/forms-publications/publications-subject/tax-topics/2025-tax-legislation"
       ]
     },
     "dsp.berkeley.edu": {
@@ -255,6 +320,47 @@
       },
       "workingPaths": []
     },
+    "forum.bubble.io": {
+      "attempts": 2,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-02",
+      "lastOk": "2026-11-02",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "curl https://forum.bubble.io/search.json?q=accessibility%20after%3A2026-07-01",
+        "curl https://forum.bubble.io/search.json?q=GDPR%20after%3A2026-07-01"
+      ]
+    },
+    "forum.ghost.org": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-02",
+      "lastOk": "2026-11-02",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://forum.ghost.org/search.json?q=cookie%20after%3A2026-06-01"
+      ]
+    },
+    "forum.invoiceninja.com": {
+      "attempts": 2,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-02",
+      "lastOk": "2026-11-02",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "curl https://forum.invoiceninja.com/search.json?q=sales%20tax%20after%3A2026-06-01",
+        "curl https://forum.invoiceninja.com/t/adding-sales-tax-to-washington-clients/14575.json"
+      ]
+    },
     "forum.obsidian.md": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -267,6 +373,28 @@
       "workingPaths": [
         "curl https://forum.obsidian.md/search.json?q=accessibility%20after%3A2026-08-01"
       ]
+    },
+    "forum.squarespace.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-02",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_403": 1
+      },
+      "workingPaths": []
+    },
+    "forum.webflow.com": {
+      "attempts": 2,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-02",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "empty": 2
+      },
+      "workingPaths": []
     },
     "getvela.com": {
       "attempts": 1,
@@ -321,13 +449,14 @@
       ]
     },
     "hn.algolia.com": {
-      "attempts": 6,
-      "evidenceItems": 0,
-      "lastAttempt": "2026-11-01",
-      "lastOk": "2026-11-01",
-      "ok": 6,
+      "attempts": 22,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-02",
+      "lastOk": "2026-11-02",
+      "ok": 18,
       "outcomes": {
-        "ok": 6
+        "empty": 4,
+        "ok": 18
       },
       "workingPaths": [
         "curl https://hn.algolia.com/api/v1/search_by_date?query=%22alt%20text%22&tags=comment&hitsPerPage=30",
@@ -429,14 +558,27 @@
       },
       "workingPaths": []
     },
-    "themarkup.org": {
+    "sift-health.pages.dev": {
       "attempts": 1,
-      "evidenceItems": 0,
-      "lastAttempt": "2026-11-01",
-      "lastOk": "2026-11-01",
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-02",
+      "lastOk": "2026-11-02",
       "ok": 1,
       "outcomes": {
         "ok": 1
+      },
+      "workingPaths": [
+        "curl https://sift-health.pages.dev/pricing/"
+      ]
+    },
+    "themarkup.org": {
+      "attempts": 2,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-02",
+      "lastOk": "2026-11-02",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
       },
       "workingPaths": [
         "curl https://themarkup.org/blacklight"
@@ -520,13 +662,13 @@
       "workingPaths": []
     },
     "wordpress.org": {
-      "attempts": 7,
-      "evidenceItems": 0,
-      "lastAttempt": "2026-11-01",
-      "lastOk": "2026-11-01",
-      "ok": 7,
+      "attempts": 16,
+      "evidenceItems": 3,
+      "lastAttempt": "2026-11-02",
+      "lastOk": "2026-11-02",
+      "ok": 16,
       "outcomes": {
-        "ok": 7
+        "ok": 16
       },
       "workingPaths": [
         "curl https://wordpress.org/support/plugin/wp-accessibility/",
@@ -578,6 +720,32 @@
       },
       "workingPaths": []
     },
+    "www.cookiebot.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-02",
+      "lastOk": "2026-11-02",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://www.cookiebot.com/en/pricing/"
+      ]
+    },
+    "www.cookieyes.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-02",
+      "lastOk": "2026-11-02",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://www.cookieyes.com/pricing/"
+      ]
+    },
     "www.cs.umd.edu": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -611,6 +779,19 @@
       },
       "workingPaths": []
     },
+    "www.dor.wa.gov": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-02",
+      "lastOk": "2026-11-02",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://www.dor.wa.gov/taxes-rates/retail-sales-tax/services-newly-subject-retail-sales-tax/custom-website-development"
+      ]
+    },
     "www.etsy.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -623,16 +804,18 @@
       "workingPaths": []
     },
     "www.federalregister.gov": {
-      "attempts": 1,
+      "attempts": 4,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-01",
-      "lastOk": "2026-11-01",
-      "ok": 1,
+      "lastAttempt": "2026-11-02",
+      "lastOk": "2026-11-02",
+      "ok": 4,
       "outcomes": {
-        "ok": 1
+        "ok": 4
       },
       "workingPaths": [
-        "curl https://www.federalregister.gov/api/v1/documents.json?per_page=10&order=newest&conditions[term]=web%20accessibility"
+        "curl https://www.federalregister.gov/api/v1/documents.json?per_page=10&order=newest&conditions[term]=web%20accessibility",
+        "curl https://www.federalregister.gov/api/v1/documents.json?per_page=15&order=newest&conditions[term]=accessibility+small+business",
+        "curl https://www.federalregister.gov/api/v1/documents.json?per_page=15&order=newest&conditions[term]=%22small+entity+compliance+guide%22"
       ]
     },
     "www.govinfo.gov": {
@@ -646,6 +829,19 @@
       },
       "workingPaths": [
         "curl https://www.govinfo.gov/content/pkg/FR-2026-05-11/html/2026-09266.htm"
+      ]
+    },
+    "www.mondaq.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-02",
+      "lastOk": "2026-11-02",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://www.mondaq.com/unitedstates/tax-authorities/1773378/washington-state-2026-session-legislature-repeals-and-rolls-back-certain-recently-enacted-taxes"
       ]
     },
     "www.nationgraph.com": {
@@ -770,31 +966,31 @@
       "selected": 0
     },
     "A12": {
-      "candidates": 8,
+      "candidates": 10,
       "fetchFail": 1,
-      "fetchOk": 9,
-      "lastUsed": "2026-11-01",
-      "runs": 2,
-      "searches": 9,
+      "fetchOk": 20,
+      "lastUsed": "2026-11-02",
+      "runs": 3,
+      "searches": 24,
       "selected": 0
     },
     "A13": {
-      "candidates": 3,
-      "fetchFail": 2,
-      "fetchOk": 6,
-      "lastUsed": "2026-11-01",
-      "runs": 1,
-      "searches": 6,
+      "candidates": 9,
+      "fetchFail": 6,
+      "fetchOk": 20,
+      "lastUsed": "2026-11-02",
+      "runs": 2,
+      "searches": 19,
       "selected": 0
     },
     "A14": {
-      "candidates": 3,
+      "candidates": 7,
       "fetchFail": 0,
-      "fetchOk": 9,
-      "lastUsed": "2026-11-01",
-      "runs": 1,
-      "searches": 4,
-      "selected": 0
+      "fetchOk": 18,
+      "lastUsed": "2026-11-02",
+      "runs": 2,
+      "searches": 8,
+      "selected": 1
     },
     "A3": {
       "candidates": 5,
@@ -842,12 +1038,12 @@
       "selected": 0
     },
     "B10": {
-      "candidates": 2,
+      "candidates": 5,
       "fetchFail": 0,
-      "fetchOk": 2,
-      "lastUsed": "2026-11-01",
-      "runs": 1,
-      "searches": 2,
+      "fetchOk": 6,
+      "lastUsed": "2026-11-02",
+      "runs": 2,
+      "searches": 6,
       "selected": 0
     },
     "B3": {
@@ -887,12 +1083,12 @@
       "selected": 0
     },
     "C10": {
-      "candidates": 6,
-      "fetchFail": 6,
-      "fetchOk": 7,
-      "lastUsed": "2026-11-01",
-      "runs": 2,
-      "searches": 10,
+      "candidates": 9,
+      "fetchFail": 7,
+      "fetchOk": 10,
+      "lastUsed": "2026-11-02",
+      "runs": 3,
+      "searches": 12,
       "selected": 1
     },
     "C2": {
@@ -925,10 +1121,10 @@
     "C5": {
       "candidates": 4,
       "fetchFail": 0,
-      "fetchOk": 3,
-      "lastUsed": "2026-11-01",
-      "runs": 2,
-      "searches": 9,
+      "fetchOk": 6,
+      "lastUsed": "2026-11-02",
+      "runs": 3,
+      "searches": 12,
       "selected": 0
     },
     "C6": {
@@ -1035,22 +1231,31 @@
     }
   ],
   "funnel": {
-    "candidates": 78,
+    "candidates": 94,
     "passedGate": 1,
-    "passedRejectRules": 61,
-    "provisional": 1,
-    "reviewKilled": 5,
+    "passedRejectRules": 77,
+    "provisional": 2,
+    "reviewKilled": 6,
     "validated": 0,
-    "watchlist": 16
+    "watchlist": 24
   },
   "gateFailures": {
     "painBelow4": 3,
     "rejectRule": 17,
-    "reviewKill": 5,
-    "totalBelowMin": 52
+    "reviewKill": 6,
+    "totalBelowMin": 66
   },
-  "generated": "2026-11-01",
+  "generated": "2026-11-02",
   "prefer": [
+    {
+      "client": "webfetch",
+      "evidence": "complaint",
+      "id": "A14",
+      "name": "Plugin and add-on support forums",
+      "path": "https://wordpress.org/support/plugin/{slug}/",
+      "selectedIdeas": 1,
+      "status": "ok"
+    },
     {
       "client": null,
       "evidence": "mandate",
@@ -1093,15 +1298,6 @@
       "id": "A13",
       "name": "Discourse forums, any niche",
       "path": "https://{host}/search.json?q={q}+after%3A{YYYY-MM-DD}",
-      "selectedIdeas": 0,
-      "status": "ok"
-    },
-    {
-      "client": "webfetch",
-      "evidence": "complaint",
-      "id": "A14",
-      "name": "Plugin and add-on support forums",
-      "path": "https://wordpress.org/support/plugin/{slug}/",
       "selectedIdeas": 0,
       "status": "ok"
     },
@@ -1259,6 +1455,6 @@
       "status": "ok"
     }
   ],
-  "runsInWindow": 5,
+  "runsInWindow": 6,
   "windowDays": 45
 }

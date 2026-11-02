@@ -604,3 +604,4 @@
 | 2026-10-29 | Tagging Doctor for LaTeX Courses | EdTech: Higher Ed | Multi-week | 23 | |  |
 | 2026-10-29 | Camera-Ready Preflight | Micro-SaaS | Weekend MVP | 22 | |  |
 | 2026-11-01 | Embed Rescue | EdTech: Higher Ed | Multi-week | 15 | provisional |  |
+| 2026-11-02 | Consent Leak Watch | Accessibility & Compliance | Multi-week | 16 | provisional |  |
