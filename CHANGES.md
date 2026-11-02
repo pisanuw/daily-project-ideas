@@ -527,3 +527,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-01 [note] Modulo Bias Microscope (2026-10-08 n2) marked implemented: live at modulo-bias-microscope.netlify.app, repo Claude-capstone/modulo-bias-microscope. Exact fractions + chi-square, 7-bug gallery, exercise links; 68 tests. No LLM.
 
 2026-11-02 [scope] Site reframed as "ideas I could build for you": new tagline and description, hero buttons for email and the built apps, a build-this mailto on every idea modal.
+
+2026-11-02 [doc] Site footer replaced with the owner-approved wording ("Built by Claude, guided by me..."), same text as the app footers.
