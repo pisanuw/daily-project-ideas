@@ -280,8 +280,8 @@ from higher education on purpose.
 | Monday | A13 Discourse, any niche; B10 WordPress plugin market data; C5 Policy and regulation trackers | Accessibility and regulatory compliance, any sector |
 | Tuesday | A14 Plugin and add-on support forums; B1 Teachers Pay Teachers; C10 Change events | Teaching and training anywhere: K-12, corporate L&D, tutoring, homeschool |
 | Wednesday | A3 Open-source teaching tools; B2 AppSumo; C2 Education and computing research | Developer and research tooling |
-| Thursday | A12 Ask HN; B8 Install counts; C11 Federal award and grant data | Small business and solo professional operations |
-| Friday | A5 Educator Stack Exchanges; B6 Verified revenue dashboards; C8 Trade news | No lens: follow whatever the spend signals point at |
+| Thursday | A12 Ask HN; B8 Install counts; C11 Federal award and grant data | Small business back office and solo professionals: invoicing, scheduling, bookkeeping, client intake, paperwork |
+| Friday | A5 Educator Stack Exchanges; B6 Verified revenue dashboards; C8 Trade news | Small business, customer-facing: local services, trades, clinics, restaurants, retail, their websites and bookings |
 | Saturday | A2 Other LMS and classroom forums; B5 Acquisition marketplaces; C4 Job postings | Institutional back-office work |
 | Sunday | A11 Accessibility practitioners; B10 WordPress plugin market data; C6 Accreditation and standards | Creative, prosumer, and household |
 
@@ -572,7 +572,7 @@ Format (all fields required for every idea; `gateGap` is required only when
   ],
   "runNotes": {
     "weekday": "Friday",
-    "domainLens": "No lens: follow whatever the spend signals point at",
+    "domainLens": "Small business, customer-facing: local services, trades, clinics, restaurants, retail, their websites and bookings",
     "focusSources": ["A5 Educator Stack Exchanges", "B6 Verified revenue", "C8 Trade news"],
     "searches": ["query 1", "query 2"],
     "unverifiedSignals": [

@@ -7,7 +7,7 @@
         "n": 2
       },
       "url": "https://accessibility-lens-pisanuw.netlify.app/",
-      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/accessibility-lens",
+      "repo": "https://github.com/pisanuw/claude-built-apps/tree/main/accessibility-lens",
       "implementedOn": "2026-05-21"
     },
     {
@@ -16,7 +16,7 @@
         "n": 1
       },
       "url": "https://game-palette-inspector.netlify.app/",
-      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/game-palette-inspector",
+      "repo": "https://github.com/pisanuw/claude-built-apps/tree/main/game-palette-inspector",
       "implementedOn": "2026-08-19",
       "notes": "Built in one session with zero runtime deps beyond React: verified Machado 2009 CVD matrices in linear sRGB, OKLab confusion detection, hue-preserving contrast fixes, PNG/print reports, 11 unit tests. Originally built in its own repo (pisanuw/c1) and mirrored to GitHub Pages; moved into Claude-capstone on 2026-08-27 with git subtree so history survived, with the Netlify site id pinned so the URL did not change. pisanuw/c1 is now an archived pointer and pisanuw.github.io/c1 redirects to the live app."
     },
@@ -26,7 +26,7 @@
         "n": 1
       },
       "url": "https://pathfinding-playground-pisanuw.netlify.app",
-      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/pathfinding-playground",
+      "repo": "https://github.com/pisanuw/claude-built-apps/tree/main/pathfinding-playground",
       "implementedOn": "2026-08-20",
       "notes": "Built in one session: five algorithms (BFS, DFS, Dijkstra, Greedy, A*) emitting a single event trace consumed by both the canvas renderer and the narrator. Narration is rule-based instead of the suggested Claude API calls, so it is free, offline, and always matches the algorithm state. Side-by-side compare mode, RLE share links in the URL hash, seeded maze generator, 20 vitest cases. Originally built in its own repo (pisanuw/pathfinding-playground); moved into Claude-capstone on 2026-08-27 with git subtree so history survived, with the Netlify site id pinned so the URL did not change. The old repo is now an archived pointer."
     },
@@ -36,7 +36,7 @@
         "n": 1
       },
       "url": "https://schema-storyteller.netlify.app",
-      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/schema-storyteller",
+      "repo": "https://github.com/pisanuw/claude-built-apps/tree/main/schema-storyteller",
       "implementedOn": "2026-08-20",
       "notes": "Fully client-side schema explainer: paste SQL DDL, a Prisma schema, or JSON Schema and get a plain-English entity-relationship narrative, vocabulary suggestions for cryptic names, and a rule-based review of missing keys/indexes/constraints, exportable as Markdown. A hand-written parser and fixed rule set replace the idea's suggested LLM calls, so output is free, offline, and reproducible. 71 vitest tests, 88.88% coverage; lint/typecheck/build green. Deploy was blocked for 4 runs by a stale NETLIFY_AUTH_TOKEN repo secret; once the owner rotated it, the remaining failure was a deploy-runner bug (empty functionsDir resolved to the project root, so the CLI bundled the whole repo as functions). Fixed in deploy.mjs, deployed via GitHub Actions, and the CI runner verified the live page returns 200 and renders."
     },
@@ -46,7 +46,7 @@
         "n": 1
       },
       "url": "https://shortcut-sprint.netlify.app",
-      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/shortcut-sprint",
+      "repo": "https://github.com/pisanuw/claude-built-apps/tree/main/shortcut-sprint",
       "implementedOn": "2026-08-20",
       "notes": "Built in one session, fully client-side: SM-2 spaced repetition drills bundled shortcut sets for VS Code, Chrome DevTools, Figma, and Vim (multi-chord sequences like Ctrl+K Ctrl+S and ciw included), plus custom JSON set upload with strict validation. Key capture derives two candidate chords per keypress (physical event.code and produced event.key), so both Ctrl+Shift+[ and Vim's $ match; browser-reserved combos (Ctrl+W/T/N) are excluded since a web page cannot capture them. localStorage replaces the suggested Supabase backend, so there are no accounts and no server. Per-tool mastery radar chart and daily streak. 78 vitest tests, 98.6% statement coverage; lint/typecheck/build green. Deployed via the GitHub Actions deploy workflow (site created first try, page verified 200), siteId pinned afterward."
     },
@@ -57,7 +57,7 @@
       },
       "notes": "Built in one session, fully client-side: parses two versions of SQL DDL (CREATE/ALTER/INDEX, Postgres and MySQL enums) or TypeScript interfaces into a shared IR, diffs them with rename detection for tables and columns, and classifies every change safe/caution/breaking with a one-sentence migration note; exports a Markdown PR checklist. A deterministic rule set replaces the suggested Claude API calls, so verdicts are instant, offline, and reproducible. 74 vitest tests, 97% statement coverage; lint/typecheck/build green. Deployed via the GitHub Actions deploy workflow (site created first try, page verified 200), siteId pinned afterward.",
       "url": "https://migration-diff-narrator.netlify.app",
-      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/migration-diff-narrator",
+      "repo": "https://github.com/pisanuw/claude-built-apps/tree/main/migration-diff-narrator",
       "implementedOn": "2026-08-20"
     },
     {
@@ -67,7 +67,7 @@
       },
       "notes": "Built in one session, fully client-side: a timed bug-spotting game where 1-3 defects are planted into realistic JavaScript/Python/SQL snippets and you click the lines you would flag in review. A seeded mutation engine (11 hand-written clean templates, 51 catalogued single-line defects with title, root cause, and fix) replaces the idea's suggested Claude API generation, and a date-seeded daily challenge plus a localStorage profile (per-category accuracy radar, streaks, best score) replace the Supabase leaderboard, so rounds are deterministic, offline, and free. Scoring rewards full sweeps: 100 per defect, -25 per false flag, time bonus only when everything is found. 46 vitest tests, 99.8% statement coverage; lint/typecheck/build green; end-to-end flow verified in headless Chromium. Deployed via the GitHub Actions deploy workflow (site created first try, page verified 200), siteId pinned afterward.",
       "url": "https://code-review-gauntlet.netlify.app",
-      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/code-review-gauntlet",
+      "repo": "https://github.com/pisanuw/claude-built-apps/tree/main/code-review-gauntlet",
       "implementedOn": "2026-08-21"
     },
     {
@@ -77,7 +77,7 @@
       },
       "notes": "Built in one session, fully client-side: a perceptual YIQ pixel diff with anti-aliasing detection (pixelmatch algorithm), grid-BFS region clustering, and a 7-type heuristic classifier (element-added/removed via local-background analysis, layout/spacing via a full-coverage displacement search, visibility via least-squares opacity fit, color via edge-map correlation, text via edge density) replace the suggested Claude Vision calls, so results are deterministic and screenshots never leave the browser. SVG overlay with filterable legend and per-region evidence, annotated PNG and standalone HTML report export, built-in sample pair covering all seven change types (verified end-to-end in headless Chromium). 56 vitest tests, 96.4% statement coverage; lint/typecheck/build green. Deployed via the GitHub Actions deploy workflow (site created first try, page verified 200), siteId pinned afterward.",
       "url": "https://ui-diff-lens.netlify.app",
-      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/ui-diff-lens",
+      "repo": "https://github.com/pisanuw/claude-built-apps/tree/main/ui-diff-lens",
       "implementedOn": "2026-08-21"
     },
     {
@@ -87,7 +87,7 @@
       },
       "notes": "Built in one session, fully client-side with zero runtime dependencies: a hand-written tokenizer, recursive-descent parser, three-valued-logic expression evaluator, and staged executor replay a SELECT one stage at a time (FROM, JOIN, WHERE, GROUP BY, HAVING, SELECT, DISTINCT, ORDER BY, LIMIT), showing the actual rows merging, being struck out, and collapsing into groups at every step. A deterministic narrator generated from real execution stats replaces the idea's optional Claude API narrator, and CSS animations replace Framer Motion, so explanations always match the screen and the app is free and offline. Honest SQL semantics (Kleene AND/OR, COUNT(x) vs COUNT(*), NULLs-last ordering), CSV paste with type inference, bundled demo tables and queries, URL-hash share links. 86 vitest tests, 99.7% statement coverage; lint/typecheck/build green. Deployed via the GitHub Actions deploy workflow (runner verified the live page returns 200), siteId pinned afterward.",
       "url": "https://sql-replay.netlify.app",
-      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/sql-replay",
+      "repo": "https://github.com/pisanuw/claude-built-apps/tree/main/sql-replay",
       "implementedOn": "2026-08-21"
     },
     {
@@ -97,7 +97,7 @@
       },
       "notes": "Built in one session, fully client-side: a deterministic word-to-DSP lexicon (20 base sounds, 18 modifiers with synonyms) replaces the idea's suggested Claude API code generation, and a pure sample-by-sample DSP engine (swept oscillators, seeded white/pink/brown noise, ADSR envelopes, RBJ biquad filters with block-rate sweeps, feedback echo, tanh drive, bit crush, peak normalization) replaces Web Audio graphs, so the browser just plays the rendered buffer and tests assert on the exact samples the user hears. Same description always yields the same sound (seed hashed from the words); a Variation button re-rolls only the seed. Oscilloscope, per-layer signal-chain view, tuning sliders (pitch/length/brightness/echo/volume), and 16/24-bit WAV export at 22050/44100/48000 Hz. 59 vitest tests, 100% statement coverage; lint/typecheck/build green; UI verified end-to-end in headless Chromium. Deployed via the GitHub Actions deploy workflow (site created first try, page verified 200), siteId pinned afterward.",
       "url": "https://sound-sketchpad.netlify.app",
-      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/sound-sketchpad",
+      "repo": "https://github.com/pisanuw/claude-built-apps/tree/main/sound-sketchpad",
       "implementedOn": "2026-08-21"
     },
     {
@@ -107,7 +107,7 @@
       },
       "notes": "Built in one session, fully client-side: a forgiving HAR parser (skips malformed entries with warnings, wire-size fallbacks for Chrome/Firefox export quirks) feeds ten deterministic detectors (N+1 endpoint templates, cache-header audit, missing compression, redirect chains reconstructed hop by hop, serialized API waterfalls, duplicate fetches, 4xx/5xx groups, TTFB outliers, oversized payloads, HTTP/1.x connection churn) that replace the idea's suggested Claude API analysis, so reports are instant, reproducible, and the HAR never leaves the browser. Findings are ranked by severity and estimated impact, each with evidence and a copy-paste fix; SVG waterfall with phase segments, type filters, and per-finding highlighting; Markdown report export; a bundled synthetic session trips every detector. 56 vitest tests, 100% statement coverage; lint/typecheck/build green; verified end-to-end in headless Chromium. Deployed via the GitHub Actions deploy workflow: the first run failed because package-lock.json was gitignored at the repo root and npm ci had nothing to install from; force-added the lockfile, retriggered, site created and the runner verified the live page returns 200; siteId pinned afterward.",
       "url": "https://har-detective.netlify.app",
-      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/har-detective",
+      "repo": "https://github.com/pisanuw/claude-built-apps/tree/main/har-detective",
       "implementedOn": "2026-08-23"
     },
     {
@@ -117,7 +117,7 @@
       },
       "notes": "Built in one session, fully client-side: paste code or name a concept, pick an audience (curious child, high school student, CS undergrad, non-technical adult), and get three analogies from three distinct everyday domains, each with a code-to-analogy mapping table. A curated corpus (47 concepts x 3 domains x 4 audience variants, 564 hand-written texts, ten browse groups) replaces the suggested Claude API generation, and a localStorage library with tags, search, and Markdown export replaces Supabase; read-only share links encode ids into the URL hash, so sharing needs no server. The detector combines keyword mentions with code-shape patterns and body-scoped self-call analysis (brace matching or Python indentation) for recursion; anything outside the 47 concepts gets an honest \"not detected\" instead of a hallucinated analogy. 125 vitest tests, 99.9% statement coverage; lint/typecheck/build green; UI verified end-to-end in headless Chromium. Deployed via the GitHub Actions deploy workflow (site created first try, runner verified the page returns 200), siteId pinned afterward. Follow-up same day: audience-toggle highlight fix and an example pull-down with one test-pinned snippet per concept (47), and staged corpus expansions from 14 to 25 to 47 concepts, adding systems, language mechanics, web/networking, and software-craft topics.",
       "url": "https://code-analogy-forge.netlify.app",
-      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/code-analogy-forge",
+      "repo": "https://github.com/pisanuw/claude-built-apps/tree/main/code-analogy-forge",
       "implementedOn": "2026-08-25"
     },
     {
@@ -127,7 +127,7 @@
       },
       "notes": "Built in one session, fully client-side: the real TypeScript compiler (pinned 5.6.3) runs in a Web Worker over an in-memory file system with the full ES2022 lib.d.ts reference closure (57 files) bundled as raw text, so analysis is exact, offline, and nothing pasted leaves the browser. A post-order AST walk turns inference into a narrated story: literal types and let/const widening, generic calls showing declared signature, inferred binding (T = string, recovered defensively from internal signature state with graceful fallback), and resolved signature, unannotated callback parameters typed from context, control-flow narrowing with declared-vs-here detail, inferred return types, and compiler diagnostics threaded in right after the step where inference went astray. Hover any expression for its exact type, click to jump to its step, autoplay, major-steps filter, 8 pinned examples, URL-hash share links. The idea named no LLM, so nothing needed replacing; React was swapped for the monorepo's vanilla TS + Vite house pattern. One honest cost: the compiler-in-a-worker bundle is ~1 MB gzipped on first load. 62 vitest tests, 97.6% statement coverage; lint/typecheck/build green; verified end-to-end in headless Chromium. Deployed via the GitHub Actions deploy workflow (site created first try, runner verified the page returns 200), siteId pinned afterward.",
       "url": "https://type-witness.netlify.app",
-      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/type-witness",
+      "repo": "https://github.com/pisanuw/claude-built-apps/tree/main/type-witness",
       "implementedOn": "2026-08-28"
     },
     {
@@ -137,7 +137,7 @@
       },
       "notes": "Built in one session, fully client-side: a rule-based classifier (explicit section labels plus sentence-level cue patterns, each gene showing the evidence for its label) segments any pasted prompt into typed genes (role, persona, context, task, constraint, format, example), replacing the idea's suggested Claude API parsing; three hand-written deterministic mutations per gene type (e.g. Harden it / Soften it / Make it checkable, with case-aware word swaps like should-to-must) replace 'AI suggests three alternatives'; and a word-level LCS diff of the prompt itself replaces model-response diffing, since without API calls there are no responses to compare. A 12-rule lint scores the genome 0-100 (missing task, vague wording, brevity-vs-depth conflicts, negative-only constraints, duplicates, and more); genes can be edited, reclassified, reordered, and duplicated; a localStorage library keeps reusable genes with tags and search (replacing the implied server store); share links carry the whole genome in the URL hash; export as text, Markdown, or JSON. 87 vitest tests, 98.98% statement coverage; lint/typecheck/build green; verified end-to-end in headless Chromium. Deployed via the GitHub Actions deploy workflow (site created first try, runner verified the page returns 200), siteId pinned afterward.",
       "url": "https://prompt-genome.netlify.app",
-      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/prompt-genome",
+      "repo": "https://github.com/pisanuw/claude-built-apps/tree/main/prompt-genome",
       "implementedOn": "2026-08-27"
     },
     {
@@ -147,7 +147,7 @@
       },
       "notes": "Built in one session, fully client-side with zero runtime dependencies: a hand-written five-field cron parser (names, steps, wrap-around ranges like FRI-MON, @shortcuts, vixie dom/dow union semantics), an RFC 5545 RRULE subset (FREQ/INTERVAL/BYDAY with 1MO and -1FR ordinals/BYMONTHDAY/BYMONTH/BYHOUR/BYMINUTE/COUNT/UNTIL), GitHub Actions on.schedule snippet extraction, and a deterministic rule-based English-to-cron converter that annotates every assumption and returns an honest null replace the suggested Claude API call and the cronstrue/cron-parser packages. Time-zone math builds exact offset-transition tables from the browser's IANA data (transitions binary-searched to the minute), so the dual-zone pickers convert exactly: spring-forward gap firings are reported as skipped like system cron, and ambiguous fall-back times fire once at the earlier instant. 30/90/365-day calendar heatmap with per-day fire times, plain-English schedule descriptions, next-25 table in both zones, query-param share links. 74 vitest tests, 92% statement coverage; lint/typecheck/build green; verified end-to-end in headless Chromium. Deployed via the GitHub Actions deploy workflow (site created first try, runner verified the page returns 200), siteId pinned afterward.",
       "url": "https://cron-cartographer.netlify.app",
-      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/cron-cartographer",
+      "repo": "https://github.com/pisanuw/claude-built-apps/tree/main/cron-cartographer",
       "implementedOn": "2026-09-02"
     },
     {
@@ -157,7 +157,7 @@
       },
       "notes": "Built in one session from a direct request: a mobile-first schedule browser for the inaugural ACM AI Leadership Summit (Hyatt Regency Atlanta, Aug 30 to Sep 2, 2026). Sticky day tabs, eleven color-coded track chips, every-term search across titles/speakers/rooms/descriptions, a starred personal agenda in localStorage, a now/next banner on the conference clock, and a one-tap toggle between Atlanta time and the viewer's own timezone (exact IANA math). The whole conference lives in one validated schedule.json, so the app doubles as a drop-in template for any conference. The build environment could not reach aisummit.acm.org (egress policy), so the bundled data is an unofficial snapshot reconstructed from ACM's public announcements, disclosed in the app footer and README. 42 vitest tests, 100% statement coverage on core logic; deploy worked first try, siteId pinned.",
       "url": "https://summit-navigator.netlify.app",
-      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/summit-navigator",
+      "repo": "https://github.com/pisanuw/claude-built-apps/tree/main/summit-navigator",
       "implementedOn": "2026-09-03"
     },
     {
@@ -167,7 +167,7 @@
       },
       "notes": "Built in one session, fully client-side: decomposes a pasted prompt into labeled sections (system/instructions, context, examples, user/task) by explicit label or heuristic (You are..., Q:/A: and Input:/Output: pairs), then compresses each at a light/medium/aggressive level: whitespace and filler-word removal, verbose-phrase simplification (in order to -> to, due to the fact that -> because, ...), cross-section duplicate-instruction removal (a repeated sentence is kept once, at its first occurrence), hedge-word removal, and few-shot example trimming with a note of how many were dropped. Fenced code blocks are hidden behind a placeholder before any rule runs and restored byte-for-byte, so code is never rewritten. A deterministic rule set and a keyword-retention heuristic (numbers, quoted strings, inline/fenced code, probable proper nouns, reporting exactly which ones a compression dropped) replace the idea's suggested Claude Haiku compression call and Claude Sonnet semantic-equivalence check, so results are free, offline, and reproducible. Token counts are the characters/4 approximation providers themselves cite for English text, not a real tokenizer. Live token/cost estimate, word-level diff, per-section rule breakdown, copy-compressed and JSON-template export. 76 vitest tests, 100% statement coverage; lint/typecheck/build green. Deployed via the GitHub Actions deploy workflow (site created first try, runner verified the page returns 200), siteId pinned afterward.",
       "url": "https://prompt-shrink-ray.netlify.app",
-      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/prompt-shrink-ray",
+      "repo": "https://github.com/pisanuw/claude-built-apps/tree/main/prompt-shrink-ray",
       "implementedOn": "2026-09-23"
     },
     {
@@ -177,7 +177,7 @@
       },
       "notes": "Built in one session as a static, fully client-side web app rather than the idea's local CLI, so it deploys with zero install: you drop in (or paste) MCP configs (Claude Desktop, Cursor, Windsurf/Cline, VS Code mcp.json and settings, Claude Code ~/.claude.json and .mcp.json), Claude Code settings.json permissions, Chrome/Edge extension manifest.json files, and VS Code extension package.json files, and nothing is uploaded. Each tool gets a 0-100 blast-radius score across filesystem, shell/code exec, network egress, credentials, and browser data, with a plain-English explanation and the exact config evidence per capability. Known MCP servers are matched by launch command (filesystem path args classified as root/home/sensitive/scoped; Docker mounts, --privileged, and the Docker socket scored; remote servers by host with plain HTTP flagged); an unrecognized local server is scored as full-privilege code, not as safe. Hygiene findings cover plaintext secrets (env, headers, connection strings in args, known token prefixes; masked in output), unpinned npx/uvx packages and :latest images, auto-approved tools, bypassPermissions, enableAllProjectMcpServers, MV2, unsafe-eval CSP, and off-store update URLs. Downloadable self-contained HTML report. Limitation: it scores declared config only, never a server's code. 95 vitest tests, >99% statement coverage; lint/typecheck/build green. First deploy failed because the root .gitignore excludes lockfiles; after force-adding package-lock.json the GitHub Actions deploy workflow created the site and the runner verified the page.",
       "url": "https://agent-blast-radius.netlify.app",
-      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/agent-blast-radius",
+      "repo": "https://github.com/pisanuw/claude-built-apps/tree/main/agent-blast-radius",
       "implementedOn": "2026-09-25"
     },
     {
@@ -187,7 +187,7 @@
       },
       "notes": "Built in one session, fully client-side: pick or drop a project folder and the browser walks it (File System Access API in Chromium, webkitdirectory input and drag-and-drop elsewhere; names and sizes only, nothing uploaded), draws a hand-written squarified treemap with click-to-zoom and breadcrumbs colored by ten categories (location before extension, so a PNG in node_modules is a dependency), and runs 19 ordered ecosystem-aware junk rules (venv via pyvenv.cfg, conda, __pycache__, egg-info, node_modules, .next, Maven target/ only next to a pom.xml, Gradle build/, .NET bin/obj only next to a .csproj, Unity Library/Temp/Build only under Assets+ProjectSettings, C/CMake objects, Cargo target, generic dist/build, coverage, logs, .DS_Store, editor swap files, Terraform, secrets, files over 10 MB). Each file counts toward its first matching rule; untick findings to refine a before/after estimate and the .gitignore block or unified diff against the existing .gitignore; standalone HTML report download; a deterministic 8,847-file synthetic student repo as the demo (?sample). History mode (large blobs only in git history plus the filter-repo command) was left out as beyond Weekend size. 40 vitest tests, 100% statement coverage on core; lint/typecheck/build green; end-to-end verified in headless Chromium at desktop and phone widths. Deployed via the GitHub Actions deploy workflow (site created first try, page verified 200 and the sample rendered in headless Chromium), siteId pinned afterward.",
       "url": "https://repo-weight-map.netlify.app",
-      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/repo-weight-map",
+      "repo": "https://github.com/pisanuw/claude-built-apps/tree/main/repo-weight-map",
       "implementedOn": "2026-09-28"
     },
     {
@@ -197,7 +197,7 @@
       },
       "notes": "Built in one session, fully client-side: a six-rung ladder (Caesar, affine, Vigenere, columnar transposition, monoalphabetic substitution, homophonic over two-digit symbols with frequency-proportional symbol counts) where each rung unlocks after a correct solve. The workbench has letter, bigram and trigram frequencies against English baselines, index of coincidence for periods 1-12 with English/random reference lines, a Kasiski table (repeated trigrams, distances, and which periods divide them), a per-column chart for Vigenere, symbol histograms and repeated pairs for homophonic, and keyboard-only substitution and symbol boards that decrypt live; every chart is an SVG with a data table for screen readers. Hints come from an instructor-set budget and each reveals one key fragment. The idea's LLM debrief is a deterministic solver per cipher (chi-squared over all shifts or all 312 affine keys, Kasiski vs IC then per-column Caesar, every read order for up to 7 columns then swap hill-climbing, frequency-seeded trigram hill-climb for substitution, simulated annealing with a letter-histogram penalty for homophonic) whose step log is shown beside the student's path with its accuracy, its own confidence, and the first letters it got wrong; the trigram model is trained on about 11k letters of 14 bundled public-domain passages, so confidence is discounted on short texts. Supabase auth and rosters are replaced by an instructor ladder builder that encodes the whole assignment in the URL fragment, localStorage progress with JSON export, and a dashboard that reads any number of exports (current rung, time per rung, hints, tools used, per-rung median time). 65 vitest tests, 100% statement coverage on the core; lint/typecheck/build green; end-to-end verified in headless Chromium at desktop and phone widths. Deployed via the GitHub Actions deploy workflow (site created first try; the runner's immediate check hit a 404 during DNS propagation, the page returned 200 within a minute and the live index.html matches the local build), siteId pinned afterward.",
       "url": "https://cipher-ladder.netlify.app",
-      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/cipher-ladder",
+      "repo": "https://github.com/pisanuw/claude-built-apps/tree/main/cipher-ladder",
       "implementedOn": "2026-09-28"
     },
     {
@@ -207,7 +207,7 @@
       },
       "notes": "Built in one session, fully client-side: quote-or-refuse course Q&A where every answer is a passage from the instructor's syllabus, specs or policies (PDF via pdf.js, Markdown or text), verified word for word after whitespace/typography folding (labelled relaxations: capitalization, in-order ellipsis) and highlighted in a side-by-side viewer; otherwise 'Not stated in the course documents' plus the question words the documents never use. The idea's Claude Haiku proposer is a deterministic BM25 sentence retriever with heading context, a course-logistics synonym table and numbered-item matching ('lab 3' finds 'labs 1 to 4', 'lab 6' finds 'lab 5 onward', a passage naming other lab numbers cannot answer), so there is no API key or server. A Check-a-quote mode verifies quotes pasted from a chatbot and word-diffs altered ones against the closest passage. Questions and 'did not answer' feedback are logged per browser, exported as JSON, and merged into an instructor gap report (by week, similar wording, missing words; Markdown/CSV). Course packs travel deflated in the URL fragment or as hosted JSON (?pack=). 91 vitest tests, 99.7% statement coverage on the core; lint/typecheck/build green; end-to-end verified in headless Chromium at desktop and phone widths, including a Chromium-printed two-page PDF. Deployed via the GitHub Actions deploy workflow from the feature branch; the live index.html references the same bundle as the local build.",
       "url": "https://where-does-it-say.netlify.app",
-      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/where-does-it-say",
+      "repo": "https://github.com/pisanuw/claude-built-apps/tree/main/where-does-it-say",
       "implementedOn": "2026-09-30"
     },
     {
@@ -217,7 +217,7 @@
       },
       "notes": "Built in one session, fully client-side: students write dispatch(car, state) in JavaScript and it runs in a Web Worker (killed after 8 s) against seeded scenarios in an animated SVG building with two to three cars, door time and capacity. Six built-in scenarios (textbook disk trace, morning rush, lunch spike, starvation trap, quiet evening, cylinder storm) plus instructor JSON with deterministic generators (up-peak, down-peak, lunch, interfloor) and a hidden flag for grading; disk scenarios are kind: disk. Metrics: mean, p95 and max wait (unserved count until max time), mean ride, energy (floors travelled = head movement), finish time, stops, served/unserved. Side-by-side compare replays two policies in sync; the disk view redraws the same run as cylinder across, time down. Six presets (FCFS, SSTF, SCAN, LOOK, C-LOOK, zoned LOOK) as readable source; tests pin the textbook head-movement numbers 640/236/236/208/326. Supabase replaced by a localStorage leaderboard (names, scores, policy hash only) with CSV/JSON export and import, and share links that deflate the policy and scenario into the URL fragment. Cars go straight to the floor the policy names (no en-route stops), which keeps the model identical to disk scheduling. 53 vitest tests, 100% statement coverage on core; lint/typecheck/build green; verified in headless Chromium at desktop and phone widths. Deployed via the GitHub Actions deploy workflow (site created first try, runner verified 200), siteId pinned afterward.",
       "url": "https://elevator-algorithm-lab.netlify.app",
-      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/elevator-algorithm-lab",
+      "repo": "https://github.com/pisanuw/claude-built-apps/tree/main/elevator-algorithm-lab",
       "implementedOn": "2026-10-01"
     },
     {
@@ -227,7 +227,7 @@
       },
       "notes": "Built in one session, fully client-side: drag to paint mines on a 4x4 to 40x40 canvas grid, pick a safe opening (or let Best start try up to 80 openings in a Web Worker), and a four-tier solver plays the board from that opening without ever guessing: single-cell rules, pairwise overlap bounds (1-2 and subset patterns), exhaustive per-component frontier enumeration with a 250k-node budget, then the global mine count (which is what clears a walled box). Solved means every safe cell is opened; the solver runs against the real board and throws if it ever flags a safe cell or opens a mine, swept over 120 random boards in tests. Stuck cells are amber, cells no number reaches are pale, Layout A/B overlays two mine placements for the smallest ambiguous region that both fit every visible number, and a worker ranks single-cell edits near the trouble (guess-free first, then cells uncovered, then easier tier). A slider replays the deduction step by step; the difficulty meter reports the hardest tier used. Boards travel in the URL fragment (about 270 characters at 40x40) and open in a play mode with flags, long-press, chording and a reveal of the drawing on a win. Vanilla TypeScript and canvas instead of the suggested React/Tailwind. Limitation: fixes are single-cell edits only, so some boards need fixing one step at a time. 40 vitest tests, 99.9% statement coverage on core; lint/typecheck/build green; verified in headless Chromium at desktop and phone widths. Deployed via the GitHub Actions deploy workflow (site created first try, runner verified 200), siteId pinned afterward.",
       "url": "https://reverse-minesweeper-studio.netlify.app",
-      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/reverse-minesweeper-studio",
+      "repo": "https://github.com/pisanuw/claude-built-apps/tree/main/reverse-minesweeper-studio",
       "implementedOn": "2026-10-02"
     },
     {
@@ -237,7 +237,7 @@
       },
       "notes": "Built in one session, fully client-side: a Web Worker enumerates every reachable state of Towers of Hanoi (1-8 disks, 3-5 pegs), sliding tiles up to the 8-puzzle (181,440 states, farthest start at 31 moves), the classic Klotski (13,011 states with same-shape pieces merged and mirror reduction, 25,955 without; 116 single-step moves optimal) and Rush Hour boards, then a second BFS from the goals gives exact distance-to-goal for every state. Layered layout (column = distance from start, barycentre-ordered within columns) or radial, drawn on a 2D canvas with an offscreen edge cache; colour by distance, heuristic value or heuristic error; hover previews the state, click to inspect or make it the new start. BFS, DFS, graph-variant IDDFS, greedy and A* run as steppable searches with expanded/frontier/peak-memory/generated counters, all testing the goal at expansion for fair comparison, and a run table compares them on one atlas. Students write the body of a JavaScript heuristic; the checker evaluates it on every state and reports admissibility (overestimate count and worst margin), consistency, h(goal)=0 and informedness, outlining violations on the atlas. Presets include a deliberately inadmissible Manhattan x2 and an admissible-but-inconsistent Hanoi heuristic. Instructors export puzzle + algorithm + expansion target as a base64url challenge link that judges the student's run. Canvas 2D replaces the suggested Sigma.js/regl; no LLM anywhere. Space capped at 400k states. 65 vitest tests, 99.6% statement coverage on core; lint/typecheck/build green; verified in headless Chromium at desktop and phone widths. Deployed via the GitHub Actions deploy workflow (site created first try, runner verified 200), siteId pinned afterward.",
       "url": "https://state-space-atlas.netlify.app",
-      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/state-space-atlas",
+      "repo": "https://github.com/pisanuw/claude-built-apps/tree/main/state-space-atlas",
       "implementedOn": "2026-10-02"
     },
     {
@@ -247,7 +247,7 @@
       },
       "notes": "Built in one session, fully client-side in vanilla TypeScript + SVG (no React/Tailwind). The Enigma I core reproduces the textbook vectors, the double step, and the 1930 instruction-manual message with ring settings, plugboard and UKW-A. Every keypress returns its nine-hop signal path, drawn through plugboard, rotors and reflector with the full wiring faint behind it; cycle decompositions of each rotor and of the whole stack are shown. Crib sliding marks impossible offsets (letter enciphering to itself), the menu graph gets a fundamental cycle basis with loops coloured, and the Bombe runs in a Web Worker over up to 60 rotor orders x 17,576 positions: loops through the test letter are a fixed-point prefilter on the composed scramblers (Turing's test), survivors are propagated with Welchman's diagonal board, and a checking-machine pass rejects stops whose implied plugs conflict or whose other menu components die. The full search takes about a second in the browser (precomputed per-rotor-order scrambler tables, generation-tagged visited buffers). A tracer follows one hypothesis implication by implication, with the diagonal board switchable off. Challenge links carry ciphertext, crib and lightly scrambled settings; the generator guarantees no middle-rotor turnover inside the crib and the page grades a pasted decryption letter by letter. Stops report core positions at ring A, so random-ring challenges decrypt through the crib and drift after a turnover. 55 vitest tests, 98.8% statement coverage; lint/typecheck/build green. Deployed by the auto-discovering GitHub Actions deploy workflow to Netlify.",
       "url": "https://bombe-bench.netlify.app",
-      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/bombe-bench",
+      "repo": "https://github.com/pisanuw/claude-built-apps/tree/main/bombe-bench",
       "implementedOn": "2026-10-03"
     },
     {
@@ -257,7 +257,7 @@
       },
       "notes": "Built in one session, fully client-side: a word-accurate CS:APP-style heap (boundary tags, prologue/epilogue, padding, pred/succ pointers in free payloads) replaying malloc-lab or C-style traces under first/next/best/worst fit on implicit, explicit or segregated lists with immediate, deferred or no coalescing, realloc with keep/shrink/absorb/move, and policy switches mid-replay. Compare tab runs eight policies on the same trace with utilization, fragmentation and search-cost charts; the quiz generator reads answers off the simulator and exports Markdown or a Canvas QTI zip (dependency-free zip writer); diff mode finds the first op where a student allocator's addresses diverge and flags misalignment, overlap and bounds bugs. React/Tailwind/Recharts/Supabase replaced by plain TypeScript, SVG and URL share links. Fixed arena with no sbrk, so malloc-lab utilization scoring is not reproduced. 57 vitest tests, 99.1% stmt coverage.",
       "url": "https://heap-arena-replay.netlify.app",
-      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/heap-arena-replay",
+      "repo": "https://github.com/pisanuw/claude-built-apps/tree/main/heap-arena-replay",
       "implementedOn": "2026-10-06"
     },
     {
@@ -267,7 +267,7 @@
       },
       "notes": "Built in one session, fully client-side in vanilla TypeScript and canvas: a simplified AGC Executive with priorities and the real pools of 7 core sets and 5 VAC areas runs SERVICER, landing radar, downlink, DSKY refresh and the crew's V16N68 monitor every 2 s. A radar cycle-steal slider makes low-priority jobs starve and keep their slots until a request fails and 1202 (or 1201 when VAC areas run out first) fires from real exhaustion; the restart flushes everything and re-establishes only restart-protected jobs at their last phase, so guidance keeps flying a 1D descent. At the default 15% steal with the monitor on it lands with five alarms; a halt-on-overflow Executive aborts at the first and naive round-robin misses guidance deadlines and lands hard. Compare tab with guidance timelines and a steal sweep, DSKY panel, Apollo 11 timeline tab, share links. Job sizes are invented to match the real load level, not taken from Luminary. 36 vitest tests, 100% statement coverage on the core. Deployed via the GitHub Actions deploy workflow, siteId pinned afterward.",
       "url": "https://program-alarm-1202.netlify.app",
-      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/program-alarm-1202",
+      "repo": "https://github.com/pisanuw/claude-built-apps/tree/main/program-alarm-1202",
       "implementedOn": "2026-10-09"
     },
     {
@@ -277,7 +277,7 @@
       },
       "notes": "Built in one session, fully client-side in plain TypeScript and SVG (no React/Tailwind/Recharts). Easy mode is Aaronson's oracle: a 6-gram table (five previous presses predict the sixth) with back-off to shorter contexts and a bet-on-a-switch default; hard mode is a weighted-majority mixture of 1- to 6-gram experts (weight x0.8 per miss, 1% floor so a benched expert can recover). Before each press the page shows SHA-256 of 'outguess-me:<F|J>:<nonce>' via Web Crypto, then reveals the guess and nonce and re-verifies the hash. Live hit-rate chart against a 95% coin-flip band; post-game breakdown with Wilson CI, one-sided binomial p-value, the 6-gram table, run-length histogram vs a fair coin, alternation rate, longest run vs log2(n), and Krichevsky-Trofimov bits per press for context orders 0-5. Paste-any-two-symbol-sequence mode, a 200-coin-flip control from crypto.getRandomValues, and share links that pack the presses in the URL hash and recompute the score by replay on open. Limitation: the commitment only guards against a dishonest page, since oracle and player share the browser tab, and 50-100 presses leave a wide coin band. 43 vitest tests, 100% statement coverage on core; lint/typecheck/build green. Deployed via the GitHub Actions deploy workflow, siteId pinned afterward.",
       "url": "https://outguess-me.netlify.app",
-      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/outguess-me",
+      "repo": "https://github.com/pisanuw/claude-built-apps/tree/main/outguess-me",
       "implementedOn": "2026-10-16"
     },
     {
@@ -287,7 +287,7 @@
       },
       "notes": "Built in one session, fully client-side in plain TypeScript (no React/Tailwind, Supabase, Flask or Claude API). Import a Gradescope export, a Canvas submissions zip (nested zips unpacked) or one folder per student with an optional git log, or a GitHub Classroom assignment straight from the browser to api.github.com. A regex and brace-matching analyser finds each function's loops, guards, recursion, data structures, vague names and constants; commit stats flag one-commit submissions, bulk adds, late-night commits and deadline rushes (bot starter commits ignored). Templates produce 4 to 6 questions per student (recursion, edge, design, naming, scale, trace, spec, commit), varied by kind, at most two per function, seeded by student id. The timed text session runs from a link carrying the questions in the URL fragment, with up to two non-repeating follow-ups aimed at what a vague answer misses, extended-time multipliers, and paste/blur/restart tracking; students return a CVR1 response code. Review: 0-3 keyword rubric with quoted evidence (mostly pasted replies earn no credit), a flag queue, overrides, approval, and results/links CSV. Limitation: response codes are not signed. 79 vitest tests, 99.6% statement coverage on core.",
       "url": "https://code-viva.netlify.app",
-      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/code-viva",
+      "repo": "https://github.com/pisanuw/claude-built-apps/tree/main/code-viva",
       "implementedOn": "2026-10-21"
     },
     {
@@ -297,7 +297,7 @@
       },
       "notes": "Built in one session, fully client-side in plain TypeScript and SVG (no Mermaid, dagre or ELK). A hand-written recursive-descent parser covers a Mermaid flowchart subset (14 shapes, both label forms, chains, & groups, solid/thick/dotted/invisible links with o/x/< heads, longer links, nested subgraphs with their own direction, classDef/class/:::/style/linkStyle) and stops at the first error with line, column and a caret. Layout is the Sugiyama pipeline from scratch: greedy feedback arc set or DFS, longest-path or network-simplex layering, dummy nodes with labels on the middle one, barycenter or weighted-median sweeps with transposition scored by the Barth-Juenger-Mutzel accumulator tree, Brandes-Koepf or priority coordinates, then spline, polyline or orthogonal routing. Subgraphs are laid out bottom-up in their own direction; legs into them bend around sibling nodes. Six CSS-variable themes, SVG/PNG export, share links, a stable-layout diff (one union layout, added/removed/changed colouring), a stage-by-stage pipeline inspector and a 50-graph benchmark ranking five configurations (barycenter became the default because it had the fewest crossings). Ten bundled examples. Limitation: subgraphs are fixed boxes in their parent, so a heavily connected one can come out wider than dagre or ELK would draw it. 88 vitest tests (brute-force checks for network simplex and the crossing count), 98.9% statement coverage on the core. Deployed via the GitHub Actions deploy workflow, siteId pinned afterward.",
       "url": "https://diagram-layout-engine.netlify.app",
-      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/diagram-layout-engine",
+      "repo": "https://github.com/pisanuw/claude-built-apps/tree/main/diagram-layout-engine",
       "implementedOn": "2026-10-22"
     },
     {
@@ -307,7 +307,7 @@
       },
       "notes": "Built in one session, fully client-side in plain TypeScript (no React/Tailwind, Supabase, Resend, Stripe or Claude API). The professor's request link carries their policy (notice days, max programs, minimum grade on letter or 4.0 scales, required documents, conditions, questions) and an ECDH P-256 public key in the URL fragment. The student form collects programs with letter deadlines and submission methods, courses, documents and a typed-signature FERPA release naming records, purpose and programs (34 CFR 99.30), stored verbatim with a SHA-256; errors block, short notice and grade-rule misses warn. It seals everything (ephemeral ECDH, HKDF, AES-256-GCM) into one .ledger file the student emails. The dashboard files requests by email, re-checks policy and release, sorts letters by deadline with overdue/this-week flags, exports .ics reminders (stable UIDs, alarms at 7, 2 and 1 days) and CSV, and writes status emails as mailto drafts. Notes timeline with quick capture ('Name: note #oh'), a Markdown fact outline per program (grades only when released, paragraph 4 tailored per program, gap checklist), passphrase-encrypted backups, delete-student for deletion requests and a demo ledger. Limitation: a typed name does not prove identity, and data lives in one browser until backed up. 58 vitest tests, 100% statement coverage on core.",
       "url": "https://letter-ledger.netlify.app",
-      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/letter-ledger",
+      "repo": "https://github.com/pisanuw/claude-built-apps/tree/main/letter-ledger",
       "implementedOn": "2026-10-22"
     },
     {
@@ -317,7 +317,7 @@
       },
       "notes": "Built in one session, fully client-side in plain TypeScript (no React/Tailwind). The target is any arithmetic expression or a:b, parsed without eval. Instead of only walking the Stern-Brocot tree, trains come from an exhaustive search: a byte table marks every product of 1 to 3 tooth counts in range, and for each driver product D the numerators nearest target x D are tested, keeping one train per reduced ratio with the most even factorisation (8->24, 8->32 for 12). Sidereal time at 8 to 120 teeth checks about 25,000 trains in a quarter second and reaches 2.3 ppb (0.2 ms/day) in three stages. A panel shows the continued fraction, the run-length Stern-Brocot path and which convergents are buildable. The chosen train animates in SVG with 20 degree involute teeth phased to mesh, a dial shows drift against an ideal hand on a log time slider, share links live in the URL fragment, and an SVG cut sheet exports for laser cutting. Limitation: the layout is schematic (no clearance or undercut checks) and the search stops at 3 stages. 44 vitest tests, 100% statement coverage on core.",
       "url": "https://brocot-gear-finder.netlify.app",
-      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/brocot-gear-finder",
+      "repo": "https://github.com/pisanuw/claude-built-apps/tree/main/brocot-gear-finder",
       "implementedOn": "2026-10-23"
     },
     {
@@ -327,7 +327,7 @@
       },
       "notes": "Built in one session as a static, fully client-side TypeScript app. A hand-written parser and interpreter for a fork/wait/exit/printf C subset runs each process by re-executing main() along its fork decisions, which reproduces the stdio buffer a child inherits. An exhaustive schedule search with eager invisible steps and a canonical-state symmetry reduction lists every possible output (16 identical processes need about 200 states), and a checker says whether a typed output is possible and, if not, which fork or wait edge rules it out. Also: a stepped process tree with zombie and orphan states, 13 classic examples, and a seeded exam-question generator with verified answers exported as Markdown or QTI 1.2. 94 tests including a brute-force soundness check. Limitations: no pointers, pipes, signals or helper functions, exec is a stub, and pids are one consistent numbering.",
       "url": "https://fork-count.netlify.app/",
-      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/fork-count",
+      "repo": "https://github.com/pisanuw/claude-built-apps/tree/main/fork-count",
       "implementedOn": "2026-10-23"
     },
     {
@@ -337,7 +337,7 @@
       },
       "notes": "Built in one session as a static TypeScript app with no backend (no React/Tailwind, Supabase, Flask or Gemini API). A tolerant parser reads rubrics as lines or Markdown tables; rows tagged {tests} are scored by the share of the instructor's pytest tests that pass, run in Pyodide in a Web Worker with a 20 s limit, and the rest by a Claude judge with structured outputs. Each model makes three attempts: lazy paste (effort low), rubric-aware (medium) and a plan/write/self-check conversation (high). Report: model x style matrix, per-row lazy/mean/best with verdicts (meets it, partway, holds up) bucketed on the best attempt, editable scores, transcripts, a one-page HTML export, re-test diffs and term history that flags assignments that aged badly. Instructors bring their own API key (sent only to api.anthropic.com) or paste replies from any chat tool. Real demo on two samples recorded with the claude CLI: AI met correctness, edge cases and code quality on the CS1 lab, no attempt could engage the in-class debate the memo requires, and Haiku 5.5 sometimes declined to write graded work. Limitations: scores are a lower bound, the judge can be wrong, Python only, history is local until exported. 53 vitest tests, 99.8% statement coverage on core.",
       "url": "https://assignment-stress-test.netlify.app",
-      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/assignment-stress-test",
+      "repo": "https://github.com/pisanuw/claude-built-apps/tree/main/assignment-stress-test",
       "implementedOn": "2026-10-23"
     },
     {
@@ -347,7 +347,7 @@
       },
       "notes": "Built in one session as a static TypeScript app with no backend (no React or D3). A hand-written parser and interpreter run a C loop-nest subset (arrays of any element type and dimension, #define constants, for/while/if, min/max bounds) and record the exact address of every array access, with arrays row-major from 0x10000 on 64-byte boundaries and scalars in registers; an interpreter replaced the suggested affine-only analysis so blocked loops with min() bounds just work. The trace runs through a configurable set-associative cache (size, line, associativity, LRU/FIFO/seeded random, write-allocate, write-back) and every miss is classified compulsory, capacity or conflict by running an infinite and a fully associative LRU cache alongside. The theater animates a sets x ways grid with labelled lines and a per-array memory map; two kernels compare side by side; sweeps vary a #define or a cache parameter and plot miss rate; six question templates produce simulator-verified exam questions exported as Markdown or QTI 1.2. Eight presets (row vs column, ijk vs ikj, blocked matmul 3,744 to 1,008 misses, transpose, padding, stride, stencil, write policies). Limitations: one level of data cache, fixed evaluation order within a statement, array contents not simulated (no pointers or indirect indexing), QTI not yet tried in Canvas. 62 vitest tests, cache cross-checked against a naive reference, 99.7% statement coverage on core.",
       "url": "https://cache-miss-theater.netlify.app",
-      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/cache-miss-theater",
+      "repo": "https://github.com/pisanuw/claude-built-apps/tree/main/cache-miss-theater",
       "implementedOn": "2026-10-24"
     },
     {
@@ -357,7 +357,7 @@
       },
       "notes": "Built in one session as a static TypeScript app with no backend, no LLM and no framework (plain DOM and SVG). The edit graph draws A across and B down with a diagonal for every shared token; forward greedy Myers (1986) runs in its quadratic-space form so each step can be replayed, with paths coloured by d, the V array shown as the paper's triangle, and a sentence per diagonal explaining its value (off-grid diagonals are summarised in one line). The final path becomes a GNU-style unified diff (inline diff in character mode) and hovering a hunk highlights its stretch of the path. A compare view runs LCS DP (with its table and traceback for inputs up to 24x24), Myers, patience (unique-line anchors via patience sorting) and histogram (rarest common run, after JGit) and outlines hunks that differ from Myers. Seven curated examples (ABCABBA/CBABAC, kitten/sitting, sliding braces, swapped functions, frobnitz, reordered list, blank-line prose), with notes describing what these implementations actually do. A seeded exercise generator (predict D, fill in V[k], spot the patience diff, count hunks) exports Markdown and QTI 1.2; share links live in the URL fragment. Limitations: raw algorithm output without git's indent-heuristic post-pass, forward Myers rather than git's bidirectional search (so it can pick a different minimal path than git), a simplified histogram tie rule, 600 tokens per side, QTI not yet tried in Canvas. 36 vitest tests; edit distances and generated patches cross-checked against the diff npm package; 99.4% statement coverage on core.",
       "url": "https://edit-graph-lab.netlify.app",
-      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/edit-graph-lab",
+      "repo": "https://github.com/pisanuw/claude-built-apps/tree/main/edit-graph-lab",
       "implementedOn": "2026-10-25"
     },
     {
@@ -367,7 +367,7 @@
       },
       "notes": "Built in one session as a static TypeScript app with no backend, no LLM and no framework (plain DOM and Canvas). Two to four simulated RTS clients (wandering units, move commands, order-dependent separation) run in one main-thread simulation advanced in 1 ms steps, so a run is reproducible from its seed, over a seeded fake network with latency, jitter, loss and optional reordering; packets carry every unacknowledged input. Lockstep stalls (and the game clock waits) until all inputs for a tick arrive; rollback predicts no new command, runs ahead up to a prediction limit, and restores and re-simulates on a misprediction. Four nondeterminism toggles: float32 across two simulated platforms (per-op rounding vs extended precision, two libms) against Q16.16 fixed point, an unseeded RNG, Map insertion-order iteration, and frame-time timesteps at 60 vs 144 Hz. Confirmed ticks are FNV-1a hashed, a strip shows per-tick agreement and a diff names the first differing unit, field and bits. A sweep over input delays 0 to 8 plots input lag, stall time and re-simulation cost for both models; eight presets; five autograded exercises run student step functions in a Web Worker on two simulated machines for 10,000 ticks. Limitations: the platform float differences are simulated and exaggerated (the float preset diverges within the first ticks), the grader shadows only Math.random, sin, cos and tan, there is no GGPO-style time sync, and desync detection compares hashes directly rather than over the network. 46 vitest tests, including rollback confirming exactly lockstep's states over a 15%-loss network; 100% statement coverage on core.",
       "url": "https://lockstep-lab.netlify.app",
-      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/lockstep-lab",
+      "repo": "https://github.com/pisanuw/claude-built-apps/tree/main/lockstep-lab",
       "implementedOn": "2026-10-26"
     },
     {
@@ -380,7 +380,7 @@
       "complexity": "Implemented",
       "notes": "Built in one session on a direct request (not from the ideas list) as a static TypeScript app with no backend, no LLM and no framework (plain DOM and Canvas). A deterministic 60 fps core implements guideline rules: SRS rotation with the published kick tables plus 180-degree turns, a seeded 7-bag, hold, ghost, 30-frame lock delay with 15 move resets, T-spin and mini detection, back-to-back, combos and perfect clears. Seven modes (Marathon, Sprint 40L, Ultra, Dig, Master 20G, Zen, Versus CPU) plus a date-seeded Daily Sprint; the CPU scores every hard-drop placement of its current and hold piece with El-Tetris weights and four difficulty levels, and versus exchanges garbage with cancelling. Rebindable keys with DAS/ARR/soft drop settings, gamepad and touch controls, four themes, Web Audio sound, top-10 records, lifetime stats, and exact replays stored as seed plus key log. Limitations: the CPU never tucks or sets up T-spins, records are per browser with no shared daily leaderboard, versus games are not replayable, and there is no ARE delay or IRS/IHS. 58 vitest tests (99% statement coverage on core), including a replay reproducing a game cell for cell and full CPU versus matches.",
       "url": "https://tetromino-arcade.netlify.app",
-      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/tetromino-arcade",
+      "repo": "https://github.com/pisanuw/claude-built-apps/tree/main/tetromino-arcade",
       "implementedOn": "2026-10-27"
     },
     {
@@ -390,7 +390,7 @@
       },
       "notes": "Built in one session as a static TypeScript app with no backend, no LLM and no framework. A hand-written lexer for Python, JavaScript/TypeScript, Java and C/C++ replaces the suggested tree-sitter: names, keywords, literals and operators count one coding unit each, while punctuation, comments and layout count zero, so cramming code onto fewer lines does not help. Each solution is line-diffed against the starter and its net units are the units on added lines minus those on deleted lines, per file and per function (scopes found by indentation in Python and brace matching elsewhere), alongside new branches (McCabe complexity after minus before) and the share of added units inside a 12-unit stretch that repeats with names normalized. A size vs tests-passed scatter with complexity or duplication overlays, a side-by-side diff that highlights every counted unit, a guess-the-author round with seeded codenames and show-of-hands tallies, and Markdown annotation and anonymized JSON exports round it out; assignments upload as folders and live in localStorage. The bundled Python sample has a reference, three student solutions and three AI-style baselines with real pytest pass counts. Limitations: the AI baselines are hand-written illustrations rather than model output, tests passed are entered by the instructor because the tool does not run code, the lexer is not a parser (regex literals and macros are approximated and function attribution is heuristic), and the diff is line-based with no move detection. 39 vitest tests, 99.6% statement coverage on core.",
       "url": "https://net-units.netlify.app",
-      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/net-units",
+      "repo": "https://github.com/pisanuw/claude-built-apps/tree/main/net-units",
       "implementedOn": "2026-10-27"
     },
     {
@@ -400,7 +400,7 @@
       },
       "notes": "Built in one session as a static TypeScript app with no backend, no LLM and no framework, so student data never leaves the instructor's browser; the suggested Claude clustering and Flask/Supabase backend are replaced by deterministic code. A gradebook CSV (comma, tab or semicolon) is read with topics and maxima taken from headers such as 'Q3 [recursion] /5' and an editable column plan; blanks and excused cells are skipped, not zeroed. Per-topic mastery is the share of available points earned on attempted items, classified strong, getting there or gap against adjustable thresholds and shown in a colour-coded class table. Pairs maximise total complementarity (help both ways plus a reciprocity bonus, minus a shared-gap penalty) by exact subset DP up to 20 students and greedy matching plus pair swaps above (over 97% of optimum in tests), with one trio for odd classes and keep-apart constraints, compared against random pairing. Each group gets up to four sessions (strongest member leads, alternating leaders) with resource links from a small built-in library or the instructor's own, plus office-hours topics; each student gets a private printable card that never shows a groupmate's scores. Pairings CSV and Markdown exports. Limitations: the score treats a mastery difference as teaching value and ignores personalities and schedules, topics must be labelled by the instructor, only pairs (and one trio) are formed, the resource library is small, and there is no student login. 29 vitest tests, 100% statement coverage on core.",
       "url": "https://study-buddy-matchmaker.netlify.app",
-      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/study-buddy-matchmaker",
+      "repo": "https://github.com/pisanuw/claude-built-apps/tree/main/study-buddy-matchmaker",
       "implementedOn": "2026-10-27"
     },
     {
@@ -410,7 +410,7 @@
       },
       "notes": "Built in one session as a static TypeScript app with no samples, no backend and no LLM. Every note is synthesized live by Karplus-Strong in an AudioWorklet (with a ScriptProcessor fallback): a delay line of seeded noise, a weighted two-point loop filter, a first-order allpass for fractional tuning, a comb-filtered pick position, and a strum as the chord's strings started a few milliseconds apart, played from the keyboard (home and bottom rows pick chords, H and J strum down and up, 1 to 6 pluck single strings). A seeded mirror of the watched string drives the views, so the delay line, its harmonics (a direct DFT of the one period the line holds) and the output can be slowed to one sample per frame without slowing the sound. Seven lecture scenes set up and play each idea: noise to note, pitch quantization (integer delays at 48 and 8 kHz versus the allpass), why high notes die faster with an equal-decay option, tone, pick position, strum timing, and writing your own filter. The suggested Claude explanation of a student's edited filter is replaced by a deterministic analysis: linearity and randomness checks, least-squares gain and phase delay at 48 frequencies, predicted ring times, and the delay the tuning subtracts, with the filter hot-swapped into the audio thread. Limitations: it is the textbook model (no body resonance, string stiffness or bends, and mono output), so it sounds like a plucked string rather than a recorded guitar; user filter code runs unsandboxed in the student's own tab; and browsers may refuse the requested low sample rates. 53 vitest tests, 100% statement coverage on core.",
       "url": "https://pluck-lab.netlify.app",
-      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/pluck-lab",
+      "repo": "https://github.com/pisanuw/claude-built-apps/tree/main/pluck-lab",
       "implementedOn": "2026-10-28"
     },
     {
@@ -420,7 +420,7 @@
       },
       "notes": "Built in one session as a static TypeScript app with no backend and no LLM. The machine is a Ben Eater style SAP-1 (8-bit bus with pull-downs, PC, MAR, 16 bytes of RAM, IR, A, B, ALU, flags, output register and a 512-word microcode ROM driving 16 control lines) simulated cycle by cycle at the signal level: 11 chip packages, 168 pins and 52 nets carrying 0, 1 or Z, with wired-AND bus contention and floating TTL inputs reading high. Faults are stuck nets, open pins (output no longer reaches the net, input floats), shorted adjacent bus lines, flipped microcode ROM bits and dead chips, 3,810 in all; challenges in three tiers draw only faults that make some test program show a wrong display. Students run four test programs or their own assembly for free, spend a probe budget capturing waveforms on a logic analyzer, and watch the set of consistent faults shrink: every catalog fault is simulated on each program in a Web Worker and compared by waveform hash. The suggested Claude tutor is replaced by a deterministic next-probe suggestion that minimizes the expected number of remaining faults, reasoning only from faults that fit what the student has measured. A sandbox shows every signal with healthy-versus-faulty diffs, and the instructor tab makes seeded or hand-picked challenge links and exports the local attempt log. Limitations: modules are idealized single packages rather than real 74LS parts and timing is cycle-level with no propagation delays, only single faults are modelled, and attempts stay in the browser that made them, with challenge links obfuscated rather than secret. 74 vitest tests, 99% statement coverage on core.",
       "url": "https://pull-the-pin-lab.netlify.app",
-      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/pull-the-pin",
+      "repo": "https://github.com/pisanuw/claude-built-apps/tree/main/pull-the-pin",
       "implementedOn": "2026-10-29"
     },
     {
@@ -430,7 +430,7 @@
       },
       "notes": "Built in one session as a static TypeScript app with no backend and no LLM. A small leap-second-aware time library (TAI scale, the 27 IERS leap seconds, optional hypothetical negative leaps, 23:59:60.x labels, GPS week/time-of-week, the value a stepping kernel reports) drives four tabs. The timeline plots TAI, GPS, Unix and UT1 against UTC from 1972 with a continuous-UTC projection whose cutover date, excess length of day and growth are inputs. The step vs smear tab compares POSIX step, a 24-hour linear smear, UTC-SLS and a monotonic clock around 2016-12-31T23:59:60, and replays a seeded two-host request log that counts reordered lines, receives before sends, backwards clocks and mismeasured round trips. The library bench shows outputs recorded from real runs of Node Date, the Temporal polyfill, CPython and PostgreSQL 16 on ten edge cases (for example, Temporal clamps :60 to :59, and Postgres accepts :60 but rejects :60.5), each with a hand-written note in place of the suggested Claude explainer. Four fix-the-bug exercises (timeout, rate limiter, billing duration, log merge) run hidden tests in a Web Worker against a simulated stepping clock. Limitations: UT1 before the cutover is a schematic sawtooth, not IERS data, and the projection is a two-parameter model. The 2027-05-20 cutover default comes from the idea brief and is unverified (the 2022 CGPM resolution only says by or before 2035). The bench is recorded rather than live. The exercises are JavaScript only, with no Pyodide. 47 vitest tests, 99.7% statement coverage on core.",
       "url": "https://leap-second-lab.netlify.app",
-      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/leap-second-lab",
+      "repo": "https://github.com/pisanuw/claude-built-apps/tree/main/leap-second-lab",
       "implementedOn": "2026-10-31"
     },
     {
@@ -440,7 +440,7 @@
       },
       "notes": "Built in one session as a static TypeScript app with no backend and no LLM. One Redis-like console (SET with EX, GET, DEL, EXPIRE, TTL, TICK, RANGE, FILL, CAPACITY, SEED) drives four buildings at once: a separate-chaining hash map that doubles past load 0.75, a CLRS B-tree of minimum degree 2 (split on the way down on insert; borrow or merge on the way down on delete), a skip list with seeded p = 1/2 towers so every student sees the same city, and a 5-slot LRU cache (hash index plus recency list) that forgets on purpose. Each building reports structural events (rehash, collision, split, grow, merge, borrow, shrink, promote, evict), highlights the keys that moved, and keeps a cost meter of probes, comparisons and moves with last, amortized (running mean) and worst-case figures; RANGE shows ordered structures walking forward while the hash map and cache scan everything. TTLs use a logical clock swept on TICK. Five predict-then-reveal guided tours are built in, and instructors edit tour JSON in the page and share it in the URL fragment, replacing the suggested Supabase storage. Keyboard navigation between buildings, a polite live region, and a text narration mode that describes every building in words. Limitations: changes appear as highlights and event notes rather than tweened animation, there is no 3D view, the B-tree degree and initial bucket count are fixed, and the city holds at most 40 keys. 71 vitest tests (including a 600-step randomized B-tree invariant check and a test that every tour answer matches what the city does), 99.8% statement coverage on core.",
       "url": "https://data-structure-city.netlify.app",
-      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/data-structure-city",
+      "repo": "https://github.com/pisanuw/claude-built-apps/tree/main/data-structure-city",
       "implementedOn": "2026-10-31"
     },
     {
@@ -450,7 +450,7 @@
       },
       "notes": "Built in one session as a static TypeScript app with no backend and no LLM. Connect Four 7x6 with a fixed network interface: an MLP with 84 inputs (mover's pieces, opponent's pieces), up to three hidden layers (relu or tanh) and 7 linear outputs, playing the legal column with the highest logit, under a 5,000-parameter budget. Submissions are plain JSON weight files validated for shape, finiteness and budget, so the ladder never runs student code. Two in-browser training methods run in a Web Worker: imitation of a house bot (Scripted heuristic, Lookahead-2 or Lookahead-4; every tied-best column as a soft target, mirrored data, Adam on a legal-masked softmax) and a truncation-selection evolution strategy that can fine-tune an imitation net. House bots are Random, a scripted win/block/avoid-blunder heuristic and depth-4 alpha-beta. The round-robin ladder plays fixed two-ply openings with colour swaps and rates bots with an order-independent Bradley-Terry fit on the Elo scale (Random pinned at 1000), plus an efficiency board of Elo above Random per 1k parameters. Milestone badges (90% vs Random, above 50% vs Scripted, ladder rank), a replay viewer with per-ply network probabilities and missed-win/missed-block/played-under-a-win flags, an experiment log that exports a Markdown or CSV ablation table, and a NumPy reference runtime checked against the browser by a 131-position parity fixture. The suggested Flask server, React viewer and Supabase storage are replaced by the browser and localStorage. Limitations: no shared server or accounts (the instructor runs the official ladder by loading every file into one browser), single-threaded JS training, Connect Four only, no built-in self-play. 46 vitest tests, 100% statement coverage on core.",
       "url": "https://tiny-brains-league.netlify.app",
-      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/tiny-brains-league",
+      "repo": "https://github.com/pisanuw/claude-built-apps/tree/main/tiny-brains-league",
       "implementedOn": "2026-10-31"
     },
     {
@@ -460,7 +460,7 @@
       },
       "notes": "Built in one session as a static TypeScript app with no backend. The {p,q} polygon centred at the origin splits into 2p right triangles with angles π/p, π/q and π/2, and the three mirrors of that triangle generate the tiling. Isometries are stored as SU(1,1) Möbius maps z ↦ (αz + β)/(β̄z + ᾱ), applied to z or z̄, and renormalised after every product. Tiles are generated breadth-first from the tile under the screen centre, up to a depth limit and a minimum on-screen size. Each stroke is folded into the fundamental triangle once and redrawn under every group element (or only the orientation-preserving coset in rotation mode), so freehand doodles become Circle Limit patterns and the geodesic brush draws arcs orthogonal to the rim. Widths are stored in hyperbolic units, so copies thin towards the boundary at the right rate. Dragging applies a pure hyperbolic translation, and after each step the view is swapped for an equivalent one composed with a group element, which keeps precision however far you travel (a test drags about 360 units). Double-clicking glides a point to the centre. A measure tool gives hyperbolic distance and a triangle's angles, angle sum and area. SVG export uses real arcs, and share links pack tiling, symmetry, view and strokes into a compact binary in the URL fragment. Batching shading fills and stroke copies took a {7,3} frame from about 900 ms to 70 ms in headless Chromium. Limitations: Canvas 2D only, with no WebGL path for very deep tilings; one width per stroke, so long strokes do not taper; freehand segments are polylines rather than geodesic pieces; measurement marks are not shared or exported; no pinch-zoom. 58 vitest tests, 100% statement coverage on core.",
       "url": "https://poincare-paint.netlify.app",
-      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/poincare-paint",
+      "repo": "https://github.com/pisanuw/claude-built-apps/tree/main/poincare-paint",
       "implementedOn": "2026-10-31"
     },
     {
@@ -470,7 +470,7 @@
       },
       "notes": "Built in one session as a static TypeScript app with no backend and no LLM. Every piece, historical or invented, is one line of a Betza-like notation (atoms, riders, ranges such as B{2,}, a second leg such as the giraffe's F>R{3,}, and m/c/f/b/l/r/s/v/n/j/p/i modifiers) compiled once per variant into rays that the move generator, the highlight overlay and the engine all walk. Play: Timur chess on the 11x10 board with both citadels (a king entering the opponent's citadel draws; stalemate loses), against a negamax alpha-beta engine with iterative deepening and quiescence in a Web Worker, plus simplified classic chess. Piece lab: live animated reach with placeable blockers, a mobility-based value estimate, drop-in replacement in Timur or classic chess, six-game engine-vs-engine balance tests with alternating colours, and share links that encode the spec in the URL. A pieces tab gives each historical piece a history card. Limitations: no king swap, no extra royals (the prince is an ordinary king-mover), the pawn of pawns promotes straight to a prince, citadel ownership is an interpretation, classic chess has no castling or en passant, the Claude English-to-notation step is replaced by examples, and values are a heuristic. 82 vitest tests, 99% statement coverage on core.",
       "url": "https://tamerlane-board.netlify.app",
-      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/tamerlane-board",
+      "repo": "https://github.com/pisanuw/claude-built-apps/tree/main/tamerlane-board",
       "implementedOn": "2026-10-31"
     },
     {
@@ -480,7 +480,7 @@
       },
       "notes": "Built in one session as a static TypeScript app with no backend and no LLM; the GPU is simulated, not WebGPU, so every browser gives the same numbers. Students write kernels in a small CUDA-like language (let, if/else, for, while, return, shared arrays, sync(), selects, atomicAdd) and pick the launch; the simulator runs each warp of 32 lanes with an active mask, so divergent branches run both paths, loops run while any lane continues, and warps pause at barriers (a sync() reached by only some lanes is an error). A cost model charges per warp instruction, per 128-byte global segment, per queued shared-memory bank and per serialized atomic, spreads blocks over four SMs, and compares the result with a one-core CPU estimate. Every access is bounds-checked and race-checked (shared memory between barriers, global memory within and across blocks). Twelve levels cover indexing, bounds, block size, divergence, grid-stride loops, coalescing, races and atomics, shared-memory reduction, barrier placement, bank conflicts, tiling and privatized histograms; each run gets stars against a reference solution's par, counters, an SM timeline and a warp inspector with per-lane masks coloured by segment or bank. The suggested Claude hints are replaced by a deterministic diagnosis built from the simulator's counters and traces, pointing at lines; the Supabase dashboard is replaced by JSON progress exports that an instructor loads into a class table and CSV, plus a Markdown rubric. Limitations: the GPU is a teaching model with invented costs and no caches, latency hiding or 2D indices, so cycle counts compare a student's own versions rather than predict hardware; blocks run in a fixed order, so the race detector stands in for real nondeterminism; values are untyped, so / truncates whenever both operands are whole; exports are unsigned files. 36 vitest tests, 99.2% statement coverage on core.",
       "url": "https://gpu-parallel-puzzler.netlify.app",
-      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/gpu-parallel-puzzler",
+      "repo": "https://github.com/pisanuw/claude-built-apps/tree/main/gpu-parallel-puzzler",
       "implementedOn": "2026-10-31"
     },
     {
@@ -490,7 +490,7 @@
       },
       "notes": "Built in one session as a static site with no backend and no LLM. Students paste a JavaScript sample(rng, ...args); exact mode enumerates every draw sequence from a 1-16 bit source odometer-style and reports each outcome's probability as a BigInt fraction (rng.next() % 6 on 8 bits gives 43/256 vs 42/256), with rejection loops cut at 2^-32 and judged given termination; statistical mode runs a chi-square test on a seeded 32-bit xoshiro128** stream. Seven-bug gallery with fixes, shuffle position heat map, permalinks, and instructor exercise links (encoded in the URL) graded exact-first with a chi-square fallback at a stated false-fail rate. The suggested Pyodide/Python mode was left out; exact mode is exponential in draws, so large shuffles fall back to statistics. 68 vitest tests.",
       "url": "https://modulo-bias-microscope.netlify.app",
-      "repo": "https://github.com/pisanuw/Claude-capstone/tree/main/modulo-bias-microscope",
+      "repo": "https://github.com/pisanuw/claude-built-apps/tree/main/modulo-bias-microscope",
       "implementedOn": "2026-11-01"
     }
   ]

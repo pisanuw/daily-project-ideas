@@ -529,3 +529,7 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-02 [scope] Site reframed as "ideas I could build for you": new tagline and description, hero buttons for email and the built apps, a build-this mailto on every idea modal.
 
 2026-11-02 [doc] Site footer replaced with the owner-approved wording ("Built by Claude, guided by me..."), same text as the app footers.
+
+2026-11-02 [decision] Small business is now the lens on two days: Thursday back office and solo professionals, Friday customer-facing (replacing Friday's no-lens day). Owner's customer priority puts small business first.
+
+2026-11-02 [note] Claude-capstone renamed to pisanuw/claude-built-apps; repo links in implemented.json and the hero button updated (GitHub redirects the old name).
