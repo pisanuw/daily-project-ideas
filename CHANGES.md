@@ -547,3 +547,7 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-02 [code] Home page canonical and og:url are the bare root https://daily-project-ideas.pisan.me/ (was /index.html), matching what people share.
 
 2026-11-02 [doc] Footer wording updated by the owner: "I create tools like this ... Want something like this for your own work?" (replaces "Got a problem I can fix?").
+
+2026-11-02 [decision] ROUTINE.md: small business first. Mon and Sun lenses now small-business, 5+ small-business candidates per run, day floor is one small-business idea (replaces EdTech floor).
+
+2026-11-02 [code] validate_ideas.py checks the small-business floor; optional smallBusiness boolean added to the schema for small-business buyers outside Small Business Ops.

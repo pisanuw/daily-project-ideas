@@ -13,6 +13,14 @@ connections that can supply design partners and early customers, reads CS
 education research fluently, teaches courses that use agentic coding tools, and
 can ship a working web app alone in days.
 
+Who he builds for (owner, 2026-11-02): **small businesses first**, then
+startups, edtech, and universities. The ideas site is a shop window for paid
+custom builds, and a Claude Code routine builds the chosen ideas as standalone
+web apps, each with its own public repo in the pisan-labs GitHub org. So an
+idea he could build, sell, and hand to a shop owner, a clinic, a trade, or a
+solo professional is worth more here than an equally strong one for a
+university department.
+
 Your task: find commercially viable product ideas backed by real demand
 evidence, write them to the day's JSON file, record what you tried in the run
 log, update IDEAS.md and the idea index, and commit to main.
@@ -273,17 +281,23 @@ readable; the avoid list in Step 0 is what you act on.
 ### Focus rotation and domain lens (first run of the day)
 
 The lens is what keeps ideas out of a single rut. On most days it points away
-from higher education on purpose.
+from higher education on purpose, and four days in seven point at small
+businesses (Monday, Thursday, Friday, Sunday).
+
+Whatever the lens, at least 5 of a first run's candidates (3 in an extra run)
+have a small-business buyer: a small business, solo professional, local
+service, trade, clinic, restaurant, shop, or freelancer paying for it
+themselves. Run at least two complaint searches aimed at them every run.
 
 | Weekday | Focus sources | Domain lens |
 |---|---|---|
-| Monday | A13 Discourse, any niche; B10 WordPress plugin market data; C5 Policy and regulation trackers | Accessibility and regulatory compliance, any sector |
+| Monday | A13 Discourse, any niche; B10 WordPress plugin market data; C5 Policy and regulation trackers | Accessibility and regulatory compliance for small businesses and startups: website accessibility, privacy notices, sales tax, licensing and permits |
 | Tuesday | A14 Plugin and add-on support forums; B1 Teachers Pay Teachers; C10 Change events | Teaching and training anywhere: K-12, corporate L&D, tutoring, homeschool |
 | Wednesday | A3 Open-source teaching tools; B2 AppSumo; C2 Education and computing research | Developer and research tooling |
 | Thursday | A12 Ask HN; B8 Install counts; C11 Federal award and grant data | Small business back office and solo professionals: invoicing, scheduling, bookkeeping, client intake, paperwork |
 | Friday | A5 Educator Stack Exchanges; B6 Verified revenue dashboards; C8 Trade news | Small business, customer-facing: local services, trades, clinics, restaurants, retail, their websites and bookings |
 | Saturday | A2 Other LMS and classroom forums; B5 Acquisition marketplaces; C4 Job postings | Institutional back-office work |
-| Sunday | A11 Accessibility practitioners; B10 WordPress plugin market data; C6 Accreditation and standards | Creative, prosumer, and household |
+| Sunday | A11 Accessibility practitioners; B10 WordPress plugin market data; C6 Accreditation and standards | Makers, creators and freelancers who sell: craft and online shops, studios, photographers, tutors, consultants |
 
 Sources outside today's focus still count toward the per-kind minimums, and
 extra runs pick from the whole reachable catalog. If a focus source is on the
@@ -306,7 +320,7 @@ including any watchlist entries that gained new evidence. Score each from 1 to 5
 | willingnessToPay | Nobody pays for anything similar | Customers already pay for an inferior solution |
 | reachability | Requires cold enterprise sales | Pisan can reach the first 10 buyers through his network or a self-serve channel |
 | competitiveGap | Well served by incumbents | Clear, unmet gap |
-| feasibility | Needs a team or heavy ongoing support | One person can build and support it within the stated complexity using his stack |
+| feasibility | Needs a team or heavy ongoing support | One person can build and support it within the stated complexity using his stack, as a standalone web app with no paid API called on his key at runtime |
 | complianceBurden | Heavy (student PII, minors, institutional contracts) | Minimal |
 
 `total` is the sum (maximum 30).
@@ -366,9 +380,13 @@ Constraints on the selected set, applied to the whole day in an extra run:
 - No two selected ideas share both the same target customer and the same
   problem.
 - At most 2 share a `category`, so one domain cannot take over a day.
-- At least one is educational software (`category` starting `EdTech:`), which is
-  where Pisan's unfair advantage lies. This is a floor, not a quota: it is no
-  longer required that half the ideas be educational.
+- At least one has a small-business buyer: `category` "Small Business Ops", or
+  `smallBusiness: true` on an idea in another category whose buyer is a small
+  business (for example a compliance tool sold to shop owners). This replaced
+  the floor of one educational idea on 2026-11-02, after the owner put small
+  businesses first; educational ideas are still welcome, just not required.
+- When choosing between candidates whose totals are within 2 points of each
+  other, take the small-business one.
 - At least one has a buyer who is an organization or a professional spending
   their own money, not a student.
 - If 3 or more are selected, at least one is "Weekend MVP" and at least one is
@@ -436,6 +454,9 @@ Allowed values:
   "EdTech: Learners", "Developer Tool", "Accessibility & Compliance",
   "Research & Lab Tools", "Small Business Ops", "Civic & Public Sector",
   "Creative & Prosumer"
+- `smallBusiness`: optional boolean, the one optional field. Set it to `true`
+  when the buyer is a small business but the category is not "Small Business
+  Ops"; omit it otherwise.
 - `complexity`: "Weekend MVP", "Multi-week", "Multi-month"
 - `confidence`: "validated", "provisional"
 - `review.verdict`: "pass", "rescored"
@@ -470,7 +491,8 @@ exactly as they are: never change, reorder, or remove an earlier idea. Then:
 - Append one sentence to `runNotes.caveats` that starts "Extra run (random
   sources ...):", lists the picked IDs, and names the ideas it added by `n`.
 
-The schema is the same for both modes. Do not add fields.
+The schema is the same for both modes. Do not add fields other than the optional
+`smallBusiness`.
 
 Format (all fields required for every idea; `gateGap` is required only when
 `confidence` is "provisional", and must be absent otherwise):

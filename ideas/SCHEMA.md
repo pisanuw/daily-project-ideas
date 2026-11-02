@@ -121,7 +121,12 @@ version history:
   - `category` gained five non-education values: `Accessibility & Compliance`,
     `Research & Lab Tools`, `Small Business Ops`, `Civic & Public Sector`, and
     `Creative & Prosumer`. At most 2 ideas in a day may share a category, and
-    at least one must still be `EdTech:` something.
+    at least one must still be `EdTech:` something. Since 2026-11-02 that floor
+    is a small-business buyer instead (see `smallBusiness`).
+  - `smallBusiness` (optional boolean, added 2026-11-02): `true` when the buyer
+    is a small business but the `category` is not `Small Business Ops`. A day
+    needs at least one idea that is `Small Business Ops` or `smallBusiness:
+    true`, or a `runNotes.caveats` line saying why none qualified.
 
   - `topic` (required): exactly one topic from the closed list in
     `ideas/topics-taxonomy.json`, chosen by what the product is about rather

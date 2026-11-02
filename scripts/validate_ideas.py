@@ -57,6 +57,11 @@ RECENT_DAYS = 90
 FLOOR_DAYS = 180
 
 
+
+def is_small_business(idea):
+    """The day's floor since 2026-11-02 (owner: small businesses first)."""
+    return idea.get("category") == "Small Business Ops" or idea.get("smallBusiness") is True
+
 def parse_date(value):
     try:
         return datetime.date.fromisoformat(str(value))
@@ -224,9 +229,12 @@ def main(path):
         if n > MAX_PER_CATEGORY:
             errs.append(f"{n} ideas share the category {category!r}, maximum is "
                         f"{MAX_PER_CATEGORY}")
-    if ideas and not any(str(i.get("category", "")).startswith("EdTech:") for i in ideas):
+    for i in ideas:
+        if "smallBusiness" in i and not isinstance(i["smallBusiness"], bool):
+            errs.append(f"idea {i.get('n', '?')}: smallBusiness must be true or false")
+    if ideas and not any(is_small_business(i) for i in ideas):
         if not run_notes.get("caveats"):
-            errs.append("no idea is educational software and runNotes.caveats does "
+            errs.append("no idea has a small-business buyer and runNotes.caveats does "
                         "not explain why none qualified")
 
     for w in run_notes.get("watchlist", []):
