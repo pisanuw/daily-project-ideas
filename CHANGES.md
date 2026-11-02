@@ -543,3 +543,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-02 [decision] Kept the name Daily Project Ideas, since "project ideas" is what students and builders search for; only titles and meta descriptions now say "software I could build for you".
 
 2026-11-02 [doc] README, DEPLOY and the notify email footer point at daily-project-ideas.pisan.me; the netlify.app address still serves the site.
+
+2026-11-02 [code] Home page canonical and og:url are the bare root https://daily-project-ideas.pisan.me/ (was /index.html), matching what people share.
