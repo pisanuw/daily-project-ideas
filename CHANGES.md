@@ -545,3 +545,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-02 [doc] README, DEPLOY and the notify email footer point at daily-project-ideas.pisan.me; the netlify.app address still serves the site.
 
 2026-11-02 [code] Home page canonical and og:url are the bare root https://daily-project-ideas.pisan.me/ (was /index.html), matching what people share.
+
+2026-11-02 [doc] Footer wording updated by the owner: "I create tools like this ... Want something like this for your own work?" (replaces "Got a problem I can fix?").
