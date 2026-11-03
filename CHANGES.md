@@ -571,3 +571,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-03 [doc] Created ideas/2026-11-03.json (schemaVersion 3, 1 idea): Student Journey Check (16, provisional)
 
 2026-11-03 [plan] Claimed Student Journey Check (2026-11-03 #1) for the build routine; folder student-journey-check.
+
+2026-11-03 [code] Student Journey Check (2026-11-03 #1) implemented and live at https://student-journey-check.pisan.me; claim replaced with url, repo, notes and publicNotes.
