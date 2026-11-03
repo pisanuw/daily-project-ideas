@@ -1,6 +1,6 @@
 # Source health
 
-Generated 2026-11-02 from the last 45 days of `ideas/run-log.jsonl` (6 runs). Do not edit by hand: regenerate with `python3 scripts/source_health.py`.
+Generated 2026-11-03 from the last 45 days of `ideas/run-log.jsonl` (7 runs). Do not edit by hand: regenerate with `python3 scripts/source_health.py`.
 
 ## Do not spend searches here
 
@@ -21,7 +21,7 @@ Generated 2026-11-02 from the last 45 days of `ideas/run-log.jsonl` (6 runs). Do
 
 | Source | Yields | Status | selected | Access path |
 |---|---|---|---|---|
-| A14 Plugin and add-on support forums | complaint | ok | 1 | `webfetch: https://wordpress.org/support/plugin/{slug}/` |
+| A14 Plugin and add-on support forums | complaint | ok | 2 | `webfetch: https://wordpress.org/support/plugin/{slug}/` |
 | C10 Change events: shutdowns, price rises, removed free tiers | mandate | ok | 1 | no verified path |
 | A1 LMS idea boards | complaint | ok | 0 | `both: https://community.instructure.com/t5/forums/searchpage/tab/message?q={q}` |
 | A11 Accessibility practitioners | complaint | ok-curl | 0 | `webfetch: https://webaim.org/discussion/archives` |
@@ -62,15 +62,16 @@ These sources are not on the avoid list, because at least one of their paths wor
 
 | Host | usable/tried | Outcomes | Last usable |
 |---|---|---|---|
-| hn.algolia.com | 18/22 | empty 4, ok 18 | 2026-11-02 |
-| wordpress.org | 16/16 | ok 16 | 2026-11-02 |
+| wordpress.org | 41/41 | ok 41 | 2026-11-03 |
+| hn.algolia.com | 23/27 | empty 4, ok 23 | 2026-11-03 |
+| api.wordpress.org | 13/13 | ok 13 | 2026-11-03 |
 | community.shopify.com | 9/9 | ok 9 | 2026-11-02 |
-| api.wordpress.org | 6/6 | ok 6 | 2026-11-02 |
 | www.federalregister.gov | 4/4 | ok 4 | 2026-11-02 |
 | community.etsy.com | 1/3 | empty 2, ok 1 | 2026-11-01 |
 | github.com | 3/3 | ok 3 | 2026-11-01 |
 | meet.ribblr.com | 3/3 | ok 3 | 2026-11-01 |
 | webaim.org | 1/3 | empty 2, ok 1 | 2026-11-01 |
+| app.thetutor.link | 2/2 | ok 2 | 2026-11-03 |
 | community.instructure.com | 0/2 | empty 2 | never |
 | dor.wa.gov | 1/2 | http_404 1, ok 1 | 2026-11-02 |
 | dsp.berkeley.edu | 2/2 | ok 2 | 2026-11-01 |
@@ -84,6 +85,7 @@ These sources are not on the avoid list, because at least one of their paths wor
 | api.stackexchange.com | 0/1 | allowlist 1 | never |
 | apuo.ca | 0/1 | empty 1 | never |
 | careers.csudh.edu | 0/1 | empty 1 | never |
+| cartmango.com | 1/1 | ok 1 | 2026-11-03 |
 | coddy.tech | 0/1 | http_403 1 | never |
 | codeboard.io | 1/1 | ok 1 | 2026-11-01 |
 | community.cloudflare.com | 0/1 | http_403 1 | never |
@@ -92,7 +94,9 @@ These sources are not on the avoid list, because at least one of their paths wor
 | complianz.io | 1/1 | ok 1 | 2026-11-02 |
 | consentcheck.online | 0/1 | http_404 1 | never |
 | cseducators.stackexchange.com | 0/1 | allowlist 1 | never |
+| dev.to | 0/1 | http_404 1 | never |
 | discuss.pixls.us | 1/1 | ok 1 | 2026-11-01 |
+| ecosire.com | 1/1 | ok 1 | 2026-11-03 |
 | elementor.com | 0/1 | http_404 1 | never |
 | equalizedigital.com | 0/1 | http_403 1 | never |
 | erank.com | 1/1 | ok 1 | 2026-11-01 |
@@ -101,22 +105,32 @@ These sources are not on the avoid list, because at least one of their paths wor
 | forum.obsidian.md | 1/1 | ok 1 | 2026-11-01 |
 | forum.squarespace.com | 0/1 | http_403 1 | never |
 | getvela.com | 1/1 | ok 1 | 2026-11-01 |
+| ghostinspector.com | 1/1 | ok 1 | 2026-11-03 |
 | grad.tamu.edu | 0/1 | http_404 1 | never |
 | help.pickcode.io | 1/1 | ok 1 | 2026-11-01 |
+| hookdeck.com | 1/1 | ok 1 | 2026-11-03 |
 | its.umich.edu | 0/1 | http_403 1 | never |
+| kourses.com | 1/1 | ok 1 | 2026-11-03 |
 | latexformat.netlify.app | 0/1 | http_404 1 | never |
+| managewp.com | 1/1 | ok 1 | 2026-11-03 |
 | news.ycombinator.com | 0/1 | http_429 1 | never |
 | nwelearn2026.sched.com | 0/1 | http_403 1 | never |
+| pricingsaas.com | 1/1 | ok 1 | 2026-11-03 |
 | rtl.berkeley.edu | 1/1 | ok 1 | 2026-11-01 |
 | scispace.com | 0/1 | http_403 1 | never |
 | sift-health.pages.dev | 1/1 | ok 1 | 2026-11-02 |
 | tilt.colostate.edu | 1/1 | ok 1 | 2026-11-01 |
 | trinket.io | 1/1 | ok 1 | 2026-11-01 |
 | trustmrr.com | 1/1 | ok 1 | 2026-10-31 |
+| tutorlms.com | 1/1 | ok 1 | 2026-11-03 |
 | ucsb-ds.github.io | 1/1 | ok 1 | 2026-11-01 |
+| vendordirectory.shrm.org | 0/1 | http_403 1 | never |
 | williamsrecord.com | 0/1 | http_403 1 | never |
+| wpamelia.com | 1/1 | ok 1 | 2026-11-03 |
+| wpengine.com | 1/1 | ok 1 | 2026-11-03 |
 | www.capterra.com | 0/1 | http_403 1 | never |
 | www.careerbuilder.com | 0/1 | http_403 1 | never |
+| www.checklyhq.com | 1/1 | ok 1 | 2026-11-03 |
 | www.chronicle.com | 0/1 | http_403 1 | never |
 | www.classcentral.com | 0/1 | http_403 1 | never |
 | www.cookiebot.com | 1/1 | ok 1 | 2026-11-02 |
@@ -132,7 +146,9 @@ These sources are not on the avoid list, because at least one of their paths wor
 | www.ndsmcobserver.com | 0/1 | http_403 1 | never |
 | www.pulse.bot | 0/1 | http_5xx 1 | never |
 | www.ru.nl | 0/1 | http_5xx 1 | never |
+| www.teacherspayteachers.com | 1/1 | ok 1 | 2026-11-03 |
 | www.the-standard.org | 1/1 | ok 1 | 2026-11-01 |
+| www.tutorbird.com | 0/1 | empty 1 | never |
 | www.valueaddedresource.net | 1/1 | ok 1 | 2026-11-01 |
 | xdaforums.com | 0/1 | http_403 1 | never |
 
@@ -140,16 +156,16 @@ These sources are not on the avoid list, because at least one of their paths wor
 
 | Gate condition | Candidates lost |
 |---|---|
-| totalBelowMin | 66 |
-| rejectRule | 17 |
-| reviewKill | 6 |
+| totalBelowMin | 77 |
+| rejectRule | 19 |
+| reviewKill | 8 |
 | painBelow4 | 3 |
 
 The largest row is the one to argue about before changing anything else.
 
 ## Funnel over the window
 
-candidates 94 -> passedRejectRules 77 -> passedGate 1 -> reviewKilled 6 -> validated 0 -> provisional 2 -> watchlist 24
+candidates 110 -> passedRejectRules 91 -> passedGate 1 -> reviewKilled 8 -> validated 0 -> provisional 3 -> watchlist 31
 
 ## Runs that produced nothing
 

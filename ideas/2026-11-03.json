@@ -1,0 +1,440 @@
+{
+  "date": "2026-11-03",
+  "schemaVersion": 3,
+  "complete": true,
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Student Journey Check",
+      "slug": "student-journey-check",
+      "category": "Small Business Ops",
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Teaching Operations",
+      "summary": "For solo course creators and small training businesses on WordPress: a test student walks your course site every day and after every update, and tells you in plain words when login, lessons, quizzes, certificates or checkout break.",
+      "public": {
+        "summary": "A pretend student checks your online course every day and tells you the moment something your real students rely on stops working.",
+        "problem": "You update a plugin, everything looks fine from your admin screen, and you move on. Days later a student emails to say they can't open the lesson they paid for, or their quiz results never appear, or the certificate page shows an error. By then other students have hit the same wall and quietly given up.",
+        "forWhom": "Coaches, tutors, yoga and fitness teachers, and small training academies who sell courses from their own WordPress site.",
+        "benefits": [
+          "Find out about a broken course before your students do",
+          "Know within minutes whether an update broke anything",
+          "See exactly which step failed, with a picture of what students saw",
+          "Spend less time answering 'I can't get in' emails",
+          "Keep selling while you fix it, instead of losing a week of sales"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "I updated the LMS plugin and my site looked fine to me, but my clients could not reach the courses they had bought, quiz results stopped showing, the certificate page errored for everyone, or every lesson video stopped playing. I only found out when students complained.",
+      "description": "The owner enters the site URL, a dedicated test-student login, and the course and price they expect to see. On a daily schedule, and on demand right after an update, a headless browser walks a fixed student journey: log in, open the dashboard, open one lesson, confirm the video frame loads without a player error, open the course certificate page, and load the checkout page to compare the displayed price with the expected one. Each step is a pass or fail with a screenshot, and failures send one plain-language email ('Your student dashboard is covered by a popup since this morning'). Quiz submission is opt-in, against a dedicated test quiz, so the owner's real analytics stay clean. The first version supports Tutor LMS only, with known page paths, and adds LearnPress and LifterLMS after that.",
+      "targetCustomer": "Solo course creators, coaches, and small training businesses (for example a dental training academy, a yoga teacher, a language school) who run Tutor LMS on their own WordPress site and maintain it themselves.",
+      "buyer": "The business owner, on a personal or business card, from the same budget that pays for hosting and the LMS Pro licence.",
+      "whyNow": "Tutor LMS shipped its 4.x line in August to October 2026, and the support forum shows a run of student-facing breakages after updates (login and admin dead after 4.0.7, dashboard blocked after 4.1.1, certificate pages broken on 4.x, quiz results not displaying), each found by the owner only after students complained.",
+      "founderFit": "Pisan ships small React and Supabase web apps alone and teaches with browser automation and agentic coding tools, so a Playwright-based checker is squarely in his stack. As an instructor he knows the student journey (lesson, quiz, results, certificate) better than a generic uptime vendor does.",
+      "problemEvidence": [
+        {
+          "url": "https://wordpress.org/support/topic/wp-admin-inaccessible-since-the-4-0-7-update/",
+          "source": "wordpress.org (Tutor LMS support)",
+          "author": "updoze",
+          "date": "2026-08-24",
+          "kind": "complaint",
+          "summary": "After the Tutor LMS 4.0.7 update the login and admin pages died; 'none of my clients can now access the courses they've purchased... I can't even sell my products anymore.'"
+        },
+        {
+          "url": "https://wordpress.org/support/topic/tutor-lms-4-1-1-welcome-onboarding-popup-is-stuck-and-blocks-student-dashboard/",
+          "source": "wordpress.org (Tutor LMS support)",
+          "author": "mundocofi",
+          "date": "2026-10-09",
+          "kind": "complaint",
+          "summary": "After 4.1.1 a welcome popup with dead buttons blocks the student dashboard on a live course site; support called it site-specific, unresolved."
+        },
+        {
+          "url": "https://wordpress.org/support/topic/quiz-results-page-redirects-back-to-the-quiz-instead-of-displaying-results/",
+          "source": "wordpress.org (Tutor LMS support)",
+          "author": "neuroeducactiva85",
+          "date": "2026-10-19",
+          "kind": "complaint",
+          "summary": "Students who finish a quiz click View Results and land back on the quiz; the attempt saves in admin, so the owner only sees it if a student complains."
+        },
+        {
+          "url": "https://wordpress.org/support/topic/certificate-builder-1-1-1-broken-on-tutor-4-x-nonce-error-critical-error/",
+          "source": "wordpress.org (Tutor LMS support)",
+          "author": "lwec",
+          "date": "2026-09-30",
+          "kind": "complaint",
+          "summary": "With Tutor 4.1.0 and Pro 4.0.3 the public certificate page shows 'Nonce not matched' to every visitor and the course certificate subpage throws a critical error."
+        },
+        {
+          "url": "https://wordpress.org/support/topic/youtube-videos-suddenly-showing-error-153-in-tutor-lms-4-0-6/",
+          "source": "wordpress.org (Tutor LMS support)",
+          "author": "nicholasmatyinko",
+          "date": "2026-08-22",
+          "kind": "complaint",
+          "summary": "All YouTube lesson videos in a course suddenly showed Error 153 or spun forever, while the same video worked on a normal page."
+        },
+        {
+          "url": "https://managewp.com/pricing",
+          "source": "managewp.com",
+          "author": "ManageWP (GoDaddy)",
+          "date": "2026-11-03",
+          "kind": "spend",
+          "summary": "Sells uptime monitoring at $1 per site per month (in 100-site bundles) and Safe Updates that require premium backup: agencies pay per site to avoid broken updates. Date is the fetch date; the page is undated."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Velprove",
+          "url": "https://dev.to/velprove/definitive-wordpress-uptime-monitoring-guide-for-2026-48g4",
+          "price": "Free tier with 1 real-browser login monitor; $19 and $49 plans (from a vendor-written guide; pricing page not fetched)",
+          "gap": "Checks that a test user can log in, which covers the worst case, but not lesson, video, quiz results, certificate or checkout price."
+        },
+        {
+          "name": "ManageWP Safe Updates",
+          "url": "https://managewp.com/pricing",
+          "price": "Requires premium backup; uptime monitor $1/site/month in 100-site bundles",
+          "gap": "Agency tool; compares logged-out page screenshots around updates, not a logged-in student flow."
+        },
+        {
+          "name": "WP Engine Smart Plugin Manager",
+          "url": "https://wpengine.com/smart-plugin-manager/",
+          "price": "Reseller pricing 'as low as $2 per site'; list price unknown",
+          "gap": "Visual regression on public pages with rollback, aimed at hosts and agencies; does not walk lessons, quizzes or certificates."
+        },
+        {
+          "name": "Checkly",
+          "url": "https://www.checklyhq.com/pricing/",
+          "price": "Free tier; paid browser checks billed per 1k runs ($4.00 per 1k extra)",
+          "gap": "Needs the owner to write Playwright scripts; built for developers, not a yoga teacher."
+        }
+      ],
+      "keyFeatures": [
+        "Fixed Tutor LMS student journey with pass or fail per step and screenshots",
+        "Run-now button for right after a plugin update",
+        "Expected-price check on the checkout page",
+        "Plain-language failure email naming the broken step",
+        "Opt-in test quiz so real quiz analytics stay clean"
+      ],
+      "mvpScope": {
+        "features": [
+          "Tutor LMS only",
+          "Login, dashboard, one lesson, certificate page, checkout price",
+          "Daily schedule plus run-now",
+          "Email alert with screenshot"
+        ],
+        "outOfScope": [
+          "Video playback verification beyond detecting a player error frame",
+          "LearnPress, LifterLMS, Amelia",
+          "Automatic rollback",
+          "Agency multi-site dashboard"
+        ],
+        "buildEstimate": "3 to 4 weeks, most of it on reliable selectors and the worker that runs the browsers"
+      },
+      "techStack": "React + Vite + Tailwind front end, Supabase (auth, schedules, results, encrypted test credentials), a small Playwright worker on a cheap VM or container; no AI API.",
+      "pricing": {
+        "model": "Per-site subscription",
+        "pricePoint": "$9/month or $79/year per site",
+        "rationale": "Above the $1 to $2 per site agency tools because it walks a logged-in student flow, but well under the $19 Velprove starter tier; the reviewer judged even this hard to sell to owners who resent a $199/yr Pro licence."
+      },
+      "revenueSketch": "Estimate only: 150 sites x $9/month = $1,350 MRR. Assumes roughly 0.15% of Tutor LMS's 100,000 active installs convert, which is unproven.",
+      "distribution": "A free one-off 'student journey check' page that anyone can run against their course site, linked from helpful answers to breakage threads on the Tutor LMS support forum (no promotion in threads, per forum rules) and from Tutor LMS Facebook groups; then a listing as a free helper plugin that points to the hosted checker.",
+      "validationTest": {
+        "method": "Build the free one-off check for Tutor LMS (login, dashboard, lesson, certificate, checkout price) and offer it to the posters of recent breakage threads and in two Tutor LMS owner groups. Ask everyone who runs it whether they want it daily for $9/month, and take pre-orders.",
+        "successCriteria": "At least 40 owners run the free check within 4 weeks, and at least 5 pre-pay for the daily plan.",
+        "cost": "About 1 week of build time and under $20 of hosting."
+      },
+      "moat": "Thin. A library of tested student-journey scripts per LMS and theme, and a record of which plugin versions broke which steps, which could become an 'is this update safe?' feed. It is easy to copy for one LMS.",
+      "compliance": [
+        "Credentials: stores a low-privilege test-student password; encrypt at rest, never ask for admin or payment keys.",
+        "GDPR: screenshots may capture other students' names on leaderboards or forums; crop or blur, keep 14 days, and offer a data processing agreement to EU owners.",
+        "Site terms: the owner must authorise checks on their own site; rate-limit to avoid tripping security plugins.",
+        "Accessibility: the dashboard and emails must meet WCAG 2.2 AA."
+      ],
+      "risks": [
+        {
+          "risk": "Login CAPTCHAs (Turnstile, hCaptcha, Wordfence) block the test browser.",
+          "mitigation": "Document an allowlist for the test account or the worker's IP; detect and report 'blocked by CAPTCHA' as its own state."
+        },
+        {
+          "risk": "Selectors break across themes and page builders, producing false alarms that make owners mute the alerts.",
+          "mitigation": "Support Tutor LMS default templates first, require two consecutive failures before alerting, and let the owner mark a step as not applicable."
+        },
+        {
+          "risk": "Owners will not pay monthly because students' own emails already detect the worst breaks.",
+          "mitigation": "The validation test asks for pre-payment before the daily product is built."
+        },
+        {
+          "risk": "A free real-browser login monitor (Velprove) already covers the most severe failure.",
+          "mitigation": "Compete only on the LMS steps that it does not check: lesson, certificate, results, price."
+        }
+      ],
+      "scores": {
+        "pain": 3,
+        "willingnessToPay": 2,
+        "reachability": 3,
+        "competitiveGap": 2,
+        "feasibility": 2,
+        "complianceBurden": 4,
+        "total": 16
+      },
+      "scoreRationale": {
+        "pain": "Five independent owners report student-facing breakage after Tutor updates in Aug to Oct 2026 (https://wordpress.org/support/topic/wp-admin-inaccessible-since-the-4-0-7-update/), but threads are low-volume, some are site-specific, and students report the worst breaks quickly.",
+        "willingnessToPay": "Agencies pay $1 to $2 per site for update safety (https://managewp.com/pricing), but these owners balk at a $199/yr Pro licence (https://tutorlms.com/pricing/) and treat monitoring as free.",
+        "reachability": "Owners are findable on the Tutor LMS support forum (https://wordpress.org/support/topic/tutor-lms-4-1-1-welcome-onboarding-popup-is-stuck-and-blocks-student-dashboard/), but forum rules forbid promotion and they arrive after the fix.",
+        "competitiveGap": "Velprove's free tier already runs a real-browser test-user login check (https://dev.to/velprove/definitive-wordpress-uptime-monitoring-guide-for-2026-48g4); only the lesson, results, certificate and price steps are uncovered.",
+        "feasibility": "Headless browsers per site, theme-dependent selectors, CAPTCHAs and cross-origin video frames make it fragile for one person to run (https://www.checklyhq.com/pricing/ shows the per-run cost of browser checks).",
+        "complianceBurden": "Only a low-privilege test password and screenshots are stored, no payment keys or admin access (https://wordpress.org/support/topic/certificate-builder-1-1-1-broken-on-tutor-4-x-nonce-error-critical-error/ shows the pages checked are ones every visitor sees)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Reviewer rescored from 20 to 16. Pain 4->3: threads are low-volume, support called the popup and YouTube 153 cases site-specific or unreproducible, and students report hard breaks within hours. WTP 3->2: buyers resent $199/yr Tutor Pro; agency safe-update tools cost about $2 per site. Gap 3->2: Velprove's free tier includes one real-browser login monitor with a test subscriber account and names LMS sites as a fit. Feasibility 3->2: fragile selectors, Turnstile or hCaptcha on login, cross-origin video iframes, quiz submissions polluting analytics, and per-site browser ops. No rejection rule tripped; risk of drifting into per-site consulting. Reviewer's Velprove pricing came from a vendor-written dev.to guide, not the pricing page."
+      },
+      "inspiredBy": "https://wordpress.org/support/topic/wp-admin-inaccessible-since-the-4-0-7-update/",
+      "gateGap": {
+        "missing": [
+          "total 16 is below 22",
+          "pain 3 is below 4",
+          "willingnessToPay 2 is below 3"
+        ],
+        "closedBy": "The validation test's pre-orders close the largest gap, willingness to pay: 5 owners pre-paying $9/month would lift WTP to 3, and 40 free runs that surface real breakages would support pain 4. Reaching 22 also needs a feasibility answer to CAPTCHAs and theme selectors, shown by the free check working on most of the sites that try it."
+      }
+    }
+  ],
+  "runNotes": {
+    "weekday": "Tuesday",
+    "domainLens": "Teaching and training anywhere: K-12, corporate L&D, tutoring, homeschool",
+    "focusSources": [
+      "A14 Plugin and add-on support forums",
+      "B1 Teachers Pay Teachers and Etsy",
+      "C10 Change events: shutdowns, price rises, removed free tiers"
+    ],
+    "searches": [
+      "tutoring business owner complaint scheduling software price increase 2026",
+      "site:wordpress.org/support/plugin tutor lms certificate problem",
+      "online course platform shutting down 2026 creators migrate",
+      "music teacher studio software price increase 2026 alternative",
+      "Teachers Pay Teachers tutoring progress report template",
+      "corporate training compliance training records small business requirement 2026 deadline",
+      "site:wordpress.org/support/topic paid but not enrolled course after payment LMS",
+      "LearnDash WooCommerce order completed user not enrolled fix bulk re-enroll",
+      "Teachable Kajabi price increase 2026 course creators",
+      "homeschool co-op organizer software complaint scheduling fees 2026",
+      "HN Algolia comments: \"tutoring business\", \"my students\" invoice lessons, \"piano teacher\", \"driving school\", \"corporate training\" LMS",
+      "WordPress plugin API: webhook monitor, enrollment sync, payment reconciliation, lms, appointment booking, bulk enroll, class pass credits",
+      "TPT Browse/Search: tutoring log",
+      "Tutor LMS 4.0 update broke enrollments native ecommerce 2026",
+      "Stripe webhook endpoint disabled failing course access customers paid didn't get access small business",
+      "OSHA training certificate expiration tracking small contractor spreadsheet complaint",
+      "\"Thinkific\" price increase August 2026",
+      "tool to find customers who paid but were not enrolled in course WooCommerce LMS audit retroactive access",
+      "Hookdeck pricing webhook monitoring alerts failed deliveries",
+      "site:wordpress.org/support/topic class pack credits prepaid sessions remaining balance booking plugin 2026",
+      "tutor prepaid lesson package hours remaining tracking spreadsheet parents balance",
+      "dance studio owner recital costume orders sizes spreadsheet nightmare 2026",
+      "swim school makeup lessons tracking owner frustrated software 2026",
+      "continuing education credits tracking licensed professionals small clinic CE hours audit spreadsheet complaint forum 2026",
+      "Watchlist: Canvas bulk find replace across courses broken links November 2026",
+      "Watchlist: Shopify store ADA website demand letter received 2026 what to do",
+      "Watchlist: agentic browser completing Canvas quizzes online courses detection October 2026",
+      "Watchlist: health clinic website Meta pixel tracking audit small practice 2026",
+      "Watchlist: instructors completion credit homework AI feedback no grader budget 2026",
+      "Watchlist: specifications grading Canvas tokens resubmission tool 2026",
+      "Watchlist: course LLM API key students budget proxy instructors 2026"
+    ],
+    "unverifiedSignals": [
+      {
+        "url": "https://vendordirectory.shrm.org/company/925918/whitepapers/12629/are-your-training-records-compliant-what-california-s-new-2026-law-means-for-employers-everywhere",
+        "reason": "HTTP 403 bot check; the SB 513 claim comes from a search snippet only."
+      },
+      {
+        "url": "https://dev.to/riff9045/stripe-shows-an-active-subscription-but-my-app-didnt-unlock-debugging-webhooks-in-nextjs-28kh",
+        "reason": "HTTP 404."
+      },
+      {
+        "url": "https://wordpress.org/support/topic/webhook-endpoint-403-error/",
+        "reason": "Fetched, but dated 2021-07-09, too old to use."
+      },
+      {
+        "url": "https://www.teacherspayteachers.com/Browse/Search:tutoring%20log",
+        "reason": "Fetched and usable as a spend signal ($16 tutor billing sheet), but listings are undated, so not used as gate evidence."
+      }
+    ],
+    "rejectedCandidates": [
+      {
+        "title": "Paid-Access Watch (daily API reconciler of Stripe/PayPal/Square payments against WordPress LMS enrollments and bookings)",
+        "total": 17,
+        "reason": "Reviewer kill, from 23. WTP 2: owners resent $199/yr Tutor Pro, the failure is episodic and the student's own email detects it. Tutor's enrollment REST endpoints are Pro-only and Amelia's API is Elite-only. A free read-only reconciler (payment-truth-for-woocommerce) plus auto-enroll-tutor-lms already exist. Storing payment keys plus write-capable WP passwords is a real GDPR burden."
+      },
+      {
+        "title": "Paid, Not Enrolled (browser-only CSV diff of payments against enrollments)",
+        "total": 16,
+        "reason": "Reviewer kill after rescoping the above. Tutor LMS free and LearnPress cannot export enrolled students; where both exports exist, a spreadsheet lookup does the job; a check run once or twice is close to a novelty toy."
+      },
+      {
+        "title": "Prepaid lesson-package balance statements for solo tutors",
+        "total": 14,
+        "reason": "TheTutor Register already does exactly this, free in early access with a planned £8/month (https://app.thetutor.link/about); Teachworks, TutorCruncher and TutorBird cover it in full studio suites; a $16 TPT spreadsheet sells for the same job."
+      },
+      {
+        "title": "Class-pass credits for WordPress fitness studios (Amelia)",
+        "total": 14,
+        "reason": "One July 2026 question (https://wordpress.org/support/topic/credit-system-for-fitness-studio/); ClassPilot Booking and Baxtersweb Credit Packs already sell prepaid credits on WordPress."
+      },
+      {
+        "title": "Spam sign-up cleanup for course sites",
+        "total": 12,
+        "reason": "Free fixes exist (hCaptcha plus Bulk Delete), as the poster found (https://wordpress.org/support/topic/10k-spam-sign-ups-need-to-delete/)."
+      },
+      {
+        "title": "ThriveCart Learn migration helper",
+        "total": 13,
+        "reason": "ThriveCart migrates courses to ThriveAcademy automatically and lifetime licences keep courses free (https://kourses.com/?p=12006); the residual need is a one-time move."
+      },
+      {
+        "title": "Kajabi and Thinkific price-rise exit migrator",
+        "total": 13,
+        "reason": "Rival platforms (SchoolMaker and others) offer free migration; one-time need; price rises confirmed only on comparison blogs such as https://cartmango.com/thinkific-alternatives/."
+      },
+      {
+        "title": "California SB 513 training-records ledger for small employers",
+        "total": 14,
+        "reason": "No complaint evidence (pain capped at 3); the SHRM page returned a bot check (403); HR suites and compliance-training vendors already keep training records."
+      },
+      {
+        "title": "OSHA card expiry tracker for small contractors",
+        "total": 13,
+        "reason": "Crowded with free and cheap trackers (ExpirationReminder, Teambridge and others); no complaint found."
+      },
+      {
+        "title": "Cross-LMS certificate builder that survives updates",
+        "total": 15,
+        "reason": "Two certificate complaints (Tutor Certificate Builder nonce error, LearnPress certificate error), but every LMS bundles its own builder and a standalone tool cannot hook enrollment data without paid APIs."
+      },
+      {
+        "title": "Accessible certificate design for blind course creators",
+        "total": 12,
+        "reason": "A single LifterLMS thread about 3 months old; tiny market."
+      },
+      {
+        "title": "Dance studio recital costume ordering",
+        "total": 13,
+        "reason": "Jackrabbit, Studio Director with CostumeManager, and free form templates cover it; no dated owner complaint found."
+      },
+      {
+        "title": "Swim school make-up lesson credits",
+        "total": 12,
+        "reason": "Only vendor content; Jackrabbit Swim, iClassPro and others already sell make-up credit tracking."
+      },
+      {
+        "title": "CE hours tracker for licensed clinicians",
+        "total": 13,
+        "reason": "Regulators push CE Broker (Texas BHEC requires it from 2026-01-01) and many free trackers exist; no complaint found."
+      },
+      {
+        "title": "Music teacher website rebuild after site went down",
+        "total": 8,
+        "reason": "Rejected: a custom-development service, not a product (https://wordpress.org/support/topic/woodeo-8-10-yr-music-teachers-site-that-recently-went-down/)."
+      },
+      {
+        "title": "Medical question bank platform on Tutor LMS",
+        "total": 9,
+        "reason": "Rejected: a consulting and custom-architecture request (https://wordpress.org/support/topic/technical-consultation-full-architecture-for-a-medical-question-bank-platform/)."
+      }
+    ],
+    "watchlist": [
+      {
+        "title": "Cross-course content maintenance for Canvas design teams (bulk find, preview, replace and rollback for vendor-driven breakage)",
+        "targetCustomer": "Instructional designers and LMS admin teams who maintain content across dozens to thousands of Canvas courses.",
+        "problemStatement": "Vendor-side changes keep breaking content across many courses at once: Canvas's silent 2026-10-07 change to enhanceable_content tabs, Community guide links moving from /t5/ to /en/kb/, and LTI 1.3 migrations that leave embedded assignment links saying 'deleted'. Teams fix pages one at a time or with shared Tampermonkey scripts.",
+        "total": 21,
+        "missedGate": "competitiveGap 2: Atomic Search already sells account-wide Find & Replace for Canvas, and free community userscripts cover bulk search and link conversion; total below 22.",
+        "evidence": [
+          "https://community.instructure.com/en/discussion/667426/fix-or-alternative-to-class-enhanceable-content-tabs",
+          "https://community.instructure.com/en/discussion/667671/master-inventory-comprehensive-list-of-canvas-guide-titles-urls-for-link-remediation",
+          "https://community.instructure.com/en/discussion/667065/mcgraw-hill-lti-ltia-migration-broke-linked-course-assignment-links-in-pages-and-announcements",
+          "https://community.instructure.com/en/discussion/666768/bulk-find-replace-across-canvas-courses-with-tampermonkey",
+          "https://www.atomicjolt.com/post/streamline-course-updates-with-find-replace-in-atomic-search-for-canvas"
+        ],
+        "firstSeen": "2026-10-31"
+      },
+      {
+        "title": "ADA demand-letter remediation ledger for small Shopify and WordPress stores",
+        "targetCustomer": "Small online store owners who have received an ADA website demand letter or lawsuit",
+        "problemStatement": "Owners who are served do not know where to start, get pitched overlays, and have no dated record of good-faith fixes mapped to the allegations.",
+        "total": 20,
+        "missedGate": "No complaint dated within 180 days (the served owners posted in 2023 to 2025); competitiveGap 2 against remediation vendors and free axe/WAVE.",
+        "evidence": [
+          "https://community.shopify.com/t/232788",
+          "https://community.shopify.com/t/230778"
+        ],
+        "firstSeen": "2026-11-02"
+      },
+      {
+        "title": "Agent Exposure Audit for asynchronous online programs",
+        "targetCustomer": "Online program directors and instructional designers running asynchronous courses where proctoring is not feasible.",
+        "problemStatement": "Agentic browsers and cheap bots now complete Canvas New Quizzes and whole courses; quiz logs cannot prove it, and programs do not know which of their assessments an agent can finish unaided.",
+        "total": 20,
+        "missedGate": "willingnessToPay 3 and competitiveGap 3 (Cursive sells LMS agent detection; the existing Assignment Stress Test idea covers testing assignments against AI); only one fetched item is within 90 days; total below 22. 2026-11-01: the CSU TILT page confirms agents complete Canvas quizzes but is undated and recommends the LockDown Browser campuses already license.",
+        "evidence": [
+          "https://community.instructure.com/en/discussion/667216/help-with-detecting-bots-in-new-quizzes",
+          "https://www.pangram.com/it/blog/agentic-browsers-present-risks-to-universities",
+          "https://tilt.colostate.edu/new-ai-browsers-can-complete-canvas-quizzes/"
+        ],
+        "firstSeen": "2026-10-31"
+      },
+      {
+        "title": "Attempt-First Feedback Desk (AI first-pass feedback on ungraded practice with escalation to TAs)",
+        "targetCustomer": "Instructors of large CS and STEM courses who are moving homework to completion credit because of AI and have no grader budget.",
+        "problemStatement": "Homework is being de-graded, but instructors still want students to practice and get feedback; there is no grader budget, and students who used to come to office hours now go to general-purpose AI.",
+        "total": 19,
+        "missedGate": "willingnessToPay 2 (instructors cite no grader budget) and competitiveGap 2 (CS50 Duck, PingPong, Gradescope AI features); risks being an AI wrapper.",
+        "evidence": [
+          "https://thelastsoftwareengineer.substack.com/p/how-i-changed-teaching-after-ai-managed",
+          "https://news.ycombinator.com/item?id=49858507",
+          "https://news.ycombinator.com/item?id=50236951",
+          "https://news.ycombinator.com/item?id=50252085"
+        ],
+        "firstSeen": "2026-10-31"
+      },
+      {
+        "title": "Alternative-grading layer for Canvas and autograders",
+        "targetCustomer": "CS and STEM instructors using specifications, standards-based or mastery grading on Canvas with PrairieLearn or Gradescope.",
+        "problemStatement": "LMSs and autograders only understand points, so instructors fake standards-based grades with zero-point assessments, hacky scripts and spreadsheets to handle learning targets, resubmission tokens and letter-grade bundles.",
+        "total": 19,
+        "missedGate": "pain 3 (one GitHub RFC with 2 thumbs-up plus a position paper); total below 22.",
+        "evidence": [
+          "https://github.com/PrairieLearn/PrairieLearn/issues/14285",
+          "https://vtechworks.lib.vt.edu/items/bbdb3a44-8683-4434-be3a-8b8a00218cae",
+          "https://available-inventions.umich.edu/product/gradecraft"
+        ],
+        "firstSeen": "2026-10-30"
+      },
+      {
+        "title": "Course LLM key broker",
+        "targetCustomer": "Instructors teaching courses that use LLM APIs or coding agents without a campus AI gateway.",
+        "problemStatement": "Instructors need per-student capped API keys with model allowlists and term-end revocation; today they share keys, script OpenRouter or LiteLLM, or make students pay, and student keys leak.",
+        "total": 19,
+        "missedGate": "pain 3 and willingnessToPay 2; campus gateways, Standard Compute, Anthropic per-user spend limits and OpenAI project limits are closing the gap.",
+        "evidence": [
+          "https://community.openai.com/t/recommended-way-to-deal-with-api-key-s-for-students-in-programming-courses/335259",
+          "https://www.s-anand.net/blog/leaked-key-sociology/",
+          "https://github.com/BerriAI/litellm/issues/28750",
+          "https://standardcompute.com/llm-api-for-classrooms"
+        ],
+        "firstSeen": "2026-10-30"
+      },
+      {
+        "title": "Health-page tracker audit for small health and wellness practices (HIPAA, Washington MHMDA)",
+        "targetCustomer": "Therapists, clinics, med spas and wellness shops with booking or intake pages",
+        "problemStatement": "Third-party widgets and pixels send page URLs and IPs from health-intent pages, and vendors will not sign a BAA.",
+        "total": 19,
+        "missedGate": "Only 1 complaint (pain 3); Sift Health already sells this at $39/month draft pricing.",
+        "evidence": [
+          "https://wordpress.org/support/topic/elementor-ally-data-handling-baa-confirmation/",
+          "https://sift-health.pages.dev/pricing/"
+        ],
+        "firstSeen": "2026-11-02"
+      }
+    ],
+    "caveats": "No candidate cleared the gate. The strongest pain cluster (payments that never became enrollments or bookings, 6 owner threads from Aug to Oct 2026) was killed twice in review: once as an API-connected monitor (17) and once as a browser-only CSV check (16). Student Journey Check ships as provisional at 16, after review cut it from 20, chiefly because a free real-browser login monitor exists and buyers resent even a $199/yr licence. The Velprove pricing comes from a vendor-written guide, not a fetched pricing page. The ManageWP evidence date is the fetch date. The TPT source (B1) yielded only an undated $16 spend signal. The C10 change events (ThriveCart Learn retiring at the end of 2026, Thinkific's 10% rise, Kajabi's January rise) are each served by free vendor migrations. Watchlist searches found no new fetched evidence, so all 7 entries carry forward unchanged."
+  }
+}

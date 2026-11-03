@@ -65,18 +65,32 @@
       "workingPaths": []
     },
     "api.wordpress.org": {
-      "attempts": 6,
+      "attempts": 13,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-02",
-      "lastOk": "2026-11-02",
-      "ok": 6,
+      "lastAttempt": "2026-11-03",
+      "lastOk": "2026-11-03",
+      "ok": 13,
       "outcomes": {
-        "ok": 6
+        "ok": 13
       },
       "workingPaths": [
         "curl https://api.wordpress.org/plugins/info/1.2/?action=query_plugins&request[search]=accessibility&request[per_page]=15",
         "curl https://api.wordpress.org/plugins/info/1.2/?action=query_plugins&request[search]=alt%20text&request[per_page]=15",
         "curl https://api.wordpress.org/plugins/info/1.2/?action=query_plugins&request[search]=cookie+consent&request[per_page]=15"
+      ]
+    },
+    "app.thetutor.link": {
+      "attempts": 2,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-03",
+      "lastOk": "2026-11-03",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "curl https://app.thetutor.link/about",
+        "curl https://app.thetutor.link/"
       ]
     },
     "apuo.ca": {
@@ -100,6 +114,19 @@
         "empty": 1
       },
       "workingPaths": []
+    },
+    "cartmango.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-03",
+      "lastOk": "2026-11-03",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://cartmango.com/thinkific-alternatives/"
+      ]
     },
     "coddy.tech": {
       "attempts": 1,
@@ -233,6 +260,17 @@
       },
       "workingPaths": []
     },
+    "dev.to": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-03",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_404": 1
+      },
+      "workingPaths": []
+    },
     "discuss.pixls.us": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -272,6 +310,19 @@
       "workingPaths": [
         "curl https://dsp.berkeley.edu/faculty/proctoring",
         "curl https://dsp.berkeley.edu/how-submit-testing-agreement-your-class"
+      ]
+    },
+    "ecosire.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-03",
+      "lastOk": "2026-11-03",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://ecosire.com/apps/woocommerce/woo-lms-sell-courses"
       ]
     },
     "elementor.com": {
@@ -409,6 +460,19 @@
         "curl https://getvela.com/pricing"
       ]
     },
+    "ghostinspector.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-03",
+      "lastOk": "2026-11-03",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://ghostinspector.com/pricing/"
+      ]
+    },
     "github.com": {
       "attempts": 3,
       "evidenceItems": 1,
@@ -449,19 +513,32 @@
       ]
     },
     "hn.algolia.com": {
-      "attempts": 22,
+      "attempts": 27,
       "evidenceItems": 1,
-      "lastAttempt": "2026-11-02",
-      "lastOk": "2026-11-02",
-      "ok": 18,
+      "lastAttempt": "2026-11-03",
+      "lastOk": "2026-11-03",
+      "ok": 23,
       "outcomes": {
         "empty": 4,
-        "ok": 18
+        "ok": 23
       },
       "workingPaths": [
         "curl https://hn.algolia.com/api/v1/search_by_date?query=%22alt%20text%22&tags=comment&hitsPerPage=30",
         "curl https://hn.algolia.com/api/v1/search_by_date?query=%22European%20Accessibility%20Act%22&tags=comment&hitsPerPage=30",
         "curl https://hn.algolia.com/api/v1/search_by_date?query=%22I%20would%20pay%22&tags=comment&hitsPerPage=40"
+      ]
+    },
+    "hookdeck.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-03",
+      "lastOk": "2026-11-03",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://hookdeck.com/pricing"
       ]
     },
     "its.umich.edu": {
@@ -475,6 +552,19 @@
       },
       "workingPaths": []
     },
+    "kourses.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-03",
+      "lastOk": "2026-11-03",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://kourses.com/?p=12006"
+      ]
+    },
     "latexformat.netlify.app": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -485,6 +575,19 @@
         "http_404": 1
       },
       "workingPaths": []
+    },
+    "managewp.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-03",
+      "lastOk": "2026-11-03",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://managewp.com/pricing"
+      ]
     },
     "meet.ribblr.com": {
       "attempts": 3,
@@ -522,6 +625,19 @@
         "http_403": 1
       },
       "workingPaths": []
+    },
+    "pricingsaas.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-03",
+      "lastOk": "2026-11-03",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://pricingsaas.com/companies/teachworks"
+      ]
     },
     "rtl.berkeley.edu": {
       "attempts": 1,
@@ -623,6 +739,19 @@
         "webfetch https://trustmrr.com/startup/exam-predictor"
       ]
     },
+    "tutorlms.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-03",
+      "lastOk": "2026-11-03",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://tutorlms.com/pricing/"
+      ]
+    },
     "ucsb-ds.github.io": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -635,6 +764,17 @@
       "workingPaths": [
         "curl https://ucsb-ds.github.io/pl-dev-team/topics/canvas"
       ]
+    },
+    "vendordirectory.shrm.org": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-03",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_403": 1
+      },
+      "workingPaths": []
     },
     "webaim.org": {
       "attempts": 3,
@@ -662,18 +802,44 @@
       "workingPaths": []
     },
     "wordpress.org": {
-      "attempts": 16,
-      "evidenceItems": 3,
-      "lastAttempt": "2026-11-02",
-      "lastOk": "2026-11-02",
-      "ok": 16,
+      "attempts": 41,
+      "evidenceItems": 8,
+      "lastAttempt": "2026-11-03",
+      "lastOk": "2026-11-03",
+      "ok": 41,
       "outcomes": {
-        "ok": 16
+        "ok": 41
       },
       "workingPaths": [
         "curl https://wordpress.org/support/plugin/wp-accessibility/",
         "curl https://wordpress.org/support/plugin/pojo-accessibility/",
         "curl https://wordpress.org/support/plugin/pojo-accessibility/reviews/?filter=1"
+      ]
+    },
+    "wpamelia.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-03",
+      "lastOk": "2026-11-03",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://wpamelia.com/pricing/"
+      ]
+    },
+    "wpengine.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-03",
+      "lastOk": "2026-11-03",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://wpengine.com/smart-plugin-manager/"
       ]
     },
     "www.capterra.com": {
@@ -697,6 +863,19 @@
         "http_403": 1
       },
       "workingPaths": []
+    },
+    "www.checklyhq.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-03",
+      "lastOk": "2026-11-03",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://www.checklyhq.com/pricing/"
+      ]
     },
     "www.chronicle.com": {
       "attempts": 1,
@@ -899,6 +1078,19 @@
       },
       "workingPaths": []
     },
+    "www.teacherspayteachers.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-03",
+      "lastOk": "2026-11-03",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://www.teacherspayteachers.com/Browse/Search:tutoring%20log"
+      ]
+    },
     "www.the-standard.org": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -911,6 +1103,17 @@
       "workingPaths": [
         "curl https://www.the-standard.org/news/testing-center-no-longer-proctoring-exams-for-online-courses-due-to-capacity-issues/article_46dd34a2-5813-425e-90d2-e9c325473dc2.html"
       ]
+    },
+    "www.tutorbird.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-03",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "empty": 1
+      },
+      "workingPaths": []
     },
     "www.valueaddedresource.net": {
       "attempts": 1,
@@ -968,10 +1171,10 @@
     "A12": {
       "candidates": 10,
       "fetchFail": 1,
-      "fetchOk": 20,
-      "lastUsed": "2026-11-02",
-      "runs": 3,
-      "searches": 24,
+      "fetchOk": 25,
+      "lastUsed": "2026-11-03",
+      "runs": 4,
+      "searches": 29,
       "selected": 0
     },
     "A13": {
@@ -984,13 +1187,13 @@
       "selected": 0
     },
     "A14": {
-      "candidates": 7,
+      "candidates": 15,
       "fetchFail": 0,
-      "fetchOk": 18,
-      "lastUsed": "2026-11-02",
-      "runs": 2,
-      "searches": 8,
-      "selected": 1
+      "fetchOk": 43,
+      "lastUsed": "2026-11-03",
+      "runs": 3,
+      "searches": 13,
+      "selected": 2
     },
     "A3": {
       "candidates": 5,
@@ -1029,21 +1232,21 @@
       "selected": 0
     },
     "B1": {
-      "candidates": 3,
+      "candidates": 4,
       "fetchFail": 0,
-      "fetchOk": 2,
-      "lastUsed": "2026-10-31",
-      "runs": 1,
-      "searches": 3,
+      "fetchOk": 3,
+      "lastUsed": "2026-11-03",
+      "runs": 2,
+      "searches": 5,
       "selected": 0
     },
     "B10": {
       "candidates": 5,
       "fetchFail": 0,
-      "fetchOk": 6,
-      "lastUsed": "2026-11-02",
-      "runs": 2,
-      "searches": 6,
+      "fetchOk": 13,
+      "lastUsed": "2026-11-03",
+      "runs": 3,
+      "searches": 13,
       "selected": 0
     },
     "B3": {
@@ -1083,12 +1286,12 @@
       "selected": 0
     },
     "C10": {
-      "candidates": 9,
-      "fetchFail": 7,
-      "fetchOk": 10,
-      "lastUsed": "2026-11-02",
-      "runs": 3,
-      "searches": 12,
+      "candidates": 11,
+      "fetchFail": 8,
+      "fetchOk": 13,
+      "lastUsed": "2026-11-03",
+      "runs": 4,
+      "searches": 17,
       "selected": 1
     },
     "C2": {
@@ -1119,12 +1322,12 @@
       "selected": 0
     },
     "C5": {
-      "candidates": 4,
-      "fetchFail": 0,
+      "candidates": 7,
+      "fetchFail": 1,
       "fetchOk": 6,
-      "lastUsed": "2026-11-02",
-      "runs": 3,
-      "searches": 12,
+      "lastUsed": "2026-11-03",
+      "runs": 4,
+      "searches": 15,
       "selected": 0
     },
     "C6": {
@@ -1231,21 +1434,21 @@
     }
   ],
   "funnel": {
-    "candidates": 94,
+    "candidates": 110,
     "passedGate": 1,
-    "passedRejectRules": 77,
-    "provisional": 2,
-    "reviewKilled": 6,
+    "passedRejectRules": 91,
+    "provisional": 3,
+    "reviewKilled": 8,
     "validated": 0,
-    "watchlist": 24
+    "watchlist": 31
   },
   "gateFailures": {
     "painBelow4": 3,
-    "rejectRule": 17,
-    "reviewKill": 6,
-    "totalBelowMin": 66
+    "rejectRule": 19,
+    "reviewKill": 8,
+    "totalBelowMin": 77
   },
-  "generated": "2026-11-02",
+  "generated": "2026-11-03",
   "prefer": [
     {
       "client": "webfetch",
@@ -1253,7 +1456,7 @@
       "id": "A14",
       "name": "Plugin and add-on support forums",
       "path": "https://wordpress.org/support/plugin/{slug}/",
-      "selectedIdeas": 1,
+      "selectedIdeas": 2,
       "status": "ok"
     },
     {
@@ -1455,6 +1658,6 @@
       "status": "ok"
     }
   ],
-  "runsInWindow": 6,
+  "runsInWindow": 7,
   "windowDays": 45
 }
