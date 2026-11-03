@@ -574,6 +574,14 @@
       "implementedOn": "2026-11-03",
       "notes": "Vite + TypeScript page plus one stateless Netlify function (POST /api/step, GET /api/health). A test student walks eight Tutor LMS steps: home (critical error, maintenance, DB error, PHP warnings, Cloudflare challenge), login via /wp-login.php or a custom page (wrong password, CAPTCHA, 2FA and silent failure told apart, hidden fields kept), dashboard (login bounce, popup already open, course listed), course (enrolled vs Enroll Now, first lesson link), lesson (no-access text, YouTube no-referrer Error 153, empty players), quiz (opened, never started), certificate (Nonce not matched) and price as a logged-out visitor (struck-through sale prices, several currency formats). The browser calls the function once per step and carries the session cookies, so each call fits Netlify's 10 s limit (8.5 s network budget per step); the password goes only to the login step and nothing is stored. Requests are locked to the host typed in, each hop is DNS-checked against private/reserved ranges and non-web ports, redirects followed by hand. The same step code runs in the browser against a built-in demo academy with seven breakages from Aug-Oct 2026 Tutor support threads. The idea's Playwright worker, screenshots, Supabase schedules and daily email were replaced by on-demand HTML reading; alert email is generated as text to copy. No AI or paid API. 141 vitest tests, 99% statement coverage. First deploy's function crashed (esbuild ESM banner used import.meta, which Netlify's CJS re-bundle leaves undefined); fixed in 766d713 and redeployed, /api/health OK.",
       "publicNotes": "Pretends to be one of your students and walks through your Tutor LMS course site the way they do: logging in, opening the dashboard, a course, a lesson and its video, a quiz, a certificate, and the price a new customer sees. Each step comes back as working, worth a look, or broken, in plain words with what to try next and an alert you can forward to whoever looks after your site. It is for coaches, tutors and small academies who sell courses from their own WordPress site, to run right after a plugin update. Limitation: it reads pages the way your server sends them and runs when you press the button, so problems that only appear when a script runs or a video actually plays can be missed, and there is no daily automatic check yet."
+    },
+    {
+      "ref": {
+        "date": "2026-10-25",
+        "n": 3
+      },
+      "placeholder": true,
+      "notes": "In progress since 2026-11-03"
     }
   ]
 }
