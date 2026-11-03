@@ -624,10 +624,19 @@
       "group": "B",
       "name": "Freelance build requests",
       "evidence": "spend",
-      "status": "unknown",
-      "lastVerified": "2026-11-01",
-      "paths": [],
-      "notes": "Upwork and Contra are unprobed and likely to need a login. Probe once, then set the status."
+      "status": "ok-curl",
+      "lastVerified": "2026-11-03",
+      "paths": [
+        {
+          "url": "https://www.freelancer.com/api/projects/0.1/projects/active/?query={q}&limit=20&full_description=true",
+          "client": "curl",
+          "verified": "2026-11-03",
+          "result": "Public JSON, no key: projects with time_submitted, title, budget, currency and bid_stats. The query parameter barely narrows results, so filter titles locally.",
+          "probeUrl": "https://www.freelancer.com/api/projects/0.1/projects/active/?limit=3",
+          "expect": "time_submitted"
+        }
+      ],
+      "notes": "Upwork returns HTTP 403 and contra.com/jobs is a JavaScript shell (2026-11-03). freelancer.com's public projects API works with curl. A build request is a spend signal for a custom build, not proof that a product would sell."
     },
     {
       "id": "B10",

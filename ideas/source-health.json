@@ -42,6 +42,19 @@
     }
   ],
   "byHost": {
+    "adnabu.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-03",
+      "lastOk": "2026-11-03",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://adnabu.com/free-tools/misrepresentation-checker"
+      ]
+    },
     "api.github.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -53,25 +66,41 @@
       },
       "workingPaths": []
     },
-    "api.stackexchange.com": {
-      "attempts": 1,
+    "api.openalex.org": {
+      "attempts": 3,
       "evidenceItems": 0,
-      "lastAttempt": "2026-10-30",
+      "lastAttempt": "2026-11-03",
       "lastOk": null,
       "ok": 0,
       "outcomes": {
-        "allowlist": 1
+        "http_429": 3
       },
       "workingPaths": []
     },
-    "api.wordpress.org": {
-      "attempts": 13,
+    "api.stackexchange.com": {
+      "attempts": 4,
       "evidenceItems": 0,
       "lastAttempt": "2026-11-03",
       "lastOk": "2026-11-03",
-      "ok": 13,
+      "ok": 3,
       "outcomes": {
-        "ok": 13
+        "allowlist": 1,
+        "ok": 3
+      },
+      "workingPaths": [
+        "curl https://api.stackexchange.com/2.3/search/advanced?site=academia&q=spreadsheet&order=desc&sort=creation&pagesize=20",
+        "curl https://api.stackexchange.com/2.3/questions?site=cseducators&order=desc&sort=creation&pagesize=20&filter=withbody",
+        "curl https://api.stackexchange.com/2.3/questions?site=academia&order=desc&sort=creation&pagesize=50&filter=withbody"
+      ]
+    },
+    "api.wordpress.org": {
+      "attempts": 14,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-03",
+      "lastOk": "2026-11-03",
+      "ok": 14,
+      "outcomes": {
+        "ok": 14
       },
       "workingPaths": [
         "curl https://api.wordpress.org/plugins/info/1.2/?action=query_plugins&request[search]=accessibility&request[per_page]=15",
@@ -91,6 +120,21 @@
       "workingPaths": [
         "curl https://app.thetutor.link/about",
         "curl https://app.thetutor.link/"
+      ]
+    },
+    "apps.shopify.com": {
+      "attempts": 5,
+      "evidenceItems": 5,
+      "lastAttempt": "2026-11-03",
+      "lastOk": "2026-11-03",
+      "ok": 5,
+      "outcomes": {
+        "ok": 5
+      },
+      "workingPaths": [
+        "curl https://apps.shopify.com/gmc-compliance-checker",
+        "curl https://apps.shopify.com/merchant-guard",
+        "curl https://apps.shopify.com/torhen-gmc-rescue"
       ]
     },
     "apuo.ca": {
@@ -152,6 +196,17 @@
         "curl https://codeboard.io/"
       ]
     },
+    "community.cal.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-03",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "timeout": 1
+      },
+      "workingPaths": []
+    },
     "community.cloudflare.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -199,6 +254,21 @@
       },
       "workingPaths": []
     },
+    "community.n8n.io": {
+      "attempts": 7,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-03",
+      "lastOk": "2026-11-03",
+      "ok": 7,
+      "outcomes": {
+        "ok": 7
+      },
+      "workingPaths": [
+        "curl https://community.n8n.io/search.json?q=invoice%20small%20business%20after%3A2026-09-01",
+        "curl https://community.n8n.io/t/315077.json",
+        "curl https://community.n8n.io/t/321414.json"
+      ]
+    },
     "community.openhab.org": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -211,18 +281,32 @@
       "workingPaths": []
     },
     "community.shopify.com": {
-      "attempts": 9,
-      "evidenceItems": 2,
-      "lastAttempt": "2026-11-02",
-      "lastOk": "2026-11-02",
-      "ok": 9,
+      "attempts": 26,
+      "evidenceItems": 7,
+      "lastAttempt": "2026-11-03",
+      "lastOk": "2026-11-03",
+      "ok": 25,
       "outcomes": {
-        "ok": 9
+        "empty": 1,
+        "ok": 25
       },
       "workingPaths": [
         "curl https://community.shopify.com/search.json?q=ADA%20lawsuit%20after%3A2026-05-01",
         "curl https://community.shopify.com/search.json?q=accessibility%20demand%20letter%20after%3A2026-03-01",
         "curl https://community.shopify.com/search.json?q=cookie%20consent%20pixel%20after%3A2026-08-01"
+      ]
+    },
+    "community.squareup.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-03",
+      "lastOk": "2026-11-03",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://community.squareup.com/t5/forums/searchpage/tab/message?q=appointments"
       ]
     },
     "complianz.io": {
@@ -246,6 +330,17 @@
       "ok": 0,
       "outcomes": {
         "http_404": 1
+      },
+      "workingPaths": []
+    },
+    "contra.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-03",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "empty": 1
       },
       "workingPaths": []
     },
@@ -360,6 +455,20 @@
         "curl https://erank.com/pricing"
       ]
     },
+    "export.arxiv.org": {
+      "attempts": 2,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-03",
+      "lastOk": "2026-11-03",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "curl https://export.arxiv.org/api/query?search_query=all:%22small%20business%22%20AND%20all:software&sortBy=submittedDate&sortOrder=descending&max_results=10",
+        "curl https://export.arxiv.org/api/query?search_query=all:%22shopping%20agent%22&sortBy=submittedDate&sortOrder=descending&max_results=10"
+      ]
+    },
     "flippa.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -370,6 +479,20 @@
         "empty": 1
       },
       "workingPaths": []
+    },
+    "flyingfish.ie": {
+      "attempts": 2,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-03",
+      "lastOk": "2026-11-03",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "curl https://flyingfish.ie/daily-form-testing/",
+        "curl https://flyingfish.ie/website-care/"
+      ]
     },
     "forum.bubble.io": {
       "attempts": 2,
@@ -386,30 +509,47 @@
       ]
     },
     "forum.ghost.org": {
-      "attempts": 1,
+      "attempts": 3,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-02",
-      "lastOk": "2026-11-02",
-      "ok": 1,
+      "lastAttempt": "2026-11-03",
+      "lastOk": "2026-11-03",
+      "ok": 3,
       "outcomes": {
-        "ok": 1
+        "ok": 3
       },
       "workingPaths": [
-        "curl https://forum.ghost.org/search.json?q=cookie%20after%3A2026-06-01"
+        "curl https://forum.ghost.org/search.json?q=cookie%20after%3A2026-06-01",
+        "curl https://forum.ghost.org/search.json?q=stripe%20members%20after%3A2026-09-01",
+        "curl https://forum.ghost.org/t/64074.json"
       ]
     },
     "forum.invoiceninja.com": {
+      "attempts": 3,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-03",
+      "lastOk": "2026-11-03",
+      "ok": 3,
+      "outcomes": {
+        "ok": 3
+      },
+      "workingPaths": [
+        "curl https://forum.invoiceninja.com/search.json?q=sales%20tax%20after%3A2026-06-01",
+        "curl https://forum.invoiceninja.com/t/adding-sales-tax-to-washington-clients/14575.json",
+        "curl https://forum.invoiceninja.com/search.json?q=quote%20after%3A2026-09-01"
+      ]
+    },
+    "forum.mautic.org": {
       "attempts": 2,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-02",
-      "lastOk": "2026-11-02",
+      "lastAttempt": "2026-11-03",
+      "lastOk": "2026-11-03",
       "ok": 2,
       "outcomes": {
         "ok": 2
       },
       "workingPaths": [
-        "curl https://forum.invoiceninja.com/search.json?q=sales%20tax%20after%3A2026-06-01",
-        "curl https://forum.invoiceninja.com/t/adding-sales-tax-to-washington-clients/14575.json"
+        "curl https://forum.mautic.org/latest.json",
+        "curl https://forum.mautic.org/t/38507.json"
       ]
     },
     "forum.obsidian.md": {
@@ -687,6 +827,19 @@
         "curl https://sift-health.pages.dev/pricing/"
       ]
     },
+    "support.google.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-03",
+      "lastOk": "2026-11-03",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://support.google.com/merchants/answer/6150127"
+      ]
+    },
     "themarkup.org": {
       "attempts": 2,
       "evidenceItems": 1,
@@ -843,13 +996,14 @@
       ]
     },
     "www.capterra.com": {
-      "attempts": 1,
+      "attempts": 2,
       "evidenceItems": 0,
-      "lastAttempt": "2026-10-31",
+      "lastAttempt": "2026-11-03",
       "lastOk": null,
       "ok": 0,
       "outcomes": {
-        "http_403": 1
+        "http_403": 1,
+        "http_404": 1
       },
       "workingPaths": []
     },
@@ -997,6 +1151,21 @@
         "curl https://www.federalregister.gov/api/v1/documents.json?per_page=15&order=newest&conditions[term]=%22small+entity+compliance+guide%22"
       ]
     },
+    "www.freelancer.com": {
+      "attempts": 4,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-03",
+      "lastOk": "2026-11-03",
+      "ok": 4,
+      "outcomes": {
+        "ok": 4
+      },
+      "workingPaths": [
+        "curl https://www.freelancer.com/api/projects/0.1/projects/active/?query=booking%20system&limit=20&full_description=true",
+        "curl https://www.freelancer.com/api/projects/0.1/projects/active/?query=small%20business%20automation&limit=20&full_description=true",
+        "curl https://www.freelancer.com/api/projects/0.1/projects/active/?query=contact%20form%20not%20working&limit=20"
+      ]
+    },
     "www.govinfo.gov": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -1009,6 +1178,17 @@
       "workingPaths": [
         "curl https://www.govinfo.gov/content/pkg/FR-2026-05-11/html/2026-09266.htm"
       ]
+    },
+    "www.higheredjobs.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-03",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "empty": 1
+      },
+      "workingPaths": []
     },
     "www.mondaq.com": {
       "attempts": 1,
@@ -1044,6 +1224,19 @@
         "http_403": 1
       },
       "workingPaths": []
+    },
+    "www.onlinejobs.ph": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-03",
+      "lastOk": "2026-11-03",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://www.onlinejobs.ph/jobseekers/job/1616633"
+      ]
     },
     "www.pulse.bot": {
       "attempts": 1,
@@ -1115,6 +1308,30 @@
       },
       "workingPaths": []
     },
+    "www.uptimia.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-03",
+      "lastOk": "2026-11-03",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://www.uptimia.com/form-monitoring"
+      ]
+    },
+    "www.upwork.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-03",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_403": 1
+      },
+      "workingPaths": []
+    },
     "www.valueaddedresource.net": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -1178,13 +1395,13 @@
       "selected": 0
     },
     "A13": {
-      "candidates": 9,
-      "fetchFail": 6,
-      "fetchOk": 20,
-      "lastUsed": "2026-11-02",
-      "runs": 2,
-      "searches": 19,
-      "selected": 0
+      "candidates": 19,
+      "fetchFail": 7,
+      "fetchOk": 48,
+      "lastUsed": "2026-11-03",
+      "runs": 3,
+      "searches": 33,
+      "selected": 1
     },
     "A14": {
       "candidates": 15,
@@ -1205,12 +1422,12 @@
       "selected": 0
     },
     "A5": {
-      "candidates": 2,
+      "candidates": 3,
       "fetchFail": 1,
-      "fetchOk": 2,
-      "lastUsed": "2026-10-31",
-      "runs": 2,
-      "searches": 7,
+      "fetchOk": 5,
+      "lastUsed": "2026-11-03",
+      "runs": 3,
+      "searches": 10,
       "selected": 0
     },
     "A7": {
@@ -1285,6 +1502,15 @@
       "searches": 1,
       "selected": 0
     },
+    "B9": {
+      "candidates": 1,
+      "fetchFail": 2,
+      "fetchOk": 4,
+      "lastUsed": "2026-11-03",
+      "runs": 1,
+      "searches": 6,
+      "selected": 0
+    },
     "C10": {
       "candidates": 11,
       "fetchFail": 8,
@@ -1296,11 +1522,11 @@
     },
     "C2": {
       "candidates": 3,
-      "fetchFail": 0,
-      "fetchOk": 2,
-      "lastUsed": "2026-10-30",
-      "runs": 1,
-      "searches": 6,
+      "fetchFail": 3,
+      "fetchOk": 4,
+      "lastUsed": "2026-11-03",
+      "runs": 2,
+      "searches": 11,
       "selected": 0
     },
     "C3": {
@@ -1314,11 +1540,11 @@
     },
     "C4": {
       "candidates": 8,
-      "fetchFail": 4,
-      "fetchOk": 2,
-      "lastUsed": "2026-10-31",
-      "runs": 2,
-      "searches": 18,
+      "fetchFail": 5,
+      "fetchOk": 3,
+      "lastUsed": "2026-11-03",
+      "runs": 3,
+      "searches": 20,
       "selected": 0
     },
     "C5": {
@@ -1434,19 +1660,19 @@
     }
   ],
   "funnel": {
-    "candidates": 110,
-    "passedGate": 1,
-    "passedRejectRules": 91,
-    "provisional": 3,
-    "reviewKilled": 8,
+    "candidates": 123,
+    "passedGate": 2,
+    "passedRejectRules": 103,
+    "provisional": 4,
+    "reviewKilled": 9,
     "validated": 0,
-    "watchlist": 31
+    "watchlist": 32
   },
   "gateFailures": {
     "painBelow4": 3,
-    "rejectRule": 19,
-    "reviewKill": 8,
-    "totalBelowMin": 77
+    "rejectRule": 20,
+    "reviewKill": 9,
+    "totalBelowMin": 87
   },
   "generated": "2026-11-03",
   "prefer": [
@@ -1457,6 +1683,15 @@
       "name": "Plugin and add-on support forums",
       "path": "https://wordpress.org/support/plugin/{slug}/",
       "selectedIdeas": 2,
+      "status": "ok"
+    },
+    {
+      "client": "webfetch",
+      "evidence": "complaint",
+      "id": "A13",
+      "name": "Discourse forums, any niche",
+      "path": "https://{host}/search.json?q={q}+after%3A{YYYY-MM-DD}",
+      "selectedIdeas": 1,
       "status": "ok"
     },
     {
@@ -1492,15 +1727,6 @@
       "id": "A12",
       "name": "Ask HN and HN comments",
       "path": "https://hn.algolia.com/api/v1/search_by_date?query={q}&tags=comment&hitsPerPage=20",
-      "selectedIdeas": 0,
-      "status": "ok"
-    },
-    {
-      "client": "webfetch",
-      "evidence": "complaint",
-      "id": "A13",
-      "name": "Discourse forums, any niche",
-      "path": "https://{host}/search.json?q={q}+after%3A{YYYY-MM-DD}",
       "selectedIdeas": 0,
       "status": "ok"
     },
@@ -1658,6 +1884,6 @@
       "status": "ok"
     }
   ],
-  "runsInWindow": 7,
+  "runsInWindow": 8,
   "windowDays": 45
 }

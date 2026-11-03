@@ -606,3 +606,4 @@
 | 2026-11-01 | Embed Rescue | EdTech: Higher Ed | Multi-week | 15 | provisional |  |
 | 2026-11-02 | Consent Leak Watch | Accessibility & Compliance | Multi-week | 16 | provisional |  |
 | 2026-11-03 | Student Journey Check | Small Business Ops | Multi-week | 16 | provisional |  |
+| 2026-11-03 | Misrepresentation Preflight | Accessibility & Compliance | Multi-week | 17 | provisional |  |

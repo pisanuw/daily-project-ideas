@@ -197,6 +197,197 @@
         ],
         "closedBy": "The validation test's pre-orders close the largest gap, willingness to pay: 5 owners pre-paying $9/month would lift WTP to 3, and 40 free runs that surface real breakages would support pain 4. Reaching 22 also needs a feasibility answer to CAPTCHAs and theme selectors, shown by the free check working on most of the sites that try it."
       }
+    },
+    {
+      "n": 2,
+      "title": "Misrepresentation Preflight",
+      "slug": "misrepresentation-preflight",
+      "category": "Accessibility & Compliance",
+      "smallBusiness": true,
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Data & Visualization",
+      "summary": "For small online stores suspended, or afraid of being suspended, by Google Merchant Center for 'Misrepresentation': a cross-page consistency check that shows where the store contradicts itself before the owner spends a review attempt.",
+      "public": {
+        "summary": "Before you ask Google to look at your store again, see every place where your store tells shoppers two different things.",
+        "problem": "Your Google Shopping account gets suspended for 'misrepresentation' and Google won't say what it found. You fix the footer, rewrite a policy, and ask for a review, and it comes back rejected again. Each rejection makes the next wait longer, and your ads may be at risk too.",
+        "forWhom": "Owners of small online shops who sell through Google Shopping and do their own store admin.",
+        "benefits": [
+          "Know what to fix before you spend your next review request",
+          "See where your contact details, shipping times or returns don't match from page to page",
+          "Get a dated record of what you fixed and when",
+          "Catch new contradictions after a theme or app change, before Google does"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "Google suspends the store for Misrepresentation without naming the cause; owners fix what forum replies suggest, burn review attempts, and stay suspended for months, often because small inconsistencies across Shopify, the feed, policies and business information pile up unseen.",
+      "description": "The owner enters a store URL and optionally uploads the product feed export. The app crawls the public pages and compares what they say: business name, address, phone and email across footer, contact and policy pages; shipping and return windows across policy pages, product pages and the feed; price and availability across the product page, its JSON-LD and the feed; duplicate Product schema blocks; and risky claim words such as 'authorized' or 'official'. It returns a prioritized list of contradictions with the exact page and text, and keeps a dated re-check log the owner can use before requesting review. It does not promise reinstatement.",
+      "targetCustomer": "Owners of small Shopify, WooCommerce and Wix stores (often sole proprietors) whose Google Merchant Center account is suspended or under 'website needs improvement' for Misrepresentation.",
+      "buyer": "The store owner, on a personal or business card, out of the ad budget that the suspension has frozen.",
+      "whyNow": "Forum threads from July to October 2026 show repeated suspensions and exhausted appeals, and at least five Shopify apps launched between March and October 2026 to chase the problem, which confirms the pain but also crowds the space.",
+      "founderFit": "Pisan can ship a crawler-plus-report web app alone in days with his React/Flask stack, and the core is deterministic text and structured-data comparison rather than a paid AI call. His network is not in e-commerce, so distribution is self-serve through the Shopify community forum, which is the weakest part of the fit.",
+      "problemEvidence": [
+        {
+          "url": "https://community.shopify.com/t/third-merchant-center-suspended-for-misrepresentation-any-realistic-chance-and-how-do-i-protect-google-ads/698844",
+          "source": "community.shopify.com",
+          "author": "LisaR",
+          "date": "2026-10-16",
+          "kind": "complaint",
+          "summary": "German sole proprietor selling one own-brand toy is on a third Merchant Center account suspended for Misrepresentation and has paused Google Ads; 14 replies."
+        },
+        {
+          "url": "https://community.shopify.com/t/google-merchant-center-misrepresentation-suspension-for-8-months-appeals-exhausted-any-similar-cases/666324",
+          "source": "community.shopify.com",
+          "author": "gingood",
+          "date": "2026-08-14",
+          "kind": "complaint",
+          "summary": "US online-only store suspended for Misrepresentation for 8+ months with appeals exhausted; replies say several small inconsistencies accumulated across Shopify, GMC, business info and policies."
+        },
+        {
+          "url": "https://community.shopify.com/t/need-review-fixing-google-merchant-center-misrepresentation-suspension-before-monday-appeal/650702",
+          "source": "community.shopify.com",
+          "author": "bt12345",
+          "date": "2026-07-12",
+          "kind": "complaint",
+          "summary": "UK store owner fixed identity and policy pages over a weekend and asks the forum what hidden triggers remain before their one review request; 18 replies."
+        },
+        {
+          "url": "https://community.shopify.com/t/google-merchant-center-misrepresentation-pre-review-shopify-audit-99/668558",
+          "source": "community.shopify.com",
+          "author": "sarunas",
+          "date": "2026-08-20",
+          "kind": "spend",
+          "summary": "A seller offers a EUR 99 pre-review audit for Shopify stores suspended for Misrepresentation (vendor post, not a buyer purchase)."
+        },
+        {
+          "url": "https://www.onlinejobs.ph/jobseekers/job/1616633",
+          "source": "onlinejobs.ph",
+          "author": "unknown",
+          "date": "2026-05-14",
+          "kind": "spend",
+          "summary": "A store posts a full-time job (wage listed as 15) for a Shopify and GMC specialist to fix misrepresentation suspensions and feed-versus-page inconsistencies."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "AdNabu Misrepresentation Checker",
+          "url": "https://adnabu.com/free-tools/misrepresentation-checker",
+          "price": "Free",
+          "gap": "Free, works on any platform; reviewer found it checks business-name consistency but does not clearly compare shipping and return terms across pages and the feed."
+        },
+        {
+          "name": "Torhen GMC Rescue",
+          "url": "https://apps.shopify.com/torhen-gmc-rescue",
+          "price": "Free (3 audits/month); Pro $24.99/month",
+          "gap": "Shopify-only; flags feed price differences and writes appeal letters; launched 2026-10-12 with 0 reviews."
+        },
+        {
+          "name": "ShopSniff - GMC Compliance",
+          "url": "https://apps.shopify.com/gmc-compliance-checker-1",
+          "price": "Free (3 scans); $29/month; $99 one-time emergency",
+          "gap": "Shopify-only; launched 2026-10-14 with 0 reviews."
+        },
+        {
+          "name": "Merchant Guard: GMC Risk",
+          "url": "https://apps.shopify.com/merchant-guard",
+          "price": "Free plan; Pro $29/month or $290/year",
+          "gap": "Shopify-only; launched 2026-06-08 with 0 reviews."
+        },
+        {
+          "name": "GMC Compliance Checker",
+          "url": "https://apps.shopify.com/gmc-compliance-checker",
+          "price": "Free plan; Pro $19.99/month or $149/year",
+          "gap": "Shopify-only, product-policy focus; launched 2026-10-06 with 0 reviews."
+        },
+        {
+          "name": "GMC Store Readiness Scanner",
+          "url": "https://apps.shopify.com/gmc-store-readiness-scanner",
+          "price": "Free (2 scans, 10 products); $9.99 one-time",
+          "gap": "Shopify-only, 38 checks, 2 reviews."
+        }
+      ],
+      "keyFeatures": [
+        "Cross-page comparison of business identity, shipping and returns text",
+        "Product page vs JSON-LD vs feed price and availability diff",
+        "Duplicate Product schema and risky-claim-word detection",
+        "Dated re-check log for review requests"
+      ],
+      "mvpScope": {
+        "features": [
+          "URL crawl of up to 50 pages plus an uploaded feed CSV",
+          "Identity, shipping-window and return-window consistency report",
+          "Price and availability diff between page, JSON-LD and feed"
+        ],
+        "outOfScope": [
+          "Checkout crawling",
+          "Copied-supplier-text detection",
+          "Appeal letter drafting",
+          "Platform app-store listings"
+        ],
+        "buildEstimate": "3 to 4 weeks"
+      },
+      "techStack": "React + Vite + Tailwind front end, Flask crawler with a parsing queue, Supabase for scan history; no paid AI API at runtime.",
+      "pricing": {
+        "model": "One-time pre-review scan with an optional monthly re-check",
+        "pricePoint": "$29 one-time, or $9/month",
+        "rationale": "Below the $24.99-$29/month Shopify apps and the EUR 99 manual audit, because free tiers exist and buyers are distressed small stores."
+      },
+      "revenueSketch": "Estimate only: 40 one-time scans a month at $29 plus 60 monthly subscribers at $9 is about $1,700/month. Assumes a non-Shopify niche the Shopify-only apps miss; unproven.",
+      "distribution": "Answer Misrepresentation threads in the Shopify Community and Google Merchant Center Community with a free one-page cross-check, then the WooCommerce and Wix forums where the Shopify-only apps cannot reach.",
+      "validationTest": {
+        "method": "Publish a free single-scan cross-page check (identity, shipping, returns) on a landing page with a $29 'full report and re-check log' button; post it once in 3 active Misrepresentation threads and the WooCommerce forum.",
+        "successCriteria": "At least 5 paid $29 reports within 30 days, with at least 2 from non-Shopify stores, and at least 3 of the first 20 free scans surfacing a contradiction the owner did not know about.",
+        "cost": "About 1 week of build and $0 to $20 in hosting."
+      },
+      "moat": "Weak. The comparison logic is copyable; the only defensible pieces are non-Shopify coverage and an accumulating library of contradiction patterns tied to outcomes owners report back.",
+      "compliance": [
+        "Crawls public third-party pages: respect robots.txt and rate limits",
+        "Stores owner-uploaded feed files: delete after 30 days, no customer PII",
+        "Marketing must not imply guaranteed reinstatement (refund and consumer-protection risk)"
+      ],
+      "risks": [
+        {
+          "risk": "Free tools and five new Shopify apps already cover most checks",
+          "mitigation": "Lead with non-Shopify stores and the cross-page shipping/returns comparison the reviewer found no free tool doing; kill if the validation test shows no paid conversions."
+        },
+        {
+          "risk": "Many suspensions have no on-site cause a tool can find",
+          "mitigation": "Say so plainly in the report and offer a refund when the scan finds nothing."
+        },
+        {
+          "risk": "Forums are saturated with vendor pitches, so posts read as spam",
+          "mitigation": "Answer specific threads with a concrete finding from the free scan rather than a link drop."
+        }
+      ],
+      "scores": {
+        "pain": 4,
+        "willingnessToPay": 2,
+        "reachability": 3,
+        "competitiveGap": 1,
+        "feasibility": 3,
+        "complianceBurden": 4,
+        "total": 17
+      },
+      "scoreRationale": {
+        "pain": "Three independent owners describe repeated or months-long suspensions in Jul-Oct 2026 (https://community.shopify.com/t/third-merchant-center-suspended-for-misrepresentation-any-realistic-chance-and-how-do-i-protect-google-ads/698844), but much of the pain is Google's opacity, which no tool can fix.",
+        "willingnessToPay": "The only spend seen is sellers offering a EUR 99 audit (https://community.shopify.com/t/google-merchant-center-misrepresentation-pre-review-shopify-audit-99/668558) and a VA job posting (https://www.onlinejobs.ph/jobseekers/job/1616633); the Shopify apps charging $19.99-$29/month all show 0 reviews (https://apps.shopify.com/torhen-gmc-rescue).",
+        "reachability": "Owners post publicly in the Shopify Community (https://community.shopify.com/t/google-merchant-center-misrepresentation-suspension-for-8-months-appeals-exhausted-any-similar-cases/666324), but those threads are crowded with service pitches and free audit offers (https://community.shopify.com/t/free-merchant-center-misrepresentation-audit-first-5-stores/690116).",
+        "competitiveGap": "A free platform-agnostic checker (https://adnabu.com/free-tools/misrepresentation-checker) plus at least five Shopify apps with free tiers (https://apps.shopify.com/gmc-compliance-checker-1) cover most checks; only cross-page shipping and returns comparison looked uncovered.",
+        "feasibility": "A URL crawler and diff report fit one person, but checkout crawling, bot protection and Google's unstated criteria (https://support.google.com/merchants/answer/6150127) make the full scope fragile.",
+        "complianceBurden": "No customer PII, but it crawls third-party sites, stores feed files and must avoid implied reinstatement claims (https://support.google.com/merchants/answer/6150127)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Reviewer rescored from 22 to 17, calling it borderline kill. Pain 5->4: real, but many suspensions (8 months, appeals exhausted) have no fixable on-site cause. WTP 3->2: the EUR 99 audit and the OnlineJobs posting are seller and VA signals, not owners buying a scan; LisaR's earlier suspension followed a paid 'specialist'. Gap 2->1: AdNabu's free checker works on any platform and checks business-name consistency; Torhen, ShopSniff and others (GMC Scout, Selofy, FeedSiren, GMC Guard per search, unfetched) cover feed price checks and appeal letters. Feasibility 4->3: checkout crawling behind bot protection and copied-text detection are hard without paid services, so both were cut from the MVP. Compliance 5->4. Only gap found: no free tool comparing shipping and return terms in the feed against live policy pages."
+      },
+      "inspiredBy": "https://community.shopify.com/t/third-merchant-center-suspended-for-misrepresentation-any-realistic-chance-and-how-do-i-protect-google-ads/698844",
+      "gateGap": {
+        "missing": [
+          "total 17 is below 22",
+          "willingnessToPay 2 is below 3"
+        ],
+        "closedBy": "The validation test's $29 paid-report button closes the largest gap, willingness to pay: 5 paid reports in 30 days, 2 of them from non-Shopify stores, would support WTP 3 and a competitiveGap of 2 for the non-Shopify niche. Even then the total would sit near 19, so a promotion to validated also needs a free-scan hit rate showing the cross-page check finds contradictions the existing tools miss."
+      }
     }
   ],
   "runNotes": {
@@ -205,7 +396,12 @@
     "focusSources": [
       "A14 Plugin and add-on support forums",
       "B1 Teachers Pay Teachers and Etsy",
-      "C10 Change events: shutdowns, price rises, removed free tiers"
+      "C10 Change events: shutdowns, price rises, removed free tiers",
+      "A13 Discourse forums, any niche",
+      "A5 Educator Stack Exchanges",
+      "B9 Freelance build requests",
+      "C4 Job postings that describe manual work",
+      "C2 Education and computing research"
     ],
     "searches": [
       "tutoring business owner complaint scheduling software price increase 2026",
@@ -238,7 +434,36 @@
       "Watchlist: health clinic website Meta pixel tracking audit small practice 2026",
       "Watchlist: instructors completion credit homework AI feedback no grader budget 2026",
       "Watchlist: specifications grading Canvas tokens resubmission tool 2026",
-      "Watchlist: course LLM API key students budget proxy instructors 2026"
+      "Watchlist: course LLM API key students budget proxy instructors 2026",
+      "community.shopify.com search.json: reviews app after:2026-09-01",
+      "community.shopify.com search.json: appointment booking after:2026-09-01",
+      "community.shopify.com search.json: chatgpt agentic after:2026-09-01",
+      "community.shopify.com search.json: contact form not receiving after:2026-08-15",
+      "community.shopify.com search.json: google merchant center misrepresentation after:2026-08-15",
+      "community.n8n.io search.json: invoice small business after:2026-09-01",
+      "community.n8n.io search.json: silently failed after:2026-08-01",
+      "community.n8n.io search.json: e-invoice after:2026-08-01",
+      "forum.invoiceninja.com search.json: quote after:2026-09-01",
+      "forum.ghost.org search.json: stripe members after:2026-09-01",
+      "forum.mautic.org latest.json",
+      "api.stackexchange.com academia search: spreadsheet",
+      "api.stackexchange.com cseducators latest questions",
+      "api.stackexchange.com academia latest questions",
+      "upwork.com freelance-jobs (probe)",
+      "contra.com/jobs (probe)",
+      "freelancer.com API projects/active: booking system",
+      "freelancer.com API: small business automation",
+      "freelancer.com API: contact form not working",
+      "freelancer.com API: shopify schema",
+      "higheredjobs.com admin/search.cfm JobCat=185 (probe)",
+      "web: job posting Google Merchant Center feed specialist disapprovals 2026",
+      "openalex: small business software adoption (429)",
+      "openalex: small business e-invoicing (429)",
+      "openalex: small business accessibility websites (429)",
+      "arxiv: small business AND software",
+      "arxiv: shopping agent",
+      "web: Google Merchant Center misrepresentation checker tool Shopify app pricing",
+      "web: contact form monitoring service test submissions alert small business website pricing"
     ],
     "unverifiedSignals": [
       {
@@ -256,6 +481,26 @@
       {
         "url": "https://www.teacherspayteachers.com/Browse/Search:tutoring%20log",
         "reason": "Fetched and usable as a spend signal ($16 tutor billing sheet), but listings are undated, so not used as gate evidence."
+      },
+      {
+        "url": "https://www.upwork.com/freelance-jobs/apply/",
+        "reason": "HTTP 403 from the site."
+      },
+      {
+        "url": "https://contra.com/jobs",
+        "reason": "HTTP 200 but a JavaScript shell with no listings."
+      },
+      {
+        "url": "https://www.higheredjobs.com/admin/search.cfm?JobCat=185",
+        "reason": "HTTP 200 but a 926-byte stub with no listings from this environment."
+      },
+      {
+        "url": "https://api.openalex.org/works?search=small%20business%20software%20adoption&per-page=10&sort=publication_date%3Adesc",
+        "reason": "HTTP 429 on all three OpenAlex queries."
+      },
+      {
+        "url": "https://www.capterra.com/p/10065759/FormStory/",
+        "reason": "HTTP 404; the FormStory $9 price came from a search snippet only."
       }
     ],
     "rejectedCandidates": [
@@ -338,6 +583,61 @@
         "title": "Medical question bank platform on Tutor LMS",
         "total": 9,
         "reason": "Rejected: a consulting and custom-architecture request (https://wordpress.org/support/topic/technical-consultation-full-architecture-for-a-medical-question-bank-platform/)."
+      },
+      {
+        "title": "Lead Form Watch (synthetic contact-form round-trip monitor for small business sites)",
+        "total": 15,
+        "reason": "Reviewer kill, from 20. FormWatch (free first form), Velnix Form Monitor (free WP plugin), MoniForm and Uptimia already do this; WP form plugins store entries; Shopify hCaptcha and per-site CAPTCHAs make synthetic submits fragile; test leads pollute CRMs. Complaint posts are partly vendor-tinged."
+      },
+      {
+        "title": "Silent-success outcome monitor for small-business n8n automations",
+        "total": 18,
+        "reason": "Below 19. Floxer, FlowSRE, FlowPrecheck and several free templates already target it; buyers are automation freelancers who bundle alerting into build price."
+      },
+      {
+        "title": "Missed Shopify webhook order reconciler",
+        "total": 18,
+        "reason": "Below 19. A free n8n template (TrenoxaHQ, 2026-10-26) already does the daily diff; one author."
+      },
+      {
+        "title": "Stalled-deal and unanswered-client nudger for small service businesses",
+        "total": 17,
+        "reason": "Below 19. Pain from one thread (derzzz, 2026-10-06), mostly answered with DIY n8n patterns; CRMs already have stale-deal views."
+      },
+      {
+        "title": "Card-testing bot shield for small Shopify stores",
+        "total": 17,
+        "reason": "Below 19. Shopify's own bot protection plus Signifyd and NoFraud; feasibility 2 for a solo founder."
+      },
+      {
+        "title": "Bulk draft-order invoice delivery tracker for Shopify",
+        "total": 18,
+        "reason": "Below 19. One complaint (Tomo-chimahaga, 2026-09-18), no spend signal."
+      },
+      {
+        "title": "Ghost paid-newsletter migration fixer (imported comps not applied)",
+        "total": 16,
+        "reason": "Below 19. One complaint (david1, 2026-09-17); a one-time migration need."
+      },
+      {
+        "title": "Ghost member dunning emails",
+        "total": 15,
+        "reason": "Creator Dunning launched 2026-10-27, free up to 100 members; evidence is the vendor's own post."
+      },
+      {
+        "title": "XRechnung/ZUGFeRD e-invoice intake for German micro-businesses",
+        "total": 15,
+        "reason": "Mandate is real (receive since Jan 2025) but evidence is a template author's post, accounting suites already cover it, and Pisan has no reach into German small businesses."
+      },
+      {
+        "title": "Journal submission status tracker for researchers",
+        "total": 14,
+        "reason": "Academia SE questions about stalled manuscripts (2026-10-15) show pain but no willingness to pay."
+      },
+      {
+        "title": "RFID attendance with SMS alerts for small schools and gyms",
+        "total": 15,
+        "reason": "Only a freelancer.com build request ($250-750); no complaint; custom-build service rather than product."
       }
     ],
     "watchlist": [
@@ -433,8 +733,21 @@
           "https://sift-health.pages.dev/pricing/"
         ],
         "firstSeen": "2026-11-02"
+      },
+      {
+        "title": "AI shopping-agent readiness check for small Shopify stores (duplicate Product JSON-LD, availability and rating signals agents read)",
+        "targetCustomer": "Small Shopify merchants whose products AI assistants describe wrongly or as out of stock.",
+        "problemStatement": "ChatGPT and other agents report products as out of stock or with invented specs because of duplicate or stale Product schema, missing aggregateRating, and Shopify Catalog entries that disagree with the product page.",
+        "total": 19,
+        "missedGate": "competitiveGap 1 (Botfound, FoundGPT and several free checkers already posted in the forum); willingnessToPay 2; total below 22. Not reviewed.",
+        "evidence": [
+          "https://community.shopify.com/t/llms-think-my-product-is-out-of-stock-when-it-is-not/677281",
+          "https://community.shopify.com/t/what-the-shopify-catalog-gets-wrong-about-your-products/689041",
+          "https://community.shopify.com/t/offer-free-ai-shopping-readiness-check-for-your-shopify-store-i-built-the-tool/708230"
+        ],
+        "firstSeen": "2026-11-03"
       }
     ],
-    "caveats": "No candidate cleared the gate. The strongest pain cluster (payments that never became enrollments or bookings, 6 owner threads from Aug to Oct 2026) was killed twice in review: once as an API-connected monitor (17) and once as a browser-only CSV check (16). Student Journey Check ships as provisional at 16, after review cut it from 20, chiefly because a free real-browser login monitor exists and buyers resent even a $199/yr licence. The Velprove pricing comes from a vendor-written guide, not a fetched pricing page. The ManageWP evidence date is the fetch date. The TPT source (B1) yielded only an undated $16 spend signal. The C10 change events (ThriveCart Learn retiring at the end of 2026, Thinkific's 10% rise, Kajabi's January rise) are each served by free vendor migrations. Watchlist searches found no new fetched evidence, so all 7 entries carry forward unchanged."
+    "caveats": "No candidate cleared the gate. The strongest pain cluster (payments that never became enrollments or bookings, 6 owner threads from Aug to Oct 2026) was killed twice in review: once as an API-connected monitor (17) and once as a browser-only CSV check (16). Student Journey Check ships as provisional at 16, after review cut it from 20, chiefly because a free real-browser login monitor exists and buyers resent even a $199/yr licence. The Velprove pricing comes from a vendor-written guide, not a fetched pricing page. The ManageWP evidence date is the fetch date. The TPT source (B1) yielded only an undated $16 spend signal. The C10 change events (ThriveCart Learn retiring at the end of 2026, Thinkific's 10% rise, Kajabi's January rise) are each served by free vendor migrations. Watchlist searches found no new fetched evidence, so all 7 entries carry forward unchanged. Extra run (random sources A13 A5 B9 C4 C2): added idea 2, Misrepresentation Preflight, as provisional at 17 after review cut it from 22; the next candidate, Lead Form Watch, was reviewed and killed at 15. A5 Stack Exchange and C2 yielded no small-business signal (OpenAlex returned 429; arXiv worked). B9: Upwork 403s and Contra is a JS shell, but the freelancer.com public projects API returned dated listings via curl, though its query filter barely narrows results. C4 HigherEdJobs returned a stub, so C4 came from a web search on GMC specialist postings. A search snippet claimed GMC Compliance Checker had 201 reviews; its fetched page shows 0."
   }
 }
