@@ -605,3 +605,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-04 [decision] Provisional cap is per run (4 first, 3 extra), a day holds up to 10 ideas; the per-day cap of 4 left the third Nov 4 run unable to add anything.
 
 2026-11-04 [build] Misrepresentation Preflight (2026-11-03 #2) implemented: https://misrepresentation-preflight.pisan.me/
+
+2026-11-04 [code] Accessibility Fleet Log (2026-11-04 #2) implemented and live at https://accessibility-fleet-log.pisan.me; claim replaced with url, repo, notes and publicNotes.
