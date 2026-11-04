@@ -596,4 +596,4 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 
 2026-11-04 [decision] After the Nov 4 first run shipped 1 idea: review keeps going until 3 survive (max 10 reviews), a kill needs a free same-job same-customer replacement (partial overlap is a rescore), and watchlist entries above the shipped total must be considered for provisional.
 
-2026-11-04 [doc] Extra run (random sources A11 A2 B1 C7 C1) added 3 ideas to ideas/2026-11-04.json: Accessibility Fleet Log (18, provisional), Health Page Tracker Watch (17, provisional), Client Safe-Edit Pack for n8n (17, provisional)
+2026-11-04 [doc] Extra run (random sources A11 A2 B1 C7 C1) added 3 ideas to ideas/2026-11-04.json: A11y Fleet Log (18, prov), Health Tracker Watch (17, prov), n8n Safe-Edit Pack (17, prov)
