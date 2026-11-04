@@ -396,6 +396,11 @@ routine with almost nothing to choose from.
 2. Take the `validated` candidates in rank order, up to 6.
 3. If that gives fewer than 3, fill up to 3 (and at most 5 in all) with the
    highest-ranked candidates that meet the floor, shipped as `provisional`.
+   Watchlist entries rank by their (re-researched) total like any other
+   candidate: finding no new evidence for an entry does not keep it on the
+   watchlist. On 2026-11-04 six entries at 20 stayed there while an idea at 17
+   shipped alone; that is the mistake this rule exists to stop. An entry needs
+   only the floor (a usable item dated within 180 days, review in this run).
    Never more than 4 provisional ideas in a day. Each provisional idea must be
    about a different customer and problem from every other idea that day.
    Prefer, among candidates within 2 points of each other, the one with
@@ -472,11 +477,20 @@ The reviewer may run its own searches. Based on its findings:
 - **Kill:** move it to `rejectedCandidates` with the reviewer's reason, then go
   back to Step 4 selection rule 4 and continue down the ranked list.
 
+Kill only when the idea cannot be saved: a free or cheaper product already does
+the same job for the same customer, the evidence was misread or is not
+independent, or a rejection rule applies. When a competitor covers only part
+of the job, a different customer, or a different platform, that is a rescore
+(`competitiveGap` down, and re-scope the idea to the gap the reviewer found),
+not a kill. On 2026-11-04 five of six reviewed candidates were killed and the
+first run shipped one idea.
+
 Record the outcome in each surviving idea's `review` field.
 
-If the session is running long, review fewer ideas rather than skipping review.
-Any idea that was not reviewed is dropped, and if that empties the run, the
-highest-ranked reviewed candidate still ships as provisional.
+Keep reviewing down the ranked list, watchlist entries included, until 3
+ideas have survived review or you have reviewed 10 candidates. Any idea that
+was not reviewed is dropped. If fewer than 3 survive 10 reviews, ship what
+survived and say so in `runNotes.caveats`.
 
 ## Step 7: Write ideas/YYYY-MM-DD.json
 

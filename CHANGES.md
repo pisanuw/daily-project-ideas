@@ -593,3 +593,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-04 [doc] Created ideas/2026-11-04.json (schemaVersion 3, 1 idea): Theme Conflict Merge (17, provisional); 5 of 6 reviewed candidates killed by free replacements
 
 2026-11-04 [doc] sources.json A3: GitHub issue search needs is:issue in the query (422 otherwise); path fixed and re-verified with curl.
+
+2026-11-04 [decision] After the Nov 4 first run shipped 1 idea: review keeps going until 3 survive (max 10 reviews), a kill needs a free same-job same-customer replacement (partial overlap is a rescore), and watchlist entries above the shipped total must be considered for provisional.
