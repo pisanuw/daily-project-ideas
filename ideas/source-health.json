@@ -56,15 +56,30 @@
       ]
     },
     "api.github.com": {
-      "attempts": 1,
+      "attempts": 2,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-01",
+      "lastAttempt": "2026-11-03",
       "lastOk": null,
       "ok": 0,
       "outcomes": {
-        "http_403": 1
+        "http_403": 1,
+        "http_5xx": 1
       },
       "workingPaths": []
+    },
+    "api.nsf.gov": {
+      "attempts": 2,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-03",
+      "lastOk": "2026-11-03",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "curl https://api.nsf.gov/services/v1/awards.json?keyword=small+business+compliance&printFields=id,title,date,awardeeName,fundsObligatedAmt&rpp=25&dateStart=01/01/2026",
+        "curl https://api.nsf.gov/services/v1/awards.json?keyword=%22small+businesses%22+retail&printFields=id,title,date,awardeeName,fundsObligatedAmt&rpp=25&dateStart=01/01/2026"
+      ]
     },
     "api.openalex.org": {
       "attempts": 3,
@@ -123,13 +138,14 @@
       ]
     },
     "apps.shopify.com": {
-      "attempts": 5,
-      "evidenceItems": 5,
+      "attempts": 37,
+      "evidenceItems": 7,
       "lastAttempt": "2026-11-03",
       "lastOk": "2026-11-03",
-      "ok": 5,
+      "ok": 28,
       "outcomes": {
-        "ok": 5
+        "empty": 9,
+        "ok": 28
       },
       "workingPaths": [
         "curl https://apps.shopify.com/gmc-compliance-checker",
@@ -170,6 +186,19 @@
       },
       "workingPaths": [
         "curl https://cartmango.com/thinkific-alternatives/"
+      ]
+    },
+    "changelog.shopify.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-03",
+      "lastOk": "2026-11-03",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://changelog.shopify.com/posts/run-inventory-counts-in-pos"
       ]
     },
     "coddy.tech": {
@@ -281,14 +310,15 @@
       "workingPaths": []
     },
     "community.shopify.com": {
-      "attempts": 26,
+      "attempts": 52,
       "evidenceItems": 7,
       "lastAttempt": "2026-11-03",
       "lastOk": "2026-11-03",
-      "ok": 25,
+      "ok": 50,
       "outcomes": {
         "empty": 1,
-        "ok": 25
+        "http_404": 1,
+        "ok": 50
       },
       "workingPaths": [
         "curl https://community.shopify.com/search.json?q=ADA%20lawsuit%20after%3A2026-05-01",
@@ -365,6 +395,21 @@
         "http_404": 1
       },
       "workingPaths": []
+    },
+    "discuss.openedx.org": {
+      "attempts": 3,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-03",
+      "lastOk": "2026-11-03",
+      "ok": 2,
+      "outcomes": {
+        "empty": 1,
+        "ok": 2
+      },
+      "workingPaths": [
+        "curl https://discuss.openedx.org/search.json?q=certificate%20after%3A2026-08-01",
+        "curl https://discuss.openedx.org/latest.json"
+      ]
     },
     "discuss.pixls.us": {
       "attempts": 1,
@@ -652,6 +697,19 @@
         "curl https://help.pickcode.io/docs/transition-from-trinket/"
       ]
     },
+    "help.shopify.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-03",
+      "lastOk": "2026-11-03",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://help.shopify.com/en/manual/sell-in-person/shopify-pos/inventory-management/inventory-counts"
+      ]
+    },
     "hn.algolia.com": {
       "attempts": 27,
       "evidenceItems": 1,
@@ -813,6 +871,20 @@
         "http_403": 1
       },
       "workingPaths": []
+    },
+    "seedfund.nsf.gov": {
+      "attempts": 2,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-03",
+      "lastOk": "2026-11-03",
+      "ok": 1,
+      "outcomes": {
+        "http_404": 1,
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://seedfund.nsf.gov/"
+      ]
     },
     "sift-health.pages.dev": {
       "attempts": 1,
@@ -1152,13 +1224,13 @@
       ]
     },
     "www.freelancer.com": {
-      "attempts": 4,
+      "attempts": 7,
       "evidenceItems": 0,
       "lastAttempt": "2026-11-03",
       "lastOk": "2026-11-03",
-      "ok": 4,
+      "ok": 7,
       "outcomes": {
-        "ok": 4
+        "ok": 7
       },
       "workingPaths": [
         "curl https://www.freelancer.com/api/projects/0.1/projects/active/?query=booking%20system&limit=20&full_description=true",
@@ -1270,6 +1342,19 @@
         "http_5xx": 1
       },
       "workingPaths": []
+    },
+    "www.shopify.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-03",
+      "lastOk": "2026-11-03",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://www.shopify.com/pos/pricing"
+      ]
     },
     "www.teacherspayteachers.com": {
       "attempts": 1,
@@ -1395,12 +1480,12 @@
       "selected": 0
     },
     "A13": {
-      "candidates": 19,
-      "fetchFail": 7,
-      "fetchOk": 48,
+      "candidates": 25,
+      "fetchFail": 8,
+      "fetchOk": 73,
       "lastUsed": "2026-11-03",
-      "runs": 3,
-      "searches": 33,
+      "runs": 4,
+      "searches": 51,
       "selected": 1
     },
     "A14": {
@@ -1412,6 +1497,15 @@
       "searches": 13,
       "selected": 2
     },
+    "A2": {
+      "candidates": 1,
+      "fetchFail": 1,
+      "fetchOk": 2,
+      "lastUsed": "2026-11-03",
+      "runs": 1,
+      "searches": 3,
+      "selected": 0
+    },
     "A3": {
       "candidates": 5,
       "fetchFail": 1,
@@ -1419,6 +1513,15 @@
       "lastUsed": "2026-11-01",
       "runs": 2,
       "searches": 7,
+      "selected": 0
+    },
+    "A4": {
+      "candidates": 0,
+      "fetchFail": 1,
+      "fetchOk": 0,
+      "lastUsed": "2026-11-03",
+      "runs": 1,
+      "searches": 1,
       "selected": 0
     },
     "A5": {
@@ -1466,6 +1569,24 @@
       "searches": 13,
       "selected": 0
     },
+    "B11": {
+      "candidates": 0,
+      "fetchFail": 0,
+      "fetchOk": 3,
+      "lastUsed": "2026-11-03",
+      "runs": 1,
+      "searches": 3,
+      "selected": 0
+    },
+    "B12": {
+      "candidates": 10,
+      "fetchFail": 9,
+      "fetchOk": 23,
+      "lastUsed": "2026-11-03",
+      "runs": 1,
+      "searches": 12,
+      "selected": 1
+    },
     "B3": {
       "candidates": 2,
       "fetchFail": 1,
@@ -1511,6 +1632,15 @@
       "searches": 6,
       "selected": 0
     },
+    "C1": {
+      "candidates": 0,
+      "fetchFail": 1,
+      "fetchOk": 1,
+      "lastUsed": "2026-11-03",
+      "runs": 1,
+      "searches": 2,
+      "selected": 0
+    },
     "C10": {
       "candidates": 11,
       "fetchFail": 8,
@@ -1519,6 +1649,15 @@
       "runs": 4,
       "searches": 17,
       "selected": 1
+    },
+    "C11": {
+      "candidates": 0,
+      "fetchFail": 0,
+      "fetchOk": 2,
+      "lastUsed": "2026-11-03",
+      "runs": 1,
+      "searches": 2,
+      "selected": 0
     },
     "C2": {
       "candidates": 3,
@@ -1660,21 +1799,21 @@
     }
   ],
   "funnel": {
-    "candidates": 123,
-    "passedGate": 2,
-    "passedRejectRules": 103,
-    "provisional": 4,
-    "reviewKilled": 9,
+    "candidates": 137,
+    "passedGate": 3,
+    "passedRejectRules": 117,
+    "provisional": 5,
+    "reviewKilled": 12,
     "validated": 0,
     "watchlist": 32
   },
   "gateFailures": {
     "painBelow4": 3,
     "rejectRule": 20,
-    "reviewKill": 9,
-    "totalBelowMin": 87
+    "reviewKill": 12,
+    "totalBelowMin": 97
   },
-  "generated": "2026-11-03",
+  "generated": "2026-11-04",
   "prefer": [
     {
       "client": "webfetch",
@@ -1691,6 +1830,15 @@
       "id": "A13",
       "name": "Discourse forums, any niche",
       "path": "https://{host}/search.json?q={q}+after%3A{YYYY-MM-DD}",
+      "selectedIdeas": 1,
+      "status": "ok"
+    },
+    {
+      "client": "webfetch",
+      "evidence": "spend",
+      "id": "B12",
+      "name": "Paid app marketplaces",
+      "path": "https://apps.shopify.com/search?q={q}",
       "selectedIdeas": 1,
       "status": "ok"
     },
@@ -1727,6 +1875,15 @@
       "id": "A12",
       "name": "Ask HN and HN comments",
       "path": "https://hn.algolia.com/api/v1/search_by_date?query={q}&tags=comment&hitsPerPage=20",
+      "selectedIdeas": 0,
+      "status": "ok"
+    },
+    {
+      "client": "webfetch",
+      "evidence": "complaint",
+      "id": "A15",
+      "name": "No-code automation communities",
+      "path": "https://community.make.com/search.json?q={q}+after%3A{YYYY-MM-DD}",
       "selectedIdeas": 0,
       "status": "ok"
     },
@@ -1787,6 +1944,15 @@
     {
       "client": "webfetch",
       "evidence": "spend",
+      "id": "B11",
+      "name": "Freelance job boards",
+      "path": "https://www.freelancer.com/api/projects/0.1/projects/active/?query={q}&limit=20&full_description=true",
+      "selectedIdeas": 0,
+      "status": "ok"
+    },
+    {
+      "client": "webfetch",
+      "evidence": "spend",
       "id": "B2",
       "name": "AppSumo",
       "path": "https://appsumo.com/software/{category}/",
@@ -1817,6 +1983,15 @@
       "id": "B8",
       "name": "Install counts for paid add-ons",
       "path": "https://chromewebstore.google.com/detail/{id}",
+      "selectedIdeas": 0,
+      "status": "ok-curl"
+    },
+    {
+      "client": "curl",
+      "evidence": "spend",
+      "id": "B9",
+      "name": "Freelance build requests",
+      "path": "https://www.freelancer.com/api/projects/0.1/projects/active/?query={q}&limit=20&full_description=true",
       "selectedIdeas": 0,
       "status": "ok-curl"
     },
@@ -1884,6 +2059,6 @@
       "status": "ok"
     }
   ],
-  "runsInWindow": 8,
+  "runsInWindow": 9,
   "windowDays": 45
 }

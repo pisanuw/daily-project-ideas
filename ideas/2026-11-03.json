@@ -388,6 +388,150 @@
         ],
         "closedBy": "The validation test's $29 paid-report button closes the largest gap, willingness to pay: 5 paid reports in 30 days, 2 of them from non-Shopify stores, would support WTP 3 and a competitiveGap of 2 for the non-Shopify niche. Even then the total would sit near 19, so a promotion to validated also needs a free-scan hit rate showing the cross-page check finds contradictions the existing tools miss."
       }
+    },
+    {
+      "n": 3,
+      "title": "Popup Check",
+      "slug": "popup-check",
+      "category": "Accessibility & Compliance",
+      "smallBusiness": true,
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Accessibility",
+      "summary": "For small online-store owners: triggers every popup, age gate, cookie banner and chat bubble on the site and checks each one with the keyboard and a screen-reader view, then produces a dated report.",
+      "public": {
+        "summary": "Find out whether the popups on your store lock out shoppers who use a keyboard or a screen reader, before someone else finds out for you.",
+        "problem": "You add an email sign-up popup, an age gate or a cookie banner, and it looks fine to you. To a shopper using a screen reader it can be a wall: focus never reaches it, the close button has no name, and Escape does nothing. Popups are among the failures that show up in website accessibility demand letters, and the free checkers mostly test the page as it looks before the popup appears.",
+        "forWhom": "Owners of small online shops who run their own store and add popups, banners and chat widgets through apps.",
+        "benefits": [
+          "See which of your popups a keyboard or screen-reader user cannot close or use",
+          "Get plain instructions, or a note that the popup app itself needs replacing",
+          "Keep a dated record of what you checked and changed",
+          "Get re-checked automatically after you add or change an app"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "Store owners install popup, age-gate, cookie and chat apps they cannot edit; those overlays often trap or skip keyboard focus and lack accessible names, and one owner reports being sued over a popup that did not work with screen readers.",
+      "description": "Popup Check opens the store in a headless browser, finds the overlays (email capture, spin-to-win, age gates, cookie banners, chat launchers) and triggers each one by timer, scroll, exit intent and first-visit state. For each overlay it runs scripted keyboard tests (does focus move in, is it trapped while open, does Escape close it, does focus return, does the close control have an accessible name) plus axe-core on the open state. The report names the app behind each overlay where it can, says whether the fix is a setting or a different app, and keeps a dated history. A weekly re-check flags new overlays after an app install. The report is worded as test results, never as a compliance certificate.",
+      "targetCustomer": "Owners and solo operators of small online stores on Shopify, WordPress/WooCommerce or Squarespace who add marketing popups and banners through apps.",
+      "buyer": "The store owner, on a personal or business card, from the marketing or website budget.",
+      "whyNow": "ADA website demand letters to small stores continue in 2026, and the store-owner complaint here is dated 2026-05-12. Free scanners test the page at load; the one modal-dialog guided test found is in paid axe DevTools Pro.",
+      "founderFit": "Pisan works in accessibility and can build Playwright and axe-core tooling alone; the scripted keyboard checks are the kind of thing he already teaches. He has no special channel into store owners, so distribution is self-serve.",
+      "problemEvidence": [
+        {
+          "url": "https://apps.shopify.com/shopify-forms/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest",
+          "source": "apps.shopify.com",
+          "author": "Boyt Harness",
+          "date": "2026-05-12",
+          "kind": "complaint",
+          "summary": "A US store gives Shopify Forms (766 reviews) one star: 'We got sued because the pop up is not compliment for people with disablilities that require screen readers.' It is the only accessibility complaint among that app's 1 and 2 star reviews."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "axe DevTools Pro (Deque), Modal Dialog guided test",
+          "url": "https://docs.deque.com/devtools-for-web/4/en/devtools-igt-modal-dialog",
+          "price": "paid; price unknown",
+          "gap": "Checks focus trapping, Escape and focus return, but it is a manual guided test in a developer tool, not an automated popup trigger for store owners."
+        },
+        {
+          "name": "Remedy (iTechVista)",
+          "url": "https://apps.shopify.com/remedy-accessibility",
+          "price": "Free plan available; paid plans unknown",
+          "gap": "Scans the storefront with axe-core and keeps a dated record, but its listing does not mention triggering or testing overlays; Shopify only, launched 2026-08-21, 0 reviews."
+        },
+        {
+          "name": "Shopify Forms",
+          "url": "https://apps.shopify.com/shopify-forms",
+          "price": "Free",
+          "gap": "The popup builder itself; a merchant cannot edit its markup, so the only fix is a setting or a different app."
+        }
+      ],
+      "keyFeatures": [
+        "Finds and triggers popups, age gates, cookie banners and chat launchers",
+        "Scripted keyboard tests: focus in, focus trap, Escape, focus return, close-button name",
+        "axe-core run on each overlay's open state",
+        "Names the app behind each overlay and whether the fix is a setting or a swap",
+        "Dated report history and weekly re-check"
+      ],
+      "mvpScope": {
+        "features": [
+          "One-URL scan that triggers timer and scroll popups and the first-visit state",
+          "Five keyboard checks plus axe-core on each open overlay",
+          "Dated PDF and web report with plain-language fixes"
+        ],
+        "outOfScope": [
+          "Exit-intent and geolocation triggers",
+          "Full-site WCAG audit",
+          "Automatic fixes or a script injected into the store",
+          "Any compliance certificate or badge"
+        ],
+        "buildEstimate": "3 to 4 weeks"
+      },
+      "techStack": "React + Vite, Flask or Node worker running Playwright and axe-core, Supabase for accounts and report history; no paid API at runtime.",
+      "pricing": {
+        "model": "per-store subscription, with a one-off report",
+        "pricePoint": "$9/month, or $29 for a single dated report",
+        "rationale": "Below overlay subscriptions and far below a remediation engagement; the one-off report suits owners who just received a letter. Willingness to pay is unproven."
+      },
+      "revenueSketch": "Estimate: 150 stores x $9/month = $1,350 MRR plus 20 one-off reports a month x $29 = $580. Assumes self-serve conversion that has not been tested.",
+      "distribution": "A free one-popup check as the funnel, posted in the Shopify Community accessibility threads and WordPress accessibility forums; then the WordPress plugin directory as a thin connector.",
+      "validationTest": {
+        "method": "Build a one-URL free check that tests a single popup, and run it on 100 small stores found through Shopify Community and WordPress.org showcase posts to measure the failure rate. Offer the $29 dated report on the results page.",
+        "successCriteria": "At least 30 of 100 stores have a popup that fails a keyboard check, and at least 5 owners buy the $29 report within 30 days.",
+        "cost": "About 1 week of build and $0 to $20 of hosting."
+      },
+      "moat": "Weak. The reliable triggering of overlays and a library of known popup apps with their fix-or-swap advice is the only part that is hard to copy, and a scanner vendor could add it.",
+      "compliance": [
+        "Accessibility: the report must be worded as test results, not a statement of ADA or WCAG compliance; the FTC fined an overlay vendor over compliance claims.",
+        "Privacy: scans public pages only; stores no shopper data."
+      ],
+      "risks": [
+        {
+          "risk": "A popup-only report does not settle a demand letter, which cites many failures, so owners may not pay for it.",
+          "mitigation": "Position it as prevention when adding apps, and price the one-off report low; test willingness to pay before building the weekly plan."
+        },
+        {
+          "risk": "Popups fire on exit intent, timers, scroll or once per visitor, and bot protection blocks headless browsers, so triggering is unreliable and false positives are likely.",
+          "mitigation": "Start with timer, scroll and first-visit triggers only, and show the owner a screenshot of each overlay found so they can confirm it."
+        },
+        {
+          "risk": "Merchants cannot fix third-party popup markup.",
+          "mitigation": "Make 'switch to this app or setting' a first-class result, backed by a list of popup apps that passed."
+        }
+      ],
+      "scores": {
+        "pain": 3,
+        "willingnessToPay": 2,
+        "reachability": 3,
+        "competitiveGap": 3,
+        "feasibility": 2,
+        "complianceBurden": 4,
+        "total": 17
+      },
+      "scoreRationale": {
+        "pain": "One dated store-owner complaint of being sued over a popup (https://apps.shopify.com/shopify-forms/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest); the 2026 forum replies on ADA threads are mostly vendors, so this is capped at 3.",
+        "willingnessToPay": "No payment evidence for popup testing specifically; the one adjacent paid tool is axe DevTools Pro (https://docs.deque.com/devtools-for-web/4/en/devtools-igt-modal-dialog), sold to developers, not owners.",
+        "reachability": "Self-serve only: Shopify Community and WordPress forums, with no network advantage (https://apps.shopify.com/remedy-accessibility shows the same channel is already being worked).",
+        "competitiveGap": "No free tool found that triggers overlays and runs keyboard tests on them; Deque's guided test is manual and paid (https://docs.deque.com/devtools-for-web/4/en/devtools-igt-modal-dialog).",
+        "feasibility": "Reliable popup triggering across apps and bot protection is hard for one person, per review (https://apps.shopify.com/remedy-accessibility scans at load only).",
+        "complianceBurden": "Public pages only, but compliance-claim wording carries liability (https://apps.shopify.com/shopify-forms/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Reviewer rescored from 20 to 17. No free tool was found that triggers and tests popups (gap stays 3; Deque's Modal Dialog guided test is in paid axe DevTools Pro, and Remedy's listing does not mention overlays). Pain 3: the Boyt Harness review is real but is the only accessibility complaint among Shopify Forms' 1-2 star reviews, and the 2026 replies in Shopify Community ADA threads 232788 and 230778 come from vendor accounts, so they were dropped as evidence. WTP 3->2: a popup-only report does not settle a demand letter, and money after a letter goes to lawyers. Reachability 4->3. Feasibility 3->2: exit-intent, timer and once-per-visitor triggers, bot protection and false positives. Compliance 5->4: the FTC's action against an overlay vendor means reports must not imply compliance."
+      },
+      "inspiredBy": "https://apps.shopify.com/shopify-forms/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest",
+      "gateGap": {
+        "missing": [
+          "total 17 is below 22",
+          "pain 3 is below 4",
+          "willingnessToPay 2 is below 3",
+          "only 1 independent evidence item",
+          "no evidence dated within 90 days"
+        ],
+        "closedBy": "The validation test's free one-popup check on 100 stores closes the evidence and pain gaps (a 30% failure rate plus owner replies would be new, dated evidence), and the $29 report offer closes willingness to pay: 5 paid reports in 30 days would support WTP 3. Promotion to validated would still need a second independent owner complaint and a total of 22."
+      }
     }
   ],
   "runNotes": {
@@ -401,7 +545,12 @@
       "A5 Educator Stack Exchanges",
       "B9 Freelance build requests",
       "C4 Job postings that describe manual work",
-      "C2 Education and computing research"
+      "C2 Education and computing research",
+      "A2 Other LMS and classroom forums",
+      "A4 GitHub Education and Classroom discussions (probe 422; substituted A13 community.shopify.com)",
+      "B12 Paid app marketplaces",
+      "C1 SBIR and STTR solicitations",
+      "C11 Federal award and grant data"
     ],
     "searches": [
       "tutoring business owner complaint scheduling software price increase 2026",
@@ -463,7 +612,30 @@
       "arxiv: small business AND software",
       "arxiv: shopping agent",
       "web: Google Merchant Center misrepresentation checker tool Shopify app pricing",
-      "web: contact form monitoring service test submissions alert small business website pricing"
+      "web: contact form monitoring service test submissions alert small business website pricing",
+      "discuss.openedx.org search.json q=certificate after:2026-08-01",
+      "discuss.openedx.org search.json q=payment after:2026-08-01",
+      "discuss.openedx.org latest.json",
+      "api.github.com search/issues repo:community/community classroom (422)",
+      "api.nsf.gov awards keyword=small business compliance dateStart 2026",
+      "api.nsf.gov awards keyword=\"small businesses\" retail dateStart 2026",
+      "seedfund.nsf.gov topics (404) and home page",
+      "site:apps.shopify.com rental booking app reviews",
+      "site:apps.shopify.com local delivery date picker app",
+      "site:apps.shopify.com wholesale net terms invoice app",
+      "site:apps.shopify.com GPSR EU product safety responsible person app",
+      "site:apps.shopify.com nutrition facts label allergen app",
+      "site:apps.shopify.com packaging EPR extended producer responsibility reporting",
+      "site:apps.shopify.com workshop class booking tickets app for studios",
+      "site:apps.shopify.com age verification alcohol checkout compliance app",
+      "site:apps.shopify.com consignment vendor payouts app",
+      "Shopify App Store 1-2 star newest reviews: order-delivery-date-by-identixweb, sufio, order-printer-pro, subscriptions-by-appstle, bookthatapp, stocky, vendor-payout, vendor-consignment, sesami, shopify-forms, shopify-subscriptions, bundles, local-delivery, stock-take, stock-take-inventory-count-1",
+      "Shopify Stocky retirement 2026 replacement purchase orders inventory count",
+      "Belgium Peppol e-invoicing mandatory January 2026 Shopify small webshop problem",
+      "community.shopify.com search.json: stocktake, stocky, inventory count, purchase order (after 2026-08-01); peppol, e-invoicing, XRechnung, KSeF (after 2026-05-01); demand letter, ADA lawsuit, accessibility lawsuit, sued accessibility (after 2026-05-01); shopify subscriptions bulk/report (after 2026-06-01)",
+      "Spend pass, B11 freelancer.com API: shopify purchase order; shopify inventory count; shopify subscription export (query filter did not narrow, no relevant jobs)",
+      "Spend pass, B12 app pages: flochlabels, stock-take, labelloom, stock-take-inventory-count-1, mimi-stock-take-inventory, subscriptions-by-appstle, remedy-accessibility",
+      "Shopify POS inventory count POS Pro requirement quick count"
     ],
     "unverifiedSignals": [
       {
@@ -501,6 +673,22 @@
       {
         "url": "https://www.capterra.com/p/10065759/FormStory/",
         "reason": "HTTP 404; the FormStory $9 price came from a search snippet only."
+      },
+      {
+        "url": "https://api.github.com/search/issues?q=repo%3Acommunity%2Fcommunity+classroom&per_page=5",
+        "reason": "HTTP 422 from the run environment, as on 2026-11-01; A4 substituted with A13."
+      },
+      {
+        "url": "https://seedfund.nsf.gov/topics/",
+        "reason": "HTTP 404; the seedfund.nsf.gov home page works and says pitches reopened 2026-06-02."
+      },
+      {
+        "url": "https://apps.shopify.com/search?q=rental+booking",
+        "reason": "Search page returns no results to curl or WebFetch ('We are having trouble loading your results'); app pages and review pages work."
+      },
+      {
+        "url": "https://community.shopify.com/t/590739.json",
+        "reason": "HTTP 404 on the EU e-invoicing thread's JSON form."
       }
     ],
     "rejectedCandidates": [
@@ -638,6 +826,66 @@
         "title": "RFID attendance with SMS alerts for small schools and gyms",
         "total": 15,
         "reason": "Only a freelancer.com build request ($250-750); no complaint; custom-build service rather than product."
+      },
+      {
+        "title": "Trusted Stocktake (phone stock counts for small Shopify shops after Stocky)",
+        "total": 17,
+        "reason": "Review kill from 23: MiMi Stock Take (free to install, launched 2026-08-12) already applies only the difference during multi-day counts; Stockroom by MyWorks is free and unlimited with team counts; PML Stock Take ($10.79/mo, 95 reviews) needs no POS Pro. Merchant complaints date from Feb to May 2026, before the shutdown."
+      },
+      {
+        "title": "PO Pack (CSV, templates and outstanding sheets from Shopify native purchase orders)",
+        "total": 16,
+        "reason": "Review kill from 20: Shopify's Admin API 2026-10 added purchase-order read queries on 2026-09-17, so the no-API premise is out of date; ASUNOKI Purchase Order Export (free tier, $9.99 Pro) and a free PO-PDF-to-CSV tool already exist."
+      },
+      {
+        "title": "Subscriber Desk (bulk edit and reporting for Shopify Subscriptions)",
+        "total": 12,
+        "reason": "Review kill from 19: apps cannot read subscription contracts owned by another app, so it would have to become a full subscription app; Shopify Subscriptions already has CSV import/export and pause; Subi, PayWhirl, Recharge bulk-edit, and Appstle has a free plan."
+      },
+      {
+        "title": "Peppol e-invoices for Belgian Shopify B2B sellers",
+        "total": 15,
+        "reason": "Sufio already submits Peppol e-invoices; complaints are about one gap (VAT number capture, 2026-04-22); needs an access point; buyer far from Pisan's reach."
+      },
+      {
+        "title": "GoBD-safe immutable invoices for German Shopify shops",
+        "total": 15,
+        "reason": "One complaint (Order Printer Pro, 2026-10-29); served by German invoicing apps and Sufio."
+      },
+      {
+        "title": "Rental booking for small rental shops on Shopify",
+        "total": 16,
+        "reason": "Crowded: IzyRent (131 reviews), BookThatApp (421), Bookable (~2,000), Sesami; complaints are about bugs and support, not a missing product."
+      },
+      {
+        "title": "Delivery-date picker with reliable order tagging",
+        "total": 14,
+        "reason": "One complaint (2026-03-05); Stellar (556 reviews), Buunto (free, 5.0) and others serve it."
+      },
+      {
+        "title": "Consignment shop vendor payouts",
+        "total": 13,
+        "reason": "Newest complaint is 2025-02-03, outside 180 days; several apps exist."
+      },
+      {
+        "title": "GPSR product-safety info for EU-selling small Shopify shops",
+        "total": 13,
+        "reason": "Fifteen or more GPSR apps on the Shopify App Store, several free, almost all with 0 reviews; no merchant complaint found."
+      },
+      {
+        "title": "Stocktake variance-reason log",
+        "total": 15,
+        "reason": "Same customer and problem as Trusted Stocktake; a developer is building it in Shopify Community topic 679330."
+      },
+      {
+        "title": "Pay-per-use invoices for small shops (Order Printer auto-tier complaint)",
+        "total": 14,
+        "reason": "Shopify native invoices are free and Sufio and Order Printer cover it; one complaint about plan auto-selection."
+      },
+      {
+        "title": "Open edX storage migration after MinIO goes away (self-hosted operators)",
+        "total": 11,
+        "reason": "Not a small-business buyer, low willingness to pay, Tutor community is handling it (discuss.openedx.org topic 19999)."
       }
     ],
     "watchlist": [
@@ -661,10 +909,11 @@
         "targetCustomer": "Small online store owners who have received an ADA website demand letter or lawsuit",
         "problemStatement": "Owners who are served do not know where to start, get pitched overlays, and have no dated record of good-faith fixes mapped to the allegations.",
         "total": 20,
-        "missedGate": "No complaint dated within 180 days (the served owners posted in 2023 to 2025); competitiveGap 2 against remediation vendors and free axe/WAVE.",
+        "missedGate": "No complaint dated within 180 days (the served owners posted in 2023 to 2025); competitiveGap 2 against remediation vendors and free axe/WAVE. 2026-11-03 extra run: a store owner's 2026-05-12 Shopify Forms review says they were sued over a popup (within 180 days), but Remedy (free plan, launched 2026-08-21) now keeps a dated accessibility record, so competitiveGap stays 2.",
         "evidence": [
           "https://community.shopify.com/t/232788",
-          "https://community.shopify.com/t/230778"
+          "https://community.shopify.com/t/230778",
+          "https://apps.shopify.com/shopify-forms/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest"
         ],
         "firstSeen": "2026-11-02"
       },
@@ -748,6 +997,6 @@
         "firstSeen": "2026-11-03"
       }
     ],
-    "caveats": "No candidate cleared the gate. The strongest pain cluster (payments that never became enrollments or bookings, 6 owner threads from Aug to Oct 2026) was killed twice in review: once as an API-connected monitor (17) and once as a browser-only CSV check (16). Student Journey Check ships as provisional at 16, after review cut it from 20, chiefly because a free real-browser login monitor exists and buyers resent even a $199/yr licence. The Velprove pricing comes from a vendor-written guide, not a fetched pricing page. The ManageWP evidence date is the fetch date. The TPT source (B1) yielded only an undated $16 spend signal. The C10 change events (ThriveCart Learn retiring at the end of 2026, Thinkific's 10% rise, Kajabi's January rise) are each served by free vendor migrations. Watchlist searches found no new fetched evidence, so all 7 entries carry forward unchanged. Extra run (random sources A13 A5 B9 C4 C2): added idea 2, Misrepresentation Preflight, as provisional at 17 after review cut it from 22; the next candidate, Lead Form Watch, was reviewed and killed at 15. A5 Stack Exchange and C2 yielded no small-business signal (OpenAlex returned 429; arXiv worked). B9: Upwork 403s and Contra is a JS shell, but the freelancer.com public projects API returned dated listings via curl, though its query filter barely narrows results. C4 HigherEdJobs returned a stub, so C4 came from a web search on GMC specialist postings. A search snippet claimed GMC Compliance Checker had 201 reviews; its fetched page shows 0."
+    "caveats": "No candidate cleared the gate. The strongest pain cluster (payments that never became enrollments or bookings, 6 owner threads from Aug to Oct 2026) was killed twice in review: once as an API-connected monitor (17) and once as a browser-only CSV check (16). Student Journey Check ships as provisional at 16, after review cut it from 20, chiefly because a free real-browser login monitor exists and buyers resent even a $199/yr licence. The Velprove pricing comes from a vendor-written guide, not a fetched pricing page. The ManageWP evidence date is the fetch date. The TPT source (B1) yielded only an undated $16 spend signal. The C10 change events (ThriveCart Learn retiring at the end of 2026, Thinkific's 10% rise, Kajabi's January rise) are each served by free vendor migrations. Watchlist searches found no new fetched evidence, so all 7 entries carry forward unchanged. Extra run (random sources A13 A5 B9 C4 C2): added idea 2, Misrepresentation Preflight, as provisional at 17 after review cut it from 22; the next candidate, Lead Form Watch, was reviewed and killed at 15. A5 Stack Exchange and C2 yielded no small-business signal (OpenAlex returned 429; arXiv worked). B9: Upwork 403s and Contra is a JS shell, but the freelancer.com public projects API returned dated listings via curl, though its query filter barely narrows results. C4 HigherEdJobs returned a stub, so C4 came from a web search on GMC specialist postings. A search snippet claimed GMC Compliance Checker had 201 reviews; its fetched page shows 0. Extra run (random sources A2 A4 B12 C1 C11): added idea 3, Popup Check, as provisional at 17 after review cut it from 20. Three higher candidates were reviewed and killed (Trusted Stocktake 23 to 17, PO Pack 20 to 16, Subscriber Desk 19 to 12), each because a free tool or a new Shopify API already covers it. A4 GitHub search returned 422 and was substituted with A13 (community.shopify.com); A2 Open edX, C1 and C11 produced no small-business signal. The Shopify App Store search page returns nothing, but app and review pages work with curl. The day now has three Multi-week ideas and no Weekend MVP, so the complexity-mix constraint is not met: no Weekend MVP candidate survived review."
   }
 }
