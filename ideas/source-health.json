@@ -97,14 +97,14 @@
       "workingPaths": []
     },
     "api.stackexchange.com": {
-      "attempts": 4,
+      "attempts": 8,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-03",
-      "lastOk": "2026-11-03",
-      "ok": 3,
+      "lastAttempt": "2026-11-04",
+      "lastOk": "2026-11-04",
+      "ok": 7,
       "outcomes": {
         "allowlist": 1,
-        "ok": 3
+        "ok": 7
       },
       "workingPaths": [
         "curl https://api.stackexchange.com/2.3/search/advanced?site=academia&q=spreadsheet&order=desc&sort=creation&pagesize=20",
@@ -208,6 +208,19 @@
       },
       "workingPaths": []
     },
+    "blog.report-uri.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-04",
+      "lastOk": "2026-11-04",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://blog.report-uri.com/pci-dss-4-0-1-saq-a-and-client-side-security-a-plain-english-faq/"
+      ]
+    },
     "careers.csudh.edu": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -243,6 +256,21 @@
       },
       "workingPaths": [
         "curl https://changelog.shopify.com/posts/run-inventory-counts-in-pos"
+      ]
+    },
+    "chromewebstore.google.com": {
+      "attempts": 4,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-04",
+      "lastOk": "2026-11-04",
+      "ok": 4,
+      "outcomes": {
+        "ok": 4
+      },
+      "workingPaths": [
+        "curl https://chromewebstore.google.com/detail/kami/ecnphlgnajanjnkcmbpancdjoidceilk/reviews",
+        "curl https://chromewebstore.google.com/detail/vendoo-crosslist-extensio/mnampbajndaipakjhcbbaihllmghlcdf/reviews",
+        "curl https://chromewebstore.google.com/detail/crosslist-magic/lkjldebnppchfbcgbeelhpjplklnjfbk/reviews"
       ]
     },
     "coddy.tech": {
@@ -303,13 +331,14 @@
       "workingPaths": []
     },
     "community.etsy.com": {
-      "attempts": 3,
+      "attempts": 4,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-01",
+      "lastAttempt": "2026-11-04",
       "lastOk": "2026-11-01",
       "ok": 1,
       "outcomes": {
         "empty": 2,
+        "http_404": 1,
         "ok": 1
       },
       "workingPaths": [
@@ -338,14 +367,25 @@
       },
       "workingPaths": []
     },
+    "community.klaviyo.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-04",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_404": 1
+      },
+      "workingPaths": []
+    },
     "community.make.com": {
-      "attempts": 6,
+      "attempts": 7,
       "evidenceItems": 0,
       "lastAttempt": "2026-11-04",
       "lastOk": "2026-11-04",
-      "ok": 6,
+      "ok": 7,
       "outcomes": {
-        "ok": 6
+        "ok": 7
       },
       "workingPaths": [
         "curl https://community.make.com/search.json?q=deprecated%20after%3A2026-08-01",
@@ -354,13 +394,13 @@
       ]
     },
     "community.n8n.io": {
-      "attempts": 28,
+      "attempts": 30,
       "evidenceItems": 4,
       "lastAttempt": "2026-11-04",
       "lastOk": "2026-11-04",
-      "ok": 28,
+      "ok": 30,
       "outcomes": {
-        "ok": 28
+        "ok": 30
       },
       "workingPaths": [
         "curl https://community.n8n.io/search.json?q=invoice%20small%20business%20after%3A2026-09-01",
@@ -380,15 +420,15 @@
       "workingPaths": []
     },
     "community.shopify.com": {
-      "attempts": 82,
+      "attempts": 85,
       "evidenceItems": 11,
       "lastAttempt": "2026-11-04",
       "lastOk": "2026-11-04",
-      "ok": 80,
+      "ok": 83,
       "outcomes": {
         "empty": 1,
         "http_404": 1,
-        "ok": 80
+        "ok": 83
       },
       "workingPaths": [
         "curl https://community.shopify.com/search.json?q=ADA%20lawsuit%20after%3A2026-05-01",
@@ -397,16 +437,31 @@
       ]
     },
     "community.squareup.com": {
-      "attempts": 1,
+      "attempts": 2,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-03",
+      "lastAttempt": "2026-11-04",
       "lastOk": "2026-11-03",
       "ok": 1,
       "outcomes": {
+        "empty": 1,
         "ok": 1
       },
       "workingPaths": [
         "curl https://community.squareup.com/t5/forums/searchpage/tab/message?q=appointments"
+      ]
+    },
+    "community.zoom.com": {
+      "attempts": 2,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-04",
+      "lastOk": "2026-11-04",
+      "ok": 1,
+      "outcomes": {
+        "empty": 1,
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://community.zoom.com/t5/Zoom-Phone-System/10DLC-Registration-failed-over-and-over/m-p/191089"
       ]
     },
     "complianz.io": {
@@ -467,6 +522,19 @@
         "allowlist": 1
       },
       "workingPaths": []
+    },
+    "cside.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-04",
+      "lastOk": "2026-11-04",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://cside.com/pricing"
+      ]
     },
     "dev.to": {
       "attempts": 1,
@@ -560,6 +628,17 @@
       "workingPaths": [
         "curl https://docs.n8n.io/api/"
       ]
+    },
+    "docs.smrtphone.io": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-04",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "redirect": 1
+      },
+      "workingPaths": []
     },
     "dor.wa.gov": {
       "attempts": 2,
@@ -665,6 +744,30 @@
         "curl http://export.arxiv.org/api/query?search_query=abs:%22vibe%20coding%22+AND+abs:security&sortBy=submittedDate&sortOrder=descending&max_results=6"
       ]
     },
+    "fasta2p-portal.pages.dev": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-04",
+      "lastOk": "2026-11-04",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://fasta2p-portal.pages.dev/"
+      ]
+    },
+    "fiverr.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-04",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_403": 1
+      },
+      "workingPaths": []
+    },
     "flippa.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -704,12 +807,13 @@
       ]
     },
     "forum.bubble.io": {
-      "attempts": 2,
+      "attempts": 3,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-02",
+      "lastAttempt": "2026-11-04",
       "lastOk": "2026-11-02",
       "ok": 2,
       "outcomes": {
+        "empty": 1,
         "ok": 2
       },
       "workingPaths": [
@@ -901,14 +1005,14 @@
       ]
     },
     "hn.algolia.com": {
-      "attempts": 32,
+      "attempts": 33,
       "evidenceItems": 1,
       "lastAttempt": "2026-11-04",
       "lastOk": "2026-11-04",
-      "ok": 28,
+      "ok": 29,
       "outcomes": {
         "empty": 4,
-        "ok": 28
+        "ok": 29
       },
       "workingPaths": [
         "curl https://hn.algolia.com/api/v1/search_by_date?query=%22alt%20text%22&tags=comment&hitsPerPage=30",
@@ -928,6 +1032,17 @@
       "workingPaths": [
         "curl https://hookdeck.com/pricing"
       ]
+    },
+    "inflowave.netlify.app": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-04",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_404": 1
+      },
+      "workingPaths": []
     },
     "its.umich.edu": {
       "attempts": 1,
@@ -1136,6 +1251,19 @@
       },
       "workingPaths": [
         "curl https://seedfund.nsf.gov/"
+      ]
+    },
+    "senderz-website.pages.dev": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-04",
+      "lastOk": "2026-11-04",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://senderz-website.pages.dev/blog/stop-texts-opt-outs"
       ]
     },
     "shopify.dev": {
@@ -1578,13 +1706,14 @@
       "workingPaths": []
     },
     "www.federalregister.gov": {
-      "attempts": 4,
+      "attempts": 9,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-02",
-      "lastOk": "2026-11-02",
-      "ok": 4,
+      "lastAttempt": "2026-11-04",
+      "lastOk": "2026-11-04",
+      "ok": 7,
       "outcomes": {
-        "ok": 4
+        "ok": 7,
+        "redirect": 2
       },
       "workingPaths": [
         "curl https://www.federalregister.gov/api/v1/documents.json?per_page=10&order=newest&conditions[term]=web%20accessibility",
@@ -1593,13 +1722,13 @@
       ]
     },
     "www.freelancer.com": {
-      "attempts": 45,
+      "attempts": 58,
       "evidenceItems": 1,
       "lastAttempt": "2026-11-04",
       "lastOk": "2026-11-04",
-      "ok": 45,
+      "ok": 58,
       "outcomes": {
-        "ok": 45
+        "ok": 58
       },
       "workingPaths": [
         "curl https://www.freelancer.com/api/projects/0.1/projects/active/?query=booking%20system&limit=20&full_description=true",
@@ -1608,16 +1737,17 @@
       ]
     },
     "www.govinfo.gov": {
-      "attempts": 1,
+      "attempts": 2,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-01",
-      "lastOk": "2026-11-01",
-      "ok": 1,
+      "lastAttempt": "2026-11-04",
+      "lastOk": "2026-11-04",
+      "ok": 2,
       "outcomes": {
-        "ok": 1
+        "ok": 2
       },
       "workingPaths": [
-        "curl https://www.govinfo.gov/content/pkg/FR-2026-05-11/html/2026-09266.htm"
+        "curl https://www.govinfo.gov/content/pkg/FR-2026-05-11/html/2026-09266.htm",
+        "curl https://www.govinfo.gov/content/pkg/FR-2026-10-26/html/2026-21821.htm"
       ]
     },
     "www.higheredjobs.com": {
@@ -1641,6 +1771,19 @@
         "http_403": 2
       },
       "workingPaths": []
+    },
+    "www.messagedesk.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-04",
+      "lastOk": "2026-11-04",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.messagedesk.com/free-tools/sms-compliance-checker"
+      ]
     },
     "www.mondaq.com": {
       "attempts": 1,
@@ -1892,19 +2035,19 @@
     "A12": {
       "candidates": 11,
       "fetchFail": 1,
-      "fetchOk": 30,
+      "fetchOk": 31,
       "lastUsed": "2026-11-04",
-      "runs": 5,
-      "searches": 34,
+      "runs": 6,
+      "searches": 35,
       "selected": 0
     },
     "A13": {
       "candidates": 31,
-      "fetchFail": 8,
-      "fetchOk": 110,
+      "fetchFail": 10,
+      "fetchOk": 116,
       "lastUsed": "2026-11-04",
-      "runs": 6,
-      "searches": 64,
+      "runs": 7,
+      "searches": 70,
       "selected": 2
     },
     "A14": {
@@ -1953,12 +2096,21 @@
       "selected": 0
     },
     "A5": {
-      "candidates": 3,
+      "candidates": 4,
       "fetchFail": 1,
-      "fetchOk": 5,
-      "lastUsed": "2026-11-03",
-      "runs": 3,
-      "searches": 10,
+      "fetchOk": 9,
+      "lastUsed": "2026-11-04",
+      "runs": 4,
+      "searches": 14,
+      "selected": 0
+    },
+    "A6": {
+      "candidates": 4,
+      "fetchFail": 0,
+      "fetchOk": 4,
+      "lastUsed": "2026-11-04",
+      "runs": 1,
+      "searches": 3,
       "selected": 0
     },
     "A7": {
@@ -2061,12 +2213,12 @@
       "selected": 0
     },
     "B9": {
-      "candidates": 1,
+      "candidates": 6,
       "fetchFail": 2,
-      "fetchOk": 4,
-      "lastUsed": "2026-11-03",
-      "runs": 1,
-      "searches": 6,
+      "fetchOk": 17,
+      "lastUsed": "2026-11-04",
+      "runs": 2,
+      "searches": 19,
       "selected": 0
     },
     "C1": {
@@ -2124,21 +2276,21 @@
       "selected": 0
     },
     "C5": {
-      "candidates": 7,
-      "fetchFail": 1,
-      "fetchOk": 6,
-      "lastUsed": "2026-11-03",
-      "runs": 4,
-      "searches": 15,
+      "candidates": 8,
+      "fetchFail": 3,
+      "fetchOk": 10,
+      "lastUsed": "2026-11-04",
+      "runs": 5,
+      "searches": 19,
       "selected": 0
     },
     "C6": {
-      "candidates": 3,
+      "candidates": 4,
       "fetchFail": 0,
-      "fetchOk": 0,
-      "lastUsed": "2026-11-01",
-      "runs": 1,
-      "searches": 4,
+      "fetchOk": 2,
+      "lastUsed": "2026-11-04",
+      "runs": 2,
+      "searches": 6,
       "selected": 0
     },
     "C7": {
@@ -2233,12 +2385,16 @@
     {
       "floorFailure": "Fresh Canvas pain was either already served (Atomic Search sells account-wide Find and Replace) or bound up with minors' data. EdSurge, EdWeek Market Brief and pulse.bot returned no usable October 2026 content through WebFetch.",
       "runId": "2026-10-31#3"
+    },
+    {
+      "floorFailure": "Two separate limits stopped this run. (1) The day already held 4 provisional ideas, the cap in ROUTINE.md and validate_ideas.py (MAX_PROVISIONAL), so a third run on the same day can only ship validated ideas. (2) No candidate came near the gate of 22: the best two were rescored by reviewers from 18 and 16 to 14. Without the cap, neither would have shipped as validated either. The cap makes any third same-day run unable to add provisional ideas, so the routine should either stop extra runs once the cap is reached or count the cap per run.",
+      "runId": "2026-11-04#3"
     }
   ],
   "funnel": {
-    "candidates": 169,
+    "candidates": 180,
     "passedGate": 4,
-    "passedRejectRules": 142,
+    "passedRejectRules": 149,
     "provisional": 9,
     "reviewKilled": 20,
     "validated": 0,
@@ -2246,9 +2402,9 @@
   },
   "gateFailures": {
     "painBelow4": 3,
-    "rejectRule": 27,
+    "rejectRule": 31,
     "reviewKill": 20,
-    "totalBelowMin": 113
+    "totalBelowMin": 120
   },
   "generated": "2026-11-04",
   "prefer": [
@@ -2496,6 +2652,6 @@
       "status": "ok"
     }
   ],
-  "runsInWindow": 11,
+  "runsInWindow": 12,
   "windowDays": 45
 }

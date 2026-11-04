@@ -1,6 +1,6 @@
 # Source health
 
-Generated 2026-11-04 from the last 45 days of `ideas/run-log.jsonl` (11 runs). Do not edit by hand: regenerate with `python3 scripts/source_health.py`.
+Generated 2026-11-04 from the last 45 days of `ideas/run-log.jsonl` (12 runs). Do not edit by hand: regenerate with `python3 scripts/source_health.py`.
 
 ## Do not spend searches here
 
@@ -65,22 +65,24 @@ These sources are not on the avoid list, because at least one of their paths wor
 
 | Host | usable/tried | Outcomes | Last usable |
 |---|---|---|---|
-| community.shopify.com | 80/82 | empty 1, http_404 1, ok 80 | 2026-11-04 |
+| community.shopify.com | 83/85 | empty 1, http_404 1, ok 83 | 2026-11-04 |
+| www.freelancer.com | 58/58 | ok 58 | 2026-11-04 |
 | apps.shopify.com | 42/51 | empty 9, ok 42 | 2026-11-04 |
 | wordpress.org | 50/51 | http_404 1, ok 50 | 2026-11-04 |
-| www.freelancer.com | 45/45 | ok 45 | 2026-11-04 |
-| hn.algolia.com | 28/32 | empty 4, ok 28 | 2026-11-04 |
-| community.n8n.io | 28/28 | ok 28 | 2026-11-04 |
+| hn.algolia.com | 29/33 | empty 4, ok 29 | 2026-11-04 |
+| community.n8n.io | 30/30 | ok 30 | 2026-11-04 |
 | api.wordpress.org | 15/15 | ok 15 | 2026-11-04 |
+| www.federalregister.gov | 7/9 | ok 7, redirect 2 | 2026-11-04 |
+| api.stackexchange.com | 7/8 | allowlist 1, ok 7 | 2026-11-04 |
 | discuss.openedx.org | 7/8 | empty 1, ok 7 | 2026-11-04 |
-| community.make.com | 6/6 | ok 6 | 2026-11-04 |
+| community.make.com | 7/7 | ok 7 | 2026-11-04 |
 | api.github.com | 1/5 | empty 1, http_403 2, http_5xx 1, ok 1 | 2026-11-04 |
 | export.arxiv.org | 5/5 | ok 5 | 2026-11-04 |
 | api.openalex.org | 0/4 | http_429 4 | never |
-| api.stackexchange.com | 3/4 | allowlist 1, ok 3 | 2026-11-03 |
+| chromewebstore.google.com | 4/4 | ok 4 | 2026-11-04 |
+| community.etsy.com | 1/4 | empty 2, http_404 1, ok 1 | 2026-11-01 |
 | github.com | 3/4 | http_403 1, ok 3 | 2026-11-01 |
-| www.federalregister.gov | 4/4 | ok 4 | 2026-11-02 |
-| community.etsy.com | 1/3 | empty 2, ok 1 | 2026-11-01 |
+| forum.bubble.io | 2/3 | empty 1, ok 2 | 2026-11-02 |
 | forum.ghost.org | 3/3 | ok 3 | 2026-11-03 |
 | forum.invoiceninja.com | 3/3 | ok 3 | 2026-11-03 |
 | meet.ribblr.com | 3/3 | ok 3 | 2026-11-01 |
@@ -92,11 +94,12 @@ These sources are not on the avoid list, because at least one of their paths wor
 | apibreaks.com | 2/2 | ok 2 | 2026-11-04 |
 | app.thetutor.link | 2/2 | ok 2 | 2026-11-03 |
 | community.instructure.com | 0/2 | empty 2 | never |
+| community.squareup.com | 1/2 | empty 1, ok 1 | 2026-11-03 |
+| community.zoom.com | 1/2 | empty 1, ok 1 | 2026-11-04 |
 | discourse.jupyter.org | 2/2 | ok 2 | 2026-11-04 |
 | dor.wa.gov | 1/2 | http_404 1, ok 1 | 2026-11-02 |
 | dsp.berkeley.edu | 2/2 | ok 2 | 2026-11-01 |
 | flyingfish.ie | 2/2 | ok 2 | 2026-11-03 |
-| forum.bubble.io | 2/2 | ok 2 | 2026-11-02 |
 | forum.mautic.org | 2/2 | ok 2 | 2026-11-03 |
 | forum.webflow.com | 0/2 | empty 2 | never |
 | help.shopify.com | 2/2 | ok 2 | 2026-11-04 |
@@ -106,12 +109,14 @@ These sources are not on the avoid list, because at least one of their paths wor
 | vibeappscanner.com | 2/2 | ok 2 | 2026-11-04 |
 | wpengine.com | 1/2 | http_404 1, ok 1 | 2026-11-03 |
 | www.capterra.com | 0/2 | http_403 1, http_404 1 | never |
+| www.govinfo.gov | 2/2 | ok 2 | 2026-11-04 |
 | www.make.com | 0/2 | http_403 2 | never |
 | www.reddit.com | 0/2 | allowlist 2 | never |
 | adnabu.com | 1/1 | ok 1 | 2026-11-03 |
 | apify.com | 1/1 | ok 1 | 2026-11-04 |
 | appsumo.com | 1/1 | ok 1 | 2026-11-04 |
 | apuo.ca | 0/1 | empty 1 | never |
+| blog.report-uri.com | 1/1 | ok 1 | 2026-11-04 |
 | careers.csudh.edu | 0/1 | empty 1 | never |
 | cartmango.com | 1/1 | ok 1 | 2026-11-03 |
 | changelog.shopify.com | 1/1 | ok 1 | 2026-11-03 |
@@ -121,23 +126,27 @@ These sources are not on the avoid list, because at least one of their paths wor
 | community.cal.com | 0/1 | timeout 1 | never |
 | community.cloudflare.com | 0/1 | http_403 1 | never |
 | community.home-assistant.io | 0/1 | http_403 1 | never |
+| community.klaviyo.com | 0/1 | http_404 1 | never |
 | community.openhab.org | 0/1 | empty 1 | never |
-| community.squareup.com | 1/1 | ok 1 | 2026-11-03 |
 | complianz.io | 1/1 | ok 1 | 2026-11-02 |
 | consentcheck.online | 0/1 | http_404 1 | never |
 | contra.com | 0/1 | empty 1 | never |
 | cronitor.io | 1/1 | ok 1 | 2026-11-04 |
 | cseducators.stackexchange.com | 0/1 | allowlist 1 | never |
+| cside.com | 1/1 | ok 1 | 2026-11-04 |
 | dev.to | 0/1 | http_404 1 | never |
 | developers.make.com | 1/1 | ok 1 | 2026-11-04 |
 | discuss.pixls.us | 1/1 | ok 1 | 2026-11-01 |
 | docs.lovable.dev | 1/1 | ok 1 | 2026-11-04 |
 | docs.n8n.io | 1/1 | ok 1 | 2026-11-04 |
+| docs.smrtphone.io | 0/1 | redirect 1 | never |
 | doyouok.com | 1/1 | ok 1 | 2026-11-04 |
 | ecosire.com | 1/1 | ok 1 | 2026-11-03 |
 | elementor.com | 0/1 | http_404 1 | never |
 | equalizedigital.com | 0/1 | http_403 1 | never |
 | erank.com | 1/1 | ok 1 | 2026-11-01 |
+| fasta2p-portal.pages.dev | 1/1 | ok 1 | 2026-11-04 |
+| fiverr.com | 0/1 | http_403 1 | never |
 | flippa.com | 0/1 | empty 1 | never |
 | flowlert.com | 1/1 | ok 1 | 2026-11-04 |
 | forum.obsidian.md | 1/1 | ok 1 | 2026-11-01 |
@@ -149,6 +158,7 @@ These sources are not on the avoid list, because at least one of their paths wor
 | help.outofthesandbox.com | 0/1 | http_403 1 | never |
 | help.pickcode.io | 1/1 | ok 1 | 2026-11-01 |
 | hookdeck.com | 1/1 | ok 1 | 2026-11-03 |
+| inflowave.netlify.app | 0/1 | http_404 1 | never |
 | its.umich.edu | 0/1 | http_403 1 | never |
 | jorijn.com | 0/1 | redirect 1 | never |
 | kourses.com | 1/1 | ok 1 | 2026-11-03 |
@@ -162,6 +172,7 @@ These sources are not on the avoid list, because at least one of their paths wor
 | rootbrief.com | 1/1 | ok 1 | 2026-11-04 |
 | rtl.berkeley.edu | 1/1 | ok 1 | 2026-11-01 |
 | scispace.com | 0/1 | http_403 1 | never |
+| senderz-website.pages.dev | 1/1 | ok 1 | 2026-11-04 |
 | shopify.dev | 1/1 | ok 1 | 2026-11-04 |
 | sift-health.pages.dev | 1/1 | ok 1 | 2026-11-02 |
 | supabase.com | 1/1 | ok 1 | 2026-11-04 |
@@ -190,8 +201,8 @@ These sources are not on the avoid list, because at least one of their paths wor
 | www.digitalcommerce360.com | 0/1 | http_403 1 | never |
 | www.dor.wa.gov | 1/1 | ok 1 | 2026-11-02 |
 | www.etsy.com | 0/1 | empty 1 | never |
-| www.govinfo.gov | 1/1 | ok 1 | 2026-11-01 |
 | www.higheredjobs.com | 0/1 | empty 1 | never |
+| www.messagedesk.com | 1/1 | ok 1 | 2026-11-04 |
 | www.mondaq.com | 1/1 | ok 1 | 2026-11-02 |
 | www.nationgraph.com | 0/1 | http_404 1 | never |
 | www.ndsmcobserver.com | 0/1 | http_403 1 | never |
@@ -213,8 +224,8 @@ These sources are not on the avoid list, because at least one of their paths wor
 
 | Gate condition | Candidates lost |
 |---|---|
-| totalBelowMin | 113 |
-| rejectRule | 27 |
+| totalBelowMin | 120 |
+| rejectRule | 31 |
 | reviewKill | 20 |
 | painBelow4 | 3 |
 
@@ -222,7 +233,7 @@ The largest row is the one to argue about before changing anything else.
 
 ## Funnel over the window
 
-candidates 169 -> passedRejectRules 142 -> passedGate 4 -> reviewKilled 20 -> validated 0 -> provisional 9 -> watchlist 36
+candidates 180 -> passedRejectRules 149 -> passedGate 4 -> reviewKilled 20 -> validated 0 -> provisional 9 -> watchlist 36
 
 ## Runs that produced nothing
 
@@ -230,6 +241,7 @@ candidates 169 -> passedRejectRules 142 -> passedGate 4 -> reviewKilled 20 -> va
 - `2026-10-31#1`: Best candidate was Orphaned Embed Rescue at 21, one point under the gate of 22, held back by free replacements and a one-time migration need. With no provisional tier the run had no way to ship its best candidate. Saturday's focus sources (RFP portals, job postings) mostly surfaced enterprise solicitations that the no-procurement rejection rule kills by construction.
 - `2026-10-31#2`: A8 yielded nothing because Reddit is unreachable, so a quarter of the run's source budget was spent on a dead source the morning run had already found dead. The strongest signal, the end of Canvas Free-for-Teacher, is already served by free Canvas Lite and ProfDesk.
 - `2026-10-31#3`: Fresh Canvas pain was either already served (Atomic Search sells account-wide Find and Replace) or bound up with minors' data. EdSurge, EdWeek Market Brief and pulse.bot returned no usable October 2026 content through WebFetch.
+- `2026-11-04#3`: Two separate limits stopped this run. (1) The day already held 4 provisional ideas, the cap in ROUTINE.md and validate_ideas.py (MAX_PROVISIONAL), so a third run on the same day can only ship validated ideas. (2) No candidate came near the gate of 22: the best two were rescored by reviewers from 18 and 16 to 14. Without the cap, neither would have shipped as validated either. The cap makes any third same-day run unable to add provisional ideas, so the routine should either stop extra runs once the cap is reached or count the cap per run.
 
 A run producing nothing is a routine bug, not a quiet day. Each line above is one to fix.
 

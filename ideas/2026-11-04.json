@@ -785,7 +785,12 @@
       "A2 Other LMS and classroom forums (discuss.openedx.org)",
       "B1 Teachers Pay Teachers and Etsy",
       "C7 Market reports (web search only; no verified path)",
-      "C1 SBIR and STTR solicitations (nsf.gov solicitation page)"
+      "C1 SBIR and STTR solicitations (nsf.gov solicitation page)",
+      "A6 Edtech app and extension reviews (Chrome Web Store reviews pages via curl, no consent wall from this environment; used for small-business extensions)",
+      "A5 Educator Stack Exchanges (api.stackexchange.com via curl)",
+      "B9 Freelance build requests (freelancer.com public API via curl)",
+      "C6 Accreditation and standards changes (PCI DSS v4.0.1 SAQ A eligibility, via web search and blog.report-uri.com)",
+      "C5 Policy and regulation trackers (federalregister.gov API; HTML pages redirect to unblock.federalregister.gov, govinfo.gov HTML works)"
     ],
     "searches": [
       "community.n8n.io search.json: deprecated after:2026-08-01",
@@ -827,7 +832,24 @@
       "teacherspayteachers.com Browse: accessibility checklist; tutoring business",
       "freelancer.com API (spend pass): ada website accessibility remediation; shopify theme update; wcag audit wordpress; accessibility statement; n8n documentation; n8n workflow fix; make.com scenario documentation",
       "community.shopify.com search.json: ada demand letter after:2026-05-01; accessibility lawsuit after:2026-06-01",
-      "community.n8n.io search.json: client handover after:2026-08-01; document workflow client after:2026-08-01"
+      "community.n8n.io search.json: client handover after:2026-08-01; document workflow client after:2026-08-01",
+      "CWS reviews: Vendoo Crosslist Extension, Listelf (Crosslist Magic), Streak CRM, Kami",
+      "web: chromewebstore crosslisting extension Poshmark eBay Mercari",
+      "web: chromewebstore WhatsApp Web CRM extension small business",
+      "web: chromewebstore Google Business Profile reviews extension",
+      "SE academia: grading spreadsheet / office hours / tool students AI; SE cseducators latest",
+      "FR API: \"small entity compliance guide\", \"revoke consent\" robocalls, \"consumer reviews\", \"small businesses\" effective date website (rules since 2026-06-01)",
+      "freelancer API: invoice, small business, booking, shopify, quickbooks, google sheets automation, 10DLC, A2P, twilio, TCPA, crosslisting, PCI",
+      "web: PCI DSS 4.0.1 SAQ A eligibility script attack small merchants 2026",
+      "web: wordpress.org SAQ A woocommerce payment page compliance",
+      "web: FCC TCPA revocation rule November 25 2026 small business",
+      "web: 10DLC campaign rejected small business privacy policy opt-in forum",
+      "HN algolia comments: 10DLC; Discourse search 10DLC on community.n8n.io, community.make.com, forum.bubble.io",
+      "spend: A2P 10DLC registration done-for-you price (FastA2P $97)",
+      "competitor: free A2P 10DLC website compliance checker (MessageDesk free)",
+      "web: customer texted STOP still got texts from another app small business",
+      "competitor: cside pricing (free plan to 2,000 pageviews)",
+      "web: reseller sold twice crosslisting delist failed Vendoo List Perfectly"
     ],
     "unverifiedSignals": [
       {
@@ -857,6 +879,22 @@
       {
         "url": "https://testparty.ai/blog/testparty-awarded-dollar1184700-in-sbir-phase-ii-funding",
         "reason": "Search result only (company press release); not fetched, not used."
+      },
+      {
+        "url": "https://www.federalregister.gov/documents/2026/10/26/2026-21821/enhancing-the-ability-of-consumers-to-control-the-robocalls",
+        "reason": "302 to unblock.federalregister.gov (bot interstitial); read the same rule on govinfo.gov instead."
+      },
+      {
+        "url": "https://inflowave.netlify.app/resources/a2p-approval-guide-rejected-2026",
+        "reason": "HTTP 410."
+      },
+      {
+        "url": "https://fiverr.com/andreasmith9/set-up-a2p-10dlc-with-go-high-level-crm-automation",
+        "reason": "HTTP 403; Fiverr 10DLC gig prices ($50-100) seen only in search snippets, not used."
+      },
+      {
+        "url": "https://community.zoom.com/t5/Zoom-Phone-System/10DLC-Registration-failed-over-and-over/m-p/191089",
+        "reason": "Fetched and usable but dated 2024-07-16, outside the 180-day floor."
       }
     ],
     "rejectedCandidates": [
@@ -994,6 +1032,61 @@
         "title": "Cleaning company job and staff scheduling app",
         "total": 12,
         "reason": "A freelancer.com job asks for a custom build (a service, not a product), and Jobber-class products already serve the job."
+      },
+      {
+        "title": "Text Consent Ledger (cross-tool SMS opt-out ledger for the FCC rule effective 2026-11-25)",
+        "total": 14,
+        "reason": "Reviewer rescored from 18: complaints found are about 10DLC registration, not opt-out sync; each tool already honours STOP; Square and Quo expose no SMS opt-out API; the FCC says the rule adds no recordkeeping for small entities. Could not ship anyway: the day's 4 provisional slots were full."
+      },
+      {
+        "title": "Oversell Watch (independent delist auditor for crosslisting resellers)",
+        "total": 14,
+        "reason": "Reviewer rescored from 16: Vendoo, Crosslist and PrimeLister include sale detection and auto-delist; evidence is two reviews on one CWS page; Poshmark terms ban automated scraping. Gap left: Vinted sales and a miss log."
+      },
+      {
+        "title": "10DLC campaign approval preflight for small businesses",
+        "total": 15,
+        "reason": "MessageDesk's free SMS Compliance Checker already scans the website, privacy policy and opt-in forms against carrier criteria; FastA2P sells done-for-you at $97."
+      },
+      {
+        "title": "Payment-page script attestation for small WooCommerce stores (PCI SAQ A)",
+        "total": 14,
+        "reason": "cside's free plan covers 6.4.3/11.6.1 monitoring up to 2,000 pageviews a month, which fits small merchants; only complaint is a 2026-05-20 Shopify question where Shopify handles checkout."
+      },
+      {
+        "title": "Missed-call text-back for trades",
+        "total": 12,
+        "reason": "Well served (GoHighLevel, Quo, Podium, free n8n workflows)."
+      },
+      {
+        "title": "Shopify real-order end-to-end tester",
+        "total": 12,
+        "reason": "Needs human testers in the US/Canada receiving parcels: a service or two-sided marketplace (rejection rule)."
+      },
+      {
+        "title": "WhatsApp FAQ auto-responder for small shops",
+        "total": 11,
+        "reason": "AI wrapper with no data moat; many cheap incumbents."
+      },
+      {
+        "title": "Indeed job-post rejection preflight",
+        "total": 10,
+        "reason": "One non-US freelancer job as evidence; no complaint."
+      },
+      {
+        "title": "Tutor curriculum tie-ins for parents (cseducators 2026-08-15)",
+        "total": 10,
+        "reason": "A single question with no payment signal."
+      },
+      {
+        "title": "Invoice collection / dunning for small firms",
+        "total": 11,
+        "reason": "Crowded (Chaser and accounting-suite reminders); a freelancer job for a human collector is a service."
+      },
+      {
+        "title": "Kami classview grading workaround",
+        "total": 9,
+        "reason": "K-12 institutional buyer with minors' data; complaint is one CWS review."
       }
     ],
     "watchlist": [
@@ -1011,6 +1104,6 @@
         "firstSeen": "2026-11-03"
       }
     ],
-    "caveats": "Only one idea ships, against a first-run target of 3. Six candidates were reviewed and five were killed outright, each because a free or very cheap product already does the job (Flowlert, Lovable's built-in scan, PixelGuard's free plan, free PHP 8.4 scanners); the developer-tooling lens on small-business automation and Shopify surfaced markets crowded with indie tools launched in 2026, and many forum 'complaints' were market-validation posts by those builders. Theme Conflict Merge ships as provisional at 17 although its reviewer recommended a kill: the reviewer's own findings left one gap (Shopify's updater drops every edit when any file conflicts, and the $9/month incumbent does not list Horizon), and the idea was re-scoped to that case. Because one idea ships, the complexity-mix constraint (a Weekend MVP plus a Multi-week) is not met. Watchlist re-research (Canvas maintenance, ADA demand letters, agent exposure audit) found no new payment evidence. A3's GitHub path returned 422 only because queries lacked is:issue; with it the API works. The OOTS evidence date (2025-02-15) is older than 180 days; the freelancer job date comes from the API's time_submitted. Extra run (random sources A11 A2 B1 C7 C1): added ideas 2, 3 and 4 (Accessibility Fleet Log, Health Page Tracker Watch, Client Safe-Edit Pack for n8n), all provisional after review. The random sources leaned to education and yielded little; two of the three ideas came from A11 (WordPress accessibility plugin reviews) and the third is a re-scoped watchlist entry. Seven candidates were reviewed: three watchlist entries were killed (Canvas content maintenance, ADA demand-letter ledger, Agent Exposure Audit), and four were rescored, of which Horizon regression check (18) was held back because it shares idea 1's customer. Health Page Tracker Watch overlaps in mechanism with Consent Leak Watch (2026-11-02) but targets health practices and BAA/consumer-health-data exposure, not consent banners. Pricing-page evidence items are undated; their date is the date read. The n8n pack's complianceBurden was raised from the reviewer's 2 to 3 because the re-scope removed stored API keys."
+    "caveats": "Only one idea ships, against a first-run target of 3. Six candidates were reviewed and five were killed outright, each because a free or very cheap product already does the job (Flowlert, Lovable's built-in scan, PixelGuard's free plan, free PHP 8.4 scanners); the developer-tooling lens on small-business automation and Shopify surfaced markets crowded with indie tools launched in 2026, and many forum 'complaints' were market-validation posts by those builders. Theme Conflict Merge ships as provisional at 17 although its reviewer recommended a kill: the reviewer's own findings left one gap (Shopify's updater drops every edit when any file conflicts, and the $9/month incumbent does not list Horizon), and the idea was re-scoped to that case. Because one idea ships, the complexity-mix constraint (a Weekend MVP plus a Multi-week) is not met. Watchlist re-research (Canvas maintenance, ADA demand letters, agent exposure audit) found no new payment evidence. A3's GitHub path returned 422 only because queries lacked is:issue; with it the API works. The OOTS evidence date (2025-02-15) is older than 180 days; the freelancer job date comes from the API's time_submitted. Extra run (random sources A11 A2 B1 C7 C1): added ideas 2, 3 and 4 (Accessibility Fleet Log, Health Page Tracker Watch, Client Safe-Edit Pack for n8n), all provisional after review. The random sources leaned to education and yielded little; two of the three ideas came from A11 (WordPress accessibility plugin reviews) and the third is a re-scoped watchlist entry. Seven candidates were reviewed: three watchlist entries were killed (Canvas content maintenance, ADA demand-letter ledger, Agent Exposure Audit), and four were rescored, of which Horizon regression check (18) was held back because it shares idea 1's customer. Health Page Tracker Watch overlaps in mechanism with Consent Leak Watch (2026-11-02) but targets health practices and BAA/consumer-health-data exposure, not consent banners. Pricing-page evidence items are undated; their date is the date read. The n8n pack's complianceBurden was raised from the reviewer's 2 to 3 because the re-scope removed stored API keys. Extra run (random sources A6 A5 B9 C6 C5): added no ideas. The day already held 4 provisional ideas, the maximum ROUTINE.md and the validator allow, so only a validated idea could have shipped. No candidate came near the gate: the best two (Text Consent Ledger 18 and Oversell Watch 16) were rescored to 14 by reviewers. The FCC revocation rule (2026-21821, effective 2026-11-25) is real mandate evidence for any future small-business texting idea. The watchlist is unchanged."
   }
 }
