@@ -603,3 +603,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-04 [doc] Extra run (random sources A6 A5 B9 C6 C5) added 0 ideas to ideas/2026-11-04.json: day at 4-provisional cap, best candidates rescored to 14. 0 ideas: floor not met, see run log
 
 2026-11-04 [decision] Provisional cap is per run (4 first, 3 extra), a day holds up to 10 ideas; the per-day cap of 4 left the third Nov 4 run unable to add anything.
+
+2026-11-04 [build] Misrepresentation Preflight (2026-11-03 #2) implemented: https://misrepresentation-preflight.pisan.me/
