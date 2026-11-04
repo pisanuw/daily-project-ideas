@@ -100,8 +100,9 @@ version history:
   ideas between them, so v3 gained a second tier instead of an all-or-nothing
   gate. The version number did not change: the fields below are additions, and
   older v3 files stay valid. Changes:
-  - Since 2026-11-04 a day carries 3 to 6 ideas: validated ones first, then
-    provisional ones (at most 4) to make up at least 3. Fewer than 3 needs a
+  - Since 2026-11-04 a day carries 3 to 10 ideas: validated ones first, then
+    provisional ones (at most 4 per first run, 3 per extra run) to make up at
+    least 3. Fewer than 3 needs a
     `runNotes.caveats` line saying why.
   - `confidence` (required, `"validated"` or `"provisional"`). A validated idea
     cleared the gate, whose numbers are unchanged. A provisional idea is the

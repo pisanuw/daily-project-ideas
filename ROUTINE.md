@@ -401,7 +401,9 @@ routine with almost nothing to choose from.
    watchlist. On 2026-11-04 six entries at 20 stayed there while an idea at 17
    shipped alone; that is the mistake this rule exists to stop. An entry needs
    only the floor (a usable item dated within 180 days, review in this run).
-   Never more than 4 provisional ideas in a day. Each provisional idea must be
+   At most 4 provisional ideas in a first run and 3 in an extra run; a day
+   holds at most 10 ideas in all. (Until 2026-11-04 the cap of 4 was per day,
+   so a third run that day could add nothing.) Each provisional idea must be
    about a different customer and problem from every other idea that day.
    Prefer, among candidates within 2 points of each other, the one with
    `willingnessToPay` of 3 or more.

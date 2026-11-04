@@ -49,9 +49,9 @@ TOPICS = {"Assessment & Grading", "AI Literacy & Ethics",
           "Accessibility", "Math & Cryptography", "Writing & Language",
           "Teaching Operations", "Developer Tooling", "Data & Visualization"}
 EVIDENCE_KINDS = {"complaint", "spend", "mandate"}
-MAX_IDEAS = 6
+MAX_IDEAS = 10  # per day, first run plus extra runs (2026-11-04)
 MIN_IDEAS = 3  # since 2026-11-04
-MAX_PROVISIONAL = 4  # since 2026-11-04: a first run ships 3 to 5 ideas
+MAX_PROVISIONAL = 10  # per day; ROUTINE.md caps each run (4 first, 3 extra)
 MAX_PER_CATEGORY = 2
 MIN_TOTAL = 22
 RECENT_DAYS = 90
