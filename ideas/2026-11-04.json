@@ -1,0 +1,469 @@
+{
+  "date": "2026-11-04",
+  "schemaVersion": 3,
+  "complete": true,
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Theme Conflict Merge",
+      "slug": "theme-conflict-merge",
+      "category": "Developer Tool",
+      "smallBusiness": true,
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Developer Tooling",
+      "summary": "For small Shopify merchants whose theme update failed with 'code edits could not be included': upload the old and new theme, get back a merged copy with your edits carried over file by file and a plain-language list of the few places that need a decision.",
+      "public": {
+        "summary": "When a theme update refuses to keep your custom changes, this carries them over for you and shows you only the few spots that need a decision.",
+        "problem": "You paid someone to tweak your store's theme, and now the theme has an update with fixes you want. You click update and get a message that your code edits could not be included, so the new version arrives without any of your changes. Your choices are to stay on the old version, hire a developer to copy everything across by hand, or hope you remember what was changed.",
+        "forWhom": "Shop owners on Shopify who have edited their theme, or had someone edit it for them, and want to keep getting theme updates.",
+        "benefits": [
+          "Keep your custom changes when you update your theme",
+          "Know exactly which changes need a human decision, in plain words",
+          "Stop paying a developer every time the theme updates",
+          "See the updated store side by side with the old one before anything goes live",
+          "Your live store stays untouched until you choose to switch"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "I tried to update my theme and Shopify said a copy was added but my code edits could not be included because 'Rebase failed with conflicts' on ten files. I don't know which of my changes are missing, and copying old files over the new version breaks the update itself.",
+      "description": "The merchant downloads two theme ZIPs from the Shopify admin (the live, customized theme and the new version Shopify added to the library) and uploads them. The tool finds the stock version the store was originally installed from (public release tags for Horizon and Dawn on GitHub; other themes need the merchant's original ZIP) and runs a three-way merge file by file, so that one conflict no longer throws away every edit, which is what Shopify's built-in updater does today. Non-conflicting customizations are applied automatically; each real conflict is shown as a short plain-language card ('you changed the cart button text here; the update also changed this button') with a choose-mine, choose-theirs, or ask-a-developer option. Store-specific files (settings_data.json, locales, JSON templates) are labeled as settings, not code, so they do not drown the list. The output is a merged ZIP the merchant uploads as an unpublished theme, plus side-by-side screenshots of the home, product and cart pages for a visual check.",
+      "targetCustomer": "Owners of small Shopify stores (one to ten staff) on Horizon or Dawn who have edited theme code themselves, with Sidekick, or through a past freelancer, and whose theme update reported that code edits could not be included.",
+      "buyer": "The store owner, on the business card, from the same budget that pays for apps and occasional freelance theme work (one freelancer.com job for this task offered $30 to $250).",
+      "whyNow": "Horizon, Shopify's newest free theme, ships updates every few weeks (3.3.1 to 3.5.1 to 4.14 to 4.15 in 2026), and Shopify's own updater drops all code edits when any file conflicts. Shopify staff said in August 2025 they were working on it, and the thread was still open in September 2026. The paid updater with 291 reviews (OOTS) does not list Horizon among the themes it supports.",
+      "founderFit": "Three-way merge is version control, which Pisan teaches, and the core is a deterministic diff3 over text files that he can build and test alone with real theme release tags. It needs no paid API at runtime and no access to the merchant's store in the first version, because it works on downloaded ZIPs.",
+      "problemEvidence": [
+        {
+          "url": "https://community.shopify.com/t/update-theme-error-rebase-failed-with-conflicts/630057",
+          "source": "community.shopify.com",
+          "author": "zhuk",
+          "date": "2026-05-29",
+          "kind": "complaint",
+          "summary": "Theme update added a copy but 'your code edits could not be included': Rebase failed with conflicts on 10 files, header and footer among them."
+        },
+        {
+          "url": "https://community.shopify.com/t/unable-to-update-horizon-theme/629151",
+          "source": "community.shopify.com",
+          "author": "joerg_hartmann",
+          "date": "2026-05-24",
+          "kind": "complaint",
+          "summary": "Cannot update Horizon 3.3.1 to 3.5.1; the update silently fails, which last time was caused by direct customizations; asks for a workflow to keep customized Horizon updateable."
+        },
+        {
+          "url": "https://community.shopify.com/t/i-have-a-problem-with-my-store/675548",
+          "source": "community.shopify.com",
+          "author": "Angelo20300",
+          "date": "2026-09-01",
+          "kind": "complaint",
+          "summary": "After updating Horizon 4.14 to 4.15 the store got slower, a cart app stopped responding and Sticky Add to Cart broke."
+        },
+        {
+          "url": "https://community.shopify.com/t/seo-fell-since-updating-my-theme/651712",
+          "source": "community.shopify.com",
+          "author": "TPELUCHEFACTORY",
+          "date": "2026-07-15",
+          "kind": "complaint",
+          "summary": "Updated Refresh 15.4.1 to 15.5.0; Shopify said some code could not be copied; free SEO traffic roughly halved."
+        },
+        {
+          "url": "https://www.freelancer.com/projects/git/Shopify-Theme-Update-Diff-Migrate",
+          "source": "freelancer.com (public projects API)",
+          "author": "unknown (project 40796563)",
+          "date": "2026-10-31",
+          "kind": "spend",
+          "summary": "A store owner offers $30 to $250 for a developer to diff and merge commented custom Liquid, CSS, JS and CSP into the new version of the same theme, because Shopify's updater does not carry them over."
+        },
+        {
+          "url": "https://apps.shopify.com/theme-updater-by-out-of-the-sandbox/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest",
+          "source": "apps.shopify.com",
+          "author": "camieandme",
+          "date": "2025-02-15",
+          "kind": "spend",
+          "summary": "A paying Theme Updater subscriber says updates delete their theme customizations and they had to pay a developer $300 extra; the app has 291 reviews and charges $9/month."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Shopify built-in theme update",
+          "url": "https://help.shopify.com/en/manual/online-store/themes/managing-themes/updating-themes",
+          "price": "Free",
+          "gap": "Carries code edits over only when nothing conflicts; one conflicting file means none of the edits are included."
+        },
+        {
+          "name": "Theme Updater & Backups (Out of the Sandbox)",
+          "url": "https://apps.shopify.com/theme-updater-by-out-of-the-sandbox",
+          "price": "Free plan; Updater Pro $9/month or $96/year; 4.2 from 291 reviews",
+          "gap": "Lists Dawn and partner themes but not Horizon; 1 and 2 star reviews say customizations are still lost."
+        },
+        {
+          "name": "Theme Drift: Compare & Diff",
+          "url": "https://apps.shopify.com/theme-change-monitor",
+          "price": "2-theme compare free; 3-theme compare $19.99 one-time (launched 2026-09-18, 0 reviews)",
+          "gap": "Shows three-way conflicts but leaves the merge to the merchant or to a paid migration service."
+        },
+        {
+          "name": "DiffMate",
+          "url": "https://apps.shopify.com/diffmate",
+          "price": "Free; 4.3 from 14 reviews",
+          "gap": "Diff editor that copies changes between themes one by one; no automatic merge."
+        },
+        {
+          "name": "Theme Ledger",
+          "url": "https://apps.shopify.com/theme-ledger-1",
+          "price": "Free preview; $49 per report (launched 2026-10-26, 0 reviews)",
+          "gap": "Read-only plain-English report of custom code; Dawn only; does not produce a merged theme."
+        },
+        {
+          "name": "ThemeWatch",
+          "url": "https://apps.shopify.com/themewatch",
+          "price": "$4.99/month or $49.99/year",
+          "gap": "Two-theme comparison only; read-only."
+        },
+        {
+          "name": "Diffy Theme Tools",
+          "url": "https://apps.shopify.com/diffy",
+          "price": "$9.99/month; 4.7 from 7 reviews",
+          "gap": "Diff, backups and history; no merge."
+        }
+      ],
+      "keyFeatures": [
+        "Three-way merge per file against the stock release the store started from",
+        "Automatic carry-over of non-conflicting edits, so one conflict no longer drops everything",
+        "Plain-language conflict cards with mine / theirs / ask-a-developer choices",
+        "Settings files labeled as settings, not code",
+        "Side-by-side screenshots of home, product and cart pages",
+        "A developer hand-off note listing only the unresolved conflicts"
+      ],
+      "mvpScope": {
+        "features": [
+          "Upload two theme ZIPs; Horizon and Dawn base versions fetched from public GitHub tags",
+          "diff3 merge per file with conflict cards",
+          "Merged ZIP download for upload as an unpublished theme"
+        ],
+        "outOfScope": [
+          "Writing to the store through the Admin API (needs Shopify's protected Asset access scope)",
+          "Third-party paid themes without a merchant-supplied original ZIP",
+          "Screenshots of password-protected stores",
+          "AI-suggested conflict resolutions"
+        ],
+        "buildEstimate": "3 to 4 weeks"
+      },
+      "techStack": "React + Vite, a browser-side diff3 library (no upload of theme code to a server in the free check), Supabase for accounts and payments, Playwright for screenshots in a later version.",
+      "pricing": {
+        "model": "Per update, with a cheap subscription for frequent Horizon updaters",
+        "pricePoint": "$19 per merged update, or $7/month",
+        "rationale": "Sits between Theme Drift's $19.99 one-time compare and the $30 to $250 a merchant offers a freelancer for the same job; under OOTS's $9/month."
+      },
+      "revenueSketch": "Estimate: 150 merchants a month at $19 = $2,850/month, assuming a 2 to 3 percent conversion from free conflict checks driven by forum answers. Unvalidated.",
+      "distribution": "Answer the recurring 'code edits could not be included' and 'rebase failed with conflicts' threads on community.shopify.com with a free conflict check; list on the Shopify App Store only after the ZIP version proves demand.",
+      "validationTest": {
+        "method": "Ship the free browser-only check (upload two ZIPs, see how many edits would carry over and how many conflict) and offer the merged ZIP for $19 to merchants found in forum threads.",
+        "successCriteria": "Out of 40 free checks, 8 or more paid merges, and at least 5 merchants who report the merged theme went live without a developer.",
+        "cost": "About 2 weeks of evenings and $0 beyond hosting."
+      },
+      "moat": "Weak. The merge itself is standard; the defensible part would be a library of per-theme base versions and file-type rules (JSON templates, settings, locales) tuned on real merges. Shopify could fix its updater at any time.",
+      "compliance": [
+        "Shopify app review: writing assets back to a theme from a public app needs Shopify's protected Asset access scope, so the first version works on downloaded ZIPs and never writes to the store.",
+        "Privacy: theme code can contain API keys or tracking IDs; the free check runs in the browser and nothing is stored.",
+        "Licensing: paid themes' code is licensed to the merchant; the tool must not keep or redistribute base versions of paid themes."
+      ],
+      "risks": [
+        {
+          "risk": "Shopify ships a better merge in its built-in updater (staff said they were working on it).",
+          "mitigation": "Keep the build small and ZIP-based; pivot the conflict cards into a developer hand-off tool if Shopify closes the gap."
+        },
+        {
+          "risk": "Liquid and JSON merges that are textually clean but break the store.",
+          "mitigation": "Always output an unpublished theme, show page screenshots, and never publish."
+        },
+        {
+          "risk": "Crowded category: seven theme diff and update apps, four launched in 2026.",
+          "mitigation": "Compete on the one thing none of them does for Horizon: produce a merged theme, not a diff."
+        }
+      ],
+      "scores": {
+        "pain": 4,
+        "willingnessToPay": 3,
+        "reachability": 3,
+        "competitiveGap": 1,
+        "feasibility": 3,
+        "complianceBurden": 3,
+        "total": 17
+      },
+      "scoreRationale": {
+        "pain": "Four independent merchants in 2026 hit failed or damaging theme updates: https://community.shopify.com/t/update-theme-error-rebase-failed-with-conflicts/630057 and https://community.shopify.com/t/i-have-a-problem-with-my-store/675548",
+        "willingnessToPay": "One dated paid job ($30 to $250, https://www.freelancer.com/projects/git/Shopify-Theme-Update-Diff-Migrate) and a $9/month app with 291 reviews (https://apps.shopify.com/theme-updater-by-out-of-the-sandbox); reviewer: people pay to have it done, not much for software.",
+        "reachability": "Self-serve via forum answers, but the App Store category is crowded with 7+ theme diff/update apps (https://apps.shopify.com/theme-change-monitor).",
+        "competitiveGap": "Shopify's free updater already merges non-conflicting edits (https://help.shopify.com/en/manual/online-store/themes/managing-themes/updating-themes); Theme Drift sells a 3-way compare for $19.99.",
+        "feasibility": "A correct merge across Liquid, JSON templates, settings and locales is harder than it looks, as the Theme Drift feedback thread notes: https://community.shopify.com/t/looking-for-merchants-agencies-who-struggle-when-a-customized-theme-gets-an-update-feedback-on-theme-drift-2-3-way-theme-compare/686301",
+        "complianceBurden": "Writing a merged theme from a public app needs Shopify's protected Asset access scope (https://shopify.dev/docs/api/admin-rest/latest/resources/asset), which is why the first version works on ZIPs."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Adversarial reviewer recommended a kill and rescored from 23 to 17: competitiveGap 2->1 because Shopify's free updater already carries over non-conflicting edits and Theme Drift ($19.99 one-time 3-way compare), DiffMate (free) and Theme Upgrade Buddy (free) cover the compare-and-copy step; WTP 4->3 because the paid evidence is one $30-250 freelancer job and a $9/month app; reachability 4->3 (7+ apps in the category); feasibility 4->3 (Liquid/JSON/settings merge is hard); compliance 5->3 (theme asset writes need a protected scope). The reviewer also identified the one remaining wedge: Shopify's updater is all or nothing, so a single conflict drops every edit, and OOTS does not list Horizon. The idea was re-scoped to exactly that case, working on downloaded ZIPs to avoid the protected scope, and ships as provisional at the reviewer's 17 because it is the only candidate today that survived review with a residual gap; the other five reviewed candidates were killed outright."
+      },
+      "inspiredBy": "https://www.freelancer.com/projects/git/Shopify-Theme-Update-Diff-Migrate",
+      "gateGap": {
+        "missing": [
+          "total 17 is below 22",
+          "competitiveGap 1: Shopify's free updater and several cheap diff apps cover most of the job"
+        ],
+        "closedBy": "The validation test's paid merges close the largest gap: 8 paid $19 merges out of 40 free checks would show that merchants pay for a merged theme rather than a diff, which would justify raising competitiveGap to 2 and willingnessToPay to 4. Reaching 22 also needs reachability 4, shown by forum answers converting without App Store listing."
+      }
+    }
+  ],
+  "runNotes": {
+    "weekday": "Wednesday",
+    "domainLens": "Developer and research tooling",
+    "focusSources": [
+      "A3 Open-source teaching tools (GitHub issue search works again once the query includes is:issue; Jupyter Discourse yielded no small-business signal)",
+      "B2 AppSumo",
+      "C2 Education and computing research (OpenAlex 429; arXiv used)",
+      "A15 No-code automation communities",
+      "A13 Discourse forums, any niche (community.shopify.com)",
+      "A12 Ask HN and HN comments",
+      "B11 Freelance job boards",
+      "B12 Paid app marketplaces",
+      "C10 Change events: shutdowns, price rises, removed free tiers",
+      "A14 Plugin and add-on support forums"
+    ],
+    "searches": [
+      "community.n8n.io search.json: deprecated after:2026-08-01",
+      "community.make.com search.json: deprecated after:2026-08-01",
+      "community.n8n.io and community.make.com: stopped working after:2026-09-15",
+      "community.n8n.io and community.make.com: client broke after:2026-08-01",
+      "site:community.n8n.io OR site:community.make.com client workflow broke API deprecated 2026",
+      "community.shopify.com: additional scripts / thank you page upgrade / tracking stopped after:2026-08-15",
+      "community.shopify.com: theme update customizations lost / update theme custom code after:2026-07-01",
+      "hn.algolia.com comments since 2026-08: bill clients AI usage; vibe coded client; webhook silently; lab manager software",
+      "discourse.jupyter.org search.json: grading after:2026-08-01; deploy after:2026-08-15",
+      "api.github.com search/issues: repo:n8n-io/n8n is:issue deprecated created:>2026-07-01",
+      "api.github.com search/issues: RLS exposed is:issue created:>2026-08-01",
+      "appsumo.com/software/development-tools/ (B2)",
+      "site:appsumo.com n8n OR make.com workflow monitoring OR documentation lifetime deal (B2)",
+      "SPEND B11 freelancer.com API: n8n; make.com; zapier; documentation; workflow; php upgrade; apps script; supabase; website broken",
+      "SPEND B11 freelancer.com API: theme update; shopify theme update; dawn update; horizon theme; peopleperhour shopify theme update",
+      "SPEND B11 freelancer.com API: deprecated; api migration; openai model; n8n documentation; php 8; workflow fix (found nothing for the automation candidates)",
+      "SPEND B12 site:apps.shopify.com conversion tracking health monitor pixel audit alerts",
+      "SPEND B12 site:apps.shopify.com theme updater keep custom code; Theme Drift / Theme Update Audit",
+      "SPEND Supabase security scanner pricing for Lovable/Bolt apps",
+      "SPEND n8n workflow monitoring silent failure tool pricing; NodeHero/Flowlert/RootBrief pricing",
+      "MANDATE SSL certificate 200 day validity March 2026",
+      "MANDATE Shopify Scripts deprecation June 2026",
+      "MANDATE Shopify script tags March 1 2027",
+      "MANDATE OpenAI October 23 2026 model shutdowns and automations",
+      "MANDATE C2 arXiv: vibe coding AND security; workflow automation AND failures; API deprecation (OpenAlex returned 429)",
+      "MANDATE PHP 8.4 / PHP 8.2 EOL WordPress breakage",
+      "WATCHLIST B11 freelancer.com: canvas lms; canvas course links; ada compliance; accessibility lawsuit; online quiz cheating; lockdown browser"
+    ],
+    "unverifiedSignals": [
+      {
+        "url": "https://www.producthunt.com/p/rootbrief/rootbrief",
+        "reason": "producthunt.com is on the avoid list (HTTP 403); not fetched."
+      },
+      {
+        "url": "https://jorijn.com/en/blog/php-81-end-of-life-is-your-wordpress-site-ready-for-php-84/",
+        "reason": "Redirects to the site's homepage; the article no longer exists, so its claims are unconfirmed."
+      },
+      {
+        "url": "https://github.com/nentswunienterprises-oss/responseintegrity/issues/178",
+        "reason": "Seen in GitHub search API results; the reviewer's direct fetch returned HTTP 403 (rate limit)."
+      },
+      {
+        "url": "https://trustmrr.com/startup/nodehero",
+        "reason": "HTTP 404."
+      }
+    ],
+    "rejectedCandidates": [
+      {
+        "title": "Silent-Stop Watch (alerts when n8n/Make workflows stop running or run green but write nothing)",
+        "total": 14,
+        "reason": "Reviewer kill, from 20. Flowlert already does this free for 5 workflows; RootBrief, Vivere, Healthchecks.io and Cronitor have free tiers. Most complaint threads are market-validation posts by people building competing monitors; one seller's $150/mo watch offer got no buyers."
+      },
+      {
+        "title": "Open Door Check (anonymous-read probe of Supabase tables behind Lovable/Bolt apps)",
+        "total": 15,
+        "reason": "Reviewer kill, from 18. Lovable's Quick scan and Supabase's Database Advisor flag RLS-off tables for free; VibeAppScanner ($29/mo) and an Apify actor ($0.02/run) cover outside checks; probing needs ownership verification."
+      },
+      {
+        "title": "Purchase Count Check (Shopify orders vs Meta/Google reported purchases after the 2026-08-26 Additional Scripts removal)",
+        "total": 13,
+        "reason": "Reviewer kill, from 19. PixelGuard's free plan already compares Shopify orders to Meta Purchase events; five tracking-health apps launched May to Aug 2026 with 0 to 2 reviews; most posters are vendors or agencies."
+      },
+      {
+        "title": "PHP Upgrade Preflight (PHP 8.2 end-of-life readiness for small WordPress sites)",
+        "total": 15,
+        "reason": "Reviewer kill, from 19. Free maintained scanners (Eli's PHP Compatibility Scanner, BrightLeaf) and CompatShield at $2/month already cover PHP 8.4; hosts' rollback fixes the one complaint found; a cited blog article no longer exists."
+      },
+      {
+        "title": "Automation Deprecation Radar (maps n8n/Make workflows to announced API and model shutdowns)",
+        "total": 19,
+        "reason": "apibreaks.com already sells exactly this ($29 to $99/month) with a free in-browser report; Make's Module Migrator is free for Make modules. Would have qualified for the watchlist but it was full. Not reviewed."
+      },
+      {
+        "title": "Script-tag sunset check for Shopify storefront apps (script tags stop running 2027-03-01)",
+        "total": 19,
+        "reason": "No merchant complaint yet (pain capped), a free independent checker was posted 2026-10-27, and it is a one-time check. Watchlist full. Not reviewed."
+      },
+      {
+        "title": "Real-order end-to-end test for Shopify stores by local testers",
+        "total": 0,
+        "reason": "Reject rule: a crowdtesting service and a two-sided marketplace, not a product."
+      },
+      {
+        "title": "Theme customization ledger (scheduled versioned snapshots of Shopify theme code)",
+        "total": 0,
+        "reason": "Reject rule: same customer and problem as Theme Conflict Merge; folded into it."
+      },
+      {
+        "title": "AI coding cost attribution per client for freelancers using Claude Code or Codex",
+        "total": 18,
+        "reason": "No complaint found (pain capped at 2); the only spend signal is an adjacent AppSumo token-saving deal."
+      },
+      {
+        "title": "n8n credential setup wizard for template sellers",
+        "total": 17,
+        "reason": "One complaint; n8n's own credential sharing covers part of it; no payment evidence."
+      },
+      {
+        "title": "Third-party API v1 sunset migration helper for automations (Todoist, Pipedrive, Cal.com)",
+        "total": 16,
+        "reason": "Each sunset is a one-time fix with a free HTTP-node workaround posted in the thread."
+      },
+      {
+        "title": "Shopify Scripts to Functions parity tester",
+        "total": 15,
+        "reason": "Scripts stopped running on 2026-06-30, so the migration window has passed."
+      },
+      {
+        "title": "SSL 200-day certificate renewal tracker for small businesses",
+        "total": 14,
+        "reason": "Free uptime and certificate monitors cover it; no complaint found, only vendor posts."
+      },
+      {
+        "title": "JupyterHub diagnostics for small research labs",
+        "total": 13,
+        "reason": "Institutional buyer and a free Grafana dashboard already shared on the forum."
+      },
+      {
+        "title": "Attempt-First Feedback Desk (AI first-pass feedback on ungraded practice with escalation to TAs)",
+        "total": 19,
+        "reason": "Displaced from the watchlist (maximum 8) by higher or small-business entries on 2026-11-04; firstSeen 2026-10-31."
+      },
+      {
+        "title": "Alternative-grading layer for Canvas and autograders",
+        "total": 19,
+        "reason": "Displaced from the watchlist (maximum 8) by higher or small-business entries on 2026-11-04; firstSeen 2026-10-30."
+      },
+      {
+        "title": "Course LLM key broker",
+        "total": 19,
+        "reason": "Displaced from the watchlist (maximum 8) by higher or small-business entries on 2026-11-04; firstSeen 2026-10-30."
+      }
+    ],
+    "watchlist": [
+      {
+        "title": "Cross-course content maintenance for Canvas design teams (bulk find, preview, replace and rollback for vendor-driven breakage)",
+        "targetCustomer": "Instructional designers and LMS admin teams who maintain content across dozens to thousands of Canvas courses.",
+        "problemStatement": "Vendor-side changes keep breaking content across many courses at once: Canvas's silent 2026-10-07 change to enhanceable_content tabs, Community guide links moving from /t5/ to /en/kb/, and LTI 1.3 migrations that leave embedded assignment links saying 'deleted'. Teams fix pages one at a time or with shared Tampermonkey scripts.",
+        "total": 21,
+        "missedGate": "competitiveGap 2: Atomic Search already sells account-wide Find & Replace for Canvas, and free community userscripts cover bulk search and link conversion; total below 22. 2026-11-04: re-researched with two freelancer.com searches each (B11); no paid job for the task was found (the Canvas hits were homepage redesigns), so the score is unchanged.",
+        "evidence": [
+          "https://community.instructure.com/en/discussion/667426/fix-or-alternative-to-class-enhanceable-content-tabs",
+          "https://community.instructure.com/en/discussion/667671/master-inventory-comprehensive-list-of-canvas-guide-titles-urls-for-link-remediation",
+          "https://community.instructure.com/en/discussion/667065/mcgraw-hill-lti-ltia-migration-broke-linked-course-assignment-links-in-pages-and-announcements",
+          "https://community.instructure.com/en/discussion/666768/bulk-find-replace-across-canvas-courses-with-tampermonkey",
+          "https://www.atomicjolt.com/post/streamline-course-updates-with-find-replace-in-atomic-search-for-canvas"
+        ],
+        "firstSeen": "2026-10-31"
+      },
+      {
+        "title": "ADA demand-letter remediation ledger for small Shopify and WordPress stores",
+        "targetCustomer": "Small online store owners who have received an ADA website demand letter or lawsuit",
+        "problemStatement": "Owners who are served do not know where to start, get pitched overlays, and have no dated record of good-faith fixes mapped to the allegations.",
+        "total": 20,
+        "missedGate": "No complaint dated within 180 days (the served owners posted in 2023 to 2025); competitiveGap 2 against remediation vendors and free axe/WAVE. 2026-11-03 extra run: a store owner's 2026-05-12 Shopify Forms review says they were sued over a popup (within 180 days), but Remedy (free plan, launched 2026-08-21) now keeps a dated accessibility record, so competitiveGap stays 2. 2026-11-04: re-researched with two freelancer.com searches each (B11); no paid job for the task was found (the Canvas hits were homepage redesigns), so the score is unchanged.",
+        "evidence": [
+          "https://community.shopify.com/t/232788",
+          "https://community.shopify.com/t/230778",
+          "https://apps.shopify.com/shopify-forms/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest"
+        ],
+        "firstSeen": "2026-11-02"
+      },
+      {
+        "title": "Agent Exposure Audit for asynchronous online programs",
+        "targetCustomer": "Online program directors and instructional designers running asynchronous courses where proctoring is not feasible.",
+        "problemStatement": "Agentic browsers and cheap bots now complete Canvas New Quizzes and whole courses; quiz logs cannot prove it, and programs do not know which of their assessments an agent can finish unaided.",
+        "total": 20,
+        "missedGate": "willingnessToPay 3 and competitiveGap 3 (Cursive sells LMS agent detection; the existing Assignment Stress Test idea covers testing assignments against AI); only one fetched item is within 90 days; total below 22. 2026-11-01: the CSU TILT page confirms agents complete Canvas quizzes but is undated and recommends the LockDown Browser campuses already license. 2026-11-04: re-researched with two freelancer.com searches each (B11); no paid job for the task was found (the Canvas hits were homepage redesigns), so the score is unchanged.",
+        "evidence": [
+          "https://community.instructure.com/en/discussion/667216/help-with-detecting-bots-in-new-quizzes",
+          "https://www.pangram.com/it/blog/agentic-browsers-present-risks-to-universities",
+          "https://tilt.colostate.edu/new-ai-browsers-can-complete-canvas-quizzes/"
+        ],
+        "firstSeen": "2026-10-31"
+      },
+      {
+        "title": "Automation handover pack for n8n and Make freelancers (credentials inventory, runbook, safe-edit list, acceptance test from workflow JSON)",
+        "targetCustomer": "Freelancers and small agencies who build n8n or Make automations for client businesses.",
+        "problemStatement": "The client does not know which accounts are connected, what happens when a run fails, or what they can safely change, and three months later the builder gets the 'it stopped working' call.",
+        "total": 20,
+        "missedGate": "competitiveGap 2: n8n Handoff Kit already sells a $9 done-for-you handoff and a $19 local generator, and a free workflow documenter exists; total below 22. Not reviewed.",
+        "evidence": [
+          "https://community.n8n.io/t/how-do-you-hand-over-n8n-workflows-to-clients-heres-the-format-im-working-on/322030",
+          "https://community.n8n.io/t/what-is-your-trick-for-handing-over-n8n-workflows-without-the-credentials-setup-pain/323533",
+          "https://n8n-handoff-kit.vercel.app/how-to-document-n8n-workflows-for-clients.html"
+        ],
+        "firstSeen": "2026-11-04"
+      },
+      {
+        "title": "Pre-production linter for exported n8n workflows (broken connections, hard-coded secrets, missing error/retry handling, no heartbeat)",
+        "targetCustomer": "Automation freelancers and small teams putting n8n workflows into production.",
+        "problemStatement": "Workflows go live with missing error handling and hard-coded secrets and fail quietly; builders check by hand before handover.",
+        "total": 20,
+        "missedGate": "willingnessToPay 2 (no payment evidence) and pain 3 (the thread starter is validating his own prototype); total below 22. Not reviewed.",
+        "evidence": [
+          "https://community.n8n.io/t/how-do-you-catch-broken-n8n-workflows-before-they-fail-in-production/320910"
+        ],
+        "firstSeen": "2026-11-04"
+      },
+      {
+        "title": "Post-update regression check for Shopify Horizon stores (cart, sticky add-to-cart and app widgets after each theme update)",
+        "targetCustomer": "Small Shopify merchants on Horizon who update the theme often.",
+        "problemStatement": "A Horizon update quietly breaks a cart app or sticky add-to-cart and the owner finds out from customers.",
+        "total": 20,
+        "missedGate": "Same customer as today's Theme Conflict Merge; one complaint (pain 3), no payment evidence (WTP 2). Not reviewed.",
+        "evidence": [
+          "https://community.shopify.com/t/i-have-a-problem-with-my-store/675548"
+        ],
+        "firstSeen": "2026-11-04"
+      },
+      {
+        "title": "Health-page tracker audit for small health and wellness practices (HIPAA, Washington MHMDA)",
+        "targetCustomer": "Therapists, clinics, med spas and wellness shops with booking or intake pages",
+        "problemStatement": "Third-party widgets and pixels send page URLs and IPs from health-intent pages, and vendors will not sign a BAA.",
+        "total": 19,
+        "missedGate": "Only 1 complaint (pain 3); Sift Health already sells this at $39/month draft pricing.",
+        "evidence": [
+          "https://wordpress.org/support/topic/elementor-ally-data-handling-baa-confirmation/",
+          "https://sift-health.pages.dev/pricing/"
+        ],
+        "firstSeen": "2026-11-02"
+      },
+      {
+        "title": "AI shopping-agent readiness check for small Shopify stores (duplicate Product JSON-LD, availability and rating signals agents read)",
+        "targetCustomer": "Small Shopify merchants whose products AI assistants describe wrongly or as out of stock.",
+        "problemStatement": "ChatGPT and other agents report products as out of stock or with invented specs because of duplicate or stale Product schema, missing aggregateRating, and Shopify Catalog entries that disagree with the product page.",
+        "total": 19,
+        "missedGate": "competitiveGap 1 (Botfound, FoundGPT and several free checkers already posted in the forum); willingnessToPay 2; total below 22. Not reviewed.",
+        "evidence": [
+          "https://community.shopify.com/t/llms-think-my-product-is-out-of-stock-when-it-is-not/677281",
+          "https://community.shopify.com/t/what-the-shopify-catalog-gets-wrong-about-your-products/689041",
+          "https://community.shopify.com/t/offer-free-ai-shopping-readiness-check-for-your-shopify-store-i-built-the-tool/708230"
+        ],
+        "firstSeen": "2026-11-03"
+      }
+    ],
+    "caveats": "Only one idea ships, against a first-run target of 3. Six candidates were reviewed and five were killed outright, each because a free or very cheap product already does the job (Flowlert, Lovable's built-in scan, PixelGuard's free plan, free PHP 8.4 scanners); the developer-tooling lens on small-business automation and Shopify surfaced markets crowded with indie tools launched in 2026, and many forum 'complaints' were market-validation posts by those builders. Theme Conflict Merge ships as provisional at 17 although its reviewer recommended a kill: the reviewer's own findings left one gap (Shopify's updater drops every edit when any file conflicts, and the $9/month incumbent does not list Horizon), and the idea was re-scoped to that case. Because one idea ships, the complexity-mix constraint (a Weekend MVP plus a Multi-week) is not met. Watchlist re-research (Canvas maintenance, ADA demand letters, agent exposure audit) found no new payment evidence. A3's GitHub path returned 422 only because queries lacked is:issue; with it the API works. The OOTS evidence date (2025-02-15) is older than 180 days; the freelancer job date comes from the API's time_submitted."
+  }
+}

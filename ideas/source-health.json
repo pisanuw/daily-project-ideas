@@ -56,16 +56,20 @@
       ]
     },
     "api.github.com": {
-      "attempts": 2,
+      "attempts": 5,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-03",
-      "lastOk": null,
-      "ok": 0,
+      "lastAttempt": "2026-11-04",
+      "lastOk": "2026-11-04",
+      "ok": 1,
       "outcomes": {
-        "http_403": 1,
-        "http_5xx": 1
+        "empty": 1,
+        "http_403": 2,
+        "http_5xx": 1,
+        "ok": 1
       },
-      "workingPaths": []
+      "workingPaths": [
+        "curl https://api.github.com/search/issues?q=nbgrader+is%3Aissue+created%3A%3E2026-08-01&per_page=20"
+      ]
     },
     "api.nsf.gov": {
       "attempts": 2,
@@ -82,13 +86,13 @@
       ]
     },
     "api.openalex.org": {
-      "attempts": 3,
+      "attempts": 4,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-03",
+      "lastAttempt": "2026-11-04",
       "lastOk": null,
       "ok": 0,
       "outcomes": {
-        "http_429": 3
+        "http_429": 4
       },
       "workingPaths": []
     },
@@ -109,18 +113,45 @@
       ]
     },
     "api.wordpress.org": {
-      "attempts": 14,
+      "attempts": 15,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-03",
-      "lastOk": "2026-11-03",
-      "ok": 14,
+      "lastAttempt": "2026-11-04",
+      "lastOk": "2026-11-04",
+      "ok": 15,
       "outcomes": {
-        "ok": 14
+        "ok": 15
       },
       "workingPaths": [
         "curl https://api.wordpress.org/plugins/info/1.2/?action=query_plugins&request[search]=accessibility&request[per_page]=15",
         "curl https://api.wordpress.org/plugins/info/1.2/?action=query_plugins&request[search]=alt%20text&request[per_page]=15",
         "curl https://api.wordpress.org/plugins/info/1.2/?action=query_plugins&request[search]=cookie+consent&request[per_page]=15"
+      ]
+    },
+    "apibreaks.com": {
+      "attempts": 2,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-04",
+      "lastOk": "2026-11-04",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "curl https://apibreaks.com/",
+        "curl https://apibreaks.com/pricing"
+      ]
+    },
+    "apify.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-04",
+      "lastOk": "2026-11-04",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://apify.com/renzomacar/supabase-rls-scanner"
       ]
     },
     "app.thetutor.link": {
@@ -138,19 +169,32 @@
       ]
     },
     "apps.shopify.com": {
-      "attempts": 37,
-      "evidenceItems": 7,
-      "lastAttempt": "2026-11-03",
-      "lastOk": "2026-11-03",
-      "ok": 28,
+      "attempts": 50,
+      "evidenceItems": 8,
+      "lastAttempt": "2026-11-04",
+      "lastOk": "2026-11-04",
+      "ok": 41,
       "outcomes": {
         "empty": 9,
-        "ok": 28
+        "ok": 41
       },
       "workingPaths": [
         "curl https://apps.shopify.com/gmc-compliance-checker",
         "curl https://apps.shopify.com/merchant-guard",
         "curl https://apps.shopify.com/torhen-gmc-rescue"
+      ]
+    },
+    "appsumo.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-04",
+      "lastOk": "2026-11-04",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://appsumo.com/software/development-tools/"
       ]
     },
     "apuo.ca": {
@@ -225,6 +269,17 @@
         "curl https://codeboard.io/"
       ]
     },
+    "coffeewp.dev": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-04",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_403": 1
+      },
+      "workingPaths": []
+    },
     "community.cal.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -283,14 +338,29 @@
       },
       "workingPaths": []
     },
-    "community.n8n.io": {
-      "attempts": 7,
+    "community.make.com": {
+      "attempts": 6,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-03",
-      "lastOk": "2026-11-03",
-      "ok": 7,
+      "lastAttempt": "2026-11-04",
+      "lastOk": "2026-11-04",
+      "ok": 6,
       "outcomes": {
-        "ok": 7
+        "ok": 6
+      },
+      "workingPaths": [
+        "curl https://community.make.com/search.json?q=deprecated%20after%3A2026-08-01",
+        "curl https://community.make.com/search.json?q=stopped%20working%20after%3A2026-09-15",
+        "curl https://community.make.com/search.json?q=client%20broke%20after%3A2026-08-01"
+      ]
+    },
+    "community.n8n.io": {
+      "attempts": 21,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-04",
+      "lastOk": "2026-11-04",
+      "ok": 21,
+      "outcomes": {
+        "ok": 21
       },
       "workingPaths": [
         "curl https://community.n8n.io/search.json?q=invoice%20small%20business%20after%3A2026-09-01",
@@ -310,15 +380,15 @@
       "workingPaths": []
     },
     "community.shopify.com": {
-      "attempts": 52,
-      "evidenceItems": 7,
-      "lastAttempt": "2026-11-03",
-      "lastOk": "2026-11-03",
-      "ok": 50,
+      "attempts": 75,
+      "evidenceItems": 11,
+      "lastAttempt": "2026-11-04",
+      "lastOk": "2026-11-04",
+      "ok": 73,
       "outcomes": {
         "empty": 1,
         "http_404": 1,
-        "ok": 50
+        "ok": 73
       },
       "workingPaths": [
         "curl https://community.shopify.com/search.json?q=ADA%20lawsuit%20after%3A2026-05-01",
@@ -374,6 +444,19 @@
       },
       "workingPaths": []
     },
+    "cronitor.io": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-04",
+      "lastOk": "2026-11-04",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://cronitor.io/pricing"
+      ]
+    },
     "cseducators.stackexchange.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -395,6 +478,33 @@
         "http_404": 1
       },
       "workingPaths": []
+    },
+    "developers.make.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-04",
+      "lastOk": "2026-11-04",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://developers.make.com/api-documentation"
+      ]
+    },
+    "discourse.jupyter.org": {
+      "attempts": 2,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-04",
+      "lastOk": "2026-11-04",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "curl https://discourse.jupyter.org/search.json?q=grading%20after%3A2026-08-01",
+        "curl https://discourse.jupyter.org/search.json?q=deploy%20after%3A2026-08-15"
+      ]
     },
     "discuss.openedx.org": {
       "attempts": 3,
@@ -424,6 +534,32 @@
         "curl https://discuss.pixls.us/search.json?q=%22wish%22%20after%3A2026-08-15"
       ]
     },
+    "docs.lovable.dev": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-04",
+      "lastOk": "2026-11-04",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://docs.lovable.dev/features/security"
+      ]
+    },
+    "docs.n8n.io": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-04",
+      "lastOk": "2026-11-04",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://docs.n8n.io/api/"
+      ]
+    },
     "dor.wa.gov": {
       "attempts": 2,
       "evidenceItems": 0,
@@ -436,6 +572,19 @@
       },
       "workingPaths": [
         "curl https://dor.wa.gov/forms-publications/publications-subject/tax-topics/2025-tax-legislation"
+      ]
+    },
+    "doyouok.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-04",
+      "lastOk": "2026-11-04",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://doyouok.com"
       ]
     },
     "dsp.berkeley.edu": {
@@ -501,17 +650,18 @@
       ]
     },
     "export.arxiv.org": {
-      "attempts": 2,
+      "attempts": 5,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-03",
-      "lastOk": "2026-11-03",
-      "ok": 2,
+      "lastAttempt": "2026-11-04",
+      "lastOk": "2026-11-04",
+      "ok": 5,
       "outcomes": {
-        "ok": 2
+        "ok": 5
       },
       "workingPaths": [
         "curl https://export.arxiv.org/api/query?search_query=all:%22small%20business%22%20AND%20all:software&sortBy=submittedDate&sortOrder=descending&max_results=10",
-        "curl https://export.arxiv.org/api/query?search_query=all:%22shopping%20agent%22&sortBy=submittedDate&sortOrder=descending&max_results=10"
+        "curl https://export.arxiv.org/api/query?search_query=all:%22shopping%20agent%22&sortBy=submittedDate&sortOrder=descending&max_results=10",
+        "curl http://export.arxiv.org/api/query?search_query=abs:%22vibe%20coding%22+AND+abs:security&sortBy=submittedDate&sortOrder=descending&max_results=6"
       ]
     },
     "flippa.com": {
@@ -524,6 +674,19 @@
         "empty": 1
       },
       "workingPaths": []
+    },
+    "flowlert.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-04",
+      "lastOk": "2026-11-04",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://flowlert.com"
+      ]
     },
     "flyingfish.ie": {
       "attempts": 2,
@@ -659,12 +822,13 @@
       ]
     },
     "github.com": {
-      "attempts": 3,
+      "attempts": 4,
       "evidenceItems": 1,
-      "lastAttempt": "2026-11-01",
+      "lastAttempt": "2026-11-04",
       "lastOk": "2026-11-01",
       "ok": 3,
       "outcomes": {
+        "http_403": 1,
         "ok": 3
       },
       "workingPaths": [
@@ -684,6 +848,30 @@
       },
       "workingPaths": []
     },
+    "healthchecks.io": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-04",
+      "lastOk": "2026-11-04",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://healthchecks.io/pricing/"
+      ]
+    },
+    "help.outofthesandbox.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-04",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_403": 1
+      },
+      "workingPaths": []
+    },
     "help.pickcode.io": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -698,27 +886,28 @@
       ]
     },
     "help.shopify.com": {
-      "attempts": 1,
+      "attempts": 2,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-03",
-      "lastOk": "2026-11-03",
-      "ok": 1,
+      "lastAttempt": "2026-11-04",
+      "lastOk": "2026-11-04",
+      "ok": 2,
       "outcomes": {
-        "ok": 1
+        "ok": 2
       },
       "workingPaths": [
-        "curl https://help.shopify.com/en/manual/sell-in-person/shopify-pos/inventory-management/inventory-counts"
+        "curl https://help.shopify.com/en/manual/sell-in-person/shopify-pos/inventory-management/inventory-counts",
+        "curl https://help.shopify.com/en/manual/online-store/themes/managing-themes/updating-themes"
       ]
     },
     "hn.algolia.com": {
-      "attempts": 27,
+      "attempts": 32,
       "evidenceItems": 1,
-      "lastAttempt": "2026-11-03",
-      "lastOk": "2026-11-03",
-      "ok": 23,
+      "lastAttempt": "2026-11-04",
+      "lastOk": "2026-11-04",
+      "ok": 28,
       "outcomes": {
         "empty": 4,
-        "ok": 23
+        "ok": 28
       },
       "workingPaths": [
         "curl https://hn.algolia.com/api/v1/search_by_date?query=%22alt%20text%22&tags=comment&hitsPerPage=30",
@@ -747,6 +936,17 @@
       "ok": 0,
       "outcomes": {
         "http_403": 1
+      },
+      "workingPaths": []
+    },
+    "jorijn.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-04",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "redirect": 1
       },
       "workingPaths": []
     },
@@ -802,6 +1002,20 @@
         "curl https://meet.ribblr.com/t/810784.json"
       ]
     },
+    "n8n-handoff-kit.vercel.app": {
+      "attempts": 2,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-04",
+      "lastOk": "2026-11-04",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "curl https://n8n-handoff-kit.vercel.app/how-to-document-n8n-workflows-for-clients.html",
+        "curl https://n8n-handoff-kit.vercel.app/"
+      ]
+    },
     "news.ycombinator.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -810,6 +1024,17 @@
       "ok": 0,
       "outcomes": {
         "http_429": 1
+      },
+      "workingPaths": []
+    },
+    "nodehero.io": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-04",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "timeout": 1
       },
       "workingPaths": []
     },
@@ -824,6 +1049,19 @@
       },
       "workingPaths": []
     },
+    "peerpush.net": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-04",
+      "lastOk": "2026-11-04",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://peerpush.net/p/flowguard"
+      ]
+    },
     "pricingsaas.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -835,6 +1073,19 @@
       },
       "workingPaths": [
         "curl https://pricingsaas.com/companies/teachworks"
+      ]
+    },
+    "rootbrief.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-04",
+      "lastOk": "2026-11-04",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://rootbrief.com"
       ]
     },
     "rtl.berkeley.edu": {
@@ -886,6 +1137,19 @@
         "curl https://seedfund.nsf.gov/"
       ]
     },
+    "shopify.dev": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-04",
+      "lastOk": "2026-11-04",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://shopify.dev/docs/api/admin-rest/latest/resources/asset"
+      ]
+    },
     "sift-health.pages.dev": {
       "attempts": 1,
       "evidenceItems": 1,
@@ -899,6 +1163,19 @@
         "curl https://sift-health.pages.dev/pricing/"
       ]
     },
+    "supabase.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-04",
+      "lastOk": "2026-11-04",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://supabase.com/docs/guides/database/database-advisors"
+      ]
+    },
     "support.google.com": {
       "attempts": 1,
       "evidenceItems": 1,
@@ -910,6 +1187,19 @@
       },
       "workingPaths": [
         "curl https://support.google.com/merchants/answer/6150127"
+      ]
+    },
+    "techcrunch.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-04",
+      "lastOk": "2026-11-04",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://techcrunch.com/2026/09/25/some-supabase-customers-are-publicly-exposing-reams-of-peoples-data-to-the-web/"
       ]
     },
     "themarkup.org": {
@@ -952,12 +1242,13 @@
       ]
     },
     "trustmrr.com": {
-      "attempts": 1,
+      "attempts": 2,
       "evidenceItems": 0,
-      "lastAttempt": "2026-10-31",
+      "lastAttempt": "2026-11-04",
       "lastOk": "2026-10-31",
       "ok": 1,
       "outcomes": {
+        "http_404": 1,
         "ok": 1
       },
       "workingPaths": [
@@ -990,6 +1281,19 @@
         "curl https://ucsb-ds.github.io/pl-dev-team/topics/canvas"
       ]
     },
+    "unpwned.io": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-04",
+      "lastOk": "2026-11-04",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://unpwned.io"
+      ]
+    },
     "vendordirectory.shrm.org": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -1000,6 +1304,44 @@
         "http_403": 1
       },
       "workingPaths": []
+    },
+    "vibe-eval.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-04",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "empty": 1
+      },
+      "workingPaths": []
+    },
+    "vibeappscanner.com": {
+      "attempts": 2,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-04",
+      "lastOk": "2026-11-04",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "curl https://vibeappscanner.com/question/security-audit-lovable",
+        "curl https://vibeappscanner.com"
+      ]
+    },
+    "vivere.dev": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-04",
+      "lastOk": "2026-11-04",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://vivere.dev/pricing"
+      ]
     },
     "webaim.org": {
       "attempts": 3,
@@ -1027,13 +1369,13 @@
       "workingPaths": []
     },
     "wordpress.org": {
-      "attempts": 41,
+      "attempts": 42,
       "evidenceItems": 8,
-      "lastAttempt": "2026-11-03",
-      "lastOk": "2026-11-03",
-      "ok": 41,
+      "lastAttempt": "2026-11-04",
+      "lastOk": "2026-11-04",
+      "ok": 42,
       "outcomes": {
-        "ok": 41
+        "ok": 42
       },
       "workingPaths": [
         "curl https://wordpress.org/support/plugin/wp-accessibility/",
@@ -1055,17 +1397,29 @@
       ]
     },
     "wpengine.com": {
-      "attempts": 1,
+      "attempts": 2,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-03",
+      "lastAttempt": "2026-11-04",
       "lastOk": "2026-11-03",
       "ok": 1,
       "outcomes": {
+        "http_404": 1,
         "ok": 1
       },
       "workingPaths": [
         "curl https://wpengine.com/smart-plugin-manager/"
       ]
+    },
+    "www.bluehost.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-04",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_403": 1
+      },
+      "workingPaths": []
     },
     "www.capterra.com": {
       "attempts": 2,
@@ -1124,6 +1478,19 @@
         "http_403": 1
       },
       "workingPaths": []
+    },
+    "www.compatshield.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-04",
+      "lastOk": "2026-11-04",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://www.compatshield.com/"
+      ]
     },
     "www.cookiebot.com": {
       "attempts": 1,
@@ -1224,13 +1591,13 @@
       ]
     },
     "www.freelancer.com": {
-      "attempts": 7,
-      "evidenceItems": 0,
-      "lastAttempt": "2026-11-03",
-      "lastOk": "2026-11-03",
-      "ok": 7,
+      "attempts": 38,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-04",
+      "lastOk": "2026-11-04",
+      "ok": 38,
       "outcomes": {
-        "ok": 7
+        "ok": 38
       },
       "workingPaths": [
         "curl https://www.freelancer.com/api/projects/0.1/projects/active/?query=booking%20system&limit=20&full_description=true",
@@ -1259,6 +1626,17 @@
       "ok": 0,
       "outcomes": {
         "empty": 1
+      },
+      "workingPaths": []
+    },
+    "www.make.com": {
+      "attempts": 2,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-04",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_403": 2
       },
       "workingPaths": []
     },
@@ -1310,6 +1688,19 @@
         "curl https://www.onlinejobs.ph/jobseekers/job/1616633"
       ]
     },
+    "www.peopleperhour.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-04",
+      "lastOk": "2026-11-04",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://www.peopleperhour.com/freelance-jobs?q=shopify%20theme%20update"
+      ]
+    },
     "www.pulse.bot": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -1355,6 +1746,17 @@
       "workingPaths": [
         "curl https://www.shopify.com/pos/pricing"
       ]
+    },
+    "www.siteground.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-04",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_404": 1
+      },
+      "workingPaths": []
     },
     "www.teacherspayteachers.com": {
       "attempts": 1,
@@ -1471,31 +1873,40 @@
       "selected": 0
     },
     "A12": {
-      "candidates": 10,
+      "candidates": 11,
       "fetchFail": 1,
-      "fetchOk": 25,
-      "lastUsed": "2026-11-03",
-      "runs": 4,
-      "searches": 29,
+      "fetchOk": 30,
+      "lastUsed": "2026-11-04",
+      "runs": 5,
+      "searches": 34,
       "selected": 0
     },
     "A13": {
-      "candidates": 25,
+      "candidates": 31,
       "fetchFail": 8,
-      "fetchOk": 73,
-      "lastUsed": "2026-11-03",
-      "runs": 4,
-      "searches": 51,
-      "selected": 1
+      "fetchOk": 96,
+      "lastUsed": "2026-11-04",
+      "runs": 5,
+      "searches": 60,
+      "selected": 2
     },
     "A14": {
-      "candidates": 15,
+      "candidates": 16,
       "fetchFail": 0,
-      "fetchOk": 43,
-      "lastUsed": "2026-11-03",
-      "runs": 3,
-      "searches": 13,
+      "fetchOk": 44,
+      "lastUsed": "2026-11-04",
+      "runs": 4,
+      "searches": 15,
       "selected": 2
+    },
+    "A15": {
+      "candidates": 7,
+      "fetchFail": 0,
+      "fetchOk": 20,
+      "lastUsed": "2026-11-04",
+      "runs": 1,
+      "searches": 8,
+      "selected": 0
     },
     "A2": {
       "candidates": 1,
@@ -1507,12 +1918,12 @@
       "selected": 0
     },
     "A3": {
-      "candidates": 5,
-      "fetchFail": 1,
-      "fetchOk": 4,
-      "lastUsed": "2026-11-01",
-      "runs": 2,
-      "searches": 7,
+      "candidates": 6,
+      "fetchFail": 2,
+      "fetchOk": 7,
+      "lastUsed": "2026-11-04",
+      "runs": 3,
+      "searches": 11,
       "selected": 0
     },
     "A4": {
@@ -1570,22 +1981,31 @@
       "selected": 0
     },
     "B11": {
-      "candidates": 0,
-      "fetchFail": 0,
-      "fetchOk": 3,
-      "lastUsed": "2026-11-03",
-      "runs": 1,
-      "searches": 3,
-      "selected": 0
+      "candidates": 3,
+      "fetchFail": 1,
+      "fetchOk": 35,
+      "lastUsed": "2026-11-04",
+      "runs": 2,
+      "searches": 30,
+      "selected": 1
     },
     "B12": {
-      "candidates": 10,
+      "candidates": 13,
       "fetchFail": 9,
-      "fetchOk": 23,
-      "lastUsed": "2026-11-03",
+      "fetchOk": 40,
+      "lastUsed": "2026-11-04",
+      "runs": 2,
+      "searches": 16,
+      "selected": 2
+    },
+    "B2": {
+      "candidates": 1,
+      "fetchFail": 0,
+      "fetchOk": 1,
+      "lastUsed": "2026-11-04",
       "runs": 1,
-      "searches": 12,
-      "selected": 1
+      "searches": 2,
+      "selected": 0
     },
     "B3": {
       "candidates": 2,
@@ -1642,12 +2062,12 @@
       "selected": 0
     },
     "C10": {
-      "candidates": 11,
-      "fetchFail": 8,
-      "fetchOk": 13,
-      "lastUsed": "2026-11-03",
-      "runs": 4,
-      "searches": 17,
+      "candidates": 15,
+      "fetchFail": 9,
+      "fetchOk": 16,
+      "lastUsed": "2026-11-04",
+      "runs": 5,
+      "searches": 22,
       "selected": 1
     },
     "C11": {
@@ -1660,12 +2080,12 @@
       "selected": 0
     },
     "C2": {
-      "candidates": 3,
-      "fetchFail": 3,
-      "fetchOk": 4,
-      "lastUsed": "2026-11-03",
-      "runs": 2,
-      "searches": 11,
+      "candidates": 4,
+      "fetchFail": 4,
+      "fetchOk": 7,
+      "lastUsed": "2026-11-04",
+      "runs": 3,
+      "searches": 15,
       "selected": 0
     },
     "C3": {
@@ -1745,15 +2165,6 @@
     },
     {
       "detail": "177B",
-      "fallbacks": 1,
-      "id": "A3",
-      "name": "Open-source teaching tools",
-      "outcome": "http_422",
-      "status": "ok",
-      "url": "https://api.github.com/search/issues?q=autograder+in%3Atitle+state%3Aopen&per_page=5"
-    },
-    {
-      "detail": "177B",
       "fallbacks": 0,
       "id": "A4",
       "name": "GitHub Education and Classroom discussions",
@@ -1799,22 +2210,31 @@
     }
   ],
   "funnel": {
-    "candidates": 137,
-    "passedGate": 3,
-    "passedRejectRules": 117,
-    "provisional": 5,
-    "reviewKilled": 12,
+    "candidates": 155,
+    "passedGate": 4,
+    "passedRejectRules": 133,
+    "provisional": 6,
+    "reviewKilled": 17,
     "validated": 0,
-    "watchlist": 32
+    "watchlist": 35
   },
   "gateFailures": {
     "painBelow4": 3,
-    "rejectRule": 20,
-    "reviewKill": 12,
-    "totalBelowMin": 97
+    "rejectRule": 22,
+    "reviewKill": 17,
+    "totalBelowMin": 107
   },
   "generated": "2026-11-04",
   "prefer": [
+    {
+      "client": "webfetch",
+      "evidence": "complaint",
+      "id": "A13",
+      "name": "Discourse forums, any niche",
+      "path": "https://{host}/search.json?q={q}+after%3A{YYYY-MM-DD}",
+      "selectedIdeas": 2,
+      "status": "ok"
+    },
     {
       "client": "webfetch",
       "evidence": "complaint",
@@ -1825,20 +2245,20 @@
       "status": "ok"
     },
     {
-      "client": "webfetch",
-      "evidence": "complaint",
-      "id": "A13",
-      "name": "Discourse forums, any niche",
-      "path": "https://{host}/search.json?q={q}+after%3A{YYYY-MM-DD}",
-      "selectedIdeas": 1,
+      "client": "curl",
+      "evidence": "spend",
+      "id": "B12",
+      "name": "Paid app marketplaces",
+      "path": "https://apps.shopify.com/{slug}/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest",
+      "selectedIdeas": 2,
       "status": "ok"
     },
     {
       "client": "webfetch",
       "evidence": "spend",
-      "id": "B12",
-      "name": "Paid app marketplaces",
-      "path": "https://apps.shopify.com/search?q={q}",
+      "id": "B11",
+      "name": "Freelance job boards",
+      "path": "https://www.freelancer.com/api/projects/0.1/projects/active/?query={q}&limit=20&full_description=true",
       "selectedIdeas": 1,
       "status": "ok"
     },
@@ -1897,11 +2317,11 @@
       "status": "ok"
     },
     {
-      "client": "webfetch",
+      "client": "curl",
       "evidence": "complaint",
       "id": "A3",
       "name": "Open-source teaching tools",
-      "path": "https://api.github.com/search/issues?q={q}+state%3Aopen+sort%3Areactions&per_page=10",
+      "path": "https://api.github.com/search/issues?q={q}+is%3Aissue+state%3Aopen+sort%3Areactions&per_page=10",
       "selectedIdeas": 0,
       "status": "ok"
     },
@@ -1938,15 +2358,6 @@
       "id": "B10",
       "name": "WordPress plugin market data",
       "path": "https://api.wordpress.org/plugins/info/1.2/?action=query_plugins&request[search]={q}&request[per_page]=10",
-      "selectedIdeas": 0,
-      "status": "ok"
-    },
-    {
-      "client": "webfetch",
-      "evidence": "spend",
-      "id": "B11",
-      "name": "Freelance job boards",
-      "path": "https://www.freelancer.com/api/projects/0.1/projects/active/?query={q}&limit=20&full_description=true",
       "selectedIdeas": 0,
       "status": "ok"
     },
@@ -2059,6 +2470,6 @@
       "status": "ok"
     }
   ],
-  "runsInWindow": 9,
+  "runsInWindow": 10,
   "windowDays": 45
 }

@@ -589,3 +589,7 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-03 [doc] ideas/sources.json B12: Shopify App Store search page returns an empty shell; use app and 1-2 star review pages via curl instead.
 
 2026-11-04 [doc] sources.json B12: Shopify App Store search returns an empty shell, use app review pages (1-2 star, newest) found via site: search; B11 note on loose query matching.
+
+2026-11-04 [doc] Created ideas/2026-11-04.json (schemaVersion 3, 1 idea): Theme Conflict Merge (17, provisional); 5 of 6 reviewed candidates killed by free replacements
+
+2026-11-04 [doc] sources.json A3: GitHub issue search needs is:issue in the query (422 otherwise); path fixed and re-verified with curl.
