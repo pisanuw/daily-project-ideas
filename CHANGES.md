@@ -579,3 +579,7 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-03 [code] Dossier Comment Reflector (2026-10-25 #3) implemented and live at https://dossier-comment-reflector.pisan.me; claim replaced with url, repo, notes and publicNotes.
 
 2026-11-03 [doc] Extra run (random sources A13 A5 B9 C4 C2) added 1 idea to ideas/2026-11-03.json: Misrepresentation Preflight (17, provisional); B9 freelancer.com API path
+
+2026-11-04 [decision] More and better ideas: first run ships 3 to 5 (up to 4 provisional), 18 to 24 candidates, spend pass on every candidate at 17+, top 3 watchlist entries re-researched, 14-day watchlist expiry.
+
+2026-11-04 [doc] New sources A15 (Make, Bubble, n8n, Zapier communities), B11 (freelancer.com API, PeoplePerHour), B12 (Shopify App Store, Atlassian Marketplace), all probed ok; rotation uses them on small-business days.

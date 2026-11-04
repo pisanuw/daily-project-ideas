@@ -25,10 +25,10 @@ Your task: find commercially viable product ideas backed by real demand
 evidence, write them to the day's JSON file, record what you tried in the run
 log, update IDEAS.md and the idea index, and commit to main.
 
-**Every run produces at least one idea.** Quality is graded, not all-or-nothing:
-an idea that clears the quality gate ships as `validated`, and when nothing
-clears it the run ships its best reviewed candidate as `provisional`, labelled
-with exactly what it is missing. A run that produces nothing is a bug in this
+**A first run produces 3 to 5 ideas, an extra run 1 to 3.** Quality is graded,
+not all-or-nothing: an idea that clears the quality gate ships as `validated`,
+and the run fills up to 3 with its best reviewed candidates as `provisional`,
+each labelled with exactly what it is missing. A run that produces nothing is a bug in this
 routine, not a quiet day, and Step 9 makes you say which condition stopped
 every candidate so the routine can be fixed.
 
@@ -207,10 +207,20 @@ Then check `ideas/YYYY-MM-DD.json`:
 ## Step 3: Gather demand signals (not showcases)
 
 **First run.** Take today's three focus sources and domain lens from the
-rotation table. Run at least 12 searches: at least 3 per evidence kind
-(complaint, spend, mandate) and at least 2 on each focus source. Point at least
-half of the complaint searches at the day's domain lens rather than at
-education. Also run one search per watchlist entry looking for new evidence.
+rotation table. Run at least 14 searches: at least 3 per evidence kind
+(complaint, spend, mandate), at least 4 spend searches of which at least 2 on
+B11 (freelance job boards) or B12 (paid app marketplaces), and at least 2 on
+each focus source. Point at least half of the complaint searches at the day's
+domain lens rather than at education.
+
+**Re-research the watchlist.** Take the 3 highest-scoring watchlist entries
+and run two searches for each, aimed at what its score lacks. That is nearly
+always willingness to pay, so search B11 for paid jobs doing that task by hand
+and B12 for paid apps that half-solve it; otherwise look for a recent
+complaint. Rescore each entry with what you found, and put it in today's
+candidate pool to compete with the new ones. An entry that has sat on the
+watchlist 14 days or more without gaining evidence leaves it: move it to
+`rejectedCandidates` with the reason "stale on the watchlist".
 
 **Extra run.** Ignore the rotation table. Pick random reachable sources:
 
@@ -274,7 +284,7 @@ A mandate tells you the work is not optional. An idea with all three is strong;
 an idea with only mandates is a guess about a market.
 
 The catalog in `ideas/sources.json` is the full list of sources with their
-access paths. Group A is IDs A1 to A14, Group B is B1 to B10, Group C is C1 to
+access paths. Group A is IDs A1 to A15, Group B is B1 to B12, Group C is C1 to
 C11. Blocked IDs are kept in the catalog so that old `sourcesUsed` entries stay
 readable; the avoid list in Step 0 is what you act on.
 
@@ -284,20 +294,20 @@ The lens is what keeps ideas out of a single rut. On most days it points away
 from higher education on purpose, and four days in seven point at small
 businesses (Monday, Thursday, Friday, Sunday).
 
-Whatever the lens, at least 5 of a first run's candidates (3 in an extra run)
+Whatever the lens, at least 6 of a first run's candidates (3 in an extra run)
 have a small-business buyer: a small business, solo professional, local
 service, trade, clinic, restaurant, shop, or freelancer paying for it
 themselves. Run at least two complaint searches aimed at them every run.
 
 | Weekday | Focus sources | Domain lens |
 |---|---|---|
-| Monday | A13 Discourse, any niche; B10 WordPress plugin market data; C5 Policy and regulation trackers | Accessibility and regulatory compliance for small businesses and startups: website accessibility, privacy notices, sales tax, licensing and permits |
+| Monday | A13 Discourse, any niche; B12 Paid app marketplaces; C5 Policy and regulation trackers | Accessibility and regulatory compliance for small businesses and startups: website accessibility, privacy notices, sales tax, licensing and permits |
 | Tuesday | A14 Plugin and add-on support forums; B1 Teachers Pay Teachers; C10 Change events | Teaching and training anywhere: K-12, corporate L&D, tutoring, homeschool |
 | Wednesday | A3 Open-source teaching tools; B2 AppSumo; C2 Education and computing research | Developer and research tooling |
-| Thursday | A12 Ask HN; B8 Install counts; C11 Federal award and grant data | Small business back office and solo professionals: invoicing, scheduling, bookkeeping, client intake, paperwork |
-| Friday | A5 Educator Stack Exchanges; B6 Verified revenue dashboards; C8 Trade news | Small business, customer-facing: local services, trades, clinics, restaurants, retail, their websites and bookings |
+| Thursday | A15 No-code automation communities; B11 Freelance job boards; C11 Federal award and grant data | Small business back office and solo professionals: invoicing, scheduling, bookkeeping, client intake, paperwork |
+| Friday | A13 Discourse, any niche (community.shopify.com is the strongest host); B11 Freelance job boards; C8 Trade news | Small business, customer-facing: local services, trades, clinics, restaurants, retail, their websites and bookings |
 | Saturday | A2 Other LMS and classroom forums; B5 Acquisition marketplaces; C4 Job postings | Institutional back-office work |
-| Sunday | A11 Accessibility practitioners; B10 WordPress plugin market data; C6 Accreditation and standards | Makers, creators and freelancers who sell: craft and online shops, studios, photographers, tutors, consultants |
+| Sunday | A12 Ask HN; B12 Paid app marketplaces; C10 Change events | Makers, creators and freelancers who sell: craft and online shops, studios, photographers, tutors, consultants |
 
 Sources outside today's focus still count toward the per-kind minimums, and
 extra runs pick from the whole reachable catalog. If a focus source is on the
@@ -311,8 +321,8 @@ edit.
 
 ## Step 4: Generate, score, and gate candidates
 
-Generate 15 to 20 candidate ideas from the signals (10 to 15 in an extra run),
-including any watchlist entries that gained new evidence. Score each from 1 to 5:
+Generate 18 to 24 candidate ideas from the signals (10 to 15 in an extra run),
+plus the re-researched watchlist entries. Score each from 1 to 5:
 
 | Criterion | 1 | 5 |
 |---|---|---|
@@ -329,6 +339,21 @@ For every score, write a one-line justification that cites a signal URL. A
 score with no cited evidence is capped at 2. `pain` is capped at 3 unless at
 least one evidence item is a **complaint**: a mandate and a price between them
 say nothing about whether anybody is suffering.
+
+**The spend pass.** Between 2026-10-30 and 2026-11-03 no candidate cleared the
+gate, and the score that sank most of them was `willingnessToPay` 2: the run
+had found no evidence of payment, so the score was capped. Before you finalize
+scores, take every candidate whose preliminary `total` is 17 or more and run
+one spend search for that exact task: B11 for businesses paying freelancers to
+do it by hand or build a one-off tool, B12 for paid apps that half-solve it.
+Calibrate `willingnessToPay` on what you find:
+- 2: no payment evidence found (the cap).
+- 3: one dated paid job for the task, or one paid app or plan for it.
+- 4: three or more independent paid jobs within 90 days, or a paid app with
+  many reviews whose 1 and 2 star reviews complain about the gap you would fill.
+- 5: customers visibly paying for an inferior solution and saying so.
+Record each spend search in `runNotes.searches` and in the run log, including
+the ones that found nothing.
 
 **Reject** any candidate that is:
 - A novelty toy, or a game with no paying buyer.
@@ -363,13 +388,18 @@ The floor is deliberately low on score and strict on honesty. A provisional
 idea is a lead with its weakness written on the front, not a watered-down
 product brief.
 
-**Selection.**
-1. Rank every surviving candidate by `total`.
+**Selection.** A first run ships 3 to 5 ideas; an extra run adds 1 to 3. Until
+2026-11-03 a run shipped one idea at most, which left the site and the build
+routine with almost nothing to choose from.
+1. Rank every surviving candidate by `total`, the re-researched watchlist
+   entries included.
 2. Take the `validated` candidates in rank order, up to 6.
-3. **If none is validated, take the single highest-ranked candidate that meets
-   the floor and ship it as `provisional`.** Take a second provisional only if
-   it is about a different customer and problem. Never more than 2, and never
-   any provisional in a run that produced a validated idea.
+3. If that gives fewer than 3, fill up to 3 (and at most 5 in all) with the
+   highest-ranked candidates that meet the floor, shipped as `provisional`.
+   Never more than 4 provisional ideas in a day. Each provisional idea must be
+   about a different customer and problem from every other idea that day.
+   Prefer, among candidates within 2 points of each other, the one with
+   `willingnessToPay` of 3 or more.
 4. If the adversarial review in Step 6 kills or demotes a selected idea,
    **continue down the ranked list**: research and review the next candidate and
    take it if it qualifies. Keep going until you have filled the slot or run out
@@ -398,7 +428,8 @@ qualifies.
 
 **Watchlist.** Candidates with a `total` of 19 or higher that were neither
 selected nor shipped as provisional go to `runNotes.watchlist` (maximum 8,
-highest totals first). Keep the original `firstSeen` date for carried-forward
+highest totals first). A watchlist entry is a candidate like any other: once it
+is re-researched (Step 3) and reviewed (Step 6), it can be selected. Keep the original `firstSeen` date for carried-forward
 entries. In an extra run, merge new near-misses into today's watchlist under the
 same rules. All other candidates go to `runNotes.rejectedCandidates`.
 

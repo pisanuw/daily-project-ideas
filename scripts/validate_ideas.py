@@ -50,7 +50,8 @@ TOPICS = {"Assessment & Grading", "AI Literacy & Ethics",
           "Teaching Operations", "Developer Tooling", "Data & Visualization"}
 EVIDENCE_KINDS = {"complaint", "spend", "mandate"}
 MAX_IDEAS = 6
-MAX_PROVISIONAL = 2
+MIN_IDEAS = 3  # since 2026-11-04
+MAX_PROVISIONAL = 4  # since 2026-11-04: a first run ships 3 to 5 ideas
 MAX_PER_CATEGORY = 2
 MIN_TOTAL = 22
 RECENT_DAYS = 90
@@ -232,6 +233,9 @@ def main(path):
                         "candidate met the floor, runNotes.floorFailure must name "
                         "the floor condition that stopped every one of them, and "
                         "the run log must record it too")
+    if ideas and len(ideas) < MIN_IDEAS and not run_notes.get("caveats"):
+        errs.append(f"{len(ideas)} ideas: a first run ships at least {MIN_IDEAS}; if "
+                    "fewer met the floor, runNotes.caveats must say why")
     if len(ideas) > MAX_IDEAS:
         errs.append(f"{len(ideas)} ideas, maximum is {MAX_IDEAS}")
 
@@ -243,9 +247,6 @@ def main(path):
     validated = confidences.count("validated")
     if provisional > MAX_PROVISIONAL:
         errs.append(f"{provisional} provisional ideas, maximum is {MAX_PROVISIONAL}")
-    if provisional and validated:
-        errs.append("a run that produced a validated idea must not also ship "
-                    "provisional ones")
 
     slugs = [i.get("slug") for i in ideas]
     if len(slugs) != len(set(slugs)):

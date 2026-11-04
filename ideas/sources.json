@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-01",
+  "updated": "2026-11-04",
   "note": "Source catalog for ROUTINE.md. Every entry names a concrete access path, not just a brand, so a run does not have to rediscover how to reach a source. Status is empirical: it records what a fetch actually returned. scripts/source_health.py refreshes status from ideas/run-log.jsonl; sources.json is the hand-maintained baseline. Each path may carry probeUrl (a concrete URL with the placeholders filled in) and expect (a string that must appear in the body for the fetch to count as usable). scripts/probe_sources.py uses those two fields to re-measure the catalog, which is what to run after the run environment changes. Statuses depend on where the probe ran. The 2026-11-01 baseline was measured from a European residential IP and then re-measured by the routine from its US cloud environment; the two agreed on every source but two. Where they disagree, the routine's measurement is the one that matters, because that is where the daily run happens. Two known geography effects: HigherEdJobs (C4) serves a stub to non-US addresses, and the Chrome Web Store (A6) redirects European traffic to a consent wall that US traffic does not see.",
   "statusMeanings": {
     "ok": "A verified path returns usable, dated content through the WebFetch tool.",
@@ -429,6 +429,49 @@
       "notes": "Pairs with B10: the install count says how many people are affected and the support forum says what they are stuck on. Relative ages ('1 month ago') must be converted to a date and the thread page fetched to confirm it."
     },
     {
+      "id": "A15",
+      "group": "A",
+      "name": "No-code automation communities",
+      "evidence": "complaint",
+      "status": "ok",
+      "lastVerified": "2026-11-04",
+      "paths": [
+        {
+          "url": "https://community.make.com/search.json?q={q}+after%3A{YYYY-MM-DD}",
+          "client": "webfetch",
+          "verified": "2026-11-04",
+          "result": "Discourse JSON with topics and posts; 'invoice' after 2026-08-01 returned 47 posts (supplier-invoice reconciliation, invoice chasers).",
+          "probeUrl": "https://community.make.com/search.json?q=invoice",
+          "expect": "topics"
+        },
+        {
+          "url": "https://forum.bubble.io/search.json?q={q}+after%3A{YYYY-MM-DD}",
+          "client": "webfetch",
+          "verified": "2026-11-04",
+          "result": "Discourse JSON.",
+          "probeUrl": "https://forum.bubble.io/search.json?q=booking",
+          "expect": "topics"
+        },
+        {
+          "url": "https://community.n8n.io/search.json?q={q}+after%3A{YYYY-MM-DD}",
+          "client": "webfetch",
+          "verified": "2026-11-03",
+          "result": "Discourse JSON; 7 of 7 usable in the run log.",
+          "probeUrl": "https://community.n8n.io/search.json?q=invoice",
+          "expect": "topics"
+        },
+        {
+          "url": "https://community.zapier.com/search?q={q}",
+          "client": "curl",
+          "verified": "2026-11-04",
+          "result": "HTML search results, 285KB.",
+          "probeUrl": "https://community.zapier.com/search?q=spreadsheet",
+          "expect": "zapier"
+        }
+      ],
+      "notes": "Small businesses that cannot buy a tool build a workaround out of Make, Zapier, n8n or Bubble and then ask for help when it breaks. A post describing a home-built workaround is complaint evidence that the job matters and is unserved; count the original poster only, not consultants answering. Pairs with B11: the same task posted as a paid job is the spend evidence."
+    },
+    {
       "id": "B1",
       "group": "B",
       "name": "Teachers Pay Teachers and Etsy",
@@ -668,6 +711,60 @@
         }
       ],
       "notes": "active_installs plus a paid pro tier is a strong, checkable spend signal, and it is wholly outside education. Pair with A14 for the matching pain."
+    },
+    {
+      "id": "B11",
+      "group": "B",
+      "name": "Freelance job boards",
+      "evidence": "spend",
+      "status": "ok",
+      "lastVerified": "2026-11-04",
+      "paths": [
+        {
+          "url": "https://www.freelancer.com/api/projects/0.1/projects/active/?query={q}&limit=20&full_description=true",
+          "client": "webfetch",
+          "verified": "2026-11-04",
+          "result": "JSON: title, description, budget minimum and maximum with currency, time_submitted (Unix time), seo_url (page is https://www.freelancer.com/projects/{seo_url}). Public, no key.",
+          "probeUrl": "https://www.freelancer.com/api/projects/0.1/projects/active/?query=invoice&limit=3",
+          "expect": "time_submitted"
+        },
+        {
+          "url": "https://www.peopleperhour.com/freelance-jobs?q={q}",
+          "client": "curl",
+          "verified": "2026-11-04",
+          "result": "HTML job list, 330KB.",
+          "probeUrl": "https://www.peopleperhour.com/freelance-jobs?q=spreadsheet",
+          "expect": "job"
+        }
+      ],
+      "notes": "A business paying a freelancer to do a task by hand, or to build a one-off tool for it, is spend evidence: money already changes hands for an inferior solution. Cite the job page, its posting date and budget. One posting supports willingnessToPay 3; three or more independent postings within 90 days for the same task support 4. Upwork and Guru return 403; do not work around them."
+    },
+    {
+      "id": "B12",
+      "group": "B",
+      "name": "Paid app marketplaces",
+      "evidence": "spend",
+      "status": "ok",
+      "lastVerified": "2026-11-04",
+      "paths": [
+        {
+          "url": "https://apps.shopify.com/search?q={q}",
+          "client": "webfetch",
+          "verified": "2026-11-04",
+          "result": "HTML search results; app pages carry the pricing plans, the review count and dated reviews (filter 1 and 2 star reviews for complaints). 5 of 5 usable in the run log.",
+          "probeUrl": "https://apps.shopify.com/search?q=booking",
+          "expect": "app"
+        },
+        {
+          "url": "https://marketplace.atlassian.com/search?query={q}",
+          "client": "curl",
+          "verified": "2026-11-04",
+          "result": "HTML, 480KB.",
+          "probeUrl": "https://marketplace.atlassian.com/search?query=timesheet",
+          "expect": "atlassian"
+        }
+      ],
+      "notes": "A paid app with many reviews for the same job is spend evidence (people pay for an inferior or partial solution); its 1 and 2 star reviews, with dates, are complaint evidence from paying customers. State the plan prices you saw and the review count. A free app with installs is not spend evidence."
     },
     {
       "id": "C1",
