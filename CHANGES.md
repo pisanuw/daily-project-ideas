@@ -587,3 +587,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-03 [doc] Extra run (random sources A2 A4 B12 C1 C11) added 1 idea to ideas/2026-11-03.json: Popup Check (17, provisional)
 
 2026-11-03 [doc] ideas/sources.json B12: Shopify App Store search page returns an empty shell; use app and 1-2 star review pages via curl instead.
+
+2026-11-04 [doc] sources.json B12: Shopify App Store search returns an empty shell, use app review pages (1-2 star, newest) found via site: search; B11 note on loose query matching.

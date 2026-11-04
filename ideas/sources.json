@@ -737,7 +737,7 @@
           "expect": "job"
         }
       ],
-      "notes": "A business paying a freelancer to do a task by hand, or to build a one-off tool for it, is spend evidence: money already changes hands for an inferior solution. Cite the job page, its posting date and budget. One posting supports willingnessToPay 3; three or more independent postings within 90 days for the same task support 4. Upwork and Guru return 403; do not work around them."
+      "notes": "A business paying a freelancer to do a task by hand, or to build a one-off tool for it, is spend evidence: money already changes hands for an inferior solution. Cite the job page, its posting date and budget. One posting supports willingnessToPay 3; three or more independent postings within 90 days for the same task support 4. Upwork and Guru return 403; do not work around them. The freelancer.com API's query matches loosely: read every title and keep only jobs for the same task; a search that returns only unrelated jobs counts as 'nothing found', and say so."
     },
     {
       "id": "B12",
@@ -748,12 +748,12 @@
       "lastVerified": "2026-11-04",
       "paths": [
         {
-          "url": "https://apps.shopify.com/search?q={q}",
-          "client": "webfetch",
+          "url": "https://apps.shopify.com/{slug}/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest",
+          "client": "curl",
           "verified": "2026-11-04",
-          "result": "HTML search results; app pages carry the pricing plans, the review count and dated reviews (filter 1 and 2 star reviews for complaints). 5 of 5 usable in the run log.",
-          "probeUrl": "https://apps.shopify.com/search?q=booking",
-          "expect": "app"
+          "result": "Dated 1 and 2 star reviews from paying merchants, newest first; the app page https://apps.shopify.com/{slug} carries the plans and review count. Find slugs with WebSearch site:apps.shopify.com {task}. The search page (apps.shopify.com/search) returns an empty shell to both clients (2026-11-03 extra run).",
+          "probeUrl": "https://apps.shopify.com/stocky/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest",
+          "expect": "review"
         },
         {
           "url": "https://marketplace.atlassian.com/search?query={q}",
@@ -764,7 +764,7 @@
           "expect": "atlassian"
         }
       ],
-      "notes": "A paid app with many reviews for the same job is spend evidence (people pay for an inferior or partial solution); its 1 and 2 star reviews, with dates, are complaint evidence from paying customers. State the plan prices you saw and the review count. A free app with installs is not spend evidence. 2026-11-03#3: the apps.shopify.com/search page returned an empty shell ('trouble loading your results') to both curl and WebFetch; find slugs with WebSearch site:apps.shopify.com, then curl https://apps.shopify.com/{slug} and https://apps.shopify.com/{slug}/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest, which return dated, named reviews."
+      "notes": "A paid app with many reviews for the same job is spend evidence (people pay for an inferior or partial solution); its 1 and 2 star reviews, with dates, are complaint evidence from paying customers. State the plan prices you saw and the review count. A free app with installs is not spend evidence. 2026-11-03#3: the apps.shopify.com/search page returned an empty shell ('trouble loading your results') to both curl and WebFetch; find slugs with WebSearch site:apps.shopify.com, then curl https://apps.shopify.com/{slug} and https://apps.shopify.com/{slug}/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest, which return dated, named reviews. Back-office Shopify niches filled up with new apps from July to October 2026, most with 0 reviews: an app with no reviews is not spend evidence."
     },
     {
       "id": "C1",
