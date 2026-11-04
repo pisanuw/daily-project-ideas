@@ -210,6 +210,561 @@
         ],
         "closedBy": "The validation test's paid merges close the largest gap: 8 paid $19 merges out of 40 free checks would show that merchants pay for a merged theme rather than a diff, which would justify raising competitiveGap to 2 and willingnessToPay to 4. Reaching 22 also needs reachability 4, shown by forum answers converting without App Store listing."
       }
+    },
+    {
+      "n": 2,
+      "title": "Accessibility Fleet Log",
+      "slug": "accessibility-fleet-log",
+      "category": "Accessibility & Compliance",
+      "smallBusiness": true,
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Accessibility",
+      "summary": "For web agencies and freelancers who look after 10 to 100 small-business WordPress sites: one dashboard showing every client site's accessibility status, a dated statement and issue log per site, and white-label client reports, built on free checkers that run on the client's own server.",
+      "public": {
+        "summary": "See the accessibility status of every client website you look after in one place, with a dated record and a clean report you can send each client.",
+        "problem": "You look after dozens of client websites, and each one needs an accessibility check, a statement, and some proof that you are keeping on top of it. The plugin you used to rely on now pushes upsells and its own branding onto your clients' dashboards, and sends visitor data to someone else's servers. The tools that do this well for many sites at once are priced for big companies.",
+        "forWhom": "Web agencies and freelancers who maintain WordPress sites for small businesses.",
+        "benefits": [
+          "Every client site's accessibility status on one screen",
+          "A dated record of issues and fixes for each site",
+          "Reports with your own name on them, ready to send",
+          "Nothing extra on your clients' dashboards",
+          "Visitor data stays on each client's own site"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "I manage multiple client websites and the accessibility plugin I put on all of them turned into upsell adware with 'powered by' branding and dashboard widgets; I had to write PHP snippets to hide it and finally uninstalled it across my whole fleet. In the EU it also loads Google Analytics from the vendor's CDN, so I cannot use it for GDPR clients.",
+      "description": "A small companion plugin is installed on each client site. It reads results from free engines that already run on the site itself (Equalize Digital Accessibility Checker free, Editoria11y, Sa11y) and sends only issue counts, rule IDs and page URLs (no visitor data) to the agency's dashboard. The dashboard lists every site with open issues by WCAG criterion, the date each was found and fixed, and a dated accessibility statement (EAA/BFSG and ADA wording) per site. Each month it produces a white-label PDF report per client. It is not an overlay and claims no compliance; it records what was checked and when.",
+      "targetCustomer": "Web agencies and freelance WordPress developers who maintain 10 to 100 separate (non-multisite) client sites for small businesses, many with EU clients.",
+      "buyer": "The agency owner, from the care-plan margin they already charge clients for maintenance; the same budget that pays for ManageWP/MainWP and plugin licences.",
+      "whyNow": "Elementor took over the widely installed One Click Accessibility plugin and rebranded it as Ally, and its 2026 one-star reviews are agencies and EU users leaving over upsells, branding and a CDN that loads Google Analytics. The European Accessibility Act has applied since 2025-06-28, so EU clients now ask for statements. The incumbent with a network view (Equalize Digital) sells it only in its $2,250/year 25-site Agency plan, and only for WordPress multisite.",
+      "founderFit": "Pisan works in accessibility and can ship a WordPress plugin plus a Supabase dashboard alone. The product reuses free open-source checkers rather than building a new rules engine, and needs no paid API at runtime.",
+      "problemEvidence": [
+        {
+          "url": "https://wordpress.org/support/topic/unusable-bloatware-replaced-on-every-site-i-manage/",
+          "source": "wordpress.org",
+          "author": "Northwoods Dev Studio",
+          "date": "2026-08-02",
+          "kind": "complaint",
+          "summary": "Agency managing multiple client sites: after Elementor took over, the accessibility plugin added upsell widgets, menu items and 'powered by' branding to client sites; replaced it across the fleet."
+        },
+        {
+          "url": "https://wordpress.org/support/topic/gdpr-disaster/",
+          "source": "wordpress.org",
+          "author": "daanse",
+          "date": "2026-04-10",
+          "kind": "complaint",
+          "summary": "The plugin works only via CDN and loads Google Analytics hidden in a JS file from Elementor's CDN; found just before a go-live."
+        },
+        {
+          "url": "https://wordpress.org/support/topic/plugin-has-no-valid-header-8/",
+          "source": "wordpress.org",
+          "author": "PlayerWeb",
+          "date": "2025-07-02",
+          "kind": "complaint",
+          "summary": "Expensive annual Ally licences sold in Germany for legal compliance, integrated into customers' sites, and not GDPR compliant."
+        },
+        {
+          "url": "https://equalizedigital.com/accessibility-checker/pricing/",
+          "source": "equalizedigital.com",
+          "author": "Equalize Digital (pricing page, undated; read 2026-11-04 by the reviewer)",
+          "date": "2026-11-04",
+          "kind": "spend",
+          "summary": "Paid tiers: Professional $190/yr for 1 site, Small Business $750/yr for 5, Agency $2,250/yr for 25 sites including the Multisite add-on."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Equalize Digital Accessibility Checker",
+          "url": "https://equalizedigital.com/accessibility-checker/pricing/",
+          "price": "Free; $190/yr (1 site), $750/yr (5), $2,250/yr (25, Agency)",
+          "gap": "Cross-site view only through the Agency plan and only for WordPress multisite; agencies with separate client installs get no fleet view below $2,250/yr."
+        },
+        {
+          "name": "WP Accessibility (Joe Dolson)",
+          "url": "https://wordpress.org/plugins/wp-accessibility/",
+          "price": "Free",
+          "gap": "Fixes and a toolbar on one site; no issue log, statement archive or cross-site view."
+        },
+        {
+          "name": "Editoria11y",
+          "url": "https://wordpress.org/plugins/editoria11y-accessibility-checker/",
+          "price": "Free",
+          "gap": "In-browser checks with reports stored on the site; no cross-site dashboard."
+        },
+        {
+          "name": "Sa11y",
+          "url": "https://wordpress.org/plugins/sa11y/",
+          "price": "Free",
+          "gap": "Editor-side checker for one site; no fleet view or client reports."
+        },
+        {
+          "name": "Pope Tech",
+          "url": "https://pope.tech/pricing",
+          "price": "unknown (agency and reseller pricing by contacting sales)",
+          "gap": "Aimed at higher education and priced by page count."
+        },
+        {
+          "name": "Ally / Web Accessibility by Elementor",
+          "url": "https://wordpress.org/support/plugin/pojo-accessibility/reviews/?filter=1",
+          "price": "unknown (paid licences mentioned in reviews)",
+          "gap": "The product agencies are leaving: upsells and branding on client dashboards, CDN loading analytics."
+        }
+      ],
+      "keyFeatures": [
+        "Companion plugin that reads results from free on-site checkers and reports issue counts only",
+        "Agency dashboard of every client site by open WCAG issues",
+        "Dated issue and fix log per site",
+        "Accessibility statement per site with version history",
+        "Monthly white-label PDF report per client"
+      ],
+      "mvpScope": {
+        "features": [
+          "Companion plugin reading Equalize Digital free results",
+          "Dashboard listing sites with open issues and dates",
+          "Per-site dated statement page and PDF export"
+        ],
+        "outOfScope": [
+          "Its own rules engine",
+          "Editoria11y and Sa11y adapters",
+          "Shopify and Webflow sites",
+          "Any automatic fixing"
+        ],
+        "buildEstimate": "3 to 4 weeks"
+      },
+      "techStack": "WordPress plugin (PHP), React + Vite + Tailwind dashboard, Supabase (auth, Postgres), server-side PDF generation",
+      "pricing": {
+        "model": "Per-agency subscription by site bundle",
+        "pricePoint": "$29/month for 25 sites, $59/month for 100 sites",
+        "rationale": "Undercuts Equalize Digital's $2,250/yr 25-site Agency plan (about $188/month) while relying on its free engine; agencies bill accessibility into care plans, so the cost is passed through."
+      },
+      "revenueSketch": "Estimate: 60 agencies x $40/month average = $2,400 MRR. Assumes agencies leaving Ally convert at a low single-digit rate from wordpress.org and agency communities.",
+      "distribution": "A free listing in the WordPress plugin directory for the companion plugin; replies in the Ally and Equalize support forums where agencies ask for fleet features; WordPress agency communities and meetups; WP care-plan newsletters.",
+      "validationTest": {
+        "method": "Publish a landing page with a clickable mock of the fleet dashboard and a sample white-label report, and show it to 10 agencies that maintain 10 or more client sites, reached through WordPress agency communities and the plugin forums.",
+        "successCriteria": "4 of 10 say they would replace their current approach, and 3 pay a $29 first month up front.",
+        "cost": "About 2 days of work and $0 to $50."
+      },
+      "moat": "Weak at first. The per-site dated history becomes switching cost after a few months, and white-label reports tie it into the agency's client deliverables.",
+      "compliance": [
+        "Accessibility: the product must not claim compliance or certification; statements are drafts the site owner adopts (EAA/BFSG and ADA wording differs).",
+        "GDPR: only issue counts, rule IDs and page URLs leave the client site, no visitor data; a DPA is still needed for agency accounts.",
+        "Liability: clients may treat a statement as proof of compliance; disclaimers and wording reviewed once by a lawyer."
+      ],
+      "risks": [
+        {
+          "risk": "Equalize Digital adds a cheap non-multisite agency dashboard.",
+          "mitigation": "Support several free engines, not only Equalize, and compete on white-label reporting and price."
+        },
+        {
+          "risk": "The pain is anger at one vendor, not demand for a new tool.",
+          "mitigation": "The validation test asks agencies to pay before building."
+        },
+        {
+          "risk": "Checking rendered pages needs a browser, and free engines run in the editor or front end.",
+          "mitigation": "Report what the on-site engines find; leave scheduled headless scans out of the MVP."
+        }
+      ],
+      "scores": {
+        "pain": 3,
+        "willingnessToPay": 4,
+        "reachability": 3,
+        "competitiveGap": 2,
+        "feasibility": 3,
+        "complianceBurden": 3,
+        "total": 18
+      },
+      "scoreRationale": {
+        "pain": "Real, recent agency and EU complaints, but they are about one plugin's upsells and CDN, not a missing fleet tool: https://wordpress.org/support/topic/unusable-bloatware-replaced-on-every-site-i-manage/",
+        "willingnessToPay": "Agencies already pay Equalize up to $2,250/yr and buy Ally licences: https://equalizedigital.com/accessibility-checker/pricing/ and https://wordpress.org/support/topic/plugin-has-no-valid-header-8/",
+        "reachability": "Unhappy agencies are visible in plugin reviews, but only one or two agency voices so far: https://wordpress.org/support/plugin/pojo-accessibility/reviews/?filter=1",
+        "competitiveGap": "Equalize already does on-server checks, a statement generator and multisite; the gap is a cheap fleet view for separate installs: https://wordpress.org/plugins/accessibility-checker/",
+        "feasibility": "Rendered-page checks need a browser; free engines run in-browser, so the MVP depends on their output: https://wordpress.org/plugins/editoria11y-accessibility-checker/",
+        "complianceBurden": "No visitor data leaves the site, but statements for EAA/ADA invite reliance as proof of compliance: https://wordpress.org/plugins/accessibility-checker/"
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "The reviewer confirmed the five Ally reviews (2025-07 to 2026-11, different authors) but found they target Elementor's widget, upsells and CDN, not a missing checker, and the Northwoods agency had already moved to a free alternative. Equalize Digital's free plugin already checks WCAG on the server, generates a statement and needs no external API, so a new checker would fail; the idea was re-scoped to a fleet layer over free engines (aggregated status, dated log and statement archive, white-label reports), the one gap left because Equalize's network view needs multisite and the $2,250/yr Agency plan. Scores: pain 3, WTP 4, reachability 3, competitiveGap 2, feasibility 3, complianceBurden 3."
+      },
+      "inspiredBy": "https://wordpress.org/support/topic/unusable-bloatware-replaced-on-every-site-i-manage/",
+      "gateGap": {
+        "missing": [
+          "total 18 is below 22",
+          "pain 3 is below 4: the complaints are about one vendor's plugin, not about lacking a fleet view",
+          "no agency has yet asked for a cross-site accessibility dashboard in its own words"
+        ],
+        "closedBy": "The validation test's 10 agency demos close the largest gap (pain and the missing direct ask): if 3 of 10 pay a first month, pain rises to 4 and the evidence includes direct requests, which would lift the total to about 21 to 22."
+      }
+    },
+    {
+      "n": 3,
+      "title": "Health Page Tracker Watch",
+      "slug": "health-page-tracker-watch",
+      "category": "Small Business Ops",
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Data & Visualization",
+      "summary": "For therapists, med spas, wellness studios and small clinics: a monthly scan of the booking and service pages that lists every third-party script and widget that sends visitors' page addresses and IPs to a vendor, flags which of those vendors will not sign a BAA or fall under consumer-health-data laws, and alerts when a new one appears.",
+      "public": {
+        "summary": "Know which outside tools on your booking and service pages are sending visitor information to other companies, and hear about it when a new one shows up.",
+        "problem": "Your website was put together with a booking widget, a chat box, an accessibility tool and an analytics tag, and each one quietly sends the address of the page a visitor is reading to its maker. On a page about therapy, fertility or weight loss, that can count as health information. You rarely know which tools are on the site, and a plugin update can add a new one without telling you.",
+        "forWhom": "Owners of small health and wellness practices and the people who run their websites.",
+        "benefits": [
+          "A plain list of every outside tool on your health pages",
+          "Know which vendors will and will not sign a privacy agreement",
+          "An alert when an update adds a new tracker",
+          "A dated report to keep with your privacy records",
+          "A short list of fixes your web person can act on"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "I build sites for health practices and need to know whether the accessibility plugin sends anything from health-intent pages to its servers and whether the vendor will sign a BAA; the vendor confirmed it sends the page URL, IP and device data and offered only a GDPR DPA.",
+      "description": "The owner or their web person enters the site; a headless browser visits the booking, intake and service pages, records every third-party request, and matches each host against a maintained vendor table (does the vendor sign a BAA, what it receives, whether a consumer-health-data law such as Washington's My Health My Data Act is likely in scope). The report lists each tool by page in plain words with a suggested fix (remove, switch to a vendor that signs, move off health-intent pages). A monthly rescan alerts only on changes. The vendor table, kept current by hand from vendor terms, is the product; the scan itself is commodity.",
+      "targetCustomer": "Small health and wellness businesses (solo therapists, group practices, med spas, wellness studios, small dental and physical-therapy offices) and the freelancers or agencies who run their websites.",
+      "buyer": "The practice owner on the business card, or a web agency that resells it in a care plan.",
+      "whyNow": "Widget vendors keep adding CDN-loaded scripts (Elementor's Ally confirmed in October 2026 that it sends URL, IP and device data and offered no BAA). Although HHS's tracking-technology guidance was vacated in 2024, private class actions over pixels on provider booking pages continue (the Aspen Dental settlement), and Washington's My Health My Data Act covers wellness businesses that HIPAA does not.",
+      "founderFit": "Pisan can build a Playwright crawler and a Supabase dashboard alone, and his interest in AI ethics and accessibility fits a privacy audit; it needs no paid API at runtime.",
+      "problemEvidence": [
+        {
+          "url": "https://wordpress.org/support/topic/elementor-ally-data-handling-baa-confirmation/",
+          "source": "wordpress.org",
+          "author": "webmastercreativeklick",
+          "date": "2026-09-18",
+          "kind": "complaint",
+          "summary": "A site builder for health clients asks whether Ally sends data from health-intent pages and whether Elementor signs a BAA; Elementor confirmed URL, IP and device data are sent and offered only a GDPR DPA; unresolved."
+        },
+        {
+          "url": "https://wordpress.org/support/topic/gdpr-disaster/",
+          "source": "wordpress.org",
+          "author": "daanse",
+          "date": "2026-04-10",
+          "kind": "complaint",
+          "summary": "The accessibility plugin loads Google Analytics hidden in a CDN script, discovered just before go-live (GDPR, not health-specific)."
+        },
+        {
+          "url": "https://patient-protect.com/pricing",
+          "source": "patient-protect.com",
+          "author": "Patient Protect (pricing page, undated; read 2026-11-04 by the reviewer)",
+          "date": "2026-11-04",
+          "kind": "spend",
+          "summary": "Independent practices pay $39 Basic or $99 Pro per office per month for a compliance platform that includes website tracker checks."
+        },
+        {
+          "url": "https://sift-health.pages.dev/pricing/",
+          "source": "sift-health.pages.dev",
+          "author": "Sift Health (pricing page, undated; read 2026-11-04 by the reviewer)",
+          "date": "2026-11-04",
+          "kind": "spend",
+          "summary": "A free monthly scan plus $39/$119/$299 monthly plans with weekly rescans, all marked draft: an offer, not proof of purchases."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Sift Health",
+          "url": "https://sift-health.pages.dev/pricing/",
+          "price": "Free scan; $39/$119/$299 per month (draft)",
+          "gap": "Nearly the same product at $39; no sign of a maintained BAA table for accessibility, chat and booking widgets, and pricing is still draft."
+        },
+        {
+          "name": "Echo-Factory HIPAA Site Scanner",
+          "url": "https://hipaa-scan.echo-factory.com/",
+          "price": "Free",
+          "gap": "One-off detection of 120+ trackers; no monitoring or alerts seen."
+        },
+        {
+          "name": "Patient Protect",
+          "url": "https://patient-protect.com/scan",
+          "price": "Scan free; platform $39 or $99 per office per month",
+          "gap": "The scan is not continuous; the paid product is a whole compliance platform, more than a small studio needs."
+        },
+        {
+          "name": "Captain Compliance",
+          "url": "https://captaincompliance.com/solutions/healthcare/",
+          "price": "Free scan; rest unknown",
+          "gap": "Lead generation for paid services."
+        },
+        {
+          "name": "Blacklight (The Markup)",
+          "url": "https://themarkup.org/blacklight",
+          "price": "Free",
+          "gap": "General tracker inspector, not health-specific, no monitoring."
+        }
+      ],
+      "keyFeatures": [
+        "Crawl of booking, intake and service pages with every third-party request recorded",
+        "Maintained vendor table: BAA available or not, data received, consumer-health-data law exposure",
+        "Plain-language report by page with a suggested fix",
+        "Monthly rescan that alerts only on new or changed trackers",
+        "Dated PDF report"
+      ],
+      "mvpScope": {
+        "features": [
+          "Single-site scan of up to 20 pages",
+          "Vendor table for the 50 most common widgets and pixels",
+          "Report and monthly change alert by email"
+        ],
+        "outOfScope": [
+          "Fixing anything on the site",
+          "Legal opinions",
+          "Form-field and session-replay analysis",
+          "Multi-site agency accounts"
+        ],
+        "buildEstimate": "3 weeks"
+      },
+      "techStack": "Playwright on a small server, React + Vite + Tailwind, Supabase (auth, Postgres, scheduled jobs), email via a transactional provider",
+      "pricing": {
+        "model": "Per-site monthly subscription",
+        "pricePoint": "$19/month per site; agency bundle of 10 sites at $99/month",
+        "rationale": "Below Sift Health's $39 and Patient Protect's $39 platform; the free one-off scanners set the floor, so the paid part is monitoring and the vendor table."
+      },
+      "revenueSketch": "Estimate: 120 sites x $19/month = $2,280 MRR, assuming most sales come through web agencies serving health practices.",
+      "distribution": "Agencies that build therapist and med-spa sites (reached through the WordPress support threads where they ask about BAAs), therapy-practice technology communities such as PersonCenteredTech's audience, and a free one-page scan as the entry point.",
+      "validationTest": {
+        "method": "Run the free scan by hand on 30 public therapist, med-spa and wellness-studio booking pages, email each owner or listed web agency their own findings, and offer monthly monitoring at $19.",
+        "successCriteria": "5 of 30 reply asking what to fix, and 3 pay for the first month.",
+        "cost": "About 3 days and $0."
+      },
+      "moat": "The hand-maintained vendor table (which widgets sign BAAs and what each sends) and the history of changes per site.",
+      "compliance": [
+        "HIPAA / MHMDA: the product must not give legal opinions; it reports what is sent and what vendors' own terms say, with a disclaimer.",
+        "Legal context: HHS's 2022 tracking guidance was vacated in 2024 (AHA v. Becerra), so whether an IP plus a public-page visit is PHI is disputed; copy must say so.",
+        "Data: the scan reads public pages only and stores no patient data."
+      ],
+      "risks": [
+        {
+          "risk": "Sift Health already sells the same monitoring at $39 for the same buyer.",
+          "mitigation": "Compete on price and on the widget vendor table; if Sift drops to $19 or adds the table, stop."
+        },
+        {
+          "risk": "After the 2024 vacatur, small practices feel less urgency.",
+          "mitigation": "Lead with the wellness businesses HIPAA does not cover but MHMDA does, and with class-action exposure."
+        },
+        {
+          "risk": "'This vendor will not sign a BAA, remove it' reads as legal advice.",
+          "mitigation": "Report vendor terms as facts with links, never conclusions; have a lawyer review wording once."
+        }
+      ],
+      "scores": {
+        "pain": 3,
+        "willingnessToPay": 3,
+        "reachability": 3,
+        "competitiveGap": 2,
+        "feasibility": 4,
+        "complianceBurden": 2,
+        "total": 17
+      },
+      "scoreRationale": {
+        "pain": "One unresolved recent complaint from a builder for health clients, and the rest is vendor content: https://wordpress.org/support/topic/elementor-ally-data-handling-baa-confirmation/",
+        "willingnessToPay": "Independent practices pay $39 per office per month for a platform that includes this: https://patient-protect.com/pricing",
+        "reachability": "Practices are fragmented; the route is through web agencies and therapy-tech communities: https://personcenteredtech.com/tag/google-analytics/",
+        "competitiveGap": "Free scanners exist and Sift Health offers $39 monitoring: https://hipaa-scan.echo-factory.com/ and https://sift-health.pages.dev/pricing/",
+        "feasibility": "Crawling and classifying requests is routine; keeping the vendor table current is the ongoing work: https://wordpress.org/support/topic/elementor-ally-data-handling-baa-confirmation/",
+        "complianceBurden": "Findings border on legal advice and the PHI question is disputed after the vacatur: https://www.quarles.com/newsroom/publications/hhs-ocr-withdraws-tracking-technologies-appeal-in-aha-v-becerra"
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "The reviewer found the one-off scan is free from several vendors (Echo-Factory, Patient Protect, Captain Compliance) and Sift Health already offers $39/month monitoring with weekly rescans for this buyer, so the idea was re-scoped to a cheaper monitor whose value is a maintained table of which widget vendors (accessibility, chat, booking) sign BAAs, plus MHMDA scoping for wellness businesses HIPAA does not cover. Urgency is weaker since HHS withdrew its appeal in AHA v. Becerra; the live risk is private class actions (the Aspen Dental settlement involved a large dental chain, not a small practice), and no MHMDA suit against a small practice was found. Both WordPress posts come from web builders, not practice owners. Scores: pain 3, WTP 3, reachability 3, competitiveGap 2, feasibility 4, complianceBurden 2."
+      },
+      "inspiredBy": "https://wordpress.org/support/topic/elementor-ally-data-handling-baa-confirmation/",
+      "gateGap": {
+        "missing": [
+          "total 17 is below 22",
+          "pain 3 is below 4",
+          "only one health-specific complaint, from a web builder rather than a practice owner",
+          "competitiveGap 2: Sift Health sells near-identical monitoring at $39"
+        ],
+        "closedBy": "The 30-site outreach in the validation test closes the largest gap (pain from actual owners): 5 replies asking what to fix and 3 paid months would add owner complaints and paid demand, lifting pain to 4 and WTP to 4."
+      }
+    },
+    {
+      "n": 4,
+      "title": "Client Safe-Edit Pack for n8n",
+      "slug": "client-safe-edit-pack-n8n",
+      "category": "Developer Tool",
+      "smallBusiness": true,
+      "complexity": "Weekend MVP",
+      "confidence": "provisional",
+      "topic": "Developer Tooling",
+      "summary": "For freelancers who build n8n automations for small-business clients: upload the workflow export, tick the values the client may change (prompts, business rules, recipients), and get back an importable form-and-config add-on so the client edits only those, plus a run-it-yourself acceptance test that proves the workflow still works.",
+      "public": {
+        "summary": "Let your clients safely change the few settings they care about in the automations you built, without touching anything that could break them.",
+        "problem": "You build an automation for a client, and they want to tweak a prompt or change who gets the weekly email. Giving them the full editor means they can break everything, and the proper permission controls cost far more than a small client will pay. So you get the call every time a word needs changing, or the call three months later when something they changed stopped working.",
+        "forWhom": "Freelancers and small agencies who build automations for small-business clients.",
+        "benefits": [
+          "Clients change prompts and settings on their own",
+          "The rest of the automation stays out of reach",
+          "A simple test the client can run to see it still works",
+          "Fewer 'it stopped working' calls",
+          "A cleaner handover you can charge for"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "I want an easy way for my clients to update the AI nodes themselves without getting lost in everything; is there a permission where they can only update the parts I document? When I hand over, the client doesn't know what they can safely change, and three months later I get the 'it stopped working' call.",
+      "description": "The freelancer uploads an exported workflow JSON. The app lists every Set node, prompt field and literal value, and the freelancer ticks the ones the client may change and gives each a plain label. It generates two importable files: a small n8n add-on (an n8n Form Trigger plus a Data Table that holds those values, with the original nodes rewired to read from it) so the client edits values through a form instead of the editor, and an acceptance-test workflow with a sample input, the expected output and one failure case to replay. Everything runs in the browser on the export; the app never holds the client's n8n credentials or API key.",
+      "targetCustomer": "Freelancers and small agencies who build n8n automations for small-business clients on n8n Cloud Starter or self-hosted Community edition, where real per-role restrictions are not available.",
+      "buyer": "The freelancer, on their own card, priced per client handover so they can pass it through on the invoice.",
+      "whyNow": "n8n's restrictive roles sit behind Cloud Pro (Project Editor) and Enterprise (Viewer and custom roles), while n8n added Data Tables that can hold configuration. In October 2026 the n8n forum had several threads on client handover, and at least three indie handover and audit products launched there, none offering a client-safe edit surface.",
+      "founderFit": "The core is a deterministic transform of workflow JSON, a version-control and testing problem Pisan teaches; it is a browser-only React app he can ship in a weekend, with no paid API and no stored secrets.",
+      "problemEvidence": [
+        {
+          "url": "https://community.n8n.io/t/best-examples-of-documenting-an-n8n-workflow-to-leave-with-non-technical-clients/325506",
+          "source": "community.n8n.io",
+          "author": "Katie_LoopsFTW",
+          "date": "2026-10-30",
+          "kind": "complaint",
+          "summary": "Worries clients cannot maintain workflows; wants clients to update AI nodes themselves and asks for a permission limiting them to documented parts."
+        },
+        {
+          "url": "https://community.n8n.io/t/how-do-you-hand-over-n8n-workflows-to-clients-heres-the-format-im-working-on/322030",
+          "source": "community.n8n.io",
+          "author": "AntoBel4",
+          "date": "2026-10-16",
+          "kind": "complaint",
+          "summary": "Handover is where things go wrong: clients do not know what they can safely change and the builder gets the 'it stopped working' call; the poster is validating their own product (FlowDossier)."
+        },
+        {
+          "url": "https://community.n8n.io/t/what-is-your-trick-for-handing-over-n8n-workflows-without-the-credentials-setup-pain/323533",
+          "source": "community.n8n.io",
+          "author": "easybits",
+          "date": "2026-10-21",
+          "kind": "complaint",
+          "summary": "A template seller doing client handovers finds credential setup trips up every recipient; replies suggest a single Config node for editable values."
+        },
+        {
+          "url": "https://n8n-handoff-kit.vercel.app/how-to-document-n8n-workflows-for-clients.html",
+          "source": "n8n-handoff-kit.vercel.app",
+          "author": "n8n Handoff Kit (vendor page)",
+          "date": "2026-11-04",
+          "kind": "spend",
+          "summary": "Sells a $9 done-for-you handoff and a $19 local generator for static client handover documents (page undated; date is when read)."
+        },
+        {
+          "url": "https://community.n8n.io/t/i-wrote-a-free-linter-for-n8n-workflows-12-checks-for-the-failures-that-cost-money/322370",
+          "source": "community.n8n.io",
+          "author": "ck_lu",
+          "date": "2026-10-22",
+          "kind": "spend",
+          "summary": "Sells a $19 audit kit with a client-ready report and a $12 workflow diff, one-time prices."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "n8n Handoff Kit",
+          "url": "https://n8n-handoff-kit.vercel.app/",
+          "price": "Free template; $9 done-for-you; $19 local generator",
+          "gap": "Static Markdown document; no client edit surface or acceptance test."
+        },
+        {
+          "name": "FlowDossier",
+          "url": "https://getflowdossier.netlify.app",
+          "price": "EUR 390 per workflow done-for-you; planned $9/month Pro",
+          "gap": "Static PDF dossier; no client-safe editing."
+        },
+        {
+          "name": "ck_lu audit kits",
+          "url": "https://community.n8n.io/t/i-wrote-a-free-linter-for-n8n-workflows-12-checks-for-the-failures-that-cost-money/322370",
+          "price": "Free linter; $19 audit kit; $12 diff",
+          "gap": "Reliability checks, not handover or client editing."
+        },
+        {
+          "name": "FlowEngine",
+          "url": "https://railway.com/deploy/flowengine--dark-cool",
+          "price": "Free, open source, self-hosted",
+          "gap": "Client portal with logins and execution views; no safe-edit form for prompts or business rules was seen."
+        },
+        {
+          "name": "n8n roles (RBAC)",
+          "url": "https://docs.n8n.io/administer/manage-users-and-access/set-permissions-and-roles-rbac/see-available-roles",
+          "price": "Project Editor on Cloud Pro; Viewer and custom roles on Enterprise",
+          "gap": "Restricting a client to a few values costs more than small clients pay."
+        }
+      ],
+      "keyFeatures": [
+        "Pick editable values from an uploaded workflow export",
+        "Generate an importable form plus Data Table add-on and rewire nodes to read from it",
+        "Generate an acceptance-test workflow with sample input, expected output and a failure case",
+        "One-page client guide listing what they can change",
+        "Runs in the browser; no credentials or API keys stored"
+      ],
+      "mvpScope": {
+        "features": [
+          "Upload export, tick Set-node values and prompts",
+          "Generate the form and Data Table add-on JSON",
+          "Generate the acceptance-test workflow JSON"
+        ],
+        "outOfScope": [
+          "Live run status",
+          "Make or Zapier support",
+          "Pushing changes to the client's n8n through the API",
+          "AI-written failure explanations"
+        ],
+        "buildEstimate": "1 to 2 weekends"
+      },
+      "techStack": "React + Vite + Tailwind, browser-only JSON transforms, Stripe Checkout for per-handover payment, static hosting",
+      "pricing": {
+        "model": "Per client handover, with an optional builder plan",
+        "pricePoint": "$15 per client pack, or $12/month unlimited",
+        "rationale": "Every confirmed price in this niche is one-off ($9 to $19), so per-handover pricing matches how builders already pay, and they can bill it to the client."
+      },
+      "revenueSketch": "Estimate: 150 packs/month x $15 = $2,250/month, assuming 50 to 100 active n8n freelancers using it a few times a month.",
+      "distribution": "The n8n community forum, where handover threads appear weekly and product posts are tolerated; n8n template creators; freelancers who post fixed-price n8n services.",
+      "validationTest": {
+        "method": "Build a by-hand version for 5 freelancers who posted in the October 2026 handover threads: take one real workflow export each and return the form add-on and acceptance test, then offer the next one at $15.",
+        "successCriteria": "3 of 5 deploy it with a client and 2 pay for a second pack.",
+        "cost": "About 4 days and $0."
+      },
+      "moat": "Thin: correct rewiring across n8n versions and node types is fiddly, and a library of tested patterns (AI agent prompts, email recipients, schedules) builds up with use.",
+      "compliance": [
+        "Secrets: workflow exports can contain secrets in node parameters; process exports only in the browser and say so.",
+        "No client data or n8n API keys are stored.",
+        "Accessibility: the generated client form uses n8n's own form pages; the app's own UI needs WCAG 2.2 AA."
+      ],
+      "risks": [
+        {
+          "risk": "n8n ships cheaper per-field permissions or client forms.",
+          "mitigation": "Keep the build to two weekends so a native feature costs little; pivot the transform to Make if it happens."
+        },
+        {
+          "risk": "Freelancers will not pay even $15.",
+          "mitigation": "The validation test asks for payment on the second pack before more is built."
+        },
+        {
+          "risk": "Rewiring breaks on unusual node types.",
+          "mitigation": "Support only Set nodes, AI prompt fields and email recipients at first, and generate the acceptance test to catch breakage."
+        }
+      ],
+      "scores": {
+        "pain": 3,
+        "willingnessToPay": 2,
+        "reachability": 4,
+        "competitiveGap": 2,
+        "feasibility": 3,
+        "complianceBurden": 3,
+        "total": 17
+      },
+      "scoreRationale": {
+        "pain": "One clearly independent buyer voice; the other threads come from builders validating their own products: https://community.n8n.io/t/best-examples-of-documenting-an-n8n-workflow-to-leave-with-non-technical-clients/325506",
+        "willingnessToPay": "Only one-off $9 to $19 prices are confirmed, and no one is shown paying for client-safe editing: https://n8n-handoff-kit.vercel.app/how-to-document-n8n-workflows-for-clients.html",
+        "reachability": "The n8n forum is full of these builders and tolerates product posts: https://community.n8n.io/t/how-do-you-hand-over-n8n-workflows-to-clients-heres-the-format-im-working-on/322030",
+        "competitiveGap": "Static handover docs and a free client portal exist; only the safe-edit form and acceptance test are open: https://railway.com/deploy/flowengine--dark-cool",
+        "feasibility": "Parsing is easy, but rewiring nodes to a Data Table reliably across versions is fiddly: https://community.n8n.io/t/what-is-your-trick-for-handing-over-n8n-workflows-without-the-credentials-setup-pain/323533",
+        "complianceBurden": "Re-scoped to browser-only processing with no stored API keys, though exports can hold secrets in node parameters: https://community.n8n.io/t/how-do-you-hand-over-n8n-workflows-to-clients-heres-the-format-im-working-on/322030"
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "The reviewer found the evidence less independent than it looked: AntoBel4 is validating FlowDossier, easybits sells templates, and only Katie_LoopsFTW is a clearly independent buyer. All confirmed prices are one-off ($9-19), undercutting a monthly plan, and FlowEngine (free, open source) already gives clients a portal, so the live-page angle was dropped. The one real gap is a client-safe edit surface, because n8n's restrictive roles need Cloud Pro or Enterprise; the original design's stored client API keys were rated a security burden, so the idea was re-scoped to a browser-only generator of an importable form plus Data Table add-on and an acceptance test, sold per handover. Reviewer scores pain 3, WTP 2, reachability 4, competitiveGap 2, feasibility 3, complianceBurden 2; complianceBurden was raised to 3 after the re-scope removed stored keys."
+      },
+      "inspiredBy": "https://community.n8n.io/t/best-examples-of-documenting-an-n8n-workflow-to-leave-with-non-technical-clients/325506",
+      "gateGap": {
+        "missing": [
+          "total 17 is below 22",
+          "pain 3 is below 4",
+          "willingnessToPay 2 is below 3: no payment found for client-safe editing",
+          "only one clearly independent complaint; the others are from builders validating their own products"
+        ],
+        "closedBy": "The by-hand packs for 5 freelancers close the largest gap (willingness to pay): 2 paid second packs would move WTP to 3 and supply independent complaints, lifting the total to about 19 to 20; validation would still need a second independent buyer complaint."
+      }
     }
   ],
   "runNotes": {
@@ -225,7 +780,12 @@
       "B11 Freelance job boards",
       "B12 Paid app marketplaces",
       "C10 Change events: shutdowns, price rises, removed free tiers",
-      "A14 Plugin and add-on support forums"
+      "A14 Plugin and add-on support forums",
+      "A11 Accessibility practitioners (via wordpress.org accessibility plugin reviews, per the catalog note)",
+      "A2 Other LMS and classroom forums (discuss.openedx.org)",
+      "B1 Teachers Pay Teachers and Etsy",
+      "C7 Market reports (web search only; no verified path)",
+      "C1 SBIR and STTR solicitations (nsf.gov solicitation page)"
     ],
     "searches": [
       "community.n8n.io search.json: deprecated after:2026-08-01",
@@ -254,7 +814,20 @@
       "MANDATE OpenAI October 23 2026 model shutdowns and automations",
       "MANDATE C2 arXiv: vibe coding AND security; workflow automation AND failures; API deprecation (OpenAlex returned 429)",
       "MANDATE PHP 8.4 / PHP 8.2 EOL WordPress breakage",
-      "WATCHLIST B11 freelancer.com: canvas lms; canvas course links; ada compliance; accessibility lawsuit; online quiz cheating; lockdown browser"
+      "WATCHLIST B11 freelancer.com: canvas lms; canvas course links; ada compliance; accessibility lawsuit; online quiz cheating; lockdown browser",
+      "WebSearch: small business website European Accessibility Act compliance complaint 2026 forum",
+      "WebSearch: site:wordpress.org/support accessibility statement plugin review 2026",
+      "WebSearch: site:teacherspayteachers.com tutoring business forms templates",
+      "WebSearch: NSF SBIR Phase I solicitation 2026 topics small business",
+      "WebSearch: 2026 survey small business owners accessibility lawsuit website report",
+      "WebSearch: 2026 report small business automation adoption n8n Zapier freelancers market survey",
+      "WebSearch: SBIR 2026 topic small business software tools accessibility compliance solicitation",
+      "discuss.openedx.org search.json: grading after:2026-08-01; hosting cost after:2026-08-01; latest.json",
+      "wordpress.org: pojo-accessibility one-star reviews",
+      "teacherspayteachers.com Browse: accessibility checklist; tutoring business",
+      "freelancer.com API (spend pass): ada website accessibility remediation; shopify theme update; wcag audit wordpress; accessibility statement; n8n documentation; n8n workflow fix; make.com scenario documentation",
+      "community.shopify.com search.json: ada demand letter after:2026-05-01; accessibility lawsuit after:2026-06-01",
+      "community.n8n.io search.json: client handover after:2026-08-01; document workflow client after:2026-08-01"
     ],
     "unverifiedSignals": [
       {
@@ -272,6 +845,18 @@
       {
         "url": "https://trustmrr.com/startup/nodehero",
         "reason": "HTTP 404."
+      },
+      {
+        "url": "https://wordpress.org/support/plugin/one-click-accessibility/reviews/?filter=1",
+        "reason": "HTTP 404: the plugin slug is pojo-accessibility."
+      },
+      {
+        "url": "https://seedfund.nsf.gov/topics/",
+        "reason": "HTTP 404."
+      },
+      {
+        "url": "https://testparty.ai/blog/testparty-awarded-dollar1184700-in-sbir-phase-ii-funding",
+        "reason": "Search result only (company press release); not fetched, not used."
       }
     ],
     "rejectedCandidates": [
@@ -359,97 +944,59 @@
         "title": "Course LLM key broker",
         "total": 19,
         "reason": "Displaced from the watchlist (maximum 8) by higher or small-business entries on 2026-11-04; firstSeen 2026-10-30."
+      },
+      {
+        "title": "Cross-course content maintenance for Canvas design teams (watchlist)",
+        "total": 15,
+        "reason": "Extra-run review kill: Atomic Search already does account-level find and replace with preview, undo and history for colleges, a free userscript covers cross-course search and replace, and an app holding an admin token hits university token policy and HECVAT review (procurement rule)."
+      },
+      {
+        "title": "ADA demand-letter remediation ledger for small Shopify and WordPress stores (watchlist)",
+        "total": 14,
+        "reason": "Extra-run review kill: every 2026 post is from a vendor (no served owner within 90 days), the served 2023 owner said she did not want an app, and Remedy (free plan) and AccessBinder ($0-29) already keep dated, exportable remediation records."
+      },
+      {
+        "title": "Agent Exposure Audit for asynchronous online programs (watchlist)",
+        "total": 13,
+        "reason": "Extra-run review kill: free AI-resilience diagnostics (Ohio State, CSU, LSE, JHSPH Assignment Assistant) and MagicSchool already classify and redesign assessments; the only distinction is a prompt change, so it is an AI wrapper with no moat; the one complaint asks for bot detection, not redesign."
+      },
+      {
+        "title": "Pre-production linter for exported n8n workflows (watchlist)",
+        "total": 15,
+        "reason": "A free 12-check n8n linter was published on 2026-10-18 by ck_lu (community.n8n.io/t/322370), with a $19 paid kit; same job, same customer."
+      },
+      {
+        "title": "Post-update regression check for Shopify Horizon stores (watchlist)",
+        "total": 18,
+        "reason": "Reviewed and rescored to 18 (at least six paid apps such as Checkout Doctor at $29 and Firebell at $19 already run real-browser cart tests); not shipped because it shares its customer with idea 1, Theme Conflict Merge, and each provisional idea must differ in customer and problem."
+      },
+      {
+        "title": "Tutoring business admin kit (contracts, intake, invoices) for solo tutors",
+        "total": 12,
+        "reason": "TPT and Jotform offer free editable tutoring business templates; served for free."
+      },
+      {
+        "title": "MinIO replacement guide and migration tool for Tutor/Open edX operators",
+        "total": 11,
+        "reason": "Niche, one-time migration with free alternatives (the Open edX thread itself describes a path); no payment evidence."
+      },
+      {
+        "title": "EAA accessibility statement generator for EU micro-shops",
+        "total": 12,
+        "reason": "Free statement generators exist (Equalize Digital, several WordPress plugins), and most small shops are exempt as microenterprises (community.shopify.com/t/683909)."
+      },
+      {
+        "title": "SBIR Project Pitch drafting assistant",
+        "total": 10,
+        "reason": "AI wrapper with no workflow moat; the buyer is a deep-tech startup, outside the owner's priorities."
+      },
+      {
+        "title": "Cleaning company job and staff scheduling app",
+        "total": 12,
+        "reason": "A freelancer.com job asks for a custom build (a service, not a product), and Jobber-class products already serve the job."
       }
     ],
     "watchlist": [
-      {
-        "title": "Cross-course content maintenance for Canvas design teams (bulk find, preview, replace and rollback for vendor-driven breakage)",
-        "targetCustomer": "Instructional designers and LMS admin teams who maintain content across dozens to thousands of Canvas courses.",
-        "problemStatement": "Vendor-side changes keep breaking content across many courses at once: Canvas's silent 2026-10-07 change to enhanceable_content tabs, Community guide links moving from /t5/ to /en/kb/, and LTI 1.3 migrations that leave embedded assignment links saying 'deleted'. Teams fix pages one at a time or with shared Tampermonkey scripts.",
-        "total": 21,
-        "missedGate": "competitiveGap 2: Atomic Search already sells account-wide Find & Replace for Canvas, and free community userscripts cover bulk search and link conversion; total below 22. 2026-11-04: re-researched with two freelancer.com searches each (B11); no paid job for the task was found (the Canvas hits were homepage redesigns), so the score is unchanged.",
-        "evidence": [
-          "https://community.instructure.com/en/discussion/667426/fix-or-alternative-to-class-enhanceable-content-tabs",
-          "https://community.instructure.com/en/discussion/667671/master-inventory-comprehensive-list-of-canvas-guide-titles-urls-for-link-remediation",
-          "https://community.instructure.com/en/discussion/667065/mcgraw-hill-lti-ltia-migration-broke-linked-course-assignment-links-in-pages-and-announcements",
-          "https://community.instructure.com/en/discussion/666768/bulk-find-replace-across-canvas-courses-with-tampermonkey",
-          "https://www.atomicjolt.com/post/streamline-course-updates-with-find-replace-in-atomic-search-for-canvas"
-        ],
-        "firstSeen": "2026-10-31"
-      },
-      {
-        "title": "ADA demand-letter remediation ledger for small Shopify and WordPress stores",
-        "targetCustomer": "Small online store owners who have received an ADA website demand letter or lawsuit",
-        "problemStatement": "Owners who are served do not know where to start, get pitched overlays, and have no dated record of good-faith fixes mapped to the allegations.",
-        "total": 20,
-        "missedGate": "No complaint dated within 180 days (the served owners posted in 2023 to 2025); competitiveGap 2 against remediation vendors and free axe/WAVE. 2026-11-03 extra run: a store owner's 2026-05-12 Shopify Forms review says they were sued over a popup (within 180 days), but Remedy (free plan, launched 2026-08-21) now keeps a dated accessibility record, so competitiveGap stays 2. 2026-11-04: re-researched with two freelancer.com searches each (B11); no paid job for the task was found (the Canvas hits were homepage redesigns), so the score is unchanged.",
-        "evidence": [
-          "https://community.shopify.com/t/232788",
-          "https://community.shopify.com/t/230778",
-          "https://apps.shopify.com/shopify-forms/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest"
-        ],
-        "firstSeen": "2026-11-02"
-      },
-      {
-        "title": "Agent Exposure Audit for asynchronous online programs",
-        "targetCustomer": "Online program directors and instructional designers running asynchronous courses where proctoring is not feasible.",
-        "problemStatement": "Agentic browsers and cheap bots now complete Canvas New Quizzes and whole courses; quiz logs cannot prove it, and programs do not know which of their assessments an agent can finish unaided.",
-        "total": 20,
-        "missedGate": "willingnessToPay 3 and competitiveGap 3 (Cursive sells LMS agent detection; the existing Assignment Stress Test idea covers testing assignments against AI); only one fetched item is within 90 days; total below 22. 2026-11-01: the CSU TILT page confirms agents complete Canvas quizzes but is undated and recommends the LockDown Browser campuses already license. 2026-11-04: re-researched with two freelancer.com searches each (B11); no paid job for the task was found (the Canvas hits were homepage redesigns), so the score is unchanged.",
-        "evidence": [
-          "https://community.instructure.com/en/discussion/667216/help-with-detecting-bots-in-new-quizzes",
-          "https://www.pangram.com/it/blog/agentic-browsers-present-risks-to-universities",
-          "https://tilt.colostate.edu/new-ai-browsers-can-complete-canvas-quizzes/"
-        ],
-        "firstSeen": "2026-10-31"
-      },
-      {
-        "title": "Automation handover pack for n8n and Make freelancers (credentials inventory, runbook, safe-edit list, acceptance test from workflow JSON)",
-        "targetCustomer": "Freelancers and small agencies who build n8n or Make automations for client businesses.",
-        "problemStatement": "The client does not know which accounts are connected, what happens when a run fails, or what they can safely change, and three months later the builder gets the 'it stopped working' call.",
-        "total": 20,
-        "missedGate": "competitiveGap 2: n8n Handoff Kit already sells a $9 done-for-you handoff and a $19 local generator, and a free workflow documenter exists; total below 22. Not reviewed.",
-        "evidence": [
-          "https://community.n8n.io/t/how-do-you-hand-over-n8n-workflows-to-clients-heres-the-format-im-working-on/322030",
-          "https://community.n8n.io/t/what-is-your-trick-for-handing-over-n8n-workflows-without-the-credentials-setup-pain/323533",
-          "https://n8n-handoff-kit.vercel.app/how-to-document-n8n-workflows-for-clients.html"
-        ],
-        "firstSeen": "2026-11-04"
-      },
-      {
-        "title": "Pre-production linter for exported n8n workflows (broken connections, hard-coded secrets, missing error/retry handling, no heartbeat)",
-        "targetCustomer": "Automation freelancers and small teams putting n8n workflows into production.",
-        "problemStatement": "Workflows go live with missing error handling and hard-coded secrets and fail quietly; builders check by hand before handover.",
-        "total": 20,
-        "missedGate": "willingnessToPay 2 (no payment evidence) and pain 3 (the thread starter is validating his own prototype); total below 22. Not reviewed.",
-        "evidence": [
-          "https://community.n8n.io/t/how-do-you-catch-broken-n8n-workflows-before-they-fail-in-production/320910"
-        ],
-        "firstSeen": "2026-11-04"
-      },
-      {
-        "title": "Post-update regression check for Shopify Horizon stores (cart, sticky add-to-cart and app widgets after each theme update)",
-        "targetCustomer": "Small Shopify merchants on Horizon who update the theme often.",
-        "problemStatement": "A Horizon update quietly breaks a cart app or sticky add-to-cart and the owner finds out from customers.",
-        "total": 20,
-        "missedGate": "Same customer as today's Theme Conflict Merge; one complaint (pain 3), no payment evidence (WTP 2). Not reviewed.",
-        "evidence": [
-          "https://community.shopify.com/t/i-have-a-problem-with-my-store/675548"
-        ],
-        "firstSeen": "2026-11-04"
-      },
-      {
-        "title": "Health-page tracker audit for small health and wellness practices (HIPAA, Washington MHMDA)",
-        "targetCustomer": "Therapists, clinics, med spas and wellness shops with booking or intake pages",
-        "problemStatement": "Third-party widgets and pixels send page URLs and IPs from health-intent pages, and vendors will not sign a BAA.",
-        "total": 19,
-        "missedGate": "Only 1 complaint (pain 3); Sift Health already sells this at $39/month draft pricing.",
-        "evidence": [
-          "https://wordpress.org/support/topic/elementor-ally-data-handling-baa-confirmation/",
-          "https://sift-health.pages.dev/pricing/"
-        ],
-        "firstSeen": "2026-11-02"
-      },
       {
         "title": "AI shopping-agent readiness check for small Shopify stores (duplicate Product JSON-LD, availability and rating signals agents read)",
         "targetCustomer": "Small Shopify merchants whose products AI assistants describe wrongly or as out of stock.",
@@ -464,6 +1011,6 @@
         "firstSeen": "2026-11-03"
       }
     ],
-    "caveats": "Only one idea ships, against a first-run target of 3. Six candidates were reviewed and five were killed outright, each because a free or very cheap product already does the job (Flowlert, Lovable's built-in scan, PixelGuard's free plan, free PHP 8.4 scanners); the developer-tooling lens on small-business automation and Shopify surfaced markets crowded with indie tools launched in 2026, and many forum 'complaints' were market-validation posts by those builders. Theme Conflict Merge ships as provisional at 17 although its reviewer recommended a kill: the reviewer's own findings left one gap (Shopify's updater drops every edit when any file conflicts, and the $9/month incumbent does not list Horizon), and the idea was re-scoped to that case. Because one idea ships, the complexity-mix constraint (a Weekend MVP plus a Multi-week) is not met. Watchlist re-research (Canvas maintenance, ADA demand letters, agent exposure audit) found no new payment evidence. A3's GitHub path returned 422 only because queries lacked is:issue; with it the API works. The OOTS evidence date (2025-02-15) is older than 180 days; the freelancer job date comes from the API's time_submitted."
+    "caveats": "Only one idea ships, against a first-run target of 3. Six candidates were reviewed and five were killed outright, each because a free or very cheap product already does the job (Flowlert, Lovable's built-in scan, PixelGuard's free plan, free PHP 8.4 scanners); the developer-tooling lens on small-business automation and Shopify surfaced markets crowded with indie tools launched in 2026, and many forum 'complaints' were market-validation posts by those builders. Theme Conflict Merge ships as provisional at 17 although its reviewer recommended a kill: the reviewer's own findings left one gap (Shopify's updater drops every edit when any file conflicts, and the $9/month incumbent does not list Horizon), and the idea was re-scoped to that case. Because one idea ships, the complexity-mix constraint (a Weekend MVP plus a Multi-week) is not met. Watchlist re-research (Canvas maintenance, ADA demand letters, agent exposure audit) found no new payment evidence. A3's GitHub path returned 422 only because queries lacked is:issue; with it the API works. The OOTS evidence date (2025-02-15) is older than 180 days; the freelancer job date comes from the API's time_submitted. Extra run (random sources A11 A2 B1 C7 C1): added ideas 2, 3 and 4 (Accessibility Fleet Log, Health Page Tracker Watch, Client Safe-Edit Pack for n8n), all provisional after review. The random sources leaned to education and yielded little; two of the three ideas came from A11 (WordPress accessibility plugin reviews) and the third is a re-scoped watchlist entry. Seven candidates were reviewed: three watchlist entries were killed (Canvas content maintenance, ADA demand-letter ledger, Agent Exposure Audit), and four were rescored, of which Horizon regression check (18) was held back because it shares idea 1's customer. Health Page Tracker Watch overlaps in mechanism with Consent Leak Watch (2026-11-02) but targets health practices and BAA/consumer-health-data exposure, not consent banners. Pricing-page evidence items are undated; their date is the date read. The n8n pack's complianceBurden was raised from the reviewer's 2 to 3 because the re-scope removed stored API keys."
   }
 }

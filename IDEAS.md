@@ -609,3 +609,6 @@
 | 2026-11-03 | Misrepresentation Preflight | Accessibility & Compliance | Multi-week | 17 | provisional |  |
 | 2026-11-03 | Popup Check | Accessibility & Compliance | Multi-week | 17 | provisional |  |
 | 2026-11-04 | Theme Conflict Merge | Developer Tool | Multi-week | 17 | provisional |  |
+| 2026-11-04 | Accessibility Fleet Log | Accessibility & Compliance | Multi-week | 18 | provisional |  |
+| 2026-11-04 | Health Page Tracker Watch | Small Business Ops | Multi-week | 17 | provisional |  |
+| 2026-11-04 | Client Safe-Edit Pack for n8n | Developer Tool | Weekend MVP | 17 | provisional |  |

@@ -1,6 +1,6 @@
 # Source health
 
-Generated 2026-11-04 from the last 45 days of `ideas/run-log.jsonl` (10 runs). Do not edit by hand: regenerate with `python3 scripts/source_health.py`.
+Generated 2026-11-04 from the last 45 days of `ideas/run-log.jsonl` (11 runs). Do not edit by hand: regenerate with `python3 scripts/source_health.py`.
 
 ## Do not spend searches here
 
@@ -21,15 +21,15 @@ Generated 2026-11-04 from the last 45 days of `ideas/run-log.jsonl` (10 runs). D
 
 | Source | Yields | Status | selected | Access path |
 |---|---|---|---|---|
+| A11 Accessibility practitioners | complaint | ok-curl | 2 | `webfetch: https://webaim.org/discussion/archives` |
 | A13 Discourse forums, any niche | complaint | ok | 2 | `webfetch: https://{host}/search.json?q={q}+after%3A{YYYY-MM-DD}` |
 | A14 Plugin and add-on support forums | complaint | ok | 2 | `webfetch: https://wordpress.org/support/plugin/{slug}/` |
 | B12 Paid app marketplaces | spend | ok | 2 | `curl: https://apps.shopify.com/{slug}/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest` |
+| A15 No-code automation communities | complaint | ok | 1 | `webfetch: https://community.make.com/search.json?q={q}+after%3A{YYYY-MM-DD}` |
 | B11 Freelance job boards | spend | ok | 1 | `webfetch: https://www.freelancer.com/api/projects/0.1/projects/active/?query={q}&limit=20&full_description=true` |
 | C10 Change events: shutdowns, price rises, removed free tiers | mandate | ok | 1 | no verified path |
 | A1 LMS idea boards | complaint | ok | 0 | `both: https://community.instructure.com/t5/forums/searchpage/tab/message?q={q}` |
-| A11 Accessibility practitioners | complaint | ok-curl | 0 | `webfetch: https://webaim.org/discussion/archives` |
 | A12 Ask HN and HN comments | complaint | ok | 0 | `webfetch: https://hn.algolia.com/api/v1/search_by_date?query={q}&tags=comment&hitsPerPage=20` |
-| A15 No-code automation communities | complaint | ok | 0 | `webfetch: https://community.make.com/search.json?q={q}+after%3A{YYYY-MM-DD}` |
 | A2 Other LMS and classroom forums | complaint | ok | 0 | `webfetch: https://discuss.openedx.org/latest.json` |
 | A3 Open-source teaching tools | complaint | ok | 0 | `curl: https://api.github.com/search/issues?q={q}+is%3Aissue+state%3Aopen+sort%3Areactions&per_page=10` |
 | A5 Educator Stack Exchanges | complaint | ok-curl | 0 | `curl: https://api.stackexchange.com/2.3/questions?site={cseducators|academia|matheducators}&order=desc&sort=creation&pagesize=20&filter=withbody` |
@@ -65,13 +65,14 @@ These sources are not on the avoid list, because at least one of their paths wor
 
 | Host | usable/tried | Outcomes | Last usable |
 |---|---|---|---|
-| community.shopify.com | 73/75 | empty 1, http_404 1, ok 73 | 2026-11-04 |
-| apps.shopify.com | 41/50 | empty 9, ok 41 | 2026-11-04 |
-| wordpress.org | 42/42 | ok 42 | 2026-11-04 |
-| www.freelancer.com | 38/38 | ok 38 | 2026-11-04 |
+| community.shopify.com | 80/82 | empty 1, http_404 1, ok 80 | 2026-11-04 |
+| apps.shopify.com | 42/51 | empty 9, ok 42 | 2026-11-04 |
+| wordpress.org | 50/51 | http_404 1, ok 50 | 2026-11-04 |
+| www.freelancer.com | 45/45 | ok 45 | 2026-11-04 |
 | hn.algolia.com | 28/32 | empty 4, ok 28 | 2026-11-04 |
-| community.n8n.io | 21/21 | ok 21 | 2026-11-04 |
+| community.n8n.io | 28/28 | ok 28 | 2026-11-04 |
 | api.wordpress.org | 15/15 | ok 15 | 2026-11-04 |
+| discuss.openedx.org | 7/8 | empty 1, ok 7 | 2026-11-04 |
 | community.make.com | 6/6 | ok 6 | 2026-11-04 |
 | api.github.com | 1/5 | empty 1, http_403 2, http_5xx 1, ok 1 | 2026-11-04 |
 | export.arxiv.org | 5/5 | ok 5 | 2026-11-04 |
@@ -80,11 +81,13 @@ These sources are not on the avoid list, because at least one of their paths wor
 | github.com | 3/4 | http_403 1, ok 3 | 2026-11-01 |
 | www.federalregister.gov | 4/4 | ok 4 | 2026-11-02 |
 | community.etsy.com | 1/3 | empty 2, ok 1 | 2026-11-01 |
-| discuss.openedx.org | 2/3 | empty 1, ok 2 | 2026-11-03 |
 | forum.ghost.org | 3/3 | ok 3 | 2026-11-03 |
 | forum.invoiceninja.com | 3/3 | ok 3 | 2026-11-03 |
 | meet.ribblr.com | 3/3 | ok 3 | 2026-11-01 |
+| n8n-handoff-kit.vercel.app | 3/3 | ok 3 | 2026-11-04 |
+| seedfund.nsf.gov | 1/3 | http_404 2, ok 1 | 2026-11-03 |
 | webaim.org | 1/3 | empty 2, ok 1 | 2026-11-01 |
+| www.teacherspayteachers.com | 3/3 | ok 3 | 2026-11-04 |
 | api.nsf.gov | 2/2 | ok 2 | 2026-11-03 |
 | apibreaks.com | 2/2 | ok 2 | 2026-11-04 |
 | app.thetutor.link | 2/2 | ok 2 | 2026-11-03 |
@@ -97,9 +100,7 @@ These sources are not on the avoid list, because at least one of their paths wor
 | forum.mautic.org | 2/2 | ok 2 | 2026-11-03 |
 | forum.webflow.com | 0/2 | empty 2 | never |
 | help.shopify.com | 2/2 | ok 2 | 2026-11-04 |
-| n8n-handoff-kit.vercel.app | 2/2 | ok 2 | 2026-11-04 |
 | samsearch.co | 0/2 | empty 2 | never |
-| seedfund.nsf.gov | 1/2 | http_404 1, ok 1 | 2026-11-03 |
 | themarkup.org | 2/2 | ok 2 | 2026-11-02 |
 | trustmrr.com | 1/2 | http_404 1, ok 1 | 2026-10-31 |
 | vibeappscanner.com | 2/2 | ok 2 | 2026-11-04 |
@@ -194,13 +195,13 @@ These sources are not on the avoid list, because at least one of their paths wor
 | www.mondaq.com | 1/1 | ok 1 | 2026-11-02 |
 | www.nationgraph.com | 0/1 | http_404 1 | never |
 | www.ndsmcobserver.com | 0/1 | http_403 1 | never |
+| www.nsf.gov | 1/1 | ok 1 | 2026-11-04 |
 | www.onlinejobs.ph | 1/1 | ok 1 | 2026-11-03 |
 | www.peopleperhour.com | 1/1 | ok 1 | 2026-11-04 |
 | www.pulse.bot | 0/1 | http_5xx 1 | never |
 | www.ru.nl | 0/1 | http_5xx 1 | never |
 | www.shopify.com | 1/1 | ok 1 | 2026-11-03 |
 | www.siteground.com | 0/1 | http_404 1 | never |
-| www.teacherspayteachers.com | 1/1 | ok 1 | 2026-11-03 |
 | www.the-standard.org | 1/1 | ok 1 | 2026-11-01 |
 | www.tutorbird.com | 0/1 | empty 1 | never |
 | www.uptimia.com | 1/1 | ok 1 | 2026-11-03 |
@@ -212,16 +213,16 @@ These sources are not on the avoid list, because at least one of their paths wor
 
 | Gate condition | Candidates lost |
 |---|---|
-| totalBelowMin | 107 |
-| rejectRule | 22 |
-| reviewKill | 17 |
+| totalBelowMin | 113 |
+| rejectRule | 27 |
+| reviewKill | 20 |
 | painBelow4 | 3 |
 
 The largest row is the one to argue about before changing anything else.
 
 ## Funnel over the window
 
-candidates 155 -> passedRejectRules 133 -> passedGate 4 -> reviewKilled 17 -> validated 0 -> provisional 6 -> watchlist 35
+candidates 169 -> passedRejectRules 142 -> passedGate 4 -> reviewKilled 20 -> validated 0 -> provisional 9 -> watchlist 36
 
 ## Runs that produced nothing
 
