@@ -72,17 +72,18 @@
       ]
     },
     "api.nsf.gov": {
-      "attempts": 2,
+      "attempts": 5,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-03",
-      "lastOk": "2026-11-03",
-      "ok": 2,
+      "lastAttempt": "2026-11-05",
+      "lastOk": "2026-11-05",
+      "ok": 5,
       "outcomes": {
-        "ok": 2
+        "ok": 5
       },
       "workingPaths": [
         "curl https://api.nsf.gov/services/v1/awards.json?keyword=small+business+compliance&printFields=id,title,date,awardeeName,fundsObligatedAmt&rpp=25&dateStart=01/01/2026",
-        "curl https://api.nsf.gov/services/v1/awards.json?keyword=%22small+businesses%22+retail&printFields=id,title,date,awardeeName,fundsObligatedAmt&rpp=25&dateStart=01/01/2026"
+        "curl https://api.nsf.gov/services/v1/awards.json?keyword=%22small+businesses%22+retail&printFields=id,title,date,awardeeName,fundsObligatedAmt&rpp=25&dateStart=01/01/2026",
+        "curl https://api.nsf.gov/services/v1/awards.json?keyword=small%20business%20accounting&printFields=id,title,date,awardeeName,fundsObligatedAmt&rpp=10&dateStart=01/01/2025"
       ]
     },
     "api.openalex.org": {
@@ -169,19 +170,32 @@
       ]
     },
     "apps.shopify.com": {
-      "attempts": 51,
+      "attempts": 55,
       "evidenceItems": 8,
-      "lastAttempt": "2026-11-04",
-      "lastOk": "2026-11-04",
-      "ok": 42,
+      "lastAttempt": "2026-11-05",
+      "lastOk": "2026-11-05",
+      "ok": 46,
       "outcomes": {
         "empty": 9,
-        "ok": 42
+        "ok": 46
       },
       "workingPaths": [
         "curl https://apps.shopify.com/gmc-compliance-checker",
         "curl https://apps.shopify.com/merchant-guard",
         "curl https://apps.shopify.com/torhen-gmc-rescue"
+      ]
+    },
+    "apps.xero.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-05",
+      "lastOk": "2026-11-05",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://apps.xero.com/us/function/debtor-tracking/app/remitclear"
       ]
     },
     "appsumo.com": {
@@ -379,13 +393,14 @@
       "workingPaths": []
     },
     "community.make.com": {
-      "attempts": 7,
+      "attempts": 13,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-04",
-      "lastOk": "2026-11-04",
-      "ok": 7,
+      "lastAttempt": "2026-11-05",
+      "lastOk": "2026-11-05",
+      "ok": 12,
       "outcomes": {
-        "ok": 7
+        "empty": 1,
+        "ok": 12
       },
       "workingPaths": [
         "curl https://community.make.com/search.json?q=deprecated%20after%3A2026-08-01",
@@ -394,13 +409,14 @@
       ]
     },
     "community.n8n.io": {
-      "attempts": 30,
+      "attempts": 36,
       "evidenceItems": 4,
-      "lastAttempt": "2026-11-04",
-      "lastOk": "2026-11-04",
-      "ok": 30,
+      "lastAttempt": "2026-11-05",
+      "lastOk": "2026-11-05",
+      "ok": 35,
       "outcomes": {
-        "ok": 30
+        "empty": 1,
+        "ok": 35
       },
       "workingPaths": [
         "curl https://community.n8n.io/search.json?q=invoice%20small%20business%20after%3A2026-09-01",
@@ -420,15 +436,15 @@
       "workingPaths": []
     },
     "community.shopify.com": {
-      "attempts": 85,
-      "evidenceItems": 11,
-      "lastAttempt": "2026-11-04",
-      "lastOk": "2026-11-04",
-      "ok": 83,
+      "attempts": 107,
+      "evidenceItems": 13,
+      "lastAttempt": "2026-11-05",
+      "lastOk": "2026-11-05",
+      "ok": 105,
       "outcomes": {
         "empty": 1,
         "http_404": 1,
-        "ok": 83
+        "ok": 105
       },
       "workingPaths": [
         "curl https://community.shopify.com/search.json?q=ADA%20lawsuit%20after%3A2026-05-01",
@@ -437,13 +453,13 @@
       ]
     },
     "community.squareup.com": {
-      "attempts": 2,
+      "attempts": 3,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-04",
+      "lastAttempt": "2026-11-05",
       "lastOk": "2026-11-03",
       "ok": 1,
       "outcomes": {
-        "empty": 1,
+        "empty": 2,
         "ok": 1
       },
       "workingPaths": [
@@ -572,6 +588,19 @@
       "workingPaths": [
         "curl https://discourse.jupyter.org/search.json?q=grading%20after%3A2026-08-01",
         "curl https://discourse.jupyter.org/search.json?q=deploy%20after%3A2026-08-15"
+      ]
+    },
+    "discuss.frappe.io": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-05",
+      "lastOk": "2026-11-05",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://discuss.frappe.io/search.json?q=small%20business%20invoice+after%3A2026-08-07"
       ]
     },
     "discuss.openedx.org": {
@@ -837,13 +866,13 @@
       ]
     },
     "forum.invoiceninja.com": {
-      "attempts": 3,
+      "attempts": 4,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-03",
-      "lastOk": "2026-11-03",
-      "ok": 3,
+      "lastAttempt": "2026-11-05",
+      "lastOk": "2026-11-05",
+      "ok": 4,
       "outcomes": {
-        "ok": 3
+        "ok": 4
       },
       "workingPaths": [
         "curl https://forum.invoiceninja.com/search.json?q=sales%20tax%20after%3A2026-06-01",
@@ -1005,14 +1034,14 @@
       ]
     },
     "hn.algolia.com": {
-      "attempts": 33,
+      "attempts": 35,
       "evidenceItems": 1,
-      "lastAttempt": "2026-11-04",
-      "lastOk": "2026-11-04",
-      "ok": 29,
+      "lastAttempt": "2026-11-05",
+      "lastOk": "2026-11-05",
+      "ok": 31,
       "outcomes": {
         "empty": 4,
-        "ok": 29
+        "ok": 31
       },
       "workingPaths": [
         "curl https://hn.algolia.com/api/v1/search_by_date?query=%22alt%20text%22&tags=comment&hitsPerPage=30",
@@ -1191,6 +1220,64 @@
         "curl https://pricingsaas.com/companies/teachworks"
       ]
     },
+    "productideas.xero.com": {
+      "attempts": 2,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-05",
+      "lastOk": "2026-11-05",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "curl https://productideas.xero.com/forums/939198-for-small-businesses/suggestions/45701299-bank-reconciliation-bulk-import-recieved-payments",
+        "curl https://productideas.xero.com/forums/967139-purchase-orders-bills-inventory/suggestions/45073597-batch-deposit-more-than-50-transactions?page=1"
+      ]
+    },
+    "quickbooks.intuit.com": {
+      "attempts": 4,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-05",
+      "lastOk": "2026-11-05",
+      "ok": 3,
+      "outcomes": {
+        "ok": 3,
+        "timeout": 1
+      },
+      "workingPaths": [
+        "webfetch https://quickbooks.intuit.com/learn-support/en-uk/transactions/does-qbo-have-any-features-to-automate-ar-i-e-to-match-incoming/01/1582229",
+        "webfetch https://quickbooks.intuit.com/learn-support/en-us/other-questions/how-do-you-match-a-lump-sum-deposit-to-multiple-customers/00/1516576",
+        "webfetch https://quickbooks.intuit.com/community/do-more-with-quickbooks-6/remittance-advice-to-receive-payment-283908"
+      ]
+    },
+    "remitclear.com": {
+      "attempts": 3,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-05",
+      "lastOk": "2026-11-05",
+      "ok": 3,
+      "outcomes": {
+        "ok": 3
+      },
+      "workingPaths": [
+        "curl https://remitclear.com/blog/bulk-apply-payments-quickbooks-online-spreadsheet",
+        "curl https://remitclear.com/",
+        "curl https://remitclear.com/pricing"
+      ]
+    },
+    "remittancego.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-05",
+      "lastOk": "2026-11-05",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://remittancego.com/pricing"
+      ]
+    },
     "rootbrief.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -1318,6 +1405,19 @@
         "curl https://support.google.com/merchants/answer/6150127"
       ]
     },
+    "support.saasant.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-05",
+      "lastOk": "2026-11-05",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://support.saasant.com/support/solutions/articles/14000067369-pricing-for-saasant-transactions-online-/"
+      ]
+    },
     "techcrunch.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -1355,6 +1455,19 @@
       },
       "workingPaths": [
         "webfetch https://tilt.colostate.edu/new-ai-browsers-can-complete-canvas-quizzes/"
+      ]
+    },
+    "tothecent.app": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-05",
+      "lastOk": "2026-11-05",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://tothecent.app"
       ]
     },
     "trinket.io": {
@@ -1574,6 +1687,19 @@
       },
       "workingPaths": []
     },
+    "www.cdtfa.ca.gov": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-05",
+      "lastOk": "2026-11-05",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://www.cdtfa.ca.gov/lawguides/vol1/sutr/1668.html"
+      ]
+    },
     "www.checklyhq.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -1722,13 +1848,13 @@
       ]
     },
     "www.freelancer.com": {
-      "attempts": 58,
+      "attempts": 79,
       "evidenceItems": 1,
-      "lastAttempt": "2026-11-04",
-      "lastOk": "2026-11-04",
-      "ok": 58,
+      "lastAttempt": "2026-11-05",
+      "lastOk": "2026-11-05",
+      "ok": 79,
       "outcomes": {
-        "ok": 58
+        "ok": 79
       },
       "workingPaths": [
         "curl https://www.freelancer.com/api/projects/0.1/projects/active/?query=booking%20system&limit=20&full_description=true",
@@ -1847,16 +1973,17 @@
       ]
     },
     "www.peopleperhour.com": {
-      "attempts": 1,
+      "attempts": 2,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-04",
-      "lastOk": "2026-11-04",
-      "ok": 1,
+      "lastAttempt": "2026-11-05",
+      "lastOk": "2026-11-05",
+      "ok": 2,
       "outcomes": {
-        "ok": 1
+        "ok": 2
       },
       "workingPaths": [
-        "curl https://www.peopleperhour.com/freelance-jobs?q=shopify%20theme%20update"
+        "curl https://www.peopleperhour.com/freelance-jobs?q=shopify%20theme%20update",
+        "curl https://www.peopleperhour.com/freelance-jobs?q=reconciliation"
       ]
     },
     "www.pulse.bot": {
@@ -1942,6 +2069,20 @@
       },
       "workingPaths": [
         "curl https://www.the-standard.org/news/testing-center-no-longer-proctoring-exams-for-online-courses-due-to-capacity-issues/article_46dd34a2-5813-425e-90d2-e9c325473dc2.html"
+      ]
+    },
+    "www.trustpilot.com": {
+      "attempts": 2,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-05",
+      "lastOk": "2026-11-05",
+      "ok": 1,
+      "outcomes": {
+        "http_403": 1,
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.trustpilot.com/review/shipmonk.com?sort=recency"
       ]
     },
     "www.tutorbird.com": {
@@ -2033,39 +2174,39 @@
       "selected": 2
     },
     "A12": {
-      "candidates": 11,
+      "candidates": 12,
       "fetchFail": 1,
-      "fetchOk": 31,
-      "lastUsed": "2026-11-04",
-      "runs": 6,
-      "searches": 35,
+      "fetchOk": 33,
+      "lastUsed": "2026-11-05",
+      "runs": 7,
+      "searches": 37,
       "selected": 0
     },
     "A13": {
-      "candidates": 31,
+      "candidates": 43,
       "fetchFail": 10,
-      "fetchOk": 116,
-      "lastUsed": "2026-11-04",
-      "runs": 7,
-      "searches": 70,
-      "selected": 2
+      "fetchOk": 135,
+      "lastUsed": "2026-11-05",
+      "runs": 8,
+      "searches": 89,
+      "selected": 3
     },
     "A14": {
-      "candidates": 16,
+      "candidates": 17,
       "fetchFail": 0,
-      "fetchOk": 44,
-      "lastUsed": "2026-11-04",
-      "runs": 4,
-      "searches": 15,
+      "fetchOk": 45,
+      "lastUsed": "2026-11-05",
+      "runs": 5,
+      "searches": 17,
       "selected": 2
     },
     "A15": {
-      "candidates": 7,
+      "candidates": 13,
       "fetchFail": 0,
-      "fetchOk": 28,
-      "lastUsed": "2026-11-04",
-      "runs": 2,
-      "searches": 10,
+      "fetchOk": 40,
+      "lastUsed": "2026-11-05",
+      "runs": 3,
+      "searches": 22,
       "selected": 1
     },
     "A2": {
@@ -2150,22 +2291,22 @@
       "selected": 0
     },
     "B11": {
-      "candidates": 4,
+      "candidates": 7,
       "fetchFail": 1,
-      "fetchOk": 42,
-      "lastUsed": "2026-11-04",
-      "runs": 3,
-      "searches": 37,
+      "fetchOk": 64,
+      "lastUsed": "2026-11-05",
+      "runs": 4,
+      "searches": 59,
       "selected": 1
     },
     "B12": {
-      "candidates": 13,
+      "candidates": 15,
       "fetchFail": 9,
-      "fetchOk": 40,
-      "lastUsed": "2026-11-04",
-      "runs": 2,
-      "searches": 16,
-      "selected": 2
+      "fetchOk": 46,
+      "lastUsed": "2026-11-05",
+      "runs": 3,
+      "searches": 20,
+      "selected": 3
     },
     "B2": {
       "candidates": 1,
@@ -2231,21 +2372,21 @@
       "selected": 0
     },
     "C10": {
-      "candidates": 15,
+      "candidates": 17,
       "fetchFail": 9,
       "fetchOk": 16,
-      "lastUsed": "2026-11-04",
-      "runs": 5,
-      "searches": 22,
+      "lastUsed": "2026-11-05",
+      "runs": 6,
+      "searches": 24,
       "selected": 1
     },
     "C11": {
       "candidates": 0,
       "fetchFail": 0,
-      "fetchOk": 2,
-      "lastUsed": "2026-11-03",
-      "runs": 1,
-      "searches": 2,
+      "fetchOk": 5,
+      "lastUsed": "2026-11-05",
+      "runs": 2,
+      "searches": 5,
       "selected": 0
     },
     "C2": {
@@ -2276,12 +2417,12 @@
       "selected": 0
     },
     "C5": {
-      "candidates": 8,
+      "candidates": 9,
       "fetchFail": 3,
-      "fetchOk": 10,
-      "lastUsed": "2026-11-04",
-      "runs": 5,
-      "searches": 19,
+      "fetchOk": 11,
+      "lastUsed": "2026-11-05",
+      "runs": 6,
+      "searches": 21,
       "selected": 0
     },
     "C6": {
@@ -2392,22 +2533,40 @@
     }
   ],
   "funnel": {
-    "candidates": 180,
+    "candidates": 205,
     "passedGate": 4,
-    "passedRejectRules": 149,
-    "provisional": 9,
-    "reviewKilled": 20,
+    "passedRejectRules": 169,
+    "provisional": 11,
+    "reviewKilled": 23,
     "validated": 0,
     "watchlist": 36
   },
   "gateFailures": {
     "painBelow4": 3,
-    "rejectRule": 31,
-    "reviewKill": 20,
-    "totalBelowMin": 120
+    "rejectRule": 36,
+    "reviewKill": 23,
+    "totalBelowMin": 137
   },
-  "generated": "2026-11-04",
+  "generated": "2026-11-05",
   "prefer": [
+    {
+      "client": "webfetch",
+      "evidence": "complaint",
+      "id": "A13",
+      "name": "Discourse forums, any niche",
+      "path": "https://{host}/search.json?q={q}+after%3A{YYYY-MM-DD}",
+      "selectedIdeas": 3,
+      "status": "ok"
+    },
+    {
+      "client": "curl",
+      "evidence": "spend",
+      "id": "B12",
+      "name": "Paid app marketplaces",
+      "path": "https://apps.shopify.com/{slug}/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest",
+      "selectedIdeas": 3,
+      "status": "ok"
+    },
     {
       "client": "webfetch",
       "evidence": "complaint",
@@ -2420,27 +2579,9 @@
     {
       "client": "webfetch",
       "evidence": "complaint",
-      "id": "A13",
-      "name": "Discourse forums, any niche",
-      "path": "https://{host}/search.json?q={q}+after%3A{YYYY-MM-DD}",
-      "selectedIdeas": 2,
-      "status": "ok"
-    },
-    {
-      "client": "webfetch",
-      "evidence": "complaint",
       "id": "A14",
       "name": "Plugin and add-on support forums",
       "path": "https://wordpress.org/support/plugin/{slug}/",
-      "selectedIdeas": 2,
-      "status": "ok"
-    },
-    {
-      "client": "curl",
-      "evidence": "spend",
-      "id": "B12",
-      "name": "Paid app marketplaces",
-      "path": "https://apps.shopify.com/{slug}/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest",
       "selectedIdeas": 2,
       "status": "ok"
     },
@@ -2652,6 +2793,6 @@
       "status": "ok"
     }
   ],
-  "runsInWindow": 12,
+  "runsInWindow": 13,
   "windowDays": 45
 }

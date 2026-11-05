@@ -1,6 +1,6 @@
 # Source health
 
-Generated 2026-11-04 from the last 45 days of `ideas/run-log.jsonl` (12 runs). Do not edit by hand: regenerate with `python3 scripts/source_health.py`.
+Generated 2026-11-05 from the last 45 days of `ideas/run-log.jsonl` (13 runs). Do not edit by hand: regenerate with `python3 scripts/source_health.py`.
 
 ## Do not spend searches here
 
@@ -21,10 +21,10 @@ Generated 2026-11-04 from the last 45 days of `ideas/run-log.jsonl` (12 runs). D
 
 | Source | Yields | Status | selected | Access path |
 |---|---|---|---|---|
+| A13 Discourse forums, any niche | complaint | ok | 3 | `webfetch: https://{host}/search.json?q={q}+after%3A{YYYY-MM-DD}` |
+| B12 Paid app marketplaces | spend | ok | 3 | `curl: https://apps.shopify.com/{slug}/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest` |
 | A11 Accessibility practitioners | complaint | ok-curl | 2 | `webfetch: https://webaim.org/discussion/archives` |
-| A13 Discourse forums, any niche | complaint | ok | 2 | `webfetch: https://{host}/search.json?q={q}+after%3A{YYYY-MM-DD}` |
 | A14 Plugin and add-on support forums | complaint | ok | 2 | `webfetch: https://wordpress.org/support/plugin/{slug}/` |
-| B12 Paid app marketplaces | spend | ok | 2 | `curl: https://apps.shopify.com/{slug}/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest` |
 | A15 No-code automation communities | complaint | ok | 1 | `webfetch: https://community.make.com/search.json?q={q}+after%3A{YYYY-MM-DD}` |
 | B11 Freelance job boards | spend | ok | 1 | `webfetch: https://www.freelancer.com/api/projects/0.1/projects/active/?query={q}&limit=20&full_description=true` |
 | C10 Change events: shutdowns, price rises, removed free tiers | mandate | ok | 1 | no verified path |
@@ -65,36 +65,38 @@ These sources are not on the avoid list, because at least one of their paths wor
 
 | Host | usable/tried | Outcomes | Last usable |
 |---|---|---|---|
-| community.shopify.com | 83/85 | empty 1, http_404 1, ok 83 | 2026-11-04 |
-| www.freelancer.com | 58/58 | ok 58 | 2026-11-04 |
-| apps.shopify.com | 42/51 | empty 9, ok 42 | 2026-11-04 |
+| community.shopify.com | 105/107 | empty 1, http_404 1, ok 105 | 2026-11-05 |
+| www.freelancer.com | 79/79 | ok 79 | 2026-11-05 |
+| apps.shopify.com | 46/55 | empty 9, ok 46 | 2026-11-05 |
 | wordpress.org | 50/51 | http_404 1, ok 50 | 2026-11-04 |
-| hn.algolia.com | 29/33 | empty 4, ok 29 | 2026-11-04 |
-| community.n8n.io | 30/30 | ok 30 | 2026-11-04 |
+| community.n8n.io | 35/36 | empty 1, ok 35 | 2026-11-05 |
+| hn.algolia.com | 31/35 | empty 4, ok 31 | 2026-11-05 |
 | api.wordpress.org | 15/15 | ok 15 | 2026-11-04 |
+| community.make.com | 12/13 | empty 1, ok 12 | 2026-11-05 |
 | www.federalregister.gov | 7/9 | ok 7, redirect 2 | 2026-11-04 |
 | api.stackexchange.com | 7/8 | allowlist 1, ok 7 | 2026-11-04 |
 | discuss.openedx.org | 7/8 | empty 1, ok 7 | 2026-11-04 |
-| community.make.com | 7/7 | ok 7 | 2026-11-04 |
 | api.github.com | 1/5 | empty 1, http_403 2, http_5xx 1, ok 1 | 2026-11-04 |
+| api.nsf.gov | 5/5 | ok 5 | 2026-11-05 |
 | export.arxiv.org | 5/5 | ok 5 | 2026-11-04 |
 | api.openalex.org | 0/4 | http_429 4 | never |
 | chromewebstore.google.com | 4/4 | ok 4 | 2026-11-04 |
 | community.etsy.com | 1/4 | empty 2, http_404 1, ok 1 | 2026-11-01 |
+| forum.invoiceninja.com | 4/4 | ok 4 | 2026-11-05 |
 | github.com | 3/4 | http_403 1, ok 3 | 2026-11-01 |
+| quickbooks.intuit.com | 3/4 | ok 3, timeout 1 | 2026-11-05 |
+| community.squareup.com | 1/3 | empty 2, ok 1 | 2026-11-03 |
 | forum.bubble.io | 2/3 | empty 1, ok 2 | 2026-11-02 |
 | forum.ghost.org | 3/3 | ok 3 | 2026-11-03 |
-| forum.invoiceninja.com | 3/3 | ok 3 | 2026-11-03 |
 | meet.ribblr.com | 3/3 | ok 3 | 2026-11-01 |
 | n8n-handoff-kit.vercel.app | 3/3 | ok 3 | 2026-11-04 |
+| remitclear.com | 3/3 | ok 3 | 2026-11-05 |
 | seedfund.nsf.gov | 1/3 | http_404 2, ok 1 | 2026-11-03 |
 | webaim.org | 1/3 | empty 2, ok 1 | 2026-11-01 |
 | www.teacherspayteachers.com | 3/3 | ok 3 | 2026-11-04 |
-| api.nsf.gov | 2/2 | ok 2 | 2026-11-03 |
 | apibreaks.com | 2/2 | ok 2 | 2026-11-04 |
 | app.thetutor.link | 2/2 | ok 2 | 2026-11-03 |
 | community.instructure.com | 0/2 | empty 2 | never |
-| community.squareup.com | 1/2 | empty 1, ok 1 | 2026-11-03 |
 | community.zoom.com | 1/2 | empty 1, ok 1 | 2026-11-04 |
 | discourse.jupyter.org | 2/2 | ok 2 | 2026-11-04 |
 | dor.wa.gov | 1/2 | http_404 1, ok 1 | 2026-11-02 |
@@ -103,6 +105,7 @@ These sources are not on the avoid list, because at least one of their paths wor
 | forum.mautic.org | 2/2 | ok 2 | 2026-11-03 |
 | forum.webflow.com | 0/2 | empty 2 | never |
 | help.shopify.com | 2/2 | ok 2 | 2026-11-04 |
+| productideas.xero.com | 2/2 | ok 2 | 2026-11-05 |
 | samsearch.co | 0/2 | empty 2 | never |
 | themarkup.org | 2/2 | ok 2 | 2026-11-02 |
 | trustmrr.com | 1/2 | http_404 1, ok 1 | 2026-10-31 |
@@ -111,9 +114,12 @@ These sources are not on the avoid list, because at least one of their paths wor
 | www.capterra.com | 0/2 | http_403 1, http_404 1 | never |
 | www.govinfo.gov | 2/2 | ok 2 | 2026-11-04 |
 | www.make.com | 0/2 | http_403 2 | never |
+| www.peopleperhour.com | 2/2 | ok 2 | 2026-11-05 |
 | www.reddit.com | 0/2 | allowlist 2 | never |
+| www.trustpilot.com | 1/2 | http_403 1, ok 1 | 2026-11-05 |
 | adnabu.com | 1/1 | ok 1 | 2026-11-03 |
 | apify.com | 1/1 | ok 1 | 2026-11-04 |
+| apps.xero.com | 1/1 | ok 1 | 2026-11-05 |
 | appsumo.com | 1/1 | ok 1 | 2026-11-04 |
 | apuo.ca | 0/1 | empty 1 | never |
 | blog.report-uri.com | 1/1 | ok 1 | 2026-11-04 |
@@ -136,6 +142,7 @@ These sources are not on the avoid list, because at least one of their paths wor
 | cside.com | 1/1 | ok 1 | 2026-11-04 |
 | dev.to | 0/1 | http_404 1 | never |
 | developers.make.com | 1/1 | ok 1 | 2026-11-04 |
+| discuss.frappe.io | 1/1 | ok 1 | 2026-11-05 |
 | discuss.pixls.us | 1/1 | ok 1 | 2026-11-01 |
 | docs.lovable.dev | 1/1 | ok 1 | 2026-11-04 |
 | docs.n8n.io | 1/1 | ok 1 | 2026-11-04 |
@@ -169,6 +176,7 @@ These sources are not on the avoid list, because at least one of their paths wor
 | nwelearn2026.sched.com | 0/1 | http_403 1 | never |
 | peerpush.net | 1/1 | ok 1 | 2026-11-04 |
 | pricingsaas.com | 1/1 | ok 1 | 2026-11-03 |
+| remittancego.com | 1/1 | ok 1 | 2026-11-05 |
 | rootbrief.com | 1/1 | ok 1 | 2026-11-04 |
 | rtl.berkeley.edu | 1/1 | ok 1 | 2026-11-01 |
 | scispace.com | 0/1 | http_403 1 | never |
@@ -177,8 +185,10 @@ These sources are not on the avoid list, because at least one of their paths wor
 | sift-health.pages.dev | 1/1 | ok 1 | 2026-11-02 |
 | supabase.com | 1/1 | ok 1 | 2026-11-04 |
 | support.google.com | 1/1 | ok 1 | 2026-11-03 |
+| support.saasant.com | 1/1 | ok 1 | 2026-11-05 |
 | techcrunch.com | 1/1 | ok 1 | 2026-11-04 |
 | tilt.colostate.edu | 1/1 | ok 1 | 2026-11-01 |
+| tothecent.app | 1/1 | ok 1 | 2026-11-05 |
 | trinket.io | 1/1 | ok 1 | 2026-11-01 |
 | tutorlms.com | 1/1 | ok 1 | 2026-11-03 |
 | ucsb-ds.github.io | 1/1 | ok 1 | 2026-11-01 |
@@ -190,6 +200,7 @@ These sources are not on the avoid list, because at least one of their paths wor
 | wpamelia.com | 1/1 | ok 1 | 2026-11-03 |
 | www.bluehost.com | 0/1 | http_403 1 | never |
 | www.careerbuilder.com | 0/1 | http_403 1 | never |
+| www.cdtfa.ca.gov | 1/1 | ok 1 | 2026-11-05 |
 | www.checklyhq.com | 1/1 | ok 1 | 2026-11-03 |
 | www.chronicle.com | 0/1 | http_403 1 | never |
 | www.classcentral.com | 0/1 | http_403 1 | never |
@@ -208,7 +219,6 @@ These sources are not on the avoid list, because at least one of their paths wor
 | www.ndsmcobserver.com | 0/1 | http_403 1 | never |
 | www.nsf.gov | 1/1 | ok 1 | 2026-11-04 |
 | www.onlinejobs.ph | 1/1 | ok 1 | 2026-11-03 |
-| www.peopleperhour.com | 1/1 | ok 1 | 2026-11-04 |
 | www.pulse.bot | 0/1 | http_5xx 1 | never |
 | www.ru.nl | 0/1 | http_5xx 1 | never |
 | www.shopify.com | 1/1 | ok 1 | 2026-11-03 |
@@ -224,16 +234,16 @@ These sources are not on the avoid list, because at least one of their paths wor
 
 | Gate condition | Candidates lost |
 |---|---|
-| totalBelowMin | 120 |
-| rejectRule | 31 |
-| reviewKill | 20 |
+| totalBelowMin | 137 |
+| rejectRule | 36 |
+| reviewKill | 23 |
 | painBelow4 | 3 |
 
 The largest row is the one to argue about before changing anything else.
 
 ## Funnel over the window
 
-candidates 180 -> passedRejectRules 149 -> passedGate 4 -> reviewKilled 20 -> validated 0 -> provisional 9 -> watchlist 36
+candidates 205 -> passedRejectRules 169 -> passedGate 4 -> reviewKilled 23 -> validated 0 -> provisional 11 -> watchlist 36
 
 ## Runs that produced nothing
 

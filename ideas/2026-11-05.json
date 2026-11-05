@@ -1,0 +1,504 @@
+{
+  "date": "2026-11-05",
+  "schemaVersion": 3,
+  "complete": true,
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Remittance Matcher for QuickBooks Online",
+      "slug": "remittance-matcher-quickbooks-online",
+      "category": "Small Business Ops",
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Data & Visualization",
+      "summary": "For small wholesalers, trades and staffing firms on QuickBooks Online whose customers pay dozens of invoices in one lump sum: turn the customer's remittance advice into a checked, tied-out payment in minutes instead of ticking invoices by hand.",
+      "public": {
+        "summary": "Turns the remittance advice your customer sends into a payment applied to the right invoices in QuickBooks, checked to the cent.",
+        "problem": "A customer pays 60 invoices in one bank transfer and emails a PDF listing them. You open QuickBooks, find each invoice number, tick it, and hope the total matches the deposit. When it is a few cents off because of a short payment or a credit note, you start again.",
+        "forWhom": "Owners and bookkeepers of small businesses on QuickBooks Online whose customers pay many invoices at once.",
+        "benefits": [
+          "Apply a lump-sum payment across dozens of invoices in minutes",
+          "See short payments, credit notes and unknown references before anything is posted",
+          "Never post a payment that does not add up to the deposit",
+          "Keep the customer's remittance attached to the payment for your accountant",
+          "A published monthly price, no sales call"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "When a customer pays one lump sum for many invoices and sends a remittance advice, QuickBooks Online has no way to read that file: someone opens Receive Payment and ticks every invoice by hand, and a short payment or credit note makes the total refuse to tie. A QuickBooks user with a 77-invoice remittance found spreadsheet imports would not link payments to invoices, and the QuickBooks Team confirmed there is no automation.",
+      "description": "The user connects QuickBooks Online and uploads or forwards a remittance advice (CSV, Excel, or a text PDF). Per-customer parsing templates, built once from a sample with a column-mapping screen and pdf.js text extraction, turn it into lines of invoice reference and amount. The matcher pairs each line with an open invoice for that customer using exact and fuzzy reference rules, flags short payments, open credit memos and unknown references, and refuses to post until the allocation ties to the deposit to the cent. On approval it creates one Receive Payment per customer, attaches the remittance, and keeps an audit log with an undo that voids the payment.",
+      "targetCustomer": "Owners, office managers and outside bookkeepers at small QuickBooks Online businesses (wholesalers, suppliers, trades, staffing agencies, care providers) that receive customer payments covering 20 or more invoices at a time.",
+      "buyer": "The business owner on a company card, or a bookkeeping practice paying per client file.",
+      "whyNow": "Xero told users on 2026-06-26 it has no plans to support importing received payments, and three Xero-only matchers launched in 2026 (Remittance Go, RemitClear on Xero, ToTheCent), which shows the job is paid for; on QuickBooks Online the only remittance matcher found (RemitClear) is demo- and quote-only, leaving small QBO firms without a self-serve option.",
+      "founderFit": "A solo build of a rules-based matcher with a review screen is squarely in his React/Supabase range, and the hard part (matching with explanations and a tie-out invariant) is an algorithms problem he teaches. He has no accounting-channel network, so distribution relies on SEO and bookkeeper outreach.",
+      "problemEvidence": [
+        {
+          "url": "https://productideas.xero.com/forums/967139-purchase-orders-bills-inventory/suggestions/45073597-batch-deposit-more-than-50-transactions?page=1",
+          "source": "productideas.xero.com",
+          "author": "Michelle Anderson",
+          "date": "2026-06-03",
+          "kind": "complaint",
+          "summary": "Needs to match customer payments of about 100 invoices at a time; other users in the same thread (Kathy Ward 2026-04-22, Omar Khater 2026-05-01) report the same, and Diane Watkinson asked on 2026-09-26 when the paid add-on would reach the UK. Xero users, not QuickBooks users."
+        },
+        {
+          "url": "https://quickbooks.intuit.com/community/do-more-with-quickbooks-6/remittance-advice-to-receive-payment-283908",
+          "source": "quickbooks.intuit.com",
+          "author": "WeststarSA",
+          "date": "2025-06-19",
+          "kind": "complaint",
+          "summary": "One remittance covers 77 invoices; a spreadsheet sync uploaded payments but did not link them to the invoices; the QuickBooks Team replied that there is no automation for this."
+        },
+        {
+          "url": "https://remittancego.com/pricing",
+          "source": "remittancego.com",
+          "author": "Remittance Go",
+          "date": "2026-11-05",
+          "kind": "spend",
+          "summary": "A Xero-only remittance matcher sells at AUD 99, 149 and 299 a month and has 18 reviews on the Xero App Store after about four months; businesses pay for this job on Xero."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "RemitClear",
+          "url": "https://remitclear.com/pricing",
+          "price": "Quote only after a demo; 30-day money-back guarantee",
+          "gap": "Supports QuickBooks Online and Xero but is sold to AR teams by quote and demo; no published price or self-serve start for a 5-person firm."
+        },
+        {
+          "name": "Remittance Go",
+          "url": "https://remittancego.com/pricing",
+          "price": "AUD 99 / 149 / 299 per month",
+          "gap": "Xero only."
+        },
+        {
+          "name": "ToTheCent",
+          "url": "https://tothecent.app",
+          "price": "Starter $49/month listed, pre-launch (currency not stated)",
+          "gap": "Xero only and not yet live."
+        },
+        {
+          "name": "SaaSAnt Transactions",
+          "url": "https://support.saasant.com/support/solutions/articles/14000067369-pricing-for-saasant-transactions-online-/",
+          "price": "From $25/month",
+          "gap": "Bulk importer: applies payments from a clean sheet with exact invoice numbers; no PDF reading, fuzzy matching, credit-memo handling or tie-out check."
+        }
+      ],
+      "keyFeatures": [
+        "Remittance import from CSV, Excel and text PDF with saved per-customer templates",
+        "Fuzzy invoice-reference matching with a reason shown for every match",
+        "Short-payment, credit-memo and unknown-reference flags",
+        "Hard tie-out: nothing posts unless allocations equal the deposit",
+        "One-click Receive Payment per customer with the remittance attached, plus void-based undo"
+      ],
+      "mvpScope": {
+        "features": [
+          "QuickBooks Online OAuth connection and open-invoice sync",
+          "CSV and Excel remittance import with a column-mapping screen saved per customer",
+          "Exact and normalised reference matching with review screen and tie-out",
+          "Post Receive Payment for one customer per remittance"
+        ],
+        "outOfScope": [
+          "Scanned PDFs and OCR",
+          "Xero and Sage",
+          "Email forwarding inbox",
+          "Multi-customer remittances and lockbox files"
+        ],
+        "buildEstimate": "3 to 4 weeks, plus Intuit app review"
+      },
+      "techStack": "React + Vite + Tailwind, Supabase (Postgres, auth, encrypted storage), QuickBooks Online Accounting API, pdf.js for text PDFs; no LLM at runtime.",
+      "pricing": {
+        "model": "Per company file subscription, published",
+        "pricePoint": "$39/month per QuickBooks company, bookkeeper bundle of 5 files at $149/month",
+        "rationale": "Below Remittance Go's AUD 99 entry plan and RemitClear's demo-gated quotes, above SaaSAnt's $25 importer because it does the matching SaaSAnt leaves to the user."
+      },
+      "revenueSketch": "Estimate: 80 company files x $39/month = $3,120 MRR, assuming 20 bookkeeping practices with 3 to 5 qualifying clients each. Unvalidated.",
+      "distribution": "QBO-specific search pages (apply one payment to many invoices from a remittance), a free one-remittance matching report as the hook (the offer ToTheCent uses on Xero), and outreach to QuickBooks ProAdvisor bookkeepers who serve wholesale and trades clients; an Intuit App Store listing once approved.",
+      "validationTest": {
+        "method": "Offer 10 QuickBooks Online users or bookkeepers a free matched report from one redacted remittance plus an open-invoice export, run with a spreadsheet prototype, and ask the ones who receive 30+ line remittances weekly to pre-pay a first month.",
+        "successCriteria": "At least 5 QBO businesses with weekly 30+ line remittances send files, and 3 pre-pay $39.",
+        "cost": "About 15 hours and $0."
+      },
+      "moat": "Thin: per-customer templates and match rules accumulate per account and make switching costly, but a funded competitor (RemitClear) already supports QuickBooks and could publish a low tier.",
+      "compliance": [
+        "Intuit App Partner Program: app security self-assessment and production review before going live; API read metering above the free tier.",
+        "Remittances carry customer names and bank details: encrypted storage, retention limits, a data processing agreement; GDPR and UK GDPR if sold abroad.",
+        "Accuracy: never post unapproved payments; keep an audit log and void-based undo."
+      ],
+      "risks": [
+        {
+          "risk": "QuickBooks users feel less pain than Xero users, because QBO has no 50-invoice batch-deposit cap and its bank feed already lets users tick many invoices.",
+          "mitigation": "Validation test targets QBO users with 30+ line remittances only; stop if fewer than 5 respond."
+        },
+        {
+          "risk": "Template-only PDF parsing breaks on varied customer layouts and creates support load.",
+          "mitigation": "Ship CSV/Excel first, add PDF templates per customer, and offer bring-your-own-key extraction later."
+        },
+        {
+          "risk": "RemitClear publishes a cheap self-serve QBO plan.",
+          "mitigation": "Compete on bookkeeper multi-file pricing and the free matching report."
+        }
+      ],
+      "scores": {
+        "pain": 3,
+        "willingnessToPay": 3,
+        "reachability": 2,
+        "competitiveGap": 2,
+        "feasibility": 3,
+        "complianceBurden": 3,
+        "total": 16
+      },
+      "scoreRationale": {
+        "pain": "Recent complaints are from Xero users (https://productideas.xero.com/forums/967139-purchase-orders-bills-inventory/suggestions/45073597-batch-deposit-more-than-50-transactions?page=1); the only QBO complaint is from 2025 (https://quickbooks.intuit.com/community/do-more-with-quickbooks-6/remittance-advice-to-receive-payment-283908), so 3.",
+        "willingnessToPay": "One paid app for the job with 18 reviews at AUD 99+ a month (https://remittancego.com/pricing), on Xero, so 3.",
+        "reachability": "No network into QBO bookkeepers; first buyers come through SEO and cold outreach, competing with RemitClear's QBO content (https://remitclear.com/pricing), so 2.",
+        "competitiveGap": "RemitClear already matches remittances for QuickBooks Online, only behind a demo (https://remitclear.com/pricing); SaaSAnt covers clean-file posting (https://support.saasant.com/support/solutions/articles/14000067369-pricing-for-saasant-transactions-online-/), so 2.",
+        "feasibility": "Rules-based matching is buildable alone, but PDF layouts vary by customer and QBO write access needs Intuit review (https://quickbooks.intuit.com/community/do-more-with-quickbooks-6/remittance-advice-to-receive-payment-283908), so 3.",
+        "complianceBurden": "Financial write access, bank details in remittances and Intuit's partner-program assessment (https://remitclear.com/pricing shows the category handles posting to the ledger), so 3."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Reviewer rescored 20 to 16. No free or sub-$40 product does the whole job (parse, fuzzy match, tie out, post) for QuickBooks Online: SaaSAnt applies payments only from a clean file with exact invoice numbers, RemitClear and EBizCharge do it behind demos and quotes, and Intuit Assist only auto-matches payments taken through Intuit. But the evidence was partly misread: the recent complaints are Xero users facing Xero's 50-invoice batch-deposit cap, which QBO does not have; Diane Watkinson's and Nathan Price's comments concern a vendor's Xero app; and the freelancer job first cited never names QuickBooks (dropped). Pain 4 to 3, reachability 3 to 2, feasibility 4 to 3 (template-only PDF parsing), compliance 4 to 3 (Intuit App Partner Program assessment, metered API). Re-scoped to the step between SaaSAnt and RemitClear: messy remittance to tied-out Receive Payment, self-serve, published price."
+      },
+      "inspiredBy": "https://productideas.xero.com/forums/939198-for-small-businesses/suggestions/45701299-bank-reconciliation-bulk-import-recieved-payments",
+      "gateGap": {
+        "missing": [
+          "total 16 is below 22",
+          "pain 3 is below 4",
+          "the only QuickBooks-user complaint is dated 2025-06-19; the evidence dated within 90 days is spend evidence (a competitor's pricing page) and the recent complaints come from Xero users"
+        ],
+        "closedBy": "The validationTest's free matching reports: 5 QBO businesses with weekly 30+ line remittances sending files (dated QBO complaints, pain 4) and 3 pre-paying (willingnessToPay 4) would lift the total toward the gate."
+      }
+    },
+    {
+      "n": 2,
+      "title": "Resale Ledger for Mixed Wholesale and Retail Shops",
+      "slug": "resale-ledger-mixed-wholesale-retail",
+      "category": "Small Business Ops",
+      "complexity": "Weekend MVP",
+      "confidence": "provisional",
+      "topic": "Data & Visualization",
+      "summary": "For small Shopify shops that sell both wholesale and retail (farms, florists, makers): keep each reseller's certificate, keep wholesale lines tax-free and retail lines taxed on the same buyer's orders, and export the line-by-line record an auditor asks for.",
+      "public": {
+        "summary": "Keeps a clear record of which items each wholesale buyer bought tax-free for resale, and which they paid tax on, with their certificate attached.",
+        "problem": "A florist buys your flowers to resell and a vase for their own shop on the same order. Your store can only mark the whole customer tax-exempt, so either everything goes untaxed or you keep two accounts and juggle them. When the tax office asks why you did not collect tax, you have to rebuild the story from emails.",
+        "forWhom": "Small shops and farms that sell to both resellers and the public from one online store.",
+        "benefits": [
+          "Charge tax on what a reseller buys for their own use, and not on what they resell",
+          "Keep every buyer's resale certificate and its expiry in one place",
+          "Get a reminder before a certificate runs out",
+          "Hand your accountant a line-by-line record of tax-free sales"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "Shopify's customer tax exemption makes every taxable line on a buyer's order exempt and overrides product tax settings, so a florist who buys flowers for resale and a vase for their own use gets both tax-free. The merchant either keeps two accounts per buyer or adjusts orders by hand, while rules such as California Regulation 1668 require a mixed purchase order to say which items were bought for resale.",
+      "description": "The merchant connects a Shopify store that uses native B2B (on all paid plans since April 2026). The app sets up tax-off wholesale variants in a resale catalog assigned to non-exempt company locations, so only resale-eligible items are tax-free at checkout and everything else is taxed normally. It stores each buyer's resale certificate or PST number with jurisdiction and expiry, reminds both sides before expiry, and on every order writes a ledger row per line: resale or own use, and which certificate covered it. A monthly export gives the accountant the resale/own-use split per buyer. It records and organises; it does not decide whether an exemption applies.",
+      "targetCustomer": "Owners of small Shopify stores (often one to five people) that sell wholesale to resellers and retail to the public from the same store: flower farms, growers, makers, craft and gift suppliers.",
+      "buyer": "The owner, on a personal or business card.",
+      "whyNow": "Shopify opened native B2B companies and catalogs to Basic, Grow and Advanced plans in April 2026, so small mixed shops now have the building blocks (catalogs, company locations) but no tool tying line-level resale treatment to a certificate; on 2026-10-29 a BC farm asked Shopify for exactly this.",
+      "founderFit": "A small Shopify app with a clear data model, built in a weekend or two on his stack. He has no direct network among farm and craft sellers, so he would reach them through the forum threads and grower associations.",
+      "problemEvidence": [
+        {
+          "url": "https://community.shopify.com/t/feature-request-product-specific-customer-tax-exemptions-for-accurate-wholesale-and-retail-checkout/706515",
+          "source": "community.shopify.com",
+          "author": "Julie_Remy",
+          "date": "2026-10-29",
+          "kind": "complaint",
+          "summary": "A micro flower farm in BC selling wholesale to florists and retail from one store says customer-level exemptions make retail items tax-free for resellers; replies confirm exemptions override product tax overrides and offer only two accounts or manual draft orders, which she rejects as long-term fixes."
+        },
+        {
+          "url": "https://community.shopify.com/t/how-are-you-verifying-tax-exempt-certificates-or-professional-licenses-for-b2b-customers/654132",
+          "source": "community.shopify.com",
+          "author": "Nithi1994",
+          "date": "2026-07-23",
+          "kind": "complaint",
+          "summary": "A merchant opening wholesale says checking resale certificates and licences by hand could become a lot of work; replies name small certificate apps and note expiry is the part most people miss."
+        },
+        {
+          "url": "https://www.cdtfa.ca.gov/lawguides/vol1/sutr/1668.html",
+          "source": "cdtfa.ca.gov",
+          "author": "California Department of Tax and Fee Administration",
+          "date": "2026-11-05",
+          "kind": "mandate",
+          "summary": "Regulation 1668: if a purchase order includes both items for resale and items for use, it must specify which are which, and the seller keeps the purchase orders with the resale certificates."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "CertVault",
+          "url": "https://apps.shopify.com/certvault",
+          "price": "Free for 1 company, $9.99/month",
+          "gap": "Certificate storage and expiry, exemption per company location; no line-level resale/own-use split."
+        },
+        {
+          "name": "Hexloom Tax Exempt",
+          "url": "https://apps.shopify.com/hexloom-tax-exempt",
+          "price": "Free for 3 certificates, $12/month",
+          "gap": "Sets Shopify's native exemption codes and removes them on expiry; whole-customer exemption only."
+        },
+        {
+          "name": "TaxWisp",
+          "url": "https://apps.shopify.com/taxwisp",
+          "price": "Free for 30 approvals, $8/month",
+          "gap": "Approval and customer tagging; no per-line records."
+        },
+        {
+          "name": "Avalara Tax Compliance",
+          "url": "https://apps.shopify.com/avalara-avatax-1",
+          "price": "From $699 per state per year (listing)",
+          "gap": "A Shopify tax partner that can handle line-level taxability, priced for larger sellers."
+        }
+      ],
+      "keyFeatures": [
+        "Resale catalog setup: tax-off wholesale variants on non-exempt company locations",
+        "Certificate and PST-number vault with jurisdiction, expiry and reminders",
+        "Per-line resale/own-use ledger linked to the covering certificate",
+        "Monthly export of the resale/own-use split per buyer for the accountant"
+      ],
+      "mvpScope": {
+        "features": [
+          "Certificate vault with expiry reminders",
+          "Order webhook that writes a per-line ledger (resale variant or not) with the active certificate",
+          "CSV export per buyer and month"
+        ],
+        "outOfScope": [
+          "Automatic creation of wholesale variants and inventory syncing between them",
+          "Deciding eligibility or validating certificates with tax authorities",
+          "Point of sale"
+        ],
+        "buildEstimate": "2 weekends"
+      },
+      "techStack": "React + Vite + Tailwind with Shopify Polaris, Supabase (encrypted storage for certificates), Shopify Admin GraphQL API (B2B companies, catalogs, orders webhooks).",
+      "pricing": {
+        "model": "Flat monthly subscription per store",
+        "pricePoint": "$12/month",
+        "rationale": "In line with the $8 to $12 certificate apps, justified only by the per-line ledger they lack; far below Avalara."
+      },
+      "revenueSketch": "Estimate: 100 stores x $12/month = $1,200 MRR. Small; this is a lead, not a business case.",
+      "distribution": "Reply in the Shopify Community threads on mixed wholesale/retail tax, then flower-farmer and grower associations in BC and the US, and craft-supplier groups.",
+      "validationTest": {
+        "method": "Publish a free guide on the duplicate-variant B2B catalog setup with a sign-up for the ledger, post it in the two threads, and interview 5 mixed wholesale/retail merchants about how their accountant handles resale records.",
+        "successCriteria": "5 merchants confirm they sell resale and own-use items to the same buyers and 3 agree to pay $12/month for the ledger and reminders.",
+        "cost": "About 10 hours and $0."
+      },
+      "moat": "Weak: the ledger is easy to copy and certificate apps could add it. The value is in the setup guide and per-jurisdiction record formats.",
+      "compliance": [
+        "Position as record-keeping, not tax advice; the merchant and accountant decide eligibility.",
+        "Certificates hold tax IDs and signatures: encrypted storage, retention settings, Shopify's mandatory GDPR webhooks.",
+        "Records differ by jurisdiction (California resale certificate, BC PST number); a wrong collection mapping leaves the merchant liable."
+      ],
+      "risks": [
+        {
+          "risk": "Duplicate wholesale variants split inventory, and the native catalog setup is free without the app.",
+          "mitigation": "Sell the certificate link and export, not the setup; test whether merchants accept duplicate variants before building."
+        },
+        {
+          "risk": "Shopify adds line- or collection-level exemptions natively.",
+          "mitigation": "Keep the ledger and certificate vault useful on their own."
+        },
+        {
+          "risk": "Demand is a handful of merchants.",
+          "mitigation": "Validation test requires 5 confirmed mixed sellers before building."
+        }
+      ],
+      "scores": {
+        "pain": 3,
+        "willingnessToPay": 2,
+        "reachability": 3,
+        "competitiveGap": 2,
+        "feasibility": 1,
+        "complianceBurden": 2,
+        "total": 13
+      },
+      "scoreRationale": {
+        "pain": "A named merchant describes the problem in 2026 (https://community.shopify.com/t/feature-request-product-specific-customer-tax-exemptions-for-accurate-wholesale-and-retail-checkout/706515), with a 2025 Plus merchant reporting the same per the reviewer, so 3.",
+        "willingnessToPay": "Certificate apps charge $8 to $12 but none sells this job and none has reviews (https://apps.shopify.com/certvault), so the 2 cap.",
+        "reachability": "The merchants post in public threads that can be answered (https://community.shopify.com/t/how-are-you-verifying-tax-exempt-certificates-or-professional-licenses-for-b2b-customers/654132), so 3.",
+        "competitiveGap": "Certificate and expiry tracking is crowded (https://apps.shopify.com/hexloom-tax-exempt); only the line-level link is open, and the native catalog workaround is free, so 2.",
+        "feasibility": "Apps cannot change checkout tax and the draft-order API ignores per-line taxable on variant lines, leaving only duplicate variants, which split inventory (https://community.shopify.com/t/feature-request-product-specific-customer-tax-exemptions-for-accurate-wholesale-and-retail-checkout/706515), so 1.",
+        "complianceBurden": "Per-jurisdiction records and certificate data, with merchant liability if mapped wrong (https://www.cdtfa.ca.gov/lawguides/vol1/sutr/1668.html), so 2."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Reviewer rescored 16 to 13, not a kill: no free or cheaper product does line-level resale treatment linked to a certificate, and demand is independent (Julie_Remy 2026, and a Shopify Plus B2B merchant plus a second reply with the same mixed resale/own-use problem in 2025). But the app cannot touch online checkout tax (Shopify's tax platform is invitation-only), the draft-order API ignores per-line taxable when a variant is given, and draft orders are the workaround the lead merchant rejected; the free native route (non-exempt company location with tax-off wholesale variants in a B2B catalog, on Basic since April 2026) covers most of the treatment, at the cost of split inventory. Feasibility 2 to 1, competitiveGap 3 to 2, complianceBurden 3 to 2. Re-scoped to a record-keeping ledger on top of the native catalog setup, not an exemption engine."
+      },
+      "inspiredBy": "https://community.shopify.com/t/feature-request-product-specific-customer-tax-exemptions-for-accurate-wholesale-and-retail-checkout/706515",
+      "gateGap": {
+        "missing": [
+          "total 13 is below 22",
+          "pain 3 is below 4",
+          "willingnessToPay 2 is below 3"
+        ],
+        "closedBy": "The validationTest interviews: 5 confirmed mixed wholesale/retail merchants (pain 4) and 3 agreeing to pay $12/month (willingnessToPay 3); feasibility stays low unless merchants accept duplicate wholesale variants, so this most likely stays provisional."
+      }
+    }
+  ],
+  "runNotes": {
+    "weekday": "Thursday",
+    "domainLens": "Small business back office and solo professionals: invoicing, scheduling, bookkeeping, client intake, paperwork",
+    "focusSources": [
+      "A15 No-code automation communities",
+      "B11 Freelance job boards",
+      "C11 Federal award and grant data"
+    ],
+    "searches": [
+      "community.make.com search.json: invoice; quote estimate; client intake form; appointment reminder; bookkeeping reconcile; receipt OCR (after 2026-08-07)",
+      "community.n8n.io search.json: invoice; client onboarding; quickbooks; receipt; timesheet payroll; contract signature (after 2026-08-07)",
+      "freelancer.com API: bank reconciliation; quickbooks cleanup; invoice reminder; client intake form; sales tax filing; 1099; timesheet; mileage log; receipt data entry; quote template; appointment scheduling; payroll spreadsheet; certificate of insurance; job costing",
+      "freelancer.com API (spend pass): remittance; apply payments invoices; 3PL invoice; wholesale order entry shopify; accounts receivable reconciliation; shopify draft order; shopify schema markup",
+      "peopleperhour.com freelance-jobs?q=reconciliation",
+      "api.nsf.gov awards: small business accounting; invoice automation; bookkeeping (since 2025-01-01)",
+      "community.shopify.com search.json: net terms invoice; B2B payment overdue; bookkeeping payout reconcile; sales tax filing; 1099-K; quickbooks sync; 3PL invoice; purchase order email wholesale; supplier invoice; resale certificate",
+      "hn.algolia.com comments: quickbooks; invoicing small business",
+      "forum.invoiceninja.com search.json: payment",
+      "discuss.frappe.io search.json: small business invoice",
+      "community.squareup.com search: tip pooling payroll",
+      "WebSearch: QuickBooks Online one payment multiple invoices remittance advice forum 2026",
+      "WebSearch: Xero community remittance advice apply payment to many invoices",
+      "WebSearch: small contractor subcontractor certificates of insurance tracking spreadsheet 2026",
+      "WebSearch: site:apps.shopify.com remittance OR payment reconciliation",
+      "WebSearch: QuickBooks Online app remittance advice upload apply payments",
+      "WebSearch: community.shopify.com 2026 wholesale net 30 invoices chasing payment",
+      "WebSearch: Ask HN 2026 freelancer bookkeeping invoicing tool frustrated",
+      "WebSearch: Federal Register 2026 final rule small business recordkeeping deadline 2027",
+      "WebSearch: 2026 price increase HoneyBook Jobber SimplePractice Acuity",
+      "WebSearch: Remittance Go RemitClear QuickBooks Online lump sum",
+      "WebSearch (extended): quickbooks.intuit.com 2026 remittance many invoices",
+      "WebSearch (watchlist WTP): site:apps.shopify.com AI search product schema JSON-LD readiness",
+      "WebSearch: AIA G702 G703 pay application small subcontractor software price",
+      "WebSearch: WooCommerce Peppol e-invoicing Belgium 2026 plugin"
+    ],
+    "unverifiedSignals": [
+      {
+        "url": "https://www.trustpilot.com/review/shipmonk.com?sort=recency",
+        "reason": "HTTP 403 to curl; read through WebFetch. Reviewer found the billing complaints were mostly price rises and service failures, not invoice errors."
+      },
+      {
+        "url": "https://www.freelancer.com/projects/excel/Automate-Customer-Payments-Supplier",
+        "reason": "Dropped as evidence: the job never names QuickBooks and its scope (FX, supplier payments) is wider than remittance matching."
+      },
+      {
+        "url": "https://community.squareup.com/t5/forums/searchpage/tab/message?q=tip%20pooling%20payroll",
+        "reason": "HTTP 200 but results load by JavaScript; no items readable."
+      }
+    ],
+    "rejectedCandidates": [
+      {
+        "title": "3PL Invoice Check for small Shopify brands",
+        "total": 13,
+        "reason": "Reviewer kill: evidence misread (Trustpilot complaints are price rises, service failures and privacy, not invoice lines breaking the rate card; the Shopify thread is builders only); free open-source CLI covers core checks; payoff small at this order volume."
+      },
+      {
+        "title": "Wholesale Order Desk (emailed orders to Shopify draft orders)",
+        "total": 12,
+        "reason": "Research found 8+ Shopify apps doing it, including Kaison B2B Order Import (free 5/month, $19.90 unlimited) and LevelOps (21 reviews); no gap."
+      },
+      {
+        "title": "Credit hold for overdue wholesale accounts on Shopify",
+        "total": 12,
+        "reason": "Research found 9+ apps launched since June 2026, Wholora and B2B Marshal block overdue accounts from $19 with free tiers, and Shopify Flow can hold fulfillment for free; native B2B on all plans since April 2026."
+      },
+      {
+        "title": "Net-terms running balance on invoices",
+        "total": 11,
+        "reason": "Same customer and problem as the credit-hold candidate; Upright Net Terms ($12.99) and B2B Marshal already ship it."
+      },
+      {
+        "title": "AI shopping-agent readiness check for small Shopify stores (watchlist, firstSeen 2026-11-03)",
+        "total": 14,
+        "reason": "Re-researched for willingness to pay: more than ten apps (SchemaRank, Product Markup for AI Shopping, Trusted Schema, AIReadinessAIQ) with free plans; competitiveGap 1. Leaves the watchlist."
+      },
+      {
+        "title": "Stocky replacement: receiving from supplier invoices",
+        "total": 12,
+        "reason": "Change event (Stocky ended 2026-08-31) already served by Stockbeam, MarginSentry (free plan), PO Pilot and others posting daily."
+      },
+      {
+        "title": "Historical COGS / landed cost per receipt ledger",
+        "total": 12,
+        "reason": "Crowded profit apps; a reply corrected the premise (Shopify captures cost at sale)."
+      },
+      {
+        "title": "Shopify payout-to-order month-end reconciliation",
+        "total": 12,
+        "reason": "A2X, Reconcilely and others serve it; thread was builders researching."
+      },
+      {
+        "title": "3PL pick/pack file vs Shopify order line reconciliation",
+        "total": 11,
+        "reason": "Folded into the 3PL candidate, which was killed."
+      },
+      {
+        "title": "Invoice chaser from a Google Sheet",
+        "total": 10,
+        "reason": "Free templates already shared in community.make.com and community.n8n.io; AI-wrapper/no-moat rule."
+      },
+      {
+        "title": "PDF invoice data entry to Google Sheets",
+        "total": 10,
+        "reason": "AI wrapper with no workflow moat; many extraction tools."
+      },
+      {
+        "title": "Fill blank PDF forms from source PDFs",
+        "total": 10,
+        "reason": "AI wrapper with no workflow moat."
+      },
+      {
+        "title": "Stripe invoices from monday.com rows",
+        "total": 9,
+        "reason": "Custom development service, not a product."
+      },
+      {
+        "title": "Supplier invoice vs purchase order reconciliation template",
+        "total": 11,
+        "reason": "Free Make and n8n templates posted in the last 60 days."
+      },
+      {
+        "title": "Reusable Make scenarios deployed to many clients",
+        "total": 12,
+        "reason": "Same customer and problem as Client Safe-Edit Pack for n8n (2026-11-04)."
+      },
+      {
+        "title": "Silent-failure check for back-office automations (API 200 but no document)",
+        "total": 11,
+        "reason": "Monitoring tools already killed on 2026-11-04 (Flowlert and others)."
+      },
+      {
+        "title": "Client says they paid by check: notify and reconcile (Invoice Ninja)",
+        "total": 9,
+        "reason": "Single feature request, served by the invoicing tool itself."
+      },
+      {
+        "title": "HOA dues lump-sum ACH matching",
+        "total": 10,
+        "reason": "Evidence from 2024; folded into Remittance Matcher."
+      },
+      {
+        "title": "Subcontractor certificate of insurance tracker",
+        "total": 12,
+        "reason": "Crowded with cheap tools (YourStanding, certkeeper, Apify actor); evidence mostly vendor blogs."
+      },
+      {
+        "title": "Amazon business purchases categorised into QuickBooks",
+        "total": 10,
+        "reason": "Amazon Business and bookkeeping AI tools already integrate with QuickBooks; HN comments are anecdotes."
+      },
+      {
+        "title": "AI sales tax filing for small Shopify stores",
+        "total": 10,
+        "reason": "Heavy compliance burden; TaxJar, Avalara and accountants serve it."
+      },
+      {
+        "title": "AIA G702/G703 pay applications for small subcontractors",
+        "total": 11,
+        "reason": "PayAppHub ($39.99) and Siteline already serve it; no complaint found."
+      },
+      {
+        "title": "Peppol e-invoicing connector for small WooCommerce shops",
+        "total": 11,
+        "reason": "Several plugins (GestOO, Scrada Lite, Peppol Plugged) already on wordpress.org."
+      }
+    ],
+    "watchlist": [],
+    "caveats": "Only two ideas ship, against a first-run target of 3, and both are provisional with low totals (16 and 13). Six candidates went through research or review: 3PL Invoice Check was killed by its reviewer (evidence misread), Wholesale Order Desk and Credit Hold for Wholesale died in research because 8 to 9 Shopify apps launched in 2026 already do each job with free tiers, and the two shipped ideas were rescored down (20 to 16, 16 to 13). The pattern across today's sources is that the small-business back-office threads on community.shopify.com, community.make.com and community.n8n.io are dominated by builders researching or promoting their own tools; genuine merchant complaints are rare, so pain scores stay at 3. The complexity-mix constraint (a Weekend MVP plus a Multi-week) is met by the two ideas. Both ideas share the category Small Business Ops (cap 2). No candidate reached 19, so the watchlist is empty; the one carried-forward entry (AI shopping-agent readiness) was re-researched and rejected. C11 (NSF awards) returned no small-business back-office signal in three searches. The Remittance Go spend item and CDTFA mandate are dated to today's fetch (pricing and regulation pages carry no post date)."
+  }
+}

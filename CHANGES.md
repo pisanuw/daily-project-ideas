@@ -607,3 +607,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-04 [build] Misrepresentation Preflight (2026-11-03 #2) implemented: https://misrepresentation-preflight.pisan.me/
 
 2026-11-04 [code] Accessibility Fleet Log (2026-11-04 #2) implemented and live at https://accessibility-fleet-log.pisan.me; claim replaced with url, repo, notes and publicNotes.
+
+2026-11-05 [doc] Created ideas/2026-11-05.json (schemaVersion 3, 2 ideas): Remittance Matcher for QBO (16, provisional), Resale Ledger (13, provisional)
