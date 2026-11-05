@@ -400,7 +400,12 @@ function build() {
     total: live.length,
     ideas,
   };
+  // Built apps shown at the top of the landing page, with their demo GIFs
+  // (web/showcase/, smaller copies of the claude-built-apps README images).
+  const showcaseFile = path.join(WEB_DIR, 'showcase.json');
+  payload.showcase = fs.existsSync(showcaseFile) ? JSON.parse(fs.readFileSync(showcaseFile, 'utf8')) : [];
   const publicPayload = {
+    showcase: payload.showcase,
     generatedAt: payload.generatedAt,
     meta: META,
     audiences: AUDIENCES,

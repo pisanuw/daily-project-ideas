@@ -613,3 +613,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-05 [doc] Nov 5 first run shipped 2 ideas after 6 reviews: new source A16 (vendor feature-request boards, Xero ideas), Thursday C slot C11 -> C10, fewer than 3 ideas after under 10 reviews counts as a routine failure, check forum posters for builders.
 
 2026-11-05 [code] Popup Check (2026-11-03 #3) implemented and live at https://popup-check.pisan.me; claim replaced with url, repo, notes and publicNotes.
+
+2026-11-05 [code] Landing page "Built and live" showcase: 8 built apps with their demo GIFs (480px copies in web/showcase/, listed in web/showcase.json), including StepWise and Digital Student Assistant.

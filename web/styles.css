@@ -574,3 +574,16 @@ button { font-family: inherit; font-size: inherit; line-height: inherit; color: 
 
 /* Public idea page: the one-line summary leads. */
 .detail .detail__lead { font-size: 1.05rem; line-height: 1.5; color: var(--text); margin: 4px 0 16px; }
+
+/* Built-and-live showcase under the hero: demo GIFs of finished apps. */
+.showcase { padding-top: 8px; padding-bottom: 24px; }
+.showcase__title { margin: 0 0 4px; font-size: 1.5rem; }
+.showcase__sub { margin: 0 0 16px; color: var(--text-dim); }
+.showcase__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+.showcase__card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; }
+.showcase__media { display: block; background: #fff; aspect-ratio: 16 / 10; overflow: hidden; }
+.showcase__media img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
+.showcase__name { margin: 12px 14px 4px; font-size: 1.05rem; }
+.showcase__blurb { margin: 0 14px 12px; color: var(--text-dim); font-size: 0.92rem; line-height: 1.45; flex: 1; }
+.showcase__links { display: flex; gap: 8px; flex-wrap: wrap; margin: 0 14px 14px; }
+.showcase__more { margin: 14px 0 0; }

@@ -67,6 +67,26 @@
     return [el('span', { class: 'tag tag--date', text: idea.date })];
   }
 
+  // ---- Showcase: built apps with their demo animations ----
+  function renderShowcase() {
+    var host = document.getElementById('showcase-grid');
+    var items = DATA.showcase || [];
+    if (!host || !items.length) return;
+    items.forEach(function (it) {
+      var links = [el('a', { class: 'btn-link', href: it.url, target: '_blank', rel: 'noopener', text: 'Try it \u2197' })];
+      if (it.code) links.push(el('a', { class: 'btn-link btn-link--ghost', href: it.code, target: '_blank', rel: 'noopener', text: 'Code \u2197' }));
+      host.appendChild(el('article', { class: 'showcase__card' }, [
+        el('a', { class: 'showcase__media', href: it.url, target: '_blank', rel: 'noopener' }, [
+          el('img', { src: it.image, alt: it.alt || it.title, loading: 'lazy', decoding: 'async', width: '480' }),
+        ]),
+        el('h3', { class: 'showcase__name', text: it.title }),
+        el('p', { class: 'showcase__blurb', text: it.blurb || '' }),
+        el('div', { class: 'showcase__links' }, links),
+      ]));
+    });
+    document.getElementById('showcase').hidden = false;
+  }
+
   // ---- Card ----
   function card(idea) {
     var tags = dateTags(idea);
@@ -804,6 +824,7 @@
     initTopics();
   } else {
     renderHero();
+    if (!NOTES_MODE) renderShowcase();
     renderSections();
     openFromUrl();
   }
