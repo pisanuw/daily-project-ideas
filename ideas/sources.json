@@ -470,6 +470,25 @@
       "notes": "Small businesses that cannot buy a tool build a workaround out of Make, Zapier, n8n or Bubble and then ask for help when it breaks. A post describing a home-built workaround is complaint evidence that the job matters and is unserved; count the original poster only, not consultants answering. Pairs with B11: the same task posted as a paid job is the spend evidence."
     },
     {
+      "id": "A16",
+      "group": "A",
+      "name": "Vendor feature-request boards",
+      "evidence": "complaint",
+      "status": "ok-curl",
+      "lastVerified": "2026-11-05",
+      "paths": [
+        {
+          "url": "https://productideas.xero.com/search?query={q}",
+          "client": "curl",
+          "verified": "2026-11-05",
+          "result": "Xero's product ideas board: dated, named requests from small-business users and bookkeepers, readable with curl (2026-11-05 run). QuickBooks community (quickbooks.intuit.com/learn-support) fails with curl (HTTP/2 error) but reads through WebFetch.",
+          "probeUrl": "https://productideas.xero.com/forums/939198-for-small-businesses",
+          "expect": "idea"
+        }
+      ],
+      "notes": "Requests users file with the vendor of a tool they already pay for are complaint evidence from paying customers, and far less polluted than community forums, where most 2026 back-office threads are opened by builders promoting their own apps. Count the requester and the votes; check that the request is still open."
+    },
+    {
       "id": "B1",
       "group": "B",
       "name": "Teachers Pay Teachers and Etsy",

@@ -284,7 +284,7 @@ A mandate tells you the work is not optional. An idea with all three is strong;
 an idea with only mandates is a guess about a market.
 
 The catalog in `ideas/sources.json` is the full list of sources with their
-access paths. Group A is IDs A1 to A15, Group B is B1 to B12, Group C is C1 to
+access paths. Group A is IDs A1 to A16, Group B is B1 to B12, Group C is C1 to
 C11. Blocked IDs are kept in the catalog so that old `sourcesUsed` entries stay
 readable; the avoid list in Step 0 is what you act on.
 
@@ -304,7 +304,7 @@ themselves. Run at least two complaint searches aimed at them every run.
 | Monday | A13 Discourse, any niche; B12 Paid app marketplaces; C5 Policy and regulation trackers | Accessibility and regulatory compliance for small businesses and startups: website accessibility, privacy notices, sales tax, licensing and permits |
 | Tuesday | A14 Plugin and add-on support forums; B1 Teachers Pay Teachers; C10 Change events | Teaching and training anywhere: K-12, corporate L&D, tutoring, homeschool |
 | Wednesday | A3 Open-source teaching tools; B2 AppSumo; C2 Education and computing research | Developer and research tooling |
-| Thursday | A15 No-code automation communities; B11 Freelance job boards; C11 Federal award and grant data | Small business back office and solo professionals: invoicing, scheduling, bookkeeping, client intake, paperwork |
+| Thursday | A16 Vendor feature-request boards; B11 Freelance job boards; C10 Change events | Small business back office and solo professionals: invoicing, scheduling, bookkeeping, client intake, paperwork |
 | Friday | A13 Discourse, any niche (community.shopify.com is the strongest host); B11 Freelance job boards; C8 Trade news | Small business, customer-facing: local services, trades, clinics, restaurants, retail, their websites and bookings |
 | Saturday | A2 Other LMS and classroom forums; B5 Acquisition marketplaces; C4 Job postings | Institutional back-office work |
 | Sunday | A12 Ask HN; B12 Paid app marketplaces; C10 Change events | Makers, creators and freelancers who sell: craft and online shops, studios, photographers, tutors, consultants |
@@ -492,7 +492,14 @@ Record the outcome in each surviving idea's `review` field.
 Keep reviewing down the ranked list, watchlist entries included, until 3
 ideas have survived review or you have reviewed 10 candidates. Any idea that
 was not reviewed is dropped. If fewer than 3 survive 10 reviews, ship what
-survived and say so in `runNotes.caveats`.
+survived and say so in `runNotes.caveats`, giving the number reviewed. Fewer
+than 3 ideas after fewer than 10 reviews is a routine failure, not a quiet day
+(the 2026-11-05 first run stopped at 6 reviews with 2 ideas).
+
+Before counting a forum post as a complaint, check who wrote it. Since mid-2026
+most small-business back-office threads on community.shopify.com, Make and n8n
+are opened or answered by developers validating their own apps: those posts are
+not complaints, and a niche full of them is crowded, not unserved.
 
 ## Step 7: Write ideas/YYYY-MM-DD.json
 
