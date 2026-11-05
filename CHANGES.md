@@ -611,3 +611,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-05 [doc] Created ideas/2026-11-05.json (schemaVersion 3, 2 ideas): Remittance Matcher for QBO (16, provisional), Resale Ledger (13, provisional)
 
 2026-11-05 [doc] Nov 5 first run shipped 2 ideas after 6 reviews: new source A16 (vendor feature-request boards, Xero ideas), Thursday C slot C11 -> C10, fewer than 3 ideas after under 10 reviews counts as a routine failure, check forum posters for builders.
+
+2026-11-05 [code] Popup Check (2026-11-03 #3) implemented and live at https://popup-check.pisan.me; claim replaced with url, repo, notes and publicNotes.
