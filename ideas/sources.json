@@ -362,7 +362,7 @@
           "probeDetail": "HTTP 200, 14128B"
         }
       ],
-      "notes": "news.ycombinator.com/item returned HTTP 429 on 2026-10-31. Cite the HN item URL only if the item page itself fetched; otherwise cite the Algolia hit and say so. Algolia carries the date and author, which is what the gate needs."
+      "notes": "news.ycombinator.com/item returned HTTP 429 on 2026-10-31. Cite the HN item URL only if the item page itself fetched; otherwise cite the Algolia hit and say so. Algolia carries the date and author, which is what the gate needs. 2026-11-06: numericFilters (for example created_at_i>N) must be URL-encoded (%3E for >), or the API returns an error page instead of JSON."
     },
     {
       "id": "A13",
@@ -781,7 +781,7 @@
           "expect": "atlassian"
         }
       ],
-      "notes": "A paid app with many reviews for the same job is spend evidence (people pay for an inferior or partial solution); its 1 and 2 star reviews, with dates, are complaint evidence from paying customers. State the plan prices you saw and the review count. A free app with installs is not spend evidence. 2026-11-03#3: the apps.shopify.com/search page returned an empty shell ('trouble loading your results') to both curl and WebFetch; find slugs with WebSearch site:apps.shopify.com, then curl https://apps.shopify.com/{slug} and https://apps.shopify.com/{slug}/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest, which return dated, named reviews. Back-office Shopify niches filled up with new apps from July to October 2026, most with 0 reviews: an app with no reviews is not spend evidence."
+      "notes": "A paid app with many reviews for the same job is spend evidence (people pay for an inferior or partial solution); its 1 and 2 star reviews, with dates, are complaint evidence from paying customers. State the plan prices you saw and the review count. A free app with installs is not spend evidence. 2026-11-03#3: the apps.shopify.com/search page returned an empty shell ('trouble loading your results') to both curl and WebFetch; find slugs with WebSearch site:apps.shopify.com, then curl https://apps.shopify.com/{slug} and https://apps.shopify.com/{slug}/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest, which return dated, named reviews. Back-office Shopify niches filled up with new apps from July to October 2026, most with 0 reviews: an app with no reviews is not spend evidence. 2026-11-06: a wrong slug returns an ~80KB 404 page with HTTP 200 under curl -L, so check the body contains review text before reading it as 'no complaints'."
     },
     {
       "id": "C1",
