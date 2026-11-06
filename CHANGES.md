@@ -615,3 +615,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-05 [code] Popup Check (2026-11-03 #3) implemented and live at https://popup-check.pisan.me; claim replaced with url, repo, notes and publicNotes.
 
 2026-11-05 [code] Landing page "Built and live" showcase: 8 built apps with their demo GIFs (480px copies in web/showcase/, listed in web/showcase.json), including StepWise and Digital Student Assistant.
+
+2026-11-06 [doc] Showcase: Chess TD (chesstd.pisan.me) with a recorded demo GIF (round results by keyboard, next round paired and explained, standings).
