@@ -619,3 +619,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-06 [doc] Showcase: Chess TD (chesstd.pisan.me) with a recorded demo GIF (round results by keyboard, next round paired and explained, standings).
 
 2026-11-06 [code] Health Page Tracker Watch (2026-11-04 #3) implemented and live at https://health-page-tracker-watch.pisan.me; claim replaced with url, repo, notes and publicNotes.
+
+2026-11-06 [doc] Created ideas/2026-11-06.json (schemaVersion 3, 3 ideas): Shop-in-Shop Stock (16, provisional), Grab-and-Go Allergen Labels (15, provisional), Fee Disclosure Check (15, provisional)

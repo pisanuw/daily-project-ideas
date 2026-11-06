@@ -614,3 +614,6 @@
 | 2026-11-04 | Client Safe-Edit Pack for n8n | Developer Tool | Weekend MVP | 17 | provisional |  |
 | 2026-11-05 | Remittance Matcher for QuickBooks Online | Small Business Ops | Multi-week | 16 | provisional |  |
 | 2026-11-05 | Resale Ledger for Mixed Wholesale and Retail Shops | Small Business Ops | Weekend MVP | 13 | provisional |  |
+| 2026-11-06 | Shop-in-Shop Stock | Small Business Ops | Multi-week | 16 | provisional |  |
+| 2026-11-06 | Grab-and-Go Allergen Labels | Accessibility & Compliance | Weekend MVP | 15 | provisional |  |
+| 2026-11-06 | Fee Disclosure Check for Restaurants | Accessibility & Compliance | Weekend MVP | 15 | provisional |  |

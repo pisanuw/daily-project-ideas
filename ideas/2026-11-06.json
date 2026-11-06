@@ -1,0 +1,696 @@
+{
+  "date": "2026-11-06",
+  "schemaVersion": 3,
+  "complete": true,
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Shop-in-Shop Stock",
+      "slug": "shop-in-shop-stock",
+      "category": "Small Business Ops",
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Data & Visualization",
+      "summary": "For small Shopify brands that keep a few products on unattended shelves inside cafés, gyms and salons: a QR code per shelf, phone checkout through the brand's own Shopify store, and stock tracked per shelf without paying for a Shopify location at each one.",
+      "public": {
+        "summary": "Lets shoppers buy from your unattended shelves in other people's shops by scanning a code, and tells you exactly what is left on each shelf.",
+        "problem": "You have a small shelf of your products in a café, a gym and a salon, with nobody there to sell them. A shopper scans a code and pays on your web store, but you have no idea which shelf that sale came from or what is left on it. So you drive round guessing what to restock and settle up with each host from memory.",
+        "forWhom": "Small brands that place their products on shelves inside other local businesses.",
+        "benefits": [
+          "Shoppers pay on their own phone, no staff or till at the shelf",
+          "See what is left on every shelf at a glance",
+          "Get a restock list for your next round of visits",
+          "Spot missing stock early, shelf by shelf",
+          "Hand each host a clear commission statement"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "A brand with products on unattended shelves at many partner locations needs each sale paid on the shopper's phone and deducted from that shelf's stock. Shopify caps locations at 10 below Plus and 200 on Plus, the nearest QR-checkout app is priced per Shopify location, and the nearest stockist app expects the partner to enter sales by hand.",
+      "description": "Each shelf gets a printed QR code that opens a page listing only what is in stock at that shelf; the shopper adds items and pays through the brand's normal Shopify checkout, with the shelf ID carried as a cart attribute. A small Shopify app reads paid orders by webhook, deducts the shelf's stock in its own ledger (outside Shopify's location model), and guards against double deduction and stale carts. The owner side handles warehouse-to-shelf transfers, route restock lists, stock counts with shrink reports, and per-host commission statements. Shopify keeps payments, receipts, refunds and tax.",
+      "targetCustomer": "Owners of small Shopify brands (coffee roasters, candle and snack makers, skincare, local crafts) with 5 to 200 unattended product placements inside other businesses.",
+      "buyer": "The brand owner, on a company card, as a monthly Shopify app charge.",
+      "whyNow": "A Shopify merchant asked for exactly this on 2026-09-22 (412 views, 28 replies) and was told no single tool does it; PlaceStock (launched 2026-08-18) shows stockist tracking is being productized, but it relies on partners logging sales.",
+      "founderFit": "A Shopify app with a stock ledger, a webhook consumer and a mobile page is a solo Supabase/React build; the hard parts (idempotent deduction, stale carts, reconciliation) are the systems problems he teaches. He has no retail network, so distribution leans on the Shopify App Store and community threads.",
+      "problemEvidence": [
+        {
+          "url": "https://community.shopify.com/t/looking-for-a-solution-for-many-small-unattended-shop-in-shop-locations/686270",
+          "source": "community.shopify.com",
+          "author": "ThomasOBG",
+          "date": "2026-09-22",
+          "kind": "complaint",
+          "summary": "Merchant wants QR phone checkout and per-location stock at 100 to 500 unattended shop-in-shop spots without POS hardware; replies say Shopify's location caps rule out native locations."
+        },
+        {
+          "url": "https://community.shopify.com/t/actually-separate-inventories-for-separate-locations/636369",
+          "source": "community.shopify.com",
+          "author": "shopoddbird",
+          "date": "2026-06-11",
+          "kind": "complaint",
+          "summary": "Adjacent: Shopify locations do not stop a pop-up from selling stock held at other locations (staffed case)."
+        },
+        {
+          "url": "https://apps.shopify.com/placestock",
+          "source": "apps.shopify.com",
+          "author": "PlaceStock (vendor)",
+          "date": "2026-08-18",
+          "kind": "spend",
+          "summary": "Paid app for stock held at partner shops, $14.99 to $49.99 a month by partner count; 0 reviews, so price exists but buyers are unproven."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "PlaceStock",
+          "url": "https://apps.shopify.com/placestock",
+          "price": "$14.99, $19.99 or $49.99/month for 30, 100 or unlimited partners",
+          "gap": "Partners enter sales themselves; no shopper QR checkout, so it does not fit unstaffed shelves."
+        },
+        {
+          "name": "Leav Scan & Go",
+          "url": "https://apps.shopify.com/swift-mobile-self-checkout",
+          "price": "$20/month for 1 location, $50 for 5, $495 unlimited",
+          "gap": "QR self-checkout tied to Shopify locations, so it hits the 10 or 200 location cap and per-shelf economics break."
+        },
+        {
+          "name": "Store Check-In",
+          "url": "https://apps.shopify.com/store-check-in",
+          "price": "Free for 1 kiosk; $50/month per location",
+          "gap": "Needs an iPad at each spot."
+        },
+        {
+          "name": "ConsignKit",
+          "url": "https://apps.shopify.com/consignkit",
+          "price": "Free, $9 + 2%, or $199",
+          "gap": "Built for shops selling other people's goods (inbound consignment), not brands placing stock outward."
+        },
+        {
+          "name": "TallyTill",
+          "url": "https://slashdot.org/software/p/TallyTill/",
+          "price": "Free; $15 per device",
+          "gap": "Honor-mode till with multi-location, but per-location stock with Shopify checkout is unconfirmed; Shopify import only."
+        }
+      ],
+      "keyFeatures": [
+        "One QR code per shelf showing only that shelf's stock",
+        "Checkout through the brand's own Shopify store with the shelf ID on the order",
+        "Per-shelf stock ledger outside Shopify locations, with idempotent deduction",
+        "Route restock lists and stock counts with shrink reports",
+        "Monthly commission statement per host business"
+      ],
+      "mvpScope": {
+        "features": [
+          "Shelf list and QR generation",
+          "Shelf storefront page with cart attribute",
+          "Order webhook deduction with double-delivery guard",
+          "Transfer, count and restock-list screens"
+        ],
+        "outOfScope": [
+          "Host self-service portal",
+          "Hardware locks or smart shelves",
+          "Automatic tax-address switching per shelf",
+          "Multi-currency"
+        ],
+        "buildEstimate": "3 to 4 weeks, plus Shopify app review"
+      },
+      "techStack": "React + Vite + Tailwind, Supabase (Postgres ledger, auth, edge functions for webhooks), Shopify Admin API and Storefront cart API; no LLM at runtime.",
+      "pricing": {
+        "model": "Shopify app subscription by number of shelves",
+        "pricePoint": "$19/month up to 20 shelves, $49/month up to 200",
+        "rationale": "In line with PlaceStock's $14.99 to $49.99 tiers and far below Leav's $495 unlimited tier; the requester budgets under $150 a month in sales per spot, so per-shelf cost must stay pennies."
+      },
+      "revenueSketch": "Estimate: 60 brands x $30/month average = $1,800 MRR, assuming the App Store and direct outreach to brands with stockist pages convert; unvalidated.",
+      "distribution": "Reply in thread 686270 and newer pop-up or multi-location threads; Shopify App Store keywords (unattended, honesty shelf, stockists, consignment); direct outreach to small roasters, candle and snack brands whose stockist pages list cafés and gyms.",
+      "validationTest": {
+        "method": "Build a no-code prototype (one QR page per shelf linking to a Shopify cart with a shelf attribute, plus a spreadsheet ledger fed by order export) and offer it to ThomasOBG and 10 brands found through stockist pages.",
+        "successCriteria": "3 brands run it on at least 5 shelves for a month and 2 agree to pay $19/month.",
+        "cost": "About 20 hours and $0."
+      },
+      "moat": "Thin: per-shelf history and host statements create switching cost, but PlaceStock could add QR checkout cheaply.",
+      "compliance": [
+        "Payments, PCI and receipts stay in Shopify checkout.",
+        "Sales tax should follow the shelf's address for in-person sales; tag each order with it and leave the tax decision to the merchant.",
+        "Host commissions may need 1099 reporting in the US (unverified).",
+        "Exclude age-restricted goods.",
+        "Shopify App Store GDPR webhooks and privacy policy."
+      ],
+      "risks": [
+        {
+          "risk": "Only one buyer was found and he was already talking to a provider by 2026-10-12.",
+          "mitigation": "The validation test must find 3 more brands before any build."
+        },
+        {
+          "risk": "Theft and shrink at unattended shelves become a support burden.",
+          "mitigation": "Ship shrink reports and per-shelf counts; leave loss policy to the brand and the host."
+        },
+        {
+          "risk": "Stale carts or duplicate webhooks deduct the wrong shelf.",
+          "mitigation": "Expire shelf carts quickly and make deduction idempotent on order ID."
+        }
+      ],
+      "scores": {
+        "pain": 3,
+        "willingnessToPay": 2,
+        "reachability": 2,
+        "competitiveGap": 2,
+        "feasibility": 3,
+        "complianceBurden": 4,
+        "total": 16
+      },
+      "scoreRationale": {
+        "pain": "One detailed, recent request with 28 replies (https://community.shopify.com/t/looking-for-a-solution-for-many-small-unattended-shop-in-shop-locations/686270); no second independent complaint found.",
+        "willingnessToPay": "Nearest paid apps have 0 reviews (https://apps.shopify.com/placestock) and no freelancer jobs were found for the task.",
+        "reachability": "About 20 community searches surfaced one buyer (https://community.shopify.com/t/looking-for-a-solution-for-many-small-unattended-shop-in-shop-locations/686270); App Store is the realistic channel.",
+        "competitiveGap": "PlaceStock covers the owner side and Leav covers QR checkout for a few locations (https://apps.shopify.com/swift-mobile-self-checkout).",
+        "feasibility": "Stale carts, races on the last unit, duplicate webhooks and shrink are real traps listed in https://community.shopify.com/t/looking-for-a-solution-for-many-small-unattended-shop-in-shop-locations/686270.",
+        "complianceBurden": "Shopify checkout carries payments; tax by shelf address and host 1099s remain (https://apps.shopify.com/placestock lists partner commissions as a feature)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Reviewer rescored 19 to 16 and narrowed the gap to QR-per-shelf checkout plus an off-Shopify stock ledger for unstaffed spots. PlaceStock (2026-08-18, $14.99 to $49.99) already does partner stock and commissions but relies on partners logging sales; Leav Scan & Go does Shopify QR checkout but per Shopify location ($495 unlimited). The original requester is small (under $150/month sales per spot, Plus unaffordable) and said on 2026-10-12 he was in talks with a provider. No second 2026 complaint and no freelancer jobs found."
+      },
+      "inspiredBy": "https://community.shopify.com/t/looking-for-a-solution-for-many-small-unattended-shop-in-shop-locations/686270",
+      "gateGap": {
+        "missing": [
+          "total 16 is below 22",
+          "pain 3 is below 4",
+          "willingnessToPay 2 is below 3",
+          "only 1 on-task complaint; the second evidence item is adjacent"
+        ],
+        "closedBy": "The validationTest: 3 more brands running the prototype on 5+ shelves would give independent complaints (pain 4), and 2 agreeing to pay $19/month would lift willingnessToPay to 3."
+      }
+    },
+    {
+      "n": 2,
+      "title": "Grab-and-Go Allergen Labels",
+      "slug": "grab-and-go-allergen-labels",
+      "category": "Accessibility & Compliance",
+      "smallBusiness": true,
+      "complexity": "Weekend MVP",
+      "confidence": "provisional",
+      "topic": "Data & Visualization",
+      "summary": "For independent New York delis, bakeries, cafés and food trucks that pack food on site: keep each recipe's allergens in one place and print a dated 'Contains' label on a cheap thermal printer, ready for the state's allergen-notice law that starts 2026-11-12.",
+      "public": {
+        "summary": "Keeps track of which allergens are in each thing you make and prints the label for it in seconds.",
+        "problem": "From November 12, anything you wrap and put in the case in New York needs a note saying which major allergens it contains. You know your recipes, but swap a supplier's bread or add a pesto and the handwritten sticker is wrong without anyone noticing.",
+        "forWhom": "Owners of small delis, bakeries, cafés, ice cream shops and food trucks that sell food packed on site.",
+        "benefits": [
+          "Print an allergen and date label for any item in seconds",
+          "Change a recipe once and every label updates",
+          "A shelf chart of allergens for staff and customers",
+          "A record of what each label said and when"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "New York's law requires a written notice of the nine major allergens on food prepared and packed on the same premises, from 2026-11-12, with no size threshold. Small shops label by hand, and a recipe or supplier change silently makes the label wrong.",
+      "description": "The owner enters each recipe once by picking ingredients and sub-recipes, recording each supplier product's 'Contains' statement. The app derives which of the nine major allergens each item contains, asks the owner to confirm, and prints a label with item name, 'Contains:' line and pack date to a Rollo, Munbyn, Brother QL or DYMO printer, or to Avery sheets. Every recipe change is logged with a timestamp, and a one-page allergen chart can be printed for the counter.",
+      "targetCustomer": "Owners and managers of independent New York delis, bakeries, sandwich shops, cafés, ice cream parlors and food trucks that sell prepacked items.",
+      "buyer": "The owner, on a personal or business card, per location.",
+      "whyNow": "The New York law (A6558-A, Chapter 494 of 2025) takes effect 2026-11-12 and reaches every establishment regardless of size; the state issued no guidance, so owners are improvising.",
+      "founderFit": "A recipe-to-allergen matrix with label printing is a small, well-bounded web app; accessibility and plain-language labeling are his interests. He has no food-industry network, so the first customers come from walking into shops and from label-printer sellers.",
+      "problemEvidence": [
+        {
+          "url": "https://www.nysenate.gov/legislation/bills/2025/A6558A",
+          "source": "nysenate.gov",
+          "author": "New York State Legislature",
+          "date": "2025-11-12",
+          "kind": "mandate",
+          "summary": "Enacted text: written notice of any major food allergen on food prepared and packed on premises; no other ingredients required; effective one year after signing."
+        },
+        {
+          "url": "https://www.transact-tech.com/resources/blog/manual-food-labeling-allergen-compliance",
+          "source": "transact-tech.com",
+          "author": "Dana Loof",
+          "date": "2026-08-07",
+          "kind": "mandate",
+          "summary": "Trade vendor post: law effective 2026-11-12, no location-count threshold, manual labeling breaks when recipes change (vendor opinion)."
+        },
+        {
+          "url": "https://www.onlinelabels.com/articles/what-you-need-to-know-about-new-yorks-allergen-law?src=7",
+          "source": "onlinelabels.com",
+          "author": "Paige Maseda",
+          "date": "2026-09-10",
+          "kind": "spend",
+          "summary": "Label seller sells pre-printed allergen stickers for the NY law and suggests handwriting on blanks: owners buy supplies, but the cheap answer is a sticker."
+        },
+        {
+          "url": "https://www.bcnys.org/sites/default/files/S.6820%20(Harckham)%20A.7494%20(Lunsford)%20-BCNys.pdf",
+          "source": "bcnys.org",
+          "author": "Paul Zuber, Business Council of NYS",
+          "date": "2023-06-01",
+          "kind": "complaint",
+          "summary": "Trade group memo on the predecessor bill: small delis, bakeries and food trucks would need costly labeling software and hardware."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Cakery Bakeries label maker",
+          "url": "https://cakerybakeries.com/labelmaker",
+          "price": "Free (email required)",
+          "gap": "Drafts a 'Contains' line from ingredients, but no saved recipes or sub-recipes, no change log, PNG output only, no thermal printing."
+        },
+        {
+          "name": "BatchBound",
+          "url": "https://batchbound.com",
+          "price": "$2.50/month early-bird",
+          "gap": "Allergens entered by hand per label; Avery PDF; has a New York template."
+        },
+        {
+          "name": "ReciPal",
+          "url": "https://recipal.com/pricing",
+          "price": "$29 per recipe, or $49 to $129/month",
+          "gap": "Built for nutrition panels for packaged goods; priced above a corner deli."
+        },
+        {
+          "name": "DoughOps",
+          "url": "https://doughops.pages.dev",
+          "price": "Free tier; label printing only on Pro at $99/month",
+          "gap": "Bakery operations suite; expensive for labels alone."
+        },
+        {
+          "name": "TransAct BOHA",
+          "url": "https://www.transact-tech.com/resources/blog/manual-food-labeling-allergen-compliance",
+          "price": "unknown (sold by demo, with hardware)",
+          "gap": "Aimed at multi-location operators."
+        }
+      ],
+      "keyFeatures": [
+        "Recipe and sub-recipe allergen matrix with supplier 'Contains' statements",
+        "Owner confirmation step before any label prints",
+        "One-tap printing to common thermal printers and Avery sheets",
+        "Timestamped change log of recipes and labels",
+        "Printable counter allergen chart"
+      ],
+      "mvpScope": {
+        "features": [
+          "Ingredient and recipe entry with the nine allergens",
+          "Label template with item, Contains line and pack date",
+          "Browser printing to 2x1 inch thermal labels and Avery sheets",
+          "Change log"
+        ],
+        "outOfScope": [
+          "Nutrition facts panels",
+          "Supplier catalog imports",
+          "Multi-location sync",
+          "States other than New York"
+        ],
+        "buildEstimate": "1 to 2 weekends"
+      },
+      "techStack": "React + Vite + Tailwind, Supabase (auth, Postgres), browser print CSS for label sizes; no LLM at runtime.",
+      "pricing": {
+        "model": "Per-location subscription",
+        "pricePoint": "$9/month or $79/year",
+        "rationale": "Must beat the free generator on saved recipes and printing while staying near the cost of stickers; well below ReciPal and DoughOps Pro."
+      },
+      "revenueSketch": "Estimate: 150 New York locations x $9/month = $1,350 MRR, if walk-in and printer-seller channels work; unvalidated.",
+      "distribution": "Walk into 20 delis and bakeries in one neighborhood and set it up on their printer; partner with Rollo and Munbyn resellers and bakery suppliers; allergy advocacy groups that backed the bill as a referral channel (unverified).",
+      "validationTest": {
+        "method": "Visit 20 New York delis and bakeries in the first two weeks after 2026-11-12, show a working prototype printing on a Rollo, and ask for a $79 annual pre-payment.",
+        "successCriteria": "5 of 20 pre-pay, or at least 8 say a missing or wrong label was flagged or worried them.",
+        "cost": "Two days in New York, about $300 travel and a $150 printer."
+      },
+      "moat": "Low: saved recipe matrices create some lock-in; the free generator could add saving and printing.",
+      "compliance": [
+        "The owner must confirm each allergen derivation; the app never certifies compliance and says it is not legal advice.",
+        "Wrong allergen output can cause harm: keep a timestamped audit log and clear disclaimers.",
+        "Handle exemptions such as highly refined oils as owner-confirmed notes.",
+        "Labels themselves should meet basic legibility (font size, contrast)."
+      ],
+      "risks": [
+        {
+          "risk": "A handwritten or pre-printed sticker satisfies the law, so few owners pay.",
+          "mitigation": "Sell the date label and recipe-change safety, not compliance alone; validate before building more."
+        },
+        {
+          "risk": "The law sets no penalties and no agency guidance, so urgency fades.",
+          "mitigation": "Watch for the first inspection citations and other states adopting the 2022 Food Code rule."
+        },
+        {
+          "risk": "Liability for a wrong allergen derivation.",
+          "mitigation": "Owner confirmation on every item and an explicit disclaimer."
+        }
+      ],
+      "scores": {
+        "pain": 2,
+        "willingnessToPay": 2,
+        "reachability": 2,
+        "competitiveGap": 2,
+        "feasibility": 4,
+        "complianceBurden": 3,
+        "total": 15
+      },
+      "scoreRationale": {
+        "pain": "The enacted law asks only for an allergen notice, which a sticker meets (https://www.nysenate.gov/legislation/bills/2025/A6558A); the only cost complaint is about an older bill (https://www.bcnys.org/sites/default/files/S.6820%20(Harckham)%20A.7494%20(Lunsford)%20-BCNys.pdf).",
+        "willingnessToPay": "The supplier answer is pre-printed stickers and handwriting (https://www.onlinelabels.com/articles/what-you-need-to-know-about-new-yorks-allergen-law?src=7); no freelancer jobs found for the task.",
+        "reachability": "No owner voices found online; local news quotes only the sponsor (https://www.wxxinews.org/local-news/2025-11-14/new-state-law-requires-food-allergen-labeling-for-deli-and-bakery-products), so reach is door to door.",
+        "competitiveGap": "A free tool already drafts the Contains line (https://cakerybakeries.com/labelmaker); the gap is saved recipes, change log and thermal printing.",
+        "feasibility": "Simple CRUD plus print CSS; the law needs no ingredient list (https://www.nysenate.gov/legislation/bills/2025/A6558A).",
+        "complianceBurden": "A wrong derivation can cause anaphylaxis, so liability and disclaimers matter (https://www.transact-tech.com/resources/blog/manual-food-labeling-allergen-compliance notes inspectors will look at labels)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Reviewer rescored 18 to 15. The enacted text (A6558-A, Chapter 494) requires only a notice of major allergens, so a handwritten 'Contains' sticker complies; OnlineLabels sells pre-printed allergen stickers for it. The only cost complaint (Business Council, 2023-06-01) targeted a predecessor bill that required full ingredient lists. A free generator (cakerybakeries.com) drafts the Contains line but has no saved recipes, change log or thermal printing; that is the re-scoped gap. No penalties, guidance or delay found. Not killed because no free tool does the saved-recipe, print and audit job."
+      },
+      "inspiredBy": "https://www.transact-tech.com/resources/blog/manual-food-labeling-allergen-compliance",
+      "gateGap": {
+        "missing": [
+          "total 15 is below 22",
+          "pain 2 is below 4",
+          "willingnessToPay 2 is below 3",
+          "no complaint dated within 90 days; the only complaint (2023-06-01) concerns a predecessor bill"
+        ],
+        "closedBy": "The validationTest's door-to-door visits after 2026-11-12: 8 owners describing a flagged or wrong label would be dated complaints (pain 4), and 5 annual pre-payments would lift willingnessToPay to 3."
+      }
+    },
+    {
+      "n": 3,
+      "title": "Fee Disclosure Check for Restaurants",
+      "slug": "fee-disclosure-check-restaurants",
+      "category": "Accessibility & Compliance",
+      "smallBusiness": true,
+      "complexity": "Weekend MVP",
+      "confidence": "provisional",
+      "topic": "Writing & Language",
+      "summary": "For independent restaurants in Florida, Colorado and California that add service, kitchen or card charges: upload the menu, website and receipt, and get a line-by-line check of every surcharge against the state's disclosure rules, with suggested wording.",
+      "public": {
+        "summary": "Checks your menu, website and receipts for every added charge and shows what your state expects you to say about it.",
+        "problem": "You add a service or kitchen charge to cover rising costs. Then a new state law says it has to be on the menu, in letters as big as your dish descriptions, with the amount and what it pays for. You reprint menus and still are not sure the online ordering page and the receipt match.",
+        "forWhom": "Owners and managers of independent restaurants, cafés and bars that add charges to the bill.",
+        "benefits": [
+          "Find every added charge across menu, website and receipt",
+          "See which ones fall short of your state's rules and why",
+          "Get plain wording you can put on the menu today",
+          "Check again before you reprint, not after"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "Florida (from 2026-07-01), Colorado (from 2026-01-01) and California now require restaurants to disclose added charges with the amount and purpose, in specified places and type sizes. Owners are unsure whether a third-party ordering fee counts, what wording works, and whether the online menu and receipt match the printed one.",
+      "description": "The owner uploads a menu PDF or photo, pastes the online ordering URL and a sample receipt. The app extracts every surcharge, service charge, auto-gratuity and card fee, measures the disclosure's type size against the menu text, and checks placement, amount and purpose against the cited statute for the chosen state. It produces a findings list with statute references and suggested disclosure wording, and re-checks the online menu when the owner asks. It never certifies compliance.",
+      "targetCustomer": "Owners and general managers of independent restaurants, cafés, bars and caterers in Florida, Colorado and California that add charges.",
+      "buyer": "The owner, as a one-off purchase per location, often at menu-reprint time.",
+      "whyNow": "Florida's SB 606 took effect 2026-07-01 and Colorado's HB25-1090 on 2026-01-01; owners quoted in June 2026 were still unsure what to disclose, and one restaurant spent about $3,000 reprinting menus.",
+      "founderFit": "Text extraction, font-size measurement and rule checks are a bounded build he can ship alone; plain-language rewriting of legal requirements suits his writing and teaching background.",
+      "problemEvidence": [
+        {
+          "url": "https://cbs12.com/features/the-wellness-experience/photos/new-state-law-cracks-down-on-hidden-dining-surcharges-florida-restaurant-fees-service-charges-gratuity-mamush-prime-kosher-grill-boca-raton-dining-town-center-mall-operations-charge-law-florida-law-2026-surcharge-transparency-hidden-restaurant",
+          "source": "cbs12.com (Sun Sentinel)",
+          "author": "Phillip Valys",
+          "date": "2026-06-27",
+          "kind": "complaint",
+          "summary": "Named Florida owners and managers unsure how to disclose charges; Mamush Prime Kosher Grill spent about $3,000 reprinting menus."
+        },
+        {
+          "url": "https://mynews13.com/fl/orlando/news/2026/07/03/florida-law-now-requires-restaurants-to-disclose-service-charges-before-customer-s-order",
+          "source": "mynews13.com",
+          "author": "Randy Rauch",
+          "date": "2026-07-03",
+          "kind": "mandate",
+          "summary": "Florida law now requires restaurants to disclose service charges before the customer orders."
+        },
+        {
+          "url": "https://coloradosun.com/2026/01/17/junk-fees-colorado-consumer-protection-tickets-rents-prices/",
+          "source": "coloradosun.com",
+          "author": "Tamara Chuang",
+          "date": "2026-01-17",
+          "kind": "mandate",
+          "summary": "Colorado's junk-fee law in force; the Attorney General has received complaints; enforcement under the Consumer Protection Act."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Law-firm checklists (Clark Hill)",
+          "url": "https://www.clarkhill.com/news-events/news/what-is-colorados-junk-fee-ban-compliance-checklist-for-hotels-restaurants-hospitality-businesses-hb-25-1090/",
+          "price": "Free",
+          "gap": "Static checklist; does not read a menu or check type size and placement."
+        },
+        {
+          "name": "beancount.io compliance guides",
+          "url": "https://beancount.io/blog/2026/09/23/colorado-hb25-1090-restaurant-service-charge-automatic-gratuity-disclosure-guide",
+          "price": "Free",
+          "gap": "Blog guidance only."
+        },
+        {
+          "name": "SpotOn junk-fee guide",
+          "url": "https://www.spoton.com/blog/how-to-navigate-junk-fees-law",
+          "price": "Free for SpotOn clients",
+          "gap": "Signage advice tied to its POS."
+        },
+        {
+          "name": "Restaurant lawyers (Greenspoon Marder)",
+          "url": "https://www.gmlaw.com/news/tips-on-tips-floridas-new-law-on-food-service-charges-effective-july-1-2026/",
+          "price": "unknown (no published flat fee)",
+          "gap": "Advice by appointment; nothing self-serve."
+        }
+      ],
+      "keyFeatures": [
+        "Surcharge extraction from menu PDF, photo, web page and receipt",
+        "Type-size comparison of the disclosure against menu text",
+        "Per-state rule checks with statute citations",
+        "Suggested disclosure wording to copy",
+        "Re-check of the online menu on demand"
+      ],
+      "mvpScope": {
+        "features": [
+          "Florida rules only",
+          "Menu PDF upload with text and font-size extraction",
+          "Findings list with statute references",
+          "Wording suggestions"
+        ],
+        "outOfScope": [
+          "Colorado and California rules",
+          "Scheduled monitoring",
+          "Third-party delivery app menus",
+          "POS integrations"
+        ],
+        "buildEstimate": "2 weekends"
+      },
+      "techStack": "React + Vite + Tailwind, Supabase, pdf.js for text and font sizes, Tesseract.js for photos, a rules table per state; no paid API on the founder's key at runtime.",
+      "pricing": {
+        "model": "One-off audit per location",
+        "pricePoint": "$59 per location, free re-check within 90 days",
+        "rationale": "Reviewer found no recurring need once menus are fixed, so a subscription would not hold; well under the $3,000 menu reprint and a lawyer's hour."
+      },
+      "revenueSketch": "Estimate: 300 audits a year x $59 = about $17,700 a year, if menu printers and POS resellers bundle it; unvalidated.",
+      "distribution": "Florida menu printers and POS resellers bundling the audit with reprints; Florida Restaurant & Lodging Association chapter newsletters; a free 'paste your menu' type-size checker as a lead magnet.",
+      "validationTest": {
+        "method": "Publish a free single-page type-size checker for Florida menus and offer the full audit at $59; contact 3 Florida menu printers about bundling.",
+        "successCriteria": "15 paid audits in 60 days, or one printer agreeing to resell.",
+        "cost": "About 15 hours and $0."
+      },
+      "moat": "Low: rule tables per state and printer partnerships; law firms could publish a similar tool.",
+      "compliance": [
+        "Unauthorized practice of law risk: present findings as checks against published statute text, never certify compliance, and offer a lawyer referral.",
+        "California exposure is high (class actions under consumer law), so keep California out of the MVP.",
+        "Uploaded menus and receipts are low-sensitivity, but receipts may carry card digits: strip them."
+      ],
+      "risks": [
+        {
+          "risk": "One-time need: once menus are fixed, nothing recurs.",
+          "mitigation": "Price as a one-off audit and sell at reprint time through printers."
+        },
+        {
+          "risk": "Soft enforcement in Florida (no private right of action, small fines) lowers urgency.",
+          "mitigation": "Track first enforcement actions and add states as laws pass."
+        },
+        {
+          "risk": "Owners read the output as legal advice.",
+          "mitigation": "Clear framing, statute citations and a lawyer referral."
+        }
+      ],
+      "scores": {
+        "pain": 2,
+        "willingnessToPay": 2,
+        "reachability": 2,
+        "competitiveGap": 2,
+        "feasibility": 4,
+        "complianceBurden": 3,
+        "total": 15
+      },
+      "scoreRationale": {
+        "pain": "Owners are confused and one spent about $3,000 reprinting (https://cbs12.com/features/the-wellness-experience/photos/new-state-law-cracks-down-on-hidden-dining-surcharges-florida-restaurant-fees-service-charges-gratuity-mamush-prime-kosher-grill-boca-raton-dining-town-center-mall-operations-charge-law-florida-law-2026-surcharge-transparency-hidden-restaurant), but that cost is sunk and no penalties have been seen.",
+        "willingnessToPay": "No paid service or freelancer job for this task found; lawyers publish no flat fee (https://www.gmlaw.com/news/tips-on-tips-floridas-new-law-on-food-service-charges-effective-july-1-2026/).",
+        "reachability": "Independent restaurants are hard to reach cold and associations already advise members (https://coloradosun.com/2026/01/17/junk-fees-colorado-consumer-protection-tickets-rents-prices/).",
+        "competitiveGap": "Free checklists exist but none reads a menu or checks type size (https://www.clarkhill.com/news-events/news/what-is-colorados-junk-fee-ban-compliance-checklist-for-hotels-restaurants-hospitality-businesses-hb-25-1090/).",
+        "feasibility": "PDF text and font-size extraction is routine; the Florida rule is specific about type size and placement (https://mynews13.com/fl/orlando/news/2026/07/03/florida-law-now-requires-restaurants-to-disclose-service-charges-before-customer-s-order).",
+        "complianceBurden": "Unauthorized-practice-of-law risk and California class-action exposure (https://www.californiaemploymentlawreport.com/2026/04/fridays-five-mandatory-fees-and-service-charges-in-california-what-employers-should-know/)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Reviewer rescored 18 to 15 and re-scoped from a $15/month subscription to a one-off audit: the need does not recur once menus are fixed. Florida has no private right of action and small DBPR fines; no enforcement action or lawsuit against a small restaurant found in Florida or Colorado. Free law-firm checklists and vendor guides supply wording, but none checks a menu's type size and placement or the online checkout; that is the remaining gap. The '$3,000 Miami owner' in search snippets was in fact Mamush Prime Kosher Grill in Boca Raton (CBS12/Sun Sentinel, 2026-06-27). Unauthorized-practice-of-law risk noted."
+      },
+      "inspiredBy": "https://cbs12.com/features/the-wellness-experience/photos/new-state-law-cracks-down-on-hidden-dining-surcharges-florida-restaurant-fees-service-charges-gratuity-mamush-prime-kosher-grill-boca-raton-dining-town-center-mall-operations-charge-law-florida-law-2026-surcharge-transparency-hidden-restaurant",
+      "gateGap": {
+        "missing": [
+          "total 15 is below 22",
+          "pain 2 is below 4",
+          "willingnessToPay 2 is below 3",
+          "no evidence dated within 90 days (newest owner complaint 2026-06-27)"
+        ],
+        "closedBy": "The validationTest's free checker and $59 audit: 15 paid audits in 60 days would establish willingnessToPay 3 and supply dated owner complaints toward pain 4."
+      }
+    }
+  ],
+  "runNotes": {
+    "weekday": "Friday",
+    "domainLens": "Small business, customer-facing: local services, trades, clinics, restaurants, retail, their websites and bookings",
+    "focusSources": [
+      "A13 Discourse forums, any niche (community.shopify.com)",
+      "B11 Freelance job boards",
+      "C8 Trade news"
+    ],
+    "searches": [
+      "community.shopify.com search.json: no-show deposit; appointment reminder; google reviews; restaurant menu; waitlist (after 2026-08-15); misrepresentation; junk fee; service fee law; PPWR; DMCA takedown; Capital adjustments; Balance statement bookkeeper (after 2026-08-08); allergen label; allergen (after 2026-05-01)",
+      "freelancer.com API: google business profile; menu website restaurant; booking website salon; ppwr packaging; shopify payout reconciliation; reviews; restaurant; salon; booking; reconcil; quote",
+      "freelancer.com API (spend pass): allergen; food label; unattended; food truck; small business website; shopify payout",
+      "apps.shopify.com 1-2 star reviews: sesami; bookthatapp; appointment-booking-cowlendar; zapiet-pickup-delivery; order-delivery-date-pro; a2x-accounting",
+      "wordpress.org reviews: restaurant-reservations",
+      "hn.algolia.com comments since 2025-09: \"my restaurant\"; \"my salon\"; \"my bakery\"; \"small business owner\" website; \"my clinic\"; \"customers\" \"google reviews\"; story 50167536 (Facebook Pages link limit) comments",
+      "WebSearch: small restaurant owner online ordering third-party fees 2026; site:community.squareup.com appointments no-show 2026; Google Business Profile suspended small business 2026; 2026 new rule small businesses deadline restaurants salons contractors; restaurant service fee disclosure law 2026; restaurantbusinessonline OR nrn.com November 2026 independent restaurants; salon OR med spa OR dental practice new law 2026; New York premises packed food allergen labeling law November 2026; bakery owner New York allergen labeling law cost; allergen label maker app small bakery price; HHS Section 504 small providers deadline; Facebook Pages limit links per month paid Meta Verified",
+      "Reviewer subagents ran their own competitor and spend searches for 7 candidates (see run log)."
+    ],
+    "unverifiedSignals": [
+      {
+        "url": "https://www.allergicliving.com/?p=131204",
+        "reason": "HTTP 403 (Cloudflare) to curl and WebFetch."
+      },
+      {
+        "url": "https://streetfoodfinder.com/pricing",
+        "reason": "HTTP 403 to both clients; food-truck plan prices unknown."
+      },
+      {
+        "url": "https://www.bcnys.org/node/7173",
+        "reason": "HTTP 403; the memo PDF itself was read instead."
+      },
+      {
+        "url": "https://whitespark.ca/gbp-reinstatement-service/",
+        "reason": "Seen only in search results; not fetched, so reinstatement prices are not cited."
+      },
+      {
+        "url": "https://get.popmenu.com/pricing",
+        "reason": "HTTP 403."
+      }
+    ],
+    "rejectedCandidates": [
+      {
+        "title": "Payout Explainer for Shopify Capital adjustments",
+        "total": 16,
+        "reason": "Reviewer kill: Payout Match ($19/mo Shopify app, 2026-10-13) already itemizes every adjustment behind a payout, PayoutCheck ($47/yr) separates Capital from chargebacks, and Payout Close is free; the Capital-in-payout change applies only to some financings since 2025-09-01."
+      },
+      {
+        "title": "Venue Update Page (Facebook link-limit escape)",
+        "total": 12,
+        "reason": "Reviewer kill: evidence misread, the Meta cap limits link posts only and text posts are unlimited; Buffer's free plan already publishes to a Facebook Page, Google Business Profile and a free Start Page from one composer."
+      },
+      {
+        "title": "Where's the Truck Today (food truck location broadcaster)",
+        "total": 16,
+        "reason": "Reviewed and rescored 19 to 16, but fails the floor: operator complaints (Square feature request, last reply 2026-04-27; HN 2026-03-30) are older than 180 days and the only recent item is advice, not a complaint; Publer and Buffer free plus Forwheel cover most of the job."
+      },
+      {
+        "title": "Crew Log by WhatsApp",
+        "total": 14,
+        "reason": "Reviewed and rescored 17 to 14: WhatsApp Cloud API groups need an Official Business Account and cap at 8 members, so workers cannot keep posting in their group; a free n8n template does the job for technical owners and Valoon, SendStatus and Kraaft serve construction; the spend evidence is a commodity custom build (272 bids). Below the watchlist line."
+      },
+      {
+        "title": "Google Business Profile suspension early warning",
+        "total": 16,
+        "reason": "Complaints sit on Reddit (blocked) and the GBP help forum was not fetched; spend exists only as reinstatement services (Whitespark, Fiverr gigs); not researched."
+      },
+      {
+        "title": "HHS Section 504 accessibility tracker for small medical and dental practices",
+        "total": 14,
+        "reason": "Deadline moved by interim final rule to 2028-05-10 for small recipients; crowded accessibility-audit market; the only practice-facing post (cdocs, 2026-04) is staff content with no replies."
+      },
+      {
+        "title": "Class and workshop booking on Shopify (spots left, waitlists)",
+        "total": 13,
+        "reason": "Rejected, crowded: Sesami (264 reviews), BookThatApp (421 reviews), Cowlendar and the new Trenoxa all sell this."
+      },
+      {
+        "title": "Rental deposit and booking for Shopify rental stores",
+        "total": 12,
+        "reason": "Rejected, crowded: Rental OS and BookThatApp already do it; the thread was a developer recruiting testers."
+      },
+      {
+        "title": "Salon no-show fee protection",
+        "total": 11,
+        "reason": "Rejected, crowded: Square Appointments, Vagaro and Booksy include no-show fees; Square threads are pre-2026."
+      },
+      {
+        "title": "Merchant Center misrepresentation pre-review",
+        "total": 0,
+        "reason": "Rejected, duplicate of Misrepresentation Preflight (2026-11-03)."
+      },
+      {
+        "title": "Transfer Zillow reviews to Google",
+        "total": 0,
+        "reason": "Rejected: reposting reviews on a Google profile breaches Google's review policy; also a one-off service."
+      },
+      {
+        "title": "EU PPWR supplier packaging document collector",
+        "total": 12,
+        "reason": "Rejected: the Shopify threads are opened by developers validating their own tools (crowded, not unserved)."
+      },
+      {
+        "title": "Fake DMCA counter-notice kit for Shopify merchants",
+        "total": 10,
+        "reason": "Rejected: legal-service shaped, and the 2026 replies read as promotional content rather than merchant complaints."
+      },
+      {
+        "title": "First-party online ordering to escape delivery-app fees",
+        "total": 12,
+        "reason": "Rejected, crowded: Owner.com, ChowNow and Toast online ordering already serve independents (Omaha owner moved to Toast)."
+      },
+      {
+        "title": "Card-testing fake checkout cleaner",
+        "total": 11,
+        "reason": "Rejected, crowded: several Shopify fraud and bot-blocker apps, and the thread replies are vendors."
+      },
+      {
+        "title": "Product-specific customer tax exemptions on Shopify",
+        "total": 0,
+        "reason": "Rejected, duplicate of Resale Ledger for Mixed Wholesale and Retail Shops (2026-11-05)."
+      },
+      {
+        "title": "Book Royal Mail collections from Shopify admin",
+        "total": 9,
+        "reason": "Rejected: Royal Mail Click & Drop already books collections; a feature request to Shopify, not a product gap."
+      },
+      {
+        "title": "Bookkeeper access to Shopify Balance statements",
+        "total": 8,
+        "reason": "Rejected: the thread was resolved by a separate staff permission that unlocks the Shopify Payments activity report."
+      },
+      {
+        "title": "Pickup time slots for food orders on Shopify",
+        "total": 10,
+        "reason": "Rejected, crowded: Zapiet and other pickup/delivery date apps."
+      },
+      {
+        "title": "Weather and event revenue hedging for small restaurants",
+        "total": 6,
+        "reason": "Rejected: a regulated financial product, not a software build he can ship."
+      },
+      {
+        "title": "Dental clinic website speed and SEO fixes",
+        "total": 8,
+        "reason": "Rejected: a consulting service, not a product."
+      },
+      {
+        "title": "Saved order filters for the Shopify admin",
+        "total": 7,
+        "reason": "Rejected: bookmarking filtered URLs already works, per the thread."
+      },
+      {
+        "title": "Wholesale order book reporting when orders bypass Shopify",
+        "total": 11,
+        "reason": "Rejected: ERP-shaped, enterprise sale, and the threads are answered by developers."
+      },
+      {
+        "title": "Unwanted taxonomy metafield cleanup",
+        "total": 7,
+        "reason": "Rejected: one-off cleanup that bulk editing already handles; no payment evidence."
+      }
+    ],
+    "watchlist": [],
+    "caveats": "Three provisional ideas ship (16, 15, 15); none came near the gate of 22. Seven candidates were researched and adversarially reviewed: two were killed (Payout Explainer: Payout Match and PayoutCheck already do it; Venue Update Page: the Facebook cap limits links only and Buffer's free plan covers the job), one was rescored but failed the 180-day floor (food truck broadcaster), one was rescored to 14 (Crew Log by WhatsApp) and not shipped because three ideas already qualified, and three survived as provisional after rescoring. As on 2026-11-05, community.shopify.com back-office and booking threads are dominated by developers promoting their own apps, and every booking niche checked (classes, rentals, salons) already has several paid apps; the strongest fresh signals today were mandates (New York allergen notices from 2026-11-12, Florida and Colorado fee disclosure) whose cheapest compliance path is a sticker or a reprint, which caps willingness to pay. No idea is validated, so no candidate has willingnessToPay 3 or more. Two of the three ideas share the category Accessibility & Compliance (the maximum). All three have small-business buyers. No candidate scored 19 or more without shipping, so the watchlist is empty."
+  }
+}
