@@ -625,3 +625,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-06 [doc] Extra run (random sources A15 A3 B6 C1 A5) added 3 ideas to ideas/2026-11-06.json: Recurring Send Check (17, prov), Transfer Enquiry Desk (16, prov), Mixed-Use Vehicle (15, prov)
 
 2026-11-06 [doc] ideas/sources.json: A3 GitHub issue-search path verified working again (200 with is:issue); B6 gains a TrustMRR category-page path.
+
+2026-11-07 [doc] Created ideas/2026-11-07.json (schemaVersion 3, 4 ideas): Donation Receipts (21, prov), Overtime TT Checker (19, prov), Renewal Audit (17, prov), Charity Registry Watch (17, prov)

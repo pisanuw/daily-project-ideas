@@ -1,0 +1,935 @@
+{
+  "date": "2026-11-07",
+  "schemaVersion": 3,
+  "complete": true,
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Donation Receipts for Xero",
+      "slug": "donation-receipts-for-xero",
+      "category": "Micro-SaaS",
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Teaching Operations",
+      "summary": "For small Australian charities, churches and community groups on Xero, and the bookkeepers who serve several of them: numbered, properly worded donation receipts and one 30 June annual statement per donor, straight from the gifts already in Xero.",
+      "public": {
+        "summary": "Sends every donor a proper receipt and a year-end statement from the gifts already in your accounts, without retyping anything.",
+        "problem": "Most of your donations arrive as bank transfers, cash or cheques, so there is no invoice to send. You end up building receipts one by one in Word, or invoicing every gift just to get a receipt out. At year end you spend days adding up each donor's giving for their tax statement.",
+        "forWhom": "Treasurers and bookkeepers of small charities, churches and community associations that keep their books in Xero.",
+        "benefits": [
+          "Every gift receipted with the right wording and a receipt number",
+          "One annual statement per donor, ready in minutes",
+          "No more invoicing gifts just to send a receipt",
+          "A clear register of every receipt issued",
+          "Bookkeepers can run it for several organisations from one place"
+        ],
+        "audience": "teams"
+      },
+      "problemStatement": "Donations that land directly in the bank have no invoice, so Xero has no way to send a receipt or a year-end giving statement. Charities hand-build Word receipts, invoice every gift as a workaround, or mail separate receipts; a bookkeeper serving several charities says clients keep asking her to issue DGR receipts and annual statements. The Xero idea has 56 votes and steady 2026 comments, with no Xero commitment.",
+      "description": "A read-only Xero connection lists bank transactions coded to the organisation's donation accounts. The treasurer reviews each gift, links it to a donor contact (the contact field on bank lines is often blank, so the app suggests matches from reference text and past gifts), and issues a numbered receipt with the organisation's name, ABN, deductible-gift wording, amount and date by email or PDF. On 30 June it produces one cumulative statement per donor and a receipt register for the auditor. US wording (written acknowledgement for gifts of $250 or more) and NZ signed receipts follow once Australia works.",
+      "targetCustomer": "Volunteer treasurers and part-time finance officers at small Australian charities, churches, parishes and community associations (roughly 20 to 500 donors), and bookkeepers who keep the books for several such organisations.",
+      "buyer": "The organisation on its own card from a small admin budget, or a bookkeeper who buys a multi-organisation pack and passes the cost on.",
+      "whyNow": "The 56-vote Xero idea is still open with fresh 2026 requests (2026-10-28, 2026-10-08, 2026-08-20) and no Xero response; the only same-scope rival, Donation Docket, is a waitlist that says nothing has been built; and the AU 30 June statement season gives a fixed launch date.",
+      "founderFit": "A Xero OAuth integration, a review queue and PDF/email generation is a small React + Supabase build Pisan can ship alone. He has no charity-finance network, so distribution depends on the Xero ideas thread, bookkeepers and church finance offices; that is the weak point.",
+      "problemEvidence": [
+        {
+          "url": "https://productideas.xero.com/forums/939198-for-small-businesses/suggestions/48787700-donation-receipts",
+          "source": "productideas.xero.com",
+          "author": "Jennifer Waters",
+          "date": "2026-10-28",
+          "kind": "complaint",
+          "summary": "Bookkeeper who works with several charities says they keep asking her for help issuing DGR receipts and annual statements, which Xero cannot do; the idea has 56 votes and 2026 comments from Heidi Gleeson (2026-08-20), Denis Putt (2026-06-07) and others."
+        },
+        {
+          "url": "https://productideas.xero.com/forums/967133-reports-tax/suggestions/51188209-donation-receipts-ability-to-add-signatures-on-c",
+          "source": "productideas.xero.com",
+          "author": "Karen Francis",
+          "date": "2026-10-08",
+          "kind": "complaint",
+          "summary": "Charitable trust: creating an invoice per donation just to send a receipt is a 'manual work around' that is 'so time consuming'; Carola Guerresi (2026-08-04) calls the workflow ridiculous, and the original NZ poster attached an IRD rejection of unsigned receipts."
+        },
+        {
+          "url": "https://productideas.xero.com/forums/967115-invoices-quotes/suggestions/47210360-receipts-generate-receipts-without-creating-invo",
+          "source": "productideas.xero.com",
+          "author": "Treasurer WAQA",
+          "date": "2025-11-02",
+          "kind": "complaint",
+          "summary": "Community association treasurer: members pay dues by bank transfer without an invoice, so numbered receipts must be built outside Xero; 28 votes."
+        },
+        {
+          "url": "https://apps.xero.com/uk/app/infoodle",
+          "source": "apps.xero.com",
+          "author": "Infoodle Ltd (vendor listing)",
+          "date": "2026-11-07",
+          "kind": "spend",
+          "summary": "Church and charity CRM on the Xero App Store that pushes donation batches to Xero and issues receipts; paid tiers (from GBP 24/month, receipts need the Finance add-on), 5.0 from 21 reviews; read on the run date."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Donation Docket",
+          "url": "https://donationdocket.com.au",
+          "price": "A$149/year up to 300 donors, A$299/year unlimited (waitlist; nothing built yet)",
+          "gap": "Same Australian scope but not built; its developer is pitching it in the same Xero thread."
+        },
+        {
+          "name": "Zeffy",
+          "url": "https://www.zeffy.com/en-au/feature/donation-receipts",
+          "price": "free",
+          "gap": "Free ABN/DGR receipts and a 30 June cumulative receipt, but no Xero link: every bank gift must be keyed in a second time."
+        },
+        {
+          "name": "infoodle",
+          "url": "https://apps.xero.com/uk/app/infoodle",
+          "price": "from GBP 24/month (100 contacts); receipts need the Finance add-on",
+          "gap": "A full church CRM; too heavy and costly for a treasurer who only needs receipts from Xero."
+        },
+        {
+          "name": "DonorSeek",
+          "url": "https://donorseek.com",
+          "price": "free plan; Pro NZ$200/year (Xero import on Pro)",
+          "gap": "New Zealand IRD receipts only; no ABN or DGR wording."
+        },
+        {
+          "name": "Xero branding-theme workaround",
+          "url": "https://helpdesk.scoutsqld.com.au/portal/en/kb/articles/tax-deductible-receipts-for-donations-template",
+          "price": "free",
+          "gap": "Eight manual steps per gift via an invoice coded to Donation; no annual statement."
+        }
+      ],
+      "keyFeatures": [
+        "Read-only Xero connection to donation-coded bank transactions",
+        "Review queue that links each gift to a donor, with suggested matches",
+        "Numbered receipts with ABN and deductible-gift wording, by email or PDF",
+        "30 June cumulative statement per donor",
+        "Receipt register export for the auditor",
+        "Bookkeeper dashboard across client organisations"
+      ],
+      "mvpScope": {
+        "features": [
+          "Xero OAuth and donation-account picker",
+          "Gift review and donor linking",
+          "Australian receipt and annual statement templates",
+          "Email delivery and PDF download",
+          "Receipt register CSV"
+        ],
+        "outOfScope": [
+          "US and NZ wording",
+          "Online giving pages",
+          "Gift Aid",
+          "App Store listing (needs Xero's Plus tier)"
+        ],
+        "buildEstimate": "3 weeks"
+      },
+      "techStack": "React + Vite + Tailwind, Supabase (Postgres, auth, edge functions), Xero Accounting API (BankTransactions, Contacts), server-side PDF generation, Resend for email; no LLM at runtime.",
+      "pricing": {
+        "model": "Per organisation annual subscription; bookkeeper pack",
+        "pricePoint": "A$129/year per organisation; A$590/year for up to 10 organisations",
+        "rationale": "Below Donation Docket's announced A$149 and far below infoodle; annual billing matches a job that peaks once a year."
+      },
+      "revenueSketch": "Estimate: 150 organisations x A$129 + 15 bookkeeper packs x A$590 = about A$28,000 a year, less Xero developer fees (Core A$35/month beyond 5 connections).",
+      "distribution": "Reply in the Xero donation-receipts idea threads with a free first-year pilot, contact bookkeepers who serve charities (starting with those posting in the thread), then diocese and church-network finance offices before the 30 June season; App Store listing only once revenue covers Xero's Plus tier.",
+      "validationTest": {
+        "method": "Landing page with a sample receipt and statement, linked from the Xero thread, plus calls with 5 charity bookkeepers and 5 treasurers offering a paid pilot for the 2026-27 statements.",
+        "successCriteria": "10 organisations or 2 bookkeepers prepay A$129 (or a bookkeeper pack) before building the statement feature.",
+        "cost": "About 15 hours and under A$50."
+      },
+      "moat": "Weak: the integration is copyable. The defence is correct per-country receipt wording maintained over time, the donor-matching history, and bookkeeper relationships.",
+      "compliance": [
+        "Australian Privacy Act: donor names, emails and gift amounts; keep minimal data, read-only Xero scopes, delete on disconnect.",
+        "ATO deductible-gift receipt requirements must be checked against the ATO page (it returned 403 this run) before launch.",
+        "NZ receipts must be signed by an authorised person (IRD rejection cited in the Xero thread).",
+        "Xero app partner terms; App Store listing requires certification and the Plus tier."
+      ],
+      "risks": [
+        {
+          "risk": "Free Zeffy or the Xero branding-theme workaround is good enough for many treasurers.",
+          "mitigation": "Sell the no-retyping link to Xero and the bookkeeper multi-organisation view, which neither offers."
+        },
+        {
+          "risk": "Donation Docket ships first in the same thread.",
+          "mitigation": "Move quickly on the bookkeeper channel and US wording, which Donation Docket does not plan."
+        },
+        {
+          "risk": "Once-a-year job leads to churn.",
+          "mitigation": "Annual billing and per-gift receipts during the year, not just the statement."
+        },
+        {
+          "risk": "Xero ships native donation receipts.",
+          "mitigation": "Xero reps reportedly call it low priority; keep the build small."
+        }
+      ],
+      "scores": {
+        "pain": 4,
+        "willingnessToPay": 3,
+        "reachability": 3,
+        "competitiveGap": 3,
+        "feasibility": 4,
+        "complianceBurden": 4,
+        "total": 21
+      },
+      "scoreRationale": {
+        "pain": "Steady 2026 requests from charities and a multi-charity bookkeeper in a 56-vote idea with no Xero response: https://productideas.xero.com/forums/939198-for-small-businesses/suggestions/48787700-donation-receipts",
+        "willingnessToPay": "Charities already pay for infoodle, which reads Xero bank transactions and issues receipts (from GBP 24/month plus add-on): https://apps.xero.com/uk/app/infoodle; the reviewer argued 2 because free Zeffy exists (https://www.zeffy.com/en-au/feature/donation-receipts).",
+        "reachability": "The demand sits in one public thread a competitor already works, and App Store listing needs Xero's A$245/month Plus tier: https://developer.xero.com/pricing",
+        "competitiveGap": "Nothing live turns Xero bank lines into ATO-worded receipts and statements at this price; Donation Docket is a waitlist: https://donationdocket.com.au",
+        "feasibility": "BankTransactions is readable on Xero's free Starter tier (5 connections), Core A$35/month for 50: https://developer.xero.com/pricing",
+        "complianceBurden": "Donor personal data and per-country wording, but no minors, payments or institutional contracts: https://productideas.xero.com/forums/967133-reports-tax/suggestions/51188209-donation-receipts-ability-to-add-signatures-on-c"
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Reviewer found no free product that does this from Xero for Australian organisations, so no kill. It rescored 22 to 20: willingnessToPay 3 to 2 (free Zeffy covers AU receipts and a 30 June statement outside Xero; a free Xero branding-theme workaround exists; one commenter calls even Xero poor value for small charities) and reachability 4 to 3 (one thread, already worked by Donation Docket; App Store needs the A$245/month Plus tier). It also noted the two 48787700 URLs are one thread and the NZ signature thread is weak support for an AU-first product. We keep willingnessToPay at 3 under the routine's calibration (infoodle is a paid app doing the job), giving 21; still below the gate."
+      },
+      "inspiredBy": "https://productideas.xero.com/forums/939198-for-small-businesses/suggestions/48787700-donation-receipts",
+      "gateGap": {
+        "missing": [
+          "total 21 is below 22",
+          "willingnessToPay is contested: the reviewer scored it 2 because free Zeffy and a free Xero workaround exist"
+        ],
+        "closedBy": "The validationTest's prepay: 10 organisations or 2 bookkeepers paying A$129 (or a pack) before the statement feature is built would show willingness to pay over the free options and lift reachability; that promotes it to validated."
+      }
+    },
+    {
+      "n": 2,
+      "title": "Qualified Overtime Checker for W-2 Box 12 TT",
+      "slug": "qualified-overtime-checker",
+      "category": "Small Business Ops",
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Data & Visualization",
+      "summary": "For small employers with hourly staff and the bookkeepers who run their payroll: rebuilds each workweek from payroll and timesheet exports, computes the qualified overtime premium the 2026 W-2 must report, and shows which employees' figures are wrong before W-2s go out.",
+      "public": {
+        "summary": "Checks the new overtime figure on your staff's W-2s and tells you exactly which ones are wrong and by how much.",
+        "problem": "This year every W-2 has to show the extra half of overtime pay separately, and your payroll software may not get it right when someone has two pay rates, a bonus or tips. If the number is wrong, your staff lose part of their tax deduction and you face corrected forms and penalties. Working it out by hand for every week of the year is not realistic.",
+        "forWhom": "Owners of small businesses with hourly staff, and the bookkeepers who run their payroll.",
+        "benefits": [
+          "Know before filing whether each employee's overtime figure is right",
+          "A corrected figure to enter for anyone who is off",
+          "A week-by-week worksheet you can keep on file",
+          "A short list of forms that need correcting",
+          "Your staff get the deduction they are owed"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "Tax-year-2026 W-2s must report the qualified overtime premium (the half-time portion of FLSA overtime at the regular rate) in Box 12 code TT, and employees can deduct only what is reported. Payroll tools compute it only for the simple case: QuickBooks says multiple pay rates and state overtime need manual entry, an EasyAcct test W-2 put all overtime pay in TT, and users report doubled or missing amounts.",
+      "description": "The user uploads a payroll register and a timesheet export with dated daily hours (QuickBooks, EasyAcct, Toast, or generic CSV). In the browser, the tool rebuilds every FLSA workweek, computes the regular rate including all remuneration (blended rates for multiple pay rates, non-discretionary bonuses allocated back to their weeks, shift differentials, the full minimum wage for tip-credit staff), then the qualified premium per week, following IRS FS-2026-13. It compares the yearly total with the TT figure the payroll tool produced and outputs a per-employee worksheet, the corrected figure to override in the W-2 software, and a W-2c list. Single-state FLSA rules first; California daily overtime later.",
+      "targetCustomer": "Owners and office managers of small US employers with 2 to 50 hourly staff (trades, restaurants, clinics, shops), and write-up and payroll bookkeepers who prepare W-2s for several such clients.",
+      "buyer": "The bookkeeper, per client file, passing the cost on; or the owner on a company card.",
+      "whyNow": "First filing season for Box 12 TT ends 2027-02-01; IRS updated its guidance on 2026-08-06 (FS-2026-13), and Intuit's moderator confirmed on 2026-08-26 that the automated feature does not handle multiple overtime items or pay rates.",
+      "founderFit": "Workweek reconstruction and regular-rate arithmetic over messy CSVs is a precise data-processing problem that fits Pisan's teaching; browser-only processing keeps SSNs off his servers. He has no payroll network, so distribution relies on QuickBooks and accountant communities in a short season.",
+      "problemEvidence": [
+        {
+          "url": "https://quickbooks.intuit.com/community/employees-and-payroll-2/new-qualified-overtime-compensation-375800",
+          "source": "quickbooks.intuit.com",
+          "author": "lilavalv",
+          "date": "2026-08-25",
+          "kind": "complaint",
+          "summary": "Qualified overtime tracking 'didn't calculate at all' with two or more overtime lines; Intuit moderator TrixieD (2026-08-26) confirmed the feature does not handle multiple overtime items or pay rates and suggested overriding Box 12 by hand."
+        },
+        {
+          "url": "https://accountants.intuit.com/community/easyacct-13/overtime-code-12tt-96621",
+          "source": "accountants.intuit.com",
+          "author": "DaniB",
+          "date": "2026-08-31",
+          "kind": "complaint",
+          "summary": "EasyAcct test W-2 carried 100% of overtime pay into TT rather than the premium; payroll preparers expect to 'manually adjust all the W-2s'."
+        },
+        {
+          "url": "https://quickbooks.intuit.com/community/employees-and-payroll-2/paystub-worker-sees-on-workforce-app-is-wrong-because-it-doubles-the-qualified-overtime-375919",
+          "source": "quickbooks.intuit.com",
+          "author": "LDO",
+          "date": "2026-09-02",
+          "kind": "complaint",
+          "summary": "The qualified overtime amount on the worker's paystub is doubled (6,382.75 shown twice)."
+        },
+        {
+          "url": "https://quickbooks.intuit.com/learn-support/en-us/employees-and-payroll/new-qualified-overtime-compensation-tracking/00/1593295/page/2",
+          "source": "quickbooks.intuit.com",
+          "author": "valerie3905",
+          "date": "2026-06-17",
+          "kind": "complaint",
+          "summary": "153-reply thread: multiple earn codes break the calculation, California daily overtime is not handled, results are inconsistent."
+        },
+        {
+          "url": "https://www.irs.gov/pub/taxpros/fs-2026-13.pdf",
+          "source": "irs.gov",
+          "author": "Internal Revenue Service",
+          "date": "2026-08-06",
+          "kind": "mandate",
+          "summary": "FS-2026-13: TT is hours over 40 x half the FLSA regular rate per workweek, the regular rate includes all remuneration, employees can deduct only what is reported, and errors need a W-2c with possible penalties."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Tie-Out Press",
+          "url": "https://www.cpapracticeadvisor.com/2026/10/13/when-box-12-code-tt-will-not-tie-to-the-payroll-register/191510/",
+          "price": "unknown",
+          "gap": "Named in a 2026-10-13 CPA Practice Advisor article as building reconciliation tools for code TT; no product page found, so scope and price are unknown."
+        },
+        {
+          "name": "QuickBooks Payroll qualified overtime tracking",
+          "url": "https://quickbooks.intuit.com/learn-support/en-us/help-article/track-worker-overtime/impact-tax-overtime-provision-quickbooks-payroll/L8bjFtrJ5_US_en_US",
+          "price": "included in QuickBooks Payroll (price unknown)",
+          "gap": "Automatic only with built-in 1.5x/2x items and a 40-hour week; multiple rates, bonuses and state rules need manual entry."
+        },
+        {
+          "name": "Toast Payroll",
+          "url": "https://support.toasttab.com/en/article/Toast-Payroll-No-Tax-on-Tips-and-or-Overtime?lang=en_US",
+          "price": "included in Toast Payroll (price unknown)",
+          "gap": "Uses (hours - 40) x overtime rate / 3; says nothing on blended rates, bonuses or tip credit."
+        },
+        {
+          "name": "Clockspot no-tax-on-overtime calculator",
+          "url": "https://clockspot.com/tools/no-tax-on-overtime-calculator/methodology",
+          "price": "free",
+          "gap": "For employees, one rate only; says blended rates are not modelled."
+        },
+        {
+          "name": "Patriot Software FLSA overtime setting",
+          "url": "https://help.patriotsoftware.com/en/articles/15423923-how-to-indicate-flsa-overtime-for-w-2-reporting-in-payroll",
+          "price": "included in Patriot payroll (price unknown)",
+          "gap": "Computes the half portion per pay item; no blended regular rate described."
+        }
+      ],
+      "keyFeatures": [
+        "Import payroll registers and dated timesheets (QuickBooks, EasyAcct, Toast, CSV)",
+        "Workweek rebuild across pay periods and year end",
+        "Regular rate with blended rates, bonuses and tip credit",
+        "Per-employee TT comparison and corrected figure",
+        "Week-by-week worksheet PDF and W-2c list",
+        "Browser-only processing; SSNs never uploaded"
+      ],
+      "mvpScope": {
+        "features": [
+          "Generic CSV import with column mapping",
+          "FLSA weekly overtime with blended rates and non-discretionary bonuses",
+          "Comparison with reported TT",
+          "Worksheet PDF"
+        ],
+        "outOfScope": [
+          "California and other daily-overtime states",
+          "Tipped occupation codes and qualified tips (TP)",
+          "Direct payroll integrations",
+          "Filing W-2 or W-2c"
+        ],
+        "buildEstimate": "2 to 3 weeks"
+      },
+      "techStack": "React + Vite + Tailwind, client-side CSV parsing (Papa Parse) and PDF generation, Supabase only for accounts and payments (Stripe); no LLM and no payroll data on the server.",
+      "pricing": {
+        "model": "Per employer file for the filing season; bookkeeper pack",
+        "pricePoint": "$49 per employer file; $199 for 10 files",
+        "rationale": "Below the cost of one W-2c and an hour of a bookkeeper's time; seasonal pricing matches a once-a-year check."
+      },
+      "revenueSketch": "Estimate: 150 bookkeeper packs x $199 + 300 single files x $49 = about $44,500 per season, for three seasons (tax years 2026 to 2028) unless the law is extended.",
+      "distribution": "Answer the QuickBooks and accountants.intuit.com qualified-overtime threads with a free one-employee checker, then offer bookkeeper packs; a short guide for write-up bookkeepers on EasyAcct, QuickBooks Desktop and Toast. The season runs December to February, plus W-2c work in spring.",
+      "validationTest": {
+        "method": "Free one-employee checker posted in the QuickBooks threads, plus calls with 8 payroll bookkeepers to run it on a real client file.",
+        "successCriteria": "5 of 8 find a mismatch on at least one employee, and 3 buy a $199 pack before 2027-01-15.",
+        "cost": "One week of evenings and $0."
+      },
+      "moat": "Low but real: handling the edge cases (pay periods that split a workweek, retroactive bonuses, tip credit, year-end timing) correctly and documenting the method is work a quick clone will skip.",
+      "compliance": [
+        "Payroll data includes SSNs and wages: process in the browser, never upload SSNs.",
+        "The output goes on a W-2: clear 'worksheet, not tax advice' wording, documented method, and the IRS FS-2026-13 reference.",
+        "Accessibility: WCAG 2.1 AA for the web app."
+      ],
+      "risks": [
+        {
+          "risk": "Payroll vendors fix multiple rates before January.",
+          "mitigation": "Keep the comparison role: even correct tools need a check, and bonuses and tip credit remain hard."
+        },
+        {
+          "risk": "Timesheet exports lack dated daily hours.",
+          "mitigation": "Support weekly-hours exports and flag files that cannot be checked."
+        },
+        {
+          "risk": "Short season and the law ends after 2028.",
+          "mitigation": "Low build cost; reuse the workweek engine for state overtime audits."
+        },
+        {
+          "risk": "Tie-Out Press or another tool reaches bookkeepers first.",
+          "mitigation": "Free one-employee checker in the threads where the complaints are."
+        }
+      ],
+      "scores": {
+        "pain": 4,
+        "willingnessToPay": 3,
+        "reachability": 3,
+        "competitiveGap": 3,
+        "feasibility": 3,
+        "complianceBurden": 3,
+        "total": 19
+      },
+      "scoreRationale": {
+        "pain": "Several independent 2026 users report wrong or missing TT and Intuit's moderator confirms the gap: https://quickbooks.intuit.com/community/employees-and-payroll-2/new-qualified-overtime-compensation-375800",
+        "willingnessToPay": "A once-a-year check, but bookkeepers already hand-adjust W-2s and a vendor is building TT reconciliation tools for them: https://www.cpapracticeadvisor.com/2026/10/13/when-box-12-code-tt-will-not-tie-to-the-payroll-register/191510/",
+        "reachability": "Buyers are spread across QuickBooks, accountant and Toast communities in a short season: https://accountants.intuit.com/community/easyacct-13/overtime-code-12tt-96621",
+        "competitiveGap": "No free tool rebuilds workweeks with a blended rate, but Tie-Out Press targets the same bookkeepers: https://www.cpapracticeadvisor.com/2026/10/13/when-box-12-code-tt-will-not-tie-to-the-payroll-register/191510/",
+        "feasibility": "Needs dated daily hours and handles about ten mismatch causes; more than a weekend: https://www.irs.gov/pub/taxpros/fs-2026-13.pdf",
+        "complianceBurden": "The output goes on a W-2 with W-2c and penalty exposure; browser processing limits data risk: https://www.irs.gov/pub/taxpros/fs-2026-13.pdf"
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Reviewer found no free tool that rebuilds FLSA workweeks from uploads with a blended regular rate (Clockspot is single-rate; QuickBooks, Toast, Patriot and Thomson Reuters use single-rate formulas), and confirmed the QuickBooks evidence comes from independent users. It rescored 22 to 19: reachability 4 to 3 (scattered buyers, short season), competitiveGap 4 to 3 (Tie-Out Press, named in a 2026-10-13 CPA Practice Advisor article, builds TT reconciliation tools; ArtMinds is building a Sage 300 report), and feasibility 4 to 3 (the article lists about ten mismatch causes, and a weekend MVP was optimistic, so complexity moved to Multi-week). The Sage thread was a question from a larger construction firm and was dropped as evidence."
+      },
+      "inspiredBy": "https://quickbooks.intuit.com/community/employees-and-payroll-2/new-qualified-overtime-compensation-375800",
+      "gateGap": {
+        "missing": [
+          "total 19 is below 22"
+        ],
+        "closedBy": "The validationTest: 5 of 8 bookkeepers finding mismatches and 3 buying packs would raise willingnessToPay and reachability, and confirm the gap against Tie-Out Press; that would lift the total to the gate."
+      }
+    },
+    {
+      "n": 3,
+      "title": "Renewal Audit for WildApricot",
+      "slug": "renewal-audit-for-wildapricot",
+      "category": "Micro-SaaS",
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Data & Visualization",
+      "summary": "For volunteer treasurers and admins of small associations, clubs and HOAs on WildApricot: a weekly list of dues and renewal records that do not add up, before members get wrong invoices or lapse.",
+      "public": {
+        "summary": "Checks your membership records every week and tells you which renewals and dues need fixing.",
+        "problem": "You send a batch of renewal invoices and some go to members who already paid. A payment lands but the membership does not extend, or an unpaid invoice disappears while the dues are still owed. You only find out when an annoyed member calls.",
+        "forWhom": "Volunteer treasurers and membership admins of small associations, clubs, homeowners associations and societies.",
+        "benefits": [
+          "Catch wrong renewal invoices before members see them",
+          "Find payments that did not extend a membership",
+          "Keep track of dues still owed",
+          "A weekly fix list instead of a spreadsheet hunt",
+          "A record of every exception for the board or auditor"
+        ],
+        "audience": "teams"
+      },
+      "problemStatement": "Membership platforms leave dues and renewals out of step: bulk renewal invoices go to members who already renewed, unpaid invoices are auto-voided while HOA dues stay owed, cancelled registrations sit as overpayments past the refund deadline, and completed payments fail to extend membership end dates. Admins find these one at a time and fix them by hand.",
+      "description": "The admin creates a read-only WildApricot authorized application and connects it. Each week the app pulls invoices, payments, allocations, refunds, membership levels and contacts through the Admin API and runs a fixed set of consistency rules: a completed dues payment with no extended renewal date; a pending renewal invoice for a member already renewed; auto-voided invoices on levels where dues remain owed; cancelled registrations left as overpayments past the refund date; and payments allocated to a contact other than the member renewed. It emails the treasurer a short fix list with links into WildApricot and keeps an exception register for export. CiviCRM would be a second connector, sold separately.",
+      "targetCustomer": "Volunteer treasurers, membership chairs and part-time administrators of small associations, clubs, HOAs and historical societies (100 to 2,000 contacts) on WildApricot.",
+      "buyer": "The organisation, from the same small admin budget that pays for WildApricot (from $66/month).",
+      "whyNow": "Fresh 2026 wishlist posts describe each exception (2026-08-12, 2026-09-11, 2026-10-26) with no staff reply, and WildApricot's 2025-11-01 API pagination change means old home-made scripts need rewriting anyway.",
+      "founderFit": "A scheduled rules engine over a documented REST API with a clear email report is a small Supabase build Pisan can do alone; the rules are the kind of data-consistency checking he teaches. He has no association network, so distribution relies on the public wishlist forum and WildApricot consultants.",
+      "problemEvidence": [
+        {
+          "url": "https://forums.wildapricot.com/forums/308932-wishlist/suggestions/51857829",
+          "source": "forums.wildapricot.com",
+          "author": "Donna Kreis",
+          "date": "2026-10-26",
+          "kind": "complaint",
+          "summary": "The bulk-invoices filter 'still requires enhancement': renewal invoices also go to members who already renewed; she wants only Pending Renewal members invoiced (1 vote, no reply)."
+        },
+        {
+          "url": "https://forums.wildapricot.com/forums/308932-wishlist/suggestions/51694198",
+          "source": "forums.wildapricot.com",
+          "author": "LezLi Logan",
+          "date": "2026-09-11",
+          "kind": "complaint",
+          "summary": "HOA: WildApricot auto-voids unpaid invoices for lapsed members though dues stay owed, 'very cumbersome for administrators' (1 vote; the cause is a Member Level setting)."
+        },
+        {
+          "url": "https://forums.wildapricot.com/forums/308932-wishlist/suggestions/51595964",
+          "source": "forums.wildapricot.com",
+          "author": "Annette Santullano",
+          "date": "2026-08-12",
+          "kind": "complaint",
+          "summary": "A cancelled paid registration shows as an overpayment even past the refund deadline, so balances are corrected by hand after each cancellation (5 votes)."
+        },
+        {
+          "url": "https://civicrm.stackexchange.com/questions/51652/some-member-dues-are-not-associated-with-a-membership-nor-updating-the-end-date",
+          "source": "civicrm.stackexchange.com",
+          "author": "eeprom",
+          "date": "2026-08-12",
+          "kind": "complaint",
+          "summary": "On CiviCRM, completed recurring dues payments do not extend membership end dates for some long-history contacts."
+        },
+        {
+          "url": "https://greenleaflabs.onrender.com/custom-reports-wildapricot",
+          "source": "greenleaflabs.onrender.com",
+          "author": "Green Leaf Labs (vendor)",
+          "date": "2026-11-07",
+          "kind": "spend",
+          "summary": "Custom WildApricot reports sold from $2,999 one-time; Cobalt Extensions also sells a reporting database and custom reports (typically about $100): organisations pay for reporting WildApricot lacks. Read on the run date."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "WildApricot saved searches and finance reports",
+          "url": "https://vol.asura.asu.edu/mailing-membership-renewal-letters",
+          "price": "included in WildApricot (from $66/month, https://www.wildapricot.com/pricing)",
+          "gap": "Saved searches filter by status and renewal date, and there is an outstanding-debts report, but nothing flags payments, invoices and memberships that disagree."
+        },
+        {
+          "name": "Cobalt Extensions reporting database",
+          "url": "https://cobaltextensions.wildapricot.org/reporting",
+          "price": "subscription unknown; custom reports typically about $100",
+          "gap": "Nightly SQL copy of contacts, events and audit tables; no finance exception rules."
+        },
+        {
+          "name": "NewPath Pro Reports (WARM)",
+          "url": "https://newpathconsulting.com/warm",
+          "price": "unknown (yearly subscription)",
+          "gap": "Looker Studio connector exposing invoices and payments; the admin must design the checks."
+        },
+        {
+          "name": "Green Leaf Labs custom reports",
+          "url": "https://greenleaflabs.onrender.com/custom-reports-wildapricot",
+          "price": "from $2,999 one-time",
+          "gap": "One-off consulting project, no weekly monitoring."
+        },
+        {
+          "name": "Zapier WildApricot triggers",
+          "url": "https://zapier.com/apps/wildapricot/integrations",
+          "price": "Zapier plan price unknown",
+          "gap": "Invoice and payment triggers exist, but the admin has to build and maintain every rule."
+        }
+      ],
+      "keyFeatures": [
+        "Read-only WildApricot connection",
+        "Five built-in dues and renewal consistency rules",
+        "Weekly fix-list email with deep links",
+        "Exception register with export",
+        "Snooze and mark-fixed per exception"
+      ],
+      "mvpScope": {
+        "features": [
+          "Connect via read-only authorized application",
+          "Two rules: paid-not-extended and invoiced-already-renewed",
+          "Weekly email",
+          "CSV export"
+        ],
+        "outOfScope": [
+          "CiviCRM connector",
+          "Who-changed-what auditing (the API does not expose it)",
+          "Automatic fixes",
+          "Event registration rules beyond cancellations"
+        ],
+        "buildEstimate": "2 to 3 weeks"
+      },
+      "techStack": "React + Vite + Tailwind, Supabase (Postgres, auth, scheduled edge functions, encrypted key storage), WildApricot Admin API, Resend for email; no LLM at runtime.",
+      "pricing": {
+        "model": "Per organisation subscription",
+        "pricePoint": "$12/month or $99/year",
+        "rationale": "Small next to WildApricot's own $66/month and Green Leaf's $2,999 custom reports; volunteer budgets cap it low."
+      },
+      "revenueSketch": "Estimate: 200 organisations x $99/year = about $19,800 a year; assumes most come through WildApricot consultants and the wishlist forum.",
+      "distribution": "Offer a free one-time scan in reply to the dated wishlist threads (disclosed as the developer's own tool), partner with WildApricot consultants who already sell reporting, and target HOAs and societies ahead of their renewal season.",
+      "validationTest": {
+        "method": "A free one-time scan for 10 WildApricot organisations recruited from the wishlist forum and consultants, reporting how many exceptions each has.",
+        "successCriteria": "At least 6 of 10 have real exceptions and 3 pay $99 for a year of weekly checks.",
+        "cost": "About 20 hours to build the scan; $0."
+      },
+      "moat": "Weak: the rules are copyable and WildApricot could fix individual filters. The value is a maintained rule set that tracks WildApricot's changes and a history of each organisation's exceptions.",
+      "compliance": [
+        "Member personal data and payment history (GDPR for UK/EU members, PIPEDA in Canada): data processing agreement, minimal storage, delete on disconnect.",
+        "WildApricot API terms allow extensions but forbid substantially replicating WildApricot products; follow its call-frequency limits and keep keys secure.",
+        "Use a read-only authorized application key, stored encrypted."
+      ],
+      "risks": [
+        {
+          "risk": "Demand is thin: the wishlist posts have 1 to 5 votes and some exceptions are configuration choices.",
+          "mitigation": "Run the free scan first and only build the rules that turn up real exceptions."
+        },
+        {
+          "risk": "WildApricot fixes the bulk-invoice filter itself.",
+          "mitigation": "Keep several rules so one fix does not remove the product."
+        },
+        {
+          "risk": "Subscribers cancel after renewal season.",
+          "mitigation": "Annual billing only."
+        },
+        {
+          "risk": "Holding many organisations' API keys is a security liability.",
+          "mitigation": "Read-only keys, encryption at rest, and revocation guidance."
+        }
+      ],
+      "scores": {
+        "pain": 2,
+        "willingnessToPay": 2,
+        "reachability": 3,
+        "competitiveGap": 3,
+        "feasibility": 3,
+        "complianceBurden": 4,
+        "total": 17
+      },
+      "scoreRationale": {
+        "pain": "Three independent 2026 posts, but with 1 to 5 votes, no replies, and two describing configuration or designed behaviour: https://forums.wildapricot.com/forums/308932-wishlist/suggestions/51694198",
+        "willingnessToPay": "Organisations pay for WildApricot ($66/month) and custom reports, but no spend on exception auditing was found: https://www.wildapricot.com/pricing",
+        "reachability": "Complainants post publicly under their names on the wishlist forum: https://forums.wildapricot.com/forums/308932-wishlist/suggestions/51857829",
+        "competitiveGap": "Cobalt and NewPath expose data without exception rules; saved searches cover only the renewal-status part: https://cobaltextensions.wildapricot.org/reporting",
+        "feasibility": "Read-only access works (https://help.ce-go.com/article/673-connect-wild-apricot), but payment-allocation and refund-deadline logic is harder than it looks.",
+        "complianceBurden": "Read-only keys and allowed extensions; key custody and deletion duties remain: https://www.wildapricot.com/legal-center/api-terms-of-use"
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Reviewer found no free or cheaper product running these exception checks, so no kill, but rescored 18 to 17: pain 3 to 2 (1, 1 and 5 votes, no replies; the auto-void complaint is a Member Level setting and the overpayment one is designed behaviour), willingnessToPay 2 (no audit-tool spend found), complianceBurden 3 to 4 after finding WildApricot supports read-only authorized applications (CE-Go setup guide), and noted that WildApricot saved searches already cover renewal-status filtering and one more WildApricot release could fix the bulk-invoice filter. The idea was rescoped to read-only keys and to drop who-changed auditing, which the API cannot provide."
+      },
+      "inspiredBy": "https://forums.wildapricot.com/forums/308932-wishlist/suggestions/51857829",
+      "gateGap": {
+        "missing": [
+          "total 17 is below 22",
+          "pain 2 is below 4",
+          "willingnessToPay 2 is below 3"
+        ],
+        "closedBy": "The free-scan validationTest: if 6 of 10 organisations have real exceptions and 3 pay $99, that is both fresh complaint evidence and payment, lifting pain and willingnessToPay toward the gate."
+      }
+    },
+    {
+      "n": 4,
+      "title": "Charity Registry Watch for California",
+      "slug": "charity-registry-watch-california",
+      "category": "Accessibility & Compliance",
+      "complexity": "Weekend MVP",
+      "confidence": "provisional",
+      "topic": "Data & Visualization",
+      "summary": "For small CPA and bookkeeping firms and fiscal sponsors with many California charity clients: each client's Registry renewal date, a twice-monthly status check against the state's delinquency list, and reminders before a client lapses.",
+      "public": {
+        "summary": "Keeps every charity client's state registration on time and warns you the moment one slips into delinquency.",
+        "problem": "Each charity you look after has its own fiscal year and its own state renewal date, and the state is moving filings and notices online. One missed renewal puts a client on the delinquent list, with monthly late fees the charity cannot pay from its charitable funds. You find out when the client is already in trouble.",
+        "forWhom": "Accountants, bookkeepers and fiscal sponsors who handle state registrations for several California charities.",
+        "benefits": [
+          "Every client's renewal due date in one calendar",
+          "An alert when a client appears on the state's delinquent or suspended list",
+          "Reminders and a client checklist before each filing",
+          "Fewer late fees and status scares",
+          "Ready for the switch to online-only filing in 2027"
+        ],
+        "audience": "teams"
+      },
+      "problemStatement": "California's Registry of Charities moves to mandatory online filing on 2027-01-01, and from 2027-05-01 sends notices by mail or email, not both. CalNonprofits warned the state that email-only notices pose 'a high risk of missed notices, leading to inadvertent and catastrophic status changes'. Thousands of charities sit on the delinquent or suspended list at any time, and late fees of $25 a month cannot be paid from charitable assets.",
+      "description": "The firm enters or imports its charity clients (name, EIN, fiscal year end, IRS extension status). The app computes each Registry renewal due date (4 months 15 days after year end, following the federal extension), sends reminders and a client-ready checklist, and twice a month cross-checks every client's EIN against the Attorney General's published 'may not operate' CSV of delinquent, suspended and revoked registrants. Any client that appears triggers an alert with the delinquency steps. It never files or signs; the filing stays in the state's free Online Filing Service.",
+      "targetCustomer": "Small California CPA and bookkeeping firms, and fiscal sponsors, that handle Registry renewals for 10 to 200 small charities.",
+      "buyer": "The firm, from its practice software budget, passing the cost into its nonprofit compliance fee.",
+      "whyNow": "Final regulations approved 2026-10-13 make online filing mandatory from 2027-01-01 and switch notices to a single channel from 2027-05-01; the state's own response to comments keeps mail and email only until then.",
+      "founderFit": "Date arithmetic plus a scheduled diff against a public CSV is a weekend build for Pisan. He has no CPA network; the buyer channel (CalCPA, practice-management marketplaces) is unproven.",
+      "problemEvidence": [
+        {
+          "url": "https://www.oag.ca.gov/system/files/media/final-statement-of-reasons.pdf",
+          "source": "oag.ca.gov",
+          "author": "Jeannette Brown (CalNonprofits), comment in the Attorney General's Final Statement of Reasons",
+          "date": "2026-10-13",
+          "kind": "complaint",
+          "summary": "Comment filed in the 2026-05-01 to 2026-06-16 rulemaking period, published in the Final Statement of Reasons for regulations approved 2026-10-13: relying on email-only notices 'poses a high risk of missed notices, leading to inadvertent and catastrophic status changes'. Chanel Crawford (Daryl Reese Law Group) asked for a practitioner multi-organisation account."
+        },
+        {
+          "url": "https://oag.ca.gov/charities/regs/registry-of-charities-and-fundraisers-online-filing-service",
+          "source": "oag.ca.gov",
+          "author": "California Department of Justice",
+          "date": "2026-10-13",
+          "kind": "mandate",
+          "summary": "Final regulations approved 2026-10-13: filings and payments to the Registry go online from 2027-01-01, section 311 (notices) from 2027-05-01."
+        },
+        {
+          "url": "https://oag.ca.gov/charities/reports",
+          "source": "oag.ca.gov",
+          "author": "California Department of Justice",
+          "date": "2026-11-04",
+          "kind": "mandate",
+          "summary": "Public 'may not operate' list updated twice a month (data as of 2026-11-04): 29,547 rows with FEIN, of which 3,945 delinquent and 1,179 suspended."
+        },
+        {
+          "url": "https://www.oag.ca.gov/charities/delinquency",
+          "source": "oag.ca.gov",
+          "author": "California Department of Justice",
+          "date": "2026-11-05",
+          "kind": "mandate",
+          "summary": "Late fee of $25 per month; charitable assets cannot be used to pay it."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Registry Online Filing Service",
+          "url": "https://oag.ca.gov/charities/renewals",
+          "price": "free (state fees $25 to $1,200 by revenue)",
+          "gap": "Validates forms and fees and lets one preparer link many organisations, but no due-date reminders across clients."
+        },
+        {
+          "name": "Karbon 990 workflow templates",
+          "url": "https://karbonhq.com/integrations/file-forms/",
+          "price": "unknown",
+          "gap": "Practice-management deadlines and state compliance calendars; no charity Registry status checks shown."
+        },
+        {
+          "name": "Lacerte RRF-1 screen",
+          "url": "https://accountants.intuit.com/community/ideas/california-doj-form-rrf-1-mandatory-electronic-filing-and-client-letter-22268",
+          "price": "included in Lacerte (price unknown)",
+          "gap": "Prepares the RRF-1 but does not e-file it or watch Registry status."
+        },
+        {
+          "name": "Managed multi-state registration services (Labyrinth and others)",
+          "url": "https://labyrinthinc.com/nonprofit-annual-filing-requirements-california/",
+          "price": "unknown on the page",
+          "gap": "Full-service and multi-state, priced per state; too costly for a California-only charity paying a $25 fee."
+        }
+      ],
+      "keyFeatures": [
+        "Client list with EIN, fiscal year end and extension status",
+        "Computed Registry due dates and reminders",
+        "Twice-monthly check against the state's delinquent and suspended list",
+        "Client-ready filing checklist",
+        "Firm dashboard of upcoming and overdue renewals"
+      ],
+      "mvpScope": {
+        "features": [
+          "CSV import of clients",
+          "Due-date calculation",
+          "Email reminders",
+          "Status diff against the published CSV"
+        ],
+        "outOfScope": [
+          "Filing or signing",
+          "Other states",
+          "Storing donor schedules (never store Schedule B)",
+          "Practice-management integrations"
+        ],
+        "buildEstimate": "1 weekend"
+      },
+      "techStack": "React + Vite + Tailwind, Supabase (Postgres, auth, scheduled edge functions), Resend for email; public CSV from oag.ca.gov; no LLM at runtime.",
+      "pricing": {
+        "model": "Per firm subscription",
+        "pricePoint": "$19/month for up to 50 charities, $39/month for up to 200",
+        "rationale": "Priced against one avoided client delinquency rather than a full compliance service; low enough to expense."
+      },
+      "revenueSketch": "Estimate: 60 firms x $25/month average = $1,500 MRR; a niche side income unless other states follow.",
+      "distribution": "Direct outreach to California CPA firms with nonprofit practices and to fiscal sponsors, posts in accountants.intuit.com threads on the RRF-1, and CalNonprofits resources, timed to the 2027-01-01 switch.",
+      "validationTest": {
+        "method": "Free status check: a firm pastes its client EINs and gets an instant report against the published list; follow up with 10 firms.",
+        "successCriteria": "3 of 10 firms find a client they did not know was delinquent, and 3 pay for reminders.",
+        "cost": "One evening and $0."
+      },
+      "moat": "None technical: the data is public. Value is convenience for firms and timing around the 2027 switch.",
+      "compliance": [
+        "Public registry data only; never accept or store Schedule B donor lists.",
+        "Registration codes act as credentials if a firm stores them: do not collect them.",
+        "State the tool does not file, sign or give legal advice."
+      ],
+      "risks": [
+        {
+          "risk": "Firms already track deadlines in practice-management tools.",
+          "mitigation": "Lead with the free status diff, which those tools lack."
+        },
+        {
+          "risk": "Delinquency mostly hits tiny charities with no CPA.",
+          "mitigation": "Also offer a low-price single-charity tier through CalNonprofits."
+        },
+        {
+          "risk": "The pain is a one-time transition.",
+          "mitigation": "Expand to other states' charitable registrations."
+        }
+      ],
+      "scores": {
+        "pain": 2,
+        "willingnessToPay": 2,
+        "reachability": 2,
+        "competitiveGap": 2,
+        "feasibility": 5,
+        "complianceBurden": 4,
+        "total": 17
+      },
+      "scoreRationale": {
+        "pain": "Delinquency recurs, but the state keeps mail and email until 2027-05-01 and the main quote is a rulemaking comment: https://www.oag.ca.gov/system/files/media/final-statement-of-reasons.pdf",
+        "willingnessToPay": "One state's filing with a $25-$100 fee; the only CPA request found has no replies: https://accountants.intuit.com/community/ideas/california-doj-form-rrf-1-mandatory-electronic-filing-and-client-letter-22268",
+        "reachability": "No proven channel into small California CPA firms; practice-management marketplaces are where they are: https://karbonhq.com/integrations/file-forms/",
+        "competitiveGap": "The free Online Filing Service already handles many organisations per preparer; reminders are the only gap: https://oag.ca.gov/charities/renewals",
+        "feasibility": "Status comes from a free twice-monthly CSV keyed by FEIN, no scraping: https://oag.ca.gov/charities/reports",
+        "complianceBurden": "No filing or signing, public data only: https://www.oag.ca.gov/charities/delinquency"
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Reviewer rescored 19 to 17 rather than killing, as no free product does cross-client reminders plus status checks for CPA firms. But the Final Statement of Reasons says the Online Filing Service already lets one preparer link many organisations, and the state publishes the delinquent and suspended list free as a CSV, so the idea was cut down to reminders plus a status diff (pain 3 to 2, willingnessToPay 3 to 2, competitiveGap 3 to 2, feasibility 4 to 5). The CalNonprofits and law-firm quotes are rulemaking comments, not buyer complaints, and the state will send both mail and email until 2027-05-01."
+      },
+      "inspiredBy": "https://www.oag.ca.gov/system/files/media/final-statement-of-reasons.pdf",
+      "gateGap": {
+        "missing": [
+          "total 17 is below 22",
+          "pain 2 is below 4",
+          "willingnessToPay 2 is below 3",
+          "the only complaint is a rulemaking comment from an association, not from a buyer"
+        ],
+        "closedBy": "The free status-check validationTest: firms discovering unknown delinquent clients and 3 of 10 paying would supply both buyer complaints and payment evidence."
+      }
+    }
+  ],
+  "runNotes": {
+    "weekday": "Saturday",
+    "domainLens": "Institutional back-office work",
+    "focusSources": [
+      "A2 Other LMS and classroom forums",
+      "B5 Acquisition marketplaces",
+      "C4 Job postings that describe manual work"
+    ],
+    "searches": [
+      "WebSearch: nonprofit office manager spreadsheet donor acknowledgment letters year-end forum 2026",
+      "WebSearch: site:community.squareup.com end of day / tip / payroll problem October 2026",
+      "WebSearch (B5): site:acquire.com startup listing back office small business SaaS",
+      "WebSearch (C4): job posting 2026 manually spreadsheets office coordinator nonprofit reconcile reports",
+      "freelancer.com API (B11): volunteer hours tracking; board meeting minutes; grant reporting spreadsheet; membership renewal dues; church management; school admin automation (loose matches, nothing on task)",
+      "discuss.openedx.org search.json (A2): grading; manual export; certificate; report enrollment; enrollment export; grades csv; instructor dashboard; cohort export learners",
+      "discuss.frappe.io search.json: school fees; payroll manual; donor; membership; student attendance; nonprofit; volunteer",
+      "forum.invoiceninja.com search.json: donation; recurring; nonprofit; quote deposit",
+      "community.n8n.io / community.make.com / forum.ghost.org search.json: nonprofit; donation; church; membership renewal",
+      "productideas.xero.com: donation receipt; nonprofit reporting; receipt capture; month end checklist; job costing quote",
+      "civicrm.stackexchange API: receipt; membership; report; contribution",
+      "forums.wildapricot.com wishlist (via WebSearch Wild Apricot renewal)",
+      "HN Algolia comments: nonprofit spreadsheet; church volunteer scheduling; restaurant scheduling; my clinic intake; contractor quotes paperwork",
+      "community.shopify.com search.json: inventory sync wholesale; sales tax filing frustrated; returns exchanges manual; purchase order supplier spreadsheet; payout reconcile accountant; hours every week manually; unpaid net 30 wholesale spreadsheet",
+      "apps.shopify.com 1-2 star reviews (B12): a2x; inventory-planner; taxcloud-sales-tax-automation",
+      "freelancer.com API (B11): reconcile; data entry invoices; donor; timesheet(s); pdf to excel; quickbooks cleanup; inventory spreadsheet; certificate generate; compliance form; nonprofit; church; bank reconciliation; school fees; payroll spreadsheet",
+      "PeoplePerHour (B11): bookkeeping reconciliation; data entry invoices; charity (query ignored)",
+      "WebSearch (B12): site:apps.xero.com donations Gift Aid charity app; site:apps.shopify.com QuickBooks sync reconciliation payouts; GiveWP pricing",
+      "WebSearch (B5): site:flippa.com SaaS church OR nonprofit OR school management for sale; site:acquire.com invoicing OR bookkeeping OR scheduling; app.acquire.com nonprofit OR church OR clinic; microns.io back office",
+      "WebSearch (C4): idealist reconciliation operations coordinator; church administrator reconcile contributions; community college compliance reporting; private school business office; catholicjobs parish business manager; community health clinic UDS data coordinator; higheredjobs financial aid reconciliation",
+      "Federal Register API (C5): qualified tips; qualified overtime compensation; information returns 1099; web content state and local government accessibility; beneficial ownership information; Form W-2 tips overtime; nonprofit charitable contribution small entity",
+      "WebSearch (C5/C10): pay transparency 2027; sales tax on services 2027; IRS 2026 W-2 box 12 TP TT; AG charitable registration 2026; California Registry Online Filing Service; QuickBooks Online price increase 2026; free church software plan discontinued 2026; Microsoft nonprofit 2026; Wave June 2026 pricing; Mailchimp free plan 2026",
+      "Spend pass: site:apps.xero.com donation receipts charity app (infoodle found)",
+      "Spend pass: Wild Apricot add-on paid integration renewal reconciliation (nothing priced)",
+      "Spend pass: BRC Donor Statements QuickBooks church giving statements price (product found, price unknown)",
+      "Spend pass: 2026 W-2 box 12 TT TP small employer software (no dedicated tool found)",
+      "Spend pass: Shopify app import supplier price list (Sheetbreaker free, 264 reviews)",
+      "Spend pass: Synder nonprofit Stripe donations QuickBooks (Synder covers fee splitting)",
+      "Spend pass: California RRF-1 CT-TR-1 filing service fee (no published prices)",
+      "Spend pass: self-managed HOA treasurer software price (PayHOA, Easy HOA from $49/month)",
+      "Spend pass: restricted fund release schedule QuickBooks add-on (Aplos $59-79/month)",
+      "Spend pass: Section 504 HHS clinic website compliance service price (none published)",
+      "Research and review agents: about 60 further searches on competitors and free substitutes for the six reviewed candidates (see run log)"
+    ],
+    "unverifiedSignals": [
+      {
+        "url": "https://community.squareup.com/t5/Orders-Menu-Items-Catalog/Missing-Tips/td-p/803711",
+        "reason": "Empty page to curl (0 bytes) and WebFetch; not cited."
+      },
+      {
+        "url": "https://www.ato.gov.au/businesses-and-organisations/not-for-profit-organisations/gifts-and-fundraising/receiving-tax-deductible-gifts/receipts",
+        "reason": "HTTP 403 from the site; ATO receipt rules not confirmed from a fetched page."
+      },
+      {
+        "url": "https://www.federalregister.gov/documents/2026/04/17/2026-07519/increase-in-threshold-for-requiring-information-reporting-with-respect-to-certain-payees",
+        "reason": "Redirected to the federalregister.gov bot interstitial; the $2,000 threshold was seen only in snippets."
+      },
+      {
+        "url": "https://www.idealist.org/en/nonprofit-job/a5c27b566a534511b4065eeb533e1b32-administrative-coordinator-for-development-and-operations-episcopal-charities-of-new-york-new-york",
+        "reason": "Closed Idealist /en/ postings return HTTP 404; about ten such job URLs failed."
+      },
+      {
+        "url": "https://www.windes.com/ca-attorney-general-online-filing/",
+        "reason": "HTTP 403 and a Cloudflare challenge; not retried."
+      },
+      {
+        "url": "https://support.gusto.com/article/112472520100000/manage-tip-wages-distributed-service-charges-and-tip-credits-in-gusto-for-admins",
+        "reason": "HTTP 403; Gusto's handling of TT and tips unconfirmed."
+      }
+    ],
+    "rejectedCandidates": [
+      {
+        "title": "Month-Close Pack for Shopify Bookkeepers",
+        "total": 21,
+        "reason": "Killed during research and review: Shopify's free Payments activity report (2026-08-22) already gives opening and closing balances as a PDF, Ledger Badger (free, 2026-10-14) gives a monthly close PDF for the accountant, and Mipler ($9.99/month, 661 reviews) shares reports by link without admin access; what remains is a Shopify permission flaw."
+      },
+      {
+        "title": "504 Readiness Binder for Small Clinics",
+        "total": 16,
+        "reason": "Survived review as provisional (rescored 19 to 16: no dated owner complaint, small practices have until 2028-05-10, free vendor 504 plans and checklists), but a first run ships at most 4 provisional ideas and it ranked fifth."
+      },
+      {
+        "title": "Supplier price-list import for Shopify retailers",
+        "total": 16,
+        "reason": "Spend pass found Sheetbreaker (free plan, 264 reviews) and several paid importers doing the job; one merchant complaint (community.shopify.com 687184)."
+      },
+      {
+        "title": "Donation payout splitter (Stripe/PayPal to QuickBooks funds)",
+        "total": 16,
+        "reason": "Synder already syncs Stripe payments and fees into QuickBooks and Xero; one complaint (community.make.com 111764, 2026-07-07)."
+      },
+      {
+        "title": "Church giving statements from QuickBooks Online",
+        "total": 17,
+        "reason": "BRC Donor Statements (donorstatements.com) already produces IRS-style statements from QuickBooks; complaint evidence is from 2024; overlaps Donation Receipts for Xero."
+      },
+      {
+        "title": "Restricted fund release schedules for small nonprofits",
+        "total": 17,
+        "reason": "Aplos ($59-79/month) and QuickBooks classes cover fund tracking; only complaint is from 2025-10-14 (QuickBooks community), the other signal a job posting."
+      },
+      {
+        "title": "HOA volunteer treasurer books",
+        "total": 15,
+        "reason": "PayHOA, Easy HOA and ManageCasa from about $45-49/month already serve self-managed HOAs; one housing-society freelance job (2026-11-06)."
+      },
+      {
+        "title": "1099 vendor tracking under the new $2,000 threshold",
+        "total": 15,
+        "reason": "Mandate only (threshold read only in snippets); Track1099 and TaxBandits already serve the job cheaply."
+      },
+      {
+        "title": "Who-changed-what audit log for membership records",
+        "total": 15,
+        "reason": "WildApricot's AuditLogItems API covers financial history only, so the tool cannot see which admin edited a profile; two low-vote requests."
+      },
+      {
+        "title": "Wholesale net-30 receivables for small Shopify brands",
+        "total": 13,
+        "reason": "Saturated: at least five apps including free Chalkline and Arrears pitched in the threads."
+      },
+      {
+        "title": "Lighter sales-tax filing for small Shopify sellers",
+        "total": 14,
+        "reason": "Crowded (TaxCloud, TaxJar, BreezyFile) and heavy multi-state compliance burden for one developer."
+      },
+      {
+        "title": "Inventory forecasting for shops under $1M revenue",
+        "total": 15,
+        "reason": "Several paid forecasting apps already compete; one 1-star review on Inventory Planner (2026-09-24)."
+      },
+      {
+        "title": "Receipt snap-now-code-later for Xero sole traders",
+        "total": 13,
+        "reason": "Hubdoc is included free with Xero and Dext covers the job; low-vote Xero ideas."
+      },
+      {
+        "title": "Month-end close checklist and lock for Xero bookkeepers",
+        "total": 14,
+        "reason": "Fails the floor: latest comment 2026-04-13 is over 180 days old; Karbon and Financial Cents already offer close checklists."
+      },
+      {
+        "title": "Scanned register to reconciled spreadsheet",
+        "total": 12,
+        "reason": "Rejection rule: an OCR/AI wrapper with no workflow or data moat, despite several freelance jobs."
+      },
+      {
+        "title": "Community college state compliance reporting pack",
+        "total": 12,
+        "reason": "Rejection rule: unsellable without institutional procurement for the first sale."
+      },
+      {
+        "title": "Scholarship granting organisation compliance (federal tax credit)",
+        "total": 12,
+        "reason": "Proposed rule only (comments due 2026-12-01); no complaint, no buyer yet."
+      },
+      {
+        "title": "Engagement tier reports for nonprofit organisers",
+        "total": 12,
+        "reason": "One CiviCRM question; SearchKit can already build it."
+      },
+      {
+        "title": "Small-business bank-feed bookkeeping for Wave refugees",
+        "total": 13,
+        "reason": "Bank feeds need a paid aggregator API at runtime; many cheap alternatives exist."
+      },
+      {
+        "title": "Open edX to SIS sync for small schools",
+        "total": 12,
+        "reason": "One unanswered Open edX post; institutional integration work closer to consulting."
+      },
+      {
+        "title": "Shopify POS external payment settlement check",
+        "total": 11,
+        "reason": "One weak post (2026-09-16); unclear buyer."
+      },
+      {
+        "title": "Delaware pay-transparency posting checker",
+        "total": 11,
+        "reason": "Mandate effective 2027-09-26 for 25+ employees only; no complaint; job boards already add ranges."
+      }
+    ],
+    "watchlist": [],
+    "caveats": "Four provisional ideas ship (21, 19, 17, 17); none cleared the gate of 22. Six candidates were researched and adversarially reviewed: one killed (Shopify month-close pack: free Shopify activity report and Ledger Badger), five rescored down (22 to 21, 22 to 19, 18 to 17, 19 to 17, 19 to 16), and the fifth survivor (504 Readiness Binder, 16) was left out by the first-run cap of 4 provisional ideas. Donation Receipts keeps willingnessToPay 3 under the routine's calibration (infoodle is a paid app doing the job) where its reviewer argued 2. Saturday's focus sources were thin: Open edX (A2) is developer and operator talk with little admin-office pain; B5 yielded one Flippa-vetted private-school SaaS sale and seller-reported listings, used only as context; C4 Idealist and CatholicJobs postings 404 or 410 once closed, so only four postings were readable. The strongest fresh veins were vendor idea boards (productideas.xero.com, forums.wildapricot.com) and the QuickBooks and accountants communities. Many 'pages.dev' and 'onrender.com' comparison sites in search results are AI-built competitors, a sign that small-business back-office niches are being flooded. No watchlist entries carried over from 2026-11-06 and none were added."
+  }
+}

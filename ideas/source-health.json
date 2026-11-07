@@ -42,6 +42,66 @@
     }
   ],
   "byHost": {
+    "accessibe.com": {
+      "attempts": 3,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 3,
+      "outcomes": {
+        "ok": 3
+      },
+      "workingPaths": [
+        "webfetch https://accessibe.com/pricing",
+        "webfetch https://accessibe.com/industry/healthcare",
+        "webfetch https://accessibe.com/accessibility-platform/reports/sec-504/sec-504-plan-healthcare"
+      ]
+    },
+    "accessible.org": {
+      "attempts": 3,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 3,
+      "outcomes": {
+        "ok": 3
+      },
+      "workingPaths": [
+        "webfetch https://accessible.org/section-504-web-compliance-services/",
+        "webfetch https://accessible.org/?p=9021384",
+        "webfetch https://accessible.org/pocket-guide-hhs-section-504/"
+      ]
+    },
+    "accountants.intuit.com": {
+      "attempts": 5,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 4,
+      "outcomes": {
+        "http_403": 1,
+        "ok": 4
+      },
+      "workingPaths": [
+        "webfetch https://accountants.intuit.com/community/ideas/california-doj-form-rrf-1-mandatory-electronic-filing-and-client-letter-22268",
+        "webfetch https://accountants.intuit.com/community/proseries-product-discussions-9/72726",
+        "webfetch https://accountants.intuit.com/community/easyacct-13/overtime-code-12tt-96621"
+      ]
+    },
+    "adanews.ada.org": {
+      "attempts": 2,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "webfetch https://adanews.ada.org/ada-news/2026/may/comply-by-may-11/",
+        "webfetch https://adanews.ada.org/ada-news/2026/may/hhs-office-for-civil-rights-extends-compliance-deadline-for-digital-accessibility-final-rule-to-may-2027/"
+      ]
+    },
     "adnabu.com": {
       "attempts": 1,
       "evidenceItems": 1,
@@ -126,15 +186,26 @@
       },
       "workingPaths": []
     },
+    "api.regulations.gov": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_429": 1
+      },
+      "workingPaths": []
+    },
     "api.stackexchange.com": {
-      "attempts": 14,
-      "evidenceItems": 1,
-      "lastAttempt": "2026-11-06",
-      "lastOk": "2026-11-06",
-      "ok": 13,
+      "attempts": 19,
+      "evidenceItems": 2,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 18,
       "outcomes": {
         "allowlist": 1,
-        "ok": 13
+        "ok": 18
       },
       "workingPaths": [
         "curl https://api.stackexchange.com/2.3/search/advanced?site=academia&q=spreadsheet&order=desc&sort=creation&pagesize=20",
@@ -143,13 +214,14 @@
       ]
     },
     "api.wordpress.org": {
-      "attempts": 16,
+      "attempts": 19,
       "evidenceItems": 1,
-      "lastAttempt": "2026-11-06",
-      "lastOk": "2026-11-06",
-      "ok": 16,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 18,
       "outcomes": {
-        "ok": 16
+        "empty": 1,
+        "ok": 18
       },
       "workingPaths": [
         "curl https://api.wordpress.org/plugins/info/1.2/?action=query_plugins&request[search]=accessibility&request[per_page]=15",
@@ -195,6 +267,19 @@
         "curl https://apify.com/renzomacar/supabase-rls-scanner"
       ]
     },
+    "app.acquire.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://app.acquire.com/public/n3h27fcojv-your-fundraising-sidekick"
+      ]
+    },
     "app.thetutor.link": {
       "attempts": 2,
       "evidenceItems": 0,
@@ -223,15 +308,15 @@
       ]
     },
     "apps.shopify.com": {
-      "attempts": 65,
+      "attempts": 84,
       "evidenceItems": 9,
-      "lastAttempt": "2026-11-06",
-      "lastOk": "2026-11-06",
-      "ok": 51,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 69,
       "outcomes": {
         "empty": 13,
-        "http_404": 1,
-        "ok": 51
+        "http_404": 2,
+        "ok": 69
       },
       "workingPaths": [
         "curl https://apps.shopify.com/gmc-compliance-checker",
@@ -240,16 +325,18 @@
       ]
     },
     "apps.xero.com": {
-      "attempts": 1,
-      "evidenceItems": 0,
-      "lastAttempt": "2026-11-05",
-      "lastOk": "2026-11-05",
-      "ok": 1,
+      "attempts": 3,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 2,
       "outcomes": {
-        "ok": 1
+        "empty": 1,
+        "ok": 2
       },
       "workingPaths": [
-        "curl https://apps.xero.com/us/function/debtor-tracking/app/remitclear"
+        "curl https://apps.xero.com/us/function/debtor-tracking/app/remitclear",
+        "webfetch https://apps.xero.com/uk/app/infoodle"
       ]
     },
     "appsumo.com": {
@@ -289,6 +376,20 @@
         "webfetch https://batchbound.com"
       ]
     },
+    "beancount.io": {
+      "attempts": 2,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "webfetch https://beancount.io/blog/2026/08/05/wave-accounting-bank-feeds-collaborator-paywall-guide",
+        "webfetch https://beancount.io/forum/t/3679"
+      ]
+    },
     "bestfoodtrucks.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -299,6 +400,19 @@
         "http_429": 1
       },
       "workingPaths": []
+    },
+    "blog.groupmail.io": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://blog.groupmail.io/mailchimp-free-plan-changes-2026/"
+      ]
     },
     "blog.report-uri.com": {
       "attempts": 1,
@@ -313,6 +427,71 @@
         "webfetch https://blog.report-uri.com/pci-dss-4-0-1-saq-a-and-client-side-security-a-plain-english-faq/"
       ]
     },
+    "blog.taxbandits.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://blog.taxbandits.com/obbbas-no-tax-on-overtime-rule-what-small-business-owners-must-report-on-2026-w-2s/"
+      ]
+    },
+    "blog.techsoup.org": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://blog.techsoup.org/en-ca/posts/tag/technology-planning"
+      ]
+    },
+    "blog.usablenet.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://blog.usablenet.com/hhs-section-504-digital-accessibility-faq"
+      ]
+    },
+    "bookkeep.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://bookkeep.com/docs/apps/shopify/shopify-payments-order-to-cash-reporting"
+      ]
+    },
+    "bostonwebgroup.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://bostonwebgroup.com/hhs-ada-compliance-physicians-clinics/"
+      ]
+    },
     "buffer.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -325,6 +504,17 @@
       "workingPaths": [
         "webfetch https://buffer.com/pricing"
       ]
+    },
+    "ca-rcf.evokeplatform.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "empty": 1
+      },
+      "workingPaths": []
     },
     "cabgrid.com": {
       "attempts": 2,
@@ -377,6 +567,17 @@
         "curl https://cartmango.com/thinkific-alternatives/"
       ]
     },
+    "cause-comply.onrender.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_5xx": 1
+      },
+      "workingPaths": []
+    },
     "cbs12.com": {
       "attempts": 1,
       "evidenceItems": 1,
@@ -391,16 +592,31 @@
       ]
     },
     "changelog.shopify.com": {
+      "attempts": 3,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 3,
+      "outcomes": {
+        "ok": 3
+      },
+      "workingPaths": [
+        "curl https://changelog.shopify.com/posts/run-inventory-counts-in-pos",
+        "webfetch https://changelog.shopify.com/posts/review-shopify-payments-balance-activity-with-the-new-activity-report",
+        "webfetch https://changelog.shopify.com/posts/new-and-updated-staff-permissions-for-payments-payouts-disputes-and-tax-documents"
+      ]
+    },
+    "charitycompliancesolutions.com": {
       "attempts": 1,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-03",
-      "lastOk": "2026-11-03",
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
       "ok": 1,
       "outcomes": {
         "ok": 1
       },
       "workingPaths": [
-        "curl https://changelog.shopify.com/posts/run-inventory-counts-in-pos"
+        "webfetch https://charitycompliancesolutions.com/services/registrations/charity-registration-renewals"
       ]
     },
     "chromewebstore.google.com": {
@@ -416,6 +632,32 @@
         "curl https://chromewebstore.google.com/detail/kami/ecnphlgnajanjnkcmbpancdjoidceilk/reviews",
         "curl https://chromewebstore.google.com/detail/vendoo-crosslist-extensio/mnampbajndaipakjhcbbaihllmghlcdf/reviews",
         "curl https://chromewebstore.google.com/detail/crosslist-magic/lkjldebnppchfbcgbeelhpjplklnjfbk/reviews"
+      ]
+    },
+    "clockspot.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://clockspot.com/tools/no-tax-on-overtime-calculator/methodology"
+      ]
+    },
+    "cobaltextensions.wildapricot.org": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://cobaltextensions.wildapricot.org/reporting"
       ]
     },
     "coddy.tech": {
@@ -491,12 +733,13 @@
       "workingPaths": []
     },
     "community.cloudflare.com": {
-      "attempts": 1,
+      "attempts": 2,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-02",
+      "lastAttempt": "2026-11-07",
       "lastOk": null,
       "ok": 0,
       "outcomes": {
+        "empty": 1,
         "http_403": 1
       },
       "workingPaths": []
@@ -550,14 +793,14 @@
       "workingPaths": []
     },
     "community.make.com": {
-      "attempts": 18,
+      "attempts": 20,
       "evidenceItems": 2,
-      "lastAttempt": "2026-11-06",
-      "lastOk": "2026-11-06",
-      "ok": 17,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 19,
       "outcomes": {
         "empty": 1,
-        "ok": 17
+        "ok": 19
       },
       "workingPaths": [
         "curl https://community.make.com/search.json?q=deprecated%20after%3A2026-08-01",
@@ -566,20 +809,31 @@
       ]
     },
     "community.n8n.io": {
-      "attempts": 50,
+      "attempts": 51,
       "evidenceItems": 4,
-      "lastAttempt": "2026-11-06",
-      "lastOk": "2026-11-06",
-      "ok": 49,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 50,
       "outcomes": {
         "empty": 1,
-        "ok": 49
+        "ok": 50
       },
       "workingPaths": [
         "curl https://community.n8n.io/search.json?q=invoice%20small%20business%20after%3A2026-09-01",
         "curl https://community.n8n.io/t/315077.json",
         "curl https://community.n8n.io/t/321414.json"
       ]
+    },
+    "community.openemr.org": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "empty": 1
+      },
+      "workingPaths": []
     },
     "community.openhab.org": {
       "attempts": 1,
@@ -593,15 +847,15 @@
       "workingPaths": []
     },
     "community.shopify.com": {
-      "attempts": 126,
+      "attempts": 149,
       "evidenceItems": 15,
-      "lastAttempt": "2026-11-06",
-      "lastOk": "2026-11-06",
-      "ok": 123,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 145,
       "outcomes": {
-        "empty": 2,
+        "empty": 3,
         "http_404": 1,
-        "ok": 123
+        "ok": 145
       },
       "workingPaths": [
         "curl https://community.shopify.com/search.json?q=ADA%20lawsuit%20after%3A2026-05-01",
@@ -610,13 +864,13 @@
       ]
     },
     "community.squareup.com": {
-      "attempts": 4,
+      "attempts": 6,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-06",
+      "lastAttempt": "2026-11-07",
       "lastOk": "2026-11-06",
       "ok": 2,
       "outcomes": {
-        "empty": 2,
+        "empty": 4,
         "ok": 2
       },
       "workingPaths": [
@@ -647,6 +901,20 @@
       },
       "workingPaths": [
         "curl https://community.zoom.com/t5/Zoom-Phone-System/10DLC-Registration-failed-over-and-over/m-p/191089"
+      ]
+    },
+    "communityhub.sage.com": {
+      "attempts": 2,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "curl https://communityhub.sage.com/us/sage_construction_and_real_estate/f/sage-300-construction-and-real-estate/275623/w2-ot-in-box-12-using-code-tt",
+        "curl https://communityhub.sage.com/us/sage50_us/f/payroll-tax/262118/the-big-beautiful-confusing-law"
       ]
     },
     "complianz.io": {
@@ -745,14 +1013,27 @@
       },
       "workingPaths": []
     },
-    "developer.xero.com": {
+    "developer.candid.org": {
       "attempts": 1,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-06",
-      "lastOk": "2026-11-06",
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
       "ok": 1,
       "outcomes": {
         "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://developer.candid.org/docs/california-endpoint"
+      ]
+    },
+    "developer.xero.com": {
+      "attempts": 2,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
       },
       "workingPaths": [
         "webfetch https://developer.xero.com/pricing"
@@ -798,28 +1079,41 @@
         "curl https://discourse.jupyter.org/search.json?q=deploy%20after%3A2026-08-15"
       ]
     },
-    "discuss.frappe.io": {
+    "discourse.webflow.com": {
       "attempts": 1,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-05",
-      "lastOk": "2026-11-05",
-      "ok": 1,
+      "lastAttempt": "2026-11-07",
+      "lastOk": null,
+      "ok": 0,
       "outcomes": {
-        "ok": 1
+        "empty": 1
+      },
+      "workingPaths": []
+    },
+    "discuss.frappe.io": {
+      "attempts": 10,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 10,
+      "outcomes": {
+        "ok": 10
       },
       "workingPaths": [
-        "curl https://discuss.frappe.io/search.json?q=small%20business%20invoice+after%3A2026-08-07"
+        "curl https://discuss.frappe.io/search.json?q=small%20business%20invoice+after%3A2026-08-07",
+        "curl https://discuss.frappe.io/search.json?q=school%20fees+after%3A2026-08-15",
+        "curl https://discuss.frappe.io/search.json?q=payroll%20manual+after%3A2026-08-15"
       ]
     },
     "discuss.openedx.org": {
-      "attempts": 8,
+      "attempts": 19,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-04",
-      "lastOk": "2026-11-04",
-      "ok": 7,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 18,
       "outcomes": {
         "empty": 1,
-        "ok": 7
+        "ok": 18
       },
       "workingPaths": [
         "curl https://discuss.openedx.org/search.json?q=certificate%20after%3A2026-08-01",
@@ -877,18 +1171,58 @@
       },
       "workingPaths": []
     },
-    "dor.wa.gov": {
-      "attempts": 2,
+    "donationdocket.com.au": {
+      "attempts": 1,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-02",
-      "lastOk": "2026-11-02",
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
       "ok": 1,
       "outcomes": {
-        "http_404": 1,
         "ok": 1
       },
       "workingPaths": [
-        "curl https://dor.wa.gov/forms-publications/publications-subject/tax-topics/2025-tax-legislation"
+        "webfetch https://donationdocket.com.au"
+      ]
+    },
+    "donationmanager.co.nz": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://donationmanager.co.nz"
+      ]
+    },
+    "donorseek.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://donorseek.com"
+      ]
+    },
+    "dor.wa.gov": {
+      "attempts": 3,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 2,
+      "outcomes": {
+        "http_404": 1,
+        "ok": 2
+      },
+      "workingPaths": [
+        "curl https://dor.wa.gov/forms-publications/publications-subject/tax-topics/2025-tax-legislation",
+        "webfetch https://dor.wa.gov/taxes-rates/retail-sales-tax/services-newly-subject-retail-sales-tax/why-am-i-being-charged-sales-tax-now"
       ]
     },
     "doyouok.com": {
@@ -942,6 +1276,19 @@
       },
       "workingPaths": []
     },
+    "elvanto.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://elvanto.com/features/all/online-giving-finances"
+      ]
+    },
     "emailmeter.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -956,15 +1303,18 @@
       ]
     },
     "equalizedigital.com": {
-      "attempts": 1,
+      "attempts": 2,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-01",
-      "lastOk": null,
-      "ok": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
       "outcomes": {
-        "http_403": 1
+        "http_403": 1,
+        "ok": 1
       },
-      "workingPaths": []
+      "workingPaths": [
+        "webfetch https://equalizedigital.com/accessibility-checker/pricing/"
+      ]
     },
     "erank.com": {
       "attempts": 1,
@@ -1032,15 +1382,19 @@
       "workingPaths": []
     },
     "flippa.com": {
-      "attempts": 1,
+      "attempts": 4,
       "evidenceItems": 0,
-      "lastAttempt": "2026-10-30",
-      "lastOk": null,
-      "ok": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 2,
       "outcomes": {
-        "empty": 1
+        "empty": 2,
+        "ok": 2
       },
-      "workingPaths": []
+      "workingPaths": [
+        "curl https://flippa.com/12755441-an-all-in-one-saas-school-management-and-administration-system-for-small-private-schools-across-the-us-and-canada-with-online-payments-and-tuition-management",
+        "webfetch https://flippa.com/13789049-macro-manage-helps-schools-clubs-tutors-gyms-and-academies-track-fees-earn-recurring-revenue-by-selling-monthly-or-yearly-organization-plans"
+      ]
     },
     "flowlert.com": {
       "attempts": 1,
@@ -1092,14 +1446,14 @@
       "workingPaths": []
     },
     "forum.bubble.io": {
-      "attempts": 4,
+      "attempts": 5,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-06",
-      "lastOk": "2026-11-06",
-      "ok": 3,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 4,
       "outcomes": {
         "empty": 1,
-        "ok": 3
+        "ok": 4
       },
       "workingPaths": [
         "curl https://forum.bubble.io/search.json?q=accessibility%20after%3A2026-07-01",
@@ -1108,13 +1462,13 @@
       ]
     },
     "forum.ghost.org": {
-      "attempts": 3,
+      "attempts": 4,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-03",
-      "lastOk": "2026-11-03",
-      "ok": 3,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 4,
       "outcomes": {
-        "ok": 3
+        "ok": 4
       },
       "workingPaths": [
         "curl https://forum.ghost.org/search.json?q=cookie%20after%3A2026-06-01",
@@ -1123,13 +1477,14 @@
       ]
     },
     "forum.invoiceninja.com": {
-      "attempts": 4,
+      "attempts": 9,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-05",
-      "lastOk": "2026-11-05",
-      "ok": 4,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 8,
       "outcomes": {
-        "ok": 4
+        "empty": 1,
+        "ok": 8
       },
       "workingPaths": [
         "curl https://forum.invoiceninja.com/search.json?q=sales%20tax%20after%3A2026-06-01",
@@ -1165,12 +1520,13 @@
       ]
     },
     "forum.squarespace.com": {
-      "attempts": 1,
+      "attempts": 2,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-02",
+      "lastAttempt": "2026-11-07",
       "lastOk": null,
       "ok": 0,
       "outcomes": {
+        "empty": 1,
         "http_403": 1
       },
       "workingPaths": []
@@ -1186,6 +1542,21 @@
       },
       "workingPaths": []
     },
+    "forums.wildapricot.com": {
+      "attempts": 11,
+      "evidenceItems": 3,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 11,
+      "outcomes": {
+        "ok": 11
+      },
+      "workingPaths": [
+        "curl https://forums.wildapricot.com/forums/308932-wishlist/suggestions/47477840-allow-renewal-date-to-be-set-based-on-the-current",
+        "curl https://forums.wildapricot.com/forums/308932-wishlist/filters/new",
+        "curl https://forums.wildapricot.com/forums/308932-wishlist/suggestions/51889032"
+      ]
+    },
     "get.popmenu.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -1194,6 +1565,33 @@
       "ok": 0,
       "outcomes": {
         "http_403": 1
+      },
+      "workingPaths": []
+    },
+    "gethelp.wildapricot.com": {
+      "attempts": 7,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 5,
+      "outcomes": {
+        "empty": 2,
+        "ok": 5
+      },
+      "workingPaths": [
+        "curl https://gethelp.wildapricot.com/en/categories/32-wild-apricot-apis",
+        "curl https://gethelp.wildapricot.com/en/articles/182-using-wildapricot-s-api",
+        "curl https://gethelp.wildapricot.com/en/articles/2911-updating-your-api-integrations-for-pagination"
+      ]
+    },
+    "getholdings.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_404": 1
       },
       "workingPaths": []
     },
@@ -1239,6 +1637,30 @@
         "webfetch https://github.com/JMCanning78/datastructures-visualization/issues/313"
       ]
     },
+    "givebutter.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://givebutter.com/freebies/donation-receipt-generator"
+      ]
+    },
+    "givewp.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "redirect": 1
+      },
+      "workingPaths": []
+    },
     "grad.tamu.edu": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -1249,6 +1671,19 @@
         "http_404": 1
       },
       "workingPaths": []
+    },
+    "greenleaflabs.onrender.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://greenleaflabs.onrender.com/custom-reports-wildapricot"
+      ]
     },
     "healthchecks.io": {
       "attempts": 1,
@@ -1263,6 +1698,41 @@
         "curl https://healthchecks.io/pricing/"
       ]
     },
+    "help.ce-go.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://help.ce-go.com/article/673-connect-wild-apricot"
+      ]
+    },
+    "help.elvanto.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_403": 1
+      },
+      "workingPaths": []
+    },
+    "help.onpay.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_403": 1
+      },
+      "workingPaths": []
+    },
     "help.outofthesandbox.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -1273,6 +1743,19 @@
         "http_403": 1
       },
       "workingPaths": []
+    },
+    "help.patriotsoftware.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://help.patriotsoftware.com/en/articles/15423923-how-to-indicate-flsa-overtime-for-w-2-reporting-in-payroll"
+      ]
     },
     "help.pickcode.io": {
       "attempts": 1,
@@ -1301,6 +1784,19 @@
         "curl https://help.shopify.com/en/manual/online-store/themes/managing-themes/updating-themes"
       ]
     },
+    "helpdesk.scoutsqld.com.au": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://helpdesk.scoutsqld.com.au/portal/en/kb/articles/tax-deductible-receipts-for-donations-template"
+      ]
+    },
     "hiverhq.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -1315,14 +1811,14 @@
       ]
     },
     "hn.algolia.com": {
-      "attempts": 49,
+      "attempts": 58,
       "evidenceItems": 1,
-      "lastAttempt": "2026-11-06",
-      "lastOk": "2026-11-06",
-      "ok": 39,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 48,
       "outcomes": {
         "empty": 10,
-        "ok": 39
+        "ok": 48
       },
       "workingPaths": [
         "curl https://hn.algolia.com/api/v1/search_by_date?query=%22alt%20text%22&tags=comment&hitsPerPage=30",
@@ -1365,6 +1861,17 @@
       },
       "workingPaths": []
     },
+    "info.adp.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "empty": 1
+      },
+      "workingPaths": []
+    },
     "its.umich.edu": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -1376,6 +1883,19 @@
       },
       "workingPaths": []
     },
+    "jobs.mehi.masstech.org": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://jobs.mehi.masstech.org/companies/manet-community-health-center/jobs/87302488-clinical-data-coordinator"
+      ]
+    },
     "jorijn.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -1384,6 +1904,30 @@
       "ok": 0,
       "outcomes": {
         "redirect": 1
+      },
+      "workingPaths": []
+    },
+    "karbonhq.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://karbonhq.com/integrations/file-forms/"
+      ]
+    },
+    "kb.drakesoftware.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_404": 1
       },
       "workingPaths": []
     },
@@ -1400,6 +1944,20 @@
         "curl https://kourses.com/?p=12006"
       ]
     },
+    "labyrinthinc.com": {
+      "attempts": 2,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "webfetch https://labyrinthinc.com/california-launches-new-online-system-for-charitable-registration/",
+        "webfetch https://labyrinthinc.com/nonprofit-annual-filing-requirements-california/"
+      ]
+    },
     "latexformat.netlify.app": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -1412,17 +1970,28 @@
       "workingPaths": []
     },
     "legacy.cdocs.com": {
-      "attempts": 1,
+      "attempts": 2,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-06",
-      "lastOk": "2026-11-06",
-      "ok": 1,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 2,
       "outcomes": {
-        "ok": 1
+        "ok": 2
       },
       "workingPaths": [
         "webfetch https://legacy.cdocs.com/discussion-boards/view/id/92776"
       ]
+    },
+    "loopnet.ca": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_403": 1
+      },
+      "workingPaths": []
     },
     "mage-people.com": {
       "attempts": 2,
@@ -1479,6 +2048,32 @@
         "curl https://meet.ribblr.com/t/810784.json"
       ]
     },
+    "meta.discourse.org": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://meta.discourse.org/search.json?q=section+504+after%3A2026-05-01"
+      ]
+    },
+    "mosscpa.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://mosscpa.com/blog/california-form-rrf1-filing-guide"
+      ]
+    },
     "mynews13.com": {
       "attempts": 1,
       "evidenceItems": 1,
@@ -1519,6 +2114,19 @@
         "webfetch https://n8n.io/workflows/20556-create-daily-construction-site-reports-from-whatsapp-with-openai-and-google/"
       ]
     },
+    "newpathconsulting.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://newpathconsulting.com/warm"
+      ]
+    },
     "news.ycombinator.com": {
       "attempts": 2,
       "evidenceItems": 0,
@@ -1544,6 +2152,32 @@
       },
       "workingPaths": []
     },
+    "nonprofitlawblog.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://nonprofitlawblog.com/california-registry-online-filing-service"
+      ]
+    },
+    "nporesources.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://nporesources.com/rrf-1"
+      ]
+    },
     "nwelearn2026.sched.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -1554,6 +2188,21 @@
         "http_403": 1
       },
       "workingPaths": []
+    },
+    "oag.ca.gov": {
+      "attempts": 7,
+      "evidenceItems": 2,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 7,
+      "outcomes": {
+        "ok": 7
+      },
+      "workingPaths": [
+        "webfetch https://oag.ca.gov/charities/regs/registry-of-charities-and-fundraisers-online-filing-service",
+        "webfetch https://oag.ca.gov/CHARITIES/RENEWALS",
+        "webfetch https://oag.ca.gov/charities/renewals"
+      ]
     },
     "onde.app": {
       "attempts": 1,
@@ -1581,6 +2230,19 @@
         "webfetch https://payoutcheck.online/"
       ]
     },
+    "pbpatl.org": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://pbpatl.org/wp-content/uploads/Aug-2022.pdf"
+      ]
+    },
     "peerpush.net": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -1592,6 +2254,19 @@
       },
       "workingPaths": [
         "curl https://peerpush.net/p/flowguard"
+      ]
+    },
+    "pope.tech": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://pope.tech/pricing/"
       ]
     },
     "pricingsaas.com": {
@@ -1608,13 +2283,13 @@
       ]
     },
     "productideas.xero.com": {
-      "attempts": 3,
-      "evidenceItems": 2,
-      "lastAttempt": "2026-11-06",
-      "lastOk": "2026-11-06",
-      "ok": 3,
+      "attempts": 20,
+      "evidenceItems": 6,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 20,
       "outcomes": {
-        "ok": 3
+        "ok": 20
       },
       "workingPaths": [
         "curl https://productideas.xero.com/forums/939198-for-small-businesses/suggestions/45701299-bank-reconciliation-bulk-import-recieved-payments",
@@ -1647,19 +2322,43 @@
       ]
     },
     "quickbooks.intuit.com": {
-      "attempts": 6,
-      "evidenceItems": 1,
-      "lastAttempt": "2026-11-06",
-      "lastOk": "2026-11-06",
-      "ok": 4,
+      "attempts": 22,
+      "evidenceItems": 4,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 20,
       "outcomes": {
-        "ok": 4,
+        "ok": 20,
         "timeout": 2
       },
       "workingPaths": [
         "webfetch https://quickbooks.intuit.com/learn-support/en-uk/transactions/does-qbo-have-any-features-to-automate-ar-i-e-to-match-incoming/01/1582229",
         "webfetch https://quickbooks.intuit.com/learn-support/en-us/other-questions/how-do-you-match-a-lump-sum-deposit-to-multiple-customers/00/1516576",
         "webfetch https://quickbooks.intuit.com/community/do-more-with-quickbooks-6/remittance-advice-to-receive-payment-283908"
+      ]
+    },
+    "rct.doj.ca.gov": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_404": 1
+      },
+      "workingPaths": []
+    },
+    "reachrightstudios.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://reachrightstudios.com/blog/free-church-software/"
       ]
     },
     "recipal.com": {
@@ -1791,16 +2490,18 @@
       "workingPaths": []
     },
     "shopify.dev": {
-      "attempts": 1,
+      "attempts": 4,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-04",
-      "lastOk": "2026-11-04",
-      "ok": 1,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 4,
       "outcomes": {
-        "ok": 1
+        "ok": 4
       },
       "workingPaths": [
-        "curl https://shopify.dev/docs/api/admin-rest/latest/resources/asset"
+        "curl https://shopify.dev/docs/api/admin-rest/latest/resources/asset",
+        "webfetch https://shopify.dev/docs/api/admin-graphql/latest/objects/ShopifyPaymentsAccount",
+        "webfetch https://shopify.dev/docs/api/admin-graphql/latest/objects/ShopifyPaymentsBalanceTransaction"
       ]
     },
     "sift-health.pages.dev": {
@@ -1814,6 +2515,32 @@
       },
       "workingPaths": [
         "curl https://sift-health.pages.dev/pricing/"
+      ]
+    },
+    "silktide.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://silktide.com/blog/the-section-504-deadline-moved/"
+      ]
+    },
+    "squareup.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://squareup.com/help/us/en/article/8712-understand-no-tax-on-tips-deductions"
       ]
     },
     "streetfoodfinder.com": {
@@ -1854,6 +2581,17 @@
         "curl https://support.google.com/merchants/answer/6150127"
       ]
     },
+    "support.gusto.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_403": 1
+      },
+      "workingPaths": []
+    },
     "support.saasant.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -1866,6 +2604,30 @@
       "workingPaths": [
         "curl https://support.saasant.com/support/solutions/articles/14000067369-pricing-for-saasant-transactions-online-/"
       ]
+    },
+    "support.toasttab.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://support.toasttab.com/en/article/Toast-Payroll-No-Tax-on-Tips-and-or-Overtime?lang=en_US"
+      ]
+    },
+    "support.wildapricot.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_403": 1
+      },
+      "workingPaths": []
     },
     "techcrunch.com": {
       "attempts": 1,
@@ -1970,6 +2732,19 @@
         "curl https://trustmrr.com/category/customer-support"
       ]
     },
+    "trykintsugi.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://trykintsugi.com/blog/sales-tax-changes-january-1-2027.md"
+      ]
+    },
     "tutorlms.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -2007,6 +2782,19 @@
       },
       "workingPaths": [
         "curl https://unpwned.io"
+      ]
+    },
+    "userway.org": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://userway.org/pricing/"
       ]
     },
     "vendordirectory.shrm.org": {
@@ -2058,14 +2846,40 @@
         "curl https://vivere.dev/pricing"
       ]
     },
-    "webaim.org": {
-      "attempts": 3,
+    "vol.asura.asu.edu": {
+      "attempts": 1,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-01",
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://vol.asura.asu.edu/mailing-membership-renewal-letters"
+      ]
+    },
+    "wave.webaim.org": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://wave.webaim.org/api/"
+      ]
+    },
+    "webaim.org": {
+      "attempts": 4,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
       "lastOk": "2026-11-01",
       "ok": 1,
       "outcomes": {
-        "empty": 2,
+        "empty": 3,
         "ok": 1
       },
       "workingPaths": [
@@ -2083,16 +2897,27 @@
       },
       "workingPaths": []
     },
+    "windes.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_403": 1
+      },
+      "workingPaths": []
+    },
     "wordpress.org": {
-      "attempts": 54,
+      "attempts": 59,
       "evidenceItems": 12,
-      "lastAttempt": "2026-11-06",
-      "lastOk": "2026-11-06",
-      "ok": 52,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 57,
       "outcomes": {
         "empty": 1,
         "http_404": 1,
-        "ok": 52
+        "ok": 57
       },
       "workingPaths": [
         "curl https://wordpress.org/support/plugin/wp-accessibility/",
@@ -2127,6 +2952,30 @@
         "curl https://wpengine.com/smart-plugin-manager/"
       ]
     },
+    "www.ada.org": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "empty": 1
+      },
+      "workingPaths": []
+    },
+    "www.adlercolvin.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.adlercolvin.com/blog/2026/08/21/"
+      ]
+    },
     "www.allergicliving.com": {
       "attempts": 2,
       "evidenceItems": 0,
@@ -2148,6 +2997,56 @@
         "http_403": 1
       },
       "workingPaths": []
+    },
+    "www.ato.gov.au": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_403": 1
+      },
+      "workingPaths": []
+    },
+    "www.aucklandanglican.org.nz": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.aucklandanglican.org.nz/wp-content/uploads/2026/04/2026_Preparing_Donation_Tax_Receipts_Parish_Guide-v2.pdf"
+      ]
+    },
+    "www.audioeye.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.audioeye.com/pricing/"
+      ]
+    },
+    "www.barnesdennig.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.barnesdennig.com/preparing-for-2026-qualified-overtime-reporting/"
+      ]
     },
     "www.bcnys.org": {
       "attempts": 2,
@@ -2210,6 +3109,30 @@
       },
       "workingPaths": []
     },
+    "www.catholicjobs.com": {
+      "attempts": 2,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_404": 2
+      },
+      "workingPaths": []
+    },
+    "www.cda.org": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.cda.org/?p=48603"
+      ]
+    },
     "www.cdocs.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -2232,6 +3155,19 @@
       },
       "workingPaths": [
         "curl https://www.cdtfa.ca.gov/lawguides/vol1/sutr/1668.html"
+      ]
+    },
+    "www.chcanys.org": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.chcanys.org/WCAG%20Conformance%204.10.2026.pdf"
       ]
     },
     "www.checklyhq.com": {
@@ -2321,6 +3257,20 @@
         "curl https://www.cookieyes.com/pricing/"
       ]
     },
+    "www.cpapracticeadvisor.com": {
+      "attempts": 2,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "webfetch https://www.cpapracticeadvisor.com/2026/09/01/",
+        "webfetch https://www.cpapracticeadvisor.com/2026/10/13/when-box-12-code-tt-will-not-tie-to-the-payroll-register/191510/"
+      ]
+    },
     "www.cs.umd.edu": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -2340,6 +3290,17 @@
       "ok": 0,
       "outcomes": {
         "http_403": 1
+      },
+      "workingPaths": []
+    },
+    "www.deque.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_404": 1
       },
       "workingPaths": []
     },
@@ -2367,6 +3328,44 @@
         "curl https://www.dor.wa.gov/taxes-rates/retail-sales-tax/services-newly-subject-retail-sales-tax/custom-website-development"
       ]
     },
+    "www.drbicuspid.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_403": 1
+      },
+      "workingPaths": []
+    },
+    "www.duanemorris.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.duanemorris.com/alerts/health_human_services_follows_department_justices_lead_extends_section_504_web_mobile_0526.html"
+      ]
+    },
+    "www.edjoin.org": {
+      "attempts": 2,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "http_404": 1,
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.edjoin.org/Home/JobPosting/2290788"
+      ]
+    },
     "www.etsy.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -2377,6 +3376,19 @@
         "empty": 1
       },
       "workingPaths": []
+    },
+    "www.experian.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.experian.com/blogs/employer-services/irs-finalizes-2026-form-w-2/"
+      ]
     },
     "www.facebook.com": {
       "attempts": 1,
@@ -2392,19 +3404,32 @@
       ]
     },
     "www.federalregister.gov": {
-      "attempts": 9,
+      "attempts": 19,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-04",
-      "lastOk": "2026-11-04",
-      "ok": 7,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 15,
       "outcomes": {
-        "ok": 7,
-        "redirect": 2
+        "ok": 15,
+        "redirect": 4
       },
       "workingPaths": [
         "curl https://www.federalregister.gov/api/v1/documents.json?per_page=10&order=newest&conditions[term]=web%20accessibility",
         "curl https://www.federalregister.gov/api/v1/documents.json?per_page=15&order=newest&conditions[term]=accessibility+small+business",
         "curl https://www.federalregister.gov/api/v1/documents.json?per_page=15&order=newest&conditions[term]=%22small+entity+compliance+guide%22"
+      ]
+    },
+    "www.feldesman.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.feldesman.com/hhs-extends-compliance-deadlines-for-web-and-mobile-accessibility-requirements/"
       ]
     },
     "www.followupthen.com": {
@@ -2418,14 +3443,41 @@
       },
       "workingPaths": []
     },
-    "www.freelancer.com": {
-      "attempts": 102,
-      "evidenceItems": 1,
-      "lastAttempt": "2026-11-06",
-      "lastOk": "2026-11-06",
-      "ok": 102,
+    "www.fourlane.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
       "outcomes": {
-        "ok": 102
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.fourlane.com/quickbooks-online-pricing-changes-2026-new-rates-and-fourlane-discounts/"
+      ]
+    },
+    "www.fqhc.org": {
+      "attempts": 2,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "http_404": 1,
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.fqhc.org/blog/2026/5/11/"
+      ]
+    },
+    "www.freelancer.com": {
+      "attempts": 128,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 128,
+      "outcomes": {
+        "ok": 128
       },
       "workingPaths": [
         "curl https://www.freelancer.com/api/projects/0.1/projects/active/?query=booking%20system&limit=20&full_description=true",
@@ -2446,18 +3498,58 @@
         "webfetch https://www.getjobber.com/pricing/"
       ]
     },
+    "www.github.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.github.com/NewPath-Consulting/warm"
+      ]
+    },
     "www.govinfo.gov": {
+      "attempts": 3,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 3,
+      "outcomes": {
+        "ok": 3
+      },
+      "workingPaths": [
+        "curl https://www.govinfo.gov/content/pkg/FR-2026-05-11/html/2026-09266.htm",
+        "curl https://www.govinfo.gov/content/pkg/FR-2026-10-26/html/2026-21821.htm"
+      ]
+    },
+    "www.halfpricesoft.com": {
       "attempts": 2,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-04",
-      "lastOk": "2026-11-04",
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
       "ok": 2,
       "outcomes": {
         "ok": 2
       },
       "workingPaths": [
-        "curl https://www.govinfo.gov/content/pkg/FR-2026-05-11/html/2026-09266.htm",
-        "curl https://www.govinfo.gov/content/pkg/FR-2026-10-26/html/2026-21821.htm"
+        "webfetch https://www.halfpricesoft.com/payroll-software/payroll-qualified-overtime",
+        "webfetch https://www.halfpricesoft.com/w2-software/what-is-new-2026-w2-w3/"
+      ]
+    },
+    "www.harborcompliance.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.harborcompliance.com/charitable-registration"
       ]
     },
     "www.higheredjobs.com": {
@@ -2484,6 +3576,46 @@
         "webfetch https://www.housecallpro.com/pricing/"
       ]
     },
+    "www.idealist.org": {
+      "attempts": 11,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "http_404": 10,
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.idealist.org/es/ong-empleo/9bbfed7756d74bbba355562cb52f6f79-finance-development-operations-coordinator-congressional-black-caucus-foundation-washington"
+      ]
+    },
+    "www.infoodle.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://www.infoodle.com/pricing/"
+      ]
+    },
+    "www.irs.gov": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.irs.gov/pub/taxpros/fs-2026-13.pdf"
+      ]
+    },
     "www.jibble.io": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -2497,16 +3629,67 @@
         "curl https://www.jibble.io/pricing"
       ]
     },
-    "www.make.com": {
-      "attempts": 2,
+    "www.krowdbase.com": {
+      "attempts": 1,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-04",
+      "lastAttempt": "2026-11-07",
       "lastOk": null,
       "ok": 0,
       "outcomes": {
-        "http_403": 2
+        "http_403": 1
       },
       "workingPaths": []
+    },
+    "www.legal500.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.legal500.com/intelligence/united-states/employment-and-hr/delaware-enacts-new-pay-transparency-law-to-go-into-effect-september-2027"
+      ]
+    },
+    "www.levelaccess.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_404": 1
+      },
+      "workingPaths": []
+    },
+    "www.liquidweb.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.liquidweb.com/software/give/"
+      ]
+    },
+    "www.make.com": {
+      "attempts": 3,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "http_403": 2,
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.make.com/en/pricing"
+      ]
     },
     "www.mass.gov": {
       "attempts": 1,
@@ -2519,6 +3702,19 @@
       },
       "workingPaths": []
     },
+    "www.mediabistro.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.mediabistro.com/jobs/3541554618-ada-504-coordinator"
+      ]
+    },
     "www.messagedesk.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -2530,6 +3726,33 @@
       },
       "workingPaths": [
         "webfetch https://www.messagedesk.com/free-tools/sms-compliance-checker"
+      ]
+    },
+    "www.mgma.com": {
+      "attempts": 2,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "webfetch https://www.mgma.com/federal-policy-resources/may-6-2026-section-504-digital-accessibility-requirements",
+        "curl https://www.mgma.com/getkaiasset/MGMA%20Section%20504%20letter.Final%202026.pdf"
+      ]
+    },
+    "www.microns.io": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.microns.io/startup-listings/all-in-one-platform-for-managing-business-operations"
       ]
     },
     "www.mondaq.com": {
@@ -2556,6 +3779,19 @@
       },
       "workingPaths": []
     },
+    "www.nachc.org": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.nachc.org/resource/section-504-disability-nondiscrimination-factsheet/"
+      ]
+    },
     "www.nationgraph.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -2566,6 +3802,19 @@
         "http_404": 1
       },
       "workingPaths": []
+    },
+    "www.nccommunitycolleges.edu": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.nccommunitycolleges.edu/about-us/jobs/compliance-and-reporting-coordinator/"
+      ]
     },
     "www.ndsmcobserver.com": {
       "attempts": 1,
@@ -2605,6 +3854,20 @@
         "webfetch https://www.nysenate.gov/legislation/bills/2025/A6558A"
       ]
     },
+    "www.oag.ca.gov": {
+      "attempts": 2,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "webfetch https://www.oag.ca.gov/charities/delinquency",
+        "curl https://www.oag.ca.gov/system/files/media/final-statement-of-reasons.pdf"
+      ]
+    },
     "www.onlinejobs.ph": {
       "attempts": 1,
       "evidenceItems": 1,
@@ -2631,13 +3894,49 @@
         "curl https://www.onlinelabels.com/articles/what-you-need-to-know-about-new-yorks-allergen-law"
       ]
     },
-    "www.peopleperhour.com": {
-      "attempts": 2,
+    "www.onpay.com": {
+      "attempts": 1,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-05",
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.onpay.com/insights/no-tax-tips-what-employers-should-know/"
+      ]
+    },
+    "www.patriotsoftware.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_404": 1
+      },
+      "workingPaths": []
+    },
+    "www.paylocity.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "empty": 1
+      },
+      "workingPaths": []
+    },
+    "www.peopleperhour.com": {
+      "attempts": 5,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
       "lastOk": "2026-11-05",
       "ok": 2,
       "outcomes": {
+        "empty": 3,
         "ok": 2
       },
       "workingPaths": [
@@ -2728,6 +4027,19 @@
       },
       "workingPaths": []
     },
+    "www.siteimprove.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.siteimprove.com/pricing/"
+      ]
+    },
     "www.softwareadvice.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -2738,6 +4050,32 @@
         "http_403": 1
       },
       "workingPaths": []
+    },
+    "www.startupdaily.net": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.startupdaily.net/advice/new-zealand-startup-donation-manager-helping-charities-streamline-donation-receipts/"
+      ]
+    },
+    "www.taxbandits.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.taxbandits.com/pricing/"
+      ]
     },
     "www.teacherspayteachers.com": {
       "attempts": 3,
@@ -2765,6 +4103,19 @@
       },
       "workingPaths": [
         "curl https://www.the-standard.org/news/testing-center-no-longer-proctoring-exams-for-online-courses-due-to-capacity-issues/article_46dd34a2-5813-425e-90d2-e9c325473dc2.html"
+      ]
+    },
+    "www.thomsonreuters.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.thomsonreuters.com/en-us/help/accounting-cs/enter-payroll-checks/set-up-pay-items-obbba-ot-prem.html"
       ]
     },
     "www.transact-tech.com": {
@@ -2846,16 +4197,31 @@
       ]
     },
     "www.waveapps.com": {
-      "attempts": 1,
+      "attempts": 2,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-06",
-      "lastOk": "2026-11-06",
-      "ok": 1,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 2,
       "outcomes": {
-        "ok": 1
+        "ok": 2
       },
       "workingPaths": [
         "webfetch https://www.waveapps.com/pricing"
+      ]
+    },
+    "www.wildapricot.com": {
+      "attempts": 4,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 4,
+      "outcomes": {
+        "ok": 4
+      },
+      "workingPaths": [
+        "webfetch https://www.wildapricot.com/pricing",
+        "webfetch http://www.wildapricot.com/apitermsofuse",
+        "webfetch https://www.wildapricot.com/features/online-payment-processing"
       ]
     },
     "www.wxxinews.org": {
@@ -2869,6 +4235,19 @@
       },
       "workingPaths": [
         "webfetch https://www.wxxinews.org/local-news/2025-11-14/new-state-law-requires-food-allergen-labeling-for-deli-and-bakery-products"
+      ]
+    },
+    "www.zeffy.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.zeffy.com/en-au/feature/donation-receipts"
       ]
     },
     "www.zoho.com": {
@@ -2894,6 +4273,19 @@
         "http_403": 1
       },
       "workingPaths": []
+    },
+    "zapier.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-07",
+      "lastOk": "2026-11-07",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://zapier.com/apps/wildapricot/integrations"
+      ]
     },
     "zeitride.com": {
       "attempts": 1,
@@ -2940,28 +4332,28 @@
     "A12": {
       "candidates": 14,
       "fetchFail": 7,
-      "fetchOk": 42,
-      "lastUsed": "2026-11-06",
-      "runs": 8,
-      "searches": 50,
+      "fetchOk": 53,
+      "lastUsed": "2026-11-07",
+      "runs": 9,
+      "searches": 61,
       "selected": 0
     },
     "A13": {
-      "candidates": 57,
-      "fetchFail": 11,
-      "fetchOk": 159,
-      "lastUsed": "2026-11-06",
-      "runs": 9,
-      "searches": 111,
+      "candidates": 62,
+      "fetchFail": 17,
+      "fetchOk": 181,
+      "lastUsed": "2026-11-07",
+      "runs": 10,
+      "searches": 129,
       "selected": 4
     },
     "A14": {
       "candidates": 17,
       "fetchFail": 1,
-      "fetchOk": 45,
-      "lastUsed": "2026-11-06",
-      "runs": 6,
-      "searches": 18,
+      "fetchOk": 49,
+      "lastUsed": "2026-11-07",
+      "runs": 7,
+      "searches": 19,
       "selected": 2
     },
     "A15": {
@@ -2973,13 +4365,22 @@
       "searches": 30,
       "selected": 2
     },
-    "A2": {
-      "candidates": 2,
+    "A16": {
+      "candidates": 5,
       "fetchFail": 1,
-      "fetchOk": 7,
-      "lastUsed": "2026-11-04",
-      "runs": 2,
-      "searches": 6,
+      "fetchOk": 27,
+      "lastUsed": "2026-11-07",
+      "runs": 1,
+      "searches": 12,
+      "selected": 2
+    },
+    "A2": {
+      "candidates": 3,
+      "fetchFail": 1,
+      "fetchOk": 22,
+      "lastUsed": "2026-11-07",
+      "runs": 3,
+      "searches": 19,
       "selected": 0
     },
     "A3": {
@@ -3001,13 +4402,13 @@
       "selected": 0
     },
     "A5": {
-      "candidates": 7,
+      "candidates": 9,
       "fetchFail": 1,
-      "fetchOk": 15,
-      "lastUsed": "2026-11-06",
-      "runs": 5,
-      "searches": 18,
-      "selected": 1
+      "fetchOk": 20,
+      "lastUsed": "2026-11-07",
+      "runs": 6,
+      "searches": 22,
+      "selected": 2
     },
     "A6": {
       "candidates": 4,
@@ -3047,30 +4448,30 @@
     },
     "B10": {
       "candidates": 5,
-      "fetchFail": 0,
-      "fetchOk": 15,
-      "lastUsed": "2026-11-06",
-      "runs": 4,
-      "searches": 14,
+      "fetchFail": 1,
+      "fetchOk": 17,
+      "lastUsed": "2026-11-07",
+      "runs": 5,
+      "searches": 16,
       "selected": 0
     },
     "B11": {
-      "candidates": 10,
-      "fetchFail": 1,
-      "fetchOk": 91,
-      "lastUsed": "2026-11-06",
-      "runs": 6,
-      "searches": 86,
+      "candidates": 13,
+      "fetchFail": 4,
+      "fetchOk": 117,
+      "lastUsed": "2026-11-07",
+      "runs": 7,
+      "searches": 109,
       "selected": 1
     },
     "B12": {
-      "candidates": 17,
-      "fetchFail": 13,
-      "fetchOk": 52,
-      "lastUsed": "2026-11-06",
-      "runs": 4,
-      "searches": 27,
-      "selected": 3
+      "candidates": 21,
+      "fetchFail": 15,
+      "fetchOk": 76,
+      "lastUsed": "2026-11-07",
+      "runs": 5,
+      "searches": 35,
+      "selected": 4
     },
     "B2": {
       "candidates": 1,
@@ -3092,11 +4493,11 @@
     },
     "B5": {
       "candidates": 1,
-      "fetchFail": 1,
-      "fetchOk": 0,
-      "lastUsed": "2026-10-30",
-      "runs": 1,
-      "searches": 6,
+      "fetchFail": 3,
+      "fetchOk": 4,
+      "lastUsed": "2026-11-07",
+      "runs": 2,
+      "searches": 10,
       "selected": 0
     },
     "B6": {
@@ -3136,12 +4537,12 @@
       "selected": 0
     },
     "C10": {
-      "candidates": 19,
+      "candidates": 21,
       "fetchFail": 9,
-      "fetchOk": 19,
-      "lastUsed": "2026-11-06",
-      "runs": 7,
-      "searches": 26,
+      "fetchOk": 26,
+      "lastUsed": "2026-11-07",
+      "runs": 8,
+      "searches": 32,
       "selected": 1
     },
     "C11": {
@@ -3172,22 +4573,22 @@
       "selected": 0
     },
     "C4": {
-      "candidates": 8,
-      "fetchFail": 5,
-      "fetchOk": 3,
-      "lastUsed": "2026-11-03",
-      "runs": 3,
-      "searches": 20,
+      "candidates": 10,
+      "fetchFail": 18,
+      "fetchOk": 7,
+      "lastUsed": "2026-11-07",
+      "runs": 4,
+      "searches": 28,
       "selected": 0
     },
     "C5": {
-      "candidates": 12,
-      "fetchFail": 4,
-      "fetchOk": 13,
-      "lastUsed": "2026-11-06",
-      "runs": 7,
-      "searches": 24,
-      "selected": 2
+      "candidates": 18,
+      "fetchFail": 8,
+      "fetchOk": 29,
+      "lastUsed": "2026-11-07",
+      "runs": 8,
+      "searches": 35,
+      "selected": 4
     },
     "C6": {
       "candidates": 4,
@@ -3297,20 +4698,20 @@
     }
   ],
   "funnel": {
-    "candidates": 243,
-    "passedGate": 4,
-    "passedRejectRules": 190,
-    "provisional": 17,
-    "reviewKilled": 30,
+    "candidates": 269,
+    "passedGate": 6,
+    "passedRejectRules": 214,
+    "provisional": 21,
+    "reviewKilled": 31,
     "validated": 0,
     "watchlist": 36
   },
   "gateFailures": {
-    "noRecentEvidence": 1,
+    "noRecentEvidence": 2,
     "painBelow4": 3,
-    "rejectRule": 53,
-    "reviewKill": 30,
-    "totalBelowMin": 150
+    "rejectRule": 55,
+    "reviewKill": 31,
+    "totalBelowMin": 172
   },
   "generated": "2026-11-07",
   "prefer": [
@@ -3329,7 +4730,16 @@
       "id": "B12",
       "name": "Paid app marketplaces",
       "path": "https://apps.shopify.com/{slug}/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest",
-      "selectedIdeas": 3,
+      "selectedIdeas": 4,
+      "status": "ok"
+    },
+    {
+      "client": "webfetch",
+      "evidence": "mandate",
+      "id": "C5",
+      "name": "Policy and regulation trackers",
+      "path": "https://www.federalregister.gov/api/v1/documents.json?per_page=10&order=newest&conditions[term]={q}",
+      "selectedIdeas": 4,
       "status": "ok"
     },
     {
@@ -3360,13 +4770,22 @@
       "status": "ok"
     },
     {
-      "client": "webfetch",
-      "evidence": "mandate",
-      "id": "C5",
-      "name": "Policy and regulation trackers",
-      "path": "https://www.federalregister.gov/api/v1/documents.json?per_page=10&order=newest&conditions[term]={q}",
+      "client": "curl",
+      "evidence": "complaint",
+      "id": "A16",
+      "name": "Vendor feature-request boards",
+      "path": "https://productideas.xero.com/search?query={q}",
       "selectedIdeas": 2,
-      "status": "ok"
+      "status": "ok-curl"
+    },
+    {
+      "client": "curl",
+      "evidence": "complaint",
+      "id": "A5",
+      "name": "Educator Stack Exchanges",
+      "path": "https://api.stackexchange.com/2.3/questions?site={cseducators|academia|matheducators}&order=desc&sort=creation&pagesize=20&filter=withbody",
+      "selectedIdeas": 2,
+      "status": "ok-curl"
     },
     {
       "client": "curl",
@@ -3385,15 +4804,6 @@
       "path": "https://api.github.com/search/issues?q={q}+is%3Aissue+state%3Aopen+sort%3Areactions&per_page=10",
       "selectedIdeas": 1,
       "status": "ok"
-    },
-    {
-      "client": "curl",
-      "evidence": "complaint",
-      "id": "A5",
-      "name": "Educator Stack Exchanges",
-      "path": "https://api.stackexchange.com/2.3/questions?site={cseducators|academia|matheducators}&order=desc&sort=creation&pagesize=20&filter=withbody",
-      "selectedIdeas": 1,
-      "status": "ok-curl"
     },
     {
       "client": "webfetch",
@@ -3430,15 +4840,6 @@
       "path": "https://hn.algolia.com/api/v1/search_by_date?query={q}&tags=comment&hitsPerPage=20",
       "selectedIdeas": 0,
       "status": "ok"
-    },
-    {
-      "client": "curl",
-      "evidence": "complaint",
-      "id": "A16",
-      "name": "Vendor feature-request boards",
-      "path": "https://productideas.xero.com/search?query={q}",
-      "selectedIdeas": 0,
-      "status": "ok-curl"
     },
     {
       "client": "webfetch",
@@ -3567,6 +4968,6 @@
       "status": "ok"
     }
   ],
-  "runsInWindow": 15,
+  "runsInWindow": 16,
   "windowDays": 45
 }

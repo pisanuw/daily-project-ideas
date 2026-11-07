@@ -620,3 +620,7 @@
 | 2026-11-06 | Recurring Invoice Send Check | Small Business Ops | Multi-week | 17 | provisional |  |
 | 2026-11-06 | Transfer Enquiry Desk | Micro-SaaS | Weekend MVP | 16 | provisional |  |
 | 2026-11-06 | Mixed-Use Vehicle Worksheet | Micro-SaaS | Weekend MVP | 15 | provisional |  |
+| 2026-11-07 | Donation Receipts for Xero | Micro-SaaS | Multi-week | 21 | provisional |  |
+| 2026-11-07 | Qualified Overtime Checker for W-2 Box 12 TT | Small Business Ops | Multi-week | 19 | provisional |  |
+| 2026-11-07 | Renewal Audit for WildApricot | Micro-SaaS | Multi-week | 17 | provisional |  |
+| 2026-11-07 | Charity Registry Watch for California | Accessibility & Compliance | Weekend MVP | 17 | provisional |  |
