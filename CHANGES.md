@@ -627,3 +627,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-06 [doc] ideas/sources.json: A3 GitHub issue-search path verified working again (200 with is:issue); B6 gains a TrustMRR category-page path.
 
 2026-11-07 [doc] Created ideas/2026-11-07.json (schemaVersion 3, 4 ideas): Donation Receipts (21, prov), Overtime TT Checker (19, prov), Renewal Audit (17, prov), Charity Registry Watch (17, prov)
+
+2026-11-07 [doc] Donation Receipts (2026-11-07 #1) implemented: https://donation-receipts.pisan.me (code in claude-built-apps/donation-receipts).
