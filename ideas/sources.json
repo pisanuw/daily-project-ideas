@@ -87,12 +87,12 @@
       "name": "Open-source teaching tools",
       "evidence": "complaint",
       "status": "ok",
-      "lastVerified": "2026-11-04",
+      "lastVerified": "2026-11-06",
       "paths": [
         {
           "url": "https://api.github.com/search/issues?q={q}+is%3Aissue+state%3Aopen+sort%3Areactions&per_page=10",
           "client": "curl",
-          "verified": "2026-11-04",
+          "verified": "2026-11-06",
           "result": "JSON items with total_count, title, created_at, reactions, user. Since 2026 the API returns 422 unless the query includes is:issue or is:pull-request; direct /repos/.../issues/N fetches 403 once rate limited.",
           "probeUrl": "https://api.github.com/search/issues?q=autograder+is%3Aissue+state%3Aopen&per_page=5",
           "expect": "total_count"
@@ -108,7 +108,7 @@
           "probeDetail": "HTTP 200, 1514B"
         }
       ],
-      "notes": "Two paths, and only one of them was working as of 2026-11-01. The GitHub issue-search path answered HTTP 422 from the routine's environment (see A4); the Jupyter Discourse path works. Do not treat this source as a GitHub vein until a probe says the 422 has cleared, and check source-health.md, which now lists failing paths inside reachable sources. Reactions and comment counts are the demand signal; a long-open issue with many reactions is one complaint item, not several."
+      "notes": "Two paths, and only one of them was working as of 2026-11-01. The GitHub issue-search path answered HTTP 422 from the routine's environment (see A4); the Jupyter Discourse path works. Do not treat this source as a GitHub vein until a probe says the 422 has cleared, and check source-health.md, which now lists failing paths inside reachable sources. Reactions and comment counts are the demand signal; a long-open issue with many reactions is one complaint item, not several. Update 2026-11-06: the GitHub issue-search path returned HTTP 200 from curl with is:issue in q (five queries), and search items include the issue body, so /repos/ fetches (403 when rate limited) are unnecessary."
     },
     {
       "id": "A4",
@@ -611,7 +611,7 @@
       "name": "Verified revenue dashboards",
       "evidence": "spend",
       "status": "ok-curl",
-      "lastVerified": "2026-11-01",
+      "lastVerified": "2026-11-06",
       "paths": [
         {
           "url": "https://trustmrr.com/",
@@ -622,6 +622,14 @@
           "expect": "MRR",
           "probeOutcome": "ok",
           "probeDetail": "HTTP 200, 1471390B"
+        },
+        {
+          "url": "https://trustmrr.com/category/{slug}",
+          "client": "curl",
+          "verified": "2026-11-06",
+          "result": "HTTP 200, ~175KB; lists startups in a category (customer-support, productivity, ecommerce, education, real-estate, ...) with 30-day revenue, MRR and total revenue read off the page.",
+          "probeUrl": "https://trustmrr.com/category/customer-support",
+          "expect": "MRR"
         }
       ],
       "notes": "On 2026-10-31 a TrustMRR search snippet claimed about $14k of 30-day revenue for a product whose fetched page showed $51 all-time. Never use a search snippet's revenue figure; read it off the fetched page."

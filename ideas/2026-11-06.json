@@ -526,6 +526,468 @@
         ],
         "closedBy": "The validationTest's free checker and $59 audit: 15 paid audits in 60 days would establish willingnessToPay 3 and supply dated owner complaints toward pain 4."
       }
+    },
+    {
+      "n": 4,
+      "title": "Recurring Invoice Send Check",
+      "slug": "recurring-invoice-send-check",
+      "category": "Small Business Ops",
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Data & Visualization",
+      "summary": "For small firms that bill retainers and maintenance plans through Xero repeating invoices: a daily check that every invoice due today was actually created and marked sent, with a same-day alert when one silently was not.",
+      "public": {
+        "summary": "Tells you the same day if one of your automatic monthly invoices did not go out.",
+        "problem": "You set up repeating invoices for your regular clients and trust them to go out on time. When one quietly fails, nothing warns you, and you find out weeks later when the money has not arrived. By then you are chasing a client for a bill they never received.",
+        "forWhom": "Small businesses and freelancers who bill regular clients with automatic repeating invoices.",
+        "benefits": [
+          "Know every scheduled invoice actually went out",
+          "Hear about a missed one the same day, not a month later",
+          "A monthly list of expected versus sent invoices",
+          "No more awkward calls about bills clients never got"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "Recurring invoices fail silently: a template stops generating, auto-send is off, or the email never leaves, and the owner learns of it only when a retainer payment does not arrive. Xero has said it has no near-term plan to add sent/not-sent notifications, and a self-hosted Invoice Ninja user saw recurring invoices generated but never emailed with nothing in the logs.",
+      "description": "A read-only Xero connection lists every repeating-invoice template and its next scheduled date. Each morning the app compares templates due yesterday and today with the invoices that exist and with each invoice's sent status and history event, and emails or texts the owner a short exception list: not created, created but still draft, or created but never marked sent. A monthly ledger shows expected versus sent per client. QuickBooks Online recurring templates (which already flag bounces natively, but not templates that failed to run or have auto-send off) follow as the second connector.",
+      "targetCustomer": "Owners, office managers and outside bookkeepers at small Xero businesses (1 to 20 staff) that bill monthly retainers, memberships or maintenance plans through repeating invoices.",
+      "buyer": "The business owner on a company card, or a bookkeeper who adds it per client and passes the cost on.",
+      "whyNow": "Xero marked the sent/not-sent notification idea 'Not in pipeline' on 2025-09-09, and a fresh 2026-10-23 report shows recurring invoices still failing with no trace; Xero's developer pricing (2025) made per-connection costs explicit, which a narrow paid app can absorb.",
+      "founderFit": "A scheduled comparison job over an accounting API with idempotent alerting is a small Supabase build; the hard part, reasoning about schedules and missed runs, is the kind of systems problem Pisan teaches. He has no bookkeeping network, so distribution relies on the Xero App Store and bookkeeper communities.",
+      "problemEvidence": [
+        {
+          "url": "https://github.com/invoiceninja/invoiceninja/issues/13385",
+          "source": "github.com",
+          "author": "Skarema",
+          "date": "2026-10-23",
+          "kind": "complaint",
+          "summary": "Recurring invoices are generated but no longer emailed, 'suddenly stopped working', logs untouched; about 4 users report the same, closed by the maintainer on 2026-10-25 as cannot recreate."
+        },
+        {
+          "url": "https://productideas.xero.com/forums/967115-invoices-quotes/suggestions/44960542-sales-notification-that-invoice-sent-not-sent",
+          "source": "productideas.xero.com",
+          "author": "Kelly Munro (Xero community manager), responding to a 2013 idea with 33 votes",
+          "date": "2025-09-09",
+          "kind": "complaint",
+          "summary": "Users ask to be told when an invoice was sent or not sent; Xero says it has no plans to change invoice notifications in the near term and suggests sending a copy to self."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "QuickBooks Online delivery errors list",
+          "url": "https://quickbooks.intuit.com/learn-support/en-us/help-article/view-list-bounced-emails-delivery-errors/L88qTcb6b",
+          "price": "included in QuickBooks Online plans (plan price unknown)",
+          "gap": "Flags bounced or undelivered invoice emails, but not a recurring template that failed to run or has auto-send off; QuickBooks only."
+        },
+        {
+          "name": "Xero invoice history",
+          "url": "https://productideas.xero.com/forums/967115-invoices-quotes/suggestions/44960542-sales-notification-that-invoice-sent-not-sent",
+          "price": "included in Xero plans (price unknown)",
+          "gap": "Records a 'sent' event per invoice but never alerts when an expected repeating invoice is missing or unsent."
+        },
+        {
+          "name": "FreeAgent email status",
+          "url": "https://support.freeagent.com/hc/en-gb/articles/22796515356306",
+          "price": "unknown",
+          "gap": "Shows sent, delivered or bounced per invoice inside FreeAgent only (seen in search results, not fetched)."
+        },
+        {
+          "name": "BillerGenie bounced email report",
+          "url": "https://helpcenter.billergenie.com/reports/bounced-email-report",
+          "price": "unknown",
+          "gap": "A receivables tool's bounce report, not a check that scheduled invoices were created (seen in search results, not fetched)."
+        }
+      ],
+      "keyFeatures": [
+        "Read-only Xero connection listing repeating-invoice templates",
+        "Daily expected-versus-actual comparison: not created, still draft, never sent",
+        "Same-day email or SMS exception alert, deduplicated",
+        "Monthly expected-versus-sent ledger per client",
+        "Bookkeeper view across several client organisations"
+      ],
+      "mvpScope": {
+        "features": [
+          "Xero OAuth with read-only scopes",
+          "Daily comparison job for repeating invoices",
+          "Exception email to the owner",
+          "Monthly ledger export"
+        ],
+        "outOfScope": [
+          "Bounce detection (not reliably exposed by Xero's API)",
+          "QuickBooks connector",
+          "Invoice Ninja and other self-hosted tools",
+          "Automatic re-sending"
+        ],
+        "buildEstimate": "2 to 3 weeks, plus Xero app certification"
+      },
+      "techStack": "React + Vite + Tailwind, Supabase (Postgres, auth, scheduled edge functions), Xero Accounting API, Resend for alert email; no LLM at runtime.",
+      "pricing": {
+        "model": "Per Xero organisation subscription",
+        "pricePoint": "$9/month per organisation; bookkeeper bundle $49/month for 10",
+        "rationale": "Below the cost of one missed retainer; must cover Xero's per-connection developer charges above the free 5-connection tier."
+      },
+      "revenueSketch": "Estimate: 300 organisations x $9/month = $2,700 MRR, less Xero connection fees; assumes bookkeepers bring most organisations.",
+      "distribution": "Xero App Store listing; posts answering missed-invoice threads in Xero Central and productideas.xero.com; offers to 10 Xero-certified bookkeepers to run it free on their client books for a month.",
+      "validationTest": {
+        "method": "Interview 10 Xero bookkeepers about missed repeating invoices in the last 12 months, and run a one-page landing site linked from the Xero idea thread.",
+        "successCriteria": "At least 4 of 10 recall a silent missed repeating invoice and 3 agree to a paid pilot at $9 per organisation.",
+        "cost": "About 8 hours and under $50."
+      },
+      "moat": "Weak: the history of expected-versus-sent per client is the only accumulating asset; speed and a bookkeeper-friendly multi-client view are the real edge.",
+      "compliance": [
+        "Xero app certification is required on every tier; the free developer tier allows 5 connections",
+        "Financial data: read-only scopes, minimal retention, data processing agreement for UK and EU customers (GDPR)",
+        "Accessibility: WCAG 2.2 AA for the dashboard"
+      ],
+      "risks": [
+        {
+          "risk": "Xero ships native failed-send alerts",
+          "mitigation": "Xero said on 2025-09-09 it has no near-term plan; keep the product cheap and multi-platform."
+        },
+        {
+          "risk": "Few businesses ever see a silent failure",
+          "mitigation": "The validation test measures frequency before any build."
+        },
+        {
+          "risk": "Connection fees eat the margin",
+          "mitigation": "Price per organisation above Xero's per-connection cost and sell bookkeeper bundles."
+        }
+      ],
+      "scores": {
+        "pain": 3,
+        "willingnessToPay": 2,
+        "reachability": 3,
+        "competitiveGap": 3,
+        "feasibility": 3,
+        "complianceBurden": 3,
+        "total": 17
+      },
+      "scoreRationale": {
+        "pain": "Real silent failures in Invoice Ninja (https://github.com/invoiceninja/invoiceninja/issues/13385) and a long-running QuickBooks thread (https://quickbooks.intuit.com/learn-support/en-us/other-questions/reoccurring-invoices-not-sending-emails/00/1420171), but no first-hand loss amounts.",
+        "willingnessToPay": "No payment evidence: the Xero idea drew 33 votes in a decade (https://productideas.xero.com/forums/967115-invoices-quotes/suggestions/44960542-sales-notification-that-invoice-sent-not-sent); capped at 2.",
+        "reachability": "Users gather in vendor idea boards and app stores (https://productideas.xero.com/forums/967115-invoices-quotes/suggestions/44960542-sales-notification-that-invoice-sent-not-sent), but none of them is a confirmed buyer.",
+        "competitiveGap": "QuickBooks covers bounces natively (https://quickbooks.intuit.com/learn-support/en-us/help-article/view-list-bounced-emails-delivery-errors/L88qTcb6b) but neither it nor Xero alerts on a template that did not run.",
+        "feasibility": "Creation and sent status are readable via the API, but bounce data is likely not; certification adds time (https://developer.xero.com/pricing).",
+        "complianceBurden": "Xero certification is mandatory and paid tiers start beyond 5 connections (https://developer.xero.com/pricing)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Reviewer rescored 19 to 17. Invoice Ninja #13385 is a self-hosted Docker bug closed as cannot-recreate, so it is weak as a market and was dropped as the starting platform. QuickBooks Online already lists bounced and undelivered invoices for free, so the scope narrowed to Xero repeating invoices that were not created or not marked sent, with QuickBooks failed-template checks second. Xero does not notify on failed sends and said so on 2025-09-09. No paid monitor found; app stores not searched. Feasibility and compliance lowered by one each for Xero certification and connection pricing."
+      },
+      "inspiredBy": "https://github.com/invoiceninja/invoiceninja/issues/13385",
+      "gateGap": {
+        "missing": [
+          "total 17 is below 22",
+          "pain 3 is below 4",
+          "willingnessToPay 2 is below 3"
+        ],
+        "closedBy": "The bookkeeper interviews close the largest gap, willingnessToPay: 3 paid pilots would lift it to 3, and 4 of 10 recalling a silent miss would support pain 4."
+      }
+    },
+    {
+      "n": 5,
+      "title": "Transfer Enquiry Desk",
+      "slug": "transfer-enquiry-desk",
+      "category": "Micro-SaaS",
+      "smallBusiness": true,
+      "complexity": "Weekend MVP",
+      "confidence": "provisional",
+      "topic": "Data & Visualization",
+      "summary": "For owner-operated airport-transfer and chauffeur firms without a WordPress booking plugin: a hosted enquiry link that validates each journey, keeps outbound and return legs linked, and lets the owner confirm from a phone so customers get an honest 'received' or 'confirmed' message.",
+      "public": {
+        "summary": "Gives your transfer business one booking link that collects complete journey details and lets you confirm each trip from your phone.",
+        "problem": "Enquiries arrive by WhatsApp, phone and email with missing pickup times, passenger counts or return dates. A return trip gets mixed up with the outbound one, and customers are not sure whether their ride is booked or only requested. You end up chasing details and hoping nobody is left waiting at arrivals.",
+        "forWhom": "Owners of small airport-transfer, chauffeur and minibus firms.",
+        "benefits": [
+          "Every enquiry arrives complete, with nothing to chase",
+          "Outbound and return trips kept together but never mixed up",
+          "Customers know whether a trip is requested or confirmed",
+          "Confirm a booking with one tap from your phone",
+          "All trips in one tidy spreadsheet"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "A small private airport-transfer business wants new booking enquiries captured with pickup, destination, date, passengers and contact, routed to a sheet and the team, but does not know how to handle missing or invalid fields; replies add that outbound and return trips on the same day get merged and that 'booking' and 'enquiry' are not distinguished.",
+      "description": "The owner gets a hosted booking link to put in a Google Business profile, Instagram bio or WhatsApp auto-reply. The form validates pickup and drop-off, flight time, date not in the past, passengers and luggage, and stores outbound and return as two legs under one submission ID. Each request lands as an 'enquiry' and the customer is told so; the owner taps confirm (or decline with a reason) on a phone, which sends the customer the confirmed message and writes the leg to a Google Sheet. No dispatch, payments or driver app.",
+      "targetCustomer": "Owner-operators of airport-transfer, chauffeur and minibus firms with 1 to 10 vehicles that take bookings by phone, WhatsApp or email and have no WordPress booking plugin.",
+      "buyer": "The owner, on a personal or company card.",
+      "whyNow": "Small operators now try to build this themselves in Make (2026-10-02), while the existing tools are WordPress plugins (E-cab, updated 2026-10-27) or dispatch suites priced in thousands.",
+      "founderFit": "A validated form, a two-leg data model, an SMS or email notification and a Sheets sync is a weekend Supabase build. He has no transport network, so first customers come from automation forums and local operator directories.",
+      "problemEvidence": [
+        {
+          "url": "https://community.make.com/t/116396",
+          "source": "community.make.com",
+          "author": "Cambridge_Transfers",
+          "date": "2026-10-02",
+          "kind": "complaint",
+          "summary": "Private airport-transfer owner asks how to capture and validate booking enquiries and route them to a sheet and the team; replies raise same-day return-leg merging and booking-versus-enquiry status."
+        },
+        {
+          "url": "https://wordpress.org/plugins/ecab-taxi-booking-manager/",
+          "source": "wordpress.org",
+          "author": "MagePeople",
+          "date": "2026-10-27",
+          "kind": "spend",
+          "summary": "E-cab taxi and chauffeur booking plugin: 2,000 active installs, 28 ratings, with a paid Pro version ($69/year or $99 lifetime on the vendor page)."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "E-cab Taxi Booking Manager (free and Pro)",
+          "url": "https://mage-people.com/product/wordpress-taxi-cab-booking-plugin-for-woocommerce/",
+          "price": "Free; Pro $69/year per domain or $99 lifetime",
+          "gap": "Needs WordPress and WooCommerce; no visible enquiry-versus-confirmed status or Sheets export."
+        },
+        {
+          "name": "Chauffeur Booking System",
+          "url": "https://codecanyon.net/item/chauffeur-booking-system-for-wordpress/21072773",
+          "price": "$99 regular licence, one-time",
+          "gap": "Strong feature set including return trips and alerts, but it is a self-installed WordPress plugin."
+        },
+        {
+          "name": "Cab Grid",
+          "url": "https://cabgrid.com/",
+          "price": "Free; Pro one-time price unknown",
+          "gap": "Fare grid with 'please call to book' in the free version; booking form and returns are Pro only, on WordPress."
+        },
+        {
+          "name": "Onde",
+          "url": "https://onde.app/pricing",
+          "price": "$4,500 to $23,000 one-time plus $99 to $259/month",
+          "gap": "Full dispatch platform for larger fleets."
+        }
+      ],
+      "keyFeatures": [
+        "Hosted booking link, no website needed",
+        "Journey validation: date, flight time, passengers, luggage",
+        "Outbound and return legs linked by one submission ID",
+        "Enquiry versus confirmed status with honest customer messages",
+        "One-tap confirm from the owner's phone and Google Sheets sync"
+      ],
+      "mvpScope": {
+        "features": [
+          "Hosted form with validation",
+          "Two-leg data model",
+          "Owner confirm or decline page",
+          "Customer email or SMS messages",
+          "Google Sheets sync"
+        ],
+        "outOfScope": [
+          "Fare calculation and maps",
+          "Payments",
+          "Driver app and dispatch",
+          "Multi-operator marketplace"
+        ],
+        "buildEstimate": "1 to 2 weekends"
+      },
+      "techStack": "React + Vite + Tailwind, Supabase (Postgres, auth, edge functions), Google Sheets API, email via Resend and optional SMS via the owner's Twilio account; no LLM at runtime.",
+      "pricing": {
+        "model": "Flat monthly subscription per operator",
+        "pricePoint": "$9/month",
+        "rationale": "The reviewer found one-time WordPress plugins at $69 to $99, so a hosted tool must stay near $100 a year to compete."
+      },
+      "revenueSketch": "Estimate: 150 operators x $9/month = $1,350 MRR; assumes operators without WordPress sites find it through forums and Google Business profiles.",
+      "distribution": "Answer transfer and chauffeur booking threads in Make and n8n communities; contact 30 small operators listed on Google Maps near three UK and US airports with a free first month.",
+      "validationTest": {
+        "method": "Build a clickable demo link and message 30 small transfer operators found on Google Maps, offering a free month in exchange for a 15-minute call.",
+        "successCriteria": "At least 8 replies, 5 calls, and 3 operators who say they handle enquiries by WhatsApp or phone and agree to pay $9 a month after the trial.",
+        "cost": "About 10 hours, no cash."
+      },
+      "moat": "Weak: a simple form product. The edge is being hosted and WordPress-free, with operator-specific details (flights, returns, luggage) built in.",
+      "compliance": [
+        "GDPR and UK GDPR: passenger names, phone numbers and trip details; data processing agreement and a retention limit",
+        "No payments, so no PCI scope",
+        "Accessibility: WCAG 2.2 AA for the public booking form"
+      ],
+      "risks": [
+        {
+          "risk": "Operators already use free Google Forms or a $99 plugin",
+          "mitigation": "Target operators without websites; validation test checks this first."
+        },
+        {
+          "risk": "Only one owner complaint found",
+          "mitigation": "The outreach test measures demand before building."
+        },
+        {
+          "risk": "Low price limits revenue",
+          "mitigation": "Keep support minimal and the product self-serve."
+        }
+      ],
+      "scores": {
+        "pain": 2,
+        "willingnessToPay": 2,
+        "reachability": 2,
+        "competitiveGap": 2,
+        "feasibility": 4,
+        "complianceBurden": 4,
+        "total": 16
+      },
+      "scoreRationale": {
+        "pain": "One pre-launch design question from a single owner (https://community.make.com/t/116396); no other operator complaint found.",
+        "willingnessToPay": "Operators pay, but one-time: E-cab Pro $69/year or $99 lifetime (https://mage-people.com/product/wordpress-taxi-cab-booking-plugin-for-woocommerce/) and Chauffeur Booking System $99 (https://codecanyon.net/item/chauffeur-booking-system-for-wordpress/21072773).",
+        "reachability": "Owners are scattered; only one surfaced in automation forums (https://community.make.com/t/116396).",
+        "competitiveGap": "Chauffeur Booking System already has return trips, statuses and alerts on WordPress (https://codecanyon.net/item/chauffeur-booking-system-for-wordpress/21072773).",
+        "feasibility": "A form, a status flag, Sheets sync and notifications, as the Make thread outlines (https://community.make.com/t/116396).",
+        "complianceBurden": "Passenger contact data needs GDPR care but no payments are taken (https://wordpress.org/plugins/ecab-taxi-booking-manager/)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Reviewer rescored 18 to 16: pain 3 to 2 (one thread, a design question, return-leg and status points came from repliers) and willingnessToPay 3 to 2 (comparable WordPress tools sell for $69 to $99 one-time). Not killed: no free product found does the hosted, WordPress-free enquiry-versus-confirmed flow with linked legs and Sheets sync. Re-scoped to operators without WordPress who book by phone or WhatsApp, at about $9/month."
+      },
+      "inspiredBy": "https://community.make.com/t/116396",
+      "gateGap": {
+        "missing": [
+          "total 16 is below 22",
+          "pain 2 is below 4",
+          "willingnessToPay 2 is below 3"
+        ],
+        "closedBy": "The operator outreach test closes the largest gaps: 3 operators committing to $9/month would lift willingnessToPay to 3, and 5 calls describing lost or garbled enquiries would support pain 4."
+      }
+    },
+    {
+      "n": 6,
+      "title": "Mixed-Use Vehicle Worksheet",
+      "slug": "mixed-use-vehicle-worksheet",
+      "category": "Micro-SaaS",
+      "smallBusiness": true,
+      "complexity": "Weekend MVP",
+      "confidence": "provisional",
+      "topic": "Math & Cryptography",
+      "summary": "For sole proprietors who use one vehicle for both a Schedule C business and Schedule E rentals: upload a mileage export and get the combined qualified business-use percentage, the per-schedule split, a prior-year recapture check and the statement to attach.",
+      "public": {
+        "summary": "Turns your mileage log into the vehicle numbers you need when one car or truck serves both your business and your rental properties.",
+        "problem": "You drive the same vehicle for your business and for your rentals, and your tax software treats them as two separate assets. Split that way, neither use looks big enough to qualify, even though together they clearly do. You are left guessing how to enter it and how to explain it if asked.",
+        "forWhom": "Self-employed people and small landlords who use one vehicle for both a business and rental properties.",
+        "benefits": [
+          "See your combined business-use share in minutes",
+          "Know how to split vehicle costs between business and rentals",
+          "Get a ready-to-attach explanation",
+          "Spot when a drop in business use could cost you"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "A filer using one truck for a Schedule C business and Schedule E rentals finds that splitting it into two assets in tax software makes each fail the more-than-50% qualified business use test (40% and 20%), although combined use is 60%; the accepted answer says to test per asset on one Form 4562 and prorate across schedules, and notes TurboTax may not support it easily.",
+      "description": "The user uploads a CSV from any mileage tracker and tags trips as business, rental or personal (rules can auto-tag by destination). The worksheet computes combined qualified business use per vehicle, the more-than-50% test, standard-mileage versus actual-expense figures split by schedule, and a recapture warning when use falls to 50% or below compared with prior years. It produces a PDF statement and step-by-step entry notes for common tax software. It is a calculator with citations, not tax advice.",
+      "targetCustomer": "Sole proprietors and side-business owners who also own one to five rental properties and share a vehicle between them.",
+      "buyer": "The filer, on a personal card, once per tax year.",
+      "whyNow": "A 2026-10-14 question shows mainstream software still tests each split asset separately, and landlord mileage apps such as LandMile (launched 2026) log trips but do not compute the combined test.",
+      "founderFit": "Pure arithmetic over a CSV with clear rules is a weekend React build with no server-side data. He has no tax network, so it depends on search traffic and landlord communities, and the tax-liability framing needs care.",
+      "problemEvidence": [
+        {
+          "url": "https://money.stackexchange.com/questions/170088",
+          "source": "money.stackexchange.com",
+          "author": "user4910112",
+          "date": "2026-10-14",
+          "kind": "complaint",
+          "summary": "Shared truck used 40% for Schedule C and 20% for Schedule E fails the 50% test when split into two assets; accepted answer: test per asset on one Form 4562 and prorate, TurboTax may not support it easily."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "LandMile",
+          "url": "https://apps.apple.com/us/app/property-miles/id6760436282",
+          "price": "$4.99/month or $39.99/year",
+          "gap": "Logs and tags landlord trips with CSV export; no combined business-use test or per-schedule allocation."
+        },
+        {
+          "name": "Everlance",
+          "url": "https://everlance.com/pricing",
+          "price": "$0 Basic; paid tiers listed at conflicting prices on the page",
+          "gap": "General mileage tracking; no combined qualified-use test found."
+        },
+        {
+          "name": "TurboTax vehicle worksheets",
+          "url": "https://ttlc.intuit.com/community/investments-and-rental-properties/discussion/re-hi-i-use-my-car-for-business-purpose-i-m-a-part-time-real-estate-agent-and-also-for-my-per/01/3546723",
+          "price": "unknown",
+          "gap": "Tests the 50% rule per split asset, which is the failure the question describes."
+        }
+      ],
+      "keyFeatures": [
+        "CSV import from any mileage tracker",
+        "Trip tagging by schedule with destination rules",
+        "Combined qualified-use percentage and the more-than-50% test",
+        "Per-schedule standard versus actual expense split",
+        "Prior-year recapture warning and a PDF statement to attach"
+      ],
+      "mvpScope": {
+        "features": [
+          "CSV upload and tagging",
+          "Combined-use and 50% test calculation",
+          "Per-schedule split",
+          "PDF statement"
+        ],
+        "outOfScope": [
+          "Mileage logging",
+          "Multi-vehicle fleets",
+          "Filing or e-file integration",
+          "State-specific rules"
+        ],
+        "buildEstimate": "1 weekend"
+      },
+      "techStack": "React + Vite + Tailwind, all computation in the browser, PDF generation client-side; Supabase only for license keys; no LLM at runtime.",
+      "pricing": {
+        "model": "One-time purchase per tax year",
+        "pricePoint": "$19 per tax year",
+        "rationale": "A once-a-year calculation; below LandMile's $39.99 annual price for logging."
+      },
+      "revenueSketch": "Estimate: 500 filers x $19 = $9,500 per tax season; assumes search traffic from tax-season questions.",
+      "distribution": "Answers on money.stackexchange.com and TurboTax community threads about shared vehicles; a free calculator page that ranks for the question, with the PDF statement as the paid step; landlord forums.",
+      "validationTest": {
+        "method": "Publish a free one-page calculator during January to March and put the PDF statement behind a $19 payment.",
+        "successCriteria": "300 calculator uses and at least 15 paid statements in the season.",
+        "cost": "One weekend and about $20 for a domain."
+      },
+      "moat": "Weak: simple math. The edge is a precise, cited treatment of an awkward case, plus search ranking.",
+      "compliance": [
+        "Tax liability: practitioners disagree on the treatment; present as a calculator with cited rules and a clear not-tax-advice notice",
+        "Privacy: all computation in the browser, no trip data stored",
+        "Accessibility: WCAG 2.2 AA"
+      ],
+      "risks": [
+        {
+          "risk": "The case is too narrow to sustain revenue",
+          "mitigation": "Ship as a cheap seasonal calculator, not a subscription."
+        },
+        {
+          "risk": "Wrong treatment exposes users to recapture",
+          "mitigation": "Show both readings practitioners use, with citations, and a prior-year recapture check."
+        },
+        {
+          "risk": "Tax software fixes the entry path",
+          "mitigation": "Keep the build to a weekend so the downside is small."
+        }
+      ],
+      "scores": {
+        "pain": 2,
+        "willingnessToPay": 2,
+        "reachability": 2,
+        "competitiveGap": 3,
+        "feasibility": 4,
+        "complianceBurden": 2,
+        "total": 15
+      },
+      "scoreRationale": {
+        "pain": "Happens once per vehicle per year and one good answer resolved it (https://money.stackexchange.com/questions/170088).",
+        "willingnessToPay": "Filers already pay for logging, e.g. LandMile $39.99/year (https://apps.apple.com/us/app/property-miles/id6760436282); no one pays for the calculation itself.",
+        "reachability": "The Schedule C plus E shared-vehicle combination is narrow; search traffic is the channel (https://money.stackexchange.com/questions/170088).",
+        "competitiveGap": "Trackers stop at logging and tax software tests split assets separately (https://ttlc.intuit.com/community/investments-and-rental-properties/discussion/re-hi-i-use-my-car-for-business-purpose-i-m-a-part-time-real-estate-agent-and-also-for-my-per/01/3546723).",
+        "feasibility": "Simple arithmetic over a CSV export that trackers already provide (https://apps.apple.com/us/app/property-miles/id6760436282).",
+        "complianceBurden": "Practitioners disagree and recapture risk applies when use drops to 50% or below (https://ttlc.intuit.com/community/tax-credits-deductions/discussion/bonus-depreciation-on-vehicle/00/1723767/amp)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Reviewer rescored 16 to 15. The question is a single TurboTax entry problem, solved by an accepted answer, and the asker's Schedule C business rents the truck on Turo, so the case is narrow and once a year. Logging is already served (LandMile $39.99/year, Everlance free Basic), so the idea was re-scoped from a tracker to a one-vehicle Form 4562 worksheet sold per tax year. Compliance lowered to 2 because the treatment is disputed and carries recapture risk."
+      },
+      "inspiredBy": "https://money.stackexchange.com/questions/170088",
+      "gateGap": {
+        "missing": [
+          "total 15 is below 22",
+          "pain 2 is below 4",
+          "willingnessToPay 2 is below 3",
+          "only 1 independent evidence item"
+        ],
+        "closedBy": "The seasonal paid-statement test closes the largest gap, willingnessToPay: 15 paid statements would lift it to 3 and supply the second evidence item."
+      }
     }
   ],
   "runNotes": {
@@ -534,7 +996,12 @@
     "focusSources": [
       "A13 Discourse forums, any niche (community.shopify.com)",
       "B11 Freelance job boards",
-      "C8 Trade news"
+      "C8 Trade news",
+      "A15 No-code automation communities (extra run)",
+      "A3 Open-source teaching tools (extra run)",
+      "B6 Verified revenue dashboards (extra run)",
+      "C1 SBIR and STTR solicitations (extra run)",
+      "A5 Educator Stack Exchanges (extra run)"
     ],
     "searches": [
       "community.shopify.com search.json: no-show deposit; appointment reminder; google reviews; restaurant menu; waitlist (after 2026-08-15); misrepresentation; junk fee; service fee law; PPWR; DMCA takedown; Capital adjustments; Balance statement bookkeeper (after 2026-08-08); allergen label; allergen (after 2026-05-01)",
@@ -544,7 +1011,14 @@
       "wordpress.org reviews: restaurant-reservations",
       "hn.algolia.com comments since 2025-09: \"my restaurant\"; \"my salon\"; \"my bakery\"; \"small business owner\" website; \"my clinic\"; \"customers\" \"google reviews\"; story 50167536 (Facebook Pages link limit) comments",
       "WebSearch: small restaurant owner online ordering third-party fees 2026; site:community.squareup.com appointments no-show 2026; Google Business Profile suspended small business 2026; 2026 new rule small businesses deadline restaurants salons contractors; restaurant service fee disclosure law 2026; restaurantbusinessonline OR nrn.com November 2026 independent restaurants; salon OR med spa OR dental practice new law 2026; New York premises packed food allergen labeling law November 2026; bakery owner New York allergen labeling law cost; allergen label maker app small bakery price; HHS Section 504 small providers deadline; Facebook Pages limit links per month paid Meta Verified",
-      "Reviewer subagents ran their own competitor and spend searches for 7 candidates (see run log)."
+      "Reviewer subagents ran their own competitor and spend searches for 7 candidates (see run log).",
+      "Extra run, A15 Discourse search.json: community.make.com quote estimate; appointment reminder; my business spreadsheet (after 2026-08-15/09-01); community.n8n.io small business client; whatsapp booking; \"my business\" (after 2026-09-01/15); forum.bubble.io clinic; community.zapier.com quickbooks invoice and my small business (JS shell, empty)",
+      "Extra run, A3 GitHub search API: autograder is:issue sort:reactions; repo:jupyter/nbgrader; repo:PrairieLearn/PrairieLearn; repo:invoiceninja/invoiceninja created>2026-08-01; recurring invoice not sent created>2026-05-01; discourse.jupyter.org grading",
+      "Extra run, A5 Stack Exchange API: cseducators newest; academia spreadsheet; freelancing client; money tagged small-business",
+      "Extra run, B6 trustmrr.com home, /category/customer-support, /category/productivity, /category/ecommerce",
+      "Extra run, C1 seedfund.nsf.gov home and /solicitation-proposal/; api.www.sbir.gov solicitations (403)",
+      "Extra run, spend pass, freelancer.com API: airport transfer booking; unanswered emails; employee clock in telegram; recurring invoice reminder; missed call text back",
+      "Extra run, spend pass: api.wordpress.org query_plugins airport transfer booking; boomeranggmail.com pricing; hiverhq.com pricing; jibble.io pricing; cabgrid.com pricing (403); mage-people E-cab Pro (404 on guessed path)"
     ],
     "unverifiedSignals": [
       {
@@ -566,6 +1040,26 @@
       {
         "url": "https://get.popmenu.com/pricing",
         "reason": "HTTP 403."
+      },
+      {
+        "url": "https://api.www.sbir.gov/public/api/solicitations?keyword=education&open=1&rows=10",
+        "reason": "HTTP 403 from the SBIR.gov API (extra run)."
+      },
+      {
+        "url": "https://cabgrid.com/pricing/",
+        "reason": "HTTP 403 to curl (extra run); the reviewer later read https://cabgrid.com/ via WebFetch."
+      },
+      {
+        "url": "https://community.zapier.com/search?q=quickbooks%20invoice",
+        "reason": "HTTP 200 but a JavaScript shell with no results (extra run)."
+      },
+      {
+        "url": "https://www.followupthen.com/pricing",
+        "reason": "HTTP 502 proxy error (extra run)."
+      },
+      {
+        "url": "https://www.moovs.app/pricing",
+        "reason": "WebFetch could not resolve the host (reviewer, extra run)."
       }
     ],
     "rejectedCandidates": [
@@ -688,9 +1182,64 @@
         "title": "Unwanted taxonomy metafield cleanup",
         "total": 7,
         "reason": "Rejected: one-off cleanup that bulk editing already handles; no payment evidence."
+      },
+      {
+        "title": "Inbox Miss Report (unanswered customer email digest)",
+        "total": 13,
+        "reason": "Reviewer kill (extra run): the main post is a developer's showcase who already published the fix as a free n8n template; the second is a general builder question; Gmail restricted scopes add a CASA assessment."
+      },
+      {
+        "title": "Quote Request Catcher for contractors",
+        "total": 12,
+        "reason": "Reviewer kill (extra run): no contractor in the evidence, only builders, one with a competing product; Quo ($15/user) and Jobber Core ($29+) already cover missed-call text-back and request inboxes."
+      },
+      {
+        "title": "Sheet Invoice Chaser",
+        "total": 15,
+        "reason": "Reviewer kill (extra run): all three posts are builders sharing or selling templates; Zoho Invoice is free with automated reminders."
+      },
+      {
+        "title": "Altegio WhatsApp Front Desk",
+        "total": 14,
+        "reason": "Reviewer kill (extra run): ChatPlug on Altegio's marketplace already books, reschedules and cancels in Altegio over WhatsApp from $19/month; AI wrapper with no moat."
+      },
+      {
+        "title": "Interest-Led Coding Plans for tutors",
+        "total": 15,
+        "reason": "Reviewer kill (extra run): evidence misread (parents wanted lessons tied to AI, tutor already had a sequence); AI wrapper with no data moat."
+      },
+      {
+        "title": "Chat Shift Clock for micro-shops",
+        "total": 14,
+        "reason": "Reviewer rescored 16 to 14 (extra run) and not shipped: Connecteam is free up to 10 users, Jibble free unlimited, IdelerTime already sells messenger time tracking; the evidence is a builder showcase."
+      },
+      {
+        "title": "Dispatch Handoff Log for NEMT operators",
+        "total": 13,
+        "reason": "Reviewer rescored 15 to 13 (extra run) and not shipped: the spend is on a dispatcher's labour, ZeitRide includes audit trails, and rider notes are likely PHI."
+      },
+      {
+        "title": "Escrow review-window policy for freelance platforms",
+        "total": 10,
+        "reason": "Rejected (extra run): two-sided marketplace dependency (freelancing.stackexchange.com question 11057)."
+      },
+      {
+        "title": "PrairieLearn rubric library",
+        "total": 11,
+        "reason": "Rejected (extra run): a feature request in a free open-source tool; first sale needs institutional adoption."
+      },
+      {
+        "title": "Gradescope autograder base images",
+        "total": 9,
+        "reason": "Rejected (extra run): a vendor configuration issue, not a product."
+      },
+      {
+        "title": "Airbnb enquiry auto-replies",
+        "total": 12,
+        "reason": "Rejected (extra run): AI wrapper in a crowded niche (Enquiry Genie on TrustMRR shows an incumbent)."
       }
     ],
     "watchlist": [],
-    "caveats": "Three provisional ideas ship (16, 15, 15); none came near the gate of 22. Seven candidates were researched and adversarially reviewed: two were killed (Payout Explainer: Payout Match and PayoutCheck already do it; Venue Update Page: the Facebook cap limits links only and Buffer's free plan covers the job), one was rescored but failed the 180-day floor (food truck broadcaster), one was rescored to 14 (Crew Log by WhatsApp) and not shipped because three ideas already qualified, and three survived as provisional after rescoring. As on 2026-11-05, community.shopify.com back-office and booking threads are dominated by developers promoting their own apps, and every booking niche checked (classes, rentals, salons) already has several paid apps; the strongest fresh signals today were mandates (New York allergen notices from 2026-11-12, Florida and Colorado fee disclosure) whose cheapest compliance path is a sticker or a reprint, which caps willingness to pay. No idea is validated, so no candidate has willingnessToPay 3 or more. Two of the three ideas share the category Accessibility & Compliance (the maximum). All three have small-business buyers. No candidate scored 19 or more without shipping, so the watchlist is empty."
+    "caveats": "Three provisional ideas ship (16, 15, 15); none came near the gate of 22. Seven candidates were researched and adversarially reviewed: two were killed (Payout Explainer: Payout Match and PayoutCheck already do it; Venue Update Page: the Facebook cap limits links only and Buffer's free plan covers the job), one was rescored but failed the 180-day floor (food truck broadcaster), one was rescored to 14 (Crew Log by WhatsApp) and not shipped because three ideas already qualified, and three survived as provisional after rescoring. As on 2026-11-05, community.shopify.com back-office and booking threads are dominated by developers promoting their own apps, and every booking niche checked (classes, rentals, salons) already has several paid apps; the strongest fresh signals today were mandates (New York allergen notices from 2026-11-12, Florida and Colorado fee disclosure) whose cheapest compliance path is a sticker or a reprint, which caps willingness to pay. No idea is validated, so no candidate has willingnessToPay 3 or more. Two of the three ideas share the category Accessibility & Compliance (the maximum). All three have small-business buyers. No candidate scored 19 or more without shipping, so the watchlist is empty. Extra run (random sources A15 A3 B6 C1 A5): added ideas 4 (Recurring Invoice Send Check, 17), 5 (Transfer Enquiry Desk, 16) and 6 (Mixed-Use Vehicle Worksheet, 15), all provisional with willingnessToPay 2. Ten candidates were adversarially reviewed: five killed (Inbox Miss Report, Quote Request Catcher, Sheet Invoice Chaser, Altegio WhatsApp Front Desk, Interest-Led Coding Plans) and five rescored, of which the top three shipped. As on 2026-11-05 and 2026-11-06, most small-business threads on community.make.com and community.n8n.io came from developers showcasing or selling workflows, which reviewers discounted. The GitHub issue-search path (A3) returned 200 with is:issue in the query, so the 422 noted in source-health has cleared. C1 yielded no relevant solicitation (NSF seed fund targets deep tech). Some competitor URLs (FreeAgent, BillerGenie, QuickBooks help article) were seen in reviewers' search results but not fetched; their prices are unknown. No candidate scored 19 or more, so the watchlist stays empty. Categories across the day: Small Business Ops 2, Accessibility & Compliance 2, Micro-SaaS 2."
   }
 }

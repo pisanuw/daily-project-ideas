@@ -617,3 +617,6 @@
 | 2026-11-06 | Shop-in-Shop Stock | Small Business Ops | Multi-week | 16 | provisional |  |
 | 2026-11-06 | Grab-and-Go Allergen Labels | Accessibility & Compliance | Weekend MVP | 15 | provisional |  |
 | 2026-11-06 | Fee Disclosure Check for Restaurants | Accessibility & Compliance | Weekend MVP | 15 | provisional |  |
+| 2026-11-06 | Recurring Invoice Send Check | Small Business Ops | Multi-week | 17 | provisional |  |
+| 2026-11-06 | Transfer Enquiry Desk | Micro-SaaS | Weekend MVP | 16 | provisional |  |
+| 2026-11-06 | Mixed-Use Vehicle Worksheet | Micro-SaaS | Weekend MVP | 15 | provisional |  |

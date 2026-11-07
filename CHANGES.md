@@ -621,3 +621,7 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-06 [code] Health Page Tracker Watch (2026-11-04 #3) implemented and live at https://health-page-tracker-watch.pisan.me; claim replaced with url, repo, notes and publicNotes.
 
 2026-11-06 [doc] Created ideas/2026-11-06.json (schemaVersion 3, 3 ideas): Shop-in-Shop Stock (16, provisional), Grab-and-Go Allergen Labels (15, provisional), Fee Disclosure Check (15, provisional)
+
+2026-11-06 [doc] Extra run (random sources A15 A3 B6 C1 A5) added 3 ideas to ideas/2026-11-06.json: Recurring Send Check (17, prov), Transfer Enquiry Desk (16, prov), Mixed-Use Vehicle (15, prov)
+
+2026-11-06 [doc] ideas/sources.json: A3 GitHub issue-search path verified working again (200 with is:issue); B6 gains a TrustMRR category-page path.

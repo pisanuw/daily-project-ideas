@@ -55,20 +55,49 @@
         "curl https://adnabu.com/free-tools/misrepresentation-checker"
       ]
     },
-    "api.github.com": {
-      "attempts": 5,
+    "ai.varsitytutors.com": {
+      "attempts": 1,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-04",
-      "lastOk": "2026-11-04",
+      "lastAttempt": "2026-11-06",
+      "lastOk": "2026-11-06",
       "ok": 1,
       "outcomes": {
-        "empty": 1,
-        "http_403": 2,
-        "http_5xx": 1,
         "ok": 1
       },
       "workingPaths": [
-        "curl https://api.github.com/search/issues?q=nbgrader+is%3Aissue+created%3A%3E2026-08-01&per_page=20"
+        "webfetch https://ai.varsitytutors.com/tools/lesson-plan-generator"
+      ]
+    },
+    "alteg.io": {
+      "attempts": 2,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-06",
+      "lastOk": "2026-11-06",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "webfetch https://alteg.io/en/support/knowledge-base/158996/",
+        "webfetch https://alteg.io/en/support/knowledge-base/altegio-and-chatplug-whatsapp-telegram/"
+      ]
+    },
+    "api.github.com": {
+      "attempts": 12,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-06",
+      "lastOk": "2026-11-06",
+      "ok": 6,
+      "outcomes": {
+        "empty": 1,
+        "http_403": 4,
+        "http_5xx": 1,
+        "ok": 6
+      },
+      "workingPaths": [
+        "curl https://api.github.com/search/issues?q=nbgrader+is%3Aissue+created%3A%3E2026-08-01&per_page=20",
+        "curl https://api.github.com/search/issues?q=autograder+is%3Aissue+state%3Aopen+sort%3Areactions&per_page=10",
+        "curl https://api.github.com/search/issues?q=repo%3Ajupyter%2Fnbgrader+is%3Aissue+state%3Aopen+sort%3Areactions&per_page=10"
       ]
     },
     "api.nsf.gov": {
@@ -98,14 +127,14 @@
       "workingPaths": []
     },
     "api.stackexchange.com": {
-      "attempts": 8,
-      "evidenceItems": 0,
-      "lastAttempt": "2026-11-04",
-      "lastOk": "2026-11-04",
-      "ok": 7,
+      "attempts": 14,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-06",
+      "lastOk": "2026-11-06",
+      "ok": 13,
       "outcomes": {
         "allowlist": 1,
-        "ok": 7
+        "ok": 13
       },
       "workingPaths": [
         "curl https://api.stackexchange.com/2.3/search/advanced?site=academia&q=spreadsheet&order=desc&sort=creation&pagesize=20",
@@ -114,19 +143,30 @@
       ]
     },
     "api.wordpress.org": {
-      "attempts": 15,
-      "evidenceItems": 0,
-      "lastAttempt": "2026-11-04",
-      "lastOk": "2026-11-04",
-      "ok": 15,
+      "attempts": 16,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-06",
+      "lastOk": "2026-11-06",
+      "ok": 16,
       "outcomes": {
-        "ok": 15
+        "ok": 16
       },
       "workingPaths": [
         "curl https://api.wordpress.org/plugins/info/1.2/?action=query_plugins&request[search]=accessibility&request[per_page]=15",
         "curl https://api.wordpress.org/plugins/info/1.2/?action=query_plugins&request[search]=alt%20text&request[per_page]=15",
         "curl https://api.wordpress.org/plugins/info/1.2/?action=query_plugins&request[search]=cookie+consent&request[per_page]=15"
       ]
+    },
+    "api.www.sbir.gov": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-06",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_403": 1
+      },
+      "workingPaths": []
     },
     "apibreaks.com": {
       "attempts": 2,
@@ -167,6 +207,19 @@
       "workingPaths": [
         "curl https://app.thetutor.link/about",
         "curl https://app.thetutor.link/"
+      ]
+    },
+    "apps.apple.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-06",
+      "lastOk": "2026-11-06",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://apps.apple.com/us/app/property-miles/id6760436282"
       ]
     },
     "apps.shopify.com": {
@@ -273,6 +326,20 @@
         "webfetch https://buffer.com/pricing"
       ]
     },
+    "cabgrid.com": {
+      "attempts": 2,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-06",
+      "lastOk": "2026-11-06",
+      "ok": 1,
+      "outcomes": {
+        "http_403": 1,
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://cabgrid.com/"
+      ]
+    },
     "cakerybakeries.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -375,6 +442,19 @@
         "curl https://codeboard.io/"
       ]
     },
+    "codecanyon.net": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-06",
+      "lastOk": "2026-11-06",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://codecanyon.net/item/chauffeur-booking-system-for-wordpress/21072773"
+      ]
+    },
     "coffeewp.dev": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -470,14 +550,14 @@
       "workingPaths": []
     },
     "community.make.com": {
-      "attempts": 13,
-      "evidenceItems": 0,
-      "lastAttempt": "2026-11-05",
-      "lastOk": "2026-11-05",
-      "ok": 12,
+      "attempts": 18,
+      "evidenceItems": 2,
+      "lastAttempt": "2026-11-06",
+      "lastOk": "2026-11-06",
+      "ok": 17,
       "outcomes": {
         "empty": 1,
-        "ok": 12
+        "ok": 17
       },
       "workingPaths": [
         "curl https://community.make.com/search.json?q=deprecated%20after%3A2026-08-01",
@@ -486,14 +566,14 @@
       ]
     },
     "community.n8n.io": {
-      "attempts": 37,
+      "attempts": 50,
       "evidenceItems": 4,
       "lastAttempt": "2026-11-06",
       "lastOk": "2026-11-06",
-      "ok": 36,
+      "ok": 49,
       "outcomes": {
         "empty": 1,
-        "ok": 36
+        "ok": 49
       },
       "workingPaths": [
         "curl https://community.n8n.io/search.json?q=invoice%20small%20business%20after%3A2026-09-01",
@@ -544,6 +624,17 @@
         "webfetch https://community.squareup.com/t5/Feature-Requests/Allow-Mobile-Vendors-to-Edit-Pickup-Address-Independently-from/idi-p/831400"
       ]
     },
+    "community.zapier.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-06",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "empty": 1
+      },
+      "workingPaths": []
+    },
     "community.zoom.com": {
       "attempts": 2,
       "evidenceItems": 0,
@@ -569,6 +660,19 @@
       },
       "workingPaths": [
         "curl https://complianz.io/pricing/"
+      ]
+    },
+    "connecteam.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-06",
+      "lastOk": "2026-11-06",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://connecteam.com/pricing/"
       ]
     },
     "consentcheck.online": {
@@ -641,6 +745,32 @@
       },
       "workingPaths": []
     },
+    "developer.xero.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-06",
+      "lastOk": "2026-11-06",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://developer.xero.com/pricing"
+      ]
+    },
+    "developers.google.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-06",
+      "lastOk": "2026-11-06",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://developers.google.com/workspace/gmail/api/auth/scopes"
+      ]
+    },
     "developers.make.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -655,13 +785,13 @@
       ]
     },
     "discourse.jupyter.org": {
-      "attempts": 2,
+      "attempts": 3,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-04",
-      "lastOk": "2026-11-04",
-      "ok": 2,
+      "lastAttempt": "2026-11-06",
+      "lastOk": "2026-11-06",
+      "ok": 3,
       "outcomes": {
-        "ok": 2
+        "ok": 3
       },
       "workingPaths": [
         "curl https://discourse.jupyter.org/search.json?q=grading%20after%3A2026-08-01",
@@ -812,6 +942,19 @@
       },
       "workingPaths": []
     },
+    "emailmeter.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-06",
+      "lastOk": "2026-11-06",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://emailmeter.com/pricing"
+      ]
+    },
     "equalizedigital.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -834,6 +977,19 @@
       },
       "workingPaths": [
         "curl https://erank.com/pricing"
+      ]
+    },
+    "everlance.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-06",
+      "lastOk": "2026-11-06",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://everlance.com/pricing"
       ]
     },
     "export.arxiv.org": {
@@ -936,18 +1092,19 @@
       "workingPaths": []
     },
     "forum.bubble.io": {
-      "attempts": 3,
+      "attempts": 4,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-04",
-      "lastOk": "2026-11-02",
-      "ok": 2,
+      "lastAttempt": "2026-11-06",
+      "lastOk": "2026-11-06",
+      "ok": 3,
       "outcomes": {
         "empty": 1,
-        "ok": 2
+        "ok": 3
       },
       "workingPaths": [
         "curl https://forum.bubble.io/search.json?q=accessibility%20after%3A2026-07-01",
-        "curl https://forum.bubble.io/search.json?q=GDPR%20after%3A2026-07-01"
+        "curl https://forum.bubble.io/search.json?q=GDPR%20after%3A2026-07-01",
+        "curl https://forum.bubble.io/search.json?q=clinic%20after%3A2026-08-01"
       ]
     },
     "forum.ghost.org": {
@@ -1067,14 +1224,14 @@
       ]
     },
     "github.com": {
-      "attempts": 4,
-      "evidenceItems": 1,
-      "lastAttempt": "2026-11-04",
-      "lastOk": "2026-11-01",
-      "ok": 3,
+      "attempts": 6,
+      "evidenceItems": 2,
+      "lastAttempt": "2026-11-06",
+      "lastOk": "2026-11-06",
+      "ok": 5,
       "outcomes": {
         "http_403": 1,
-        "ok": 3
+        "ok": 5
       },
       "workingPaths": [
         "webfetch https://github.com/PrairieLearn/PrairieLearn/issues/14717",
@@ -1142,6 +1299,19 @@
       "workingPaths": [
         "curl https://help.shopify.com/en/manual/sell-in-person/shopify-pos/inventory-management/inventory-counts",
         "curl https://help.shopify.com/en/manual/online-store/themes/managing-themes/updating-themes"
+      ]
+    },
+    "hiverhq.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-06",
+      "lastOk": "2026-11-06",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://hiverhq.com/pricing"
       ]
     },
     "hn.algolia.com": {
@@ -1252,6 +1422,20 @@
       },
       "workingPaths": [
         "webfetch https://legacy.cdocs.com/discussion-boards/view/id/92776"
+      ]
+    },
+    "mage-people.com": {
+      "attempts": 2,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-06",
+      "lastOk": "2026-11-06",
+      "ok": 1,
+      "outcomes": {
+        "http_404": 1,
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://mage-people.com/product/wordpress-taxi-cab-booking-plugin-for-woocommerce/"
       ]
     },
     "managewp.com": {
@@ -1371,6 +1555,19 @@
       },
       "workingPaths": []
     },
+    "onde.app": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-06",
+      "lastOk": "2026-11-06",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://onde.app/pricing"
+      ]
+    },
     "payoutcheck.online": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -1411,18 +1608,30 @@
       ]
     },
     "productideas.xero.com": {
-      "attempts": 2,
-      "evidenceItems": 1,
-      "lastAttempt": "2026-11-05",
-      "lastOk": "2026-11-05",
-      "ok": 2,
+      "attempts": 3,
+      "evidenceItems": 2,
+      "lastAttempt": "2026-11-06",
+      "lastOk": "2026-11-06",
+      "ok": 3,
       "outcomes": {
-        "ok": 2
+        "ok": 3
       },
       "workingPaths": [
         "curl https://productideas.xero.com/forums/939198-for-small-businesses/suggestions/45701299-bank-reconciliation-bulk-import-recieved-payments",
-        "curl https://productideas.xero.com/forums/967139-purchase-orders-bills-inventory/suggestions/45073597-batch-deposit-more-than-50-transactions?page=1"
+        "curl https://productideas.xero.com/forums/967139-purchase-orders-bills-inventory/suggestions/45073597-batch-deposit-more-than-50-transactions?page=1",
+        "curl https://productideas.xero.com/forums/967115-invoices-quotes/suggestions/44960542-sales-notification-that-invoice-sent-not-sent"
       ]
+    },
+    "projects.raspberrypi.org": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-06",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "empty": 1
+      },
+      "workingPaths": []
     },
     "publer.com": {
       "attempts": 1,
@@ -1438,14 +1647,14 @@
       ]
     },
     "quickbooks.intuit.com": {
-      "attempts": 4,
+      "attempts": 6,
       "evidenceItems": 1,
-      "lastAttempt": "2026-11-05",
-      "lastOk": "2026-11-05",
-      "ok": 3,
+      "lastAttempt": "2026-11-06",
+      "lastOk": "2026-11-06",
+      "ok": 4,
       "outcomes": {
-        "ok": 3,
-        "timeout": 1
+        "ok": 4,
+        "timeout": 2
       },
       "workingPaths": [
         "webfetch https://quickbooks.intuit.com/learn-support/en-uk/transactions/does-qbo-have-any-features-to-automate-ar-i-e-to-match-incoming/01/1582229",
@@ -1543,17 +1752,18 @@
       "workingPaths": []
     },
     "seedfund.nsf.gov": {
-      "attempts": 3,
+      "attempts": 6,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-04",
-      "lastOk": "2026-11-03",
-      "ok": 1,
+      "lastAttempt": "2026-11-06",
+      "lastOk": "2026-11-06",
+      "ok": 3,
       "outcomes": {
-        "http_404": 2,
-        "ok": 1
+        "http_404": 3,
+        "ok": 3
       },
       "workingPaths": [
-        "curl https://seedfund.nsf.gov/"
+        "curl https://seedfund.nsf.gov/",
+        "curl https://seedfund.nsf.gov/solicitation-proposal/"
       ]
     },
     "senderz-website.pages.dev": {
@@ -1631,12 +1841,13 @@
       ]
     },
     "support.google.com": {
-      "attempts": 1,
+      "attempts": 2,
       "evidenceItems": 1,
-      "lastAttempt": "2026-11-03",
+      "lastAttempt": "2026-11-06",
       "lastOk": "2026-11-03",
       "ok": 1,
       "outcomes": {
+        "http_404": 1,
         "ok": 1
       },
       "workingPaths": [
@@ -1744,17 +1955,19 @@
       "workingPaths": []
     },
     "trustmrr.com": {
-      "attempts": 2,
+      "attempts": 6,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-04",
-      "lastOk": "2026-10-31",
-      "ok": 1,
+      "lastAttempt": "2026-11-06",
+      "lastOk": "2026-11-06",
+      "ok": 5,
       "outcomes": {
         "http_404": 1,
-        "ok": 1
+        "ok": 5
       },
       "workingPaths": [
-        "webfetch https://trustmrr.com/startup/exam-predictor"
+        "webfetch https://trustmrr.com/startup/exam-predictor",
+        "curl https://trustmrr.com/",
+        "curl https://trustmrr.com/category/customer-support"
       ]
     },
     "tutorlms.com": {
@@ -1871,15 +2084,15 @@
       "workingPaths": []
     },
     "wordpress.org": {
-      "attempts": 52,
-      "evidenceItems": 11,
+      "attempts": 54,
+      "evidenceItems": 12,
       "lastAttempt": "2026-11-06",
-      "lastOk": "2026-11-04",
-      "ok": 50,
+      "lastOk": "2026-11-06",
+      "ok": 52,
       "outcomes": {
         "empty": 1,
         "http_404": 1,
-        "ok": 50
+        "ok": 52
       },
       "workingPaths": [
         "curl https://wordpress.org/support/plugin/wp-accessibility/",
@@ -1960,6 +2173,19 @@
         "http_403": 1
       },
       "workingPaths": []
+    },
+    "www.boomeranggmail.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-06",
+      "lastOk": "2026-11-06",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://www.boomeranggmail.com/subscriptions.html"
+      ]
     },
     "www.capterra.com": {
       "attempts": 2,
@@ -2181,19 +2407,43 @@
         "curl https://www.federalregister.gov/api/v1/documents.json?per_page=15&order=newest&conditions[term]=%22small+entity+compliance+guide%22"
       ]
     },
+    "www.followupthen.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-06",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_5xx": 1
+      },
+      "workingPaths": []
+    },
     "www.freelancer.com": {
-      "attempts": 97,
+      "attempts": 102,
       "evidenceItems": 1,
       "lastAttempt": "2026-11-06",
       "lastOk": "2026-11-06",
-      "ok": 97,
+      "ok": 102,
       "outcomes": {
-        "ok": 97
+        "ok": 102
       },
       "workingPaths": [
         "curl https://www.freelancer.com/api/projects/0.1/projects/active/?query=booking%20system&limit=20&full_description=true",
         "curl https://www.freelancer.com/api/projects/0.1/projects/active/?query=small%20business%20automation&limit=20&full_description=true",
         "curl https://www.freelancer.com/api/projects/0.1/projects/active/?query=contact%20form%20not%20working&limit=20"
+      ]
+    },
+    "www.getjobber.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-06",
+      "lastOk": "2026-11-06",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.getjobber.com/pricing/"
       ]
     },
     "www.govinfo.gov": {
@@ -2220,6 +2470,32 @@
         "empty": 1
       },
       "workingPaths": []
+    },
+    "www.housecallpro.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-06",
+      "lastOk": "2026-11-06",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.housecallpro.com/pricing/"
+      ]
+    },
+    "www.jibble.io": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-06",
+      "lastOk": "2026-11-06",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://www.jibble.io/pricing"
+      ]
     },
     "www.make.com": {
       "attempts": 2,
@@ -2269,6 +2545,17 @@
         "curl https://www.mondaq.com/unitedstates/tax-authorities/1773378/washington-state-2026-session-legislature-repeals-and-rolls-back-certain-recently-enacted-taxes"
       ]
     },
+    "www.moovs.app": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-06",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "allowlist": 1
+      },
+      "workingPaths": []
+    },
     "www.nationgraph.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -2292,12 +2579,13 @@
       "workingPaths": []
     },
     "www.nsf.gov": {
-      "attempts": 1,
+      "attempts": 3,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-04",
+      "lastAttempt": "2026-11-06",
       "lastOk": "2026-11-04",
       "ok": 1,
       "outcomes": {
+        "http_404": 2,
         "ok": 1
       },
       "workingPaths": [
@@ -2368,6 +2656,19 @@
       },
       "workingPaths": []
     },
+    "www.quo.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-06",
+      "lastOk": "2026-11-06",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.quo.com/blog/missed-call-text-back-software/"
+      ]
+    },
     "www.reddit.com": {
       "attempts": 2,
       "evidenceItems": 0,
@@ -2427,6 +2728,17 @@
       },
       "workingPaths": []
     },
+    "www.softwareadvice.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-06",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_403": 1
+      },
+      "workingPaths": []
+    },
     "www.teacherspayteachers.com": {
       "attempts": 3,
       "evidenceItems": 0,
@@ -2483,15 +2795,18 @@
       ]
     },
     "www.tutorbird.com": {
-      "attempts": 1,
+      "attempts": 2,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-03",
-      "lastOk": null,
-      "ok": 0,
+      "lastAttempt": "2026-11-06",
+      "lastOk": "2026-11-06",
+      "ok": 1,
       "outcomes": {
-        "empty": 1
+        "empty": 1,
+        "ok": 1
       },
-      "workingPaths": []
+      "workingPaths": [
+        "webfetch https://www.tutorbird.com/pricing/"
+      ]
     },
     "www.uptimia.com": {
       "attempts": 1,
@@ -2530,6 +2845,19 @@
         "curl https://www.valueaddedresource.net/etsy-bans-ai-patterns/"
       ]
     },
+    "www.waveapps.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-06",
+      "lastOk": "2026-11-06",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.waveapps.com/pricing"
+      ]
+    },
     "www.wxxinews.org": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -2543,6 +2871,19 @@
         "webfetch https://www.wxxinews.org/local-news/2025-11-14/new-state-law-requires-food-allergen-labeling-for-deli-and-bakery-products"
       ]
     },
+    "www.zoho.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-06",
+      "lastOk": "2026-11-06",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.zoho.com/us/invoice/pricing/"
+      ]
+    },
     "xdaforums.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -2553,6 +2894,19 @@
         "http_403": 1
       },
       "workingPaths": []
+    },
+    "zeitride.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-06",
+      "lastOk": "2026-11-06",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://zeitride.com/"
+      ]
     }
   },
   "bySource": {
@@ -2611,13 +2965,13 @@
       "selected": 2
     },
     "A15": {
-      "candidates": 13,
-      "fetchFail": 0,
-      "fetchOk": 40,
-      "lastUsed": "2026-11-05",
-      "runs": 3,
-      "searches": 22,
-      "selected": 1
+      "candidates": 19,
+      "fetchFail": 1,
+      "fetchOk": 54,
+      "lastUsed": "2026-11-06",
+      "runs": 4,
+      "searches": 30,
+      "selected": 2
     },
     "A2": {
       "candidates": 2,
@@ -2629,13 +2983,13 @@
       "selected": 0
     },
     "A3": {
-      "candidates": 6,
-      "fetchFail": 2,
-      "fetchOk": 7,
-      "lastUsed": "2026-11-04",
-      "runs": 3,
-      "searches": 11,
-      "selected": 0
+      "candidates": 9,
+      "fetchFail": 4,
+      "fetchOk": 13,
+      "lastUsed": "2026-11-06",
+      "runs": 4,
+      "searches": 17,
+      "selected": 1
     },
     "A4": {
       "candidates": 0,
@@ -2647,13 +3001,13 @@
       "selected": 0
     },
     "A5": {
-      "candidates": 4,
+      "candidates": 7,
       "fetchFail": 1,
-      "fetchOk": 9,
-      "lastUsed": "2026-11-04",
-      "runs": 4,
-      "searches": 14,
-      "selected": 0
+      "fetchOk": 15,
+      "lastUsed": "2026-11-06",
+      "runs": 5,
+      "searches": 18,
+      "selected": 1
     },
     "A6": {
       "candidates": 4,
@@ -2694,19 +3048,19 @@
     "B10": {
       "candidates": 5,
       "fetchFail": 0,
-      "fetchOk": 13,
-      "lastUsed": "2026-11-03",
-      "runs": 3,
-      "searches": 13,
+      "fetchOk": 15,
+      "lastUsed": "2026-11-06",
+      "runs": 4,
+      "searches": 14,
       "selected": 0
     },
     "B11": {
-      "candidates": 9,
+      "candidates": 10,
       "fetchFail": 1,
-      "fetchOk": 86,
+      "fetchOk": 91,
       "lastUsed": "2026-11-06",
-      "runs": 5,
-      "searches": 81,
+      "runs": 6,
+      "searches": 86,
       "selected": 1
     },
     "B12": {
@@ -2746,12 +3100,12 @@
       "selected": 0
     },
     "B6": {
-      "candidates": 2,
+      "candidates": 3,
       "fetchFail": 0,
-      "fetchOk": 1,
-      "lastUsed": "2026-10-31",
-      "runs": 1,
-      "searches": 3,
+      "fetchOk": 5,
+      "lastUsed": "2026-11-06",
+      "runs": 2,
+      "searches": 7,
       "selected": 0
     },
     "B8": {
@@ -2774,11 +3128,11 @@
     },
     "C1": {
       "candidates": 1,
-      "fetchFail": 2,
-      "fetchOk": 2,
-      "lastUsed": "2026-11-04",
-      "runs": 2,
-      "searches": 4,
+      "fetchFail": 6,
+      "fetchOk": 4,
+      "lastUsed": "2026-11-06",
+      "runs": 3,
+      "searches": 7,
       "selected": 0
     },
     "C10": {
@@ -2943,22 +3297,22 @@
     }
   ],
   "funnel": {
-    "candidates": 229,
+    "candidates": 243,
     "passedGate": 4,
-    "passedRejectRules": 180,
-    "provisional": 14,
-    "reviewKilled": 25,
+    "passedRejectRules": 190,
+    "provisional": 17,
+    "reviewKilled": 30,
     "validated": 0,
     "watchlist": 36
   },
   "gateFailures": {
     "noRecentEvidence": 1,
     "painBelow4": 3,
-    "rejectRule": 49,
-    "reviewKill": 25,
-    "totalBelowMin": 145
+    "rejectRule": 53,
+    "reviewKill": 30,
+    "totalBelowMin": 150
   },
-  "generated": "2026-11-06",
+  "generated": "2026-11-07",
   "prefer": [
     {
       "client": "webfetch",
@@ -2998,6 +3352,15 @@
     },
     {
       "client": "webfetch",
+      "evidence": "complaint",
+      "id": "A15",
+      "name": "No-code automation communities",
+      "path": "https://community.make.com/search.json?q={q}+after%3A{YYYY-MM-DD}",
+      "selectedIdeas": 2,
+      "status": "ok"
+    },
+    {
+      "client": "webfetch",
       "evidence": "mandate",
       "id": "C5",
       "name": "Policy and regulation trackers",
@@ -3015,13 +3378,22 @@
       "status": "ok-curl"
     },
     {
-      "client": "webfetch",
+      "client": "curl",
       "evidence": "complaint",
-      "id": "A15",
-      "name": "No-code automation communities",
-      "path": "https://community.make.com/search.json?q={q}+after%3A{YYYY-MM-DD}",
+      "id": "A3",
+      "name": "Open-source teaching tools",
+      "path": "https://api.github.com/search/issues?q={q}+is%3Aissue+state%3Aopen+sort%3Areactions&per_page=10",
       "selectedIdeas": 1,
       "status": "ok"
+    },
+    {
+      "client": "curl",
+      "evidence": "complaint",
+      "id": "A5",
+      "name": "Educator Stack Exchanges",
+      "path": "https://api.stackexchange.com/2.3/questions?site={cseducators|academia|matheducators}&order=desc&sort=creation&pagesize=20&filter=withbody",
+      "selectedIdeas": 1,
+      "status": "ok-curl"
     },
     {
       "client": "webfetch",
@@ -3076,24 +3448,6 @@
       "path": "https://discuss.openedx.org/latest.json",
       "selectedIdeas": 0,
       "status": "ok"
-    },
-    {
-      "client": "curl",
-      "evidence": "complaint",
-      "id": "A3",
-      "name": "Open-source teaching tools",
-      "path": "https://api.github.com/search/issues?q={q}+is%3Aissue+state%3Aopen+sort%3Areactions&per_page=10",
-      "selectedIdeas": 0,
-      "status": "ok"
-    },
-    {
-      "client": "curl",
-      "evidence": "complaint",
-      "id": "A5",
-      "name": "Educator Stack Exchanges",
-      "path": "https://api.stackexchange.com/2.3/questions?site={cseducators|academia|matheducators}&order=desc&sort=creation&pagesize=20&filter=withbody",
-      "selectedIdeas": 0,
-      "status": "ok-curl"
     },
     {
       "client": "webfetch",
@@ -3213,6 +3567,6 @@
       "status": "ok"
     }
   ],
-  "runsInWindow": 14,
+  "runsInWindow": 15,
   "windowDays": 45
 }
