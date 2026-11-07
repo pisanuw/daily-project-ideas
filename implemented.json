@@ -629,6 +629,14 @@
       "implementedOn": "2026-11-06",
       "notes": "Vite + TypeScript, no server. Inputs: a HAR recording (requests assigned to pages by pageref, else navigation order; only third-party requests kept; flags whether the full page address went out in the URL, POST body or Referer) or pasted page source (src/href/action attributes and URLs inside inline scripts, after stripping anchors, meta, canonical/alternate links, comments and JSON-LD). Pages guessed as booking/intake/service/contact/home/other from path and title keywords, owner can override. Hand-kept vendor table of 82 tools with host rules, kind (ad pixel, analytics, session recording, chat, accessibility widget, booking, practice system, forms, email marketing, call tracking, reviews, video, maps, fonts, code library, spam protection, payments, website platform, social embed) and public BAA position: offers, some-plans, no, or 'ask' where unconfirmed (deliberately conservative; reviewed 2026-11 stamp on every report). Levels: review (high-weight kind on a health page, BAA no/ask), check (some-plans, low-weight kind, or unknown company on a health page), fyi (not on health pages), ok (BAA offered). Practice profile (HIPAA/wellness/unsure, WA/NV/CT) changes explanations only. Saved-check JSON diff: new tools, spread to new health pages, worse levels, gone (only for re-checked pages), BAA changes. Exports: Markdown summary, print to PDF, monthly .ics reminder. The idea's Playwright crawler, Supabase and email alerts replaced by this browser-only core; example practice on the reserved .example domain. 53 vitest tests, 99% statement coverage. Vendor BAA statuses come from public positions as best known, not re-verified live this run; worth a spot check before promoting.",
       "publicNotes": "For therapists, small clinics, med spas and wellness studios, and the people who run their websites. Record your booking, intake and service pages in your browser, or paste a page's source, and it lists every outside company those pages contact, what each one receives, and whether its maker publicly says it signs a Business Associate Agreement, with the tools to look at first and options your web person can act on. Save the check and next month it shows only what changed, such as a new tracker or one that spread onto your booking page after an update. Limitation: the vendor table is kept by hand and vendors change their plans, so where we could not confirm what a vendor offers it says to ask them, and it reports what your pages sent, not whether you are compliant."
+    },
+    {
+      "ref": {
+        "date": "2026-11-07",
+        "n": 1
+      },
+      "placeholder": true,
+      "notes": "In progress since 2026-11-07"
     }
   ]
 }
