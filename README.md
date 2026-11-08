@@ -1,6 +1,6 @@
 # Daily Project Ideas
 
-**Live site: https://daily-project-ideas.pisan.me/**
+**Live site: https://studio.hintwise.org/** (HintWise Studio; the ideas are on its [Next up](https://studio.hintwise.org/next-up.html) page)
 
 Automated daily product ideas curated by a Claude Code scheduled routine.
 
@@ -26,17 +26,26 @@ rather than from guesses.
 
 ## Website
 
-Live at **https://daily-project-ideas.pisan.me/** (auto-deployed from `main`; https://daily-project-ideas.netlify.app/ also serves it). Each page
-declares the pisan.me address as canonical and carries Open Graph and Twitter card tags with `web/og-image.png`.
+Since 2026-11-08 the site is **HintWise Studio** at **https://studio.hintwise.org/**
+(Netlify site `hintwise`, auto-deployed from `main`), the showcase of the apps
+HintWise has built. Every page declares its studio.hintwise.org address as
+canonical and carries Open Graph and Twitter card tags with `web/og-image.png`.
 
-Three pages: **Latest** shows the newest few per effort tier, **Browse all** searches
-and filters all 601, and **Topics** splits them into 13 topics with one topic per idea.
-Filter and search state lives in the URL, so the back button works and any view can be
-shared as a link.
+- **Home** (`/`): hero, the featured apps with demo videos, who it is for, how
+  it works, about.
+- **Apps** (`/apps/`): every built app, filtered by audience (`?for=`) and
+  searched (`?q=`), and one page per app at `/apps/<slug>/`.
+- **Next up** (`/next-up.html`, `browse.html`, `topics.html`): the daily ideas,
+  grouped by who they are for, searchable and by topic.
+- **Notes** (`/notes/`): the owner's view of the ideas, behind `NOTES_PASSWORD`.
 
-A static site renders the ideas grouped by complexity (Weekend 🌶️, 1-2 Weeks 🌶️🌶️,
-Multi-week 🌶️🌶️🌶️) plus an Implemented section. Build it with `node build.js`
-(zero dependencies) and serve `dist/`. See [DEPLOY.md](DEPLOY.md) for Netlify setup.
+`node build.js` (zero dependencies) writes all of it to `dist/`. The app pages
+come from `implemented.json` plus `studio.json` (public names, one-line blurbs,
+audiences, the featured order, and apps built outside the routine);
+`build-studio.js` renders them. Images live in `web/media/` and are made by
+`node scripts/studio_media.js <claude-built-apps dir>` (ffmpeg, plus Playwright
+for apps without a demo GIF). `node scripts/smoke_pages.js` checks the build.
+See [DEPLOY.md](DEPLOY.md) for Netlify setup.
 
 ## Structure
 

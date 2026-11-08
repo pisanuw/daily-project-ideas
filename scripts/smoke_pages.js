@@ -4,7 +4,7 @@
  *
  * Usage: node scripts/smoke_pages.js
  *
- * Runs dist/app.js against a minimal DOM stub once per page (index, browse,
+ * Runs dist/app.js against a minimal DOM stub once per page (next-up, browse,
  * topics), using the real dist/data.js, and reports what each page rendered.
  * It catches the failure this repo is most exposed to: app.js is one script
  * shared by three pages, so a selector that exists on only one of them throws
@@ -205,7 +205,7 @@ function runPage(name, query) {
 // ---- Expectations --------------------------------------------------------
 
 const EXPECT = {
-  index: (c) => c.section >= 3 && c.card > 0 && c.jumpbarLink > 0,
+  'next-up': (c) => c.section >= 3 && c.card > 0 && c.jumpbarLink > 0,
   browse: (c) => c.card > 0 && c.chip > 0 && c.pagerBtn > 0,
   topics: (c) => c.topiccard > 0,
 };
@@ -222,12 +222,12 @@ const SCENARIOS = [
     check: (c) => c.card === 24 && /page 2 of/.test(c.resultText), why: 'expected a full second page' },
   { name: 'browse ?q=zzzznomatch', page: 'browse', query: '?q=zzzznomatch',
     check: (c) => c.card === 0, why: 'expected no cards' },
-  { name: 'index ?idea=<first>', page: 'index', query: null, deepLink: true,
+  { name: 'next-up ?idea=<first>', page: 'next-up', query: null, deepLink: true,
     check: (c) => c.modalOpen, why: 'expected a shared idea link to open its modal' },
 ];
 
 let failures = 0;
-for (const page of ['index', 'browse', 'topics']) {
+for (const page of ['next-up', 'browse', 'topics']) {
   try {
     const counts = runPage(page);
     const ok = EXPECT[page](counts);
@@ -262,6 +262,20 @@ const notesRaw = fs.readFileSync(path.join(DIST, 'notes', 'data.js'), 'utf8');
 const leakOk = leaked.length === 0 && notesRaw.includes('"scores"');
 if (!leakOk) failures += 1;
 console.log(`${leakOk ? 'PASS' : 'FAIL'}  public data has no working notes (${leaked.length} leaking), notes data keeps them`);
+
+// The HintWise Studio pages are static HTML written by build-studio.js.
+const home = fs.readFileSync(path.join(DIST, 'index.html'), 'utf8');
+const appsHtml = fs.readFileSync(path.join(DIST, 'apps', 'index.html'), 'utf8');
+const appCards = (appsHtml.match(/class="app-card"/g) || []).length;
+const appPages = fs.readdirSync(path.join(DIST, 'apps'), { withFileTypes: true }).filter((d) => d.isDirectory()).length;
+const features = (home.match(/class="feature"/g) || []).length;
+const studioOk = features === 6 && appCards >= built.ideas.filter((i) => i.implemented).length && appPages === appCards;
+if (!studioOk) failures += 1;
+console.log(`${studioOk ? 'PASS' : 'FAIL'}  studio: ${features} featured on home, ${appCards} app cards, ${appPages} app pages`);
+const oldLinks = [home, appsHtml, fs.readFileSync(path.join(DIST, 'data.js'), 'utf8')]
+  .join('\n').match(/https?:\/\/[a-z0-9-]+\.pisan\.me/g) || [];
+if (oldLinks.length) failures += 1;
+console.log(`${oldLinks.length ? 'FAIL' : 'PASS'}  no pisan.me app links on public pages (${oldLinks.length} found)`);
 
 console.log('');
 for (const s of SCENARIOS) {

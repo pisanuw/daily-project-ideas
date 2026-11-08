@@ -1,0 +1,531 @@
+{
+  "_comment": "HintWise Studio catalog (see build.js, studio section). implemented.json says which apps exist; this file adds the public name, a one-line blurb, the audiences used by the Apps filters, and apps built outside the daily-ideas routine (entries with a url). An app in implemented.json with no entry here still appears, with its audience guessed from the idea category and its blurb from publicNotes.",
+  "featured": [
+    "stepwise",
+    "poincare-paint",
+    "digital-student-assistant",
+    "bombe-bench",
+    "cache-miss-theater",
+    "health-page-tracker-watch"
+  ],
+  "audiences": [
+    {
+      "key": "small-business",
+      "label": "Small businesses",
+      "blurb": "Shops, clinics, charities, makers and the people who run their websites."
+    },
+    {
+      "key": "educators",
+      "label": "Educators",
+      "blurb": "Teachers, departments and course builders."
+    },
+    {
+      "key": "developers",
+      "label": "Developers",
+      "blurb": "Software teams, web agencies and anyone who ships code."
+    },
+    {
+      "key": "learners",
+      "label": "Learners",
+      "blurb": "Students and the curious: interactive lessons, puzzles and games."
+    }
+  ],
+  "apps": {
+    "accessibility-fleet-log": {
+      "title": "Accessibility Fleet Log",
+      "audiences": [
+        "small-business"
+      ],
+      "blurb": "For agencies looking after many client sites: everyone's accessibility status on one screen, a dated log of problems found and fixed, a statement per site and a monthly report under your name."
+    },
+    "accessibility-lens": {
+      "title": "Accessibility Lens",
+      "audiences": [
+        "small-business",
+        "developers"
+      ],
+      "blurb": "Scan a public page against WCAG 2.1, then see it the way low-vision, color-blind, keyboard-only and screen-reader users do."
+    },
+    "acr-draft": {
+      "title": "ACR Draft",
+      "audiences": [
+        "developers",
+        "small-business"
+      ],
+      "blurb": "Write the accessibility report (VPAT) a university asks for before it buys your software: scans plus a guided review, exported to Word."
+    },
+    "agent-blast-radius": {
+      "title": "Agent Blast Radius",
+      "audiences": [
+        "developers"
+      ],
+      "blurb": "Drop in MCP configs and agent settings to see what each AI tool on your machine can reach."
+    },
+    "assignment-stress-test": {
+      "title": "Assignment Stress Test",
+      "audiences": [
+        "learners",
+        "educators"
+      ],
+      "blurb": "Every output the scheduler could produce for a fork/wait snippet, and why the others are impossible."
+    },
+    "bombe-bench": {
+      "title": "Bombe Bench",
+      "audiences": [
+        "learners",
+        "educators"
+      ],
+      "blurb": "Step through an Enigma rotor by rotor, then break it with a working Bombe.",
+      "featuredBlurb": "An Enigma you can open up, and a working Turing-Welchman Bombe that breaks messages from a guessed word."
+    },
+    "brocot-gear-finder": {
+      "title": "Brocot Gear Finder",
+      "audiences": [
+        "learners",
+        "educators"
+      ],
+      "blurb": "Gear trains for any ratio with continued fractions and the Stern-Brocot tree."
+    },
+    "cache-miss-theater": {
+      "title": "Cache Miss Theater",
+      "audiences": [
+        "learners",
+        "educators"
+      ],
+      "blurb": "Watch a C loop nest's exact address trace run through a configurable cache.",
+      "featuredBlurb": "Watch a C loop's memory accesses run through a cache you configure, with every miss labelled."
+    },
+    "chess-td": {
+      "title": "Chess TD",
+      "audiences": [
+        "small-business"
+      ],
+      "url": "https://chesstd.hintwise.org/",
+      "blurb": "Run a chess tournament from your browser, even offline: Swiss and round-robin pairings by FIDE and US Chess rules, results by keyboard, standings with tiebreaks.",
+      "description": "Run a chess tournament from your browser, even offline. Swiss and round-robin pairings follow FIDE and US Chess rules, each pairing comes with an explanation, results go in by keyboard, and standings come with tiebreaks."
+    },
+    "cipher-ladder": {
+      "title": "Cipher Ladder",
+      "audiences": [
+        "learners",
+        "educators"
+      ],
+      "blurb": "Climb from Caesar to Vigenère to homophonic ciphers with live cryptanalysis tools."
+    },
+    "code-analogy-forge": {
+      "title": "Code Analogy Forge",
+      "audiences": [
+        "educators"
+      ],
+      "blurb": "Three analogies for a piece of code or a CS concept, pitched at the audience you choose."
+    },
+    "code-review-gauntlet": {
+      "title": "Code Review Gauntlet",
+      "audiences": [
+        "learners",
+        "educators"
+      ],
+      "blurb": "Race the clock to spot planted bugs and security holes."
+    },
+    "code-viva": {
+      "title": "Code Viva",
+      "audiences": [
+        "educators"
+      ],
+      "blurb": "Short oral checks on each student's own submission, with questions anchored to their functions."
+    },
+    "consent-leak-watch": {
+      "title": "Consent Leak Watch",
+      "audiences": [
+        "small-business"
+      ],
+      "blurb": "Check that your shop's cookie banner really blocks trackers, and which plugin broke it."
+    },
+    "cron-cartographer": {
+      "title": "Cron Cartographer",
+      "audiences": [
+        "developers"
+      ],
+      "blurb": "Any cron expression, RRULE or GitHub Actions schedule as a calendar heatmap of when it fires."
+    },
+    "data-structure-city": {
+      "title": "Data Structure City",
+      "audiences": [
+        "learners",
+        "educators"
+      ],
+      "blurb": "A hash map, B-tree, skip list and LRU cache side by side, driven by one Redis-like console."
+    },
+    "diagram-layout-engine": {
+      "title": "Diagram Layout Engine",
+      "audiences": [
+        "developers"
+      ],
+      "blurb": "A from-scratch layout engine for Mermaid flowcharts, with every stage of the pipeline visible."
+    },
+    "digital-student-assistant": {
+      "title": "Digital Student Assistant",
+      "audiences": [
+        "educators",
+        "learners"
+      ],
+      "url": "https://digital-student-assistant.com/",
+      "blurb": "An AI teaching assistant that asks before it tells and won’t hand over homework. Yusuf Pisan’s data structures students at UW Bothell use it now.",
+      "description": "Digital Student Assistant is the AI teaching assistant for data structures courses at UW Bothell, and students are using it now. It guides rather than answers: it asks before it tells, it will not hand over homework solutions, and it teaches from the instructor’s own lectures and recordings rather than the internet. To look around, sign in with the demo account demo@hintwise.org (no code needed); student accounts are limited to UW addresses for now."
+    },
+    "donation-receipts": {
+      "title": "Donation Receipts",
+      "audiences": [
+        "small-business"
+      ],
+      "blurb": "For small charities, churches and community groups: numbered donation receipts with your ABN and the right tax wording, and one 30 June statement per donor, straight from your Xero or bank export."
+    },
+    "dossier-comment-reflector": {
+      "title": "Dossier Comment Reflector",
+      "audiences": [
+        "educators"
+      ],
+      "blurb": "Years of student evaluation comments in; themes, before-and-after evidence for your course changes, fair quotes and a page-limited tenure reflection draft out."
+    },
+    "edit-graph-lab": {
+      "title": "Edit Graph Lab",
+      "audiences": [
+        "learners",
+        "educators"
+      ],
+      "blurb": "Diff as a shortest-path search, with Myers' algorithm animated."
+    },
+    "elevator-algorithm-lab": {
+      "title": "Elevator Algorithm Lab",
+      "audiences": [
+        "learners",
+        "educators"
+      ],
+      "blurb": "Write an elevator dispatch policy in JavaScript and run it against seeded traffic."
+    },
+    "emoji-lingua": {
+      "title": "Emoji Lingua",
+      "audiences": [
+        "learners"
+      ],
+      "blurb": "English to emoji and back.",
+      "url": "https://emoji-lingua.hintwise.org/"
+    },
+    "fork-count": {
+      "title": "Fork Count",
+      "audiences": [
+        "learners",
+        "educators"
+      ],
+      "blurb": "Every process, pipe and possible output of a fork/wait/pipe C snippet, deadlocks included."
+    },
+    "game-palette-inspector": {
+      "title": "Game Palette Inspector",
+      "audiences": [
+        "developers"
+      ],
+      "blurb": "Check a palette against WCAG contrast and 8 kinds of color blindness, with replacements that keep the art style."
+    },
+    "gpu-parallel-puzzler": {
+      "title": "GPU Parallel Puzzler",
+      "audiences": [
+        "learners",
+        "educators"
+      ],
+      "blurb": "Twelve kernel puzzles on a simulated GPU: warps, divergence, coalescing, bank conflicts."
+    },
+    "har-detective": {
+      "title": "HAR Detective",
+      "audiences": [
+        "developers"
+      ],
+      "blurb": "Drag in a browser HAR file for a waterfall and a ranked, plain-English performance report."
+    },
+    "health-page-tracker-watch": {
+      "title": "Health Page Tracker Watch",
+      "audiences": [
+        "small-business"
+      ],
+      "blurb": "For therapists, clinics, med spas and wellness studios: every outside tool on your booking, intake and service pages, what it receives, whether its maker signs a BAA, and what is new since last month."
+    },
+    "heap-arena-replay": {
+      "title": "Heap Arena Replay",
+      "audiences": [
+        "learners",
+        "educators"
+      ],
+      "blurb": "Replay a malloc/free trace on a word-accurate heap under different allocator policies."
+    },
+    "leap-second-lab": {
+      "title": "Leap Second Lab",
+      "audiences": [
+        "learners",
+        "educators"
+      ],
+      "blurb": "TAI, UTC, GPS, Unix and UT1 on one timeline, and what 23:59:60 does to your code."
+    },
+    "letter-ledger": {
+      "title": "Letter Ledger",
+      "audiences": [
+        "educators"
+      ],
+      "blurb": "Recommendation-letter requests: a request link with your policy and FERPA release, encrypted packets, a deadline dashboard."
+    },
+    "lockstep-lab": {
+      "title": "Lockstep Lab",
+      "audiences": [
+        "learners",
+        "educators"
+      ],
+      "blurb": "Watch deterministic lockstep and rollback netcode work, and fail."
+    },
+    "migration-diff-narrator": {
+      "title": "Migration Diff Narrator",
+      "audiences": [
+        "developers"
+      ],
+      "blurb": "Two versions of a schema in, every change marked safe, caution or breaking out."
+    },
+    "misrepresentation-preflight": {
+      "title": "Misrepresentation Preflight",
+      "audiences": [
+        "small-business"
+      ],
+      "blurb": "Suspended by Google Shopping for “Misrepresentation”? See every place your store contradicts itself (contact details, shipping and return times, prices, your feed) before your next review request."
+    },
+    "modulo-bias-microscope": {
+      "title": "Modulo Bias Microscope",
+      "audiences": [
+        "developers"
+      ],
+      "blurb": "Paste a random sampling function and see exactly how biased it is."
+    },
+    "mult-streak": {
+      "title": "Mult Streak",
+      "audiences": [
+        "learners"
+      ],
+      "blurb": "Ten multiplications in a row wins a 24-hour crown.",
+      "url": "https://mult-streak.hintwise.org/"
+    },
+    "mychessmaster": {
+      "title": "MyChessMaster",
+      "audiences": [
+        "learners"
+      ],
+      "url": "https://mychessmaster.net/",
+      "blurb": "For tournament players preparing for a specific opponent: where games went wrong, why, and drills from your own mistakes.",
+      "description": "A chess coach for tournament players preparing for a specific opponent. It finds where each of your games went wrong, explains why, and turns your own mistakes into preparation sheets and spaced-repetition drills."
+    },
+    "net-units": {
+      "title": "Net Units",
+      "audiences": [
+        "developers"
+      ],
+      "blurb": "Measure how much code a change adds in syntax-level units instead of lines."
+    },
+    "outguess-me": {
+      "title": "Outguess Me",
+      "audiences": [
+        "learners"
+      ],
+      "blurb": "Press F or J as randomly as you can while an oracle predicts you. You are less random than you think."
+    },
+    "pathfinding-playground": {
+      "title": "Pathfinding Playground",
+      "audiences": [
+        "learners",
+        "educators"
+      ],
+      "blurb": "Draw a grid and race BFS, Dijkstra, A* and friends across it."
+    },
+    "pluck-lab": {
+      "title": "Pluck Lab",
+      "audiences": [
+        "learners",
+        "educators"
+      ],
+      "blurb": "A keyboard guitar synthesized live by Karplus-Strong, with the filter on screen."
+    },
+    "poincare-paint": {
+      "title": "Poincaré Paint",
+      "audiences": [
+        "learners"
+      ],
+      "blurb": "Draw in the hyperbolic disk and watch every stroke tile to infinity.",
+      "featuredBlurb": "Draw in the hyperbolic disk and watch every stroke tile to infinity, the way Escher’s Circle Limit prints do."
+    },
+    "popup-check": {
+      "title": "Popup Check",
+      "audiences": [
+        "small-business"
+      ],
+      "blurb": "A free bookmark that tests your email popup, age gate, cookie banner and chat button with the keyboard and a screen-reader view, and keeps a dated report with a message for the app’s support."
+    },
+    "program-alarm-1202": {
+      "title": "Program Alarm 1202",
+      "audiences": [
+        "learners",
+        "educators"
+      ],
+      "blurb": "A playable model of the Apollo Guidance Computer's executive during the lunar descent."
+    },
+    "prompt-genome": {
+      "title": "Prompt Genome",
+      "audiences": [
+        "developers"
+      ],
+      "blurb": "Split a prompt into color-coded parts (role, task, constraint, format...) and lint it."
+    },
+    "prompt-shrink-ray": {
+      "title": "Prompt Shrink Ray",
+      "audiences": [
+        "developers"
+      ],
+      "blurb": "Compress an LLM prompt with a live token estimate and a check that the keywords survived."
+    },
+    "pull-the-pin": {
+      "title": "Pull the Pin",
+      "audiences": [
+        "learners",
+        "educators"
+      ],
+      "blurb": "An 8-bit SAP-1 computer where the instructor breaks a chip and students find the fault."
+    },
+    "repo-weight-map": {
+      "title": "Repo Weight Map",
+      "audiences": [
+        "developers"
+      ],
+      "blurb": "Drop a project folder in and see what is bloating it, with the .gitignore lines to fix it."
+    },
+    "reverse-minesweeper-studio": {
+      "title": "Reverse Minesweeper Studio",
+      "audiences": [
+        "learners"
+      ],
+      "blurb": "Paint a picture with mines and find out if it can be solved without guessing."
+    },
+    "schema-storyteller": {
+      "title": "Schema Storyteller",
+      "audiences": [
+        "developers"
+      ],
+      "blurb": "Paste a SQL, Prisma or JSON schema, get the data model in plain English plus missing keys and indexes."
+    },
+    "shortcut-sprint": {
+      "title": "Shortcut Sprint",
+      "audiences": [
+        "developers",
+        "learners"
+      ],
+      "blurb": "Spaced-repetition drills for keyboard shortcuts in VS Code, Vim, Figma, Excel and more."
+    },
+    "sound-sketchpad": {
+      "title": "Sound Sketchpad",
+      "audiences": [
+        "learners"
+      ],
+      "blurb": "Describe a sound effect in words and get playable audio with WAV export."
+    },
+    "sql-replay": {
+      "title": "SQL Replay",
+      "audiences": [
+        "learners",
+        "educators"
+      ],
+      "blurb": "Watch a SELECT execute step by step, each stage narrated."
+    },
+    "state-space-atlas": {
+      "title": "State Space Atlas",
+      "audiences": [
+        "learners",
+        "educators"
+      ],
+      "blurb": "Every reachable state of Hanoi, sliding tiles, Klotski and Rush Hour, drawn as one graph."
+    },
+    "stepwise": {
+      "title": "StepWise",
+      "audiences": [
+        "learners",
+        "educators"
+      ],
+      "blurb": "100+ data structures and algorithms, every step narrated with its pseudocode line and variables; step back, share as a link, embed in Canvas.",
+      "url": "https://stepwise.hintwise.org/",
+      "description": "Pick any of more than 100 data structures and algorithms used in university courses, run operations on it, and every step comes with a plain explanation, the pseudocode line that is running and the variables. Step backwards as far as you like, share what you built as a link, or embed it in Canvas.",
+      "featuredBlurb": "100+ data structures and algorithms for university courses, one narrated step at a time. Step back, share as a link, embed in Canvas."
+    },
+    "student-journey-check": {
+      "title": "Student Journey Check",
+      "audiences": [
+        "small-business",
+        "educators"
+      ],
+      "blurb": "A test student walks your online course after every update and tells you which step your students would get stuck on."
+    },
+    "study-buddy-matchmaker": {
+      "title": "Study Buddy Matchmaker",
+      "audiences": [
+        "educators"
+      ],
+      "blurb": "Upload a gradebook CSV and get complementary study pairs with shared agendas."
+    },
+    "summit-navigator": {
+      "title": "Summit Navigator",
+      "audiences": [
+        "small-business"
+      ],
+      "blurb": "A conference program you can use in a hallway: day tabs, track filters, search, a starred personal agenda and a now-and-next banner in your own time zone."
+    },
+    "tamerlane-board": {
+      "title": "Tamerlane Board",
+      "audiences": [
+        "learners"
+      ],
+      "blurb": "Timur's 14th-century chess with giraffes, war engines and citadels."
+    },
+    "tetromino-arcade": {
+      "title": "Tetromino Arcade",
+      "audiences": [
+        "learners"
+      ],
+      "blurb": "A falling-block puzzle game with modern rules, seven modes, a computer opponent, replays and a daily challenge."
+    },
+    "tiny-brains-league": {
+      "title": "Tiny Brains League",
+      "audiences": [
+        "learners",
+        "educators"
+      ],
+      "blurb": "Train the smallest Connect Four network you can and climb a ladder."
+    },
+    "type-witness": {
+      "title": "Type Witness",
+      "audiences": [
+        "developers"
+      ],
+      "blurb": "Watch the TypeScript compiler infer types, expression by expression."
+    },
+    "ui-diff-lens": {
+      "title": "UI Diff Lens",
+      "audiences": [
+        "developers"
+      ],
+      "blurb": "Two screenshots in, every changed region classified as layout, spacing, color, text and so on."
+    },
+    "us-duty-price-sheet": {
+      "title": "US Duty Price Sheet",
+      "audiences": [
+        "small-business"
+      ],
+      "blurb": "For UK makers who post to US customers duty paid: a US code for every product, a US price and postage table with the duty included, and a list of which prices to change when US duty changes."
+    },
+    "where-does-it-say": {
+      "title": "Where Does It Say",
+      "audiences": [
+        "educators"
+      ],
+      "blurb": "Questions about the syllabus answered only with verbatim quotes, or a refusal."
+    }
+  }
+}

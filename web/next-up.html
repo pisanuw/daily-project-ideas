@@ -3,60 +3,43 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Daily Project Ideas · Software I could build for you</title>
-  <meta name="description" content="Software ideas for small businesses, startups and educators, new every morning. See one you need? I can build it for you." />
-  <link rel="canonical" href="https://daily-project-ideas.pisan.me/" />
-  <meta property="og:site_name" content="Daily Project Ideas" />
+  <title>Next up · HintWise Studio</title>
+  <meta name="description" content="Problems small businesses, startups and educators have told the world about, written up as software HintWise could build next. New ones every morning." />
+  <link rel="canonical" href="https://studio.hintwise.org/next-up.html" />
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0e1015" media="(prefers-color-scheme: dark)" />
+  <meta property="og:site_name" content="HintWise Studio" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Daily Project Ideas · Software I could build for you" />
-  <meta property="og:description" content="Software ideas for small businesses, startups and educators, new every morning. See one you need? I can build it for you." />
-  <meta property="og:url" content="https://daily-project-ideas.pisan.me/" />
-  <meta property="og:image" content="https://daily-project-ideas.pisan.me/og-image.png" />
+  <meta property="og:title" content="Next up · HintWise Studio" />
+  <meta property="og:description" content="Problems small businesses, startups and educators have told the world about, written up as software HintWise could build next. New ones every morning." />
+  <meta property="og:url" content="https://studio.hintwise.org/next-up.html" />
+  <meta property="og:image" content="https://studio.hintwise.org/og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Daily Project Ideas: software I could build for you" />
+  <meta property="og:image:alt" content="HintWise Studio: small, focused software for small businesses, startups and educators" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Daily Project Ideas · Software I could build for you" />
-  <meta name="twitter:description" content="Software ideas for small businesses, startups and educators, new every morning. See one you need? I can build it for you." />
-  <meta name="twitter:url" content="https://daily-project-ideas.pisan.me/" />
-  <meta name="twitter:image" content="https://daily-project-ideas.pisan.me/og-image.png" />
-  <meta name="twitter:image:alt" content="Daily Project Ideas: software I could build for you" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <meta name="twitter:title" content="Next up · HintWise Studio" />
+  <meta name="twitter:description" content="Problems small businesses, startups and educators have told the world about, written up as software HintWise could build next. New ones every morning." />
+  <meta name="twitter:image" content="https://studio.hintwise.org/og-image.png" />
+  <!-- @favicon -->
   <link rel="stylesheet" href="styles.css" />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%B6%EF%B8%8F%3C/text%3E%3C/svg%3E" />
 </head>
 <body data-page="index">
-  <nav class="nav">
-    <div class="wrap nav__inner">
-      <a class="nav__brand" href="index.html">🌶️ Daily Project Ideas</a>
-      <div class="nav__links">
-        <a href="index.html" data-nav="index">Latest</a>
-        <a href="browse.html" data-nav="browse">Browse all</a>
-        <a href="topics.html" data-nav="topics">Topics</a>
-      </div>
-    </div>
-  </nav>
-  <header class="hero">
+  <!-- @nav:next-up -->
+  <header class="hero" id="main">
     <div class="wrap">
-      <h1 class="hero__title">🌶️ Daily Project Ideas</h1>
+      <p class="eyebrow">Next up</p>
+      <h1 class="hero__title">What we could build next</h1>
       <p class="hero__tagline" id="tagline"></p>
       <p class="hero__desc" id="description"></p>
       <p class="hero__meta" id="hero-meta"></p>
       <p class="hero__cta">
-        <a class="btn" href="browse.html">Browse all ideas</a>
-        <a class="btn btn--ghost" href="topics.html">Browse by topic</a>
-        <a class="btn btn--ghost" href="mailto:builder@pisan.me?subject=Project%20idea%20(via%20daily-project-ideas)">Want one built?</a>
-        <a class="btn btn--ghost" href="https://github.com/pisanuw/claude-built-apps">50 apps already built</a>
+        <a class="btn" href="mailto:builder@hintwise.org?subject=Project%20idea%20(via%20HintWise%20Studio%2C%20Next%20up)">Want one built?</a>
+        <a class="btn btn--quiet" href="browse.html">Browse all ideas</a>
+        <a class="btn btn--quiet" href="topics.html">Browse by topic</a>
       </p>
     </div>
   </header>
-
-  <section class="showcase wrap" id="showcase" hidden aria-labelledby="showcase-title">
-    <h2 class="showcase__title" id="showcase-title">Built and live</h2>
-    <p class="showcase__sub">A few of the apps already built this way. Try them; they are free.</p>
-    <div class="showcase__grid" id="showcase-grid"></div>
-    <p class="showcase__more"><a href="https://github.com/pisanuw/claude-built-apps">All the built apps &rarr;</a></p>
-  </section>
 
   <div class="jumpbar" id="jumpbar" hidden>
     <div class="wrap jumpbar__inner" id="jumpbar-links"></div>
@@ -66,20 +49,7 @@
     <!-- Audience sections injected by app.js -->
   </main>
 
-  <footer class="footer wrap">
-    <p>
-      Curated automatically by a <a href="https://claude.com/claude-code">Claude Code</a> routine.
-      Source: <a href="https://github.com/pisanuw/daily-project-ideas">daily-project-ideas</a>.
-    </p>
-    <p>
-      Built by Claude, guided by me. I create tools like this for small businesses, startups and educators.
-      Want something like this for your own work? Email
-      <a href="mailto:builder@pisan.me?subject=Project%20idea%20(via%20daily-project-ideas)">builder@pisan.me</a>.
-      Paid projects welcome, interesting ones may be done for free :-)
-      More apps: <a href="https://pisanorg.github.io/yusuf/aiprojects.html">pisanorg.github.io/yusuf/aiprojects</a>.
-    </p>
-    <p>Yusuf Pisan</p>
-  </footer>
+  <!-- @footer -->
 
   <!-- Detail modal -->
   <div class="modal" id="modal" hidden>

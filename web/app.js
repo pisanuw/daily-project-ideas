@@ -52,7 +52,7 @@
       year: 'numeric', month: 'long', day: 'numeric'
     }) : '';
     document.getElementById('hero-meta').textContent =
-      live + ' ideas and counting · last updated ' + when;
+      live + ' ideas and counting \u00b7 last updated ' + when;
   }
 
   // Implemented projects carry two dates: when the idea was proposed and when
@@ -65,26 +65,6 @@
       ];
     }
     return [el('span', { class: 'tag tag--date', text: idea.date })];
-  }
-
-  // ---- Showcase: built apps with their demo animations ----
-  function renderShowcase() {
-    var host = document.getElementById('showcase-grid');
-    var items = DATA.showcase || [];
-    if (!host || !items.length) return;
-    items.forEach(function (it) {
-      var links = [el('a', { class: 'btn-link', href: it.url, target: '_blank', rel: 'noopener', text: 'Try it \u2197' })];
-      if (it.code) links.push(el('a', { class: 'btn-link btn-link--ghost', href: it.code, target: '_blank', rel: 'noopener', text: 'Code \u2197' }));
-      host.appendChild(el('article', { class: 'showcase__card' }, [
-        el('a', { class: 'showcase__media', href: it.url, target: '_blank', rel: 'noopener' }, [
-          el('img', { src: it.image, alt: it.alt || it.title, loading: 'lazy', decoding: 'async', width: '480' }),
-        ]),
-        el('h3', { class: 'showcase__name', text: it.title }),
-        el('p', { class: 'showcase__blurb', text: it.blurb || '' }),
-        el('div', { class: 'showcase__links' }, links),
-      ]));
-    });
-    document.getElementById('showcase').hidden = false;
   }
 
   // ---- Card ----
@@ -196,6 +176,8 @@
     var host = document.getElementById('sections');
     var present = [];
     DATA.audiences.forEach(function (aud) {
+      // Built apps have their own pages (/apps/); Next up is what is not built yet.
+      if (aud.key === 'implemented' && !NOTES_MODE) return;
       var ideas = DATA.ideas.filter(function (i) { return i.audience === aud.key && !i.placeholder; });
       if (ideas.length === 0) return;
       host.appendChild(section(aud, ideas));
@@ -495,7 +477,7 @@
   // Every idea ends with a way to ask for it. Implemented ones ask for
   // "one like this"; the rest ask for the idea itself. The subject names the
   // idea so the email says which card it came from.
-  var CONTACT_EMAIL = 'builder@pisan.me';
+  var CONTACT_EMAIL = 'builder@hintwise.org';
   function buildThisCta(idea) {
     var built = !!idea.url;
     var subject = (built ? 'Something like ' : 'Build this: ') + idea.title + ' (' + idea.id + ')';
@@ -824,7 +806,6 @@
     initTopics();
   } else {
     renderHero();
-    if (!NOTES_MODE) renderShowcase();
     renderSections();
     openFromUrl();
   }

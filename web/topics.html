@@ -3,62 +3,40 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Topics · Daily Project Ideas</title>
-  <meta name="description" content="Every project idea sorted into one topic, from assessment and grading to developer tooling. Each one is software I could build for you." />
-  <link rel="canonical" href="https://daily-project-ideas.pisan.me/topics.html" />
-  <meta property="og:site_name" content="Daily Project Ideas" />
+  <title>Topics · Next up · HintWise Studio</title>
+  <meta name="description" content="Every idea sorted into one topic, from assessment and grading to developer tooling. Each one is software HintWise could build for you." />
+  <link rel="canonical" href="https://studio.hintwise.org/topics.html" />
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0e1015" media="(prefers-color-scheme: dark)" />
+  <meta property="og:site_name" content="HintWise Studio" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Topics · Daily Project Ideas" />
-  <meta property="og:description" content="Every project idea sorted into one topic, from assessment and grading to developer tooling. Each one is software I could build for you." />
-  <meta property="og:url" content="https://daily-project-ideas.pisan.me/topics.html" />
-  <meta property="og:image" content="https://daily-project-ideas.pisan.me/og-image.png" />
+  <meta property="og:title" content="Topics · Next up · HintWise Studio" />
+  <meta property="og:description" content="Every idea sorted into one topic, from assessment and grading to developer tooling. Each one is software HintWise could build for you." />
+  <meta property="og:url" content="https://studio.hintwise.org/topics.html" />
+  <meta property="og:image" content="https://studio.hintwise.org/og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Daily Project Ideas: software I could build for you" />
+  <meta property="og:image:alt" content="HintWise Studio: small, focused software for small businesses, startups and educators" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Topics · Daily Project Ideas" />
-  <meta name="twitter:description" content="Every project idea sorted into one topic, from assessment and grading to developer tooling. Each one is software I could build for you." />
-  <meta name="twitter:url" content="https://daily-project-ideas.pisan.me/topics.html" />
-  <meta name="twitter:image" content="https://daily-project-ideas.pisan.me/og-image.png" />
-  <meta name="twitter:image:alt" content="Daily Project Ideas: software I could build for you" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <meta name="twitter:title" content="Topics · Next up · HintWise Studio" />
+  <meta name="twitter:description" content="Every idea sorted into one topic, from assessment and grading to developer tooling. Each one is software HintWise could build for you." />
+  <meta name="twitter:image" content="https://studio.hintwise.org/og-image.png" />
+  <!-- @favicon -->
   <link rel="stylesheet" href="styles.css" />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%B6%EF%B8%8F%3C/text%3E%3C/svg%3E" />
 </head>
 <body data-page="topics">
-  <nav class="nav">
-    <div class="wrap nav__inner">
-      <a class="nav__brand" href="index.html">🌶️ Daily Project Ideas</a>
-      <div class="nav__links">
-        <a href="index.html" data-nav="index">Latest</a>
-        <a href="browse.html" data-nav="browse">Browse all</a>
-        <a href="topics.html" data-nav="topics">Topics</a>
-      </div>
-    </div>
-  </nav>
+  <!-- @nav:next-up -->
   <header class="pagehead wrap">
+    <p class="eyebrow"><a href="next-up.html">Next up</a></p>
     <h1 class="pagehead__title">Browse by topic</h1>
     <p class="pagehead__sub" id="topics-sub"></p>
   </header>
 
-  <main class="wrap">
+  <main class="wrap" id="main">
     <div class="topicgrid" id="topicgrid"></div>
   </main>
 
-  <footer class="footer wrap">
-    <p>
-      Curated automatically by a <a href="https://claude.com/claude-code">Claude Code</a> routine.
-      Source: <a href="https://github.com/pisanuw/daily-project-ideas">daily-project-ideas</a>.
-    </p>
-    <p>
-      Built by Claude, guided by me. I create tools like this for small businesses, startups and educators.
-      Want something like this for your own work? Email
-      <a href="mailto:builder@pisan.me?subject=Project%20idea%20(via%20daily-project-ideas)">builder@pisan.me</a>.
-      Paid projects welcome, interesting ones may be done for free :-)
-      More apps: <a href="https://pisanorg.github.io/yusuf/aiprojects.html">pisanorg.github.io/yusuf/aiprojects</a>.
-    </p>
-    <p>Yusuf Pisan</p>
-  </footer>
+  <!-- @footer -->
 
   <!-- Detail modal -->
   <div class="modal" id="modal" hidden>

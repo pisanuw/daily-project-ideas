@@ -1,8 +1,12 @@
 #!/usr/bin/env node
-// Zero-dependency build step for the Daily Project Ideas site.
+// Zero-dependency build step for HintWise Studio (https://studio.hintwise.org),
+// formerly the Daily Project Ideas site.
 //
 // Reads project ideas from ideas/YYYY-MM-DD.{json,md}, merges the curated
-// implemented.json overlay, and emits dist/ (static files + data.js).
+// implemented.json overlay, and emits dist/: the studio pages (home, apps,
+// one page per app; see build-studio.js), the Next up pages that list the
+// ideas (web/next-up.html, browse.html, topics.html + app.js + data.js), and
+// the owner's notes at /notes/.
 //
 // Data precedence per date: ideas/<date>.json (if present) overrides
 // ideas/<date>.md. The daily routine may emit either format; markdown is the
@@ -10,6 +14,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { buildStudio, fillShell, hintwiseLinks } = require('./build-studio');
 
 const ROOT = __dirname;
 const IDEAS_DIR = path.join(ROOT, 'ideas');
@@ -331,11 +336,16 @@ function applyImplemented(ideas) {
 // ---- Site metadata --------------------------------------------------------
 
 const META = {
-  title: 'Daily Project Ideas',
-  tagline: 'Software I could build for you. New ideas every morning.',
+  title: 'Next up',
+  tagline: 'Software HintWise could build for you. New ideas every morning.',
   description:
-    'Every morning a Claude Code routine looks for problems that small businesses, startups and educators complain about or already pay to solve, and writes up the best as software I could build. See one you need, or something close to it? Email me and we can talk about building it. Some are already built: try them in the first section.',
+    'Every morning we look for problems that small businesses, startups and educators complain about or already pay to solve, and write up the best as software we could build. See one you need, or something close to it? Email us and we can talk about building it. The ones already built are on the Apps page.',
 };
+
+// data.js for a page: the payload with old pisan.me app links rewritten.
+function dataJs(payload) {
+  return 'window.IDEAS_DATA = ' + hintwiseLinks(JSON.stringify(payload)) + ';\n';
+}
 
 // ---- Emit -----------------------------------------------------------------
 
@@ -344,16 +354,17 @@ const META = {
 function writeNotes(payload) {
   const dir = path.join(DIST_DIR, 'notes');
   fs.mkdirSync(dir, { recursive: true });
-  let html = fs.readFileSync(path.join(WEB_DIR, 'index.html'), 'utf8');
+  // Built from the Next up page after build() has filled in its nav and footer.
+  let html = fs.readFileSync(path.join(DIST_DIR, 'next-up.html'), 'utf8');
   html = html
     .replace('<head>', '<head>\n  <meta name="robots" content="noindex, nofollow" />')
     .replace('href="styles.css"', 'href="../styles.css"')
     .replace('<script src="data.js"></script>', '<script>window.NOTES_MODE = true;</script>\n  <script src="data.js"></script>')
     .replace('<script src="app.js"></script>', '<script src="../app.js"></script>')
-    .replace(/href="(index|browse|topics)\.html/g, 'href="../$1.html');
-  if (!html.includes('window.NOTES_MODE')) throw new Error('notes page: script tags not found in web/index.html');
+    .replace(/href="(next-up|browse|topics)\.html/g, 'href="../$1.html');
+  if (!html.includes('window.NOTES_MODE')) throw new Error('notes page: script tags not found in web/next-up.html');
   fs.writeFileSync(path.join(dir, 'index.html'), html);
-  fs.writeFileSync(path.join(dir, 'data.js'), 'window.IDEAS_DATA = ' + JSON.stringify(payload) + ';\n');
+  fs.writeFileSync(path.join(dir, 'data.js'), dataJs(payload));
 }
 
 function copyDir(src, dest) {
@@ -400,12 +411,7 @@ function build() {
     total: live.length,
     ideas,
   };
-  // Built apps shown at the top of the landing page, with their demo GIFs
-  // (web/showcase/, smaller copies of the claude-built-apps README images).
-  const showcaseFile = path.join(WEB_DIR, 'showcase.json');
-  payload.showcase = fs.existsSync(showcaseFile) ? JSON.parse(fs.readFileSync(showcaseFile, 'utf8')) : [];
   const publicPayload = {
-    showcase: payload.showcase,
     generatedAt: payload.generatedAt,
     meta: META,
     audiences: AUDIENCES,
@@ -416,11 +422,14 @@ function build() {
 
   fs.rmSync(DIST_DIR, { recursive: true, force: true });
   copyDir(WEB_DIR, DIST_DIR);
-  fs.writeFileSync(
-    path.join(DIST_DIR, 'data.js'),
-    'window.IDEAS_DATA = ' + JSON.stringify(publicPayload) + ';\n'
-  );
+  for (const f of fs.readdirSync(DIST_DIR)) {
+    if (!f.endsWith('.html')) continue;
+    const file = path.join(DIST_DIR, f);
+    fs.writeFileSync(file, fillShell(fs.readFileSync(file, 'utf8')));
+  }
+  fs.writeFileSync(path.join(DIST_DIR, 'data.js'), dataJs(publicPayload));
   writeNotes(payload);
+  buildStudio({ root: ROOT, dist: DIST_DIR, ideas });
 
   const counts = {};
   for (const a of AUDIENCES) counts[a.key] = ideas.filter((i) => i.audience === a.key && !i.placeholder).length;
