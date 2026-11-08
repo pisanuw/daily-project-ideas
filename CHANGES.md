@@ -631,3 +631,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-07 [doc] Donation Receipts (2026-11-07 #1) implemented: https://donation-receipts.pisan.me (code in claude-built-apps/donation-receipts).
 
 2026-11-08 [doc] Created ideas/2026-11-08.json (schemaVersion 3, 4 ideas): US Duty Sheet (21, prov), Sync Switch Pre-flight (20, prov), Delivery Canary (19, prov), Deposits Register (18, prov)
+
+2026-11-08 [doc] US Duty Price Sheet for UK Makers (2026-11-08 #1) implemented: https://us-duty-price-sheet.hintwise.org (code in claude-built-apps/us-duty-price-sheet).
