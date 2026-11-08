@@ -629,3 +629,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-07 [doc] Created ideas/2026-11-07.json (schemaVersion 3, 4 ideas): Donation Receipts (21, prov), Overtime TT Checker (19, prov), Renewal Audit (17, prov), Charity Registry Watch (17, prov)
 
 2026-11-07 [doc] Donation Receipts (2026-11-07 #1) implemented: https://donation-receipts.pisan.me (code in claude-built-apps/donation-receipts).
+
+2026-11-08 [doc] Created ideas/2026-11-08.json (schemaVersion 3, 4 ideas): US Duty Sheet (21, prov), Sync Switch Pre-flight (20, prov), Delivery Canary (19, prov), Deposits Register (18, prov)

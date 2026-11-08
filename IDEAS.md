@@ -624,3 +624,7 @@
 | 2026-11-07 | Qualified Overtime Checker for W-2 Box 12 TT | Small Business Ops | Multi-week | 19 | provisional |  |
 | 2026-11-07 | Renewal Audit for WildApricot | Micro-SaaS | Multi-week | 17 | provisional |  |
 | 2026-11-07 | Charity Registry Watch for California | Accessibility & Compliance | Weekend MVP | 17 | provisional |  |
+| 2026-11-08 | US Duty Price Sheet for UK Makers | Accessibility & Compliance | Multi-week | 21 | provisional |  |
+| 2026-11-08 | Sync Switch Pre-flight for Etsy and Shopify Sellers | Small Business Ops | Weekend MVP | 20 | provisional |  |
+| 2026-11-08 | Delivery Canary for Digital Shops | Small Business Ops | Multi-week | 19 | provisional |  |
+| 2026-11-08 | Deposits Register for Xero | Micro-SaaS | Multi-week | 18 | provisional |  |

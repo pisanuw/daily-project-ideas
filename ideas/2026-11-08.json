@@ -1,0 +1,1719 @@
+{
+  "date": "2026-11-08",
+  "schemaVersion": 3,
+  "complete": true,
+  "ideas": [
+    {
+      "n": 1,
+      "title": "US Duty Price Sheet for UK Makers",
+      "slug": "us-duty-price-sheet-for-uk-makers",
+      "category": "Accessibility & Compliance",
+      "smallBusiness": true,
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Data & Visualization",
+      "summary": "A saved catalog for UK handmade sellers who ship to the US through Folksy or their own shop, with confirmed US tariff codes that are recalculated into a US delivered-duty-paid price and Royal Mail postage table whenever a US rate change touches one of their products.",
+      "public": {
+        "summary": "Keep a US price and postage table for every product you make, and have it updated for you whenever US import duty changes.",
+        "problem": "You make things in the UK and sell to US customers through Folksy or your own shop. Each product now needs its own US customs code, the import duty has to be paid up front and folded into your price or postage, and the rates keep changing. You work it all out once in a spreadsheet, then have to redo it by hand every time the rules move, or you give up on US buyers.",
+        "forWhom": "Small UK makers who sell handmade goods to US customers through Folksy, Shopify or their own website and post with Royal Mail.",
+        "benefits": [
+          "Each product's US code saved once and checked, with the official wording shown so you can confirm it",
+          "A US price and postage table you can copy into your shop",
+          "Your prices worked out again for you when a duty rate changes for something you sell",
+          "An email telling you which products changed and by how much",
+          "Fewer surprise charges and fewer parcels held up at the US border"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "Since US de minimis ended for mail and US orders must be sent duty-paid, UK makers who sell to the US outside Etsy (Folksy, which has flat postage profiles and no US price field, or their own Shopify Basic, Big Cartel or Squarespace shop) must find a US-specific 10-digit HTS code for each product (UK codes are not accepted), add the general duty plus the current country tariff layer, fold the total into a US price or Royal Mail postage band, and redo it whenever a rate changes. In their words: finding the right US codes 'is proving difficult' (a tote bag came out at 17.6% on top of 10%), one maker 'cannot find a suitable tariff code' and stopped offering US postage, and the makers who cope built their own spreadsheet mapping UK and US codes, duty, tariff and shipping, then recalculated their catalog by hand with free lookups. The one-off lookup is covered by free tools; the recurring recalculation of a whole catalog when rates change is not.",
+      "description": "The maker builds a saved catalog (title, materials, origin, weight, current price) by hand or from a Folksy or Shopify CSV. For each product they confirm a US 10-digit HTS code, helped by a curated map of common handmade categories (jewellery, knitted and sewn textiles, ceramics, candles, cards, soft toys) and a search of the public USITC HTS data that shows the legal description and general rate. The app stacks the duty (general rate plus the current country-specific Chapter 99 layer, curated by hand with its source and date), applies Royal Mail DDP fees, and produces a US price and postage-band table per product. A nightly job watches the USITC release list and the curated Chapter 99 layer; when a change touches one of the maker's saved codes, it recalculates the affected prices and bands and emails the maker a before-and-after list. Exports are a Folksy-ready postage table, a Shopify product CSV and a plain CSV for Big Cartel or Squarespace.",
+      "targetCustomer": "UK handmade sellers with roughly 10 to 300 products who ship to US buyers with Royal Mail DDP through Folksy or their own site (Shopify Basic without checkout duty collection, Big Cartel, Squarespace), including multi-channel makers who also sell on Etsy.",
+      "buyer": "The maker, on a personal or business card, out of a very small software budget (typically a few pounds a month).",
+      "whyNow": "US de minimis was suspended for mail and the CBP final rule of 2026-10-22 makes it indefinite with a new postal informal entry; Royal Mail warned of US partner-agency checks on regulated goods from 2026-10-22; Etsy made DDP mandatory for US orders from 2026-07-09 and gives its own sellers a free estimator, which leaves Folksy and own-site sellers to work it out themselves; and the USITC published 22 HTS revisions in 2026 up to 2026-10-30, so a once-off spreadsheet goes stale. The EU EUR 3 per-tariff-line duty on parcels under EUR 150 (from 2026-07-01) is a second, later market for the same recalculation engine.",
+      "founderFit": "The core is careful data work Pisan can ship alone on his stack: a Flask job that syncs the free USITC HTS REST data into Supabase, a React table UI with CSV import and export, a curated mapping table, and a diff-and-recalculate job. No paid API is called at runtime. The hard part, keeping a maker-specific code map and tariff layer honest, is the kind of curated-dataset maintenance a CS educator does well; he has no UK maker network, so distribution leans on open online maker forums.",
+      "problemEvidence": [
+        {
+          "url": "https://talk.folksy.com/t/33500.json",
+          "source": "talk.folksy.com",
+          "author": "Debbie Seton (thecrimsonrabbit)",
+          "date": "2026-07-25",
+          "kind": "complaint",
+          "summary": "One thread, counted as one item: Debbie Seton says the US requires its own codes and finding them 'is proving difficult' (a tote bag at 17.6% on top of 10%; 80% of her sales are to the US), but by 2026-07-27 she had recoded and repriced her catalog with a free Zonos account and ChatGPT, and her US channel is Etsy. Other commenters: Sarah Lou built her own UK/US code, duty, tariff and shipping spreadsheet that matched Royal Mail; Debby Coatham lacks time to recalculate GBP 34 bear postage; TheBeadHare saw a charge jump from 10% to 26%; PoppyKayDesigns argues Folksy gets very few US buyers. Context: the same author removed US shipping on Folksy in April 2026 because its postage profiles are clunky (https://talk.folksy.com/t/us-customs-tariffs-quick-question/33182)."
+        },
+        {
+          "url": "https://talk.folksy.com/t/33742.json",
+          "source": "talk.folksy.com",
+          "author": "Jo Barnes (GINGERPINEAPPLECRAFTS)",
+          "date": "2026-09-25",
+          "kind": "complaint",
+          "summary": "One-sentence comment: stopped offering US postage because she cannot find a suitable tariff code, is confused by DDP, and the post office quoted much more than online. The thread was opened by Brenda Cumming on 2026-09-23 quoting Royal Mail's 2026-10-22 partner-agency checks for toys, cosmetics and children's products."
+        },
+        {
+          "url": "https://community.shopify.com/t/usa-import-tariffs-and-end-of-de-minimis/567439",
+          "source": "community.shopify.com",
+          "author": "Feemish",
+          "date": "2025-09-24",
+          "kind": "complaint",
+          "summary": "UK own-site seller using Royal Mail Click & Drop DDP finds Shopify checkout duties do not match Royal Mail's; a 2026-04-01 reply recommends full 10-digit US HTS codes per product and a 2026-08-05 reply notes the 2026-07-24 tariff change and the 2026-10-22 Chapter 99 compliance date. Older than 90 days."
+        },
+        {
+          "url": "https://community.shopify.com/t/calculating-tariffs-and-shipping-to-the-us-from-the-uk/562214",
+          "source": "community.shopify.com",
+          "author": "PourAway",
+          "date": "2025-08-31",
+          "kind": "complaint",
+          "summary": "UK seller pausing US shipping because Shopify stacked HS-code duty on top of the 10% tariff while Royal Mail postal shipments paid a different amount. Merchant complaints run 2025-08-31 to 2025-09-05 and concern a Shopify checkout bug; the 2026 replies are by developers and a researcher, not merchants."
+        },
+        {
+          "url": "https://www.federalregister.gov/documents/2026/10/22/2026-21600/indefinite-suspension-of-the-de-minimis-exemption-for-mail-shipments-and-new-postal-informal-entry",
+          "source": "federalregister.gov",
+          "author": "U.S. Customs and Border Protection",
+          "date": "2026-10-22",
+          "kind": "mandate",
+          "summary": "Final rule: de minimis indefinitely suspended for mail with a new postal informal entry; formal-entry compliance for mail subject to partner-agency requirements or Chapter 98/99 duties extended to 2027-01-20 (signal agent fetch)."
+        },
+        {
+          "url": "https://www.valueaddedresource.net/etsy-requires-ddp-shipping-us-tariffs/",
+          "source": "valueaddedresource.net",
+          "author": "Liz Morton",
+          "date": "2026-06-09",
+          "kind": "mandate",
+          "summary": "Etsy requires non-US sellers to ship US orders DDP and build duties into prices from 2026-07-09, and offers a free US tariffs estimator in Shop Manager with separate US listing prices; relevant here because multi-channel makers must keep Folksy and own-site US prices consistent with it."
+        },
+        {
+          "url": "https://commission.europa.eu/news-and-media/news/ensuring-fairness-and-safety-eur3-customs-duty-low-value-parcels-2026-06-29_en",
+          "source": "commission.europa.eu",
+          "author": "European Commission",
+          "date": "2026-06-29",
+          "kind": "mandate",
+          "summary": "EU EUR 3 customs duty per tariff line on parcels up to EUR 150 from 2026-07-01 (signal agent fetch); the basis for a phase 2 EU sheet, not the MVP."
+        },
+        {
+          "url": "https://apps.shopify.com/dutycalc",
+          "source": "apps.shopify.com",
+          "author": "US Tariff Rates (developer)",
+          "date": "2026-05-19",
+          "kind": "spend",
+          "summary": "DutyCalc, a paid Shopify app for HS/HTS gaps and US tariff exposure: Free 10 lookups, Pro $49/month, Team $199/month; 0 reviews."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Etsy Shop Manager US tariffs calculator (Zonos-backed)",
+          "url": "https://community.etsy.com/forum/announcements-290/topic/updated-sep-9-navigating-evolving-global-tariff-policies-22351/",
+          "price": "Free inside Etsy",
+          "gap": "Estimates US duty per listing, prompts HS-code review, was updated after the August 2026 rate change and works with US-specific listing prices, so it replaces this product for Etsy-only sellers; it does nothing for Folksy or own-site prices and postage."
+        },
+        {
+          "name": "Zonos free cross-border tools",
+          "url": "https://zonos.com/cross-border-ecommerce-tools-calculators",
+          "price": "Free with a Zonos account, per a maker's 2026-07-27 forum post (the page itself states no free tier)",
+          "gap": "HS code calculator, duty and tax calculator and restricted-items lookup cover one-off lookups on any channel and partly cover regulated-goods checks; no saved catalog, no postage-band table and no recalculation when a rate changes."
+        },
+        {
+          "name": "Zonos Classify",
+          "url": "https://zonos.com/docs/supply-chain/classify/pricing",
+          "price": "1,000 free classifications for a Zonos account (stated as intended for small businesses); paid subscriptions from 500 USD for 10,000 classifications",
+          "gap": "Strong free code lookup; does not produce a Royal Mail DDP price and postage table or alert a maker when a saved code's rate changes."
+        },
+        {
+          "name": "The maker's own spreadsheet with free lookups",
+          "url": "https://talk.folksy.com/t/33500.json",
+          "price": "Free; about two days of the maker's time per full recode",
+          "gap": "Works once, as Sarah Lou and Debbie Seton showed, but has to be redone by hand at every rate change and nobody tells the maker which products are affected."
+        },
+        {
+          "name": "Royal Mail International Tracked DDP (Click & Drop)",
+          "url": "https://help.etsy.com/hc/articles/30907634892311",
+          "price": "Label price plus duty; label cost previewed after customs details are entered",
+          "gap": "Calculates duty when the label is bought, after the sale; the maker still has to set the US price or postage band in advance and choose the code."
+        },
+        {
+          "name": "Shopify Markets duties and import taxes",
+          "url": "https://help.shopify.com/manual/markets/duties-and-import-taxes/charging-duties",
+          "price": "0.85% (Shopify Payments) or 1.5% per order, temporary 0.5% rate; plan eligibility not stated on the page (a 2026-08 forum reply says Advanced plan)",
+          "gap": "Shopify only and out of reach on small plans; UK sellers reported mismatches with Royal Mail postal duty; no help for Folksy, Big Cartel or Squarespace."
+        },
+        {
+          "name": "Origova: Customs & HS Codes",
+          "url": "https://apps.shopify.com/origova",
+          "price": "Free (30 fixes), $7.99/month, $14.99/month; 0 reviews",
+          "gap": "Shopify-only data-completeness fixer; does not compute a DDP price or postage table."
+        },
+        {
+          "name": "Lumenkit Tariff",
+          "url": "https://community.shopify.com/t/built-an-hs-code-import-duty-estimator-after-de-minimis-ended-looking-for-5-cross-border-stores-to-test-it/688780.json",
+          "price": "Free 20 SKUs/month, $9.90/month, $29/month (per the developer's forum post)",
+          "gap": "Shopify-only; developer says rates are updated manually and estimates can overstate; aimed at importers, not maker pricing."
+        },
+        {
+          "name": "DutyCalc",
+          "url": "https://apps.shopify.com/dutycalc",
+          "price": "Free 10 lookups, $49/month, $199/month; 0 reviews",
+          "gap": "Shopify-only US tariff exposure for importers; no maker category map, postage table or Folksy export."
+        },
+        {
+          "name": "HClassify (LandedCost.io)",
+          "url": "https://apps.shopify.com/hclassify",
+          "price": "$49, $149, $399/month; 1 review, 1 star",
+          "gap": "Auto-assigns HS codes only, priced for larger merchants."
+        }
+      ],
+      "keyFeatures": [
+        "Saved catalog with a confirmed US 10-digit HTS code per product, helped by a curated handmade-category map and checked against the live USITC record",
+        "Duty stack per product: general rate plus the current Chapter 99 country layer, with source and date shown",
+        "US DDP price and Royal Mail postage-band table per product",
+        "Automatic recalculation when a USITC revision or Chapter 99 change touches a saved code, with a before-and-after email",
+        "Exports: Folksy postage table, Shopify product CSV, plain CSV for Big Cartel and Squarespace",
+        "Simple warning for categories the US checks more closely (toys, children's products, cosmetics, food)"
+      ],
+      "mvpScope": {
+        "features": [
+          "Manual or CSV product entry (title, material, origin, weight, price) from Folksy or Shopify",
+          "Curated map for about 40 common handmade categories with HTS search fallback, maker confirms each code",
+          "Duty stack and US DDP price per product for UK-origin goods",
+          "Royal Mail DDP postage-band table",
+          "Nightly check of the USITC release list and curated Chapter 99 layer, recalculation of affected products and an email listing the changes",
+          "CSV and Folksy-table export"
+        ],
+        "outOfScope": [
+          "Etsy listings and Etsy API write-back (Etsy's free estimator already covers Etsy-only sellers)",
+          "EU EUR 3 per-line duty sheet (phase 2)",
+          "Carriers beyond Royal Mail",
+          "Detailed partner-agency guidance beyond a category warning",
+          "AI classification of free text"
+        ],
+        "buildEstimate": "3 to 4 weeks, most of it curating and testing the category map, the Chapter 99 layer and the change-detection job"
+      },
+      "techStack": "React + Vite, Tailwind, Flask (nightly USITC HTS sync and release diff from the public no-key reststop endpoints), Supabase (products, curated map, rate snapshots, change log), transactional email. No paid API at runtime.",
+      "pricing": {
+        "model": "Per-shop subscription with a small free tier",
+        "pricePoint": "GBP 4/month or GBP 36/year; free for up to 5 products",
+        "rationale": "Below the cheapest Shopify tariff apps ($7.99 to $49/month) because makers are price-sensitive and free tools (Etsy's estimator, Zonos lookups) cover the one-off lookup; the paid value is the saved catalog and the automatic recalculation and alert when a rate changes, which free tools do not do."
+      },
+      "revenueSketch": "Illustrative estimate only: each 100 paying makers x GBP 36/year = GBP 3,600/year. The number of UK makers who still ship to the US through Folksy or their own site is unknown; the earlier 250-maker assumption included Etsy-only sellers, who are now out of scope, and one Folksy maker argues the site gets very few US buyers.",
+      "distribution": "Answer threads and post a free code-and-price checker on talk.folksy.com (makers there already share spreadsheets and ask each other for codes), the Shopify Community UK duty threads for own-site sellers, and UK maker newsletters (Crafts Council Makers Manual readers); free tier for 5 products as the hook. Etsy seller groups are reached only for multi-channel makers.",
+      "validationTest": {
+        "method": "Publish a free one-page US duty and DDP price checker for 10 common handmade categories that shows what happened to each price at the last rate change, post it in the Folksy US-tariff threads and two Shopify Community UK duty threads, ask each user which channels they sell to the US through, and offer a GBP 36/year early-bird for the saved catalog with automatic recalculation and alerts.",
+        "successCriteria": "At least 10 paid early-bird sign-ups within 3 weeks from makers who sell to the US through Folksy or their own site (not Etsy only); Etsy-only sign-ups are not counted.",
+        "cost": "About 4 days of build time; no money beyond hosting."
+      },
+      "moat": "Weak. A curated, maintained map from maker product language to US HTS codes and duty layers, with a change history per code, and the per-maker catalog that makes recalculation automatic; Etsy and Zonos could extend their free tools to other channels.",
+      "compliance": [
+        "Customs advice: estimates only, not a binding ruling; show the HTS legal text and tell the maker they remain responsible for the declared code (US classification responsibility sits with the importer; the maker acts as importer on DDP).",
+        "UK GDPR: store only seller account and product data; no buyer PII.",
+        "Accuracy and liability: terms of service limiting liability; show data date and revision on every figure and in every change email.",
+        "Accessibility: WCAG 2.2 AA for the table UI."
+      ],
+      "risks": [
+        {
+          "risk": "Makers solve it themselves once with free tools: the lead complainant recoded and repriced her catalog with a free Zonos account and ChatGPT in about two days.",
+          "mitigation": "Sell the recurring part, not the lookup: recalculation and a change email at every rate change, which the free tools and a spreadsheet do not give."
+        },
+        {
+          "risk": "The non-Etsy segment may be small: one Folksy maker says Folksy gets very few US buyers, and there have been no new Folksy tariff posts since 2026-09-26.",
+          "mitigation": "Count only Folksy and own-site sign-ups in the validation test, and stop before building if fewer than 10 pay."
+        },
+        {
+          "risk": "Free tools close the gap: Etsy's estimator is free and current, and Zonos offers free lookups.",
+          "mitigation": "Stay off Etsy-only sellers and focus on Folksy and own-site prices, the saved catalog and rate-change alerts."
+        },
+        {
+          "risk": "The Chapter 99 tariff layer for UK goods changes often and sources conflict.",
+          "mitigation": "Curate the layer by hand from Federal Register and USITC notices, show the source and date, and alert on each USITC revision."
+        },
+        {
+          "risk": "A wrong code costs the maker money or a held parcel.",
+          "mitigation": "Present codes as suggestions with legal text, require the maker to confirm each one, never auto-apply, keep a disclaimer."
+        }
+      ],
+      "scores": {
+        "pain": 4,
+        "willingnessToPay": 3,
+        "reachability": 4,
+        "competitiveGap": 2,
+        "feasibility": 4,
+        "complianceBurden": 4,
+        "total": 21
+      },
+      "scoreRationale": {
+        "pain": "Two independent recent Folksy items, one thread each (https://talk.folksy.com/t/33500.json, 2026-07-25; https://talk.folksy.com/t/33742.json, 2026-09-25), plus 2025 UK own-site complaints (https://community.shopify.com/t/usa-import-tariffs-and-end-of-de-minimis/567439); 4 not 5 because the lead complainant fixed it with free tools in two days and no new Folksy tariff posts appeared after 2026-09-26 (https://talk.folksy.com/search.json?q=tariff%20after%3A2026-09-26).",
+        "willingnessToPay": "Paid tools for the task exist but with almost no reviews: DutyCalc $49/month (https://apps.shopify.com/dutycalc), Origova $7.99-$14.99/month (https://apps.shopify.com/origova); no freelancer jobs found (https://www.freelancer.com/api/projects/0.1/projects/active/?query=customs&limit=20&full_description=true), and makers lean on free lookups and spreadsheets (https://talk.folksy.com/t/33500.json).",
+        "reachability": "Folksy makers ask each other for codes and share spreadsheets in an open Discourse forum (https://talk.folksy.com/t/33500.json) and UK own-site sellers post in Shopify Community duty threads (https://community.shopify.com/t/usa-import-tariffs-and-end-of-de-minimis/567439); self-serve channels, but Pisan has no UK maker network and the non-Etsy pool is smaller.",
+        "competitiveGap": "Etsy's free Shop Manager calculator, kept current through the August 2026 change, replaces this for Etsy-only sellers (https://community.etsy.com/forum/announcements-290/topic/updated-sep-9-navigating-evolving-global-tariff-policies-22351/) and Zonos's free tools cover one-off lookups (https://zonos.com/cross-border-ecommerce-tools-calculators); the gap left is Folksy and own-site prices, saved-catalog recalculation and rate-change alerts.",
+        "feasibility": "The USITC HTS REST endpoints answer without a key (https://hts.usitc.gov/reststop/releaseList lists 22 revisions in 2026; https://hts.usitc.gov/reststop/search?keyword=tote%20bag returns codes and general rates), but the Chapter 99 layer and handmade category map must be curated by hand; dropping Etsy write-back removes the Commercial Access review.",
+        "complianceBurden": "No buyer PII; the main burden is accuracy and a disclaimer that the maker owns the declared code as importer on duty-paid mail now that de minimis is suspended (https://www.federalregister.gov/documents/2026/10/22/2026-21600/indefinite-suspension-of-the-de-minimis-exemption-for-mail-shipments-and-new-postal-informal-entry)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "The reviewer fetched three Folksy threads, two Shopify Community threads, the Etsy tariff announcement, the Value Added Resource DDP article and Zonos's free-tools page. Authors, dates and quoted figures match (the 17.6% tote, 80% of sales to the US, the GBP 34 bears, Jo Barnes on 2026-09-25). Under the one-thread-one-item rule the Folksy pain is two independent items; thread 33182 shares an author with 33500 and is now context only. The lead complainant's US channel is Etsy, and two days later she had recoded her catalog with a free Zonos account and ChatGPT. Etsy's free calculator, kept current through the August 2026 changes, plus US-specific listing prices, replaces this product for Etsy-only sellers, and Zonos's free lookups cover one-off checks on any channel. The 2026 replies in Shopify UK thread 562214 are by developers, so it is dated 2025 and no longer called active; the Canadian complaint (672240) is a different customer whose problem was solved on 2026-08-31 and was dropped, as was the Etsy-only Mumsnet thread. Score change: pain 5 -> 4, total 22 -> 21; competitiveGap stays 2 but narrows. The idea is re-scoped to Folksy and own-site UK makers and to automatic recalculation of a saved catalog when rates change, and ships as provisional."
+      },
+      "gateGap": {
+        "missing": [
+          "total 21 is below 22"
+        ],
+        "closedBy": "The validationTest's paid early-bird offer closes it: at least 10 paid GBP 36/year sign-ups within 3 weeks from makers who sell to the US through Folksy or their own site (not Etsy only) would show payment for the recalculation gap, raising willingnessToPay to 4 and the total to 22, which promotes the idea to validated."
+      },
+      "inspiredBy": "https://talk.folksy.com/t/33500.json"
+    },
+    {
+      "n": 2,
+      "title": "Sync Switch Pre-flight for Etsy and Shopify Sellers",
+      "slug": "sync-switch-pre-flight-for-etsy-and-shopify-sellers",
+      "category": "Small Business Ops",
+      "complexity": "Weekend MVP",
+      "confidence": "provisional",
+      "topic": "Data & Visualization",
+      "summary": "For Etsy-and-Shopify sellers switching sync apps whose listings have missing or inconsistent SKUs: a one-time CSV pre-flight that pairs the two catalogs, hands back SKU-fix files for both stores so the next app links instead of duplicating, and saves a dated copy of the Etsy shop before the old app is uninstalled.",
+      "public": {
+        "summary": "Before you change the app that keeps your Etsy shop and Shopify store in step, this matches your listings across both, gives you the code fixes to make them line up, and saves a dated copy of your Etsy shop.",
+        "problem": "You sell the same pieces on Etsy and on your Shopify store, and the app that keeps them in step is letting you down, so you want to change it. But the new app can only pair items that carry the same product code in both shops, and yours are missing or don't agree, so it either makes duplicates or leaves you matching hundreds of items by hand. And you have heard of shops losing dozens of Etsy listings the moment the old app was removed.",
+        "forWhom": "Makers, crafters and vintage sellers with dozens or hundreds of items listed on both Etsy and Shopify who are about to change the app that links them.",
+        "benefits": [
+          "See which Etsy and Shopify items belong together, even when their product codes are missing or different",
+          "Get ready-to-use files that give each matching pair the same code in both shops",
+          "Let your new app link existing listings instead of creating duplicates",
+          "Keep a dated copy of your Etsy listings and photos before removing the old app",
+          "Skip hours of matching items by hand"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "Sellers leaving one Etsy-Shopify sync app for another find that every app links existing listings only by matching SKUs; when SKUs are missing or inconsistent, setup republishes everything as duplicates or tells them to spend hours hand-matching SKUs and variant names (DPL's own reply says sync works only when SKUs are aligned), and resets or uninstalls of the old app have rewritten Etsy SKUs on 1,600 listings or deleted 50+ Etsy listings, with no copy to restore from.",
+      "description": "The seller uploads two exports: Etsy's listing CSV and Shopify's product or inventory CSV. The tool pairs listings across the two where SKUs are missing or inconsistent, using normalized title, option values, price and a perceptual hash of the first photo (downloaded from the image URLs in the exports), and shows a match table with a confidence score and the unmatched leftovers on each side for the seller to confirm. It then outputs a SKU-fix CSV for each store's bulk editing route, giving every confirmed pair one shared SKU, so whichever sync app is installed next links the listings instead of duplicating them. It also bundles a dated Etsy-side archive (the listing CSV plus every downloaded photo) to keep before the old app is uninstalled. It is CSV-only and never connects to or writes to either store; a free preview shows how many listings it can pair, and the SKU-fix files and archive are a one-time purchase.",
+      "targetCustomer": "Solo makers and small craft or vintage shops with 50 or more listings on both Etsy and Shopify that lack consistent SKUs, at the moment they are leaving CedCommerce, DPL or Shopify's Marketplace Connect for another sync app.",
+      "buyer": "The shop owner, as a one-time card purchase at the moment of switching apps, from the same budget that pays $9-$60/month for a sync app.",
+      "whyNow": "Shopify stopped new Etsy connections in Marketplace Connect and froze its development after Etsy made readiness_state mandatory on 2025-09-30 (https://community.shopify.com/t/marketplace-connect-and-etsy/568436.json), so sellers moved to third-party sync apps and, per 2026 reviews, are now switching between them: CedCommerce reviewers in Jul-Oct 2026 report reset-rewritten SKUs, listings deleted on uninstall and moves to cheaper apps (https://apps.shopify.com/etsy-marketplace-integration/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest), and a DPL reviewer in September 2026 was told to hand-match SKUs before linking (https://apps.shopify.com/etsy-integration-dpl/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest). Each switch is a moment when SKUs must line up.",
+      "founderFit": "The core is CSV parsing, fuzzy record matching and image hashing, which fits Pisan's Flask stack and his data/algorithms background; it is CSV-only and read-only, so there is no API approval to wait for and little support load. He has no network among Etsy sellers, so distribution must be self-serve.",
+      "problemEvidence": [
+        {
+          "url": "https://apps.shopify.com/etsy-marketplace-integration/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest",
+          "source": "apps.shopify.com",
+          "author": "Be Lusch (Australia)",
+          "date": "2026-09-16",
+          "kind": "complaint",
+          "summary": "Paid CedCommerce for 2 years; 6 months of stock drift, and uninstalling deleted 50+ Etsy listings; now on a cheaper app. The date is an edit date, so the original post may be older. Same page (one item): LA Balloons (2026-07-29, 1,600 listings, a reset rewrote Etsy SKUs), Only Little Once (2026-08-24, paid $5,000 for an enterprise plan, switched to a cheaper competitor) and 5 Hearts Paper (2026-10-20, would pay $59/mo for a sync that worked, which is willingness to pay for sync, not for this tool)."
+        },
+        {
+          "url": "https://apps.shopify.com/etsy-integration-dpl/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest",
+          "source": "apps.shopify.com",
+          "author": "Apokrypha (US)",
+          "date": "2026-09-08",
+          "kind": "complaint",
+          "summary": "Wanted existing Etsy listings linked to Shopify; setup was about to create duplicates and the seller was told to hand-match SKUs and variant names per product. Same page: 3DbyDee (2025-10-03) had listings republished instead of matched, and DPL's reply of 2025-10-01 says sync works only when SKUs are aligned."
+        },
+        {
+          "url": "https://apps.shopify.com/shuttle-transfer-from-etsy/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest",
+          "source": "apps.shopify.com",
+          "author": "littleclothingco",
+          "date": "2025-08-25",
+          "kind": "complaint",
+          "summary": "Older supporting evidence (outside 180 days): SKUs constantly broke. Same page: The Nichole Collection (2024-12-26) got duplicate listings on import; Knifty Knittings (2024-12-09) had stock set from 50 to 0."
+        },
+        {
+          "url": "https://apps.shopify.com/shopupz-inventory/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest",
+          "source": "apps.shopify.com",
+          "author": "Saint Violet Creative (US)",
+          "date": "2025-11-29",
+          "kind": "complaint",
+          "summary": "Supporting only: on Black Friday an Etsy-to-Shopify import deleted all existing Shopify listings. Free Shopify backup apps already cover this Shopify-side loss, so it is not a reason to buy this tool."
+        },
+        {
+          "url": "https://apps.shopify.com/etsy-marketplace-integration",
+          "source": "apps.shopify.com",
+          "author": "CedCommerce (app page)",
+          "date": "2026-11-08",
+          "kind": "spend",
+          "summary": "CedCommerce Etsy Integration: 1,248 ratings; plans $9/mo (10 products) to $59/mo (1,000 products)."
+        },
+        {
+          "url": "https://apps.shopify.com/etsy-integration-dpl",
+          "source": "apps.shopify.com",
+          "author": "Digital Product Labs (app page)",
+          "date": "2026-11-08",
+          "kind": "spend",
+          "summary": "DPL Etsy Integration: 966 ratings; plans $19.99, $28.99 and $59.99/mo."
+        },
+        {
+          "url": "https://community.shopify.com/t/marketplace-connect-and-etsy/568436.json",
+          "source": "community.shopify.com",
+          "author": "badgerated",
+          "date": "2025-10-01",
+          "kind": "mandate",
+          "summary": "Shopify deprecating Etsy on Marketplace Connect after Etsy made readiness_state mandatory on 2025-09-30; new connections stopped. Later in the thread two developers promote their own pre-launch Etsy-Shopify tools (Mersall44 2026-08-05; Jules_StockPont 2026-10-14, advising SKU checks before migrating)."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Etsy Importer & Sync by SP",
+          "url": "https://apps.shopify.com/etsy-import-and-sync-by-sp",
+          "price": "Free plan (unlimited SKU linking, auto sync up to 100 SKUs); $9.99 and $19.99/month",
+          "gap": "'Smart SKU Linking' auto-matches existing listings for free, but only by SKU; listings with missing or inconsistent SKUs still need a manual pass, and it keeps no Etsy-side archive."
+        },
+        {
+          "name": "Shuttle - Sync with Etsy",
+          "url": "https://apps.shopify.com/shuttle-transfer-from-etsy",
+          "price": "Free (10 transfers/month); $12, $19, $39/month",
+          "gap": "Offers a 'Smart SKU generator & auto-match' inside its own sync; reviewers report broken SKUs and duplicates on import, and it gives no app-neutral fix file or Etsy archive."
+        },
+        {
+          "name": "Etsy Integration - DPL",
+          "url": "https://apps.shopify.com/etsy-integration-dpl",
+          "price": "$19.99-$59.99/month",
+          "gap": "Links only when SKUs are aligned; otherwise the seller hand-enters SKUs and variant names."
+        },
+        {
+          "name": "Etsy Integration - CedCommerce",
+          "url": "https://apps.shopify.com/etsy-marketplace-integration",
+          "price": "$9-$59/month",
+          "gap": "The app sellers are leaving; reviewers report resets rewriting Etsy SKUs and 50+ Etsy listings deleted on uninstall, with no copy kept."
+        },
+        {
+          "name": "Trunk",
+          "url": "https://apps.shopify.com/trunk",
+          "price": "From $35/month (14-day trial)",
+          "gap": "A well-reviewed sync (95% 5-star) that removes drift, but it syncs stock between matching SKUs, so it still needs SKUs aligned first."
+        },
+        {
+          "name": "StoreArk",
+          "url": "https://apps.shopify.com/storeark",
+          "price": "Free plan; $9.90 and $19.90/month",
+          "gap": "Free daily Shopify backups with diff-preview restore make a Shopify snapshot unnecessary here; Shopify only, nothing on the Etsy side."
+        },
+        {
+          "name": "BackupShop.io",
+          "url": "https://saasbrowser.com/saas/118418/backupshop",
+          "price": "unknown",
+          "gap": "Sells Etsy-side backups (directory listing, est. 2024), covering part of the archive; no cross-store matching or SKU fixes."
+        },
+        {
+          "name": "Everlyst (Etsy listing manager)",
+          "url": "https://everlystastro.pages.dev/features/backup-restore",
+          "price": "Free to start; paid tiers unknown",
+          "gap": "Undo covers only edits made through Everlyst; cannot restore deleted listings or photos; no Shopify."
+        },
+        {
+          "name": "Pre-launch developer tools in the Marketplace Connect thread (Transparent Sync, StockPont)",
+          "url": "https://community.shopify.com/t/marketplace-connect-and-etsy/568436.json",
+          "price": "unknown (pre-launch)",
+          "gap": "Not launched; one pitches SKU checks before migrating, which is this idea's angle, so the window may be short."
+        },
+        {
+          "name": "Free path: Etsy listing CSV + Shopify inventory CSV + a spreadsheet",
+          "url": "https://help.etsy.com/hc/en-us/articles/360000343508-How-to-Download-Your-Listing-Information",
+          "price": "$0",
+          "gap": "Works for small or well-labelled shops; for 50+ listings without SKUs it means matching titles and photos by hand, and Etsy's export lists no variation columns."
+        }
+      ],
+      "keyFeatures": [
+        "Upload Etsy's listing CSV and Shopify's product or inventory CSV; no store connection",
+        "Matching where SKUs are missing or inconsistent: normalized title, option values, price and first-photo perceptual hash, with a confidence score and unmatched lists on both sides",
+        "Free preview of how many listings pair up before paying",
+        "SKU-fix CSVs for both stores' bulk editors, giving each confirmed pair one shared SKU so the next sync app links instead of duplicating",
+        "Dated Etsy-side archive (listing CSV plus downloaded photos) as a zip, to keep before the old app is uninstalled"
+      ],
+      "mvpScope": {
+        "features": [
+          "Upload both CSVs; fuzzy match by title, options, price and photo hash; editable match table",
+          "Download a Shopify SKU-fix CSV and an Etsy SKU-fix CSV for the confirmed pairs",
+          "Download a dated Etsy archive zip (CSV plus images fetched from the export's image URLs)",
+          "One-time checkout that unlocks the downloads after a free match-count preview"
+        ],
+        "outOfScope": [
+          "Any API connection to Etsy or Shopify (deferred; an Etsy key depends on a manually reviewed, currently unpredictable approval process)",
+          "Shopify-side snapshots (free Shopify backup apps already do this)",
+          "Daily drift alerts and ongoing monitoring (a working sync app prevents drift, and alerts need an Etsy API key)",
+          "Any writing to either store, order sync, and other marketplaces"
+        ],
+        "buildEstimate": "One weekend for the CSV-only version (upload, match, SKU-fix CSVs, Etsy archive zip, checkout); API connections deferred."
+      },
+      "techStack": "Single Flask app with server-rendered upload and match-table pages; pandas for CSV parsing, rapidfuzz for title/option matching, imagehash plus Pillow for photo hashes; Stripe Checkout for the one-time purchase; uploads and generated files held only for the session and deleted after download, so no database is needed. No Etsy or Shopify API and no paid API at runtime.",
+      "pricing": {
+        "model": "One-time pre-flight pack per store pair, with a free match-count preview",
+        "pricePoint": "$29 one-time",
+        "rationale": "Sellers already pay $9-$60/month for the sync app itself (CedCommerce, DPL, Shuttle, SP); a one-time fee at the moment of switching is easy to weigh against hours of hand-matching or lost listings. It must beat a free alternative (SP's SKU linking plus a manual SKU pass), so the free preview has to show matches SP would miss; whether sellers pay $29 for that is unverified."
+      },
+      "revenueSketch": "Estimate only: 40 pre-flight packs/month x $29 = $1,160/month, with no recurring revenue. Assumes a steady stream of sellers switching sync apps (CedCommerce, DPL, Shuttle and shopUpz together carry about 2,600 reviews) and that the free preview converts about 5% of users; the number of sellers switching each month is unknown.",
+      "distribution": "Self-serve. A free match-count preview page aimed at searches like 'Etsy Shopify duplicate listings' and 'match Etsy listings to Shopify without SKUs'; disclosed-developer replies in community.shopify.com Etsy-integration threads such as https://community.shopify.com/t/marketplace-connect-and-etsy/568436.json; Etsy-seller Facebook groups and YouTube creators who make Etsy-to-Shopify setup videos. First 10 customers: sellers posting about leaving CedCommerce or DPL, reached through those threads and the free preview.",
+      "validationTest": {
+        "method": "Build the CSV-only pre-flight in one weekend with a free match-count preview and a $29 checkout for the SKU-fix CSVs and Etsy archive; post it in 3 Etsy-integration threads on community.shopify.com and 2 Etsy-seller groups; ask every buyer whether they had first tried SP's free SKU linking or Shuttle's auto-match and how many listings those left unmatched.",
+        "successCriteria": "In 3 weeks: 40 sellers run the free preview and 5 buy the $29 pack through those threads and groups, and at least 3 buyers say the free SKU linkers left 50+ listings unmatched. Fewer than 2 sales, or buyers who say SP's free linking plus a manual pass was enough, means drop it.",
+        "cost": "One weekend of build, $0-$20 hosting, no ad spend."
+      },
+      "moat": "Weak. Any sync vendor (SP, DPL, Shuttle) could add fuzzy title and photo matching to its linker, and a developer in the Marketplace Connect thread is already pitching pre-migration SKU checks (https://community.shopify.com/t/marketplace-connect-and-etsy/568436.json). The only defensible part is being app-neutral at the moment of switching and having matching tuned on real handmade and vintage catalogs (one-of-a-kind items, inconsistent SKUs).",
+      "compliance": [
+        "No API use in the MVP, so Etsy app approval and Etsy API terms do not apply yet; if API connections are added later, serving other sellers needs a Personal App and manually reviewed Commercial Access (https://developers.etsy.com/documentation/), and the Etsy API Terms of Use (HTTP 403 this run) must be read first.",
+        "Trademark: the product name names Etsy and Shopify descriptively and does not lead with 'Etsy'; check both companies' trademark-use guidance before launch (not checked this run).",
+        "Data: catalog data and the seller's own product photos only, no order or customer data; delete uploads and generated files after download and say so on the page.",
+        "Etsy policy risk: Etsy has deactivated listings tied to some third-party integration apps (2023, https://valueaddedresource.net/etsy-item-deactivations-shopify-integration-apps); a CSV-only tool that never touches the store is lower risk."
+      ],
+      "risks": [
+        {
+          "risk": "SP's free 'Smart SKU Linking' (https://apps.shopify.com/etsy-import-and-sync-by-sp) or Shuttle's auto-match plus a manual SKU pass is good enough, so sellers will not pay $29.",
+          "mitigation": "The free preview shows how many listings it pairs that have no matching SKU; the validation test asks buyers what the free linkers left unmatched, and the idea is dropped if the answer is 'nothing much'."
+        },
+        {
+          "risk": "Etsy's listing CSV covers active listings only and its help page lists no variation columns (https://help.etsy.com/hc/en-us/articles/360000343508-How-to-Download-Your-Listing-Information), so variation-level SKU fixes on the Etsy side may be incomplete, and the archive misses inactive listings.",
+          "mitigation": "Use Shopify's variant-level export (https://help.shopify.com/en/manual/products/inventory/setup/inventory-csv) as the reference side, flag Etsy listings whose variations cannot be resolved, and state plainly that the archive covers active listings."
+        },
+        {
+          "risk": "Whether Etsy's own tools can import a SKU-fix CSV was not checked; the Etsy-side file may have to be applied by hand or through the new sync app.",
+          "mitigation": "Order the Etsy-side file by listing title as it appears in Shop Manager, and check before launch which sync apps accept a SKU-mapping import."
+        },
+        {
+          "risk": "An archive cannot bring back an Etsy listing's reviews, sales history or listing ID; sellers may expect a one-click restore.",
+          "mitigation": "Call it an archive for guided re-creation, and sell the SKU alignment (which avoids the destructive uninstall path) as the main value."
+        },
+        {
+          "risk": "Crowding: two developers are building Etsy-Shopify tools in the same Shopify Community thread, one pitching pre-migration SKU checks (https://community.shopify.com/t/marketplace-connect-and-etsy/568436.json).",
+          "mitigation": "Ship the weekend version first and validate quickly; if a sync vendor adds fuzzy matching, stop rather than compete."
+        },
+        {
+          "risk": "One-time revenue per seller with no recurring plan.",
+          "mitigation": "Treat it as a small, low-maintenance product; revisit monitoring only if an Etsy key becomes reliably obtainable."
+        }
+      ],
+      "scores": {
+        "pain": 4,
+        "willingnessToPay": 4,
+        "reachability": 3,
+        "competitiveGap": 2,
+        "feasibility": 3,
+        "complianceBurden": 4,
+        "total": 20
+      },
+      "scoreRationale": {
+        "pain": "Independent, recent complaints from paying merchants on separate pages: a seller told to hand-match SKUs and variant names to avoid duplicates (Apokrypha 2026-09-08, https://apps.shopify.com/etsy-integration-dpl/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest), and a reset that rewrote Etsy SKUs on 1,600 listings plus 50+ Etsy listings deleted on uninstall (LA Balloons 2026-07-29, Be Lusch edited 2026-09-16, https://apps.shopify.com/etsy-marketplace-integration/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest).",
+        "willingnessToPay": "Sellers pay $9-$59/mo for CedCommerce (1,248 ratings, https://apps.shopify.com/etsy-marketplace-integration) and $19.99-$59.99/mo for DPL (966 ratings, https://apps.shopify.com/etsy-integration-dpl), and one reviewer paid $5,000 for an enterprise plan (https://apps.shopify.com/etsy-marketplace-integration/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest); at the low edge of 4 because this is a second purchase beside the sync app and the observed behaviour is switching apps.",
+        "reachability": "Self-serve but unproven: Shopify Community Etsy-integration threads exist (https://community.shopify.com/t/marketplace-connect-and-etsy/568436.json) and a free preview can rank on search, but Pisan has no network among Etsy sellers and Etsy's own forum threads sit behind a login.",
+        "competitiveGap": "Most of the job is served: SP matches existing listings by SKU for free (https://apps.shopify.com/etsy-import-and-sync-by-sp), Shuttle has free-tier SKU auto-match (https://apps.shopify.com/shuttle-transfer-from-etsy), StoreArk backs up Shopify free (https://apps.shopify.com/storeark), BackupShop.io sells Etsy backups (https://saasbrowser.com/saas/118418/backupshop) and developers are pitching pre-migration SKU checks (https://community.shopify.com/t/marketplace-connect-and-etsy/568436.json); only no-SKU matching plus an Etsy archive at switch time is left.",
+        "feasibility": "The CSV-only version is a one-weekend build with no API key, but Etsy's export lists no variation columns and covers active listings only (https://help.etsy.com/hc/en-us/articles/360000343508-How-to-Download-Your-Listing-Information), so match quality on variation listings is unproven, and any later API version waits on Etsy's unpredictable key approvals (https://github.com/etsy/open-api/discussions/1607).",
+        "complianceBurden": "CSV-only, catalog data only, no customer or order data and no store access; not 5 because Etsy has acted against integration apps before (https://valueaddedresource.net/etsy-item-deactivations-shopify-integration-apps) and the Etsy API terms were not read."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "The reviewer re-fetched and verified the three app review pages. On CedCommerce, Be Lusch (Australia, edited 2026-09-16) reports 6 months of drift and 50+ Etsy listings deleted on uninstall, and 5 Hearts Paper (2026-10-20) would pay $59/mo for a sync that worked; on DPL, Apokrypha (2026-09-08) was told to hand-match SKUs and variant names; on shopUpz, Saint Violet Creative (2025-11-29) had an import delete all Shopify listings. All are real merchants, not developers. No free product does the whole job, but its parts are covered: SP's free plan auto-links existing listings by SKU, Shuttle has free-tier SKU auto-match, StoreArk gives free daily Shopify backups with a diff-preview restore, and BackupShop.io sells Etsy-side backups. The aggrieved CedCommerce users fixed things by switching to a cheaper, better sync app (Trunk is 95% 5-star). The Marketplace Connect thread cited for whyNow is genuine (badgerated, 2025-09-30/10-01) but now also holds two developers promoting pre-launch Etsy sync tools, one pitching a pre-migration SKU check. competitiveGap was rescored 3 to 2, total 21 to 20; it stays provisional. The idea was re-scoped from a matcher, two-store snapshot and drift monitor to a one-time, CSV-only 'switching sync apps' pre-flight: matching listings that lack consistent SKUs, SKU-fix CSVs for both stores, and an Etsy-side archive taken before the old app is uninstalled. Complexity is now Weekend MVP, with API connections deferred."
+      },
+      "inspiredBy": "https://apps.shopify.com/etsy-marketplace-integration/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest",
+      "gateGap": {
+        "missing": [
+          "total 20 is below 22"
+        ],
+        "closedBy": "The validationTest closes it: 5 sellers buying the $29 pack through Shopify Community threads and seller groups would show a working self-serve channel (reachability 3 to 4), and at least 3 buyers reporting that SP's free SKU linking or Shuttle's auto-match left 50+ listings unmatched would confirm the gap (competitiveGap 2 to 3), taking the total to 22 and promoting it to validated."
+      }
+    },
+    {
+      "n": 3,
+      "title": "Delivery Canary for Digital Shops",
+      "slug": "delivery-canary-for-digital-shops",
+      "category": "Small Business Ops",
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Data & Visualization",
+      "summary": "For creators selling ebooks, patterns, presets and printables on Shopify: a watchdog that places a free tagged test order on a schedule and checks that the download email arrives, which Gmail folder it lands in (Inbox, Promotions or Spam), and that its link returns the right file, plus a free scan for paid digital orders that were never fulfilled.",
+      "public": {
+        "summary": "Places a test order in your shop on a schedule and tells you if your download email stops arriving, lands in spam, or links to a broken file.",
+        "problem": "You sell files, so you assume that once someone pays, the download email goes out, reaches their inbox and the link works. When the email starts landing in spam or the link breaks, nothing warns you, and you hear about it from confused customers. Checking by hand means placing test orders yourself, which nobody keeps doing.",
+        "forWhom": "Solo creators and small studios selling ebooks, sewing and knitting patterns, presets, templates, audio and printables from their own Shopify shop.",
+        "benefits": [
+          "Know whether your download emails reach the inbox, the promotions tab or the spam folder",
+          "Catch broken or wrong download links before customers do",
+          "See paid orders that never got their download, ready to resend",
+          "A short summary of every check instead of placing test orders yourself"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "Shopify sellers of digital products rely on a delivery app (Shopify's free Digital Products app, Sky Pilot, Filemonk, BIG Digital Downloads) to email a working download link after payment, and nothing tells them when that email stops reaching buyers. The clearest recent pain is inbox placement: a Filemonk seller's download emails go to customers' spam or promotions and 'I've tried everything in terms of verification ... with no luck' (2026-09-14), and a Sky Pilot reviewer says 'emails go to customer's spam' (2026-06-26). Older and weaker reports cover broken links and stopped fulfilment on Shopify's rebuilt app (May 2026) and one disputed claim of six months without delivery on BIG Digital Downloads (2026-04-13). Shopify's help page says the download destination 'isn't monitored' and tells merchants to place a test order themselves.",
+      "description": "The merchant installs a small Shopify app that reads orders (read_orders) and creates draft orders (write_draft_orders). On a schedule (weekly by default) it creates a 100%-discounted, tagged order for one canary product and sends it to a seed Gmail account the developer owns. The app reads that mailbox with the free Gmail API and records whether the delivery email arrived, how long it took, and whether Gmail filed it in Inbox, Promotions or Spam; it then follows the download link and compares file type, size and hash with a baseline. Separately, it scans real paid orders whose line items do not require shipping and flags any still unfulfilled after a grace period. Results go into a dashboard and a digest email, and canary orders are tagged and archived so they stay out of reports. Whether a draft order completed through the API triggers each delivery app is unverified; if it does not, the canary must instead go through a real checkout using a 100%-off code the merchant creates.",
+      "targetCustomer": "Solo creators and micro studios selling digital files (patterns, ebooks, presets, templates, sample packs, printables) from their own Shopify store with a delivery app installed.",
+      "buyer": "The shop owner, from the store's app budget on their own card (they already pay $9 to $55 a month for the delivery app).",
+      "whyNow": "Shopify's free Digital Downloads app was rebuilt as 'Digital Products' in 2026 and drew a cluster of breakage reviews in May 2026; SendOwl's 2025 price rise pushed long-time sellers onto newer apps; and spam placement of download emails is still being reported on community.shopify.com in September 2026. Shopify's own docs tell merchants to verify delivery by placing test orders by hand, and a July 2026 community thread on catching checkout failures gets the same advice (periodic real test orders, or generic synthetic monitors), with no tool that checks the digital delivery email.",
+      "founderFit": "Pisan's stack (React + Vite, Flask, Supabase) covers a Shopify embedded app plus a scheduler; the core is a deterministic end-to-end test harness, which is a testing problem a CS educator understands well. No paid API on his key at runtime: the Shopify Admin API is free, and the seed mailbox is his own Gmail account read with the free Gmail API.",
+      "problemEvidence": [
+        {
+          "url": "https://community.shopify.com/t/my-customers-digital-product-goes-to-spam-even-with-verification/681919",
+          "source": "community.shopify.com",
+          "author": "selenadaphne",
+          "date": "2026-09-14",
+          "kind": "complaint",
+          "summary": "Filemonk user: order confirmation arrives fine but the separate download email goes to customers' spam or promotions; 'I've tried everything in terms of verification ... with no luck', considering switching apps. One reply in the thread (sarah.klem, 2026-09-15)."
+        },
+        {
+          "url": "https://apps.shopify.com/sky-pilot/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest",
+          "source": "apps.shopify.com",
+          "author": "Employment with Amy / Fancy Steel",
+          "date": "2026-06-26",
+          "kind": "complaint",
+          "summary": "Sky Pilot: 'emails go to customer's spam' (2026-06-26); a 9-year user says downloads 'regularly drop out', customers are disconnected partway and the seller is still billed for the bandwidth (2026-01-07)."
+        },
+        {
+          "url": "https://community.shopify.com/t/digital-downloads-im-facing-an-issue-with-expired-links/637369",
+          "source": "community.shopify.com",
+          "author": "HulkyZo",
+          "date": "2026-06-16",
+          "kind": "complaint",
+          "summary": "Filemonk seller: 'a few customers reach out saying their download links had expired before they managed to access their files'; a BIG Digital Downloads team member replies in the thread promoting their own app."
+        },
+        {
+          "url": "https://apps.shopify.com/digital-downloads/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest",
+          "source": "apps.shopify.com",
+          "author": "Bible Study Collective (US) / AtlasDSP (Hungary) / StickyBrickit (UK)",
+          "date": "2026-05-06",
+          "kind": "complaint",
+          "summary": "Shopify's rebuilt Digital Products app: 'randomly stops fulfilling orders despite the products being set to fulfill immediately' (2026-05-05); 'ALL MY PRODUCTS DOWNLOAD LINKS GOT BROKEN' (2026-05-06); 'Worked fine for a while then broke completely' (2026-05-06). Tied to one rebuild, and many of the page's low reviews are about UI changes."
+        },
+        {
+          "url": "https://apps.shopify.com/digital-download-products/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest",
+          "source": "apps.shopify.com",
+          "author": "SpineFit (Hong Kong)",
+          "date": "2026-04-13",
+          "kind": "complaint",
+          "summary": "Weak and disputed: SpineFit says BIG Digital Downloads 'have not send out since 6 months any ebook for my orders'; the founder's reply (2026-05-29) says BIG found no delivery failures, the merchant had deleted the product, and the store still processes thousands of orders a month through the app. The page shows 5 one-star reviews out of 882, so failures look rare."
+        },
+        {
+          "url": "https://apps.shopify.com/digital-download-products",
+          "source": "apps.shopify.com",
+          "author": "BIG Digital Downloads (app page)",
+          "date": "2026-11-08",
+          "kind": "spend",
+          "summary": "Paid delivery app with 882 reviews, 4.9 stars; Starter $9.99/month (15GB storage, 50GB bandwidth), Pro $19.99/month."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Shopify Flow (unfulfilled-order summary template)",
+          "url": "https://apps.shopify.com/flow",
+          "price": "Free (4.7 stars, 15,346 reviews)",
+          "gap": "Can email a list of paid orders still unfulfilled after N days for free, which covers the 'app stopped fulfilling' case, but cannot tell whether the email arrived, landed in spam, or whether the link opens the right file; apps that mark orders fulfilled when they send are invisible to it."
+        },
+        {
+          "name": "Shopify Digital Products app download log",
+          "url": "https://help.shopify.com/en/manual/products/digital-service-product/digital-downloads",
+          "price": "Free",
+          "gap": "Logs downloads per order and can resend, but sends the merchant no alert on failure; the help page says the destination URL 'isn't monitored' and recommends placing a test order by hand. Only covers Shopify's own app."
+        },
+        {
+          "name": "The delivery apps themselves (Sky Pilot, Filemonk, BIG Digital Downloads, SendOwl; also MP Digital Downloads, GIT, FileFlow)",
+          "url": "https://apps.shopify.com/sky-pilot",
+          "price": "Sky Pilot free / $9 / $24.99 / $54.99 per month; Filemonk free / $10 / $25; BIG $9.99 / $19.99; SendOwl $39 / $87 / $159; others unknown",
+          "gap": "Each shows its own logs and can resend, but none reports whether its email reached the buyer's inbox or spam, and nobody checks the app from outside."
+        },
+        {
+          "name": "CheckoutGuard",
+          "url": "https://apps.shopify.com/checkoutguard-3",
+          "price": "unknown",
+          "gap": "Alerts on drops in order volume; does not test the delivery email, its inbox placement or its download link."
+        },
+        {
+          "name": "Generic synthetic monitors (Pingdom, Checkly)",
+          "url": "https://community.shopify.com/t/how-do-store-owners-catch-checkout-failures-before-customers-report-them/658699",
+          "price": "unknown",
+          "gap": "Recommended in a community thread for catching checkout failures, but they script page checks, not a Shopify order followed by a delivery email and a per-order download link."
+        },
+        {
+          "name": "LinkFix",
+          "url": "https://linkfix.app/",
+          "price": "Free for 3 links; $19 one-time lifetime deal for the first 50 customers; subscription price not stated",
+          "gap": "Pings static public URLs every 5 minutes; cannot test per-order tokenised download links, email delivery, or spam placement, and does not read Shopify orders."
+        },
+        {
+          "name": "LateKit: Late Shipment Alerts (and parcel monitors such as Delivery-Radar, ShipAware)",
+          "url": "https://apps.shopify.com/latekit",
+          "price": "Free (50 orders/month), $3.99/month, $7.99/month",
+          "gap": "Built for physical parcels and carrier delays, not file delivery."
+        },
+        {
+          "name": "SLA Guard Fulfillment Alerts",
+          "url": "https://apps.shopify.com/sla-guard",
+          "price": "$19.99/month (launched 2026-10-16, 0 reviews)",
+          "gap": "Unfulfilled-order timers only; no end-to-end delivery test."
+        }
+      ],
+      "keyFeatures": [
+        "Scheduled canary order: a free, tagged order for one product, delivered to a seed Gmail mailbox",
+        "Inbox placement: whether the delivery email landed in Inbox, Promotions or Spam, and how long it took to arrive",
+        "Link test: follows the download link and compares file type, size and hash with the baseline",
+        "Real-order watch: paid orders with non-shipping items still unfulfilled after a grace period, with a jump to resend",
+        "Digest email plus an instant alert when a canary fails or lands in spam"
+      ],
+      "mvpScope": {
+        "features": [
+          "Shopify app with read_orders and write_draft_orders; Level 1 protected customer data only (no customer names or emails read)",
+          "Weekly canary order on one product, tagged and archived after the run (draft-order route if the dev-store check passes, otherwise a real checkout with a merchant-created 100%-off code)",
+          "Seed Gmail mailbox owned by the developer, read with the free Gmail API: arrival time and Inbox/Promotions/Spam placement",
+          "Download-link extraction for Shopify Digital Products, Sky Pilot and Filemonk emails, with a file size and hash check",
+          "Unfulfilled digital order scan and a digest email"
+        ],
+        "outOfScope": [
+          "Placement checks in Outlook, Yahoo or other mailbox providers",
+          "Bandwidth forecasting and license-key stock (no API exposes them for these apps)",
+          "WooCommerce and Etsy (Etsy delivers files itself)",
+          "Automatic resending of failed deliveries"
+        ],
+        "buildEstimate": "Estimate: 3 to 4 weeks including Shopify app review on the draft-order route; unknown if the dev-store check forces the real-checkout fallback"
+      },
+      "techStack": "React + Vite + Tailwind (Shopify embedded admin UI with App Bridge), Flask API, Supabase (Postgres + scheduled jobs), Shopify Admin GraphQL API, Gmail API on a developer-owned seed account; no paid API on the developer's key at runtime.",
+      "pricing": {
+        "model": "Monthly Shopify subscription via the Billing API",
+        "pricePoint": "Free: unfulfilled digital order scan and a weekly canary (arrival and link check); $7/month: inbox placement, daily canary on up to 5 products, instant alerts",
+        "rationale": "Must sit well below the delivery app it watches ($9.99-$54.99) and near LateKit ($3.99-$7.99); the free tier competes with Shopify Flow's free unfulfilled-order email, so the paid tier sells on inbox placement, the only check with a recent, independent complaint behind it."
+      },
+      "revenueSketch": "Estimate: if 1% of the roughly 3,300 merchants who have reviewed the five main delivery apps (882 + 1,444 + 441 + 508 + 39 reviews, used only as a scale proxy) convert, 33 x $7 = $231 MRR; 300 paying shops would be $2,100 MRR. Both are assumptions, not observed, and the low failure rate visible in reviews (BIG: 5 one-star of 882) suggests conversion may be lower.",
+      "distribution": "Shopify App Store listing in the digital downloads category, plus direct, non-promotional answers to recurring community.shopify.com threads on download emails going to spam and links failing (where sellers like selenadaphne and HulkyZo post); then a co-marketing ask to a delivery app that wants an independent 'delivery verified' badge.",
+      "validationTest": {
+        "method": "Step 1, before anything else: on a Shopify dev store, complete a 100%-off draft order through the Admin API (draftOrderComplete, marked paid) for a product set up in each of Shopify Digital Products, Sky Pilot and Filemonk, and record whether each app sends its download email. If an app does not fire, repeat with a 100%-off discount code through a real checkout to confirm the fallback route. Step 2: run the canary by hand for 10 Shopify digital sellers recruited from community.shopify.com and pattern/preset seller groups (they create a 100%-off code, Pisan places a weekly test order to his seed Gmail account and reports arrival, Inbox/Promotions/Spam placement and link status), then ask each seller to prepay $7/month for the automated version.",
+        "successCriteria": "Step 1: draft-order canaries trigger delivery in at least 2 of the 3 apps (otherwise the build switches to the real-checkout route and compliance is re-checked before going further). Step 2: at least 3 of the 10 shops have a canary land in Spam or Promotions or hit a broken link or unfulfilled paid order within 4 weeks, and 4 of the 10 sellers prepay.",
+        "cost": "About 2 hours for the dev-store check and about 15 hours over 4 weeks for the hand-run canaries; $0 (dev store, free Gmail API)."
+      },
+      "moat": "Thin. Per-app email parsers and an accumulated history of which delivery apps land in spam or fail, and how often, are the only assets; a delivery app could add self-tests. Independence (watching the app from outside, from a real mailbox) is the selling point a delivery app cannot claim about itself.",
+      "compliance": [
+        "Shopify protected customer data: orders are protected data; staying at Level 1 (no name, email, address, phone fields) still needs review for a public app (https://shopify.dev/docs/apps/launch/protected-customer-data).",
+        "Shopify App Store requirements have no rule on apps creating test orders, but 1.1.4 forbids falsified data that deceives merchants or buyers, so canaries must be merchant-consented, clearly tagged and archived (https://shopify.dev/docs/apps/launch/shopify-app-store/app-store-requirements). The real-checkout fallback, if needed, must be re-checked against these requirements.",
+        "Shopify mandatory GDPR webhooks (customers/data_request, customers/redact, shop/redact) and Billing API for charges.",
+        "Canary orders must be zero-value so they do not distort sales reports or tax filings; they count toward order caps on some delivery app plans (Filemonk free plan: 50 orders/month).",
+        "Gmail API is used only on the developer-owned seed account; no merchant or buyer mailbox is accessed.",
+        "Downloading the merchant's paid files to verify them: store only hashes and sizes, never the files."
+      ],
+      "risks": [
+        {
+          "risk": "Orders created by draftOrderComplete may not trigger some delivery apps the way a checkout does: the API page is silent, and a 2021 community report says a manually created 100%-off order marked paid did not send the download link in Shopify's old Digital Downloads app (https://community.shopify.com/t/can-manual-creation-of-orders-affect-digital-download-delivery/55046).",
+          "mitigation": "Step 1 of the validation test checks this on a dev store for Shopify Digital Products, Sky Pilot and Filemonk before any build; fall back to merchant-created 100%-off codes through a real checkout, and re-check compliance if so."
+        },
+        {
+          "risk": "Delivery failures look rare (BIG: 5 one-star reviews out of 882), so many sellers may never see a failed canary and cancel.",
+          "mitigation": "Lead with inbox placement, which varies over time and gives every run a result worth reading, and measure fault rates in the hand-run test before building."
+        },
+        {
+          "risk": "Placement in one seed Gmail account is a proxy, not what every buyer's mailbox does.",
+          "mitigation": "Say so in the report, show placement trends rather than single results, and add other providers only if sellers ask."
+        },
+        {
+          "risk": "Shopify Flow's free unfulfilled-order email already covers the most common failure, so the paid tier must sell on link, file and spam checks.",
+          "mitigation": "Give the unfulfilled scan away free and price only the end-to-end checks."
+        },
+        {
+          "risk": "Sellers react to a failure by switching delivery apps, not by buying monitoring (SendOwl and Sky Pilot reviewers did exactly that).",
+          "mitigation": "Position as the check that tells you when to switch, and pitch to sellers mid-migration."
+        },
+        {
+          "risk": "Delivery email formats change and break the link parser.",
+          "mitigation": "Fall back to the order status page download block and alert on parse failure rather than reporting a false pass."
+        },
+        {
+          "risk": "Each canary download consumes the merchant's bandwidth quota and download limits.",
+          "mitigation": "Use a small dedicated canary product file and weekly default cadence."
+        }
+      ],
+      "scores": {
+        "pain": 3,
+        "willingnessToPay": 3,
+        "reachability": 3,
+        "competitiveGap": 3,
+        "feasibility": 3,
+        "complianceBurden": 4,
+        "total": 19
+      },
+      "scoreRationale": {
+        "pain": "3: the only complaint inside 90 days is selenadaphne's download emails landing in spam (2026-09-14, https://community.shopify.com/t/my-customers-digital-product-goes-to-spam-even-with-verification/681919), backed by a Sky Pilot spam review (2026-06-26, https://apps.shopify.com/sky-pilot/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest); the May 2026 breakage cluster is 6 months old and tied to one rebuild (https://apps.shopify.com/digital-downloads/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest), SpineFit's claim is disputed by the founder and BIG shows 5 one-star of 882 (https://apps.shopify.com/digital-download-products/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest), and the 2026-11-04 pre-sale thread was a configuration issue, not a delivery failure.",
+        "willingnessToPay": "3: Sellers pay $9.99-$19.99/month for BIG Digital Downloads (882 reviews, https://apps.shopify.com/digital-download-products) and fulfillment-alert apps charge $3.99-$19.99 (https://apps.shopify.com/latekit, https://apps.shopify.com/sla-guard), but no seller was found paying for delivery monitoring, and reviewers respond to failures by switching apps (https://apps.shopify.com/sky-pilot/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest); B11 found no jobs for it.",
+        "reachability": "3: self-serve Shopify App Store plus recurring community.shopify.com threads (https://community.shopify.com/t/my-customers-digital-product-goes-to-spam-even-with-verification/681919), but new alert apps launched in October 2026 still show 0 reviews (https://apps.shopify.com/sla-guard) and community replies are crowded with app developers (https://community.shopify.com/t/digital-downloads-im-facing-an-issue-with-expired-links/637369).",
+        "competitiveGap": "3: Shopify Flow emails unfulfilled orders free (https://apps.shopify.com/flow), delivery apps keep their own logs, CheckoutGuard alerts on order-volume drops (https://apps.shopify.com/checkoutguard-3) and Pingdom/Checkly run generic synthetic checks (https://community.shopify.com/t/how-do-store-owners-catch-checkout-failures-before-customers-report-them/658699), but none tests the delivery email, its inbox placement and its link, and Shopify's help page says the destination 'isn't monitored' (https://help.shopify.com/en/manual/products/digital-service-product/digital-downloads).",
+        "feasibility": "3: draftOrderComplete creates real paid orders (https://shopify.dev/docs/api/admin-graphql/latest/mutations/draftOrderComplete) and LineItem exposes requiresShipping and unfulfilledQuantity (https://shopify.dev/docs/api/admin-graphql/latest/objects/LineItem), but whether draft orders trigger delivery apps is undocumented and a 2021 report says a manual 100%-off paid order did not send the download link (https://community.shopify.com/t/can-manual-creation-of-orders-affect-digital-download-delivery/55046).",
+        "complianceBurden": "4: Level 1 protected customer data only, no names or emails needed, but public-app review and GDPR webhooks apply (https://shopify.dev/docs/apps/launch/protected-customer-data), and the App Store requirements allow tagged, consented test orders while forbidding deceptive falsified data (https://shopify.dev/docs/apps/launch/shopify-app-store/app-store-requirements)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Score change: pain 4 -> 3, total 20 -> 19; other scores unchanged. The reviewer fetched four evidence items: the BIG and Shopify Digital Products low-star review pages, and community threads 709826 and 681919. Authors and dates match, but the lindamae thread (709826) was misread: she attached a file to physical pre-sale products after customers had paid, so no delivery app failed, and it was dropped. SpineFit's 'six months without delivery' review is disputed in a founder reply that blames a product the merchant deleted, and BIG has only 5 one-star reviews out of 882. That leaves selenadaphne's spam complaint (2026-09-14) as the only one inside 90 days, so Gmail seed-inbox placement was moved from phase 2 into the MVP. No free or paid product runs end-to-end checks of digital delivery: Shopify Flow (unfulfilled orders), the delivery apps' own logs, CheckoutGuard (order-volume drops) and Pingdom/Checkly (generic synthetic monitoring) each cover only part of the job, so this is a rescore, not a kill. A 2021 community report that a manually created 100%-off paid order did not trigger the download email makes the draft-order mechanism the main build risk, so the dev-store check of it is now the first validation step. No rule in the Shopify App Store requirements forbids merchant-consented, tagged test orders, and nothing in ideas/index.jsonl duplicates the idea."
+      },
+      "inspiredBy": "https://community.shopify.com/t/my-customers-digital-product-goes-to-spam-even-with-verification/681919",
+      "gateGap": {
+        "missing": [
+          "total 19 is below 22",
+          "pain 3 is below 4"
+        ],
+        "closedBy": "The hand-run canary in Step 2 of the validationTest closes the largest gap (pain): if at least 3 of the 10 shops have a canary land in Spam or Promotions or hit a broken link or unfulfilled paid order within 4 weeks, pain rises to 4, and if 4 of the 10 sellers prepay, willingnessToPay and reachability rise to 4. Together with Step 1 showing draft-order canaries trigger at least 2 of the 3 delivery apps (feasibility 4), the total reaches 23 and the idea can be promoted to validated. If Step 1 fails, the real-checkout route must be proven before Step 2 counts."
+      }
+    },
+    {
+      "n": 4,
+      "title": "Deposits Register for Xero",
+      "slug": "deposits-register-for-xero",
+      "category": "Micro-SaaS",
+      "smallBusiness": true,
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Data & Visualization",
+      "summary": "For event, travel and tour operators, creative studios and commission makers on Xero with no job or booking system: request a deposit with a reference before the final invoice exists, see every deposit held and how old it is, and apply it to the final invoice in one click.",
+      "public": {
+        "summary": "Keeps a clear list of every deposit you have asked for or taken in Xero, and takes each one off the final bill for you when the work is done.",
+        "problem": "You take a deposit weeks or months before the trip, event or commission is finished, long before there is a final invoice to put it against. The money lands in your bank with nothing to match it to, so you keep a separate spreadsheet of who has paid, and you have to remember to knock each deposit off the final bill by hand. Miss one and a customer gets billed twice; lose track and you cannot say how much of your customers' money you are holding.",
+        "forWhom": "Event, travel and tour businesses, creative studios and makers who work on commission, who keep their books in Xero and have no separate booking or job system.",
+        "benefits": [
+          "Ask for a deposit with its own reference, so the payment is easy to match when it arrives",
+          "One list of every deposit you are owed, holding or have already used, with how long each has been waiting",
+          "Know at any moment how much of your customers' money you are holding",
+          "Deposits come off the final invoice in one click, so nobody is billed twice",
+          "Payment details go out from your own business, so customers can trust them"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "For businesses that take a deposit before the final invoice exists, Xero has no deposit record of its own: Xero's deposit request (rolled out May-June 2026) is Stripe-only and attaches to an invoice, and matching a part payment to an existing invoice is already free. So upfront bank-transfer payments 'sit in the unallocated banking transactions for weeks or months' (Mark Compton, 2026-08-10), deposits outstanding live in 'a spreadsheet to keep track of clients deposits outstanding' (Matthew Powell, 2026-08-05), the common workaround is 'a very complicated draft invoice then minus the payment which we have reconciled to Customer deposits' on orders that run up to 12 months (Keith Gatenby, 2026-08-05), deposits taken for future invoices do not appear in Aged Receivables (Kyle Hogan, 2026-05-25), and staff cannot tell whether a deposit was paid (Mel Greenwood, 2026-08-27).",
+      "description": "A small web app connected to the business's Xero organisation, built around three things that matter only when the deposit arrives before the final invoice exists. (1) Deposit request: staff pick a contact, enter the booking or commission and the amount, and the app creates a deposit document in Xero (an authorised invoice coded to a Customer Deposits liability account, or a prepayment) with a unique reference; the payment details travel on the Xero invoice PDF or in an email sent from the business's own verified domain, never from a third-party sender. (2) Deposits Register: the app polls Xero for payments after the user reconciles (Xero's API does not expose unreconciled bank lines) and lists every deposit as requested, overdue, held or applied, with ageing and the total held as a liability. (3) Apply to final invoice: one click adds a 'Less deposit received' line against the liability account, or allocates the prepayment through the Prepayments Allocations endpoint, and marks the deposit applied so it cannot be used twice.",
+      "targetCustomer": "Owners, office staff and outside bookkeepers at small Xero businesses (roughly 1 to 20 staff) in event, travel and tour operation, creative studios and commission making, that take deposits before the final invoice exists and have no vertical job or booking system. Trades and hire businesses are excluded: ServiceM8, Fergus/Tradify and HirePOS already handle deposits for them. Commenters are mostly AU, NZ and UK businesses; none identified as photographers or makers, so the creative-studio and maker segment is an assumption.",
+      "buyer": "The business owner on the business card, or a bookkeeper on behalf of several client organisations in these verticals.",
+      "whyNow": "Xero shipped Stripe-only deposits in May-June 2026 (admin response 2026-06-15 on the 515-vote idea), which put the deposit gap in front of every bank-transfer business at once, and Aug-Oct 2026 comments keep asking for it. Xero marked 'deposits without Stripe' In discovery on 2026-10-15, so collecting a deposit by bank transfer may soon be built in; the register of deposits held before an invoice exists and the apply-to-final-invoice step are what would remain. An Australian card-surcharge rule change (Monique Lennon, 2026-09-24) is pushing some businesses off card for deposits.",
+      "founderFit": "A narrow CRUD app over a documented REST API (Xero Accounting API: Invoices, Payments, Prepayments, Allocations) fits React + Vite, Flask and Supabase; no paid API is called on Pisan's key at runtime. Pisan has no accounting-industry network and Xero's community rules out pitching in idea threads, so distribution is cold outreach to bookkeepers in these verticals and a search-ranked workaround guide: a weak fit, reflected in reachability 2.",
+      "problemEvidence": [
+        {
+          "url": "https://productideas.xero.com/forums/967115-invoices-quotes/suggestions/44960308-invoicing-customers-to-pay-deposits-on-invoices",
+          "source": "productideas.xero.com",
+          "author": "Keith Gatenby (comment); Jonathan Esling and Stephen Wright (comments)",
+          "date": "2026-08-05",
+          "kind": "complaint",
+          "summary": "515-vote 'Customers to pay deposits on invoices' (In development; admin 2026-06-15 says Stripe deposits rolled out). Keith Gatenby 2026-08-05 describes 'a very complicated draft invoice then minus the payment which we have reconciled to Customer deposits ... sounds confusing - you should try carrying this process out', on orders that run up to 12 months; Jonathan Esling and Stephen Wright (2026-05-28) are paid by bank transfer/EFT. Counterpoint in the same thread: Andrew Syme (2026-05-29) notes any part payment can already be matched to an unpaid invoice."
+        },
+        {
+          "url": "https://productideas.xero.com/forums/967115-invoices-quotes/suggestions/45048514-invoice-payment-stripe-partial-payments",
+          "source": "productideas.xero.com",
+          "author": "Mark Compton (comment); Matthew Powell (comment)",
+          "date": "2026-08-10",
+          "kind": "complaint",
+          "summary": "259 votes, In development. Mark Compton 2026-08-10: up-front bank-transfer payments 'sit in the unallocated banking transactions for weeks or months'; Matthew Powell 2026-08-05 keeps 'a spreadsheet to keep track of clients deposits outstanding'; several more Aug-Oct 2026 commenters ask for EFT deposits. No developer promotes an app in the thread."
+        },
+        {
+          "url": "https://productideas.xero.com/forums/967115-invoices-quotes/suggestions/51108952-invoice-ability-to-use-deposits-without-stripe",
+          "source": "productideas.xero.com",
+          "author": "Michelle Balchin (idea); Daniel Fluckiger and Monique Lennon (comments)",
+          "date": "2026-10-08",
+          "kind": "complaint",
+          "summary": "'Invoice - Ability to use deposits without Stripe' (2026-03-19): 44 votes, In discovery (Xero admin 2026-10-15). Daniel Fluckiger 2026-10-08: 'Xero needs to allow EFT for deposit payments'; Monique Lennon 2026-09-24 wants to drop card after the AU surcharge rule change but keep deposits. Aaron Lowndes (2026-05-20) describes a free workaround: bank details or PayID in the invoice footer, then split in bank reconciliation."
+        },
+        {
+          "url": "https://productideas.xero.com/forums/939198-for-small-businesses/suggestions/46862584-invoice-ability-for-users-with-invoice-only-user",
+          "source": "productideas.xero.com",
+          "author": "Mel Greenwood (comment)",
+          "date": "2026-08-27",
+          "kind": "complaint",
+          "summary": "15 votes, Submitted since 2023: invoice-only users cannot add or see prepayments; Mel Greenwood 2026-08-27 says staff still cannot tell whether deposits were paid or allocate them."
+        },
+        {
+          "url": "https://productideas.xero.com/forums/967115-invoices-quotes/suggestions/51541754-invoicing-deposit-option-for-all-users",
+          "source": "productideas.xero.com",
+          "author": "Brian Nasr (idea)",
+          "date": "2026-07-24",
+          "kind": "complaint",
+          "summary": "10 votes, Gaining Support: Xero's deposit request is restricted to Standard/Advisor roles, so sales staff must ask an admin to request one (comments Julia Nixon 2026-08-19, Chris Pogson 2026-08-26)."
+        },
+        {
+          "url": "https://productideas.xero.com/forums/967133-reports-tax/suggestions/49013516-aged-receivable-summary-include-prepayments-depo",
+          "source": "productideas.xero.com",
+          "author": "Accounting Rivers Edge (idea); Kyle Hogan (comment)",
+          "date": "2026-05-25",
+          "kind": "complaint",
+          "summary": "8 votes, submitted since 2024-10-26: deposits taken for future invoices do not appear in Aged Receivables; Kyle Hogan 2026-05-25 says the suggested Receivable Invoice Summary lacks ageing, which is what a deposits register would show."
+        },
+        {
+          "url": "https://www.quotientapp.com/blog/deposits-split-invoices-adjustments",
+          "source": "quotientapp.com",
+          "author": "Nathan Carter (Quotient)",
+          "date": "2025-12-09",
+          "kind": "spend",
+          "summary": "Paid Xero app that raises deposit invoices from accepted quotes (4.9 stars from 148 reviews on its Xero App Store listing, https://apps.xero.com/au/function/invoicing-jobs/app/quotient; Solo US$28/month, Team US$48/month, https://www.quotientapp.com/pricing). It is a full quoting tool; the post does not mention bank transfer, liability coding or a deposits-held report."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Xero deposits (built in)",
+          "url": "https://productideas.xero.com/forums/967115-invoices-quotes/suggestions/44960308-invoicing-customers-to-pay-deposits-on-invoices",
+          "price": "included in Xero plans; Stripe card fees apply",
+          "gap": "Stripe-only, attached to an invoice that already exists, and restricted to Standard/Advisor users (https://productideas.xero.com/forums/967115-invoices-quotes/suggestions/51541754-invoicing-deposit-option-for-all-users); no register of deposits held. A non-Stripe version is In discovery (https://productideas.xero.com/forums/967115-invoices-quotes/suggestions/51108952-invoice-ability-to-use-deposits-without-stripe) and may ship."
+        },
+        {
+          "name": "Match a part payment to an invoice, or footer bank details plus split reconciliation (free workaround)",
+          "url": "https://productideas.xero.com/forums/967115-invoices-quotes/suggestions/51108952-invoice-ability-to-use-deposits-without-stripe",
+          "price": "free",
+          "gap": "Covers collecting a bank-transfer deposit against an invoice that already exists (Aaron Lowndes 2026-05-20; Andrew Syme 2026-05-29 on https://productideas.xero.com/forums/967115-invoices-quotes/suggestions/44960308-invoicing-customers-to-pay-deposits-on-invoices), but not a deposit taken before the invoice, a list of deposits held, or automatic application to the final invoice."
+        },
+        {
+          "name": "Xero prepayments and overpayments (built in)",
+          "url": "https://productideas.xero.com/forums/939198-for-small-businesses/suggestions/46221157-prepayment-automatic-allocation-when-an-invoice",
+          "price": "included in Xero plans",
+          "gap": "Records money already received, but no deposit request, no list of deposits owed or held, no automatic allocation when the invoice is raised (14-vote idea), and invoice-only staff cannot use it."
+        },
+        {
+          "name": "Deposit invoice or minus line on a draft invoice (free workaround)",
+          "url": "https://productideas.xero.com/forums/967115-invoices-quotes/suggestions/44960308-invoicing-customers-to-pay-deposits-on-invoices",
+          "price": "free",
+          "gap": "Works with bank transfer but is manual per job, easy to double-bill, and 'confusing' (Keith Gatenby 2026-08-05); no register of deposits held."
+        },
+        {
+          "name": "ServiceM8 Pay",
+          "url": "https://support.servicem8.com/hc/en-us/articles/10804448488463-How-Deposits-sync-to-Xero-with-ServiceM8-Pay",
+          "price": "unknown (not stated on the help page)",
+          "gap": "Deposits taken on quote acceptance sync to Xero as prepayments and are applied when the job completes, but only inside ServiceM8's trades job workflow. Trades are therefore out of this idea's target, as are businesses on Fergus or Tradify; search results (not fetched) show Preno doing the same for accommodation and Workshop Software for auto workshops."
+        },
+        {
+          "name": "HirePOS",
+          "url": "https://docs.hirepos.com/en/articles/4332353",
+          "price": "unknown",
+          "gap": "Exports a $0 invoice with a deposit to Xero as an overpayment for hire businesses, which the user then allocates by hand; only for businesses running hire through HirePOS, so hire is out of target."
+        },
+        {
+          "name": "Quotient",
+          "url": "https://apps.xero.com/au/function/invoicing-jobs/app/quotient",
+          "price": "US$28/month Solo, US$48/month Team (5 users) (https://www.quotientapp.com/pricing)",
+          "gap": "Deposit invoices come with a whole quoting workflow; deposits are a percentage of a quote, and neither its help pages nor its Dec 2025 deposits post mentions bank transfer, liability coding or a deposits-held report (https://www.quotientapp.com/blog/deposits-split-invoices-adjustments)."
+        },
+        {
+          "name": "Studio Ninja",
+          "url": "https://apps.xero.com/au/app/studio-ninja",
+          "price": "unknown (7-day trial; no price on the listing)",
+          "gap": "Photographer CRM that copies invoices and payments to Xero, but its Xero help article does not mention deposits or prepayments (https://help.studioninja.co/integrations/xero-integration); only for photographers who move their whole workflow into it."
+        },
+        {
+          "name": "PayAdvantage",
+          "url": "https://apps.xero.com/au/app/payadvantage",
+          "price": "unknown",
+          "gap": "Adds PayID, PayTo, BPAY and direct debit 'Pay Now' to Xero invoices (Australia), but the listing does not mention deposits held before an invoice exists."
+        }
+      ],
+      "keyFeatures": [
+        "Deposit request with a unique reference and due date, created in Xero as an authorised invoice to a Customer Deposits liability account (or as a prepayment)",
+        "Payment details carried on the Xero invoice PDF or emailed from the business's own verified domain, never from a third-party sender",
+        "Deposits Register: requested, overdue, held and applied deposits, with ageing and the total held as a liability",
+        "One-click apply to the final invoice: a 'Less deposit received' line or a prepayment allocation, with the deposit locked once used",
+        "Bookkeeper view across several client organisations"
+      ],
+      "mvpScope": {
+        "features": [
+          "Connect one Xero organisation (OAuth 2.0, accounting.transactions and accounting.contacts scopes)",
+          "Create a deposit request and the matching Xero invoice coded to a chosen liability account, with a unique reference",
+          "Send the request via Xero's own invoice email/PDF, or from the business's verified sending domain",
+          "Poll Xero for payments and show the Deposits Register with ageing and the liability total",
+          "Apply a held deposit to a final invoice as a negative line and mark it applied"
+        ],
+        "outOfScope": [
+          "Collecting a part payment against an invoice that already exists (already free in Xero)",
+          "Reading or auto-matching the bank feed (not available in Xero's public API)",
+          "Card payments",
+          "Job, booking or quote management (vertical tools already do this)",
+          "Instalment schedules beyond one deposit",
+          "QuickBooks and other ledgers",
+          "Multi-currency"
+        ],
+        "buildEstimate": "About 3 weekends for the MVP, plus Xero certification (needs real customers and a review), so several weeks before it can be offered beyond the free tier's 5 connections."
+      },
+      "techStack": "React + Vite + Tailwind front end, Flask API, Supabase (Postgres, auth) for deposit records and tokens; Xero Accounting API via OAuth 2.0; transactional email (e.g. Resend or SES) sending only from the customer's own verified domain. No paid API on the founder's key at runtime beyond email and hosting.",
+      "pricing": {
+        "model": "Per Xero organisation monthly subscription, with a bookkeeper bundle",
+        "pricePoint": "US$12/month per organisation; US$60/month for up to 10 organisations",
+        "rationale": "Below Quotient's US$28/month, which bundles deposits with quoting (https://www.quotientapp.com/pricing); the target has no job or booking tool and is not looking to adopt one. Must cover Xero's platform fee (Core A$35/month for 50 connections, Plus A$245/month for 1,000 connections and an App Store listing, https://developer.xero.com/pricing). Price acceptance is untested."
+      },
+      "revenueSketch": "Estimate only: 100 organisations x US$12/month = US$1,200 MRR, less about A$245/month for Xero's Plus tier once past 50 connections. Assumes bookkeeper referrals and a search-ranked guide page bring the customers; the number of Xero event, travel, studio and commission businesses taking deposits before invoicing is unknown.",
+      "distribution": "First 10: cold outreach to bookkeepers whose sites list event, travel, tour or creative-industry clients, offering a free beta for their client organisations; a Xero-workaround guide page that aims to rank for searches like 'Xero customer deposits bank transfer' and explains the liability-account method, with a beta sign-up. In Xero's idea threads, at most one helpful, non-promotional answer explaining the workaround, because Xero's community guidelines forbid commercial posts (https://xero.com/us/support/community-guidelines) and UserVoice has no direct messages. The Xero App Store comes later, once certified and on the Plus tier (https://developer.xero.com/pricing).",
+      "validationTest": {
+        "method": "Publish the Xero-workaround guide page with a beta sign-up, email 30 bookkeepers who serve event, travel, tour or creative businesses, and run a free beta on Xero's Starter tier (5 connections, no fee); ask beta organisations to pre-pay US$12/month from month two.",
+        "successCriteria": "Within 4 weeks, 5 organisations in the target verticals connect, at least 2 of them through a bookkeeper, and each records at least 3 deposits taken before the final invoice existed; 3 of the 5 pre-pay; and Xero's 'deposits without Stripe' item has not moved beyond 'In discovery' when checked.",
+        "cost": "About 3 weekends of build plus a day of outreach; a domain, under US$50."
+      },
+      "moat": "Thin. The register and the apply step are easy to copy, and Xero may close part of the gap. Any edge comes from bookkeeper relationships in these verticals, certification, and the deposit history stored per organisation.",
+      "compliance": [
+        "Xero Developer Platform: an app must be certified before it is offered to users (connection, scopes, error handling, data integrity, account and payment mapping, tax rates) with annual recertification (https://developer.xero.com/xero-developer-platform-commercial-terms)",
+        "Tax treatment of deposits differs by country (UK VAT tax point on receipt of a deposit; Australian GST on part-payments versus security deposits); let the user choose the account and tax rate, and have an accountant review the default setup",
+        "Financial and customer personal data: GDPR/UK GDPR and the Australian Privacy Act; request minimal scopes, encrypt tokens, delete data on disconnect",
+        "Payment details in email: send only from the business's own authenticated domain (SPF/DKIM/DMARC) or via Xero's invoice email, to avoid looking like payment-redirection fraud",
+        "The app writes to the customer's ledger: every write must be reversible and logged",
+        "Accessibility: WCAG 2.2 AA for the dashboard and the customer-facing request page"
+      ],
+      "risks": [
+        {
+          "risk": "Emailing bank details from a third-party sending domain looks like payment-redirection (invoice) fraud to customers, so deposit requests get ignored or reported, and a compromised account could be used to change bank details.",
+          "mitigation": "Never send payment details from the app's own domain: put them on the Xero invoice PDF and send through Xero, or send from the business's own verified domain; lock bank details after setup and require re-authentication and an alert to the owner to change them."
+        },
+        {
+          "risk": "Xero ships bank-transfer deposits ('deposits without Stripe' is In discovery as of 2026-10-15).",
+          "mitigation": "Do not lead with 'request a deposit by bank transfer'; the product is the register of deposits held before an invoice exists and the apply step, which a request feature does not cover. Validate before building and keep build cost to a few weekends."
+        },
+        {
+          "risk": "Free workarounds are good enough: matching a part payment to an existing invoice, or footer bank details plus split reconciliation.",
+          "mitigation": "Target only businesses that take deposits before the final invoice exists and hold many at once (events, travel, commissions), where the spreadsheet is the pain; drop prospects who invoice up front."
+        },
+        {
+          "risk": "Vertical job and booking tools (ServiceM8, Fergus/Tradify, HirePOS) already handle deposits, and more may add it for events or travel.",
+          "mitigation": "Exclude trades and hire; screen beta users for having no job or booking system."
+        },
+        {
+          "risk": "Weak channel: Xero's community guidelines forbid commercial posts, UserVoice has no direct messages, the App Store needs certification and the Plus tier, and Pisan has no bookkeeper network.",
+          "mitigation": "Cold outreach to bookkeepers in these verticals plus the search-ranked guide page; the validation test measures whether either brings organisations before any build beyond the beta."
+        },
+        {
+          "risk": "Xero's API does not expose unreconciled bank statement lines, and Xero has said it has no plans to add reconciliation to the API (admin reply 2026-09-02).",
+          "mitigation": "Rely on Xero's reconciliation suggesting the deposit invoice by amount and reference; the app reads payments only after the user reconciles."
+        },
+        {
+          "risk": "Wrong accounting treatment (income vs liability, tax) damages trust with bookkeepers.",
+          "mitigation": "Offer liability-invoice and prepayment modes, make the account and tax rate explicit settings, and recruit a bookkeeper adviser in the beta."
+        }
+      ],
+      "scores": {
+        "pain": 4,
+        "willingnessToPay": 3,
+        "reachability": 2,
+        "competitiveGap": 3,
+        "feasibility": 3,
+        "complianceBurden": 3,
+        "total": 18
+      },
+      "scoreRationale": {
+        "pain": "4: independent named complaints dated Aug-Oct 2026 across three idea threads (deposits unallocated 'for weeks or months', a deposits-outstanding spreadsheet, a 'very complicated' minus-line workaround) at https://productideas.xero.com/forums/967115-invoices-quotes/suggestions/45048514-invoice-payment-stripe-partial-payments and https://productideas.xero.com/forums/967115-invoices-quotes/suggestions/44960308-invoicing-customers-to-pay-deposits-on-invoices; not 5 because matching a part payment to an existing invoice is already free.",
+        "willingnessToPay": "3: one paid app half-solves it, Quotient, which raises deposit invoices in Xero at US$28/month with 148 reviews (https://apps.xero.com/au/function/invoicing-jobs/app/quotient, https://www.quotientapp.com/pricing); no paid freelance jobs and no low-star reviews about the gap were found.",
+        "reachability": "2: Xero's community guidelines forbid commercial posts in Product Ideas (https://xero.com/us/support/community-guidelines), UserVoice has no direct messages, the App Store needs certification and the A$245/month Plus tier (https://developer.xero.com/pricing), and Pisan has no bookkeeper network, leaving cold outreach to bookkeepers and a search page.",
+        "competitiveGap": "3: no tool keeps a register of deposits taken before the invoice exists for businesses without a job or booking system, but ServiceM8 Pay (https://support.servicem8.com/hc/en-us/articles/10804448488463-How-Deposits-sync-to-Xero-with-ServiceM8-Pay) and HirePOS (https://docs.hirepos.com/en/articles/4332353) cover trades and hire, free matching covers deposits against existing invoices, and Xero's non-Stripe deposits are In discovery (https://productideas.xero.com/forums/967115-invoices-quotes/suggestions/51108952-invoice-ability-to-use-deposits-without-stripe).",
+        "feasibility": "3: invoices, RECEIVE-PREPAYMENT transactions and PUT Prepayments/{id}/Allocations are in the public Accounting API (https://raw.githubusercontent.com/XeroAPI/Xero-OpenAPI/master/xero_accounting.yaml), but unreconciled bank lines are not and Xero will not add them (https://productideas.xero.com/forums/967136-banking-chart-of-accounts/suggestions/51657982-api-allow-secure-auditable-bank-reconciliation), and certification is required before offering the app (https://developer.xero.com/xero-developer-platform-commercial-terms).",
+        "complianceBurden": "3: writes to customers' ledgers with country-specific deposit tax treatment, sends payment details that must not look like redirection fraud, and needs certification with annual recertification (https://developer.xero.com/xero-developer-platform-commercial-terms); no minors or institutional contracts."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Reachability lowered 3 -> 2, total 19 -> 18 (pain 4, willingnessToPay 3, competitiveGap 3, feasibility 3, complianceBurden 3 unchanged); still provisional. The reviewer re-fetched the 515-, 259- and 44-vote threads and the quotes, authors and dates hold up: Mark Compton (2026-08-10) on up-front bank-transfer payments sitting unallocated 'for weeks or months', Matthew Powell (2026-08-05) on a deposits spreadsheet, Keith Gatenby (2026-08-05) on a 'very complicated draft invoice then minus the payment' reconciled to Customer deposits (reworded from 'negative draft invoice'; the Scarlett AI comment was dropped), and Xero setting 'deposits without Stripe' to In discovery on 2026-10-15. None of the commenters is a developer promoting an app, so the draft's claim that developers already pitch in these threads was removed; Xero's community guidelines forbid commercial posts (https://xero.com/us/support/community-guidelines), which is why reachability fell and the thread-reply channel was replaced with bookkeeper outreach and a workaround guide page. The same threads show free workarounds (Andrew Syme: match any part payment to an unpaid invoice; Aaron Lowndes: bank details in the invoice footer plus split reconciliation), and paid vertical tools (ServiceM8 Pay, HirePOS; Preno and Workshop Software in search results) already sync deposits to Xero as prepayments. The idea was therefore narrowed to event, travel and tour operators, creative studios and commission makers with no job or booking system, and to the Deposits Register plus apply-to-final-invoice product, with a new payment-redirection-fraud risk. Not a duplicate of the 2026-11-05 Remittance Matcher (QuickBooks, lump-sum allocation) or the 2026-11-06 Recurring Invoice Send Check (silent recurring failures), though it shares the small-Xero-business customer with the latter."
+      },
+      "inspiredBy": "https://productideas.xero.com/forums/967115-invoices-quotes/suggestions/51108952-invoice-ability-to-use-deposits-without-stripe",
+      "gateGap": {
+        "missing": [
+          "total 18 is below 22"
+        ],
+        "closedBy": "The validationTest closes it, and needs 4 more points. Three of five target-vertical organisations pre-paying would lift willingnessToPay 3 -> 4; at least 2 of those organisations arriving through bookkeepers would show a repeatable channel and lift reachability 2 -> 4; and Xero's 'deposits without Stripe' item still not past 'In discovery', with beta users recording deposits taken before the final invoice existed, would support competitiveGap 3 -> 4. All three together reach 22 (pain 4, willingnessToPay 4, reachability 4, competitiveGap 4, feasibility 3, complianceBurden 3); anything less keeps it provisional."
+      }
+    }
+  ],
+  "runNotes": {
+    "weekday": "Sunday",
+    "domainLens": "Makers, creators and freelancers who sell: craft and online shops, studios, photographers, tutors, consultants",
+    "focusSources": [
+      "A12 Ask HN and HN comments",
+      "B12 Paid app marketplaces",
+      "C10 Change events: shutdowns, price rises, removed free tiers",
+      "A13 Discourse forums, any niche (community.shopify.com, talk.folksy.com, sellersasksellers.com, forum.ghost.org)",
+      "A16 Vendor feature-request boards (productideas.xero.com, community.squareup.com)",
+      "B11 Freelance job boards",
+      "C5 Policy and regulation trackers",
+      "C8 Trade news",
+      "A14 Plugin and add-on support forums",
+      "B10 WordPress plugin market data"
+    ],
+    "searches": [
+      "site:apps.shopify.com deposit balance payment plan made to order",
+      "Shopify Downpay app deposits partial payments pricing",
+      "Shopify draft order payment terms deposit \"send invoice\" balance due",
+      "help.shopify.com draft order \"deposit\" payment terms collect remaining balance",
+      "help.shopify.com \"deposit\" draft order Shopify Plus payment terms \"due on fulfillment\"",
+      "shopify.dev pre-orders try before you buy selling plan orderCreateMandatePayment requirements deferred payment app",
+      "Acowebs Deposits & Partial Payments for WooCommerce Pro price",
+      "Report Pundit Shopify app VAT deposit payments received report",
+      "gov.uk VAT guide tax point deposits advance payments \"deposit\" VAT due when received",
+      "Partial.ly payment plans Shopify pricing merchant-defined installment plans",
+      "site:apps.shopify.com layaway payment plan installments custom schedule",
+      "freelancer.com API: deposit balance / partial payment / payment plan shopify / installment payment / deposit woocommerce / layaway / shopify deposit / woocommerce deposits / partial payments / payment schedule / split payment shopify / custom order deposit (12 queries)",
+      "community.shopify.com search.json: payment plan, layaway, partially paid balance, deposit balance reminder (after 2026-06/07)",
+      "community.shopify.com digital download not received customer email 2026",
+      "Shopify digital downloads app stopped sending download emails customers",
+      "apps.shopify.com digital downloads delivery app sendowl sky pilot filemonk reviews",
+      "Shopify app alert unfulfilled orders notification late fulfillment monitor",
+      "Shopify Flow unfulfilled order after hours send email alert template",
+      "monitor digital product delivery failures download links broken alert creators Gumroad Payhip Shopify tool",
+      "LinkFix monitor digital product download links Gumroad Etsy Shopify pricing",
+      "community.shopify.com Discourse search: digital download after:2026-07-01 / download link after:2026-07-01 / digital downloads not sending after:2026-06-01",
+      "freelancer.com projects API x8: digital download shopify; digital products delivery; download link email; license key delivery; digital downloads fix; sky pilot; shopify ebook delivery; digital product automation",
+      "etsy shopify",
+      "etsy inventory",
+      "etsy sync",
+      "etsy listings",
+      "shopify etsy inventory",
+      "etsy shopify sync",
+      "etsy api",
+      "etsy integration",
+      "shopify inventory sync",
+      "multichannel inventory",
+      "shopify etsy",
+      "etsy csv",
+      "etsy sku",
+      "peopleperhour freelance-jobs q=etsy shopify",
+      "site:apps.shopify.com Etsy sync inventory Shuttle OR Vela OR \"Etsy Sync\"",
+      "site:apps.shopify.com Rewind backups Shopify products restore",
+      "Etsy listings backup tool restore deleted listings app 2026",
+      "Etsy Open API v3 commercial access app approval personal access rate limit",
+      "developers.etsy.com documentation essentials rate limits request access",
+      "Etsy Open API v3 getListingInventory listings_r scope reference",
+      "Etsy help download listings CSV shop manager settings options download data",
+      "shopify.dev Admin GraphQL API productVariants inventoryItem sku read_products read_inventory access scopes",
+      "help.shopify.com export products CSV file variant SKU inventory quantity columns",
+      "community.etsy.com Shopify sync app deleted my Etsy listings 2026",
+      "community.shopify.com Etsy integration duplicate listings oversold inventory not syncing 2026",
+      "Square Bookings API class bookings group appointments supported",
+      "Square App Marketplace class waitlist app studio",
+      "developer.squareup.com bookings API \"class\" bookings not supported limitation",
+      "Square API changelog 2026 bookings classes support",
+      "squareup.com app-marketplace class booking fitness studio app integrates Square",
+      "Punchpass pricing waitlist Square integration studio",
+      "squareup.com/us/en/app-marketplace/app classes waitlist booking",
+      "freelancer.com API: square appointments class / square classes / class waitlist / square booking / class booking studio / yoga studio booking / pottery class",
+      "Acuity Scheduling class waitlist feature classes series Square payments",
+      "community.squareup.com idi-p classes waitlist OR \"class series\" OR \"multi-week\" feature request",
+      "Occasion booking software pricing classes Square integration getoccasion",
+      "Shopify app HS code classification duties tariff calculator",
+      "Zonos Classify free HS code pricing",
+      "USITC HTS REST API documentation hts.usitc.gov reststop",
+      "Royal Mail Click & Drop US duty calculator DDP tariff code sellers",
+      "Etsy tariff estimator non-US sellers DDP help article",
+      "community.shopify.com UK seller US tariff HTS code DDP Royal Mail October 2026",
+      "Etsy UK seller DDP US tariff code help forum 2026 \"HS code\" handmade stopped shipping USA",
+      "sellersasksellers DDP tariff non-US Etsy seller HS code",
+      "\"tariff code\" US handmade UK maker forum \"ship to the US\" duty 2026 knitting OR jewellery OR ceramics",
+      "UK small seller US DDP duties \"Royal Mail\" tariff code forum thread October 2026 OR September 2026 Etsy Folksy Shopify",
+      "Origova Shopify HS code country of origin app",
+      "Shopify app tariff DDP landed cost reviews \"HS code\" small merchants apps.shopify.com Zonos Duty Tax",
+      "freelancer.com API: hs code / hts code / tariff code / customs classification / harmonized code / tariff / tariffs / HTS / duties / customs",
+      "community.shopify.com search.json: tariff UK US after:2026-08-10",
+      "talk.folksy.com search.json: tariff after:2026-09-26",
+      "talk.folksy.com search.json: US postage after:2026-09-26",
+      "Xero API unreconciled bank statement lines not available reconcile via API",
+      "Xero request a deposit on an invoice Stripe only central.xero.com",
+      "central.xero.com \"deposit\" invoice \"Stripe\" request deposit help article",
+      "site:apps.xero.com deposit invoices customer deposits app",
+      "Xero app manage customer deposits prepayments bank transfer reconcile apply to final invoice",
+      "Stagepay Xero app deposit invoices pricing",
+      "Quotient quotes deposit invoice Xero apps.xero.com",
+      "Studio Ninja Xero integration deposits bank transfer photographers",
+      "stagepay.app Xero payment stages invoices",
+      "QuickBooks Online request deposit on estimate bank transfer ACH QuickBooks Payments required help article",
+      "central.xero.com record a customer prepayment allocate to invoice",
+      "developer.xero.com app partner certification checkpoints requirements Xero App Store listing",
+      "apps.xero.com/au/search?q=deposit|prepayment|retainer|deposit invoice (direct)",
+      "freelancer.com active projects: xero deposit (filtered locally for deposit|prepay|retainer|overpay|unallocated)",
+      "freelancer.com active projects: xero prepayment (filtered locally for deposit|prepay|retainer|overpay|unallocated)",
+      "freelancer.com active projects: xero reconciliation (filtered locally for deposit|prepay|retainer|overpay|unallocated)",
+      "freelancer.com active projects: xero bookkeeping (filtered locally for deposit|prepay|retainer|overpay|unallocated)",
+      "freelancer.com active projects: xero integration (filtered locally for deposit|prepay|retainer|overpay|unallocated)",
+      "freelancer.com active projects: customer deposits (filtered locally for deposit|prepay|retainer|overpay|unallocated)",
+      "Square Invoices payment schedule deposit installments free plan",
+      "ideas/index.jsonl grep: deposit, layaway, instalment, partial pay, balance due, VAT, payouts, Shopify/WooCommerce Oct-Nov 2026",
+      "Shopify app monitor checkout test orders automatically alert store broken",
+      "Sky Pilot Shopify email delivery status download tracking per order logs",
+      "\"digital downloads\" Shopify app \"delivery failed\" alert notify merchant email bounced download email",
+      "apps.shopify.com digital download delivery monitoring alerts undelivered downloads app (allowed_domains apps.shopify.com)",
+      "Shopify digital downloads app draft order marked as paid download email not sent",
+      "apps.shopify.com/search?q=digital delivery monitor; test order monitoring (curl)",
+      "Etsy Shopify sync app match existing listings automatically free",
+      "site:apps.shopify.com Etsy sync Vela OR Trunk OR \"SKU IQ\" inventory",
+      "site:apps.shopify.com backup products restore free plan",
+      "Etsy shop backup listings tool download all listings photos variations restore",
+      "BackupShop.io Etsy backup pricing",
+      "StockPont Etsy Shopify sync",
+      "\"Transparent Sync\" Etsy Shopify",
+      "free class booking software waitlist Square payments integration studio classes series",
+      "Acuity Scheduling class waitlist series packages Square payment help article",
+      "Etsy tariff estimator non-US sellers DDP US orders HS code calculator update",
+      "Zonos free tools landed cost calculator HS code lookup free account small business",
+      "\"tariff\" estimator Etsy Shop Manager US price \"variations\" sellers September OR October 2026",
+      "talk.folksy.com search.json: DDP",
+      "Xero app deposit invoice bank transfer track customer deposits prepayment apply to final invoice",
+      "Paidnice Xero payment plans deposits partial payment schedule",
+      "Tradify OR Fergus deposit invoice Xero sync deposit deducted from final invoice",
+      "central.xero.com request a deposit invoice Stripe \"deposit\" online invoice",
+      "GoCardless Pay by Bank Xero invoice partial payment deposit",
+      "Xero Product Ideas community guidelines advertising promoting apps comments not allowed",
+      "etsy fees (HN comments)",
+      "photography business clients (HN comments)",
+      "freelance invoicing (HN comments)",
+      "tutoring business (HN comments)",
+      "\"etsy\" sellers since 2026-05 (HN comments)",
+      "photographer (Ask HN)",
+      "story 49419237 comments (EU makers)",
+      "story 49096605 + invoice",
+      "\"my clients\" photographer (HN)",
+      "\"wish there was\" small business (HN)",
+      "shopify store since 2026-06 (HN)",
+      "commission artist (HN)",
+      "clients no-show deposit booking (HN)",
+      "\"my wife\" business etsy/shop/studio (HN)",
+      "small business (Ask HN since 2026-05)",
+      "community.shopify.com: etsy sync",
+      "community.shopify.com: Marketplace Connect Etsy",
+      "community.shopify.com: workshop class booking",
+      "community.shopify.com: personalized custom order proof",
+      "community.glowforge.com: selling",
+      "discuss.pixls.us: client",
+      "forum.ghost.org: paid members stripe",
+      "community.shopify.com: photographer digital download",
+      "community.shopify.com: sales tax handmade craft fair",
+      "community.shopify.com: one of a kind unique items inventory",
+      "community.shopify.com: made to order processing time",
+      "community.shopify.com: pop up market POS inventory",
+      "community.shopify.com: consignment artists payout",
+      "community.shopify.com: deposit balance payment",
+      "forum.obsidian.md: freelance clients invoice",
+      "forum.ghost.org: VAT tax invoice receipt",
+      "forum.obsidian.md: clients",
+      "community.shopify.com: lessons tutoring",
+      "forum.ghost.org: refund",
+      "discuss.pixls.us: business",
+      "community.shopify.com: photography prints",
+      "community.squarespace.com: scheduling",
+      "WebSearch: photographers forum discourse \"client gallery\" delivery 2026",
+      "WebSearch: discourse community forum tutors private tutoring business scheduling invoicing",
+      "WebSearch: \"Powered by Discourse\" forum pottery OR ceramics OR knitting OR sewing studio sellers",
+      "WebSearch: forum.ghost.org paid members creator problem 2026",
+      "WebSearch: photographer forum thread 2026 clients gallery pixieset/shootproof/pic-time complaint price increase",
+      "WebSearch: community forum discourse music teachers/piano teachers/tutors studio billing makeup lessons policy 2026",
+      "Etsy seller policy change 2026 new fee November",
+      "Gumroad OR Patreon OR Kajabi price increase 2026 creators",
+      "Pixieset OR ShootProof OR Pic-Time price increase 2026 photographers",
+      "shutting down 2026 small sellers creators platform closing migrate shop",
+      "Squarespace OR Wix OR \"Big Cartel\" OR \"Square Online\" price increase plan change fall 2026 sellers",
+      "Teachable OR Thinkific OR Calendly OR Acuity pricing change removed free plan 2026",
+      "alura.io news Etsy October 2026 sellers policy",
+      "EU €3 customs duty low-value parcels July 2026 small sellers Etsy shipping to EU",
+      "Patreon Apple subscription billing deadline November 2026 creators first-of-month per-creation",
+      "PayPal OR Stripe OR Square change small sellers fee policy effective November 2026",
+      "Etsy creativity standards update October 22 2026 sellers",
+      "federalregister API term: de minimis postal shipments",
+      "federalregister API term: third party settlement organization 1099-K",
+      "federalregister API term: online marketplace sellers",
+      "ecommercebytes Etsy sellers October 2026",
+      "valueaddedresource Etsy policy update September October 2026",
+      "photographers client gallery platform shutting down 2026 migrate galleries deadline",
+      "Etsy new AI policy ban AI-generated patterns unedited photos of actual item automated listings 2026",
+      "Pass+ gallery shutting down October 31 2026 photographers",
+      "Etsy unedited photo requirement every listing sellers frustrated forum November 2026",
+      "community.etsy.com unedited photo AI creations policy October 2026 thread",
+      "Patreon subscription billing switch per-creation creators lost patrons complaint November 2026",
+      "Pass gallery Pass+ closing Pic-Time migration photographer forum complaint 2026",
+      "forum.squarespace.com price increase 2026 renewal small business",
+      "small seller shipping to EU €3 duty per item IOSS handmade complaint forum 2026",
+      "UK Canada Etsy seller DDP prepay US tariffs July 2026 stopped shipping to US forum",
+      "photographer Pass gallery shutdown \"Pic-Time\" export client list order history December 31 deletion",
+      "state eliminates 200 transaction threshold remote sellers 2026 economic nexus small online sellers",
+      "\"DDP\" Etsy UK maker \"US customers\" tariff estimator HS code headache blog 2026",
+      "Wyzant OR Outschool OR Preply tutor commission change policy 2026 tutors upset",
+      "sellersasksellers.com search.json: unedited after:2026-10-01",
+      "sellersasksellers.com search.json: tariff after:2026-06-01",
+      "sellersasksellers.com search.json: custom order after:2026-06-01",
+      "sellersasksellers.com search.json: DDP after:2026-05-01",
+      "talk.folksy.com search.json: DDP after:2026-05-01",
+      "talk.folksy.com search.json: EU customs after:2026-06-01",
+      "talk.folksy.com search.json: GPSR after:2026-05-01",
+      "hn.algolia comments: patreon subscription billing",
+      "site:apps.shopify.com preorder made to order lead time",
+      "site:apps.shopify.com etsy integration sync inventory",
+      "site:apps.shopify.com product personalizer custom engraving preview",
+      "site:apps.shopify.com class workshop booking tickets",
+      "site:apps.shopify.com local pickup delivery date scheduler",
+      "site:apps.shopify.com wholesale line sheet",
+      "site:apps.shopify.com pre-order app partial payment deposit reviews",
+      "site:apps.shopify.com digital downloads license keys files",
+      "site:apps.shopify.com request a quote hide price custom order form",
+      "site:apps.shopify.com etsy marketplace integration CedCommerce",
+      "site:apps.shopify.com appointment booking class Sesami BookThatApp",
+      "site:apps.shopify.com product options personalization teeinblue Zepto",
+      "site:wix.com app-market photo proofing client gallery reviews",
+      "freelancer.com API query=etsy",
+      "freelancer.com API query=shopify%20product%20personalization",
+      "freelancer.com API query=preorder",
+      "freelancer.com API query=wholesale%20line%20sheet",
+      "freelancer.com API query=photography%20gallery",
+      "freelancer.com API query=booking%20workshop",
+      "freelancer.com API query=quote%20calculator",
+      "freelancer.com API query=gift%20card",
+      "freelancer.com API query=inventory%20sync",
+      "freelancer.com API query=print%20on%20demand",
+      "freelancer.com API query=digital%20download",
+      "freelancer.com API query=commission%20form",
+      "freelancer.com API query=etsy%20shopify%20sync",
+      "freelancer.com API query=product%20configurator",
+      "freelancer.com API query=custom%20order%20form",
+      "freelancer.com API query=photo%20proofing",
+      "freelancer.com API query=lesson%20booking",
+      "freelancer.com API query=wholesale%20order%20form",
+      "freelancer.com API query=made%20to%20order",
+      "freelancer.com API query=squarespace",
+      "freelancer.com API query=etsy%20listing",
+      "freelancer.com API query=shopify%20product%20upload",
+      "freelancer.com API query=tutor%20scheduling",
+      "freelancer.com API query=photographer%20client%20gallery",
+      "freelancer.com API (all 24 queries pooled, locally filtered); dust-collection configurator surfaced under several queries",
+      "peopleperhour q=etsy shopify",
+      "peopleperhour q=etsy",
+      "api.wordpress.org query_plugins search=etsy",
+      "api.wordpress.org query_plugins search=photo proofing",
+      "api.wordpress.org query_plugins search=pre-order",
+      "api.wordpress.org query_plugins search=product personalizer",
+      "api.wordpress.org query_plugins search=class booking",
+      "xero productideas: deposit",
+      "xero productideas: class pass",
+      "xero productideas: booking",
+      "xero productideas: prepaid",
+      "xero productideas: retainer",
+      "xero productideas: online booking",
+      "xero productideas: gift voucher",
+      "xero productideas: payment schedule",
+      "Square feature request community \"feature request\" appointments class packages 2026",
+      "Pixieset feature request board photographers idea vote",
+      "Dubsado OR HoneyBook feature request board \"ideas\" vote photographers",
+      "site:canny.io feature request studio class pack OR photographers OR tutoring 2026",
+      "quickbooks.intuit.com learn-support photographer retainer deposit invoice apply 2026",
+      "Acuity Scheduling feature request packages expire OR \"class package\" complaint 2026",
+      "Wave apps OR FreshBooks feature request \"ideas\" board deposit retainer freelancer",
+      "Pic-Time OR ShootProof OR \"Sprout Studio\" OR \"Studio Ninja\" feature request board vote",
+      "Square \"Feature Requests\" community 2026 kudos invoices deposit OR \"class\" OR \"pottery\" OR \"tutoring\"",
+      "quickbooks.intuit.com learn-support \"feature request\" 2026 small business deposit received before invoice OR \"payment schedule\" OR \"installments\"",
+      "TutorBird OR \"My Music Staff\" OR \"Teachworks\" feature request suggestion forum vote",
+      "Etsy sellers feature request \"community.etsy.com\" 2026 \"ideas\" OR \"suggestion\" missing tool",
+      "\"feature request\" board Kajabi OR \"Practice Better\" OR Paperbell OR Momence OR Arketa coaches studios vote 2026",
+      "site:featurebase.app OR site:canny.io photographer gallery OR \"print sales\" OR \"session fee\" feature request",
+      "community.squareup.com Feature-Requests idi-p 2026 classes OR workshop OR \"class pass\" OR waitlist studio",
+      "wordpress.org support plugin deposits partial payments woocommerce custom orders makers",
+      "site:apps.shopify.com POS pop-up event sales tax location market",
+      "site:apps.shopify.com cancel unpaid orders restock inventory bank transfer",
+      "site:apps.shopify.com production batch inventory makers work in progress",
+      "freelancer API query=ghost members",
+      "freelancer API query=ghost cms",
+      "freelancer API query=EU customs duty",
+      "freelancer API query=shopify personalization",
+      "freelancer API query=shopify booking"
+    ],
+    "unverifiedSignals": [
+      {
+        "url": "https://apps.shopify.com/zalify-downpay",
+        "reason": "http_404 (curl): Slug from search results no longer exists."
+      },
+      {
+        "url": "https://apps.shopify.com/zalify-downpay/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest",
+        "reason": "http_404 (curl)"
+      },
+      {
+        "url": "https://community.shopify.com/search.json?q=layaway%20after%3A2026-06-01",
+        "reason": "empty (curl): 0 posts."
+      },
+      {
+        "url": "https://www.freelancer.com/api/projects/0.1/projects/active/?query=layaway&limit=20&full_description=true",
+        "reason": "empty (curl): 0 projects"
+      },
+      {
+        "url": "https://apps.shopify.com/sla-guard/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest",
+        "reason": "empty (curl): No reviews."
+      },
+      {
+        "url": "https://apps.shopify.com/latekit/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest",
+        "reason": "empty (curl): No low reviews."
+      },
+      {
+        "url": "https://apps.shopify.com/fulfillcue/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest",
+        "reason": "empty (curl): No reviews."
+      },
+      {
+        "url": "https://www.peopleperhour.com/freelance-jobs?q=etsy%20shopify",
+        "reason": "empty (curl): 200, 312KB, but the query is ignored: generic latest-jobs list, no Etsy jobs."
+      },
+      {
+        "url": "https://apps.shopify.com/etsify-1",
+        "reason": "redirect (curl): Redirects to shuttle-transfer-from-etsy."
+      },
+      {
+        "url": "https://apps.shopify.com/etsify-1/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest",
+        "reason": "http_404 (curl)"
+      },
+      {
+        "url": "https://www.etsy.com/legal/api/",
+        "reason": "http_403 (webfetch): API Terms of Use not read; not retried (site block)."
+      },
+      {
+        "url": "https://community.etsy.com/t5/Seller-Tools-Pro/Automatic-shop-backup/m-p/141783197/highlight/true",
+        "reason": "http_404 (webfetch)"
+      },
+      {
+        "url": "https://community.etsy.com/t5/Technical-Issues/Etsy-App-Integration-Shopify-Listings-deactivated/td-p/143756284",
+        "reason": "empty (webfetch): Login wall: title only, no author, date or body."
+      },
+      {
+        "url": "https://developer.squareup.com/forums/t/cannot-find-how-to-create-classes-programmatically",
+        "reason": "redirect (webfetch): 301; URL was shortened from a related-topic title by me - not used; the real URL came from the tag page next."
+      },
+      {
+        "url": "https://community.squareup.com/t5/Square-Appointments/Does-anyone-know-when-if-there-will-be-a-waitlist-function-for/td-p/773103",
+        "reason": "empty (webfetch)"
+      },
+      {
+        "url": "https://community.squareup.com/t5/Appointments-Bookings/Does-anyone-know-when-if-there-will-be-a-waitlist-function-for/m-p/785761/highlight/true",
+        "reason": "empty (webfetch)"
+      },
+      {
+        "url": "https://squareup.com/ca/en/app-marketplace/app/here",
+        "reason": "http_429 (webfetch)"
+      },
+      {
+        "url": "https://squareup.com/us/en/appointments/features/class-booking",
+        "reason": "http_429 (webfetch)"
+      },
+      {
+        "url": "https://squareup.com/help/article/6473",
+        "reason": "redirect (webfetch): 301 to app.squareup.com/app-marketplace/app/occasion."
+      },
+      {
+        "url": "https://squareup.com/help/gb/en/article/6473",
+        "reason": "http_429 (curl): Cloudflare error 1015 rate limit; the '$349/year' figure from search snippet NOT used."
+      },
+      {
+        "url": "https://zonos.com/docs/supply-chain/classify/pricing",
+        "reason": "empty (webfetch): JS shell with nav only."
+      },
+      {
+        "url": "https://help.parcel.royalmail.com/hc/en-gb/articles/30042594924957-Sending-items-to-the-USA-Account-Click-Drop-Customers",
+        "reason": "http_403 (webfetch)"
+      },
+      {
+        "url": "https://community.ebay.co.uk/t5/Business-Seller-Board/Shipping-to-US-royal-mail-DDP/m-p/7927224",
+        "reason": "empty (webfetch): Login wall: 'Log in to view the post'."
+      },
+      {
+        "url": "https://www.etsy.com/seller-handbook/article/1355662653395",
+        "reason": "http_403 (webfetch): Etsy Seller Handbook DDP article."
+      },
+      {
+        "url": "https://www.royalmail.com/usabusinessupdates",
+        "reason": "http_403 (webfetch)"
+      },
+      {
+        "url": "https://talk.folksy.com/search.json?q=tariff%20after%3A2026-09-26",
+        "reason": "empty (webfetch): Valid search, zero posts: no new Folksy tariff posts after 2026-09-26."
+      },
+      {
+        "url": "https://www.usitc.gov/documents/hts/hts_external_user_guide.pdf",
+        "reason": "http_403 (webfetch): Official HTS REST user guide PDF; endpoints confirmed by calling them instead."
+      },
+      {
+        "url": "https://developer.xero.com/documentation/api/accounting/prepayments",
+        "reason": "empty (webfetch): Title only (JS-rendered docs)."
+      },
+      {
+        "url": "https://developer.xero.com/documentation/api/accounting/banktransactions",
+        "reason": "empty (webfetch): Title only; not retried with curl because the same docs site returned a JS shell to curl."
+      },
+      {
+        "url": "https://apps.xero.com/au/search?q=deposit",
+        "reason": "empty (curl): Search results are rendered client-side; no app list in HTML. WebFetch not tried (deviation)."
+      },
+      {
+        "url": "https://apps.xero.com/au/search?q=prepayment",
+        "reason": "empty (curl): Same JS-rendered search shell."
+      },
+      {
+        "url": "https://apps.xero.com/au/search?q=retainer",
+        "reason": "empty (curl): Same JS-rendered search shell."
+      },
+      {
+        "url": "https://apps.xero.com/au/search?q=deposit%20invoice",
+        "reason": "empty (curl): Same JS-rendered search shell."
+      },
+      {
+        "url": "https://apps.shopify.com/search?q=digital%20delivery%20monitor",
+        "reason": "empty (curl): Search results are rendered client-side; no app cards in HTML."
+      },
+      {
+        "url": "https://apps.shopify.com/search?q=test%20order%20monitoring",
+        "reason": "empty (curl): Same: no app cards in HTML."
+      },
+      {
+        "url": "https://community.etsy.com/t5/Technical-Issues/Navigating-US-Tariffs-as-an-International-Seller-A-Workaround/td-p/149044160",
+        "reason": "empty (webfetch): Login wall; only the title is visible ('A Workaround and a Plea for Better Tools'), with no author or date."
+      },
+      {
+        "url": "https://dotgolf.freshdesk.com/support/solutions/articles/6000223865-functions-receiving-and-applying-a-deposit-to-a-function-invoice",
+        "reason": "http_404 (webfetch): URL came from search results; returned 404."
+      },
+      {
+        "url": "https://evolutionplatform.poolwerx.com.au/support/solutions/articles/13000107858-xero-options-for-recording-a-client-prepayment-or-deposit-without-an-invoice",
+        "reason": "redirect (webfetch): Redirects to a Freshworks login; not followed."
+      },
+      {
+        "url": "https://community.shopify.com/search.json?q=photographer%20digital%20download%20after%3A2026-08-15",
+        "reason": "empty (webfetch): 0 posts (multi-word AND too narrow)"
+      },
+      {
+        "url": "https://community.shopify.com/search.json?q=sales%20tax%20handmade%20craft%20fair%20after%3A2026-08-15",
+        "reason": "empty (webfetch): 0 posts"
+      },
+      {
+        "url": "https://www.photographytalk.com/forum/photography-general-discussion/262742-how-would-you-handle-a-client-who-was-10-months-late/371648",
+        "reason": "empty (webfetch): Thread URL from WebSearch rendered as site index page"
+      },
+      {
+        "url": "https://community.shopify.com/search.json?q=consignment%20artists%20payout%20after%3A2026-08-15",
+        "reason": "empty (webfetch): 0 posts"
+      },
+      {
+        "url": "https://forum.obsidian.md/search.json?q=freelance%20clients%20invoice%20after%3A2026-08-15",
+        "reason": "empty (webfetch): 0 posts"
+      },
+      {
+        "url": "https://forum.ghost.org/search.json?q=VAT%20tax%20invoice%20receipt%20after%3A2026-08-15",
+        "reason": "empty (webfetch): 0 posts"
+      },
+      {
+        "url": "https://community.squarespace.com/search.json?q=scheduling%20after%3A2026-08-15",
+        "reason": "http_404 (webfetch): Not Discourse (no search.json)"
+      },
+      {
+        "url": "https://www.patreon.com/posts/170931602",
+        "reason": "http_403 (webfetch)"
+      },
+      {
+        "url": "https://petapixel.com/2026/07/17/squarespace-is-increasing-prices-by-up-to-26/",
+        "reason": "http_403 (webfetch)"
+      },
+      {
+        "url": "https://techradar.com/pro/im-paying-for-things-i-sincerely-did-not-ask-for-squarespace-users-arent-happy-with-recent-price-hikes",
+        "reason": "empty (webfetch): headline only"
+      },
+      {
+        "url": "https://www.federalregister.gov/documents/2026/10/22/2026-21600/indefinite-suspension-of-the-de-minimis-exemption-for-mail-shipments-and-new-postal-informal-entry",
+        "reason": "redirect (webfetch): 302 to unblock.federalregister.gov; use API instead"
+      },
+      {
+        "url": "https://www.federalregister.gov/documents/2026/10/08/2026-20650/low-value-shipments",
+        "reason": "redirect (webfetch): 302 to unblock.federalregister.gov"
+      },
+      {
+        "url": "https://www.federalregister.gov/documents/2026/08/10/2026-16269/backup-withholding-on-third-party-network-transactions",
+        "reason": "redirect (webfetch): 302 to unblock.federalregister.gov"
+      },
+      {
+        "url": "https://www.etsy.com/seller-handbook/article/1522733284810",
+        "reason": "http_403 (webfetch)"
+      },
+      {
+        "url": "https://community.etsy.com/forum/announcements-290/topic/important-updates-to-ai-on-etsy-190573/",
+        "reason": "empty (webfetch): JS shell, 'Loading...'"
+      },
+      {
+        "url": "https://support.patreon.com/hc/articles/28801582599181-Migrating-to-subscription-billing-FAQ",
+        "reason": "http_403 (webfetch)"
+      },
+      {
+        "url": "https://www.diyphotography.net/squarespace-price-increase-26-percent-2026/",
+        "reason": "empty (webfetch): headline only"
+      },
+      {
+        "url": "https://talk.folksy.com/search.json?q=DDP%20after%3A2026-05-01",
+        "reason": "empty (webfetch): valid JSON, 0 posts"
+      },
+      {
+        "url": "https://www.freelancer.com/api/projects/0.1/projects/active/?query=preorder&limit=50&full_description=true",
+        "reason": "empty (curl): 143-byte reply: no projects for this query"
+      },
+      {
+        "url": "https://apps.shopify.com/etsy-integration-sync",
+        "reason": "redirect (curl): 301 to apps.shopify.com/etsy-integration-dpl"
+      },
+      {
+        "url": "https://apps.shopify.com/etsy-integration-sync/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest",
+        "reason": "http_404 (curl): old slug; use etsy-integration-dpl"
+      },
+      {
+        "url": "https://apps.shopify.com/product-personalizer",
+        "reason": "empty (curl): Zepto slug from search: 110KB page with empty title, app not found"
+      },
+      {
+        "url": "https://apps.shopify.com/product-personalizer/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest",
+        "reason": "http_404 (curl)"
+      },
+      {
+        "url": "https://www.peopleperhour.com/freelance-jobs?q=etsy",
+        "reason": "empty (curl): 312KB HTML but query ignored: lists latest generic jobs, none about the task"
+      },
+      {
+        "url": "https://community.squareup.com/t5/Appointments-Bookings/Square-Appointments-Class-Check-Ins-and-Purchased-Packages-in/td-p/825824",
+        "reason": "empty (webfetch)"
+      },
+      {
+        "url": "https://feedback.qbo.intuit.com/forums/966060-qbo-estimates/suggestions/49950663-enhance-estimates-and-deposits-for-service-based-b",
+        "reason": "allowlist (curl): HTTP 200 but 'This is a private forum. Sign in with an approved profile' - QBO UserVoice board is private. WebFetch not tried first (deviation)."
+      },
+      {
+        "url": "https://feedback.qbo.intuit.com/forums/966060-qbo-estimates/suggestions/49971585-add-request-deposit-feature-directly-from-estima",
+        "reason": "allowlist (curl): same private-forum wall"
+      },
+      {
+        "url": "https://community.etsy.com/t5/Technical-Issues/Feature-Requests-for-Etsy-ENG-team/td-p/146462243",
+        "reason": "allowlist (webfetch): login wall: body hidden, 'Log in to join the conversation'"
+      },
+      {
+        "url": "https://feedback.picflow.com/features/p/sell-images",
+        "reason": "http_404 (webfetch)"
+      },
+      {
+        "url": "https://feedback.kajabi.com/",
+        "reason": "allowlist (webfetch): login gate: Kajabi Google Workspace accounts only"
+      },
+      {
+        "url": "https://waveapps.vanillacommunities.com/discussion/comment/38998",
+        "reason": "allowlist (webfetch): getaddrinfo ENOTFOUND: host outside session network allowlist"
+      },
+      {
+        "url": "https://apps.shopify.com/app85115",
+        "reason": "empty (curl): Empreender Bulk Cancel slug resolves to a generic App Store page; the listing appears to be gone"
+      },
+      {
+        "url": "https://apps.shopify.com/craftybase",
+        "reason": "http_404 (curl): 'Oh no! That page doesn't exist.'"
+      },
+      {
+        "url": "https://apps.shopify.com/craftybase/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest",
+        "reason": "http_404 (curl): listing gone"
+      },
+      {
+        "url": "https://www.craftybase.com/integrations/shopify-bill-of-materials-software",
+        "reason": "redirect (webfetch): 301 to https://stocksmith.io/integrations/shopify/ (Craftybase rebrand?), not followed"
+      }
+    ],
+    "rejectedCandidates": [
+      {
+        "title": "Balance Due for Made-to-Order Sellers (deposit then instalment schedule plus tax-on-receipts report, Shopify POS)",
+        "total": 16,
+        "reason": "Researched at 20, reviewer rescored to 16: the September VAT poster's profile says she is a content writer, so the only merchant post in that thread is 285 days old; one partial-payment poster is a dev agency; Shopify App Store requirement 1.1.2 bars apps that bypass checkout, so off-store pay links cannot be listed; Partial.ly (2% per transaction) and Downpay already sell most of it, and POS Pro split payments plus 'send invoice' cover a single balance free. Ranked below the four shipped ideas; re-scope to an in-Shopify bridal-boutique schedule-and-reminder companion if revisited."
+      },
+      {
+        "title": "Class Waitlist and Series Enrolment for Square Studios",
+        "total": 17,
+        "reason": "Review kill: Square's API does not expose Classes (Square staff on the developer forum, 2025-09-12 and 2026-04-23), so an in-Square add-on cannot be built; the buildable standalone scheduler is what Occasion already sells to Square studios (waitlist, multi-week series, embeddable calendar, Square gateway, 2% fee the studio can pass on). Revisit if Square ships a Classes API or class webhooks."
+      },
+      {
+        "title": "Listing Snapshot and Rollback before installing Etsy sync apps",
+        "total": 20,
+        "reason": "Merged into Sync Switch Pre-flight (the Etsy-side archive); the Shopify-side snapshot is already free in StoreArk."
+      },
+      {
+        "title": "EU Duty Line Counter for non-EU makers (EUR 3 per tariff line)",
+        "total": 19,
+        "reason": "Merged into the US Duty Price Sheet as phase 2; complaints are mild (one seller unsure, one already stopped EU sales) and no spend found on B11."
+      },
+      {
+        "title": "US Regulated-Goods Preflight for small senders",
+        "total": 17,
+        "reason": "Merged into the US Duty Price Sheet as a category flag; CBP's 2027-01-20 compliance date for postal partner-agency goods softens the urgency and only one maker complained."
+      },
+      {
+        "title": "Paid-but-Unbooked check for Shopify class and workshop sellers",
+        "total": 18,
+        "reason": "Overselling evidence dates from 2023 and the one 2026 complaint is a double booking; booking apps' APIs are largely closed or paid-tier (the 2026-11-03 Paid-Access Watch kill found the same); no B11 job."
+      },
+      {
+        "title": "Deposit and Balance Collector for pre-orders without revenue share",
+        "total": 18,
+        "reason": "Crowded (Depo, Advanced PreOrder, Downpay, five 2026 launches); the complaint is mostly about Depo's billing change, and the customer and problem overlap Balance Due."
+      },
+      {
+        "title": "Quote Request Inbox for custom and commission work",
+        "total": 18,
+        "reason": "The low reviews on Quote Snap come from B2B sellers, not makers; no maker commission complaint found; a similar contractor idea was killed on 2026-11-06."
+      },
+      {
+        "title": "Market Day Mode (event tax rate and temporary stock location for craft fairs on Shopify POS)",
+        "total": 18,
+        "reason": "Merchant complaints date 2023 to 2025; the only 2026 post is a developer building the same app; spend pass found no paid app or job (willingnessToPay 2)."
+      },
+      {
+        "title": "Comp Lifecycle for Ghost (members billed outside Stripe)",
+        "total": 17,
+        "reason": "Two creator complaints but willingnessToPay 2 (no B11 job); PayGlue (open source) and Creator Dunning (free to 100 members) cover parts; rejected at 16 on 2026-11-03."
+      },
+      {
+        "title": "Batch Receiving for Makers on Shopify",
+        "total": 17,
+        "reason": "One merchant, with six inventory-app developers replying in her thread; spend pass found Craftybase's Shopify listing gone and Makeready free with 0 reviews."
+      },
+      {
+        "title": "Unedited Photo Audit for Etsy shops",
+        "total": 16,
+        "reason": "Three fresh named complaints, but the 2026-11-01 review already showed Etsy's API returns only re-encoded images with no edit history, so compliance cannot be detected; no spend."
+      },
+      {
+        "title": "Etsy Bridge after Shopify Marketplace Connect froze Etsy",
+        "total": 15,
+        "reason": "Vendor-saturated (LitCommerce, CedCommerce, shopUpz, Shuttle, StockPont); recent posts are almost all vendors."
+      },
+      {
+        "title": "Class-Pack Credit Ledger for studios on a general CRM",
+        "total": 15,
+        "reason": "Crowded (Momence, Glofox, Amelia Packages, Square Packages); similar candidate rejected 2026-11-03."
+      },
+      {
+        "title": "Patreon Anniversary-Billing Fulfillment Batcher",
+        "total": 15,
+        "reason": "Only complaint is from January 2026, before the switch; about 4 percent of creators affected; Patreon pages 403."
+      },
+      {
+        "title": "Proofing Picks to Editor Handoff for wedding photographers",
+        "total": 16,
+        "reason": "No complaint evidence; proofing platforms (Pixieset, ShootProof) not checked; culling jobs show spend on editing, not on handoff."
+      },
+      {
+        "title": "Proof Sign-off Log for personalised orders",
+        "total": 14,
+        "reason": "Thread opener looks like a builder; one merchant voice; Upproof has a free plan."
+      },
+      {
+        "title": "Bespoke Order Balance Tracker for Etsy custom orders",
+        "total": 14,
+        "reason": "Mandate only (Etsy custom-order rule from 2026-07-09); no complaint or spend found."
+      },
+      {
+        "title": "EU Cancellation Button Check for small shops",
+        "total": 13,
+        "reason": "Single second-hand forum relay of a hosting email; overlaps the 2026-11-03 Popup Check and consent ideas."
+      },
+      {
+        "title": "Cash and Check Tips Log for solo service providers",
+        "total": 14,
+        "reason": "One complaint (2026-04-19); tip-deduction eligibility rules not checked."
+      },
+      {
+        "title": "Pass+ Exit Kit for photographers",
+        "total": 14,
+        "reason": "Rejection rule: a one-time migration job closer to a service than a product; every named complaint was on Reddit (not counted); Pic-Time's free migration covers galleries."
+      },
+      {
+        "title": "Supplier PDF catalog to Shopify CSV conversion",
+        "total": 13,
+        "reason": "Rejection rule: a freelancer service ($49 per catalog on HN), not a product; no complaint."
+      }
+    ],
+    "watchlist": [
+      {
+        "title": "Flat-Fee Text Personalizer for small engravers and gift makers",
+        "targetCustomer": "Owners of small Shopify shops selling engraved or personalised gifts who need text options, not print-on-demand pipelines.",
+        "problemStatement": "Leading personalizers charge $49/month plus a per-item fee, render slowly (20 minutes per file) and lack plain text-phrase dropdowns with font and colour choice.",
+        "total": 19,
+        "missedGate": "total 19 is below 22 and pain 3 is below 4; competitiveGap 2 (crowded with new 0-review apps)",
+        "evidence": [
+          "https://apps.shopify.com/customily-product-personalizer/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest",
+          "https://apps.shopify.com/teeinblue/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest",
+          "https://apps.shopify.com/customily-product-personalizer"
+        ],
+        "firstSeen": "2026-11-08"
+      },
+      {
+        "title": "One-Off Hold Guard for unique-item sellers",
+        "targetCustomer": "Sellers of one-of-a-kind handmade or vintage items who take delayed payment methods (Multibanco, bank transfer) or sell the same unique pieces at a stall and online.",
+        "problemStatement": "An unpaid delayed-payment order holds the only unit for up to a week, and a late payment can settle after the piece is resold; stall-plus-online sellers cannot reserve unique stock across channels.",
+        "total": 19,
+        "missedGate": "total 19 is below 22 and pain 3 is below 4; Payster ($19.99/month, 4 ratings) already auto-cancels unpaid bank-transfer orders",
+        "evidence": [
+          "https://community.shopify.com/t/configurable-multibanco-payment-deadlines-in-shopify-payments/687189.json",
+          "https://hn.algolia.com/api/v1/items/50247711",
+          "https://apps.shopify.com/payster-payment-email-reminder"
+        ],
+        "firstSeen": "2026-11-08"
+      }
+    ],
+    "caveats": "First run of 2026-11-08 (Sunday). Four provisional ideas ship (21, 20, 19, 18); none cleared the gate of 22. Six candidates were researched and adversarially reviewed: one killed (Square class waitlist and series: Square's API does not expose Classes, and Occasion already sells the buildable standalone version to Square studios) and five rescored down (US Duty Price Sheet 22 to 21, because the Folksy commenters are one thread and Etsy's free estimator covers Etsy-only sellers; listing matcher 21 to 20, because SP's free plan auto-links SKUs and StoreArk backs up Shopify free; Delivery Canary 20 to 19, because one evidence thread was misread and the lead review is disputed; Xero deposits 19 to 18, because Xero's community rules forbid promoting in idea threads; Balance Due 20 to 16, not shipped). Deposits Register for Xero (18) shipped over two unreviewed watchlist entries at 19 (Flat-Fee Text Personalizer, One-Off Hold Guard): it was selected at a preliminary 19, tied with them, on stronger complaint evidence (515, 259 and 44-vote Xero ideas with named 2026 comments), and lost a point in review. It is the third small-Xero-business idea in four days. Each idea is scoped to a different customer and problem, but all four sit in Small Business Ops territory; categories were spread (Accessibility & Compliance, Small Business Ops x2, Micro-SaaS). The focus source A12 (HN) yielded one first-person maker complaint in 15 queries; the lens is poorly served there. C10 yielded strong change events (Etsy DDP 2026-07-09, CBP de minimis rules, EU EUR 3 duty, Etsy photo rules, Pass+ shutdown, Patreon billing), but Pass+ and Squarespace complaints were only on Reddit, which is not counted. B11 (freelancer.com) found almost no task-specific paid jobs across about 60 queries; its search barely narrows. No tutor or working-photographer forum with business pain was found, so neither group is covered today. No watchlist entries carried over from 2026-11-07."
+  }
+}
