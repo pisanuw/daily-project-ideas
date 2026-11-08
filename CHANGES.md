@@ -635,3 +635,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-08 [doc] US Duty Price Sheet for UK Makers (2026-11-08 #1) implemented: https://us-duty-price-sheet.hintwise.org (code in claude-built-apps/us-duty-price-sheet).
 
 2026-11-08 [code] HintWise Studio redesign (branch studio-redesign): home (hero, 6 featured apps, audiences, how it works, about), /apps/ with audience filters and search, one page per app (65), ideas moved to Next up (next-up.html, browse, topics; routine unchanged), app links on hintwise.org, light and dark, new og-image; data in studio.json, pages in build-studio.js, images in web/media/.
+
+2026-11-08 [decision] Owner approved the HintWise Studio redesign ("merge"); merged to main and live at https://studio.hintwise.org.
