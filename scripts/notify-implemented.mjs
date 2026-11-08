@@ -212,7 +212,7 @@ function renderText(projects) {
     out.push('---');
     out.push('');
   }
-  out.push('From daily-project-ideas: https://daily-project-ideas.pisan.me/');
+  out.push('From HintWise Studio: https://studio.hintwise.org/apps/');
   return out.join('\n');
 }
 
@@ -239,7 +239,7 @@ ${links}
 <div style="max-width:40em;margin:0 auto">
 ${blocks}
 <p style="margin:2.5em 0 0;color:#666;font-size:0.85em">
-From <a href="https://daily-project-ideas.pisan.me/" style="color:#666">daily-project-ideas</a>.
+From <a href="https://studio.hintwise.org/apps/" style="color:#666">HintWise Studio</a>.
 </p>
 </div>
 </body></html>`;
