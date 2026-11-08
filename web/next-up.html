@@ -6,8 +6,8 @@
   <title>Next up · HintWise Studio</title>
   <meta name="description" content="Problems small businesses, startups and educators have told the world about, written up as software HintWise could build next. New ones every morning." />
   <link rel="canonical" href="https://studio.hintwise.org/next-up.html" />
-  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
-  <meta name="theme-color" content="#0e1015" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#fcfbf8" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#12141a" media="(prefers-color-scheme: dark)" />
   <meta property="og:site_name" content="HintWise Studio" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Next up · HintWise Studio" />
@@ -26,7 +26,8 @@
 </head>
 <body data-page="index">
   <!-- @nav:next-up -->
-  <header class="hero" id="main">
+  <main id="main">
+  <div class="hero">
     <div class="wrap">
       <p class="eyebrow">Next up</p>
       <h1 class="hero__title">What we could build next</h1>
@@ -39,14 +40,15 @@
         <a class="btn btn--quiet" href="topics.html">Browse by topic</a>
       </p>
     </div>
-  </header>
-
-  <div class="jumpbar" id="jumpbar" hidden>
-    <div class="wrap jumpbar__inner" id="jumpbar-links"></div>
   </div>
 
-  <main class="wrap" id="sections">
+  <nav class="jumpbar" id="jumpbar" aria-label="Sections" hidden>
+    <div class="wrap jumpbar__inner" id="jumpbar-links"></div>
+  </nav>
+
+  <div class="wrap" id="sections">
     <!-- Audience sections injected by app.js -->
+  </div>
   </main>
 
   <!-- @footer -->

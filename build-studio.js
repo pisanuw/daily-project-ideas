@@ -119,8 +119,8 @@ function head({ title, description, pathname, noindex }) {
   <title>${esc(title)}</title>
   <meta name="description" content="${esc(description)}" />${noindex ? '\n  <meta name="robots" content="noindex, nofollow" />' : ''}
   <link rel="canonical" href="${url}" />
-  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
-  <meta name="theme-color" content="#0e1015" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#fcfbf8" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#12141a" media="(prefers-color-scheme: dark)" />
   <meta property="og:site_name" content="${NAME}" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="${esc(title)}" />
@@ -135,6 +135,8 @@ function head({ title, description, pathname, noindex }) {
   <meta name="twitter:description" content="${esc(description)}" />
   <meta name="twitter:image" content="${OG_IMAGE}" />
   <link rel="icon" href="${FAVICON}" />
+  <link rel="preload" href="/fonts/atkinson-next-latin-var.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/nunito-latin-var.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="/styles.css" />`;
 }
 
@@ -224,13 +226,13 @@ function featureCard(app, studio) {
       </article>`;
 }
 
-function appCard(app, studio) {
+function appCard(app, studio, level = 3) {
   const text = [app.title, app.blurb, app.forWhom, ...app.audiences.map((k) => audienceLabel(studio, k))]
     .join(' ').toLowerCase();
   return `      <article class="app-card" data-aud="${esc(app.audiences.join(' '))}" data-text="${esc(text)}">
         ${media(app)}
         <div class="app-card__body">
-          <h3 class="app-card__title"><a href="/apps/${app.slug}/">${esc(app.title)}</a></h3>
+          <h${level} class="app-card__title"><a href="/apps/${app.slug}/">${esc(app.title)}</a></h${level}>
           <p class="app-card__blurb">${esc(app.blurb)}</p>
           <p class="app-card__meta">${app.audiences.map((k) => `<span class="aud">${esc(audienceLabel(studio, k))}</span>`).join('')}
             <a class="app-card__open" href="${esc(app.url)}" aria-label="Open ${esc(app.title)}">Open &#8599;</a></p>
@@ -354,7 +356,7 @@ function appsPage(apps, studio) {
     </div>
     <div class="wrap">
       <div class="appgrid" id="appgrid">
-${apps.map((a) => appCard(a, studio)).join('\n')}
+${apps.map((a) => appCard(a, studio, 2)).join('\n')}
       </div>
       <p class="empty" id="app-none" hidden>No apps match. Try another word, or <a href="${esc(mailto('Project idea (via HintWise Studio)'))}">tell us what you need</a>.</p>
     </div>

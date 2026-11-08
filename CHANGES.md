@@ -637,3 +637,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-08 [code] HintWise Studio redesign (branch studio-redesign): home (hero, 6 featured apps, audiences, how it works, about), /apps/ with audience filters and search, one page per app (65), ideas moved to Next up (next-up.html, browse, topics; routine unchanged), app links on hintwise.org, light and dark, new og-image; data in studio.json, pages in build-studio.js, images in web/media/.
 
 2026-11-08 [decision] Owner approved the HintWise Studio redesign ("merge"); merged to main and live at https://studio.hintwise.org.
+
+2026-11-08 [code] Studio softer and more approachable (owner): Atkinson Hyperlegible Next body + Nunito headings, self-hosted (web/fonts, OFL); rounded surfaces, soft shadows, pill buttons, warm palette; axe WCAG 2.2 AA clean.
