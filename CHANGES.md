@@ -647,3 +647,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-09 [code] scripts/validate_ideas.py checks shape, substantial, platformNeeds and buildPlan on files dated 2026-11-10 or later; a day with no substantial Multi-week idea needs a caveat
 
 2026-11-09 [code] validate_ideas.py: the duplicated COMPLEXITY/CONFIDENCE/TOPICS constants are gone; the topic list is read from ideas/topics-taxonomy.json only.
+
+2026-11-09 [doc] Studio lists Research Map (pisan-labs/research-map, https://research-map.hintwise.org/; owner yes 9 Nov), audiences educators and learners, card image from the live UW Bothell map.
