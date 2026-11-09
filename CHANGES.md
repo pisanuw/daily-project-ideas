@@ -645,3 +645,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-09 [decision] Owner: ideas carry a shape rubric (5 marks), substantial flag, buildPlan (5-7 milestones) and platformNeeds from 2026-11-10; feasibility now rewards a 7-day HintWise build
 
 2026-11-09 [code] scripts/validate_ideas.py checks shape, substantial, platformNeeds and buildPlan on files dated 2026-11-10 or later; a day with no substantial Multi-week idea needs a caveat
+
+2026-11-09 [code] validate_ideas.py: the duplicated COMPLEXITY/CONFIDENCE/TOPICS constants are gone; the topic list is read from ideas/topics-taxonomy.json only.
