@@ -240,14 +240,14 @@
       ]
     },
     "api.wordpress.org": {
-      "attempts": 25,
+      "attempts": 27,
       "evidenceItems": 1,
-      "lastAttempt": "2026-11-08",
-      "lastOk": "2026-11-08",
-      "ok": 24,
+      "lastAttempt": "2026-11-09",
+      "lastOk": "2026-11-09",
+      "ok": 26,
       "outcomes": {
         "empty": 1,
-        "ok": 24
+        "ok": 26
       },
       "workingPaths": [
         "curl https://api.wordpress.org/plugins/info/1.2/?action=query_plugins&request[search]=accessibility&request[per_page]=15",
@@ -347,15 +347,15 @@
       ]
     },
     "apps.shopify.com": {
-      "attempts": 195,
-      "evidenceItems": 20,
-      "lastAttempt": "2026-11-08",
-      "lastOk": "2026-11-08",
-      "ok": 164,
+      "attempts": 218,
+      "evidenceItems": 21,
+      "lastAttempt": "2026-11-09",
+      "lastOk": "2026-11-09",
+      "ok": 182,
       "outcomes": {
-        "empty": 20,
+        "empty": 25,
         "http_404": 9,
-        "ok": 164,
+        "ok": 182,
         "redirect": 2
       },
       "workingPaths": [
@@ -840,16 +840,18 @@
       ]
     },
     "community.glowforge.com": {
-      "attempts": 1,
+      "attempts": 3,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-08",
-      "lastOk": "2026-11-08",
-      "ok": 1,
+      "lastAttempt": "2026-11-09",
+      "lastOk": "2026-11-09",
+      "ok": 2,
       "outcomes": {
-        "ok": 1
+        "empty": 1,
+        "ok": 2
       },
       "workingPaths": [
-        "webfetch https://community.glowforge.com/search.json?q=selling%20after%3A2026-08-15"
+        "webfetch https://community.glowforge.com/search.json?q=selling%20after%3A2026-08-15",
+        "curl https://community.glowforge.com/search.json?q=license+after%3A2026-06-01"
       ]
     },
     "community.home-assistant.io": {
@@ -886,14 +888,14 @@
       "workingPaths": []
     },
     "community.make.com": {
-      "attempts": 20,
+      "attempts": 21,
       "evidenceItems": 2,
-      "lastAttempt": "2026-11-07",
-      "lastOk": "2026-11-07",
-      "ok": 19,
+      "lastAttempt": "2026-11-09",
+      "lastOk": "2026-11-09",
+      "ok": 20,
       "outcomes": {
         "empty": 1,
-        "ok": 19
+        "ok": 20
       },
       "workingPaths": [
         "curl https://community.make.com/search.json?q=deprecated%20after%3A2026-08-01",
@@ -902,14 +904,14 @@
       ]
     },
     "community.n8n.io": {
-      "attempts": 51,
+      "attempts": 52,
       "evidenceItems": 4,
-      "lastAttempt": "2026-11-07",
-      "lastOk": "2026-11-07",
-      "ok": 50,
+      "lastAttempt": "2026-11-09",
+      "lastOk": "2026-11-09",
+      "ok": 51,
       "outcomes": {
         "empty": 1,
-        "ok": 50
+        "ok": 51
       },
       "workingPaths": [
         "curl https://community.n8n.io/search.json?q=invoice%20small%20business%20after%3A2026-09-01",
@@ -939,16 +941,31 @@
       },
       "workingPaths": []
     },
-    "community.shopify.com": {
-      "attempts": 210,
-      "evidenceItems": 21,
-      "lastAttempt": "2026-11-08",
-      "lastOk": "2026-11-08",
-      "ok": 202,
+    "community.retellai.com": {
+      "attempts": 7,
+      "evidenceItems": 3,
+      "lastAttempt": "2026-11-09",
+      "lastOk": "2026-11-09",
+      "ok": 7,
       "outcomes": {
-        "empty": 7,
+        "ok": 7
+      },
+      "workingPaths": [
+        "curl https://community.retellai.com/search.json?q=A2P+after%3A2026-06-01",
+        "curl https://community.retellai.com/search.json?q=10DLC",
+        "curl https://community.retellai.com/t/3787.json"
+      ]
+    },
+    "community.shopify.com": {
+      "attempts": 250,
+      "evidenceItems": 22,
+      "lastAttempt": "2026-11-09",
+      "lastOk": "2026-11-09",
+      "ok": 241,
+      "outcomes": {
+        "empty": 8,
         "http_404": 1,
-        "ok": 202
+        "ok": 241
       },
       "workingPaths": [
         "curl https://community.shopify.com/search.json?q=ADA%20lawsuit%20after%3A2026-05-01",
@@ -1242,13 +1259,13 @@
       "workingPaths": []
     },
     "discuss.frappe.io": {
-      "attempts": 10,
+      "attempts": 11,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-07",
-      "lastOk": "2026-11-07",
-      "ok": 10,
+      "lastAttempt": "2026-11-09",
+      "lastOk": "2026-11-09",
+      "ok": 11,
       "outcomes": {
-        "ok": 10
+        "ok": 11
       },
       "workingPaths": [
         "curl https://discuss.frappe.io/search.json?q=small%20business%20invoice+after%3A2026-08-07",
@@ -1324,6 +1341,19 @@
       },
       "workingPaths": [
         "curl https://docs.n8n.io/api/"
+      ]
+    },
+    "docs.retellai.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-09",
+      "lastOk": "2026-11-09",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://docs.retellai.com/deploy/sms-campaign-application"
       ]
     },
     "docs.smrtphone.io": {
@@ -1572,16 +1602,17 @@
       ]
     },
     "fasta2p-portal.pages.dev": {
-      "attempts": 1,
-      "evidenceItems": 0,
-      "lastAttempt": "2026-11-04",
-      "lastOk": "2026-11-04",
-      "ok": 1,
+      "attempts": 2,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-09",
+      "lastOk": "2026-11-09",
+      "ok": 2,
       "outcomes": {
-        "ok": 1
+        "ok": 2
       },
       "workingPaths": [
-        "webfetch https://fasta2p-portal.pages.dev/"
+        "webfetch https://fasta2p-portal.pages.dev/",
+        "curl https://fasta2p-portal.pages.dev/"
       ]
     },
     "feedback.kajabi.com": {
@@ -1618,13 +1649,13 @@
       "workingPaths": []
     },
     "fiverr.com": {
-      "attempts": 1,
+      "attempts": 2,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-04",
+      "lastAttempt": "2026-11-09",
       "lastOk": null,
       "ok": 0,
       "outcomes": {
-        "http_403": 1
+        "http_403": 2
       },
       "workingPaths": []
     },
@@ -1709,14 +1740,14 @@
       ]
     },
     "forum.ghost.org": {
-      "attempts": 10,
-      "evidenceItems": 0,
-      "lastAttempt": "2026-11-08",
-      "lastOk": "2026-11-08",
-      "ok": 9,
+      "attempts": 14,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-09",
+      "lastOk": "2026-11-09",
+      "ok": 13,
       "outcomes": {
         "empty": 1,
-        "ok": 9
+        "ok": 13
       },
       "workingPaths": [
         "curl https://forum.ghost.org/search.json?q=cookie%20after%3A2026-06-01",
@@ -1725,14 +1756,14 @@
       ]
     },
     "forum.invoiceninja.com": {
-      "attempts": 9,
+      "attempts": 12,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-07",
-      "lastOk": "2026-11-07",
-      "ok": 8,
+      "lastAttempt": "2026-11-09",
+      "lastOk": "2026-11-09",
+      "ok": 11,
       "outcomes": {
         "empty": 1,
-        "ok": 8
+        "ok": 11
       },
       "workingPaths": [
         "curl https://forum.invoiceninja.com/search.json?q=sales%20tax%20after%3A2026-06-01",
@@ -1871,6 +1902,20 @@
         "curl https://getvela.com/pricing"
       ]
     },
+    "ghost.org": {
+      "attempts": 2,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-09",
+      "lastOk": "2026-11-09",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "webfetch https://ghost.org/docs/themes/members/",
+        "webfetch https://ghost.org/changelog/signup-terms/"
+      ]
+    },
     "ghostinspector.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -1999,6 +2044,19 @@
         "webfetch https://help.etsy.com/hc/articles/30907634892311"
       ]
     },
+    "help.gohighlevel.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-09",
+      "lastOk": "2026-11-09",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://help.gohighlevel.com/support/solutions/articles/155000008307-pre-built-a2p-campaign-registration-with-chat-widget"
+      ]
+    },
     "help.onpay.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -2073,6 +2131,19 @@
         "webfetch https://help.shopify.com/manual/orders/create-orders"
       ]
     },
+    "help.smrtphone.io": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-09",
+      "lastOk": "2026-11-09",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://help.smrtphone.io/get-help-setting-up-your-a2p-10dlc-registration-smrtphone-help-center"
+      ]
+    },
     "help.studioninja.co": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -2100,16 +2171,17 @@
       ]
     },
     "highlevel.canny.io": {
-      "attempts": 1,
+      "attempts": 2,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-08",
-      "lastOk": "2026-11-08",
-      "ok": 1,
+      "lastAttempt": "2026-11-09",
+      "lastOk": "2026-11-09",
+      "ok": 2,
       "outcomes": {
-        "ok": 1
+        "ok": 2
       },
       "workingPaths": [
-        "webfetch https://highlevel.canny.io/crm/p/add-full-group-class-scheduling-with-membership-credit-tracking-attendance-for-f"
+        "webfetch https://highlevel.canny.io/crm/p/add-full-group-class-scheduling-with-membership-credit-tracking-attendance-for-f",
+        "curl https://highlevel.canny.io/search?search=A2P"
       ]
     },
     "hiverhq.com": {
@@ -2126,14 +2198,14 @@
       ]
     },
     "hn.algolia.com": {
-      "attempts": 76,
-      "evidenceItems": 1,
-      "lastAttempt": "2026-11-08",
-      "lastOk": "2026-11-08",
-      "ok": 66,
+      "attempts": 80,
+      "evidenceItems": 2,
+      "lastAttempt": "2026-11-09",
+      "lastOk": "2026-11-09",
+      "ok": 70,
       "outcomes": {
         "empty": 10,
-        "ok": 66
+        "ok": 70
       },
       "workingPaths": [
         "curl https://hn.algolia.com/api/v1/search_by_date?query=%22alt%20text%22&tags=comment&hitsPerPage=30",
@@ -2704,13 +2776,14 @@
       ]
     },
     "productideas.xero.com": {
-      "attempts": 41,
+      "attempts": 44,
       "evidenceItems": 15,
-      "lastAttempt": "2026-11-08",
-      "lastOk": "2026-11-08",
-      "ok": 41,
+      "lastAttempt": "2026-11-09",
+      "lastOk": "2026-11-09",
+      "ok": 43,
       "outcomes": {
-        "ok": 41
+        "empty": 1,
+        "ok": 43
       },
       "workingPaths": [
         "curl https://productideas.xero.com/forums/939198-for-small-businesses/suggestions/45701299-bank-reconciliation-bulk-import-recieved-payments",
@@ -3135,19 +3208,32 @@
       "workingPaths": []
     },
     "talk.folksy.com": {
-      "attempts": 14,
+      "attempts": 18,
       "evidenceItems": 4,
-      "lastAttempt": "2026-11-08",
-      "lastOk": "2026-11-08",
-      "ok": 12,
+      "lastAttempt": "2026-11-09",
+      "lastOk": "2026-11-09",
+      "ok": 16,
       "outcomes": {
         "empty": 2,
-        "ok": 12
+        "ok": 16
       },
       "workingPaths": [
         "webfetch https://talk.folksy.com/search.json?q=US%20postage%20after%3A2026-09-26",
         "webfetch https://talk.folksy.com/t/33907.json",
         "curl https://talk.folksy.com/t/33500.json"
+      ]
+    },
+    "taxcloud.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-09",
+      "lastOk": "2026-11-09",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://taxcloud.com/blog/does-shopify-file-sales-tax/"
       ]
     },
     "techcrunch.com": {
@@ -3268,16 +3354,17 @@
       ]
     },
     "trykintsugi.com": {
-      "attempts": 1,
-      "evidenceItems": 0,
-      "lastAttempt": "2026-11-07",
-      "lastOk": "2026-11-07",
-      "ok": 1,
+      "attempts": 2,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-09",
+      "lastOk": "2026-11-09",
+      "ok": 2,
       "outcomes": {
-        "ok": 1
+        "ok": 2
       },
       "workingPaths": [
-        "webfetch https://trykintsugi.com/blog/sales-tax-changes-january-1-2027.md"
+        "webfetch https://trykintsugi.com/blog/sales-tax-changes-january-1-2027.md",
+        "curl https://trykintsugi.com/blog/shopify-automated-filing-ending"
       ]
     },
     "tutorlms.com": {
@@ -3343,6 +3430,19 @@
       },
       "workingPaths": [
         "webfetch https://valueaddedresource.net/etsy-item-deactivations-shopify-integration-apps"
+      ]
+    },
+    "vatit.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-09",
+      "lastOk": "2026-11-09",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://vatit.com/blog/shopify-sales-tax-filing-replacement/"
       ]
     },
     "vendordirectory.shrm.org": {
@@ -4026,13 +4126,13 @@
       ]
     },
     "www.federalregister.gov": {
-      "attempts": 30,
+      "attempts": 32,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-08",
-      "lastOk": "2026-11-08",
-      "ok": 23,
+      "lastAttempt": "2026-11-09",
+      "lastOk": "2026-11-09",
+      "ok": 25,
       "outcomes": {
-        "ok": 23,
+        "ok": 25,
         "redirect": 7
       },
       "workingPaths": [
@@ -4093,14 +4193,14 @@
       ]
     },
     "www.freelancer.com": {
-      "attempts": 212,
+      "attempts": 233,
       "evidenceItems": 1,
-      "lastAttempt": "2026-11-08",
-      "lastOk": "2026-11-08",
-      "ok": 210,
+      "lastAttempt": "2026-11-09",
+      "lastOk": "2026-11-09",
+      "ok": 228,
       "outcomes": {
-        "empty": 2,
-        "ok": 210
+        "empty": 5,
+        "ok": 228
       },
       "workingPaths": [
         "curl https://www.freelancer.com/api/projects/0.1/projects/active/?query=booking%20system&limit=20&full_description=true",
@@ -4352,13 +4452,13 @@
       ]
     },
     "www.messagedesk.com": {
-      "attempts": 1,
+      "attempts": 2,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-04",
-      "lastOk": "2026-11-04",
-      "ok": 1,
+      "lastAttempt": "2026-11-09",
+      "lastOk": "2026-11-09",
+      "ok": 2,
       "outcomes": {
-        "ok": 1
+        "ok": 2
       },
       "workingPaths": [
         "webfetch https://www.messagedesk.com/free-tools/sms-compliance-checker"
@@ -4590,18 +4690,19 @@
       "workingPaths": []
     },
     "www.peopleperhour.com": {
-      "attempts": 7,
+      "attempts": 8,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-08",
-      "lastOk": "2026-11-05",
-      "ok": 2,
+      "lastAttempt": "2026-11-09",
+      "lastOk": "2026-11-09",
+      "ok": 3,
       "outcomes": {
         "empty": 5,
-        "ok": 2
+        "ok": 3
       },
       "workingPaths": [
         "curl https://www.peopleperhour.com/freelance-jobs?q=shopify%20theme%20update",
-        "curl https://www.peopleperhour.com/freelance-jobs?q=reconciliation"
+        "curl https://www.peopleperhour.com/freelance-jobs?q=reconciliation",
+        "curl https://www.peopleperhour.com/freelance-jobs?q=A2P"
       ]
     },
     "www.photographytalk.com": {
@@ -4882,6 +4983,19 @@
         "webfetch https://www.tutorbird.com/pricing/"
       ]
     },
+    "www.txtimpact.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-09",
+      "lastOk": "2026-11-09",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://www.txtimpact.com/blog/10dlc-campaign-rejection-and-solution"
+      ]
+    },
     "www.uptimia.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -5107,22 +5221,22 @@
       "selected": 2
     },
     "A12": {
-      "candidates": 17,
+      "candidates": 18,
       "fetchFail": 7,
-      "fetchOk": 72,
-      "lastUsed": "2026-11-08",
-      "runs": 10,
-      "searches": 81,
+      "fetchOk": 75,
+      "lastUsed": "2026-11-09",
+      "runs": 11,
+      "searches": 83,
       "selected": 0
     },
     "A13": {
-      "candidates": 73,
-      "fetchFail": 25,
-      "fetchOk": 264,
-      "lastUsed": "2026-11-08",
-      "runs": 11,
-      "searches": 184,
-      "selected": 6
+      "candidates": 88,
+      "fetchFail": 27,
+      "fetchOk": 324,
+      "lastUsed": "2026-11-09",
+      "runs": 12,
+      "searches": 224,
+      "selected": 9
     },
     "A14": {
       "candidates": 19,
@@ -5143,12 +5257,12 @@
       "selected": 2
     },
     "A16": {
-      "candidates": 10,
-      "fetchFail": 10,
-      "fetchOk": 58,
-      "lastUsed": "2026-11-08",
-      "runs": 2,
-      "searches": 42,
+      "candidates": 11,
+      "fetchFail": 11,
+      "fetchOk": 60,
+      "lastUsed": "2026-11-09",
+      "runs": 3,
+      "searches": 44,
       "selected": 3
     },
     "A2": {
@@ -5224,30 +5338,30 @@
       "selected": 0
     },
     "B10": {
-      "candidates": 5,
+      "candidates": 6,
       "fetchFail": 1,
-      "fetchOk": 23,
-      "lastUsed": "2026-11-08",
-      "runs": 6,
-      "searches": 21,
+      "fetchOk": 25,
+      "lastUsed": "2026-11-09",
+      "runs": 7,
+      "searches": 23,
       "selected": 0
     },
     "B11": {
       "candidates": 14,
       "fetchFail": 8,
-      "fetchOk": 199,
-      "lastUsed": "2026-11-08",
-      "runs": 8,
-      "searches": 165,
+      "fetchOk": 221,
+      "lastUsed": "2026-11-09",
+      "runs": 9,
+      "searches": 188,
       "selected": 1
     },
     "B12": {
-      "candidates": 28,
-      "fetchFail": 40,
-      "fetchOk": 192,
-      "lastUsed": "2026-11-08",
-      "runs": 6,
-      "searches": 98,
+      "candidates": 31,
+      "fetchFail": 45,
+      "fetchOk": 204,
+      "lastUsed": "2026-11-09",
+      "runs": 7,
+      "searches": 112,
       "selected": 6
     },
     "B2": {
@@ -5314,13 +5428,13 @@
       "selected": 0
     },
     "C10": {
-      "candidates": 23,
-      "fetchFail": 9,
-      "fetchOk": 29,
-      "lastUsed": "2026-11-08",
-      "runs": 9,
-      "searches": 45,
-      "selected": 1
+      "candidates": 25,
+      "fetchFail": 10,
+      "fetchOk": 35,
+      "lastUsed": "2026-11-09",
+      "runs": 10,
+      "searches": 51,
+      "selected": 3
     },
     "C11": {
       "candidates": 0,
@@ -5361,10 +5475,10 @@
     "C5": {
       "candidates": 20,
       "fetchFail": 12,
-      "fetchOk": 41,
-      "lastUsed": "2026-11-08",
-      "runs": 9,
-      "searches": 44,
+      "fetchOk": 43,
+      "lastUsed": "2026-11-09",
+      "runs": 10,
+      "searches": 46,
       "selected": 5
     },
     "C6": {
@@ -5475,11 +5589,11 @@
     }
   ],
   "funnel": {
-    "candidates": 297,
-    "passedGate": 7,
-    "passedRejectRules": 240,
-    "provisional": 25,
-    "reviewKilled": 32,
+    "candidates": 319,
+    "passedGate": 8,
+    "passedRejectRules": 262,
+    "provisional": 28,
+    "reviewKilled": 36,
     "validated": 0,
     "watchlist": 38
   },
@@ -5487,10 +5601,10 @@
     "noRecentEvidence": 2,
     "painBelow4": 3,
     "rejectRule": 57,
-    "reviewKill": 32,
-    "totalBelowMin": 194
+    "reviewKill": 36,
+    "totalBelowMin": 209
   },
-  "generated": "2026-11-08",
+  "generated": "2026-11-09",
   "prefer": [
     {
       "client": "webfetch",
@@ -5498,7 +5612,7 @@
       "id": "A13",
       "name": "Discourse forums, any niche",
       "path": "https://{host}/search.json?q={q}+after%3A{YYYY-MM-DD}",
-      "selectedIdeas": 6,
+      "selectedIdeas": 9,
       "status": "ok"
     },
     {
@@ -5527,6 +5641,15 @@
       "path": "https://productideas.xero.com/search?query={q}",
       "selectedIdeas": 3,
       "status": "ok-curl"
+    },
+    {
+      "client": null,
+      "evidence": "mandate",
+      "id": "C10",
+      "name": "Change events: shutdowns, price rises, removed free tiers",
+      "path": null,
+      "selectedIdeas": 3,
+      "status": "ok"
     },
     {
       "client": "curl",
@@ -5588,15 +5711,6 @@
       "id": "B11",
       "name": "Freelance job boards",
       "path": "https://www.freelancer.com/api/projects/0.1/projects/active/?query={q}&limit=20&full_description=true",
-      "selectedIdeas": 1,
-      "status": "ok"
-    },
-    {
-      "client": null,
-      "evidence": "mandate",
-      "id": "C10",
-      "name": "Change events: shutdowns, price rises, removed free tiers",
-      "path": null,
       "selectedIdeas": 1,
       "status": "ok"
     },
@@ -5745,6 +5859,6 @@
       "status": "ok"
     }
   ],
-  "runsInWindow": 17,
+  "runsInWindow": 18,
   "windowDays": 45
 }

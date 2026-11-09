@@ -639,3 +639,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-08 [decision] Owner approved the HintWise Studio redesign ("merge"); merged to main and live at https://studio.hintwise.org.
 
 2026-11-08 [code] Studio softer and more approachable (owner): Atkinson Hyperlegible Next body + Nunito headings, self-hosted (web/fonts, OFL); rounded surfaces, soft shadows, pill buttons, warm palette; axe WCAG 2.2 AA clean.
+
+2026-11-09 [doc] Created ideas/2026-11-09.json (schemaVersion 3, 3 ideas): A2P Rejection Fixer (18, provisional), State Return Walkthrough (15, provisional), Ghost Consent Proof Log (13, provisional)

@@ -628,3 +628,6 @@
 | 2026-11-08 | Sync Switch Pre-flight for Etsy and Shopify Sellers | Small Business Ops | Weekend MVP | 20 | provisional |  |
 | 2026-11-08 | Delivery Canary for Digital Shops | Small Business Ops | Multi-week | 19 | provisional |  |
 | 2026-11-08 | Deposits Register for Xero | Micro-SaaS | Multi-week | 18 | provisional |  |
+| 2026-11-09 | A2P Rejection Fixer for AI Receptionist Resellers | Accessibility & Compliance | Multi-week | 18 | provisional |  |
+| 2026-11-09 | State Return Walkthrough for Micro Shopify Sellers | Small Business Ops | Multi-week | 15 | provisional |  |
+| 2026-11-09 | Consent Proof Log for Ghost Publishers | Micro-SaaS | Weekend MVP | 13 | provisional |  |
