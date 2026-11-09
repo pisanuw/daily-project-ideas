@@ -330,8 +330,14 @@ plus the re-researched watchlist entries. Score each from 1 to 5:
 | willingnessToPay | Nobody pays for anything similar | Customers already pay for an inferior solution |
 | reachability | Requires cold enterprise sales | Pisan can reach the first 10 buyers through his network or a self-serve channel |
 | competitiveGap | Well served by incumbents | Clear, unmet gap |
-| feasibility | Needs a team or heavy ongoing support | One person can build and support it within the stated complexity using his stack, as a standalone web app with no paid API called on his key at runtime |
+| feasibility | Needs a team or heavy ongoing support | One person can build and support it within 7 build days on the HintWise platform (static front end, the shared Supabase project for sign-in and per-app data, the LLM gateway for capped use of the owner's key or the visitor's own key, backend-hub on Render for anything else) |
 | complianceBurden | Heavy (student PII, minors, institutional contracts) | Minimal |
+
+The `feasibility` wording changed on 2026-11-09. Until then a 5 meant a
+standalone web app with no paid API called on the owner's key, and that
+rewarded single-page calculators: paste a file, read a number, close the tab.
+The built apps now share one platform, so sign-in, a database, a scheduled job
+and an LLM call cost a day each, not a new service.
 
 `total` is the sum (maximum 30).
 
@@ -375,6 +381,28 @@ the ones that found nothing.
 - At least one evidence item is dated within 90 days of today.
 - Every evidence item was fetched and usable, by the Step 0 standard.
 - It passes every rejection rule.
+
+**The shape rubric.** Give every candidate five yes/no marks:
+- `stateful`: the customer comes back to saved data (an account, a saved
+  catalog, history).
+- `connected`: it imports from, exports to or syncs with a system the customer
+  already uses, with their own credentials or files (Xero, Shopify, Google
+  Sheets, a calendar, email).
+- `unattended`: something runs without the user (a scheduled check, a digest,
+  a reminder).
+- `engine`: real domain rules or a nontrivial algorithm, not a formula on a
+  form (tax tables, scheduling constraints, a parser, a matcher).
+- `shared`: two or more roles, or an artifact one person makes and another
+  receives.
+
+An idea with two or more marks is `substantial`. The owner asked for this on
+2026-11-09: the daily builds had become single-session paste-a-file tools, and
+the build routine in claude-built-apps now builds one project a week and picks
+only substantial Multi-week ideas. The rubric changes no score and no gate. It
+is recorded on each idea as `shape` and `substantial` (Step 7), and a
+substantial Multi-week idea also carries a `buildPlan` and `platformNeeds`.
+Weekend MVP ideas still ship to the site; they are just never picked for a
+build.
 
 **The floor.** A candidate may ship as `provisional` only if all of these hold:
 - It passes every rejection rule, without exception.
@@ -428,6 +456,9 @@ Constraints on the selected set, applied to the whole day in an extra run:
   their own money, not a student.
 - If 3 or more are selected, at least one is "Weekend MVP" and at least one is
   "Multi-week" or longer.
+- At least one selected idea is substantial (two or more shape marks) with
+  complexity Multi-week and a `buildPlan`, so the weekly build has something
+  to pick; if none qualifies, say so in `runNotes.caveats`.
 
 Never admit a candidate that fails the floor in order to satisfy a constraint.
 If a constraint cannot be met, say so in `runNotes.caveats` and ship what
@@ -523,6 +554,25 @@ Allowed values:
   "education", when the category alone would file it under the wrong reader
   (for example a Micro-SaaS sold to professors is "education").
 - `complexity`: "Weekend MVP", "Multi-week", "Multi-month"
+- `shape`: required from 2026-11-10. An object with the five rubric marks from
+  Step 4 as booleans, `stateful`, `connected`, `unattended`, `engine`,
+  `shared`, plus `notes`: an object with one line per true mark saying what in
+  the idea earns it, and no entry for a false mark.
+- `substantial`: required from 2026-11-10. Boolean, true exactly when two or
+  more marks are true.
+- `platformNeeds`: required from 2026-11-10. An array drawn from "accounts",
+  "database", "llm", "email", "scheduled", "backend": the parts of the
+  HintWise platform the build would use (sign-in, a Supabase schema, the LLM
+  gateway, transactional email, a scheduled job, backend-hub on Render). May
+  be empty.
+- `buildPlan`: required when `substantial` is true and `complexity` is
+  "Multi-week" or "Multi-month"; optional otherwise. An array of 5 to 7
+  milestones `{ "n": 1, "title": "...", "delivers": "what a user can do after
+  it", "acceptance": "how the build knows it is done, testable" }`. Milestone
+  1 is a vertical slice that can be deployed on day 1: the smallest end-to-end
+  flow. Each milestone is about one day of work for an autonomous coding
+  agent. The last one or two are polish: business-owner README, mobile,
+  accessibility, walkthrough test.
 - `confidence`: "validated", "provisional"
 - `review.verdict`: "pass", "rescored"
 - `topic`, exactly one, from this closed list: "Assessment & Grading",
@@ -557,7 +607,8 @@ exactly as they are: never change, reorder, or remove an earlier idea. Then:
   sources ...):", lists the picked IDs, and names the ideas it added by `n`.
 
 The schema is the same for both modes. Do not add fields other than the optional
-`smallBusiness` and the `public` block.
+`smallBusiness`, the `public` block and, from 2026-11-10, `shape`,
+`substantial`, `platformNeeds` and `buildPlan`.
 
 Format (all fields required for every idea; `gateGap` is required only when
 `confidence` is "provisional", and must be absent otherwise):
@@ -573,9 +624,32 @@ Format (all fields required for every idea; `gateGap` is required only when
       "title": "Product Title",
       "slug": "product-title",
       "category": "EdTech: Higher Ed",
-      "complexity": "Weekend MVP",
+      "complexity": "Multi-week",
       "confidence": "validated",
       "topic": "Assessment & Grading",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": true,
+        "engine": true,
+        "shared": false,
+        "notes": {
+          "stateful": "The maker keeps a saved catalog with a confirmed tariff code per product and comes back to it.",
+          "connected": "Imports a Folksy or Shopify product CSV; exports a Shopify CSV and a Folksy postage table.",
+          "unattended": "A nightly job watches the USITC release list and emails a before-and-after list when a saved code changes.",
+          "engine": "The duty stack per code: general rate plus the Chapter 99 country layer plus Royal Mail DDP fees."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": ["accounts", "database", "email", "scheduled"],
+      "buildPlan": [
+        { "n": 1, "title": "One product, one price", "delivers": "Sign in, enter one product with a tariff code, see its US delivered-duty-paid price.", "acceptance": "A signed-in user saves a product and its price matches a hand-worked example; deployed." },
+        { "n": 2, "title": "Catalog and CSV import", "delivers": "Import a Folksy or Shopify CSV into a saved catalog and edit rows.", "acceptance": "A 40-row sample CSV imports with no lost rows; rows survive sign-out and sign-in." },
+        { "n": 3, "title": "Code finder", "delivers": "Pick a tariff code from the curated handmade map or search the public HTS data.", "acceptance": "Each curated category resolves to a current 10-digit code with its legal text shown." },
+        { "n": 4, "title": "Postage table and exports", "delivers": "Royal Mail DDP postage bands per product; download a Folksy table and a Shopify CSV.", "acceptance": "The Shopify CSV re-imports into a test store without errors." },
+        { "n": 5, "title": "Nightly change watch", "delivers": "A scheduled job diffs the USITC release list and emails the maker when a saved code changes.", "acceptance": "A seeded rate change produces exactly one email with before-and-after prices." },
+        { "n": 6, "title": "Polish", "delivers": "Business-owner README, phone layout, keyboard and screen-reader pass, walkthrough test.", "acceptance": "A walkthrough test runs sign-in to export; axe reports no serious issues." }
+      ],
       "summary": "1-2 sentence card blurb: who it is for and what it saves them.",
       "public": {
         "summary": "One sentence for the buyer: what it does for them.",
@@ -611,7 +685,7 @@ Format (all fields required for every idea; `gateGap` is required only when
       "mvpScope": {
         "features": ["Smallest feature set worth charging for"],
         "outOfScope": ["Deliberately deferred features"],
-        "buildEstimate": "e.g., 2 weekends"
+        "buildEstimate": "e.g., 3 weeks"
       },
       "techStack": "React + Vite, Supabase, Claude API, ...",
       "pricing": {
@@ -692,6 +766,10 @@ Format (all fields required for every idea; `gateGap` is required only when
 
 The second idea above is shown abbreviated to highlight `gateGap`; a
 provisional idea carries every other field exactly as a validated one does.
+The first idea's `shape`, `platformNeeds` and `buildPlan` are filled in the
+style of the 2026-11-08 US Duty Price Sheet idea to show the fields at full
+size; a Weekend MVP or non-substantial idea carries `shape`, `substantial` and
+`platformNeeds` but may omit `buildPlan`.
 
 One optional field exists for the case this routine is built to avoid. If a run
 produced no idea at all, add `runNotes.floorFailure`: one or two sentences
@@ -714,8 +792,9 @@ python3 scripts/validate_ideas.py ideas/YYYY-MM-DD.json
 It must print `OK`. It checks structure, required fields, allowed values, score
 sums, the quality gate for validated ideas, the floor and `gateGap` for
 provisional ones, the at-least-one-idea rule, evidence independence and
-recency, score rationales, review verdicts, and the watchlist. Do not edit the
-script to make a file pass.
+recency, score rationales, review verdicts, the watchlist and, on files dated
+2026-11-10 or later, `shape`, `substantial`, `platformNeeds` and `buildPlan`.
+Do not edit the script to make a file pass.
 
 In an extra run, also confirm that the earlier ideas are untouched, replacing
 YYYY-MM-DD with today's date:

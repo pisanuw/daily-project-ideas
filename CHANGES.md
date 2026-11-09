@@ -641,3 +641,7 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-08 [code] Studio softer and more approachable (owner): Atkinson Hyperlegible Next body + Nunito headings, self-hosted (web/fonts, OFL); rounded surfaces, soft shadows, pill buttons, warm palette; axe WCAG 2.2 AA clean.
 
 2026-11-09 [doc] Created ideas/2026-11-09.json (schemaVersion 3, 3 ideas): A2P Rejection Fixer (18, provisional), State Return Walkthrough (15, provisional), Ghost Consent Proof Log (13, provisional)
+
+2026-11-09 [decision] Owner: ideas carry a shape rubric (5 marks), substantial flag, buildPlan (5-7 milestones) and platformNeeds from 2026-11-10; feasibility now rewards a 7-day HintWise build
+
+2026-11-09 [code] scripts/validate_ideas.py checks shape, substantial, platformNeeds and buildPlan on files dated 2026-11-10 or later; a day with no substantial Multi-week idea needs a caveat

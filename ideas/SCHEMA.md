@@ -141,6 +141,25 @@ version history:
     `ideas/topics-taxonomy.json`, chosen by what the product is about rather
     than who buys it or what it is built with. It drives topic browsing on the
     site. `scripts/validate_ideas.py` rejects anything off the list.
+  - `shape`, `substantial`, `platformNeeds` and `buildPlan` (added
+    2026-11-09, required on ideas dated 2026-11-10 or later). `shape` is an
+    object with five booleans, `stateful`, `connected`, `unattended`,
+    `engine`, `shared` (the shape rubric in ROUTINE.md Step 4), plus `notes`,
+    one line per true mark saying what in the idea earns it. `substantial` is
+    true exactly when two or more marks are true. `platformNeeds` lists the
+    parts of the HintWise platform the build would use, drawn from `accounts`,
+    `database`, `llm`, `email`, `scheduled`, `backend`; it may be empty.
+    `buildPlan`, required when `substantial` is true and `complexity` is
+    `Multi-week` or `Multi-month`, is 5 to 7 milestones `{n, title, delivers,
+    acceptance}`: the first a vertical slice deployable on day 1, each about
+    one day for an autonomous coding agent, the last one or two polish. They
+    exist because the daily builds had become single-session paste-a-file
+    tools: since 2026-11-09 claude-built-apps builds one substantial project a
+    week on the shared platform, and `claude-built-apps/BUILD_ROUTINE.md`
+    reads `substantial` and `buildPlan` to pick and plan that build. Older
+    ideas without `shape` are judged by the build routine against the same
+    rubric. The fields change no score and no gate;
+    `scripts/validate_ideas.py` checks them on files from 2026-11-10.
 
 ### Topic files added 2026-11-01
 

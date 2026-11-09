@@ -5,7 +5,9 @@ Usage: python3 scripts/validate_ideas.py ideas/YYYY-MM-DD.json
 
 Prints OK and exits 0 when the file passes, otherwise prints one problem per
 line and exits 1. Checks structure, the quality gate for validated ideas, the
-floor for provisional ones, and the evidence rules from ROUTINE.md. It cannot
+floor for provisional ones, and the evidence rules from ROUTINE.md. On files
+dated 2026-11-10 or later it also checks the shape rubric (`shape`,
+`substantial`), `platformNeeds` and the weekly build's `buildPlan`. It cannot
 check that URLs appeared in the run's search results; the routine does that by
 hand.
 
@@ -129,9 +131,104 @@ def check_public(idea, tag, today, errs):
         errs.append(f"{tag}: public.audience must be one of {sorted(PUBLIC_AUDIENCES)}")
 
 
+# The shape rubric (ROUTINE.md Step 4) and the weekly build's plan (Step 7).
+# Required for ideas written from this date on; the build routine in
+# claude-built-apps judges older ideas against the same rubric by hand.
+SHAPE_FROM = datetime.date(2026, 11, 10)
+SHAPE_MARKS = ["stateful", "connected", "unattended", "engine", "shared"]
+SUBSTANTIAL_MARKS = 2  # two or more true marks make an idea substantial
+PLATFORM_NEEDS = {"accounts", "database", "llm", "email", "scheduled", "backend"}
+BUILD_PLAN_COMPLEXITY = {"Multi-week", "Multi-month"}
+MIN_MILESTONES = 5
+MAX_MILESTONES = 7
+
+
+def is_buildable(idea):
+    """What the weekly build picks from (owner, 2026-11-09): a substantial
+    Multi-week idea that carries a build plan."""
+    return (idea.get("substantial") is True
+            and idea.get("complexity") == "Multi-week"
+            and bool(idea.get("buildPlan")))
+
+
+def check_shape(idea, tag, today, errs):
+    if today < SHAPE_FROM:
+        return
+    shape = idea.get("shape")
+    marks = 0
+    if not isinstance(shape, dict):
+        errs.append(f"{tag}: missing shape (the five rubric marks "
+                    f"{SHAPE_MARKS} as booleans, plus notes)")
+    else:
+        if set(shape) != set(SHAPE_MARKS) | {"notes"}:
+            errs.append(f"{tag}: shape must have exactly the keys {SHAPE_MARKS} "
+                        "and notes")
+        for mark in SHAPE_MARKS:
+            if not isinstance(shape.get(mark), bool):
+                errs.append(f"{tag}: shape.{mark} must be true or false")
+        notes = shape.get("notes")
+        if not isinstance(notes, dict):
+            errs.append(f"{tag}: shape.notes must be an object with one line per "
+                        "true mark")
+            notes = {}
+        extra = sorted(set(notes) - set(SHAPE_MARKS))
+        if extra:
+            errs.append(f"{tag}: shape.notes has keys that are not marks: {extra}")
+        for mark in SHAPE_MARKS:
+            if shape.get(mark) is True:
+                marks += 1
+                note = notes.get(mark)
+                if not isinstance(note, str) or not note.strip():
+                    errs.append(f"{tag}: shape.{mark} is true but shape.notes.{mark} "
+                                "does not say what in the idea earns it")
+
+    substantial = idea.get("substantial")
+    if not isinstance(substantial, bool):
+        errs.append(f"{tag}: missing substantial (true when {SUBSTANTIAL_MARKS} or "
+                    "more shape marks are true)")
+    elif isinstance(shape, dict) and substantial != (marks >= SUBSTANTIAL_MARKS):
+        errs.append(f"{tag}: substantial is {str(substantial).lower()} but {marks} "
+                    f"shape marks are true; {SUBSTANTIAL_MARKS} or more make it "
+                    "substantial")
+
+    needs = idea.get("platformNeeds")
+    if not isinstance(needs, list):
+        errs.append(f"{tag}: missing platformNeeds (a list drawn from "
+                    f"{sorted(PLATFORM_NEEDS)}, possibly empty)")
+    else:
+        bad = [n for n in needs if n not in PLATFORM_NEEDS]
+        if bad:
+            errs.append(f"{tag}: platformNeeds {bad} are not in {sorted(PLATFORM_NEEDS)}")
+        if len(needs) != len(set(map(str, needs))):
+            errs.append(f"{tag}: platformNeeds has duplicates")
+
+    plan = idea.get("buildPlan")
+    if plan is None:
+        if substantial is True and idea.get("complexity") in BUILD_PLAN_COMPLEXITY:
+            errs.append(f"{tag}: substantial and {idea.get('complexity')} but no "
+                        f"buildPlan ({MIN_MILESTONES} to {MAX_MILESTONES} milestones)")
+        return
+    if not isinstance(plan, list) or not MIN_MILESTONES <= len(plan) <= MAX_MILESTONES:
+        errs.append(f"{tag}: buildPlan must be a list of {MIN_MILESTONES} to "
+                    f"{MAX_MILESTONES} milestones")
+        return
+    for k, milestone in enumerate(plan, 1):
+        if not isinstance(milestone, dict):
+            errs.append(f"{tag}: buildPlan milestone {k} must be an object")
+            continue
+        if milestone.get("n") != k:
+            errs.append(f"{tag}: buildPlan milestone {k} has n {milestone.get('n')}, "
+                        f"expected {k}")
+        for field in ("title", "delivers", "acceptance"):
+            value = milestone.get(field)
+            if not isinstance(value, str) or not value.strip():
+                errs.append(f"{tag}: buildPlan milestone {k} is missing {field}")
+
+
 def check_idea(idea, expected_n, today, errs):
     tag = f"idea {expected_n}"
     check_public(idea, tag, today, errs)
+    check_shape(idea, tag, today, errs)
 
     for field in REQUIRED:
         if idea.get(field) in (None, "", [], {}):
@@ -266,6 +363,11 @@ def main(path):
         if not run_notes.get("caveats"):
             errs.append("no idea has a small-business buyer and runNotes.caveats does "
                         "not explain why none qualified")
+    if ideas and today >= SHAPE_FROM and not any(is_buildable(i) for i in ideas):
+        if not run_notes.get("caveats"):
+            errs.append("no idea is substantial, Multi-week and carries a buildPlan, so "
+                        "the weekly build has nothing to pick, and runNotes.caveats "
+                        "does not explain why none qualified")
 
     for w in run_notes.get("watchlist", []):
         name = w.get("title", "?")
