@@ -41,15 +41,6 @@ CONFIDENCE = {"validated", "provisional"}
 # list cannot drift from build.js and scripts/tag_topics.py.
 TAXONOMY_FILE = pathlib.Path(__file__).resolve().parent.parent / "ideas" / "topics-taxonomy.json"
 TOPICS = set(json.loads(TAXONOMY_FILE.read_text(encoding="utf-8"))["topics"])
-COMPLEXITY = {"Weekend MVP", "Multi-week", "Multi-month"}
-CONFIDENCE = {"validated", "provisional"}
-# One topic per idea, for topic browsing. Mirrors build.js TOPIC_NAMES and
-# scripts/tag_topics.py TOPICS; all three must stay in step.
-TOPICS = {"Assessment & Grading", "AI Literacy & Ethics",
-          "Algorithms & Data Structures", "Systems & Hardware",
-          "Graphics & Simulation", "Music & Audio", "Games & Puzzles",
-          "Accessibility", "Math & Cryptography", "Writing & Language",
-          "Teaching Operations", "Developer Tooling", "Data & Visualization"}
 EVIDENCE_KINDS = {"complaint", "spend", "mandate"}
 MAX_IDEAS = 10  # per day, first run plus extra runs (2026-11-04)
 MIN_IDEAS = 3  # since 2026-11-04
