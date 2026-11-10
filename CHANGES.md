@@ -655,3 +655,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-10 [doc] Claimed 2026-11-07 #2 Qualified Overtime Checker for the weekly build (placeholder, slug qualified-overtime-checker, day 1 of 7).
 
 2026-11-10 [doc] qualified-overtime-checker placeholder: day 1 of 7, milestone 1 live.
+
+2026-11-10 [doc] qualified-overtime-checker placeholder: day 2 of 7, milestone 2 live.
