@@ -631,3 +631,6 @@
 | 2026-11-09 | A2P Rejection Fixer for AI Receptionist Resellers | Accessibility & Compliance | Multi-week | 18 | provisional |  |
 | 2026-11-09 | State Return Walkthrough for Micro Shopify Sellers | Small Business Ops | Multi-week | 15 | provisional |  |
 | 2026-11-09 | Consent Proof Log for Ghost Publishers | Micro-SaaS | Weekend MVP | 13 | provisional |  |
+| 2026-11-10 | Off-TPT Catalog Kit for Teacher-Authors | Small Business Ops | Multi-week | 19 | provisional |  |
+| 2026-11-10 | CPE Audit Pack for Solo Webinar Trainers | Accessibility & Compliance | Multi-week | 16 | provisional |  |
+| 2026-11-10 | Made-By-Me Record for Teacher-Authors | Creative & Prosumer | Weekend MVP | 17 | provisional |  |

@@ -1,0 +1,889 @@
+{
+  "date": "2026-11-10",
+  "schemaVersion": 3,
+  "complete": true,
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Off-TPT Catalog Kit for Teacher-Authors",
+      "slug": "off-tpt-catalog-kit",
+      "category": "Small Business Ops",
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Teaching Operations",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": true,
+        "engine": true,
+        "shared": false,
+        "notes": {
+          "stateful": "The seller keeps a saved master catalog: every resource, its files, its price and the stores it is listed on, and comes back to it each time they list something new.",
+          "connected": "Imports TPT's own Product Statistics and Sales Details CSV downloads; exports a Shopify product CSV and per-store listing packs for Payhip and TES.",
+          "unattended": "A weekly job reads the updated date of TPT's two seller-rule help articles and emails the seller when either changes, plus reminders before the 31 December 2026 Exclusive decision and the 1 January 2027 Basic conversion.",
+          "engine": "Applies TPT's rules per resource: the Exclusive table of product types allowed off TPT (clip art, fonts, courses, Boom Cards, Kindle and physical yes; digital educational resources, licences and memberships no) and the Basic rule to keep prices consistent across platforms."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "email",
+        "scheduled"
+      ],
+      "buildPlan": [
+        {
+          "n": 1,
+          "title": "One resource, one verdict",
+          "delivers": "Sign in, add one resource with its type, price and the stores it is on, and see whether it breaks Exclusive or Basic rules.",
+          "acceptance": "A signed-in user saves a resource; a digital worksheet listed on Payhip under Exclusive is flagged, a clip-art set is not; deployed."
+        },
+        {
+          "n": 2,
+          "title": "Catalog import from TPT",
+          "delivers": "Upload TPT's Product Statistics CSV and get a saved catalog of every resource with its TPT price.",
+          "acceptance": "A 300-row sample CSV imports with no lost rows; rows survive sign-out and sign-in; duplicate uploads do not create duplicates."
+        },
+        {
+          "n": 3,
+          "title": "Where-is-it-sold matrix and price parity",
+          "delivers": "Mark each resource's other stores and prices; see a matrix of conflicts and price mismatches.",
+          "acceptance": "Seeded data with three mismatched prices and two Exclusive conflicts shows exactly those five flags."
+        },
+        {
+          "n": 4,
+          "title": "Listing packs and Shopify CSV",
+          "delivers": "Download a Shopify product CSV and a step-by-step Payhip and TES listing pack (title, description, tags, price, file checklist) for selected resources.",
+          "acceptance": "The Shopify CSV imports into a test store without errors; packs contain every selected resource."
+        },
+        {
+          "n": 5,
+          "title": "Rule watch and decision reminders",
+          "delivers": "A weekly job checks TPT's two rule articles and emails the seller when they change; deadline reminders before 31 December and 1 January.",
+          "acceptance": "A seeded change in an article's updated date produces exactly one email; reminders fire once each on their dates."
+        },
+        {
+          "n": 6,
+          "title": "Sales roll-up",
+          "delivers": "Upload TPT Sales Details, Payhip and Etsy order CSVs and see revenue per resource per store.",
+          "acceptance": "Totals for a sample month match a hand-worked spreadsheet to the cent."
+        },
+        {
+          "n": 7,
+          "title": "Polish",
+          "delivers": "Seller-facing README, phone layout, keyboard and screen-reader pass, walkthrough test.",
+          "acceptance": "A walkthrough test runs sign-in to CSV export; axe reports no serious issues."
+        }
+      ],
+      "summary": "For teacher-authors deciding between TPT's Exclusive and Basic tiers before the 1 January 2027 conversion: one catalog that shows which resources may be sold where, flags price mismatches, and produces listing packs for other stores.",
+      "public": {
+        "summary": "Keeps your teaching-resource catalog in one place and tells you which products you can sell where, at what price, under your marketplace's rules.",
+        "problem": "Your marketplace changed its seller terms, and now some of your products can only be sold there while others can go anywhere. You sell on two or three stores and you are not sure which listings break the rules, or whether your prices still match. Re-listing everything by hand on a new store takes evenings you do not have.",
+        "forWhom": "Teachers who sell their own lesson resources online as a small business.",
+        "benefits": [
+          "Know which products you are allowed to sell outside the marketplace",
+          "Catch price mismatches before buyers or the marketplace do",
+          "Move products to a second store in an afternoon, not a month",
+          "Get a heads-up when the marketplace's rules change"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "TPT retired Premium on 1 October 2026. If I take Exclusive I must pull my educational resources off Payhip and my own site; if I go Basic I keep 55% and must keep prices consistent everywhere. I have hundreds of listings and no export of them, and I don't know which ones break which rule.",
+      "description": "The seller imports TPT's Product Statistics CSV to seed a master catalog, then marks where each resource is also sold and at what price. A rules engine encodes TPT's published Exclusive product-type table and the Basic price-consistency rule and flags every conflict. For resources the seller moves or cross-lists, the app produces a Shopify product CSV and step-by-step Payhip and TES listing packs (those stores have no bulk import). A weekly job watches TPT's rule articles for changes and reminds the seller before the 31 December decision and the 1 January Basic conversion. Sales CSVs from TPT, Payhip and Etsy roll up into revenue per resource per store.",
+      "targetCustomer": "TPT teacher-authors with roughly 50 to 500 resources who also sell, or are deciding whether to sell, on Payhip, Etsy, Shopify, TES or their own site.",
+      "buyer": "The teacher-author, paying from their store's income on a personal or business card.",
+      "whyNow": "TPT retired Premium on 2026-10-01; ex-Premium sellers who do not opt into Exclusive become Basic on 2027-01-01; TPT's rule articles on selling elsewhere were updated on 2026-11-09.",
+      "founderFit": "Pisan can ship a CSV-and-rules web app in days, knows teacher communities, and can reach seller-bloggers and podcast hosts who are already writing about the change.",
+      "problemEvidence": [
+        {
+          "url": "https://www.change.org/p/teachers-pay-teachers-reconsider-the-new-seller-terms-restricting-off-platform-sales",
+          "source": "change.org",
+          "author": "Elizabeth W",
+          "date": "2026-10-01",
+          "kind": "complaint",
+          "summary": "Petition with 1,508 signatures objecting to new TPT seller terms that restrict selling original resources on sellers' own sites and storefronts."
+        },
+        {
+          "url": "https://www.change.org/p/teachers-pay-teachers-tpt-keep-premium-membership",
+          "source": "change.org",
+          "author": "Josephine Myers",
+          "date": "2026-10-01",
+          "kind": "complaint",
+          "summary": "SLP and teacher-author's petition (279 signatures) objecting to committing entire catalogs exclusively to TPT for 77.5%."
+        },
+        {
+          "url": "https://lit-and-more.com/teachers-pay-teachers-the-cost-of-exclusivity/",
+          "source": "lit-and-more.com",
+          "author": "Lit & More store owner (name not stated)",
+          "date": "2026-10-17",
+          "kind": "complaint",
+          "summary": "Seller spent countless hours and dollars on an own storefront; TPT is 50-75% of earnings; going Basic is costly."
+        },
+        {
+          "url": "https://www.chalkbeat.org/2026/10/15/teachers-pay-teachers-to-ban-ai-generated-teaching-resources/",
+          "source": "chalkbeat.org",
+          "author": "Lily Altavena",
+          "date": "2026-10-15",
+          "kind": "complaint",
+          "summary": "Reports the exclusive seller tier; teacher Nicholas Ferroni calls the exclusivity requirement a slap in the face."
+        },
+        {
+          "url": "https://help.teacherspayteachers.com/hc/en-us/articles/360044219551-Guidelines-around-utilizing-other-sites",
+          "source": "help.teacherspayteachers.com",
+          "author": "Teachers Pay Teachers",
+          "date": "2026-11-09",
+          "kind": "mandate",
+          "summary": "TPT rule: keep your prices consistent if you offer your resources on other platforms (article updated 2026-11-09)."
+        },
+        {
+          "url": "https://help.teacherspayteachers.com/hc/en-us/articles/54095615314324-What-kinds-of-products-can-I-sell-outside-of-TPT-as-an-Exclusive-Seller",
+          "source": "help.teacherspayteachers.com",
+          "author": "Teachers Pay Teachers",
+          "date": "2026-11-09",
+          "kind": "mandate",
+          "summary": "Table of product types Exclusive sellers may and may not sell off TPT (article updated 2026-11-09)."
+        },
+        {
+          "url": "https://www.onlinejobs.ph/jobseekers/job/1241870",
+          "source": "onlinejobs.ph",
+          "author": "Early Childhood Plus (employer)",
+          "date": "2025-09-10",
+          "kind": "spend",
+          "summary": "A TPT store pays a full-time VA $2.5/hour to design and list products on TPT; listing work, not cross-listing."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Graphene TPT store backup guide",
+          "url": "https://graphene-edu.com/tpt-sellers/tpt-store-backup/",
+          "price": "Free",
+          "gap": "Backs up listings with a browser script; does not check rules, prices or produce listings for other stores."
+        },
+        {
+          "name": "TeachShare",
+          "url": "https://teachshare.com/onboarding",
+          "price": "unknown",
+          "gap": "Reportedly imports a TPT store into TeachShare only; no rules or multi-store view."
+        },
+        {
+          "name": "LitCommerce",
+          "url": "https://litcommerce.com/pricing/",
+          "price": "From $29/month",
+          "gap": "Multichannel for Etsy and Shopify; no TPT, Payhip or TES, and no TPT rule checks."
+        },
+        {
+          "name": "Vela",
+          "url": "https://getvela.com/pricing",
+          "price": "Lite $29.95/shop/month",
+          "gap": "Etsy, Shopify, eBay, Faire; no TPT; digital support unknown."
+        },
+        {
+          "name": "Payhip",
+          "url": "https://payhip.com/tpt-alternatives",
+          "price": "Free plan, 5% per sale",
+          "gap": "Destination store with no import tool."
+        }
+      ],
+      "keyFeatures": [
+        "TPT CSV import into a saved master catalog",
+        "Exclusive and Basic rule checks per resource",
+        "Price-parity matrix across stores",
+        "Shopify CSV and Payhip/TES listing packs",
+        "Weekly watch of TPT's rule articles with email alerts",
+        "Sales roll-up across stores"
+      ],
+      "mvpScope": {
+        "features": [
+          "TPT Product Statistics import",
+          "Per-resource store and price matrix",
+          "Exclusive conflict and Basic price-parity flags",
+          "Shopify CSV export"
+        ],
+        "outOfScope": [
+          "Etsy API publishing (commercial API access reported locked in 2026)",
+          "Scraping TPT listings",
+          "Sales-tax remittance advice"
+        ],
+        "buildEstimate": "2 weeks"
+      },
+      "techStack": "React + Vite, Supabase (auth and catalog tables), a scheduled job on backend-hub for the rule watch, transactional email.",
+      "pricing": {
+        "model": "One-time decision kit plus optional subscription",
+        "pricePoint": "$39 one-time for the catalog check and exports; $5/month for rule watch and sales roll-up",
+        "rationale": "Sellers are weighing a $59.95/year Exclusive fee and a $29 Basic fee, so a tool priced near those is plausible; a subscription is hard to justify for a one-time decision."
+      },
+      "revenueSketch": "Estimate: 150 sellers x $39 = $5,850 in the decision window, plus 60 x $5/month = $300 MRR afterwards. Assumes a few hundred engaged sellers are reachable through blogs and podcasts.",
+      "distribution": "Seller-bloggers already writing about the change (Lit & More, The SEO Teacher), TPT seller podcasts, Graphene's Side Hustle Staffroom Discord, and a free 'which of my products break the new rules' checker as a lead magnet before 31 December 2026.",
+      "validationTest": {
+        "method": "Free one-page checker (upload Product Statistics CSV, see conflicts) posted to two seller blogs' comment threads and one seller Discord, with a $39 full-kit pre-order button.",
+        "successCriteria": "10 pre-orders or 40 checker uploads before 15 December 2026.",
+        "cost": "Two build days and about $20."
+      },
+      "moat": "Thin: an up-to-date encoding of TPT's rules and the per-store listing formats, plus the seller's saved catalog. Easy for TPT itself to make moot.",
+      "compliance": [
+        "TPT terms: the app works only from the seller's own CSV downloads; no scraping of TPT pages.",
+        "Licensing: map per-classroom licences to each store's licence options.",
+        "Sales tax: show which store collects tax but give no tax advice.",
+        "GDPR: sales CSVs contain buyer data; minimise, allow deletion.",
+        "Accessibility: WCAG 2.2 AA for the app."
+      ],
+      "risks": [
+        {
+          "risk": "Most sellers with real revenue take Exclusive and stop cross-selling, shrinking the market.",
+          "mitigation": "Serve Exclusive sellers too: the conflict check tells them what they may still sell elsewhere (clip art, courses, Boom Cards)."
+        },
+        {
+          "risk": "TPT changes its rules again.",
+          "mitigation": "The weekly rule watch turns this into a reason to keep the subscription."
+        },
+        {
+          "risk": "The decision window closes on 31 December 2026.",
+          "mitigation": "Ship milestones 1 to 4 first; the rest serves Basic sellers after 1 January."
+        }
+      ],
+      "scores": {
+        "pain": 3,
+        "willingnessToPay": 2,
+        "reachability": 4,
+        "competitiveGap": 3,
+        "feasibility": 3,
+        "complianceBurden": 4,
+        "total": 19
+      },
+      "scoreRationale": {
+        "pain": "Two petitions and a seller blog complain about the exclusivity terms (https://www.change.org/p/teachers-pay-teachers-reconsider-the-new-seller-terms-restricting-off-platform-sales), but the reviewer found the multi-store Basic seller is a minority case (https://lit-and-more.com/teachers-pay-teachers-the-cost-of-exclusivity/).",
+        "willingnessToPay": "Only payment found is a VA hired for TPT listing work, not for cross-listing (https://www.onlinejobs.ph/jobseekers/job/1241870), so capped at 2.",
+        "reachability": "Sellers gather around a few blogs, podcasts and petitions with a hard 31 December deadline (https://www.change.org/p/teachers-pay-teachers-tpt-keep-premium-membership).",
+        "competitiveGap": "Free backup guide and Etsy/Shopify multichannel tools cover parts, nothing applies TPT's rules (https://graphene-edu.com/tpt-sellers/tpt-store-backup/).",
+        "feasibility": "No TPT seller API and Payhip/TES have no bulk import, so it runs on CSV downloads and listing packs (https://payhip.com/tpt-alternatives).",
+        "complianceBurden": "Rules come from TPT's own help articles and the app only reads the seller's own CSVs (https://help.teacherspayteachers.com/hc/en-us/articles/54095615314324-What-kinds-of-products-can-I-sell-outside-of-TPT-as-an-Exclusive-Seller)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Reviewer rescored 22 to 17: the multi-store Basic buyer is a minority because Exclusive pays 77.5% against Basic's 55%; the onlinejobs.ph job is listing work, not cross-listing (WTP 2); Etsy commercial API access is reported locked in a July 2026 GitHub discussion (https://github.com/etsy/open-api/discussions/1663), so Etsy publishing was dropped; the reviewer could not find the price-parity rule. That rule was then confirmed directly in TPT help article 360044219551 (updated 2026-11-09), restoring complianceBurden to 4 and adding the rule engine; final total 19. Re-scoped, as the reviewer suggested, into an Exclusive-compliance and exit kit that serves both tiers."
+      },
+      "inspiredBy": "https://www.change.org/p/teachers-pay-teachers-reconsider-the-new-seller-terms-restricting-off-platform-sales",
+      "gateGap": {
+        "missing": [
+          "total 19 is below 22",
+          "pain 3 is below 4",
+          "willingnessToPay 2 is below 3"
+        ],
+        "closedBy": "The validation test's pre-order button closes willingness to pay: 10 paid pre-orders at $39 before 15 December 2026 would show payment (WTP 3 to 4) and that the pain applies to sellers who would act (pain 4), lifting the total to 22 or more."
+      }
+    },
+    {
+      "n": 2,
+      "title": "CPE Audit Pack for Solo Webinar Trainers",
+      "slug": "cpe-audit-pack",
+      "category": "Accessibility & Compliance",
+      "smallBusiness": true,
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Teaching Operations",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": true,
+        "engine": true,
+        "shared": true,
+        "notes": {
+          "stateful": "Keeps every event's attendance, poll data, credit computation and certificates for NASBA's five-year retention period.",
+          "connected": "Imports Zoom participant and poll report CSVs; exports a CE Broker Excel roster and NASBA-field certificates.",
+          "unattended": "After an event is closed, a scheduled job emails attendees their certificates and reminds the sponsor of board deadlines such as Washington insurance CE's 10-day certificate rule.",
+          "engine": "NASBA group-internet rules: at least three interactivity instances per credit, 50-minute credit, half then fifth increments never rounded up, versioned by standards effective date; email reconciliation between registration and Zoom sign-in.",
+          "shared": "The trainer signs off the computation and each attendee receives a certificate and a verification page."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "email",
+        "scheduled"
+      ],
+      "buildPlan": [
+        {
+          "n": 1,
+          "title": "One event, one credit",
+          "delivers": "Sign in, upload a Zoom participant CSV and poll CSV for one event, see each attendee's credit.",
+          "acceptance": "A sample 70-attendee event computes credits matching a hand-worked NASBA example; deployed."
+        },
+        {
+          "n": 2,
+          "title": "Email reconciliation",
+          "delivers": "Match attendees whose Zoom sign-in email differs from their registration email, with a review screen for doubtful matches.",
+          "acceptance": "A seeded file with 10 mismatched emails resolves 8 automatically and shows 2 for manual review."
+        },
+        {
+          "n": 3,
+          "title": "Sign-off and certificates",
+          "delivers": "The sponsor signs off the computation; attendees get PDF certificates with NASBA-required fields.",
+          "acceptance": "Certificates contain every required field; no certificate issues before sign-off."
+        },
+        {
+          "n": 4,
+          "title": "Rosters and audit log",
+          "delivers": "Download a CE Broker Excel roster and a per-attendee computation log.",
+          "acceptance": "The roster matches CE Broker's template columns; the log reproduces each credit from raw rows."
+        },
+        {
+          "n": 5,
+          "title": "Delivery and deadline reminders",
+          "delivers": "Scheduled certificate emails and reminders before board deadlines.",
+          "acceptance": "A seeded event closes and sends exactly one email per attendee; a 10-day rule reminder fires on day 8."
+        },
+        {
+          "n": 6,
+          "title": "Polish",
+          "delivers": "Trainer-facing README, phone layout, keyboard and screen-reader pass, walkthrough test.",
+          "acceptance": "Walkthrough test runs upload to roster download; axe reports no serious issues."
+        }
+      ],
+      "summary": "For solo CPE trainers and small CE sponsors on ordinary Zoom plans: upload the Zoom reports after a webinar and get NASBA-correct credits, certificates, a CE Broker roster and a five-year audit trail.",
+      "public": {
+        "summary": "Turns your webinar's attendance and poll reports into correct continuing-education credits, certificates and board rosters, with records kept for audits.",
+        "problem": "After every webinar you reconcile attendance lists against poll answers, work out who earned how much credit, and make certificates by hand. Some attendees joined with a different email, so they look absent. If the accrediting body audits you, you need to show how every credit was worked out, years later.",
+        "forWhom": "Independent trainers and small organizations that run accredited continuing-education webinars.",
+        "benefits": [
+          "Credits worked out the same way every time",
+          "Certificates sent the same day",
+          "Rosters ready for the licensing board",
+          "An audit trail kept for years without a filing cabinet"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "I issue CPE certificates based on attendance time and poll answers, but attendees who join with a different email than they registered with don't match, and I have to keep five years of records showing how each credit was earned.",
+      "description": "The trainer uploads Zoom's participant and poll CSVs after a session (no Zoom Marketplace app needed). The app reconciles attendees across registration and sign-in emails, applies the NASBA group-internet rule set for the event's date (interactivity per credit, 50-minute credits, increments never rounded up), and shows the computation for sign-off. It then issues certificates with the required fields, produces a CE Broker roster, and keeps the raw rows and computation log for five years. It is designed to sit beside Zoom's own certificate feature or a certificate tool, not replace them.",
+      "targetCustomer": "Solo CPE trainers for CPAs and small NASBA-registered sponsors running live webinars on Zoom Pro or basic Zoom Webinars; later therapists and social workers reporting to CE Broker.",
+      "buyer": "The trainer or small sponsor, from business revenue, priced per event.",
+      "whyNow": "NASBA's revised standards took effect on 2026-08-01, with new programs due to comply by 2027-03-01, and Zoom's webinar poll report API has been dropping responses since about September 2026.",
+      "founderFit": "Pisan teaches with these tools, can encode rule sets precisely and test them, and can ship a CSV-first web app quickly.",
+      "problemEvidence": [
+        {
+          "url": "https://devforum.zoom.us/t/146521",
+          "source": "devforum.zoom.us",
+          "author": "DGU",
+          "date": "2026-09-17",
+          "kind": "complaint",
+          "summary": "A provider issuing certificates by attendance time and quiz answers cannot match attendees who signed in with a different email."
+        },
+        {
+          "url": "https://devforum.zoom.us/t/webinar-poll-report-api-missing-responses-meeting-report-api-returns-different-emails-from-csv-export/146352.md",
+          "source": "devforum.zoom.us",
+          "author": "liu",
+          "date": "2026-09-10",
+          "kind": "complaint",
+          "summary": "Webinar poll report API misses responses when registration email differs from Zoom account email; the integration matches poll answers to registrants."
+        },
+        {
+          "url": "https://community.zoom.com/webinars-19/mismatch-between-polls-and-attendance-3607",
+          "source": "community.zoom.com",
+          "author": "vonnie",
+          "date": "2023-12-01",
+          "kind": "complaint",
+          "summary": "Host of a 70-person webinar must reconcile polls against attendance to release certificates."
+        },
+        {
+          "url": "https://www.nasbaregistry.org/the-standards",
+          "source": "nasbaregistry.org",
+          "author": "NASBA",
+          "date": "2026-08-01",
+          "kind": "mandate",
+          "summary": "Revised CPE standards effective 2026-08-01; new programs comply by 2027-03-01, existing by 2028-11-01."
+        },
+        {
+          "url": "https://www.nasbaregistry.org/what-sponsors-need-to-know/cpe-provider-responsibilities-attendance-monitoring-record-keeping-cpe-program",
+          "source": "nasbaregistry.org",
+          "author": "NASBA",
+          "date": "2026-11-10",
+          "kind": "mandate",
+          "summary": "Sponsors need at least three interactivity instances per CPE credit and must keep documentation for five years (page undated; fetch date used)."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Zoom native certification",
+          "url": "https://zoom.us/pricing/events",
+          "price": "Included in Webinars Plus, $82.50/month billed annually",
+          "gap": "Not on Pro or basic Webinars; no board rosters or NASBA computation log."
+        },
+        {
+          "name": "CE-Go",
+          "url": "https://www.ce-go.com/plans/compare",
+          "price": "$5 per participant",
+          "gap": "Replaces your webinar setup with its own; overkill for a trainer already on Zoom."
+        },
+        {
+          "name": "Salepager",
+          "url": "https://salepager.com",
+          "price": "$19 to $70 per user per month",
+          "gap": "Combines registration and participation reports; CE rule handling unconfirmed."
+        },
+        {
+          "name": "Virtualbadge",
+          "url": "https://virtualbadge.io/pricing",
+          "price": "Advanced €99/month billed yearly",
+          "gap": "Certificates with Zoom integration; no attendance thresholds or CE credit rules."
+        },
+        {
+          "name": "Certifier",
+          "url": "https://certifier.io/pricing",
+          "price": "Free for 250 per year",
+          "gap": "Bulk certificates from a CSV; no credit computation."
+        }
+      ],
+      "keyFeatures": [
+        "Zoom CSV import",
+        "Email reconciliation",
+        "NASBA rule set by effective date",
+        "Sign-off before issue",
+        "Certificates and CE Broker roster",
+        "Five-year audit log"
+      ],
+      "mvpScope": {
+        "features": [
+          "CSV upload",
+          "NASBA computation",
+          "Certificates",
+          "Computation log"
+        ],
+        "outOfScope": [
+          "Zoom Marketplace app",
+          "Non-NASBA boards beyond CE Broker roster",
+          "Hosting webinars"
+        ],
+        "buildEstimate": "2 weeks"
+      },
+      "techStack": "React + Vite, Supabase (records and storage), PDF generation on backend-hub, scheduled email jobs.",
+      "pricing": {
+        "model": "Per event",
+        "pricePoint": "$15 per event, or $29/month unlimited",
+        "rationale": "Below Zoom's roughly $16/month Webinars Plus premium per event-heavy month and far below enterprise CPE platforms."
+      },
+      "revenueSketch": "Estimate: 60 sponsors x 2 events/month x $15 = $1,800/month. Assumes NASBA's public sponsor list yields solo trainers who run monthly webinars.",
+      "distribution": "NASBA Registry's public sponsor search (group internet-based sponsors), CPA-trainer communities, and the Zoom developer-forum posters who hit the email-matching problem.",
+      "validationTest": {
+        "method": "Offer five NASBA sponsors a free CSV computation and audit log for one past event, then ask for $15 for the next one.",
+        "successCriteria": "3 of 5 pay for a second event.",
+        "cost": "One week of outreach and two build days."
+      },
+      "moat": "Correct, versioned rule sets and audit logs that a generic certificate tool does not carry; trust once a sponsor's five years of records live there.",
+      "compliance": [
+        "NASBA: sponsor stays responsible; tool never issues credit without sign-off; five-year retention.",
+        "State boards: certificate fields and deadlines vary (e.g., Washington insurance CE 10 days).",
+        "Privacy: attendee emails and licence numbers; minimise and encrypt.",
+        "Accessibility: certificates and app to WCAG 2.2 AA."
+      ],
+      "risks": [
+        {
+          "risk": "Small sponsors just upgrade to Zoom Webinars Plus.",
+          "mitigation": "Sell the audit log and rosters, which Zoom does not give, alongside Zoom's certificates."
+        },
+        {
+          "risk": "A wrong credit computation creates liability.",
+          "mitigation": "Show the computation for sign-off and keep the raw rows; the sponsor issues, not the tool."
+        },
+        {
+          "risk": "Rule details are unsettled (some firms use four polls per credit).",
+          "mitigation": "Let sponsors set stricter thresholds above NASBA's minimum."
+        }
+      ],
+      "scores": {
+        "pain": 3,
+        "willingnessToPay": 2,
+        "reachability": 3,
+        "competitiveGap": 2,
+        "feasibility": 3,
+        "complianceBurden": 3,
+        "total": 16
+      },
+      "scoreRationale": {
+        "pain": "Only one recent poster is clearly a sponsor (https://devforum.zoom.us/t/146521); the others are developers or vendors.",
+        "willingnessToPay": "No paid job found; sponsors can upgrade Zoom for about $16/month (https://zoom.us/pricing/events), so capped at 2.",
+        "reachability": "NASBA publishes its sponsors, but the audience spans CPAs, therapists and insurance trainers (https://www.nasbaregistry.org/the-standards).",
+        "competitiveGap": "Zoom native certification, CE-Go and Salepager cover most of the job (https://www.ce-go.com/plans/compare).",
+        "feasibility": "CSV-first avoids Marketplace review, but rule sets must be versioned and kept current (https://www.nasbaregistry.org/the-standards).",
+        "complianceBurden": "A wrong credit computation fails a NASBA audit, so the tool needs sign-off and full logs (https://www.nasbaregistry.org/what-sponsors-need-to-know/cpe-provider-responsibilities-attendance-monitoring-record-keeping-cpe-program)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Reviewer rescored 21 to 16. Of the four Zoom developer-forum posts only DGU is clearly a sponsor; @liu is an integrator, mdingess-lcvista appears to be enterprise-vendor staff, expertswho a Zoom MVP; two threads describe a Zoom API bug the CSV export avoids. Zoom native certification (Webinars Plus, about $16/month more), CE-Go ($5 per participant) and Salepager cover most of the job. Marketplace app review and versioned NASBA rules add build and liability risk. Re-scoped to a CSV-first audit pack for NASBA-registered solo trainers that works beside Zoom's own certificates."
+      },
+      "inspiredBy": "https://devforum.zoom.us/t/146521",
+      "gateGap": {
+        "missing": [
+          "total 16 is below 22",
+          "pain 3 is below 4",
+          "willingnessToPay 2 is below 3",
+          "only one recent complaint is from a sponsor"
+        ],
+        "closedBy": "The validation test closes willingness to pay and pain together: if 3 of 5 NASBA sponsors pay $15 for a second event, that is paid demand (WTP 3) and three sponsor complaints (pain 4)."
+      }
+    },
+    {
+      "n": 3,
+      "title": "Made-By-Me Record for Teacher-Authors",
+      "slug": "made-by-me-record",
+      "category": "Creative & Prosumer",
+      "smallBusiness": true,
+      "complexity": "Weekend MVP",
+      "confidence": "provisional",
+      "topic": "AI Literacy & Ethics",
+      "shape": {
+        "stateful": true,
+        "connected": false,
+        "unattended": false,
+        "engine": false,
+        "shared": true,
+        "notes": {
+          "stateful": "Each resource keeps a dated record of drafts, source exports, licence receipts and notes that the seller adds to over time.",
+          "shared": "The seller assembles a one-page evidence pack that a marketplace reviewer receives during an appeal."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database"
+      ],
+      "summary": "For teacher-authors worried about being wrongly flagged under TPT's and Etsy's new AI-content rules: a dated making-of record per resource and a one-page evidence pack for appeals.",
+      "public": {
+        "summary": "Keeps a dated record of how you made each product, ready to show if a marketplace wrongly says it was made by AI.",
+        "problem": "Your marketplace says it will remove AI-generated products, and buyers can now report them. If one of your products is flagged, you will have to prove you made it, and your drafts are scattered across Canva, Slides and your downloads folder.",
+        "forWhom": "Teachers and makers who sell their own original resources on online marketplaces.",
+        "benefits": [
+          "Proof of your work in one place",
+          "A ready-made appeal page if a product is flagged",
+          "A simple habit while you create, not a scramble later"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "TPT says it will remove AI-generated resources and add a buyer report button, but there is no written policy or appeal process. If my human-made resource is flagged I have no organised way to show I made it.",
+      "description": "For each resource the seller uploads version snapshots and source exports, clip-art and font licence receipts and short notes; the app stores them with a timestamp and a file hash. When a listing is flagged, it assembles a one-page evidence pack (timeline, thumbnails of drafts, licence list) to attach to an appeal. A checklist reminds the seller what to capture while making a resource. It should launch only once TPT publishes what evidence an appeal accepts, and should cover Etsy's AI pattern rules too.",
+      "targetCustomer": "TPT and Etsy sellers of original teaching resources and patterns, especially those using clip art and Canva.",
+      "buyer": "The seller, personal card.",
+      "whyNow": "TPT's 2026-09-30 statement and 2026-10-08 town hall announced AI removals and a report button; Etsy banned AI-generated patterns on 2026-10-22.",
+      "founderFit": "Pisan works on AI ethics and authorship and can build a small storage-and-PDF app in a weekend.",
+      "problemEvidence": [
+        {
+          "url": "https://www.change.org/p/reevaluate-tpt-s-ai-content-policies",
+          "source": "change.org",
+          "author": "Audrey Hare",
+          "date": "2026-10-08",
+          "kind": "complaint",
+          "summary": "Music-education creator's petition (325 signatures) against a sweeping, retroactive ban on AI-assisted content."
+        },
+        {
+          "url": "https://mikellane.com/tpt-ai-policy/",
+          "source": "mikellane.com",
+          "author": "Mikell L Lane",
+          "date": "2026-10-09",
+          "kind": "complaint",
+          "summary": "Seller-blogger's town-hall account: sellers have no way to contest mistaken reports."
+        },
+        {
+          "url": "https://www.webull.com/news/15667269561369600",
+          "source": "webull.com (PR Newswire)",
+          "author": "Teachers Pay Teachers",
+          "date": "2026-09-30",
+          "kind": "mandate",
+          "summary": "TPT says it has implemented tools to surface and remove stores tied to low-effort AI-generated content, with more policies to come."
+        },
+        {
+          "url": "https://www.valueaddedresource.net/etsy-creativity-standards-takedowns-no-appeal/",
+          "source": "valueaddedresource.net",
+          "author": "Liz Morton",
+          "date": "2024-09-11",
+          "kind": "complaint",
+          "summary": "Etsy handmade sellers wrongly removed, often with no appeal; one seller's two hours of evidence was ignored."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Grammarly Authorship",
+          "url": "https://www.grammarly.com/authorship",
+          "price": "Free and Pro",
+          "gap": "Text in Docs and Word only; not Canva or slides."
+        },
+        {
+          "name": "Google Docs and Slides version history",
+          "url": "https://support.google.com/docs/answer/190843",
+          "price": "Free",
+          "gap": "Dated history per file, but scattered and deletable."
+        },
+        {
+          "name": "Originality.ai",
+          "url": "https://originality.ai/pricing",
+          "price": "Free tier; Pro $14.95/month",
+          "gap": "A detector with writing replay, not an evidence pack."
+        },
+        {
+          "name": "Not By AI badge",
+          "url": "https://notbyai.fyi/pricing",
+          "price": "$5 to $12/month or $99 once",
+          "gap": "Self-declared badge, no record."
+        }
+      ],
+      "keyFeatures": [
+        "Per-resource dated record",
+        "File hashing and timestamps",
+        "Licence receipt store",
+        "One-page appeal pack",
+        "Making-of checklist"
+      ],
+      "mvpScope": {
+        "features": [
+          "Upload and timestamp files per resource",
+          "Licence receipts",
+          "PDF evidence pack"
+        ],
+        "outOfScope": [
+          "Automatic capture from Canva",
+          "AI detection",
+          "Marketplace integration"
+        ],
+        "buildEstimate": "1 weekend"
+      },
+      "techStack": "React + Vite, Supabase storage and auth, PDF generation in the browser.",
+      "pricing": {
+        "model": "Free checklist and Drive template; paid tier",
+        "pricePoint": "$5/month",
+        "rationale": "Must sit just above a free do-it-yourself Drive folder."
+      },
+      "revenueSketch": "Estimate: 100 sellers x $5/month = $500 MRR, only if TPT publishes an appeal path that accepts evidence.",
+      "distribution": "Petition signers' communities, seller-bloggers such as Mikell Lane, TPT seller podcasts, and a free Drive-template lead magnet.",
+      "validationTest": {
+        "method": "Publish the free checklist and Drive template, then offer the paid pack to downloaders once TPT publishes its appeal process.",
+        "successCriteria": "200 template downloads and 20 paid sign-ups within two weeks of TPT publishing an appeal process.",
+        "cost": "One day and $0."
+      },
+      "moat": "None beyond shaping the pack to each marketplace's appeal format; a native platform tool would erase it.",
+      "compliance": [
+        "Do not claim to certify human authorship or guarantee reinstatement.",
+        "Source files may contain student names or work; private storage and full deletion.",
+        "Licence receipts contain personal data; store the minimum."
+      ],
+      "risks": [
+        {
+          "risk": "TPT never accepts evidence in appeals, or builds its own tool.",
+          "mitigation": "Do not build past the free template until TPT publishes its process."
+        },
+        {
+          "risk": "Sellers use a free Drive folder instead.",
+          "mitigation": "Charge only for automatic capture and store-wide packs."
+        }
+      ],
+      "scores": {
+        "pain": 3,
+        "willingnessToPay": 1,
+        "reachability": 4,
+        "competitiveGap": 1,
+        "feasibility": 4,
+        "complianceBurden": 4,
+        "total": 17
+      },
+      "scoreRationale": {
+        "pain": "Real fear in a petition and a seller blog (https://www.change.org/p/reevaluate-tpt-s-ai-content-policies), but no case of a human-made resource wrongly flagged was found.",
+        "willingnessToPay": "Insurance against a flag that has not happened, aimed at an appeal path that does not exist (https://mikellane.com/tpt-ai-policy/).",
+        "reachability": "Petition, seller-bloggers and podcasts reach the audience (https://mikellane.com/tpt-ai-policy/).",
+        "competitiveGap": "Free version history and Drive folders already hold the evidence (https://support.google.com/docs/answer/190843).",
+        "feasibility": "Upload, hash and PDF is a weekend build (https://www.grammarly.com/authorship shows the simpler text-only version).",
+        "complianceBurden": "Low, provided it makes no certification claims (https://www.webull.com/news/15667269561369600)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Reviewer rescored 20 to 17, close to a kill. TPT's 2026-09-30 release targets low-effort AI content and accepts reviewed or refined AI material, so the petition's 'ban on all AI-assisted content' is the starter's reading; TPT's CEO said AI products are a minuscule fraction of sales. No appeal path, effective date or evidence standard exists, and the Etsy example shows evidence being ignored. Free Drive, Slides and Canva history hold the same data (gap 1, WTP 1). Not killed: no product assembles a per-listing pack across tools. Re-scope: launch only when TPT publishes its appeal process, cover Etsy's 2026-10-22 AI pattern ban too, start with a free template."
+      },
+      "inspiredBy": "https://www.change.org/p/reevaluate-tpt-s-ai-content-policies",
+      "gateGap": {
+        "missing": [
+          "total 17 is below 22",
+          "pain 3 is below 4",
+          "willingnessToPay 1 is below 3",
+          "no evidence that marketplaces accept authorship evidence in appeals"
+        ],
+        "closedBy": "The validation test closes the largest gap, willingness to pay, only after TPT publishes an appeal process: 20 paid sign-ups from 200 template downloads would lift WTP to 3 and show the pain is acted on (pain 4)."
+      }
+    }
+  ],
+  "runNotes": {
+    "weekday": "Tuesday",
+    "domainLens": "Teaching and training anywhere: K-12, corporate L&D, tutoring, homeschool",
+    "focusSources": [
+      "A14 Plugin and add-on support forums",
+      "B1 Teachers Pay Teachers and Etsy",
+      "C10 Change events: shutdowns, price rises, removed free tiers"
+    ],
+    "searches": [
+      "wordpress.org/support/plugin/{tutor,lifterlms,sensei-lms,masterstudy-lms-learning-management-system,h5p,ameliabooking}/ (A14)",
+      "Teachers Pay Teachers sellers announcement change 2026 (C10)",
+      "TPT sellers moving store to Payhip Shopify after exclusive seller change (C10/B1)",
+      "TPT AI crackdown store removed appeal seller (complaint)",
+      "teacherspayteachers.com/Browse/Search: tutoring progress report, homeschool portfolio, TPT seller templates, piano studio policy (B1)",
+      "Outschool teachers fee change 2026 (C10)",
+      "Wyzant tutors 2026 change fees (C10)",
+      "Teachable OR Thinkific OR Kajabi price increase 2026 (C10)",
+      "Articulate 360 price increase 2026 complaint (C10)",
+      "Google Workspace for Education feature removed 2026 (C10)",
+      "music teacher studio software price increase 2026 (complaint)",
+      "tutoring business owner complaint scheduling software 2026 (complaint, small business)",
+      "dance studio recital costume orders spreadsheet (complaint, small business)",
+      "homeschool co-op registration software expensive (complaint)",
+      "pianoworld piano teachers studio software makeup lessons (complaint, small business)",
+      "restaurant food handler card expiration tracking (complaint, small business)",
+      "childcare staff training hours tracking licensing (mandate)",
+      "CPE provider NASBA attendance polling Zoom certificates (mandate)",
+      "Zoom poll report CPE certificates community.zoom.com (complaint)",
+      "CE Broker provider roster upload deadline (mandate)",
+      "continuing education provider certificates attendance verification board (mandate)",
+      "Texas Education Freedom Accounts vendors invoices Odyssey (mandate)",
+      "ESA vendor reimbursement denied ClassWallet providers (complaint)",
+      "Pennsylvania homeschool evaluator software (mandate)",
+      "sexual harassment training due dates multi-state small employer (mandate)",
+      "driving school software DMV certificate complaint (mandate)",
+      "ISO 9001 training matrix small manufacturer (mandate)",
+      "Trainual price increase 2026 (C10)",
+      "freelancer.com API: teachers pay teachers, tutoring business, music lessons, SCORM, LearnDash, Kajabi, Thinkific, CPE certificate, driving school, dance studio, homeschool, training records (B11)",
+      "freelancer.com API spend pass: Payhip, TPT, Etsy digital listings, ClassWallet, Kajabi migration, homeschool evaluation, CE credits, Zoom webinar certificates (B11)",
+      "peopleperhour.com freelance-jobs?q=teachers+pay+teachers, TPT, CPD certificates (B11; query ignored)",
+      "site:freelancer.com teachers pay teachers listing upload (B11)",
+      "apps.shopify.com digital downloads license keys teachers (B12)",
+      "Zoom App Marketplace certificate of attendance CE credits pricing (B12)",
+      "virtualbadge.io/pricing (B12 spend)",
+      "community.shopify.com search.json: teachers pay teachers, TPT, classroom resources (A13)",
+      "community.n8n.io and community.make.com search.json: certificate webinar, zoom certificate, tutoring (A15)",
+      "hn.algolia.com comments: tutoring business, music teacher studio, CE credits webinar, teachers pay teachers, homeschool records (A12)",
+      "Discourse probes: community.thinkific.com, community.teachable.com, community.podia.com, community.kajabi.com, forum.moodle.org, discuss.h5p.org (A13)",
+      "help.teacherspayteachers.com Zendesk API articles 360044219551 and 54095615314324 (rule verification)"
+    ],
+    "unverifiedSignals": [
+      {
+        "url": "https://help.teacherspayteachers.com/hc/en-us/articles/47532335291668-Sales-Tax-FAQs",
+        "reason": "HTTP 403 to both clients on the HTML help centre; the same host's Zendesk JSON API works with curl."
+      },
+      {
+        "url": "https://www.canva.com/help/version-history/",
+        "reason": "HTTP 403 and a Cloudflare challenge; the 1,000-version figure came only from a search snippet and is not used."
+      },
+      {
+        "url": "https://texas.support.withodyssey.com/hc/en-us/categories/43754481686939-Vendor-Hub",
+        "reason": "HTTP 403 and a Cloudflare challenge; TEFA vendor payment timing unknown."
+      },
+      {
+        "url": "https://www.azed.gov/esa",
+        "reason": "HTTP 403 to both clients."
+      },
+      {
+        "url": "https://www.myschoolyear.com/pricing",
+        "reason": "HTTP 403 to both clients."
+      },
+      {
+        "url": "https://www.peopleperhour.com/freelance-jobs?q=teachers+pay+teachers",
+        "reason": "HTTP 200 but the q parameter is ignored: the same unrelated job list for every query."
+      },
+      {
+        "url": "https://www.freelancer.de/projects/content-writing/upload-math-resources-tpti-very",
+        "reason": "Usable but dated 2026-03-09 and $10-30; listing work on TPT, not cross-listing; not cited."
+      }
+    ],
+    "rejectedCandidates": [
+      {
+        "title": "ESA Vendor Desk (invoices and claim aging for tutors in ESA programs)",
+        "total": 19,
+        "reason": "Reviewed and killed: ChoicePaid (free to $29/month) and GetESAPaid ($39/month) already sell per-program invoices, payout aging and late alerts to the same vendors (https://choicepaid.com/pricing, https://getesapaid.com/pricing); no named vendor complaint within 90 days."
+      },
+      {
+        "title": "Evaluator Desk for homeschool evaluators (PA, FL)",
+        "total": 15,
+        "reason": "Researched, not reviewed (three ideas had already survived review). PA evaluators charge $25-$50 per child per the CHAP directory (https://www.chaponline.com/evaluators-by-county/), most work by email and phone, and no logistics complaint was found within 180 days."
+      },
+      {
+        "title": "Classroom licence checkout for teacher-authors' own sites (school POs, multi-teacher licences)",
+        "total": 16,
+        "reason": "No complaint found; Shopify licence-key apps (https://apps.shopify.com/digitally-digital-products) partly cover it; folded into idea 1's licence mapping."
+      },
+      {
+        "title": "Course Platform Exit Kit (Kajabi and Thinkific price rises)",
+        "total": 16,
+        "reason": "Evidence is vendor-written (https://cartmango.com/thinkific-alternatives/, https://wisdmlabs.com/blog/kajabi-fees-rising-teachable-not-free-what-exiting-business-owners-found-out/); one-time need; migration services exist."
+      },
+      {
+        "title": "Harassment-training due-date tracker for small multi-state employers",
+        "total": 15,
+        "reason": "No complaint found; training vendors and HR suites bundle tracking; free state trainings."
+      },
+      {
+        "title": "Tutoring business tracker (sessions, packages, invoices, progress reports)",
+        "total": 13,
+        "reason": "Served by TutorBird and Teachworks; the TPT spreadsheet version has no ratings (https://www.teacherspayteachers.com/Product/Tutoring-Business-Tracker-Sessions-Invoices-Progress-Reports-Sheets-Excel-17876455)."
+      },
+      {
+        "title": "Tutoring session notes to parent progress reports with an LLM",
+        "total": 12,
+        "reason": "AI wrapper with no data moat; tutoring platforms already keep session notes."
+      },
+      {
+        "title": "Childcare staff training-hours tracker for state licensing",
+        "total": 13,
+        "reason": "Brightwheel, Procare and Kangarootime already track PD hours (https://mybrightwheel.com/childcare-centers/no-system-to-track-staff-professional-development-hours-and-licensing-renewal-deadlines.md)."
+      },
+      {
+        "title": "Restaurant food-handler card expiry tracker",
+        "total": 13,
+        "reason": "Cheap tools exist (FoodSafe Pro, Expiration Reminder for 7shifts, Connecteam)."
+      },
+      {
+        "title": "Dance recital costume ordering and sizing",
+        "total": 12,
+        "reason": "CostumeManager is free for studio owners; Jackrabbit and Studio Director include costume tools (https://dance-teacher.com/everything-you-wanted-to-know-about-costumes-but-were-afraid-to-ask/)."
+      },
+      {
+        "title": "Homeschool co-op registration and volunteer hours",
+        "total": 12,
+        "reason": "Homeschool-Life and MyCoop at about $10 per family per year."
+      },
+      {
+        "title": "Music studio make-up lesson credits",
+        "total": 12,
+        "reason": "Served by My Music Staff, Duet and the free Nova Music."
+      },
+      {
+        "title": "Driving school hour logs and DMV certificates",
+        "total": 12,
+        "reason": "Served by Drive Scout, DrivingSchoolSoftware.com and Drive School Suite."
+      },
+      {
+        "title": "ISO 9001 training matrix for small manufacturers",
+        "total": 13,
+        "reason": "Spreadsheets suffice per auditors' guidance; many QMS tools; no recent complaint."
+      },
+      {
+        "title": "Trainual-lite SOP sign-off for small teams",
+        "total": 13,
+        "reason": "Crowded (Trainual, Whale, Process Street, Notion plus a sign-off sheet)."
+      },
+      {
+        "title": "Review links for freelance instructional designers after Articulate's forced AI tier",
+        "total": 12,
+        "reason": "zipBoard and similar review tools exist; complaint evidence only on Reddit snapshots (unreachable)."
+      },
+      {
+        "title": "LMS spam-registration cleanup for WordPress course sites",
+        "total": 11,
+        "reason": "Single support thread (https://wordpress.org/support/topic/10k-spam-sign-ups-need-to-delete/); free anti-spam and bulk-delete plugins exist."
+      },
+      {
+        "title": "Google Workspace for Education AI default-off controls for districts",
+        "total": 10,
+        "reason": "Rejected: needs institutional procurement for the first sale."
+      },
+      {
+        "title": "Kajabi/Thinkific price-rise calculator",
+        "total": 9,
+        "reason": "Rejected: novelty calculator with no workflow."
+      }
+    ],
+    "watchlist": [],
+    "caveats": "First run of 2026-11-10 (Tuesday, teaching and training lens). Three provisional ideas ship (19, 17, 16); none cleared the gate of 22. Five candidates were researched and four adversarially reviewed: ESA Vendor Desk was killed (ChoicePaid and GetESAPaid already do it), and the three shipped ideas were rescored down (Off-TPT Catalog Kit 22 to 19, Made-By-Me Record 20 to 17, CPE Audit Pack 21 to 16). The Evaluator Desk was researched but not reviewed because three ideas had already survived review; it would not have qualified (fees $25-$50, no complaints). The lens's ground is crowded: tutoring, music, dance, co-op, childcare, driving-school and course-platform pains all have free or cheap incumbents, which is why most candidates scored low. The one strong change event, TPT's 2026-10-01 seller-terms change, supplied ideas 1 and 3; those two share a buyer but solve different problems (catalog rules versus AI-flag appeals). Idea 3 is a weak lead that should not be built until TPT publishes an appeal process. Dates: the NASBA attendance page has no visible date, so the fetch date 2026-11-10 is used; TPT help articles carry their updated date 2026-11-09. Constraint check: categories Small Business Ops, Accessibility & Compliance, Creative & Prosumer (one each); all three have small-business buyers; one Weekend MVP and two Multi-week; ideas 1 and 2 are substantial Multi-week with build plans. The watchlist is empty: the previous file's was empty and no unselected candidate reached 19 after review. Focus source A14 (WordPress LMS plugin forums) yielded only bug reports, no product signals."
+  }
+}
