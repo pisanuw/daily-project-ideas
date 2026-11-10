@@ -651,3 +651,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-09 [doc] Studio lists Research Map (pisan-labs/research-map, https://research-map.hintwise.org/; owner yes 9 Nov), audiences educators and learners, card image from the live UW Bothell map.
 
 2026-11-10 [doc] Created ideas/2026-11-10.json (schemaVersion 3, 3 ideas): Off-TPT Catalog Kit (19, provisional), CPE Audit Pack (16, provisional), Made-By-Me Record (17, provisional)
+
+2026-11-10 [doc] Claimed 2026-11-07 #2 Qualified Overtime Checker for the weekly build (placeholder, slug qualified-overtime-checker, day 1 of 7).
