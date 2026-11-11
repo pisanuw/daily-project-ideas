@@ -659,3 +659,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-10 [doc] qualified-overtime-checker placeholder: day 2 of 7, milestone 2 live.
 
 2026-11-11 [doc] qualified-overtime-checker placeholder: day 3 of 7, milestone 3 live.
+
+2026-11-11 [doc] qualified-overtime-checker placeholder: day 4 of 7, milestone 4 live.
