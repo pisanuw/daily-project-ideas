@@ -634,3 +634,6 @@
 | 2026-11-10 | Off-TPT Catalog Kit for Teacher-Authors | Small Business Ops | Multi-week | 19 | provisional |  |
 | 2026-11-10 | CPE Audit Pack for Solo Webinar Trainers | Accessibility & Compliance | Multi-week | 16 | provisional |  |
 | 2026-11-10 | Made-By-Me Record for Teacher-Authors | Creative & Prosumer | Weekend MVP | 17 | provisional |  |
+| 2026-11-11 | Scan-to-Email Fix-Path Finder | Small Business Ops | Weekend MVP | 18 | provisional |  |
+| 2026-11-11 | Client AI-Use Register for Small Dev Agencies | Developer Tool | Multi-week | 17 | provisional |  |
+| 2026-11-11 | CRA Report-Ready Kit for Micro Makers | Accessibility & Compliance | Multi-week | 16 | provisional |  |
