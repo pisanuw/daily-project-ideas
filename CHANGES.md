@@ -665,3 +665,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-11 [doc] qualified-overtime-checker placeholder: day 5 of 7, milestone 5 live.
 
 2026-11-11 [doc] qualified-overtime-checker placeholder: day 6 of 7, milestone 6 live.
+
+2026-11-11 [doc] Qualified Overtime Checker for W-2 Box 12 TT (2026-11-07 #2) implemented: https://qualified-overtime-checker.hintwise.org (code in claude-built-apps/qualified-overtime-checker). First weekly build, seven build days.
