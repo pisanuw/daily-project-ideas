@@ -663,15 +663,6 @@
       "implementedOn": "2026-11-11",
       "notes": "First weekly build (seven build days, 2026-11-10 to 2026-11-11) and the first app on the shared platform. Vite + TypeScript, no framework; the engine runs in the browser: fixed 168-hour workweeks from dated timesheet lines (Toast time entries confirmed, QuickBooks Online time activities inferred, any other CSV mapped once and saved per header signature; add mode merges without duplicates), regular rate from all remuneration (weighted average, shift differentials, tip-credit hours at a minimum-wage setting, non-discretionary bonuses and commissions spread over their earning weeks with days-weighted edges, PTO/tips/gifts/discretionary pay excluded), premium = OT hours x half the regular rate, assigned to the year of the latest pay date in the week (else the week's end, with a warning), capped at what overtime lines show was paid. Comparison with the payroll's TT gives status and likely causes (blended rate, pay-period overtime, full OT pay in TT, missed bonus, year-end week). SSN columns dropped at the parser by header and by value. Output: employer summary and worksheet PDFs from a small built-in writer (Letter landscape, Helvetica), W-2c list CSV, results and worksheet CSVs, print view. Client files in localStorage or, after Google or magic-link sign-in through the platform Supabase, in schema app_qualified_overtime_checker (table client_files, RLS own rows, compact codec, caps: data under 10 MB, 500 files per account, name 200 chars, summary 4 KB; migrations 0001-0004 applied by the Deploy workflow). No LLM by design. 247 vitest tests (98.6% statements, 93.6% branches) and a 4-test Playwright walkthrough; accessibility-lens 93 with no serious issues; final whole-app review (high) fixed 11 findings on day 7. Worth checking: bonus arithmetic rests on hand-worked examples (the CFR's printed examples were not re-read); Toast overnight shifts count in the week of their In Date; QuickBooks columns are inferred, not confirmed against a real export.",
       "publicNotes": "From 2026, every W-2 shows the extra half of overtime pay in Box 12 code TT, and payroll software often gets it wrong. This checker is for small businesses with hourly staff and their bookkeepers: upload a timesheet export and your payroll's figures, and it rebuilds each workweek, works out the right amount per employee, and lists who needs a correction, by how much and why, with a worksheet PDF to keep. Limitation: it reads exports rather than connecting to payroll, and does not cover hospitals' 8-and-80, public-safety overtime or state daily overtime."
-    },
-    {
-      "ref": {
-        "date": "2026-11-10",
-        "n": 1
-      },
-      "placeholder": true,
-      "slug": "teacher-catalog-kit",
-      "notes": "In progress since 2026-11-11, day 1 of 7, milestone 1 live (TPT Exclusive/Basic rule check per resource, browser or account catalog with sign-in); next: Product Statistics CSV import."
     }
   ]
 }
