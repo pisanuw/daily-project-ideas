@@ -673,3 +673,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-11 [decision] ROUTINE.md: a rebase conflict only in CHANGES.md where both sides appended at the end keeps both lines (main's first); any other conflict still aborts.
 
 2026-11-11 [code] Studio: Qualified Overtime Checker gets its catalog entry (small businesses, blurb) and a home-page screenshot in web/media; it had neither, so it showed no image under Learners.
+
+2026-11-11 [code] four-ghosts (idea 2026-10-09 n1) marked implemented: implemented.json, studio.json, web/media/four-ghosts.jpg. Built 31 Oct, shipped 11 Nov.
