@@ -665,3 +665,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-11 [doc] qualified-overtime-checker placeholder: day 5 of 7, milestone 5 live.
 
 2026-11-11 [doc] qualified-overtime-checker placeholder: day 6 of 7, milestone 6 live.
+
+2026-11-11 [doc] Created ideas/2026-11-11.json (schemaVersion 3, 3 ideas): Scan-to-Email Fix-Path Finder (18, provisional), AI-Use Register (17, provisional), CRA Report-Ready Kit (16, provisional)

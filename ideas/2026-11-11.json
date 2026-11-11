@@ -1,0 +1,941 @@
+{
+  "date": "2026-11-11",
+  "schemaVersion": 3,
+  "complete": true,
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Scan-to-Email Fix-Path Finder",
+      "slug": "scan-to-email-fix-path-finder",
+      "category": "Small Business Ops",
+      "complexity": "Weekend MVP",
+      "confidence": "provisional",
+      "topic": "Systems & Hardware",
+      "shape": {
+        "stateful": true,
+        "connected": false,
+        "unattended": false,
+        "engine": true,
+        "shared": true,
+        "notes": {
+          "stateful": "A dealer or MSP keeps a saved device list per client office (make, model family, firmware, chosen fix path, status) and comes back to it when Microsoft announces the final removal date.",
+          "engine": "Rules that map a copier or scanner model family and firmware to the right path: OAuth, High Volume Email for internal-only scans, a connector relay, direct send or a third-party relay, with each path's Microsoft 365 settings.",
+          "shared": "The technician produces a white-label runbook per client office that the office manager receives and follows."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database"
+      ],
+      "summary": "For small MSPs, copier dealers and office managers facing Microsoft's end-of-December 2026 SMTP AUTH change: look up a copier or scanner model and get the fix path that will actually work, with the Microsoft 365 steps, then hand the office a runbook.",
+      "public": {
+        "summary": "Tells you how to keep each office scanner sending email after Microsoft's sign-in change, model by model, in plain steps.",
+        "problem": "Your office scanner has emailed scans for years, and one morning it quietly stops. Microsoft is switching off the old username-and-password method these machines use, and each brand and model needs a different fix. You end up reading fifteen articles and still guessing.",
+        "forWhom": "Office managers, small IT firms and copier dealers who look after scanners and copiers in small businesses using Microsoft 365.",
+        "benefits": [
+          "Know which fix works for each machine before it breaks",
+          "Step-by-step instructions you can follow or hand to someone",
+          "A clear checklist for every office you look after",
+          "Fewer surprise calls when scans stop arriving"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "Over the Christmas break we can look forward to lots of tickets asking why people cannot send emails from their scanners. Most printers still don't have OAuth with client credentials, and I've wasted an entire day on one multifunction printer while Microsoft's help sends me to fifteen different articles.",
+      "description": "A free public lookup takes a make, model family and firmware version and returns the recommended path (OAuth if supported, High Volume Email for internal-only scanning, a Microsoft 365 connector relay, direct send, or a third-party relay), the vendor's own setup page, and the matching Microsoft 365 configuration, stating plainly that re-enabling Basic auth only buys time. A paid tier lets a dealer or MSP save device lists per client office, mark status per device, and export a white-label PDF runbook for each office. The rules are curated by hand from vendor pages, starting with the six to eight brands that dominate small offices, and never inferred by an LLM.",
+      "targetCustomer": "Service desks at independent copier and MFP dealers, small MSPs and solo IT consultants, and office managers at Microsoft 365 businesses with 5 to 100 staff.",
+      "buyer": "The dealer or MSP owner, on a business card, as a one-time runbook pack or small annual fee; office managers use the free lookup.",
+      "whyNow": "Microsoft disables SMTP AUTH Basic authentication by default for existing tenants at the end of December 2026 and will announce final removal in the second half of 2027; High Volume Email keeps Basic auth only until September 2028 for internal recipients.",
+      "founderFit": "Pisan can build a rules-and-lookup web app in days and write clear technical instructions; the work is curation, which suits a careful solo builder. He has no MSP network, so the channel is search traffic on the error strings and dealer outreach.",
+      "problemEvidence": [
+        {
+          "url": "https://techcommunity.microsoft.com/blog/exchange/updated-exchange-online-smtp-auth-basic-authentication-deprecation-timeline/4489835",
+          "source": "techcommunity.microsoft.com",
+          "author": "technonath",
+          "date": "2026-10-26",
+          "kind": "complaint",
+          "summary": "Comment on Microsoft's updated timeline post expecting a wave of tickets over the Christmas break from staff whose scanners and legacy devices can no longer send; VictorKilo7 (2026-09-27) on the same post says most printers still lack OAuth with client credentials."
+        },
+        {
+          "url": "https://techcommunity.microsoft.com/discussions/communityquestions/need-help-with-scan-to-email-function-on-printer/4559300",
+          "source": "techcommunity.microsoft.com",
+          "author": "barooder",
+          "date": "2026-09-23",
+          "kind": "complaint",
+          "summary": "Ricoh MP C2011 scan-to-email returns 535 authentication errors through Microsoft 365 even with SMTP AUTH enabled; the poster reproduced it from PowerShell and still could not fix it."
+        },
+        {
+          "url": "https://learn.microsoft.com/en-us/answers/questions/5814896/scan-to-email-problems",
+          "source": "learn.microsoft.com",
+          "author": "Ekaterina Cuff",
+          "date": "2026-03-09",
+          "kind": "complaint",
+          "summary": "Small business owner setting up scan-to-email on a new OAuth-capable device calls it the most convoluted thing she has tried and says she wasted an entire day."
+        },
+        {
+          "url": "https://techcommunity.microsoft.com/blog/exchange/updated-exchange-online-smtp-auth-basic-authentication-deprecation-timeline/4489835",
+          "source": "techcommunity.microsoft.com",
+          "author": "The_Exchange_Team",
+          "date": "2026-01-27",
+          "kind": "mandate",
+          "summary": "Microsoft's revised timeline: SMTP AUTH Basic authentication disabled by default for existing tenants at the end of December 2026, admins can re-enable it, final removal date announced in H2 2027."
+        },
+        {
+          "url": "https://www.sharp.net.nz/microsoft365-exchange",
+          "source": "sharp.net.nz",
+          "author": "Sharp Corporation of New Zealand",
+          "date": "2026-11-11",
+          "kind": "spend",
+          "summary": "Read on 2026-11-11: Sharp NZ charges $37.50 per 15 minutes remote or $150 an hour on site to reconfigure scan-to-email for this change, outside service contracts."
+        },
+        {
+          "url": "https://smtply.pages.dev/en/",
+          "source": "smtply.pages.dev",
+          "author": "IT Beratung Andreas Haehnel",
+          "date": "2026-11-11",
+          "kind": "spend",
+          "summary": "Read on 2026-11-11: a paid local OAuth2 relay sold for exactly this change at 199, 349 and 499 EUR one-time by number of tenants."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Microsoft SMTP AUTH Clients report",
+          "url": "https://learn.microsoft.com/en-us/Exchange/monitoring/mail-flow-reports/mfr-smtp-auth-clients-report",
+          "price": "Free with Microsoft 365",
+          "gap": "Shows which sender addresses still use Basic auth, but no device model, no fix path and no instructions."
+        },
+        {
+          "name": "CIPP",
+          "url": "https://raw.githubusercontent.com/KelvinTegelaar/CIPP/main/src/data/alerts.json",
+          "price": "Free, open source (self-hosted)",
+          "gap": "Per-tenant SMTP AUTH usage alert and a baseline to disable it for MSPs; no device-model rules or runbooks, and the alert needs Entra P1."
+        },
+        {
+          "name": "Marco OAuth setup guide hub",
+          "url": "https://help.marconet.com/scan-to-email-oauth-v2.0-authentication-manufacturer-setup-guides",
+          "price": "Free",
+          "gap": "Links each manufacturer's OAuth guide; no per-model decision, no non-OAuth paths, no saved device lists."
+        },
+        {
+          "name": "Loffler options guide",
+          "url": "https://www.loffler.com/hubfs/Microsoft%20365%20Training/December%202026%20MFP%20Scan-to-Email%20Options%20After%20Microsoft%20Basic%20Authentication%20Deprecation%20Date%20-%20Loffler.pdf",
+          "price": "Free PDF",
+          "gap": "Generic six-option decision tree; not model-specific and not a working checklist."
+        },
+        {
+          "name": "SMTPly",
+          "url": "https://smtply.pages.dev/en/",
+          "price": "199 / 349 / 499 EUR one-time",
+          "gap": "Sells one fix (a local OAuth relay), not the decision across a mixed fleet."
+        },
+        {
+          "name": "SMTP2GO",
+          "url": "https://www.smtp2go.com/pricing/",
+          "price": "Free tier; Starter $10/month",
+          "gap": "A relay service; no inventory or per-device guidance."
+        }
+      ],
+      "keyFeatures": [
+        "Model-family lookup with recommended fix path",
+        "Microsoft 365 settings for each path (OAuth app, HVE, connector, direct send)",
+        "Plain 'buy time' option and its expiry stated",
+        "Saved device lists per client office",
+        "White-label PDF runbook per office"
+      ],
+      "mvpScope": {
+        "features": [
+          "Rules for the six to eight most common office brands by model family",
+          "Public lookup page per model family (also the search landing pages)",
+          "Saved device list for one office with status",
+          "PDF runbook export"
+        ],
+        "outOfScope": [
+          "Reading tenant data through Microsoft Graph",
+          "Firmware-level accuracy for every model",
+          "Configuring devices remotely",
+          "EWS application migration"
+        ],
+        "buildEstimate": "4 to 5 days, most of it curating vendor rules"
+      },
+      "techStack": "Static front end (React + Vite), Supabase for sign-in and saved device lists, server-side PDF generation; no LLM in the recommendation path.",
+      "pricing": {
+        "model": "Free lookup; paid runbook pack for dealers and MSPs",
+        "pricePoint": "$79 one-time runbook pack (unlimited offices for 12 months), relay referral links where disclosed",
+        "rationale": "Reviewer found the fix itself is where money goes (SMTPly 199 to 499 EUR, dealer labour at $150/hour); a one-time pack below one hour of dealer labour fits a migration that recurs only when Microsoft sets the final date."
+      },
+      "revenueSketch": "Estimate: 120 dealers or MSPs x $79 = $9,480 in the December 2026 to 2027 window, with a second bump when the final removal date is announced. Assumes the free lookup ranks for the 535 and 5.7.30 error strings.",
+      "distribution": "Search landing pages for each model family and the common error strings; useful answers in the Microsoft Tech Community and Q&A threads where admins post; direct outreach to independent copier dealers' service managers.",
+      "validationTest": {
+        "method": "Publish the free lookup for three brands (Ricoh, Canon, Konica Minolta) with a 'buy the runbook pack' pre-order button, and post it in two Microsoft community threads and to ten dealer service managers.",
+        "successCriteria": "300 lookups and 8 paid pre-orders at $79 by 15 January 2027.",
+        "cost": "Three build days and about $50 in hosting."
+      },
+      "moat": "Thin: a curated, dated model-to-path rule set kept current as vendors ship firmware, plus search pages that rank. Microsoft or a large dealer could publish the same list.",
+      "compliance": [
+        "Personal data: device lists hold office names and maybe staff email addresses; keep them minimal, allow deletion, state hosting location (GDPR for UK/EU users).",
+        "Never ask for Microsoft 365 admin credentials, SMTP passwords or app passwords.",
+        "Security advice: every path that re-enables Basic auth or uses direct send carries a warning about spoofing and open-relay risk, plus a not-advice disclaimer.",
+        "Brand names used descriptively, no logos.",
+        "Accessibility: lookup and runbooks meet WCAG 2.1 AA."
+      ],
+      "risks": [
+        {
+          "risk": "Admins simply re-enable Basic auth in December and the urgency disappears until 2027 or 2028.",
+          "mitigation": "Say so on the page, capture the email address, and re-engage when Microsoft announces the final date."
+        },
+        {
+          "risk": "A wrong model rule breaks a client's scanning.",
+          "mitigation": "Every rule cites the vendor page and date checked; unknown models get 'relay' as the safe default."
+        },
+        {
+          "risk": "Free dealer guides and Microsoft docs improve.",
+          "mitigation": "Compete on the per-office checklist and runbook output, not on the information alone."
+        }
+      ],
+      "scores": {
+        "pain": 3,
+        "willingnessToPay": 2,
+        "reachability": 3,
+        "competitiveGap": 3,
+        "feasibility": 3,
+        "complianceBurden": 4,
+        "total": 18
+      },
+      "scoreRationale": {
+        "pain": "Three independent dated complaints (technonath 2026-10-26 on https://techcommunity.microsoft.com/blog/exchange/updated-exchange-online-smtp-auth-basic-authentication-deprecation-timeline/4489835, barooder 2026-09-23 on https://techcommunity.microsoft.com/discussions/communityquestions/need-help-with-scan-to-email-function-on-printer/4559300, https://learn.microsoft.com/en-us/answers/questions/5814896/scan-to-email-problems), but admins can re-enable Basic auth and HVE keeps it until 2028 for internal mail (https://techcommunity.microsoft.com/t5/exchange-team-blog/high-volume-email-continued-support-for-basic-authentication/ba-p/4411197), so urgency is soft.",
+        "willingnessToPay": "Money goes to the fix, not to guidance: SMTPly sells a relay at 199 to 499 EUR (https://smtply.pages.dev/en/) and Sharp NZ bills $150/hour (https://www.sharp.net.nz/microsoft365-exchange); no one was found paying for a checklist, so 2.",
+        "reachability": "Self-serve via search and Microsoft community threads (https://techcommunity.microsoft.com/blog/exchange/updated-exchange-online-smtp-auth-basic-authentication-deprecation-timeline/4489835), but Pisan has no MSP or dealer network.",
+        "competitiveGap": "Free hubs cover parts (https://help.marconet.com/scan-to-email-oauth-v2.0-authentication-manufacturer-setup-guides, https://www.loffler.com/hubfs/Microsoft%20365%20Training/December%202026%20MFP%20Scan-to-Email%20Options%20After%20Microsoft%20Basic%20Authentication%20Deprecation%20Date%20-%20Loffler.pdf, https://raw.githubusercontent.com/KelvinTegelaar/CIPP/main/src/data/alerts.json); none gives a per-model decision plus a per-office runbook.",
+        "feasibility": "Code is small, but the model rules must be curated by hand from vendor pages such as https://help.marconet.com/scan-to-email-oauth-v2.0-authentication-manufacturer-setup-guides and kept current; firmware-level accuracy is a liability.",
+        "complianceBurden": "Little personal data and no credentials needed; the report it builds on has no device fields (https://learn.microsoft.com/en-us/Exchange/monitoring/mail-flow-reports/mfr-smtp-auth-clients-report)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Reviewer rescored 20 to 18. Evidence checked and real, but Amber Tin's 2026-11-09 comment only asks whether the timeline is accurate. Urgency is weaker than pitched: admins can re-enable Basic auth in the tenant, and Microsoft's HVE post (https://techcommunity.microsoft.com/t5/exchange-team-blog/high-volume-email-continued-support-for-basic-authentication/ba-p/4411197) keeps Basic auth until September 2028 for internal recipients, which is how the administrator.de poster solved it the same day (https://administrator.de/forum/scan-to-mail-ms365-mfa-einrichtung-677379.html). Free cross-vendor material exists (https://help.marconet.com/scan-to-email-oauth-v2.0-authentication-manufacturer-setup-guides, https://www.loffler.com/hubfs/Microsoft%20365%20Training/December%202026%20MFP%20Scan-to-Email%20Options%20After%20Microsoft%20Basic%20Authentication%20Deprecation%20Date%20-%20Loffler.pdf), and dealers bill for the work (https://www.sharp.net.nz/microsoft365-exchange), but nobody pays for a checklist SaaS, so willingnessToPay 3 to 2 and pain 4 to 3. Re-scoped from a $19-49/month tracker to a free lookup plus a one-time runbook pack."
+      },
+      "inspiredBy": "https://techcommunity.microsoft.com/blog/exchange/updated-exchange-online-smtp-auth-basic-authentication-deprecation-timeline/4489835",
+      "gateGap": {
+        "missing": [
+          "total 18 is below 22",
+          "pain 3 is below 4",
+          "willingnessToPay 2 is below 3"
+        ],
+        "closedBy": "The validation test's pre-order button closes willingness to pay: 8 paid runbook packs at $79 by 15 January 2027 would show dealers pay for guidance (WTP 3), and the lookup count shows whether the December default-off produces enough pain to lift pain to 4."
+      }
+    },
+    {
+      "n": 2,
+      "title": "Client AI-Use Register for Small Dev Agencies",
+      "slug": "client-ai-use-register",
+      "category": "Developer Tool",
+      "smallBusiness": true,
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "AI Literacy & Ethics",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": true,
+        "engine": false,
+        "shared": true,
+        "notes": {
+          "stateful": "The agency keeps a register of clients, their repositories and each client's AI policy, plus a month-by-month history of AI usage per client.",
+          "connected": "A small open-source collector reads Claude Code and Codex usage through ccusage on each developer's machine and uploads only aggregates; exports a CSV for the agency's invoicing tool.",
+          "unattended": "A monthly scheduled job builds each client's disclosure and emails the agency; the collector syncs daily so nothing is lost to the 30-day transcript cleanup.",
+          "shared": "The agency produces a client-facing AI-use disclosure page that the client receives and reads."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "email",
+        "scheduled",
+        "backend"
+      ],
+      "buildPlan": [
+        {
+          "n": 1,
+          "title": "One client, one policy, one report",
+          "delivers": "Sign in, add a client with its AI policy and one repository alias, upload one ccusage JSON file, and see that client's usage for the month.",
+          "acceptance": "A signed-in user uploads a sample ccusage JSON and sees per-model token totals for the mapped repository; deployed."
+        },
+        {
+          "n": 2,
+          "title": "Team collector",
+          "delivers": "Each developer runs a small open-source collector that syncs daily aggregates (date, model, tokens, hashed repo alias) to the agency's register.",
+          "acceptance": "Two test machines sync; totals per client equal the sum of the two machines' ccusage output; no prompt or file text leaves the machine."
+        },
+        {
+          "n": 3,
+          "title": "Policy warnings",
+          "delivers": "Usage in a repository whose client forbids AI raises a warning in the register and an email to the agency owner; an optional open-source SessionStart hook warns the developer locally.",
+          "acceptance": "A seeded session in a forbidden repo produces exactly one warning email and one register entry."
+        },
+        {
+          "n": 4,
+          "title": "Monthly client disclosure",
+          "delivers": "A scheduled job builds each client's disclosure page: tools and machines covered, date range, usage by month, and the agency's signed policy acknowledgement.",
+          "acceptance": "The disclosure for a test client lists its coverage statement and never claims 'no AI used'; the share link opens without sign-in."
+        },
+        {
+          "n": 5,
+          "title": "Invoice line export",
+          "delivers": "Download a CSV invoice line per client, priced as a subscription share or API-equivalent value, for Harvest, Xero or QuickBooks import.",
+          "acceptance": "The CSV imports into a test Xero organisation as draft invoice lines without errors."
+        },
+        {
+          "n": 6,
+          "title": "Polish",
+          "delivers": "Agency-owner README, phone layout, keyboard and screen-reader pass, walkthrough test.",
+          "acceptance": "A walkthrough test runs sign-in to disclosure; axe reports no serious issues."
+        }
+      ],
+      "summary": "For agencies of 2 to 10 developers using Claude Code and Codex on client work: one register of each client's AI policy, per-client usage across the whole team, and a monthly AI-use disclosure the client can read.",
+      "public": {
+        "summary": "Keeps a record of what each client allows when your team uses AI coding tools, and gives every client a clear monthly report.",
+        "problem": "One client's contract forbids any AI tools, another pays for them and wants you to use them more, and a third just wants to know. Today that lives in people's heads and old emails. When a client asks how AI was used on their project, you have nothing solid to show them.",
+        "forWhom": "Small software agencies and freelance developers who use AI coding assistants on client projects.",
+        "benefits": [
+          "Every client's AI rules in one place your whole team can see",
+          "An early warning when work happens where AI is not allowed",
+          "A clear monthly report you can send each client",
+          "Usage figures ready for your invoices if you bill for it"
+        ],
+        "audience": "teams"
+      },
+      "problemStatement": "One client pays for my AI subscriptions and wants me to use it as much as possible; for the other I signed an NDA that forbids any AI service. Clients want to be told when a contractor uses AI, and our usage reporting is account-level, so tying AI use to the client work we plan, staff and bill is guesswork.",
+      "description": "The agency records each client, its repositories and its AI policy (allowed, allowed with zero-data-retention, forbidden). An open-source collector on each developer's machine wraps ccusage, maps repositories to clients, and syncs daily aggregates only: date, tool, model, tokens and a hashed repository alias, never prompts or code. The register rolls usage up per client across the team, warns when usage appears in a forbidden client's repository, and a monthly job produces a client-facing disclosure with an explicit coverage statement and the agency's signed policy acknowledgement, plus an optional invoice line.",
+      "targetCustomer": "Owners and leads of software agencies and outsourcing shops with 2 to 10 developers, and senior freelancers with several clients, who use Claude Code or Codex on client repositories.",
+      "buyer": "The agency owner, on a business card, as a flat monthly subscription.",
+      "whyNow": "Agentic coding is now routine on client work, clients are writing AI clauses into NDAs, and the tools still report usage per account or per person, not per client (Cursor feature requests from July to September 2026; Claude Code usage-panel issue from October 2026).",
+      "founderFit": "Pisan teaches courses that use agentic coding tools, writes about AI ethics, and builds with Claude Code daily, so he knows the log formats and the disclosure questions; HN and developer forums are a channel he can work.",
+      "problemEvidence": [
+        {
+          "url": "https://forum.juce.com/t/how-are-people-factoring-ai-usage-into-their-client-billing/69023",
+          "source": "forum.juce.com",
+          "author": "jcalvo60",
+          "date": "2026-07-23",
+          "kind": "complaint",
+          "summary": "Freelancer with two projects: one client pays for his AI subscriptions and encourages heavy use, the other's NDA forbids any AI service; kerfuffle (2026-06-21) in the same thread wants contractors to disclose AI use and indemnify."
+        },
+        {
+          "url": "https://forum.cursor.com/t/167142.json",
+          "source": "forum.cursor.com",
+          "author": "jimlbeaver",
+          "date": "2026-09-17",
+          "kind": "complaint",
+          "summary": "Usage reporting is still account-level and the CSV export has no project or session id, so AI spend cannot be tied to the work teams plan, staff and bill against."
+        },
+        {
+          "url": "https://forum.cursor.com/t/160895.json",
+          "source": "forum.cursor.com",
+          "author": "Andrey_Eroftiev",
+          "date": "2026-08-27",
+          "kind": "complaint",
+          "summary": "A software outsourcing company asks for per-task client and cost attribution because its clients want per-task cost logging; others in the thread call attribution across clients guesswork."
+        },
+        {
+          "url": "https://hn.algolia.com/api/v1/items/50403153",
+          "source": "news.ycombinator.com (Algolia API)",
+          "author": "Michel_Aventin",
+          "date": "2026-11-07",
+          "kind": "complaint",
+          "summary": "Ask HN from a freelancer working across several clients: keeping each client's rules and context separate for agents is his main time cost; nilleb replies that each customer has different policies."
+        },
+        {
+          "url": "https://standardcompute.com/bill-ai-coding-costs-to-clients",
+          "source": "standardcompute.com",
+          "author": "Standard Compute",
+          "date": "2026-10-14",
+          "kind": "spend",
+          "summary": "Sells one API key per client project so dev shops can bill AI coding costs to clients, from $19/month per key with $89, $249 and $499 plans (facts dated 2026-10-14 on the page)."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "ccusage",
+          "url": "https://raw.githubusercontent.com/ryoppippi/ccusage/main/apps/ccusage/README.md",
+          "price": "Free, open source",
+          "gap": "Per-machine usage reports for 19+ agents; no clients, no policies, no team rollup, no disclosure."
+        },
+        {
+          "name": "ccusage-team",
+          "url": "https://cdn.jsdelivr.net/npm/ccusage-team@1.0.27/README.en.md",
+          "price": "Free, open source",
+          "gap": "Team rollup with per-member totals; no per-client grouping, policy register or client-facing output."
+        },
+        {
+          "name": "Varda (open source)",
+          "url": "https://hn.algolia.com/api/v1/items/50403153",
+          "price": "Free, open source",
+          "gap": "Restricts which agent may run in a directory tree; no usage, no disclosure."
+        },
+        {
+          "name": "Vibes to Bucks",
+          "url": "https://forum.cursor.com/t/159552.json",
+          "price": "Free per-client tracking; paid Pro sync, price unknown",
+          "gap": "Cursor only; no Claude Code or Codex, no policies or disclosure."
+        },
+        {
+          "name": "Standard Compute",
+          "url": "https://standardcompute.com/bill-ai-coding-costs-to-clients",
+          "price": "From $19/month per key; $89, $249, $499 plans",
+          "gap": "Works only if traffic goes through its API; no help for developers on Claude or ChatGPT subscriptions; no policy register."
+        },
+        {
+          "name": "Claude Team and Enterprise analytics",
+          "url": "https://code.claude.com/docs/en/costs?ref=t01.li",
+          "price": "Included with those plans",
+          "gap": "Per-user and per-model spend, not per client; no client-facing document."
+        }
+      ],
+      "keyFeatures": [
+        "Client register with AI policy per client",
+        "Open-source collector syncing aggregates only",
+        "Per-client usage rollup across the team",
+        "Forbidden-repo warnings",
+        "Monthly client disclosure with a coverage statement",
+        "Invoice line CSV"
+      ],
+      "mvpScope": {
+        "features": [
+          "Client and repository register with policies",
+          "Collector for Claude Code and Codex via ccusage",
+          "Per-client monthly rollup",
+          "Client disclosure page"
+        ],
+        "outOfScope": [
+          "Cursor and Copilot coverage (no repository link in their logs)",
+          "Browser ChatGPT usage",
+          "Blocking sessions centrally",
+          "'No AI used' attestations"
+        ],
+        "buildEstimate": "6 to 7 build days"
+      },
+      "techStack": "React + Vite front end, Supabase (auth, clients, policies, daily aggregates with row-level security), a small Node collector published to npm, a sync endpoint and monthly job on backend-hub, transactional email.",
+      "pricing": {
+        "model": "Flat per-agency subscription",
+        "pricePoint": "$29/month per agency up to 10 developers",
+        "rationale": "Free tools set the price of metering and team rollup at zero, so the charge is for the client register and disclosure; well below Standard Compute's $89 plan."
+      },
+      "revenueSketch": "Estimate: 150 agencies x $29/month = $4,350 MRR after a year. Assumes a few percent of agencies whose clients ask for AI reports convert from the free collector.",
+      "distribution": "Free open-source collector and hook on npm and GitHub as the funnel; answers in HN and Cursor/JUCE forum threads where agencies ask about client attribution; direct messages to the named posters in the Cursor threads.",
+      "validationTest": {
+        "method": "Interview 5 small agencies (from the Cursor and JUCE threads and HN) and ask whether any client has asked for a written AI-use report or put AI terms in a contract; show a mock disclosure page with a $29/month pre-order.",
+        "successCriteria": "3 of 5 have had a client ask, and 2 pre-order.",
+        "cost": "A week of outreach and one day for the mock."
+      },
+      "moat": "Modest: the per-client history and the agency's policy acknowledgements accumulate in the register, and the disclosure format becomes what clients expect; the collector itself is free and copyable.",
+      "compliance": [
+        "Confidentiality: upload aggregates only; never prompts, code or file contents; hash repository paths, which can reveal a client's identity.",
+        "Disclosure liability: every report states which tools and machines were metered and the date range, and never claims no AI was used.",
+        "GDPR: EU hosting option, a DPA and a sub-processor list; developer names are personal data.",
+        "Credentials: the collector reads only session-log directories and never API keys.",
+        "Accessibility: disclosure pages meet WCAG 2.2 AA."
+      ],
+      "risks": [
+        {
+          "risk": "Anthropic or OpenAI add per-project or per-client reporting to their own consoles.",
+          "mitigation": "Keep the value in the client register and disclosure, which vendors are unlikely to build for agencies."
+        },
+        {
+          "risk": "Few clients actually ask for AI reports yet.",
+          "mitigation": "Run the interview test before building past milestone 1."
+        },
+        {
+          "risk": "Log formats change between CLI versions.",
+          "mitigation": "Depend on ccusage's maintained parsers rather than our own."
+        }
+      ],
+      "scores": {
+        "pain": 3,
+        "willingnessToPay": 3,
+        "reachability": 3,
+        "competitiveGap": 2,
+        "feasibility": 3,
+        "complianceBurden": 3,
+        "total": 17
+      },
+      "scoreRationale": {
+        "pain": "Several dated posts (https://forum.juce.com/t/how-are-people-factoring-ai-usage-into-their-client-billing/69023, https://forum.cursor.com/t/167142.json, https://forum.cursor.com/t/160895.json, https://hn.algolia.com/api/v1/items/50403153), but freelancers in the JUCE thread say they do not pass AI costs on, so the pain is real but narrow.",
+        "willingnessToPay": "One paid product for billing AI coding cost per client project (https://standardcompute.com/bill-ai-coding-costs-to-clients, from $19/month per key).",
+        "reachability": "Agencies post in reachable developer forums (https://forum.cursor.com/t/160895.json) and HN (https://hn.algolia.com/api/v1/items/50403153); a free npm collector is a self-serve funnel.",
+        "competitiveGap": "Metering and team rollup are free (https://raw.githubusercontent.com/ryoppippi/ccusage/main/apps/ccusage/README.md, https://cdn.jsdelivr.net/npm/ccusage-team@1.0.27/README.en.md) and per-folder policy exists (https://hn.algolia.com/api/v1/items/50403153); only per-client grouping and a client-readable disclosure are open.",
+        "feasibility": "Buildable on the platform in about a week, but the collector depends on undocumented log formats and the 30-day transcript cleanup (https://code.claude.com/docs/en/settings-reference.md).",
+        "complianceBurden": "Handles confidential client identities and makes statements to clients that could be relied on; a coverage statement is required (https://code.claude.com/docs/en/settings-reference.md)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Reviewer rescored 18 to 17. The JUCE thread is quoted correctly, but its posters are solo freelancers and two say they do not pass AI costs on; the disclosure demand comes from the client side (https://forum.juce.com/t/how-are-people-factoring-ai-usage-into-their-client-billing/69023). Free tools already do the team rollup (https://cdn.jsdelivr.net/npm/ccusage-team@1.0.27/README.en.md) and per-folder policy (Varda and breadcrumb in https://hn.algolia.com/api/v1/items/50403153), and a short SessionStart hook or managed settings can block a repo (https://code.claude.com/docs/en/settings-reference.md), so the hook is a free funnel, not paid value. complianceBurden 4 to 3 because a disclosure built from Claude Code and Codex logs alone cannot see browser ChatGPT, Cursor or Copilot and must never support a 'no AI used' claim. Re-scoped to a per-client register, cross-team per-client rollup and client disclosure at a flat per-agency price."
+      },
+      "inspiredBy": "https://forum.juce.com/t/how-are-people-factoring-ai-usage-into-their-client-billing/69023",
+      "gateGap": {
+        "missing": [
+          "total 17 is below 22",
+          "pain 3 is below 4"
+        ],
+        "closedBy": "The interview step of the validation test closes the pain gap: if 3 of 5 agencies report a client asking for a written AI-use report or contract terms, pain rises to 4; 2 pre-orders at $29/month would also confirm willingness to pay above one competitor's pricing."
+      }
+    },
+    {
+      "n": 3,
+      "title": "CRA Report-Ready Kit for Micro Makers",
+      "slug": "cra-report-ready-kit",
+      "category": "Accessibility & Compliance",
+      "smallBusiness": true,
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Systems & Hardware",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": true,
+        "engine": true,
+        "shared": true,
+        "notes": {
+          "stateful": "The maker keeps a saved record of the company, each product, its support period, its components and its CSIRT, pre-filled into every future report.",
+          "connected": "Takes inbound security reports from the maker's security.txt address or a CVD Portal free intake by email forwarding, and optionally imports a CycloneDX or SPDX file.",
+          "unattended": "Once a report is triaged as actively exploited, scheduled reminders and SMS escalation to a backup person run toward the 72-hour and final deadlines; a nightly KEV and OSV check runs for Linux-based products.",
+          "engine": "Maps the maker's stored data and the incident facts to each ENISA Single Reporting Platform stage's fields (early warning, notification, final report) with the right deadline per case type.",
+          "shared": "Two roles: the primary and the backup reporter, each with their own EU Login, both see the clock and the copy sheets."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "email",
+        "scheduled",
+        "llm"
+      ],
+      "buildPlan": [
+        {
+          "n": 1,
+          "title": "Company and product record",
+          "delivers": "Sign in, enter the company, one product with its support period and CSIRT, and print the SRP readiness checklist for the primary and backup reporter.",
+          "acceptance": "A signed-in user saves a product and the checklist lists EU Login, MFA and Secondary AR registration steps; deployed."
+        },
+        {
+          "n": 2,
+          "title": "Incident clock",
+          "delivers": "Record a report, triage it, set the 'became aware' time, and see the 24-hour, 72-hour and final deadlines for a vulnerability or a severe incident.",
+          "acceptance": "For a seeded actively exploited vulnerability the deadlines match a hand-worked example; times show in the maker's time zone."
+        },
+        {
+          "n": 3,
+          "title": "Copy sheets per SRP stage",
+          "delivers": "For each stage, a copy sheet filled from the stored record and incident facts, field by field, with LLM-drafted wording the maker edits.",
+          "acceptance": "Every field in the SRP Glossary for the notification stage appears on the sheet; drafted text never invents a CVE or EUVD id."
+        },
+        {
+          "n": 4,
+          "title": "Escalation",
+          "delivers": "Inbound report email to a per-maker address opens a draft incident; reminders and SMS escalate to the backup person if the primary has not acknowledged.",
+          "acceptance": "A test email opens one incident; with no acknowledgement, the backup gets one SMS and one email at the set interval."
+        },
+        {
+          "n": 5,
+          "title": "Component watch",
+          "delivers": "Enter components by hand or import CycloneDX/SPDX; a nightly job checks CISA KEV and OSV and raises a 'review this' item, never an automatic 'aware'.",
+          "acceptance": "A seeded component with a KEV entry raises exactly one review item and does not start the clock."
+        },
+        {
+          "n": 6,
+          "title": "Polish",
+          "delivers": "Maker README, phone layout, keyboard and screen-reader pass, walkthrough test.",
+          "acceptance": "A walkthrough test runs sign-in to a filled copy sheet; axe reports no serious issues."
+        }
+      ],
+      "summary": "For micro hardware makers and tiny software publishers selling into the EU: get both reporters registered on ENISA's platform before anything happens, then a clock and pre-filled copy sheets that make each Cyber Resilience Act report a 15-minute job.",
+      "public": {
+        "summary": "Gets your small product business ready to file EU security reports on time, and walks you through each report when it happens.",
+        "problem": "You sell a few hundred connected gadgets into Europe, and a new EU law says that if a flaw in one is being exploited you must tell the authorities within days. You have no security team, the official site has no shortcuts, and you are not sure what to write or who covers for you on holiday.",
+        "forWhom": "Makers and tiny companies, inside or outside Europe, who sell connected hardware or software products to EU customers.",
+        "benefits": [
+          "Ready before an incident, not scrambling during one",
+          "Clear deadlines for each report in your own time zone",
+          "Your product details filled in for you every time",
+          "A named backup who gets alerted if you are away"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "How can a small business report anything within 24 hours through weekends, long weekends, a week at Christmas and summer holidays? We have no security team, the self-assessment alone costs thousands, and the reporting platform has no API.",
+      "description": "The kit starts before any incident: it walks the primary and a backup reporter through getting their own EU Login with MFA and registering as Primary and Secondary Assigned Representatives on ENISA's Single Reporting Platform, and stores the company, product, support period and CSIRT details the platform asks for. When a security report arrives (by the maker's security.txt address or a free intake form), the maker triages it and records when they became aware; the kit then runs the deadlines, escalates by SMS and email to the backup, and produces a copy sheet for each stage, field by field, with drafted wording to edit. A nightly KEV and OSV check is a minor feature for Linux-based products and raises review items, never an automatic 'aware'.",
+      "targetCustomer": "Micro hardware makers and tiny software publishers (1 to 5 people, 1 to 3 products) selling connected products into the EU, including sellers on maker marketplaces.",
+      "buyer": "The maker, on a personal or business card, per incident or as a low annual fee.",
+      "whyNow": "CRA reporting obligations have applied since 11 September 2026 to products already on the market; ENISA's platform is UI-only with personal EU Logins, and the wider obligations follow on 11 December 2027.",
+      "founderFit": "Pisan can build a forms-and-deadlines app with careful wording in days and read the regulation and ENISA's glossary closely; as a US founder he lacks EU maker connections, so distribution leans on maker marketplaces and forums.",
+      "problemEvidence": [
+        {
+          "url": "https://hn.algolia.com/api/v1/items/49419237",
+          "source": "news.ycombinator.com (Algolia API)",
+          "author": "kvemkon",
+          "date": "2026-08-25",
+          "kind": "complaint",
+          "summary": "Asks how a small business can report within 24 hours through weekends, Christmas and summer holidays; ghosty141 replies that the clock starts at awareness, and kvemkon accepts that. imtringued (same thread) puts CE self-assessment near $20k."
+        },
+        {
+          "url": "https://www.enisa.europa.eu/topics/product-security/vulnerability-services/eu-incident-response-and-cyber-crisis-management/single-reporting-platform-srp/frequently-asked-questions",
+          "source": "enisa.europa.eu",
+          "author": "ENISA",
+          "date": "2026-10-15",
+          "kind": "mandate",
+          "summary": "SRP live since 2026-09-11; 24-hour early warning, 72-hour notification, final report 14 days after a fix or one month for incidents; personal EU Login with MFA; drafts visible only to their author; no API at release."
+        },
+        {
+          "url": "https://cvdportal.com/pricing",
+          "source": "cvdportal.com",
+          "author": "Porta Regulus B.V.",
+          "date": "2026-11-11",
+          "kind": "spend",
+          "summary": "Read on 2026-11-11: free intake tier; Reporting tier EUR 99/month billed annually with the 24h/72h/14d workflow and SRP-ready package; the SME SECURE grant can pay half a CRA project."
+        },
+        {
+          "url": "https://verimu.com/pricing",
+          "source": "verimu.com",
+          "author": "Verimu",
+          "date": "2026-11-11",
+          "kind": "spend",
+          "summary": "Read on 2026-11-11: Free, EUR 49 and EUR 149 per month; the notification workflow and KEV are in the EUR 149 tier; paid billing started 2026-09-01."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "CVD Portal",
+          "url": "https://cvdportal.com/pricing",
+          "price": "Free intake; Reporting EUR 99/month billed annually; Compliance EUR 299/month",
+          "gap": "Covers intake, the workflow and SRP packages; EUR 1,188 a year is steep for a maker with one product and rare incidents."
+        },
+        {
+          "name": "Verimu",
+          "url": "https://verimu.com/pricing",
+          "price": "Free; EUR 49; EUR 149/month",
+          "gap": "Codebase and CI centred; the reporting workflow sits in the EUR 149 tier."
+        },
+        {
+          "name": "CRAready",
+          "url": "https://craready.pages.dev/",
+          "price": "EUR 299 / 799 / 1,999 per month",
+          "gap": "Firmware analysis for device makers, priced far above micro makers."
+        },
+        {
+          "name": "CRA Evidence",
+          "url": "https://craevidence.com/pricing",
+          "price": "unknown (personalised pricing)",
+          "gap": "Sales-led platform for manufacturers and importers."
+        },
+        {
+          "name": "OpenCRA",
+          "url": "https://pypi.org/project/opencra/",
+          "price": "Free, open source",
+          "gap": "SBOM against OSV and KEV in CI, stating a hit is only a candidate; no reporting workflow or ENISA filing help."
+        },
+        {
+          "name": "ENISA Single Reporting Platform",
+          "url": "https://www.enisa.europa.eu/topics/product-security/vulnerability-services/eu-incident-response-and-cyber-crisis-management/single-reporting-platform-srp/frequently-asked-questions",
+          "price": "Free (the official channel)",
+          "gap": "No API, drafts per user, field guidance in a glossary; no reminders or pre-filled data."
+        }
+      ],
+      "keyFeatures": [
+        "SRP readiness checklist for primary and backup reporters",
+        "Stored company, product and CSIRT record",
+        "Triage step that sets the awareness time",
+        "Deadline clock per case type",
+        "Field-by-field copy sheets per stage",
+        "SMS and email escalation to a backup"
+      ],
+      "mvpScope": {
+        "features": [
+          "Readiness checklist",
+          "Product record",
+          "Incident clock",
+          "Copy sheets for the three stages"
+        ],
+        "outOfScope": [
+          "Filing on ENISA's platform (no API; never store EU Login credentials)",
+          "Binary firmware analysis",
+          "Technical documentation and CE conformity",
+          "Legal advice"
+        ],
+        "buildEstimate": "6 to 7 build days"
+      },
+      "techStack": "React + Vite front end, Supabase (auth, products, incidents with row-level security), inbound email and SMS through backend-hub, scheduled jobs for reminders and the KEV/OSV check, LLM gateway for drafting with template-only fallback.",
+      "pricing": {
+        "model": "Low annual fee or per incident",
+        "pricePoint": "EUR 59 per year, or EUR 49 per incident without a plan",
+        "rationale": "Well below CVD Portal's EUR 1,188 a year and Verimu's EUR 149/month, matching a buyer who may never have an incident."
+      },
+      "revenueSketch": "Estimate: 200 makers x EUR 59 = EUR 11,800 a year. Assumes a marketplace partnership puts the kit in front of a few thousand EU-selling makers.",
+      "distribution": "Maker marketplaces and their seller communities (Lectronz, Tindie, Crowd Supply), maker forums (Arduino, PlatformIO) where CRA questions come up, and EU authorised representatives who serve non-EU sellers.",
+      "validationTest": {
+        "method": "A free 'Are you report-ready?' checklist page posted in the Lectronz community and two maker forums, with a EUR 59 pre-order for the kit.",
+        "successCriteria": "100 checklist completions and 10 pre-orders by 31 January 2027.",
+        "cost": "Two build days and outreach time."
+      },
+      "moat": "Thin: careful, current mapping of ENISA's glossary to a micro maker's stored record, and trust from a marketplace partnership.",
+      "compliance": [
+        "Confidential vulnerability details: encrypt at rest, strict per-tenant row-level security, audit log.",
+        "LLM drafting: no-retention terms and a per-maker opt-out to templates only.",
+        "Never store or proxy EU Login credentials.",
+        "Liability: a missed alert could matter; redundant escalation, a not-legal-advice disclaimer and capped liability in the terms.",
+        "GDPR for reporter contact data; EU hosting.",
+        "Accessibility: WCAG 2.1 AA.",
+        "No branding that implies ENISA or EU affiliation."
+      ],
+      "risks": [
+        {
+          "risk": "Micro makers almost never face an actively exploited vulnerability, so few feel the need.",
+          "mitigation": "Sell readiness once a year, priced like insurance, not a monitoring subscription."
+        },
+        {
+          "risk": "CVD Portal adds a cheap micro tier.",
+          "mitigation": "Partner with a marketplace and stay focused on the two-person maker."
+        },
+        {
+          "risk": "A KEV match is read as legal awareness.",
+          "mitigation": "Matches only create review items; the human sets the awareness time."
+        }
+      ],
+      "scores": {
+        "pain": 2,
+        "willingnessToPay": 3,
+        "reachability": 2,
+        "competitiveGap": 2,
+        "feasibility": 4,
+        "complianceBurden": 3,
+        "total": 16
+      },
+      "scoreRationale": {
+        "pain": "The weekend complaint (https://hn.algolia.com/api/v1/items/49419237) was answered in-thread and accepted, and the CISA KEV catalog has no entries for common MCU stacks (https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json), so incidents are rare for these makers.",
+        "willingnessToPay": "Paid plans exist for this exact workflow: CVD Portal Reporting at EUR 99/month (https://cvdportal.com/pricing) and Verimu at EUR 149/month (https://verimu.com/pricing).",
+        "reachability": "EU makers through marketplaces and forums (https://hn.algolia.com/api/v1/items/49419237); a US founder with no EU maker network.",
+        "competitiveGap": "CVD Portal's free tier and OpenCRA cover intake and matching (https://cvdportal.com/pricing, https://pypi.org/project/opencra/); only low-cost readiness and copy sheets for the two-person maker are open.",
+        "feasibility": "Forms, deadlines, email and SMS on the platform; the SRP glossary must be transcribed by hand (https://www.enisa.europa.eu/topics/product-security/vulnerability-services/eu-incident-response-and-cyber-crisis-management/single-reporting-platform-srp/frequently-asked-questions).",
+        "complianceBurden": "Holds embargoed vulnerability details and drafts legal notifications, so a missed alert is a liability (https://www.enisa.europa.eu/topics/product-security/vulnerability-services/eu-incident-response-and-cyber-crisis-management/single-reporting-platform-srp/frequently-asked-questions)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Reviewer rescored 18 to 16. The CISA KEV catalog (https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json, 1,779 entries) has no entries for mbedTLS, lwIP, FreeRTOS, Zephyr, ESP-IDF, Arduino, MicroPython, wolfSSL, curl or dnsmasq, so the nightly alert would almost never fire for MCU products. OpenCRA (https://pypi.org/project/opencra/) already matches SBOMs against OSV and KEV for free, and CVD Portal's free tier gives intake and an Article 14 countdown (https://cvdportal.com/pricing). kvemkon's weekend complaint was answered in the same HN thread (https://hn.algolia.com/api/v1/items/49419237): the clock starts at awareness. Pain 4 to 2. Re-scoped from KEV monitoring to report readiness: EU Login and Secondary AR registration before an incident, stored data pre-filled into copy sheets per SRP field, a human triage step, and escalation to a backup, priced per incident or yearly."
+      },
+      "inspiredBy": "https://hn.algolia.com/api/v1/items/49419237",
+      "gateGap": {
+        "missing": [
+          "total 16 is below 22",
+          "pain 2 is below 4",
+          "the only complaint was answered in-thread, so no unrebutted complaint within 90 days"
+        ],
+        "closedBy": "The free readiness checklist in the validation test closes the pain gap: 100 completions and 10 paid pre-orders by 31 January 2027 from EU-selling makers would show micro makers feel the obligation enough to pay (pain 3 to 4)."
+      }
+    }
+  ],
+  "runNotes": {
+    "weekday": "Wednesday",
+    "domainLens": "Developer and research tooling",
+    "focusSources": [
+      "A3 Open-source teaching tools",
+      "B2 AppSumo",
+      "C2 Education and computing research"
+    ],
+    "searches": [
+      "api.github.com search/issues: \"research software\" created>2026-09-01 sort:reactions (A3)",
+      "api.github.com search/issues: zotero feature request created>2026-08-15 (A3)",
+      "api.github.com search/issues: client handoff wordpress created>2026-08-15 (A3)",
+      "api.github.com search/issues by reactions since 2026-08-01 in anthropics/claude-code, supabase, coolify, n8n, cal.com (422), documenso, invoiceninja, zotero (A3)",
+      "appsumo.com/software/developer-tools/ and /software/education/ (B2; category filter ignored, sitewide deals shown)",
+      "export.arxiv.org: research software AND maintenance; coding agents AND cost (C2)",
+      "api.openalex.org works search research software sustainability (C2; HTTP 429)",
+      "hn.algolia.com comments: \"I would pay for\"; \"cyber resilience act\"; \"security questionnaire\"; SBOM customer; \"SOC 2\" small startup; \"clients\" \"token costs\"; \"pen test\" customer requires; \"status page\" expensive; \"data sharing plan\" (A12)",
+      "Cyber Resilience Act vulnerability reporting September 2026 small software company micro enterprise struggling (C5)",
+      "freelance developer bill clients for Claude Code Codex token usage per project tracking (complaint)",
+      "small SaaS founder security questionnaire enterprise customer no SOC 2 forum 2026 (complaint)",
+      "GitHub Actions self-hosted runner pricing change 2026 small team complaint (C10)",
+      "community forum small business owner vibe coded app broke need developer to maintain 2026 (complaint, small business)",
+      "NIH data management and sharing plan compliance annual progress report lab burden 2026 (mandate)",
+      "web agency WordPress plugin abandoned closed security notify clients 2026 forum (complaint, small business)",
+      "Stripe API version deprecation small SaaS forced upgrade 2026 webhook breaking (C10)",
+      "Texas App Store Accountability Act developers age range API indie developer complaint 2026 (C5)",
+      "200-day TLS certificate lifetime March 2026 small business manual renewal problems (C10)",
+      "\"Ask HN\" SOC2 solo founder 2026 customer requires (A12)",
+      "NIH RPPR data sharing C.5.c October 2026 investigators confused repository deposit tracking (mandate)",
+      "Cyber Resilience Act small electronics maker Tindie Etsy forum CRA sell in EU worried 2026 (complaint)",
+      "CRA compliance software SME pricing vulnerability handling SBOM ENISA single reporting platform tool micro manufacturer (spend)",
+      "Xero app XRechnung ZUGFeRD Germany e-invoice send receive Xero app store 2026 (B12 spend)",
+      "Microsoft SMTP AUTH basic authentication retirement 2026 scanner printer small business broke (C10, small business)",
+      "\"Updated Exchange Online SMTP AUTH Basic Authentication Deprecation Timeline\" (C5)",
+      "learn.microsoft.com answers scan to email stopped working Office 365 SMTP basic auth disabled 2026 copier (complaint, small business)",
+      "\"scan to email\" Microsoft 365 \"basic auth\" December 2026 forum MSP clients copiers (complaint, small business)",
+      "Discourse search.json: forum.invoiceninja.com peppol, xrechnung; community.shopify.com peppol, e-invoice belgium; community.spiceworks.com smtp auth basic scanner, scan to email oauth (A13)",
+      "productideas.xero.com search: peppol; e-invoicing (A16)",
+      "freelancer.com API (B11, spend): SBOM; cyber resilience act; security questionnaire; peppol; xrechnung; e-invoicing; claude code; lovable; supabase security; SOC 2; penetration test; data management plan; scan to email; office 365 smtp",
+      "apps.xero.com search peppol, xrechnung; appsource.microsoft.com smtp relay (B12; empty client-rendered shells)",
+      "Spend pass, research agents (B11): freelancer.com claude code usage dashboard; AI token cost tracking per client; LLM API cost dashboard; xrechnung; zugferd; e-invoice xero; cyber resilience act; SBOM; vulnerability disclosure policy; CE marking cybersecurity; data management plan NIH; data sharing plan grant; scan to email; office 365 smtp (all no relevant jobs)",
+      "Research agent searches: ccusage per project; track AI coding token costs per client; Vibes to Bucks pricing; tokentab; Claude Code cleanupPeriodDays; CIPP SMTP AUTH report; EWS retirement 2026; printer scan to email OAuth support list; Microsoft Q&A scan to email 2026; CRA tool pricing; CRA-Ready pricing; CVD Portal pricing; CRA Evidence pricing; Xero XRechnung app; Xero Peppol Germany December 2025; E-Rechnungspflicht 2027 Verschiebung; NOT-OD-26-046; NIH DMS tracking software pricing; DMPTool 2026 matching; Dryad charges",
+      "Reviewer searches: scan to email OAuth supported printer models list; copier dealer SMTP AUTH December 2026 customers free; High Volume Email basic authentication September 2028; ccusage team dashboard; agency client contract forbids AI coding tools; CRA Article 64(10) microenterprise fines; free open source CRA Article 14 reporting tool; CISA KEV JSON feed; NOT-OD-26-046 structured template; SBIR NIH data sharing proprietary 20 years"
+    ],
+    "unverifiedSignals": [
+      {
+        "url": "https://api.openalex.org/works?search=research%20software%20sustainability&per-page=10&sort=publication_date%3Adesc",
+        "reason": "HTTP 429 from OpenAlex (fifth 429 in a row for this host in the log)."
+      },
+      {
+        "url": "https://api.github.com/search/issues?q=repo%3Acalcom/cal.com+is%3Aissue+state%3Aopen+created%3A%3E2026-08-01&sort=reactions&order=desc&per_page=12",
+        "reason": "HTTP 422 Validation Failed: the repository slug was not accepted."
+      },
+      {
+        "url": "https://apps.xero.com/search?q=peppol",
+        "reason": "Client-rendered shell with no app results (also for xrechnung and e-invoicing)."
+      },
+      {
+        "url": "https://appsource.microsoft.com/en-us/marketplace/apps?search=smtp%20relay",
+        "reason": "1.9 MB page; app results not parseable, not used."
+      },
+      {
+        "url": "https://learn.microsoft.com/en-us/answers/a/12543651",
+        "reason": "Returned only page chrome, no question text, to curl."
+      },
+      {
+        "url": "https://community.spiceworks.com/search.json?q=smtp%20auth%20basic%20scanner%20after%3A2026-08-01",
+        "reason": "Discourse search returned 0 posts (also for scan to email oauth)."
+      },
+      {
+        "url": "https://github.com/ryoppippi/ccusage",
+        "reason": "HTTP 403 for github.com HTML from a research agent; raw.githubusercontent.com worked."
+      },
+      {
+        "url": "https://h30434.www3.hp.com/t5/Printer-Setup-Software-Drivers/Smart-Tank-7600-Scan-to-email-doesn-t-work-with-Outlook-or/td-p/9557684",
+        "reason": "HTTP 403."
+      },
+      {
+        "url": "https://community.usa.canon.com/t5/Office-Printers/imageCLASS-MF644Cdw-Set-up-Scan-To-Email-using-M365-OAUTH/m-p/570759",
+        "reason": "Redirect to a login wall."
+      },
+      {
+        "url": "https://policycommons.net/artifacts/16465986/cogr-letter_forms-i_rppr_dms_719/17350825",
+        "reason": "Cloudflare challenge (HTTP 403)."
+      },
+      {
+        "url": "https://forum.openwrt.org/search.json?q=%22cyber%20resilience%22%20after%3A2026-08-13",
+        "reason": "HTTP 429."
+      },
+      {
+        "url": "https://www.springlex.eu/en/packages/cra/cra-regulation/article-64/",
+        "reason": "JS challenge; the micro-enterprise fine relief for the 24h warning stays unverified."
+      },
+      {
+        "url": "https://www.capterra.com/p/10045966/CRA-Ready/",
+        "reason": "Not fetched (Capterra is on the avoid list); its USD 49/99 prices came from search snippets only and were not used."
+      }
+    ],
+    "rejectedCandidates": [
+      {
+        "title": "FY2027 RPPR Data-Sharing Kit for NIH SBIR Companies",
+        "total": 15,
+        "reason": "Reviewed and killed: identifier reporting in RPPR C.5 has applied since 1 Oct 2024 (https://www.niaid.nih.gov/grants-contracts/reporting-dms-plan-activities-progress-reports), the 2026 plan is five yes/no questions plus two short boxes (https://www.grants.nih.gov/grants/guide/notice-files/NOT-OD-26-046.html), SBIR awardees may withhold data for 20 years, free DMPTool and library consults cover the rest, and no 2026 sufferer complaint was found."
+      },
+      {
+        "title": "E-Rechnung Bridge for Xero (XRechnung/ZUGFeRD)",
+        "total": 14,
+        "reason": "Researched, not reviewed (three ideas had already survived review): Xero has offered native Peppol e-invoicing for Germany since December 2025 (https://productideas.xero.com/forums/967115-invoices-quotes/suggestions/44961211-e-invoicing-peppol-compliance), Tailride already reads XRechnung/ZUGFeRD into Xero with a free tier (https://tailride.so/pricing), and the last German complaint on the Xero idea is from November 2024."
+      },
+      {
+        "title": "Security Answer Pack for solo SaaS founders",
+        "total": 15,
+        "reason": "Crowded (trust-centre and questionnaire tools plus free templates); only a May 2026 Ask HN thread and one Freelancer pen-test job (2026-11-11) as evidence; pain 3, gap 1."
+      },
+      {
+        "title": "Peppol Rejection Explainer for small invoicers",
+        "total": 15,
+        "reason": "One complaint (forum.invoiceninja.com, randy, 2026-10-25, https://forum.invoiceninja.com/t/23615.json) about a tool-specific bug; free EN 16931 validators exist; Freelancer returned 0 Peppol jobs."
+      },
+      {
+        "title": "Closed-Plugin Watch for WordPress agencies",
+        "total": 13,
+        "reason": "Search results show Wordfence already alerts on abandoned and removed plugins for free; no 2026 agency complaint found."
+      },
+      {
+        "title": "Agent Instruction-File Drift Check",
+        "total": 14,
+        "reason": "Inspired by an arXiv paper on stale agent instruction files (http://arxiv.org/abs/2611.09802v1); no complaint and no payment evidence, so pain, willingness to pay and gap are capped at 2."
+      },
+      {
+        "title": "Texas App Store Accountability Act kit for indie app developers",
+        "total": 13,
+        "reason": "Mandate only (legal analyses in search results); no developer complaint found, and Apple's and Google's age APIs carry most of the work."
+      },
+      {
+        "title": "EWS retirement app inventory for small businesses",
+        "total": 13,
+        "reason": "EWS phase-out began 2026-10-01 with removal on 2027-04-01 (https://mc.merill.net/message/MC1227454), but it affects apps rather than devices and only one comment (technonath) mentions the fallout."
+      },
+      {
+        "title": "Vibe-coded app production-readiness check",
+        "total": 13,
+        "reason": "Crowded with scanners and rescue agencies seen in search results; no small-business owner complaint found on a usable page."
+      },
+      {
+        "title": "200-day TLS certificate renewal tracker",
+        "total": 12,
+        "reason": "Change is real (March 2026) but certificate-expiry monitors are widely free; only vendor content found."
+      },
+      {
+        "title": "Self-hosted image CVE watch for agencies (n8n, Coolify)",
+        "total": 12,
+        "reason": "GitHub issue n8n#38532 shows fixable CVEs in a published image, but Trivy, Dependabot and Coolify's built-in image scanning are free."
+      },
+      {
+        "title": "Shopify e-invoicing app for Belgian merchants",
+        "total": 12,
+        "reason": "Sufio already sends Belgian Peppol invoices for Shopify (https://community.shopify.com/t/mandatory-e-invoicing/410748.json), and the thread's 2026 posts are by vendors."
+      },
+      {
+        "title": "Agency client renewal register (domains, certificates, hosting)",
+        "total": 12,
+        "reason": "No evidence found beyond general advice; free tools and registrar reminders exist."
+      },
+      {
+        "title": "Stripe API upgrade preflight",
+        "total": 11,
+        "reason": "No forced upgrade in 2026; Stripe publishes its own free upgrade guide and agent skill."
+      },
+      {
+        "title": "GitHub Actions self-hosted runner billing estimator",
+        "total": 10,
+        "reason": "GitHub postponed the self-hosted charge; nothing dated after the postponement."
+      },
+      {
+        "title": "Git 3.0 SHA-256 migration checker",
+        "total": 10,
+        "reason": "One HN comment (Onavo, 2026-10-01); no buyer evidence."
+      },
+      {
+        "title": "ChatGPT/Codex plan allowance tracker",
+        "total": 10,
+        "reason": "Rejection rule: a wrapper over a vendor's own plan limits with no workflow or data moat (inspired by openai/codex issue #58530)."
+      },
+      {
+        "title": "Recruiter-mail sorter browser extension",
+        "total": 9,
+        "reason": "Rejection rule: a novelty AI wrapper (one HN 'I would pay for this' comment, cobbzilla 2026-10-09)."
+      },
+      {
+        "title": "Research-software catalog builder for institutions",
+        "total": 11,
+        "reason": "Rejection rule: institutional procurement for the first sale (arXiv 2609.04711)."
+      },
+      {
+        "title": "Pen-test preparation for small SaaS",
+        "total": 11,
+        "reason": "Rejection rule: a consulting service rather than a product (Freelancer black-box pen test job, 2026-11-11)."
+      },
+      {
+        "title": "Zotero passage-level citation links plugin",
+        "total": 9,
+        "reason": "Rejection rule: a free-plugin feature with no paying buyer (llm-for-zotero issue #561)."
+      }
+    ],
+    "watchlist": [],
+    "caveats": "First run of 2026-11-11 (Wednesday, developer and research tooling lens). Three provisional ideas ship (18, 17, 16); none cleared the gate of 22. Twenty-four candidates; five were researched by subagents and four adversarially reviewed: the NIH data-sharing kit was killed (identifier reporting has applied since 2024, the new plan is a short form, free DMPTool and library help), and the three shipped ideas were rescored down (Scan-to-Email Fix-Path Finder 20 to 18, Client AI-Use Register 18 to 17, CRA Report-Ready Kit 18 to 16). The Xero e-invoicing bridge was researched but not reviewed because three ideas had already survived; Xero's native Peppol and Tailride would have killed it. Focus sources were thin for this lens: A3 GitHub issue search gave usable reaction counts but mostly bug reports; B2 AppSumo's category pages ignore the category and show sitewide deals, so it yielded no developer-tool spend; C2 OpenAlex returned 429 again and arXiv gave only research context. Freelancer.com's API matched none of 25+ spend queries for this lens, so willingness to pay rests on vendor price pages. No watchlist entries: no unselected candidate reached 19. The small-business buyer constraint is met by idea 1 (Small Business Ops) and by ideas 2 and 3 (smallBusiness true). The weekly build has two substantial Multi-week ideas with build plans (ideas 2 and 3). Unverified: the claim that micro and small enterprises cannot be fined for missing the CRA 24-hour early warning (search results only; the article page was behind a JS challenge)."
+  }
+}
