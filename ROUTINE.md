@@ -100,6 +100,15 @@ again. If the rebase stops on a conflict, run `git rebase --abort`, do not
 push, and report what each side of the conflict contains. Never resolve a
 conflict in `ideas/`, `IDEAS.md`, or `CHANGES.md` by keeping one side.
 
+One exception (owner, 11 November 2026): `CHANGES.md` is append-only, and the
+build routine also adds lines to it, so both runs often add a line at its end
+on the same day. When the only conflicting file is `CHANGES.md` and both
+sides only added lines at the end, resolve it by keeping both: main's new
+lines first, then this run's, each entry separated by a blank line as usual.
+Change nothing else, `git add CHANGES.md`, `git rebase --continue`, run
+`validate_ideas.py` again, and push. Say in the report that you did this and
+quote both sides' lines. Any other conflict still aborts as above.
+
 ---
 
 ## Step 0: Read what earlier runs learned
