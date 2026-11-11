@@ -671,3 +671,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-11 [doc] Qualified Overtime Checker for W-2 Box 12 TT (2026-11-07 #2) implemented: https://qualified-overtime-checker.hintwise.org (code in claude-built-apps/qualified-overtime-checker). First weekly build, seven build days.
 
 2026-11-11 [decision] ROUTINE.md: a rebase conflict only in CHANGES.md where both sides appended at the end keeps both lines (main's first); any other conflict still aborts.
+
+2026-11-11 [code] Studio: Qualified Overtime Checker gets its catalog entry (small businesses, blurb) and a home-page screenshot in web/media; it had neither, so it showed no image under Learners.
