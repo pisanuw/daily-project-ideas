@@ -1,0 +1,998 @@
+{
+  "date": "2026-11-12",
+  "schemaVersion": 3,
+  "complete": true,
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Pay-Run Cover Check for Xero",
+      "slug": "pay-run-cover-check-for-xero",
+      "category": "Small Business Ops",
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Data & Visualization",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": true,
+        "engine": true,
+        "shared": true,
+        "notes": {
+          "stateful": "The business keeps a saved register of every supplier's certificate of currency and every worker's licence or ticket, with expiry dates and the document itself, and comes back to it each pay run.",
+          "connected": "Reads Xero contacts and bills awaiting payment with the business's own Xero login, and writes a short history note on a flagged bill.",
+          "unattended": "A nightly job checks expiry dates, emails suppliers an upload link 30 days out, and emails the owner or bookkeeper a pre-pay-run list of bills from non-compliant suppliers.",
+          "engine": "Per-supplier rules: which cover types are required for that trade, minimum limits, a grace window, and matching each bill awaiting payment to the supplier's compliance status on its due date.",
+          "shared": "Suppliers upload renewed certificates through a no-login link; the owner and the outside bookkeeper see the same register and pay-run list."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "email",
+        "scheduled",
+        "backend"
+      ],
+      "buildPlan": [
+        {
+          "n": 1,
+          "title": "One supplier, one certificate",
+          "delivers": "Sign in, connect a Xero organisation, pick a supplier from Xero contacts, upload a certificate of currency with its expiry date, and see it marked current or expired.",
+          "acceptance": "A signed-in user connects a Xero demo company, saves a certificate against a real contact, and the status flips to expired when the date is moved into the past; deployed."
+        },
+        {
+          "n": 2,
+          "title": "Register and rules",
+          "delivers": "A register of all suppliers and workers with required cover types per trade (public liability, workers compensation, contract works, trade licence, white card) and a missing/expiring/expired status.",
+          "acceptance": "A 30-contact demo company shows the right status for every row after seeding mixed dates; rules edited for one trade change only that trade's rows."
+        },
+        {
+          "n": 3,
+          "title": "Pay-run check",
+          "delivers": "A list of Xero bills awaiting payment whose supplier is missing or out of cover on the bill's due date, with an optional history note written to each flagged bill.",
+          "acceptance": "With 10 seeded bills (4 from non-compliant suppliers) the list shows exactly those 4, and each gets one history note under 250 characters; no bill is changed otherwise."
+        },
+        {
+          "n": 4,
+          "title": "Supplier upload link",
+          "delivers": "Each supplier gets a private, expiring link to upload a renewed certificate and expiry date without an account; the owner approves it.",
+          "acceptance": "A supplier uploads via the link on a phone, the owner approves, and the register updates; an expired link refuses uploads."
+        },
+        {
+          "n": 5,
+          "title": "Nightly watch and emails",
+          "delivers": "A scheduled job emails suppliers 30 and 7 days before expiry and emails the owner a digest before the usual pay-run day.",
+          "acceptance": "Seeded expiries produce exactly one supplier email per threshold and one owner digest listing the flagged bills; re-running the job sends nothing twice."
+        },
+        {
+          "n": 6,
+          "title": "Polish",
+          "delivers": "Business-owner README, phone layout, keyboard and screen-reader pass, multi-organisation view for bookkeepers, walkthrough test.",
+          "acceptance": "A walkthrough test runs sign-in to pay-run list; axe reports no serious issues; one bookkeeper login switches between two Xero organisations."
+        }
+      ],
+      "summary": "For small Australian trades and building firms on Xero: before each pay run, see which bills are from subcontractors whose insurance or licence has lapsed, and chase the renewal automatically.",
+      "public": {
+        "summary": "Before you pay your subcontractors, it shows you which ones no longer have current insurance or licences, and asks them for the new certificate.",
+        "problem": "You keep certificates of insurance in a folder and expiry dates in a spreadsheet, if anywhere. When a pay run comes round nobody checks, so you pay a subcontractor whose cover lapsed last month. If something goes wrong on site, that gap can land on you.",
+        "forWhom": "Owners, office managers and bookkeepers of small building, trades and maintenance businesses that pay subcontractors.",
+        "benefits": [
+          "A short list of who not to pay yet, before every pay run",
+          "Subcontractors upload their own renewed certificates",
+          "Staff licences and tickets tracked in the same place",
+          "No more digging through email for an expiry date"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "Xero (and QuickBooks Online) lets you attach a certificate to a contact but has no expiry date, reminder or link to payments, so small contractors keep cover and licence dates in notes or spreadsheets and, in one QuickBooks user's words, the system 'will allow you to pay a subcontractor with an expired insurance certificate'. Xero users have asked for bills to be blocked once a certificate is due to expire (Kristi Truong, 2026-01-30), structured certificate tracking (Logan Spearman, 2026-04-10) and staff licence expiry reminders instead of 'separate spreadsheets, calendar reminders or other systems' (Simon & Grace Bolton, 2026-09-04).",
+      "description": "A web app connected to the business's Xero organisation. It keeps a register of suppliers' certificates of currency and workers' licences with expiry dates and required cover per trade. Before each pay run it lists the Xero bills awaiting payment whose supplier is missing or out of cover, and can add a history note to each flagged bill; it cannot block a payment, so the list is the control. Suppliers renew through a no-login upload link, and a nightly job emails suppliers before expiry and the owner or bookkeeper before the usual pay day. Australia first (certificates of currency, white cards, trade licences), with US certificates of insurance as a second market.",
+      "targetCustomer": "Owners, office managers and outside bookkeepers of small Australian building, trades and facilities businesses (2 to 30 staff, 5 to 60 subcontractors) that pay suppliers from Xero.",
+      "buyer": "The business owner on the business card, or the bookkeeper who bills it to several trade clients.",
+      "whyNow": "Xero told the payroll requester that it has 'currently no plans' for qualification expiry reminders, the bill-blocking request has sat at Gaining Support since January 2026, and free standalone trackers (bcs, free up to 25 vendors) are not connected to Xero bills, so nothing cheap sits at the point where the money leaves.",
+      "founderFit": "A Xero-connected web app with a scheduled job and email is a direct fit for the shared platform, and Pisan can ship and support it alone; the first buyers come through bookkeepers, who are reachable on the Xero App Store and in bookkeeper communities rather than through his university network.",
+      "problemEvidence": [
+        {
+          "url": "https://productideas.xero.com/forums/967118-payroll-expenses/suggestions/51669724-payroll-au-licences-qualifications-tab-in-employe",
+          "source": "productideas.xero.com",
+          "author": "Simon & Grace Bolton",
+          "date": "2026-09-04",
+          "kind": "complaint",
+          "summary": "Asks for a licences and qualifications tab with expiry reminders at 90/60/30/7 days so employers stop relying on separate spreadsheets and calendar reminders; 3 votes."
+        },
+        {
+          "url": "https://productideas.xero.com/forums/967124-projects-tracking/suggestions/50947124-bills-certificate-insurance-prevent-bill-from",
+          "source": "productideas.xero.com",
+          "author": "Kristi Truong",
+          "date": "2026-01-30",
+          "kind": "complaint",
+          "summary": "Certificates of insurance are 'a big part of our company's operation'; asks Xero to stop bills being submitted for payment when a certificate is due to expire; 6 votes."
+        },
+        {
+          "url": "https://productideas.xero.com/forums/967130-contacts-documents/suggestions/51182920-us-tax-certificate-of-insurance-coi-management",
+          "source": "productideas.xero.com",
+          "author": "Logan Spearman",
+          "date": "2026-04-10",
+          "kind": "complaint",
+          "summary": "Wants structured certificate tracking (policy type, limits, expiry) with reminders, like Xero's W-9 fields, for businesses that rely heavily on subcontractors."
+        },
+        {
+          "url": "https://quickbooks.intuit.com/learn-support/en-us/reports-and-accounting/re-is-there-a-way-to-track-when-certificates-of-insurance/01/1334084",
+          "source": "quickbooks.intuit.com",
+          "author": "Holly64",
+          "date": "2025-01-29",
+          "kind": "complaint",
+          "summary": "Contractor edition user: QuickBooks 'will allow you to pay a subcontractor with an expired insurance certificate'; earlier replies since 2021 confirm QuickBooks Online cannot track certificate expiry."
+        },
+        {
+          "url": "https://getbcs.com/pricing",
+          "source": "getbcs.com",
+          "author": "bcs",
+          "date": "2026-11-12",
+          "kind": "spend",
+          "summary": "Read on 2026-11-12: certificate tracking free for up to 25 vendors, self-service $0.95 per vendor per month, full service $17.80 per vendor per year with a $10,000 minimum; no Xero or QuickBooks link listed."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "bcs",
+          "url": "https://getbcs.com/pricing",
+          "price": "Free up to 25 vendors; $0.95/vendor/month self-service",
+          "gap": "Standalone; integrations are Yardi, Procore and MRI, not Xero bills; no staff licences."
+        },
+        {
+          "name": "Manage My Renewals",
+          "url": "https://apps.xero.com/au/function/bills-expenses/app/manage-my-renewals",
+          "price": "unknown",
+          "gap": "General licence and insurance renewal tracker on the AU Xero App Store with 0 reviews; no supplier upload link and no link to bills awaiting payment."
+        },
+        {
+          "name": "TrustLayer",
+          "url": "https://www.trustlayer.io/pages/quickbooks-integration",
+          "price": "unknown",
+          "gap": "Checks vendor compliance before payment, but for QuickBooks Online and priced for larger buyers; no Xero."
+        },
+        {
+          "name": "Archdesk",
+          "url": "https://archdesk.com/en-au/solutions/subcontractor-management",
+          "price": "unknown",
+          "gap": "Full construction ERP with expiry alerts, aimed at 5 to 250+ staff firms; far more than a small trades firm will adopt for this."
+        },
+        {
+          "name": "BuildPass",
+          "url": "https://help.buildpass.ai/en/articles/10344472-do-subcontractors-get-a-notification-when-insurances-are-expiring",
+          "price": "unknown (third-party listings A$175-549/month)",
+          "gap": "Site-management suite with insurance expiry emails; priced for builders who want the whole suite."
+        }
+      ],
+      "keyFeatures": [
+        "Supplier and staff compliance register with required cover per trade",
+        "Pre-pay-run list of Xero bills from non-compliant suppliers, with history notes",
+        "No-login supplier upload link for renewed certificates",
+        "Nightly expiry watch with supplier and owner emails",
+        "Bookkeeper view across several Xero organisations"
+      ],
+      "mvpScope": {
+        "features": [
+          "Xero connection and contact picker",
+          "Certificate register with expiry status",
+          "Pay-run list of bills awaiting payment from non-compliant suppliers",
+          "Nightly expiry email"
+        ],
+        "outOfScope": [
+          "Blocking payments (Xero's API cannot)",
+          "Reading policy limits from PDFs automatically",
+          "QuickBooks Online",
+          "US certificate formats beyond expiry and cover type"
+        ],
+        "buildEstimate": "about 6 build days"
+      },
+      "techStack": "Static front end on the shared platform, Supabase for accounts and the register, backend-hub on Render for Xero OAuth and API calls, the platform's scheduled job and transactional email.",
+      "pricing": {
+        "model": "Flat subscription per Xero organisation; bookkeeper bundle",
+        "pricePoint": "A$29/month per organisation; bookkeeper plan A$99/month for up to 10 organisations",
+        "rationale": "Priced against bcs (free to 25 vendors, about US$57/month at 60) on the one thing bcs lacks, the Xero bill check; Xero's developer Core tier (A$35/month for 50 connections) keeps cost per customer low."
+      },
+      "revenueSketch": "Estimate: 60 organisations at A$29 plus 10 bookkeeper plans at A$99 = about A$2,730 MRR, before Xero API tier costs. Assumes bookkeepers bring most organisations.",
+      "distribution": "Ten Australian bookkeepers who serve trades clients (found through bookkeeper communities and the Xero advisor directory), then a Xero App Store listing once past the Starter tier's 5 connections.",
+      "validationTest": {
+        "method": "Landing page plus a free pay-run check on a demo export, offered to 10 AU bookkeepers with trades clients; ask each to run it on one real client.",
+        "successCriteria": "4 of 10 bookkeepers run it on a real client and 3 agree to pay A$29/month per client after a two-week trial.",
+        "cost": "About 1 week of outreach and a landing page; under A$100."
+      },
+      "moat": "The supplier upload habit and the per-trade rule sets built up per bookkeeper make switching away a chore; weak against Xero shipping its own fields.",
+      "compliance": [
+        "Australian Privacy Act: stores staff licence details and supplier documents, so access control, retention limits and a privacy policy are required.",
+        "Xero developer terms: Core tier and, later, App Store certification and a security assessment.",
+        "Liability: the app shows status only and must not claim a supplier is insured; wording and terms need care.",
+        "Accessibility: WCAG 2.2 AA for the owner and supplier pages."
+      ],
+      "risks": [
+        {
+          "risk": "Xero ships certificate fields and reminders.",
+          "mitigation": "Stay the pay-run control and the supplier upload workflow, which Xero has not planned; keep pricing low."
+        },
+        {
+          "risk": "Small firms keep using a free tracker or a spreadsheet.",
+          "mitigation": "Sell through bookkeepers, whose own time on chasing certificates is the budget."
+        },
+        {
+          "risk": "A wrong 'compliant' flag leads to an uninsured incident.",
+          "mitigation": "Show source documents and dates, never infer cover, and require a human approval of each upload."
+        }
+      ],
+      "scores": {
+        "pain": 3,
+        "willingnessToPay": 2,
+        "reachability": 3,
+        "competitiveGap": 3,
+        "feasibility": 4,
+        "complianceBurden": 3,
+        "total": 18
+      },
+      "scoreRationale": {
+        "pain": "Real and repeated (https://productideas.xero.com/forums/967124-projects-tracking/suggestions/50947124-bills-certificate-insurance-prevent-bill-from, https://productideas.xero.com/forums/967118-payroll-expenses/suggestions/51669724-payroll-au-licences-qualifications-tab-in-employe, https://quickbooks.intuit.com/learn-support/en-us/reports-and-accounting/re-is-there-a-way-to-track-when-certificates-of-insurance/01/1334084), but vote counts are small and a spreadsheet works for 5 to 60 suppliers.",
+        "willingnessToPay": "bcs is free up to 25 vendors (https://getbcs.com/pricing), which anchors the price; only the Xero bill check is clearly worth paying for; no paid job for this task found on Freelancer.",
+        "reachability": "Bookkeepers with trades clients are reachable; an App Store listing needs a paid Xero tier (https://developer.xero.com/pricing).",
+        "competitiveGap": "Nothing cheap ties compliance to Xero bills (https://apps.xero.com/au/function/bills-expenses/app/manage-my-renewals has no bill link), but standalone tracking is a free commodity (https://getbcs.com/pricing).",
+        "feasibility": "Xero's API reads bills awaiting payment and accepts history notes, though it cannot block a payment; Starter tier is free for 5 connections (https://developer.xero.com/pricing).",
+        "complianceBurden": "Holds supplier documents and staff licence data and carries reputational risk if a status is wrong (https://productideas.xero.com/forums/967118-payroll-expenses/suggestions/51669724-payroll-au-licences-qualifications-tab-in-employe)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Reviewer rescored 21 to 18 (pain 4 to 3, willingnessToPay 3 to 2, complianceBurden 4 to 3). bcs's free tier for up to 25 vendors (https://getbcs.com/pricing) replaces plain certificate tracking for most small firms; CertCove, TrustLayer (QuickBooks only), Archdesk and BuildPass exist but none ties compliance to Xero bills at a small-firm price; Manage My Renewals (https://apps.xero.com/au/function/bills-expenses/app/manage-my-renewals) is a 0-review general tracker. The 'documents expiry' request is mostly outside the target market (South African BBBEE documents, a landlord's gas-safety comment), so it was dropped from the evidence. Only Bolton (2026-09-04) and a construction comment on Spearman's idea (Vickie Nee, 2026-09-05) fall inside 90 days. Xero cannot block a payment and has no pay-run event, so the product is a scheduled list plus history notes. Xero said 'currently no plans' for qualification reminders, which lowers that risk. Re-scoped to Australia first, the pay-run check plus staff tickets, priced at about A$29/month, validated through bookkeepers."
+      },
+      "inspiredBy": "https://productideas.xero.com/forums/967124-projects-tracking/suggestions/50947124-bills-certificate-insurance-prevent-bill-from",
+      "gateGap": {
+        "missing": [
+          "total 18 is below 22",
+          "pain 3 is below 4",
+          "willingnessToPay 2 is below 3"
+        ],
+        "closedBy": "The bookkeeper trial closes willingness to pay: 3 of 10 bookkeepers paying A$29/month per client after running the pay-run check on a real client would support willingnessToPay 3, and a flagged bill they had not caught would support pain 4."
+      }
+    },
+    {
+      "n": 2,
+      "title": "Walk-In Board for Square Shops",
+      "slug": "walk-in-board-for-square-shops",
+      "category": "Small Business Ops",
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Data & Visualization",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": true,
+        "engine": true,
+        "shared": true,
+        "notes": {
+          "stateful": "Returning clients are recognised by phone number, and each barber's daily availability, visit history and wait times are kept.",
+          "connected": "Uses the shop's own Square account: Square team members as barbers, Square customers as the client list, Square bookings so walk-ins do not collide with appointments.",
+          "unattended": "Texts the next client automatically when a chair is about to free up, and resets the board and emails an end-of-day summary on a schedule.",
+          "engine": "Queue assignment: next available barber, or a requested one, around booked appointments, with wait estimates from service durations and each barber's recent pace.",
+          "shared": "Three roles: the client at the tablet and on their phone, the barber marking clients done, and the owner; plus a TV board everyone in the shop sees."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "scheduled",
+        "backend"
+      ],
+      "buildPlan": [
+        {
+          "n": 1,
+          "title": "Tablet check-in to TV board",
+          "delivers": "The owner signs in, adds barbers, and a client checks in on a tablet with name and phone; the TV page shows the queue live.",
+          "acceptance": "Two browser windows (tablet and TV) show a new check-in on the board within 2 seconds; deployed."
+        },
+        {
+          "n": 2,
+          "title": "Barbers and availability",
+          "delivers": "Each barber sets today's hours and marks clients started and done from a phone; the queue assigns the next available barber or a requested one.",
+          "acceptance": "With 3 barbers and 8 seeded walk-ins the assignment matches a hand-worked schedule, including one requested barber."
+        },
+        {
+          "n": 3,
+          "title": "Square connection",
+          "delivers": "Connect Square: import team members, match returning clients to Square customers by phone, and keep booked appointments out of the walk-in queue.",
+          "acceptance": "In a Square sandbox, a booked 2 pm appointment blocks that barber's slot and a returning client's phone pulls their Square name."
+        },
+        {
+          "n": 4,
+          "title": "Wait times and texts",
+          "delivers": "Estimated waits from service durations and recent pace; an automatic text when the client is next, sent through a registered number.",
+          "acceptance": "Estimates stay within 10 minutes on a replayed day of seeded data; exactly one 'you're next' text per client in the test number log."
+        },
+        {
+          "n": 5,
+          "title": "Day close and summary",
+          "delivers": "A scheduled job clears the board, saves the day's visits and emails the owner walk-ins served, walk-outs and average wait.",
+          "acceptance": "A seeded day produces one summary with counts matching the visit table."
+        },
+        {
+          "n": 6,
+          "title": "Polish",
+          "delivers": "Shop-owner README, large-text TV mode, tablet kiosk mode, accessibility pass, walkthrough test.",
+          "acceptance": "A walkthrough test runs check-in to done; axe reports no serious issues on the tablet and TV pages."
+        }
+      ],
+      "summary": "For barbershops and walk-in salons on Square: a tablet check-in, a TV queue with wait times and a text when it is your turn, using the shop's Square staff and client list.",
+      "public": {
+        "summary": "Walk-in clients sign in on a tablet, see their place and wait on a screen, and get a text when it is their turn.",
+        "problem": "Walk-ins write their name on a clipboard, ask the front desk how long it will be, and some leave. Your barbers lose track of who is next around booked appointments. And you never find out who your regulars are.",
+        "forWhom": "Owners of barbershops and walk-in salons that already take payments and bookings with Square.",
+        "benefits": [
+          "Clients know their wait and stop asking",
+          "Fewer people walk out before their turn",
+          "Walk-ins fit around booked appointments",
+          "A list of regulars you can thank and invite back"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "Walk-in barbershops run their queue on paper or memory. A barbershop owner posted a paid job on 2026-11-12 for a self check-in waitlist that fills barbers' availability, shows names and wait times on a monitor and saves returning clients by phone. Square sellers have asked Square for a walk-in queue on a big screen since 2022, one saying 'we would be willing to pay someone to develop this option' and another that Square's reluctance had them 'seriously looking for other options'.",
+      "description": "A Square-connected web app. A tablet at the door checks clients in by phone number (returning clients are recognised from Square customers); barbers set today's hours and mark clients done from a phone; the engine assigns the next free or requested barber around booked Square appointments and estimates waits; a TV page shows the queue; clients get a text when they are next. A daily job closes the board and emails the owner walk-ins served, walk-outs and average wait. Positioned as the Square-native walk-in layer, not a new booking system.",
+      "targetCustomer": "Owners of independent barbershops and walk-in salons (2 to 8 chairs) in the US that use Square for payments or appointments.",
+      "buyer": "The shop owner, on the business card.",
+      "whyNow": "Square Appointments still has a waitlist but no walk-in check-in or queue display, and its sellers keep asking for one; walk-in queue apps exist but are not tied to the shop's Square staff, bookings and client list.",
+      "founderFit": "A real-time queue with a TV view, Square OAuth and a scheduled job is a direct fit for the shared platform; the Square App Marketplace and local shop visits are self-serve channels Pisan can work alone.",
+      "problemEvidence": [
+        {
+          "url": "https://www.freelancer.com/projects/app-development/Barber-Shop-Walk-Check-System",
+          "source": "freelancer.com",
+          "author": "unknown",
+          "date": "2026-11-12",
+          "kind": "spend",
+          "summary": "Barbershop owner budgets US$250-750 for a walk-in self check-in with barber availability, a monitor showing names and wait times, saved phone numbers and client data for marketing; 281 bids."
+        },
+        {
+          "url": "https://community.squareup.com/t5/Feature-Requests/walk-in-and-appointment-queue/idi-p/382469",
+          "source": "community.squareup.com",
+          "author": "Groompella",
+          "date": "2024-02-18",
+          "kind": "complaint",
+          "summary": "Feature request for a walk-in and appointment queue on a big screen; the requester adds 'we would be willing to pay someone to develop this option', and iclipssalon (2024-09-16) says Square's reluctance has them looking for other options."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "NextUp Walk-in",
+          "url": "https://omr.com/en/reviews/product/nextup-walk-in/alternatives",
+          "price": "about $29/location/month (third-party listing)",
+          "gap": "Already offers door tablet, TV apps and texts; no confirmed Square integration, so staff and clients are kept twice."
+        },
+        {
+          "name": "Waitwhile",
+          "url": "https://waitwhile.com/pricing",
+          "price": "Free to 50 visits/month; Starter $31, Business $55/month",
+          "gap": "General queueing; the free tier is far below a 4-chair shop's walk-ins."
+        },
+        {
+          "name": "TablesReady",
+          "url": "https://www.tablesready.com/pricing",
+          "price": "Free to 100 parties/month; Starter $39/month billed annually",
+          "gap": "Restaurant-first waitlist; no barber availability or Square bookings."
+        },
+        {
+          "name": "NextMe",
+          "url": "https://nextmeapp.com/pricing",
+          "price": "Free with 100 texts; Starter $49.99/month",
+          "gap": "Generic waitlist, not tied to Square staff or appointments."
+        },
+        {
+          "name": "Squire",
+          "url": "https://getsquire.com/pricing",
+          "price": "Pro $50/month",
+          "gap": "Includes waitlist and walk-ins but replaces Square as the shop's whole system."
+        },
+        {
+          "name": "Square Appointments",
+          "url": "https://squareup.com/us/en/appointments/pricing",
+          "price": "$0 / $49 / $149 per location",
+          "gap": "Has a waitlist for bookings but no walk-in check-in or queue display."
+        }
+      ],
+      "keyFeatures": [
+        "Tablet check-in by phone, recognising returning Square customers",
+        "Live TV queue with estimated waits",
+        "Assignment around booked Square appointments and requested barbers",
+        "Automatic 'you're next' text",
+        "End-of-day summary of walk-ins, walk-outs and waits"
+      ],
+      "mvpScope": {
+        "features": [
+          "Tablet check-in",
+          "TV board",
+          "Barber availability and next-free assignment",
+          "Square team and customer import"
+        ],
+        "outOfScope": [
+          "Taking payment (Square does it)",
+          "Marketing campaigns",
+          "Online remote check-in",
+          "Multi-location chains"
+        ],
+        "buildEstimate": "about 6 build days"
+      },
+      "techStack": "Static front end on the shared platform with Supabase realtime for the board, Supabase for accounts and visits, backend-hub on Render for Square OAuth, Square APIs and the SMS provider, the platform's scheduled job and email.",
+      "pricing": {
+        "model": "Monthly subscription per location",
+        "pricePoint": "$19/month including 500 texts",
+        "rationale": "Below NextUp ($29) and Squire Pro ($50); the free tiers of Waitwhile and TablesReady are too small for a busy shop, so $19 with Square sync is the gap."
+      },
+      "revenueSketch": "Estimate: 120 shops at $19 = $2,280 MRR, less SMS and registration costs of roughly $3 to $5 per shop per month.",
+      "distribution": "Square App Marketplace listing, plus walking into 20 local barbershops with a tablet demo; Square Community feature-request threads point to sellers who asked for exactly this.",
+      "validationTest": {
+        "method": "A working tablet-and-TV demo (no Square sync yet) loaned free for two weeks to 5 local Square-using barbershops.",
+        "successCriteria": "3 of 5 keep using it daily in week two and 2 agree to pay $19/month once Square sync ships.",
+        "cost": "About 2 weeks of evenings and one spare tablet; under $300."
+      },
+      "moat": "Square integration and a habit at the front door; modest, since queue apps are easy to copy.",
+      "compliance": [
+        "SMS: A2P 10DLC brand and campaign registration per sending number, with fees and review delays (https://pages.twilio.com/10DLC-HelpArticles-WW).",
+        "TCPA: texts only to clients who check in and consent; marketing use needs separate opt-in.",
+        "Privacy: names and phone numbers of the public, so a short retention policy.",
+        "Accessibility: WCAG 2.2 AA on the tablet; large text on the TV board."
+      ],
+      "risks": [
+        {
+          "risk": "NextUp or Waitwhile adds Square sync.",
+          "mitigation": "Ship the Square-native flow first and price under them."
+        },
+        {
+          "risk": "Square builds walk-in check-in into Appointments.",
+          "mitigation": "Keep the product small and cheap to run; the Square-request threads date to 2022 without action."
+        },
+        {
+          "risk": "SMS registration slows onboarding.",
+          "mitigation": "Launch with an on-screen and web-page 'you're next' alert and add texts once the number is approved."
+        }
+      ],
+      "scores": {
+        "pain": 3,
+        "willingnessToPay": 2,
+        "reachability": 3,
+        "competitiveGap": 2,
+        "feasibility": 4,
+        "complianceBurden": 3,
+        "total": 17
+      },
+      "scoreRationale": {
+        "pain": "Owners want it (https://www.freelancer.com/projects/app-development/Barber-Shop-Walk-Check-System, https://community.squareup.com/t5/Feature-Requests/walk-in-and-appointment-queue/idi-p/382469), but paper sign-in still works and the newest Square complaint found is not within 90 days.",
+        "willingnessToPay": "One paid build request at $250-750 one-off (https://www.freelancer.com/projects/app-development/Barber-Shop-Walk-Check-System); free queue tiers set expectations (https://waitwhile.com/pricing).",
+        "reachability": "Shops are easy to find and the Square App Marketplace is self-serve, but barbers are pitched constantly by Booksy and Squire (https://getsquire.com/pricing).",
+        "competitiveGap": "NextUp already sells the same features at about $29 (https://omr.com/en/reviews/product/nextup-walk-in/alternatives); the remaining gap is Square integration.",
+        "feasibility": "Realtime board, Square OAuth and texts are routine on the platform; Square pricing and APIs checked (https://squareup.com/us/en/appointments/pricing).",
+        "complianceBurden": "SMS registration per shop and TCPA consent add work (https://pages.twilio.com/10DLC-HelpArticles-WW)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Reviewer recommended a kill as originally scoped (a generic walk-in board at $15-29) because NextUp Walk-in already offers a door tablet, TV apps and 1,000 texts for about $29 (https://omr.com/en/reviews/product/nextup-walk-in/alternatives), and Waitwhile, TablesReady and NextMe have free tiers. Scores went from 19 to 17 (willingnessToPay 3 to 2, competitiveGap 2 kept, complianceBurden 4 to 3 for 10DLC and TCPA). NextUp is not cheaper and has no confirmed Square sync, so under ROUTINE.md this is a re-scope, not a kill: the idea is now the Square-native walk-in layer at $19, which Square sellers have requested since 2022 (https://community.squareup.com/t5/Feature-Requests/walk-in-and-appointment-queue/idi-p/382469). The reviewer flagged two checks before building: whether a Square Marketplace app such as myCheck-in already covers it, and Square API limits."
+      },
+      "inspiredBy": "https://www.freelancer.com/projects/app-development/Barber-Shop-Walk-Check-System",
+      "gateGap": {
+        "missing": [
+          "total 17 is below 22",
+          "pain 3 is below 4",
+          "willingnessToPay 2 is below 3"
+        ],
+        "closedBy": "The two-week loan to 5 Square barbershops closes willingness to pay: 2 shops agreeing to $19/month would support willingnessToPay 3, and daily use in week two with logged walk-outs avoided would support pain 4."
+      }
+    },
+    {
+      "n": 3,
+      "title": "DRS Deposit Lines for Xero Wholesalers",
+      "slug": "drs-deposit-lines-for-xero-wholesalers",
+      "category": "Accessibility & Compliance",
+      "smallBusiness": true,
+      "complexity": "Weekend MVP",
+      "confidence": "provisional",
+      "topic": "Data & Visualization",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": false,
+        "engine": true,
+        "shared": false,
+        "notes": {
+          "stateful": "A saved per-product deposit table (containers per case, material, size, scheme region, exemption status) that the business maintains as its range changes.",
+          "connected": "Reads Xero items and draft sales invoices and bills with the business's own Xero login, and adds the deposit lines to them.",
+          "engine": "Scheme rules: in scope only for PET, steel and aluminium from 150 ml to 3 litres, glass out except under the Welsh scheme, the under-5,000-units-a-year product-line exemption, and deposits charged out versus paid in reconciled per period."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "backend"
+      ],
+      "summary": "For small UK drinks wholesalers and importers on Xero: add the 20p-per-container deposit to every trade invoice and bill automatically, outside VAT, and see deposits charged against deposits paid.",
+      "public": {
+        "summary": "It adds the new drinks container deposit to your trade invoices and supplier bills for you, so you never count cans by hand.",
+        "problem": "From October 2027 every can and plastic bottle you sell to the trade carries a 20p deposit that has to appear as its own line. If an invoice has a hundred products, you would have to work out the containers per case for each one, every time. You also pay deposits to your own suppliers and need the two to match.",
+        "forWhom": "Owners and office staff of small drinks wholesalers, importers and cash-and-carry businesses that invoice from Xero.",
+        "benefits": [
+          "Correct deposit lines on every invoice without manual counting",
+          "Deposits kept out of your VAT figures",
+          "A running total of deposits charged and paid",
+          "Ready before the scheme starts, not after"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "The UK deposit return scheme starts on 1 October 2027 with a 20p deposit on in-scope drinks containers charged along the supply chain and kept outside VAT. A Xero user (James Granville, 2026-09-21) asked how to itemise £1.20 to £4.80 per case separately, and later noted some invoices have over 100 product lines, making manual case counting 'unrealistic'. Independent brewers' body SIBA called for a delay, citing a lack of clarity and different rules across the UK.",
+      "description": "A small Xero-connected tool. The business keeps a deposit table per product (containers per case, material, size, which scheme applies, whether the product line falls under the 5,000-units exemption). The tool scans draft invoices and supplier bills in Xero and adds one deposit line per invoice coded to a deposit liability account with a no-VAT rate, and shows deposits charged against deposits paid per period. Reporting to the scheme administrator waits for the published spec.",
+      "targetCustomer": "Owners and office staff of small UK drinks wholesalers, importers and cash-and-carry businesses (1 to 20 staff) with large ranges, invoicing from Xero and not using a brewery system such as Breww.",
+      "buyer": "The owner, on the business card.",
+      "whyNow": "The scheme launch date of 1 October 2027 still stands, producer registration opens in early 2027, and wholesalers pay deposits on purchases as well as charging them, so the work lands on invoices and bills alike.",
+      "founderFit": "A rules table plus Xero invoice editing is a small, testable build on the shared platform; the hard part is getting the scheme rules right, which suits careful reading of guidance.",
+      "problemEvidence": [
+        {
+          "url": "https://productideas.xero.com/forums/967115-invoices-quotes/suggestions/51717049-inventory-uk-upcoming-drs-deposit-return-scheme",
+          "source": "productideas.xero.com",
+          "author": "James Granville",
+          "date": "2026-09-21",
+          "kind": "complaint",
+          "summary": "Asks whether Xero will support the deposit return scheme: 20p per can or bottle B2B, £1.20 to £4.80 per case, to be itemised separately and outside VAT; a later comment (2026-10-15) says invoices with over 100 lines make manual counting unrealistic."
+        },
+        {
+          "url": "https://www.gov.uk/guidance/deposit-return-scheme-drinks-producer-and-retailer-responsibilities",
+          "source": "gov.uk",
+          "author": "Department for Environment, Food & Rural Affairs",
+          "date": "2026-11-12",
+          "kind": "mandate",
+          "summary": "Read on 2026-11-12: producer and retailer responsibilities, including registration and reporting, and the exemption for product lines under 5,000 units a year, which must still register and report."
+        },
+        {
+          "url": "https://www.retailgazette.co.uk/blog/2026/09/drs-retailers-suppliers-now/",
+          "source": "retailgazette.co.uk",
+          "author": "Retail Gazette",
+          "date": "2026-09-02",
+          "kind": "mandate",
+          "summary": "Retailers and suppliers must prepare now; wholesalers pay deposits on purchases as well as charging them."
+        },
+        {
+          "url": "https://www.just-drinks.com/newsletters/independent-brewers-urge-uk-government-to-delay-drs",
+          "source": "just-drinks.com",
+          "author": "Andy Slee (SIBA), quoted",
+          "date": "2026-08-19",
+          "kind": "complaint",
+          "summary": "Independent brewers' body asks for at least a year's delay, citing a lack of clarity and different rules across the UK."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Breww",
+          "url": "https://breww.com/docs/container-deposit-schemes-drs-and-crvs/",
+          "price": "unknown (priced by hectolitres)",
+          "gap": "Already supports deposit schemes as a separate invoice line with its own VAT rate and reports, but only for breweries running Breww, not wholesalers on Xero."
+        },
+        {
+          "name": "Xero untracked item workaround",
+          "url": "https://productideas.xero.com/forums/967115-invoices-quotes/suggestions/51717049-inventory-uk-upcoming-drs-deposit-return-scheme",
+          "price": "Free",
+          "gap": "A Xero admin suggested an untracked deposit item with no VAT; it still needs the per-product container count worked out by hand on every invoice and bill."
+        }
+      ],
+      "keyFeatures": [
+        "Per-product deposit table with scheme scope rules",
+        "One-click deposit lines on Xero draft invoices and bills",
+        "No-VAT coding to a deposit liability account",
+        "Deposits charged versus paid by period",
+        "Exemption tracking for small product lines"
+      ],
+      "mvpScope": {
+        "features": [
+          "Product deposit table imported from Xero items",
+          "Deposit line added to selected draft invoices",
+          "Charged versus paid summary"
+        ],
+        "outOfScope": [
+          "Scheme administrator reporting until the spec is published",
+          "Return handling for retailers",
+          "The Welsh scheme's glass rules",
+          "QuickBooks and Sage"
+        ],
+        "buildEstimate": "about 3 build days"
+      },
+      "techStack": "Static front end on the shared platform, Supabase for the product table, backend-hub on Render for Xero OAuth and invoice updates.",
+      "pricing": {
+        "model": "Monthly subscription, sold as a launch package from mid-2027",
+        "pricePoint": "£12/month",
+        "rationale": "Small against the staff time of counting containers on long invoices; nothing is due before October 2027, so selling earlier is unrealistic."
+      },
+      "revenueSketch": "Estimate: 80 wholesalers at £12 = £960 MRR from late 2027; small, and dependent on the scheme launching on time.",
+      "distribution": "Wholesale and importer trade bodies' newsletters, the Xero App Store, and the Xero idea's voters and commenters, approached in spring 2027 when registration is open.",
+      "validationTest": {
+        "method": "A one-page calculator that turns a pasted product list into deposit lines, shared on the Xero idea and with 10 Xero-using wholesalers in spring 2027.",
+        "successCriteria": "5 of 10 wholesalers run their range through it and 3 pre-order at £12/month for October 2027.",
+        "cost": "About 2 days of work; under £50."
+      },
+      "moat": "Thin: correct scheme rules and a maintained product table; Xero or Breww could add the same.",
+      "compliance": [
+        "Deposit return scheme regulations: rules, VAT treatment (final rules due in Finance Bill 2026-27) and reporting format still unsettled.",
+        "Wales runs a separate scheme that includes glass; out of scope at first.",
+        "Xero developer terms for invoice write access."
+      ],
+      "risks": [
+        {
+          "risk": "The scheme is delayed again.",
+          "mitigation": "Build nothing beyond the calculator until registration opens and the launch date is confirmed."
+        },
+        {
+          "risk": "Xero adds a deposit item type.",
+          "mitigation": "Keep the value in the per-product table and charged-versus-paid reconciliation."
+        },
+        {
+          "risk": "Rules change before launch.",
+          "mitigation": "Keep rules in data, not code, and update from published guidance."
+        }
+      ],
+      "scores": {
+        "pain": 2,
+        "willingnessToPay": 1,
+        "reachability": 2,
+        "competitiveGap": 2,
+        "feasibility": 4,
+        "complianceBurden": 3,
+        "total": 14
+      },
+      "scoreRationale": {
+        "pain": "One complainant on Xero (https://productideas.xero.com/forums/967115-invoices-quotes/suggestions/51717049-inventory-uk-upcoming-drs-deposit-return-scheme) and a trade body's call for delay (https://www.just-drinks.com/newsletters/independent-brewers-urge-uk-government-to-delay-drs); real only on long invoices.",
+        "willingnessToPay": "Nothing is due before October 2027 and producer fees are zero until December 2028 (https://www.gov.uk/guidance/deposit-return-scheme-drinks-producer-and-retailer-responsibilities); no spend evidence found.",
+        "reachability": "Wholesalers are reachable through trade bodies, but brewers mostly use Breww (https://breww.com/docs/container-deposit-schemes-drs-and-crvs/).",
+        "competitiveGap": "Breww covers its own users and Xero's free item workaround covers simple cases (https://productideas.xero.com/forums/967115-invoices-quotes/suggestions/51717049-inventory-uk-upcoming-drs-deposit-return-scheme).",
+        "feasibility": "Adding lines to Xero draft invoices and bills is routine; scheme scope rules come from published guidance (https://www.gov.uk/guidance/deposit-return-scheme-drinks-producer-and-retailer-responsibilities).",
+        "complianceBurden": "Reporting spec, VAT law and the Welsh scheme are still undecided (https://www.retailgazette.co.uk/blog/2026/09/drs-retailers-suppliers-now/)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Reviewer rescored 17 to 14 (willingnessToPay 2 to 1, competitiveGap 3 to 2, complianceBurden 4 to 3). Launch on 1 October 2027 still holds; SIBA's August 2026 call for a delay has had no government reply (https://www.just-drinks.com/newsletters/independent-brewers-urge-uk-government-to-delay-drs). The original scope was wrong: the Exchange for Change scheme covers England, Scotland and Northern Ireland, while Wales runs its own scheme that includes glass. Glass is out elsewhere, so most cideries and bottled beer drop out. Product lines under 5,000 units a year pay no deposit but must register and report (https://www.gov.uk/guidance/deposit-return-scheme-drinks-producer-and-retailer-responsibilities). Breww already supports deposit lines (https://breww.com/docs/container-deposit-schemes-drs-and-crvs/), and a Xero admin suggested a free untracked-item workaround on 2026-10-14. Re-scoped to Xero-based wholesalers and importers with large ranges, handling invoices and bills, sold as a launch package in mid-2027 and built after the reporting spec is published."
+      },
+      "inspiredBy": "https://productideas.xero.com/forums/967115-invoices-quotes/suggestions/51717049-inventory-uk-upcoming-drs-deposit-return-scheme",
+      "gateGap": {
+        "missing": [
+          "total 14 is below 22",
+          "pain 2 is below 4",
+          "willingnessToPay 1 is below 3"
+        ],
+        "closedBy": "The spring-2027 calculator test closes willingness to pay: 3 of 10 wholesalers pre-ordering at £12/month would support willingnessToPay 3, and their counts of lines per invoice would show whether pain reaches 4."
+      }
+    },
+    {
+      "n": 4,
+      "title": "Tip Reclass Audit for Restaurant Bookkeepers",
+      "slug": "tip-reclass-audit-for-restaurant-bookkeepers",
+      "category": "Accessibility & Compliance",
+      "smallBusiness": true,
+      "complexity": "Weekend MVP",
+      "confidence": "provisional",
+      "topic": "Data & Visualization",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": false,
+        "engine": true,
+        "shared": false,
+        "notes": {
+          "stateful": "The bookkeeper keeps each restaurant client's role-to-occupation-code mapping and last year's audit, and reuses them next season.",
+          "connected": "Imports the client's own POS tip exports (Toast, Clover, Square) and the QuickBooks payroll register as files.",
+          "engine": "Classifies voluntary tips versus service charges and auto-gratuities, maps each shift's role to a Treasury tipped occupation code, splits qualified from non-qualified tips per paycheck, and ranks the two codes for Box 14b."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database"
+      ],
+      "summary": "For bookkeepers with restaurant clients on QuickBooks payroll whose POS is not linked to payroll: a year-end audit that lists which tips to move between qualified and non-qualified items, and each worker's occupation codes, before W-2s are produced.",
+      "public": {
+        "summary": "Before year-end, it checks each restaurant client's tips against payroll and lists exactly which amounts and job codes need fixing for the new W-2 boxes.",
+        "problem": "This year's W-2s need tips split into a new box and a job code for each tipped worker. Your restaurant clients' tips came from a till that never talked to payroll, servers also worked shifts in other roles, and some service charges were coded as tips. You find out when the W-2s are wrong.",
+        "forWhom": "Bookkeepers and small payroll firms that run payroll for several restaurants, cafés and bars.",
+        "benefits": [
+          "A per-worker list of corrections to make before W-2s go out",
+          "Service charges kept out of tips",
+          "Job codes assigned once and reused next year",
+          "Fewer corrected W-2s in February"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "Tax-year-2026 W-2s must show qualified cash tips in Box 12 code TP and each worker's Treasury tipped occupation code in Box 14b. Payroll products now carry these fields, but where the POS is not connected to payroll, workers hold tipped and non-tipped roles, or service charges were coded as tips during the year, the figures are wrong. A bookkeeper with restaurant clients reported on 2026-04-21 that QuickBooks' new non-qualified tips item did not flow to the 941 and worried about fixing W-2s for many employees.",
+      "description": "An in-browser audit for bookkeepers. For each restaurant client it imports the POS tip export and the QuickBooks payroll register, lets the bookkeeper map POS roles to occupation codes once, separates voluntary tips from service charges and auto-gratuities, and compares qualified and non-qualified tips per paycheck with what payroll recorded. It outputs the past-paycheck moves to make in QuickBooks, the two occupation codes per worker for Box 14b, and a list of workers whose W-2 would otherwise be wrong. It does not file anything.",
+      "targetCustomer": "Bookkeepers and small payroll firms running QuickBooks Desktop or Online payroll for several US restaurants, cafés and bars whose POS (Toast, Clover, Square) is not connected to payroll.",
+      "buyer": "The bookkeeping firm, per client, from its own fees.",
+      "whyNow": "The first W-2s with code TP and Box 14b are produced in January 2027, so the corrections window is December 2026; QuickBooks' tip items and occupation-code fields arrived during 2026 and earlier paychecks were not set up for them.",
+      "founderFit": "A rules engine over two CSV files is a short, testable build, and the reading of IRS final rules and vendor help pages is the kind of careful document work Pisan does well; distribution runs through bookkeeper communities rather than his network.",
+      "problemEvidence": [
+        {
+          "url": "https://support.toasttab.com/article/Toast-Payroll-No-Tax-on-Tips-and-or-Overtime",
+          "source": "support.toasttab.com",
+          "author": "Toast",
+          "date": "2026-10-14",
+          "kind": "mandate",
+          "summary": "Updated 2026-10-14: restates the new W-2 reporting of qualified tips and occupation codes and says Toast Payroll will add occupation codes to employee profiles in 2026."
+        },
+        {
+          "url": "https://quickbooks.intuit.com/learn-support/en-us/employees-and-payroll/non-qualified-tips-not-included-on-line-2-of-quarterly-941/00/1609366",
+          "source": "quickbooks.intuit.com",
+          "author": "TheOnlyHawkman",
+          "date": "2026-04-21",
+          "kind": "complaint",
+          "summary": "Bookkeeper with restaurant clients: the non-qualified tips payroll item does not flow to line 2 of the 941, with worry about fixing W-2s for many employees; BigRedConsulting (2026-04-22) confirms it is also missing from the W-2 Excel report."
+        },
+        {
+          "url": "https://quickbooks.intuit.com/learn-support/en-us/help-article/tip-income/impact-tax-tips-provision-quickbooks-payroll/L6kRbKsEY_US_en_US",
+          "source": "quickbooks.intuit.com",
+          "author": "Intuit",
+          "date": "2026-11-12",
+          "kind": "mandate",
+          "summary": "Read on 2026-11-12: QuickBooks Payroll uses existing cash and paycheck tip items for qualified tips, adds non-qualified tip items, and lets amounts be moved between items on past paychecks."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "QuickBooks Payroll",
+          "url": "https://quickbooks.intuit.com/learn-support/en-us/help-article/tip-income/impact-tax-tips-provision-quickbooks-payroll/L6kRbKsEY_US_en_US",
+          "price": "Included in payroll subscription",
+          "gap": "Has the items and occupation-code fields but no audit of POS tips by role against what was recorded."
+        },
+        {
+          "name": "Patriot Payroll",
+          "url": "https://www.patriotsoftware.com/blog/payroll/no-tax-on-tips",
+          "price": "Included in payroll subscription",
+          "gap": "Occupation-code dropdown on each tipped pay rate; relies on tips being entered correctly per rate."
+        },
+        {
+          "name": "Toast Payroll",
+          "url": "https://support.toasttab.com/article/Toast-Payroll-No-Tax-on-Tips-and-or-Overtime",
+          "price": "Included for Toast Payroll customers",
+          "gap": "Occupation codes still promised for 2026; covers only restaurants on Toast Payroll."
+        },
+        {
+          "name": "Square Payroll",
+          "url": "https://squareup.com/help/us/en/article/6480-square-payroll-tip-importing",
+          "price": "Included in Square Payroll",
+          "gap": "Imports card tips and tip pools automatically for Square Payroll users only."
+        }
+      ],
+      "keyFeatures": [
+        "POS tip export and payroll register import with column mapping",
+        "Role-to-occupation-code mapping saved per client",
+        "Service charge and auto-gratuity separation",
+        "Per-paycheck qualified versus non-qualified comparison",
+        "Correction list and Box 14b codes per worker"
+      ],
+      "mvpScope": {
+        "features": [
+          "Toast and QuickBooks register CSV import",
+          "Role mapping",
+          "Correction list export"
+        ],
+        "outOfScope": [
+          "Filing W-2 or W-2c",
+          "Direct payroll or POS API connections",
+          "States' own tip rules",
+          "Overtime (Box 12 TT), covered by an earlier idea"
+        ],
+        "buildEstimate": "about 3 build days"
+      },
+      "techStack": "Static front end with in-browser CSV parsing; Supabase for bookkeeper accounts and saved role mappings only (no payroll data stored).",
+      "pricing": {
+        "model": "Per client per tax year",
+        "pricePoint": "$39 per restaurant client per tax year",
+        "rationale": "One-off season work billed by bookkeepers to clients; payroll vendors' own features are free, so the price must sit well under an hour of correction work."
+      },
+      "revenueSketch": "Estimate: 40 bookkeepers x 5 restaurant clients x $39 = $7,800 per season, for tax years 2026 to 2028 only.",
+      "distribution": "QuickBooks community threads on tips, restaurant-focused bookkeeper groups and ProAdvisor directories, in December.",
+      "validationTest": {
+        "method": "Offer a free audit on one client's real files to 10 bookkeepers with restaurant clients in early December 2026.",
+        "successCriteria": "At least 5 audits find a correction worth making and 4 bookkeepers pay $39 for a second client.",
+        "cost": "About 2 weeks of evenings; no cash cost."
+      },
+      "moat": "Little beyond accurate rules and saved mappings; payroll vendors will absorb more of it each year.",
+      "compliance": [
+        "IRS final regulations on qualified tips and the 2026 W-2 instructions; output must be framed as a worksheet, not tax advice.",
+        "Employee pay data: process in the browser and store only mappings.",
+        "The deduction ends after tax year 2028."
+      ],
+      "risks": [
+        {
+          "risk": "Payroll vendors close the gap before January.",
+          "mitigation": "Target clients whose POS is not connected to payroll, which vendor features do not reach."
+        },
+        {
+          "risk": "A wrong correction costs an employee a deduction.",
+          "mitigation": "Show every rule applied per line and require bookkeeper sign-off."
+        },
+        {
+          "risk": "Short season and a three-year window.",
+          "mitigation": "Keep the build tiny and treat it as a seasonal tool."
+        }
+      ],
+      "scores": {
+        "pain": 2,
+        "willingnessToPay": 2,
+        "reachability": 2,
+        "competitiveGap": 2,
+        "feasibility": 3,
+        "complianceBurden": 2,
+        "total": 13
+      },
+      "scoreRationale": {
+        "pain": "One bookkeeper complaint, about a related QuickBooks gap rather than occupation codes (https://quickbooks.intuit.com/learn-support/en-us/employees-and-payroll/non-qualified-tips-not-included-on-line-2-of-quarterly-941/00/1609366); vendors are absorbing the work.",
+        "willingnessToPay": "Payroll vendors include the fields free (https://quickbooks.intuit.com/learn-support/en-us/help-article/tip-income/impact-tax-tips-provision-quickbooks-payroll/L6kRbKsEY_US_en_US, https://www.patriotsoftware.com/blog/payroll/no-tax-on-tips); no paid job or tool for the task found.",
+        "reachability": "Short December season and the deduction ends after 2028; bookkeepers reachable through QuickBooks community (https://quickbooks.intuit.com/learn-support/en-us/employees-and-payroll/non-qualified-tips-not-included-on-line-2-of-quarterly-941/00/1609366).",
+        "competitiveGap": "QuickBooks, Patriot, Square and soon Toast cover the setup (https://support.toasttab.com/article/Toast-Payroll-No-Tax-on-Tips-and-or-Overtime); only disconnected-POS clean-up is left.",
+        "feasibility": "POS export formats vary and results are keyed in by hand (https://squareup.com/help/us/en/article/6480-square-payroll-tip-importing).",
+        "complianceBurden": "A wrong W-2 costs employees their deduction and edges into tax advice (https://quickbooks.intuit.com/learn-support/en-us/help-article/tip-income/impact-tax-tips-provision-quickbooks-payroll/L6kRbKsEY_US_en_US)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Reviewer rescored 18 to 13. Gusto, QuickBooks Payroll (https://quickbooks.intuit.com/learn-support/en-us/help-article/tip-income/impact-tax-tips-provision-quickbooks-payroll/L6kRbKsEY_US_en_US), Patriot (https://www.patriotsoftware.com/blog/payroll/no-tax-on-tips, occupation code per tipped pay rate, 2026-07-07) and Workforce.com (automatic TP from shifts, 2026-08-05) already handle occupation codes inside payroll at no extra cost; Square imports tips automatically (https://squareup.com/help/us/en/article/6480-square-payroll-tip-importing); Toast still only promises codes in 2026 (https://support.toasttab.com/article/Toast-Payroll-No-Tax-on-Tips-and-or-Overtime). No owner complaint about occupation codes was found and HN had none. Re-scoped from a $49-99 owner worksheet to a per-client year-end reclass audit for bookkeepers whose restaurant clients' POS is not connected to payroll, with a December deadline."
+      },
+      "inspiredBy": "https://quickbooks.intuit.com/learn-support/en-us/employees-and-payroll/non-qualified-tips-not-included-on-line-2-of-quarterly-941/00/1609366",
+      "gateGap": {
+        "missing": [
+          "total 13 is below 22",
+          "pain 2 is below 4",
+          "willingnessToPay 2 is below 3",
+          "only 1 complaint, older than 90 days"
+        ],
+        "closedBy": "The December free-audit offer closes willingness to pay and pain: 4 of 10 bookkeepers paying $39 for a second client would support willingnessToPay 3, and audits finding corrections on real files would be the dated complaints pain 4 needs."
+      }
+    }
+  ],
+  "runNotes": {
+    "weekday": "Thursday",
+    "domainLens": "Small business back office and solo professionals: invoicing, scheduling, bookkeeping, client intake, paperwork",
+    "focusSources": [
+      "A16 Vendor feature-request boards",
+      "B11 Freelance job boards",
+      "C10 Change events: shutdowns, price rises, removed free tiers"
+    ],
+    "searches": [
+      "A16 productideas.xero.com search: payment reminder, job costing, timesheet, deposit, quote accept, recurring, client portal, receipt, subcontractor, retainer, statement, insurance expiry, workers comp, compliance documents, lien waiver, options quote, booking, payday super, MTD income tax, 1099, e-invoicing, tips, approval bills",
+      "A13 forum.invoiceninja.com search.json 'wish' after:2026-09-15 (empty) and latest.json",
+      "A13 discuss.frappe.io 'small business' after:2026-09-15; community.n8n.io 'invoice client' after:2026-10-01; community.make.com 'quickbooks' after:2026-10-01",
+      "A12 hn.algolia.com comments: 'bookkeeping small business'; '\"my wife\" business spreadsheet'",
+      "B11 freelancer.com API: bookkeeping cleanup, invoice automation, client intake, certificate of insurance, 1099, CIS subcontractor, quote follow up, making tax digital, appointment reminder, AIA billing, retainage, progress billing, quickbooks online, xero, scheduling staff rota, superannuation, payroll australia",
+      "B12 WebSearch site:apps.xero.com quote optional items; site:apps.xero.com certificate of insurance OR contractor compliance OR licence expiry",
+      "Spend pass: COI tracking software pricing (bcs, CertCove); Payday Super compliance monitoring tools (Wrkr pricing); Quotient pricing; Xero CIS add-on price",
+      "C10 WebSearch: invoicing app price increase 2026; small business app shutting down 2026; 'will be discontinued' December 31 2026 (extended); QuickBooks Desktop 2024 discontinued contractors",
+      "C5/mandate WebSearch: HMRC CIS changes April 2026; Payday Super 1 July 2026 rules; qualified tips W-2 2026 Box 12 TP; qualified tips community questions; Xero retentions progress claims",
+      "QuickBooks community WebSearch: certificate of insurance / subcontractor / 1099 tracking"
+    ],
+    "unverifiedSignals": [
+      {
+        "url": "https://community.squareup.com/t5/Reports-Setup-Management/Pricing-More-than-Doubled/m-p/831630",
+        "reason": "curl returned HTTP 202 with an empty body and WebFetch returned an empty page; the reported price rise could not be read."
+      },
+      {
+        "url": "https://www.fairwork.gov.au/newsroom/news/payday-super-new-rules-starting-1-july-2026",
+        "reason": "curl timed out and WebFetch returned HTTP 503."
+      },
+      {
+        "url": "https://www.ato.gov.au/businesses-and-organisations/super-for-employers/payday-super-resources/payday-super-communication-toolkit/employers",
+        "reason": "HTTP 403 from the site."
+      },
+      {
+        "url": "https://www.dwt.com/blogs/employment-labor-and-benefits/2026/05/irs-rules-tighten-tip-deduction-eligibility-2026",
+        "reason": "HTTP 403 from the site."
+      },
+      {
+        "url": "https://www.accountingweb.co.uk/node/230673",
+        "reason": "HTTP 403 (Cloudflare) to both clients, per the CIS reviewer."
+      }
+    ],
+    "rejectedCandidates": [
+      {
+        "title": "Payday Super Watch for Xero Payroll AU",
+        "total": 22,
+        "reason": "Reviewed and killed: Xero shipped an auto super overview page around 21 July 2026 that shows contributions past their expected payment date (https://blog.xero.com/?p=39807), overdue reminder emails are In development with 55 votes (https://productideas.xero.com/forums/967118/suggestions/51085414), Xero's Payroll AU API has no super batch or payment status endpoint (https://raw.githubusercontent.com/XeroAPI/Xero-OpenAPI/master/xero-payroll-au.yaml), late contributions apply to the earliest period automatically so the allocation feature misread the law (https://www.claytonutz.com/insights/2026/june/payday-super-frequently-asked-questions), and Wrkr's clearing house from A$5.50/month already gives timestamped timelines (https://www.wrkr.com.au/pricing). Evidence was real: six Xero requests from July to October 2026 with 26 and 27 votes."
+      },
+      {
+        "title": "Options Quote for Xero",
+        "total": 21,
+        "reason": "Reviewed and killed: Quotient ($28/month Solo, https://www.quotientapp.com/pricing) already offers multiple-choice option groups, optional items, deposits that recalculate and automatic Xero deposit invoices, 4.9 stars from 148 reviews on the Xero App Store (https://apps.xero.com/us/app/quotient); Fergus, ServiceM8 and Tradify cover it too."
+      },
+      {
+        "title": "CIS Month-End Watch",
+        "total": 19,
+        "reason": "Reviewed and killed: Xero's CIS add-on (£5/month) already marks returns due or overdue and sends nil returns (https://www.xero.com/uk/accounting-software/submit-vat-online/submit-cis-returns/), HMRC is taking a soft-landing approach with appeals accepted, BrightCIS flags nil returns, the Xero API exposes no CIS return data, and the only request (https://productideas.xero.com/forums/967133-reports-tax/suggestions/51894027-uk-cis-alert-when-a-subcontractor-needs-re-verif, 1 vote) is 'being looked into' by Xero."
+      },
+      {
+        "title": "Second Signature for Xero Bill Payments",
+        "total": 19,
+        "reason": "Reviewed and killed: commenters want two approvers inside Xero's own online bill payments, which a third-party app cannot hold or release (https://productideas.xero.com/forums/967139-purchase-orders-bills-inventory/suggestions/51509312-bill-payments-2-stage-approval-process-for-onlin); the ABA-file route is already covered free by banks' dual authorisation, ApprovalMax sells multi-step bill and batch approval (https://approvalmax.com/pricing/approvalmax-for-xero), and VendorAlert alerts on bank-detail changes for A$9/month (https://apps.xero.com/app/vendoralert)."
+      },
+      {
+        "title": "Property Side-Ledger for MTD",
+        "total": 17,
+        "reason": "Reviewed and killed: HMRC is no longer accepting production credential requests for new 2026-27 quarterly update products (https://developer.service.hmrc.gov.uk/guides/income-tax-mtd-end-to-end-service-guide/), TaxCalc's filer costs about £0.78 per client per month (https://www.taxcalc.com/pricing), FreeAgent for Landlords reads letting-agent statements (https://www.freeagent.com/blog/product-spotlight-june-2026/), and a commenter on the Xero idea already files property income with TaxCalc."
+      },
+      {
+        "title": "Deposit button for invoice-only Xero users",
+        "total": 16,
+        "reason": "Duplicate of 2026-11-08 Deposits Register for Xero (same customer and problem); evidence was Brian Nasr's 2026-07-24 request with 10 votes (https://productideas.xero.com/forums/967115-invoices-quotes/suggestions/51541754-invoicing-deposit-option-for-all-users)."
+      },
+      {
+        "title": "Reminder Guard for Xero invoice reminders",
+        "total": 15,
+        "reason": "Below the watchlist line and infeasible: the useful rule (suspend a reminder when a matching bank line exists, Daniel Bodkin 2026-08-16, https://productideas.xero.com/forums/967115-invoices-quotes/suggestions/51606911-invoice-reminder-prevent-invoice-reminder-when-a) needs unreconciled bank lines, which the Xero API does not expose; Chaser and Paidnice sell reminder control."
+      },
+      {
+        "title": "Retention tracking for small builders on Xero",
+        "total": 15,
+        "reason": "Well served: Retention Track on the Xero App Store, Lentune, Ascora and SmoothLink handle retentions with Xero sync (https://apps.xero.com/uk/app/retention-track)."
+      },
+      {
+        "title": "AIA pay applications for small subcontractors on QuickBooks Online",
+        "total": 14,
+        "reason": "No complaint found and no freelance spend (freelancer.com 'AIA billing', 'retainage' and 'progress billing' returned nothing relevant); Siteline, GCPay and Knowify serve it."
+      },
+      {
+        "title": "Supplier bills grouped by supplier for bulk payment",
+        "total": 13,
+        "reason": "Single 1-vote request (Jack Rice, 2026-09-25, https://productideas.xero.com/forums/967115-invoices-quotes/suggestions/51731958-awaiting-payment); a report tweak, not a product."
+      },
+      {
+        "title": "Books health multiple chases for accountants",
+        "total": 13,
+        "reason": "Request raised by Xero's own community manager for Xero's own feature (https://productideas.xero.com/forums/966573-xero-partner-hub/suggestions/51750990-books-health-ability-to-send-multiple-chases-for); Karbon and Content Snare cover client chasing."
+      },
+      {
+        "title": "Xero Partner Hub document request portal",
+        "total": 12,
+        "reason": "Crowded: Content Snare, TaxDome, Karbon and Xero's own Partner Hub roadmap."
+      },
+      {
+        "title": "QuickBooks Online to Xero migration after the August 2026 price rise",
+        "total": 12,
+        "reason": "Served by paid migration services (MMC Convert, Movemybooks) and free Xero conversion tools; price-rise figures were inconsistent across sources (https://certumsolutions.com/blog/quickbooks-price-increase-august-2026)."
+      },
+      {
+        "title": "Quote accepted-versus-invoiced tracker",
+        "total": 12,
+        "reason": "Single 1-vote request (Vanessa Jonkman, 2026-09-14, https://productideas.xero.com/forums/967115-invoices-quotes/suggestions/51697852-quotes-track-accepted-vs-invoiced-status-on); covered by Quotient's split invoices."
+      },
+      {
+        "title": "Email task reminders for Xero users",
+        "total": 11,
+        "reason": "1-vote request (Natalie Hosni, 2026-10-21, https://productideas.xero.com/forums/967115-invoices-quotes/suggestions/51820137-email-task-reminders); generic reminder tools cover it."
+      },
+      {
+        "title": "Peppol e-invoicing to Sweden via Xero",
+        "total": 11,
+        "reason": "Needs a certified Peppol access point; Xero has native Peppol e-invoicing for 15 EU countries since December 2025 (2026-11-11 run notes)."
+      },
+      {
+        "title": "Invoice Ninja superannuation line on invoices",
+        "total": 10,
+        "reason": "Rests on a likely misreading of Payday Super (super is an employer obligation, not an invoice line) in one 2026-11-07 post (https://forum.invoiceninja.com/t/australian-superannuation/23646)."
+      },
+      {
+        "title": "Aluminium window and door costing SaaS",
+        "total": 10,
+        "reason": "Rejected as a custom build for one buyer (Freelancer job 2026-11-12, EUR 30,000-60,000, Greek-language) in a market with established fabrication software."
+      },
+      {
+        "title": "Daily scanned-PDF to Excel keying",
+        "total": 8,
+        "reason": "AI wrapper with no workflow moat (Freelancer job 2026-11-12, Rs 800/day)."
+      },
+      {
+        "title": "UK MTD supporting-agent tax report sharing",
+        "total": 9,
+        "reason": "Xero permission feature request (Naomi Lamb, 2026-09-22); not a standalone product."
+      },
+      {
+        "title": "Square pricing rise alternatives",
+        "total": 8,
+        "reason": "The source thread returned an empty page to both clients, so the event could not be verified."
+      }
+    ],
+    "watchlist": [],
+    "caveats": "First run of 2026-11-12 (Thursday, small business back office lens). Four provisional ideas ship (18, 17, 14, 13); none cleared the gate of 22. Twenty-five candidates; ten were adversarially reviewed, the cap in ROUTINE.md Step 6. Five were killed: Payday Super Watch (the strongest complaint cluster of the day, six Xero requests with up to 27 votes, but Xero shipped a free overview page and is building overdue emails, and its API exposes no super batch status), Options Quote (Quotient), CIS Month-End Watch (Xero's own CIS add-on), Second Signature for Xero bill payments (cannot control Xero's own payments; banks' dual authorisation is free) and Property Side-Ledger for MTD (HMRC closed new 2026-27 credentials). Four were rescored and re-scoped: Pay-Run Cover Check (21 to 18, Australia first), Walk-In Board (19 to 17, Square-native), DRS Deposit Lines (17 to 14, wholesalers, sell in mid-2027) and Tip Reclass Audit (18 to 13, bookkeepers with disconnected POS). The walk-in reviewer recommended a kill; it was kept as a re-scope because NextUp Walk-in is not cheaper and has no confirmed Square sync. Two ideas share Small Business Ops and two share Accessibility & Compliance. Ideas 1 and 2 are substantial Multi-week ideas with build plans; 3 and 4 are Weekend MVPs. Some competitor and review facts (Quotient, Fergus, bcs, Xero developer pricing, DRS guidance, tip-vendor pages) were fetched by reviewer subagents in this run. No watchlist entries: the only candidate at 19 or more that was not shipped was killed in review. The previous file's watchlist was empty, so no watchlist re-research was due."
+  }
+}

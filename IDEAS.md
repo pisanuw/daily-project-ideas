@@ -637,3 +637,7 @@
 | 2026-11-11 | Scan-to-Email Fix-Path Finder | Small Business Ops | Weekend MVP | 18 | provisional |  |
 | 2026-11-11 | Client AI-Use Register for Small Dev Agencies | Developer Tool | Multi-week | 17 | provisional |  |
 | 2026-11-11 | CRA Report-Ready Kit for Micro Makers | Accessibility & Compliance | Multi-week | 16 | provisional |  |
+| 2026-11-12 | Pay-Run Cover Check for Xero | Small Business Ops | Multi-week | 18 | provisional |  |
+| 2026-11-12 | Walk-In Board for Square Shops | Small Business Ops | Multi-week | 17 | provisional |  |
+| 2026-11-12 | DRS Deposit Lines for Xero Wholesalers | Accessibility & Compliance | Weekend MVP | 14 | provisional |  |
+| 2026-11-12 | Tip Reclass Audit for Restaurant Bookkeepers | Accessibility & Compliance | Weekend MVP | 13 | provisional |  |

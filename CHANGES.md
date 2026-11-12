@@ -675,3 +675,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-11 [code] Studio: Qualified Overtime Checker gets its catalog entry (small businesses, blurb) and a home-page screenshot in web/media; it had neither, so it showed no image under Learners.
 
 2026-11-11 [code] four-ghosts (idea 2026-10-09 n1) marked implemented: implemented.json, studio.json, web/media/four-ghosts.jpg. Built 31 Oct, shipped 11 Nov.
+
+2026-11-12 [doc] Created ideas/2026-11-12.json (schemaVersion 3, 4 ideas): Cover Check (18, provisional), Walk-In Board (17, provisional), DRS Lines (14, provisional), Tip Audit (13, provisional)
