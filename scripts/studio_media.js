@@ -31,7 +31,8 @@ const implemented = JSON.parse(fs.readFileSync(path.join(ROOT, 'implemented.json
 const slugOf = (u) => String(u).replace(/^https?:\/\//, '').split('.')[0];
 
 const apps = new Map();
-for (const p of implemented) apps.set(slugOf(p.url), p.url.replace('.pisan.me', '.hintwise.org'));
+// A placeholder (an app still being built) has no url yet: skip it.
+for (const p of implemented) if (p.url) apps.set(slugOf(p.url), p.url.replace('.pisan.me', '.hintwise.org'));
 for (const [slug, a] of Object.entries(studio.apps)) if (a.url) apps.set(slug, a.url);
 
 // Where a demo image lives when it is not <claude-built-apps>/<slug>/demo.gif.
