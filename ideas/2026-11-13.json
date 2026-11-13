@@ -1,0 +1,905 @@
+{
+  "date": "2026-11-13",
+  "schemaVersion": 3,
+  "complete": true,
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Phone Order Desk for Gift Shops",
+      "slug": "phone-order-desk-for-gift-shops",
+      "category": "Small Business Ops",
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Data & Visualization",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": false,
+        "engine": true,
+        "shared": true,
+        "notes": {
+          "stateful": "The shop keeps a saved recipient address book and every phone order it has taken, and comes back to both the next time the same caller orders flowers for the same aunt.",
+          "connected": "Runs inside Shopify admin on the shop's own store, reads the catalog, writes a draft order with the recipient, date and card message as order attributes, and takes payment through Shopify's own invoice or checkout link.",
+          "engine": "Per-product prep days, daily cutoffs and closed days, resolved across a mixed cart to the earliest date the whole order can be ready, and re-checked whenever a line changes.",
+          "shared": "A staff member takes the order on the phone, the buyer receives a Shopify invoice, and the recipient's details travel to the packing slip and the day sheet the drivers carry."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "backend"
+      ],
+      "buildPlan": [
+        {
+          "n": 1,
+          "title": "One phone order",
+          "delivers": "Install on a development store, open a one-screen form, pick a product, enter recipient name, address, delivery date and card message, and save a Shopify draft order that carries all four as order attributes.",
+          "acceptance": "A saved draft order shows the recipient, date and card message in Shopify admin under Additional details, and the invoice sent from Shopify includes them; deployed."
+        },
+        {
+          "n": 2,
+          "title": "Date engine",
+          "delivers": "Per-product prep days, a daily cutoff time and closed days; the form offers only dates the whole cart can make.",
+          "acceptance": "A cart with a two-day and a four-day item offers no date sooner than four working days out, respects the cutoff after it passes, and skips closed days; a hand-worked table of 10 cases matches."
+        },
+        {
+          "n": 3,
+          "title": "Recipient book",
+          "delivers": "Saved recipients per customer, searchable by name or phone, reusable on the next call, with a repeat-order copy.",
+          "acceptance": "A second order for the same recipient is created in under 30 seconds from search to saved draft; recipients survive sign-out and sign-in."
+        },
+        {
+          "n": 4,
+          "title": "Day sheet and packing slips",
+          "delivers": "A printable sheet per delivery date with recipient, address, card message and prep notes, plus a card-message slip for each order.",
+          "acceptance": "A day with 20 mixed pickup and delivery orders prints one sheet in date and route order, and every card message appears exactly once."
+        },
+        {
+          "n": 5,
+          "title": "Payment and handover",
+          "delivers": "Send the Shopify invoice or checkout link from the form, and mark an order paid-by-phone handled in Shopify admin so no card number ever reaches this app.",
+          "acceptance": "A test order is paid through the emailed invoice and appears as paid; a code review confirms no card field exists anywhere in the app."
+        },
+        {
+          "n": 6,
+          "title": "Polish",
+          "delivers": "Shop-owner README, phone and tablet layout for the counter, keyboard and screen-reader pass, walkthrough test.",
+          "acceptance": "A walkthrough test runs install to printed day sheet; axe reports no serious issues on the form and the day sheet."
+        }
+      ],
+      "summary": "A one-screen phone-order form inside Shopify for florists, bakeries and hamper shops, so a call becomes an order with recipient, delivery date and card message in under a minute, without a spreadsheet beside the till.",
+      "public": {
+        "summary": "Take a phone order in one screen, with who it is going to, the day it is wanted and the message on the card.",
+        "problem": "You sell gifts that go to someone else on a chosen day, so every phone call means a name, an address, a date and a card message. Your shop system was built for parcels, so you type the order in one place, the delivery date in another, and the card message into a note that nobody prints. On your busiest week of the year, that is where orders go wrong.",
+        "forWhom": "Florists, cake and cookie bakeries, hamper and gift shops and small grocers who take orders by phone for delivery or collection on a set day.",
+        "benefits": [
+          "One screen from the first ring to a saved, payable order",
+          "Regular customers' recipients remembered for next time",
+          "Only offers dates you can actually make the order for",
+          "Card messages and addresses print on the day sheet",
+          "Your staff never has to write a card number down"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "Shops that sell gifts for delivery on a chosen day take a large share of their orders by phone, and the shop system has no place for the recipient, the delivery date or the card message, so staff keep them in a paid add-on, a note field or a spreadsheet and re-key them on the busiest days of the year.",
+      "description": "A Shopify-embedded order desk for shops that deliver locally on a chosen day. A staff member takes a call in one screen: search the catalog, pick the recipient from a saved address book or add a new one, choose a delivery date from the dates that product mix can actually make, type the card message, then send a Shopify invoice or payment link. Everything is stored as order attributes on a Shopify draft order, so it reaches the admin, the invoice and the packing slip. A printable day sheet per delivery date gives the bench and the driver the addresses, card messages and prep notes. The app never touches a card number: payment stays inside Shopify.",
+      "targetCustomer": "Counter and office staff at florists, cake and cookie bakeries, hamper and gift shops and small grocers on Shopify, typically one to five people, who take phone orders daily and far more at Valentine's Day, Mother's Day and Christmas.",
+      "buyer": "The shop owner, on the business card, as one more Shopify app subscription.",
+      "whyNow": "Shopify still has no recipient, delivery-date or card-message field on its order screens, and merchants asking for one are told to add apps: lillypadflowers pieced the workflow together from draft orders plus the paid Draft Order Magic in August 2026, and another florist was still asking for quotes for a custom build on 1 November 2026. The pickup and delivery apps that merchants already pay for have grown in the other direction, towards storefront date pickers and $49.99-and-up plans.",
+      "founderFit": "Pisan ships a working embedded web app alone in days, and this is a single form, a date engine and a print view over Shopify's own draft-order API, with no card data and no new service. The customers are reachable one at a time in the public threads where they are already describing the problem.",
+      "problemEvidence": [
+        {
+          "url": "https://community.shopify.com/t/671978.json",
+          "source": "community.shopify.com",
+          "author": "lillypadflowers",
+          "date": "2026-08-24",
+          "kind": "complaint",
+          "summary": "Florist taking many phone orders daily, 'non stop' at Valentine's Day, asks Shopify for editable local-delivery fields on the new-order form; describes their current path through draft orders plus Draft Order Magic order attributes; 16 posts and 13 likes."
+        },
+        {
+          "url": "https://community.shopify.com/t/708167.json",
+          "source": "community.shopify.com",
+          "author": "infoandsales",
+          "date": "2026-11-01",
+          "kind": "complaint",
+          "summary": "Florist on Shopify Basic asks whether an app can read their existing delivery/collection and date fields, validate product-specific preparation periods and carry the date to the order; asks a partner for a fixed quote, so is ready to pay."
+        },
+        {
+          "url": "https://community.shopify.com/t/691546.json",
+          "source": "community.shopify.com",
+          "author": "palashchhabra",
+          "date": "2026-10-03",
+          "kind": "complaint",
+          "summary": "Two-location grocer on an annual Shopify Grow plan has tried Pickeasy and Zapiet and still wants a clean status flow and editable orders; evidence that merchants in this niche already pay for apps and remain unsatisfied."
+        },
+        {
+          "url": "https://apps.shopify.com/click-and-collect",
+          "source": "apps.shopify.com",
+          "author": "Zapiet",
+          "date": "2026-11-13",
+          "kind": "spend",
+          "summary": "Zapiet - Pickup + Delivery charges $49.99, $79.99 and $179.99 per month with 1,905 reviews, and lists telephone orders only from its Essential plan; the niche demonstrably pays for order-logistics apps."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Zapiet - Pickup + Delivery",
+          "url": "https://apps.shopify.com/click-and-collect",
+          "price": "$49.99, $79.99 or $179.99 per month",
+          "gap": "Built around the storefront date picker and fulfilment statuses; its telephone-order support has no recipient address book or card message, and merchants complain about add-on costs and peak-day bugs."
+        },
+        {
+          "name": "DingDoong: D: Local Delivery Date Picker",
+          "url": "https://apps.shopify.com/delivery-date-omega",
+          "price": "Free for 20 scheduled orders a month, then $6.99, $19.99 or $24.99",
+          "gap": "Lists telephone orders and sends ready-for-pickup and out-for-delivery emails, but its documented fields are date and time slot, not recipient or card message, and there is no printable day sheet with messages."
+        },
+        {
+          "name": "Draft Order Magic",
+          "url": "https://apps.shopify.com/rm-draft-order-edit",
+          "price": "$9.90 per month",
+          "gap": "Gives draft orders custom attributes, which is exactly the workaround these merchants already use; it has no date rules, no recipient book and no day sheet."
+        },
+        {
+          "name": "Nuflorist",
+          "url": "https://apps.shopify.com/nuflorist",
+          "price": "Free, $49 or $79 per month",
+          "gap": "Card message and recipient live inside Shopify POS rather than a phone-order screen; 4 reviews, so it is barely in market."
+        },
+        {
+          "name": "Ginko",
+          "url": "https://ginkoflorist.pages.dev/",
+          "price": "$0 plus 1.9% commission, or $69, $149 or $279 per month",
+          "gap": "Has a real phone order-entry workflow, but as a separate florist platform: the shop leaves Shopify, and the free tier takes a cut of every order."
+        },
+        {
+          "name": "Shopify draft orders",
+          "url": "https://help.shopify.com/manual/orders/create-orders/get-paid",
+          "price": "Free",
+          "gap": "No recipient, delivery-date or card-message field, and metafields do not appear on invoice emails, which is the gap merchants describe."
+        }
+      ],
+      "keyFeatures": [
+        "One-screen phone-order form with recipient, delivery date and card message",
+        "Saved recipient address book per customer, searchable by name or phone",
+        "Per-product prep days, cutoffs and closed days resolved across a mixed cart",
+        "Printable day sheet and card-message slips per delivery date",
+        "Payment by Shopify invoice or checkout link, so no card data touches the app"
+      ],
+      "mvpScope": {
+        "features": [
+          "Phone-order form writing Shopify draft orders with attributes",
+          "Recipient address book",
+          "Prep-day and cutoff date engine",
+          "Day sheet and card-message printing"
+        ],
+        "outOfScope": [
+          "Storefront date picker (competitors own this)",
+          "Delivery status emails (Shopify and DingDoong already send most of them)",
+          "Switching an order's delivery method",
+          "Driver routing",
+          "Wire-service integration"
+        ],
+        "buildEstimate": "about 6 build days"
+      },
+      "techStack": "Shopify embedded app (Remix or React with Polaris), Shopify Admin GraphQL draft orders and order attributes, app proxy for print views, Supabase for the recipient book and product rules, deployed on the shared platform",
+      "pricing": {
+        "model": "Per-shop monthly subscription on the Shopify App Store",
+        "pricePoint": "$12 per month",
+        "rationale": "Just above Draft Order Magic at $9.90, which these merchants already buy for a fraction of this job, and far below Zapiet at $49.99; the reviewer's re-scope prices the form alone rather than a full pickup-and-delivery suite."
+      },
+      "revenueSketch": "Estimate: 300 shops x $12/month = $3,600 MRR. Assumptions, none verified: the Shopify App Store lists thousands of florist and bakery stores; DingDoong shows 313 reviews and Zapiet 1,905, so a niche order-entry app reaching a few hundred paying shops is plausible but unproven.",
+      "distribution": "Reply, with a maker's disclosure, in the Shopify Community threads where these merchants are already describing the problem (t/671978, t/708167, t/691546), offering free setup before Valentine's Day 2027; then App Store listing targeting 'phone orders florist' and 'draft order delivery date', with florist Facebook groups as a second channel.",
+      "validationTest": {
+        "method": "Build milestone 1 only (the form writing a draft order with the three fields) and put it in front of 6 Shopify florists and bakeries found in those threads and in the App Store's florist theme showcase, asking each to take three real phone orders with it.",
+        "successCriteria": "4 of 6 take all three orders with it rather than their current workaround, and 3 agree to pay $12 a month once the date engine and day sheet ship.",
+        "cost": "About 2 build days plus a week of outreach; under $100."
+      },
+      "moat": "Shallow: any app developer can add attribute fields. The defensible part is the date engine's accumulated rules (prep days, cutoffs, closed days, mixed carts, holiday peaks) and the saved recipient book, which makes switching cost a shop its order history.",
+      "compliance": [
+        "PCI DSS: the app never accepts a card number; payment is a Shopify invoice or checkout link, and any keyed entry stays on Shopify's own admin screen, which requires Shopify Payments.",
+        "GDPR and UK GDPR: recipient names, addresses and phone numbers are third-party personal data supplied by the buyer, so Article 14 applies; collect the minimum, set a purge rule, never market to recipients.",
+        "Shopify protected customer data: an app reading customer and address fields needs Shopify's protected-customer-data approval, which is extra review before launch.",
+        "Card messages can be sensitive (sympathy, illness), so access is restricted to shop staff and excluded from analytics.",
+        "Accessibility: Polaris admin UI and printable sheets tested for keyboard and screen-reader use (WCAG 2.2 AA as a target, not a verified legal requirement here)."
+      ],
+      "risks": [
+        {
+          "risk": "Shopify ships recipient and delivery-date fields natively, which is exactly what the loudest complainant asked for.",
+          "mitigation": "Keep the wedge narrow and the data in Shopify's own draft orders, so a native field makes the app a faster front end rather than a dead end; lean on the recipient book and day sheet, which Shopify is unlikely to build."
+        },
+        {
+          "risk": "Merchants in these threads resent paying for more apps: the lead complainant said features like this 'should be standard'.",
+          "mitigation": "Price at $12, below the add-on they already buy, and demonstrate the saving in Valentine's week order time rather than in features."
+        },
+        {
+          "risk": "Shopify's protected-customer-data review delays or blocks launch.",
+          "mitigation": "Design for the narrowest scopes, apply for review during milestone 1, and keep a non-App-Store install path for the first pilot shops."
+        },
+        {
+          "risk": "The spec was shaped partly by developers pitching paid builds in those same threads, so merchant demand may be thinner than it reads.",
+          "mitigation": "The validation test puts milestone 1 in merchants' hands before the date engine is built; three paying commitments gate further work."
+        }
+      ],
+      "scores": {
+        "pain": 3,
+        "willingnessToPay": 2,
+        "reachability": 3,
+        "competitiveGap": 2,
+        "feasibility": 3,
+        "complianceBurden": 4,
+        "total": 17
+      },
+      "scoreRationale": {
+        "pain": "Three dated merchant complaints in 70 days (https://community.shopify.com/t/671978.json, https://community.shopify.com/t/708167.json, https://community.shopify.com/t/691546.json), but each already has a working workaround, which caps this at 3.",
+        "willingnessToPay": "Merchants in this niche pay for order-logistics apps (https://apps.shopify.com/click-and-collect at $49.99 with 1,905 reviews; https://apps.shopify.com/rm-draft-order-edit at $9.90), but the lead complainant objects to paying at all and the others want Shopify to fix it (https://community.shopify.com/t/671978.json).",
+        "reachability": "The buyers post publicly in threads Pisan can answer (https://community.shopify.com/t/708167.json) and the App Store is self-serve, but it is a crowded listing with no existing network.",
+        "competitiveGap": "DingDoong at $6.99 already lists telephone orders and sends the pickup and delivery emails (https://apps.shopify.com/delivery-date-omega), so only the recipient, card message and day sheet are unserved.",
+        "feasibility": "Draft orders with attributes are a documented Shopify path the merchants already use by hand (https://community.shopify.com/t/671978.json), but protected-customer-data review and print views add work beyond a weekend.",
+        "complianceBurden": "No card data by design (https://help.shopify.com/manual/orders/create-orders/get-paid), leaving third-party recipient data and Shopify's app review as the only real burdens."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "The reviewer cut the idea from 23 to 17 and re-scoped it. Three findings stuck. First, the status-email half of the idea is already served: Shopify sends Ready for pickup natively plus an optional Picked up from POS (https://help.shopify.com/en/manual/sell-in-person/shopify-pos/order-management/local-pickup-for-online-orders), Zapiet's order management covers the whole flow and can suppress Shopify's shipping confirmation (https://support.zapiet.com/en/articles/6279852-order-management), and DingDoong documents ready-for-pickup and out-for-delivery emails on a $6.99 plan (https://docs.dingdoong.io/general-settings/general-settings/email-notifications.md). Second, the delivery-method switch is already sold by Alpaca Pack (https://pickalpaca.com/support/update-order-delivery-method) and cannot be done properly anyway, because FulfillmentOrder.deliveryMethod is read-only. Third, much of the spec wording in those threads comes from responders pitching paid builds (Taha_Dev appears in three of the five threads), and palashchhabra's real blockers are checkout gating and editing local-delivery orders, which this does not solve; the reviewer also corrected Zapiet's review count to 1,905. The board and the status emails were dropped, leaving the phone-order form, recipient book, date engine and day sheet at $12. Scores moved pain 4 to 3, willingnessToPay 4 to 2, competitiveGap 3 to 2, feasibility 4 to 3, complianceBurden 5 to 4."
+      },
+      "gateGap": {
+        "missing": [
+          "total 17 is below 22",
+          "pain 3 is below 4",
+          "willingnessToPay 2 is below 3"
+        ],
+        "closedBy": "The validation test closes willingness to pay, the largest gap: three of six shops committing $12 a month after taking real phone orders on milestone 1 would support willingnessToPay 3, and four of six abandoning their current workaround during a peak week would support pain 4."
+      },
+      "inspiredBy": "https://community.shopify.com/t/671978.json"
+    },
+    {
+      "n": 2,
+      "title": "Open Quote Price Watch for HVAC Shops",
+      "slug": "open-quote-price-watch-for-hvac-shops",
+      "category": "Small Business Ops",
+      "complexity": "Weekend MVP",
+      "confidence": "provisional",
+      "topic": "Data & Visualization",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": true,
+        "engine": false,
+        "shared": false,
+        "notes": {
+          "stateful": "The shop keeps its open quotes and the brands on each one, and comes back after every announcement to see which are still unsigned.",
+          "connected": "Reads open quotes and line items from the shop's own Jobber account, or a CSV export for shops that quote in a spreadsheet.",
+          "unattended": "A scheduled check of the month's published manufacturer increases flags affected open quotes and emails the owner before each effective date, without anyone opening the app."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "email",
+        "scheduled",
+        "backend"
+      ],
+      "summary": "Tells a small HVAC shop which of its unsigned quotes contain equipment that is about to cost more, and drafts the 'price holds until Friday' message that gets those quotes signed.",
+      "public": {
+        "summary": "Shows you which unsigned quotes are about to cost you money, and writes the note that gets them signed first.",
+        "problem": "Your suppliers raise prices several times a year, and the quotes you handed out last month are still sitting in a customer's inbox at the old number. You find out when you order the equipment. Nobody has time to read every quote again against every manufacturer notice.",
+        "forWhom": "Owners of small heating and cooling shops who quote jobs themselves or with a couple of estimators.",
+        "benefits": [
+          "A short list of unsigned quotes affected by a coming increase",
+          "The effective date for each brand, before it arrives",
+          "A ready-to-send note giving customers a reason to decide now",
+          "No price book to rebuild by hand"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "A small heating and cooling shop hands out good-better-best quotes that stay open for weeks, manufacturers raise prices several times a year with a few weeks' notice, and nobody re-reads the open quotes, so jobs get signed at a price that no longer covers the equipment.",
+      "description": "The shop connects Jobber, or uploads a quote export, and tags which brands it quotes. Each month the tool reads the published manufacturer price-increase announcements, matches brand and effective date against the open, unsigned quotes, and lists the ones at risk with the percentage and the date. For each, it drafts a short message to the homeowner saying the quoted price holds until the day before the increase, which turns a margin problem into a reason to decide. It does not try to rewrite the shop's price book, because the field-service platforms already sync distributor costs.",
+      "targetCustomer": "Owners and estimators at residential heating and cooling shops with one to fifteen technicians, who run on Jobber or spreadsheets rather than ServiceTitan.",
+      "buyer": "The shop owner, on the company card.",
+      "whyNow": "Manufacturer increases are arriving monthly and are published with dates: the November 2026 trade list names eleven manufacturers raising 3% to 15% with effective dates from 1 to 23 November, and Carrier has announced 8% on residential equipment towards the end of the quarter. Meanwhile the platforms that sync distributor costs state plainly that estimates already presented to customers are not adjusted.",
+      "founderFit": "The whole product is a scheduled parser, a brand matcher and a drafted email over a public monthly list and one API, which is a few days of work on the shared platform; Pisan has no HVAC network, which is this idea's real weakness and why it ships provisional.",
+      "problemEvidence": [
+        {
+          "url": "https://www.achrnews.com/articles/166402-rising-costs-force-contractors-to-take-a-harder-look-at-pricing",
+          "source": "achrnews.com",
+          "author": "Mike Luongo, Total Home Supply (quoted by Dylan Kurt)",
+          "date": "2026-07-08",
+          "kind": "complaint",
+          "summary": "Distributor Mike Luongo of Total Home Supply says contractors come back asking him to 'match the price we quoted a month or two ago'; the article reports contractors now re-price job by job because manufacturers keep raising prices."
+        },
+        {
+          "url": "https://www.achrnews.com/articles/166947-hvac-price-increase-list-november-2026",
+          "source": "achrnews.com",
+          "author": "Dylan Kurt",
+          "date": "2026-11-04",
+          "kind": "mandate",
+          "summary": "Eleven manufacturers announced increases of 3% to 15% effective between 1 and 23 November 2026, each with a named date: the dated feed this product parses."
+        },
+        {
+          "url": "https://help.servicetitan.com/v1/docs/pricebook-pro-optimization-guide-in-servicetitan-max",
+          "source": "help.servicetitan.com",
+          "author": "ServiceTitan",
+          "date": "2026-11-13",
+          "kind": "mandate",
+          "summary": "ServiceTitan states that estimates already presented to customers are not retroactively adjusted when the price book changes, confirming the gap even in the most expensive incumbent."
+        },
+        {
+          "url": "https://www.freelancer.com/projects/excel/HVAC-Proposal-Generation-Price",
+          "source": "freelancer.com",
+          "author": "unknown",
+          "date": "2026-11-12",
+          "kind": "spend",
+          "summary": "An HVAC contractor posts a paid job ($15-25/hr) for proposal generation and price management: preset scope, warranty and payment blocks, one-click PDF and saved proposals. It is about generating proposals, not watching prices, so it is weaker support than it first appears."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "ServiceTitan Pricebook Connect",
+          "url": "https://help.servicetitan.com/docs/ferguson-product-and-pricing-integration",
+          "price": "unknown (not published)",
+          "gap": "Syncs Ferguson, Lennox and Johnstone costs nightly but says presented estimates are never adjusted, and it is far beyond a 1-15 tech shop's budget."
+        },
+        {
+          "name": "Housecall Pro with Reece",
+          "url": "https://housecallpro.com/llm-info/",
+          "price": "$79, $189 or $329 per month (July 2026)",
+          "gap": "Daily catalog sync into templates; no alert on open estimates."
+        },
+        {
+          "name": "Profit Rhino",
+          "url": "https://help.housecallpro.com/en/articles/8754493-profit-rhino-overview",
+          "price": "$199 per month via Housecall Pro; $39-59 per user elsewhere",
+          "gap": "Quarterly parts updates, and edited items stop receiving updates; nothing about unsigned quotes."
+        },
+        {
+          "name": "PricebookPlus",
+          "url": "https://pricebook.digital/faq/",
+          "price": "$169 per feature per month (listed on Capterra)",
+          "gap": "Distributors push pricing straight into the price book, sometimes free through a distributor incentive, but the tool is about the price book, not the quotes already out."
+        },
+        {
+          "name": "Jobber",
+          "url": "https://www.capterra.com/p/127994/Jobber/pricing/",
+          "price": "unknown (the listing was fetched but its tiers did not parse)",
+          "gap": "No HVAC distributor feed found; a search snippet of a Jobber community thread (the page returned 403) says product price changes are deliberately not applied to existing quote line items, which is exactly the hole this fills."
+        },
+        {
+          "name": "Arrivy free proposal generator",
+          "url": "https://arrivy.com/?p=13934",
+          "price": "Free",
+          "gap": "Generates a good-better-best PDF with no saved price book and no price tracking at all."
+        }
+      ],
+      "keyFeatures": [
+        "Monthly parse of published manufacturer increases with brand and effective date",
+        "Open, unsigned quotes pulled from Jobber or a CSV export",
+        "A dated at-risk list: which quotes, which brand, how much, by when",
+        "A drafted 'this price holds until' message per affected quote",
+        "Email digest a week before each effective date"
+      ],
+      "mvpScope": {
+        "features": [
+          "Brand tagging",
+          "Jobber quote read or CSV import",
+          "At-risk list",
+          "Drafted customer message"
+        ],
+        "outOfScope": [
+          "Rebuilding the price book",
+          "Distributor cost feeds",
+          "Margin recomputation per line",
+          "Invoicing",
+          "Anything for shops already on ServiceTitan"
+        ],
+        "buildEstimate": "about 3 build days"
+      },
+      "techStack": "React + Vite front end, Supabase for quotes and brand tags, a scheduled job parsing the monthly increase list, Jobber GraphQL API, transactional email, backend-hub on Render",
+      "pricing": {
+        "model": "Flat monthly subscription per shop, or a seasonal one-off",
+        "pricePoint": "$19 per month, or $49 for a single increase cycle",
+        "rationale": "An episodic problem cannot carry $29 a month, as the reviewer argued; $19 sits below every field-service platform and the one-off option matches a shop that only cares in the weeks before a big increase."
+      },
+      "revenueSketch": "Estimate: 120 shops x $19/month = $2,280 MRR. Assumptions, all unverified: tens of thousands of small US HVAC shops, most not on ServiceTitan, and a 1-in-500 reach through a Jobber marketplace listing. Churn is the main doubt, because the pain is seasonal.",
+      "distribution": "A Jobber App Marketplace listing (unverified as a channel), a short post each month when the trade increase list is published, Heating Help forum participation with a maker's disclosure, and outreach to independent distributors not already tied to a price-book vendor.",
+      "validationTest": {
+        "method": "Parse the next monthly increase list by hand, then email twenty small HVAC shops a free one-page report naming their brands' increases and asking how many unsigned quotes they currently hold.",
+        "successCriteria": "5 of 20 reply with a quote count, and 2 agree to pay $19 a month or $49 for the cycle before anything is built.",
+        "cost": "Two evenings plus outreach; under $50."
+      },
+      "moat": "Thin. The increase list is public and the matching is simple. What accumulates is a brand-to-model map and the record of which shops hold which brands, plus being the only tool that looks at quotes rather than price books.",
+      "compliance": [
+        "The published increase lists are copyrighted trade journalism: link and summarise effective dates, never republish the list.",
+        "A contractor's distributor pricing is account data; import it only with the contractor's authorisation and keep it private to that account.",
+        "FTC Cooling-Off Rule: in-home sales of $25 or more carry a three-day cancellation right, so any generated customer message must not imply a signature is binding immediately.",
+        "CAN-SPAM: the drafted homeowner message is commercial, so it needs opt-out and postal address if the app sends it; the MVP hands the draft to the shop to send itself.",
+        "No consumer PII beyond the homeowner name and address already on the quote."
+      ],
+      "risks": [
+        {
+          "risk": "The pain is episodic, so a monthly subscription churns after the increase passes.",
+          "mitigation": "Offer the $49 single-cycle option and pitch it as quote follow-up, which is a year-round job, rather than as price protection."
+        },
+        {
+          "risk": "The published lists are brand-level with no models or SKUs, so matching to free-text quote lines is fuzzy.",
+          "mitigation": "Ask the shop to tag the handful of brands it quotes, and present the result as 'quotes mentioning Brand X' rather than a recomputed price."
+        },
+        {
+          "risk": "Jobber's API may not expose cost fields on quote line items, making margin impact unknowable.",
+          "mitigation": "Verify in the first build day; fall back to naming affected quotes without recomputing margin, which is most of the value."
+        },
+        {
+          "risk": "Pisan has no route to HVAC contractors.",
+          "mitigation": "Treat the free one-page report as the entire go-to-market test before building, and drop the idea if twenty shops yield fewer than five replies."
+        }
+      ],
+      "scores": {
+        "pain": 2,
+        "willingnessToPay": 2,
+        "reachability": 2,
+        "competitiveGap": 3,
+        "feasibility": 2,
+        "complianceBurden": 5,
+        "total": 16
+      },
+      "scoreRationale": {
+        "pain": "A distributor reports contractors asking him to honour month-old quotes (https://www.achrnews.com/articles/166402-rising-costs-force-contractors-to-take-a-harder-look-at-pricing), but contractors' own fix is a 30-day validity window, so the pain is episodic and no contractor complaint about open quotes was found.",
+        "willingnessToPay": "One paid freelance job for proposal tooling (https://www.freelancer.com/projects/excel/HVAC-Proposal-Generation-Price) that never mentions price watching, and no paid product for this exact task, so the cap applies.",
+        "reachability": "No network, and the forums that discuss supplier increases sit behind bot gates (https://forum.heatinghelp.com/discussion/201444/material-price-increases-due-to-govermental-tarrifs is readable, hvac-talk is not).",
+        "competitiveGap": "ServiceTitan states presented estimates are never adjusted (https://help.servicetitan.com/v1/docs/pricebook-pro-optimization-guide-in-servicetitan-max) and Housecall Pro's sync touches templates only (https://housecallpro.com/llm-info/), so nobody watches open quotes.",
+        "feasibility": "The parse and the email are trivial, but brand-level lists (https://www.achrnews.com/articles/166947-hvac-price-increase-list-november-2026) and possibly missing cost fields in Jobber's quote API make reliable matching hard.",
+        "complianceBurden": "No regulated data; the only care needed is not republishing the copyrighted list (https://www.achrnews.com/articles/166947-hvac-price-increase-list-november-2026) and the cooling-off disclosure."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "The reviewer called this a borderline kill and cut it from 19 to 16. It survives because the competitive gap is real and confirmed in the incumbents' own documentation: ServiceTitan writes that estimates already presented are not retroactively adjusted (https://help.servicetitan.com/v1/docs/pricebook-pro-optimization-guide-in-servicetitan-max) and Housecall Pro syncs price changes into templates only (https://housecallpro.com/llm-info/). Three findings cut the scores. The November list names eleven ductwork, filtration and accessory makers and no major equipment OEM (https://www.achrnews.com/articles/166947-hvac-price-increase-list-november-2026), so brand matching to quote lines is fuzzier than assumed; a search snippet suggests Jobber removed unitCost from quote line items in 2023, which would block margin recompute (unverified, the changelog returned 403). Two of three evidence items were misread: the freelance job is about generating proposals and never mentions supplier increases, and the Heating Help thread lists increases without discussing open quotes. Contractors' existing fix is a 30-day validity window, so pain fell to 2 and willingnessToPay to 2. Re-scoped to a cheap or seasonal tool pitched as sales urgency rather than margin protection, which is how it is now written, with the $49 single-cycle option added. feasibility 3 to 2, pain 3 to 2, willingnessToPay 3 to 2."
+      },
+      "gateGap": {
+        "missing": [
+          "total 16 is below 22",
+          "pain 2 is below 4",
+          "willingnessToPay 2 is below 3",
+          "no complaint from the buyer themself: the complaint evidence is a distributor describing contractors"
+        ],
+        "closedBy": "The free one-page report test closes the biggest gap: two of twenty shops paying $19 a month or $49 a cycle before any build would support willingnessToPay 3, and five shops replying with a real count of affected open quotes would give the first direct contractor complaints and support pain 3 or 4."
+      },
+      "inspiredBy": "https://www.achrnews.com/articles/166947-hvac-price-increase-list-november-2026"
+    },
+    {
+      "n": 3,
+      "title": "State-Code Food Safety Logs for Small Restaurant Groups",
+      "slug": "state-code-food-safety-logs",
+      "category": "Accessibility & Compliance",
+      "smallBusiness": true,
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Data & Visualization",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": true,
+        "engine": true,
+        "shared": true,
+        "notes": {
+          "stateful": "Each store keeps its temperature, cooling and reheating logs, corrective actions and manager sign-offs, and the group comes back to them every shift and at every inspection.",
+          "connected": "Imports readings from the group's existing wireless probe or sensor service as a CSV or webhook, so manual entries and sensor readings land in the same log.",
+          "unattended": "A scheduled job reminds the shift lead when a check is due, flags a missed or out-of-range reading, and sends the manager a daily exceptions digest.",
+          "engine": "A rule pack per store keyed to the state's adopted Food Code edition and its local amendments: which logs are required and when (for example a cooling log only when not using shallow pans), check frequency, limits and the required corrective-action wording.",
+          "shared": "Cooks log on a phone or tablet, the manager signs off, and an inspector-ready export goes to the health inspector; a cook covering a shift at another store sees that store's pack."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "email",
+        "scheduled"
+      ],
+      "buildPlan": [
+        {
+          "n": 1,
+          "title": "One store, one log",
+          "delivers": "Sign in, create a store, log a hot-holding and a cold-holding temperature from a phone with the cook's name and time, and see it in a dated list.",
+          "acceptance": "A signed-in cook logs two readings on a phone and the manager sees both with time and name; an out-of-range reading is highlighted; deployed."
+        },
+        {
+          "n": 2,
+          "title": "Washington rule pack",
+          "delivers": "A rule pack for one state (Washington, as the pilot) listing which logs are required, check frequency, limits and corrective-action wording, each rule citing its code section and a last-verified date.",
+          "acceptance": "Every rule in the pack shows its source citation; a cooling batch that misses 70°F at two hours prompts the pack's corrective action and blocks sign-off until one is chosen."
+        },
+        {
+          "n": 3,
+          "title": "Cooling and reheating logs",
+          "delivers": "Timed cooling logs with checkpoints at the pack's intervals, and reheating logs, started from the line and finished on schedule.",
+          "acceptance": "A seeded cooling batch produces checkpoint prompts at the configured times, and a batch finished late is marked non-compliant with the corrective action recorded."
+        },
+        {
+          "n": 4,
+          "title": "Reminders and exceptions",
+          "delivers": "Scheduled reminders when a check is due and a daily email to the manager listing missed, late and out-of-range readings per store.",
+          "acceptance": "With one store missing two checks in a seeded day, the digest lists exactly those two and nothing else; rerunning the job sends nothing twice."
+        },
+        {
+          "n": 5,
+          "title": "Sensor import and multi-store",
+          "delivers": "Import readings from a sensor service CSV, add a second store with a different pack, and show a covering cook the store they are logged into.",
+          "acceptance": "A 500-row sensor CSV imports with no duplicates; a cook signed into the second store sees only that store's checks and wording."
+        },
+        {
+          "n": 6,
+          "title": "Inspector export and polish",
+          "delivers": "A per-store, per-date-range PDF that mirrors the layout of the state's own log forms; owner README, tablet layout, keyboard and screen-reader pass.",
+          "acceptance": "The export for a seeded week matches a hand-filled state form line for line; axe reports no serious issues on the logging screens."
+        }
+      ],
+      "summary": "Food safety logs for restaurant groups of two to ten stores that set each store's checks, timing and corrective-action wording from its state's food code, and flag a missed or out-of-range check before the inspector does.",
+      "public": {
+        "summary": "Your kitchen's temperature and cooling logs, set to your own state's rules, with a nudge when a check is missed.",
+        "problem": "Health inspectors want proof that hot food stayed hot and cold food stayed cold, and the rules about what to log, how often and what to write when something goes wrong are not the same everywhere. Your staff forget a check on a busy shift, or follow the habit from another store, and the fine arrives months later. Paper logs and generic checklists do not know your local rules.",
+        "forWhom": "Owners and kitchen managers of small independent restaurant groups with two to ten locations.",
+        "benefits": [
+          "Each store's checks set from its own state's rules",
+          "A reminder when a check is due and an alert when one is missed",
+          "Cooks who cover another store see that store's rules",
+          "Inspector-ready logs in the format your health department uses",
+          "Sensor readings and hand-logged checks in one place"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "A restaurant operator with stores under different health jurisdictions is fined not for unsafe food but for logging it the wrong way: a cook covering a shift follows one store's interval and precision in another store, and the generic checklist apps the group uses do not know any jurisdiction's rules.",
+      "description": "A logging app for small restaurant groups in which each store is assigned a rule pack built from its state's adopted Food Code and local amendments: which logs are required and when, how often to check, the limits, and the exact corrective-action wording the local form expects. Cooks log on a phone or tablet, or the group's existing sensor service feeds readings in; the app reminds the shift lead when a check is due, flags missed and out-of-range readings, and sends the manager a daily exceptions list. A cook signed into another store sees that store's checks. At inspection the manager exports a log that mirrors the jurisdiction's own form. The pilot is one state, because the reviewer found most variation is at state level rather than county.",
+      "targetCustomer": "Kitchen managers and shift leads at independent restaurant groups with two to ten stores, especially groups that span more than one county or health district.",
+      "buyer": "The group's owner or operations lead, from the operating budget, per location.",
+      "whyNow": "A restaurant operator wrote on 2 November 2026 that most of their food-safety fines came from staff applying one county's logging rules in another, and the established vendors have been consolidating (Jolt into SmartSense, ComplianceMate into Ladle, Squadle into Crunchtime) towards quote-only enterprise sales, leaving small groups with generic templates.",
+      "founderFit": "Rule packs are structured data with citations, and the app is forms, schedules and exports on the shared platform. Pisan's research habit of reading primary sources is the right one for building a cited rule library; the weakness is that restaurant operators are outside his network.",
+      "problemEvidence": [
+        {
+          "url": "https://hn.algolia.com/api/v1/items/50340828",
+          "source": "news.ycombinator.com",
+          "author": "eszed",
+          "date": "2026-11-02",
+          "kind": "complaint",
+          "summary": "Restaurant-industry operator: every county has its own logging requirements and portal; most of the company's fines came from staff following County A's rules in County B (every two hours versus every ninety minutes, whole degrees versus tenths). They now pay a sensor service costing about 80% of what the fines used to."
+        },
+        {
+          "url": "https://www.mitti.com/pricing",
+          "source": "mitti.com",
+          "author": "Mitti by SafetyCulture",
+          "date": "2026-11-13",
+          "kind": "spend",
+          "summary": "The generic inspection-checklist tool restaurants use charges $24 per seat per month on annual billing ($29 monthly) beyond a free tier of 10 seats and 5 templates; operators pay for checklists that know nothing about local rules."
+        },
+        {
+          "url": "https://www.fooddocs.com/pricing",
+          "source": "fooddocs.com",
+          "author": "FoodDocs",
+          "date": "2026-11-13",
+          "kind": "spend",
+          "summary": "Food-safety software charges $99, $199 or $299 per site per month with onboarding fees from $999; its logs are set by business type, not jurisdiction."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Mitti (SafetyCulture)",
+          "url": "https://www.mitti.com/pricing",
+          "price": "Free for 10 seats and 5 templates; $24 per seat per month annual, $29 monthly",
+          "gap": "General checklists the operator must write and maintain for every jurisdiction; no multi-location support on the free tier."
+        },
+        {
+          "name": "FoodDocs",
+          "url": "https://www.fooddocs.com/pricing",
+          "price": "$99, $199 or $299 per site per month; onboarding from $999",
+          "gap": "Logs set by business type with 200-plus general templates, not by the state or county code a store answers to; expensive for a three-store group."
+        },
+        {
+          "name": "Xenia",
+          "url": "https://www.xenia.team/pricing",
+          "price": "Custom per location; sensors an add-on",
+          "gap": "Quote-only, and its own HACCP guidance tells operators to verify their state and county edition themselves."
+        },
+        {
+          "name": "SmartSense (formerly Jolt)",
+          "url": "https://www.smartsense.co/request-a-quote",
+          "price": "unknown (quote only)",
+          "gap": "Enterprise sales after the merger; no jurisdiction packs mentioned."
+        },
+        {
+          "name": "Sensor monitoring services",
+          "url": "https://hn.algolia.com/api/v1/items/50340828",
+          "price": "unknown; the commenter says about 80% of their prior annual fines",
+          "gap": "Automate the reading itself, which removes most of the commenter's pain, but say nothing about which manual logs each jurisdiction still requires."
+        }
+      ],
+      "keyFeatures": [
+        "Per-store rule pack from the state code and local amendments, each rule cited",
+        "Cooling, reheating and holding logs with timed checkpoints",
+        "Reminders, missed-check alerts and a daily exceptions digest",
+        "Sensor CSV or webhook import alongside manual entries",
+        "Inspector export that mirrors the jurisdiction's own form"
+      ],
+      "mvpScope": {
+        "features": [
+          "One state's rule pack",
+          "Holding, cooling and reheating logs",
+          "Reminders and exceptions digest",
+          "Two-store support with covering-cook view",
+          "Inspector export"
+        ],
+        "outOfScope": [
+          "Every state and county",
+          "Selling or installing sensors",
+          "Allergen and HACCP plan writing",
+          "Submitting to health-department portals",
+          "Staff scheduling"
+        ],
+        "buildEstimate": "about 6 build days for the app; the rule pack is ongoing research"
+      },
+      "techStack": "React + Vite PWA for the line, Supabase for logs, stores and rule packs, scheduled jobs and transactional email on the shared platform, PDF export",
+      "pricing": {
+        "model": "Per location per month",
+        "pricePoint": "$19 per location per month",
+        "rationale": "Below Mitti's $24 per seat and far below FoodDocs at $99 per site; a three-store group pays $57 a month, small against one fine."
+      },
+      "revenueSketch": "Estimate: 150 groups x 3 locations x $19 = $8,550 MRR. Assumptions, none verified: small multi-unit independents are a large share of US restaurants, but only groups that cross jurisdictions feel the specific pain, and the commenter's group solved most of it with sensors.",
+      "distribution": "Start in one state: approach the state restaurant association's technology partner programme (California's has a newly named tech advisory partner, NC's endorsed-partner list has no food-safety vendor), contact local multi-unit operators directly, and publish the cited rule pack free as a reference page that ranks for '[state] cooling log requirements'.",
+      "validationTest": {
+        "method": "Publish a free, cited Washington cooling and holding log requirements page and printable form, and interview 8 operators of 2-to-10-store groups found through the state association and local restaurant listings.",
+        "successCriteria": "5 of 8 say jurisdiction-specific logging has cost them a citation or fine in the last two years, and 3 agree to a paid pilot at $19 per location.",
+        "cost": "About a week of research and outreach; under $100."
+      },
+      "moat": "The cited rule library itself: every state's adopted Food Code edition, its amendments and its forms, kept current with last-verified dates. It is slow to build and slow to copy, which is both the moat and the cost.",
+      "compliance": [
+        "Never claim health-department approval: whether a jurisdiction accepts electronic records is unknown and must be checked per jurisdiction.",
+        "Liability: a wrong rule pack causes the fines it promises to prevent, so every rule carries a source citation and last-verified date, and the terms say the operator remains responsible.",
+        "Records must be tamper-evident: edits keep the original reading and who changed it.",
+        "Employee data is limited to names and timestamps; no health or personal data.",
+        "Accessibility: large touch targets and screen-reader support for line staff (WCAG 2.2 AA target)."
+      ],
+      "risks": [
+        {
+          "risk": "Most of the variation is at state level and smaller than the complaint suggests: cooling limits are the same Food Code numbers almost everywhere.",
+          "mitigation": "Sell the pack as 'which logs your state requires and how often', which does vary, and drop the county-level claims unless pilots surface real local amendments."
+        },
+        {
+          "risk": "Sensors solve the problem the evidence describes, and the commenter already pays for them.",
+          "mitigation": "Integrate with sensor services rather than compete: the product keeps the manual logs sensors cannot (cooling batches, reheating, corrective actions) and merges both."
+        },
+        {
+          "risk": "Small groups mostly sit inside one county, so the cross-jurisdiction case is narrow.",
+          "mitigation": "The validation interviews count how many groups cross a line; if few do, re-scope to a cheap single-state compliance log."
+        },
+        {
+          "risk": "Maintaining rule packs across states is expensive.",
+          "mitigation": "One state at a time, only after five paying groups in it."
+        }
+      ],
+      "scores": {
+        "pain": 2,
+        "willingnessToPay": 2,
+        "reachability": 2,
+        "competitiveGap": 2,
+        "feasibility": 3,
+        "complianceBurden": 4,
+        "total": 15
+      },
+      "scoreRationale": {
+        "pain": "One vivid operator complaint (https://hn.algolia.com/api/v1/items/50340828), but the same commenter says sensors now handle it, and cooling limits match the Food Code on the forms checked (https://publichealthmdc.com/documents/Cooling%20Log.pdf).",
+        "willingnessToPay": "Operators pay $24 per seat (https://www.mitti.com/pricing) and $99 per site (https://www.fooddocs.com/pricing) for food-safety logging, but nobody was found paying for jurisdiction rules specifically.",
+        "reachability": "No restaurant network; state association partner programmes are a plausible but untested channel (https://hn.algolia.com/api/v1/items/50340828 is the only operator voice found).",
+        "competitiveGap": "No vendor sells per-jurisdiction packs (https://www.xenia.team/pricing tells operators to check their own edition), but any template tool lets a group build two or three versions once (https://www.mitti.com/pricing).",
+        "feasibility": "The app is routine; a cited rule library is real ongoing research, as the differing forms show (https://publichealthmdc.com/documents/Cooling%20Log.pdf).",
+        "complianceBurden": "No personal or regulated data, but a wrong rule creates liability, so citations and disclaimers are required (https://hn.algolia.com/api/v1/items/50340828)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "The reviewer cut the idea from 18 to 15. Variation between jurisdictions is real but smaller than the complaint implies: Madison and Dane County's cooling log uses the standard Food Code limits and corrective action (https://publichealthmdc.com/documents/Cooling%20Log.pdf), and Skagit County's rule that a cooling log is needed only without shallow pans traces to Washington state code, so many 'county packs' are really state packs; an IFPTI survey did find real spread in shallow-pan depth limits across 33 state programmes (https://www.ifpti.org/cohort-10/nicklaus-koreen). The single complaint comes from someone who says sensors now solve it, in a thread about supermarket freezer cyber-attacks, and their claim that each county has its own submission portal is unverified. No free tool ships jurisdiction rules, but Mitti's free tier (https://www.mitti.com/pricing) and FoodDocs (https://www.fooddocs.com/pricing) let an operator build a template per store. Small groups mostly stay in one metro, so the covering-shift case is narrow. Re-scoped to one state's code plus local amendments, paired with sensor import. pain 3 to 2, willingnessToPay 3 to 2, competitiveGap 3 to 2."
+      },
+      "gateGap": {
+        "missing": [
+          "total 15 is below 22",
+          "pain 2 is below 4",
+          "willingnessToPay 2 is below 3",
+          "only 1 complaint, from one author; no second independent complaint"
+        ],
+        "closedBy": "The eight operator interviews close the two largest gaps at once: five groups reporting a jurisdiction-specific citation would supply the independent complaints for pain 4, and three paid pilots at $19 per location would support willingnessToPay 3."
+      },
+      "inspiredBy": "https://hn.algolia.com/api/v1/items/50340828"
+    }
+  ],
+  "runNotes": {
+    "weekday": "Friday",
+    "domainLens": "Small business, customer-facing: local services, trades, clinics, restaurants, retail, their websites and bookings",
+    "focusSources": [
+      "A13 Discourse forums, any niche (community.shopify.com)",
+      "B11 Freelance job boards",
+      "C8 Trade news"
+    ],
+    "searches": [
+      "community.shopify.com search.json: no show deposit after:2026-08-15",
+      "community.shopify.com search.json: booking appointment after:2026-09-01",
+      "community.shopify.com search.json: local pickup after:2026-09-15",
+      "community.shopify.com search.json: gift card after:2026-09-15",
+      "community.shopify.com search.json: google reviews after:2026-09-01 (HTTP 429)",
+      "community.shopify.com search.json: preorder after:2026-09-15",
+      "community.shopify.com search.json: returns exchange after:2026-09-15",
+      "community.shopify.com search.json: custom order quote after:2026-09-01",
+      "community.shopify.com search.json: class booking workshop after:2026-09-01",
+      "community.shopify.com search.json: gift card reload after:2025-06-01",
+      "community.shopify.com search.json: delivery date after:2026-09-15",
+      "community.shopify.com search.json: tariff refund after:2026-07-01",
+      "community.shopify.com search.json: IEEPA after:2026-05-01",
+      "community.shopify.com search.json: chatgpt listing after:2026-09-15",
+      "community.shopify.com search.json: bakery orders / florist / rental (lens: customer-facing shops)",
+      "community.shopify.com search.json: EU handling fee after:2026-10-20; €3 duty EU after:2026-07-01",
+      "community.shopify.com search.json: phone order delivery date; out for delivery notification",
+      "freelancer.com API (B11): booking system, online ordering restaurant, google reviews, quote form, waitlist, shopify local delivery, clinic website, menu",
+      "hn.algolia.com comments: my restaurant; salon booking; \"my shop\" software; clinic scheduling; \"price book\"",
+      "wordpress.org support (A14): bookly, ameliabooking, restaurant-reservations, order-delivery-date-for-woocommerce, simply-schedule-appointments",
+      "C8 trade news: nrn.com, restaurantbusinessonline.com, modernretail.co, achrnews.com front pages and articles",
+      "WebSearch: restaurant owners new rule November 2026 small business deadline",
+      "WebSearch: salon owners no-show fees 2026 trade news",
+      "WebSearch: contractors home services new law 2026 small business compliance trade publication",
+      "WebSearch (B12): site:apps.shopify.com local delivery pickup date picker app reviews",
+      "WebSearch (B12): site:apps.shopify.com gift card top up reload POS",
+      "WebSearch: restaurant temperature log app county health department requirements multi-location HACCP digital log price",
+      "WebSearch (B12): Zapiet Pickup Delivery Shopify app store slug; \"Draft Order Magic\" shopify app",
+      "WebSearch: HVAC contractor update price book after supplier price increase spreadsheet small shop 2026",
+      "WebSearch (A16): community.squareup.com Square Appointments feature request 2026 deposit no-show",
+      "WebSearch (B12 spend pass): site:apps.shopify.com tax exempt wholesale customers per product exemption app",
+      "WebSearch (spend pass): HVAC price book software small contractor pricing Profit Rhino New Flat Rate",
+      "Spend pass (B12): apps.shopify.com/click-and-collect 1 and 2 star reviews, newest first",
+      "Research and review subagents: competitor pricing for Zapiet, DingDoong, Pickeasy, Alpaca, Nuflorist, Ginko, ServiceTitan, Housecall Pro, Profit Rhino, PricebookPlus, FoodDocs, Mitti, Xenia, ShowMojo, Tenant Turner, TurboTenant, Avail, RentRedi, LetHub; BiggerPockets and Heating Help threads"
+    ],
+    "unverifiedSignals": [
+      {
+        "url": "https://www.restaurantbusinessonline.com/",
+        "reason": "curl returned a 30KB shell with no headlines."
+      },
+      {
+        "url": "https://www.nrn.com/restaurant-technology/chatgpt-launches-google-like-profiles-for-businesses",
+        "reason": "curl returned the site index shell; the article body was absent, so the ChatGPT business-profile change was taken from Shopify Community posts instead."
+      },
+      {
+        "url": "https://community.squareup.com/t5/Feature-Requests/Allow-clients-to-cancel-online-when-a-deposit-is-required-with/m-p/842771",
+        "reason": "WebFetch returned an empty page."
+      },
+      {
+        "url": "https://www.zillow.com/rental-manager/pricing/",
+        "reason": "HTTP 403 to WebFetch and curl."
+      },
+      {
+        "url": "https://www.zillow.com/rentals-network/ai-assist/",
+        "reason": "HTTP 403 to WebFetch and curl; whether AI Assist is free to small landlords is taken from search snippets and the EliseAI partnership page only."
+      },
+      {
+        "url": "https://www.capterra.com/p/133811/BloomNation/",
+        "reason": "HTTP 403."
+      },
+      {
+        "url": "https://theproducenews.com/node/43361",
+        "reason": "HTTP 403."
+      },
+      {
+        "url": "https://community.getjobber.com/discussions/finances-forum/%F0%9F%92%A1feature-request-price-increases-in-products--services-list/7481",
+        "reason": "HTTP 403 to both clients; the claim that Jobber does not reprice existing quote lines is from a search snippet."
+      },
+      {
+        "url": "https://developer.getjobber.com/docs/changelog/",
+        "reason": "HTTP 403; the reported 2023 removal of unitCost from quote line items is unverified."
+      },
+      {
+        "url": "https://www.contractortalk.com/ and https://www.hvac-talk.com/ threads",
+        "reason": "Redirected to a tollbit bot paywall; not followed."
+      },
+      {
+        "url": "https://www.apartments.com/rental-manager/resources/messages/how-send-and-receive-messages-apartmentscom",
+        "reason": "HTTP 403 to both clients."
+      },
+      {
+        "url": "https://help.followupboss.com/ (Zillow Rentals article)",
+        "reason": "HTTP 403 to both clients; relay-address masking taken from search results and the aptly help page."
+      }
+    ],
+    "rejectedCandidates": [
+      {
+        "title": "Rental Inquiry Desk for small landlords",
+        "total": 12,
+        "reason": "Reviewed and rescored from 18 to 12, below the three ideas shipped. Email parsing cannot reach Facebook Marketplace leads (chat only) and Zillow and Apartments.com mask the renter's address; Avail's and TurboTenant's free plans already include lead management and instant replies (https://www.avail.co/pricing, https://www.turbotenant.com/finding-tenants-p). The only spend signal is a one-off $250-750 build that wants SMS."
+      },
+      {
+        "title": "Product-level tax exemptions for mixed wholesale and retail buyers",
+        "total": 16,
+        "reason": "One complaint (Julie_Remy, 2026-10-29, https://community.shopify.com/t/706515.json) and Milople VAT Exemption already offers per-product exemption; several tax-exempt apps exist. Not reviewed: ranked below the three shipped."
+      },
+      {
+        "title": "EU per-item duty and handling fee checker for non-EU sellers",
+        "total": 15,
+        "reason": "The 1 November 2026 €2 handling fee and product identifiers are real (https://community.shopify.com/t/702681.json), but the threads are already full of new apps posted by their developers (PIDReady, Citebeam, a UK-EU customs invoice app), and it sits close to the 2026-11-08 US Duty Price Sheet."
+      },
+      {
+        "title": "Gift card reload for Shopify POS",
+        "total": 14,
+        "reason": "Real, long-running complaint (deserthighwaybtq 2026-09-22, https://community.shopify.com/t/382218.json), but Gift Card Hero's $19.99 PRO plan already reloads balances from a POS tile."
+      },
+      {
+        "title": "Physical gift card fulfilment with liability tracking",
+        "total": 13,
+        "reason": "Webbeo (2026-10-07, https://community.shopify.com/t/694208.json) wants plastic cards sold online; gift card apps (Gift Card Hero, Shopkeeper GiftCard Pro) already sell physical cards."
+      },
+      {
+        "title": "Delivery-method switch for local orders",
+        "total": 13,
+        "reason": "Shopify's deliveryMethod is read-only, so any app cancels and recreates (https://community.shopify.com/t/690055.json); Alpaca Pack already sells an Edit delivery method feature. Folded into the Phone Order Desk and then dropped by its reviewer."
+      },
+      {
+        "title": "Rental deposit authorisation expiry watch",
+        "total": 12,
+        "reason": "Shopify already emails a warning one day before an authorisation expires (https://community.shopify.com/t/713679.json), and the thread's posters are app developers."
+      },
+      {
+        "title": "Per-service appointment deposits for Square sellers",
+        "total": 12,
+        "reason": "Square marked the feature Delivered in June 2026 (https://community.squareup.com/t5/Feature-Requests/allow-deposits-to-be-required-by-service-or-price-threshold-in/idi-p/830538)."
+      },
+      {
+        "title": "Supplier lead-time reorder planner",
+        "total": 12,
+        "reason": "Threads are dominated by developers validating Stocky replacements; crowded niche."
+      },
+      {
+        "title": "UK cleaning company instant quote and booking site",
+        "total": 12,
+        "reason": "One paid freelance build (https://www.freelancer.com/projects/web-development/Cleaning-Website-Build); booking plugins already sell this; not researched further."
+      },
+      {
+        "title": "Hold-and-ship-later stacking for preorder shops",
+        "total": 11,
+        "reason": "Newest merchant post is 2025-05-08 (https://community.shopify.com/t/51274.json), outside 180 days; an app was already in development in that thread."
+      },
+      {
+        "title": "Card-testing bot defence for small stores",
+        "total": 11,
+        "reason": "Crowded; most recent posts are by app vendors."
+      },
+      {
+        "title": "ChatGPT business profile and AI-visibility audit",
+        "total": 11,
+        "reason": "OpenAI's business profiles launched 10 November, but the Shopify threads already carry at least four free checkers posted by their developers (https://community.shopify.com/search.json?q=chatgpt%20listing%20after%3A2026-09-15)."
+      },
+      {
+        "title": "Barbershop walk-in queue",
+        "total": 14,
+        "reason": "Rejection rule: same problem and customer as the 2026-11-12 Walk-In Board for Square Shops (freelance jobs 40816348 and 40814363 repeat it)."
+      },
+      {
+        "title": "Wedding venue lead nurturing on HighLevel",
+        "total": 10,
+        "reason": "Rejection rule: a consulting and setup service on an existing CRM, not a product."
+      },
+      {
+        "title": "Tiffin meal-plan ordering app",
+        "total": 9,
+        "reason": "Rejection rule: custom development for one business; consumer two-sided ordering."
+      },
+      {
+        "title": "QR table menu",
+        "total": 9,
+        "reason": "Rejection rule: novelty with abundant free tools; the job post is a proof-of-concept demo."
+      },
+      {
+        "title": "Shop App preorder and backorder messaging",
+        "total": 9,
+        "reason": "Rejection rule: the Shop App exposes no API for merchant messaging (https://community.shopify.com/t/711320.json)."
+      },
+      {
+        "title": "Canada Post rate connection fixer after MFA",
+        "total": 8,
+        "reason": "Rejection rule: a one-off support issue, not a product (https://community.shopify.com/t/697430.json)."
+      }
+    ],
+    "watchlist": [],
+    "caveats": "First run of 2026-11-13 (Friday, small business customer-facing lens). Three provisional ideas ship (17, 16, 15); none cleared the gate of 22. Twenty-two candidates; four were researched and adversarially reviewed, all rescored and none killed: Phone Order Desk (23 to 17, re-scoped from a full pickup-and-delivery desk to the phone-order form, because DingDoong at $6.99, Zapiet and Shopify itself already send the status emails and Alpaca already edits delivery methods), Open Quote Price Watch (19 to 16, a borderline kill: two of three evidence items were misread and the November increase list is brand-level), State-Code Food Safety Logs (18 to 15: variation is mostly state-level and the complainant now uses sensors) and Rental Inquiry Desk (18 to 12: email parsing cannot reach Facebook leads and Zillow masks renters' addresses, so it was not shipped). Three ideas survived after four reviews, so the review loop stopped there. The spend pass found Zapiet's paid plans and 1-2 star reviews and Draft Order Magic for the order desk, Profit Rhino and PricebookPlus for HVAC, and FoodDocs and Mitti for food-safety logs, but no candidate showed customers paying for this exact task, which is why willingnessToPay sits at 2 everywhere. Ideas 1 and 2 share Small Business Ops; idea 3 is Accessibility & Compliance with a small-business buyer. Ideas 1 and 3 are substantial Multi-week ideas with build plans; idea 2 is a Weekend MVP. Shopify Community threads in this niche are heavily seeded by developers pitching paid builds; the reviewer checked each complainant and counted only merchants. The Freelancer project dates come from the API's time_submitted; the project pages themselves show only relative times. Competitor prices were fetched by research and reviewer subagents in this run. No watchlist: no unshipped candidate reached 19, and the previous file's watchlist was empty."
+  }
+}

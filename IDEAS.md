@@ -641,3 +641,6 @@
 | 2026-11-12 | Walk-In Board for Square Shops | Small Business Ops | Multi-week | 17 | provisional |  |
 | 2026-11-12 | DRS Deposit Lines for Xero Wholesalers | Accessibility & Compliance | Weekend MVP | 14 | provisional |  |
 | 2026-11-12 | Tip Reclass Audit for Restaurant Bookkeepers | Accessibility & Compliance | Weekend MVP | 13 | provisional |  |
+| 2026-11-13 | Phone Order Desk for Gift Shops | Small Business Ops | Multi-week | 17 | provisional |  |
+| 2026-11-13 | Open Quote Price Watch for HVAC Shops | Small Business Ops | Weekend MVP | 16 | provisional |  |
+| 2026-11-13 | State-Code Food Safety Logs for Small Restaurant Groups | Accessibility & Compliance | Multi-week | 15 | provisional |  |

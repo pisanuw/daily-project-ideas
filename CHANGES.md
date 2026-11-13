@@ -679,3 +679,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-12 [doc] Created ideas/2026-11-12.json (schemaVersion 3, 4 ideas): Cover Check (18, provisional), Walk-In Board (17, provisional), DRS Lines (14, provisional), Tip Audit (13, provisional)
 
 2026-11-12 [code] HintWise Studio: Photo to PGN (photo2pgn.hintwise.org, own repo pisan-labs/photo2pgn) added to studio.json with a screenshot (owner "Yes studio"); studio_media.js skips placeholder entries.
+
+2026-11-13 [doc] Created ideas/2026-11-13.json (schemaVersion 3, 3 ideas): Phone Order Desk (17, provisional), Open Quote Price Watch (16, provisional), Food Safety Logs (15, provisional)
