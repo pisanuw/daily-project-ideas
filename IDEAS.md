@@ -644,3 +644,6 @@
 | 2026-11-13 | Phone Order Desk for Gift Shops | Small Business Ops | Multi-week | 17 | provisional |  |
 | 2026-11-13 | Open Quote Price Watch for HVAC Shops | Small Business Ops | Weekend MVP | 16 | provisional |  |
 | 2026-11-13 | State-Code Food Safety Logs for Small Restaurant Groups | Accessibility & Compliance | Multi-week | 15 | provisional |  |
+| 2026-11-14 | Payroll Split Journals for Xero | Small Business Ops | Multi-week | 20 | provisional |  |
+| 2026-11-14 | Open PO Balance for Xero | Small Business Ops | Multi-week | 19 | provisional |  |
+| 2026-11-14 | Gift Aid Schedule Builder for Xero Charities | Micro-SaaS | Weekend MVP | 16 | provisional |  |

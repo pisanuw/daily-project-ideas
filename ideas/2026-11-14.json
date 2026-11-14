@@ -1,0 +1,837 @@
+{
+  "date": "2026-11-14",
+  "schemaVersion": 3,
+  "complete": true,
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Payroll Split Journals for Xero",
+      "slug": "payroll-split-journals-for-xero",
+      "category": "Small Business Ops",
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Data & Visualization",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": true,
+        "engine": true,
+        "shared": true,
+        "notes": {
+          "stateful": "Each organisation keeps a saved split table per employee (percentages across two tracking categories, with effective dates) and a history of every reallocation journal posted.",
+          "connected": "Signs in to the organisation's own Xero file, reads pay runs and payslips from the Xero Payroll API and posts manual journals with tracking through the Accounting API.",
+          "unattended": "A scheduled job notices each newly posted pay run and drafts the reallocation journal, then emails the bookkeeper to approve it.",
+          "engine": "Splits wages, super or pension and employer costs per employee by the saved percentages, rounds so every journal balances to the cent, and avoids double-allocating lines that timesheets already tracked.",
+          "shared": "The bookkeeper prepares and approves the journals, and the owner, finance committee or grant funder receives a per-location or per-funder staff-cost schedule."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "email",
+        "scheduled",
+        "backend"
+      ],
+      "buildPlan": [
+        {
+          "n": 1,
+          "title": "One pay run, one journal",
+          "delivers": "Connect a Xero demo company, pick a posted pay run, enter a percentage split for one employee across two tracking options, and post one balanced manual journal that moves that employee's wages.",
+          "acceptance": "The journal posts to the Xero demo company, balances to the cent, and the tracking report for that period shows the split; deployed."
+        },
+        {
+          "n": 2,
+          "title": "Split table for every employee",
+          "delivers": "A saved split table for all employees across both tracking categories, with effective-from dates and a check that each employee's split adds to 100%.",
+          "acceptance": "A 15-employee table with three funders and two departments saves, survives sign-out, and refuses a row that does not add to 100%."
+        },
+        {
+          "n": 3,
+          "title": "Whole pay run engine",
+          "delivers": "Split every earnings, super or pension and employer-cost line on a pay run, skip lines already tracked by timesheets, and preview the journal before posting.",
+          "acceptance": "On a seeded 15-employee pay run the preview matches a hand-worked spreadsheet line for line and the posted journal nets to zero on every payroll liability account."
+        },
+        {
+          "n": 4,
+          "title": "Watch for new pay runs",
+          "delivers": "A scheduled check finds each newly posted pay run, drafts its journal and emails the bookkeeper an approve link.",
+          "acceptance": "Posting a pay run in the demo company produces exactly one draft and one email within the next scheduled run, and approving it posts the journal once."
+        },
+        {
+          "n": 5,
+          "title": "Staff-cost schedule",
+          "delivers": "Per-location or per-funder staff-cost schedule for any date range, by employee and cost type, exported to CSV and PDF for a grant acquittal or a manager.",
+          "acceptance": "A three-month schedule ties to the Xero profit and loss by tracking option for the same months."
+        },
+        {
+          "n": 6,
+          "title": "Polish",
+          "delivers": "Owner and bookkeeper README, phone layout for approvals, keyboard and screen-reader pass, walkthrough test from connect to schedule.",
+          "acceptance": "A walkthrough test runs connect, split table, approve and export; axe reports no serious issues."
+        }
+      ],
+      "summary": "For small Xero businesses with several sites and for grant-funded charities: set each employee's cost split once, and every pay run is reallocated to the right location, department or funder with one approved journal instead of a monthly spreadsheet.",
+      "public": {
+        "summary": "Set once how each person's pay is shared between your sites, teams or funders, and every pay run lands in the right place in your books.",
+        "problem": "Your staff work across two salons, a cafe and a kitchen, or on three different grants, but your payroll can only put each person in one place. So after every pay run you or your bookkeeper rebuild the split in a spreadsheet and type a correcting journal by hand. Miss one and your branch figures or your grant report are wrong.",
+        "forWhom": "Owners and bookkeepers of small multi-site businesses, and finance officers at small charities paid by several funders, who run payroll in Xero.",
+        "benefits": [
+          "No more correcting journals after every pay run",
+          "Profit by location or department you can trust",
+          "Staff costs per funder ready for grant reports",
+          "A clear record of how every pay run was shared out"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "Xero Payroll lets an employee's cost go to only one tracking option, so businesses with staff across several sites and charities with staff paid by several funders reallocate wages, super and employer costs by manual journal after every pay run; Xero has told them that is the workaround and that the feature is not in its plans.",
+      "description": "A Xero-connected web app. The bookkeeper enters each employee's percentage split across up to two tracking categories (for example location and department, or funder and programme), with effective dates. After each pay run the app reads the pay run and payslips through Xero's Payroll API, computes the reallocation for earnings, super or pension and employer costs, shows a preview, and on approval posts one balanced manual journal with tracking through the Accounting API. It keeps the history and produces a staff-cost schedule per location or funder. It deliberately avoids Xero's restricted Journals endpoint, which needs Xero's Advanced developer tier.",
+      "targetCustomer": "Owners, office managers and outside bookkeepers of small Xero businesses in Australia, New Zealand and the UK with staff split across sites or departments (salons, cafes with kitchens, clinics, trades), and finance officers of small charities whose staff are paid by several grants.",
+      "buyer": "The business owner on the business card, or the charity's finance officer from the admin budget; bookkeepers may resell it to several clients.",
+      "whyNow": "Xero marked the 138-vote request 'Not in pipeline' on 15 January 2026 and told users to keep doing manual journals, while comments kept arriving into November 2026; the UK equivalent for multi-funder charities was opened in June 2026. Xero's new developer tiers make a small app possible: up to 50 connected organisations on the Core tier for A$35 a month.",
+      "founderFit": "Pisan can ship a small connected web app with sign-in, a database and a scheduled job alone in days on the shared platform, and the allocation engine is a well-defined, testable rule set. Buyers are reachable one by one in the public Xero idea threads where they are already asking, which does not need his own network.",
+      "problemEvidence": [
+        {
+          "url": "https://productideas.xero.com/forums/967118-payroll-expenses/suggestions/45701374-au-payroll-assign-multiple-tracking-categories-t",
+          "source": "productideas.xero.com",
+          "author": "Chandana Narayan",
+          "date": "2026-11-02",
+          "kind": "complaint",
+          "summary": "Latest comment on a 138-vote idea marked Not in pipeline: allocating one employee to multiple tracking categories 'is highly needed', especially for not-for-profits; earlier comments from a salon with three locations, a cafe and factory, and an NFP that spends 'so long each month journaling the wages and super'."
+        },
+        {
+          "url": "https://productideas.xero.com/forums/967118-payroll-expenses/suggestions/51390655-uk-payroll-percentage-based-payroll-tracking-for",
+          "source": "productideas.xero.com",
+          "author": "Abimbola Adeosun",
+          "date": "2026-06-10",
+          "kind": "complaint",
+          "summary": "UK charity request (4 votes): one employee's payroll is funded by three or more external funders, and organisations 'must manually adjust payroll journals each month to show correct funder allocation'."
+        },
+        {
+          "url": "https://productideas.xero.com/forums/967124-projects-tracking/suggestions/51796755-more-tiers-of-financial-tracking-budgeting-and-re",
+          "source": "productideas.xero.com",
+          "author": "Jasmine Lambert",
+          "date": "2026-10-15",
+          "kind": "complaint",
+          "summary": "An organisation managing funding contracts, services and properties says Xero's tracking limits make it impossible to allocate budgets and spend across levels and asks whether anyone has built a custom extension."
+        },
+        {
+          "url": "https://employmenthero.com/blog/save-time-through-splitting-earnings",
+          "source": "employmenthero.com",
+          "author": "Employment Hero",
+          "date": "2026-06-02",
+          "kind": "spend",
+          "summary": "A paid payroll product sells percentage 'split earnings' across locations, but only for auto-pay salaried employees and only if the business leaves Xero Payroll."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Employment Hero Payroll",
+          "url": "https://employmenthero.com/blog/save-time-through-splitting-earnings",
+          "price": "unknown (demo only)",
+          "gap": "Splits salaried employees by percentage across locations, but means replacing Xero Payroll; does not cover hourly staff on split earnings."
+        },
+        {
+          "name": "Thankyou Payroll (NZ)",
+          "url": "https://www.thankyoupayroll.co.nz/payroll-for-charities/",
+          "price": "$0 per pay and per employee for registered NZ charities",
+          "gap": "Free and pushes to Xero with cost-centre tagging, but only for NZ, only for charities, and again means switching payroll."
+        },
+        {
+          "name": "Calxa",
+          "url": "https://www.calxa.com/pricing",
+          "price": "Premier1 $264/month GST incl. or GBP 132/month",
+          "gap": "Budgets and reports by tracking category; does not post payroll reallocation journals back to Xero and costs far more than this job."
+        },
+        {
+          "name": "Satva Solutions custom integration",
+          "url": "https://satvasolutions.com/blog/xero-payroll-dual-tracking-categories",
+          "price": "unknown (custom service)",
+          "gap": "Sells one-off custom builds for dual tracking in Xero payroll; not a product a small business can switch on."
+        },
+        {
+          "name": "Manual journals (Xero's suggested workaround)",
+          "url": "https://productideas.xero.com/forums/967118-payroll-expenses/suggestions/45701374-au-payroll-assign-multiple-tracking-categories-t",
+          "price": "Free, staff time every pay run",
+          "gap": "Weekly or monthly hand-built journals, which commenters say are slow, error-prone and make transaction reports messy."
+        }
+      ],
+      "keyFeatures": [
+        "Per-employee percentage split across two tracking categories with effective dates",
+        "Pay run reader for Xero Payroll AU first, then UK and NZ",
+        "Balanced reallocation journal with preview and one-click approval",
+        "New pay run watcher with approve-by-email",
+        "Staff-cost schedule per location or funder"
+      ],
+      "mvpScope": {
+        "features": [
+          "Xero connection",
+          "Split table with effective dates",
+          "Pay run to journal engine for Xero Payroll AU",
+          "Preview and approve",
+          "Staff-cost schedule export"
+        ],
+        "outOfScope": [
+          "UK and NZ payroll (second and third releases)",
+          "Leave accrual value splits (the API gives units, not amounts)",
+          "AU state payroll tax (Xero does not calculate it)",
+          "Timesheet-based hour splits",
+          "Xero App Store listing (needs the certified Plus tier)"
+        ],
+        "buildEstimate": "about 6 build days for AU, 2 more per extra region"
+      },
+      "techStack": "React + Vite front end, Supabase for sign-in and the split tables, backend-hub on Render for Xero OAuth, the Payroll and Accounting API calls and the scheduled pay-run watcher, transactional email for approvals.",
+      "pricing": {
+        "model": "Per Xero organisation monthly subscription; bookkeeper bundle for several clients",
+        "pricePoint": "A$/GBP 19 per month per organisation",
+        "rationale": "A fraction of Calxa (GBP 132/month) and far cheaper than switching payroll; priced against an hour of bookkeeper time each month saved on journals."
+      },
+      "revenueSketch": "Estimate: 120 organisations x A$19/month = about A$2,280 MRR, assuming the Xero Core tier (50 connections) is outgrown within the first year and certification for Plus is done then.",
+      "distribution": "Reply in the public Xero idea threads (138 voters on the AU idea, the UK multi-funder idea), reach Xero advisors listed for not-for-profit and hospitality in the Xero advisor directory, then list on the Xero App Store once past 50 connections.",
+      "validationTest": {
+        "method": "Contact 20 commenters from the two Xero threads, offer a free run of milestone 1 on their last three pay runs (they send a payroll activity export; nothing connects to their live file yet), and ask for a paid pre-order.",
+        "successCriteria": "8 of 20 reply, 5 complete the three-pay-run test, and 3 pre-pay A$19 a month.",
+        "cost": "About 2 build days and a week of outreach; under $100."
+      },
+      "moat": "The allocation rules (which payroll lines to split, rounding so journals balance, not double-counting timesheet-tracked lines) and a tested reader per regional payroll API, plus the saved split history that customers would not want to rebuild.",
+      "compliance": [
+        "UK GDPR, NZ Privacy Act 2020 and Australian Privacy Act 1988: per-employee pay amounts are personal data; store only cost amounts per pay run, never bank details or tax numbers, and sign a processing agreement with each customer.",
+        "Breach notification: ICO within 72 hours in the UK and the Notifiable Data Breaches scheme in Australia.",
+        "Xero developer terms: above 50 connections the Plus tier requires app certification (https://developer.xero.com/pricing)."
+      ],
+      "risks": [
+        {
+          "risk": "Xero ships multi-tracking for payroll (the UK idea moved to Gaining Support in June 2026).",
+          "mitigation": "Lead with Australia, where the request is Not in pipeline, and keep the staff-cost schedules and split history, which Xero would not provide, as the lasting value."
+        },
+        {
+          "risk": "Three regional payroll APIs (AU on Payroll 1.0, UK and NZ on 2.0) and some fields the API cannot give (leave accrual values, state payroll tax).",
+          "mitigation": "Launch AU only, state clearly which lines are split, and leave accruals and payroll tax out of scope."
+        },
+        {
+          "risk": "A founder in the US has no channel into AU, NZ and UK bookkeepers.",
+          "mitigation": "Recruit directly from the public idea threads and through Xero advisors who specialise in hospitality and not-for-profits."
+        }
+      ],
+      "scores": {
+        "pain": 4,
+        "willingnessToPay": 3,
+        "reachability": 3,
+        "competitiveGap": 3,
+        "feasibility": 3,
+        "complianceBurden": 4,
+        "total": 20
+      },
+      "scoreRationale": {
+        "pain": "138 votes and comments into November 2026, Xero says use manual journals (https://productideas.xero.com/forums/967118-payroll-expenses/suggestions/45701374-au-payroll-assign-multiple-tracking-categories-t); a UK multi-funder charity describes monthly journal adjustments (https://productideas.xero.com/forums/967118-payroll-expenses/suggestions/51390655-uk-payroll-percentage-based-payroll-tracking-for); held at 4 because only a few comments are grant-related and the idea is four years old.",
+        "willingnessToPay": "Businesses already pay to get this by switching payroll (https://employmenthero.com/blog/save-time-through-splitting-earnings) and NFPs pay for tracking-category tooling (https://www.calxa.com/pricing); no one sells this exact job as an add-on yet.",
+        "reachability": "Voters are named in public threads (https://productideas.xero.com/forums/967118-payroll-expenses/suggestions/45701374-au-payroll-assign-multiple-tracking-categories-t) but are in AU, NZ and the UK, outside Pisan's network, and the App Store needs certification above 50 connections (https://developer.xero.com/pricing).",
+        "competitiveGap": "No Xero app posts the journals (https://apps.xero.com/uk/industry/not-for-profit), but Thankyou Payroll is free for NZ charities (https://www.thankyoupayroll.co.nz/payroll-for-charities/) and a hand-built spreadsheet plus repeating journals works.",
+        "feasibility": "Pay runs, payslips and manual journals with two tracking elements are in Xero's public APIs, but the Journals endpoint is Advanced-tier only and the regional payroll APIs differ (https://developer.xero.com/pricing).",
+        "complianceBurden": "Employee pay amounts are personal data but no minors or institutional contracts; minimise to cost amounts per pay run (https://developer.xero.com/pricing)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "The reviewer cut the total from 23 to 20. Pain 5 to 4: of 20 visible comments on the AU idea only three are grant or NFP related, and at least five are for-profit businesses wanting locations or departments, so the idea was re-scoped from charities only to small multi-site businesses plus grant-funded charities (https://productideas.xero.com/forums/967118-payroll-expenses/suggestions/45701374-au-payroll-assign-multiple-tracking-categories-t). Competitive gap 4 to 3: Thankyou Payroll is free for NZ charities and pushes to Xero (https://www.thankyoupayroll.co.nz/payroll-for-charities/), and Xero moved the UK idea to Gaining Support on 11 June 2026 (https://productideas.xero.com/forums/967118-payroll-expenses/suggestions/51390655-uk-payroll-percentage-based-payroll-tracking-for). Feasibility 4 to 3: AU uses Payroll 1.0 and UK and NZ use 2.0, so three integrations; leave accrual lines carry units only and Xero does not calculate AU state payroll tax; Xero's API docs did not render, so payslip field names were confirmed only from a third-party data model. No existing Xero app was found that posts percentage reallocation journals."
+      },
+      "inspiredBy": "https://productideas.xero.com/forums/967118-payroll-expenses/suggestions/45701374-au-payroll-assign-multiple-tracking-categories-t",
+      "gateGap": {
+        "missing": [
+          "total 20 is below 22"
+        ],
+        "closedBy": "The validation test closes the largest gap: three pre-payments from thread commenters after a three-pay-run trial would support willingnessToPay 4 and reachability 4, lifting the total to 22."
+      }
+    },
+    {
+      "n": 2,
+      "title": "Open PO Balance for Xero",
+      "slug": "open-po-balance-for-xero",
+      "category": "Small Business Ops",
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Data & Visualization",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": true,
+        "engine": true,
+        "shared": true,
+        "notes": {
+          "stateful": "The business keeps its own ledger of ordered, billed and remaining value per purchase-order line, including the manual matches it confirmed, and comes back to it every week.",
+          "connected": "Reads the business's own Xero purchase orders, bills and contacts through the Accounting API with its Xero sign-in.",
+          "unattended": "A nightly sync picks up new bills and purchase orders and a weekly email lists open commitments and lines overdue for delivery.",
+          "engine": "Matches bill lines to purchase-order lines by order number in the reference, supplier, item code, description and amount, handling part-billing, over-billing and out-of-order supplier bills.",
+          "shared": "The office manager confirms matches, and the owner or bookkeeper receives the commitments report; suppliers receive a chase list of outstanding lines."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "email",
+        "scheduled",
+        "backend"
+      ],
+      "buildPlan": [
+        {
+          "n": 1,
+          "title": "One PO, its bills, its balance",
+          "delivers": "Connect a Xero demo company, pick one approved purchase order and see its lines with ordered, billed and remaining value from bills that quote its number.",
+          "acceptance": "A PO billed in two parts shows the right remaining value per line, matching a hand-worked example; deployed."
+        },
+        {
+          "n": 2,
+          "title": "Matching engine and review screen",
+          "delivers": "Automatic matching across all open POs and bills, with a review screen for doubtful matches and a remembered decision for each.",
+          "acceptance": "On a seeded file of 30 POs and 60 bills, 90% of lines match automatically and every confirmed manual match survives a resync."
+        },
+        {
+          "n": 3,
+          "title": "Open commitments report",
+          "delivers": "Open commitments by supplier, tracking category and account, aged by expected delivery date, exported to CSV.",
+          "acceptance": "The report total equals the sum of remaining line values and filters by each tracking option."
+        },
+        {
+          "n": 4,
+          "title": "Chase list and outstanding-lines PO",
+          "delivers": "A per-supplier list of lines still outstanding and a printable PO showing only those lines.",
+          "acceptance": "A PO with 3 of 8 lines billed prints exactly the 5 outstanding lines."
+        },
+        {
+          "n": 5,
+          "title": "Nightly sync and weekly digest",
+          "delivers": "A scheduled sync of new POs and bills and a weekly email of open commitments and overdue lines.",
+          "acceptance": "A bill added in the demo company appears matched after the next sync, and one digest is sent per week."
+        },
+        {
+          "n": 6,
+          "title": "Polish",
+          "delivers": "Owner and bookkeeper README, phone layout, keyboard and screen-reader pass, walkthrough test.",
+          "acceptance": "A walkthrough test runs connect to digest; axe reports no serious issues."
+        }
+      ],
+      "summary": "For small Xero businesses that buy on purchase orders: see what is still owed on every order, by supplier and account, and chase suppliers for the outstanding lines, instead of exporting POs and bills to a spreadsheet.",
+      "public": {
+        "summary": "See at a glance what is still to come on every purchase order, and what you are committed to spend.",
+        "problem": "You raise purchase orders and your suppliers bill in parts, out of order, across weeks. Your accounts show each order's full value but not what is left on it, so you match bills to orders in a spreadsheet to know what to chase and what you still owe. One missed line means a late delivery or a surprise bill.",
+        "forWhom": "Owners, office managers and bookkeepers at small businesses on Xero that order stock and materials on purchase orders.",
+        "benefits": [
+          "The remaining value on every order, always current",
+          "A chase list of what each supplier still owes you",
+          "Committed spend by supplier and account",
+          "A weekly email so nothing slips"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "Xero shows a purchase order's full value even after part of it is billed, and its reports have no billed-quantity or remaining-value column, so businesses export POs and bills and match them by hand to know open commitments and which suppliers to chase.",
+      "description": "A Xero-connected web app that reads purchase orders and bills, matches bill lines to purchase-order lines (by PO number in the bill reference, supplier, item code, description and amount, with a review screen for doubtful matches), and keeps its own ledger of ordered, billed and remaining value. It gives an open-commitments report by supplier, tracking category and account, a chase list of outstanding lines, a printable PO showing only what is outstanding, and a weekly email. It is read-only on Xero. Because Xero's public API does not expose the bill-to-PO link or billed quantities, the matching engine and the remembered manual matches are the product.",
+      "targetCustomer": "Owners, office managers and outside bookkeepers at small Xero businesses (trades, wholesalers, small manufacturers, schools and charities) that raise tens to hundreds of purchase orders a month.",
+      "buyer": "The business owner on the business card, or the bookkeeper on behalf of a client.",
+      "whyNow": "Xero's June 2026 purchase-order release added part-billing by quantity but kept the full PO value on screen and in reports; commenters called it 'launched but poorly executed' and a follow-up request for a remaining-value view kept collecting comments into late October 2026.",
+      "founderFit": "A read-only Xero integration with a matching engine, a report and a scheduled digest is a compact build on the shared platform, and the matching rules are testable against seeded data.",
+      "problemEvidence": [
+        {
+          "url": "https://productideas.xero.com/forums/967139-purchase-orders-bills-inventory/suggestions/51375688-purchase-orders-reduce-the-total-value-or-show-t",
+          "source": "productideas.xero.com",
+          "author": "Kris Sparks",
+          "date": "2026-10-29",
+          "kind": "complaint",
+          "summary": "On a 20-vote follow-up idea opened by Kathy Seymour on 6 June 2026: partial billing by quantity is good 'but without being able to see the unbilled value in the Approved PO List or report on it' it does not help; Tim Mitchell (2026-07-28): 'Quantity billed isn't even an available column in Reports'."
+        },
+        {
+          "url": "https://productideas.xero.com/forums/967139-purchase-orders-bills-inventory/suggestions/44960812-purchase-orders-show-partial-amounts-billed",
+          "source": "productideas.xero.com",
+          "author": "Llewellyn Poon",
+          "date": "2026-06-17",
+          "kind": "complaint",
+          "summary": "On the 348-vote part-billed PO idea after the June 2026 release: 'Can we get a report for part billed PO's please... to know which suppliers to chase'; Dave Schechter (2026-06-11): 'We still can't pull a report on open PO commitments'."
+        },
+        {
+          "url": "https://productideas.xero.com/forums/967139-purchase-orders-bills-inventory/suggestions/51708313-purchase-orders-comprehensive-purchase-order-sta",
+          "source": "productideas.xero.com",
+          "author": "Thanapon S",
+          "date": "2026-09-17",
+          "kind": "complaint",
+          "summary": "Asks for a purchase-order status report showing linked bills and outstanding POs, exportable to Excel, because users 'need to check this information manually'."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "ApprovalMax",
+          "url": "https://approvalmax.com/pricing/approvalmax-for-xero",
+          "price": "unknown (plans shown without prices; bill-to-PO matching from the Advanced plan)",
+          "gap": "A full approval-workflow product (4.78 stars, 672 reviews on the Xero App Store) whose matching keeps a PO remaining balance; far more than a small business that only wants the open-order view."
+        },
+        {
+          "name": "Xero purchase orders (June 2026 release)",
+          "url": "https://productideas.xero.com/forums/967139-purchase-orders-bills-inventory/suggestions/51375688-purchase-orders-reduce-the-total-value-or-show-t",
+          "price": "Included in Xero",
+          "gap": "Shows a Billed column per line on an approved PO, but no remaining value on the list or in reports; Xero marked the remaining-value idea Gaining Support on 9 July 2026."
+        },
+        {
+          "name": "DayFive",
+          "url": "https://apps.xero.com/nz/app/dayfive",
+          "price": "unknown",
+          "gap": "Pushes approved POs into Xero as expected expenses; does not report remaining balances per line."
+        },
+        {
+          "name": "Spreadsheet matching",
+          "url": "https://productideas.xero.com/forums/967139-purchase-orders-bills-inventory/suggestions/44960812-purchase-orders-show-partial-amounts-billed",
+          "price": "Free, staff time",
+          "gap": "Export POs and bills and match on the reference field by hand every month."
+        }
+      ],
+      "keyFeatures": [
+        "Bill-line to PO-line matching with remembered manual matches",
+        "Remaining value per PO line",
+        "Open commitments by supplier, tracking category and account",
+        "Supplier chase list and outstanding-lines PO print",
+        "Nightly sync and weekly digest"
+      ],
+      "mvpScope": {
+        "features": [
+          "Xero connection",
+          "Matching engine and review screen",
+          "Open commitments report",
+          "Chase list"
+        ],
+        "outOfScope": [
+          "Approval workflows (ApprovalMax's ground)",
+          "Goods received notes",
+          "Writing anything back to Xero",
+          "Inventory quantities"
+        ],
+        "buildEstimate": "about 6 build days"
+      },
+      "techStack": "React + Vite front end, Supabase for sign-in and the match ledger, backend-hub on Render for Xero OAuth and the nightly sync, transactional email for the digest.",
+      "pricing": {
+        "model": "Per Xero organisation monthly subscription",
+        "pricePoint": "US$19 per month",
+        "rationale": "Below ApprovalMax's Advanced plan, which is needed for matching, and priced for a business that wants the report without approval workflows."
+      },
+      "revenueSketch": "Estimate: 150 organisations x US$19/month = about US$2,850 MRR, assuming listing on the Xero App Store on the Plus developer tier (A$245/month) once past 50 connections.",
+      "distribution": "Reply in the two Xero purchase-order idea threads, reach bookkeepers serving trades and wholesalers, then list on the Xero App Store.",
+      "validationTest": {
+        "method": "Offer the commenters on the two threads a free open-commitments report built from their own PO and bill exports (no live connection), then ask for a paid connected version.",
+        "successCriteria": "6 of 20 send exports, the automatic match rate is above 85% on their data, and 3 pre-pay US$19 a month.",
+        "cost": "3 build days and a week of outreach; under $100."
+      },
+      "moat": "The matching rules and each customer's remembered manual matches; weak if Xero adds a remaining-value column.",
+      "compliance": [
+        "Business financial data only, no personal data beyond supplier contacts; standard processing agreement.",
+        "Xero developer terms: an App Store listing requires the Plus tier and certification (https://developer.xero.com/pricing)."
+      ],
+      "risks": [
+        {
+          "risk": "Xero adds remaining value to the PO list and reports (the idea is Gaining Support).",
+          "mitigation": "Lead with the commitments report by tracking category, the chase list and the weekly digest, which go beyond a column."
+        },
+        {
+          "risk": "The app's remaining figures disagree with Xero's own Billed column because the API does not expose the link.",
+          "mitigation": "Show every match and its basis, let users correct it once, and flag lines where Xero's PO status changed without a matched bill."
+        },
+        {
+          "risk": "Buyers who need matching badly already pay for ApprovalMax.",
+          "mitigation": "Sell to businesses without approval workflows and price well below ApprovalMax."
+        }
+      ],
+      "scores": {
+        "pain": 4,
+        "willingnessToPay": 3,
+        "reachability": 3,
+        "competitiveGap": 2,
+        "feasibility": 2,
+        "complianceBurden": 5,
+        "total": 19
+      },
+      "scoreRationale": {
+        "pain": "Dated complaints after the June 2026 release on two threads (https://productideas.xero.com/forums/967139-purchase-orders-bills-inventory/suggestions/44960812-purchase-orders-show-partial-amounts-billed, https://productideas.xero.com/forums/967139-purchase-orders-bills-inventory/suggestions/51375688-purchase-orders-reduce-the-total-value-or-show-t) and a separate status-report request (https://productideas.xero.com/forums/967139-purchase-orders-bills-inventory/suggestions/51708313-purchase-orders-comprehensive-purchase-order-sta); held at 4 because the follow-up idea has only 20 votes.",
+        "willingnessToPay": "Businesses pay for ApprovalMax, which keeps PO remaining balances (https://apps.xero.com/nz/search/app/approvalmax, https://support.approvalmax.com/en/articles/414105-bill-to-po-matching-what-is-the-remaining-balance-and-when-is-it-recalculated), but a report-only add-on is squeezed between it and a spreadsheet.",
+        "reachability": "Requesters are named in public threads (https://productideas.xero.com/forums/967139-purchase-orders-bills-inventory/suggestions/51375688-purchase-orders-reduce-the-total-value-or-show-t); an App Store listing needs a paid developer tier (https://developer.xero.com/pricing).",
+        "competitiveGap": "ApprovalMax Advanced already does the matching (https://approvalmax.com/pricing/approvalmax-for-xero) and Xero is moving toward showing remaining value itself (https://productideas.xero.com/forums/967139-purchase-orders-bills-inventory/suggestions/51375688-purchase-orders-reduce-the-total-value-or-show-t).",
+        "feasibility": "Xero's public API has no billed or received quantity on purchase orders and no PO link on bills (https://raw.githubusercontent.com/XeroAPI/Xero-OpenAPI/master/xero_accounting.yaml), so the app must infer matches Xero already holds.",
+        "complianceBurden": "Business purchase data only, no personal or minors' data (https://raw.githubusercontent.com/XeroAPI/Xero-OpenAPI/master/xero_accounting.yaml)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "The reviewer cut the total from 23 to 19. Competitive gap 3 to 2: ApprovalMax keeps a PO remaining balance from matched bills and states it in reports (https://support.approvalmax.com/en/articles/414105-bill-to-po-matching-what-is-the-remaining-balance-and-when-is-it-recalculated), and Xero added a per-line Billed column on approved POs in June 2026 and moved the remaining-value idea to Gaining Support on 9 July 2026 (https://productideas.xero.com/forums/967139-purchase-orders-bills-inventory/suggestions/51375688-purchase-orders-reduce-the-total-value-or-show-t). Feasibility 3 to 2: the public API spec has no billed or received fields on PurchaseOrder and no PurchaseOrderID on bills or line items (https://raw.githubusercontent.com/XeroAPI/Xero-OpenAPI/master/xero_accounting.yaml), so matching is inferred and may disagree with Xero's own column. The 348-vote idea is an old cumulative request and two of its URLs resolve to the same thread, so it counts as one item. No free or cheaper tool doing the same job was found, so not a kill."
+      },
+      "inspiredBy": "https://productideas.xero.com/forums/967139-purchase-orders-bills-inventory/suggestions/51375688-purchase-orders-reduce-the-total-value-or-show-t",
+      "gateGap": {
+        "missing": [
+          "total 19 is below 22"
+        ],
+        "closedBy": "The validation test closes the largest gaps: an automatic match rate above 85% on real customer exports would lift feasibility to 3, and three pre-payments would support willingnessToPay 4, bringing the total to 21-22."
+      }
+    },
+    {
+      "n": 3,
+      "title": "Gift Aid Schedule Builder for Xero Charities",
+      "slug": "gift-aid-schedule-builder-for-xero-charities",
+      "category": "Micro-SaaS",
+      "complexity": "Weekend MVP",
+      "confidence": "provisional",
+      "topic": "Data & Visualization",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": false,
+        "engine": true,
+        "shared": false,
+        "notes": {
+          "stateful": "The charity keeps a register of donors' Gift Aid declarations and a history of every claim, so no donation is claimed twice.",
+          "connected": "Reads the charity's Xero contact and receipt exports (and later the Xero API) and writes HMRC's own schedule spreadsheet.",
+          "engine": "HMRC's schedule rules: field limits, aggregation of donations of 20 pounds or less into lines of at most 1,000 pounds, sponsorship donations listed separately, the 1,000-row cap per file and the GASDS top-up limit."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database"
+      ],
+      "summary": "For volunteer treasurers of small UK charities and churches that keep their books in Xero: turn a Xero export and a saved declaration register into HMRC's Gift Aid schedule, with a claim history, instead of copying rows by hand.",
+      "public": {
+        "summary": "Turn the donations already in your accounts into a ready-to-upload Gift Aid claim.",
+        "problem": "Your donations are recorded in your accounts, but your accounts cannot claim Gift Aid. So once or twice a year you copy donors, postcodes and amounts into the tax office's spreadsheet by hand, checking who signed a declaration and what you claimed last time. It is slow, and mistakes mean rejected rows or missed money.",
+        "forWhom": "Volunteer treasurers and part-time finance officers of small UK charities, churches and clubs that keep their books in Xero.",
+        "benefits": [
+          "A claim ready to upload in minutes, not evenings",
+          "Never claim the same donation twice",
+          "Spot donors missing a declaration or postcode",
+          "Small cash donations top-up worked out for you"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "Xero has no Gift Aid support, so small UK charities on Xero either pay for a separate charity CRM or accounting package, or copy donors and donations into HMRC's schedule spreadsheet by hand for every claim.",
+      "description": "A small web app. The treasurer uploads Xero's contacts and receipt exports, marks which donors have signed a Gift Aid declaration (with date and type) in a saved register, and the app matches eligible donations for the claim period, aggregates small donations under HMRC's rules, flags donors missing a house number or postcode, and writes HMRC's Charities Online schedule spreadsheet in the exact format, split into files of 1,000 rows. It records what was claimed so the next claim starts where the last stopped, and works out the GASDS small-donations figure. It does not submit to HMRC at launch.",
+      "targetCustomer": "Volunteer treasurers, part-time finance officers and small-charity bookkeepers at UK charities, churches and community clubs with income under about 250,000 pounds that already use Xero.",
+      "buyer": "The charity's treasurer, with trustee approval, from the admin budget.",
+      "whyNow": "Comments on the Xero Gift Aid request kept coming through 2026 (June, August, September, October), one adviser has started moving new clients to a rival accounting package for it, and Xero has not responded to the idea.",
+      "founderFit": "A single-purpose rules engine over two CSV files and HMRC's published format is the kind of tool Pisan builds alone in a weekend, and the rules are fully specified by HMRC's guidance.",
+      "problemEvidence": [
+        {
+          "url": "https://productideas.xero.com/forums/967130-contacts-documents/suggestions/47759030-gift-aid-option-to-automatically-claim-gift-aid",
+          "source": "productideas.xero.com",
+          "author": "Julian Roberts",
+          "date": "2026-10-23",
+          "kind": "complaint",
+          "summary": "Latest comment on a 24-vote request with no Xero response: 'we desperately need some Gift Aid functionality'; Fiona Budd (2026-09-10) has 'chosen ExpensePlus for new clients' for it and John Bland (2026-06-29) asks whether any third-party app helps."
+        },
+        {
+          "url": "https://www.gov.uk/government/publications/charities-online-commercial-software-suppliers/charities-online-commercial-software-suppliers",
+          "source": "gov.uk",
+          "author": "HM Revenue and Customs",
+          "date": "2026-11-13",
+          "kind": "spend",
+          "summary": "HMRC lists 54 commercial software suppliers whose products submit Gift Aid claims through Charities Online; charities pay for these products, though none listed is a Xero add-on."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "HMRC schedule spreadsheet",
+          "url": "https://www.gov.uk/guidance/schedule-spreadsheet-to-claim-back-tax-on-gift-aid-donations",
+          "price": "Free",
+          "gap": "Filled in by hand, 1,000 rows per file, no link to Xero and no memory of earlier claims."
+        },
+        {
+          "name": "ExpensePlus",
+          "url": "https://www.expenseplus.co.uk/pricing",
+          "price": "4 pounds per month plus VAT under 10,000 pounds income (usually 5), rising to 44 pounds",
+          "gap": "A full charity accounting package with Gift Aid; it replaces Xero rather than working with it."
+        },
+        {
+          "name": "Donorfy",
+          "url": "https://www.donorfy.com/pricing",
+          "price": "Essentials free; Gift Aid HMRC integration from Starter, price unknown",
+          "gap": "A donor CRM; automated Gift Aid claims are not in the free tier and donations must be re-entered or synced."
+        },
+        {
+          "name": "infoodle",
+          "url": "https://apps.xero.com/uk/app/infoodle",
+          "price": "unknown (14-day free trial)",
+          "gap": "A full charity CRM with Gift Aid and Xero sync; more system than a treasurer who only needs the claim."
+        },
+        {
+          "name": "Swiftaid",
+          "url": "https://swiftaid.co.uk/pricing",
+          "price": "Basic plan with no subscription fee for donations through connected platforms; claim submission service 5% plus VAT",
+          "gap": "Built for donations through fundraising platforms, not offline or bank-transfer giving recorded in Xero."
+        }
+      ],
+      "keyFeatures": [
+        "Xero contacts and receipts CSV import",
+        "Saved Gift Aid declaration register",
+        "HMRC schedule .ods writer with 1,000-row splitting",
+        "Claim history to prevent double claims",
+        "GASDS top-up calculation"
+      ],
+      "mvpScope": {
+        "features": [
+          "CSV import",
+          "Declaration register",
+          "Schedule writer",
+          "Claim history"
+        ],
+        "outOfScope": [
+          "Direct HMRC submission (needs HMRC software recognition)",
+          "Live Xero API connection",
+          "Donor receipts and statements",
+          "Sponsorship forms"
+        ],
+        "buildEstimate": "about 3 build days"
+      },
+      "techStack": "React + Vite front end, Supabase for sign-in and the declaration register, a client-side ODS writer.",
+      "pricing": {
+        "model": "Per charity annual subscription",
+        "pricePoint": "30 pounds per year",
+        "rationale": "The reviewer showed that 8 pounds a month would cost more than ExpensePlus's whole accounting package for tiny charities; 30 pounds a year sits below that and well below a 5% claim fee on a claim of 1,000 pounds or more."
+      },
+      "revenueSketch": "Estimate: 300 charities x 30 pounds per year = 9,000 pounds a year, assuming reach through church treasurer networks; a side product, not a business on its own.",
+      "distribution": "Reply in the Xero Gift Aid idea thread, the Association of Church Treasurers and Accountants (ACAT) and diocesan and Methodist Gift Aid guidance pages, then the Xero App Store UK.",
+      "validationTest": {
+        "method": "Offer the commenters on the Xero thread and five church treasurers a free one-off claim built from their own exports, then ask for 30 pounds for the next claim.",
+        "successCriteria": "5 treasurers complete a claim with it and 3 pay for the next one.",
+        "cost": "3 build days and two weeks of outreach; under 50 pounds."
+      },
+      "moat": "Weak: HMRC's rules are public. The saved declaration register and claim history are the switching cost.",
+      "compliance": [
+        "UK GDPR: donor names and addresses are personal data, and church giving records can reveal religious belief, which is special category data needing an Article 9 and DPA 2018 Schedule 1 condition and a processing agreement.",
+        "HMRC record keeping: keep declarations and claim records for the periods HMRC sets (https://www.gov.uk/claim-gift-aid-online and https://www.gov.uk/guidance/claiming-a-top-up-payment-on-small-charitable-donations).",
+        "HMRC format: the schedule's tab name and field formats must not change, and copy-and-paste into it is not allowed (https://www.gov.uk/guidance/schedule-spreadsheet-to-claim-back-tax-on-gift-aid-donations)."
+      ],
+      "risks": [
+        {
+          "risk": "Tiny charities have few donors and can fill HMRC's sheet by hand, so the pain may be too small to pay for.",
+          "mitigation": "Target charities with more than about 50 Gift Aid donors and churches outside the Parish Giving Scheme."
+        },
+        {
+          "risk": "Matching Xero bank-feed payee names to donors is messy.",
+          "mitigation": "Start from Xero receipts with contacts, offer a manual match screen, and remember each mapping."
+        },
+        {
+          "risk": "Xero adds Gift Aid itself.",
+          "mitigation": "Keep the price low and the build small; a weekend product can be retired."
+        }
+      ],
+      "scores": {
+        "pain": 3,
+        "willingnessToPay": 2,
+        "reachability": 3,
+        "competitiveGap": 2,
+        "feasibility": 4,
+        "complianceBurden": 2,
+        "total": 16
+      },
+      "scoreRationale": {
+        "pain": "Real but modest: a 24-vote Xero thread with 2026 comments (https://productideas.xero.com/forums/967130-contacts-documents/suggestions/47759030-gift-aid-option-to-automatically-claim-gift-aid), and HMRC's free sheet is a working fallback for few donors (https://www.gov.uk/guidance/schedule-spreadsheet-to-claim-back-tax-on-gift-aid-donations).",
+        "willingnessToPay": "Charities pay for Gift Aid software (https://www.gov.uk/government/publications/charities-online-commercial-software-suppliers/charities-online-commercial-software-suppliers), but ExpensePlus offers a whole accounting package from 4 pounds a month (https://www.expenseplus.co.uk/pricing), which caps what a Gift Aid add-on can charge.",
+        "reachability": "Treasurers are reachable through the public Xero thread (https://productideas.xero.com/forums/967130-contacts-documents/suggestions/47759030-gift-aid-option-to-automatically-claim-gift-aid) and church treasurer networks, but they are in the UK.",
+        "competitiveGap": "Many products claim Gift Aid (https://www.gov.uk/government/publications/charities-online-commercial-software-suppliers/charities-online-commercial-software-suppliers) and infoodle already fills the Xero-connected slot (https://apps.xero.com/uk/app/infoodle); the gap is only a cheap add-on for charities staying on Xero.",
+        "feasibility": "HMRC publishes the schedule format and limits (https://www.gov.uk/guidance/schedule-spreadsheet-to-claim-back-tax-on-gift-aid-donations); CSV in, ODS out.",
+        "complianceBurden": "Church donor records can be special category data and HMRC sets retention periods (https://www.gov.uk/claim-gift-aid-online)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "The reviewer cut the total from 20 to 16 but found no free tool that turns Xero or CSV data into HMRC's schedule for this customer, so not a kill. Pain 4 to 3: HMRC's free spreadsheet works for charities with few donors (https://www.gov.uk/guidance/schedule-spreadsheet-to-claim-back-tax-on-gift-aid-donations). Willingness to pay 4 to 2: ExpensePlus is a whole charity accounting package at about 5 pounds a month (https://www.expenseplus.co.uk/pricing) and Swiftaid's basic plan has no fee for platform donations (https://swiftaid.co.uk/pricing), so the price was cut to 30 pounds a year. Compliance 3 to 2: church donor records can be special category data. All complaint evidence is one Xero thread (https://productideas.xero.com/forums/967130-contacts-documents/suggestions/47759030-gift-aid-option-to-automatically-claim-gift-aid), and two commenters solved it by leaving Xero, which signals churn rather than add-on demand. Parish Giving Scheme already claims Gift Aid for Church of England direct-debit giving."
+      },
+      "inspiredBy": "https://productideas.xero.com/forums/967130-contacts-documents/suggestions/47759030-gift-aid-option-to-automatically-claim-gift-aid",
+      "gateGap": {
+        "missing": [
+          "total 16 is below 22",
+          "pain 3 is below 4",
+          "willingnessToPay 2 is below 3",
+          "only 1 independent complaint (one Xero thread)"
+        ],
+        "closedBy": "The validation test closes willingness to pay, the largest gap: three treasurers paying 30 pounds for their next claim would support willingnessToPay 3, and a second complaint from outside the Xero thread, found during outreach, would lift pain to 4."
+      }
+    }
+  ],
+  "runNotes": {
+    "weekday": "Saturday",
+    "domainLens": "Institutional back-office work",
+    "focusSources": [
+      "A2 Other LMS and classroom forums",
+      "B5 Acquisition marketplaces",
+      "C4 Job postings that describe manual work",
+      "A16 Vendor feature-request boards (substitute vein)"
+    ],
+    "searches": [
+      "A2 discuss.openedx.org latest.json",
+      "A2 discuss.openedx.org search.json q=report after:2026-08-15",
+      "A2 discuss.openedx.org search.json q=enrollment after:2026-08-15",
+      "C4 higheredjobs.com admin/search.cfm?JobCat=185 (curl and WebFetch)",
+      "C4 WebSearch: charityjob.co.uk finance officer restricted funds funder reporting payroll allocation 2026",
+      "C4 WebSearch: apply.workable.com OR jobs.lever.co finance officer charity Xero grant allocation payroll journals",
+      "B5 flippa.com search saas_and_software",
+      "B5 acquire.com/marketplace",
+      "B5 WebSearch: acquire.com listing SaaS nonprofit OR church OR school management for sale 2026 MRR",
+      "B5 WebSearch: flippa listing church management software OR membership software SaaS for sale 2026",
+      "C10 WebSearch: 1099-NEC $2,000 threshold 2026 small business vendors W-9 January 2027 filing",
+      "C10 WebSearch: nonprofit software shutting down OR discontinued OR price increase 2026 small nonprofits alternative",
+      "A16 productideas.xero.com search: 1099, W-9, restricted fund, grant, purchase order approval",
+      "A16 productideas.xero.com search: charity, nonprofit, NDIS, school, church",
+      "A16 productideas.xero.com search: consolidation, timesheet, budget tracking, fixed asset, inter company",
+      "A12 hn.algolia.com comments: HOA treasurer, church treasurer, nonprofit board minutes, 1099 contractors W-9",
+      "B11 freelancer.com API: 1099, W-9, nonprofit, grant report, church, school administration, board meeting, donor",
+      "B11 freelancer.com API: xero payroll, xero charity, gift aid, xero bookkeeping nonprofit, 1099 filing contractors",
+      "A13 api.stackexchange.com site=civicrm newest questions",
+      "A15 community.n8n.io search school after:2026-09-01; community.make.com search nonprofit after:2026-08-01",
+      "C5 federalregister.gov: \"uniform guidance\"; information returns backup withholding; time and effort personnel costs grants",
+      "WebSearch: QuickBooks community nonprofit grant tracking restricted funds class spreadsheet 2026",
+      "WebSearch: small practice provider credentialing CAQH re-attestation license expiration tracking 2026",
+      "WebSearch: town clerk public records request tracking spreadsheet small municipality 2026",
+      "WebSearch: self-managed HOA treasurer reserve study annual budget disclosure spreadsheet 2026",
+      "WebSearch: Gift Aid claim Xero small charity spreadsheet HMRC Charities Online schedule 2026",
+      "WebSearch: NDIS PACE funding periods plan manager provider claims rejected 2026",
+      "WebSearch: Gift Aid Xero app review OR complaint small charity church treasurer 2026",
+      "B12 WebSearch: apps.xero.com grant tracking OR fund accounting OR payroll allocation charity app",
+      "WebSearch: site:quickbooks.intuit.com allocate payroll employee multiple classes grants percentage nonprofit",
+      "WebSearch: site:central.xero.com payroll split tracking categories percentage grant funders charity",
+      "B12 WebSearch (spend pass, Payroll Split): Xero app payroll cost allocation tracking categories split percentage journal automation",
+      "B12 WebSearch (spend pass, Payroll Split): Xero manual journal allocation app recurring percentage split tracking categories",
+      "B12 WebSearch (spend pass, Payroll Split): Employment Hero OR KeyPay payroll cost centre percentage split Xero",
+      "WebSearch: forums.wildapricot.com suggestion 2026 volunteer hours OR certification expiry OR background check tracking",
+      "WebSearch: volunteer DBS check renewal safeguarding training expiry tracking sports club OR church 2026",
+      "WebSearch: ptotoday.com boards treasurer report OR cash count OR budget spreadsheet PTO 2026",
+      "B12 apps.xero.com: infoodle listing and reviews, UK not-for-profit category",
+      "B12 WebSearch (spend pass, Open PO Balance): Xero purchase order report outstanding POs not billed partially billed app",
+      "B12 WebSearch (spend pass, Open PO Balance): ApprovalMax Xero pricing plans purchase order bill-to-PO matching",
+      "B11 (spend pass, Gift Aid and 1099): freelancer.com queries above found no paid job for either task"
+    ],
+    "unverifiedSignals": [
+      {
+        "url": "https://www.higheredjobs.com/admin/search.cfm?JobCat=185",
+        "reason": "Incapsula bot interstitial (212 bytes) to curl and an empty page to WebFetch; C4's primary path is blocked from this environment."
+      },
+      {
+        "url": "https://www.charityjob.co.uk/jobs/design-for-good/finance-operations-lead/1082343",
+        "reason": "HTTP 403 from the site to curl; search snippets described payroll journals into Xero and restricted funding, not used as evidence."
+      },
+      {
+        "url": "https://flippa.com/search?filter%5Bproperty_type%5D=saas_and_software",
+        "reason": "JavaScript shell with no listings."
+      },
+      {
+        "url": "https://acquire.com/marketplace",
+        "reason": "HTTP 404."
+      },
+      {
+        "url": "https://www.accountingweb.co.uk/node/232195",
+        "reason": "HTTP 403 (Gift Aid research)."
+      },
+      {
+        "url": "https://support.churchsuite.com/article/430-using-churchsuite-to-help-you-manage-dbs-renewals",
+        "reason": "HTTP 403 and a Cloudflare challenge (regulated-activity review)."
+      }
+    ],
+    "rejectedCandidates": [
+      {
+        "title": "1099 Season Desk for Bookkeeping Firms",
+        "total": 13,
+        "reason": "Killed in review: Double (formerly Keeper), already bought by bookkeeping firms, builds the 1099 vendor report from QBO and Xero with card payments excluded and sends W-9 requests through its client portal (https://doublehq.com/demo-1099s/); Xero sends free W-9 links (https://www.xero.com/us/accounting-software/1099-reporting). Rescored to pain 3, WTP 2, reach 3, gap 1, feasibility 2, compliance 2."
+      },
+      {
+        "title": "Regulated Activity Day Counter for Clubs and Churches",
+        "total": 12,
+        "reason": "Reviewed and rescored from 18 to 12: diocese-funded hubs (https://salisbury.anglican.org/working-for-justice/safeguarding/parish-safeguarding-hub-and-dbs-management) and governing body portals (https://englandkorfball.co.uk/dbs-checks-updated-process/) already hold DBS records and reminders for free; only the 3-in-30 day count is uncovered and no complaint was found. Met the floor but ranked below the three shipped."
+      },
+      {
+        "title": "Grant Period Budget Tracker for Xero charities",
+        "total": 17,
+        "reason": "Calxa already sells tracking-category budgets and not-for-profit reporting on Xero (https://apps.xero.com/uk/industry/not-for-profit, 145 reviews), and Xero answered a program-versus-budget request as existing functionality (https://productideas.xero.com/forums/967124-projects-tracking/suggestions/51681634-reports-compare-multiple-tracking-category-optio). Same customer as Payroll Split. Not reviewed."
+      },
+      {
+        "title": "PO approval routing by account code for Xero",
+        "total": 15,
+        "reason": "Jess Thompson's request (2026-09-29, https://productideas.xero.com/forums/967139-purchase-orders-bills-inventory/suggestions/51743724-purchase-orders-automatic-purchase-order-approva) is ApprovalMax's core job (672 reviews, https://apps.xero.com/nz/search/app/approvalmax)."
+      },
+      {
+        "title": "US certificate-of-insurance tracking in Xero",
+        "total": 14,
+        "reason": "One 2-vote request (Logan Spearman, 2026-04-10, https://productideas.xero.com/forums/967130-contacts-documents/suggestions/51182920-us-tax-certificate-of-insurance-coi-management); earlier runs found bcs COI tracking free to 25 vendors."
+      },
+      {
+        "title": "NDIS funding period tracker for small providers on Xero",
+        "total": 13,
+        "reason": "Only evidence is a 1-vote request from 2025-10-28 (https://productideas.xero.com/forums/967133-reports-tax/suggestions/50637575-reporting-add-ndis-funding-period-tracking-in-xe), older than 180 days, and NDIS software (Lumary, Brevity) already tracks funding periods."
+      },
+      {
+        "title": "Multi-entity consolidation for small Xero groups",
+        "total": 14,
+        "reason": "Single 1-vote request (Tibo Lazennec, 2026-10-08, https://productideas.xero.com/forums/967133-reports-tax/suggestions/51775728-consolidated-reports-accross-mutilple-entities); Calxa and Scott's Add-ins already consolidate (https://apps.xero.com/uk/industry/not-for-profit)."
+      },
+      {
+        "title": "Budget forecast (actual YTD plus remaining budget) for Xero",
+        "total": 13,
+        "reason": "One 1-vote request (Lorna Leonard, 2026-08-05, https://productideas.xero.com/forums/967133-reports-tax/suggestions/51572954-budget-variance-report-dynamic-actuals-ytd-plus); well served by Calxa and other reporting apps."
+      },
+      {
+        "title": "Volunteer hours for WildApricot associations",
+        "total": 15,
+        "reason": "Long-running wishlist thread with undated admin reply (https://forums.wildapricot.com/forums/308932-wishlist/suggestions/8826022-ability-to-track-volunteer-hours, seen in search only); paid tools such as Track It Forward already integrate. Not fetched, not reviewed."
+      },
+      {
+        "title": "Self-managed condo owner portal and work orders",
+        "total": 13,
+        "reason": "One custom-build request for a 136-unit complex (freelancer.com project 40809549, 2026-11-12, US$250-750); PayHOA, Condo Control and Buildium serve it."
+      },
+      {
+        "title": "PTO treasurer monthly report and cash count",
+        "total": 12,
+        "reason": "No complaint found; PTO Today already sells a Finance Manager and free treasurer forms (https://classic.ptotoday.com/treasurers-toolkit)."
+      },
+      {
+        "title": "Small practice credentialing calendar",
+        "total": 13,
+        "reason": "Only vendor and consultant content, no complaint (https://www.physitrack.com/insights/physical-therapy-insurance-credentialing-small-practices); many credentialing services."
+      },
+      {
+        "title": "Public records request tracker for small towns",
+        "total": 11,
+        "reason": "Rejection rule: sold to a public entity through procurement; GovQA offers a free tracking spreadsheet (https://www.carahsoft.com/resources/granicus-govqa-records-management-template-public-request-tracking-spreadsheet-2022)."
+      },
+      {
+        "title": "Microsoft Fundraising and Engagement migration kit",
+        "total": 10,
+        "reason": "Rejection rule: a consulting service; Microsoft ends support on 2026-12-31 (https://www.formuspro.com/?p=9227) and partners already migrate these customers."
+      },
+      {
+        "title": "Open edX Cairn-to-Aspects migration helper",
+        "total": 9,
+        "reason": "Operator and developer talk on discuss.openedx.org (chintan, 2026-10-21, https://discuss.openedx.org/search.json?q=report%20after%3A2026-08-15); a one-off migration, closer to consulting."
+      },
+      {
+        "title": "Open edX admin assistant",
+        "total": 9,
+        "reason": "A free open-source Open edX MCP plugin already does it (https://discuss.openedx.org/search.json?q=enrollment%20after%3A2026-08-15)."
+      },
+      {
+        "title": "CiviCRM mid-year annual receipts",
+        "total": 10,
+        "reason": "One Stack Exchange question (Sara, 2026-11-10, https://civicrm.stackexchange.com/questions/51779/annual-receipt-needed-mid-year); tiny niche inside a free open-source CRM."
+      },
+      {
+        "title": "Charity registration number field for Xero contacts",
+        "total": 9,
+        "reason": "One 2-vote request (John Bland, 2026-06-29, https://productideas.xero.com/forums/967130-contacts-documents/suggestions/51447742-contacts-add-charity-registration-numbers-field); a field, not a product."
+      },
+      {
+        "title": "Sermon-to-social posts for church communication teams",
+        "total": 10,
+        "reason": "Rejection rule: AI wrapper with no data moat, and an existing product is for sale (https://app.acquire.com/startup/93xbaonf7i-saas-using-an-ai-pipeline-to-turn-sermons-into-social-media-augments-church-communication-team)."
+      },
+      {
+        "title": "Facility records for small volunteer organisations",
+        "total": 11,
+        "reason": "Only signal is a builder describing his own project on Ask HN (gallamine, 2026-06-15, https://hn.algolia.com/api/v1/search_by_date?query=church%20treasurer&tags=comment&hitsPerPage=20&numericFilters=created_at_i%3E1755000000), not a complaint."
+      },
+      {
+        "title": "Head Start grantee rule-change tracker",
+        "total": 9,
+        "reason": "Rejection rule: federal grantees buy through institutional procurement (https://www.federalregister.gov/documents/2026/11/16/2026-23279/restoring-flexibility-to-support-head-start-program-access)."
+      }
+    ],
+    "watchlist": [],
+    "caveats": "No idea cleared the gate of 22; three provisional ideas ship (20, 19, 16). Five candidates were researched and adversarially reviewed: one killed (1099 Season Desk, by Double's bookkeeper 1099 tooling), four rescored down (23 to 20, 23 to 19, 20 to 16, 18 to 12); the fourth survivor, Regulated Activity Day Counter at 12, was left out as the weakest. Saturday's focus sources were thin again: Open edX (A2) is developer and operator talk; B5 listings were search results only (Flippa search is a JS shell, acquire.com/marketplace 404); C4 HigherEdJobs served an Incapsula interstitial and CharityJob returned 403, so no job posting is cited. The day's veins came from Xero's product ideas board (A16), so all three ideas are Xero add-ons; the run notes this concentration as a risk. No small-business idea is in a category other than Small Business Ops; Payroll Split was re-scoped by its reviewer from charities to multi-site small businesses plus grant-funded charities. No watchlist carried over from 2026-11-13 and none was added (no unselected candidate reached 19)."
+  }
+}
