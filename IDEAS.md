@@ -647,3 +647,6 @@
 | 2026-11-14 | Payroll Split Journals for Xero | Small Business Ops | Multi-week | 20 | provisional |  |
 | 2026-11-14 | Open PO Balance for Xero | Small Business Ops | Multi-week | 19 | provisional |  |
 | 2026-11-14 | Gift Aid Schedule Builder for Xero Charities | Micro-SaaS | Weekend MVP | 16 | provisional |  |
+| 2026-11-15 | Rate Book for Xero Projects | Small Business Ops | Multi-week | 20 | provisional |  |
+| 2026-11-15 | Postage Price Check for UK Makers | Small Business Ops | Multi-week | 18 | provisional |  |
+| 2026-11-15 | Promoter Payouts for Etsy Shops | Creative & Prosumer | Weekend MVP | 18 | provisional |  |

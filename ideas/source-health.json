@@ -42,6 +42,17 @@
     }
   ],
   "byHost": {
+    "about.usps.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-15",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "empty": 1
+      },
+      "workingPaths": []
+    },
     "accessibe.com": {
       "attempts": 3,
       "evidenceItems": 0,
@@ -423,15 +434,15 @@
       ]
     },
     "apps.shopify.com": {
-      "attempts": 233,
-      "evidenceItems": 27,
-      "lastAttempt": "2026-11-13",
-      "lastOk": "2026-11-13",
-      "ok": 193,
+      "attempts": 249,
+      "evidenceItems": 29,
+      "lastAttempt": "2026-11-15",
+      "lastOk": "2026-11-15",
+      "ok": 209,
       "outcomes": {
         "empty": 26,
         "http_404": 12,
-        "ok": 193,
+        "ok": 209,
         "redirect": 2
       },
       "workingPaths": [
@@ -1037,6 +1048,19 @@
         "curl https://clientmeter.pages.dev/"
       ]
     },
+    "clockify.me": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-15",
+      "lastOk": "2026-11-15",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://clockify.me/pricing"
+      ]
+    },
     "clockspot.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -1211,20 +1235,21 @@
       "workingPaths": []
     },
     "community.etsy.com": {
-      "attempts": 11,
+      "attempts": 13,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-08",
-      "lastOk": "2026-11-08",
-      "ok": 2,
+      "lastAttempt": "2026-11-15",
+      "lastOk": "2026-11-15",
+      "ok": 3,
       "outcomes": {
         "allowlist": 1,
         "empty": 6,
-        "http_404": 2,
-        "ok": 2
+        "http_404": 3,
+        "ok": 3
       },
       "workingPaths": [
         "curl https://community.etsy.com/forum/announcements-290/",
-        "webfetch https://community.etsy.com/forum/announcements-290/topic/updated-sep-9-navigating-evolving-global-tariff-policies-22351/"
+        "webfetch https://community.etsy.com/forum/announcements-290/topic/updated-sep-9-navigating-evolving-global-tariff-policies-22351/",
+        "webfetch https://community.etsy.com/forum/etsy-success-300/topic/share-save-or-creator-collective-which-program-is-right-for-you-186635/"
       ]
     },
     "community.getjobber.com": {
@@ -1239,18 +1264,19 @@
       "workingPaths": []
     },
     "community.glowforge.com": {
-      "attempts": 3,
+      "attempts": 4,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-09",
-      "lastOk": "2026-11-09",
-      "ok": 2,
+      "lastAttempt": "2026-11-15",
+      "lastOk": "2026-11-15",
+      "ok": 3,
       "outcomes": {
         "empty": 1,
-        "ok": 2
+        "ok": 3
       },
       "workingPaths": [
         "webfetch https://community.glowforge.com/search.json?q=selling%20after%3A2026-08-15",
-        "curl https://community.glowforge.com/search.json?q=license+after%3A2026-06-01"
+        "curl https://community.glowforge.com/search.json?q=license+after%3A2026-06-01",
+        "curl https://community.glowforge.com/search.json?q=pricing%20orders%20after%3A2026-08-01"
       ]
     },
     "community.home-assistant.io": {
@@ -1378,16 +1404,16 @@
       ]
     },
     "community.shopify.com": {
-      "attempts": 290,
+      "attempts": 303,
       "evidenceItems": 30,
-      "lastAttempt": "2026-11-13",
-      "lastOk": "2026-11-13",
-      "ok": 274,
+      "lastAttempt": "2026-11-15",
+      "lastOk": "2026-11-15",
+      "ok": 286,
       "outcomes": {
-        "empty": 14,
+        "empty": 15,
         "http_404": 1,
         "http_429": 1,
-        "ok": 274
+        "ok": 286
       },
       "workingPaths": [
         "curl https://community.shopify.com/search.json?q=ADA%20lawsuit%20after%3A2026-05-01",
@@ -1571,6 +1597,20 @@
       "workingPaths": [
         "curl https://craevidence.com",
         "curl https://craevidence.com/pricing"
+      ]
+    },
+    "craftybase.com": {
+      "attempts": 2,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-15",
+      "lastOk": "2026-11-15",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1,
+        "redirect": 1
+      },
+      "workingPaths": [
+        "webfetch https://craftybase.com/blog/how-to-find-etsy-shipping-label-fee-totals"
       ]
     },
     "craready.pages.dev": {
@@ -1758,17 +1798,18 @@
       ]
     },
     "developers.etsy.com": {
-      "attempts": 2,
+      "attempts": 3,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-08",
-      "lastOk": "2026-11-08",
-      "ok": 2,
+      "lastAttempt": "2026-11-15",
+      "lastOk": "2026-11-15",
+      "ok": 3,
       "outcomes": {
-        "ok": 2
+        "ok": 3
       },
       "workingPaths": [
         "webfetch https://developers.etsy.com/documentation/",
-        "webfetch https://developers.etsy.com/documentation/tutorials/shopmanagement/"
+        "webfetch https://developers.etsy.com/documentation/tutorials/shopmanagement/",
+        "webfetch https://developers.etsy.com/documentation"
       ]
     },
     "developers.google.com": {
@@ -1891,13 +1932,13 @@
       ]
     },
     "discuss.pixls.us": {
-      "attempts": 3,
+      "attempts": 4,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-08",
-      "lastOk": "2026-11-08",
-      "ok": 3,
+      "lastAttempt": "2026-11-15",
+      "lastOk": "2026-11-15",
+      "ok": 4,
       "outcomes": {
-        "ok": 3
+        "ok": 4
       },
       "workingPaths": [
         "curl https://discuss.pixls.us/search.json?q=%22wish%22%20after%3A2026-08-15",
@@ -1917,6 +1958,20 @@
       },
       "workingPaths": [
         "curl https://docs.dingdoong.io/general-settings/general-settings/email-notifications.md"
+      ]
+    },
+    "docs.ghost.org": {
+      "attempts": 2,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-15",
+      "lastOk": "2026-11-15",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "curl https://docs.ghost.org/admin-api/members/overview",
+        "curl https://docs.ghost.org/admin-api"
       ]
     },
     "docs.hirepos.com": {
@@ -1981,6 +2036,20 @@
         "redirect": 1
       },
       "workingPaths": []
+    },
+    "documentation.outpost.pub": {
+      "attempts": 2,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-15",
+      "lastOk": "2026-11-15",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "curl https://documentation.outpost.pub/features/group-subscriptions.md",
+        "curl https://documentation.outpost.pub/features/one-person-subscriptions.md"
+      ]
     },
     "donationdocket.com.au": {
       "attempts": 1,
@@ -2460,14 +2529,14 @@
       ]
     },
     "forum.ghost.org": {
-      "attempts": 15,
+      "attempts": 27,
       "evidenceItems": 1,
-      "lastAttempt": "2026-11-10",
-      "lastOk": "2026-11-10",
-      "ok": 14,
+      "lastAttempt": "2026-11-15",
+      "lastOk": "2026-11-15",
+      "ok": 26,
       "outcomes": {
         "empty": 1,
-        "ok": 14
+        "ok": 26
       },
       "workingPaths": [
         "curl https://forum.ghost.org/search.json?q=cookie%20after%3A2026-06-01",
@@ -2748,17 +2817,18 @@
       ]
     },
     "ghost.org": {
-      "attempts": 2,
+      "attempts": 3,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-09",
-      "lastOk": "2026-11-09",
-      "ok": 2,
+      "lastAttempt": "2026-11-15",
+      "lastOk": "2026-11-15",
+      "ok": 3,
       "outcomes": {
-        "ok": 2
+        "ok": 3
       },
       "workingPaths": [
         "webfetch https://ghost.org/docs/themes/members/",
-        "webfetch https://ghost.org/changelog/signup-terms/"
+        "webfetch https://ghost.org/changelog/signup-terms/",
+        "curl https://ghost.org/changelog/llms-full.txt"
       ]
     },
     "ghostinspector.com": {
@@ -3019,17 +3089,19 @@
       "workingPaths": []
     },
     "help.etsy.com": {
-      "attempts": 2,
+      "attempts": 4,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-08",
-      "lastOk": "2026-11-08",
-      "ok": 2,
+      "lastAttempt": "2026-11-15",
+      "lastOk": "2026-11-15",
+      "ok": 3,
       "outcomes": {
-        "ok": 2
+        "empty": 1,
+        "ok": 3
       },
       "workingPaths": [
         "webfetch https://help.etsy.com/hc/en-us/articles/360000343508-How-to-Download-Your-Listing-Information",
-        "webfetch https://help.etsy.com/hc/articles/30907634892311"
+        "webfetch https://help.etsy.com/hc/articles/30907634892311",
+        "webfetch https://help.etsy.com/hc/en-gb/articles/115013946647-How-to-Set-Up-Calculated-Postage"
       ]
     },
     "help.fergus.com": {
@@ -3267,14 +3339,14 @@
       ]
     },
     "hn.algolia.com": {
-      "attempts": 127,
+      "attempts": 141,
       "evidenceItems": 8,
-      "lastAttempt": "2026-11-14",
-      "lastOk": "2026-11-14",
-      "ok": 102,
+      "lastAttempt": "2026-11-15",
+      "lastOk": "2026-11-15",
+      "ok": 116,
       "outcomes": {
         "empty": 25,
-        "ok": 102
+        "ok": 116
       },
       "workingPaths": [
         "curl https://hn.algolia.com/api/v1/search_by_date?query=%22alt%20text%22&tags=comment&hitsPerPage=30",
@@ -4026,6 +4098,31 @@
         "webfetch https://originality.ai/pricing"
       ]
     },
+    "osiaffiliate.freshdesk.com": {
+      "attempts": 2,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-15",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "redirect": 2
+      },
+      "workingPaths": []
+    },
+    "outpost.pub": {
+      "attempts": 3,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-15",
+      "lastOk": "2026-11-15",
+      "ok": 3,
+      "outcomes": {
+        "ok": 3
+      },
+      "workingPaths": [
+        "curl https://outpost.pub/pricing/",
+        "webfetch https://outpost.pub/docs/what-are-group-subscriptions-for-ghost/"
+      ]
+    },
     "pages.twilio.com": {
       "attempts": 1,
       "evidenceItems": 1,
@@ -4203,14 +4300,14 @@
       ]
     },
     "productideas.xero.com": {
-      "attempts": 131,
-      "evidenceItems": 26,
-      "lastAttempt": "2026-11-14",
-      "lastOk": "2026-11-14",
-      "ok": 128,
+      "attempts": 140,
+      "evidenceItems": 28,
+      "lastAttempt": "2026-11-15",
+      "lastOk": "2026-11-15",
+      "ok": 137,
       "outcomes": {
         "empty": 3,
-        "ok": 128
+        "ok": 137
       },
       "workingPaths": [
         "curl https://productideas.xero.com/forums/939198-for-small-businesses/suggestions/45701299-bank-reconciliation-bulk-import-recieved-payments",
@@ -4323,14 +4420,14 @@
       ]
     },
     "raw.githubusercontent.com": {
-      "attempts": 11,
+      "attempts": 12,
       "evidenceItems": 3,
-      "lastAttempt": "2026-11-14",
-      "lastOk": "2026-11-14",
-      "ok": 10,
+      "lastAttempt": "2026-11-15",
+      "lastOk": "2026-11-15",
+      "ok": 11,
       "outcomes": {
         "empty": 1,
-        "ok": 10
+        "ok": 11
       },
       "workingPaths": [
         "curl https://raw.githubusercontent.com/XeroAPI/Xero-OpenAPI/master/xero_accounting.yaml",
@@ -4554,13 +4651,13 @@
       ]
     },
     "sellersasksellers.com": {
-      "attempts": 5,
-      "evidenceItems": 0,
-      "lastAttempt": "2026-11-08",
-      "lastOk": "2026-11-08",
-      "ok": 5,
+      "attempts": 17,
+      "evidenceItems": 4,
+      "lastAttempt": "2026-11-15",
+      "lastOk": "2026-11-15",
+      "ok": 17,
       "outcomes": {
-        "ok": 5
+        "ok": 17
       },
       "workingPaths": [
         "webfetch https://sellersasksellers.com/search.json?q=unedited%20after%3A2026-10-01",
@@ -4662,6 +4759,19 @@
         "curl https://smtply.pages.dev/en/"
       ]
     },
+    "smythmyke.github.io": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-15",
+      "lastOk": "2026-11-15",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://smythmyke.github.io/BulkListingPro/blog/best-etsy-bulk-listing-tools-2026.html"
+      ]
+    },
     "sourceforge.net": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -4714,6 +4824,19 @@
       },
       "workingPaths": [
         "curl https://standardcompute.com/bill-ai-coding-costs-to-clients"
+      ]
+    },
+    "stocksmith.io": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-15",
+      "lastOk": "2026-11-15",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://stocksmith.io/blog/batch-manufacturing-shopify-makers"
       ]
     },
     "streetfoodfinder.com": {
@@ -4799,6 +4922,20 @@
         "http_403": 1
       },
       "workingPaths": []
+    },
+    "support.pirateship.com": {
+      "attempts": 2,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-15",
+      "lastOk": "2026-11-15",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "curl https://support.pirateship.com/en/articles/3976275-what-should-i-charge-my-customers-for-usps-shipping",
+        "webfetch https://support.pirateship.com/en/articles/4143612-can-i-export-a-report-of-my-shipment-history"
+      ]
     },
     "support.saasant.com": {
       "attempts": 1,
@@ -4903,14 +5040,14 @@
       ]
     },
     "talk.folksy.com": {
-      "attempts": 18,
-      "evidenceItems": 4,
-      "lastAttempt": "2026-11-09",
-      "lastOk": "2026-11-09",
-      "ok": 16,
+      "attempts": 22,
+      "evidenceItems": 6,
+      "lastAttempt": "2026-11-15",
+      "lastOk": "2026-11-15",
+      "ok": 20,
       "outcomes": {
         "empty": 2,
-        "ok": 16
+        "ok": 20
       },
       "workingPaths": [
         "webfetch https://talk.folksy.com/search.json?q=US%20postage%20after%3A2026-09-26",
@@ -6628,14 +6765,14 @@
       ]
     },
     "www.freelancer.com": {
-      "attempts": 317,
-      "evidenceItems": 5,
-      "lastAttempt": "2026-11-14",
-      "lastOk": "2026-11-13",
-      "ok": 292,
+      "attempts": 344,
+      "evidenceItems": 7,
+      "lastAttempt": "2026-11-15",
+      "lastOk": "2026-11-15",
+      "ok": 319,
       "outcomes": {
         "empty": 25,
-        "ok": 292
+        "ok": 319
       },
       "workingPaths": [
         "curl https://www.freelancer.com/api/projects/0.1/projects/active/?query=booking%20system&limit=20&full_description=true",
@@ -6668,6 +6805,17 @@
       "workingPaths": [
         "webfetch https://www.ftc.gov/business-guidance/resources/ftc-safeguards-rule-what-your-business-needs-know"
       ]
+    },
+    "www.getharvest.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-15",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_404": 1
+      },
+      "workingPaths": []
     },
     "www.getjobber.com": {
       "attempts": 1,
@@ -6868,6 +7016,19 @@
         "webfetch https://www.infoodle.com/features/gift-aid/"
       ]
     },
+    "www.insightagent.app": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-15",
+      "lastOk": "2026-11-15",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.insightagent.app/guides/etsy-influencer-marketing-strategy"
+      ]
+    },
     "www.irs.gov": {
       "attempts": 2,
       "evidenceItems": 1,
@@ -6969,6 +7130,20 @@
         "webfetch https://www.liquidweb.com/software/give/"
       ]
     },
+    "www.listadum.com": {
+      "attempts": 2,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-15",
+      "lastOk": "2026-11-15",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "webfetch https://www.listadum.com/features/bulk-create",
+        "webfetch https://www.listadum.com/pricing"
+      ]
+    },
     "www.litrg.org.uk": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -7016,6 +7191,19 @@
       },
       "workingPaths": [
         "webfetch https://www.make.com/en/pricing"
+      ]
+    },
+    "www.makeinfluence.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-15",
+      "lastOk": "2026-11-15",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.makeinfluence.com/en/academy/tracking-influencer-sales-with-no-website-of-your-own-marketplace-only-sellers"
       ]
     },
     "www.mass.gov": {
@@ -7354,6 +7542,17 @@
         "webfetch https://www.onpay.com/insights/no-tax-tips-what-employers-should-know/"
       ]
     },
+    "www.osiaffiliate.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-15",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_404": 1
+      },
+      "workingPaths": []
+    },
     "www.patreon.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -7379,6 +7578,19 @@
         "webfetch https://www.patriotsoftware.com/blog/payroll/no-tax-on-tips"
       ]
     },
+    "www.payhelm.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-15",
+      "lastOk": "2026-11-15",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.payhelm.com/help/shipping-cost-vs-charged-analysis/"
+      ]
+    },
     "www.paylocity.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -7391,14 +7603,14 @@
       "workingPaths": []
     },
     "www.peopleperhour.com": {
-      "attempts": 11,
+      "attempts": 12,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-10",
-      "lastOk": "2026-11-09",
-      "ok": 3,
+      "lastAttempt": "2026-11-15",
+      "lastOk": "2026-11-15",
+      "ok": 4,
       "outcomes": {
         "empty": 8,
-        "ok": 3
+        "ok": 4
       },
       "workingPaths": [
         "curl https://www.peopleperhour.com/freelance-jobs?q=shopify%20theme%20update",
@@ -7503,6 +7715,19 @@
         "allowlist": 2
       },
       "workingPaths": []
+    },
+    "www.reportpundit.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-15",
+      "lastOk": "2026-11-15",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://www.reportpundit.com/report/shipping-label-cost-report"
+      ]
     },
     "www.respira.press": {
       "attempts": 1,
@@ -7639,6 +7864,20 @@
       },
       "workingPaths": [
         "curl https://www.shopify.com/pos/pricing"
+      ]
+    },
+    "www.shopuploader.com": {
+      "attempts": 2,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-15",
+      "lastOk": "2026-11-15",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "webfetch https://www.shopuploader.com/pricing",
+        "webfetch https://www.shopuploader.com/guides/bulk-upload-to-etsy"
       ]
     },
     "www.siteground.com": {
@@ -8000,13 +8239,13 @@
       "workingPaths": []
     },
     "www.valueaddedresource.net": {
-      "attempts": 7,
-      "evidenceItems": 2,
-      "lastAttempt": "2026-11-10",
-      "lastOk": "2026-11-10",
-      "ok": 7,
+      "attempts": 8,
+      "evidenceItems": 3,
+      "lastAttempt": "2026-11-15",
+      "lastOk": "2026-11-15",
+      "ok": 8,
       "outcomes": {
-        "ok": 7
+        "ok": 8
       },
       "workingPaths": [
         "curl https://www.valueaddedresource.net/etsy-bans-ai-patterns/",
@@ -8305,22 +8544,22 @@
       "selected": 2
     },
     "A12": {
-      "candidates": 25,
+      "candidates": 27,
       "fetchFail": 17,
-      "fetchOk": 105,
-      "lastUsed": "2026-11-14",
-      "runs": 16,
-      "searches": 120,
+      "fetchOk": 119,
+      "lastUsed": "2026-11-15",
+      "runs": 17,
+      "searches": 134,
       "selected": 3
     },
     "A13": {
-      "candidates": 113,
-      "fetchFail": 44,
-      "fetchOk": 389,
-      "lastUsed": "2026-11-14",
-      "runs": 17,
-      "searches": 280,
-      "selected": 12
+      "candidates": 121,
+      "fetchFail": 45,
+      "fetchOk": 431,
+      "lastUsed": "2026-11-15",
+      "runs": 18,
+      "searches": 302,
+      "selected": 13
     },
     "A14": {
       "candidates": 22,
@@ -8341,13 +8580,13 @@
       "selected": 2
     },
     "A16": {
-      "candidates": 42,
+      "candidates": 44,
       "fetchFail": 12,
-      "fetchOk": 147,
-      "lastUsed": "2026-11-14",
-      "runs": 7,
-      "searches": 85,
-      "selected": 8
+      "fetchOk": 156,
+      "lastUsed": "2026-11-15",
+      "runs": 8,
+      "searches": 91,
+      "selected": 9
     },
     "A2": {
       "candidates": 5,
@@ -8431,21 +8670,21 @@
       "selected": 0
     },
     "B11": {
-      "candidates": 25,
+      "candidates": 29,
       "fetchFail": 20,
-      "fetchOk": 294,
-      "lastUsed": "2026-11-14",
-      "runs": 14,
-      "searches": 282,
-      "selected": 3
+      "fetchOk": 322,
+      "lastUsed": "2026-11-15",
+      "runs": 15,
+      "searches": 309,
+      "selected": 4
     },
     "B12": {
-      "candidates": 38,
+      "candidates": 44,
       "fetchFail": 53,
-      "fetchOk": 233,
-      "lastUsed": "2026-11-14",
-      "runs": 12,
-      "searches": 136,
+      "fetchOk": 259,
+      "lastUsed": "2026-11-15",
+      "runs": 13,
+      "searches": 144,
       "selected": 11
     },
     "B2": {
@@ -8512,13 +8751,13 @@
       "selected": 0
     },
     "C10": {
-      "candidates": 39,
-      "fetchFail": 12,
-      "fetchOk": 51,
-      "lastUsed": "2026-11-14",
-      "runs": 14,
-      "searches": 70,
-      "selected": 6
+      "candidates": 43,
+      "fetchFail": 13,
+      "fetchOk": 54,
+      "lastUsed": "2026-11-15",
+      "runs": 15,
+      "searches": 79,
+      "selected": 7
     },
     "C11": {
       "candidates": 0,
@@ -8673,11 +8912,11 @@
     }
   ],
   "funnel": {
-    "candidates": 440,
+    "candidates": 462,
     "passedGate": 9,
-    "passedRejectRules": 361,
-    "provisional": 44,
-    "reviewKilled": 44,
+    "passedRejectRules": 379,
+    "provisional": 47,
+    "reviewKilled": 46,
     "validated": 0,
     "watchlist": 38
   },
@@ -8686,13 +8925,13 @@
     "noComplaintEvidence": 0,
     "noRecentEvidence": 2,
     "painBelow4": 3,
-    "rejectRule": 79,
-    "reviewKill": 44,
-    "totalBelowMin": 300,
+    "rejectRule": 83,
+    "reviewKill": 46,
+    "totalBelowMin": 316,
     "unverifiedEvidence": 0,
     "wtpBelow3": 0
   },
-  "generated": "2026-11-14",
+  "generated": "2026-11-15",
   "prefer": [
     {
       "client": "webfetch",
@@ -8700,7 +8939,7 @@
       "id": "A13",
       "name": "Discourse forums, any niche",
       "path": "https://{host}/search.json?q={q}+after%3A{YYYY-MM-DD}",
-      "selectedIdeas": 12,
+      "selectedIdeas": 13,
       "status": "ok"
     },
     {
@@ -8727,7 +8966,7 @@
       "id": "A16",
       "name": "Vendor feature-request boards",
       "path": "https://productideas.xero.com/search?query={q}",
-      "selectedIdeas": 8,
+      "selectedIdeas": 9,
       "status": "ok-curl"
     },
     {
@@ -8736,7 +8975,7 @@
       "id": "C10",
       "name": "Change events: shutdowns, price rises, removed free tiers",
       "path": null,
-      "selectedIdeas": 6,
+      "selectedIdeas": 7,
       "status": "ok"
     },
     {
@@ -8745,6 +8984,15 @@
       "id": "A14",
       "name": "Plugin and add-on support forums",
       "path": "https://wordpress.org/support/plugin/{slug}/",
+      "selectedIdeas": 4,
+      "status": "ok"
+    },
+    {
+      "client": "webfetch",
+      "evidence": "spend",
+      "id": "B11",
+      "name": "Freelance job boards",
+      "path": "https://www.freelancer.com/api/projects/0.1/projects/active/?query={q}&limit=20&full_description=true",
       "selectedIdeas": 4,
       "status": "ok"
     },
@@ -8763,15 +9011,6 @@
       "id": "A12",
       "name": "Ask HN and HN comments",
       "path": "https://hn.algolia.com/api/v1/search_by_date?query={q}&tags=comment&hitsPerPage=20",
-      "selectedIdeas": 3,
-      "status": "ok"
-    },
-    {
-      "client": "webfetch",
-      "evidence": "spend",
-      "id": "B11",
-      "name": "Freelance job boards",
-      "path": "https://www.freelancer.com/api/projects/0.1/projects/active/?query={q}&limit=20&full_description=true",
       "selectedIdeas": 3,
       "status": "ok"
     },
@@ -8947,6 +9186,6 @@
       "status": "ok"
     }
   ],
-  "runsInWindow": 23,
+  "runsInWindow": 24,
   "windowDays": 45
 }

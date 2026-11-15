@@ -683,3 +683,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-13 [doc] Created ideas/2026-11-13.json (schemaVersion 3, 3 ideas): Phone Order Desk (17, provisional), Open Quote Price Watch (16, provisional), Food Safety Logs (15, provisional)
 
 2026-11-14 [doc] Created ideas/2026-11-14.json (schemaVersion 3, 3 ideas): Payroll Split Journals (20, provisional), Open PO Balance (19, provisional), Gift Aid Schedule Builder (16, provisional)
+
+2026-11-15 [doc] Created ideas/2026-11-15.json (schemaVersion 3, 3 ideas): Rate Book for Xero Projects (20, provisional), Postage Price Check (18, provisional), Promoter Payouts (18, provisional)

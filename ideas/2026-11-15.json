@@ -1,0 +1,782 @@
+{
+  "date": "2026-11-15",
+  "schemaVersion": 3,
+  "complete": true,
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Rate Book for Xero Projects",
+      "slug": "rate-book-for-xero-projects",
+      "category": "Small Business Ops",
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Data & Visualization",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": true,
+        "engine": true,
+        "shared": true,
+        "notes": {
+          "stateful": "Each firm keeps a saved rate book: a default charge-out and cost rate per person, overrides per project, and every rate change with its effective date, so past time keeps the rate it was logged at.",
+          "connected": "Signs in to the firm's own Xero file and reads projects, tasks, time entries (each with the person who logged it) and project users through the Xero Projects API.",
+          "unattended": "A nightly sync picks up new time entries and a Monday email lists projects whose margin fell below the firm's threshold or whose budget is nearly spent.",
+          "engine": "Resolves the right rate for every time entry from a cascade (project override, then person, then firm default) as of the entry's date, and recomputes billable value, cost and margin without rewriting history.",
+          "shared": "The owner or practice manager sets the rates and reads margins; the bookkeeper receives a per-person, per-project billing schedule to invoice from in Xero."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "email",
+        "scheduled",
+        "backend"
+      ],
+      "buildPlan": [
+        {
+          "n": 1,
+          "title": "One project, true margin",
+          "delivers": "Connect a Xero demo company, pick one project, enter a charge-out and cost rate for each person on it, and see billable value, cost and margin computed from that project's time entries.",
+          "acceptance": "For a seeded project with three people at different rates, the margin matches a hand-worked spreadsheet to the cent; deployed."
+        },
+        {
+          "n": 2,
+          "title": "Rate book with history",
+          "delivers": "Firm defaults, per-person rates and per-project overrides, each with an effective-from date; a pay rise from a date leaves earlier entries at the old rate.",
+          "acceptance": "Changing a cost rate from 1 November leaves October margins unchanged and recalculates only November entries; rates survive sign-out."
+        },
+        {
+          "n": 3,
+          "title": "All projects dashboard",
+          "delivers": "Every open project with hours, billable value, cost, margin and budget used, filterable by person and date range, exported to CSV.",
+          "acceptance": "A 12-project demo file loads in under 10 seconds and the totals tie to the time entries the Projects API returns."
+        },
+        {
+          "n": 4,
+          "title": "Nightly sync and Monday digest",
+          "delivers": "A scheduled job pulls new time entries each night and emails the owner on Monday with projects under the margin threshold or past 80% of budget.",
+          "acceptance": "Adding a time entry in the demo company appears after the next sync, and a seeded low-margin project triggers exactly one digest line."
+        },
+        {
+          "n": 5,
+          "title": "Billing schedule for the bookkeeper",
+          "delivers": "A per-person, per-project schedule for a date range at the correct charge-out rates, shared by link or PDF, to raise or check the Xero invoice.",
+          "acceptance": "The schedule for a month equals the sum of that month's entries at their resolved rates; a shared link opens read-only without a login."
+        },
+        {
+          "n": 6,
+          "title": "Polish",
+          "delivers": "Owner and bookkeeper README, phone layout, keyboard and screen-reader pass, walkthrough test from connect to schedule.",
+          "acceptance": "A walkthrough test runs connect, rate book, dashboard and schedule; axe reports no serious issues."
+        }
+      ],
+      "summary": "For small consultancies, studios and trades that track time in Xero Projects: keep a rate book of charge-out and cost rates per person and per project, with history, and see the true margin on every project.",
+      "public": {
+        "summary": "See what every project really earns when each person on it bills and costs at a different rate.",
+        "problem": "Your senior consultant bills more than your junior, some clients have their own negotiated rates, and people get pay rises. Your project tool only lets you set one rate, and changing it rewrites every hour already logged. So the profit figure on each job is wrong, and you rebuild it in a spreadsheet before every invoice.",
+        "forWhom": "Owners and practice managers of small consultancies, design studios, agencies and trade firms who log time against client projects.",
+        "benefits": [
+          "A true profit figure for every project",
+          "Different rates per person and per client, kept in one place",
+          "Pay rises that never change last month's numbers",
+          "A Monday warning before a job runs over budget",
+          "A ready billing schedule for whoever raises the invoices"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "Xero Projects allows one rate per staff member or task, so firms whose people bill and cost at different rates, or whose rates differ by client, cannot see true project margins; changing a staff cost rate after a pay rise changes every previously posted entry. A 142-vote request from 2023 is still only 'submitted', and users are still asking in late October 2026.",
+      "description": "A Xero-connected web app. The firm signs in with Xero, the app reads projects, tasks, time entries and project users through the Xero Projects API (each time entry carries the user, task and duration), and the owner fills in a rate book: a firm default, a charge-out and cost rate per person, overrides per project, each with an effective date. The engine resolves the right rate for every entry as of its date and shows billable value, cost and margin per project and per person without touching Xero's own figures. A nightly sync keeps it current and a weekly email flags low-margin or nearly over-budget projects. A per-person billing schedule helps the bookkeeper raise the invoice in Xero; the first release does not write invoices back, to avoid double billing.",
+      "targetCustomer": "Owners, practice managers and bookkeepers of 2 to 15 person consultancies, design and marketing studios, engineering and trades firms in Australia, New Zealand and the UK that already pay for Xero Projects.",
+      "buyer": "The firm's owner on the business card; outside bookkeepers may resell it to several clients.",
+      "whyNow": "The main request (142 votes, opened July 2023) is still 'submitted', a June 2026 request for separate staff cost and charge-out rates sits at 'Gaining Support', and commenters in May and October 2026 report pay rises rewriting history, workaround inventory items, and one firm cancelling Xero Projects to build its own tool. Xero's 2026 developer tiers make a small connected app affordable (free up to 5 connections).",
+      "founderFit": "A read-only Xero add-on with a well-defined rate-resolution engine is a contained build on the shared platform; buyers are named, recent commenters in public Xero idea threads, reachable without Pisan's own network.",
+      "problemEvidence": [
+        {
+          "url": "https://productideas.xero.com/forums/967124-projects-tracking/suggestions/46887577-projects-different-staff-cost-rate-per-project",
+          "source": "productideas.xero.com",
+          "author": "Stacey Cowen",
+          "date": "2026-10-28",
+          "kind": "complaint",
+          "summary": "Latest comment on a 142-vote idea (opened 2023-07-06, status submitted): '3+ years of begging for this feature', staff set up as inventory items to get sale prices into projects but not cost; earlier 2026 comments say a pay rise rewrites all past entries (steve barnes, 2026-05-18) and that a firm built its own tool and cancelled Xero Projects (Chais Meyer, 2026-05-21)."
+        },
+        {
+          "url": "https://productideas.xero.com/forums/967124-projects-tracking/suggestions/51377980-projects-allow-staff-cost-rate-and-charge-out-ra",
+          "source": "productideas.xero.com",
+          "author": "Patricia Deignan",
+          "date": "2026-06-06",
+          "kind": "complaint",
+          "summary": "16-vote request for an individual staff cost rate and charge-out rate on shared tasks; Xero's admin replied on 2026-07-03 that Projects does not support individual cost rates per user and suggested tracking categories."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Harvest",
+          "url": "https://www.getharvest.com/harvest-xero",
+          "price": "about $11 per seat per month billed annually (search snippet, page not fetched)",
+          "gap": "Per-person billable and cost rates and a Xero invoice sync, but means moving all time tracking out of Xero Projects and paying per seat."
+        },
+        {
+          "name": "Hour Cap",
+          "url": "https://productideas.xero.com/forums/967124-projects-tracking/suggestions/46887577-projects-different-staff-cost-rate-per-project",
+          "price": "unknown",
+          "gap": "Its founder pitches cascading billable rates (org, person, project) in the Xero idea thread; a separate time tracker rather than a layer over Xero Projects, and cost-rate history not confirmed."
+        },
+        {
+          "name": "Clockify Pro",
+          "url": "https://clockify.me/pricing",
+          "price": "$7.99 per seat per month (pricing page)",
+          "gap": "Has labour cost rates, but its integrations list QuickBooks, not Xero, and it replaces rather than reads Xero Projects."
+        },
+        {
+          "name": "Xero Projects with tracking categories",
+          "url": "https://productideas.xero.com/forums/967124-projects-tracking/suggestions/51377980-projects-allow-staff-cost-rate-and-charge-out-ra",
+          "price": "included in higher Xero plans",
+          "gap": "Xero's own suggested workaround gives no per-person charge-out rates, no per-project overrides and no rate history."
+        }
+      ],
+      "keyFeatures": [
+        "Rate book: firm default, per-person charge-out and cost rates, per-project overrides",
+        "Effective-dated rate changes that never rewrite past entries",
+        "True billable value, cost and margin per project and per person",
+        "Nightly sync and a Monday low-margin and budget digest",
+        "Per-person billing schedule for the bookkeeper"
+      ],
+      "mvpScope": {
+        "features": [
+          "Xero sign-in and Projects read",
+          "Rate book with effective dates",
+          "Margin dashboard and CSV export",
+          "Weekly digest email"
+        ],
+        "outOfScope": [
+          "Writing invoices back to Xero (double-billing risk until Projects' invoiced flag is understood)",
+          "Timesheet entry",
+          "Xero App Store listing (needs certification above 50 connections)",
+          "Payroll-derived cost rates"
+        ],
+        "buildEstimate": "about 6 build days"
+      },
+      "techStack": "React + Vite front end, Supabase for sign-in and the rate book, backend-hub on Render for Xero OAuth, the Projects API reads and the nightly sync, transactional email for the digest.",
+      "pricing": {
+        "model": "Per Xero organisation monthly subscription",
+        "pricePoint": "A$/GBP/US$ 19 per month per organisation",
+        "rationale": "Cheaper than moving a 3-person firm to Harvest (about $33 a month) and priced against the hour a month spent rebuilding margins in a spreadsheet."
+      },
+      "revenueSketch": "Estimate: 150 firms x $19/month = about $2,850 MRR, assuming the free 5-connection developer tier is outgrown early and the Core tier (about A$35/month for 50 connections) and then certification are taken on.",
+      "distribution": "Reply to the named commenters on the two public Xero idea threads, then Xero advisors who serve consultancies and agencies, then a Xero App Store listing once past 50 connections.",
+      "validationTest": {
+        "method": "Contact 20 recent commenters from the two threads, offer a free margin report on one of their projects from a Xero time export (no live connection yet), and ask for a paid pre-order.",
+        "successCriteria": "6 of 20 reply, 4 send an export, and 3 pre-pay $19 a month.",
+        "cost": "About 2 build days and a week of outreach; under $100."
+      },
+      "moat": "The tested rate-resolution rules (overrides, effective dates, history kept), the saved rate book customers would not want to re-enter, and an early presence in the Xero idea threads where buyers gather.",
+      "compliance": [
+        "Privacy (UK GDPR, NZ Privacy Act 2020, Australian Privacy Act 1988): cost rates derived from salaries are mildly sensitive personal data; store only the rates the firm enters and time-entry totals, restrict cost rates to the owner role.",
+        "Xero developer terms: above the free 5-connection tier the paid tiers apply, and above 50 connections app certification is required (https://developer.xero.com/faq/pricing-and-policy-updates)."
+      ],
+      "risks": [
+        {
+          "risk": "Xero ships per-person or per-project rates in Projects.",
+          "mitigation": "Keep effective-dated history, the weekly digest and the bookkeeper schedule as value Xero is unlikely to add; the request has sat for over three years."
+        },
+        {
+          "risk": "Firms switch to Harvest or another tracker instead.",
+          "mitigation": "Sell to firms that already pay for Xero Projects and do not want to retrain staff on a new timer."
+        },
+        {
+          "risk": "ProjectUser returns no rates, so firms must enter rates by hand.",
+          "mitigation": "Make rate entry a two-minute table with CSV paste, and import task rates as starting defaults."
+        }
+      ],
+      "scores": {
+        "pain": 3,
+        "willingnessToPay": 3,
+        "reachability": 3,
+        "competitiveGap": 2,
+        "feasibility": 4,
+        "complianceBurden": 5,
+        "total": 20
+      },
+      "scoreRationale": {
+        "pain": "Long-running and still active (142 votes, latest comment 2026-10-28, https://productideas.xero.com/forums/967124-projects-tracking/suggestions/46887577-projects-different-staff-cost-rate-per-project), but most voters ask for per-project rates inside Xero rather than a separate tool, so held at 3.",
+        "willingnessToPay": "These firms already pay for Xero Projects on higher Xero plans and one commenter cancelled it to build their own tool (https://productideas.xero.com/forums/967124-projects-tracking/suggestions/46887577-projects-different-staff-cost-rate-per-project); per-seat trackers with cost rates sell at $7.99 and up (https://clockify.me/pricing).",
+        "reachability": "Named recent commenters in two public threads (https://productideas.xero.com/forums/967124-projects-tracking/suggestions/46887577-projects-different-staff-cost-rate-per-project, https://productideas.xero.com/forums/967124-projects-tracking/suggestions/51377980-projects-allow-staff-cost-rate-and-charge-out-ra), but a competitor is already pitching in the same thread.",
+        "competitiveGap": "Harvest, Hour Cap and Clockify cover per-person rates by replacing Xero Projects; only a layer that reads Xero Projects in place is open (https://productideas.xero.com/forums/967124-projects-tracking/suggestions/46887577-projects-different-staff-cost-rate-per-project).",
+        "feasibility": "Xero's Projects spec gives userId, taskId and duration on every time entry (https://raw.githubusercontent.com/XeroAPI/Xero-OpenAPI/master/xero-projects.yaml); rates must be entered by the firm.",
+        "complianceBurden": "Read-only access to time entries and firm-entered rates; no PII beyond staff names and emails (https://raw.githubusercontent.com/XeroAPI/Xero-OpenAPI/master/xero-projects.yaml)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "The reviewer cut the total from 21 to 20 and re-scoped the idea. It found the bigger, older request (142 votes since July 2023, status submitted, comments in May and October 2026: https://productideas.xero.com/forums/967124-projects-tracking/suggestions/46887577-projects-different-staff-cost-rate-per-project), so the product now centres on per-project overrides and effective-dated rate history rather than a per-person split alone. Competitive gap 3 to 2: Harvest (about $11 per seat, Xero invoice sync), Hour Cap (cascading org, person and project rates, pitched in the thread) and Clockify Pro ($7.99 per seat, https://clockify.me/pricing, QuickBooks only) all offer per-person rates by replacing Xero Projects. Feasibility held at 4: the Projects OpenAPI spec (https://raw.githubusercontent.com/XeroAPI/Xero-OpenAPI/master/xero-projects.yaml) gives userId, taskId and duration per time entry but ProjectUser has no rates. Not verified: whether drafting invoices would mark time as invoiced in Projects, so invoice write-back was moved out of the MVP."
+      },
+      "inspiredBy": "https://productideas.xero.com/forums/967124-projects-tracking/suggestions/46887577-projects-different-staff-cost-rate-per-project",
+      "gateGap": {
+        "missing": [
+          "total 20 is below 22",
+          "pain 3 is below 4"
+        ],
+        "closedBy": "The validation test closes the largest gap: if 3 of 20 thread commenters pre-pay after seeing a margin report on their own project, willingnessToPay and reachability move to 4 and pain to 4 on direct confirmation, lifting the total to 23."
+      }
+    },
+    {
+      "n": 2,
+      "title": "Postage Price Check for UK Makers",
+      "slug": "postage-price-check-for-uk-makers",
+      "category": "Small Business Ops",
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Data & Visualization",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": true,
+        "engine": true,
+        "shared": false,
+        "notes": {
+          "stateful": "The maker keeps a saved catalogue of products with packed weight, thickness and the postage they charge per channel, plus a history of every price check.",
+          "connected": "Imports Etsy and Folksy listing or order CSVs, reads Shopify shipping profiles through the Admin API, and optionally takes a Royal Mail Click & Drop export of what labels actually cost.",
+          "unattended": "A scheduled job watches the carriers' published price changes (Royal Mail every April and October, Evri, Parcelforce surcharges) and emails the maker a before-and-after list of under-charging products ahead of the change date.",
+          "engine": "Assigns each product to the right Royal Mail format (large letter versus small parcel by weight and thickness), prices it across services and multi-item baskets, and compares with what each channel charges."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "email",
+        "scheduled"
+      ],
+      "buildPlan": [
+        {
+          "n": 1,
+          "title": "One product, one verdict",
+          "delivers": "Sign in, enter one product's packed weight, size and the postage charged, and see the cheapest correct Royal Mail service and whether the charge covers it.",
+          "acceptance": "Ten hand-worked examples across large letter and small parcel formats return the same service and price as Royal Mail's current price list; deployed."
+        },
+        {
+          "n": 2,
+          "title": "Catalogue import",
+          "delivers": "Import an Etsy or Folksy listing export and a Shopify product list into a saved catalogue, with postage charged per channel, and edit weights in a table.",
+          "acceptance": "A 120-row sample imports without lost rows; edits survive sign-out and sign-in."
+        },
+        {
+          "n": 3,
+          "title": "Basket and service engine",
+          "delivers": "Price multi-item baskets (the 'highest postage, others free' rule Folksy uses), compare 2nd Class, Tracked 48 and Evri, and flag products that cross the large-letter thickness limit.",
+          "acceptance": "Seeded baskets match hand-worked totals, and a 2.6 cm thick item is moved from large letter to small parcel."
+        },
+        {
+          "n": 4,
+          "title": "Price change watch",
+          "delivers": "Enter the next published price table once per change; a scheduled job emails each maker a before-and-after list of products that will under-charge, with suggested new postage per channel.",
+          "acceptance": "Loading a test price table produces one email per affected maker listing exactly the seeded under-charging products."
+        },
+        {
+          "n": 5,
+          "title": "Actual cost check",
+          "delivers": "Import a Click & Drop export to compare charged postage with labels actually bought, by month and by product.",
+          "acceptance": "A sample export reconciles to the order totals, and orders with no matching label are listed rather than dropped."
+        },
+        {
+          "n": 6,
+          "title": "Polish",
+          "delivers": "Maker-facing README, phone layout, keyboard and screen-reader pass, walkthrough test.",
+          "acceptance": "A walkthrough test runs sign-in, import, check and price-change email; axe reports no serious issues."
+        }
+      ],
+      "summary": "For UK makers who charge flat postage on Etsy, Folksy or Shopify: keep each product's packed size and weight once, and get a clear list of what to change before every Royal Mail price rise instead of finding out at the post office.",
+      "public": {
+        "summary": "Know before each postage price rise which of your products will cost more to post than you charge, and what to charge instead.",
+        "problem": "Postage prices go up twice a year and sometimes in between, and nobody tells you which of your listings are now losing money. You find out when you buy the label, then take the hit or spend an evening updating every listing on every site. Thick little items that tip from a large letter into a parcel catch you out most.",
+        "forWhom": "UK makers and small craft shops who sell on Etsy, Folksy or their own Shopify shop and charge a fixed postage price.",
+        "benefits": [
+          "A list of exactly which listings to change before each price rise",
+          "The cheapest correct service for every item",
+          "No more parcels posted at a loss without noticing",
+          "One place to keep weights and sizes for every shop"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "UK makers set a fixed postage price per listing because Etsy's calculated postage is only for US and Canadian sellers and Folksy has none; Royal Mail raises parcel prices every April and October (latest 5 October 2026) and US carriers now change surcharges between annual rises, so charged postage silently falls behind and makers find out at the till.",
+      "description": "A web app for makers. The maker builds a catalogue of products with packed weight and thickness, imports what each channel charges (Etsy and Folksy CSVs, Shopify shipping profiles through the API), and the engine assigns each item to the right Royal Mail format and service, prices multi-item baskets and shows which listings under-charge. When a carrier publishes new prices, the operator loads the new table once and a scheduled job emails each maker a before-and-after list with suggested postage per channel. An optional Click & Drop import compares charged postage with labels actually bought. The reviewer narrowed the first market to UK sellers, since US Etsy sellers already have calculated postage.",
+      "targetCustomer": "UK makers and small craft shops (jewellery, cards, ceramics, textiles) selling on Etsy UK, Folksy and Shopify with fixed postage, sending from a handful to a few hundred parcels a month.",
+      "buyer": "The maker, on their own card.",
+      "whyNow": "Royal Mail raised parcel and tracked prices again on 5 October 2026, the second rise of the year, and makers on Folksy say they only found out at purchase (2026-11-10). In the US, USPS plans a January 2027 rise with a permanent 11% fuel surcharge and later weekly variable surcharges (updated 2026-11-12), and Pirate Ship stopped emailing about rate changes because carriers change them so often.",
+      "founderFit": "A rules engine over published price tables, a saved catalogue and a scheduled email is a contained build on the shared platform; makers gather in open forums (Folksy, Etsy and Shopify communities) reachable without Pisan's own network.",
+      "problemEvidence": [
+        {
+          "url": "https://talk.folksy.com/t/33945",
+          "source": "talk.folksy.com",
+          "author": "tansycatstreasures",
+          "date": "2026-11-10",
+          "kind": "complaint",
+          "summary": "UK maker found out about Royal Mail's October rise only when buying postage; in the same thread JOYSofGLASS counts 25 packages posted at a 35p loss each, and tansycatstreasures adds that postage now costs more than some items."
+        },
+        {
+          "url": "https://sellersasksellers.com/t/7684",
+          "source": "sellersasksellers.com",
+          "author": "primetime",
+          "date": "2026-10-30",
+          "kind": "complaint",
+          "summary": "Seller says accurately setting up shipping templates and monitoring all the rate changes 'is a royal PIA'; Lost_My_Marbles reports the same parcel's label rising from $4.14 to $5.80."
+        },
+        {
+          "url": "https://sellersasksellers.com/t/7658",
+          "source": "sellersasksellers.com",
+          "author": "lake",
+          "date": "2026-10-21",
+          "kind": "complaint",
+          "summary": "After Pirate Ship said carriers now change rates multiple times a week, a fixed-rate seller says small sellers on non-calculated rates 'are finding life difficult' and he is now losing a little."
+        },
+        {
+          "url": "https://www.valueaddedresource.net/usps-weekly-variable-fuel-surcharge/",
+          "source": "valueaddedresource.net",
+          "author": "Liz Morton",
+          "date": "2026-11-12",
+          "kind": "mandate",
+          "summary": "USPS will convert its temporary 8% increase into a permanent 11% fuel surcharge in January 2027 and intends to adjust it weekly from EIA fuel prices."
+        },
+        {
+          "url": "https://apps.shopify.com/oh-ship",
+          "source": "apps.shopify.com",
+          "author": "Oh Ship!",
+          "date": "2026-06-16",
+          "kind": "spend",
+          "summary": "A UK-built Shopify app launched 2026-06-16 sells charged-versus-paid shipping margin per order from $39/month (free tier for 30 days of history); one review so far."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Etsy calculated postage",
+          "url": "https://help.etsy.com/hc/en-gb/articles/115013946647-How-to-Set-Up-Calculated-Postage",
+          "price": "free",
+          "gap": "Prices postage automatically, but only for sellers in the US and Canada; UK sellers set fixed prices."
+        },
+        {
+          "name": "Oh Ship!",
+          "url": "https://apps.shopify.com/oh-ship",
+          "price": "free tier; Essential $39/month",
+          "gap": "Charged versus paid per order for Shopify only, after the fact; no Etsy or Folksy, no format check and no warning before a price change."
+        },
+        {
+          "name": "PayHelm shipping cost vs charged report",
+          "url": "https://www.payhelm.com/help/shipping-cost-vs-charged-analysis/",
+          "price": "unknown",
+          "gap": "A report over ShipStation and Shopify Shipping data; not for makers who buy Click & Drop labels or stamps."
+        },
+        {
+          "name": "Etsy Orders CSV and a spreadsheet",
+          "url": "https://craftybase.com/blog/how-to-find-etsy-shipping-label-fee-totals",
+          "price": "free",
+          "gap": "Craftybase says the CSV carries shipping collected and label cost columns (not confirmed from Etsy), but only for Etsy labels and only after the loss."
+        }
+      ],
+      "keyFeatures": [
+        "Product catalogue with packed weight and thickness",
+        "Royal Mail format and service engine with basket rules",
+        "Per-channel postage comparison for Etsy, Folksy and Shopify",
+        "Before-and-after email ahead of each published price change",
+        "Optional Click & Drop actual-cost check"
+      ],
+      "mvpScope": {
+        "features": [
+          "Catalogue with CSV import",
+          "Royal Mail format and price engine",
+          "Under-charge report per channel",
+          "Price-change email"
+        ],
+        "outOfScope": [
+          "US carriers (US Etsy sellers have calculated postage; revisit for US Shopify sellers)",
+          "Writing new postage back to Etsy or Folksy",
+          "International postage and customs",
+          "Courier rate shopping"
+        ],
+        "buildEstimate": "about 6 build days"
+      },
+      "techStack": "React + Vite front end, Supabase for sign-in, the catalogue and price tables, a scheduled job on the platform for price-change emails, transactional email; Shopify Admin API read for shipping profiles.",
+      "pricing": {
+        "model": "Monthly subscription per shop, with a cheaper annual plan",
+        "pricePoint": "GBP 5 per month or GBP 45 per year",
+        "rationale": "Priced well under Oh Ship's $39 and against a typical maker's few pounds a month of postage losses; makers on Folksy will not pay more for a tool than the leak it stops."
+      },
+      "revenueSketch": "Estimate: 400 makers x GBP 5/month = GBP 2,000 MRR, assuming uptake among the UK Etsy and Folksy sellers who post in seller forums around each April and October rise.",
+      "distribution": "Post a free 'will my listings lose money in April?' check in the Folksy forum and UK Etsy seller groups a month before the April 2027 rise, then a Shopify App Store listing.",
+      "validationTest": {
+        "method": "Before the April 2027 Royal Mail rise, offer a free one-off check: makers paste their product list and postage; send each a before-and-after list and ask for a paid subscription for the next change.",
+        "successCriteria": "40 makers run the free check and 10 pay for the next change.",
+        "cost": "About 3 build days and a few forum posts; under $50."
+      },
+      "moat": "A maintained, tested table of Royal Mail formats, services and basket rules, and each maker's saved catalogue of packed sizes that they would not want to rebuild.",
+      "compliance": [
+        "UK GDPR: order imports contain buyer names and addresses; parse only item, quantity and postage columns and discard the rest on import.",
+        "Royal Mail price data: use the published price guides and attribute them; no scraping of Royal Mail pages."
+      ],
+      "risks": [
+        {
+          "risk": "Makers notice the loss and absorb it rather than pay for a tool (the Folksy poster chose to take the hit).",
+          "mitigation": "Price near a few pounds a month, lead with the free pre-rise check, and make the before-and-after list do the editing work."
+        },
+        {
+          "risk": "Many makers buy stamps, so there is no label export to check against.",
+          "mitigation": "Make the format and price engine work from the catalogue alone; the Click & Drop import is optional."
+        },
+        {
+          "risk": "Price tables change and must be entered correctly each time.",
+          "mitigation": "One operator update per published change with test cases from the official guide before the email goes out."
+        }
+      ],
+      "scores": {
+        "pain": 3,
+        "willingnessToPay": 2,
+        "reachability": 3,
+        "competitiveGap": 2,
+        "feasibility": 3,
+        "complianceBurden": 5,
+        "total": 18
+      },
+      "scoreRationale": {
+        "pain": "Real, recent and repeated (https://talk.folksy.com/t/33945, https://sellersasksellers.com/t/7684, https://sellersasksellers.com/t/7658), but the posters already notice the loss, and one chose to absorb it.",
+        "willingnessToPay": "One paid app for the job (https://apps.shopify.com/oh-ship, $39/month) has a single review after five months; for a maker posting 20 parcels a month the tool costs about what the leak does.",
+        "reachability": "Makers post openly in the Folksy forum (https://talk.folksy.com/t/33945); sellersasksellers is mostly Amazon and free-shipping sellers (https://sellersasksellers.com/t/7684).",
+        "competitiveGap": "US Etsy sellers have free calculated postage (https://help.etsy.com/hc/en-gb/articles/115013946647-How-to-Set-Up-Calculated-Postage) and Shopify and ShipStation users have reports (https://apps.shopify.com/oh-ship, https://www.payhelm.com/help/shipping-cost-vs-charged-analysis/); UK flat-rate makers on Etsy and Folksy remain unserved.",
+        "feasibility": "Etsy and Pirate Ship export columns are not confirmed (https://craftybase.com/blog/how-to-find-etsy-shipping-label-fee-totals) and stamp buyers leave no export, so the engine must work from the catalogue; USPS weekly surcharges make US tables a moving target (https://www.valueaddedresource.net/usps-weekly-variable-fuel-surcharge/).",
+        "complianceBurden": "Product weights and postage only; buyer data in imports is discarded (https://talk.folksy.com/t/33945)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "The reviewer cut the total from 24 to 18 and narrowed the market to UK makers. Pain 5 to 3: the same few users drive both sellersasksellers threads (https://sellersasksellers.com/t/7684, https://sellersasksellers.com/t/7658) and the posters already notice their losses; JOYSofGLASS knowingly took about GBP 8.75 of losses over five weeks (https://talk.folksy.com/t/33945). Willingness to pay 3 to 2: Oh Ship (https://apps.shopify.com/oh-ship) sells this exact job at $39/month with one review. Competitive gap 3 to 2: Etsy's calculated postage is free for US and Canadian sellers (https://help.etsy.com/hc/en-gb/articles/115013946647-How-to-Set-Up-Calculated-Postage), ShipStation Insights and PayHelm (https://www.payhelm.com/help/shipping-cost-vs-charged-analysis/) cover shipping revenue versus cost, and Craftybase says Etsy's Orders CSV already has both columns (https://craftybase.com/blog/how-to-find-etsy-shipping-label-fee-totals). Feasibility 4 to 3: Pirate Ship's export columns are not documented and stamp buyers leave no export. The product was re-scoped from after-the-fact reconciliation to a catalogue-based format and price engine with warnings before each published change."
+      },
+      "inspiredBy": "https://talk.folksy.com/t/33945",
+      "gateGap": {
+        "missing": [
+          "total 18 is below 22",
+          "pain 3 is below 4",
+          "willingnessToPay 2 is below 3"
+        ],
+        "closedBy": "The free pre-rise check in the validation test closes the largest gap: 10 paying makers from 40 checks before the April 2027 Royal Mail rise would support willingnessToPay 3 and pain 4, and the catalogue engine working without label exports would lift feasibility to 4, bringing the total to 22."
+      }
+    },
+    {
+      "n": 3,
+      "title": "Promoter Payouts for Etsy Shops",
+      "slug": "promoter-payouts-for-etsy-shops",
+      "category": "Creative & Prosumer",
+      "smallBusiness": true,
+      "complexity": "Weekend MVP",
+      "confidence": "provisional",
+      "topic": "Data & Visualization",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": false,
+        "engine": false,
+        "shared": true,
+        "notes": {
+          "stateful": "The seller keeps a saved list of promoters, their coupon codes and commission rules, and a month-by-month history of statements and payouts.",
+          "connected": "Reads the seller's own monthly Etsy Orders or Order Items CSV, which carries Coupon Code and Coupon Details columns.",
+          "shared": "The seller produces a statement and the promoter receives a read-only page with their attributed orders and earnings, stripped of buyer details."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database"
+      ],
+      "summary": "For Etsy makers who pay creators or friends a commission for sales: give each promoter a coupon code, upload the monthly orders file, and get a statement and payout list per promoter instead of a spreadsheet evening.",
+      "public": {
+        "summary": "Pay the people who promote your shop the right commission every month, with a statement each of them can check.",
+        "problem": "You give each promoter their own discount code because your marketplace has no way to track who sent a sale. Every month you download your orders, filter by code, take off refunds and work out each person's share by hand. When a promoter asks how you got their number, you have nothing tidy to show them.",
+        "forWhom": "Etsy sellers who pay influencers, creators, Pinterest helpers or friends a commission on the sales they bring in.",
+        "benefits": [
+          "Each promoter's commission worked out in minutes",
+          "Refunds taken off automatically",
+          "A clear statement promoters can check for themselves",
+          "A payout list ready for the end of the month"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "Etsy has no shop-level affiliate programme, so sellers who pay promoters a commission rely on one coupon code per promoter and reconcile the monthly orders export by hand; affiliate tools such as Refersion, Tapfiliate and GoAffPro list Shopify and WooCommerce but no Etsy integration.",
+      "description": "A small web app. The seller lists promoters with their Etsy coupon code and commission rule (percent of item total after discount, excluding shipping and tax). Each month the seller uploads the Etsy Orders or Order Items CSV; the app matches orders on the Coupon Code column, nets refunds, and produces a statement and payout list. Each promoter gets a read-only link showing order dates, item totals and commission, with buyer names and addresses removed. It does no tracking of its own and needs no Etsy API access.",
+      "targetCustomer": "Etsy makers with established shops (hundreds to thousands of sales) who work with 2 to 20 creators, influencers or helpers on commission.",
+      "buyer": "The seller, on their own card.",
+      "whyNow": "An Etsy seller with over 2,000 sales posted a paid job on 2026-11-13 asking for a commission partner whose orders must be 'clearly attributed' through trackable links or codes, and influencer guides for marketplace-only sellers name the one-code-per-creator method without naming a tool.",
+      "founderFit": "A CSV parser, a rules table and a shared read-only page is a weekend build on the shared platform, and makers are reachable in open seller forums.",
+      "problemEvidence": [
+        {
+          "url": "https://www.freelancer.com/projects/social-media-marketing/Commission-Based-Etsy-Promotion",
+          "source": "freelancer.com",
+          "author": "unknown",
+          "date": "2026-11-13",
+          "kind": "spend",
+          "summary": "Paid job (USD 30-250) from an Etsy seller with 2k+ sales who will pay a commission on every order clearly attributed to a promoter, and requires trackable links or codes plus weekly performance snapshots."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Etsy Shop Manager coupon stats plus a spreadsheet",
+          "url": "https://blog.coupler.io/etsy-to-csv/",
+          "price": "free",
+          "gap": "The Orders CSV carries Coupon Code and Coupon Details, so a pivot table works for a few codes; no refund netting, statements or promoter view."
+        },
+        {
+          "name": "Etsy Share & Save and Creator Collective",
+          "url": "https://community.etsy.com/forum/etsy-success-300/topic/share-save-or-creator-collective-which-program-is-right-for-you-186635/",
+          "price": "free to the seller",
+          "gap": "Etsy's own programmes reward the seller's own links or pay creators through Etsy; they do not let a seller pay their own chosen promoters."
+        },
+        {
+          "name": "OSI Affiliate",
+          "url": "https://www.itqlick.com/osi-affiliate-software/pricing",
+          "price": "about $47/month (third-party listing)",
+          "gap": "Its Etsy setup article now sits behind a login; reported to need manual export and upload, at a price far above a maker's budget."
+        },
+        {
+          "name": "Influencer guides for marketplace sellers",
+          "url": "https://www.makeinfluence.com/en/academy/tracking-influencer-sales-with-no-website-of-your-own-marketplace-only-sellers",
+          "price": "free",
+          "gap": "Describe the one-code-per-creator method but leave the monthly maths to the seller."
+        }
+      ],
+      "keyFeatures": [
+        "Promoter list with coupon codes and commission rules",
+        "Monthly Etsy CSV upload with automatic attribution",
+        "Refund netting and payout list",
+        "Read-only promoter statement link with buyer details removed"
+      ],
+      "mvpScope": {
+        "features": [
+          "Promoter and rule table",
+          "Etsy Orders and Order Items CSV parser",
+          "Statement and payout list",
+          "Promoter share link"
+        ],
+        "outOfScope": [
+          "Etsy API connection",
+          "Paying promoters (PayPal or Wise payouts)",
+          "Shopify or other marketplaces",
+          "Link-based tracking"
+        ],
+        "buildEstimate": "about 2 build days"
+      },
+      "techStack": "React + Vite front end, Supabase for sign-in, promoters and statements; CSV parsing in the browser so buyer details never reach the server.",
+      "pricing": {
+        "model": "Monthly subscription per shop",
+        "pricePoint": "US$6 per month",
+        "rationale": "A fraction of OSI's reported $47; it competes with a free spreadsheet, so it must cost less than the time saved on one statement run."
+      },
+      "revenueSketch": "Estimate: 250 shops x $6/month = $1,500 MRR, assuming a small share of established Etsy shops run multi-promoter programmes.",
+      "distribution": "Reply to Etsy sellers hiring commission promoters on freelance boards, post a free statement template in Etsy seller communities, and offer it to influencer agencies that work with Etsy shops.",
+      "validationTest": {
+        "method": "Publish a free one-month statement generator (CSV in, statements out) and ask users whether they would pay for monthly history and promoter links.",
+        "successCriteria": "30 sellers use the free generator in a month and 8 sign up for the paid plan.",
+        "cost": "About 1 build day and a few forum posts; under $30."
+      },
+      "moat": "Weak: a careful Etsy CSV parser for refunds and partial refunds, and the saved promoter history sellers would not want to rebuild.",
+      "compliance": [
+        "Buyer privacy and UK/EU GDPR: Etsy's CSV contains buyer names and addresses; parse in the browser, keep only order dates, totals and coupon codes, and never show buyer details on promoter pages.",
+        "FTC endorsement rules: promoters must disclose paid relationships; the app reminds sellers but the duty is the promoter's."
+      ],
+      "risks": [
+        {
+          "risk": "A free spreadsheet pivot is good enough for most shops with a handful of codes.",
+          "mitigation": "Target sellers with five or more promoters and lead with promoter-facing statements, which a spreadsheet does not give."
+        },
+        {
+          "risk": "Refunds and partial refunds may not show reliably in the Orders CSV.",
+          "mitigation": "Verify against a real export in the validation test and let sellers mark refunds by hand where the file is silent."
+        },
+        {
+          "risk": "No complaint evidence yet; demand rests on one paid job.",
+          "mitigation": "The free generator measures demand before anything else is built."
+        }
+      ],
+      "scores": {
+        "pain": 2,
+        "willingnessToPay": 2,
+        "reachability": 3,
+        "competitiveGap": 3,
+        "feasibility": 4,
+        "complianceBurden": 4,
+        "total": 18
+      },
+      "scoreRationale": {
+        "pain": "No complaint found; one paid job shows the need to attribute promoter sales (https://www.freelancer.com/projects/social-media-marketing/Commission-Based-Etsy-Promotion).",
+        "willingnessToPay": "The seller will pay a promoter commission (https://www.freelancer.com/projects/social-media-marketing/Commission-Based-Etsy-Promotion), but the reconciliation itself competes with a free CSV pivot (https://blog.coupler.io/etsy-to-csv/).",
+        "reachability": "Etsy sellers are easy to find, sellers running multi-promoter programmes are not; guides describe the method but no community gathers around it (https://www.makeinfluence.com/en/academy/tracking-influencer-sales-with-no-website-of-your-own-marketplace-only-sellers).",
+        "competitiveGap": "No affiliate tool checked lists an Etsy integration, and Etsy's own programmes cover a different arrangement (https://community.etsy.com/forum/etsy-success-300/topic/share-save-or-creator-collective-which-program-is-right-for-you-186635/).",
+        "feasibility": "The Orders CSV carries Coupon Code and Coupon Details (https://blog.coupler.io/etsy-to-csv/); refund representation is unverified.",
+        "complianceBurden": "Buyer names and addresses in the CSV must never reach promoter pages (https://blog.coupler.io/etsy-to-csv/)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "The reviewer cut the total from 21 to 18. Pain held at 2: no complaint thread was found and the freelance job asks the promoter to send the snapshots (https://www.freelancer.com/projects/social-media-marketing/Commission-Based-Etsy-Promotion). Willingness to pay 3 to 2: filtering the Orders CSV by the Coupon Code column (https://blog.coupler.io/etsy-to-csv/) is a free pivot. Competitive gap held at 3: Affiliatly, Refersion, Tapfiliate and GoAffPro list no Etsy integration; OSI's Etsy article now redirects to a login and OSI is about $47/month; Etsy's Share & Save and Creator Collective (https://community.etsy.com/forum/etsy-success-300/topic/share-save-or-creator-collective-which-program-is-right-for-you-186635/) partly overlap. Compliance 5 to 4: promoter pages must strip buyer names and addresses. No Etsy rule against paying promoters for coupon codes was found."
+      },
+      "inspiredBy": "https://www.freelancer.com/projects/social-media-marketing/Commission-Based-Etsy-Promotion",
+      "gateGap": {
+        "missing": [
+          "total 18 is below 22",
+          "pain 2 is below 4",
+          "willingnessToPay 2 is below 3",
+          "only 1 independent evidence item",
+          "no complaint evidence"
+        ],
+        "closedBy": "The free statement generator in the validation test closes the largest gap: 8 paying sellers out of 30 users, plus their own descriptions of the monthly reconciliation, would add complaint evidence and support pain 3 and willingnessToPay 3."
+      }
+    }
+  ],
+  "runNotes": {
+    "weekday": "Sunday",
+    "domainLens": "Makers, creators and freelancers who sell: craft and online shops, studios, photographers, tutors, consultants",
+    "focusSources": [
+      "A12 Ask HN and HN comments",
+      "B12 Paid app marketplaces",
+      "C10 Change events: shutdowns, price rises, removed free tiers"
+    ],
+    "searches": [
+      "hn.algolia comments (A12): \"etsy\" fees; \"photographers\" client; \"I would pay\" freelance (0 hits); \"gumroad\"; \"shopify\" app wish; \"tutoring\" business; \"squarespace\"; \"flat rate shipping\"; \"my wife\" etsy shop; \"craft fair\"; \"photography business\"; \"facebook page\" links limit (0 hits)",
+      "hn.algolia Ask HN (A12): freelancers; story search embroidery machine subscription",
+      "WebSearch (C10): Facebook Pages paid subscription to post more than two links per month small businesses",
+      "WebSearch (C10): Patreon subscription billing deadline November 2026 creators switch",
+      "WebSearch (C10): Etsy sellers new fee or policy change November 2026",
+      "WebSearch (C10): photographers client gallery platform price increase shutting down 2026 Pixieset ShootProof Pic-Time",
+      "WebSearch (C10): creators platform shutting down or price increase October November 2026 Big Cartel Gumroad Kajabi Mailchimp Linktree",
+      "WebSearch (C10): Royal Mail price increase October 2026 parcel prices small business sellers",
+      "WebSearch (C10): USPS 2027 price change fuel surcharge newsroom",
+      "WebSearch (C10): Pirate Ship rates calculator dynamic pricing carriers change rates",
+      "WebSearch (C10): HoneyBook OR Dubsado OR TutorBird OR Studio Ninja price increase 2026",
+      "community.shopify.com search.json (A13): custom order form; made to order production time; personalization proof approval; commission deposit; craft fair inventory; wholesale order form line sheet (after 2026-08-15)",
+      "community.glowforge.com search.json pricing orders; talk.folksy.com latest.json; forum.ghost.org search.json paid members, group subscription, comp expiry; discuss.pixls.us client delivery (0 hits) (A13)",
+      "sellersasksellers.com search.json (A13): spreadsheet; wish there was; facebook; craft fair (0 hits); bookkeeping; price increase (after 2026-08-01)",
+      "WebSearch (B12): site:apps.shopify.com live sale facebook comments sold claim invoice",
+      "WebSearch (B12): site:apps.shopify.com commission artist custom order queue deposits",
+      "WebSearch (B12): site:apps.shopify.com made to order production capacity limit orders per day lead time",
+      "WebSearch (B12): site:apps.shopify.com shipping charged vs label cost report shipping profit loss per order",
+      "WebSearch (B12): craft fair vendor app track sales per event booth fee profit",
+      "WebSearch (B12): Ghost newsletter group subscriptions team site license seats Outpost pricing",
+      "apps.shopify.com pages and 1-2 star reviews (B12): soldlive, makerqueue, capacity, benchtime, downpay, oh-ship, reorda, binly, fyretrail",
+      "freelancer.com API (B11): etsy; photographer; craft fair; commission artist; tutoring business; made to order; personalized products; print on demand; shopify app; patreon (0); facebook page posts; squarespace",
+      "freelancer.com API (B11): live sale; facebook live selling; comment sold; etsy listing; bulk listing; boutique live",
+      "Spend pass, freelancer.com API (B11): shipping cost reconciliation; pirate ship; shipping profiles (nothing relevant found); etsy affiliate; affiliate tracking etsy (one relevant job); ghost membership (nothing); xero projects (nothing)",
+      "Spend pass: peopleperhour.com freelance-jobs?q=shipping costs (store builds only, nothing for the task); outpost.pub/pricing",
+      "productideas.xero.com search (A16): retainer; shipping charged; etsy; postage; photographer; suggestion pages 51596453, 51377980, 46887577",
+      "WebSearch: Etsy Sold Orders CSV columns Coupon Code Coupon Details; Etsy seller influencer commission tracking coupon code; Etsy sellers losing money on flat shipping profiles 2026"
+    ],
+    "unverifiedSignals": [
+      {
+        "url": "https://about.usps.com/newsroom/national-releases/",
+        "reason": "curl returned the newsroom index without the 2027 price release; the 5.9% and 11% figures are cited from sellersasksellers t/7725 and valueaddedresource.net instead."
+      },
+      {
+        "url": "https://help.etsy.com/hc/en-us/articles/360000343508-How-to-Download-Your-Shop-s-Data",
+        "reason": "curl returned a near-empty shell (1.9KB of text); the Coupon Code column is cited from blog.coupler.io."
+      },
+      {
+        "url": "https://osiaffiliate.freshdesk.com/support/solutions/articles/14000112086-how-to-setup-an-etsy-affiliate-program",
+        "reason": "Redirects to a Freshdesk login (reviewer)."
+      },
+      {
+        "url": "https://www.getharvest.com/harvest-xero",
+        "reason": "Not fetched; Harvest's price and Xero sync come from search snippets (reviewer)."
+      },
+      {
+        "url": "https://community.etsy.com/t5/Tools-for-sellers-on-etsy/BULK-LISTING-UPLOAD-TOOL/m-p/112655477",
+        "reason": "HTTP 404 (reviewer)."
+      }
+    ],
+    "rejectedCandidates": [
+      {
+        "title": "Invoice-Billed Access for Ghost",
+        "total": 15,
+        "reason": "Killed in review: Outpost already sells invoiced site licences with buyer-managed seats, Net terms and expiry for Ghost from $60/year (https://documentation.outpost.pub/features/group-subscriptions.md, https://outpost.pub/pricing/); Ghost comps already take an expiry date; two of three threads were one author (https://forum.ghost.org/t/63789) and his comp issue was solved by connecting Stripe. Rescored pain 2, WTP 2, reach 3, gap 1, feasibility 4, compliance 4."
+      },
+      {
+        "title": "Production Run Tracker for Shopify Makers",
+        "total": 14,
+        "reason": "Killed in review: the only maker complainant (DCSusan) reported on 2026-09-23 that receiving partial batches on one linked transfer works and 'the problem has been resolved' (https://community.shopify.com/t/666212); Reorda, Binly, FyreTrail, Stocksmith (Craftybase) and RunSheet already cover the space. Rescored pain 1, WTP 1, reach 3, gap 1, feasibility 3, compliance 5."
+      },
+      {
+        "title": "Folder-to-Listing for Etsy Makers",
+        "total": 14,
+        "reason": "Reviewed and rescored from 18 to 14: Listadum Bulk Create turns one photo folder per item into an Etsy draft listing with a template ($20-30/month, https://www.listadum.com/features/bulk-create) and Shop Uploader builds drafts from a sheet from $5/month (https://www.shopuploader.com/pricing); Etsy Commercial Access is reviewed manually; the only evidence is a one-off paid job (https://www.freelancer.com/projects/python/Automated-Etsy-Jewelry-Listings). Met the floor but ranked below the three shipped."
+      },
+      {
+        "title": "Live-Sale Claim Capture for TikTok, Instagram and Facebook Lives",
+        "total": 13,
+        "reason": "Rejected: SoldLive (from $35/month, 4.9 stars, https://apps.shopify.com/soldlive) and CommentSold already turn live comments into invoices; the paid job asking for on-screen OCR (https://www.freelancer.com/projects/optical-character-recognition/Live-Stream-Buyer-Detection-App) wants a one-off build."
+      },
+      {
+        "title": "Facebook Two-Link Limit Kit for Makers",
+        "total": 15,
+        "reason": "Rejected before review: Meta's two-link cap on Pages (https://www.socialmediatoday.com/news/facebook-pages-get-charged-for-link-posts/) is real, but free schedulers and link-in-bio pages cover the workaround and the product would be a thin wrapper with no data moat."
+      },
+      {
+        "title": "Made-to-Order Daily Capacity Limits",
+        "total": 15,
+        "reason": "Rejected before review: ShipNoDrama, Benchtime, BatchSlot, Capacity and DispatchFlex already sell daily capacity caps on Shopify (https://apps.shopify.com/benchtime, https://apps.shopify.com/capacity)."
+      },
+      {
+        "title": "Custom Commission Queue and Proof Approval",
+        "total": 15,
+        "reason": "Rejected before review: MakerQueue ($59/month, https://apps.shopify.com/makerqueue), CraftCue, Jewelry Studio Manager and OrderPilot already cover proofs, revisions and deposits for custom orders."
+      },
+      {
+        "title": "Craft Fair Profit per Event",
+        "total": 14,
+        "reason": "Rejected before review: Booth Math, ProfitTrackStar, BoothLedger, VendStats and TheCraftMap ($15/month Pro) already report profit per market (https://www.thecraftmap.com/pricing)."
+      },
+      {
+        "title": "Personalisation Missing-Details Order Audit",
+        "total": 15,
+        "reason": "Rejected before review: Shopify Flow can tag orders with empty line-item properties for free, and thread authors were mostly app developers (https://community.shopify.com/t/695977)."
+      },
+      {
+        "title": "One Offer Across All Ghost Tiers",
+        "total": 14,
+        "reason": "Rejected before review: one author asking twice (https://forum.ghost.org/t/63626) and Outpost already sells offer tooling for Ghost."
+      },
+      {
+        "title": "Queued Extras for Xero Repeating Invoices",
+        "total": 14,
+        "reason": "Rejected before review: one vote and one requester (https://productideas.xero.com/forums/967115-invoices-quotes/suggestions/51596453-repeating-invoices-add-one-off-charges-or-additi), no spend evidence."
+      },
+      {
+        "title": "Embroidery Design File Manager",
+        "total": 13,
+        "reason": "Rejected before review: one HN commenter on a Show HN thread (embroidery software 'held hostage', 2026-11-13); stitch-format work is heavy and buyers are hobbyists more than businesses."
+      },
+      {
+        "title": "Patreon Legacy-Billing Migration Helper",
+        "total": 12,
+        "reason": "Rejected before review: Patreon switched remaining legacy accounts automatically on 2026-11-01 (https://support.patreon.com/hc/articles/28801582599181-Migrating-to-subscription-billing-FAQ); no complaint found and fl search for patreon returned nothing."
+      },
+      {
+        "title": "Pixieset Gallery Migration for Photographers",
+        "total": 12,
+        "reason": "Rejected before review: no complaint found and no bulk export to build on (https://hackceleration.com/labs/switch/pixieset)."
+      },
+      {
+        "title": "Linktree Free-Plan Selling Replacement",
+        "total": 11,
+        "reason": "Rejected: free link-in-bio alternatives abound; change logged only by a third-party tracker (https://pricingsaas.com/companies/linktree/diffs/2026W44)."
+      },
+      {
+        "title": "Squarespace Signup to Brevo Connector",
+        "total": 11,
+        "reason": "Rejected: a one-off integration job (https://www.freelancer.com/projects/api/Squarespace-Brevo-Signup-Integration) already served by free Zapier and Make tiers."
+      },
+      {
+        "title": "Holiday Ship-By Date Banner",
+        "total": 11,
+        "reason": "Rejected: free theme snippets and existing delivery-date apps cover it (https://community.shopify.com/t/713544)."
+      },
+      {
+        "title": "Etsy Share & Save Refund Checker",
+        "total": 12,
+        "reason": "Rejected before review: no complaint found that the 6.5% refunds go missing (https://www.alura.io/news)."
+      }
+    ],
+    "watchlist": [],
+    "caveats": "No idea cleared the gate of 22; three provisional ideas ship (20, 18, 18). Seven candidates were adversarially reviewed: two killed (Invoice-Billed Access for Ghost by Outpost's group and invoiced subscriptions; Production Run Tracker because the only maker complainant found Shopify's free transfer workflow fixed it), five rescored down (24 to 18, 21 to 20, 21 to 18, 18 to 14 and the Ghost idea before its kill); Folder-to-Listing at 14 was left out as the weakest survivor. Sunday's lens produced crowded niches: live selling, capacity caps, custom-order queues, craft fair profit and bulk Etsy listing all have several paid apps. A12 (HN) gave context but no usable buyer complaints; the strongest maker complaints came from talk.folksy.com and sellersasksellers.com (A13). Rate Book for Xero Projects sells to consultancies and studios rather than makers; it ranked first on evidence. No candidate reached 19 without shipping, so the watchlist is empty. Every shipped idea has a small-business buyer; Rate Book and Postage Price Check are substantial Multi-week ideas with a buildPlan; Promoter Payouts is the Weekend MVP and rests on one paid job with no complaint evidence."
+  }
+}
