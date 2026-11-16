@@ -685,3 +685,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-14 [doc] Created ideas/2026-11-14.json (schemaVersion 3, 3 ideas): Payroll Split Journals (20, provisional), Open PO Balance (19, provisional), Gift Aid Schedule Builder (16, provisional)
 
 2026-11-15 [doc] Created ideas/2026-11-15.json (schemaVersion 3, 3 ideas): Rate Book for Xero Projects (20, provisional), Postage Price Check (18, provisional), Promoter Payouts (18, provisional)
+
+2026-11-16 [doc] Created ideas/2026-11-16.json (schemaVersion 3, 3 ideas): Fair Work Date Watch (18, provisional), Pay Rate Scheduler (16, provisional), Staff Files and RTW (16, provisional)

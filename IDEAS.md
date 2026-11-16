@@ -650,3 +650,6 @@
 | 2026-11-15 | Rate Book for Xero Projects | Small Business Ops | Multi-week | 20 | provisional |  |
 | 2026-11-15 | Postage Price Check for UK Makers | Small Business Ops | Multi-week | 18 | provisional |  |
 | 2026-11-15 | Promoter Payouts for Etsy Shops | Creative & Prosumer | Weekend MVP | 18 | provisional |  |
+| 2026-11-16 | Fair Work Date Watch for Xero Payroll AU | Accessibility & Compliance | Multi-week | 18 | provisional |  |
+| 2026-11-16 | Pay Rate Scheduler for Xero Payroll AU | Small Business Ops | Weekend MVP | 16 | provisional |  |
+| 2026-11-16 | Staff Files and Right-to-Work Follow-Ups for Xero UK Payroll | Accessibility & Compliance | Multi-week | 16 | provisional |  |

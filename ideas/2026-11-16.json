@@ -1,0 +1,802 @@
+{
+  "date": "2026-11-16",
+  "schemaVersion": 3,
+  "complete": true,
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Fair Work Date Watch for Xero Payroll AU",
+      "slug": "fair-work-date-watch-for-xero-payroll-au",
+      "category": "Accessibility & Compliance",
+      "smallBusiness": true,
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Data & Visualization",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": true,
+        "engine": true,
+        "shared": true,
+        "notes": {
+          "stateful": "Each business keeps per-employee settings Xero does not hold (probation length, apprentice start and year, award stream) and a dated log of every action taken, such as 'CEIS given 2026-11-02'.",
+          "connected": "Reads employees' start date, date of birth, termination date and employment basis from Xero Payroll AU with the read-only payroll.employees scope.",
+          "unattended": "A daily job recomputes due dates and emails the owner and bookkeeper 14 and 3 days before each one.",
+          "engine": "Fair Work date rules: probation end, the unfair-dismissal minimum employment period (12 months under 15 employees, 6 months otherwise), CEIS at start, 6 and 12 months (start and 12 months for small business), casual-conversion eligibility windows, junior birthdays and apprentice-year steps as rate-review prompts.",
+          "shared": "An outside bookkeeper sees every client business in one list; the owner gets the reminders and records what was done."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "email",
+        "scheduled",
+        "backend"
+      ],
+      "buildPlan": [
+        {
+          "n": 1,
+          "title": "One business, one calendar",
+          "delivers": "Sign in, connect one Xero Payroll AU organisation, and see each employee's start date, basis and the next probation and minimum-employment-period dates.",
+          "acceptance": "Against the Xero demo company, every active employee appears with dates that match a hand-worked example; deployed."
+        },
+        {
+          "n": 2,
+          "title": "Rules engine and per-employee settings",
+          "delivers": "Set probation length, apprentice start and award stream per employee; see CEIS, casual-conversion eligibility, junior-birthday and apprentice-year prompts.",
+          "acceptance": "A table of 20 test employees (casual and permanent, under and over 15 staff, juniors, apprentices) produces the expected due dates in unit tests."
+        },
+        {
+          "n": 3,
+          "title": "Reminders",
+          "delivers": "A daily job emails the owner 14 and 3 days before each due date with what to do and a link to the Fair Work source page.",
+          "acceptance": "A seeded employee whose 6-month CEIS date is in 14 days produces exactly one email; no email is sent twice."
+        },
+        {
+          "n": 4,
+          "title": "Action log",
+          "delivers": "Mark a reminder done with a date and note; export a per-employee history as PDF or CSV.",
+          "acceptance": "Logged actions survive sign-out, cannot be edited after 24 hours, and appear in the export."
+        },
+        {
+          "n": 5,
+          "title": "Bookkeeper view",
+          "delivers": "A bookkeeper connects several client organisations and sees all upcoming dates across them, filterable by client and type.",
+          "acceptance": "Three demo organisations show combined upcoming items sorted by date; a client user sees only their own business."
+        },
+        {
+          "n": 6,
+          "title": "Polish",
+          "delivers": "Business-owner README with the 'general information, not legal advice' framing, phone layout, keyboard and screen-reader pass, walkthrough test.",
+          "acceptance": "A walkthrough test runs connect to reminder to logged action; axe reports no serious issues; no TFN is ever stored."
+        }
+      ],
+      "summary": "For Australian small businesses on Xero Payroll and their bookkeepers: a reminder calendar for the employment-law dates Xero does not track, such as probation ends, casual information statements and apprentice pay reviews, with a record of what was done.",
+      "public": {
+        "summary": "Never miss a probation end, a casual employee's information statement or an apprentice's pay review again.",
+        "problem": "You hire someone and agree a probation period, but nothing reminds you when it ends, so the date slips past. Casual staff need an information statement when they start and again later, and juniors and apprentices move to a higher rate on a date nobody wrote down. Today these live in someone's head or an Outlook reminder.",
+        "forWhom": "Owners, office managers and outside bookkeepers of small Australian businesses that pay staff through Xero.",
+        "benefits": [
+          "See every upcoming employment date for every staff member in one place",
+          "Get an email before each date with what needs doing",
+          "Keep a dated record that the statement was given or the review was done",
+          "Bookkeepers see all their clients' dates in one list"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "Xero Payroll AU stores start dates and birthdays but has no reminders for probation ends, Casual Employment Information Statements, the minimum employment period or apprentice and junior pay steps, so businesses 'rely on a manual process that requires a person to remember to enter a reminder in their Outlook' and miss dates.",
+      "description": "A small web app that connects read-only to Xero Payroll AU and reads each employee's start date, date of birth, employment basis and termination date. The owner adds what Xero lacks (probation length, apprentice start and year, award stream) and confirms whether the business counts as a small business under the Fair Work Act. A rules engine turns this into dated actions: probation end, minimum employment period, CEIS due dates, casual-conversion eligibility, junior-birthday and apprentice-year rate reviews. A daily job emails reminders and the owner logs each action, building a dated record. Bookkeepers see all their client organisations in one list. It gives general information with links to Fair Work pages, not advice, and never stores tax file numbers.",
+      "targetCustomer": "Owners, office managers and outside bookkeepers of Australian small businesses with 2 to 50 staff (hospitality, retail, trades, clinics) on Xero Payroll AU, especially those with casuals, juniors and apprentices.",
+      "buyer": "The business owner on the business card, or a bookkeeper who pays per client and passes it on.",
+      "whyNow": "Since the 2024 casual 'employee choice' reforms the CEIS must be given at start and again later, and the ATO-era HQ reminders Xero once had are gone; Xero marked the 259-vote birthday and apprenticeship reminder idea 'Not in pipeline' in August 2025 and comments kept arriving through October 2026.",
+      "founderFit": "A read-only Xero connection, a rules table, a daily job and email are a week's work on the shared platform; the rules are documented public law, and AU bookkeepers are reachable on Xero's public idea threads. Pisan has no Australian network, so reach is through those threads and bookkeeper groups.",
+      "problemEvidence": [
+        {
+          "url": "https://productideas.xero.com/forums/967118-payroll-expenses/suggestions/51010552-au-payroll-end-of-employee-probation-period-noti",
+          "source": "productideas.xero.com",
+          "author": "Jane Draper",
+          "date": "2026-09-30",
+          "kind": "complaint",
+          "summary": "On a 53-vote request (opened by Megan Dale, 2026-02-17): 'we have missed a number of end of probation dates in the past' and rely on a manual Outlook reminder."
+        },
+        {
+          "url": "https://productideas.xero.com/forums/967118-payroll-expenses/suggestions/45298427-au-payroll-set-up-birthday-and-apprenticeship-an",
+          "source": "productideas.xero.com",
+          "author": "Kim Sheppard",
+          "date": "2026-05-05",
+          "kind": "complaint",
+          "summary": "On a 259-vote request marked Not in pipeline (2025-08-15): asks for a notification when an apprentice moves from 1st to 2nd year to prompt a pay rate review; Josie Heinemann (2026-10-16) and Jennifer Willis (2026-03-11) ask the same."
+        },
+        {
+          "url": "https://www.rosterelf.com/guides/employment-law/casual-employment-information-statement",
+          "source": "rosterelf.com",
+          "author": "unknown",
+          "date": "2026-11-16",
+          "kind": "mandate",
+          "summary": "Guide to the CEIS timing obligations (at start, 6 and 12 months for non-small employers); vendor page without a visible date, dated on the fetch date."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "XBert",
+          "url": "https://apps.xero.com/au/app/xbert",
+          "price": "A$33.25 per user per month annual plus from A$7 per client per month (https://www.xbert.io/value-based-pricing, per reviewer)",
+          "gap": "Flags junior birthdays from Xero dates of birth, but no probation, CEIS, casual-conversion or apprentice-year alerts; priced for practices."
+        },
+        {
+          "name": "Employment Hero HR",
+          "url": "https://employmenthero.com/au/pricing/",
+          "price": "A$11 per user per month, 10-user minimum",
+          "gap": "Has a probation report, but means adopting a whole HR platform beside Xero; too costly for a 4-person cafe."
+        },
+        {
+          "name": "Workfloor (ex Fair Work Mate)",
+          "url": "https://workfloor.com.au/pricing",
+          "price": "A$99 per month; Xero connection only on a plan from A$1,500 per month (per reviewer)",
+          "gap": "Works out probation dates but is HR advice software at a price far above a micro employer's budget."
+        },
+        {
+          "name": "Xonboard",
+          "url": "https://apps.xero.com/au/app/xonboard",
+          "price": "free",
+          "gap": "Sends Fair Work statements at onboarding only; nothing after day one."
+        }
+      ],
+      "keyFeatures": [
+        "Read-only Xero Payroll AU connection",
+        "Fair Work date rules for probation, minimum employment period, CEIS and casual conversion",
+        "Junior-birthday and apprentice-year rate-review prompts",
+        "Email reminders and a dated action log",
+        "Multi-client view for bookkeepers"
+      ],
+      "mvpScope": {
+        "features": [
+          "Xero connection and employee list",
+          "Probation, minimum employment period and CEIS rules",
+          "Daily email reminders",
+          "Action log with export"
+        ],
+        "outOfScope": [
+          "Award rate tables or calculating rates",
+          "Writing anything back to Xero",
+          "Rostering, leave or contracts",
+          "MYOB, KeyPay and other payroll systems"
+        ],
+        "buildEstimate": "6 build days"
+      },
+      "techStack": "React + Vite front end, Supabase for sign-in, settings and the action log, a scheduled job on backend-hub for the Xero sync and reminders, transactional email; Xero OAuth with the read-only payroll.employees scope.",
+      "pricing": {
+        "model": "Monthly subscription per business, with a bookkeeper plan per connected client",
+        "pricePoint": "A$9 per month per business; A$5 per client per month for bookkeepers",
+        "rationale": "Well under XBert and Employment Hero, which are bought for much more; it must cost less than one missed CEIS conversation with Fair Work."
+      },
+      "revenueSketch": "Estimate: 150 businesses x A$9 + 20 bookkeepers x 10 clients x A$5 = A$2,350 MRR, assuming a small share of the businesses voting on Xero's two idea threads convert; Xero's API Core tier (A$35/month, 50 connections) caps the first stage until App Store certification on Plus (A$245/month).",
+      "distribution": "Reply on the open Xero probation idea thread and contact named commenters on the apprenticeship reminder idea; then AU bookkeeper groups and payroll contractors with a multi-client pitch. Run direct on the Core API tier before paying for an App Store listing.",
+      "validationTest": {
+        "method": "A landing page plus a free CSV version (paste a Xero employee export, get a dated list of upcoming Fair Work actions), posted on the two Xero idea threads; then 5 calls with bookkeepers who manage several AU payroll clients.",
+        "successCriteria": "40 free uses in a month, and 3 bookkeepers agree to a paid pilot for at least 5 clients each.",
+        "cost": "About 3 days of build and A$0 to A$35 per month for API access."
+      },
+      "moat": "Weak to moderate: a tested Fair Work date engine (small-business test, casual reforms, apprentice steps) plus each business's logged history, which they would not want to rebuild.",
+      "compliance": [
+        "Privacy Act and TFN Rule: the payroll.employees read scope returns tax declarations including TFNs; never store them, store only dates and basis.",
+        "Fair Work: present dates as general information with links to fairwork.gov.au, not legal advice; the small-business count (fewer than 15, including associated entities) must be confirmed by the user.",
+        "Data residency: host in Australia where possible; employee dates of birth are personal information.",
+        "Xero developer terms: Core tier limits 50 connections and no App Store listing; Plus needs certification and a security assessment."
+      ],
+      "risks": [
+        {
+          "risk": "Rule errors (for example the CEIS cadence or the small-business test) cause a wrong reminder.",
+          "mitigation": "Every reminder cites its Fair Work source, the user confirms headcount and probation length, and the rules ship with a public test table."
+        },
+        {
+          "risk": "Xero or an HR app adds probation reminders.",
+          "mitigation": "Lead with the casual and apprentice rules and the bookkeeper multi-client view, which a generic reminder would not cover."
+        },
+        {
+          "risk": "Owners will not pay for reminders they can set in a calendar.",
+          "mitigation": "Sell to bookkeepers, who carry the risk across many clients, and price per client."
+        }
+      ],
+      "scores": {
+        "pain": 3,
+        "willingnessToPay": 2,
+        "reachability": 3,
+        "competitiveGap": 3,
+        "feasibility": 4,
+        "complianceBurden": 3,
+        "total": 18
+      },
+      "scoreRationale": {
+        "pain": "Real but infrequent: dates have been missed (https://productideas.xero.com/forums/967118-payroll-expenses/suggestions/51010552-au-payroll-end-of-employee-probation-period-noti) and apprentice pay steps are a recurring ask (https://productideas.xero.com/forums/967118-payroll-expenses/suggestions/45298427-au-payroll-set-up-birthday-and-apprenticeship-an).",
+        "willingnessToPay": "No paid job found on freelancer.com for four queries; the spend signal is businesses paying XBert and Employment Hero for adjacent features (https://employmenthero.com/au/pricing/).",
+        "reachability": "Named commenters on public Xero threads, but no App Store listing below the Plus API tier (https://developer.xero.com/pricing).",
+        "competitiveGap": "XBert covers junior birthdays and Xonboard the start-date CEIS, leaving probation, recurring CEIS, casual conversion and apprentice steps open (https://apps.xero.com/au/app/xbert).",
+        "feasibility": "The Payroll AU API has start date, date of birth and employment basis (https://raw.githubusercontent.com/XeroAPI/Xero-OpenAPI/master/xero-payroll-au.yaml); probation and apprentice data must be entered by hand.",
+        "complianceBurden": "TFNs arrive with the read scope and must not be stored, and the rules must be framed as general information (https://www.rosterelf.com/guides/employment-law/casual-employment-information-statement)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "The reviewer kept the idea but found every piece partly covered: XBert flags junior birthdays (A$33.25 per user per month plus per-client fees), Employment Hero has a probation report (A$11 per user, 10-user minimum), Workfloor (which took over Fair Work Mate's business plans) works out probation dates at A$99 per month, and Xonboard sends the CEIS at onboarding only, free. Xero has nothing shipped or in development. The rules in the brief were corrected: non-small employers give the CEIS again at 6 and 12 months and then yearly, the small-business test counts associated entities and regular casuals so the user must confirm it, casual conversion is employee-initiated so the date only opens eligibility, and apprentice and junior steps are award-specific, so they ship as review prompts, not rates. The Payroll AU API exposes start date, date of birth, termination date and employment basis but no probation or apprentice fields. The App Store needs the Plus API tier (A$245 per month plus certification). No paid freelancer jobs were found. Scores: pain 3, willingness to pay 2, reach 3, gap 3, feasibility 4, compliance 3, total 18."
+      },
+      "inspiredBy": "https://productideas.xero.com/forums/967118-payroll-expenses/suggestions/51010552-au-payroll-end-of-employee-probation-period-noti",
+      "gateGap": {
+        "missing": [
+          "total 18 is below 22",
+          "pain 3 is below 4",
+          "willingnessToPay 2 is below 3"
+        ],
+        "closedBy": "The free CSV version and bookkeeper calls in validationTest close the willingness-to-pay gap: 3 bookkeepers committing to a paid pilot across 5 or more clients each would justify willingnessToPay 3, and more dated complaints from those calls would lift pain."
+      }
+    },
+    {
+      "n": 2,
+      "title": "Pay Rate Scheduler for Xero Payroll AU",
+      "slug": "pay-rate-scheduler-for-xero-payroll-au",
+      "category": "Small Business Ops",
+      "complexity": "Weekend MVP",
+      "confidence": "provisional",
+      "topic": "Data & Visualization",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": true,
+        "engine": true,
+        "shared": false,
+        "notes": {
+          "stateful": "Keeps a queue of scheduled rate changes per employee and an append-only before-and-after log of every change applied.",
+          "connected": "Reads employees and pay templates from Xero Payroll AU and writes the new earnings rate to the pay template through the API on the effective date.",
+          "unattended": "A nightly job applies each change due that day and emails a summary; a pre-pay-run check flags runs that straddle a change.",
+          "engine": "Splits ordinary hours in a pay period that straddles a change into old-rate and new-rate lines by working days, per the employee's pay calendar."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "email",
+        "scheduled",
+        "backend"
+      ],
+      "summary": "For Australian small businesses on Xero Payroll: schedule a pay rate change for the day it takes effect, let it apply itself, and get the split-hours calculation when the change lands mid pay period, with a log of every change.",
+      "public": {
+        "summary": "Set a pay rise for the date it starts and let it apply itself, with a record of every change.",
+        "problem": "Your payroll lets you change a rate only for the next pay run, so you sit with a reminder and edit each person on the right day. When a rise starts mid-week, you split their hours across the old and new rate by hand. Get it wrong and someone is underpaid.",
+        "forWhom": "Owners and outside bookkeepers of small Australian businesses that pay staff on awards through Xero.",
+        "benefits": [
+          "Enter a rate change once, ahead of time",
+          "The change applies on the day it starts",
+          "Mid-period changes come with the split worked out",
+          "A record of every change, for you and your accountant"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "Xero Payroll AU has no effective-dated pay rates, so a change must be entered right before the pay run that uses it, and a change that starts mid pay period means splitting ordinary hours across two rates by hand; a 109-vote Xero request calls the current way 'archaic'.",
+      "description": "A small web app connected to Xero Payroll AU. The user schedules a rate change for an employee (new rate, effective date, reason) or imports a list. A nightly job applies each change on its effective date by updating the employee's pay template through the API, and records the old and new values. When a draft pay run covers a period that straddles a change, the app shows the split (for example 2 days at the old rate and 3 at the new) and, once the user confirms, adds the two earnings lines to the payslip. Every change is logged with who scheduled it and when it was applied, and a summary email goes to the owner and bookkeeper. Annual award rises are left to Xero's free bulk tool; this is for the one-off changes it does not schedule.",
+      "targetCustomer": "Owners, office managers and outside bookkeepers of Australian small businesses with award-covered staff (hospitality, retail, care, trades) on Xero Payroll AU who make frequent individual rate changes: classification moves, junior birthdays, apprentice years.",
+      "buyer": "The business owner on the business card, or a bookkeeper per client.",
+      "whyNow": "Xero shipped a free award-rate bulk update tool for the 1 July 2026 rise but left effective dating open: the 109-vote request is still 'Gaining Support' with a comment on 2026-11-04, and intentional wage underpayment has been a criminal offence since 1 January 2025.",
+      "founderFit": "A pay-template write, a scheduled job and a log are a few days' work on the shared platform; the commenters on Xero's public thread are a ready list of first users. Pisan has no Australian network.",
+      "problemEvidence": [
+        {
+          "url": "https://productideas.xero.com/forums/967118-payroll-expenses/suggestions/50792864-au-payroll-future-dated-pay-rate-changes-effect",
+          "source": "productideas.xero.com",
+          "author": "Sara Lucano",
+          "date": "2026-04-15",
+          "kind": "complaint",
+          "summary": "On a 109-vote request (Brigitte de Beer, 2025-12-10): 'periods of the year where there are many staff who are changing rates mid pay period'; Steve McCully (2026-02-03) calls the current way archaic; Rachel Ryalls commented 2026-11-04."
+        },
+        {
+          "url": "https://www.rosterelf.com/support/knowledge-base/xero-integration/how-to-manage-pay-rate-changes-mid-pay-period-in-xero",
+          "source": "rosterelf.com",
+          "author": "unknown",
+          "date": "2026-11-16",
+          "kind": "complaint",
+          "summary": "A rostering vendor's support article documents the manual split-the-hours workaround for a rate change mid pay period in Xero; undated vendor page, dated on the fetch date."
+        },
+        {
+          "url": "https://blog.xero.com/news-events/get-payroll-ready-eofy-fy27-changes/",
+          "source": "blog.xero.com",
+          "author": "Xero",
+          "date": "2026-06-18",
+          "kind": "mandate",
+          "summary": "The 2026 award rise applies from the first full pay period on or after 1 July; Xero's new bulk update tool applies it, but there is no future dating."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Xero award rate bulk update tool and 'use rate' pay items",
+          "url": "https://blog.xero.com/news-events/get-payroll-ready-eofy-fy27-changes/",
+          "price": "free with Xero Payroll",
+          "gap": "Bulk-applies a change now; no future dating, no mid-period split, no change log."
+        },
+        {
+          "name": "Deputy",
+          "url": "https://www.deputy.com/au/pricing",
+          "price": "A$8.75 per user per month (Core, with award interpretation), A$30 monthly minimum (per reviewer)",
+          "gap": "Award interpretation inside rostering; overkill for a business that only needs dated rate changes."
+        },
+        {
+          "name": "Tanda",
+          "url": "https://www.tanda.co/pricing/",
+          "price": "A$12.80 plus GST per user per month bundle (per reviewer)",
+          "gap": "Same as Deputy: a full workforce platform."
+        },
+        {
+          "name": "Employment Hero Payroll",
+          "url": "https://employmenthero.com/au/pricing/",
+          "price": "about A$10 per employee per month, 10-user minimum (per reviewer)",
+          "gap": "Means replacing Xero Payroll."
+        }
+      ],
+      "keyFeatures": [
+        "Scheduled rate changes per employee with reasons",
+        "Nightly apply to the Xero pay template",
+        "Mid-period split calculation and payslip lines",
+        "Append-only change log",
+        "Summary emails"
+      ],
+      "mvpScope": {
+        "features": [
+          "Xero connection and employee list",
+          "Schedule a rate change",
+          "Nightly apply with before-and-after log",
+          "Email summary"
+        ],
+        "outOfScope": [
+          "Award rate tables or interpretation",
+          "Annual Wage Review bulk rises (Xero does this free)",
+          "Writing to posted pay runs",
+          "Other payroll systems"
+        ],
+        "buildEstimate": "4 build days"
+      },
+      "techStack": "React + Vite front end, Supabase for sign-in, the schedule and the log, a scheduled job on backend-hub for the Xero writes, transactional email; Xero OAuth with payroll.employees and payroll.payslip scopes.",
+      "pricing": {
+        "model": "Monthly subscription per business",
+        "pricePoint": "A$12 per month",
+        "rationale": "Far below Deputy or Tanda for a business that does not need rostering; it must cost less than one underpayment back-pay calculation."
+      },
+      "revenueSketch": "Estimate: 120 businesses x A$12 = A$1,440 MRR, assuming a small share of the businesses behind the 109-vote request; above 50 connections the Xero Plus API tier (A$245 per month) and certification apply.",
+      "distribution": "Contact the named commenters on the Xero effective-dating thread directly, then AU bookkeepers with several award-heavy clients who apply rate changes across clients in the same week.",
+      "validationTest": {
+        "method": "Offer a free split-hours calculator page (old rate, new rate, dates, pay calendar in; split lines out) linked from the Xero thread, with a sign-up for scheduled changes.",
+        "successCriteria": "30 calculator uses in a month and 5 businesses or bookkeepers asking to schedule real changes with a card on file.",
+        "cost": "About 2 days of build, no API cost on the free Starter tier."
+      },
+      "moat": "Weak: a careful split engine tied to Xero pay calendars and an audit log; a native Xero release would close it.",
+      "compliance": [
+        "Fair Work Act: the app changes pay; require the user to confirm each change before it applies and keep the before-and-after log as a record.",
+        "Wage theft offence: intentional underpayment is criminal since 2025-01-01; the product reduces accidental errors but must not claim compliance.",
+        "Privacy Act and TFN Rule: never store tax declarations returned by the API.",
+        "Xero developer terms: write scopes, certification above the Core tier, and the risk that Deputy or another sync overwrites pay templates."
+      ],
+      "risks": [
+        {
+          "risk": "Xero ships effective dating.",
+          "mitigation": "Keep it small and cheap; the log and split engine remain useful to bookkeepers."
+        },
+        {
+          "risk": "A rostering app (Deputy) overwrites the pay template after the change.",
+          "mitigation": "Detect overwrites the next night and email; state the conflict in onboarding."
+        },
+        {
+          "risk": "A wrong automatic change causes an underpayment.",
+          "mitigation": "Changes apply only after a user confirmation and are reversible from the log."
+        }
+      ],
+      "scores": {
+        "pain": 3,
+        "willingnessToPay": 2,
+        "reachability": 2,
+        "competitiveGap": 3,
+        "feasibility": 3,
+        "complianceBurden": 3,
+        "total": 16
+      },
+      "scoreRationale": {
+        "pain": "Mid-period splits are real but occasional, and the annual rise is now handled free (https://productideas.xero.com/forums/967118-payroll-expenses/suggestions/50792864-au-payroll-future-dated-pay-rate-changes-effect, https://blog.xero.com/news-events/get-payroll-ready-eofy-fy27-changes/).",
+        "willingnessToPay": "No paid freelancer jobs among 19 active 'xero payroll' projects; serious award users already pay Deputy or Tanda (https://www.deputy.com/au/pricing).",
+        "reachability": "No App Store listing until the Plus API tier and certification (https://developer.xero.com/pricing); commenters can be contacted directly.",
+        "competitiveGap": "Nobody offers effective dating, splits or a change log for Xero Payroll AU, though the free bulk tool covers the main annual case (https://blog.xero.com/news-events/get-payroll-ready-eofy-fy27-changes/).",
+        "feasibility": "The API accepts pay template and payslip earnings lines (https://raw.githubusercontent.com/XeroAPI/Xero-OpenAPI/master/xero-payroll-au.yaml) but draft-pay-run behaviour is untested.",
+        "complianceBurden": "The app writes pay rates, so it needs confirmation steps, logs and a liability clause (https://www.rosterelf.com/support/knowledge-base/xero-integration/how-to-manage-pay-rate-changes-mid-pay-period-in-xero)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "The reviewer did not kill it but narrowed it. Xero shipped a free award-rate bulk update tool for the 1 July 2026 rise and points users to 'use rate' pay items, and the annual rise applies from the first full pay period on or after 1 July, so it never needs a split; the idea was re-scoped to one-off changes (classification moves, juniors, apprentices) and the audit log. Of the thread's comments, one (Viv Richard, 2026-03-15) is spam and three pre-dating the idea are merged requests about deduction date ranges, so the 109 votes overstate demand for rate scheduling. The API supports updating pay template and payslip earnings lines, but whether a change reaches an existing draft pay run is untested, and Deputy may overwrite templates on export. Deputy (A$8.75 per user), Tanda (A$12.80 per user) and Employment Hero (about A$10 per employee) do award interpretation as whole platforms. No paid freelancer jobs. Scores: pain 3, willingness to pay 2, reach 2, gap 3, feasibility 3, compliance 3, total 16; complexity set to Weekend MVP for the narrowed scope."
+      },
+      "inspiredBy": "https://productideas.xero.com/forums/967118-payroll-expenses/suggestions/50792864-au-payroll-future-dated-pay-rate-changes-effect",
+      "gateGap": {
+        "missing": [
+          "total 16 is below 22",
+          "pain 3 is below 4",
+          "willingnessToPay 2 is below 3",
+          "only 1 independent complaint page from a buyer (the second complaint item is a vendor's workaround article)"
+        ],
+        "closedBy": "The free split calculator in validationTest closes the largest gap, willingness to pay: 5 businesses putting a card on file for scheduled changes would justify willingnessToPay 3; finding a second, independent buyer complaint outside Xero's thread would close the evidence gap."
+      }
+    },
+    {
+      "n": 3,
+      "title": "Staff Files and Right-to-Work Follow-Ups for Xero UK Payroll",
+      "slug": "staff-files-and-right-to-work-follow-ups-for-xero-uk-payroll",
+      "category": "Accessibility & Compliance",
+      "smallBusiness": true,
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Data & Visualization",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": true,
+        "engine": true,
+        "shared": true,
+        "notes": {
+          "stateful": "A per-employee file store (contracts, starter forms, right-to-work check results) with the check type, date and permission expiry, kept across years.",
+          "connected": "Reads employee IDs, start dates and end dates from Xero Payroll UK with the read-only payroll.employees scope, so every Xero employee has a file and leavers are detected.",
+          "unattended": "A daily job sends follow-up check reminders before a time-limited permission expires and deletion reminders two years after an employee's end date.",
+          "engine": "Right-to-work retention and follow-up rules: keep evidence for employment plus two years, repeat checks before time-limited permission ends, and flag employees with no recorded check.",
+          "shared": "A payroll bureau or bookkeeper sees reminders across all client employers; each employer sees and uploads only its own staff files."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "email",
+        "scheduled",
+        "backend"
+      ],
+      "buildPlan": [
+        {
+          "n": 1,
+          "title": "One employer, one file per employee",
+          "delivers": "Sign in, connect one Xero Payroll UK organisation, see every employee, and upload a document to an employee's file.",
+          "acceptance": "Against the Xero UK demo company every employee appears; an uploaded PDF is stored encrypted and downloads intact; deployed."
+        },
+        {
+          "n": 2,
+          "title": "Right-to-work record",
+          "delivers": "Record a right-to-work check (type, date, share-code result PDF, permission expiry) per employee; see who has no check on file.",
+          "acceptance": "A missing-check list matches a seeded set of 10 employees; records survive sign-out and sign-in."
+        },
+        {
+          "n": 3,
+          "title": "Follow-up and retention reminders",
+          "delivers": "A daily job emails the employer before a time-limited permission expires and two years after an employee's Xero end date.",
+          "acceptance": "Seeded expiry and leaver dates produce exactly one email each at the right offsets."
+        },
+        {
+          "n": 4,
+          "title": "Audit register and deletion",
+          "delivers": "Export a right-to-work register for an inspection; delete a leaver's file with a logged reason once retention ends.",
+          "acceptance": "The register lists every employee with check date and type; a deleted file is unrecoverable and the deletion is logged."
+        },
+        {
+          "n": 5,
+          "title": "Bureau view",
+          "delivers": "A bureau connects several client employers and sees all reminders across them; client users see only their own.",
+          "acceptance": "Three demo organisations show combined reminders; access tests confirm no cross-client reads."
+        },
+        {
+          "n": 6,
+          "title": "Polish",
+          "delivers": "Employer README with the processor terms and the 'the employer must do the check' rule, phone layout, keyboard and screen-reader pass, walkthrough test.",
+          "acceptance": "A walkthrough runs connect to upload to reminder to export; axe reports no serious issues."
+        }
+      ],
+      "summary": "For UK small employers on Xero Payroll and their payroll bureaus: a file for every employee, including right-to-work check records, with reminders for follow-up checks and for deleting records once they no longer have to be kept.",
+      "public": {
+        "summary": "Keep every staff member's paperwork in one place, and get reminded when a right-to-work check needs repeating or a record can be deleted.",
+        "problem": "Your payroll software has nowhere to keep staff documents, so contracts and right-to-work checks sit in email and shared folders. When someone's permission to work runs out, nothing reminds you to check again, and the fines for getting it wrong are large. Old records also hang around long after you should have deleted them.",
+        "forWhom": "Owners, office managers and payroll bureaus of small UK employers, such as cafés, care providers, cleaners and shops, who pay staff through Xero.",
+        "benefits": [
+          "A file for every employee, matched to your payroll",
+          "A reminder before anyone's permission to work runs out",
+          "A ready list of checks if the Home Office asks",
+          "Reminders to delete old records on time"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "Xero rolled out employee file attachments to Australian payroll only, so UK employers keep staff documents, including the right-to-work evidence they must hold for employment plus two years, outside payroll; the UK request drew 174 votes in its first weeks and comments such as 'We NEED this capability NOW'.",
+      "description": "A small web app that connects read-only to Xero Payroll UK and creates a file for every employee. Employers upload contracts, starter forms and right-to-work check results, and record the check type, date and any permission expiry. A daily job reminds them before a time-limited permission runs out and, using the end date from Xero, when a leaver's records pass the two-year retention point and should be deleted. An exportable register lists every check for an inspection. Bureaus see reminders across all their clients; the employer still does each check itself, because a third party's check gives the employer no statutory excuse.",
+      "targetCustomer": "Owners, office managers and outside payroll bureaus of UK small employers with 2 to 50 staff (hospitality, care, cleaning, retail) on Xero Payroll UK, especially those employing staff with time-limited permission to work.",
+      "buyer": "The employer on the business card, or a payroll bureau that pays per client employer.",
+      "whyNow": "Xero completed employee files for Australia on 2026-10-06 and said on 2026-10-07 that UK files are not on its immediate roadmap, while Home Office civil penalties stand at up to £60,000 per illegal worker.",
+      "founderFit": "A file store, a read-only Xero connection and a daily reminder job are a week's work on the shared platform; the angry Xero thread names first prospects. The security work for identity documents is the hard part, and Pisan has no UK network.",
+      "problemEvidence": [
+        {
+          "url": "https://productideas.xero.com/forums/967118-payroll-expenses/suggestions/51739060-uk-payroll-upload-attach-employee-files",
+          "source": "productideas.xero.com",
+          "author": "Julia Bastin",
+          "date": "2026-10-07",
+          "kind": "complaint",
+          "summary": "On a 174-vote UK request opened 2026-09-28 after the AU-only release: 'We NEED this capability NOW'; Sabrina Preston (2026-09-30) and Ben Butcher (2026-10-05) say the same. The comments ask for generic attachments, not right-to-work specifically."
+        },
+        {
+          "url": "https://www.gov.uk/penalties-for-employing-illegal-workers",
+          "source": "gov.uk",
+          "author": "UK Home Office",
+          "date": "2026-11-16",
+          "kind": "mandate",
+          "summary": "Civil penalty of up to £60,000 for each illegal worker; page has no visible date, dated on the fetch date."
+        },
+        {
+          "url": "https://www.xero.com/uk/guides/right-to-work-checks/",
+          "source": "xero.com",
+          "author": "Xero",
+          "date": "2026-11-16",
+          "kind": "mandate",
+          "summary": "Xero's UK guide tells employers to keep right-to-work records for employment plus two years and to set reminders for follow-up checks, without naming a tool; undated, dated on the fetch date."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Breathe HR",
+          "url": "https://www.breathehr.com/en-gb/partners/pricing-changes-2026",
+          "price": "£24 per month for 1 to 10 staff, £44 for 11 to 20, £99 for 21 to 50 (per reviewer)",
+          "gap": "Has a Xero Payroll integration and document expiry alerts, but at about three times the price and with no right-to-work register or post-leaving deletion seen."
+        },
+        {
+          "name": "Employment Hero UK",
+          "url": "https://employmenthero.com/uk/pricing/",
+          "price": "£6 per user per month, 10-user minimum (per reviewer)",
+          "gap": "A full HR platform; Xero link not confirmed."
+        },
+        {
+          "name": "BrightHR",
+          "url": "https://www.brighthr.com/pricing/",
+          "price": "from £16.67 per employee per month for Core (per reviewer)",
+          "gap": "Connects to Xero only through Zapier."
+        },
+        {
+          "name": "Home Office online check",
+          "url": "https://www.gov.uk/view-right-to-work",
+          "price": "free",
+          "gap": "Gives the check result but stores nothing and sends no follow-up reminders."
+        }
+      ],
+      "keyFeatures": [
+        "Employee files matched to Xero Payroll UK",
+        "Right-to-work check records with expiry",
+        "Follow-up check and retention reminders",
+        "Inspection register export",
+        "Bureau multi-client view"
+      ],
+      "mvpScope": {
+        "features": [
+          "Xero connection and employee list",
+          "Encrypted file upload per employee",
+          "Right-to-work record with expiry",
+          "Daily reminder emails"
+        ],
+        "outOfScope": [
+          "Doing identity checks (IDVT) or Home Office lookups",
+          "Contracts generation",
+          "Other payroll systems",
+          "Leave or rostering"
+        ],
+        "buildEstimate": "6 build days, plus security review"
+      },
+      "techStack": "React + Vite front end, Supabase for sign-in, records and encrypted storage in a UK or EU region, a scheduled job on backend-hub for the Xero sync and reminders, transactional email; Xero OAuth with the read-only payroll.employees scope.",
+      "pricing": {
+        "model": "Monthly subscription per employer, with bureau pricing per client",
+        "pricePoint": "£8 per month per employer; £4 per client per month for bureaus",
+        "rationale": "A third of Breathe's micro plan for the one job payroll lacks; must cost less than an hour of a bureau's time per client per month."
+      },
+      "revenueSketch": "Estimate: 100 employers x £8 + 15 bureaus x 15 clients x £4 = £1,700 MRR, assuming a small share of the UK Xero payroll users behind the 174-vote request; above 50 connections the Xero Plus API tier (A$245 per month) and certification apply.",
+      "distribution": "Direct outreach to UK Xero-partner payroll bureaus and bookkeepers serving hospitality and care, pitched as a multi-client follow-up and register tool with a free tier; reply on the UK Xero idea thread.",
+      "validationTest": {
+        "method": "A landing page offering a free right-to-work follow-up register (enter staff and expiry dates, get reminders), shared with 10 UK payroll bureaus and on the Xero thread.",
+        "successCriteria": "3 bureaus load at least 5 clients each and 2 agree to pay for files plus reminders once Xero-connected.",
+        "cost": "About 3 days of build and £0 to £30 per month in hosting and API costs."
+      },
+      "moat": "Weak: Xero may ship UK employee files; what remains is the right-to-work follow-up and retention rules and a bureau's multi-client setup.",
+      "compliance": [
+        "UK GDPR: the app is a processor for each employer; needs an Article 28 agreement, ICO registration, encryption, access logs and 72-hour breach handling.",
+        "Identity documents and immigration status are high-harm if leaked; host in the UK or EEA and plan for a penetration test and cyber insurance.",
+        "Right-to-work rules: copies kept unaltered for employment plus two years; the employer must do the check itself to keep the statutory excuse, so bureaus can only store and remind.",
+        "Xero developer terms: Core tier limits 50 connections and no App Store listing."
+      ],
+      "risks": [
+        {
+          "risk": "Xero ships UK employee files.",
+          "mitigation": "Keep the right-to-work rules, reminders and bureau view as the product; the file store becomes a convenience."
+        },
+        {
+          "risk": "A data breach of identity documents.",
+          "mitigation": "Store only what the rules require, encrypt at rest, and offer a reminders-only tier that stores no documents."
+        },
+        {
+          "risk": "Employers buy a full HR suite instead.",
+          "mitigation": "Sell to bureaus, who need one cheap multi-client tool rather than an HR suite per client."
+        }
+      ],
+      "scores": {
+        "pain": 3,
+        "willingnessToPay": 2,
+        "reachability": 2,
+        "competitiveGap": 3,
+        "feasibility": 4,
+        "complianceBurden": 2,
+        "total": 16
+      },
+      "scoreRationale": {
+        "pain": "Demand for staff files is loud (https://productideas.xero.com/forums/967118-payroll-expenses/suggestions/51739060-uk-payroll-upload-attach-employee-files) and penalties are real (https://www.gov.uk/penalties-for-employing-illegal-workers), but no commenter links it to right-to-work records.",
+        "willingnessToPay": "The Home Office check is free and Breathe does more for £24 a month (https://www.breathehr.com/en-gb/partners/pricing-changes-2026); no freelance spend found.",
+        "reachability": "No Xero App Store listing below the Plus API tier (https://developer.xero.com/pricing); bureaus are reachable directly.",
+        "competitiveGap": "HR suites cover documents and expiry at higher prices, and none found is right-to-work specific on Xero (https://www.brighthr.com/pricing/).",
+        "feasibility": "The UK payroll API gives employee IDs and start and end dates (https://raw.githubusercontent.com/XeroAPI/Xero-OpenAPI/master/xero-payroll-uk.yaml); all right-to-work data lives in the app.",
+        "complianceBurden": "Identity documents make the app a GDPR processor with security duties (https://www.xero.com/uk/guides/right-to-work-checks/)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "The reviewer found the evidence partly misread: neither Xero thread mentions right to work, share codes or the Home Office; commenters want generic attachments (contracts, leave approvals, audit), so the idea was re-scoped to staff files first with right-to-work follow-ups as the differentiator. Xero marked the original 1,047-vote files idea Completed for Australia only (2026-10-06) and said on 2026-10-07 that UK files are not on its immediate roadmap. Breathe HR (£24 per month for 1 to 10 staff, with a Xero Payroll integration and expiry alerts) is the closest competitor; Employment Hero UK and BrightHR cost more or link to Xero only through Zapier; the Home Office check is free but stores nothing. A third party doing the check gives the employer no statutory excuse, so bureaus can only store and remind. Compliance is heavy: processor duties, identity documents, UK or EEA hosting. No second independent complaint and no freelance spend found. Scores: pain 3, willingness to pay 2, reach 2, gap 3, feasibility 4, compliance 2, total 16."
+      },
+      "inspiredBy": "https://productideas.xero.com/forums/967118-payroll-expenses/suggestions/51739060-uk-payroll-upload-attach-employee-files",
+      "gateGap": {
+        "missing": [
+          "total 16 is below 22",
+          "pain 3 is below 4",
+          "willingnessToPay 2 is below 3",
+          "only 1 complaint page, and it asks for files, not right-to-work tracking"
+        ],
+        "closedBy": "The bureau test in validationTest closes the largest gap: 2 bureaus agreeing to pay for files plus reminders would justify willingnessToPay 3, and bureaus naming missed follow-up checks would supply the right-to-work complaint the evidence lacks."
+      }
+    }
+  ],
+  "runNotes": {
+    "weekday": "Monday",
+    "domainLens": "Accessibility and regulatory compliance for small businesses and startups: website accessibility, privacy notices, sales tax, licensing and permits",
+    "focusSources": [
+      "A13 Discourse forums, any niche",
+      "B12 Paid app marketplaces",
+      "C5 Policy and regulation trackers"
+    ],
+    "searches": [
+      "A13 community.shopify.com search.json (after 2026-08-15 / 2026-05-20): accessibility lawsuit; ADA demand letter; EPR packaging; PFAS; auto renewal law; privacy policy law; importer of record; DDP customs broker; Quebec French; Circular Action Alliance; PFAS reporting; Oregon EPR; Bill 96; CPSC eFiling; children's product certificate",
+      "A13 other Discourse (after 2026-09-15 unless noted): forum.manager.io MTD income tax, payday super, MTD, new law, compliance, regulation; talk.folksy.com, sellersasksellers.com, forum.invoiceninja.com, discuss.frappe.io, community.glowforge.com new law / compliance / regulation; talk.folksy.com and sellersasksellers.com importer of record / DDP customs broker; community.n8n.io license expiry reminder; community.make.com permit renewal",
+      "A16 productideas.xero.com search: making tax digital income tax; payday super; statutory sick pay 2026; employment rights act; e-invoicing; tipping act; companies house software filing; birthday apprentice reminder; plus hot lists for payroll & expenses, invoices & quotes, reports & tax, for small businesses",
+      "A12 HN Algolia comments since 2025-08: making tax digital; payday super; ADA lawsuit website; importer of record",
+      "A14 wordpress.org support: pojo-accessibility; complianz-gdpr; cookie-law-info; wp-accessibility",
+      "B11 freelancer.com API (limit 20 then 100, titles filtered locally): payday super; superannuation; making tax digital; accessibility audit; packaging EPR; ada compliance website; super clearing; xero payroll; wcag; shopify accessibility; privacy policy",
+      "B12 apps.xero.com search payday super and superannuation (JS shell, empty); apps.shopify.com search age verification, prop 65, accessibility, packaging EPR (results load by JS, empty)",
+      "C5 federalregister.gov API (type RULE): small entity compliance guide; recordkeeping small business; website accessibility; disclosure requirement small businesses; documents 2026-22380 and 2026-22735; full text of 2026-22735 via govinfo.gov",
+      "C10 web: SBSCH closure 1 July 2026 alternatives and fees; HMRC joint accounts and Company Tax Return service closure 31 March 2026; Companies House software-only filing April 2027 (now paused)",
+      "Web: payday super compliance tracker; clearing house pricing per employee; Xero auto super returned contributions; Xero payday super features; SAFF CSV template; MTD ITSA bridging software free",
+      "Spend pass: B11 freelancer superannuation / xero payroll / xero leave / xero fixed assets / right to work (reviewers, no relevant jobs); B12 Xero App Store payday super (empty); vendor pricing for Wrkr, Single Touch, Payroller, XBert, Employment Hero, Deputy, Tanda, Breathe HR, BrightHR, CredentiAlert, Lapsewise, Shopify accessibility apps"
+    ],
+    "unverifiedSignals": [
+      {
+        "url": "https://www.ato.gov.au/businesses-and-organisations/small-business-newsroom/the-sbsch-is-now-closed",
+        "reason": "HTTP 403 from the site (curl and reviewer)."
+      },
+      {
+        "url": "https://help.employmenthero.com/hc/en-au/articles/15084112983183-What-s-changing-with-superannuation-processing-fees-FAQs",
+        "reason": "HTTP 403 to curl and WebFetch; HeroClear fee seen only in a search summary."
+      },
+      {
+        "url": "https://www.federalregister.gov/documents/2026/11/06/2026-22735/heightened-requirements-for-foreign-importers-of-record",
+        "reason": "Bot block (redirect to unblock.federalregister.gov); read the govinfo.gov copy instead."
+      },
+      {
+        "url": "https://www.fairwork.gov.au/employment-conditions/national-employment-standards/casual-employment-information-statement",
+        "reason": "HTTP 503 to WebFetch, no response to curl; CEIS timing taken from the rosterelf.com guide and the reviewer's reading."
+      },
+      {
+        "url": "https://www.royalmail.com/usabusinessupdates",
+        "reason": "HTTP 403 (reviewer)."
+      },
+      {
+        "url": "https://support.wrkr.com.au/hc/en-au/articles/59554171899033-What-is-a-SAFF-file-and-how-do-I-use-it",
+        "reason": "HTTP 403 then a Cloudflare challenge (reviewer)."
+      }
+    ],
+    "rejectedCandidates": [
+      {
+        "title": "Leave Overdraft Guard for Xero Payroll AU",
+        "total": 13,
+        "reason": "Reviewed and rescored from 19 to 13, not shipped (the day already had 3 survivors): Xero shipped an estimated leave balance with a negative warning for approvers on 2026-09-03 (https://productideas.xero.com/forums/967118/suggestions/45483061); only hard limits, an employee-side warning and a pay-run flag remain, and no spend was found."
+      },
+      {
+        "title": "Payday Super File Builder for micro employers (Manager.io, Single Touch Lite)",
+        "total": 14,
+        "reason": "Reviewer kill: Wrkr imports any CSV and offers a manual grid from A$5.50/month (https://www.wrkr.com.au/resources/do-you-need-payroll-software-to-pay-super), fund clearing houses such as Team Super's are free, and the strongest post (forum.manager.io/t/69775) asks Manager for an export in Single Touch's own format."
+      },
+      {
+        "title": "US Entry Readiness Check for UK makers (PGA data, foreign importer of record)",
+        "total": 12,
+        "reason": "Reviewer kill: Zonos's free Verified Account for Royal Mail shippers already screens items for PGA requirements and stores answers and certificates; the CBP foreign-IOR rule (govinfo FR-2026-11-06 2026-22735) binds the importer of record, usually the postal broker; the only real pain (talk.folksy.com/t/33742) is tariff codes, covered by the 2026-11-08 US Duty Price Sheet."
+      },
+      {
+        "title": "Demand Letter Workbench for small online stores",
+        "total": 14,
+        "reason": "Reviewer kill: free Shopify apps (Remedy, Conforma at $9) already give axe scans, dated evidence and regression emails; every 2026 post in the ADA threads is from a vendor, the served merchants posted 2023 to 2025; near-duplicate of the ADA remediation ledger killed 2026-11-04."
+      },
+      {
+        "title": "Licence and Permit Calendar for multi-location small businesses",
+        "total": 16,
+        "reason": "Reviewer kill: CredentiAlert does per-location permit reminders for food businesses at $9.99/month (https://www.capterra.com/p/10045494/CredentiAlert/), Lapsewise and DocuTrackr cover the generic case; one forum post (forum.manager.io/t/69771) and no spend."
+      },
+      {
+        "title": "Investment Boost Register for Xero (NZ IR10 Box 60)",
+        "total": 13,
+        "reason": "Reviewer kill: Xero Fixed Assets has had a per-asset Investment Boost setting since September 2025 (https://blog.xero.com/product-updates/investment-boost/) and Xero says IR10 imports it; what remains is a report column or a CSV filter."
+      },
+      {
+        "title": "Payday Super Exposure Log for Xero bookkeepers",
+        "total": 17,
+        "reason": "Same idea as the 2026-11-12 Payday Super Watch, killed in review: Xero's auto super overview page shows overdue contributions and the Payroll AU API has no super payment status endpoint; the new Xero requests found today (51675628, 51015442, 51264019, 51085414) do not change that."
+      },
+      {
+        "title": "Future-dated super payment approval for Xero",
+        "total": 12,
+        "reason": "93-vote Xero request (51594104, comments to 2026-11-04) but an outside app cannot control when Xero Auto Super debits; feasibility 1."
+      },
+      {
+        "title": "SGC statement report for pre-July-2026 quarters",
+        "total": 12,
+        "reason": "97-vote Xero request (50420049) but newest comment is 2026-02-09, outside 180 days; the old regime is sunsetting and the ATO calculator is free."
+      },
+      {
+        "title": "MTD for Income Tax bridge for Manager.io users",
+        "total": 11,
+        "reason": "Real complaint (forum.manager.io/t/60277, 2026-08-11) but HMRC stopped issuing production credentials to new 2026-27 quarterly update products (2026-11-12 finding) and free bridging (AbraTax) exists."
+      },
+      {
+        "title": "UK VAT over-GBP-135 gap check for EU DDP sellers on Shopify",
+        "total": 12,
+        "reason": "Same as the 2026-11-09 Tax Drift Watch, killed because free Shopify Flow covers zero-tax order alerts; thread community.shopify.com/t/691864."
+      },
+      {
+        "title": "DDP duty mismatch audit for US-to-Canada shippers",
+        "total": 13,
+        "reason": "One merchant complaint (community.shopify.com/t/668329, 2026-08-19) answered by app vendors; the fix is a carrier or settings dispute, and the 2026-11-13 EU duty checker found this niche crowded."
+      },
+      {
+        "title": "Consent-before-action leak checker for WordPress consent plugins",
+        "total": 12,
+        "reason": "Same problem and customer as Consent Leak Watch (2026-11-02) in ideas/index.jsonl."
+      },
+      {
+        "title": "EU Accessibility Act microenterprise exemption checker",
+        "total": 11,
+        "reason": "Vendors already post free checks in the Shopify threads (community.shopify.com/t/683909)."
+      },
+      {
+        "title": "PPWR packaging document collection for Shopify sellers",
+        "total": 12,
+        "reason": "Packaging Declaration Ledger was killed 2026-11-09 for four paid Shopify apps; threads are research posts by builders (community.shopify.com/t/672726)."
+      },
+      {
+        "title": "Companies House software-only filing kit for micro companies",
+        "total": 10,
+        "reason": "The April 2027 software-only filing and micro-entity P&L changes have been paused, so there is no live mandate."
+      },
+      {
+        "title": "Company tax return filing for dormant micro companies after HMRC's free service closed",
+        "total": 11,
+        "reason": "Real change event (closed 2026-03-31) but many cheap commercial CT600 products exist and no complaint was found."
+      },
+      {
+        "title": "Payday Super cash reserve planner",
+        "total": 11,
+        "reason": "3-vote Xero request (51264076); Xero's own survey shows cash-flow pressure, but cash-flow apps already exist."
+      },
+      {
+        "title": "Amazon dangerous-goods listing questions helper",
+        "total": 10,
+        "reason": "News post (sellersasksellers.com/t/7582) with no seller complaint; Amazon's own flat files cover bulk answers."
+      },
+      {
+        "title": "Returned super contributions report for Xero",
+        "total": 12,
+        "reason": "53-vote request (51015442) but part of the 2026-11-12 killed Payday Super Watch: no super payment status in the API."
+      }
+    ],
+    "watchlist": [],
+    "caveats": "First run of 2026-11-16 (Monday, accessibility and regulatory compliance lens). No idea cleared the gate of 22; three provisional ideas ship (18, 16, 16). Nine candidates were adversarially reviewed: five killed (Payday Super File Builder: Wrkr and free fund clearing houses; US Entry Readiness: Zonos's free Royal Mail PGA screening and a misread of the foreign-IOR rule; Demand Letter Workbench: free Shopify accessibility apps and only vendor posts in 2026; Licence and Permit Calendar: CredentiAlert at $9.99; Investment Boost Register: Xero already has it) and four rescored (Fair Work Date Watch 18, Pay Rate Scheduler 16, Staff Files and Right-to-Work 16, Leave Overdraft Guard 13, the last not shipped because three had survived). The lens's own veins were exhausted: earlier runs already covered or killed the Shopify and WordPress compliance mandates (EU withdrawal button, PPWR, GPSR, consent, ADA), and the Monday focus sources gave little: B12 Xero App Store and Shopify App Store searches render by JavaScript and returned nothing, and the C5 Federal Register term search is loose (its one usable small-business rule, the CBP foreign-importer-of-record rule, effective 2027-01-05, turned out not to bind postal makers). All three ideas came from A16 Xero idea threads instead. Two ideas share a customer (Australian small employers on Xero Payroll AU) but solve different problems (employment-law dates versus applying rate changes); none shares both customer and problem. Every Xero idea is limited by Xero's developer pricing since 2026-03-02: 50 connections on the A$35 Core tier and no App Store listing below Plus (A$245 per month plus certification). Constraint check: categories Accessibility & Compliance 2, Small Business Ops 1; all three have small-business buyers; one Weekend MVP (Pay Rate Scheduler) and two Multi-week ideas with build plans (Fair Work Date Watch, Staff Files). Undated vendor and government pages (rosterelf.com, gov.uk, xero.com guide) carry the fetch date and say so. Some competitor prices were read by reviewers on fetched pages and are marked 'per reviewer'. The watchlist is empty: no unselected candidate reached 19."
+  }
+}
