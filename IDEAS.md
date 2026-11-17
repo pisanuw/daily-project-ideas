@@ -653,3 +653,6 @@
 | 2026-11-16 | Fair Work Date Watch for Xero Payroll AU | Accessibility & Compliance | Multi-week | 18 | provisional |  |
 | 2026-11-16 | Pay Rate Scheduler for Xero Payroll AU | Small Business Ops | Weekend MVP | 16 | provisional |  |
 | 2026-11-16 | Staff Files and Right-to-Work Follow-Ups for Xero UK Payroll | Accessibility & Compliance | Multi-week | 16 | provisional |  |
+| 2026-11-17 | Test Change Budget for UK Driving Instructors | Small Business Ops | Multi-week | 17 | provisional |  |
+| 2026-11-17 | Briefing Log for Martyn's Law Standard Tier | Accessibility & Compliance | Weekend MVP | 17 | provisional |  |
+| 2026-11-17 | Behind-the-Wheel Log and Instructor File for Small ELDT Providers | Small Business Ops | Multi-week | 16 | provisional |  |

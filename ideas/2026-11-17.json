@@ -1,0 +1,829 @@
+{
+  "date": "2026-11-17",
+  "schemaVersion": 3,
+  "complete": true,
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Test Change Budget for UK Driving Instructors",
+      "slug": "test-change-budget-uk-driving-instructors",
+      "category": "Small Business Ops",
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Teaching Operations",
+      "shape": {
+        "stateful": true,
+        "connected": false,
+        "unattended": true,
+        "engine": true,
+        "shared": true,
+        "notes": {
+          "stateful": "The instructor keeps every pupil's readiness sign-off, booked test, changes used and history, and comes back to them each week.",
+          "unattended": "A daily job emails or texts the pupil and the instructor before the last free-change date and when a test is inside the readiness window but not signed off.",
+          "engine": "DVSA's 2026 rules as a calculator: 10 clear working days counted Monday to Saturday excluding Sundays and bank holidays, 2 changes per booking, then cancel and rebook.",
+          "shared": "The instructor sends a pupil a link; the pupil reports the slot they booked and sees their own change budget and deadlines, the instructor sees all pupils."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "email",
+        "scheduled"
+      ],
+      "buildPlan": [
+        {
+          "n": 1,
+          "title": "One pupil, one test",
+          "delivers": "An instructor signs in, adds a pupil and a booked test date, and sees the last free-change date and changes left.",
+          "acceptance": "For five hand-worked dates spanning a bank holiday the computed last free-change date matches GOV.UK's counting rule; deployed."
+        },
+        {
+          "n": 2,
+          "title": "Pupil report-back link",
+          "delivers": "The instructor sends a pupil a private link; the pupil enters the slot and centre they booked and each change they make.",
+          "acceptance": "A pupil link records a booking and two changes without an account; a third change attempt shows the cancel-and-rebook warning."
+        },
+        {
+          "n": 3,
+          "title": "Readiness sign-off",
+          "delivers": "Mock-test faults and a dated 'agreed ready for this date' sign-off per pupil, shown next to the test.",
+          "acceptance": "A test with no sign-off inside six weeks is flagged on the dashboard; the sign-off is stored with who and when."
+        },
+        {
+          "n": 4,
+          "title": "Deadline reminders",
+          "delivers": "A daily job emails pupil and instructor 5 working days before the last free-change date and on the day.",
+          "acceptance": "Seeded tests produce exactly the expected reminders on the expected days in a time-travel test."
+        },
+        {
+          "n": 5,
+          "title": "Instructor board",
+          "delivers": "All pupils' tests on one calendar with status: ready, at risk, changes used up.",
+          "acceptance": "A 30-pupil fixture renders the board in under a second and filters by status."
+        },
+        {
+          "n": 6,
+          "title": "Polish",
+          "delivers": "Instructor README in plain words, phone layout, privacy notice for pupils aged 17, keyboard and screen-reader pass, walkthrough test.",
+          "acceptance": "A walkthrough test runs sign-in to reminder; axe reports no serious issues; the pupil link stores no licence number."
+        }
+      ],
+      "summary": "For UK driving instructors who can no longer book or move their pupils' tests: a shared tracker for each pupil's booked test, the two changes they are allowed and the last day to change without losing the fee.",
+      "public": {
+        "summary": "Keeps you and each pupil on the same page about their driving test date, how many changes they have left and the last day they can still change it.",
+        "problem": "Since May only your pupils can book and move their tests, and you find out about dates when they remember to tell you. A pupil who moves twice, or misses the ten-working-day cut-off, can lose the test or the fee. You end up keeping it all in your head or on scraps of paper.",
+        "forWhom": "Approved driving instructors and small driving schools in Great Britain.",
+        "benefits": [
+          "Know every pupil's test date without chasing them",
+          "No pupil loses a fee by missing the change deadline",
+          "Agree readiness before a test is booked, with a record of it",
+          "Reminders go out to the pupil and to you automatically"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "Since DVSA made booking learner-only in May 2026, instructors say they are 'completely locked out of the process' and left to guess; pupils get only two changes and must give ten clear working days' notice, which one instructor says 'has made the job an awful lot harder'.",
+      "description": "The instructor adds each pupil and sends them a private link. The pupil reports the test they booked and any change they make; the app computes the last free-change date under DVSA's ten-clear-working-day rule, counts changes used out of two, and warns when the only option left is to cancel and rebook. The instructor records mock-test results and a dated readiness sign-off, and a daily job reminds both sides before deadlines. It never logs in to or scans the DVSA booking service.",
+      "targetCustomer": "Approved driving instructors (mostly sole traders) and small driving schools with 2 to 10 instructors in Great Britain, each with 20 to 40 active pupils.",
+      "buyer": "The instructor, from their own business card, as a low-priced add-on or a lead-in to a lesson-diary app.",
+      "whyNow": "DVSA's 2026 changes (two changes from 31 March, learner-only booking from 12 May, moves limited to the 3 nearest centres from 9 June) removed instructors from booking, and on 7 September 2026 DVSA said it is not planning view-only access for instructors.",
+      "founderFit": "Pisan builds small stateful web apps quickly and teaches; this is a teaching-business workflow (readiness sign-off and assessment records) rather than a new domain, but he has no UK driving-instructor network, so reach depends on associations and online groups.",
+      "problemEvidence": [
+        {
+          "url": "https://despatch.blog.gov.uk/2026/08/28/listening-learning-changing-my-first-update-to-driving-instructors/",
+          "source": "despatch.blog.gov.uk",
+          "author": "Martin Brown (also Paul Harper, Trevor Price)",
+          "date": "2026-08-28",
+          "kind": "complaint",
+          "summary": "Instructors on DVSA's own blog: 'completely locked out of the process', 'test availability is a complete mystery'; DVSA replied on 7 Sep 2026 it is not planning view-only access."
+        },
+        {
+          "url": "https://despatch.blog.gov.uk/2026/09/24/driving-test-booking-changes-3-months-on/",
+          "source": "despatch.blog.gov.uk",
+          "author": "Jeremy Hindley",
+          "date": "2026-09-24",
+          "kind": "complaint",
+          "summary": "Pupils 'only have 2 attempts to swap their test' and the 10-working-day cut-off 'has made the job an awful lot harder'; other instructors report 22 to 24 week waits."
+        },
+        {
+          "url": "https://www.gov.uk/guidance/changes-to-driving-test-booking-rules-in-2026",
+          "source": "gov.uk",
+          "author": "DVSA",
+          "date": "2026-06-19",
+          "kind": "mandate",
+          "summary": "The 2026 rules: learner-only booking, two changes per booking, moves limited to the three nearest centres; fetched by the reviewer this run."
+        },
+        {
+          "url": "https://totaldrive.co.uk/",
+          "source": "totaldrive.co.uk",
+          "author": "Total Drive",
+          "date": "2026-11-17",
+          "kind": "spend",
+          "summary": "Instructors already pay for business apps: 'From only £18 per month', 'used by over 8,600 driving instructors'; its article on the 2026 rules offers advice but no change or deadline tracking."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Total Drive",
+          "url": "https://totaldrive.co.uk/",
+          "price": "From £18/month on its homepage",
+          "gap": "Diary, payments and pupil progress; no feature claimed for test change counts or the ten-working-day deadline."
+        },
+        {
+          "name": "MyDriveTime",
+          "url": "https://apps.apple.com/gb/app/mydrivetime-2/id6444725965",
+          "price": "unknown (free download with trial)",
+          "gap": "Stores practical test details; no change budget or deadline reminders."
+        },
+        {
+          "name": "Instructor - Learner Progress",
+          "url": "https://apps.apple.com/us/app/-/id1212024645",
+          "price": "Free; Pro $3.99/month or $19.99/year",
+          "gap": "Test-date countdowns, but no DVSA change or notice rules and nothing shared with the pupil."
+        },
+        {
+          "name": "DriveSync",
+          "url": "https://apps.apple.com/gb/app/drivesync/id6761318450",
+          "price": "Free up to 3 pupils; Pro £14.99/month or £99.99/year",
+          "gap": "Pupil self-booking for lessons and route scoring; nothing for tests."
+        }
+      ],
+      "keyFeatures": [
+        "Per-pupil test record with changes used out of two",
+        "Last free-change date under the ten-clear-working-day rule",
+        "Pupil report-back link with no account",
+        "Dated readiness sign-off and mock-test record",
+        "Reminders to pupil and instructor before deadlines"
+      ],
+      "mvpScope": {
+        "features": [
+          "Pupil list and test record",
+          "Deadline calculator with bank holidays",
+          "Pupil link",
+          "Email reminders"
+        ],
+        "outOfScope": [
+          "Any access to the DVSA booking service",
+          "Test-centre distance lists",
+          "Lesson diary and payments",
+          "Text messages"
+        ],
+        "buildEstimate": "2 to 3 weeks"
+      },
+      "techStack": "React + Vite + Tailwind static front end, Supabase sign-in and tables, scheduled job and transactional email on the shared platform.",
+      "pricing": {
+        "model": "Free for up to 5 pupils, then a flat instructor subscription",
+        "pricePoint": "£3 to £4/month, or £30/year",
+        "rationale": "Instructors already pay £10 to £18/month for an all-in-one app, so a standalone add-on must sit well below that; the reviewer judged £6 to £8 a hard sell."
+      },
+      "revenueSketch": "Estimate: 600 paying instructors x £3.50/month = £2,100 MRR. Assumes about 7% of the 8,600 Total Drive users' scale of market converts; unverified.",
+      "distribution": "Replies in DVSA Despatch blog comment threads are not for promotion, so: ADI association newsletters (DIA, ADINJC, MSA GB), UK driving-instructor Facebook groups, and a partnership pitch to a diary app (Total Drive, MyDriveTime) as an embedded feature.",
+      "validationTest": {
+        "method": "A one-page deadline calculator (enter test date, see last free-change date) shared in two instructor groups, with a sign-up for the shared tracker.",
+        "successCriteria": "200 calculator uses and 30 instructor sign-ups in two weeks, and 5 instructors who say they would pay £3/month.",
+        "cost": "2 days and £0."
+      },
+      "moat": "Thin: the rule engine and the pupil report-back habit are easy to copy; the realistic outcome is an integration or acquisition by a diary app.",
+      "compliance": [
+        "UK GDPR: the instructor is controller and the app a processor, so a data processing agreement is needed.",
+        "ICO Children's code: some pupils are 17, so the pupil link needs high-privacy defaults and a DPIA.",
+        "Never store a licence number with a booking reference, since together they let someone manage the test.",
+        "DVSA terms: no automated access to the booking service."
+      ],
+      "risks": [
+        {
+          "risk": "DVSA adds notifications when an ADI reference number is used, or its new booking service shows instructors their pupils' tests.",
+          "mitigation": "Keep the readiness and change-budget record, which DVSA would not provide, as the core."
+        },
+        {
+          "risk": "Diary apps copy the feature.",
+          "mitigation": "Offer it to them as an integration from the start."
+        },
+        {
+          "risk": "Pupils do not report changes.",
+          "mitigation": "Make the pupil link the place they see their own deadline, so reporting has a reason."
+        }
+      ],
+      "scores": {
+        "pain": 3,
+        "willingnessToPay": 2,
+        "reachability": 3,
+        "competitiveGap": 2,
+        "feasibility": 4,
+        "complianceBurden": 3,
+        "total": 17
+      },
+      "scoreRationale": {
+        "pain": "Real, dated complaints (https://despatch.blog.gov.uk/2026/08/28/listening-learning-changing-my-first-update-to-driving-instructors/), but mostly about seeing availability, which this does not solve; the deadline pain is secondary (https://despatch.blog.gov.uk/2026/09/24/driving-test-booking-changes-3-months-on/).",
+        "willingnessToPay": "Instructors pay for all-in-one apps (https://totaldrive.co.uk/), but cheap or free apps already store test dates (https://apps.apple.com/us/app/-/id1212024645), so no evidence anyone pays for this task.",
+        "reachability": "Instructors gather in association newsletters and online groups and commented in numbers on https://despatch.blog.gov.uk/2026/09/24/driving-test-booking-changes-3-months-on/, but Pisan has no UK ADI network.",
+        "competitiveGap": "No app found tracks the change budget and notice deadline, but test dates and countdowns are common (https://apps.apple.com/gb/app/mydrivetime-2/id6444725965) and the feature is easy to copy.",
+        "feasibility": "A small stateful app with a scheduled job; the working-day rule is published on https://www.gov.uk/guidance/changes-to-driving-test-booking-rules-in-2026; centre lists are left out.",
+        "complianceBurden": "Pupil data including 17-year-olds puts it under the ICO Children's code and needs a DPIA (https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/childrens-information/childrens-code-guidance-and-resources/)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "The reviewer found no free or cheaper product that tracks changes used and the ten-working-day deadline, so no kill, but rescored from 20 to 17: pain 4 to 3 (the blog complaints are mostly about seeing availability, which this deliberately does not do, and DVSA already shows the pupil their last change date), willingnessToPay 3 to 2 (Learnr free, Instructor - Learner Progress $3.99/month and DriveSync free tiers already hold test dates), complianceBurden 4 to 3 (17-year-old pupils bring the ICO Children's code). It also found DVSA already lets instructors set availability against their reference number, so the 'available weeks' part of the original brief was dropped and the idea re-scoped to the change budget, deadline reminders and readiness sign-off, priced as a cheap add-on or integration."
+      },
+      "inspiredBy": "https://despatch.blog.gov.uk/2026/08/28/listening-learning-changing-my-first-update-to-driving-instructors/",
+      "gateGap": {
+        "missing": [
+          "total 17 is below 22",
+          "pain 3 is below 4",
+          "willingnessToPay 2 is below 3"
+        ],
+        "closedBy": "The validation test's '5 instructors who say they would pay £3/month', plus any instructor describing a pupil who lost a fee or a test to the change limit, would lift willingnessToPay to 3 and pain to 4; the total would still need a partner channel to clear 22."
+      }
+    },
+    {
+      "n": 2,
+      "title": "Briefing Log for Martyn's Law Standard Tier",
+      "slug": "briefing-log-martyns-law-standard-tier",
+      "category": "Accessibility & Compliance",
+      "smallBusiness": true,
+      "complexity": "Weekend MVP",
+      "confidence": "provisional",
+      "topic": "Teaching Operations",
+      "shape": {
+        "stateful": true,
+        "connected": false,
+        "unattended": true,
+        "engine": false,
+        "shared": true,
+        "notes": {
+          "stateful": "The operator keeps each site's procedures, mirrored from the SIA planning tool's sections, and a dated briefing history per person.",
+          "unattended": "Reminders go out when a new starter has not been briefed within a set number of days and when a site's annual review date arrives.",
+          "shared": "Staff and volunteers open a QR or phone link, read the site's procedures and sign off; the manager sees who has and has not."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "email",
+        "scheduled"
+      ],
+      "summary": "For pub groups, gym chains and small venue operators with 2 to 10 sites: keep each site's Martyn's Law procedures in the regulator's own format, and get a signed record that every new staff member has been briefed.",
+      "public": {
+        "summary": "Shows you, site by site, which staff have been briefed on your evacuation, lockdown and communication procedures, and reminds you when someone new has not.",
+        "problem": "From 2027 every site you run for 200 or more people needs procedures for an emergency, and your staff need to know them. Staff change every few weeks, so keeping track of who has been told what, at which site, quickly falls apart. When the regulator asks, you want to show it in minutes.",
+        "forWhom": "Owners and operations managers of small groups of pubs, bars, gyms and venues in the UK.",
+        "benefits": [
+          "Every site's procedures in one place, in the regulator's own layout",
+          "New staff sign off from their phone in two minutes",
+          "A reminder when someone has not been briefed",
+          "A ready record if the regulator asks"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "Martyn's Law's standard tier (200 to 799 people) requires evacuation, invacuation, lockdown and communication procedures 'so far as reasonably practicable' from about spring 2027; the free SIA planning tool records them per premises but has no way to show that changing staff and volunteers were told.",
+      "description": "The operator creates each site and fills in its procedures in sections that mirror the SIA's free standard-tier planning tool, or attaches the completed form. Each site gets a QR code and link; staff open it on their phone, read a short version of the procedures and sign off. The manager sees briefed, not briefed and overdue per site, gets reminders for new starters and annual reviews, and can export a dated record per site.",
+      "targetCustomer": "Owners and operations managers of UK groups with 2 to 10 standard-tier sites: independent pub and bar groups, gym chains, small venue and events operators.",
+      "buyer": "The operator, from the operating budget, per group rather than per site.",
+      "whyNow": "The SIA published its free standard-tier planning tool on 9 November 2026 and takes feedback until 23 December; the duties are expected to start in spring 2027, so operators are writing procedures now.",
+      "founderFit": "A small, stateful sign-off app is quick for Pisan to build and maintain; the training-acknowledgement record is close to his teaching work, but he has no UK hospitality network.",
+      "problemEvidence": [
+        {
+          "url": "https://www.gov.uk/government/publications/martyns-law-standard-tier-planning-tool",
+          "source": "gov.uk",
+          "author": "Security Industry Authority",
+          "date": "2026-11-09",
+          "kind": "mandate",
+          "summary": "The SIA's free planning tool for standard-tier premises: a per-premises form for procedures, staff instruction and a review date; using it is optional."
+        },
+        {
+          "url": "https://www.gov.uk/guidance/understanding-martyns-law-and-the-sias-role-as-regulator",
+          "source": "gov.uk",
+          "author": "Security Industry Authority",
+          "date": "2026-11-10",
+          "kind": "mandate",
+          "summary": "Standard tier is 200 to 799 people; duties are to notify the SIA and put procedures in place; commencement expected spring 2027."
+        },
+        {
+          "url": "https://www.freelancer.com/projects/risk-assessment/Martyn-Law-School-Risk-Template",
+          "source": "freelancer.com",
+          "author": "unknown (a UK primary school)",
+          "date": "2026-11-16",
+          "kind": "spend",
+          "summary": "A school pays £20 to £250 for an editable Martyn's Law template its leaders can use, 'robust enough to satisfy regulators or Ofsted'."
+        },
+        {
+          "url": "http://www.lbc.co.uk/news/anti-terror-rules-village-halls/",
+          "source": "lbc.co.uk",
+          "author": "Sharon Morris (quoted by EJ Ward)",
+          "date": "2023-06-27",
+          "kind": "complaint",
+          "summary": "A village hall chair told MPs 'We simply cannot have that level of responsibility'; this predates the lighter standard tier, so it is old pain."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "SIA standard tier planning tool",
+          "url": "https://www.gov.uk/government/publications/martyns-law-standard-tier-planning-tool",
+          "price": "Free",
+          "gap": "A single-premises form with no briefing sign-off, reminders or multi-site view."
+        },
+        {
+          "name": "LemonBooking",
+          "url": "https://lemonbooking.com/en-GB/updates/2026-06/martyns-law",
+          "price": "unknown (30-day trial)",
+          "gap": "Hall and venue booking software whose document manager stores procedures with review-date reminders; no staff sign-off."
+        },
+        {
+          "name": "Ecclesiastical, Martyn's Law made simple",
+          "url": "https://www.ecclesiastical.com/media/5bleijez/martyns-law-made-simple.pdf",
+          "price": "Free",
+          "gap": "A guide for churches, with no templates or logging."
+        }
+      ],
+      "keyFeatures": [
+        "Sites with procedures in the SIA tool's sections",
+        "QR and phone briefing sign-off",
+        "Briefed, not briefed and overdue per site",
+        "New-starter and annual review reminders",
+        "Dated export per site"
+      ],
+      "mvpScope": {
+        "features": [
+          "Sites and procedures",
+          "Sign-off link per site",
+          "Manager dashboard",
+          "Reminder emails"
+        ],
+        "outOfScope": [
+          "SIA notification on the operator's behalf",
+          "Enhanced-tier documentation",
+          "Risk assessments",
+          "Rota integrations"
+        ],
+        "buildEstimate": "1 week"
+      },
+      "techStack": "React + Vite + Tailwind static front end, Supabase sign-in and tables, scheduled job and transactional email on the shared platform.",
+      "pricing": {
+        "model": "Per operator, flat",
+        "pricePoint": "£15/month for up to 10 sites",
+        "rationale": "The regulator's form is free, so only the multi-site sign-off record is worth paying for; per-site pricing would invite comparison with the free form."
+      },
+      "revenueSketch": "Estimate: 150 operators x £15/month = £2,250 MRR. The number of UK groups with 2 to 10 standard-tier sites is unknown.",
+      "distribution": "Trade bodies and their newsletters (UKHospitality, BII, ukactive), insurers and licensing consultants, and a white-label offer to hall and venue booking software.",
+      "validationTest": {
+        "method": "Interview 8 operators of 2 to 10 pubs or gyms about how they will brief changing staff, then show a clickable sign-off page.",
+        "successCriteria": "3 of 8 say they would pay £15/month before April 2027.",
+        "cost": "1 week and £0."
+      },
+      "moat": "Weak: the sign-off record is simple; the edge is being early and matching the SIA tool's layout exactly.",
+      "compliance": [
+        "UK GDPR: staff names and sign-off times only; no special-category data.",
+        "Must not claim the law requires a briefing record: the SIA tool says the Act does not require specific training and standard-tier premises need not send documents.",
+        "Accessibility: sign-off pages must work on any phone and with a screen reader."
+      ],
+      "risks": [
+        {
+          "risk": "Standard tier needs no documentation, so operators skip the record.",
+          "mitigation": "Sell it as evidence of 'reasonably practicable' steps if the SIA asks, and test that pitch in the interviews."
+        },
+        {
+          "risk": "Booking or HR software adds a sign-off module.",
+          "mitigation": "Offer white-label to those vendors."
+        },
+        {
+          "risk": "The SIA improves its tool after the 23 December feedback deadline.",
+          "mitigation": "Mirror its sections and import its form rather than compete with it."
+        }
+      ],
+      "scores": {
+        "pain": 2,
+        "willingnessToPay": 2,
+        "reachability": 2,
+        "competitiveGap": 1,
+        "feasibility": 5,
+        "complianceBurden": 5,
+        "total": 17
+      },
+      "scoreRationale": {
+        "pain": "The only named complaint is from 2023 (http://www.lbc.co.uk/news/anti-terror-rules-village-halls/), before the lighter standard tier; no 2026 complaint found.",
+        "willingnessToPay": "One school paid for a template (https://www.freelancer.com/projects/risk-assessment/Martyn-Law-School-Risk-Template), but the regulator's form is free (https://www.gov.uk/government/publications/martyns-law-standard-tier-planning-tool).",
+        "reachability": "Buyers are spread across hospitality and leisure, reachable only through trade bodies and vendors (https://lemonbooking.com/en-GB/updates/2026-06/martyns-law).",
+        "competitiveGap": "The free SIA tool covers procedures and review dates (https://www.gov.uk/government/publications/martyns-law-standard-tier-planning-tool); only the sign-off log and multi-site view are left.",
+        "feasibility": "A simple sign-off and reminder app on the shared platform; the duties are short and published (https://www.gov.uk/guidance/understanding-martyns-law-and-the-sias-role-as-regulator).",
+        "complianceBurden": "Only staff names and sign-off times; nothing regulated beyond ordinary UK GDPR (https://www.gov.uk/guidance/understanding-martyns-law-and-the-sias-role-as-regulator)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Rescored from 20 to 17, close to a kill. The SIA published a free standard-tier planning tool on 9 November 2026 that walks through the duties and records procedures per premises with a review date, and its guidance says standard-tier premises need not document or send anything and that the Act does not require specific training. Pain 3 to 2 (the only named complaint is from 2023), willingnessToPay 3 to 2 (free regulator form; volunteer halls and churches get free guides from ACRE and insurers), competitiveGap 2 to 1. The freelance school job asks for a risk assessment, which standard tier does not require, so it shows confusion more than recurring demand. Re-scoped from single village halls to commercial operators with 2 to 10 sites, as a companion to the SIA tool that adds staff sign-off, turnover reminders and a multi-site view."
+      },
+      "inspiredBy": "https://www.freelancer.com/projects/risk-assessment/Martyn-Law-School-Risk-Template",
+      "gateGap": {
+        "missing": [
+          "total 17 is below 22",
+          "pain 2 is below 4",
+          "willingnessToPay 2 is below 3",
+          "no complaint dated within 90 days (the only complaint is from 2023)",
+          "only 1 complaint item"
+        ],
+        "closedBy": "The operator interviews close the largest gap: 3 of 8 multi-site operators describing the briefing problem in their own words and agreeing to pay £15/month would supply recent complaints and lift pain and willingnessToPay to 3 or more; it would still be a long way from 22."
+      }
+    },
+    {
+      "n": 3,
+      "title": "Behind-the-Wheel Log and Instructor File for Small ELDT Providers",
+      "slug": "btw-log-instructor-file-small-eldt-providers",
+      "category": "Small Business Ops",
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Teaching Operations",
+      "shape": {
+        "stateful": true,
+        "connected": false,
+        "unattended": true,
+        "engine": true,
+        "shared": true,
+        "notes": {
+          "stateful": "Each trainee's pre-training documents, range and road sessions and certificate, and each instructor's qualification file, are kept per location for the three-year retention period.",
+          "unattended": "A daily job warns before an instructor's CDL or medical card, a trainee's learner's permit, or the location's biennial registry update expires.",
+          "engine": "The ELDT curriculum rules: required range and public-road units per licence class, the same provider for range and road, a CLP before behind-the-wheel training, instructor CDL class and two years' experience.",
+          "shared": "The instructor logs a session on a phone at the time it happens and the trainee confirms it; the owner sees every trainee and instructor."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "email",
+        "scheduled"
+      ],
+      "buildPlan": [
+        {
+          "n": 1,
+          "title": "One trainee, one session",
+          "delivers": "An owner signs in, adds a trainee with their learner's permit, and an instructor logs one timestamped range session.",
+          "acceptance": "A session saved on a phone shows its server timestamp and cannot be back-dated; deployed."
+        },
+        {
+          "n": 2,
+          "title": "Curriculum checklist",
+          "delivers": "Class A and Class B range and public-road units per trainee, with progress and proficiency notes.",
+          "acceptance": "A trainee cannot be marked complete until every required unit for their class has a logged session."
+        },
+        {
+          "n": 3,
+          "title": "Instructor file",
+          "delivers": "Each instructor's CDL class, endorsements, experience start date and medical card, with a qualified or not-qualified status.",
+          "acceptance": "Logging a session under an instructor with an expired CDL is blocked with a clear reason."
+        },
+        {
+          "n": 4,
+          "title": "Trainee sign-off and certificate",
+          "delivers": "The trainee confirms each session from a link; a completion summary is ready for manual entry in the Training Provider Registry.",
+          "acceptance": "The summary for a seeded trainee lists every unit, instructor and date, and matches the registry's entry fields."
+        },
+        {
+          "n": 5,
+          "title": "Expiry and update watch",
+          "delivers": "A daily job emails the owner before CDLs, medical cards, permits and the biennial registry update fall due.",
+          "acceptance": "Seeded expiries produce exactly the expected emails on the expected days in a time-travel test."
+        },
+        {
+          "n": 6,
+          "title": "Investigator packet and polish",
+          "delivers": "A per-location packet (lesson plans, vehicles, instructors, trainees) as PDF; owner README in plain words; phone layout; accessibility pass.",
+          "acceptance": "The packet exports in one click for a seeded location; a walkthrough test runs sign-in to packet; axe reports no serious issues."
+        }
+      ],
+      "summary": "For small motor carriers and owner-run CDL trainers that train a few new drivers a year: a phone-first behind-the-wheel log, instructor qualification file and expiry watch, priced per trainee instead of $399 a month.",
+      "public": {
+        "summary": "Keeps the training records a federal investigator asks for, made on the day each driving lesson happens, for a small trucking company or driving school.",
+        "problem": "You train a few new drivers a year and you are on the federal training register. Investigators have removed thousands of providers, and missing training records are one of the reasons they give. The software built for big schools costs hundreds of dollars a month, so your records live in paper folders.",
+        "forWhom": "Owners of small trucking companies and small driving schools that train new commercial drivers.",
+        "benefits": [
+          "Every lesson recorded on the day, from a phone",
+          "Know which instructors are qualified to teach right now",
+          "Warnings before licences, medical cards and registry updates lapse",
+          "One packet ready when an investigator asks"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "FMCSA has removed more than 8,000 entry-level driver training providers in 18 months, and investigators cite 'missing training and assessment records' and unqualified instructors; small providers that train a handful of drivers a year keep these records on paper because the software built for schools starts at $399 per location per month.",
+      "description": "The owner sets up a location, its instructors and trainees. Instructors log each range and public-road session on a phone at the time, against the curriculum units for the trainee's licence class, and the trainee confirms it. The app checks instructor qualifications and trainee permits before a session can be logged, shows progress per trainee, prepares a completion summary for manual entry in the Training Provider Registry, warns before documents and the biennial update expire, and exports a per-location packet. It does not sell theory courses, which small providers already buy for $20 to $35 a seat with the registry upload included.",
+      "targetCustomer": "Owners and safety managers of small US motor carriers that train some of their own hires, and owner-operated CDL schools and behind-the-wheel trainers with one location.",
+      "buyer": "The carrier or school owner, from the business account, per trainee or yearly.",
+      "whyNow": "FMCSA's crackdown removed 110+ providers in an emergency action on 1 September 2026 after 175 investigators ran nearly 400 investigations, and its 21 October 2026 information-collection notice counts 26,284 respondent training providers and 198,730 burden hours a year.",
+      "founderFit": "A stateful records app with a rule checker and scheduled reminders is squarely what Pisan can build alone; training records and assessment sign-off are close to his teaching work, but he has no trucking network.",
+      "problemEvidence": [
+        {
+          "url": "https://www.truckinginfo.com/news/fmcsa-removes-110-truck-driver-training-schools-from-certified-eldt-list",
+          "source": "truckinginfo.com",
+          "author": "Deborah Lockridge",
+          "date": "2026-09-01",
+          "kind": "mandate",
+          "summary": "110+ emergency removals; investigators found instructors without proper licences and 'missing training and assessment records'; 8,000+ providers removed in 18 months."
+        },
+        {
+          "url": "https://www.govinfo.gov/content/pkg/FR-2026-10-21/pdf/2026-21514.pdf",
+          "source": "govinfo.gov (Federal Register)",
+          "author": "FMCSA",
+          "date": "2026-10-21",
+          "kind": "mandate",
+          "summary": "ICR renewal for ELDT training certification: 26,284 respondent training providers, 198,730 annual burden hours, biennial registry updates required."
+        },
+        {
+          "url": "https://cdlpowersuite.com/pricing",
+          "source": "cdlpowersuite.com",
+          "author": "CDL PowerSuite",
+          "date": "2026-11-17",
+          "kind": "spend",
+          "summary": "Schools pay for this: Foundation $399 per location per month (BTW tracking, certificates, registry submission); Suite $549 adds instructor files and expiry alerts."
+        },
+        {
+          "url": "https://www.cdlpowersuite.com/cdl-school-crackdown-what-is-required-to-pass-an-audit-stay-compliant",
+          "source": "cdlpowersuite.com",
+          "author": "Jason Boudreau",
+          "date": "2025-12-10",
+          "kind": "mandate",
+          "summary": "A vendor's audit guide: student files, theory, range and road logs with timestamps, and 'Missing documents are the #1 reason schools were removed from the TPR'."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "CDL PowerSuite",
+          "url": "https://cdlpowersuite.com/pricing",
+          "price": "$399, $549 or $799 per location per month",
+          "gap": "Built for schools; far too expensive for a provider training a few drivers a year."
+        },
+        {
+          "name": "AvatarFleet ELDT",
+          "url": "https://www.avatarfleet.com/features/eldt",
+          "price": "unknown",
+          "gap": "Pre-fills theory, range and road records and submits to the registry, inside a fleet platform; no price published."
+        },
+        {
+          "name": "MangoApps ELDT tracking template",
+          "url": "https://www.mangoapps.com/templates/tasks/entry-level-driver-training-eldt-certification-tracking",
+          "price": "Free to view",
+          "gap": "A tracking template that says it does not replace the underlying training records."
+        },
+        {
+          "name": "Kansas state BTW documentation form",
+          "url": "https://www.ksde.gov/Portals/0/School Bus/Documents-Forms/ELDT/ELDT BTW documentationSa.pdf",
+          "price": "Free",
+          "gap": "Paper form, no timestamps, instructor checks or reminders."
+        }
+      ],
+      "keyFeatures": [
+        "Phone-first, server-timestamped range and road sessions",
+        "Curriculum checklist per licence class",
+        "Instructor qualification file that blocks unqualified sessions",
+        "Expiry and biennial-update reminders",
+        "Per-location investigator packet"
+      ],
+      "mvpScope": {
+        "features": [
+          "Trainees, instructors and sessions",
+          "Class A and B checklists",
+          "Instructor qualification check",
+          "Expiry emails"
+        ],
+        "outOfScope": [
+          "Theory courses",
+          "Automatic registry submission (no public bulk upload found)",
+          "Sales CRM",
+          "State-specific skills-test scheduling"
+        ],
+        "buildEstimate": "3 weeks"
+      },
+      "techStack": "React + Vite + Tailwind static front end, Supabase sign-in and tables with an append-only session log, scheduled job and transactional email on the shared platform; PDF export in the browser.",
+      "pricing": {
+        "model": "Per trainee, or a yearly flat fee",
+        "pricePoint": "$19 per trainee, or $199/year per location",
+        "rationale": "The reviewer judged a monthly fee wrong for providers with a few trainees a year; per-trainee pricing sits beside the $20 to $35 theory seats they already buy."
+      },
+      "revenueSketch": "Estimate: 400 locations x $199/year = $79,600 a year, about $6,600 MRR equivalent. Assumes 1.5% of the 26,284 registered providers buy; the share that are small carriers is unknown.",
+      "distribution": "As an add-on sold through cheap theory sellers (DLA Academy, ELDT Nation) whose fleet customers need a behind-the-wheel record, plus state trucking association newsletters and safety consultants.",
+      "validationTest": {
+        "method": "Interview 10 small carriers and one-location schools found on the registry and in state trucking associations about how they keep BTW logs today, then offer a $19 pilot trainee.",
+        "successCriteria": "4 of 10 describe paper or spreadsheet logs as a worry and 3 pay for a pilot trainee.",
+        "cost": "2 weeks and about $60 for a pilot landing page."
+      },
+      "moat": "Modest: curriculum rules, timestamped logs and a theory-seller channel; a large vendor could add a per-trainee tier.",
+      "compliance": [
+        "49 CFR 380 Subpart F: records kept three years; the app must not imply a provider will pass an audit.",
+        "Trainee documents (permits, medical cards) are personal data: encryption at rest and role access.",
+        "FMCSA rulemaking RIN 2126-AD00 may change listing and BTW standards; keep the curriculum rules data-driven."
+      ],
+      "risks": [
+        {
+          "risk": "Removals in 2026 are triggered by driver outcomes (English-proficiency roadside failures), not paperwork, so records do not protect the listing.",
+          "mitigation": "Sell the log as the record investigators ask for, never as removal protection."
+        },
+        {
+          "risk": "Small carriers outsource training instead of registering.",
+          "mitigation": "Include owner-run schools and BTW-only trainers in the target."
+        },
+        {
+          "risk": "No complaint from a small provider has been found.",
+          "mitigation": "The validation interviews come before any build."
+        }
+      ],
+      "scores": {
+        "pain": 2,
+        "willingnessToPay": 2,
+        "reachability": 2,
+        "competitiveGap": 3,
+        "feasibility": 4,
+        "complianceBurden": 3,
+        "total": 16
+      },
+      "scoreRationale": {
+        "pain": "Strong mandate (https://www.truckinginfo.com/news/fmcsa-removes-110-truck-driver-training-schools-from-certified-eldt-list) but no complaint from a small provider found; removals are driven by driver outcomes, not records.",
+        "willingnessToPay": "Schools pay $399+/month (https://cdlpowersuite.com/pricing), but a provider with a few trainees a year buys theory with the registry upload for $20 to $35 a seat and uses free paper forms.",
+        "reachability": "26,284 registered providers (https://www.govinfo.gov/content/pkg/FR-2026-10-21/pdf/2026-21514.pdf), but no network into trucking; reach depends on theory sellers and associations.",
+        "competitiveGap": "Nobody cheap bundles BTW logs, instructor files and a packet; the cheapest bundle found is $399 per location per month (https://cdlpowersuite.com/pricing).",
+        "feasibility": "Records, a rule checker and reminders on the shared platform; required records are listed in https://www.cdlpowersuite.com/cdl-school-crackdown-what-is-required-to-pass-an-audit-stay-compliant.",
+        "complianceBurden": "Trainee permits and medical cards, three-year retention and pending FMCSA rule changes (https://www.govinfo.gov/content/pkg/FR-2026-10-21/pdf/2026-21514.pdf) make it heavier than a simple log."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "No free or under-$60 product does the whole job, so no kill, but rescored from 19 to 16. Pain 3 to 2: still no dated complaint from a small provider, and the 1 September 2026 removals were triggered by matching English-proficiency roadside violations to the registry, while one school was removed three weeks after an audit letter saying no further action, so a perfect file does not prevent removal. WillingnessToPay 3 to 2: small carriers already buy theory with the registry upload for $20 to $35 a seat, free state BTW forms and J.J. Keller's free checklist exist, and guidance says fleets with fewer than about 10 hires a year should outsource. ComplianceBurden 4 to 3: three-year retention, trainee documents, and a pending FMCSA rule (RIN 2126-AD00). The reviewer also found FMCSA's 2026 supporting statement for the information collection, which now requires new registrants and new locations to upload lesson plans, vehicle, instructor, licensure and facility documents. Re-scoped to the behind-the-wheel log, instructor file and new-location packet, priced per trainee or yearly, sold through theory sellers, and dropped theory and any promise of passing an audit."
+      },
+      "inspiredBy": "https://www.truckinginfo.com/news/fmcsa-removes-110-truck-driver-training-schools-from-certified-eldt-list",
+      "gateGap": {
+        "missing": [
+          "total 16 is below 22",
+          "pain 2 is below 4",
+          "willingnessToPay 2 is below 3",
+          "no complaint evidence"
+        ],
+        "closedBy": "The interviews with 10 small providers close the largest gap: providers describing paper BTW logs or a removal notice for missing records would supply complaint evidence and lift pain to 3 or 4, and 3 paid pilot trainees would lift willingnessToPay to 3."
+      }
+    }
+  ],
+  "runNotes": {
+    "weekday": "Tuesday",
+    "domainLens": "Teaching and training anywhere: K-12, corporate L&D, tutoring, homeschool",
+    "focusSources": [
+      "A14 Plugin and add-on support forums",
+      "B1 Teachers Pay Teachers and Etsy",
+      "C10 Change events: shutdowns, price rises, removed free tiers"
+    ],
+    "searches": [
+      "wordpress.org/support/plugin/{quiz-master-next,quiz-maker,academy,tutor,learnpress,masterstudy-lms-learning-management-system}/ (A14)",
+      "wordpress.org topic: using-quiz-maker-for-scientific-training-and-certification (A14)",
+      "FMCSA training provider registry removed providers ELDT 2026 (C10/C5)",
+      "apprenticeship OJT hours tracking electrical contractor apprentices logbook state license 2026 (mandate)",
+      "AHA Atlas instructor complaints training center eCards 2026 (complaint)",
+      "swim school software price increase 2026 owners switching (C10)",
+      "shutting down / sunset education app teachers October-November 2026 alternative (C10)",
+      "Martyn's Law standard tier small venues procedures deadline 2027 SIA guidance (mandate)",
+      "CDL school owner ELDT records audit removed registry forum complaint (complaint, small business)",
+      "LMS price increase 2026 small business TalentLMS Docebo 360Learning Absorb (C10)",
+      "EU AI Act Article 4 AI literacy digital omnibus 2026 small businesses (mandate)",
+      "DVSA driving test booking changes 2026 instructors reaction (C10, small business complaint)",
+      "despatch.blog.gov.uk comment threads 2026-05-11, 2026-08-28, 2026-09-15, 2026-09-24 (complaint, small business)",
+      "Overdrive CDL school fires back emergency shutdown (complaint)",
+      "ELDT training provider software BTW records pricing per student (spend)",
+      "driving instructor app UK pricing Total Drive ADI Network Drivejar MyDriveTime (B12 spend)",
+      "Martyn's Law village hall committee volunteers burden (complaint)",
+      "CPR instructor training business software Enrollware price increase or alternative (C10/spend)",
+      "Kahoot Quizlet Edpuzzle Nearpod Seesaw price increase 2026 free plan removed (C10)",
+      "small trucking company registered ELDT provider BTW log template TPR (mandate)",
+      "first aid CPR training company certificate expiry renewal reminders software (spend)",
+      "driving instructor app pupil test date readiness tracker 2026 (competitors)",
+      "apps.xero.com staff licences qualifications expiry tracking AU (B12 spend)",
+      "Employment Hero Deputy Tanda qualifications expiry price (competitors)",
+      "thetruckersreport ELDT training provider registry own drivers paperwork (complaint)",
+      "notice of proposed removal ELDT school owner records corrective action (complaint)",
+      "blog.gov.uk Martyn's Law standard tier comments (complaint)",
+      "despatch.blog.gov.uk 10 working days cancellation instructors (complaint)",
+      "Martyn's Law compliance app standard tier price (competitors)",
+      "freelancer.com API (B11): CDL school, training records, employee training, SCORM, quiz certificate, lesson plans, apprentice hours, onboarding training, tutoring, Martyn's Law, training matrix, RTO compliance, course certificates, CPD tracking, staff training tracker",
+      "freelancer.com API spend pass (B11): driving instructor, driving school, ELDT, licence expiry, certificate expiry reminder (all found nothing relevant)",
+      "teacherspayteachers.com/Browse/Search: drivers education, AI literacy (B1)",
+      "hn.algolia.com comments: \"AI literacy\", \"training records\", \"compliance training\" (A12)",
+      "community.shopify.com search.json: workshop class booking, class tickets capacity, course booking waitlist (A13; only a developer promoting his own app)",
+      "productideas.xero.com search: apprentice, training, certification, qualification (A16)",
+      "federalregister.gov API: \"training records\" rules, \"entry-level driver training\" (C5)",
+      "cdlpowersuite.com/pricing, totaldrive.co.uk, apps.apple.com DriveSync (spend pass, B12)"
+    ],
+    "unverifiedSignals": [
+      {
+        "url": "https://www.overdriveonline.com/regulations/article/15774653/fmcsas-cdl-mills-problem-and-selfcertification-on-the-training-provider-registry",
+        "reason": "HTTP 403 to WebFetch; curl got a Cloudflare 'Just a moment' challenge. Not worked around."
+      },
+      {
+        "url": "https://www.federalregister.gov/documents/2026/10/21/2026-21514/agency-information-collection-activities-renewal-of-an-approved-information-collection-training",
+        "reason": "WebFetch redirected to unblock.federalregister.gov and the full_text endpoint returned a 'Request Access' page; the same notice was read from the govinfo.gov PDF instead."
+      },
+      {
+        "url": "https://www.hallmaster.co.uk/what-community-venues-need-to-know-about-martyns-law/",
+        "reason": "DNS failure (EAI_AGAIN) from both this session and the reviewer."
+      },
+      {
+        "url": "https://totaldrive.co.uk/?p=963",
+        "reason": "HTTP 404; the £10/£12 instructor price in search snippets could not be confirmed, so the homepage's 'from £18' is cited."
+      },
+      {
+        "url": "https://www.capterra.com/p/172589/Jackrabbit-Swim/reviews/?page=2",
+        "reason": "Not fetched: Capterra is on the avoid list (A10); the snippet's complaint was not used."
+      }
+    ],
+    "rejectedCandidates": [
+      {
+        "title": "Ticket Register for Xero Payroll AU (staff licence and training-ticket expiry)",
+        "total": 16,
+        "reason": "Review kill: RosterElf on the Xero App Store already reads employees from Xero, stores licence type, number, issuer, expiry and scan and sends 90/60/30/14-day alerts from A$3-10 per employee per month; Canyou does the same with Xero Payroll sync. Only one 3-vote request is about employee tickets, and the product would be a tab of the 2026-11-16 Fair Work Date Watch."
+      },
+      {
+        "title": "AI Literacy Record for Small EU Teams (Article 4)",
+        "total": 13,
+        "reason": "Review kill: Praxikon's free Article 4 register and dossier, LearnFrame's free AI-use inventory and AhaSlides' free tracked course already do the job for SMEs; the Omnibus made Article 4 an effort duty ('does not require ... any specific level of AI literacy', per the Commission's AI Act Service Desk), and no small-business complaint was found."
+      },
+      {
+        "title": "Recertification reminders for small CPR and first-aid trainers",
+        "total": 15,
+        "reason": "CPR Enroll, Enrollware and Arlo already send renewal reminders, and a Zapier template does it free; no complaint found."
+      },
+      {
+        "title": "Apprentice hours logbook for small electrical and plumbing contractors",
+        "total": 15,
+        "reason": "No complaint found; vendors (ShiftFlow, Fieldproxy) already market apprentice hour tracking, and state forms differ widely."
+      },
+      {
+        "title": "View-only DVSA test availability watcher for instructors",
+        "total": 0,
+        "reason": "Rejection rule: DVSA says third-party apps, bots or automated services breach the booking system's terms."
+      },
+      {
+        "title": "Instructor test-swap network (pupils swap DVSA tests through their instructors)",
+        "total": 0,
+        "reason": "Rejection rule: depends on network effects, and DVSA's 2026 rules restrict swaps."
+      },
+      {
+        "title": "Seesaw Starter class-limit migration for teachers",
+        "total": 12,
+        "reason": "Seesaw cut the free plan to 1 active class from 30 June 2026, but free alternatives (Google Classroom, ClassDojo) cover the displaced teachers; minors' data."
+      },
+      {
+        "title": "Duolingo for Schools replacement class tool",
+        "total": 11,
+        "reason": "Ends July 2027 with many free class-quiz alternatives; teacher buyers rarely pay."
+      },
+      {
+        "title": "Martyn's Law risk-assessment template for primary schools",
+        "total": 12,
+        "reason": "Institutional buyer and the standard tier does not require a risk assessment; folded into the Briefing Log idea's research."
+      },
+      {
+        "title": "Certificate delivery and recertification for WordPress quiz-plugin trainers",
+        "total": 13,
+        "reason": "The AYS Quiz Maker thread shows the plugin's Pro tier already does pass-only certificates and templates; no unmet gap."
+      },
+      {
+        "title": "Swim school progress reports and per-student pricing",
+        "total": 12,
+        "reason": "Jackrabbit, SimplySwim, ClassBase (£25/month) and Swimscool.io (£39/month) serve it; evidence only on Capterra (avoid list)."
+      },
+      {
+        "title": "AHA Atlas eCard inventory reconciliation for small CPR training sites",
+        "total": 12,
+        "reason": "Evidence is 2023 AHA job aids; Enrollware's eCard integration already handles issuance."
+      },
+      {
+        "title": "Multilingual White Card induction helper for Australian builders",
+        "total": 13,
+        "reason": "One freelance job for an in-person translator; an AI-translation wrapper with no data moat, and RTO assessment rules restrict assistance."
+      },
+      {
+        "title": "Excel/VBA school intervention register replacement",
+        "total": 12,
+        "reason": "Student data for minors and an institutional buyer; a one-off AUD 10-20k custom job, not a product."
+      },
+      {
+        "title": "Virtual assistant tooling for small tutoring businesses",
+        "total": 10,
+        "reason": "AI wrapper with no workflow moat; tutoring tools are crowded (2026-11-10 run)."
+      },
+      {
+        "title": "PDI trainee-licence 40-hour training record for ADI trainers",
+        "total": 13,
+        "reason": "Niche, no complaint found, and trainer-booking apps already record it."
+      },
+      {
+        "title": "Class and workshop booking for Shopify makers",
+        "total": 11,
+        "reason": "The only community.shopify.com threads are a developer promoting his own booking app; crowded, as ROUTINE.md warns."
+      },
+      {
+        "title": "CDL student pre-training document collector",
+        "total": 14,
+        "reason": "Merged into the Behind-the-Wheel Log idea; on its own it is a form."
+      },
+      {
+        "title": "Xero document expiry reminders for supplier contracts and insurance",
+        "total": 14,
+        "reason": "Same customer and problem as the 2026-11-12 Pay-Run Cover Check for Xero idea."
+      }
+    ],
+    "watchlist": [],
+    "caveats": "First run of 2026-11-17 (Tuesday, teaching and training lens). Three provisional ideas ship (17, 17, 16); none came near the gate of 22. Twenty-two candidates were generated; five were adversarially reviewed and three survived. Two were killed: Ticket Register for Xero Payroll AU (RosterElf and Canyou on the Xero App Store already do it, and it would be a tab of the 2026-11-16 Fair Work Date Watch) and AI Literacy Record for Small EU Teams (free registers from Praxikon, LearnFrame and AhaSlides). All three survivors were rescored down: Test Change Budget 20 to 17 (complaints are mostly about seeing DVSA availability, which the app deliberately does not do; cheap apps already hold test dates), Briefing Log for Martyn's Law 20 to 17 (the SIA published a free standard-tier planning tool on 9 November 2026 and standard tier needs no documentation), Behind-the-Wheel Log 19 to 16 (no small-provider complaint; 2026 removals are driven by driver outcomes, not paperwork). Only five reviews were run, not ten, because three ideas had survived review; every remaining candidate was at 15 or below, under the watchlist threshold of 19, so the watchlist is empty. The strongest complaint evidence of the run is DVSA's own Despatch blog comment threads (dated, named instructors); gov.uk blogs carry comments and may be a reusable complaint vein. Freelancer.com's API matched loosely all run and found no relevant paid job for driving instructors, ELDT or licence expiry (spend pass: nothing found). Dates: Total Drive's homepage and CDL PowerSuite's pricing page carry no date, so the fetch date 2026-11-17 is used; the GOV.UK 2026 booking-rules page uses its last-updated date 2026-06-19. Constraint check: categories Small Business Ops (2) and Accessibility & Compliance (1, smallBusiness true); all three have small-business buyers paying their own money; one Weekend MVP (Briefing Log) and two Multi-week; Test Change Budget and Behind-the-Wheel Log are substantial Multi-week ideas with build plans. The lens stayed away from K-12 and higher education on purpose (minors' data and institutional buyers), toward training businesses: driving instructors, CDL trainers and staff briefings."
+  }
+}
