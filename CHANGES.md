@@ -690,3 +690,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 
 
 2026-11-17 [doc] Created ideas/2026-11-17.json (schemaVersion 3, 3 ideas): Test Change Budget (17, provisional), Martyn's Law Briefing Log (17, provisional), BTW Log for ELDT (16, provisional)
+
+2026-11-18 [scope] ROUTINE.md moved to pisan-labs/hintwise-workflow roles/finder/ROUTINE.md (owner decision, 18 Nov); this file is now a pointer and the scheduled task points to the new location.

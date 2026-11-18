@@ -18,7 +18,9 @@ Every run produces at least one idea. Ideas that clear the quality gate ship as
 ideas a day. Near misses go on a watchlist and get a second look on later runs.
 
 The full routine, including sources, scoring, the quality gate, and the
-adversarial review step, is in [ROUTINE.md](ROUTINE.md). Each run appends what
+adversarial review step, is in `roles/finder/ROUTINE.md` in the private repository
+pisan-labs/hintwise-workflow (moved there on 2026-11-18; [ROUTINE.md](ROUTINE.md) here is a
+pointer). Each run appends what
 it tried to `ideas/run-log.jsonl`, including every fetch that failed, and
 `scripts/source_health.py` turns that into the briefing the next run reads
 before it spends a search. That is how the routine gets tuned from evidence
@@ -49,8 +51,9 @@ See [DEPLOY.md](DEPLOY.md) for Netlify setup.
 
 ## Structure
 
-- `ROUTINE.md` - The daily routine prompt. The scheduled routine clones this repo and
-  follows this file, so editing it here changes the next run's behaviour. Verified
+- `ROUTINE.md` - A pointer: since 2026-11-18 the daily routine's procedure lives in
+  pisan-labs/hintwise-workflow, `roles/finder/ROUTINE.md`, and the scheduled task's prompt
+  points there. Before that, the scheduled routine cloned this repo and followed this file. Verified
   2026-11-01 against trigger `trig_01QcyJzAmLr3wVsQZwhoBkHK` ("Gather ideas"), whose
   own prompt is only: fetch main, then read ROUTINE.md and follow it exactly.
 - `ideas/YYYY-MM-DD.json` - Daily idea files (older days may be `.md`; see `ideas/SCHEMA.md`)
