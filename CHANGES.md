@@ -694,3 +694,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-18 [scope] ROUTINE.md moved to pisan-labs/hintwise-workflow roles/finder/ROUTINE.md (owner decision, 18 Nov); this file is now a pointer and the scheduled task points to the new location.
 
 2026-11-18 [doc] Created ideas/2026-11-18.json (schemaVersion 3, 4 ideas): Calendar Sync Watch (18, prov.), Class Pack Ledger (18, prov.), Pickup Check-Off (18, prov.), Idle Spend Watch (18, prov.)
+
+2026-11-18 [doc] delivery-canary implemented (day 7 of 7): implemented.json entry with url, notes and publicNotes; studio.json entry (small-business); web/media/delivery-canary.jpg from demo.gif.
