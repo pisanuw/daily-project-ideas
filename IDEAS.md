@@ -656,3 +656,7 @@
 | 2026-11-17 | Test Change Budget for UK Driving Instructors | Small Business Ops | Multi-week | 17 | provisional |  |
 | 2026-11-17 | Briefing Log for Martyn's Law Standard Tier | Accessibility & Compliance | Weekend MVP | 17 | provisional |  |
 | 2026-11-17 | Behind-the-Wheel Log and Instructor File for Small ELDT Providers | Small Business Ops | Multi-week | 16 | provisional |  |
+| 2026-11-18 | Calendar Sync Watch for WordPress Booking Sites | Micro-SaaS | Multi-week | 18 | provisional |  |
+| 2026-11-18 | Class Pack Ledger for Square Studios | Small Business Ops | Multi-week | 18 | provisional |  |
+| 2026-11-18 | Pickup Stop Check-Off for Shopify Route Sellers | Small Business Ops | Multi-week | 18 | provisional |  |
+| 2026-11-18 | Idle Spend Watch for Fly.io Teams | Developer Tool | Multi-week | 18 | provisional |  |

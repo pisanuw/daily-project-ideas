@@ -1,0 +1,2390 @@
+{
+  "date": "2026-11-18",
+  "schemaVersion": 3,
+  "complete": true,
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Calendar Sync Watch for WordPress Booking Sites",
+      "slug": "calendar-sync-watch",
+      "category": "Micro-SaaS",
+      "smallBusiness": true,
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Data & Visualization",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": true,
+        "engine": true,
+        "shared": true,
+        "notes": {
+          "stateful": "Each booking page keeps a per-service baseline of how many slots it normally offers, a 90-day check history and an incident log the owner or freelancer comes back to.",
+          "connected": "Reads availability from each site's booking plugin (Amelia or Simply Schedule Appointments) and free/busy from the client's Google Calendar with the client's consent.",
+          "unattended": "A daily scheduled check per page, with an email alert on a failure and a weekly all-clear digest.",
+          "engine": "Per-plugin adapters plus the cross-check rules: no slots in the next 7 days against a learned baseline, slots offered inside the owner's busy times (sync dead), calendar quiet while bookings continue, with time-zone and opening-hours handling.",
+          "shared": "The freelancer watches many client sites from one account and sends each client a monthly health note."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "email",
+        "scheduled",
+        "backend"
+      ],
+      "buildPlan": [
+        {
+          "n": 1,
+          "title": "One page, one check",
+          "delivers": "Sign in, paste an Amelia booking page and a service, and see today's count of bookable slots in the next 7 days; a daily job emails if it is zero.",
+          "acceptance": "Against a test WordPress site with Amelia Lite, the check reports the right slot count, and an alert email arrives after all working hours are removed; deployed."
+        },
+        {
+          "n": 2,
+          "title": "Second plugin and sync status",
+          "delivers": "Add Simply Schedule Appointments (public availability route with the page's public nonce) and read each plugin's own Google Calendar connection status where it exposes one.",
+          "acceptance": "Fixture sites for both plugins return slot counts that match what the booking page shows on the same day; a revoked Google Calendar link on the fixture raises a 'calendar disconnected' alert, not a false 'no slots'."
+        },
+        {
+          "n": 3,
+          "title": "Calendar cross-check",
+          "delivers": "The client connects Google Calendar with free/busy access only; the check flags slots offered while the owner's calendar is busy, which means the sync is dead.",
+          "acceptance": "A seeded busy block that the booking tool still offers produces exactly one 'sync looks broken' alert; event titles and attendees are never requested or stored."
+        },
+        {
+          "n": 4,
+          "title": "Baselines and quiet alerts",
+          "delivers": "A per-service baseline so 'only 2 slots this week' alerts when the norm is 30, with snooze for holidays and a weekly all-clear digest.",
+          "acceptance": "Replaying 60 days of recorded counts produces alerts only on the seeded drops; a snoozed week sends nothing."
+        },
+        {
+          "n": 5,
+          "title": "Freelancer view",
+          "delivers": "One account watches many client pages, with a status board and a plain monthly health note emailed to each business owner.",
+          "acceptance": "A 20-page fixture renders the board under one second; each owner receives only their own note."
+        },
+        {
+          "n": 6,
+          "title": "Polish",
+          "delivers": "Business-owner README in plain words, phone layout, keyboard and screen-reader pass, privacy notice on what is read, walkthrough test.",
+          "acceptance": "A walkthrough test runs sign-in to first alert; axe reports no serious issues; the privacy page lists every scope and field read."
+        }
+      ],
+      "summary": "For freelancers and small agencies who run WordPress booking sites for salons, clinics and studios: a daily check that each site's Google Calendar link is still alive and that each service still offers its usual number of slots, with an email before the client's customers notice.",
+      "public": {
+        "summary": "Checks every day that your clients' booking pages still offer times and that their calendars are still in sync, and emails you before their customers notice.",
+        "problem": "You look after booking sites for salons, clinics and studios, and an update or a lapsed calendar link can quietly stop a page offering times. You hear about it from the client, after their customers could not book or two people turned up for the same slot. Checking every client's page every morning is a job nobody has time for.",
+        "forWhom": "Freelancers and small agencies who build and look after online booking pages for appointment businesses.",
+        "benefits": [
+          "Know every client's booking page is open for business without checking it yourself",
+          "Hear about a broken calendar link before it causes a double booking",
+          "One board for all your clients' booking pages",
+          "A short monthly note you can send each client to show their bookings are being watched"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "Booking plugins break quietly after updates: an Amelia update left an escape-room owner's 'free slots ... not appearing on the website', a security-plugin update 'prevented appointment bookings', and a paid booking tool's calendar 'was regularly disconnected, which meant that bookings were no longer possible'. Simply Schedule Appointments detects a dead Google Calendar link but only shows a wp-admin banner; its email alert is commented out in the plugin code. Whoever maintains the site usually hears from the client, after customers could not book.",
+      "description": "The freelancer adds each client's booking page and picks the services to watch. Once a day a small backend reads the availability the page offers for the next 7 days through the route the plugin's own booking form uses (Amelia and Simply Schedule Appointments expose this to logged-out visitors), compares it with a learned per-service baseline, and, with free/busy-only access to the client's Google Calendar, flags slots offered inside busy times, which is what a dead calendar sync looks like. It emails the freelancer when something is off, with a weekly all-clear, and can send the client a short monthly health note. It does not try to catch front-end breakage (firewall rules, caching, script errors): the setup page links a free browser check for that. It places no test bookings, which keeps it apart from the existing Delivery Canary for digital shops.",
+      "targetCustomer": "Freelancers and small agencies who maintain 5 to 40 WordPress sites with Amelia or Simply Schedule Appointments for appointment businesses (salons, spas, clinics, therapists, tutors, escape rooms), usually inside a monthly care plan.",
+      "buyer": "The freelancer or small agency, from its own card, folded into the monthly care plan it already sells the client.",
+      "whyNow": "Booking plugins ship often (Amelia 2.4.15 updated 2026-11-16, Simply Schedule Appointments 2026-11-17, per the plugin API https://api.wordpress.org/plugins/info/1.2/?action=plugin_information&request[slug]=ameliabooking&request[fields][sections]=0), and 2026 support threads show updates breaking slots and calendar sync (https://wordpress.org/support/topic/google-calendar-event-description-2/). Freelancers already pay about EUR 2 per site per month for generic monitoring that cannot see either (https://wp-umbrella.com/pricing/).",
+      "founderFit": "Pisan can ship a web app alone in days on the HintWise platform, which already has sign-in, per-app data, scheduled jobs, transactional email and a small backend; the work is adapters and rules, which suits a CS professor. He has no stated salon or agency network, so reach relies on the WordPress plugin directory and freelancer channels.",
+      "problemEvidence": [
+        {
+          "url": "https://wordpress.org/support/topic/version-5-4-9-all-in-one-security-aios-causes-conflict-with-amelia-plugin/",
+          "source": "wordpress.org",
+          "author": "marcinek28",
+          "date": "2026-06-08",
+          "kind": "complaint",
+          "summary": "A security-plugin update 'caused the calendar to stop displaying and prevented appointment bookings' in Amelia until rolled back."
+        },
+        {
+          "url": "https://wordpress.org/support/topic/google-calendar-event-description-2/",
+          "source": "wordpress.org",
+          "author": "grzegorzewr2345234 (escape-room owner)",
+          "date": "2026-05-25",
+          "kind": "complaint",
+          "summary": "After an Amelia update, Google Calendar descriptions went missing and 'my free slots are not appearing on the website'; 'concerned about installing further updates'."
+        },
+        {
+          "url": "https://appsumo.com/products/appoint/reviews/very-bad-349430/",
+          "source": "appsumo.com",
+          "author": "melanie40",
+          "date": "2025-05-22",
+          "kind": "complaint",
+          "summary": "Paid booking tool: 'My integrated calendar was regularly disconnected, which meant that bookings were no longer possible'; stopped using it."
+        },
+        {
+          "url": "https://www.freelancer.com/projects/php/Fix-Booknetic-Booking-Error-after",
+          "source": "freelancer.com",
+          "author": "unknown (Freelancer employer)",
+          "date": "2026-05-09",
+          "kind": "spend",
+          "summary": "Owner pays USD 40 to fix 'Booking is not going through after Booknetic plugin is updated'; one of several small paid fix-after-breakage jobs."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "UptimeRobot",
+          "url": "https://uptimerobot.com/pricing.md",
+          "price": "Free (50 monitors, 5-minute checks, keyword monitoring); Solo from EUR 10/month",
+          "gap": "Keyword checks read the raw page; booking widgets load times with JavaScript, so a page with zero slots still passes. Its free appointment-page change alert is built for people hunting open slots, not owners."
+        },
+        {
+          "name": "Checkly",
+          "url": "https://www.checklyhq.com/pricing/",
+          "price": "Hobby $0 (1,000 browser checks and 10,000 API checks a month); Starter $24/month",
+          "gap": "Can script a real browser through a booking widget for free, but someone has to write and maintain the script per site, and it knows nothing about the owner's calendar. Closest free option for a technical freelancer."
+        },
+        {
+          "name": "OnlineOrNot",
+          "url": "https://onlineornot.com/pricing",
+          "price": "Hobby free (3 uptime monitors, 1,000 browser check runs a month); Pro from $25/month",
+          "gap": "Same as Checkly: generic browser checks, no booking or calendar semantics."
+        },
+        {
+          "name": "Better Stack",
+          "url": "https://betterstack.com/pricing",
+          "price": "Free for personal projects (10 monitors and heartbeats); responder licence $34/month ($29 annual)",
+          "gap": "Uptime and heartbeats; no slot reading or calendar cross-check."
+        },
+        {
+          "name": "Calendly's own disconnection email",
+          "url": "https://community.calendly.com/how-do-i-40/sudden-exchange-calendar-disconnection-ionos-hosted-exchange-ews-anyone-else-experiencing-this-6143",
+          "price": "Included in Calendly",
+          "gap": "Calendly emails when a calendar disconnects (users in the thread received it), so detection is covered for Calendly-only users; it says nothing about WordPress booking pages or plugin conflicts."
+        },
+        {
+          "name": "Synthetic transaction services (Ghost Inspector, Datadog Synthetics)",
+          "url": "https://www.ambrite.ca/knowledgebase/38/Reservation-Plugin-Monitoring-Best-Practices.html",
+          "price": "unknown (a hosting guide says typically $50-100/month; not confirmed on vendor pages)",
+          "gap": "Full scripted test bookings that create real appointments; priced and pitched for busier sites."
+        },
+        {
+          "name": "Checkly Hobby (Playwright browser checks)",
+          "url": "https://www.checklyhq.com/pricing/",
+          "price": "$0 (1,000 browser runs/month); Starter $24/month",
+          "gap": "Needs a script per site and knows nothing about the calendar behind the page, but is free and catches front-end breakage that this idea misses."
+        },
+        {
+          "name": "OnlineOrNot Hobby",
+          "url": "https://onlineornot.com/pricing",
+          "price": "Free (3 uptime monitors, 1,000 browser runs/month); Pro from $25/month",
+          "gap": "Generic browser checks; no slot counts, baselines or calendar cross-check."
+        },
+        {
+          "name": "WP Umbrella (agency maintenance and monitoring)",
+          "url": "https://wp-umbrella.com/pricing/",
+          "price": "EUR 1.99 (USD 2.19) per site per month",
+          "gap": "Uptime, PHP errors, PageSpeed and SSL only; no booking or form checks. Shows that freelancers pay about $2 per site for monitoring, which sets the price anchor."
+        },
+        {
+          "name": "Simply Schedule Appointments built-in error notices",
+          "url": "https://downloads.wordpress.org/plugin/simply-schedule-appointments.1.6.13.6.zip",
+          "price": "Included",
+          "gap": "Detects a lost Google Calendar connection but shows only a wp-admin banner; the admin email is commented out in 1.6.13.6."
+        }
+      ],
+      "keyFeatures": [
+        "Daily count of bookable slots per service for the next 7 days, against a learned baseline",
+        "Adapters for Amelia and Simply Schedule Appointments (the routes their own booking forms use)",
+        "Google Calendar free/busy cross-check: alert when offered slots fall inside busy time",
+        "Holiday snooze, 'fully booked' versus 'no hours' distinction, weekly all-clear",
+        "One board for all client sites, with an optional monthly health note to each client"
+      ],
+      "mvpScope": {
+        "features": [
+          "Amelia and Simply Schedule Appointments adapters",
+          "Google Calendar free/busy cross-check",
+          "Per-service baselines, daily job, email alerts and weekly digest",
+          "Multi-site board for one freelancer account"
+        ],
+        "outOfScope": [
+          "Calendly (it already emails on disconnection)",
+          "Front-end breakage checks (point to a free browser check instead)",
+          "Bookly and other multi-step forms that need a headless browser",
+          "Test bookings and reminder-delivery checks",
+          "A single-owner tier (no evidence owners pay for monitoring)",
+          "SMS alerts; Microsoft 365 or Exchange calendars"
+        ],
+        "buildEstimate": "3 weeks (6 build days of milestones plus Google OAuth verification lead time)"
+      },
+      "techStack": "Static front end on the HintWise platform, Supabase sign-in and per-app tables (pages, services, checks, baselines, incidents), a scheduled job calling a small Node backend on Render that holds the adapters and OAuth tokens, Google Calendar API freeBusy, transactional email. No LLM needed.",
+      "pricing": {
+        "model": "Per freelancer account, by number of watched client sites",
+        "pricePoint": "Free for 1 site; $19/month for up to 10 sites; $39/month for up to 40",
+        "rationale": "Freelancers pay about EUR 2 per site per month for WP Umbrella's generic monitoring (https://wp-umbrella.com/pricing/); a booking-specific check is worth a small premium on that, and stays under Checkly Starter ($24/month) for a typical portfolio."
+      },
+      "revenueSketch": "Estimate: 80 freelancers or agencies at an average of $25/month = about $2,000 MRR after a year, assuming the free one-site tier converts through a WordPress directory listing; unproven, since nobody was found paying for booking-specific monitoring.",
+      "distribution": "A free companion plugin in the WordPress plugin directory (guideline 6 permits plugins that connect to a paid service; trialware is not permitted, so the free plugin must work on its own, for example a one-page daily check) aimed at Amelia and Simply Schedule Appointments sites, which have 90,000 and 50,000 active installs. The wordpress.org support forums forbid promoting your own plugins or services, so no posting there. Second channel: freelancers and small agencies who maintain booking sites, reached through the plugin listing and through agency care-plan communities whose self-promotion rules were not checked this run.",
+      "validationTest": {
+        "method": "Interview 5 freelancers who maintain salon or clinic booking sites on Amelia or Simply Schedule Appointments about how they find out bookings broke, and offer a free one-time slot and calendar-sync report for their client sites; communities' self-promotion rules checked first, and not the wordpress.org support forums.",
+        "successCriteria": "3 of 5 freelancers report a silent booking or sync failure in the last year, and 3 agree to a $19/month pilot for 10 sites.",
+        "cost": "About 4 days of work and under $50."
+      },
+      "moat": "Thin: per-plugin adapters and per-site baseline history are the asset. The plugin vendors could turn on their own disconnection emails, as Calendly already has; the cross-site board and client notes are what one vendor will not build.",
+      "compliance": [
+        "Google OAuth: Calendar scopes, including calendar.events.readonly, are sensitive and need Google verification (no security assessment); request free/busy only to keep the data minimal and expect weeks of review lead time.",
+        "Health and personal data: clinic calendars can hold patient names (GDPR special-category data in the EU, PHI under HIPAA in the US); reading free/busy only and never event titles or attendees keeps the product out of that data.",
+        "Site owner consent: read only pages the customer owns or manages, respect Simply Schedule Appointments' rate limit, check once a day.",
+        "Plugin terms: read only the public availability routes the booking forms already use, on sites the freelancer manages with the client's consent; no plugin licence keys stored.",
+        "Accessibility: dashboard and emails to WCAG 2.2 AA."
+      ],
+      "risks": [
+        {
+          "risk": "Plugin updates change the internal booking routes the adapters rely on (Amelia's documented API is Elite-only and key-protected; the logged-out route is undocumented).",
+          "mitigation": "Pin adapter tests to each plugin's latest release from the WordPress API, run them daily on fixture sites, and fall back to a headless-browser read when a route changes."
+        },
+        {
+          "risk": "False alarms from holidays, fully booked weeks or staff leave annoy owners.",
+          "mitigation": "Learned baselines, a 'fully booked' versus 'no hours' distinction where the tool exposes it, and one-click snooze."
+        },
+        {
+          "risk": "Google verification delays launch.",
+          "mitigation": "Ship slot checks first; add the calendar cross-check after verification, testing with up to 100 users meanwhile."
+        },
+        {
+          "risk": "Too close to the Delivery Canary idea.",
+          "mitigation": "Keep it to appointment availability and calendar sync, with no test orders or email-delivery checks in the first release."
+        },
+        {
+          "risk": "Free browser checks (Checkly, OnlineOrNot) catch front-end breakage this product cannot see, so a freelancer may see it as redundant.",
+          "mitigation": "Sell only what a browser check cannot do (calendar sync, slot baselines, client notes) and link a free browser check in setup rather than competing with it."
+        },
+        {
+          "risk": "A firewall plugin blocks the daily read from a datacenter address, giving false alarms.",
+          "mitigation": "Detect blocked responses separately from 'no slots', and document an allowlist entry for the client site."
+        }
+      ],
+      "scores": {
+        "pain": 3,
+        "willingnessToPay": 3,
+        "reachability": 3,
+        "competitiveGap": 2,
+        "feasibility": 3,
+        "complianceBurden": 4,
+        "total": 18
+      },
+      "scoreRationale": {
+        "pain": "Only two complaints fit the scope, both owner-noticed Amelia cases from May-June 2026 (https://wordpress.org/support/topic/version-5-4-9-all-in-one-security-aios-causes-conflict-with-amelia-plugin/, https://wordpress.org/support/topic/google-calendar-event-description-2/); the headline Calendly case was not silent because Calendly emailed the owners, and it involved Exchange, which is out of scope (https://community.calendly.com/how-do-i-40/sudden-exchange-calendar-disconnection-ionos-hosted-exchange-ews-anyone-else-experiencing-this-6143).",
+        "willingnessToPay": "One dated paid job is confirmed, but it is a USD 40 fix after a Booknetic update, not a payment for monitoring (https://www.freelancer.com/api/projects/0.1/projects/?seo_urls[]=php/Fix-Booknetic-Booking-Error-after&full_description=true); freelancers do pay about EUR 1.99 per site per month for generic monitoring (https://wp-umbrella.com/pricing/); no evidence found that salon or clinic owners pay a monthly fee for a monitor.",
+        "reachability": "Self-serve via the WordPress plugin directory, which allows SaaS-connected plugins (https://developer.wordpress.org/plugins/wordpress-org/detailed-plugin-guidelines/), into Amelia's 90,000 installs (https://api.wordpress.org/plugins/info/1.2/?action=plugin_information&request[slug]=ameliabooking&request[fields][sections]=0); the support forums ban self-promotion (https://wordpress.org/support/guidelines/) and Pisan has no stated agency network.",
+        "competitiveGap": "Checkly Hobby gives 1,000 Playwright runs a month for $0, enough for a daily check on about 30 sites, and a browser check also catches front-end breakage that a server-side route read misses (https://www.checklyhq.com/pricing/); OnlineOrNot gives the same 1,000 runs free (https://onlineornot.com/pricing); Calendly emails on calendar disconnection itself; the real gap left is the calendar-sync check for WordPress plugins.",
+        "feasibility": "Kept at 3: Amelia's logged-out wpamelia_api /slots route exists (https://downloads.wordpress.org/plugin/ameliabooking.2.4.15.zip). But it is undocumented, a request from a datacenter IP can be blocked by a firewall plugin, and a server-side read would not have caught the AIOS POST-filter or JS failures cited as evidence (https://wordpress.org/support/topic/version-5-4-9-all-in-one-security-aios-causes-conflict-with-amelia-plugin/).",
+        "complianceBurden": "Kept at 4: Google sensitive-scope verification needs domain and brand verification, a privacy policy on the same domain, a demo video and a reason for each scope, and 'can take up to 10 days' (https://developers.google.com/identity/protocols/oauth2/production-readiness/sensitive-scope-verification); narrow calendar.freebusy and calendar.events.freebusy scopes exist (https://developers.google.com/workspace/calendar/api/auth), but their sensitivity is unconfirmed."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "I re-read the key evidence. The strongest recent item, the Calendly Exchange outage, was not silent: Calendly emailed every affected owner, and the calendar type is out of scope. The two Freelancer spend items are a Booknetic fix job and a rental UX feature request, not monitoring spend. Only two in-scope complaints remain, both Amelia cases from May-June 2026, so pain drops from 4 to 3. For a technical freelancer, Checkly Hobby and OnlineOrNot Hobby each give 1,000 free browser runs a month, enough for a daily scripted check on about 30 client sites. A browser check also catches the front-end breakage (firewall POST filters, caching, JS errors) that an unauthenticated server-side slot read cannot see, so competitiveGap drops from 3 to 2. The plugin source shows a real gap on calendar sync: Simply Schedule Appointments detects a dead Google Calendar token and shows only a wp-admin banner, because its admin email is commented out 'until we have a better way to detect false positives'. I found no Amelia doc for a disconnect email, and none for Acuity. Google sensitive-scope verification is moderate work (domain and brand verification, privacy policy, demo video, up to 10 days) and narrow free/busy scopes exist, so complianceBurden stays 4. I found no evidence that salon or clinic owners pay a monthly fee for any monitor; the only per-site monitoring spend is freelancers paying about EUR 2 per site for generic tools like WP Umbrella. The $9 single-owner tier is unproven, and the $29 freelancer bundle is the only buyer with precedent. Total goes from 20 to 18. Re-scoped on review to calendar-sync and slot-count health for WordPress booking plugins, sold to freelancers and agencies; Calendly and the single-owner tier dropped; misread evidence (the Calendly outage, a rental feature job, the n8n reminders case, a Bookly bug) removed."
+      },
+      "inspiredBy": "https://wordpress.org/support/topic/google-calendar-event-description-2/",
+      "gateGap": {
+        "missing": [
+          "total 18 is below 22",
+          "pain 3 is below 4 (only two in-scope complaints, both May-June 2026, after review)",
+          "no evidence item dated within 90 days"
+        ],
+        "closedBy": "The freelancer interviews in validationTest: three reports of silent booking or calendar-sync failures in the last year would lift pain to 4 and add recent evidence, and three $19/month pilots would lift willingnessToPay to 4, taking the total to 20 or more."
+      }
+    },
+    {
+      "n": 2,
+      "title": "Class Pack Ledger for Square Studios",
+      "slug": "class-pack-ledger-square-studios",
+      "category": "Small Business Ops",
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Teaching Operations",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": true,
+        "engine": true,
+        "shared": true,
+        "notes": {
+          "stateful": "The studio keeps a running ledger of every customer's packs, credits used, extensions and expiries, and comes back to it at every class.",
+          "connected": "Connects to the studio's Square account (OAuth) to pick up pack sales from Orders and customers from the Customer Directory; exports a monthly journal CSV for Xero or QuickBooks.",
+          "unattended": "A nightly job expires packs, emails customers 30 and 7 days before unused credits lapse, and freezes a month-end liability snapshot.",
+          "engine": "Credit ledger rules: oldest-expiring pack used first, class-type eligibility, freezes and extensions, per-credit value for deferred revenue, and a breakage policy applied at expiry.",
+          "shared": "The owner runs the door check-in, each customer gets a balance page by link, and the bookkeeper gets a read-only month-end export."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "email",
+        "scheduled",
+        "backend"
+      ],
+      "buildPlan": [
+        {
+          "n": 1,
+          "title": "One pack, one check-in",
+          "delivers": "Sign in, add a customer, sell them a 10-class pack by hand, check them in at the door and see 9 left.",
+          "acceptance": "A signed-in owner records a pack and a check-in; the balance reads 9 after sign-out and sign-in; deployed."
+        },
+        {
+          "n": 2,
+          "title": "Square connection",
+          "delivers": "Connect Square; mark which catalog items are packs (10+1, 20+2); new Square orders for those items credit the right customer automatically.",
+          "acceptance": "In the Square sandbox, a paid order for a mapped item creates one pack with the right credit count within a minute; a refund reverses it."
+        },
+        {
+          "n": 3,
+          "title": "Door check-in and rules",
+          "delivers": "A phone-sized check-in screen with name search and a per-customer QR code; class-type eligibility; oldest-expiring pack used first; freeze and extend.",
+          "acceptance": "Seeded test cases (two overlapping packs, an ineligible class, a frozen pack) all deduct from the expected pack."
+        },
+        {
+          "n": 4,
+          "title": "Expiry and reminders",
+          "delivers": "Nightly expiry sweep and reminder emails to customers 30 and 7 days before credits lapse; customer balance page by private link.",
+          "acceptance": "A pack seeded to expire in 7 days produces exactly one reminder email; the expired pack shows zero usable credits the next day."
+        },
+        {
+          "n": 5,
+          "title": "Credits owed and bookkeeper export",
+          "delivers": "Month-end report: packs sold, credits used, unused credits still owed, breakage at expiry; the Xero and QuickBooks journal CSVs and read-only bookkeeper invite ship only if the validation test found a bookkeeper who wants them.",
+          "acceptance": "For a hand-worked sample month, outstanding liability and recognized revenue match to the cent and the CSV imports into a Xero demo company as a manual journal."
+        },
+        {
+          "n": 6,
+          "title": "Polish",
+          "delivers": "Studio-owner README, phone layout for the door, keyboard and screen-reader pass, walkthrough test.",
+          "acceptance": "A walkthrough test runs connect-Square to month-end export; axe reports no serious issues."
+        }
+      ],
+      "summary": "For small yoga, dance and fitness studios that sell class packs as ordinary Square items: a credit ledger fed by Square sales, door check-in, expiry reminders and a month-end figure for unused classes, as a cheap add-on rather than a new studio platform.",
+      "public": {
+        "summary": "Keeps track of every student's class pack, checks them in at the door, reminds them before credits run out, and gives your bookkeeper a clean month-end figure for unused classes.",
+        "problem": "You sell 10-class and 20-class packs, but your booking system can't change a pack once it's sold, your students can't see how many classes they have left, and you end up keeping a side spreadsheet. At month end you have no idea how many prepaid classes you still owe, so your bookkeeper either guesses or books it all as income on the day it was paid.",
+        "forWhom": "Owners of small yoga, pilates, dance, pottery and fitness studios with one to five instructors who take card payments through a point-of-sale system and sell class packs.",
+        "benefits": [
+          "No more side spreadsheet of who has classes left",
+          "Students see their own balance and get a reminder before credits expire",
+          "Fast name or QR check-in at the door",
+          "A month-end number for prepaid classes you still owe, ready for your bookkeeper",
+          "Keep the payment and booking setup you already have"
+        ]
+      },
+      "problemStatement": "Studios that run on Square sell prepaid packs through Square Appointments packages, which cannot be edited after creation, are capped at one-year expiry, do not show students their remaining credits, and give no report of unused credits. Owners say they 'manually keep track of students' (matayogakeywest), keep 'a separate spreadsheet every week' (RevivalFitness), and field 'Do I still have classes left?' questions (Unnerror). The bookkeeping side, prepaid classes as a liability released on attendance or at expiry, is standard practice in bookkeeping guides but no lightweight tool produces it for a Square studio.",
+      "description": "The studio connects its Square account and marks which catalog items are packs. Square order webhooks credit the customer when one is bought and reverse on refund, and the balance is mirrored into a Square customer custom attribute so staff see it in Square too. At the door the owner checks students in by name or QR and one credit comes off the oldest-expiring eligible pack. A nightly job expires packs, emails students before credits lapse, and freezes a month-end snapshot. The month-end report shows packs sold, credits used and credits still owed; the bookkeeper export is built only if the validation test shows studios or their bookkeepers want it.",
+      "targetCustomer": "Owner-operators of 1-to-5-instructor yoga, pilates, dance, pottery or fitness studios that take payments on Square, sell packs as plain Square items, and are not paying for Square Appointments Plus ($49/month, needed for Square's own packages) or Punchpass ($59/month).",
+      "buyer": "The studio owner, from the business card, as a monthly software subscription; possibly recommended by the studio's bookkeeper.",
+      "whyNow": "A Key West yoga studio owner asked Square on 2026-08-25 for packages that can be modified, saying they track students by hand (https://community.squareup.com/t5/Feature-Requests/Modify-Yoga-Packages/idi-p/848579), Square's help page still says pack contents and expiry cannot be edited, and October 2026 bookkeeping guides tell studios to treat prepaid packs as liabilities (https://catchingnumbers.com/blog/gym-fitness-studio-bookkeeping/).",
+      "founderFit": "Yusuf Pisan can ship a web app alone in days on the HintWise platform, which already provides sign-in, per-app data, scheduled jobs, email and a small backend for the Square OAuth and webhook handling; the ledger rules are a well-bounded engine suited to an agent-built, test-driven build.",
+      "problemEvidence": [
+        {
+          "url": "https://community.squareup.com/t5/Feature-Requests/Modify-Yoga-Packages/idi-p/848579",
+          "source": "community.squareup.com",
+          "author": "matayogakeywest",
+          "date": "2026-08-25",
+          "kind": "complaint",
+          "summary": "Key West yoga studio owner: Square packages cannot be modified when the schedule changes, so they create new packages and manually track students on old packs."
+        },
+        {
+          "url": "https://community.squareup.com/t5/Feature-Requests/Add-Active-Packages-section-to-Client-Account-Dashboard/idi-p/827110",
+          "source": "community.squareup.com",
+          "author": "Unnerror",
+          "date": "2025-12-01",
+          "kind": "complaint",
+          "summary": "Studio on Square: clients cannot see remaining credits or expiry, causing 'Do I still have classes left?' questions and manual admin work."
+        },
+        {
+          "url": "https://productideas.xero.com/forums/967115-invoices-quotes/suggestions/44960389-invoices-ability-to-recognise-future-revenue",
+          "source": "productideas.xero.com",
+          "author": "Xero idea (comments by Xero users)",
+          "date": "2025-04-24",
+          "kind": "complaint",
+          "summary": "108 votes for recognising revenue later than the invoice; Xero marked it 'Not in pipeline' and points to connected apps; users describe manual monthly journals (generic, not studio-specific)."
+        },
+        {
+          "url": "https://catchingnumbers.com/blog/gym-fitness-studio-bookkeeping/",
+          "source": "catchingnumbers.com",
+          "author": "Catching Numbers (bookkeeping firm)",
+          "date": "2026-10-31",
+          "kind": "mandate",
+          "summary": "Studio bookkeeping guide: prepaid packs are a liability until used; recognize expired balances under a consistent policy after checking state gift-card and unclaimed-property rules (practice guidance, not a complaint)."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Square Appointments packages",
+          "url": "https://squareup.com/help/us/en/article/8268-create-and-manage-packages-with-square-appointments",
+          "price": "Requires Plus $49/mo or Premium $149/mo per location (Free $0 lacks packages), per https://squareup.com/us/en/appointments/pricing",
+          "gap": "Pack contents, quantity and expiry cannot be edited after creation; expiry capped at one year; no customer-facing balance or expiry reminders mentioned; no unused-credit liability report."
+        },
+        {
+          "name": "Punchpass",
+          "url": "https://punchpass.com/pricing",
+          "price": "Grow $59/mo, Flow $99/mo, Pro $149/mo; 14-day trial",
+          "gap": "Imports packs sold on Square POS into tracked passes with door check-in (Square added on request), but costs $59/month, steers new users to Stripe and replaces the studio's check-in system; no liability or journal export listed."
+        },
+        {
+          "name": "Momoyoga",
+          "url": "https://www.momoyoga.com/en/pricing",
+          "price": "Free plan (5% fee on online payments); Standard EUR34/mo billed annually",
+          "gap": "Free and cheap for yoga studios, but a whole platform switch; exports are customer/order lists, no accounting or liability export listed."
+        },
+        {
+          "name": "Finegym",
+          "url": "https://toolradar.com/tools/finegym",
+          "price": "Free up to 50 active members; Starter $79/mo",
+          "gap": "Free class packs and QR check-in for tiny studios, but a platform switch with Stripe payments; no accounting export mentioned."
+        },
+        {
+          "name": "StudioBase",
+          "url": "https://docs.studiobase.org/blog/mindbody-alternatives",
+          "price": "$29/$59/$99 per month; free until first $500 in online bookings (vendor blog)",
+          "gap": "Class packs and check-in on Stripe; integrations are Zapier, Google Calendar and webhooks only; no accounting export."
+        },
+        {
+          "name": "Momence (Bookkeeping app)",
+          "url": "https://help.momence.com/en/articles/12029948-automated-bookkeeping-faqs",
+          "price": "Bookkeeping app $85/mo; core plan unknown",
+          "gap": "Syncs deposits to QuickBooks/Xero but deferral of class-pack revenue is not mentioned; requires running the studio on Momence."
+        },
+        {
+          "name": "bsport",
+          "url": "https://intercom.help/bsport-helpcenter/en/articles/15768623-understand-deferred-revenue",
+          "price": "unknown",
+          "gap": "Already tracks earned vs deferred pass revenue and breakage (Pass Usage insight), so the liability idea is proven; but it is a full studio platform, not an add-on for Square."
+        },
+        {
+          "name": "Arketa",
+          "url": "https://www.arketa.com/features/bookkeeping",
+          "price": "unknown (demo only)",
+          "gap": "Done-for-you bookkeeping inside a full studio platform; deferral of packs not stated."
+        },
+        {
+          "name": "Amelia packages (WordPress)",
+          "url": "https://wpamelia.com/pricing/",
+          "price": "unknown (paid tiers; annual vs lifetime prices not clear on page)",
+          "gap": "Packages cover credit packs on WordPress sites; support says no CSV invoice export; WordPress only, not Square."
+        },
+        {
+          "name": "Spreadsheet plus manual Xero/QuickBooks journals",
+          "url": "https://productideas.xero.com/forums/967115-invoices-quotes/suggestions/44960389-invoices-ability-to-recognise-future-revenue",
+          "price": "free",
+          "gap": "What owners do now (RevivalFitness's weekly spreadsheet); error-prone, no door check-in, no reminders, no tie to Square sales."
+        },
+        {
+          "name": "Here by SalesVu",
+          "url": "https://squareup.com/ca/en/app-marketplace/app/here",
+          "price": "unknown (quote-based)",
+          "gap": "Listed on the Square App Marketplace for class packages and check-in, but only in the US and CA, last updated 2024-02-07, a full POS replacement, and no liability export stated."
+        },
+        {
+          "name": "SchedulingKit",
+          "url": "https://schedulingkit.com/industries/yoga-studios/integrations/square",
+          "price": "Free for one team member; Standard $12/seat/mo; class packs need Pro (price unknown)",
+          "gap": "Class packs renew through Stripe, it replaces Square Appointments booking, and its QuickBooks deferred-income claim is unverified marketing."
+        },
+        {
+          "name": "Submatic",
+          "url": "https://squareup.com/gb/en/app-marketplace/app/submatic",
+          "price": "unknown",
+          "gap": "Square Marketplace membership app (updated 2026-09-02) with benefits and store credit in Square POS; does not list class credits, check-in or expiry."
+        }
+      ],
+      "keyFeatures": [
+        "Square connection: mapped pack items credit customers automatically; refunds reverse",
+        "Door check-in by name search or QR on a phone",
+        "Ledger rules: oldest-expiring pack first, class-type eligibility, freeze and extend",
+        "Expiry sweep and reminder emails before credits lapse",
+        "Customer balance page by private link",
+        "Month-end liability report (sold, used, outstanding, breakage) with Xero and QuickBooks journal CSVs",
+        "Read-only bookkeeper invite"
+      ],
+      "mvpScope": {
+        "features": [
+          "Square OAuth and order webhook for mapped pack items",
+          "Manual pack entry for cash sales",
+          "Name and QR check-in",
+          "Expiry rules, freeze/extend, nightly sweep and reminders",
+          "Customer balance link",
+          "Month-end liability report and journal CSV"
+        ],
+        "outOfScope": [
+          "Class scheduling and online booking (Square keeps that)",
+          "Direct Xero/QuickBooks API posting",
+          "Amelia, WooCommerce and Stripe connectors",
+          "Memberships with monthly session allotments (RevivalFitness case) beyond simple renewing packs",
+          "Multi-location"
+        ],
+        "buildEstimate": "6 build days (about 2 weeks elapsed with Square sandbox testing)"
+      },
+      "techStack": "Static front end (React + Vite), Supabase sign-in and Postgres ledger tables with row-level security, small Render backend for Square OAuth token exchange and order webhooks, scheduled jobs for the expiry sweep and month-end snapshot, transactional email for reminders and bookkeeper invites.",
+      "pricing": {
+        "model": "Flat per-studio subscription, one location",
+        "pricePoint": "$15/month (estimate)",
+        "rationale": "A quarter of Punchpass Grow ($59/month) and under Square Appointments Plus ($49/month), so it is an easy add-on for a studio that wants to stay on plain Square."
+      },
+      "revenueSketch": "Estimate: 100 Square studios x $15/month = $1,500 MRR. Assumes search traffic for Square package workarounds and bookkeeper referrals; the Square App Marketplace is closed to new partners, and conversion is unknown.",
+      "distribution": "First 10: (1) a free 'unused class credits' calculator that reads a Square item-sales CSV, aimed at searches for Square package limits; (2) studio bookkeepers, who can recommend it across several studio clients; (3) answering Square Community package threads only where a seller asks for a workaround, since the Code of Conduct says 'Don't promote your own products or services unprompted' (https://community.squareup.com/t5/Community-Resources/Square-Community-Code-of-Conduct/ta-p/723469). The Square App Marketplace is not a channel: Square paused new App Partner partnerships in September 2026 with no timeline (https://developer.squareup.com/forums/t/27517.json). WordPress support forums are not a channel either (no promotion).",
+      "validationTest": {
+        "method": "Publish the free Square CSV calculator and a landing page; interview 5 Square studio owners and 2 studio bookkeepers who reach it, showing a check-in mock and a month-end credits-owed report, and ask directly whether the bookkeeper export would change how they book pack sales.",
+        "successCriteria": "3 of 5 owners agree to a $15/month pilot, and at least 1 bookkeeper asks for the export for more than one client; without the bookkeeper signal, drop the export.",
+        "cost": "About 2 days of build for the calculator and page; $0 to $100 in search ads."
+      },
+      "moat": "Thin: the ledger rules and the Square connection are copyable, and Punchpass already reads Square sales. Defensibility comes from price, the bookkeeper channel, and saved ledger history that is tedious to move.",
+      "compliance": [
+        "Prepaid expiry: state gift-card and unclaimed-property rules can limit expiring or keeping unused balances; the tool lets the studio set its own expiry and breakage policy and shows a note to check local rules, without giving legal advice (https://catchingnumbers.com/blog/gym-fitness-studio-bookkeeping/).",
+        "Customer data: names, emails and attendance of studio customers (some may be children at dance or music studios, entered by the studio, not by the child); keep minimal fields, RLS per studio, and a data export and delete; GDPR applies for EU or UK studios.",
+        "Square platform terms: OAuth scopes limited to read orders and customers; marketplace listing requires Square's review.",
+        "Accounting: the export is a working paper for the bookkeeper, not tax advice; cash-basis studios can ignore it.",
+        "Accessibility: check-in and balance pages to WCAG 2.1 AA."
+      ],
+      "risks": [
+        {
+          "risk": "Studios with this pain simply leave Square for a free or cheap studio platform (Momoyoga free, Finegym free under 50 members, StudioBase $29) that already tracks packs.",
+          "mitigation": "Target studios tied to Square POS for retail and payments; lead with the no-migration pitch and the liability export those platforms do not list."
+        },
+        {
+          "risk": "Double tracking: if the studio keeps Square packages, two ledgers disagree.",
+          "mitigation": "Onboarding converts packs to plain Square items and imports existing balances once; the ledger becomes the single source of credits."
+        },
+        {
+          "risk": "Square APIs may not expose class bookings or package redemptions, so check-ins cannot be read from Square.",
+          "mitigation": "Check-in happens in the ledger at the door; only orders and customers are read from Square (unconfirmed which booking data the API exposes)."
+        },
+        {
+          "risk": "Many small studios keep cash-basis books and do not care about deferred revenue.",
+          "mitigation": "Sell on the front-desk value (no spreadsheet, reminders, student balance page); the liability export is the bookkeeper upsell, not the core."
+        },
+        {
+          "risk": "Evidence intensity is low: the Square feature requests have 0 to 1 kudos.",
+          "mitigation": "The validation test's 5 interviews decide go or no-go before the Square integration is built."
+        },
+        {
+          "risk": "Punchpass already reads packs sold on Square, and Square may improve its own packages.",
+          "mitigation": "Stay a cheap add-on for studios on plain Square; do not chase scheduling or booking."
+        },
+        {
+          "risk": "The Square App Marketplace is closed to new partners, so there is no store listing.",
+          "mitigation": "Grow through the free calculator, search and bookkeepers; reapply if Square reopens partnerships."
+        }
+      ],
+      "scores": {
+        "pain": 3,
+        "willingnessToPay": 3,
+        "reachability": 2,
+        "competitiveGap": 2,
+        "feasibility": 4,
+        "complianceBurden": 4,
+        "total": 18
+      },
+      "scoreRationale": {
+        "pain": "Only one complaint is from a class studio and less than 90 days old: matayogakeywest, a Key West yoga studio owner, 2026-08-25 (https://community.squareup.com/t5/Feature-Requests/Modify-Yoga-Packages/idi-p/848579). Modifi is a medspa whose problem is redeeming a package and add-ons in one Square checkout, which a separate ledger does not fix (https://community.squareup.com/t5/Feature-Requests/Square-PACKAGES-Are-Practically-UNUSABLE-Without-Proper-Multi/idi-p/852211). RevivalFitness (2026-06-14) wants monthly subscription allotments, which the MVP leaves out (https://community.squareup.com/t5/Feature-Requests/Session-Bank-Package-Tracking-for-Appointments-Subscriptions/idi-p/844703). No studio complained about the liability or bookkeeping side. So 3.",
+        "willingnessToPay": "Studios do pay for pack tracking that takes Square sales: Punchpass Grow costs $59/mo and imports passes sold on Square POS (https://support.punchpass.com/en/articles/1072468-does-punchpass-work-with-square, https://www.punchpass.com/pricing). But no Square seller says they would pay extra, and Punchpass offers Square only on request and steers new users to Stripe. So 3 and no higher.",
+        "reachability": "The draft's channel (3), a Square App Marketplace listing, is closed. A Square employee wrote on 2026-09-08 that Square 'is not accepting new formal App Partner partnerships at this time' (https://developer.squareup.com/forums/t/27517.json), and on 2026-10-08 that there is no route or timeline (https://developer.squareup.com/forums/t/28138.json). Square Community forbids unprompted promotion. That leaves search and bookkeepers, so 2.",
+        "competitiveGap": "Punchpass already does what the draft says it lacks: a pack sold through Square POS becomes a Punchpass pass with door check-in (https://support.punchpass.com/en/articles/1072468-does-punchpass-work-with-square). Here by SalesVu is listed on the Square App Marketplace to sell class packages and check in clients (https://squareup.com/ca/en/app-marketplace/app/here). SchedulingKit has a free plan and Square payments (https://schedulingkit.com/industries/yoga-studios/integrations/square). What is left is a cheaper add-on plus a liability export, and no buyer has asked for the export. So 2.",
+        "feasibility": "Square's APIs allow the build. The Orders API and webhooks feed a read-only integration that is live without a listing (https://developer.squareup.com/forums/t/28138.json), and apps can write a balance into a customer custom attribute (https://developer.squareup.com/docs/customer-custom-attributes-api/custom-attributes). Punchpass warns that Square orders sometimes lack customer details and need manual matching, which adds support work. So 4 stands.",
+        "complianceBurden": "Unchanged at 4. Square keeps the payments and the personal data is minimal, but expiry and breakage touch state gift-card and unclaimed-property rules (https://catchingnumbers.com/blog/gym-fitness-studio-bookkeeping/)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Square Community is the only place the research found complaints, and only one of them is a recent class-studio owner (matayogakeywest, 2026-08-25). The medspa posts are about Square's checkout, and the trainer post is about subscriptions the MVP excludes, so pain drops to 3. Punchpass ($59/mo) already turns packs sold on Square POS into tracked passes with check-in. Here by SalesVu is a Square App Marketplace app for class packages and check-in, and SchedulingKit has a free plan with Square payments. Free platforms for studios willing to move (Momoyoga free with 2 passes and a 5% fee, Finegym free under 50 members) use Stripe, not Square, so they serve a slightly different customer. Together these drop competitiveGap to 2, but none is a free or cheaper tool doing the same job on Square, so this is not a kill. Square has paused new App Marketplace partnerships, per Square employees in September and October 2026. With Community promotion forbidden too, reachability drops to 2. The Square APIs (Orders webhooks, customer custom attributes) do allow a third-party ledger, so feasibility stays at 4. The total falls from 21 to 18. Re-scoped on review to a $15/month add-on for studios selling packs as plain Square items, reached through search and bookkeepers rather than the paused Square App Marketplace; the medspa, trainer-subscription and WordPress evaluation posts removed from the evidence; the liability export made conditional on validation."
+      },
+      "inspiredBy": "https://community.squareup.com/t5/Feature-Requests/Modify-Yoga-Packages/idi-p/848579",
+      "gateGap": {
+        "missing": [
+          "total 18 is below 22",
+          "pain 3 is below 4 (one recent class-studio complaint; nobody asks for the bookkeeping export)"
+        ],
+        "closedBy": "The owner and bookkeeper interviews in validationTest: three studio owners keeping pack balances by hand would lift pain to 4, and a bookkeeper asking for the export across clients would lift competitiveGap to 3, taking the total to 20."
+      }
+    },
+    {
+      "n": 3,
+      "title": "Pickup Stop Check-Off for Shopify Route Sellers",
+      "slug": "pickup-stop-check-off",
+      "category": "Small Business Ops",
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Data & Visualization",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": true,
+        "engine": true,
+        "shared": true,
+        "notes": {
+          "stateful": "The merchant keeps saved routes, stops, weekly schedules, closure dates and each order's route assignment and status history.",
+          "connected": "Installs as a Shopify app: reads orders by webhook (including the date and location attributes other pickup pickers write) and writes tags, metafields and the native Ready-for-pickup step back.",
+          "unattended": "A nightly audit flags orders booked on closed days, over a stop's cap or with no stop; a scheduled job emails each customer the day before their stop.",
+          "engine": "Route calendar rules: weekly recurrence per stop, cutoffs, skip dates that move or cancel booked orders, caps per stop, and mapping several pickers' date attributes to one route-day.",
+          "shared": "Staff or the driver work a per-stop manifest on a phone (picked up, no-show); customers receive reminders and closure notices from the same record."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "email",
+        "scheduled",
+        "backend"
+      ],
+      "buildPlan": [
+        {
+          "n": 1,
+          "title": "One route, one manifest",
+          "delivers": "Install on a dev store, define one route with two stops on a weekday, and see that day's orders listed per stop with item totals.",
+          "acceptance": "Five seeded pickup orders at two locations appear under the right stop with correct product totals; deployed and installable on a development store."
+        },
+        {
+          "n": 2,
+          "title": "Route calendar and closures",
+          "delivers": "Weekly schedules per stop, cutoffs, caps per stop and skip dates; orders map to a route-day from the pickup location or from a picker's date attribute (Zapiet, Pickeasy, Genie style note attributes).",
+          "acceptance": "Unit tests cover recurrence, a holiday skip and a cap; orders carrying three different attribute formats map to the same route-day."
+        },
+        {
+          "n": 3,
+          "title": "Stop check-off on a phone",
+          "delivers": "A per-stop manifest link for the driver or packer: mark picked up or no-show; picked-up pickup orders are marked ready/picked up in Shopify, others are fulfilled with the customer notice turned off.",
+          "acceptance": "On a phone-width screen, checking off a stop updates every order's status in Shopify and in the app within 10 seconds; no 'your order has shipped' email is sent for collected orders."
+        },
+        {
+          "n": 4,
+          "title": "Reminders, closure notices and nightly audit",
+          "delivers": "Day-before reminder emails with stop place and time window; a closure notice to everyone booked on a skipped date with their new day; a nightly email listing orders on closed days, over cap or with no stop.",
+          "acceptance": "A seeded skip date produces exactly one notice per affected customer; a seeded closed-day order appears in the next audit email; reminders go only to opted-in customers."
+        },
+        {
+          "n": 5,
+          "title": "Compliance and polish",
+          "delivers": "Mandatory privacy webhooks, data retention, business-owner README, keyboard and screen-reader pass on the manifest, walkthrough test.",
+          "acceptance": "customers/redact and shop/redact delete stored personal data in tests; axe reports no serious issues; a walkthrough test runs install, route setup, manifest and check-off."
+        }
+      ],
+      "summary": "For small Shopify food and pet sellers who hand orders over at weekly meeting-point stops: a per-stop manifest the driver checks off on a phone, day-before reminders and skipped-stop notices, and a nightly check for orders booked on closed days, working beside whatever free date picker the store already uses.",
+      "public": {
+        "summary": "Run your weekly pickup stops from one board: who is collecting what at each stop, a check-off on your phone, and reminders the day before.",
+        "problem": "You hand orders over at set stops on set days, and the store only knows a checkout choice. Before each route you rebuild the list of who is collecting what at each stop by hand, and a holiday closure or a skipped stop leaves customers who already booked without a word.",
+        "forWhom": "Small bakeries, raw pet food sellers, meal prep kitchens and farms that sell through an online store and hand orders over at scheduled pickup stops or routes.",
+        "benefits": [
+          "A packing list and a check-off sheet for every stop, ready the night before",
+          "Tick orders off on your phone as customers collect them",
+          "Customers get a reminder the day before and a notice when a stop is skipped",
+          "Orders booked on closed days or over a stop's limit are caught before route day"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "Small Shopify sellers who run scheduled pickup routes (meeting-point stops on set days) rebuild who-collects-what per stop by hand, and their date-picker apps sometimes let customers book closed days. A raw pet food seller running several routes cannot manage route orders cleanly in Shopify, and picker reviews describe closed-day bookings slipping through. Shopify's delivery method is read-only after checkout, so moving an order between pickup and shipping stays a native gap no app can close.",
+      "description": "An embedded Shopify app that sits beside a free or cheap pickup date picker. The merchant defines routes and stops with weekly schedules, caps and skip dates; orders map to a route-day from the pickup location or from the date attribute Zapiet, Pickeasy or Genie writes. Each route-day produces a packing total and a per-stop manifest that the driver checks off on a phone, which marks orders picked up in Shopify. Scheduled jobs email customers the day before and when a stop is skipped, and a nightly audit flags orders on closed days, over a stop's cap or with no stop. It does not change Shopify's delivery method, which the Admin API does not allow.",
+      "targetCustomer": "Owners and packing staff of small Shopify stores (1 to 5 people) that sell food or pet food through scheduled local pickup stops or routes, often alongside shipping: raw pet food sellers, bakeries without a storefront, meal prep kitchens, farm boxes.",
+      "buyer": "The store owner, on the Shopify app bill (their own card), from the same budget that already pays for a pickup date-picker app.",
+      "whyNow": "Shopify staff called the read-only delivery method a 'known product gap' on 2026-07-10 (https://community.shopify.dev/t/35393.json), so route sellers keep working around checkout; holiday closures and skipped stops make the season before Christmas the worst time for missed pickups.",
+      "founderFit": "Pisan can ship a web app alone in days on the HintWise platform, which already provides the database, scheduled jobs, transactional email and a Render backend this needs. He has no stated tie to food merchants or the Shopify partner ecosystem, so selling depends on the App Store listing and merchant interviews rather than an existing network.",
+      "problemEvidence": [
+        {
+          "url": "https://community.shopify.com/t/682434.json",
+          "source": "community.shopify.com",
+          "author": "Christopher_Gore",
+          "date": "2026-09-16",
+          "kind": "complaint",
+          "summary": "Raw dog food seller with 'multiple pickup routes as well as shipping' cannot turn a pickup order into a shipped order with tracking without cancelling and recreating it; filed a request with support: 'I'm sure I'm not the only business owner with this problem.'"
+        },
+        {
+          "url": "https://community.shopify.com/t/690055.json",
+          "source": "community.shopify.com",
+          "author": "Carla_s_Cookie_Box (bakery); +1 ParkingMarker",
+          "date": "2026-09-30",
+          "kind": "complaint",
+          "summary": "Bakery: switching an order between shipping, delivery and pickup 'comes up regularly'; treating it manually as pickup loses Ready for pickup and its notification, and the refund-and-tag workaround 'becomes a real pain when you have everything else automated'. Replies confirm the 2026-10 Admin API cannot change the method."
+        },
+        {
+          "url": "https://apps.shopify.com/click-and-collect/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest",
+          "source": "apps.shopify.com",
+          "author": "Bel Fiore Co. (3 years on Zapiet)",
+          "date": "2026-04-16",
+          "kind": "complaint",
+          "summary": "Paid Zapiet user: delivery dates 'suddenly were changed to include days we are closed', then two days with no orders possible, ahead of Mother's Day."
+        },
+        {
+          "url": "https://apps.shopify.com/store-pickup-by-genie-apps/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest",
+          "source": "apps.shopify.com",
+          "author": "Roses & Whiskers (artisan bakery, farmers-market pickups)",
+          "date": "2026-05-22",
+          "kind": "complaint",
+          "summary": "Bakery with pickups at several farmers markets: 'customers have been able to select pickup dates I originally blacked out', so it switched apps."
+        },
+        {
+          "url": "https://apps.shopify.com/click-and-collect",
+          "source": "apps.shopify.com",
+          "author": "Zapiet (vendor)",
+          "date": "2026-11-18",
+          "kind": "spend",
+          "summary": "Zapiet Pickup + Delivery, 4.9 from 1,905 reviews: Essential $49.99/mo for 1 location, Advanced $79.99/mo for 1-10 locations and order limits, Professional $179.99/mo for production reports (date is the fetch date)."
+        },
+        {
+          "url": "https://localline.co/pricing",
+          "source": "localline.co",
+          "author": "Local Line (vendor)",
+          "date": "2026-11-18",
+          "kind": "spend",
+          "summary": "Farm platform charging $109/mo monthly ($87/mo annual) for delivery and pickup scheduling, pick and pack lists and route exports: what farms pay when they leave Shopify for this bundle (date is the fetch date)."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Zapiet - Pickup + Delivery",
+          "url": "https://apps.shopify.com/click-and-collect",
+          "price": "$49.99/mo (1 location), $79.99/mo (1-10 locations, order limits), $179.99/mo (production reports)",
+          "gap": "Multi-stop sellers need the $79.99 plan and production reports need $179.99; no per-stop phone check-off or day-before reminders confirmed; recent 1-2 star reviews report closed days becoming bookable."
+        },
+        {
+          "name": "Pickup Delivery Date - Pickeasy",
+          "url": "https://apps.shopify.com/order-delivery-date-time",
+          "price": "Free (10 orders/mo, 1 location); $9.99, $19.99 (4 locations), $29.99/mo (5-20 locations)",
+          "gap": "Date picker and slot limits; a merchant who tried it reports no clean pickup/delivery status flow and the Shopify 'on its way' email still firing (t/691546)."
+        },
+        {
+          "name": "Genie Store Pickup",
+          "url": "https://apps.shopify.com/store-pickup-by-genie-apps",
+          "price": "Free (4.9, 221 reviews)",
+          "gap": "Free picker with unlimited locations and per-slot/day caps covers checkout scheduling; no route manifest, reminders or intent switching, and a 2026-05 review reports blacked-out dates becoming selectable."
+        },
+        {
+          "name": "Stellar Delivery Date & Pickup",
+          "url": "https://apps.shopify.com/order-delivery-date-by-identixweb",
+          "price": "Free (3 locations, 50 orders); $14.99/mo; $29.99/mo unlimited locations",
+          "gap": "Order limits, blackout dates and rescheduling on cheap plans; no stop-level check-off or day-before reminders confirmed on the listing."
+        },
+        {
+          "name": "Delivery Guard: Date Picker",
+          "url": "https://apps.shopify.com/delivery-guard-1",
+          "price": "Free (30 dated orders, 1 location, holidays, daily prep list); $14.99/mo; $29.99/mo (3 locations)",
+          "gap": "Launched 2026-11-03 with zero reviews; strong checkout date guard and prep list, but single-location on lower plans and no route or stop concept."
+        },
+        {
+          "name": "Northbound Pickup Scheduler",
+          "url": "https://apps.shopify.com/northbound-pickup-scheduler",
+          "price": "Free (10 orders/mo); $9.99/mo with capacity limits and blackout dates",
+          "gap": "Launched 2026-10-10, zero reviews; picker plus tags only."
+        },
+        {
+          "name": "Tikkivo BakeList",
+          "url": "https://apps.shopify.com/tikkivo-bakelist",
+          "price": "Free (30 orders); $19/mo (1 location); $49/mo (all locations)",
+          "gap": "Launched 2026-10-31: daily production sheets grouped by pickup date, reading other pickers' fields. Covers the packing-list piece, not stop check-off, reminders or moving orders."
+        },
+        {
+          "name": "Orderline Custom Order Manager",
+          "url": "https://apps.shopify.com/orderline-custom-orders",
+          "price": "$9/mo (100 orders), $19/mo, $39/mo",
+          "gap": "Custom statuses, saved views and bulk packing slips for made-to-order sellers; no route calendar, closures or customer reminders."
+        },
+        {
+          "name": "Shopify Local Delivery (native app)",
+          "url": "https://apps.shopify.com/local-delivery",
+          "price": "Free (2.9, 38 reviews)",
+          "gap": "Route optimisation and status emails for local delivery only, not pickup stops; reviews cite no manual adding of orders to routes and no saved or shared routes."
+        },
+        {
+          "name": "Shopify native local pickup",
+          "url": "https://community.shopify.com/t/717702.json",
+          "price": "Free",
+          "gap": "Per-location processing time only; no opening hours, closed days or holidays, and the delivery method cannot be changed after checkout."
+        },
+        {
+          "name": "Local Line",
+          "url": "https://localline.co/pricing",
+          "price": "$109/mo monthly, $87/mo annual (Core)",
+          "gap": "Has pickup schedules, pick and pack lists and route exports, but replaces Shopify; a Shopify seller would have to migrate their store."
+        },
+        {
+          "name": "Alpaca: Pack, Pickup, Deliver",
+          "url": "https://apps.shopify.com/pickup-and-local-delivery",
+          "price": "Lite free + $1/order; $19/mo + $0.50/order; $49/mo (3 locations); $75/mo (5 locations)",
+          "gap": "Holiday blocks, order limits, picklists and a fulfillment dashboard by location; no route/stop concept or day-before reminders confirmed."
+        },
+        {
+          "name": "Local Delivery + Pickup : SE (Scrollengine)",
+          "url": "https://apps.shopify.com/local-delivery-store-pickup",
+          "price": "$19/mo (unlimited locations and orders); $49; $99; $299",
+          "gap": "Picker, blackout rules and a driver + picker app at $19; route optimisation is for delivery addresses, not recurring pickup stops; email/SMS integration starts at $49."
+        },
+        {
+          "name": "EasyRoutes",
+          "url": "https://apps.shopify.com/easyroutes",
+          "price": "Free (50 orders/mo); $39/mo; $59/mo; $1,125/mo",
+          "gap": "Free route calendar and driver app; pickup orders need a shipping address added (https://support.easyroutes.app/article/285-how-does-easyroutes-work-with-different-shopify-apps); custom notifications start at $59."
+        },
+        {
+          "name": "Mechanic task: email a report of pick-up orders for the next X days",
+          "url": "https://tasks.mechanic.dev/email-a-report-of-pick-up-orders-for-the-next-x-days",
+          "price": "unknown (Mechanic subscription; 15-day trial)",
+          "gap": "Nightly count of Zapiet pickup orders per day for staff; no manifest, check-off or customer reminders."
+        },
+        {
+          "name": "Local Pickup Guru",
+          "url": "https://apps.shopify.com/safe-curbside-pickup",
+          "price": "$9.95-$29.95/mo by pickup location count",
+          "gap": "Curbside and in-store pickup verification across locations; no route calendar."
+        }
+      ],
+      "keyFeatures": [
+        "Routes and stops with weekly schedules, caps and skip dates",
+        "Orders mapped to a route-day from the pickup location or the picker's date attribute",
+        "Per-route packing totals and per-stop manifests checked off on a phone",
+        "Day-before reminders and skipped-stop notices by email",
+        "Nightly audit of closed-day, over-cap and unassigned orders"
+      ],
+      "mvpScope": {
+        "features": [
+          "One store, up to 5 routes and 20 stops",
+          "Order mapping from pickup location and two common picker attribute formats",
+          "Packing list and per-stop manifest with phone check-off",
+          "Day-before reminder and skipped-stop notice by email",
+          "Nightly audit email"
+        ],
+        "outOfScope": [
+          "A checkout date or slot picker (free apps already do this)",
+          "Moving orders between pickup and shipping (Shopify's delivery method is read-only)",
+          "SMS reminders (A2P registration and consent work)",
+          "Route optimisation and driver GPS tracking",
+          "Subscriptions and recurring boxes"
+        ],
+        "buildEstimate": "3 weeks, plus Shopify App Store and protected customer data review"
+      },
+      "techStack": "Shopify embedded app (Remix or plain Node on the Render backend, Admin GraphQL 2026-10, order webhooks), Supabase for routes, stops, assignments and audit history, HintWise scheduled jobs for reminders and the nightly audit, transactional email, static front end for the phone manifest.",
+      "pricing": {
+        "model": "Monthly Shopify app subscription by route orders per month, with a free tier",
+        "pricePoint": "Free up to 40 route orders/month; $19/month up to 400; $39/month unlimited routes and stops",
+        "rationale": "Sits beside a free or $10-$30 date picker and at the price of the $19 back-office apps (Alpaca, Local Delivery + Pickup SE, Tikkivo BakeList), below Zapiet's $79.99 multi-location plan."
+      },
+      "revenueSketch": "Estimate: 120 paying stores x $22/month average = about $2,640 MRR after a year, assuming 1,200 installs from the App Store at a 10% paid conversion; seasonal churn after the holidays could cut this by a third.",
+      "distribution": "Shopify App Store listing under store pickup and local delivery, with a listing written for 'pickup routes' and 'drop points' searches; answering route sellers' requests on the community.shopify.com Ask and Offer board, the only board where app recommendations are allowed (https://community.shopify.com/faq); a free tier so merchants already on a free picker can add the board without switching.",
+      "validationTest": {
+        "method": "Five interviews with Shopify route sellers who use meeting-point stops (raw pet food, farm boxes, bakeries), recruited through an Ask and Offer post, showing a clickable manifest mock built from their own last week's orders export.",
+        "successCriteria": "3 of 5 say they rebuild a per-stop list by hand every week and agree to a $19/month pilot.",
+        "cost": "About 8 hours and $0 beyond the existing platform."
+      },
+      "moat": "Weak. Reading several pickers' attributes lets it sit beside whichever picker a merchant has, and route-day rules take some domain care, but at least six pickup apps launched in 2026 and any could add a manifest.",
+      "compliance": [
+        "Shopify protected customer data: the manifest and reminders need names, emails, phones and addresses, which is Level 2, requiring encryption at rest and of backups, data minimisation, retention limits and possibly a data protection review (https://shopify.dev/docs/apps/launch/protected-customer-data).",
+        "Shopify mandatory privacy webhooks (customer data request, customer redact, shop redact) must delete or export stored order and customer data.",
+        "GDPR and CCPA: the app processes shoppers' personal data as the merchant's processor; publish a privacy policy and data processing terms.",
+        "Email: reminders and closure notices about an order are transactional, but add an opt-out and sender identification; SMS is out of scope because it would bring TCPA consent and A2P 10DLC registration.",
+        "Accessibility: the phone manifest and admin pages should meet WCAG 2.1 AA for staff who use screen readers or large text.",
+        "Food safety and cold-chain duties stay with the merchant; the app should not claim to manage them."
+      ],
+      "risks": [
+        {
+          "risk": "The niche is crowded: Readyby, Delivery Guard, Northbound, DeliverFlow, Tikkivo and Pickup Scheduler all launched in 2026, and free Genie or Pickeasy cover caps and closures.",
+          "mitigation": "Do not build a picker; sell only the route-day layer and integrate with the pickers merchants already use."
+        },
+        {
+          "risk": "Pickers store dates in inconsistent note attributes, so mapping fails silently.",
+          "mitigation": "Show unmapped orders in the nightly audit and offer a per-store attribute mapping, as Tikkivo does."
+        },
+        {
+          "risk": "Level 2 protected customer data review delays the App Store launch.",
+          "mitigation": "Start the review in week one; store only what the manifest needs and purge after a set retention."
+        },
+        {
+          "risk": "Demand evidence is a handful of forum posts and reviews; route sellers may be few.",
+          "mitigation": "Run the five-interview validation test before building beyond milestone 1."
+        },
+        {
+          "risk": "Shopify ships a native way to move orders between pickup and shipping, or changes pickup checkout (shipping and pickup changes run through July 2027).",
+          "mitigation": "Do not depend on the delivery method at all; key everything on the route-day mapping, and re-test picker attribute formats on each Shopify change."
+        }
+      ],
+      "scores": {
+        "pain": 3,
+        "willingnessToPay": 3,
+        "reachability": 3,
+        "competitiveGap": 2,
+        "feasibility": 3,
+        "complianceBurden": 4,
+        "total": 18
+      },
+      "scoreRationale": {
+        "pain": "Down from 4: the three recent complaints ask Shopify for a native delivery-method switch, which no app can provide (https://community.shopify.dev/t/35393.json); only one poster runs routes (https://community.shopify.com/t/682434.json), and nobody asks for manifests, stop check-off or reminders.",
+        "willingnessToPay": "Unchanged at 3: merchants pay $49.99-$179.99 for Zapiet (https://apps.shopify.com/click-and-collect), but the route-day layer competes with $19 tools such as Alpaca and Local Delivery + Pickup SE (https://apps.shopify.com/pickup-and-local-delivery).",
+        "reachability": "The App Store is the channel but is crowded, and the forum allows app recommendations only on the Ask and Offer board (https://community.shopify.com/faq).",
+        "competitiveGap": "Unchanged at 2, and narrower than drafted: Alpaca has holiday blocks and picklists by location from $19 (https://apps.shopify.com/pickup-and-local-delivery), SE has a picker/driver app at $19 (https://apps.shopify.com/local-delivery-store-pickup), EasyRoutes has a free route calendar and driver app (https://apps.shopify.com/easyroutes), and Mechanic already emails pickup counts per day (https://tasks.mechanic.dev/email-a-report-of-pick-up-orders-for-the-next-x-days).",
+        "feasibility": "Unchanged at 3: the switch feature can only be app-side intent, because deliveryMethod is read-only and fulfillment orders cannot hold metafields (https://community.shopify.dev/t/35393.json). Shopify is also changing shipping setup and pickup checkout through July 2027, which breaks apps that read delivery profiles (https://www.shopify.com/hk-en/enterprise/blog/shopify-fulfillment-2027).",
+        "complianceBurden": "No sector regulation, but Level 2 protected customer data requirements apply (https://shopify.dev/docs/apps/launch/protected-customer-data), so 4 not 5."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "I re-fetched all three forum threads and both review pages. Authors, dates and quotes match the draft, but the evidence points at a different product. The merchants want Shopify to let them switch an order between pickup and shipping natively. Shopify staff confirm that is impossible through the API and say they are scoping a fix (community.shopify.dev t/35393). Only one complainant runs pickup routes, and none asks for manifests, stop check-off or reminders. I found no free app that does the whole route-day board, so this is a rescore, not a kill. Still, the pieces are cheap and close by: Alpaca has holiday blocks and per-location picklists from $19, Local Delivery + Pickup SE has a picker/driver app at $19, EasyRoutes has a free plan with a route calendar (pickup orders need a shipping address added first), and a Mechanic task already emails upcoming pickup counts. Pain drops from 4 to 3. Feasibility stays at 3, with added platform risk from Shopify's 2026-2027 shipping and pickup changes. Total goes from 19 to 18, below the watchlist floor of 19. Re-scoped on review: moving orders between pickup and shipping dropped as a feature, the product narrowed to stop check-off, reminders and the nightly audit beside a free picker, the grocery post (not a route seller) removed, and the whyNow no longer cites a rival app founder's thread."
+      },
+      "inspiredBy": "https://community.shopify.com/t/682434.json",
+      "gateGap": {
+        "missing": [
+          "total 18 is below 22",
+          "pain 3 is below 4 (only one complainant runs pickup routes, and none asks for manifests or reminders)"
+        ],
+        "closedBy": "The five route-seller interviews in validationTest: three sellers who rebuild per-stop lists by hand every week would lift pain to 4, and three $19/month pilots would lift willingnessToPay to 4, taking the total to 20."
+      }
+    },
+    {
+      "n": 4,
+      "title": "Idle Spend Watch for Fly.io Teams",
+      "slug": "idle-spend-watch-fly",
+      "category": "Developer Tool",
+      "smallBusiness": true,
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Developer Tooling",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": true,
+        "engine": true,
+        "shared": false,
+        "notes": {
+          "stateful": "Keeps a nightly inventory and cost estimate per resource, a history chart, and the owner's acknowledged or snoozed flags, which they come back to each month.",
+          "connected": "Reads the customer's own Fly.io organization through an org-scoped read-only token (Machines API apps, machines, volumes, Managed Postgres clusters, IPs, and the org's Prometheus traffic metrics).",
+          "unattended": "A nightly job re-inventories the org, recomputes the month's estimate, and emails a digest plus an immediate alert when the projection crosses the owner's threshold or a new waste item appears.",
+          "engine": "A price model of Fly's public list (regional Machine rates, rootfs billing for stopped Machines, volumes billed while detached, snapshot storage past 10 GB, dedicated IPv4, Managed Postgres plans plus storage) combined with waste rules (detached volume, volume on a long-stopped Machine, started Machine with near-zero traffic for 7 days, Postgres cluster no app connects to, extra machines beyond the fly.toml count)."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "email",
+        "scheduled",
+        "backend"
+      ],
+      "buildPlan": [
+        {
+          "n": 1,
+          "title": "Token in, inventory out",
+          "delivers": "Sign in, run the self-hosted collector (or paste a read-only Fly token), and see every app with its machines (state, size, region) and volumes.",
+          "acceptance": "Against a test org with 2 apps, 3 machines and 2 volumes, the page lists all 7 resources with correct state from either the collector or a token; any stored token is encrypted; deployed."
+        },
+        {
+          "n": 2,
+          "title": "Monthly cost estimate",
+          "delivers": "Each resource shows an estimated monthly cost from the public price list, with an org total and a clear 'estimate, not your invoice' label.",
+          "acceptance": "Unit tests reproduce the pricing page's worked figures (for example a 1 GB shared-cpu-1x Machine in iad, a stopped Machine's rootfs, a detached 10 GB volume, a dedicated IPv4, a Basic Postgres cluster) to the cent."
+        },
+        {
+          "n": 3,
+          "title": "Waste finder",
+          "delivers": "A 'probably waste' list: detached volumes, volumes on long-stopped machines, started machines with near-zero traffic for 7 days, Postgres clusters with no attached app, dedicated IPs on apps with nothing running, each with its monthly cost and the CLI command to remove it.",
+          "acceptance": "A seeded fixture org produces exactly the expected five flags and no false flag on an active app with traffic."
+        },
+        {
+          "n": 4,
+          "title": "Nightly snapshot and history",
+          "delivers": "A scheduled job saves a daily snapshot; the owner sees what appeared, disappeared or changed and a month-to-date estimate chart.",
+          "acceptance": "Two runs a day apart on a fixture where one machine is added produce a diff naming only that machine; history survives sign-out."
+        },
+        {
+          "n": 5,
+          "title": "Digest and threshold alerts",
+          "delivers": "Weekly email digest, an immediate email when the projected month crosses the owner's threshold or a new waste item appears, and acknowledge or snooze per flag.",
+          "acceptance": "A seeded threshold crossing sends exactly one email; a snoozed flag is not repeated in the next digest."
+        },
+        {
+          "n": 6,
+          "title": "Polish",
+          "delivers": "Owner README (how to create a read-only token and revoke it), phone layout, keyboard and screen-reader pass, walkthrough test.",
+          "acceptance": "A walkthrough test runs sign-in to first digest; axe reports no serious issues; revoking the token shows a clear reconnect message."
+        }
+      ],
+      "summary": "A nightly watch for small teams paying their own Fly.io bill: it prices live resources, lists stopped-but-billed volumes, idle machines and orphaned Postgres clusters, and emails a threshold alert on the projected month before the invoice does.",
+      "public": {
+        "summary": "Get an email the morning a forgotten server, disk or database starts costing your team money, long before the invoice arrives.",
+        "problem": "You spin up extra machines for a batch job, create a test database, or stop an app and forget its disk, and your host keeps billing for all of it. Your hosting account has no budget alert, so you find out when the invoice lands, sometimes weeks and hundreds of dollars later. Checking means logging in and reading the dashboard yourself.",
+        "forWhom": "Small startups and agencies that run their apps on a pay-as-you-go hosting platform and pay the bill themselves.",
+        "benefits": [
+          "Know your team's likely bill for the month every morning",
+          "See forgotten machines, disks and databases with what each one costs",
+          "Get warned when spending passes the number you set",
+          "Clean up with a ready-to-run command for each item",
+          "Keep your hosting key on your own side if you prefer"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "On Fly.io, resources keep billing after you stop paying attention: stopped Machines are billed for their root filesystem, volumes are billed while detached, and a Managed Postgres cluster starts at $38 a month. Fly's docs say \"We don't support billing alerts (yet), so budget accordingly\", and there is no read-only endpoint for accrued cost, so solo developers learn about a forgotten 40-machine batch run or an unattached database from the invoice.",
+      "description": "The team either runs a small self-hosted job that keeps its Fly token on its side and sends only resource metadata, or pastes an org-scoped read-only token (`fly tokens create readonly`), after being told that such a token can also read its databases. Each night the service lists apps, machines, volumes, Managed Postgres clusters and IPs through the Machines API, reads 7 days of per-app traffic from the org's Prometheus endpoint, and prices every resource from Fly's public regional price list. It flags likely waste (detached volumes, volumes on long-stopped machines, started machines with almost no traffic, clusters no app uses, machines beyond the declared count) with each item's monthly cost and the command to remove it. A digest email and a threshold alert on the projected month do the job Fly's dashboard does not. It is Fly.io only at launch; Render (no native spending limit) is the possible second provider, while Railway, Vercel and Supabase already have native limits and are out of scope.",
+      "targetCustomer": "Two-to-ten-person startups and small agencies on paid Fly.io organizations with several apps, often with Managed Postgres, who check the dashboard rarely. Hobby personal orgs are left to Fly's new capped Free plan.",
+      "buyer": "The founder or developer, on the personal or company card that already pays the Fly.io bill.",
+      "whyNow": "Fly's cost-management doc still says it does not support billing alerts, and a 2026-11-10 forum request for 50/80/90% budget alerts was told it is not supported (https://community.fly.io/t/29045.json). Fly put Managed Postgres clusters on the Machines API on 2026-09-15 (https://fly.io/changelog/managed-postgres-machines-api.md), which makes the orphaned-database check possible. Fly's Free plan for personal orgs (launching 2026-11-23) caps hobby spend, which leaves paid team orgs as the uncovered buyer.",
+      "founderFit": "Pisan can ship a web app alone in days on the HintWise platform, which already provides sign-in, per-app data, scheduled jobs and transactional email, the four parts this product needs. As a CS professor who teaches with agentic coding tools, he can also write the price model and waste rules as tested domain logic rather than a dashboard scrape.",
+      "problemEvidence": [
+        {
+          "url": "https://community.fly.io/t/29045.json",
+          "source": "community.fly.io",
+          "author": "htadayyon",
+          "date": "2026-11-10",
+          "kind": "complaint",
+          "summary": "Wants a monthly spend budget with alerts at 50%, 80% and 90%; the reply quotes Fly's docs that billing alerts are not supported and calls it a very frequently requested feature."
+        },
+        {
+          "url": "https://community.fly.io/t/28491.json",
+          "source": "community.fly.io",
+          "author": "copythevalue",
+          "date": "2026-08-15",
+          "kind": "spend",
+          "summary": "Charged about $600 on a personal org after 41 performance machines from a batch run sat idle for roughly two weeks unnoticed."
+        },
+        {
+          "url": "https://community.fly.io/t/28404.json",
+          "source": "community.fly.io",
+          "author": "meeper",
+          "date": "2026-08-02",
+          "kind": "complaint",
+          "summary": "Bill for a little Rails app doubled: billed for 2 Managed Postgres clusters while the dashboard listed 1; the extra one was unattached."
+        },
+        {
+          "url": "https://community.fly.io/t/28402.json",
+          "source": "community.fly.io",
+          "author": "josefranf",
+          "date": "2026-08-02",
+          "kind": "complaint",
+          "summary": "New user billed EUR 25 for a test Postgres cluster left allocated without use; asked for a refund."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Fly.io dashboard (Cost Explorer, Upcoming Invoice)",
+          "url": "https://docs.fly.io/about/cost-management",
+          "price": "Free (included)",
+          "gap": "Shows month-to-date org cost when you log in; no billing alerts, no budget, no per-resource waste list, no cost API."
+        },
+        {
+          "name": "Fly.io Accident Forgiveness",
+          "url": "https://fly.io/blog/accident-forgiveness/",
+          "price": "Free refund (customers with a support contract)",
+          "gap": "Refunds unexpected charges after the invoice, on request; nothing warns you while the cost accrues, and its terms are informal."
+        },
+        {
+          "name": "flyio-usage-monitoring (open source, d-voorhees)",
+          "url": "https://raw.githubusercontent.com/d-voorhees/flyio-usage-monitoring/main/README.md",
+          "price": "Free, self-hosted on GitHub Actions",
+          "gap": "Daily compute-only estimate; you enter CPU and RAM rates yourself; assumes started machines ran all day; no volumes, Postgres, IPs, idle or orphan flags, thresholds or history; you set up SMTP and secrets."
+        },
+        {
+          "name": "flycost (open source)",
+          "url": "https://raw.githubusercontent.com/gordonmurray/flycost/main/README.md",
+          "price": "Free CLI",
+          "gap": "Estimates cost from fly.toml files before deploy; does not see live resources, so it misses manual machines, detached volumes and orphaned clusters."
+        },
+        {
+          "name": "Vantage",
+          "url": "https://www.vantage.sh/pricing",
+          "price": "Free to $2,500 tracked spend; Pro $30/month",
+          "gap": "Fly.io is not among its supported providers on the pricing page."
+        },
+        {
+          "name": "Spendwall",
+          "url": "https://spendwall.app",
+          "price": "Free; Pro $7/month; Team $49/month",
+          "gap": "50-provider spend dashboard with thresholds, but Fly.io, Render and Railway are not in its catalog; no idle or orphan detection described."
+        },
+        {
+          "name": "FreeTier Sentinel",
+          "url": "https://freetier-sentinel.dev",
+          "price": "Free; Pro $5/month; Team $25/month (planned)",
+          "gap": "Tracks free-tier usage limits, not dollars; Cloudflare, GitHub Actions and Vercel only, Render announced; no Fly.io."
+        },
+        {
+          "name": "Stackwatch",
+          "url": "https://peerpush.com/p/stackwatch",
+          "price": "Freemium, paid tiers unknown",
+          "gap": "Usage-limit alerts for GitHub Actions, Vercel, MongoDB and Supabase; no Fly.io or Render."
+        },
+        {
+          "name": "Railway native usage limits",
+          "url": "https://docs.railway.com/reference/usage-limits",
+          "price": "Free (all plans)",
+          "gap": "Different platform; shows why Railway (and Vercel, Supabase) are out of scope, since they already alert and cap natively."
+        },
+        {
+          "name": "Fly.io Free plan (docs PR #2661)",
+          "url": "https://api.github.com/search/issues?q=repo:superfly/docs+%22Add+Free+plan+page%22+is:pr",
+          "price": "Free ($5 of usage a month, personal orgs, launching 2026-11-23)",
+          "gap": "Covers hobby personal orgs with tight constraints only; no alerts or waste list stated for paid orgs."
+        },
+        {
+          "name": "flyio-cost-tuning agent skill (Intent Solutions, flyio-pack)",
+          "url": "https://tonsofskills.com/skills/flyio-cost-tuning/",
+          "price": "Free (MIT)",
+          "gap": "On-demand agent audit of stopped Machines, unattached volumes, snapshots, unused IPs, unreferenced databases; no schedule, history or alerts."
+        },
+        {
+          "name": "Fly MCP / fly CLI for agents",
+          "url": "https://fly.io/changelog",
+          "price": "Free (included)",
+          "gap": "An agent can list machines and volumes on request (2026-10-23, 2026-10-30 entries); nothing runs unattended or prices the resources."
+        }
+      ],
+      "keyFeatures": [
+        "Self-hosted collector option so the Fly token never leaves the team; or an org-scoped read-only token",
+        "Per-resource monthly estimate from Fly's regional public price list, labelled as an estimate",
+        "Nightly waste flags: detached volumes, volumes on long-stopped machines, idle started machines, unattached Postgres clusters, unused dedicated IPv4",
+        "What changed since yesterday, with history",
+        "Projected-month threshold alert and weekly digest by email",
+        "Acknowledge or snooze each flag; copy-ready removal command"
+      ],
+      "mvpScope": {
+        "features": [
+          "Self-hosted collector (GitHub Action or container) and read-only token connect for one org",
+          "Inventory of apps, machines, volumes, Postgres clusters",
+          "Price model and month projection",
+          "Five waste rules",
+          "Nightly job, threshold alert and weekly digest email"
+        ],
+        "outOfScope": [
+          "Render or other providers",
+          "Reconciling against actual invoices",
+          "Bandwidth charge estimates",
+          "Automatic stop or delete actions",
+          "Multi-org agency view",
+          "Sprites billing",
+          "A free one-time scan (free agent skills and Fly's MCP already audit on demand)",
+          "Hobby personal orgs on Fly's Free plan"
+        ],
+        "buildEstimate": "2 to 3 weeks"
+      },
+      "techStack": "Static React + Vite front end, Supabase auth and per-app tables (encrypted token, snapshots, flags), scheduled job and Fly Machines API plus Prometheus client on the Render backend, transactional email; no LLM needed.",
+      "pricing": {
+        "model": "Per paid Fly organization, monthly",
+        "pricePoint": "$9/month per organization",
+        "rationale": "Beside small-team spend monitors that do not cover Fly (Spendwall Pro $7, FreeTier Sentinel Pro $5); one unattached Basic Postgres cluster costs more than that each month. Free scripts and agent skills set a low ceiling."
+      },
+      "revenueSketch": "Estimate: 100 paying team orgs x $9/month = $900 MRR after a year; unproven, since nobody was found paying a third party for Fly cost monitoring.",
+      "distribution": "First 10 customers from community.fly.io: post the free waste scan in the Show & Tell category, which exists for projects built on Fly (https://community.fly.io/categories.json); the forum guidelines forbid spam and ask members to avoid its appearance, with no explicit self-promotion rule (https://community.fly.io/faq.json), so reply in billing threads only where the scan answers the question. Then a Show HN post. The waste scan doubles as the lead magnet.",
+      "validationTest": {
+        "method": "A landing page describing the nightly watch and the self-hosted collector, shared in Fly's Show & Tell within the forum's rules, plus 5 interviews with teams on paid Fly orgs; offer a $9/month pre-order. Before building, test which endpoints a real read-only token reaches and whether a narrower token can be made that cannot query databases.",
+        "successCriteria": "Within 3 weeks: 8 pre-orders from paid team orgs, and at least 3 of 5 interviewed teams reporting a surprise bill in the last year.",
+        "cost": "About 2 days of work and $0 in ads."
+      },
+      "moat": "Thin. The value is a tested price model and waste rules kept current with Fly's price changes and API, plus history and trust with read-only tokens. Fly could ship billing alerts at any time, which would remove the threshold half but probably not the per-resource waste list.",
+      "compliance": [
+        "Credential custody: Fly's Query Database endpoint 'can read every table' with only read access to the organization (https://docs.fly.io/api/machines/postgres-clusters/query-database.md), so a stored read-only org token exposes the customer's production data, including their end users' personal data. Offer the self-hosted collector by default, encrypt any stored token, never log it, and show how to revoke it.",
+        "GDPR: with the self-hosted collector the service holds only account emails and resource metadata (app and machine names); a privacy notice, a data processing addendum for EU customers, and deletion on cancel.",
+        "Accuracy: figures are estimates from the public price list, not invoices; label every number and disclaim liability for billing decisions.",
+        "Accessibility: WCAG 2.1 AA for the dashboard and HTML email."
+      ],
+      "risks": [
+        {
+          "risk": "Fly ships native billing alerts or caps; its docs say 'yet' and a forum reply mentions a docs branch with limited caps.",
+          "mitigation": "Lead with the per-resource waste list, which a total-spend alert does not give; keep the build small and watch Fly's changelog."
+        },
+        {
+          "risk": "The read-only token may not cover Managed Postgres listing or Prometheus for every org (not verified this run).",
+          "mitigation": "Test with a real read-only token in milestone 1; fall back to an org deploy token only with explicit consent, or drop the check."
+        },
+        {
+          "risk": "Estimates diverge from invoices after price changes (October 2026 CPU/RAM change) or regional pricing.",
+          "mitigation": "Versioned price table with a test per pricing-page example; show 'estimate' everywhere; let users report a mismatch."
+        },
+        {
+          "risk": "Small market: only Fly.io customers who pay their own bill and check rarely.",
+          "mitigation": "Add Render as a second provider if the scan converts; Render's spending-limit request has 105 votes and no native limit."
+        },
+        {
+          "risk": "Buyers prefer free: Accident Forgiveness refunds mistakes, Fly's Free plan caps hobby orgs, and free scripts and agent skills audit on demand.",
+          "mitigation": "Sell only the unattended part (nightly flags, history, threshold alert) to paid team orgs; drop the free scan."
+        },
+        {
+          "risk": "Teams refuse to hand a third party a token that can read their databases.",
+          "mitigation": "Make the self-hosted collector the default path; look for a narrower attenuated token before launch."
+        }
+      ],
+      "scores": {
+        "pain": 3,
+        "willingnessToPay": 2,
+        "reachability": 3,
+        "competitiveGap": 3,
+        "feasibility": 4,
+        "complianceBurden": 3,
+        "total": 18
+      },
+      "scoreRationale": {
+        "pain": "Real complaints are fewer than seven. johngroot is building cost tooling (https://community.fly.io/t/28382.json), D. Voorhees built his own tool (http://dvoorhees.com/2026/08/06/fly-io-doesnt-have-a-daily-billing-endpoint-so-i-built-one/), the Sprites ask is out of scope (https://community.fly.io/t/29083.json) and the 10-04 post is about abuse. The three real money-loss posts are 95-108 days old, and a regular says refunds are 'nearly always' granted (https://community.fly.io/t/28402.json). That leaves one in-scope request inside 60 days (https://community.fly.io/t/29045.json), so 3.",
+        "willingnessToPay": "No payment evidence. The only builders made free tools (https://raw.githubusercontent.com/d-voorhees/flyio-usage-monitoring/main/CHANGELOG.md, https://tonsofskills.com/skills/flyio-cost-tuning/), and Fly's own engineer sends users who want limits to Railway (https://hn.algolia.com/api/v1/items/48701567), so 2 stands.",
+        "reachability": "community.fly.io is open and billing threads recur (https://community.fly.io/t/29045.json), but no audience and anti-spam guidelines keep it at 3.",
+        "competitiveGap": "Fly's Free plan PR (#2661, 2026-11-17: '$5 of usage a month for personal orgs, launching 23 Nov', and it also edits the cost-management page) brings caps for hobby orgs. A free MIT agent skill already audits stopped Machines, unattached volumes, unused IPs and unreferenced databases on demand (https://tonsofskills.com/skills/flyio-cost-tuning/), and the free script gives daily compute estimates (https://raw.githubusercontent.com/d-voorhees/flyio-usage-monitoring/main/CHANGELOG.md). Only unattended nightly waste flags and threshold alerts for paid orgs remain open, so 3.",
+        "feasibility": "Endpoints now exist for every input: org-wide List All Machines, List All Volumes (attached_machine_id null when detached), List Postgres Clusters with attached_apps, and per-app IP assignments (https://docs.fly.io/llms.txt). A read-only token is proven on the Machines API and Prometheus (https://raw.githubusercontent.com/d-voorhees/flyio-usage-monitoring/main/CHANGELOG.md, v1.2). The read-only scope for clusters and IPs is still undocumented, so 4 stands.",
+        "complianceBurden": "Fly's Query Database endpoint 'can read every table' and 'Requires only read access to the organization' (https://docs.fly.io/api/machines/postgres-clusters/query-database.md). A stored read-only org token therefore exposes every customer's production database, including their end users' PII. The pitch 'read-only, so nothing can be changed' understates this, so 3."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Fly's own billing work is imminent but narrow. Docs PR #2661 (Fly docs staff, opened 2026-11-17, draft) adds a Free plan with '$5 of usage a month for personal orgs, launching 23 Nov' and edits the cost-management page. A forum regular describes it as capped, with 'no possibility of surprise bills' (https://community.fly.io/t/29083.json). The changelog through 2026-11-12 shows no alerts or caps for paid orgs (https://fly.io/changelog), and the docs still say 'no billing alerts (yet)'. The free flyio-usage-monitoring script is not a full replacement: it covers compute only, uses one flat rate, and has had no update since 2026-08-12. A free MIT agent skill (flyio-cost-tuning) and Fly's new MCP do cover a one-time waste audit for free, so the draft's free scan has little value as a lead magnet. Fly's API docs now list org-wide machines, volumes (detached ones are detectable), Postgres clusters with attached_apps, and per-app IPs. Read-only scope is proven only for machines and Prometheus. The Query Database endpoint works with read-only org access, which makes custody of the token much more sensitive. Of the nine evidence items, two come from tool builders, two are off-scope (Sprites, abuse) and one is opinion. Fly reports more than 37,000 customers (https://fly.io/news/fly-io-launches-computers-for-agents.md), so 150 paying orgs is about 0.4%, but hobby personal orgs will move to the Free plan and cost-sensitive users are sent to Railway. Scores change: pain 4 to 3, competitiveGap 4 to 3, complianceBurden 4 to 3, total 21 to 18. Re-scoped on review to paid team orgs, the unattended nightly flags and threshold alert only, with a self-hosted collector so the token can stay with the customer; the free scan dropped; evidence from tool builders, off-scope posts and opinion removed."
+      },
+      "inspiredBy": "https://community.fly.io/t/28491.json",
+      "gateGap": {
+        "missing": [
+          "total 18 is below 22",
+          "pain 3 is below 4 (after review, one in-scope request within 60 days; the money-loss posts are 95 to 108 days old and were refunded)",
+          "willingnessToPay 2 is below 3 (nobody found paying a third party for Fly cost monitoring)"
+        ],
+        "closedBy": "The pre-order page in validationTest: 8 pre-orders from paid team orgs would lift willingnessToPay to 3 or 4, and three interviewed teams with a recent surprise bill would lift pain to 4, taking the total to 20 or more."
+      }
+    }
+  ],
+  "runNotes": {
+    "weekday": "Wednesday",
+    "domainLens": "Developer and research tooling",
+    "focusSources": [
+      "A3 Open-source teaching tools",
+      "B2 AppSumo",
+      "C2 Education and computing research"
+    ],
+    "searches": [
+      "self-hosted runner billing created:>2026-06-01 is:issue state:open sort:reactions",
+      "nbgrader feature request is:issue state:open sort:reactions",
+      "dependabot noise grouping created:>2026-05-01 is:issue state:open sort:reactions",
+      "quarto feature request created:>2026-07-01 is:issue state:open sort:reactions",
+      "repo:dependabot/dependabot-core created:>2026-03-01 is:issue state:open sort:reactions",
+      "repo:jupyter/nbgrader created:>2025-06-01 is:issue state:open sort:reactions",
+      "repo:zotero/zotero created:>2025-09-01 is:issue state:open sort:reactions",
+      "repo:actions/runner created:>2026-05-01 is:issue state:open sort:reactions",
+      "repo:HumanSignal/label-studio created:>2026-01-01 is:issue state:open sort:reactions",
+      "repo:jupyterhub/jupyterhub created:>2026-01-01 is:issue state:open sort:reactions",
+      "repo:quarto-dev/quarto-cli created:>2026-06-01 is:issue state:open sort:reactions",
+      "repo:facebook/docusaurus created:>2026-03-01 is:issue state:open sort:reactions",
+      "github actions cost self-hosted runners (HN comments, since 2026-09-01)",
+      "\"wish there was\" github actions (HN comments, since 2026-09-01)",
+      "\"we built an internal tool\" (HN comments, since 2026-09-01)",
+      "SOC 2 startup expensive (HN comments, since 2026-09-01)",
+      "flaky tests wish (HN comments, since 2026-09-01)",
+      "SOC 2 audit small startup (HN comments, since 2026-09-01)",
+      "status page customers outage communicate (HN comments, since 2026-09-01)",
+      "SOC 2 startup (HN comments, since 2026-09-01)",
+      "deprecation notice API emails (HN comments, since 2026-09-01)",
+      "harvest (HN comments, since 2026-09-01)",
+      "lab notebook electronic (HN comments, since 2026-09-01)",
+      "I pay for uptime monitoring (HN comments, since 2026-09-01)",
+      "GitHub Actions bill (HN comments, since 2026-09-01)",
+      "deprecation emails missed (HN comments, since 2026-09-01)",
+      "time tracking invoicing freelance (HN comments, since 2026-09-01)",
+      "discourse.jupyter.org: nbgrader after:2026-08-01",
+      "community.render.com: pricing after:2026-08-01",
+      "discourse.jupyter.org: grading after:2026-08-01",
+      "community.fly.io: billing after:2026-08-01",
+      "forum.cursor.com: spending limit after:2026-08-01",
+      "discourse.jupyter.org: students course after:2026-08-01",
+      "forum.posit.co: posit cloud students after:2026-08-01",
+      "discourse.jupyter.org: jupyterhub cost after:2026-08-01",
+      "forum.obsidian.md: zotero citations after:2026-08-01",
+      "site:appsumo.com products developer tool API documentation changelog",
+      "site:appsumo.com products appointment booking scheduling small business",
+      "site:appsumo.com products research literature papers academic",
+      "appsumo.com products uptime monitoring status page lifetime deal reviews",
+      "site:appsumo.com products invoicing bookkeeping small business reviews",
+      "freelancer.com API: github actions",
+      "freelancer.com API: changelog",
+      "freelancer.com API: status page",
+      "freelancer.com API: api documentation",
+      "freelancer.com API: zotero",
+      "freelancer.com API: booking system salon",
+      "freelancer.com API: appointment reminder",
+      "freelancer.com API: google sheets automation",
+      "freelancer.com API: invoice reconciliation",
+      "freelancer.com API: systematic review",
+      "freelancer.com API: release notes",
+      "freelancer.com API: github bot",
+      "freelancer.com API: uptime monitoring",
+      "peopleperhour freelance-jobs?q=booking system",
+      "peopleperhour freelance-jobs?q=github",
+      "peopleperhour freelance-jobs?q=google sheets automation",
+      "peopleperhour freelance-jobs?q=research data cleaning",
+      "site:appsumo.com/products GitHub developers code documentation reviews",
+      "wordpress plugins API query_plugins search=appointment booking",
+      "apps.shopify.com appointment booking app salon services reviews",
+      "marketplace.atlassian.com release notes changelog app Jira reviews",
+      "atlassian marketplace REST addons text=release notes",
+      "atlassian marketplace REST addons text=github",
+      "github.com/marketplace query=pull request reminders",
+      "arXiv all:research+software+reproducibility (OR-parsed, off-topic)",
+      "arXiv all:\"research software\" AND all:reproducibility",
+      "arXiv all:\"code review\" AND all:LLM AND all:developers",
+      "arXiv all:vulnerability AND all:dependency AND all:triage",
+      "arXiv all:\"data management plan\"",
+      "arXiv all:\"artifact evaluation\"",
+      "arXiv all:\"AI disclosure\" OR all:\"AI use disclosure\"",
+      "FR API \"secure software\" attestation since 2025-09-01",
+      "FR API \"public access policy\" since 2025-09-01",
+      "FR API \"data management and sharing\" since 2025-09-01",
+      "FR API \"artificial intelligence\" \"small business\" compliance since 2025-09-01",
+      "FR API \"Cybersecurity Maturity Model Certification\" since 2025-01-01",
+      "FR API \"Children's Online Privacy Protection Rule\" since 2025-01-01",
+      "WebSearch: Colorado AI Act June 30 2026 delay SB 318 small business developers deployers",
+      "WebSearch: EU AI Act August 2 2026 obligations digital omnibus delay transparency Article 50 SMEs",
+      "WebSearch: state privacy laws effective January 1 2027 Indiana Kentucky Rhode Island small business thresholds",
+      "WebSearch: developer tool \"shutting down\" announcement October November 2026",
+      "WebSearch: Jules shutting down Antigravity official announcement blog.google OR jules.google",
+      "WebSearch: OpenAI deprecations Agent Builder Evals prompts November 30 2026 platform.openai.com",
+      "WebSearch: \"free plan\" discontinued OR removed 2026 Postman OR Mailchimp OR Calendly OR Netlify OR Heroku announcement",
+      "WebSearch: \"price increase\" 2026 GitHub Actions OR Vercel OR Square Appointments OR Zapier pricing change announcement small teams",
+      "WebSearch: API \"sunset\" OR \"deprecated\" deadline December 2026 OR January 2027 small business integration migrate developers announcement",
+      "community.squareup.com search.json appointments",
+      "community.shopify.com: booking appointments / local pickup appointment / services booking deposit / appointment app double booking / class booking studio / appointments / workshop tickets",
+      "community.shopify.com: pickup",
+      "forum.bubble.io: salon booking client / client transfer app ownership / tutoring",
+      "community.n8n.io: clinic appointment reminder / my client salon / client monthly report",
+      "community.make.com: booking salon / client handover agency",
+      "forum.invoiceninja.com: deposit",
+      "discuss.frappe.io: appointment booking",
+      "productideas.xero.com search: deposit quote",
+      "productideas.xero.com search: appointment booking",
+      "WebSearch: community.squareup.com Square Appointments no-show deposit cancellation fee problem 2026",
+      "WebSearch: Jobber ideas board feature request deposit online booking 2026",
+      "WebSearch: Wild Apricot forum idea event registration waitlist complaint 2026",
+      "wordpress.org/support/plugin/{bookly, ameliabooking, simply-schedule-appointments, event-tickets} index reads",
+      "HN comments: client domain expired agency / small business clients logins passwords handover / salon booking software",
+      "WebSearch: freelance web designer client let domain expire site went down who is responsible forum 2026",
+      "WebSearch: support.google.com business thread previous agency owner Business Profile locked out cannot get access 2026",
+      "WebSearch: localsearchforum.com threads former agency owner listing won't transfer access 2026",
+      "forum.webflow.com: client billing",
+      "solidtime import from Harvest time entries",
+      "Clockify import Harvest data CSV time entries clients projects",
+      "Invoice Ninja import from Harvest invoices clients",
+      "Kimai import Harvest timesheets plugin",
+      "Harvest time tracking price increase Bending Spoons 2026 leaving",
+      "\"import\" Harvest invoices history migrate invoices payments \"from Harvest\" alternative 2026",
+      "solidtime importer Harvest docs",
+      "Harvest help export all data invoices PDF account export",
+      "forum.invoiceninja.com search.json harvest after:2026-07-01",
+      "community.toggl.com search.json harvest after:2026-07-01",
+      "Fly.io billing alerts spend limit 2026",
+      "Fly.io cost monitoring tool idle machines volumes alert",
+      "community.fly.io search: billing alert / spend limit / budget / cost explorer / billing limit / unexpected charge / idle machines bill (after 2026-07-01)",
+      "Vantage Fly.io integration cost",
+      "github fly.io cost estimate machines volumes script \"fly.io\" bill monitor open source",
+      "Render.com spend limit billing alert usage notifications workspace",
+      "Railway usage limits hard limit email alert docs",
+      "GitHub repo search: fly.io cost / fly.io billing / fly.io spend / flyio cost / fly machines idle",
+      "Fly.io Managed Postgres API list clusters token \"mpg\" docs",
+      "Freelancer API: cloud cost audit / reduce cloud bill / fly.io / aws cost optimization / hosting cost reduce",
+      "HN Algolia comments: fly.io bill / fly.io billing alerts / fly.io spend limit (since 2025-08)",
+      "spend alerts SaaS for indie developers Fly.io Render Vercel Supabase bills one dashboard pricing",
+      "\"Fly.io\" \"billing alerts\" OR \"spend alerts\" tool tigerops OR \"cost watchdog\"",
+      "Spendwall cloud spend monitor pricing providers",
+      "FreeTier Sentinel free tier limit alerts pricing",
+      "GitHub issue search superfly/docs: billing / billing cap / spend limit / free plan / billing alert",
+      "HN comments since 2026-08-20: api deprecated broke",
+      "HN comments since 2026-08-20: brownout",
+      "HN comments since 2026-08-20: sunset api",
+      "HN comments since 2026-08-20: deprecation email missed",
+      "HN comments since 2026-08-20: hubspot api",
+      "HN comments since 2026-08-20: api version deprecated",
+      "HN comments since 2026-08-20: meta graph api deprecated",
+      "HN comments since 2026-08-20: shopify api version",
+      "n8n Discourse: deprecated api after:2026-08-20",
+      "n8n Discourse: sunset after:2026-08-20",
+      "n8n Discourse: brownout after:2026-08-01",
+      "n8n Discourse: buffer api after:2026-08-01",
+      "n8n Discourse: hubspot pipelines after:2026-08-01",
+      "n8n Discourse: stopped working deprecated after:2026-09-01",
+      "n8n Discourse: model does not exist after:2026-10-22",
+      "n8n Discourse: buffer after:2026-11-05",
+      "make Discourse: deprecated after:2026-08-20",
+      "make Discourse: buffer after:2026-10-01",
+      "shopify community Discourse: api version deprecated after:2026-08-20",
+      "shopify community Discourse: deprecated api calls after:2026-08-20",
+      "shopify.dev Discourse: deprecated after:2026-08-20",
+      "GitHub issues: \"brownout\" is:issue created:>2026-09-01",
+      "GitHub issues: buffer api deprecated is:issue created:>2026-08-01",
+      "GitHub issues: hubspot pipelines v1 is:issue created:>2026-08-01",
+      "GitHub issues: \"sunset\" api broke is:issue created:>2026-09-01",
+      "GitHub issues: \"api version\" \"no longer supported\" is:issue created:>2026-09-01",
+      "GitHub issues: repo:actions/runner deprecated is:issue created:>2026-05-01",
+      "WebSearch: tool scan repository for deprecated third-party API endpoints sunset dates alerts",
+      "WebSearch: apibreaks.com API deprecation tracker",
+      "WebSearch: Breakwatch scans GitHub repos API breaking changes deprecation pricing",
+      "WebSearch: \"DepWatch\" OR \"API Sunset\" deprecation alerts vendor changelog monitoring service",
+      "WebSearch: Shopify Dev Dashboard API health report deprecated calls",
+      "WebSearch: Meta Graph API upgrade tool app dashboard deprecated version calls",
+      "WebSearch: arol-ai deprecation scan pricing dashboard",
+      "WebSearch: community.hubspot.com API sunset broke integration November 2026",
+      "WebSearch: GitHub app watches your repos for third-party API sunset dates weekly email digest Stripe Shopify HubSpot",
+      "WebSearch: versionly.dev GitHub app third-party API breaking changes pull request pricing",
+      "monitor booking page available slots alert when booking calendar breaks",
+      "Calendly calendar disconnected email notification bookings stopped",
+      "UptimeRobot pricing keyword monitoring free plan 2026",
+      "Calendly API event_type_available_times endpoint",
+      "Simply Schedule Appointments REST API availability endpoint wp-json ssa/v1",
+      "Square Bookings API SearchAvailability permissions APPOINTMENTS_READ seller OAuth",
+      "Acuity Scheduling API availability/times endpoint authentication API key OAuth",
+      "Amelia booking plugin admin-ajax wpamelia_api slots endpoint public",
+      "Google Calendar API scopes sensitive verification calendar.events.readonly freebusy",
+      "hn algolia comments: booking calendar sync stopped",
+      "booking widget monitoring service alert salon booking page broken synthetic monitoring small business",
+      "Square Appointments online booking stopped showing availability community 2026",
+      "\"booking\" \"calendar sync\" monitor alert owner when appointment booking stops working tool for agencies WordPress clients",
+      "freelancer api: booking%20not%20working",
+      "freelancer api: booking%20calendar%20fix",
+      "freelancer api: appointment%20reminders%20not%20sending",
+      "Shopify app pickup locations schedule pickup days routes farm \"pickup\" app free plan",
+      "apps.shopify.com local delivery pickup date picker free plan bakery capacity limits",
+      "Shopify app orders by pickup date production manifest packing list per location Orderline",
+      "Shopify app \"ready for pickup\" \"out for delivery\" \"missed delivery\" notifications local orders status pickup reminder day before",
+      "farm online store pickup drop sites route manifest pricing GrazeCart Local Line Barn2Door",
+      "community.shopify.com community guidelines self-promotion app developers promoting apps rules",
+      "community.shopify.com search.json: pickup route after:2026-08-15",
+      "community.shopify.com search.json: pickup schedule after:2026-08-15",
+      "community.shopify.com search.json: pickup days after:2026-08-15",
+      "community.shopify.com search.json: local pickup after:2026-08-15",
+      "community.shopify.com search.json: pickup reminder after:2026-08-15",
+      "community.shopify.com search.json: delivery route after:2026-08-15",
+      "HN comments: former agency domain (since 2025-08)",
+      "HN comments: designer owns the domain",
+      "HN comments: domain expired client",
+      "HN comments: google business profile agency owner",
+      "HN comments: previous developer domain registrar",
+      "HN comments: forgot to renew domain",
+      "HN comments: domain lapsed",
+      "HN comments: registrar account former",
+      "HN comments: clientHold",
+      "HN comments: client owns the domain",
+      "WebSearch: localsearchforum former agency owns Google Business Profile won't transfer ownership 2026",
+      "WebSearch: client asset register for web agencies track who owns domain registrar DNS hosting Google Business Profile handover",
+      "WebSearch: UptimeRobot domain expiration monitoring SSL expiry free plan 2026",
+      "WebSearch (localsearchforum.com): previous agency primary owner profile access lost client 2026",
+      "WebSearch: \"web developer\" won't give me access to my domain small business owner forum October 2026",
+      "WebSearch: support.google.com business thread previous agency owns my business profile not responding November 2026",
+      "WebSearch (wordpress.org): \"previous developer\" hosting account access client site 2026",
+      "WebSearch: Leadsie pricing agency client access Google Business Profile domain",
+      "Shopify community search.json: domain previous developer / domain expired / domain access old agency / lost access domain, after 2026-08-20",
+      "Cloudflare community search.json: 4 queries (all 403)",
+      "localsearchforum index + 4 subforum listings (recent threads)",
+      "GitHub issues search: uptime-kuma domain expiry (issues and merged PRs)",
+      "Freelancer API: google business profile ownership",
+      "Freelancer API: domain transfer previous developer",
+      "Freelancer API: regain access website",
+      "Freelancer API: recover domain",
+      "community.n8n.io search: monthly report client after:2026-06-01",
+      "community.n8n.io search: client report executions after:2026-06-01",
+      "community.n8n.io search: retainer after:2026-06-01",
+      "community.n8n.io search: maintenance report after:2026-06-01",
+      "WebSearch: n8n workflow template monthly client report executions errors summary email",
+      "WebSearch: automated monthly client maintenance report GitHub commits pull requests uptime freelancer agency tool",
+      "WebSearch: LumaTrack n8n pricing free plan automation ROI client report",
+      "WebSearch: Clientence AI client updates GitHub commits pricing",
+      "WebSearch: MainWP Pro Reports extension pricing client reports",
+      "HN Algolia comments: retainer monthly report",
+      "HN Algolia comments: maintenance retainer report client",
+      "HN Algolia comments: monthly report clients retainer",
+      "community.make.com search: monthly report client / maintenance client report / retainer after:2026-06-01",
+      "community.n8n.io search: client asks what paying / quiet month client / monthly summary client maintenance after:2026-08-15",
+      "Freelancer API: monthly maintenance report",
+      "WebSearch: freelance developer monthly report maintenance retainer clients tedious write every month non-WordPress Laravel GitHub",
+      "community.n8n.io search: report to clients / show client value / clients monthly update after:2026-08-20",
+      "WebSearch: Make API scenario logs endpoint executions list developers.make.com",
+      "WebSearch: GitHub docs viewing a summary of repository activity Pulse period 1 month",
+      "site:wordpress.org/support class pack credits studio expire 2026",
+      "yoga studio owner class pass liability unearned revenue bookkeeping unused classes expire accountant",
+      "productideas.xero.com search: class pass / prepaid / class pack / deferred revenue / unearned",
+      "community.squareup.com search: class package (sorted by date)",
+      "community.shopify.com search.json: class pack after:2026-08-01; class credits after:2026-08-01",
+      "hn.algolia comments since 2025-08: mindbody / yoga studio / class pack / punch card / momence / punchpass",
+      "wordpress.org support topic package remaining sessions credits booking plugin yoga studio 2026",
+      "small yoga studio owner switching from Mindbody price increase class packs 2026",
+      "studio software liability report unused class passes deferred revenue Mindbody OR WellnessLiving OR Momence OR Arketa",
+      "Momence OR Arketa OR WellnessLiving OR Punchpass QuickBooks Xero integration unearned revenue class packages",
+      "quickbooks community yoga OR pilates OR dance studio class packages deferred revenue how to record unused classes",
+      "wordpress.org/support/plugin/{ameliabooking,bookly,latepoint,woocommerce-memberships,booking-activities,bookingpress}/feed/ filtered for pack/credit/pass",
+      "community.squareup.com search: class pass / punch card / package expire / packages remaining / class credits",
+      "Square API appointments packages redemption remaining sessions endpoint developer",
+      "free class pass tracker app small studio punch card check-in free plan",
+      "\"class packs\" OR \"class passes\" studio bookkeeper unused credits balance sheet forum question 2026",
+      "Square App Marketplace class packages punch pass credits app integrates with Square Appointments studio",
+      "community.shopify.com search.json q=rental after:2026-07-01",
+      "community.shopify.com search.json q=party%20rental after:2026-07-01",
+      "community.shopify.com search.json q=rental%20delivery after:2026-07-01",
+      "community.shopify.com search.json q=bounce%20house after:2026-07-01",
+      "community.shopify.com search.json q=rental%20booking after:2026-07-01",
+      "community.shopify.com search.json q=tent%20rental after:2026-07-01",
+      "community.shopify.com search.json q=rental%20deposit after:2026-07-01",
+      "Goodshuffle Pro pricing plans per month event rental software",
+      "Event Rental Systems pricing party rental software free plan",
+      "hn.algolia comments party rental (unquoted)",
+      "hn.algolia comments bounce house (unquoted)",
+      "hn.algolia comments tent rental (unquoted)",
+      "hn.algolia comments rental software (unquoted)",
+      "site:apps.shopify.com rental booking app event party equipment rental deposits",
+      "InflatableOffice review bounce house rental business owner complaint 2026",
+      "Goodshuffle Pro trustpilot reviews event rental",
+      "Booqable deliveries add-on delivery pickup scheduling route planning time window driver",
+      "InflatableOffice delivery routing route sheet setup time drivers feature",
+      "wordpress.org plugins API search 'party rental'",
+      "\"party rental\" owner forum delivery schedule spreadsheet software too expensive 2026",
+      "Booqable price increase rental business owners switching 2026",
+      "community.shopify.com search.json q=inflatable after:2026-06-01",
+      "community.shopify.com search.json q=hire after:2026-06-01",
+      "community.shopify.com search.json q=event%20hire after:2026-06-01",
+      "community.shopify.com search.json q=rentals after:2026-06-01",
+      "community.shopify.com search.json q=chairs%20tables after:2026-06-01",
+      "community.shopify.com search.json q=rental%20quote after:2026-06-01",
+      "community.shopify.com search.json q=rental%20calendar after:2026-06-01",
+      "Shopify Community guidelines self-promotion app developers disclosure rule",
+      "apps.shopify.com low-star reviews: hyrekit rentbase rentalsuite rd-rentals product-rentals-pro bookthatapp rentle sesami",
+      "wordpress.org reviews booqable-rental-reservations",
+      "apps.shopify.com Zapiet Pickup Delivery",
+      "apps.shopify.com Sesami appointment booking",
+      "apps.shopify.com Booqable rental",
+      "apps.shopify.com party equipment rental booking calendar app reviews",
+      "apps.shopify.com class pack credits booking studio app",
+      "site:appsumo.com time tracking invoicing freelancers",
+      "vercel.com integrations marketplace cost monitoring spend alerts",
+      "Cursor Claude Code team usage spend tracking tool pricing per seat",
+      "github.com/marketplace GitHub Actions CI analytics cost monitoring app pricing",
+      "GitHub Actions cost monitoring Slack alerts pricing \"per month\" small teams CICosts OR CostOps OR \"Actions usage\"",
+      "API deprecation monitoring tool alerts third-party API sunset changelog pricing",
+      "site:appsumo.com domain expiry monitoring SSL agency clients",
+      "ManageWP client report add-on price per site pricing",
+      "Punchpass pricing class passes yoga studio plans",
+      "quote app contractors require deposit to approve quote pricing Jobber alternative",
+      "Zotero AI plugin paid subscription chat with library own API key",
+      "freelancer active: time tracking invoicing / harvest alternative / \"time tracking\"",
+      "freelancer all: time tracking invoicing",
+      "freelancer all: cloud cost alert",
+      "freelancer all: github actions",
+      "freelancer all: hubspot api migration",
+      "freelancer all: api deprecated migrate integration",
+      "freelancer all: booking appointment reminders not working fix",
+      "freelancer all: booking plugin fix",
+      "freelancer all: recover google business profile ownership",
+      "freelancer all: domain access previous developer transfer",
+      "freelancer all: monthly website maintenance report",
+      "atlassian marketplace text=github hosting=cloud",
+      "atlassian marketplace text=git integration hosting=cloud",
+      "import invoices from Harvest migrate invoice history payments",
+      "Harvest getharvest export all data invoices CSV PDF zip cancel account read-only access",
+      "Harvest alternative \"import\" past invoices from Harvest 2026 Bending Spoons price switch",
+      "Harvest free plan downgrade keep data old invoices access API \"free plan\" Harvest 2026",
+      "github repositories: harvest export invoices",
+      "github repositories: harvest api backup",
+      "github issues: harvest invoices import",
+      "github issues: import from harvest created>2026-07-01",
+      "GitHub issue search superfly/docs PRs: billing / free plan / spend / cap / alert / credits; issues: billing",
+      "community.fly.io search: free plan / billing alerts / spending limit / cost alert / budget alert / billing cap",
+      "Fly.io Machines API IP addresses endpoint list apps ips volumes read-only token",
+      "Fly.io spending alerts tool idle machines unused volumes cost monitor 2026",
+      "Fly.io number of customers developers revenue 2026",
+      "WebSearch: free tool scan code for deprecated third-party API endpoints sunset dates multiple repos weekly email",
+      "WebSearch: n8n deprecated nodes migration report check workflows before upgrade",
+      "WebSearch: Make.com module migrator deprecated modules scenarios",
+      "WebSearch: \"apibreaks\" OR \"api/breaks\" n8n agency deprecation monitor",
+      "WebSearch: agency maintain client integrations API deprecation notices missed client workflow broke 2026",
+      "WebSearch: FlareCanary API deprecation monitoring pricing",
+      "n8n Discourse: client deprecated notified after:2026-08-01",
+      "GitHub issues: repo:n8n-io/n8n 43678 is:issue",
+      "GitHub issues: repo:actions/runner 4442 is:issue",
+      "Google Calendar API \"calendar.freebusy\" scope sensitive OR non-sensitive",
+      "monitor WordPress booking form availability alert agency \"booking\" synthetic check plugin 2026",
+      "Acuity Scheduling email notification when Google calendar sync disconnected",
+      "Amelia booking Google Calendar disconnected notification email admin token expired",
+      "\"no available times\" booking page customers couldn't book for days didn't notice salon OR clinic OR studio 2026",
+      "Shopify app pickup routes drop points stops schedule manifest farm raw pet food",
+      "apps.shopify.com \"pickup points\" OR \"drop sites\" route day schedule customers choose stop",
+      "Shopify change delivery method existing order pickup to shipping 2026 changelog order editing",
+      "Zapiet pickup reminder email day before pickup",
+      "community.shopify.dev search.json: deliveryMethod FulfillmentOrder mutation",
+      "apps.shopify.com search: pickup route / pickup stops / drop points pickup",
+      "Shopify app \"pickup route\" OR \"delivery route\" stops weekly schedule farm meat raw dog food customers choose route stop checkout",
+      "WebSearch: client digital asset inventory tool agencies track who owns domain Google Business Profile analytics access offboarding",
+      "WebSearch: Google Business Profile ownership recovery service agency price",
+      "WebSearch: InstaRenewal client renewal tracker agencies domains SSL hosting ownership pricing",
+      "Freelancer API: recover domain / locate hosting provider (since 2025-08)",
+      "GitHub issues search: uptime-kuma domain expiry merged PRs; rdap status issues",
+      "WebSearch: n8n agency client report multiple instances monthly execution report tool",
+      "WebSearch: n8n monitoring dashboard multiple client instances agencies free",
+      "WebSearch: n8n client portal for automation agencies show clients workflow runs report white-label",
+      "WebSearch: \"n8n\" \"client report\" monthly PDF executions errors agency tool pricing 2026",
+      "WebSearch: Flotilla n8n fleet manager pricing monthly client report",
+      "WebSearch: \"Maintain Flow\" n8n support report clients",
+      "WebSearch: Clientence client updates from GitHub commits freelancers",
+      "WebSearch: tool generate client-friendly monthly report from GitHub pull requests for freelance developers clients",
+      "Square App Marketplace class pass punch card app studio",
+      "punch card Square app class packs credits integrates with Square",
+      "squareup.com app-marketplace class packages check-in yoga studio integration",
+      "\"Square App Marketplace\" class packages memberships studio app check-in credits 2026",
+      "Square API customer custom attributes Orders webhook build punch card class credits third-party app",
+      "Square developer API appointments packages redemption not available bookings API classes group",
+      "Square community class pack workaround gift card redeem per class studio punch pass",
+      "Finegym free plan 50 members class packs pricing",
+      "studio software \"integrates with Square\" class passes check-in Square payments TeamUp OR Pike13 OR Bookee OR Glofox OR Vagaro",
+      "SalesVu Here gym studio pricing per month Square integration class packages",
+      "Momoyoga free plan class passes features 2026 pricing",
+      "Square Appointments 2026 new features packages classes memberships release",
+      "Square App Marketplace listing requirements partner application review developer how to list app",
+      "Shopify app rental delivery pickup schedule party rental drivers route",
+      "Shopify Local Delivery app free route optimization delivery list driver",
+      "free party rental software bounce house delivery routing 2026",
+      "EasyRoutes rental return pickup stop Shopify rental business",
+      "Shopify rental app \"delivery\" \"collection\" time slots event hire delivery and pickup scheduling rental orders",
+      "Glamourental rental",
+      "7RoomsRental"
+    ],
+    "unverifiedSignals": [
+      {
+        "url": "https://api.github.com/search/issues?q=repo%3Afacebook%2Fdocusaurus+created%3A%3E2026-03-01+is%3Aissue+state%3Aopen+sort%3Areactions&per_page=10",
+        "reason": "http_404: HTTP 422 Validation Failed (repo slug wrong or not searchable); recorded as failure"
+      },
+      {
+        "url": "https://api.github.com/repos/dependabot/dependabot-core/issues/14408",
+        "reason": "http_403: proxy: GitHub repo API access not enabled for this session; bodies read from search API instead"
+      },
+      {
+        "url": "https://api.github.com/repos/dependabot/dependabot-core/issues/15846",
+        "reason": "http_403: proxy: GitHub repo API access not enabled for this session; bodies read from search API instead"
+      },
+      {
+        "url": "https://api.github.com/repos/actions/runner/issues/4468",
+        "reason": "http_403: proxy: GitHub repo API access not enabled for this session; bodies read from search API instead"
+      },
+      {
+        "url": "https://api.github.com/repos/jupyter/nbgrader/issues/2021",
+        "reason": "http_403: proxy: GitHub repo API access not enabled for this session; bodies read from search API instead"
+      },
+      {
+        "url": "https://hn.algolia.com/api/v1/search?query=%22wish+there+was%22+github+actions&tags=comment&hitsPerPage=20&numericFilters=created_at_i%3E1789776000",
+        "reason": "empty: no on-topic recent hits"
+      },
+      {
+        "url": "https://hn.algolia.com/api/v1/search?query=%22we+built+an+internal+tool%22&tags=comment&hitsPerPage=20&numericFilters=created_at_i%3E1789776000",
+        "reason": "empty: no on-topic recent hits"
+      },
+      {
+        "url": "https://hn.algolia.com/api/v1/search?query=deprecation%20notice%20API%20emails&tags=comment&hitsPerPage=25&numericFilters=created_at_i%3E1788220800",
+        "reason": "empty: no on-topic recent hits"
+      },
+      {
+        "url": "https://hn.algolia.com/api/v1/search?query=deprecation%20emails%20missed&tags=comment&hitsPerPage=25&numericFilters=created_at_i%3E1788220800",
+        "reason": "empty: no on-topic recent hits"
+      },
+      {
+        "url": "https://discourse.jupyter.org/search.json?q=nbgrader+after%3A2026-08-01",
+        "reason": "empty: no complaint hits (plugin promos / course Q&A)"
+      },
+      {
+        "url": "https://community.render.com/search.json?q=pricing+after%3A2026-08-01",
+        "reason": "redirect: 301 to render.discourse.group"
+      },
+      {
+        "url": "https://render.discourse.group/search.json?q=bill+after%3A2026-08-01",
+        "reason": "http_5xx: 502 Bad Gateway after redirect from community.render.com"
+      },
+      {
+        "url": "https://discourse.jupyter.org/search.json?q=jupyterhub+cost+after%3A2026-08-01",
+        "reason": "empty: no complaint hits (plugin promos / course Q&A)"
+      },
+      {
+        "url": "https://www.peopleperhour.com/freelance-jobs?q=booking+system",
+        "reason": "empty: q parameter ignored: identical default listing of ~22 recent jobs for every query"
+      },
+      {
+        "url": "https://www.peopleperhour.com/freelance-jobs?q=github",
+        "reason": "empty: q parameter ignored: identical default listing of ~22 recent jobs for every query"
+      },
+      {
+        "url": "https://www.peopleperhour.com/freelance-jobs?q=google+sheets+automation",
+        "reason": "empty: q parameter ignored: identical default listing of ~22 recent jobs for every query"
+      },
+      {
+        "url": "https://www.peopleperhour.com/freelance-jobs?q=research+data+cleaning",
+        "reason": "empty: q parameter ignored: identical default listing of ~22 recent jobs for every query"
+      },
+      {
+        "url": "https://apps.shopify.com/reviews/1651619",
+        "reason": "http_404: single-review URL from search 404s"
+      },
+      {
+        "url": "https://apps.shopify.com/reviews/1831856",
+        "reason": "http_404: single-review URL from search 404s"
+      },
+      {
+        "url": "https://marketplace.atlassian.com/apps/1233279/ai-release-notes?tab=reviews",
+        "reason": "empty: JS shell, only meta tags"
+      },
+      {
+        "url": "https://github.com/marketplace?type=apps&query=pull+request+reminders",
+        "reason": "http_403: github.com HTML 403"
+      },
+      {
+        "url": "http://export.arxiv.org/api/query?search_query=all:research+software+reproducibility&sortBy=submittedDate&sortOrder=descending&max_results=10",
+        "reason": "empty: plain http returns 0 bytes; https works"
+      },
+      {
+        "url": "http://export.arxiv.org/api/query?search_query=all:LLM+code+review+developers&sortBy=submittedDate&sortOrder=descending&max_results=10",
+        "reason": "empty: plain http returns 0 bytes; https works"
+      },
+      {
+        "url": "http://export.arxiv.org/api/query?search_query=all:dependency+vulnerability+triage&sortBy=submittedDate&sortOrder=descending&max_results=10",
+        "reason": "empty: plain http returns 0 bytes; https works"
+      },
+      {
+        "url": "https://www.federalregister.gov/documents/full_text/text/2025/09/10/2025-17359.txt",
+        "reason": "redirect: full-text .txt redirects to unblock.federalregister.gov access page"
+      },
+      {
+        "url": "https://www.federalregister.gov/documents/full_text/text/2025/04/22/2025-05904.txt",
+        "reason": "redirect: same access-page redirect (0 bytes without -L)"
+      },
+      {
+        "url": "https://www.whitecase.com/insight-alert/eu-ai-omnibus-enters-force-amending-ai-act",
+        "reason": "http_403"
+      },
+      {
+        "url": "https://resources.github.com/actions/2026-pricing-changes-for-github-actions/",
+        "reason": "redirect: 308 to github.com/resources/insights/...; not followed (no increase for small teams per search)"
+      },
+      {
+        "url": "https://learn.thryv.com/hc/en-us/articles/48456970764557-Keap-XML-RPC-API-Deprecation-Updated-Date-and-Migration-to-REST-v2",
+        "reason": "http_403: Keap XML-RPC sunset; not retried"
+      },
+      {
+        "url": "https://community.squareup.com/search.json?q=appointments+after%3A2026-08-01",
+        "reason": "http_404: Square community is not Discourse (Khoros)"
+      },
+      {
+        "url": "https://community.shopify.com/search.json?q=local+pickup+appointment+after%3A2026-08-01",
+        "reason": "empty: no results; multi-word queries are strict"
+      },
+      {
+        "url": "https://community.make.com/search.json?q=booking+salon+after%3A2026-08-01",
+        "reason": "empty: no results"
+      },
+      {
+        "url": "https://wordpress.org/support/plugin/amelia-booking/",
+        "reason": "http_404: wrong slug; real slug is ameliabooking"
+      },
+      {
+        "url": "https://community.squareup.com/t5/Appointments-Bookings/No-Show-Cancellation-Fee-never-works/m-p/843009",
+        "reason": "empty: empty page"
+      },
+      {
+        "url": "https://community.squareup.com/t5/Appointments-Bookings/We-paid-more-than-1k-for-this-service-and-can-t-charge-no-show/m-p/777618",
+        "reason": "empty: empty page"
+      },
+      {
+        "url": "https://community.getjobber.com/discussions/online-booking-requests/online-bookingscheduling/10739",
+        "reason": "http_403"
+      },
+      {
+        "url": "https://community.getjobber.com/discussions/invoicing-getting-paid/deposit-for-cancellations/2521",
+        "reason": "http_403"
+      },
+      {
+        "url": "https://community.shopify.com/search.json?q=appointment+app+double+booking+after%3A2026-08-01",
+        "reason": "empty: no results"
+      },
+      {
+        "url": "https://community.shopify.com/search.json?q=class+booking+studio+after%3A2026-08-01",
+        "reason": "empty: no results"
+      },
+      {
+        "url": "https://community.shopify.com/search.json?q=workshop+tickets+after%3A2026-08-01",
+        "reason": "empty"
+      },
+      {
+        "url": "https://hn.algolia.com/api/v1/search_by_date?query=small%20business%20clients%20logins%20passwords%20handover&tags=comment&hitsPerPage=20",
+        "reason": "empty: 0 hits"
+      },
+      {
+        "url": "https://forum.webflow.com/search.json?q=client+billing+after%3A2026-08-01",
+        "reason": "empty: forum.webflow.com no longer Discourse (HTML community shell)"
+      },
+      {
+        "url": "https://hn.algolia.com/api/v1/search_by_date?query=booking%20software%20salon%20fees&tags=comment&hitsPerPage=20&numericFilters=created_at_i>1756684800",
+        "reason": "empty: HTTP 400: unencoded > in numericFilters"
+      },
+      {
+        "url": "https://productideas.xero.com/forums/967115-invoices-quotes/suggestions/51397156-jobber-quotes-sync",
+        "reason": "redirect: 302, not followed (no -L)"
+      },
+      {
+        "url": "https://api.github.com/repos/solidtime-io/solidtime/contents/app/Service/Import/Importers",
+        "reason": "http_403: GitHub API repo access not enabled for this session"
+      },
+      {
+        "url": "https://ch.trustpilot.com/review/www.harvestapp.com",
+        "reason": "http_403: curl attempt for full review text returned 403; WebFetch result used instead"
+      },
+      {
+        "url": "https://feedback.withmoxie.com/feature-requests/p/import-data-from-other-timekeeping-invoicing-platforms",
+        "reason": "http_404"
+      },
+      {
+        "url": "https://support.getharvest.com/hc/en-us/articles/31625325401229",
+        "reason": "http_403: Harvest export help article blocked"
+      },
+      {
+        "url": "https://fly.io/docs/about/cost-management/",
+        "reason": "redirect: 301 to docs.fly.io"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/kirahowe/fly-monitor/main/README.md",
+        "reason": "http_404: README not on main"
+      },
+      {
+        "url": "https://fly.io/docs/about/pricing/",
+        "reason": "redirect: 301 to docs.fly.io"
+      },
+      {
+        "url": "https://hn.algolia.com/api/v1/search_by_date?query=fly.io%20bill&tags=comment&hitsPerPage=20&numericFilters=created_at_i>1755000000",
+        "reason": "empty: unencoded > returned non-JSON; retried with %3E"
+      },
+      {
+        "url": "https://hn.algolia.com/api/v1/search_by_date?query=fly.io%20billing%20alerts&tags=comment&hitsPerPage=15&numericFilters=created_at_i%3E1755000000",
+        "reason": "empty: 0 hits"
+      },
+      {
+        "url": "https://api.github.com/search/issues?q=repo:superfly/docs+billing+cap&sort=created&order=desc&per_page=5",
+        "reason": "empty: 0 results (also spend limit, free plan, billing alert)"
+      },
+      {
+        "url": "https://hn.algolia.com/api/v1/search_by_date?query=api%20deprecated%20without%20notice&tags=comment&hitsPerPage=20&numericFilters=created_at_i>1755500000",
+        "reason": "empty: HTTP 400: unencoded > in numericFilters (my error); re-run encoded"
+      },
+      {
+        "url": "https://hn.algolia.com/api/v1/search_by_date?query=brownout%20api&tags=comment&hitsPerPage=20&numericFilters=created_at_i>1755500000",
+        "reason": "empty: HTTP 400: unencoded > in numericFilters (my error); re-run encoded"
+      },
+      {
+        "url": "https://hn.algolia.com/api/v1/search_by_date?query=sunset%20api%20broke&tags=comment&hitsPerPage=20&numericFilters=created_at_i>1755500000",
+        "reason": "empty: HTTP 400: unencoded > in numericFilters (my error); re-run encoded"
+      },
+      {
+        "url": "https://hn.algolia.com/api/v1/search_by_date?query=api%20deprecation%20notice%20missed&tags=comment&hitsPerPage=20&numericFilters=created_at_i>1755500000",
+        "reason": "empty: HTTP 400: unencoded > in numericFilters (my error); re-run encoded"
+      },
+      {
+        "url": "https://hn.algolia.com/api/v1/search_by_date?query=hubspot%20api%20sunset&tags=comment&hitsPerPage=20&numericFilters=created_at_i>1755500000",
+        "reason": "empty: HTTP 400: unencoded > in numericFilters (my error); re-run encoded"
+      },
+      {
+        "url": "https://hn.algolia.com/api/v1/search_by_date?query=buffer%20api%20brownout&tags=comment&hitsPerPage=20&numericFilters=created_at_i>1755500000",
+        "reason": "empty: HTTP 400: unencoded > in numericFilters (my error); re-run encoded"
+      },
+      {
+        "url": "https://api.github.com/repos/n8n-io/n8n/issues/43678",
+        "reason": "http_403: repo endpoints not enabled in this session; used search API instead"
+      },
+      {
+        "url": "https://api.github.com/repos/opt-sneh/radar-demo/issues/22",
+        "reason": "http_403: repo endpoints not enabled in this session; used search API instead"
+      },
+      {
+        "url": "https://api.github.com/repos/actions/runner/issues/4442",
+        "reason": "http_403: repo endpoints not enabled in this session; used search API instead"
+      },
+      {
+        "url": "https://api.github.com/repos/actions/runner/issues/4613",
+        "reason": "http_403: repo endpoints not enabled in this session; used search API instead"
+      },
+      {
+        "url": "https://api.github.com/repos/estuary/connectors/issues/5418",
+        "reason": "http_403: repo endpoints not enabled in this session; used search API instead"
+      },
+      {
+        "url": "https://pypi.org/project/drift-detector-scan/",
+        "reason": "empty: JS shell"
+      },
+      {
+        "url": "https://pypi.org/pypi/drift-detector-scan/json",
+        "reason": "http_404: no JSON for this name"
+      },
+      {
+        "url": "https://pypi.org/project/depdesk/",
+        "reason": "empty: JS shell"
+      },
+      {
+        "url": "https://apify.com/flintglade/documentation-deprecation-monitor",
+        "reason": "empty: embedded JSON unparseable for actor stats; spend agent's reading used instead"
+      },
+      {
+        "url": "https://mcpservers.org/ru/servers/versionly-dev",
+        "reason": "http_403"
+      },
+      {
+        "url": "https://hn.algolia.com/api/v1/search_by_date?query=booking%20calendar%20sync%20stopped&tags=comment&hitsPerPage=20",
+        "reason": "empty: no hits"
+      },
+      {
+        "url": "https://community.squareup.com/t5/Appointments-Bookings/Booking-page-says-no-availability-within-30-days/m-p/838920",
+        "reason": "empty: HTTP 202 empty body (bot interstitial)"
+      },
+      {
+        "url": "https://community.squareup.com/t5/Appointments-Bookings/Why-does-it-say-no-availability-in-the-next-30-days/m-p/825613/highlight/true",
+        "reason": "empty: empty body"
+      },
+      {
+        "url": "https://help.zoho.com/portal/en-gb/community/topic/bookings-sync-with-zoho-calendar-breaks-again-and-again?page=7",
+        "reason": "empty: JS shell, no posts"
+      },
+      {
+        "url": "https://motopress.com/forums/topic/external-calendar-failed-sync/",
+        "reason": "http_403: Cloudflare challenge"
+      },
+      {
+        "url": "https://www.freelancer.com/api/projects/0.1/projects/active/?query=booking%20not%20working&limit=20&full_description=true",
+        "reason": "empty: Query returned unrelated newest projects; no matches"
+      },
+      {
+        "url": "https://www.freelancer.com/api/projects/0.1/projects/active/?query=booking%20calendar%20fix&limit=20&full_description=true",
+        "reason": "empty: Query returned unrelated newest projects; no matches"
+      },
+      {
+        "url": "https://www.freelancer.com/api/projects/0.1/projects/active/?query=appointment%20reminders%20not%20sending&limit=20&full_description=true",
+        "reason": "empty: Query returned unrelated newest projects; no matches"
+      },
+      {
+        "url": "https://apps.shopify.com/birdchime",
+        "reason": "empty: no app content parsed (likely wrong slug)"
+      },
+      {
+        "url": "https://hn.algolia.com/api/v1/search_by_date?query=former%20agency%20domain&tags=comment&hitsPerPage=20&numericFilters=created_at_i>1755500000",
+        "reason": "empty: 400 Bad Request: unencoded > in numericFilters; retried encoded"
+      },
+      {
+        "url": "https://certpilot.app/pricing",
+        "reason": "http_404"
+      },
+      {
+        "url": "https://community.cloudflare.com/search.json?q=previous%20developer%20after%3A2026-08-20",
+        "reason": "http_403: blocked, as expected; not retried"
+      },
+      {
+        "url": "https://community.cloudflare.com/search.json?q=former%20employee%20account%20after%3A2026-08-20",
+        "reason": "http_403"
+      },
+      {
+        "url": "https://community.cloudflare.com/search.json?q=web%20designer%20account%20access%20after%3A2026-08-20",
+        "reason": "http_403"
+      },
+      {
+        "url": "https://community.cloudflare.com/search.json?q=domain%20expired%20nameservers%20after%3A2026-08-20",
+        "reason": "http_403"
+      },
+      {
+        "url": "https://help.zoho.com/portal/pt/community/topic/developer-of-domain-is-unreachable?page=13",
+        "reason": "empty: no date shown"
+      },
+      {
+        "url": "https://1password.com/pricing",
+        "reason": "empty: JS shell, no prices"
+      },
+      {
+        "url": "https://api.github.com/repos/louislam/uptime-kuma/issues/7912",
+        "reason": "empty: session GitHub access not enabled for repo endpoint"
+      },
+      {
+        "url": "https://www.profileward.com/pricing",
+        "reason": "http_404"
+      },
+      {
+        "url": "https://docs.n8n.io/api/api-reference/",
+        "reason": "empty: returned only Users section"
+      },
+      {
+        "url": "https://productideas.xero.com/search?query=class%20pass",
+        "reason": "empty: no relevant ideas"
+      },
+      {
+        "url": "https://productideas.xero.com/search?query=prepaid",
+        "reason": "empty: only prepayment multi-currency"
+      },
+      {
+        "url": "https://productideas.xero.com/search?query=class%20pack",
+        "reason": "empty: packing slips only"
+      },
+      {
+        "url": "https://community.squareup.com/t5/Appointments-Bookings/Square-Appointments-Class-Check-Ins-and-Purchased-Packages-in/m-p/825824",
+        "reason": "empty: HTTP 202 empty body (Unnerror 2025-11-19, outside 90 days)"
+      },
+      {
+        "url": "https://community.squareup.com/t5/Appointments-Bookings/Class-checkout-flow/m-p/830965",
+        "reason": "empty: empty body"
+      },
+      {
+        "url": "https://community.shopify.com/search.json?q=class%20credits%20after%3A2026-08-01",
+        "reason": "empty: no relevant topics"
+      },
+      {
+        "url": "https://hn.algolia.com/api/v1/search_by_date?query=mindbody&tags=comment&hitsPerPage=10&numericFilters=created_at_i%3E1755000000",
+        "reason": "empty: irrelevant hits; same for yoga studio, class pack, punch card, momence, punchpass"
+      },
+      {
+        "url": "https://squareup.com/us/en/app-marketplace/search?q=class%20pass",
+        "reason": "empty: title only, JS shell"
+      },
+      {
+        "url": "https://www.goodshuffle.com/pricing",
+        "reason": "empty: title only"
+      },
+      {
+        "url": "https://booqable.com/features/deliveries/",
+        "reason": "http_404"
+      },
+      {
+        "url": "https://apps.shopify.com/hyrekit/reviews?ratings%5B%5D=1&ratings%5B%5D=2&ratings%5B%5D=3&sort_by=newest",
+        "reason": "empty: no 1-3 star reviews (or none rendered)"
+      },
+      {
+        "url": "https://apps.shopify.com/rentalsuite/reviews?ratings%5B%5D=1&ratings%5B%5D=2&ratings%5B%5D=3&sort_by=newest",
+        "reason": "empty: no 1-3 star reviews (or none rendered)"
+      },
+      {
+        "url": "https://apps.shopify.com/rd-rentals/reviews?ratings%5B%5D=1&ratings%5B%5D=2&ratings%5B%5D=3&sort_by=newest",
+        "reason": "empty: no 1-3 star reviews (or none rendered)"
+      },
+      {
+        "url": "https://apps.shopify.com/product-rentals-pro/reviews?ratings%5B%5D=1&ratings%5B%5D=2&ratings%5B%5D=3&sort_by=newest",
+        "reason": "empty: no 1-3 star reviews (or none rendered)"
+      },
+      {
+        "url": "https://apps.shopify.com/rentle/reviews?ratings%5B%5D=1&ratings%5B%5D=2&ratings%5B%5D=3&sort_by=newest",
+        "reason": "empty: no 1-3 star reviews (or none rendered)"
+      },
+      {
+        "url": "https://www.inflatableoffice.com/support/topic/troubleshooting-and-faqs",
+        "reason": "redirect: 301 to rental.software"
+      },
+      {
+        "url": "https://rental.software/support/topic/troubleshooting-and-faqs",
+        "reason": "empty: login wall"
+      },
+      {
+        "url": "https://apps.shopify.com/search?q=party%20rental",
+        "reason": "empty: JS-rendered, no app handles"
+      },
+      {
+        "url": "https://hn.algolia.com/api/v1/search_by_date?query=party%20rental&tags=comment&hitsPerPage=15",
+        "reason": "empty: unquoted query, irrelevant hits"
+      },
+      {
+        "url": "https://hn.algolia.com/api/v1/search_by_date?query=bounce%20house&tags=comment&hitsPerPage=15",
+        "reason": "empty: unquoted query, irrelevant hits"
+      },
+      {
+        "url": "https://hn.algolia.com/api/v1/search_by_date?query=tent%20rental&tags=comment&hitsPerPage=15",
+        "reason": "empty: unquoted query, irrelevant hits"
+      },
+      {
+        "url": "https://hn.algolia.com/api/v1/search_by_date?query=rental%20software&tags=comment&hitsPerPage=15",
+        "reason": "empty: unquoted query, irrelevant hits"
+      },
+      {
+        "url": "https://www.freelancer.com/api/projects/0.1/projects/active/?query=time+tracking+invoicing&limit=20&full_description=true",
+        "reason": "empty: A: active endpoint OR-matches any single word and sorts by recency; itemless for the task"
+      },
+      {
+        "url": "https://www.freelancer.com/api/projects/0.1/projects/active/?query=harvest+alternative&limit=20&full_description=true",
+        "reason": "empty: A: unrelated recent projects"
+      },
+      {
+        "url": "https://www.freelancer.com/api/projects/0.1/projects/active/?query=%22time+tracking%22&limit=20&full_description=true",
+        "reason": "empty: A: quoted phrase ignored; same list as unquoted"
+      },
+      {
+        "url": "https://apps.shopify.com/rentshelf-product-rentals/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest",
+        "reason": "empty: O: no 1-2 star reviews"
+      },
+      {
+        "url": "https://ci-governor-c3ke.onrender.com/pricing",
+        "reason": "http_5xx: D: 503"
+      },
+      {
+        "url": "https://support.getharvest.com/hc/en-us/articles/26117908840845-Version-2-billing-Cancelling-your-subscription-or-closing-your-account",
+        "reason": "http_403"
+      },
+      {
+        "url": "https://support.getharvest.com/hc/en-us/articles/360048686391",
+        "reason": "http_403"
+      },
+      {
+        "url": "https://api.github.com/repos/superfly/docs/branches?per_page=100",
+        "reason": "http_403: proxy: GitHub repo access not enabled for this session; not worked around"
+      },
+      {
+        "url": "https://github.com/superfly/docs/pull/2661.diff",
+        "reason": "http_403: proxy block; could not read what the cost-management page change says"
+      },
+      {
+        "url": "https://docs.machines.dev/apps/App_IPAssignments_list.md",
+        "reason": "http_404: moved to docs.fly.io/api/machines"
+      },
+      {
+        "url": "https://docs.machines.dev/llms.txt",
+        "reason": "http_404"
+      },
+      {
+        "url": "https://versionly.dev/pricing",
+        "reason": "http_404: No pricing page"
+      },
+      {
+        "url": "https://www.freelancer.com/projects/php/Fix-Booknetic-Booking-Error-after",
+        "reason": "empty: HTML page returned compressed shell without readable content"
+      },
+      {
+        "url": "https://www.freelancer.com/projects/graphic-design/Scooter-Motorcycle-Availability-Search",
+        "reason": "empty: HTML page returned compressed shell without readable content"
+      },
+      {
+        "url": "https://docs.cronofy.com/developers/faqs/free-busy-scope-change/index.md",
+        "reason": "http_404"
+      },
+      {
+        "url": "https://apps.shopify.com/search?q=pickup+route",
+        "reason": "empty: results load by script: 'We are having trouble loading your results'"
+      },
+      {
+        "url": "https://apps.shopify.com/search?q=pickup+stops",
+        "reason": "empty: same script-loaded shell"
+      },
+      {
+        "url": "https://apps.shopify.com/search?q=drop+points+pickup",
+        "reason": "empty: same script-loaded shell"
+      },
+      {
+        "url": "https://usemechanic.com/task/email-a-report-of-pick-up-orders-for-the-next-x-days",
+        "reason": "redirect: 301 to tasks.mechanic.dev"
+      },
+      {
+        "url": "https://roundtriplabs.helpscoutdocs.com/article/285-how-does-easyroutes-work-with-different-shopify-apps",
+        "reason": "redirect: 301 to support.easyroutes.app"
+      },
+      {
+        "url": "https://www.freelancer.com/projects/web-hosting/Recover-Domain-Host-Antiques-Site",
+        "reason": "empty: gzip body; job text not in HTML (JS app); confirmed via API instead"
+      },
+      {
+        "url": "https://www.freelancer.com/projects/cloudflare/Locate-Hosting-Provider-for-Website",
+        "reason": "empty: JS app; confirmed via API instead"
+      },
+      {
+        "url": "https://community.n8n.io/u/nazar5n.json",
+        "reason": "empty: profile_hidden"
+      },
+      {
+        "url": "https://community.n8n.io/user_actions.json?username=nazar5n&filter=4,5&limit=30",
+        "reason": "empty: hidden profile, no actions returned"
+      },
+      {
+        "url": "https://community.n8n.io/u/vecthorproject.json",
+        "reason": "empty: profile_hidden"
+      },
+      {
+        "url": "https://community.n8n.io/user_actions.json?username=vecthorproject&filter=4,5&limit=30",
+        "reason": "empty: hidden profile"
+      },
+      {
+        "url": "https://www.freelancer.com/projects/full-stack-development/Senior-React-Full-Stack-Maintenance",
+        "reason": "empty: first try without --compressed returned gzip bytes"
+      },
+      {
+        "url": "https://www.freelancer.com/projects/android/Yoga-App-Maintenance-Website-Creation",
+        "reason": "empty: first try without --compressed returned gzip bytes"
+      },
+      {
+        "url": "https://squareup.com/us/en/app-marketplace/app/classpass-appointments",
+        "reason": "http_429: rate limited; ClassPass is a booking marketplace anyway"
+      },
+      {
+        "url": "https://squareup.com/gb/en/app-marketplace/app/submatic",
+        "reason": "http_429: Cloudflare 1015 rate limit"
+      },
+      {
+        "url": "https://squareup.com/au/en/app-marketplace/app/breely",
+        "reason": "http_429: Cloudflare 1015 rate limit"
+      },
+      {
+        "url": "https://community.squareup.com/t5/Appointments-Bookings/Square-Appointments-Class-Check-Ins-and-Purchased-Packages-in/m-p/837363",
+        "reason": "empty: HTTP 202 empty body"
+      },
+      {
+        "url": "https://squareup.com/help/ca/en/article/7489-here-by-salesvu-and-square",
+        "reason": "redirect: 301 to app-marketplace listing already read; not followed"
+      },
+      {
+        "url": "https://www.businesswire.com/news/home/20260219173380/en/",
+        "reason": "http_403"
+      },
+      {
+        "url": "https://apps.shopify.com/lionwheel",
+        "reason": "http_404: App Store 'page doesn't exist'"
+      }
+    ],
+    "rejectedCandidates": [
+      {
+        "title": "Harvest History Carry-Over",
+        "total": 17,
+        "reason": "Review kill: a one-time migration (the pattern earlier runs rejected as a service), Harvest's own export already gives invoice CSVs and a PDF zip, and Keito, Projectworks and TimeCamp import invoices; the gap the draft claimed was false."
+      },
+      {
+        "title": "Client API Sunset Desk",
+        "total": 15,
+        "reason": "Review kill: no complaint was an agency caught by a missed sunset, the near-identical apibreaks.com went unmaintained with no sign of payment, and free arol plus vendor tools cover the rest; also rejected on 2026-11-04."
+      },
+      {
+        "title": "Client Asset Register for Small Web Agencies",
+        "total": 17,
+        "reason": "Review kill: InstaRenewal already sells the same ownership register to the same buyer (free for 5 clients, $19 for 25), DomainNotifications covers expiry and ownership fields, and the spend found is one-off recovery, a service market."
+      },
+      {
+        "title": "Retainer Month Note for Automation Freelancers",
+        "total": 17,
+        "reason": "Review kill: Flotilla and n8n's free template cover n8n reporting, WorkPing and Clientence cover GitHub, and the evidence was a demand probe and one freelancer who already built his own."
+      },
+      {
+        "title": "Party Rental Run Sheet",
+        "total": 14,
+        "reason": "Review kill: the inspiring post was misread (a WordPress business asking a general question), and EasyRoutes (free plan) and Shopify Local Delivery already plan delivery days."
+      },
+      {
+        "title": "AI Coding Spend Ledger for Small Teams",
+        "total": 18,
+        "reason": "Below the watchlist line: no priced small-team tool found; Cursor's admin dashboard and API and Claude team caps are free; platform risk."
+      },
+      {
+        "title": "Jira-GitHub Link Health for Small Software Teams",
+        "total": 18,
+        "reason": "Below the watchlist line: the gap shows in the free official app; a paid integration ($10/month for 10 users) exists; a Jira app is a hard build on this platform."
+      },
+      {
+        "title": "EU AI Act Article 50 Transparency Check for Small SaaS",
+        "total": 18,
+        "reason": "Below the watchlist line: mandate only, no complaint found, and it overlaps the 2026-11-11 Client AI-Use Register."
+      },
+      {
+        "title": "No-Show Strike Rules for Appointment Businesses",
+        "total": 18,
+        "reason": "Below the watchlist line: most booking platforms already charge no-show fees; one recent complaint."
+      },
+      {
+        "title": "Stale-PR Triage Bot for Open-Source Maintainers",
+        "total": 18,
+        "reason": "Rejection rule: no paying buyer (volunteer maintainers)."
+      },
+      {
+        "title": "OpenAI Prompts and Evals Exit Registry",
+        "total": 17,
+        "reason": "Below the watchlist line: free Promptfoo and Langfuse already replace it; no complaint found."
+      },
+      {
+        "title": "Exam-Mode Notebooks for R and Python Instructors",
+        "total": 17,
+        "reason": "Below the watchlist line: institutional buyer, free JupyterHub and nbgrader."
+      },
+      {
+        "title": "Agent Install Provenance Guard",
+        "total": 17,
+        "reason": "Below the watchlist line: mandate-only evidence (one paper), Socket's free tier."
+      },
+      {
+        "title": "SBOM Completeness Linter",
+        "total": 17,
+        "reason": "Below the watchlist line: free sbomqs and NTIA conformance checker."
+      },
+      {
+        "title": "NIH Data Management Plan Drafter",
+        "total": 13,
+        "reason": "Rejection rule: institutional research-office buyer; DMPTool is free and its team wrote the paper cited."
+      },
+      {
+        "title": "Dependabot PR Batching",
+        "total": 19,
+        "reason": "Not put on the watchlist although at 19: Renovate already groups and batches dependency PRs for free for the same users."
+      },
+      {
+        "title": "Uptime Monitor with Working Webhooks",
+        "total": 19,
+        "reason": "Not put on the watchlist although at 19: UptimeRobot's free plan and self-hosted Uptime Kuma do the same job for the same users."
+      }
+    ],
+    "watchlist": [
+      {
+        "title": "Zotero Research Desk with Your Own Key",
+        "targetCustomer": "Independent researchers, consultants and graduate students who keep a Zotero library and pay for AI research tools themselves.",
+        "problemStatement": "Paid AI research workspaces throttle 'unlimited' plans for hours and make users upload their libraries by hand.",
+        "total": 20,
+        "missedGate": "total 20 below 22 and competitiveGap 1 before research: free Zotero plugins that take the user's own key (Beaver, SeerAI) already do much of it; not researched or reviewed this run.",
+        "evidence": [
+          "https://appsumo.com/products/logically/reviews/appsumo-tier-2-unlimited-ai-is-blocke-401064/",
+          "https://appsumo.com/products/logically/reviews/buyer-beware-fraudulent-fair-use-thro-396988/",
+          "https://appsumo.com/products/logically/"
+        ],
+        "firstSeen": "2026-11-18"
+      },
+      {
+        "title": "Actions Health and Spend Digest for Small Teams",
+        "targetCustomer": "Small software teams paying for GitHub Actions minutes.",
+        "problemStatement": "Scheduled workflows start hours late, macOS jobs cancel without a runner, deprecated runner versions stop without warning, and Actions spend creeps up.",
+        "total": 19,
+        "missedGate": "total 19 below 22; willingnessToPay 2 (no priced small-team tool found in the spend pass; GitHub budgets and alerts are free).",
+        "evidence": [
+          "https://api.github.com/search/issues?q=repo%3Aactions%2Frunner+created%3A%3E2026-05-01+is%3Aissue+state%3Aopen+sort%3Areactions&per_page=10",
+          "https://hn.algolia.com/api/v1/items/49971728"
+        ],
+        "firstSeen": "2026-11-18"
+      },
+      {
+        "title": "Mandatory Deposit Rules for Trade Quotes",
+        "targetCustomer": "Small painting, decorating and other trade contractors who require a deposit to book a job.",
+        "problemStatement": "Estimators forget to put the required deposit on quotes, and a paid deposit does not book the job date.",
+        "total": 19,
+        "missedGate": "total 19 below 22; pain 3 (one recent complaint); Xero says a quote-deposit flow is in development and Jobber sets deposits per quote.",
+        "evidence": [
+          "https://forum.invoiceninja.com/t/23644.json",
+          "https://productideas.xero.com/forums/967115-invoices-quotes/suggestions/44960839-quotes-convert-to-a-deposit-invoice-and-remainin",
+          "https://help.getjobber.com/hc/en-us/articles/7760313735575"
+        ],
+        "firstSeen": "2026-11-18"
+      },
+      {
+        "title": "Self-Rescheduling for Shopify Service Bookings",
+        "targetCustomer": "Small Shopify businesses that sell appointments (facial studios, salons, classes).",
+        "problemStatement": "Customers cannot reliably reschedule themselves, so they cancel or do not show up; Sesami puts self-rescheduling on its $129/month plan.",
+        "total": 19,
+        "missedGate": "total 19 below 22; pain 3 (one complaint, on a free app's bug); not researched or reviewed this run.",
+        "evidence": [
+          "https://apps.shopify.com/suppr-appointment-booking/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest",
+          "https://apps.shopify.com/sesami"
+        ],
+        "firstSeen": "2026-11-18"
+      },
+      {
+        "title": "Tailor Shop Orders and Measurements",
+        "targetCustomer": "Small tailoring shops and boutiques with an owner and a few tailors.",
+        "problemStatement": "Customer measurements per garment, stitching orders and invoices live on paper, and owners pay freelancers to build a one-off system.",
+        "total": 19,
+        "missedGate": "total 19 below 22; no complaint evidence (pain capped), one paid job only.",
+        "evidence": [
+          "https://www.freelancer.com/projects/cloud-computing/Cloud-Tailoring-Shop-Management-Software"
+        ],
+        "firstSeen": "2026-11-18"
+      },
+      {
+        "title": "Product CSV Import Preflight",
+        "targetCustomer": "Small online store owners who bulk-import catalogues.",
+        "problemStatement": "Catalogue CSVs fail the store's import template and owners pay freelancers to clean them.",
+        "total": 19,
+        "missedGate": "total 19 below 22; no complaint evidence (pain capped at 2), and paid import tools exist.",
+        "evidence": [
+          "https://www.freelancer.com/projects/data-analysis/Clean-Product-CSV"
+        ],
+        "firstSeen": "2026-11-18"
+      },
+      {
+        "title": "Editable TV Menu for Small Venues",
+        "targetCustomer": "Small cafés, bars and takeaways with a menu screen.",
+        "problemStatement": "Venues pay designers to change prices and specials on their TV menu.",
+        "total": 19,
+        "missedGate": "total 19 below 22; no complaint evidence, and free or cheap menu-board tools exist (competitiveGap 1).",
+        "evidence": [
+          "https://www.freelancer.com/projects/web-design/Editable-Digital-Menu"
+        ],
+        "firstSeen": "2026-11-18"
+      }
+    ],
+    "caveats": "First run of 2026-11-18 (Wednesday, developer and research tooling lens). Four provisional ideas ship, all at 18; none came near the gate of 22. Twenty-eight candidates were generated; nine were researched and adversarially reviewed, four survived (all rescored down 1 to 3 points) and five were killed: Harvest History Carry-Over (one-time migration; paid importers already carry invoices), Client API Sunset Desk (no matching complaint; apibreaks.com went unmaintained), Client Asset Register (InstaRenewal sells the same register), Retainer Month Note (free n8n and GitHub reporting tools) and Party Rental Run Sheet (misread evidence; free route apps). Reviewing stopped at nine because four had survived. The reviewers' main finding across the day: complaints that look strong are often vendors validating their own tools, or ask for something no add-on can deliver (Shopify's read-only delivery method, Calendly's own disconnection email). Selection constraints: two ideas are Small Business Ops and the other two carry smallBusiness true; every idea is substantial and Multi-week with a buildPlan; there is no Weekend MVP, because every Weekend-sized candidate (CSV preflight, TV menu, no-show rules) lacked complaint evidence and none was reviewed, so the Weekend MVP plus Multi-week constraint is not met. The Harvest price change (November 2026) is the strongest complaint cluster of the run but every product shape for it was already served. Fly.io launches a capped Free plan for personal orgs on 2026-11-23 (docs PR #2661), which the Idle Spend Watch scope already excludes. Square has paused new App Marketplace partnerships since September 2026, so Square add-ons cannot count on a store listing. Watchlist entries were all first seen today."
+  }
+}
