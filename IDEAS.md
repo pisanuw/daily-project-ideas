@@ -660,3 +660,7 @@
 | 2026-11-18 | Class Pack Ledger for Square Studios | Small Business Ops | Multi-week | 18 | provisional |  |
 | 2026-11-18 | Pickup Stop Check-Off for Shopify Route Sellers | Small Business Ops | Multi-week | 18 | provisional |  |
 | 2026-11-18 | Idle Spend Watch for Fly.io Teams | Developer Tool | Multi-week | 18 | provisional |  |
+| 2026-11-19 | Lesson Series Booker for Calendly | Micro-SaaS | Multi-week | 19 | provisional |  |
+| 2026-11-19 | Own-Domain Invoice Mail for QuickBooks Online | Small Business Ops | Multi-week | 18 | provisional |  |
+| 2026-11-19 | Payday Super Clock for Bookkeepers | Accessibility & Compliance | Multi-week | 17 | provisional |  |
+| 2026-11-19 | Books Keeper: Archive Before You Cancel QuickBooks | Small Business Ops | Multi-week | 14 | provisional |  |

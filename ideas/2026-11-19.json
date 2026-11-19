@@ -1,0 +1,1303 @@
+{
+  "date": "2026-11-19",
+  "schemaVersion": 3,
+  "complete": true,
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Lesson Series Booker for Calendly",
+      "slug": "lesson-series-booker-for-calendly",
+      "category": "Micro-SaaS",
+      "smallBusiness": true,
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "gateGap": {
+        "missing": [
+          "total 19 is below 22",
+          "reachability 2: the main community bans selling",
+          "no paid job or paid app for this exact Calendly task (willingnessToPay rests on adjacent studio software)"
+        ],
+        "closedBy": "The landing-page beta: 10 Calendly teachers booking a real series within 30 days and 3 paying would lift willingnessToPay to 4 and reachability to 3, and with feasibility confirmed on the text-reminder test the total reaches 22."
+      },
+      "topic": "Teaching Operations",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": true,
+        "engine": true,
+        "shared": false,
+        "notes": {
+          "stateful": "Each student's series is saved with every session, reschedule and cancellation, and the teacher returns to extend or end it each term.",
+          "connected": "Connects to the teacher's own Calendly account by OAuth, books through Calendly's Create Event Invitee API and listens to its invitee webhooks.",
+          "unattended": "A queued job books large terms over several days within Calendly's 100-bookings-a-day limit, and webhooks update the series log without the teacher.",
+          "engine": "A recurrence generator that skips blocked dates and holidays, checks each date against Calendly's open slots in 31-day windows, and shifts or flags conflicts."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "email",
+        "scheduled",
+        "backend"
+      ],
+      "buildPlan": [
+        {
+          "n": 1,
+          "title": "Connect and book one series",
+          "delivers": "Sign in, connect Calendly, pick a dedicated series event type, enter a student, weekday, time and number of weeks, preview the dates and book them.",
+          "acceptance": "A 12-week series appears in a paid test Calendly account with the right dates; the app is deployed at its hintwise.org address."
+        },
+        {
+          "n": 2,
+          "title": "Blocked dates and conflicts",
+          "delivers": "Teacher holidays and blocked dates, an availability check in 31-day windows, and a skip-or-shift rule shown in the preview.",
+          "acceptance": "A blocked date is skipped and a week with no open slot is flagged before anything is booked."
+        },
+        {
+          "n": 3,
+          "title": "Booking queue",
+          "delivers": "A job queue that respects 10 a minute, 50 an hour and 100 a day, with a progress view and retries.",
+          "acceptance": "150 bookings for 10 students finish over two days with none lost and every failure reported."
+        },
+        {
+          "n": 4,
+          "title": "Series record",
+          "delivers": "A webhook receiver and a per-student log of booked, rescheduled (old to new) and cancelled sessions, plus extend-series and cancel-the-rest actions.",
+          "acceptance": "A reschedule made in Calendly shows in the student's log within a minute."
+        },
+        {
+          "n": 5,
+          "title": "Student summary and text-reminder check",
+          "delivers": "One email to the student listing every date with an .ics file, and a per-student text-reminder consent status with a re-send prompt.",
+          "acceptance": "A student receives one email listing 12 dates; the consent status matches what Calendly reports for a test number."
+        },
+        {
+          "n": 6,
+          "title": "Polish",
+          "delivers": "Owner README, phone layout, keyboard and screen-reader pass, walkthrough test.",
+          "acceptance": "A new teacher books a series on a phone in under 5 minutes; axe reports no serious issues."
+        }
+      ],
+      "summary": "For music teachers, tutors and coaches who keep Calendly: book a student's whole term of weekly lessons in one go, skipping holidays, with a record of every change.",
+      "public": {
+        "summary": "Book a student's whole term of weekly lessons at once, with holidays skipped and every change recorded.",
+        "problem": "You teach the same students every week, but your booking page makes you schedule each lesson one at a time. A 12-week term for 40 students means hundreds of bookings, and you lose an evening every month doing it. When a lesson moves, you only find out from an old email.",
+        "forWhom": "Music teachers, tutors and coaches who book regular sessions for their students and want to keep their current booking page.",
+        "benefits": [
+          "A full term booked in minutes, not evenings",
+          "Holidays and your days off skipped automatically",
+          "Clashes caught before anyone is booked",
+          "One clear list of dates for each student",
+          "A history of every moved or cancelled lesson"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "\"I'm literally scheduling 700+ meetings one by one\" each term for 50+ students; coaches book 16-week series by hand; one practitioner rebooks 80 to 120 fixed appointments a month, \"6 to 7 hours every month\", hitting CAPTCHAs after about 10 bookings an hour, while competitors \"have had this feature for years\".",
+      "description": "The teacher connects Calendly and creates one hidden 'series' event type with an unlimited date range. For each student they choose a weekday, time and number of weeks; the app generates the dates, skips the teacher's holidays and blocked days, checks each date against Calendly's open slots, and books them through Calendly's Create Event Invitee API, so Calendly's own confirmations, calendar invites and workflows run as normal. Large terms are queued across days to stay inside Calendly's limits, and the teacher sees honest progress. Webhooks keep a per-student log of reschedules and cancellations, and the student gets one email listing every date.",
+      "targetCustomer": "Self-employed music teachers, tutors and coaches on paid Calendly plans who book recurring sessions for 10 to 40 students on their behalf.",
+      "buyer": "The teacher or coach, on a personal or business card, alongside the Calendly subscription they already pay for.",
+      "whyNow": "Calendly opened its Scheduling API (Create Event Invitee) and webhooks to every plan on 2026-11-03, so a small app can book on a teacher's behalf for the first time without an Enterprise deal; meanwhile recurring-booking complaints on Calendly's community ran from August to November 2026 with no native feature shipped.",
+      "founderFit": "Pisan can build the recurrence and conflict engine and the queue on the HintWise platform alone, and the buyers are teachers: tutoring and lesson businesses are a market he understands from education, without depending on his own students.",
+      "problemEvidence": [
+        {
+          "url": "https://community.calendly.com/how-do-i-40/once-again-recurring-meetings-6165",
+          "source": "community.calendly.com",
+          "author": "Isabelle23883 (private music instructor)",
+          "date": "2026-11-10",
+          "kind": "complaint",
+          "summary": "50+ students on 10-12 week sessions four times a year; schedules \"700+ meetings one by one\"; Calendly's assistant sends no text reminders for its bookings."
+        },
+        {
+          "url": "https://community.calendly.com/how-do-i-40/recurring-appointments-sms-consent-a-major-gap-for-coaches-and-other-practitioners-6135",
+          "source": "community.calendly.com",
+          "author": "WISE38515 (coach)",
+          "date": "2026-10-20",
+          "kind": "complaint",
+          "summary": "Books 16-week series by hand and calls recurring sessions a major gap for practitioners; Calendly staff reply calls it a separate capability gap."
+        },
+        {
+          "url": "https://community.calendly.com/how-do-i-40/what-is-reason-calendly-does-not-yet-support-a-recurring-meeting-option-5948",
+          "source": "community.calendly.com",
+          "author": "Serena72725 (practitioner)",
+          "date": "2026-09-04",
+          "kind": "complaint",
+          "summary": "Rebooks 80 to 120 fixed appointments a month, 6 to 7 hours monthly, with CAPTCHAs after about 10 bookings an hour; looking for an alternative."
+        },
+        {
+          "url": "https://community.calendly.com/api-webhook-help-61/recurring-appointments-5679",
+          "source": "community.calendly.com",
+          "author": "Ashley00355",
+          "date": "2026-09-30",
+          "kind": "complaint",
+          "summary": "Joins a thread of users asking for recurring appointments; earlier posters left for Acuity over it."
+        },
+        {
+          "url": "https://community.calendly.com/how-do-i-40/feature-request-direct-event-duplication-client-history-tracker-reschedule-cancellation-log-6152",
+          "source": "community.calendly.com",
+          "author": "Jill60675",
+          "date": "2026-10-30",
+          "kind": "complaint",
+          "summary": "No way to book again from a past session and no per-client reschedule or cancellation log; keeps old notification emails as the record."
+        },
+        {
+          "url": "https://www.mymusicstaff.com/pricing/",
+          "source": "mymusicstaff.com",
+          "author": "My Music Staff (vendor)",
+          "date": "2026-11-19",
+          "kind": "spend",
+          "summary": "Music teachers pay $16.95 a month (plus $4.95 per extra teacher) for studio software whose core is recurring lessons; read on the pricing page."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Calendly (native)",
+          "url": "https://calendly.com/pricing",
+          "price": "Standard $10/seat/month billed yearly",
+          "gap": "No recurring or series booking; its assistant Callie is beta on Standard Plus and Teams Plus only and books single meetings."
+        },
+        {
+          "name": "Acuity Scheduling",
+          "url": "https://acuityscheduling.com/pricing",
+          "price": "Starter $16/month yearly or $20 monthly; text reminders from Standard $27/$34",
+          "gap": "Offers recurring bookings but means leaving Calendly; which plan includes recurring was not confirmed (help page returned 403)."
+        },
+        {
+          "name": "Cal.com",
+          "url": "https://cal.com/pricing",
+          "price": "Free plan has no recurring events; Teams $12/user/month yearly includes them",
+          "gap": "A migration, and availability is checked only for the first months of a series."
+        },
+        {
+          "name": "My Music Staff / TutorBird",
+          "url": "https://www.mymusicstaff.com/pricing/",
+          "price": "$16.95/month plus $4.95 per extra teacher",
+          "gap": "Does the whole studio job but replaces the teacher's booking page; no help for teachers who stay on Calendly."
+        },
+        {
+          "name": "Calendly MCP server (do-it-yourself)",
+          "url": "https://developer.calendly.com/docs/mcp/supported-tools.md",
+          "price": "Free with an AI assistant that supports MCP",
+          "gap": "Exposes single invitee creation; a technical user could loop it, but there are no blocked dates, conflict preview, queue or series log."
+        }
+      ],
+      "keyFeatures": [
+        "Series booking: same weekday and time for N weeks",
+        "Holidays and blocked dates skipped, conflicts previewed",
+        "Queued booking that respects Calendly's daily limits",
+        "Per-student log of reschedules and cancellations",
+        "One summary email with every date and an .ics file",
+        "Extend a series or cancel the rest in one action"
+      ],
+      "mvpScope": {
+        "features": [
+          "Calendly OAuth and series event type check",
+          "Series generator with blocked dates",
+          "Queued booking with progress",
+          "Webhook series log",
+          "Student summary email"
+        ],
+        "outOfScope": [
+          "Payments and invoicing",
+          "Sending text messages",
+          "Student self-booking of a series",
+          "Group lessons and multi-teacher studios"
+        ],
+        "buildEstimate": "6 to 7 build days"
+      },
+      "techStack": "React + Vite + Tailwind front end; Supabase sign-in and per-app schema; backend-hub on Render for Calendly OAuth, token refresh and the webhook receiver; scheduled jobs for the booking queue; transactional email for summaries.",
+      "pricing": {
+        "model": "Per-teacher subscription with one free series",
+        "pricePoint": "$9/month or $79/year",
+        "rationale": "Calendly Standard ($10) plus this stays near Acuity Starter ($16-20) and below My Music Staff ($16.95), and the value is not having to move students to a new booking page."
+      },
+      "revenueSketch": "Estimate only: 25 to 40 paying teachers after six months x $9 = $225 to $360 MRR. Assumes the landing page ranks for 'Calendly recurring appointments'.",
+      "distribution": "Calendly's community holds the buyers but its guidelines say 'No selling or soliciting... includes professional services' (community-guidelines-80), so no pitching there. First 10: an SEO page for 'Calendly recurring appointments / book a series' (the complaint threads rank for it), an application to Calendly's integrations directory, and music teacher associations and teacher groups.",
+      "validationTest": {
+        "method": "Publish a landing page with a working beta (one free series) and apply to Calendly's integrations directory; on day 1, test on a paid account whether API bookings with a text-reminder number keep one consent per phone.",
+        "successCriteria": "10 Calendly teachers connect and book at least one series within 30 days, and 3 convert to paid.",
+        "cost": "About 1 day and $0 beyond a paid Calendly test seat."
+      },
+      "moat": "Weak: an early integrations-directory listing and the series history held in the app. Calendly could ship recurring natively.",
+      "compliance": [
+        "Student contact data, often of minors: collect parent contacts only, keep scheduling fields only, privacy policy and deletion on disconnect.",
+        "Calendly developer terms and its data-deletion endpoint.",
+        "The app sends no SMS itself (Calendly does), so TCPA and 10DLC registration stay with Calendly.",
+        "Series emails are transactional (CAN-SPAM)."
+      ],
+      "risks": [
+        {
+          "risk": "Calendly ships recurring bookings natively; its research team contacted a complainant in October 2026.",
+          "mitigation": "Keep the build to about a week, price monthly, and lean on the series log and blocked-date rules Calendly lacks."
+        },
+        {
+          "risk": "API rules break real setups: start times must be open slots, paid event types cannot be booked, and big terms take days to queue.",
+          "mitigation": "Guide the teacher to a dedicated hidden series event type with an unlimited range and no payment, book earliest-first, and show honest progress."
+        },
+        {
+          "risk": "Text-reminder consent may still be asked per booking for API bookings.",
+          "mitigation": "Test on day 1 on a paid account; promise only the email summary until it is confirmed."
+        }
+      ],
+      "scores": {
+        "pain": 4,
+        "willingnessToPay": 3,
+        "reachability": 2,
+        "competitiveGap": 3,
+        "feasibility": 3,
+        "complianceBurden": 4,
+        "total": 19
+      },
+      "scoreRationale": {
+        "pain": "Five independent dated complaints in 90 days, including 700+ manual bookings (https://community.calendly.com/how-do-i-40/once-again-recurring-meetings-6165) and 6-7 hours a month (https://community.calendly.com/how-do-i-40/what-is-reason-calendly-does-not-yet-support-a-recurring-meeting-option-5948).",
+        "willingnessToPay": "Teachers already pay $16.95/month for recurring-lesson software (https://www.mymusicstaff.com/pricing/) and Calendly seats; no paid job for this exact task was found.",
+        "reachability": "Calendly's community bans selling (https://community.calendly.com/welcome-to-calendly-community-57/community-guidelines-80); SEO and the integrations directory are unproven.",
+        "competitiveGap": "Nothing books a series inside Calendly, but cheap migration targets exist (https://cal.com/pricing, https://acuityscheduling.com/pricing).",
+        "feasibility": "Create Event Invitee and webhooks are open on all plans (https://developer.calendly.com/release-notes/2026/11/3), but the 100-a-day cap and open-slot rule need a queue (https://developer.calendly.com/api-docs/overview/rate-limits.md).",
+        "complianceBurden": "Email and scheduling data only; Calendly sends the texts (https://developer.calendly.com/api-docs/calendly-api/scheduled-events/create-event-invitee.md)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Reviewer re-read 6165 and 5679 and fetched Calendly's November 2026 release notes, the MCP tool list, Callie help pages, cal.com and calendly.com pricing. No add-on, extension, Zapier template or GitHub project books a series inside Calendly; the Zapier route makes a Google Calendar event and loses Calendly reminders. Callie is beta on premium plans and books single meetings; the hosted MCP server lets technical users loop single bookings. Cal.com's free plan has no recurring events (Teams $12). Calendly staff are researching the gap (6135). Isabelle23883's two threads count once; LizzyDel (May) is outside 90 days; one poster already left for Acuity. Feasibility cut from 4 to 3: 5 API bookings a day on Free, 100 on paid plans, open-slot rule during multi-day queues, paid event types blocked, text-reminder consent for API bookings untested. Re-scoped to paid-Calendly teachers with 10 to 40 students, a hidden series event type, and an honest queue. Total 20 to 19."
+      },
+      "inspiredBy": "https://community.calendly.com/how-do-i-40/once-again-recurring-meetings-6165"
+    },
+    {
+      "n": 2,
+      "title": "Own-Domain Invoice Mail for QuickBooks Online",
+      "slug": "own-domain-invoice-mail-for-quickbooks-online",
+      "category": "Small Business Ops",
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "gateGap": {
+        "missing": [
+          "total 18 is below 22",
+          "pain 3: Intuit is starting to ship an off switch",
+          "no paid job for the task (willingnessToPay rests on one paid app)"
+        ],
+        "closedBy": "The live test plus bookkeeper outreach: if sending outside QuickBooks provably avoids Intuit's emails and 2 bookkeepers pay $19 within a month, pain returns to 4 and willingnessToPay to 4, and the idea clears 22 only if reachability also improves through a bookkeeper channel."
+      },
+      "topic": "Data & Visualization",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": true,
+        "engine": false,
+        "shared": false,
+        "notes": {
+          "stateful": "Keeps a per-client log of every invoice and reminder sent, with templates and reminder schedules the firm returns to.",
+          "connected": "Reads invoices and payment status from the firm's QuickBooks Online company by OAuth and sends from the firm's own verified domain.",
+          "unattended": "Reminder schedules run before, on and after the due date and stop by themselves once QuickBooks shows the invoice paid."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "email",
+        "scheduled",
+        "backend"
+      ],
+      "buildPlan": [
+        {
+          "n": 1,
+          "title": "Send one invoice from your domain",
+          "delivers": "Connect QuickBooks Online, list open invoices, send one invoice PDF from the firm's verified domain, and log it.",
+          "acceptance": "In a live QuickBooks Online account the client receives the PDF from the firm's domain and the log shows it; a written test records whether Intuit sends any follow-up email when the invoice is never sent through QuickBooks. Deployed."
+        },
+        {
+          "n": 2,
+          "title": "Domain setup wizard",
+          "delivers": "Step-by-step DNS records for the firm's domain with a live check and a test send.",
+          "acceptance": "SPF and DKIM pass at a Gmail and an Outlook inbox for a test domain."
+        },
+        {
+          "n": 3,
+          "title": "Reminder schedules",
+          "delivers": "Before, on and after due-date reminders with editable templates, stopped by payment status from QuickBooks.",
+          "acceptance": "No reminder goes out after a test invoice is marked paid in QuickBooks."
+        },
+        {
+          "n": 4,
+          "title": "Client message log",
+          "delivers": "Per-client history of every message, CSV export, and a private note written back to the QuickBooks invoice.",
+          "acceptance": "Every send appears in the app log and as a note on the invoice."
+        },
+        {
+          "n": 5,
+          "title": "Bookkeeper view",
+          "delivers": "One bookkeeper login over up to five client companies, each with its own domain and templates.",
+          "acceptance": "A bookkeeper switches between two test companies and each sends from its own domain."
+        },
+        {
+          "n": 6,
+          "title": "Polish",
+          "delivers": "Owner README, phone layout, keyboard and screen-reader pass, walkthrough test.",
+          "acceptance": "A walkthrough from connect to first reminder passes; axe reports no serious issues."
+        }
+      ],
+      "summary": "For small US firms on QuickBooks Online: send invoices and payment reminders from your own email domain, with a record of exactly what each client received.",
+      "public": {
+        "summary": "Send your invoices and reminders from your own business address, and see exactly what every client was sent.",
+        "problem": "Your accounting software emails your clients in its own name, on its own schedule, and you cannot always switch those messages off. Long-time clients get chased for invoices they already paid another way, and you find out when they complain. You want every message a client receives to come from you.",
+        "forWhom": "Owners and bookkeepers of small service firms that bill clients through QuickBooks Online.",
+        "benefits": [
+          "Invoices arrive from your own business address",
+          "Reminders on your schedule, stopped once a client pays",
+          "A clear record of every message each client received",
+          "Fewer awkward calls from clients who already paid",
+          "One place for a bookkeeper to run several companies"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "From August 2026 QuickBooks Online began emailing customers 'Your payment for invoice ... isn't finished yet' after they opened an invoice, with no setting to stop it; owners call it contacting their clients in their name, one filed a BBB complaint, long-time clients who paid by other means threatened to leave, and the workaround is downloading invoices and emailing them by hand. QuickBooks also cannot send from a custom domain or Outlook: only one connected Gmail address.",
+      "description": "The firm connects QuickBooks Online and verifies its own domain once. The app pulls each invoice's PDF through the QuickBooks API and sends it, and any reminders, from the firm's domain on the firm's schedule, so the client never needs to receive mail from Intuit. Payment status syncs back from QuickBooks to stop reminders, every message is logged per client and noted on the invoice, and a bookkeeper can run several client companies from one login. Whether sending outside QuickBooks also stops Intuit's own follow-up emails is tested on a live account in milestone 1 before the app claims it.",
+      "targetCustomer": "Owners and office staff of US solo and small service firms (1 to 20 people) that send roughly 10 to 100 invoices a month from QuickBooks Online, and the bookkeepers who send invoices for them.",
+      "buyer": "The owner on the business card, or the outside bookkeeper for several client companies.",
+      "whyNow": "Intuit's autumn 2026 rollout of customer-facing 'Finish your payment' emails (98-reply and 20-reply community threads, August to November 2026) broke owners' trust in QuickBooks contacting clients; Intuit is only now trialling a switch on some accounts, and the general wish to send from one's own domain has gone unanswered since at least 2022.",
+      "founderFit": "A contained integration (QuickBooks OAuth, PDF fetch, email with domain authentication, schedules) that Pisan can ship alone on the HintWise platform's email and scheduled-job pieces, sold to small service firms, the owner's first-priority buyers.",
+      "problemEvidence": [
+        {
+          "url": "https://quickbooks.intuit.com/community/other-questions-9/finish-your-payment-customer-email-375767/index4.html",
+          "source": "quickbooks.intuit.com",
+          "author": "ajw246 (QuickBooks Online user)",
+          "date": "2026-10-04",
+          "kind": "complaint",
+          "summary": "Has an open case and a BBB complaint after three clients were emailed by Intuit two days after invoicing; floodlightdesign (2026-09-30) has 50 recurring invoices going out and wants a switch."
+        },
+        {
+          "url": "https://quickbooks.intuit.com/community/other-questions-9/finish-your-payment-customer-email-375767/index6.html",
+          "source": "quickbooks.intuit.com",
+          "author": "donnyhummel (QuickBooks Online user)",
+          "date": "2026-10-12",
+          "kind": "complaint",
+          "summary": "Long-time clients who paid outside QuickBooks are annoyed by the emails and threatening to leave; later posts (2026-11-09, 2026-11-10) report a new switch on some accounts and an escalation opt-out on another."
+        },
+        {
+          "url": "https://quickbooks.intuit.com/community/payments-3/finish-your-payment-emails-cannot-be-disabled-and-are-not-automatic-invoice-reminders-376201",
+          "source": "quickbooks.intuit.com",
+          "author": "username246527 (QuickBooks Online user)",
+          "date": "2026-10-05",
+          "kind": "complaint",
+          "summary": "Sends about 60 invoices a month and cannot stop Intuit's follow-up emails; the thread opener (State48Brooke, 2026-09-18) says they cannot be disabled."
+        },
+        {
+          "url": "https://quickbooks.intuit.com/community/other-questions-9/finish-your-payment-email-376173",
+          "source": "quickbooks.intuit.com",
+          "author": "LindsayCooper (QuickBooks Online user)",
+          "date": "2026-09-17",
+          "kind": "complaint",
+          "summary": "Quotes the 'Your payment for invoice ... isn't finished yet' email and calls it an unwanted feature."
+        },
+        {
+          "url": "https://invoicesherpa.com/pricing.html",
+          "source": "invoicesherpa.com",
+          "author": "InvoiceSherpa (vendor)",
+          "date": "2026-11-19",
+          "kind": "spend",
+          "summary": "Firms pay $49, $99 or $199 a month plus a 1% fee on paid invoices for QuickBooks reminders sent from their company domain; read on the pricing page."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "QuickBooks Online Gmail sending (built in)",
+          "url": "https://quickbooks.intuit.com/learn-support/en-us/manage-invoices/send-invoices-from-your-gmail-address/00/237386",
+          "price": "Included in QuickBooks Online",
+          "gap": "One connected Gmail address only, no Outlook or custom-domain sending, and invoices still go through QuickBooks, so Intuit's own emails continue."
+        },
+        {
+          "name": "InvoiceSherpa",
+          "url": "https://invoicesherpa.com/pricing.html",
+          "price": "$49/$99/$199 per month ($41/$83/$166 yearly) plus 1% of paid invoices",
+          "gap": "Does the same job; costs 2.5 times this price plus a transaction fee, which is heavy for a firm sending 20 invoices a month."
+        },
+        {
+          "name": "Paidnice",
+          "url": "https://www.paidnice.com/pricing",
+          "price": "Essentials $69/month, Pro $99/month (custom email domain listed on Pro)",
+          "gap": "Built for collections; custom-domain sending only clearly on the $99 plan."
+        },
+        {
+          "name": "Chaser",
+          "url": "https://www.chaserhq.com/pricing",
+          "price": "Compact $259/month",
+          "gap": "Accounts-receivable software for finance teams, priced far above a solo firm."
+        },
+        {
+          "name": "Manual workaround",
+          "url": "https://quickbooks.intuit.com/community/other-questions-9/finish-your-payment-customer-email-375767/index3.html",
+          "price": "Free",
+          "gap": "Download each PDF and email it yourself: no reminders, no payment sync, no log."
+        }
+      ],
+      "keyFeatures": [
+        "Invoice PDFs sent from the firm's own verified domain",
+        "Reminder schedules stopped by QuickBooks payment status",
+        "Per-client message log and CSV export",
+        "A note written back to each QuickBooks invoice",
+        "Bookkeeper view across several companies",
+        "Guided DNS setup with a live check"
+      ],
+      "mvpScope": {
+        "features": [
+          "QuickBooks Online connect and invoice list",
+          "Send PDF from verified domain",
+          "Reminder schedules with payment sync",
+          "Per-client log"
+        ],
+        "outOfScope": [
+          "Sending through Gmail or Microsoft 365 accounts",
+          "Payment links and card processing",
+          "Text messages",
+          "Multi-currency"
+        ],
+        "buildEstimate": "About 3 weeks"
+      },
+      "techStack": "React + Vite + Tailwind front end; Supabase sign-in and per-app schema; backend-hub on Render for QuickBooks OAuth, token refresh and PDF fetch; the platform's transactional email with per-customer domain verification; scheduled jobs for reminders.",
+      "pricing": {
+        "model": "Monthly subscription, no transaction fee",
+        "pricePoint": "$19/month up to 100 invoices; $39/month for a bookkeeper with up to 5 companies",
+        "rationale": "Undercuts InvoiceSherpa ($49 plus 1%) and Paidnice ($69-99) for small senders, and sits near the cost of a QuickBooks add-on a small firm will try without a meeting."
+      },
+      "revenueSketch": "Estimate only: 30 paying firms by month six x about $22 average = about $660 MRR, assuming bookkeepers bring several companies each.",
+      "distribution": "The buyers are concentrated in two QuickBooks community threads, but members rebuke selling there ('this is not the place to advertise services', 2026-09-30) and vendors who posted were called out, so no pitching. First 10: direct outreach to bookkeepers and ProAdvisors who send invoices for several clients, one non-promotional how-to article on keeping client email under your own name, and later a QuickBooks App Store listing after Intuit's review.",
+      "validationTest": {
+        "method": "Landing page and direct messages to 20 bookkeepers and ProAdvisors; on a live QuickBooks Online account with Payments, send invoices only through the prototype and record whether Intuit sends any follow-up email.",
+        "successCriteria": "8 or more waitlist sign-ups from QuickBooks Online users and 2 agreeing to pay $19 once milestone 1 works; the live test shows no Intuit email when QuickBooks never sends the invoice.",
+        "cost": "About 2 days and up to $20."
+      },
+      "moat": "Thin: the per-client delivery log and the bookkeeper multi-company view. InvoiceSherpa could cut its price and Intuit could add domain sending.",
+      "compliance": [
+        "Intuit production keys need its app assessment and security questionnaire; an App Store listing needs a review.",
+        "Store QuickBooks OAuth tokens encrypted and keep only invoice metadata.",
+        "Email authentication duties: SPF, DKIM and DMARC on each customer's domain to meet Gmail and Yahoo sender rules.",
+        "CAN-SPAM: invoice and reminder mail is transactional but headers must be accurate."
+      ],
+      "risks": [
+        {
+          "risk": "Intuit's new reminders switch (seen 2026-11-09) removes the urgent pain.",
+          "mitigation": "Lead with own-domain sending, reminders and the client log, which stand without the Intuit email issue."
+        },
+        {
+          "risk": "Intuit's follow-up email may still fire for invoices sent outside QuickBooks (one user found disabling payment options did not stop it).",
+          "mitigation": "Test on a live account in milestone 1 and make no claim about it until the test passes."
+        },
+        {
+          "risk": "Non-technical owners stall at DNS setup.",
+          "mitigation": "A guided wizard with a live record check, and a bookkeeper tier so one person sets it up for many firms."
+        }
+      ],
+      "scores": {
+        "pain": 3,
+        "willingnessToPay": 3,
+        "reachability": 3,
+        "competitiveGap": 3,
+        "feasibility": 3,
+        "complianceBurden": 3,
+        "total": 18
+      },
+      "scoreRationale": {
+        "pain": "Many dated independent complaints August to November 2026 including a BBB case (https://quickbooks.intuit.com/community/other-questions-9/finish-your-payment-customer-email-375767/index4.html), but a switch is now appearing on some accounts (https://quickbooks.intuit.com/community/other-questions-9/finish-your-payment-customer-email-375767/index6.html).",
+        "willingnessToPay": "Firms already pay $49/month plus 1% for domain-sent QuickBooks reminders (https://invoicesherpa.com/pricing.html); no paid job was found.",
+        "reachability": "Users gather in public QuickBooks threads, but selling there is policed (https://quickbooks.intuit.com/community/other-questions-9/finish-your-payment-customer-email-375767/index4.html); bookkeepers are the realistic channel.",
+        "competitiveGap": "Cheaper than InvoiceSherpa (https://invoicesherpa.com/pricing.html) and Paidnice (https://www.paidnice.com/pricing), but QuickBooks' free Gmail sending and the manual PDF route cover part of the job.",
+        "feasibility": "Invoice PDFs are available through the QuickBooks API, but production approval, per-customer DNS and the untested Intuit trigger make 7 days tight (https://quickbooks.intuit.com/learn-support/en-us/manage-invoices/send-invoices-from-your-gmail-address/00/237386).",
+        "complianceBurden": "Intuit's security assessment, stored OAuth tokens to accounting data, and email authentication duties (https://invoicesherpa.com/pricing.html shows the incumbent's model)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Reviewer re-read thread 375767 (pages 1 and 6; index7 is 404) and 376201 (pages 1 and 2). About 25 distinct non-staff users complained from 2026-08-24 to 2026-11-10; GreenBridgeFS (Nectivo promotion) and mallehajones (spam link) excluded. Intuit is partly fixing it: jessary saw a new Reminders switch on 2026-11-09 and ituniteparky had it turned off by escalation on 2026-11-10; no Intuit help article on it exists. Funkymonkeyboymusic (2026-10-10) found disabling payment options did not stop the email, and plain text did not for slkgjldfgkj, so whether sending outside QuickBooks stops it is unproven. QuickBooks supports one Gmail address, no Outlook or custom domain. Competitors read: InvoiceSherpa $49+1%, Paidnice $69/$99, Chaser $259; Automagical Invoice (free Gmail add-on) is partial. Re-scoped away from 'stops Finish your payment emails' to own-domain invoices, reminders and a client log at $19 with no fee; payment link dropped from v1. Pain 3, competitiveGap 3, feasibility 3, compliance 3. Total 17 (research) to 18."
+      },
+      "inspiredBy": "https://quickbooks.intuit.com/community/other-questions-9/finish-your-payment-customer-email-375767/index4.html"
+    },
+    {
+      "n": 3,
+      "title": "Payday Super Clock for Bookkeepers",
+      "slug": "payday-super-clock-for-bookkeepers",
+      "category": "Accessibility & Compliance",
+      "smallBusiness": true,
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "gateGap": {
+        "missing": [
+          "total 17 is below 22",
+          "competitiveGap 2: BAS Ready and Xero's own planned reminders cover part of it",
+          "feasibility 2: no super status in the Xero API and a 50-connection cap before certification",
+          "no paid job for the task (willingnessToPay rests on an adjacent paid app)"
+        ],
+        "closedBy": "The 3-file beta: 10 practices connecting files and 3 committing to AUD 29 would lift willingnessToPay to 4; if the returned register catches real bounces earlier than Xero's emails, competitiveGap rises to 3, but the total reaches 22 only after certification removes the connection cap."
+      },
+      "topic": "Data & Visualization",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": true,
+        "engine": true,
+        "shared": true,
+        "notes": {
+          "stateful": "Keeps every client file's pay runs, Payday Super deadlines and a register of returned contributions with their re-pay dates.",
+          "connected": "Connects to each client's Xero organisation by OAuth (payroll and accounting read scopes) and takes forwarded super-return emails.",
+          "unattended": "A daily sync and a per-advisor morning email list deadlines due, overdue and returned contributions without anyone opening each file.",
+          "engine": "Payday Super due dates under the Act: 7th business day after payday, 20th for new employees, with business days excluding public holidays in any state or territory.",
+          "shared": "A practice team view where each advisor chooses the client files they are responsible for."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "email",
+        "scheduled",
+        "backend",
+        "llm"
+      ],
+      "buildPlan": [
+        {
+          "n": 1,
+          "title": "One file, one clock",
+          "delivers": "Sign in, connect one Xero organisation, pull its posted pay runs and show each one's Payday Super deadline.",
+          "acceptance": "A Xero demo company's pay runs show deadlines that match hand-worked examples, including a public holiday; deployed."
+        },
+        {
+          "n": 2,
+          "title": "Practice-wide table",
+          "delivers": "Connect several client files and see one table of pay runs by deadline, with new-employee 20-day deadlines marked.",
+          "acceptance": "Three demo files appear in one table sorted by nearest deadline."
+        },
+        {
+          "n": 3,
+          "title": "Returned-contribution register",
+          "delivers": "A forwarding address that reads super-return emails (LLM extraction of employer, employee, fund, amount, reason) plus a manual 'mark returned' button, each with a re-pay deadline.",
+          "acceptance": "Five sample return emails create five correct register entries with no duplicates."
+        },
+        {
+          "n": 4,
+          "title": "Per-advisor routing and morning email",
+          "delivers": "Each advisor picks their files and gets a morning email of deadlines due today and tomorrow, overdue items and open returns.",
+          "acceptance": "Two advisors with different files receive different, correct emails at 07:00 Sydney time."
+        },
+        {
+          "n": 5,
+          "title": "Reconciliation hint",
+          "delivers": "A secondary flag when the super payable balance has not cleared by the deadline, labelled as a bank-reconciliation check, not a payment status.",
+          "acceptance": "A demo file with an unreconciled super payment shows the hint and no false 'returned' flag."
+        },
+        {
+          "n": 6,
+          "title": "Polish",
+          "delivers": "Owner README, phone layout, keyboard and screen-reader pass, walkthrough test, data-minimisation note.",
+          "acceptance": "A walkthrough from connect to morning email passes; axe reports no serious issues."
+        }
+      ],
+      "summary": "For Australian bookkeepers who run payroll for many small Xero employers: one daily view of every client's Payday Super deadline and every returned contribution, sent to the advisor responsible.",
+      "public": {
+        "summary": "See every client's super deadline and every returned super payment in one place, each morning.",
+        "problem": "Since July, super must reach the fund within days of each payday, and a payment that bounces has to be fixed fast. But the warning only reaches whoever approved the payment, often your client, and you find out weeks later while preparing their activity statement. Checking each client's file by hand every day is not practical.",
+        "forWhom": "Bookkeepers and payroll advisers in Australia who look after payroll for several small employers.",
+        "benefits": [
+          "Every client's super deadline in one list",
+          "Returned payments caught before the deadline passes",
+          "Each adviser sees only their own clients",
+          "A short morning email instead of opening every file",
+          "Fewer surprise penalties for your clients"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "Only the person who approves a super payment in Xero hears when it bounces, and it is \"not practicable to be constantly refreshing the Super Payments screen ... particularly for Accountants who manage multiple organisations\"; under Payday Super the window is short, and practices find \"several cases of bounced payments that the clients are not aware of\" while preparing BAS. Xero's planned reminder emails go to every payroll admin, which advisers call \"pointless\".",
+      "description": "The practice connects each client's Xero organisation once. A daily job reads posted pay runs and new starters through the Xero Payroll AU API and computes each pay run's Payday Super deadline under the Act, so the practice sees every file's deadlines in one table. Returned contributions enter a register from forwarded fund or clearing-house emails (read by the LLM gateway) or a manual button, each with its re-pay deadline. Each advisor chooses their files and gets a morning email. The Xero API exposes no super batch status, so the app never claims a payment was made; a reconciliation hint shows only when the super payable balance has not cleared by the deadline.",
+      "targetCustomer": "Bookkeepers, BAS agents and payroll advisers in Australian practices (1 to 10 staff) who run Xero Payroll with Auto Super for 10 to 60 small employers.",
+      "buyer": "The practice owner, from the practice's software budget.",
+      "whyNow": "Payday Super applies from 1 July 2026: contributions must arrive within 7 business days of payday (20 for new employees); Xero's own fix so far is a per-organisation overview and planned emails to all payroll admins, with the practice-wide request still only 'gaining support'.",
+      "founderFit": "A rules engine plus a daily sync that fits the HintWise platform's scheduled jobs, email and LLM gateway, sold to small practices that serve small businesses; it needs no Australian credentials, only careful reading of the Act.",
+      "problemEvidence": [
+        {
+          "url": "https://productideas.xero.com/forums/967118-payroll-expenses/suggestions/51033448-au-payroll-payroll-advisors-to-receive-superannu",
+          "source": "productideas.xero.com",
+          "author": "Xero user (payroll adviser); later comments by Xero users",
+          "date": "2026-09-01",
+          "kind": "complaint",
+          "summary": "159-vote idea (opened 2026-02-24): only the super approver gets bounce emails; a 2026-08-19 comment says one wrong member number bounced a whole batch; 2026-09-01 asks for daily notices while super awaits approval. Xero staff: notifications in development."
+        },
+        {
+          "url": "https://productideas.xero.com/forums/967118-payroll-expenses/suggestions/51478654-payroll-au-auto-super-in-web-notification-of-bo",
+          "source": "productideas.xero.com",
+          "author": "Xero user (accounting practice)",
+          "date": "2026-10-28",
+          "kind": "complaint",
+          "summary": "Asks for one view of bounced auto super across all files; while preparing BAS the practice found 'several cases of bounced payments that the clients are not aware of'."
+        },
+        {
+          "url": "https://productideas.xero.com/forums/967118-payroll-expenses/suggestions/51085414-au-payroll-payday-super-reminders",
+          "source": "productideas.xero.com",
+          "author": "Xero user (bookkeeping adviser)",
+          "date": "2026-10-23",
+          "kind": "complaint",
+          "summary": "Xero plans reminder emails to all payroll admins; the adviser replies that this is 'pointless... Should be able to select the advisors to be notified'."
+        },
+        {
+          "url": "https://productideas.xero.com/forums/967127-practice-tools/suggestions/51176116-au-xero-hq-payroll-manager",
+          "source": "productideas.xero.com",
+          "author": "Xero user (bookkeeper); later comments by practitioners",
+          "date": "2026-08-13",
+          "kind": "complaint",
+          "summary": "25-vote request for a list of payroll clients showing last super payment and its status; 'Payday super now here. I can't believe this hasn't already been rolled out.'"
+        },
+        {
+          "url": "https://www.legislation.gov.au/C2025A00057/asmade/2025-11-06/text/original/epub/OEBPS/document_1/document_1.html",
+          "source": "legislation.gov.au",
+          "author": "Parliament of Australia",
+          "date": "2025-11-06",
+          "kind": "mandate",
+          "summary": "Payday Super Act: the usual period ends on the 7th business day after the qualifying earnings day, 20 business days for new employees, for days from 1 July 2026."
+        },
+        {
+          "url": "https://apps.xero.com/au/collection/featured-apps/app/bas-ready",
+          "source": "apps.xero.com",
+          "author": "BAS Ready (vendor)",
+          "date": "2026-11-19",
+          "kind": "spend",
+          "summary": "Practices pay AUD 60 to 200 a month for a cross-client checker that includes super accrued vs super payable; rated 5.0 from 9 reviews."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Xero Auto Super overview and planned reminders",
+          "url": "https://productideas.xero.com/forums/967118-payroll-expenses/suggestions/51085414-au-payroll-payday-super-reminders",
+          "price": "Included in Xero Payroll",
+          "gap": "Per organisation only; planned emails go to all payroll admins at +1 and +7 days, with no adviser choice; practice-wide view not built."
+        },
+        {
+          "name": "BAS Ready",
+          "url": "https://apps.xero.com/au/collection/featured-apps/app/bas-ready",
+          "price": "AUD 60/month (30 connections) to AUD 200/month (150 connections)",
+          "gap": "Built around the BAS cycle: compares super accrued with super payable across clients, but no per-payday deadline clock or returned-contribution register."
+        },
+        {
+          "name": "Wrkr clearing house",
+          "url": "https://www.wrkr.com.au/payday-super-bookkeepers",
+          "price": "'from $5.50/month' (blog teaser on the page; no pricing page read)",
+          "gap": "Shows returned payments across clients and verifies members, but only if each client moves super off Xero Auto Super."
+        },
+        {
+          "name": "XBert",
+          "url": "https://www.xbert.io/blog/payday-superannuation",
+          "price": "unknown",
+          "gap": "General ledger alerts, including a generic delay alert; no Payday Super deadline per pay run."
+        }
+      ],
+      "keyFeatures": [
+        "Payday Super deadline for every pay run across all client files",
+        "New-employee 20-business-day rule and public holidays in every state",
+        "Returned-contribution register from forwarded emails",
+        "Per-adviser file choice and morning email",
+        "Reconciliation hint, clearly labelled",
+        "Employee data minimised on ingest (no tax file numbers or bank details stored)"
+      ],
+      "mvpScope": {
+        "features": [
+          "Xero connect for several files",
+          "Deadline engine",
+          "Practice table",
+          "Returned register with email forwarding",
+          "Per-adviser morning email"
+        ],
+        "outOfScope": [
+          "Paying or approving super",
+          "Member verification (SuperStream MVR)",
+          "MYOB or Employment Hero files",
+          "Super guarantee charge calculation",
+          "Lodging anything with the ATO"
+        ],
+        "buildEstimate": "About 2 to 3 weeks"
+      },
+      "techStack": "React + Vite + Tailwind front end; Supabase sign-in and per-app schema (Australian region if available); backend-hub on Render for Xero OAuth, token refresh, daily sync and an inbound email webhook; LLM gateway to read forwarded return emails; scheduled jobs and transactional email.",
+      "pricing": {
+        "model": "Per-practice subscription by number of client files",
+        "pricePoint": "AUD 29/month up to 15 files; AUD 59/month up to 40",
+        "rationale": "Below BAS Ready (AUD 60 for 30 connections) for a narrower per-payday job, and small next to a single super guarantee charge for a client."
+      },
+      "revenueSketch": "Estimate only: 20 practices x AUD 40 = AUD 800/month, less Xero's Plus API tier (AUD 245/month) needed beyond 50 connections; on the Core tier only about 3 practices fit.",
+      "distribution": "Xero's community guidelines forbid 'advertisements, promotions, or posts of a commercial nature', and an App Store listing needs Xero's Plus tier and certification. First 10: a free beta (3 files) offered on LinkedIn and through Australian bookkeeper bodies' newsletters and supplier listings (ICB, ASBA; their promotion rules were not read), to practitioners who voted for the Xero ideas.",
+      "validationTest": {
+        "method": "Landing page and a free 3-file beta offered through LinkedIn and one bookkeeper newsletter.",
+        "successCriteria": "10 practices connect 3 or more files within 14 days and 3 say they would pay AUD 29 a month.",
+        "cost": "AUD 0 to 150 plus about 2 days."
+      },
+      "moat": "Weak: an accurate Australian business-day engine and a returned-contribution register built from real emails. Xero can close the gap at any time.",
+      "compliance": [
+        "Australian Privacy Act: the Xero Employee payload includes tax file numbers, bank accounts and dates of birth; drop them on ingest and store only names, pay dates and super amounts.",
+        "Tax file number rules: never store TFNs.",
+        "Xero developer terms: certification and a security review on the Plus tier beyond 50 connections.",
+        "Not tax advice: deadlines are a check, and BAS agents remain responsible under Tax Practitioners Board rules.",
+        "Spam Act: emails only to opted-in practice staff."
+      ],
+      "risks": [
+        {
+          "risk": "Xero ships practice-wide super notifications (51033448 is 'in development').",
+          "mitigation": "Build in about two weeks, stay narrow on per-adviser routing and the returned register, price low."
+        },
+        {
+          "risk": "Payment status is invisible to the API, and the liability balance only clears after bank reconciliation, so 'unpaid' flags would be false.",
+          "mitigation": "Never claim payment status; lead with deadlines and the returned register; label the liability check as a reconciliation hint."
+        },
+        {
+          "risk": "Return emails go to the approver, often the client.",
+          "mitigation": "Help practices set a forwarding rule per client or become the approver; offer the manual button."
+        }
+      ],
+      "scores": {
+        "pain": 4,
+        "willingnessToPay": 3,
+        "reachability": 3,
+        "competitiveGap": 2,
+        "feasibility": 2,
+        "complianceBurden": 3,
+        "total": 17
+      },
+      "scoreRationale": {
+        "pain": "A 159-vote idea with recent comments (https://productideas.xero.com/forums/967118-payroll-expenses/suggestions/51033448-au-payroll-payroll-advisors-to-receive-superannu) and a practice finding bounces clients did not know about (https://productideas.xero.com/forums/967118-payroll-expenses/suggestions/51478654-payroll-au-auto-super-in-web-notification-of-bo), with deadlines set by the Act (https://www.legislation.gov.au/C2025A00057/asmade/2025-11-06/text/original/epub/OEBPS/document_1/document_1.html).",
+        "willingnessToPay": "Practices pay AUD 60 to 200 a month for an adjacent cross-client checker (https://apps.xero.com/au/collection/featured-apps/app/bas-ready); no paid job for this task was found.",
+        "reachability": "The voters are named practitioners on Xero's board (https://productideas.xero.com/forums/967127-practice-tools/suggestions/51176116-au-xero-hq-payroll-manager), but Xero forbids promotion there and listing needs certification (https://developer.xero.com/pricing).",
+        "competitiveGap": "BAS Ready reads the super-payable signal across clients (https://apps.xero.com/au/collection/featured-apps/app/bas-ready) and Xero has per-organisation reminders planned (https://productideas.xero.com/forums/967118-payroll-expenses/suggestions/51085414-au-payroll-payday-super-reminders); left is the per-payday clock and returned register.",
+        "feasibility": "The Payroll AU API has no super batch or status endpoint (https://raw.githubusercontent.com/XeroAPI/Xero-OpenAPI/master/xero-payroll-au.yaml) and Auto Super posts nothing to the ledger until reconciliation (https://productideas.xero.com/forums/967118-payroll-expenses/suggestions/51089014-au-payroll-create-an-account-transaction-when-yo); 50 connections on Xero's Core tier.",
+        "complianceBurden": "Employee payloads carry tax file numbers and bank details that must be dropped (https://raw.githubusercontent.com/XeroAPI/Xero-OpenAPI/master/xero-payroll-au.yaml), plus Xero certification at scale."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Reviewer fetched the ideas board (51033448, 51085414, 51478654, 51015442, 51264019, 51861648, 51909208, 51089014), BAS Ready's listing, developer.xero.com/pricing, the Payroll AU spec v20.1.0, the Act, XBert's blog, Wrkr's page and Xero's Xerocon release. Biggest problem: idea 51089014 (17 votes, comments to 2026-10-21) shows approving an Auto Super batch posts nothing to the ledger, so the planned 'inferred unpaid' flag would only measure how far behind bank reconciliation is. BAS Ready already shows super accrued vs payable across clients (AUD 60-200/month); Wrkr shows returns across clients but needs a clearing-house switch; Xero has a per-organisation overview and notifications in development, nothing practice-wide shipped. One complainant wrote both 51861648 and the 51478654 comment and counts once. Return emails reach only the approver. Core tier caps the app at 50 connections and cannot list on the App Store. Employee payloads carry TFNs and bank details. Re-scoped to a Payday Super deadline clock with per-adviser routing and a returned-contribution register; liability check demoted to a labelled hint; member verification left to Wrkr. Total stays 17."
+      },
+      "inspiredBy": "https://productideas.xero.com/forums/967118-payroll-expenses/suggestions/51033448-au-payroll-payroll-advisors-to-receive-superannu"
+    },
+    {
+      "n": 4,
+      "title": "Books Keeper: Archive Before You Cancel QuickBooks",
+      "slug": "books-keeper-archive-before-you-cancel-quickbooks",
+      "category": "Small Business Ops",
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "gateGap": {
+        "missing": [
+          "total 14 is below 22",
+          "pain 3: complaints have 1 to 2 votes each",
+          "reachability 2: buyers appear only at cancellation",
+          "competitiveGap 2: Books Backup, Numerint and Control-C exist",
+          "feasibility 2 and complianceBurden 2"
+        ],
+        "closedBy": "The bookkeeper pilot: 5 completed archives and 2 paid pre-orders within 3 weeks would show a reachable channel (reachability 3) and payment for the self-serve version (willingnessToPay 4); the total stays below 22 unless an accounting firm partnership proves repeat demand."
+      },
+      "topic": "Data & Visualization",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": true,
+        "engine": false,
+        "shared": true,
+        "notes": {
+          "stateful": "Holds each company's archived books for the retention period; owners and accountants come back to search them.",
+          "connected": "Connects once to QuickBooks Online by OAuth and pulls transactions, attachments and yearly reports before the subscription ends.",
+          "unattended": "The export runs for hours or days within API limits without the owner, and a scheduled email warns before the retention period ends.",
+          "shared": "The owner sends read-only, expiring links to their accountant, a buyer of the business, or an auditor."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "email",
+        "scheduled",
+        "backend"
+      ],
+      "buildPlan": [
+        {
+          "n": 1,
+          "title": "Connect and pull invoices",
+          "delivers": "Sign in, connect a QuickBooks Online company, pull customers, invoices and payments into the archive, and search them read-only.",
+          "acceptance": "A sandbox company's invoices are searchable at the app's hintwise.org address and totals match QuickBooks."
+        },
+        {
+          "n": 2,
+          "title": "Full history and yearly reports",
+          "delivers": "Bills, expenses, bank transactions, journals, vendors, and General Ledger, P&L and balance sheet by year; a resumable job within API limits.",
+          "acceptance": "Report totals for three years match QuickBooks for the sandbox company; the job survives a restart."
+        },
+        {
+          "n": 3,
+          "title": "Attachments",
+          "delivers": "Receipts and documents downloaded and linked to their transactions.",
+          "acceptance": "Every attachment in the sandbox opens from its transaction in the archive."
+        },
+        {
+          "n": 4,
+          "title": "Open-format ZIP and verification",
+          "delivers": "A ZIP of CSV, JSON, PDF reports and attachments with an index, plus a verification report of counts and totals.",
+          "acceptance": "The ZIP opens offline and the verification report shows no mismatches."
+        },
+        {
+          "n": 5,
+          "title": "Sharing and retention reminders",
+          "delivers": "Read-only expiring links for an accountant or auditor, and emails before the retention date and once a year.",
+          "acceptance": "An invited viewer can search but not change anything; reminders arrive on schedule."
+        },
+        {
+          "n": 6,
+          "title": "Polish",
+          "delivers": "Owner README, phone layout, keyboard and screen-reader pass, walkthrough test, written data-custody and shutdown terms.",
+          "acceptance": "A walkthrough on a phone passes; axe reports no serious issues."
+        }
+      ],
+      "summary": "For small businesses closing, selling or leaving QuickBooks Online: keep a complete, searchable copy of your books for the years the tax office requires, without paying for software you no longer use.",
+      "public": {
+        "summary": "Keep a complete, searchable copy of your books after you stop paying for your accounting software.",
+        "problem": "You are closing, selling or switching, but the law says you must keep your records for years. Once you cancel, your accounting software keeps your books readable for a limited time, and after that you pay for a subscription you no longer use just to look something up. The free exports leave out receipts and are hard to search.",
+        "forWhom": "Owners of small businesses leaving their accounting software, and the accountants who look after them.",
+        "benefits": [
+          "Your full history kept for the years required",
+          "Receipts stay linked to their transactions",
+          "Search any invoice or payment in seconds",
+          "Share read-only access with your accountant or a buyer",
+          "A reminder before the retention period ends"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "Businesses must keep records for years (the IRS says 3 years by default, up to 7 for some claims; Australian advisers cite 7 for the ATO), but QuickBooks Online gives one year of read-only access after cancelling, and Xero users say a restructured client must 'pay for a file he is getting no usage out of' just to view old sales, while a former employee's old payslips 'cannot be downloaded now that the file is in a ledger state'.",
+      "description": "Before cancelling, the owner or their accountant connects the QuickBooks Online company once. The app pulls the full history through the API (customers, vendors, invoices, bills, payments, bank transactions, journals and attachments) plus the General Ledger, P&L and balance sheet for each year, verifies counts and totals against QuickBooks, and produces an open-format ZIP that is the record of truth. A hosted read-only viewer lets the owner search any transaction and send expiring read-only links to an accountant, buyer or auditor, and an email reminds them before the retention period ends. Xero follows in a later phase; QuickBooks Desktop is out of scope.",
+      "targetCustomer": "Owners of US small businesses (and their bookkeepers and accountants) that are closing, selling, restructuring or switching away from QuickBooks Online and must keep 3 to 7 years of records.",
+      "buyer": "The owner, once per company, or an accounting firm buying a pack for clients who are leaving.",
+      "whyNow": "QuickBooks Online and Xero raised US prices in 2026 (Xero from 2026-10-01), pushing small firms to switch or close, and the first done-for-you QuickBooks archive service (Books Backup, $499) launched in October 2026, showing buyers pay for this at the point of cancelling.",
+      "founderFit": "An export-and-search build (OAuth, resumable jobs, Postgres full-text search, file storage, share links) that fits the HintWise platform, sold self-serve to small businesses and through accountants; the owner needs no domain credentials to sell it.",
+      "problemEvidence": [
+        {
+          "url": "https://productideas.xero.com/forums/967121-users-setup/suggestions/51858312-view-data-when-file-cancelled",
+          "source": "productideas.xero.com",
+          "author": "Xero user (adviser to small businesses)",
+          "date": "2026-10-27",
+          "kind": "complaint",
+          "summary": "Asks for read-only access to cancelled files: 'We are required to keep data for 7 years ... why can't we have read-only access'; a restructured client pays for a file he gets no use from."
+        },
+        {
+          "url": "https://productideas.xero.com/forums/967133-reports-tax/suggestions/51272953-reporting-include-read-only-access-to-all-reports",
+          "source": "productideas.xero.com",
+          "author": "Xero user (commenter on a downgraded file)",
+          "date": "2026-09-28",
+          "kind": "complaint",
+          "summary": "A former employee is asking for old payslips, which 'cannot be downloaded now that the file is in a ledger state'; the idea (opened 2026-05-07) asks for read-only access to reports after downgrading."
+        },
+        {
+          "url": "https://quickbooks.intuit.com/learn-support/en-us/help-article/access-permissions/happens-quickbooks-online-data-cancel/L6qDpbE1B_US_en_US",
+          "source": "quickbooks.intuit.com",
+          "author": "Intuit (official help article)",
+          "date": "2026-08-05",
+          "kind": "mandate",
+          "summary": "After cancelling QuickBooks Online, data stays read-only for one year (90 days for trials); Intuit advises exporting or printing data before cancelling."
+        },
+        {
+          "url": "https://www.irs.gov/businesses/small-businesses-self-employed/how-long-should-i-keep-records",
+          "source": "irs.gov",
+          "author": "IRS",
+          "date": "2026-06-30",
+          "kind": "mandate",
+          "summary": "Keep records 3 years by default, 6 if income is under-reported by more than 25%, 7 for bad-debt claims, employment tax records at least 4 years."
+        },
+        {
+          "url": "https://booksbackup.com/",
+          "source": "booksbackup.com",
+          "author": "Books Backup (vendor)",
+          "date": "2026-11-19",
+          "kind": "spend",
+          "summary": "Sells a done-for-you QuickBooks Online archive for $499 per company, one-off, delivered in about 5 business days; read on the vendor page."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Books Backup",
+          "url": "https://booksbackup.com/",
+          "price": "$499 per company, one-off",
+          "gap": "Done-for-you through an accountant-user seat and delivered as a static PDF/Excel package; QuickBooks Online only, no hosted search or share links."
+        },
+        {
+          "name": "Numerint Backup (Xero)",
+          "url": "https://apps.xero.com/uk/app/numerintbackup",
+          "price": "One-off; data-only backup £10, attachments priced per file after a free scan",
+          "gap": "Xero only; a ZIP without a hosted viewer, sharing or reminders; no journals, fixed assets or VAT returns."
+        },
+        {
+          "name": "Control-C (Xero)",
+          "url": "https://apps.xero.com/nz/app/controlc",
+          "price": "NZD 19.99/month",
+          "gap": "Xero only and a monthly fee for every year of retention (about NZD 1,680 over 7 years)."
+        },
+        {
+          "name": "QuickBooks Online read-only access and exports",
+          "url": "https://quickbooks.intuit.com/learn-support/en-us/help-article/access-permissions/happens-quickbooks-online-data-cancel/L6qDpbE1B_US_en_US",
+          "price": "Free for one year after cancelling",
+          "gap": "Access ends after a year, and the exports do not keep attachments linked to transactions."
+        }
+      ],
+      "keyFeatures": [
+        "One-click pull of the full QuickBooks Online history",
+        "Yearly General Ledger, P&L and balance sheet",
+        "Attachments linked to their transactions",
+        "Full-text search of every transaction",
+        "Read-only expiring links for accountants and auditors",
+        "Open-format ZIP with a verification report",
+        "Retention-expiry reminder"
+      ],
+      "mvpScope": {
+        "features": [
+          "QuickBooks Online connect and full pull",
+          "Search viewer",
+          "ZIP with verification report",
+          "One share link",
+          "Expiry email"
+        ],
+        "outOfScope": [
+          "Xero (phase 2)",
+          "QuickBooks Desktop files",
+          "Restoring data into any accounting system",
+          "Continuous backup",
+          "Payroll for every region"
+        ],
+        "buildEstimate": "About 3 to 4 weeks"
+      },
+      "techStack": "React + Vite + Tailwind front end; Supabase sign-in, per-app schema with Postgres full-text search and storage for attachments; backend-hub on Render for QuickBooks OAuth and long-running resumable export jobs; scheduled jobs and transactional email for reminders.",
+      "pricing": {
+        "model": "One-off fee per company, with hosted access for a stated term",
+        "pricePoint": "$149 per company including the ZIP and 7 years of hosted access; accountant pack of 5 for $499",
+        "rationale": "Undercuts Books Backup's $499 done-for-you service and seven years of Control-C; the ZIP is the record of truth so hosting is a convenience, not the only copy."
+      },
+      "revenueSketch": "Estimate only: 3 to 8 archives a month in year one through bookkeepers x $149 = about $5,000 to $14,000 a year; one accounting-firm partnership could double it.",
+      "distribution": "The QuickBooks community bans pitching and 'we do not allow people to post links to external content of any kind' (guidelines post), and the buyer is reachable only around the moment of cancelling. First 10: bookkeepers and ProAdvisors with clients who are closing, selling or switching (the accountant pack), plus a search page for 'cancel QuickBooks keep records'.",
+      "validationTest": {
+        "method": "Landing page and outreach to about 30 bookkeepers and ProAdvisors, offering free archives to the first 5 clients who are closing or switching.",
+        "successCriteria": "5 completed archives and 2 paid pre-orders at $149 within 3 weeks.",
+        "cost": "Under $50 plus time."
+      },
+      "moat": "Weak: accountant relationships and, later, coverage of both QuickBooks Online and Xero with one hosted viewer.",
+      "compliance": [
+        "Holds years of financial records and personal data (customers, vendors, possibly employees): encryption, least-privilege scopes, privacy notice, deletion on request.",
+        "Long-term custody: a written shutdown and export guarantee, with the open ZIP as the customer's own copy.",
+        "Intuit production keys need its app assessment; metered API reads.",
+        "IRS electronic records must remain accurate and accessible; the app must not claim to be an official archive."
+      ],
+      "risks": [
+        {
+          "risk": "Books Backup, Numerint and Control-C already serve most of the job.",
+          "mitigation": "Compete on self-serve price, hosted search and share links, and sell through accountants."
+        },
+        {
+          "risk": "Seven-year custody by a one-person business.",
+          "mitigation": "Make the downloadable ZIP the deliverable, host as a convenience, and publish a shutdown policy."
+        },
+        {
+          "risk": "API limits and attachment volume make large companies slow to export.",
+          "mitigation": "Resumable jobs over several days, started well inside the one-year read-only window."
+        }
+      ],
+      "scores": {
+        "pain": 3,
+        "willingnessToPay": 3,
+        "reachability": 2,
+        "competitiveGap": 2,
+        "feasibility": 2,
+        "complianceBurden": 2,
+        "total": 14
+      },
+      "scoreRationale": {
+        "pain": "Dated complaints exist (https://productideas.xero.com/forums/967121-users-setup/suggestions/51858312-view-data-when-file-cancelled, https://productideas.xero.com/forums/967133-reports-tax/suggestions/51272953-reporting-include-read-only-access-to-all-reports) but with 1 to 2 votes, and QuickBooks Online gives a free year of read-only access (https://quickbooks.intuit.com/learn-support/en-us/help-article/access-permissions/happens-quickbooks-online-data-cancel/L6qDpbE1B_US_en_US).",
+        "willingnessToPay": "Buyers pay $499 one-off for a done-for-you archive (https://booksbackup.com/) and use paid Xero backups (https://apps.xero.com/uk/app/numerintbackup).",
+        "reachability": "Buyers appear only around cancellation and the QuickBooks community bans links; the incumbent sells through accountants (https://booksbackup.com/), which is the realistic route.",
+        "competitiveGap": "Books Backup (https://booksbackup.com/), Numerint and Control-C (https://apps.xero.com/nz/app/controlc) cover most of the job; the gap is a cheap self-serve hosted archive with sharing.",
+        "feasibility": "QuickBooks attachments and reports are available through the API but production approval, metered reads and long exports make it multi-week; Xero's Journals endpoint needs its top API tier (https://developer.xero.com/pricing).",
+        "complianceBurden": "Seven years of custody of financial and personal data by one person (https://www.irs.gov/businesses/small-businesses-self-employed/how-long-should-i-keep-records)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Reviewer re-read the QuickBooks Desktop view-only thread (93519): all posts are about Desktop licences, with free workarounds (Enterprise trial, clock rollback), so they do not support a QuickBooks Online or Xero archive and are not counted; the Desktop import was dropped. Xero ideas 51858312 (1 vote) and 51272953 (2 votes) are real but thin, and Xero staff say reports can be published before downgrading. The Freelancer job (2026-09-18, $10-30) is a move to spreadsheets, not an archive, and is not counted. Books Backup ($499, QuickBooks Online, done-for-you), Numerint (Xero, £10 data-only) and Control-C (NZD 19.99/month) cover most of the job; nothing free covers 5 to 7 years with attachments. Xero's Journals endpoint is on the Advanced tier (AUD 1,445/month), so Xero moves to phase 2. Seven-year custody is a real liability; the ZIP becomes the record of truth. Re-scoped to QuickBooks Online only, self-serve, $149. Scores cut to pain 3, reachability 2, competitiveGap 2, feasibility 2, complianceBurden 2. Total 16 (research) to 14."
+      },
+      "inspiredBy": "https://productideas.xero.com/forums/967121-users-setup/suggestions/51858312-view-data-when-file-cancelled"
+    }
+  ],
+  "runNotes": {
+    "weekday": "Thursday",
+    "domainLens": "Small business back office and solo professionals: invoicing, scheduling, bookkeeping, client intake, paperwork",
+    "focusSources": [
+      "A16 Vendor feature-request boards",
+      "B11 Freelance job boards",
+      "C10 Change events: shutdowns, price rises, removed free tiers"
+    ],
+    "searches": [
+      "WebSearch: small business invoicing app shutting down 2026 alternative",
+      "WebSearch: bookkeeping software price increase November 2026 small business",
+      "WebSearch: scheduling app end of free plan / discontinued 2026 solo practitioners",
+      "WebSearch: feature request board client intake forms small business 2026",
+      "WebSearch: site:community.calendly.com feature request 2026",
+      "WebSearch: TaxDome feature request board ideas vote",
+      "WebSearch: Acuity Scheduling OR Square Appointments feature request intake form solo therapist 2026",
+      "WebSearch: Clio ideas portal feature request small law firm 2026",
+      "WebSearch: quickbooks community cancel subscription read only access old data 2026",
+      "WebSearch: forum.invoiceninja.com feature request 2026 recurring",
+      "WebSearch: Wave accounting changes 2026 removed feature small business complaint",
+      "WebSearch: 1099-NEC 2026 threshold change $2,000 small business",
+      "WebSearch (extended): price increase or discontinuing Oct/Nov 2026 small business invoicing scheduling payroll",
+      "WebSearch: QuickBooks Desktop discontinued 2026 users stuck",
+      "WebSearch: HoneyBook OR Dubsado price increase 2026",
+      "WebSearch: Rewind backups QuickBooks Online discontinued alternative",
+      "WebSearch: Xero cancelled subscription read-only access how long",
+      "WebSearch: quickbooks community view-only access period over cancelled desktop 2026",
+      "WebSearch: create invoices from Toggl time entries app Xero QuickBooks integration paid",
+      "WebSearch: Toggl 2.0 public API 2026",
+      "WebSearch (watchlist spend): Zotero AI assistant plugin paid subscription price 2026",
+      "WebSearch (watchlist spend): tradie quote deposit app Xero Jobber deposit invoice 2026",
+      "WebSearch (watchlist spend): tailor alterations shop order measurements software subscription",
+      "Xero ideas (A16): late fee, client portal, progress claim, retainer, payment plan, document request, job costing, read only, cancelled organisation, archive organisation access, export all data, 1099, sales tax, time tracking, booking, credit card surcharge, statements",
+      "Discourse (A13): forum.manager.io 'feature request'; forum.invoiceninja.com 'feature'; community.toggl.com 'invoice', 'export'; community.n8n.io 'bookkeeper'",
+      "HN Algolia (A12): 'my accountant', 'invoicing software', 'client intake', 'bookkeeping' (comments since 2025-08)",
+      "Freelancer (B11): client intake form; appointment reminder; invoice reconciliation spreadsheet; commission calculation; Toggl; QuickBooks export; timesheet invoice; Xero migration",
+      "Freelancer (B11, watchlist re-research): Zotero; deposit invoice quote; tailor shop software; appointment reschedule Shopify",
+      "Gatherer A WebSearch: QBO Stripe payout matching; QBO reminders not sending; Square invoice feature requests; Wave complaints; Shopify net-terms reminders; Zoho reminders; QBO payment holds; economie.gouv e-invoicing; Shopify Peppol; QBO bulk attachments; QBO send from own email; Harvest price increase",
+      "Gatherer A Discourse: forum.manager.io (reminder overdue invoice, bank reconciliation, stripe, paypal, accountant, e-invoicing, peppol, payout, merchant fees, receipt attachment, audit, download attachments); forum.invoiceninja.com (reminder, payment, stripe payout, late fee, bank transactions, expense, accountant, peppol, check)",
+      "Gatherer A Freelancer (12 spend searches): stripe payout reconciliation quickbooks; invoice reminder automation; quickbooks bank reconciliation catch up; bank statement pdf to excel; receipts categorize expenses spreadsheet; invoice data entry quickbooks; peppol e-invoice; factur-x; categorise bank transactions tax accountant; stripe reconciliation; unpaid invoices follow up; self assessment sole trader bookkeeping",
+      "Gatherer B: Square community API searches (forms, product ideas board, appointments board, last 90 days); Calendly community index; WebSearch Square Feature Requests intake, Calendly intake, Shopify booking intake apps, Square marketplace intake, Calendly recurring add-ons, Jobber email work orders, BC time zone; Freelancer: intake form, calendly, appointment reminder sms, consent form, DS-160, square appointments, jobber, recurring lessons scheduling, work order email",
+      "Gatherer C WebSearch: 1099 $2,000 threshold; Companies House software-only filing; ATO Payday Super; HMRC community MTD; Payday Super monitoring tools; EC e-invoicing factsheets; landlord MTD pricing (16 in all); Xero ideas: MTD income tax, Payday Super, landlord MTD, super guarantee charge, MTD property income; Freelancer: making tax digital, 1099 filing, Factur-X, XRechnung, superannuation payroll, MTD quarterly, landlord bookkeeping, payday super, sole trader bookkeeping UK, rental property Xero, Single Touch Payroll",
+      "Spend pass (Toggl invoicing): Freelancer 'toggl invoice' (0), 'toggl' (0 same-task), 'time tracking invoice integration' (0); Xero ideas 'toggl' (0)",
+      "Spend pass (QBO own-domain mail): Freelancer 'quickbooks invoice email' (0 same-task), 'quickbooks invoice reminders automation' (0); paid app InvoiceSherpa found",
+      "Spend pass (Stripe exceptions): Freelancer 'stripe reconciliation' (1, Xero), 'stripe invoice reconciliation' (0), 'invoice ninja' (0)",
+      "Spend pass (books archive): Freelancer 'QuickBooks export', 'Xero export archive', 'accounting data migration', 'QuickBooks Online backup', 'Xero export', 'QuickBooks archive', 'export QuickBooks Online data', 'Xero data' (1 same-task, 1 nearby)",
+      "Spend pass (Square brief): Freelancer 'square appointments', 'square bookings api', 'booking cancellation alert', 'square webhook' (0 same-task)",
+      "Spend pass (lesson series): Freelancer 'calendly recurring' (0), 'recurring lessons booking' (1 adjacent), 'music lesson scheduling' (1 adjacent), 'calendly api' (0), 'tutor scheduling system' (0)",
+      "Spend pass (Jobber work orders): Freelancer 'jobber', 'work order email', 'work orders property management parse', 'email parsing jobber', 'housecall pro email', 'servicetitan email work order', 'appfolio work order' (one buyer)",
+      "Spend pass (Payday Super): Freelancer 'superannuation' (0 same-task), 'payroll bookkeeper Xero' (0 same-task), 'payday super' (0); BAS Ready listing found"
+    ],
+    "unverifiedSignals": [
+      {
+        "url": "https://hopscotchsupport.zendesk.com/hc/en-us/articles/41280786318356-Hopscotch-Shutdown-FAQ",
+        "reason": "HTTP 403 Cloudflare challenge; shutdown date not read."
+      },
+      {
+        "url": "https://www.ato.gov.au/media-centre/ato-calls-on-employers-to-prepare-for-payday-super",
+        "reason": "HTTP 403 from the site; Payday Super rules read on legislation.gov.au instead."
+      },
+      {
+        "url": "https://www.fairwork.gov.au/newsroom/news/payday-super-new-rules-starting-1-july-2026",
+        "reason": "curl protocol error (rc 92) and HTTP 503 via WebFetch."
+      },
+      {
+        "url": "https://www.csc.gov.au/Employers/Resources/Legislative-updates-hub/Payday-super",
+        "reason": "HTTP 403."
+      },
+      {
+        "url": "https://economie.gouv.fr/tout-savoir-sur-la-facturation-electronique-pour-les-entreprises",
+        "reason": "HTTP 403; French e-invoicing dates read on entreprendre.service-public.gouv.fr."
+      },
+      {
+        "url": "https://www.accountingweb.co.uk/node/195944",
+        "reason": "HTTP 403 (Cloudflare) on this and five other AccountingWEB pages."
+      },
+      {
+        "url": "https://help.acuityscheduling.com/hc/articles/16676870087565",
+        "reason": "HTTP 403; which Acuity plan includes recurring bookings is unconfirmed."
+      },
+      {
+        "url": "https://developer.getjobber.com/docs/",
+        "reason": "HTTP 403 to curl and WebFetch; Jobber file-attachment API unverified."
+      },
+      {
+        "url": "https://productupdates.getjobber.com/",
+        "reason": "HTTP 403."
+      },
+      {
+        "url": "https://github.com/invoiceninja/invoiceninja/issues/10628",
+        "reason": "HTTP 403 (GitHub access to this repository is not enabled for the session); why issues #9602, #8987 and #10628 closed on 2026-09-18 is unknown."
+      },
+      {
+        "url": "https://www.controlc.com/pricing",
+        "reason": "HTTP 522; price read on the Xero App Store listing instead."
+      },
+      {
+        "url": "https://squareup.com/us/en/appointments/pricing",
+        "reason": "HTTP 429 to curl and WebFetch; square.com pricing page read instead."
+      },
+      {
+        "url": "https://quickbooks.intuit.com/community/other-questions-9/view-only-mode-of-quickbooks-desktop-not-working-93519",
+        "reason": "curl fails (rc 92) on QuickBooks community; read with WebFetch. Usable, but about QuickBooks Desktop, so not counted for the archive idea."
+      },
+      {
+        "url": "https://productideas.xero.com/forums/967121-users-setup/suggestions/51606902-provide-a-read-only-archive-subscription-for-close",
+        "reason": "HTTP 200 but redirects to an unrelated 805-vote homepage idea; not used."
+      }
+    ],
+    "rejectedCandidates": [
+      {
+        "title": "Toggl Invoice Builder (new Toggl time to client invoices)",
+        "total": 16,
+        "reason": "Research found Toggl's own public API spec (modified 2026-11-19) documents about 60 invoicing endpoints behind an invoices_v2 beta flag, including a free-plan watermark; Toggl Track and Harvest offer free invoices; no paid job or app for the task. Pain 3, willingnessToPay 2, reachability 2, competitiveGap 1. Not sent to review."
+      },
+      {
+        "title": "Stripe Exceptions for Invoice Ninja",
+        "total": 15,
+        "reason": "Review kill: Invoice Ninja's Stripe driver already handles charge.failed and charge.refunded, Stripe's free payout reconciliation report carries Invoice Ninja invoice numbers, and the key complaint (t/21251) is about Invoice Ninja's data model, which a read-only tool cannot fix."
+      },
+      {
+        "title": "Front Desk Brief for Square Appointments",
+        "total": 17,
+        "reason": "Research: Square already emails owners on booking activity on every plan; failed-text status is not in the Bookings API; no spend; the main complainant later called notifications 'not really a big deal'. Below the watchlist line."
+      },
+      {
+        "title": "Work Order Inbox for Jobber",
+        "total": 16,
+        "reason": "Research: no fetchable dated complaint (Jobber community 403), one buyer's paid job only, and Jobber's free Claude/ChatGPT connector already turns a work-order email into a request by hand; ServiceM8 and Simpro build this natively."
+      },
+      {
+        "title": "Payment Hold Early Warning for QuickBooks Payments",
+        "total": 18,
+        "reason": "No payment evidence and QuickBooks Payments hold status is not exposed in an API (gatherer A)."
+      },
+      {
+        "title": "French E-Invoicing Readiness for Micro-Businesses",
+        "total": 16,
+        "reason": "Forward-dated pain, no spend, and sending needs an approved platform partner."
+      },
+      {
+        "title": "Square Conditional Consultation Forms",
+        "total": 18,
+        "reason": "Crowded: Square Contracts and several intake apps cover most of it; health data in forms."
+      },
+      {
+        "title": "DS-160 Intake Portal for Visa Consultants",
+        "total": 17,
+        "reason": "One paid job only, no complaint, passport personal data, scattered buyers."
+      },
+      {
+        "title": "Payday Super Planner for Holiday Closures",
+        "total": 17,
+        "reason": "Two low-vote complaints, no payment evidence, rules close to tax advice."
+      },
+      {
+        "title": "MTD Submission Receipt and HMRC Status Check",
+        "total": 17,
+        "reason": "HMRC production API approval and fraud-prevention headers make 7 build days unrealistic; HMRC's own account shows obligations."
+      },
+      {
+        "title": "Low-Volume Peppol Access for Micro Businesses",
+        "total": 14,
+        "reason": "Needs an access-point partner; many access points exist; buyers spread across countries."
+      },
+      {
+        "title": "Tailor Shop Orders and Measurements",
+        "total": 17,
+        "reason": "Re-researched from the watchlist: no paid job on Freelancer and free tailor apps exist (TailorMate, Tailored Made Lite per search), so competitiveGap fell to 1 and it left the watchlist."
+      },
+      {
+        "title": "Actions Health and Spend Digest for Small Teams",
+        "total": 19,
+        "reason": "Carried watchlist entry not re-researched today; dropped by the watchlist cap of 8 in favour of higher or newer entries."
+      },
+      {
+        "title": "Product CSV Import Preflight",
+        "total": 19,
+        "reason": "Carried watchlist entry not re-researched today; dropped by the watchlist cap of 8."
+      },
+      {
+        "title": "Editable TV Menu for Small Venues",
+        "total": 19,
+        "reason": "Carried watchlist entry not re-researched today; dropped by the watchlist cap of 8."
+      }
+    ],
+    "watchlist": [
+      {
+        "title": "Booking Time-Zone Audit for BC and Manitoba",
+        "targetCustomer": "Service businesses in British Columbia and Manitoba, or with clients there, on Calendly or Square.",
+        "problemStatement": "After BC moved to permanent Pacific time on 2026-11-01, booking pages show availability an hour off and bookings land at the wrong hour.",
+        "total": 21,
+        "missedGate": "Not researched or reviewed this run; willingnessToPay 2 and competitiveGap 2 (vendors are patching, so the window is short).",
+        "evidence": [
+          "https://community.calendly.com/how-do-i-40/calendly-incorrectly-schedules-british-columbia-appointments-after-november-1-2026-5868",
+          "https://community.squareup.com/api/2.0/search?q=SELECT%20subject%2C%20body%2C%20post_time%2C%20author.login%2C%20author.rank.name%2C%20depth%20FROM%20messages%20WHERE%20topic.id%20%3D%20%27852498%27%20ORDER%20BY%20post_time%20ASC%20LIMIT%2030"
+        ],
+        "firstSeen": "2026-11-19"
+      },
+      {
+        "title": "Text-Reminder Consent Tracker for Staff-Booked Calendly Clients",
+        "targetCustomer": "Coaches, tutors, therapists and agents who book clients by phone in Calendly.",
+        "problemStatement": "Calendly's new SMS verification step means clients booked on their behalf never get the text reminders the practitioner pays for.",
+        "total": 20,
+        "missedGate": "total 20 below 22; not researched; complianceBurden 2 (TCPA, 10DLC) and Calendly may fix it.",
+        "evidence": [
+          "https://community.calendly.com/how-do-i-40/new-sms-opt-in-requirement-has-made-workflows-unreliable-is-calendly-considering-an-alternative-6079",
+          "https://community.calendly.com/how-do-i-40/new-requirement-for-text-verification-to-receive-text-reminders-5888"
+        ],
+        "firstSeen": "2026-11-19"
+      },
+      {
+        "title": "Peppol Rejection Explainer for Small Invoicing Tools",
+        "targetCustomer": "Small firms in Belgium and other EU countries sending Peppol invoices from small invoicing tools.",
+        "problemStatement": "A Peppol validation error blocks every invoice and the messages are unreadable to an owner.",
+        "total": 20,
+        "missedGate": "willingnessToPay 2 (no spend found) and one recent complaint; not researched.",
+        "evidence": [
+          "https://forum.invoiceninja.com/t/23615.json"
+        ],
+        "firstSeen": "2026-11-19"
+      },
+      {
+        "title": "Year-End Pack for the Accountant from Bank CSVs",
+        "targetCustomer": "Sole traders with a side business or rentals who hand a year-end summary to their accountant.",
+        "problemStatement": "Owners pay freelancers to add up a year of business, personal and rental expenses for their accountant.",
+        "total": 20,
+        "missedGate": "No complaint evidence (pain capped at 3) and a crowded field; not researched.",
+        "evidence": [
+          "https://www.freelancer.com/api/projects/0.1/projects/all/?query=bank%20statement%20pdf%20to%20excel&limit=15&full_description=true&from_time=1787306322"
+        ],
+        "firstSeen": "2026-11-19"
+      },
+      {
+        "title": "Zotero Research Desk with Your Own Key",
+        "targetCustomer": "Researchers and graduate students with large Zotero libraries.",
+        "problemStatement": "Search and question a Zotero library with an AI model using one's own key.",
+        "total": 20,
+        "missedGate": "Re-researched: no paid job on Freelancer (only student thesis help) and free bring-your-own-key Zotero plugins exist, so competitiveGap stays 1; total 20 below 22.",
+        "evidence": [
+          "https://appsumo.com/products/logically/reviews/appsumo-tier-2-unlimited-ai-is-blocke-401064/",
+          "https://appsumo.com/products/logically/"
+        ],
+        "firstSeen": "2026-11-18"
+      },
+      {
+        "title": "MTD Property Pack for Landlords with More than 10 Properties on Xero",
+        "targetCustomer": "UK landlords with large portfolios on Xero, and their accountants.",
+        "problemStatement": "Xero's MTD for Income Tax submission will not allow more than 10 properties, which 'makes Xero pointless for these landlords'.",
+        "total": 19,
+        "missedGate": "competitiveGap 2: per-property MTD tools (Hammock, Landlord Studio) already exist; not researched.",
+        "evidence": [
+          "https://productideas.xero.com/forums/967133-reports-tax/suggestions/51287965-mtd-for-it-allow-more-than-10-tracking-options"
+        ],
+        "firstSeen": "2026-11-19"
+      },
+      {
+        "title": "Mandatory Deposit Rules for Trade Quotes",
+        "targetCustomer": "Trades businesses that quote in Xero or Invoice Ninja.",
+        "problemStatement": "Require a deposit on a quote before work starts, then apply it to the final invoice.",
+        "total": 19,
+        "missedGate": "Re-researched: no paid job found; Jobber, ServiceM8 and hipages tradiecore build deposits into quotes; total 19 below 22.",
+        "evidence": [
+          "https://forum.invoiceninja.com/t/23644.json",
+          "https://productideas.xero.com/forums/967115-invoices-quotes/suggestions/44960839-quotes-convert-to-a-deposit-invoice-and-remainin"
+        ],
+        "firstSeen": "2026-11-18"
+      },
+      {
+        "title": "Self-Rescheduling for Shopify Service Bookings",
+        "targetCustomer": "Shopify merchants who sell appointments.",
+        "problemStatement": "Customers cannot reschedule their own service bookings.",
+        "total": 19,
+        "missedGate": "Not re-researched this run (outside the top 3); pain 3 on one complaint about a free app's bug.",
+        "evidence": [
+          "https://apps.shopify.com/suppr-appointment-booking/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest",
+          "https://apps.shopify.com/sesami"
+        ],
+        "firstSeen": "2026-11-18"
+      }
+    ],
+    "caveats": "First run of 2026-11-19 (Thursday, small business back-office lens). No candidate came near the gate of 22: 23 candidates were generated (20 new from three gatherers and the coordinator, plus 3 re-researched watchlist entries). Eight were researched; the Toggl invoicing idea died in research (Toggl's own API spec documents a native invoicing beta) and two more fell below the watchlist line in research (Square front-desk brief, Jobber work-order inbox). Five ideas were adversarially reviewed: four survived, all rescored (lesson series booker 20 to 19, own-domain invoice mail 17 to 18, Payday Super clock 17 to 17 with a re-scope, books archive 16 to 14) and one was killed (Stripe exceptions for Invoice Ninja). Every shipped idea is provisional. Selection constraint not met: no shipped idea is a Weekend MVP; the only Weekend MVP candidate that reached review (Stripe exceptions for Invoice Ninja) was killed. Order of review: the books archive (research total 16) was reviewed before unresearched candidates with higher preliminary totals (the BC time-zone audit at 21, the Calendly text-consent tracker, the Peppol explainer and the year-end pack at 20), and the Payday Super clock (17) after them; reviewing stopped at five with four survivors; those four unresearched candidates go to the watchlist for re-research. The books archive evidence excludes a long QuickBooks Desktop lockout thread, which the reviewer judged off-target for a QuickBooks Online archive. The Payday Super rule is 7 business days after payday (20 for new employees) per the Act on legislation.gov.au; ato.gov.au and fairwork.gov.au could not be read. Authors who post under a full real name are recorded by role."
+  }
+}
