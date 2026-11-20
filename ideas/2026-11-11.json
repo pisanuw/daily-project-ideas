@@ -51,15 +51,15 @@
         {
           "url": "https://techcommunity.microsoft.com/blog/exchange/updated-exchange-online-smtp-auth-basic-authentication-deprecation-timeline/4489835",
           "source": "techcommunity.microsoft.com",
-          "author": "technonath",
+          "author": "poster A",
           "date": "2026-10-26",
           "kind": "complaint",
-          "summary": "Comment on Microsoft's updated timeline post expecting a wave of tickets over the Christmas break from staff whose scanners and legacy devices can no longer send; VictorKilo7 (2026-09-27) on the same post says most printers still lack OAuth with client credentials."
+          "summary": "Comment on Microsoft's updated timeline post expecting a wave of tickets over the Christmas break from staff whose scanners and legacy devices can no longer send; poster B (2026-09-27) on the same post says most printers still lack OAuth with client credentials."
         },
         {
           "url": "https://techcommunity.microsoft.com/discussions/communityquestions/need-help-with-scan-to-email-function-on-printer/4559300",
           "source": "techcommunity.microsoft.com",
-          "author": "barooder",
+          "author": "poster C",
           "date": "2026-09-23",
           "kind": "complaint",
           "summary": "Ricoh MP C2011 scan-to-email returns 535 authentication errors through Microsoft 365 even with SMTP AUTH enabled; the poster reproduced it from PowerShell and still could not fix it."
@@ -67,7 +67,7 @@
         {
           "url": "https://learn.microsoft.com/en-us/answers/questions/5814896/scan-to-email-problems",
           "source": "learn.microsoft.com",
-          "author": "Ekaterina Cuff",
+          "author": "poster D",
           "date": "2026-03-09",
           "kind": "complaint",
           "summary": "Small business owner setting up scan-to-email on a new OAuth-capable device calls it the most convoluted thing she has tried and says she wasted an entire day."
@@ -202,7 +202,7 @@
         "total": 18
       },
       "scoreRationale": {
-        "pain": "Three independent dated complaints (technonath 2026-10-26 on https://techcommunity.microsoft.com/blog/exchange/updated-exchange-online-smtp-auth-basic-authentication-deprecation-timeline/4489835, barooder 2026-09-23 on https://techcommunity.microsoft.com/discussions/communityquestions/need-help-with-scan-to-email-function-on-printer/4559300, https://learn.microsoft.com/en-us/answers/questions/5814896/scan-to-email-problems), but admins can re-enable Basic auth and HVE keeps it until 2028 for internal mail (https://techcommunity.microsoft.com/t5/exchange-team-blog/high-volume-email-continued-support-for-basic-authentication/ba-p/4411197), so urgency is soft.",
+        "pain": "Three independent dated complaints (poster A 2026-10-26 on https://techcommunity.microsoft.com/blog/exchange/updated-exchange-online-smtp-auth-basic-authentication-deprecation-timeline/4489835, poster C 2026-09-23 on https://techcommunity.microsoft.com/discussions/communityquestions/need-help-with-scan-to-email-function-on-printer/4559300, https://learn.microsoft.com/en-us/answers/questions/5814896/scan-to-email-problems), but admins can re-enable Basic auth and HVE keeps it until 2028 for internal mail (https://techcommunity.microsoft.com/t5/exchange-team-blog/high-volume-email-continued-support-for-basic-authentication/ba-p/4411197), so urgency is soft.",
         "willingnessToPay": "Money goes to the fix, not to guidance: SMTPly sells a relay at 199 to 499 EUR (https://smtply.pages.dev/en/) and Sharp NZ bills $150/hour (https://www.sharp.net.nz/microsoft365-exchange); no one was found paying for a checklist, so 2.",
         "reachability": "Self-serve via search and Microsoft community threads (https://techcommunity.microsoft.com/blog/exchange/updated-exchange-online-smtp-auth-basic-authentication-deprecation-timeline/4489835), but Pisan has no MSP or dealer network.",
         "competitiveGap": "Free hubs cover parts (https://help.marconet.com/scan-to-email-oauth-v2.0-authentication-manufacturer-setup-guides, https://www.loffler.com/hubfs/Microsoft%20365%20Training/December%202026%20MFP%20Scan-to-Email%20Options%20After%20Microsoft%20Basic%20Authentication%20Deprecation%20Date%20-%20Loffler.pdf, https://raw.githubusercontent.com/KelvinTegelaar/CIPP/main/src/data/alerts.json); none gives a per-model decision plus a per-office runbook.",
@@ -211,7 +211,7 @@
       },
       "review": {
         "verdict": "rescored",
-        "findings": "Reviewer rescored 20 to 18. Evidence checked and real, but Amber Tin's 2026-11-09 comment only asks whether the timeline is accurate. Urgency is weaker than pitched: admins can re-enable Basic auth in the tenant, and Microsoft's HVE post (https://techcommunity.microsoft.com/t5/exchange-team-blog/high-volume-email-continued-support-for-basic-authentication/ba-p/4411197) keeps Basic auth until September 2028 for internal recipients, which is how the administrator.de poster solved it the same day (https://administrator.de/forum/scan-to-mail-ms365-mfa-einrichtung-677379.html). Free cross-vendor material exists (https://help.marconet.com/scan-to-email-oauth-v2.0-authentication-manufacturer-setup-guides, https://www.loffler.com/hubfs/Microsoft%20365%20Training/December%202026%20MFP%20Scan-to-Email%20Options%20After%20Microsoft%20Basic%20Authentication%20Deprecation%20Date%20-%20Loffler.pdf), and dealers bill for the work (https://www.sharp.net.nz/microsoft365-exchange), but nobody pays for a checklist SaaS, so willingnessToPay 3 to 2 and pain 4 to 3. Re-scoped from a $19-49/month tracker to a free lookup plus a one-time runbook pack."
+        "findings": "Reviewer rescored 20 to 18. Evidence checked and real, but poster E's 2026-11-09 comment only asks whether the timeline is accurate. Urgency is weaker than pitched: admins can re-enable Basic auth in the tenant, and Microsoft's HVE post (https://techcommunity.microsoft.com/t5/exchange-team-blog/high-volume-email-continued-support-for-basic-authentication/ba-p/4411197) keeps Basic auth until September 2028 for internal recipients, which is how the administrator.de poster solved it the same day (https://administrator.de/forum/scan-to-mail-ms365-mfa-einrichtung-677379.html). Free cross-vendor material exists (https://help.marconet.com/scan-to-email-oauth-v2.0-authentication-manufacturer-setup-guides, https://www.loffler.com/hubfs/Microsoft%20365%20Training/December%202026%20MFP%20Scan-to-Email%20Options%20After%20Microsoft%20Basic%20Authentication%20Deprecation%20Date%20-%20Loffler.pdf), and dealers bill for the work (https://www.sharp.net.nz/microsoft365-exchange), but nobody pays for a checklist SaaS, so willingnessToPay 3 to 2 and pain 4 to 3. Re-scoped from a $19-49/month tracker to a free lookup plus a one-time runbook pack."
       },
       "inspiredBy": "https://techcommunity.microsoft.com/blog/exchange/updated-exchange-online-smtp-auth-basic-authentication-deprecation-timeline/4489835",
       "gateGap": {
@@ -314,15 +314,15 @@
         {
           "url": "https://forum.juce.com/t/how-are-people-factoring-ai-usage-into-their-client-billing/69023",
           "source": "forum.juce.com",
-          "author": "jcalvo60",
+          "author": "poster A",
           "date": "2026-07-23",
           "kind": "complaint",
-          "summary": "Freelancer with two projects: one client pays for his AI subscriptions and encourages heavy use, the other's NDA forbids any AI service; kerfuffle (2026-06-21) in the same thread wants contractors to disclose AI use and indemnify."
+          "summary": "Freelancer with two projects: one client pays for his AI subscriptions and encourages heavy use, the other's NDA forbids any AI service; poster B (2026-06-21) in the same thread wants contractors to disclose AI use and indemnify."
         },
         {
           "url": "https://forum.cursor.com/t/167142.json",
           "source": "forum.cursor.com",
-          "author": "jimlbeaver",
+          "author": "poster C",
           "date": "2026-09-17",
           "kind": "complaint",
           "summary": "Usage reporting is still account-level and the CSV export has no project or session id, so AI spend cannot be tied to the work teams plan, staff and bill against."
@@ -330,7 +330,7 @@
         {
           "url": "https://forum.cursor.com/t/160895.json",
           "source": "forum.cursor.com",
-          "author": "Andrey_Eroftiev",
+          "author": "poster D",
           "date": "2026-08-27",
           "kind": "complaint",
           "summary": "A software outsourcing company asks for per-task client and cost attribution because its clients want per-task cost logging; others in the thread call attribution across clients guesswork."
@@ -338,10 +338,10 @@
         {
           "url": "https://hn.algolia.com/api/v1/items/50403153",
           "source": "news.ycombinator.com (Algolia API)",
-          "author": "Michel_Aventin",
+          "author": "poster E",
           "date": "2026-11-07",
           "kind": "complaint",
-          "summary": "Ask HN from a freelancer working across several clients: keeping each client's rules and context separate for agents is his main time cost; nilleb replies that each customer has different policies."
+          "summary": "Ask HN from a freelancer working across several clients: keeping each client's rules and context separate for agents is his main time cost; poster F replies that each customer has different policies."
         },
         {
           "url": "https://standardcompute.com/bill-ai-coding-costs-to-clients",
@@ -570,10 +570,10 @@
         {
           "url": "https://hn.algolia.com/api/v1/items/49419237",
           "source": "news.ycombinator.com (Algolia API)",
-          "author": "kvemkon",
+          "author": "poster A",
           "date": "2026-08-25",
           "kind": "complaint",
-          "summary": "Asks how a small business can report within 24 hours through weekends, Christmas and summer holidays; ghosty141 replies that the clock starts at awareness, and kvemkon accepts that. imtringued (same thread) puts CE self-assessment near $20k."
+          "summary": "Asks how a small business can report within 24 hours through weekends, Christmas and summer holidays; poster B replies that the clock starts at awareness, and poster A accepts that. Poster C (same thread) puts CE self-assessment near $20k."
         },
         {
           "url": "https://www.enisa.europa.eu/topics/product-security/vulnerability-services/eu-incident-response-and-cyber-crisis-management/single-reporting-platform-srp/frequently-asked-questions",
@@ -717,7 +717,7 @@
       },
       "review": {
         "verdict": "rescored",
-        "findings": "Reviewer rescored 18 to 16. The CISA KEV catalog (https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json, 1,779 entries) has no entries for mbedTLS, lwIP, FreeRTOS, Zephyr, ESP-IDF, Arduino, MicroPython, wolfSSL, curl or dnsmasq, so the nightly alert would almost never fire for MCU products. OpenCRA (https://pypi.org/project/opencra/) already matches SBOMs against OSV and KEV for free, and CVD Portal's free tier gives intake and an Article 14 countdown (https://cvdportal.com/pricing). kvemkon's weekend complaint was answered in the same HN thread (https://hn.algolia.com/api/v1/items/49419237): the clock starts at awareness. Pain 4 to 2. Re-scoped from KEV monitoring to report readiness: EU Login and Secondary AR registration before an incident, stored data pre-filled into copy sheets per SRP field, a human triage step, and escalation to a backup, priced per incident or yearly."
+        "findings": "Reviewer rescored 18 to 16. The CISA KEV catalog (https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json, 1,779 entries) has no entries for mbedTLS, lwIP, FreeRTOS, Zephyr, ESP-IDF, Arduino, MicroPython, wolfSSL, curl or dnsmasq, so the nightly alert would almost never fire for MCU products. OpenCRA (https://pypi.org/project/opencra/) already matches SBOMs against OSV and KEV for free, and CVD Portal's free tier gives intake and an Article 14 countdown (https://cvdportal.com/pricing). Poster A's weekend complaint was answered in the same HN thread (https://hn.algolia.com/api/v1/items/49419237): the clock starts at awareness. Pain 4 to 2. Re-scoped from KEV monitoring to report readiness: EU Login and Secondary AR registration before an incident, stored data pre-filled into copy sheets per SRP field, a human triage step, and escalation to a backup, priced per incident or yearly."
       },
       "inspiredBy": "https://hn.algolia.com/api/v1/items/49419237",
       "gateGap": {
@@ -847,7 +847,7 @@
       {
         "title": "Peppol Rejection Explainer for small invoicers",
         "total": 15,
-        "reason": "One complaint (forum.invoiceninja.com, randy, 2026-10-25, https://forum.invoiceninja.com/t/23615.json) about a tool-specific bug; free EN 16931 validators exist; Freelancer returned 0 Peppol jobs."
+        "reason": "One complaint (forum.invoiceninja.com, poster A, 2026-10-25, https://forum.invoiceninja.com/t/23615.json) about a tool-specific bug; free EN 16931 validators exist; Freelancer returned 0 Peppol jobs."
       },
       {
         "title": "Closed-Plugin Watch for WordPress agencies",
@@ -867,7 +867,7 @@
       {
         "title": "EWS retirement app inventory for small businesses",
         "total": 13,
-        "reason": "EWS phase-out began 2026-10-01 with removal on 2027-04-01 (https://mc.merill.net/message/MC1227454), but it affects apps rather than devices and only one comment (technonath) mentions the fallout."
+        "reason": "EWS phase-out began 2026-10-01 with removal on 2027-04-01 (https://mc.merill.net/message/MC1227454), but it affects apps rather than devices and only one comment (poster A) mentions the fallout."
       },
       {
         "title": "Vibe-coded app production-readiness check",
@@ -907,7 +907,7 @@
       {
         "title": "Git 3.0 SHA-256 migration checker",
         "total": 10,
-        "reason": "One HN comment (Onavo, 2026-10-01); no buyer evidence."
+        "reason": "One HN comment (poster A, 2026-10-01); no buyer evidence."
       },
       {
         "title": "ChatGPT/Codex plan allowance tracker",
@@ -917,7 +917,7 @@
       {
         "title": "Recruiter-mail sorter browser extension",
         "total": 9,
-        "reason": "Rejection rule: a novelty AI wrapper (one HN 'I would pay for this' comment, cobbzilla 2026-10-09)."
+        "reason": "Rejection rule: a novelty AI wrapper (one HN 'I would pay for this' comment, poster A 2026-10-09)."
       },
       {
         "title": "Research-software catalog builder for institutions",

@@ -86,13 +86,13 @@
       "description": "A Shopify-embedded order desk for shops that deliver locally on a chosen day. A staff member takes a call in one screen: search the catalog, pick the recipient from a saved address book or add a new one, choose a delivery date from the dates that product mix can actually make, type the card message, then send a Shopify invoice or payment link. Everything is stored as order attributes on a Shopify draft order, so it reaches the admin, the invoice and the packing slip. A printable day sheet per delivery date gives the bench and the driver the addresses, card messages and prep notes. The app never touches a card number: payment stays inside Shopify.",
       "targetCustomer": "Counter and office staff at florists, cake and cookie bakeries, hamper and gift shops and small grocers on Shopify, typically one to five people, who take phone orders daily and far more at Valentine's Day, Mother's Day and Christmas.",
       "buyer": "The shop owner, on the business card, as one more Shopify app subscription.",
-      "whyNow": "Shopify still has no recipient, delivery-date or card-message field on its order screens, and merchants asking for one are told to add apps: lillypadflowers pieced the workflow together from draft orders plus the paid Draft Order Magic in August 2026, and another florist was still asking for quotes for a custom build on 1 November 2026. The pickup and delivery apps that merchants already pay for have grown in the other direction, towards storefront date pickers and $49.99-and-up plans.",
+      "whyNow": "Shopify still has no recipient, delivery-date or card-message field on its order screens, and merchants asking for one are told to add apps: poster A pieced the workflow together from draft orders plus the paid Draft Order Magic in August 2026, and another florist was still asking for quotes for a custom build on 1 November 2026. The pickup and delivery apps that merchants already pay for have grown in the other direction, towards storefront date pickers and $49.99-and-up plans.",
       "founderFit": "Pisan ships a working embedded web app alone in days, and this is a single form, a date engine and a print view over Shopify's own draft-order API, with no card data and no new service. The customers are reachable one at a time in the public threads where they are already describing the problem.",
       "problemEvidence": [
         {
           "url": "https://community.shopify.com/t/671978.json",
           "source": "community.shopify.com",
-          "author": "lillypadflowers",
+          "author": "poster A",
           "date": "2026-08-24",
           "kind": "complaint",
           "summary": "Florist taking many phone orders daily, 'non stop' at Valentine's Day, asks Shopify for editable local-delivery fields on the new-order form; describes their current path through draft orders plus Draft Order Magic order attributes; 16 posts and 13 likes."
@@ -100,7 +100,7 @@
         {
           "url": "https://community.shopify.com/t/708167.json",
           "source": "community.shopify.com",
-          "author": "infoandsales",
+          "author": "poster B",
           "date": "2026-11-01",
           "kind": "complaint",
           "summary": "Florist on Shopify Basic asks whether an app can read their existing delivery/collection and date fields, validate product-specific preparation periods and carry the date to the order; asks a partner for a fixed quote, so is ready to pay."
@@ -108,7 +108,7 @@
         {
           "url": "https://community.shopify.com/t/691546.json",
           "source": "community.shopify.com",
-          "author": "palashchhabra",
+          "author": "poster C",
           "date": "2026-10-03",
           "kind": "complaint",
           "summary": "Two-location grocer on an annual Shopify Grow plan has tried Pickeasy and Zapiet and still wants a clean status flow and editable orders; evidence that merchants in this niche already pay for apps and remain unsatisfied."
@@ -241,7 +241,7 @@
       },
       "review": {
         "verdict": "rescored",
-        "findings": "The reviewer cut the idea from 23 to 17 and re-scoped it. Three findings stuck. First, the status-email half of the idea is already served: Shopify sends Ready for pickup natively plus an optional Picked up from POS (https://help.shopify.com/en/manual/sell-in-person/shopify-pos/order-management/local-pickup-for-online-orders), Zapiet's order management covers the whole flow and can suppress Shopify's shipping confirmation (https://support.zapiet.com/en/articles/6279852-order-management), and DingDoong documents ready-for-pickup and out-for-delivery emails on a $6.99 plan (https://docs.dingdoong.io/general-settings/general-settings/email-notifications.md). Second, the delivery-method switch is already sold by Alpaca Pack (https://pickalpaca.com/support/update-order-delivery-method) and cannot be done properly anyway, because FulfillmentOrder.deliveryMethod is read-only. Third, much of the spec wording in those threads comes from responders pitching paid builds (Taha_Dev appears in three of the five threads), and palashchhabra's real blockers are checkout gating and editing local-delivery orders, which this does not solve; the reviewer also corrected Zapiet's review count to 1,905. The board and the status emails were dropped, leaving the phone-order form, recipient book, date engine and day sheet at $12. Scores moved pain 4 to 3, willingnessToPay 4 to 2, competitiveGap 3 to 2, feasibility 4 to 3, complianceBurden 5 to 4."
+        "findings": "The reviewer cut the idea from 23 to 17 and re-scoped it. Three findings stuck. First, the status-email half of the idea is already served: Shopify sends Ready for pickup natively plus an optional Picked up from POS (https://help.shopify.com/en/manual/sell-in-person/shopify-pos/order-management/local-pickup-for-online-orders), Zapiet's order management covers the whole flow and can suppress Shopify's shipping confirmation (https://support.zapiet.com/en/articles/6279852-order-management), and DingDoong documents ready-for-pickup and out-for-delivery emails on a $6.99 plan (https://docs.dingdoong.io/general-settings/general-settings/email-notifications.md). Second, the delivery-method switch is already sold by Alpaca Pack (https://pickalpaca.com/support/update-order-delivery-method) and cannot be done properly anyway, because FulfillmentOrder.deliveryMethod is read-only. Third, much of the spec wording in those threads comes from responders pitching paid builds (poster D appears in three of the five threads), and poster C's real blockers are checkout gating and editing local-delivery orders, which this does not solve; the reviewer also corrected Zapiet's review count to 1,905. The board and the status emails were dropped, leaving the phone-order form, recipient book, date engine and day sheet at $12. Scores moved pain 4 to 3, willingnessToPay 4 to 2, competitiveGap 3 to 2, feasibility 4 to 3, complianceBurden 5 to 4."
       },
       "gateGap": {
         "missing": [
@@ -558,7 +558,7 @@
         {
           "url": "https://hn.algolia.com/api/v1/items/50340828",
           "source": "news.ycombinator.com",
-          "author": "eszed",
+          "author": "poster A",
           "date": "2026-11-02",
           "kind": "complaint",
           "summary": "Restaurant-industry operator: every county has its own logging requirements and portal; most of the company's fines came from staff following County A's rules in County B (every two hours versus every ninety minutes, whole degrees versus tenths). They now pay a sensor service costing about 80% of what the fines used to."
@@ -811,7 +811,7 @@
       {
         "title": "Product-level tax exemptions for mixed wholesale and retail buyers",
         "total": 16,
-        "reason": "One complaint (Julie_Remy, 2026-10-29, https://community.shopify.com/t/706515.json) and Milople VAT Exemption already offers per-product exemption; several tax-exempt apps exist. Not reviewed: ranked below the three shipped."
+        "reason": "One complaint (poster A, 2026-10-29, https://community.shopify.com/t/706515.json) and Milople VAT Exemption already offers per-product exemption; several tax-exempt apps exist. Not reviewed: ranked below the three shipped."
       },
       {
         "title": "EU per-item duty and handling fee checker for non-EU sellers",
@@ -821,12 +821,12 @@
       {
         "title": "Gift card reload for Shopify POS",
         "total": 14,
-        "reason": "Real, long-running complaint (deserthighwaybtq 2026-09-22, https://community.shopify.com/t/382218.json), but Gift Card Hero's $19.99 PRO plan already reloads balances from a POS tile."
+        "reason": "Real, long-running complaint (poster A 2026-09-22, https://community.shopify.com/t/382218.json), but Gift Card Hero's $19.99 PRO plan already reloads balances from a POS tile."
       },
       {
         "title": "Physical gift card fulfilment with liability tracking",
         "total": 13,
-        "reason": "Webbeo (2026-10-07, https://community.shopify.com/t/694208.json) wants plastic cards sold online; gift card apps (Gift Card Hero, Shopkeeper GiftCard Pro) already sell physical cards."
+        "reason": "Poster A (2026-10-07, https://community.shopify.com/t/694208.json) wants plastic cards sold online; gift card apps (Gift Card Hero, Shopkeeper GiftCard Pro) already sell physical cards."
       },
       {
         "title": "Delivery-method switch for local orders",
