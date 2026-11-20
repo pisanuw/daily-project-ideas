@@ -702,3 +702,9 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-20 [doc] Created ideas/2026-11-20.json (schemaVersion 3, 3 ideas): Restock Alerts (22, validated), Booking Rules Page (21, prov.), Rebook Reminders (20, prov.)
 
 2026-11-20 [doc] Re-probed ideas/sources.json for the new run environment: A1 and B5 now blocked, C3 ok-curl; older runs in the log disagree until they age out.
+
+2026-11-20 [code] scripts/fetch_url.py: the routine's curl fetch takes the URL as one argument, stops at a redirect to another host and logs every fetch; log_run.py accepts the outcome environment.
+
+2026-11-20 [code] fetch_url.py: refuses private and local hosts, treats a scheme or port change as another host, caps a fetch at 60 s, and counts a host the proxy cannot reach against the site.
+
+2026-11-20 [code] fetch_url.py: reads the host as curl will (percent signs refused, look-alike characters folded) before the private-host check; a proxy 503 is environment.

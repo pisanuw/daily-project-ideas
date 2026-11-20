@@ -68,6 +68,7 @@ See [DEPLOY.md](DEPLOY.md) for Netlify setup.
 - `scripts/log_run.py` - Appends one run record to `ideas/run-log.jsonl`
 - `scripts/source_health.py` - Rebuilds `ideas/source-health.{json,md}` from the run log
 - `scripts/probe_sources.py` - Re-measures every catalog source with curl; run with `--write` after the run environment changes
+- `scripts/fetch_url.py` - The routine's curl fetch: takes the URL as one argument (never through a shell string), does not follow a redirect to another host, and logs every fetch to `/tmp/finder-fetches.jsonl`. Tests: `python3 scripts/test_fetch_url.py`
 - `scripts/build_index.py` - Regenerates `ideas/index.jsonl`
 - `scripts/tag_topics.py` - Assigns one topic to each archived idea via the local `claude` CLI
 - `scripts/smoke_pages.js` - Runs the built pages against a tiny DOM stub; the repo's one automated check

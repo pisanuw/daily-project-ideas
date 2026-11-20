@@ -16,6 +16,9 @@ Fetch outcomes (use the narrowest one that fits):
   empty      HTTP 200 but nothing usable: a JS shell, a bot interstitial, an
              index page with no items. An HTTP 200 is not a success.
   allowlist  the WebFetch tool refused the host ("unable to fetch from")
+  environment  this session's own proxy or network refused the host (curl:
+             scripts/fetch_url.py reports it). Like allowlist, it says nothing
+             about the site: never count it as a site block
   http_403 / http_404 / http_429 / http_5xx
   redirect   a cross-host redirect that was not followed (consent walls)
   timeout    no response in time
@@ -29,7 +32,7 @@ import json
 import re
 import sys
 
-OUTCOMES = {"ok", "empty", "allowlist", "http_403", "http_404", "http_429",
+OUTCOMES = {"ok", "empty", "allowlist", "environment", "http_403", "http_404", "http_429",
             "http_5xx", "redirect", "timeout"}
 CLIENTS = {"webfetch", "curl"}
 MODES = {"first", "extra"}
