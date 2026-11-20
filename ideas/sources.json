@@ -23,8 +23,8 @@
       "group": "A",
       "name": "LMS idea boards",
       "evidence": "complaint",
-      "status": "ok",
-      "lastVerified": "2026-11-01",
+      "status": "blocked",
+      "lastVerified": "2026-11-20",
       "paths": [
         {
           "url": "https://community.instructure.com/t5/forums/searchpage/tab/message?q={q}",
@@ -56,7 +56,7 @@
       "name": "Other LMS and classroom forums",
       "evidence": "complaint",
       "status": "ok",
-      "lastVerified": "2026-11-01",
+      "lastVerified": "2026-11-20",
       "paths": [
         {
           "url": "https://discuss.openedx.org/latest.json",
@@ -66,7 +66,7 @@
           "probeUrl": "https://discuss.openedx.org/latest.json",
           "expect": "topic_list",
           "probeOutcome": "ok",
-          "probeDetail": "HTTP 200, 58125B"
+          "probeDetail": "HTTP 200, 55814B"
         },
         {
           "url": "https://discuss.openedx.org/search.json?q={q}+after%3A{YYYY-MM-DD}",
@@ -76,7 +76,7 @@
           "probeUrl": "https://discuss.openedx.org/search.json?q=grading%20after%3A2026-08-01",
           "expect": "posts",
           "probeOutcome": "ok",
-          "probeDetail": "HTTP 200, 31921B"
+          "probeDetail": "HTTP 200, 47755B"
         }
       ],
       "notes": "Open edX runs Discourse, so it takes the A13 query pattern. D2L and Anthology boards require a login and are out of reach."
@@ -87,7 +87,7 @@
       "name": "Open-source teaching tools",
       "evidence": "complaint",
       "status": "ok",
-      "lastVerified": "2026-11-06",
+      "lastVerified": "2026-11-20",
       "paths": [
         {
           "url": "https://api.github.com/search/issues?q={q}+is%3Aissue+state%3Aopen+sort%3Areactions&per_page=10",
@@ -95,7 +95,9 @@
           "verified": "2026-11-06",
           "result": "JSON items with total_count, title, created_at, reactions, user. Since 2026 the API returns 422 unless the query includes is:issue or is:pull-request; direct /repos/.../issues/N fetches 403 once rate limited.",
           "probeUrl": "https://api.github.com/search/issues?q=autograder+is%3Aissue+state%3Aopen&per_page=5",
-          "expect": "total_count"
+          "expect": "total_count",
+          "probeOutcome": "ok",
+          "probeDetail": "HTTP 200, 21803B"
         },
         {
           "url": "https://discourse.jupyter.org/search.json?q={q}+after%3A{YYYY-MM-DD}",
@@ -116,7 +118,7 @@
       "name": "GitHub Education and Classroom discussions",
       "evidence": "complaint",
       "status": "unknown",
-      "lastVerified": "2026-11-01",
+      "lastVerified": "2026-11-20",
       "paths": [
         {
           "url": "https://api.github.com/search/issues?q=repo%3Acommunity%2Fcommunity+{q}&per_page=10",
@@ -126,7 +128,7 @@
           "probeUrl": "https://api.github.com/search/issues?q=repo%3Acommunity%2Fcommunity+classroom&per_page=5",
           "expect": "total_count",
           "probeOutcome": "http_422",
-          "probeDetail": "177B"
+          "probeDetail": "177B (twice, first was http_422)"
         }
       ],
       "notes": "api.github.com/search/issues answered HTTP 422 (177B) from the routine's environment on 2026-11-01 and HTTP 200 from a residential IP the same day, with and without advanced_search=true, so the query is not the problem and the cause is unidentified. Unauthenticated GitHub search allows only 10 requests a minute per IP, which a shared datacenter address can exhaust. Treat as unknown: probe once before relying on it, and fall back to A13. Discussions may also need GraphQL with a token, which is untested."
@@ -137,7 +139,7 @@
       "name": "Educator Stack Exchanges",
       "evidence": "complaint",
       "status": "ok-curl",
-      "lastVerified": "2026-11-01",
+      "lastVerified": "2026-11-20",
       "paths": [
         {
           "url": "https://api.stackexchange.com/2.3/questions?site={cseducators|academia|matheducators}&order=desc&sort=creation&pagesize=20&filter=withbody",
@@ -147,7 +149,7 @@
           "probeUrl": "https://api.stackexchange.com/2.3/questions?site=cseducators&order=desc&sort=creation&pagesize=3",
           "expect": "creation_date",
           "probeOutcome": "ok",
-          "probeDetail": "HTTP 200, 2325B"
+          "probeDetail": "HTTP 200, 2446B"
         },
         {
           "url": "https://api.stackexchange.com/2.3/search/advanced?site={site}&q={q}&order=desc&sort=creation&pagesize=20",
@@ -168,7 +170,7 @@
       "name": "Edtech app and extension reviews",
       "evidence": "complaint",
       "status": "ok-curl",
-      "lastVerified": "2026-11-01",
+      "lastVerified": "2026-11-20",
       "paths": [
         {
           "url": "https://chromewebstore.google.com/detail/{slug}/{id}/reviews",
@@ -178,7 +180,7 @@
           "probeUrl": "https://chromewebstore.google.com/detail/kami/ecnphlgnajanjnkcmbpancdjoidceilk/reviews",
           "expect": "helpful",
           "probeOutcome": "ok",
-          "probeDetail": "HTTP 200, 700035B"
+          "probeDetail": "HTTP 200, 770303B"
         }
       ],
       "notes": "Chrome Web Store review text sat behind a consent.google.com redirect when fetched from a European IP; that is a GDPR consent wall and US traffic may not see it, so the routine's own probe is the one to believe. The detail page returns HTML to curl and install counts may be recoverable (see B8). Re-probe from the routine's environment before writing this source off.",
@@ -190,7 +192,7 @@
       "name": "Higher ed Reddit",
       "evidence": "complaint",
       "status": "blocked",
-      "lastVerified": "2026-11-01",
+      "lastVerified": "2026-11-20",
       "paths": [
         {
           "url": "https://www.reddit.com/r/{sub}/top.json?t=month",
@@ -234,7 +236,7 @@
       "name": "K-12 and learner Reddit",
       "evidence": "complaint",
       "status": "blocked",
-      "lastVerified": "2026-11-01",
+      "lastVerified": "2026-11-20",
       "paths": [
         {
           "url": "https://old.reddit.com/r/Teachers/top/.json?t=month&limit=5",
@@ -256,7 +258,7 @@
       "name": "Direct-pay buyers",
       "evidence": "complaint",
       "status": "blocked",
-      "lastVerified": "2026-11-01",
+      "lastVerified": "2026-11-20",
       "paths": [
         {
           "url": "https://forums.welltrainedmind.com/",
@@ -278,7 +280,7 @@
       "name": "Incumbent review sites",
       "evidence": "complaint",
       "status": "blocked",
-      "lastVerified": "2026-11-01",
+      "lastVerified": "2026-11-20",
       "paths": [
         {
           "url": "https://www.g2.com/products/{slug}/reviews",
@@ -298,7 +300,7 @@
           "probeUrl": "https://www.capterra.com/p/165473/Gradescope/reviews/",
           "expect": "review",
           "probeOutcome": "http_404",
-          "probeDetail": "102041B"
+          "probeDetail": "104947B"
         }
       ],
       "notes": "G2 and Capterra block automated clients at the edge. This is the site's choice; do not try to work around it.",
@@ -310,7 +312,7 @@
       "name": "Accessibility practitioners",
       "evidence": "complaint",
       "status": "ok-curl",
-      "lastVerified": "2026-11-01",
+      "lastVerified": "2026-11-20",
       "paths": [
         {
           "url": "https://webaim.org/discussion/archives",
@@ -339,7 +341,7 @@
       "name": "Ask HN and HN comments",
       "evidence": "complaint",
       "status": "ok",
-      "lastVerified": "2026-11-01",
+      "lastVerified": "2026-11-20",
       "paths": [
         {
           "url": "https://hn.algolia.com/api/v1/search_by_date?query={q}&tags=comment&hitsPerPage=20",
@@ -349,7 +351,7 @@
           "probeUrl": "https://hn.algolia.com/api/v1/search_by_date?query=%22wish%20there%20was%22&tags=comment&hitsPerPage=5",
           "expect": "created_at",
           "probeOutcome": "ok",
-          "probeDetail": "HTTP 200, 7005B"
+          "probeDetail": "HTTP 200, 9635B"
         },
         {
           "url": "https://hn.algolia.com/api/v1/search?query={q}&tags=ask_hn&hitsPerPage=20",
@@ -359,7 +361,7 @@
           "probeUrl": "https://hn.algolia.com/api/v1/search?query=tool&tags=ask_hn&hitsPerPage=5",
           "expect": "created_at",
           "probeOutcome": "ok",
-          "probeDetail": "HTTP 200, 14128B"
+          "probeDetail": "HTTP 200, 14114B"
         }
       ],
       "notes": "news.ycombinator.com/item returned HTTP 429 on 2026-10-31. Cite the HN item URL only if the item page itself fetched; otherwise cite the Algolia hit and say so. Algolia carries the date and author, which is what the gate needs. 2026-11-06: numericFilters (for example created_at_i>N) must be URL-encoded (%3E for >), or the API returns an error page instead of JSON."
@@ -370,7 +372,7 @@
       "name": "Discourse forums, any niche",
       "evidence": "complaint",
       "status": "ok",
-      "lastVerified": "2026-11-01",
+      "lastVerified": "2026-11-20",
       "paths": [
         {
           "url": "https://{host}/search.json?q={q}+after%3A{YYYY-MM-DD}",
@@ -380,7 +382,7 @@
           "probeUrl": "https://forum.obsidian.md/search.json?q=plugin%20request%20after%3A2026-09-01",
           "expect": "posts",
           "probeOutcome": "ok",
-          "probeDetail": "HTTP 200, 60306B"
+          "probeDetail": "HTTP 200, 61035B"
         },
         {
           "url": "https://{host}/latest.json",
@@ -390,7 +392,7 @@
           "probeUrl": "https://forum.obsidian.md/latest.json",
           "expect": "topic_list",
           "probeOutcome": "ok",
-          "probeDetail": "HTTP 200, 45981B"
+          "probeDetail": "HTTP 200, 47667B"
         },
         {
           "url": "https://{host}/t/{slug}/{id}.json",
@@ -400,7 +402,7 @@
           "probeUrl": "https://discourse.jupyter.org/latest.json",
           "expect": "topic_list",
           "probeOutcome": "ok",
-          "probeDetail": "HTTP 200, 43261B"
+          "probeDetail": "HTTP 200, 44691B"
         }
       ],
       "notes": "Any Discourse instance exposes these three paths, and the after: operator gives the recency the gate needs. This is the widest reachable vein of dated, authored complaints and the main replacement for Reddit. Confirmed instances: discourse.jupyter.org, discuss.openedx.org, forum.obsidian.md. To find more in a niche, search for the forum first, then try /latest.json to confirm it is Discourse."
@@ -411,7 +413,7 @@
       "name": "Plugin and add-on support forums",
       "evidence": "complaint",
       "status": "ok",
-      "lastVerified": "2026-11-01",
+      "lastVerified": "2026-11-20",
       "paths": [
         {
           "url": "https://wordpress.org/support/plugin/{slug}/",
@@ -421,7 +423,7 @@
           "probeUrl": "https://wordpress.org/support/plugin/learnpress/",
           "expect": "topic",
           "probeOutcome": "ok",
-          "probeDetail": "HTTP 200, 208471B"
+          "probeDetail": "HTTP 200, 208330B"
         }
       ],
       "notes": "Pairs with B10: the install count says how many people are affected and the support forum says what they are stuck on. Relative ages ('1 month ago') must be converted to a date and the thread page fetched to confirm it."
@@ -432,7 +434,7 @@
       "name": "No-code automation communities",
       "evidence": "complaint",
       "status": "ok",
-      "lastVerified": "2026-11-04",
+      "lastVerified": "2026-11-20",
       "paths": [
         {
           "url": "https://community.make.com/search.json?q={q}+after%3A{YYYY-MM-DD}",
@@ -440,7 +442,9 @@
           "verified": "2026-11-04",
           "result": "Discourse JSON with topics and posts; 'invoice' after 2026-08-01 returned 47 posts (supplier-invoice reconciliation, invoice chasers).",
           "probeUrl": "https://community.make.com/search.json?q=invoice",
-          "expect": "topics"
+          "expect": "topics",
+          "probeOutcome": "ok",
+          "probeDetail": "HTTP 200, 73856B"
         },
         {
           "url": "https://forum.bubble.io/search.json?q={q}+after%3A{YYYY-MM-DD}",
@@ -448,7 +452,9 @@
           "verified": "2026-11-04",
           "result": "Discourse JSON.",
           "probeUrl": "https://forum.bubble.io/search.json?q=booking",
-          "expect": "topics"
+          "expect": "topics",
+          "probeOutcome": "ok",
+          "probeDetail": "HTTP 200, 67759B"
         },
         {
           "url": "https://community.n8n.io/search.json?q={q}+after%3A{YYYY-MM-DD}",
@@ -456,7 +462,9 @@
           "verified": "2026-11-03",
           "result": "Discourse JSON; 7 of 7 usable in the run log.",
           "probeUrl": "https://community.n8n.io/search.json?q=invoice",
-          "expect": "topics"
+          "expect": "topics",
+          "probeOutcome": "ok",
+          "probeDetail": "HTTP 200, 67781B"
         },
         {
           "url": "https://community.zapier.com/search?q={q}",
@@ -464,7 +472,9 @@
           "verified": "2026-11-04",
           "result": "HTML search results, 285KB.",
           "probeUrl": "https://community.zapier.com/search?q=spreadsheet",
-          "expect": "zapier"
+          "expect": "zapier",
+          "probeOutcome": "ok",
+          "probeDetail": "HTTP 200, 297339B"
         }
       ],
       "notes": "Small businesses that cannot buy a tool build a workaround out of Make, Zapier, n8n or Bubble and then ask for help when it breaks. A post describing a home-built workaround is complaint evidence that the job matters and is unserved; count the original poster only, not consultants answering. Pairs with B11: the same task posted as a paid job is the spend evidence."
@@ -475,7 +485,7 @@
       "name": "Vendor feature-request boards",
       "evidence": "complaint",
       "status": "ok-curl",
-      "lastVerified": "2026-11-05",
+      "lastVerified": "2026-11-20",
       "paths": [
         {
           "url": "https://productideas.xero.com/search?query={q}",
@@ -483,13 +493,17 @@
           "verified": "2026-11-05",
           "result": "Xero's product ideas board: dated, named requests from small-business users and bookkeepers, readable with curl (2026-11-05 run). QuickBooks community (quickbooks.intuit.com/learn-support) fails with curl (HTTP/2 error) but reads through WebFetch.",
           "probeUrl": "https://productideas.xero.com/search?query=remittance",
-          "expect": "idea"
+          "expect": "idea",
+          "probeOutcome": "ok",
+          "probeDetail": "HTTP 200, 312523B"
         },
         {
           "url": "https://forums.wildapricot.com/ (wishlist and suggestion pages)",
           "client": "curl",
           "verified": "2026-11-07",
-          "result": "Feature suggestions from paying WildApricot admins; each suggestion page shows author, date and votes. WebFetch also works (2026-11-07 run)."
+          "result": "Feature suggestions from paying WildApricot admins; each suggestion page shows author, date and votes. WebFetch also works (2026-11-07 run).",
+          "probeOutcome": "timeout",
+          "probeDetail": "no status (curl exit 3) (twice, first was timeout)"
         }
       ],
       "notes": "Requests users file with the vendor of a tool they already pay for are complaint evidence from paying customers, and far less polluted than community forums, where most 2026 back-office threads are opened by builders promoting their own apps. Count the requester and the votes; check that the request is still open. 2026-11-07: forums.wildapricot.com wishlist added (gave the Renewal Audit idea)."
@@ -500,7 +514,7 @@
       "name": "Teachers Pay Teachers and Etsy",
       "evidence": "spend",
       "status": "ok",
-      "lastVerified": "2026-11-01",
+      "lastVerified": "2026-11-20",
       "paths": [
         {
           "url": "https://www.teacherspayteachers.com/Browse/Search:{q}",
@@ -510,7 +524,7 @@
           "probeUrl": "https://www.teacherspayteachers.com/Browse/Search:grading%20rubric",
           "expect": "Rating",
           "probeOutcome": "ok",
-          "probeDetail": "HTTP 200, 1159982B"
+          "probeDetail": "HTTP 200, 1157401B"
         }
       ],
       "notes": "Review counts on a paid listing are the spend signal. Two marketplace rules constrain any idea that sells here: TPT's AI-generated-resource ban and exclusive-seller tier (announced October 2026) and Etsy's rules on AI-generated patterns, recipes and instructions (2026-10-22). Verify both before relying on them."
@@ -521,7 +535,7 @@
       "name": "AppSumo",
       "evidence": "spend",
       "status": "ok",
-      "lastVerified": "2026-11-01",
+      "lastVerified": "2026-11-20",
       "paths": [
         {
           "url": "https://appsumo.com/software/{category}/",
@@ -531,7 +545,7 @@
           "probeUrl": "https://appsumo.com/software/education/",
           "expect": "review",
           "probeOutcome": "ok",
-          "probeDetail": "HTTP 200, 542602B"
+          "probeDetail": "HTTP 200, 694898B"
         }
       ],
       "notes": "A deal with hundreds of reviews is proof that a small tool in that shape sells."
@@ -542,7 +556,7 @@
       "name": "Indie Hackers and Starter Story",
       "evidence": "spend",
       "status": "blocked",
-      "lastVerified": "2026-11-01",
+      "lastVerified": "2026-11-20",
       "paths": [
         {
           "url": "https://www.indiehackers.com/products",
@@ -564,7 +578,7 @@
       "name": "Founder subreddits",
       "evidence": "spend",
       "status": "blocked",
-      "lastVerified": "2026-11-01",
+      "lastVerified": "2026-11-20",
       "paths": [
         {
           "url": "https://old.reddit.com/r/SaaS/top/.json?t=month&limit=5",
@@ -585,8 +599,8 @@
       "group": "B",
       "name": "Acquisition marketplaces",
       "evidence": "spend",
-      "status": "ok-curl",
-      "lastVerified": "2026-11-01",
+      "status": "blocked",
+      "lastVerified": "2026-11-20",
       "paths": [
         {
           "url": "https://acquire.com/search/?industry=education",
@@ -596,7 +610,7 @@
           "probeUrl": "https://acquire.com/search/?industry=education",
           "expect": "listing",
           "probeOutcome": "http_404",
-          "probeDetail": "453602B"
+          "probeDetail": "453603B"
         },
         {
           "url": "https://flippa.com/{id}",
@@ -605,8 +619,8 @@
           "result": "Listing body truncated; financials not visible.",
           "probeUrl": "https://flippa.com/12300115",
           "expect": "price",
-          "probeOutcome": "ok",
-          "probeDetail": "HTTP 200, 1294500B"
+          "probeOutcome": "http_403",
+          "probeDetail": "5756B"
         }
       ],
       "notes": "Find acquire.com's real listing path from a search result rather than guessing it. Stated MRR on these sites is seller-reported and unaudited; treat it as a weak spend signal."
@@ -617,7 +631,7 @@
       "name": "Verified revenue dashboards",
       "evidence": "spend",
       "status": "ok-curl",
-      "lastVerified": "2026-11-06",
+      "lastVerified": "2026-11-20",
       "paths": [
         {
           "url": "https://trustmrr.com/",
@@ -627,7 +641,7 @@
           "probeUrl": "https://trustmrr.com/",
           "expect": "MRR",
           "probeOutcome": "ok",
-          "probeDetail": "HTTP 200, 1471390B"
+          "probeDetail": "HTTP 200, 1504254B"
         },
         {
           "url": "https://trustmrr.com/category/{slug}",
@@ -635,7 +649,9 @@
           "verified": "2026-11-06",
           "result": "HTTP 200, ~175KB; lists startups in a category (customer-support, productivity, ecommerce, education, real-estate, ...) with 30-day revenue, MRR and total revenue read off the page.",
           "probeUrl": "https://trustmrr.com/category/customer-support",
-          "expect": "MRR"
+          "expect": "MRR",
+          "probeOutcome": "ok",
+          "probeDetail": "HTTP 200, 177096B"
         }
       ],
       "notes": "On 2026-10-31 a TrustMRR search snippet claimed about $14k of 30-day revenue for a product whose fetched page showed $51 all-time. Never use a search snippet's revenue figure; read it off the fetched page."
@@ -646,7 +662,7 @@
       "name": "Product Hunt",
       "evidence": "spend",
       "status": "blocked",
-      "lastVerified": "2026-11-01",
+      "lastVerified": "2026-11-20",
       "paths": [
         {
           "url": "https://www.producthunt.com/topics/{topic}",
@@ -656,7 +672,7 @@
           "probeUrl": "https://www.producthunt.com/topics/education",
           "expect": "product",
           "probeOutcome": "http_403",
-          "probeDetail": "5704B"
+          "probeDetail": "5683B"
         }
       ],
       "notes": "Blocked without an API key.",
@@ -668,7 +684,7 @@
       "name": "Install counts for paid add-ons",
       "evidence": "spend",
       "status": "ok-curl",
-      "lastVerified": "2026-11-01",
+      "lastVerified": "2026-11-20",
       "paths": [
         {
           "url": "https://chromewebstore.google.com/detail/{id}",
@@ -678,7 +694,7 @@
           "probeUrl": "https://chromewebstore.google.com/detail/ecnphlgnajanjnkcmbpancdjoidceilk",
           "expect": "users",
           "probeOutcome": "ok",
-          "probeDetail": "HTTP 200, 718119B"
+          "probeDetail": "HTTP 200, 787614B"
         },
         {
           "url": "https://marketplace.visualstudio.com/items?itemName={publisher}.{name}",
@@ -688,7 +704,7 @@
           "probeUrl": "https://marketplace.visualstudio.com/items?itemName=ms-python.python",
           "expect": "install",
           "probeOutcome": "ok",
-          "probeDetail": "HTTP 200, 92567B"
+          "probeDetail": "HTTP 200, 92754B"
         }
       ],
       "notes": "An install count alone is not a spend signal unless the add-on is paid or has a paid tier. Say which."
@@ -699,7 +715,7 @@
       "name": "Freelance build requests",
       "evidence": "spend",
       "status": "ok-curl",
-      "lastVerified": "2026-11-03",
+      "lastVerified": "2026-11-20",
       "paths": [
         {
           "url": "https://www.freelancer.com/api/projects/0.1/projects/active/?query={q}&limit=20&full_description=true",
@@ -707,7 +723,9 @@
           "verified": "2026-11-03",
           "result": "Public JSON, no key: projects with time_submitted, title, budget, currency and bid_stats. The query parameter barely narrows results, so filter titles locally.",
           "probeUrl": "https://www.freelancer.com/api/projects/0.1/projects/active/?limit=3",
-          "expect": "time_submitted"
+          "expect": "time_submitted",
+          "probeOutcome": "ok",
+          "probeDetail": "HTTP 200, 10188B"
         }
       ],
       "notes": "Upwork returns HTTP 403 and contra.com/jobs is a JavaScript shell (2026-11-03). freelancer.com's public projects API works with curl. A build request is a spend signal for a custom build, not proof that a product would sell."
@@ -718,7 +736,7 @@
       "name": "WordPress plugin market data",
       "evidence": "spend",
       "status": "ok",
-      "lastVerified": "2026-11-01",
+      "lastVerified": "2026-11-20",
       "paths": [
         {
           "url": "https://api.wordpress.org/plugins/info/1.2/?action=query_plugins&request[search]={q}&request[per_page]=10",
@@ -728,7 +746,7 @@
           "probeUrl": "https://api.wordpress.org/plugins/info/1.2/?action=query_plugins&request[search]=quiz&request[per_page]=5",
           "expect": "active_installs",
           "probeOutcome": "ok",
-          "probeDetail": "HTTP 200, 89626B"
+          "probeDetail": "HTTP 200, 92936B"
         },
         {
           "url": "https://api.wordpress.org/plugins/info/1.2/?action=plugin_information&request[slug]={slug}",
@@ -738,7 +756,7 @@
           "probeUrl": "https://api.wordpress.org/plugins/info/1.2/?action=plugin_information&request[slug]=learnpress",
           "expect": "active_installs",
           "probeOutcome": "ok",
-          "probeDetail": "HTTP 200, 91589B"
+          "probeDetail": "HTTP 200, 92472B"
         }
       ],
       "notes": "active_installs plus a paid pro tier is a strong, checkable spend signal, and it is wholly outside education. Pair with A14 for the matching pain."
@@ -749,7 +767,7 @@
       "name": "Freelance job boards",
       "evidence": "spend",
       "status": "ok",
-      "lastVerified": "2026-11-04",
+      "lastVerified": "2026-11-20",
       "paths": [
         {
           "url": "https://www.freelancer.com/api/projects/0.1/projects/active/?query={q}&limit=20&full_description=true",
@@ -757,7 +775,9 @@
           "verified": "2026-11-04",
           "result": "JSON: title, description, budget minimum and maximum with currency, time_submitted (Unix time), seo_url (page is https://www.freelancer.com/projects/{seo_url}). Public, no key.",
           "probeUrl": "https://www.freelancer.com/api/projects/0.1/projects/active/?query=invoice&limit=3",
-          "expect": "time_submitted"
+          "expect": "time_submitted",
+          "probeOutcome": "ok",
+          "probeDetail": "HTTP 200, 10157B"
         },
         {
           "url": "https://www.peopleperhour.com/freelance-jobs?q={q}",
@@ -765,7 +785,9 @@
           "verified": "2026-11-04",
           "result": "HTML job list, 330KB.",
           "probeUrl": "https://www.peopleperhour.com/freelance-jobs?q=spreadsheet",
-          "expect": "job"
+          "expect": "job",
+          "probeOutcome": "ok",
+          "probeDetail": "HTTP 200, 321532B"
         }
       ],
       "notes": "A business paying a freelancer to do a task by hand, or to build a one-off tool for it, is spend evidence: money already changes hands for an inferior solution. Cite the job page, its posting date and budget. One posting supports willingnessToPay 3; three or more independent postings within 90 days for the same task support 4. Upwork and Guru return 403; do not work around them. The freelancer.com API's query matches loosely: read every title and keep only jobs for the same task; a search that returns only unrelated jobs counts as 'nothing found', and say so."
@@ -776,7 +798,7 @@
       "name": "Paid app marketplaces",
       "evidence": "spend",
       "status": "ok",
-      "lastVerified": "2026-11-04",
+      "lastVerified": "2026-11-20",
       "paths": [
         {
           "url": "https://apps.shopify.com/{slug}/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest",
@@ -784,7 +806,9 @@
           "verified": "2026-11-04",
           "result": "Dated 1 and 2 star reviews from paying merchants, newest first; the app page https://apps.shopify.com/{slug} carries the plans and review count. Find slugs with WebSearch site:apps.shopify.com {task}. The search page (apps.shopify.com/search) returns an empty shell to both clients (2026-11-03 extra run).",
           "probeUrl": "https://apps.shopify.com/stocky/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest",
-          "expect": "review"
+          "expect": "review",
+          "probeOutcome": "ok",
+          "probeDetail": "HTTP 200, 275842B"
         },
         {
           "url": "https://marketplace.atlassian.com/search?query={q}",
@@ -792,7 +816,9 @@
           "verified": "2026-11-04",
           "result": "HTML, 480KB.",
           "probeUrl": "https://marketplace.atlassian.com/search?query=timesheet",
-          "expect": "atlassian"
+          "expect": "atlassian",
+          "probeOutcome": "ok",
+          "probeDetail": "HTTP 200, 491899B"
         }
       ],
       "notes": "A paid app with many reviews for the same job is spend evidence (people pay for an inferior or partial solution); its 1 and 2 star reviews, with dates, are complaint evidence from paying customers. State the plan prices you saw and the review count. A free app with installs is not spend evidence. 2026-11-03#3: the apps.shopify.com/search page returned an empty shell ('trouble loading your results') to both curl and WebFetch; find slugs with WebSearch site:apps.shopify.com, then curl https://apps.shopify.com/{slug} and https://apps.shopify.com/{slug}/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest, which return dated, named reviews. Back-office Shopify niches filled up with new apps from July to October 2026, most with 0 reviews: an app with no reviews is not spend evidence. 2026-11-06: a wrong slug returns an ~80KB 404 page with HTTP 200 under curl -L, so check the body contains review text before reading it as 'no complaints'."
@@ -813,7 +839,7 @@
       "name": "Education and computing research",
       "evidence": "mandate",
       "status": "ok",
-      "lastVerified": "2026-11-01",
+      "lastVerified": "2026-11-20",
       "paths": [
         {
           "url": "https://api.openalex.org/works?search={q}&per-page=10&sort=publication_date%3Adesc",
@@ -822,8 +848,8 @@
           "result": "JSON works with title, publication_date, authorships, doi.",
           "probeUrl": "https://api.openalex.org/works?search=computing%20education&per-page=5&sort=publication_date:desc",
           "expect": "publication_date",
-          "probeOutcome": "ok",
-          "probeDetail": "HTTP 200, 86067B"
+          "probeOutcome": "http_429",
+          "probeDetail": "827B (twice, first was http_429)"
         },
         {
           "url": "http://export.arxiv.org/api/query?search_query=all:{q}&sortBy=submittedDate&sortOrder=descending&max_results=10",
@@ -843,8 +869,8 @@
       "group": "C",
       "name": "Procurement and RFP portals",
       "evidence": "mandate",
-      "status": "blocked",
-      "lastVerified": "2026-11-01",
+      "status": "ok-curl",
+      "lastVerified": "2026-11-20",
       "paths": [
         {
           "url": "https://samsearch.co/gov-explore/sled/{slug}",
@@ -854,7 +880,7 @@
           "probeUrl": "https://samsearch.co/gov-explore/sled/uta2026-029-plagiarism-tool/9454862902",
           "expect": "solicitation",
           "probeOutcome": "ok",
-          "probeDetail": "HTTP 200, 207005B"
+          "probeDetail": "HTTP 200, 206610B"
         },
         {
           "url": "https://www.nationgraph.com/rfps/{slug}",
@@ -872,7 +898,7 @@
       "name": "Job postings that describe manual work",
       "evidence": "mandate",
       "status": "ok-curl",
-      "lastVerified": "2026-11-01",
+      "lastVerified": "2026-11-20",
       "paths": [
         {
           "url": "https://www.higheredjobs.com/search/advanced_action.cfm?JobCat={id}",
@@ -882,7 +908,7 @@
           "probeUrl": "https://www.higheredjobs.com/admin/search.cfm?JobCat=185",
           "expect": "job",
           "probeOutcome": "ok",
-          "probeDetail": "HTTP 200, 91228B"
+          "probeDetail": "HTTP 200, 168549B"
         },
         {
           "url": "https://www.higheredjobs.com/admin/search.cfm?JobCat={id}",
@@ -899,7 +925,7 @@
       "name": "Policy and regulation trackers",
       "evidence": "mandate",
       "status": "ok",
-      "lastVerified": "2026-11-01",
+      "lastVerified": "2026-11-20",
       "paths": [
         {
           "url": "https://www.federalregister.gov/api/v1/documents.json?per_page=10&order=newest&conditions[term]={q}",
@@ -909,7 +935,7 @@
           "probeUrl": "https://www.federalregister.gov/api/v1/documents.json?per_page=5&order=newest&conditions[term]=accessibility",
           "expect": "publication_date",
           "probeOutcome": "ok",
-          "probeDetail": "HTTP 200, 10658B"
+          "probeDetail": "HTTP 200, 10995B"
         }
       ],
       "notes": "A dated rule with a compliance deadline is the cleanest mandate evidence available, and it reaches every industry, not just education. The ADA Title II web rule takes effect 2027-04-26 for large public entities and 2028-04-26 for small ones, and binds public institutions only; verify before citing."
@@ -920,7 +946,7 @@
       "name": "Accreditation and standards changes",
       "evidence": "mandate",
       "status": "ok-curl",
-      "lastVerified": "2026-11-01",
+      "lastVerified": "2026-11-20",
       "paths": [
         {
           "url": "https://apcentral.collegeboard.org/courses/ap-computer-science-a",
@@ -930,7 +956,7 @@
           "probeUrl": "https://apcentral.collegeboard.org/courses/ap-computer-science-a",
           "expect": "course",
           "probeOutcome": "ok",
-          "probeDetail": "HTTP 200, 50852B"
+          "probeDetail": "HTTP 200, 50855B"
         }
       ],
       "notes": "ABET criteria, College Board AP CS A and AP CS Principles changes, CSTA standards. apcentral.collegeboard.org and csab.org both produced accepted evidence in v2 runs, so plain page fetches work; record the paths when used."
@@ -951,7 +977,7 @@
       "name": "Trade news",
       "evidence": "mandate",
       "status": "ok-curl",
-      "lastVerified": "2026-11-01",
+      "lastVerified": "2026-11-20",
       "paths": [
         {
           "url": "https://www.edsurge.com/news",
@@ -971,7 +997,7 @@
           "probeUrl": "https://www.insidehighered.com/news",
           "expect": "article",
           "probeOutcome": "ok",
-          "probeDetail": "HTTP 200, 132016B"
+          "probeDetail": "HTTP 200, 134229B"
         }
       ],
       "notes": "A clear case where WebFetch's renderer empties a page that curl returns in full. When WebFetch says a news index is empty, retry once with curl before marking it unverified. chronicle.com returned 403 and pulse.bot 503 on 2026-10-31."
@@ -982,7 +1008,7 @@
       "name": "Y Combinator requests and directory",
       "evidence": "mandate",
       "status": "ok",
-      "lastVerified": "2026-11-01",
+      "lastVerified": "2026-11-20",
       "paths": [
         {
           "url": "https://www.ycombinator.com/companies?query=education",
@@ -991,8 +1017,8 @@
           "result": "Added 2026-11-01 as a probe target only.",
           "probeUrl": "https://www.ycombinator.com/companies?query=education",
           "expect": "company",
-          "probeOutcome": "empty",
-          "probeDetail": "HTTP 200, 41603B, but 'company' is absent"
+          "probeOutcome": "ok",
+          "probeDetail": "HTTP 200, 42462B"
         }
       ],
       "notes": "Used on 2026-10-31 to find competitors (Edexia W2025, Frizzle S2025). Better as a competitor check in Step 5 than as a demand source."
@@ -1013,7 +1039,7 @@
       "name": "Federal award and grant data",
       "evidence": "mandate",
       "status": "ok",
-      "lastVerified": "2026-11-01",
+      "lastVerified": "2026-11-20",
       "paths": [
         {
           "url": "https://api.nsf.gov/services/v1/awards.json?keyword={q}&printFields=title,date,awardeeName,fundsObligatedAmt&rpp=10",
@@ -1023,7 +1049,7 @@
           "probeUrl": "https://api.nsf.gov/services/v1/awards.json?keyword=computing+education&printFields=title,date,awardeeName&rpp=5",
           "expect": "awardeeName",
           "probeOutcome": "ok",
-          "probeDetail": "HTTP 200, 22659B"
+          "probeDetail": "HTTP 200, 21434B"
         }
       ],
       "notes": "A cluster of awards on one problem shows funders think it is real and unsolved. Keyword matching is loose, so read the titles before believing the cluster."

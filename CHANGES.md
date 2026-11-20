@@ -698,3 +698,7 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-18 [doc] delivery-canary implemented (day 7 of 7): implemented.json entry with url, notes and publicNotes; studio.json entry (small-business); web/media/delivery-canary.jpg from demo.gif.
 
 2026-11-19 [doc] Created ideas/2026-11-19.json (schemaVersion 3, 4 ideas): Lesson Series Booker (19, prov.), Own-Domain Invoices (18, prov.), Payday Super Clock (17, prov.), Books Keeper (14, prov.)
+
+2026-11-20 [doc] Created ideas/2026-11-20.json (schemaVersion 3, 3 ideas): Restock Alerts (22, validated), Booking Rules Page (21, prov.), Rebook Reminders (20, prov.)
+
+2026-11-20 [doc] Re-probed ideas/sources.json for the new run environment: A1 and B5 now blocked, C3 ok-curl; older runs in the log disagree until they age out.

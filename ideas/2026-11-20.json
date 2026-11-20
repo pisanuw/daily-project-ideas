@@ -1,0 +1,1962 @@
+{
+  "date": "2026-11-20",
+  "schemaVersion": 3,
+  "complete": true,
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Restock Alerts for Square Online",
+      "slug": "restock-alerts-for-square-online",
+      "category": "Micro-SaaS",
+      "smallBusiness": true,
+      "complexity": "Multi-week",
+      "confidence": "validated",
+      "topic": "Data & Visualization",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": true,
+        "engine": false,
+        "shared": true,
+        "notes": {
+          "stateful": "The shop keeps a saved list of shoppers waiting per item and size, plus a demand history the owner checks before reordering.",
+          "connected": "Connects to the shop's own Square account by OAuth (catalog and inventory) and runs a script on the shop's Square Online site.",
+          "unattended": "Square's inventory webhook and a 15-minute scheduled check detect a restock and email the waiting shoppers with no action by the owner.",
+          "shared": "Shoppers sign up and receive the alert; the owner gets the demand report from the same data."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "email",
+        "scheduled",
+        "backend"
+      ],
+      "buildPlan": [
+        {
+          "n": 1,
+          "title": "One item, one alert",
+          "delivers": "The owner signs in, connects Square and installs the script through the Snippets API; the script maps a sold-out product page to its Square catalog item (address id, then SEO permalink or name as fallback); a shopper leaves an email, and a 'check now' button emails them once stock is back.",
+          "acceptance": "On a test Square Online site the page-to-item mapping is proven for 10 products; a sign-up on a sold-out item followed by a stock count above zero produces exactly one email with a working product link; the app is deployed at its hintwise.org address."
+        },
+        {
+          "n": 2,
+          "title": "Sizes, colours and page changes",
+          "delivers": "The panel asks which variation the shopper wants, recognises both zero counts and manually marked sold-out items at the site's selling location, and follows product-to-product navigation without a page reload.",
+          "acceptance": "For an item with three sizes, only subscribers to the restocked size are emailed; the panel shows and hides correctly across 10 in-site navigations; no code depends on the page's class names."
+        },
+        {
+          "n": 3,
+          "title": "Automatic restock detection",
+          "delivers": "Signed inventory.count.updated and catalog.version.updated receivers (the latter followed by SearchCatalogObjects from a stored begin_time, to catch items marked sold out or back by hand), a 15-minute scheduled reconciliation through BatchRetrieveInventoryCounts, de-duplication and an option to alert only as many shoppers as units restocked.",
+          "acceptance": "A replayed webhook sends no duplicate email; un-marking a manually sold-out item triggers its alerts; with webhooks switched off, the scheduled job still catches a seeded restock within 15 minutes."
+        },
+        {
+          "n": 4,
+          "title": "Consent and unsubscribe",
+          "delivers": "A consent record per sign-up (wording, time, page), one-click unsubscribe, the shop's name and postal address in every alert, optional double opt-in, and automatic deletion after the alert or after 180 days.",
+          "acceptance": "The unsubscribe link works without signing in and stops all further alerts; the consent export lists wording and time for every sign-up; expired rows are deleted by the nightly job."
+        },
+        {
+          "n": 5,
+          "title": "Demand report",
+          "delivers": "A dashboard of waiting shoppers per item and size, most-wanted sold-out items, sign-ups over time and alerts sent, with CSV export.",
+          "acceptance": "Counts match the database for a seeded data set of 50 sign-ups across 8 items; the CSV opens cleanly in a spreadsheet."
+        },
+        {
+          "n": 6,
+          "title": "Install fallback and polish",
+          "delivers": "A Tracking Tools paste-in fallback for owners who cannot use the Snippets install, an owner README with a setup checklist (including showing sold-out items on the site), phone layout, keyboard and screen-reader pass on the shopper panel, walkthrough test.",
+          "acceptance": "A new owner goes from sign-in to a live panel in under 10 minutes by either route; axe reports no serious issues on the panel or the dashboard; the walkthrough test passes."
+        }
+      ],
+      "summary": "For small shops on Square Online: shoppers who find a sold-out item can ask to be emailed when it returns, the email goes out by itself when stock comes back, and the owner sees which items people are waiting for.",
+      "public": {
+        "summary": "Lets shoppers ask to be emailed when a sold-out item in your Square Online store is back, and emails them by itself when you restock.",
+        "problem": "When something sells out in your Square Online store, a shopper who finds it has no way to ask to hear when it returns, so they leave and often don't come back. You answer emails and calls asking when things will be back, and you reorder without knowing which items people are actually waiting for.",
+        "forWhom": "Small shops selling on Square Online whose products sell out and come back: boutiques, plant nurseries, gift, toy and craft shops, and specialty food sellers.",
+        "benefits": [
+          "Shoppers who find a sold-out item leave their email instead of leaving empty-handed",
+          "They hear as soon as you restock, without you sending anything",
+          "See which sold-out items people are waiting for before you reorder",
+          "Fewer 'when will it be back?' emails and calls",
+          "Works with the store you already have"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "Square Online has no way for a shopper to ask to be told when a sold-out item returns. Sellers have asked since 2019: \"The 'Notify me when back in stock' has been a feature request from countless users for many years and it's still being ignored\" (2026-09-07); \"it's absolutely INSANE that customers have been asking for this feature for years now\" (2026-04-15); \"We get customers asking via email and phone when out of stock items are likely to be back in stock\"; and a plant grower says that on a prior platform the feature \"was a significant driver of sales for us\".",
+      "description": "The shop owner signs in, connects Square by OAuth and installs one small script on their Square Online site, through Square's Snippets API (no approval is needed outside the App Marketplace) or, as a fallback, pasted into Tracking Tools. On a product page the script maps the page address to a Square catalog item: the 24-character id in the address matches the catalog-id format on one store checked, but Square staff said in 2022 that item ids are not available to snippets and Square Online keeps its own site product ids, so the first milestone proves this mapping, with the item's SEO permalink or name as the fallback. The backend then checks whether that item or size is sold out at the site's selling location, and if so the script shows a small 'email me when it's back' panel that does not depend on the page's layout. Square's inventory.count.updated webhook, plus catalog.version.updated for items marked sold out by hand and a 15-minute scheduled check, detects when stock returns and sends each waiting shopper one email with a link back to the product, the shop's details and an unsubscribe link. The owner sees how many shoppers wait for each item and size, and can export the list.",
+      "targetCustomer": "Owners of small retail shops selling on Square Online (Free, Plus or Premium) whose items sell out and come back: boutiques, plant nurseries, gift, toy and craft shops, specialty food sellers.",
+      "buyer": "The shop owner, on the business card, from the same small online-store budget that pays for Square Online.",
+      "whyNow": "Square shipped a stream of inventory features through 2026 (scheduled stock resets in July, preorders for sold-out variations with a reset time on 2026-09-24, Volumes 1 to 17 of its product updates through 2026-11-19) but still no shopper sign-up for sold-out items, while sellers kept asking (2026-04-15, 2026-07-24, 2026-07-28, 2026-09-07, 2026-11-04). Square's Snippets API now lets an app place a script on Square Online sites, and Klaviyo's Square Online integration (updated 2026-10-28) still offers no back-in-stock flow for it. Holiday-season sell-outs make the gap most visible now.",
+      "founderFit": "Pisan ships small web apps alone in days, and this one is a contained integration on the HintWise platform as it stands: one storefront script, Square OAuth, a webhook receiver, a scheduled job and transactional email. It needs no domain knowledge he lacks.",
+      "problemEvidence": [
+        {
+          "url": "https://community.squareup.com/api/2.0/search?q=SELECT%20subject%2C%20body%2C%20post_time%2C%20author.rank.name%2C%20depth%20FROM%20messages%20WHERE%20topic.id%20%3D%20%27849060%27%20ORDER%20BY%20post_time%20ASC%20LIMIT%2030",
+          "source": "community.squareup.com",
+          "author": "poster A (Square seller); posters B, C and D (Square sellers) agree",
+          "date": "2026-09-07",
+          "kind": "complaint",
+          "summary": "Feature request 'Notify me when back in stock': \"such a basic feature\", \"a huge advantage for small business\"; three more sellers add their support on 2026-09-09, 2026-09-21 and 2026-11-04."
+        },
+        {
+          "url": "https://community.squareup.com/api/2.0/search?q=SELECT%20subject%2C%20body%2C%20post_time%2C%20author.rank.name%2C%20depth%2C%20kudos.sum%28weight%29%2C%20status%20FROM%20messages%20WHERE%20topic.id%20%3D%20%27630340%27%20ORDER%20BY%20post_time%20DESC%20LIMIT%2030",
+          "source": "community.squareup.com",
+          "author": "posters E, F and G (Square sellers)",
+          "date": "2026-07-28",
+          "kind": "complaint",
+          "summary": "Open Feature Requests idea 'Notify When Back in Stock' (opened 2023-01-20, 17 kudos); sellers add to it on 2026-04-15 (\"absolutely INSANE\"), 2026-07-24 (\"It's still not available?\") and 2026-07-28; a 2025-09-27 staff reply is titled 'Unspecified', and the API shows no status; with 17 kudos it ranks 21st of all product ideas since 2023."
+        },
+        {
+          "url": "https://community.squareup.com/api/2.0/search?q=SELECT%20subject%2C%20body%2C%20post_time%2C%20author.rank.name%2C%20depth%20FROM%20messages%20WHERE%20topic.id%20%3D%20%27839582%27%20ORDER%20BY%20post_time%20ASC%20LIMIT%2030",
+          "source": "community.squareup.com",
+          "author": "poster H (Square seller)",
+          "date": "2026-03-28",
+          "kind": "complaint",
+          "summary": "Wants a product waitlist, \"at the very LEAST\" a button on each item so shoppers can sign up for a restock notification."
+        },
+        {
+          "url": "https://community.squareup.com/api/2.0/search?q=SELECT%20subject%2C%20body%2C%20post_time%2C%20author.rank.name%2C%20depth%20FROM%20messages%20WHERE%20topic.id%20%3D%20%27285686%27%20ORDER%20BY%20post_time%20DESC%20LIMIT%2030",
+          "source": "community.squareup.com",
+          "author": "posters I and J (Square Online sellers, a plant grower and a Square Champion) among many; Square staff (vendor)",
+          "date": "2025-02-23",
+          "kind": "complaint",
+          "summary": "Archived idea 'NOTIFY WHEN BACK IN STOCK' (2021-07-07, 23 kudos) with seller replies to 2025-02-23, including customers asking by email and phone and a plant grower calling it a sales driver; a staff reply of 2022-12-07 says 'Not currently planned', though the idea still shows status 'New' on the archive board."
+        },
+        {
+          "url": "https://community.squareup.com/api/2.0/search?q=SELECT%20subject%2C%20body%2C%20post_time%2C%20author.rank.name%2C%20depth%20FROM%20messages%20WHERE%20topic.id%20%3D%20%27774894%27%20ORDER%20BY%20post_time%20ASC%20LIMIT%2030",
+          "source": "community.squareup.com",
+          "author": "poster K (Square Online seller); Square staff (vendor)",
+          "date": "2025-02-02",
+          "kind": "complaint",
+          "summary": "Seller cannot find back-in-stock sign-up, \"basic functionality for ecommerce\"; Square staff reply on 2025-02-04 that the feature is not available and suggest preorders."
+        },
+        {
+          "url": "https://apps.shopify.com/back-in-stock",
+          "source": "apps.shopify.com",
+          "author": "Back in Stock: Restock Alerts (vendor)",
+          "date": "2026-11-20",
+          "kind": "spend",
+          "summary": "The same job on Shopify: rated 4.9 from 1,019 reviews; Free (10 notifications a month), Starter $19, Growth $49 and Pro $99 a month; read on the listing."
+        },
+        {
+          "url": "https://www.freelancer.com/api/projects/0.1/projects/all/?query=back%20in%20stock&limit=100&offset=0&full_description=true&from_time=1787356800",
+          "source": "freelancer.com",
+          "author": "poster L (jewellery store owner) and poster M (Shopify store owner)",
+          "date": "2026-11-02",
+          "kind": "spend",
+          "summary": "Two paid briefs each list back-in-stock email alerts as one requirement inside a wider build: a WooCommerce jewellery store (EUR 250 to 750, 2026-11-02) and Shopify email and WhatsApp flows (USD 500 to 1,000, 2026-10-18); neither is a job for this task alone, and none of 281 briefs since 2026-08-22 is for Square."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Square Online (native)",
+          "url": "https://community.squareup.com/api/2.0/search?q=SELECT%20id%2C%20subject%2C%20body%2C%20post_time%2C%20author.rank.name%20FROM%20messages%20WHERE%20board.id%20%3D%20%27product-news%27%20AND%20depth%20%3D%200%20AND%20post_time%20%3E%202026-01-01T00%3A00%3A00.000-08%3A00%20ORDER%20BY%20post_time%20DESC%20LIMIT%2050",
+          "price": "$0: the feature does not exist",
+          "gap": "No shopper sign-up for sold-out items in Square's 2026 product updates (Volumes 1 to 17, to 2026-11-19); the 2026-09-24 option keeps a sold-out variation orderable only when the seller sets a reset time; the free route is a hand-made form and emailing shoppers one by one."
+        },
+        {
+          "name": "Square preorders (native workaround)",
+          "url": "https://community.squareup.com/api/2.0/search?q=SELECT%20subject%2C%20body%2C%20post_time%2C%20author.rank.name%2C%20depth%20FROM%20messages%20WHERE%20topic.id%20%3D%20%27774894%27%20ORDER%20BY%20post_time%20ASC%20LIMIT%2030",
+          "price": "unknown (plan price not read)",
+          "gap": "Staff-suggested stand-in: needs a known availability date and takes the order up front; it neither captures interest in items with no restock date nor alerts anyone."
+        },
+        {
+          "name": "Back in Stock: Restock Alerts",
+          "url": "https://apps.shopify.com/back-in-stock",
+          "price": "Free (10 notifications/month); $19, $49, $99/month",
+          "gap": "Shopify only; its own site presents it as a Shopify app."
+        },
+        {
+          "name": "Klaviyo (Square Online integration)",
+          "url": "https://help.klaviyo.com/hc/en-us/articles/11117215837211-Getting-started-with-Square-Online",
+          "price": "unknown (pricing not read)",
+          "gap": "Syncs the Square catalog, customers and orders but lists no back-in-stock flow; Klaviyo's back-in-stock supports Shopify, BigCommerce, Magento 2, PrestaShop, SFCC and Shopware, or a custom inventory-aware catalog built through its API (help article 115003872251)."
+        },
+        {
+          "name": "Elfsight Back in Stock widget",
+          "url": "https://elfsight.com/back-in-stock-widget/squarespace/",
+          "price": "unknown",
+          "gap": "Not released: the page says the plugin is 'still on its way', and it is shown for Squarespace."
+        },
+        {
+          "name": "TicketsCandy waitlist",
+          "url": "https://community.squareup.com/api/2.0/search?q=SELECT%20subject%2C%20body%2C%20post_time%2C%20author.rank.name%2C%20depth%20FROM%20messages%20WHERE%20topic.id%20%3D%20%27824310%27%20ORDER%20BY%20post_time%20ASC%20LIMIT%2030",
+          "price": "unknown",
+          "gap": "Event tickets only; a 2026-01-15 community reply says its waitlist notifications are sent by hand."
+        },
+        {
+          "name": "Zapier (Square integration)",
+          "url": "https://zapier.com/apps/square/integrations",
+          "price": "Free plan; paid plans from $19.99/month billed yearly",
+          "gap": "Square's six Zapier triggers (appointment, catalog item, customer, invoice, order, payment) include none for inventory, so a restock alert cannot be built without code."
+        },
+        {
+          "name": "Mailchimp back-in-stock alerts",
+          "url": "https://mailchimp.com/help/back-in-stock-alerts/",
+          "price": "unknown",
+          "gap": "'Back-in-stock alerts require a connected Shopify store.'"
+        }
+      ],
+      "keyFeatures": [
+        "An 'email me when it's back' panel on sold-out product pages, per size or colour",
+        "Automatic alert emails when Square stock returns (webhook plus a 15-minute check)",
+        "Option to alert only as many shoppers as units restocked",
+        "Demand report: shoppers waiting per item and size, most-wanted items, CSV export",
+        "Consent record, one-click unsubscribe and automatic deletion",
+        "Install by pasting one line into Square Online's Tracking Tools, which works on the free plan"
+      ],
+      "mvpScope": {
+        "features": [
+          "Square OAuth connect with ITEMS_READ and INVENTORY_READ",
+          "Storefront script with the sign-up panel and variation choice",
+          "Webhook receiver plus scheduled reconciliation of stock counts",
+          "Alert email with product link, shop details and unsubscribe",
+          "Waiting-list dashboard with CSV export",
+          "Consent log and deletion after the alert"
+        ],
+        "outOfScope": [
+          "Text-message alerts",
+          "Preorders, deposits or holding stock for shoppers",
+          "Tracking whether an alert led to a sale (Orders API)",
+          "App Marketplace listing (needs partner approval)",
+          "Other shop platforms",
+          "Translated shopper panels"
+        ],
+        "buildEstimate": "About 6 build days"
+      },
+      "techStack": "Static owner dashboard; a small framework-free storefront script served from the static host; backend-hub on Render for Square OAuth, the signed inventory.count.updated and catalog.version.updated webhooks (the catalog event names no object, so the app calls SearchCatalogObjects with a stored begin_time) and the public sign-up endpoint; shared Supabase for owner accounts, encrypted Square tokens, waiting lists and the consent log; HintWise transactional email for alerts; a scheduled job for reconciliation (BatchRetrieveInventoryCounts), token refresh and deletions. Square APIs: OAuth, Catalog (ITEMS_READ), Inventory (INVENTORY_READ), Sites and Snippets (ONLINE_STORE_SITE_READ, ONLINE_STORE_SNIPPETS_WRITE) as the main install, with Tracking Tools as the fallback.",
+      "pricing": {
+        "model": "Per-shop monthly subscription with a free tier",
+        "pricePoint": "Free up to 25 alert emails a month; $9/month up to 1,000; $19/month up to 5,000",
+        "rationale": "Below the $19/month Starter plan Shopify merchants pay for the same job (https://apps.shopify.com/back-in-stock), because many Square Online shops run on the free plan and are price-sensitive; a free tier lets small shops see sign-ups before paying."
+      },
+      "revenueSketch": "Estimate only. Assumes 40 paying shops by month 12 (from a free tier several times larger) at an average of $12/month: 40 x $12 = $480 MRR, about $5,800 a year. Email costs stay small at these volumes. The figure rests on unmeasured conversion from the free tier.",
+      "distribution": "First 10: (1) the Square Seller Community, where the buyers are named in the 'Notify me when back in stock' threads (topics 849060 and 630340); the community's etiquette page could not be read (empty page), so its promotion rule is unconfirmed; a search summary of it says spam includes excessive self-promotion and members should not promote their own products or services unprompted, so reply only where sellers ask for a workaround. A seller-developer's post about their own Square tool (topic 852023, 2026-11-02) drew a supportive reply on 2026-11-19, which suggests seller-built tools are tolerated when useful. (2) Direct install with no marketplace listing: the owner connects Square by OAuth and the app installs its script through the Snippets API; the fallback is one line pasted into Tracking Tools (Free, Plus and Premium, https://squareup.com/help/us/en/article/6957), though Square says tracking code 'isn't intended to be visible'. (3) Later, the Square App Marketplace: listing needs approved partner status, and snippet integrations need Square's explicit approval after a stringent review (https://developer.squareup.com/docs/snippets-api/overview). Square-seller Facebook groups and Reddit were not checked.",
+      "validationTest": {
+        "method": "Build milestone 1 and run it free for 3 weeks with 5 Square Online shops that sell out often, recruited from the two Square community feature-request threads (replying only where sellers ask for a workaround) with a one-page explainer; count sign-ups per sold-out item and whether owners switch it on for their whole catalog.",
+        "successCriteria": "3 of 5 shops keep it installed for 3 weeks, at least 2 collect 20 or more sign-ups, and 2 owners agree to pay $9/month after the trial.",
+        "cost": "2 build days; $0 beyond the HintWise platform."
+      },
+      "moat": "Thin. The value is in Square-specific details (manual sold-out flags as well as counts, per-location stock, sizes and colours, a layout-independent panel that survives Square Online page changes) and in each shop's growing waiting lists and demand history, which make switching mildly costly. Square could ship this natively at any time; that sellers have asked since 2019 without it shipping is the main reason to expect the gap to last a while.",
+      "compliance": [
+        "CAN-SPAM (US): an alert whose primary purpose is to sell the restocked item is likely commercial email, so it needs an accurate sender (the shop), a postal address, a working opt-out honoured within 10 business days, and no deceptive subject; the shop and the sender can both be liable (https://www.ftc.gov/business-guidance/resources/can-spam-act-compliance-guide-business).",
+        "CASL (Canada): express consent from the sign-up form, with the shop identified and an unsubscribe in every alert.",
+        "GDPR and UK GDPR, and Australia's Spam Act (Square Online sells in these markets): consent limited to this one alert unless a separate marketing box is ticked, a consent record, deletion after the alert, and a data processing agreement with each shop (the app is a processor).",
+        "CCPA/CPRA: likely below thresholds; support deletion requests passed on by the shop.",
+        "Accessibility: the shopper panel and dashboard should meet WCAG 2.2 AA (keyboard, screen-reader labels, no focus traps).",
+        "Square's Snippets rules: disclose what the script collects, stay out of checkout, and do not call Square APIs from the browser.",
+        "No payments, no text messages (avoids TCPA and 10DLC) and no health data."
+      ],
+      "risks": [
+        {
+          "risk": "Square ships native back-in-stock alerts.",
+          "mitigation": "Keep the price low and the build small; lists export at any time; the demand report and variation-level alerts remain useful. Square has listed the request as 'Not currently planned' (2022) and 'Unspecified' (2025) with no 2026 announcement."
+        },
+        {
+          "risk": "Square Online page changes break the panel.",
+          "mitigation": "Read the item id from the page address, not the layout; show the panel as a fixed overlay rather than inserting it into page elements, per Square's warning about class names; run a daily automated check against a test site."
+        },
+        {
+          "risk": "The product address may not carry the catalog item id: Square staff said in 2022 that ids are not available to snippets, and Square Online keeps separate site product ids.",
+          "mitigation": "Make the mapping milestone 1's first task: test the address id against the catalog on a test site, and fall back to the item's SEO permalink (CatalogEcomSeoData.permalink) or name."
+        },
+        {
+          "risk": "Shops hide sold-out items, so shoppers never see the page.",
+          "mitigation": "The setup checklist checks for and explains the 'display out of stock items' setting."
+        },
+        {
+          "risk": "Multi-location shops: the online site sells from one location's stock.",
+          "mitigation": "The owner picks the site's selling location at setup; alerts follow that location's counts."
+        },
+        {
+          "risk": "Alerts land in spam or draw complaints.",
+          "mitigation": "Send from a verified domain under the shop's name, offer double opt-in, rate-limit, and remove bounced and unsubscribed addresses at once."
+        }
+      ],
+      "scores": {
+        "pain": 4,
+        "willingnessToPay": 3,
+        "reachability": 3,
+        "competitiveGap": 4,
+        "feasibility": 4,
+        "complianceBurden": 4,
+        "total": 22
+      },
+      "scoreRationale": {
+        "pain": "About seven sellers asked in 2026 across two threads (2026-04-15 to 2026-11-04) on top of requests since 2019, but many are one-line +1s, so 4 not 5: https://community.squareup.com/api/2.0/search?q=SELECT%20subject%2C%20body%2C%20post_time%2C%20author.rank.name%2C%20depth%20FROM%20messages%20WHERE%20topic.id%20%3D%20%27849060%27%20ORDER%20BY%20post_time%20ASC%20LIMIT%2030",
+        "willingnessToPay": "Shopify merchants pay $19 to $99/month for the same job (1,019 reviews) and paid freelance briefs list it, but no Square seller was seen paying: https://apps.shopify.com/back-in-stock",
+        "reachability": "The buyers are named in Square community threads, but the community's promotion rule could not be read and App Marketplace listing needs partner approval, with explicit approval for snippet apps: https://developer.squareup.com/docs/snippets-api/overview",
+        "competitiveGap": "No native feature in Square's 2026 product updates (Volumes 1 to 17), and Klaviyo, Elfsight and the Shopify apps do not cover Square Online; the App Marketplace could not be searched here (HTTP 429): https://community.squareup.com/api/2.0/search?q=SELECT%20id%2C%20subject%2C%20body%2C%20post_time%2C%20author.rank.name%20FROM%20messages%20WHERE%20board.id%20%3D%20%27product-news%27%20AND%20depth%20%3D%200%20AND%20post_time%20%3E%202026-01-01T00%3A00%3A00.000-08%3A00%20ORDER%20BY%20post_time%20DESC%20LIMIT%2050",
+        "feasibility": "The Snippets API (early access, no approval needed outside the Marketplace) or Tracking Tools puts a script on every page, and inventory.count.updated plus catalog.version.updated and SearchCatalogObjects detect restocks and manual sold-out toggles; the open risk is mapping the product address to a catalog id, which staff said in 2022 is not on the page, so milestone 1 proves it first: https://developer.squareup.com/docs/inventory-api/monitor-sold-out-status-on-item-variation",
+        "complianceBurden": "Opt-in shopper emails only, with no payments or health data, but alerts are likely commercial email under CAN-SPAM (postal address, opt-out, shared liability) plus consent rules for Canadian, UK, EU and Australian shoppers: https://www.ftc.gov/business-guidance/resources/can-spam-act-compliance-guide-business"
+      },
+      "review": {
+        "verdict": "pass",
+        "findings": "An adversarial reviewer found no native Square feature, shipped or announced: the 2026-11-18 'Delivered' batch, product updates to 2026-11-19 and the roadmap statuses do not include shopper back-in-stock alerts. Zapier (no Square inventory trigger), Mailchimp (Shopify only), Klaviyo, Square Marketing and Elfsight ('In Consideration') offer no free route on Square Online; the App Marketplace itself could not be searched (HTTP 429). The evidence is from sellers and recent (topic 849060, 2026-09-07 to 2026-11-04, counted as one item), but willingnessToPay 3 rests on Shopify spend and two bundled Freelancer briefs, with no Square seller seen paying, so it sits at the floor of its band. Scores unchanged at 22; the reviewer corrected the install route (Snippets API first), added catalog.version.updated for manual sold-out toggles, and made the address-to-catalog-id mapping the first task of milestone 1."
+      },
+      "inspiredBy": "https://community.squareup.com/api/2.0/search?q=SELECT%20subject%2C%20body%2C%20post_time%2C%20author.rank.name%2C%20depth%20FROM%20messages%20WHERE%20topic.id%20%3D%20%27849060%27%20ORDER%20BY%20post_time%20ASC%20LIMIT%2030"
+    },
+    {
+      "n": 2,
+      "title": "Booking Rules Page for Square Appointments",
+      "slug": "booking-rules-page-for-square-appointments",
+      "category": "Small Business Ops",
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "gateGap": {
+        "missing": [
+          "total 21 is below 22 (competitiveGap 3: Square's own booking site, Square Go and its reschedule links bypass the rules, and Setmore Pro sells per-service availability with Square payments)"
+        ],
+        "closedBy": "Milestone 1's enforcement test plus the 5-owner pilot in validationTest: if bookings through Square's API still work with Square's own online booking and Square Go turned off, the page becomes the only public channel and competitiveGap returns to 4; 3 of 5 pilot owners paying after the trial would confirm willingnessToPay, for a total of 22."
+      },
+      "topic": "Algorithms & Data Structures",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": true,
+        "engine": true,
+        "shared": true,
+        "notes": {
+          "stateful": "Each business keeps saved rules per service and day, fixed start times and a new-client switch, and comes back to change them each season.",
+          "connected": "Connects to the owner's own Square account by OAuth, reads services, team, customers and open times from Square, saves cards through Square's Cards API and writes each booking into Square Appointments.",
+          "unattended": "A scheduled job refreshes the cached Square availability within the rate limit, and a morning email lists bookings that came in through Square's own booking site or Square Go and broke a rule.",
+          "engine": "A rules engine filters Square's open times by service-and-day windows, allowed start times, a no-gaps option and new-versus-returning client, and re-checks the slot under a lock before booking.",
+          "shared": "The owner sets the rules; clients book through the page and receive a confirmation, and the owner receives the morning breach email."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "email",
+        "scheduled",
+        "backend"
+      ],
+      "buildPlan": [
+        {
+          "n": 1,
+          "title": "Connect Square, test enforcement, take one booking",
+          "delivers": "The owner signs in and connects Square; the app first tests whether a buyer-level availability search and booking still work with the location's Square online booking and Square Go turned off, then a hosted page lists one location's services and open times and books a client into Square.",
+          "acceptance": "The enforcement result is recorded for a live free-plan account; a booking made on the deployed page appears as accepted in Square Appointments with the right service, team member and time."
+        },
+        {
+          "n": 2,
+          "title": "Service day and time windows",
+          "delivers": "A rule editor per service: which weekdays and which hours it can start, for example facials only Monday to Wednesday after 3 pm.",
+          "acceptance": "With a Tuesday-to-Friday rule, no Saturday times are offered; rule-engine unit tests cover overlapping windows and a service with no rule."
+        },
+        {
+          "n": 3,
+          "title": "Fixed start times and fewer gaps",
+          "delivers": "Allowed start times per service and day (for example 11, 2 and 5) and an option to offer only times that sit next to an existing booking.",
+          "acceptance": "Only the listed start times are offered; a seeded day with one booking offers only adjacent times when the no-gaps option is on."
+        },
+        {
+          "n": 4,
+          "title": "Returning clients only and card on file",
+          "delivers": "A switch that lets only clients already in Square book (matched by email or phone) while new clients leave their details for a callback, and an optional card-on-file step through Square's card form after the client accepts the owner's policy.",
+          "acceptance": "An unknown email cannot book while the switch is on; a test card is saved to the Square customer and is visible in the Square Dashboard; no card data touches the app's servers."
+        },
+        {
+          "n": 5,
+          "title": "Cache, lock and morning check",
+          "delivers": "Cached availability refreshed on a schedule, a per-slot lock with a re-check before booking, and a morning email of bookings made elsewhere that break a rule.",
+          "acceptance": "Two simultaneous requests for one slot produce one booking; a seeded off-rule booking made in Square appears in the next morning email."
+        },
+        {
+          "n": 6,
+          "title": "Polish",
+          "delivers": "Business-owner README (how to switch off Square's own online booking or Square Go, the business-wide reschedule setting, and Square's free private-address workaround), embed snippet, phone layout, keyboard and screen-reader pass, walkthrough test.",
+          "acceptance": "A walkthrough test runs connect, set a rule, book with a card on file and receive the email; axe reports no serious issues on the booking page."
+        }
+      ],
+      "summary": "For small salons, spas and studios that keep Square Appointments: a booking page that offers each service only on the days and start times the owner chooses, can close to new clients and takes a card on file, while every booking lands in Square.",
+      "public": {
+        "summary": "A booking page that follows your rules, such as which services run on which days, set start times and returning clients only, while every booking still lands in your Square calendar.",
+        "problem": "You want facials only on weekday evenings, or clients to start at 11, 2 or 5, but your Square booking page offers every service at any time you are working. The fix you are offered is to create pretend staff profiles, and odd start times leave gaps you cannot fill.",
+        "forWhom": "Owners of small salons, spas and nail, lash, skincare and massage studios who take bookings and payments with Square Appointments and want to keep it.",
+        "benefits": [
+          "Each service offered only on the days and times you choose",
+          "Clients start at the times you set, so fewer dead gaps",
+          "Close booking to new clients without shutting out your regulars",
+          "A card on file for your no-show policy",
+          "Your calendar, reminders and checkout stay in Square"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "Square Appointments ties online availability to staff working hours only, so owners ask to \"restrict individual services to specific days of the week\", to reserve \"evenings and after-school hours\" for facials, to offer start times \"such as 11 AM, 2 PM, and 5 PM\" because other times \"create gaps\", to \"turn off online booking to new clients but leave it available to existing clients\". A spa owner told to create extra staff profiles wrote: \"I have limited time before I give up on square and migrate my business to another platform.\"",
+      "description": "The owner connects Square and sets rules per service: allowed weekdays and hours, fixed start times, an option to offer only times next to existing bookings, and a returning-clients-only switch. The hosted or embedded page reads open times from Square (cached, because Square's booking rate limit is low), filters them through the rules, takes the client's card on file through Square's own card form when the owner's policy needs it, and books the client into Square Appointments, so Square's calendar, reminders and checkout keep working. Square's API cannot book a service that carries a Square cancellation fee, so no-show protection comes from the saved card, which the owner charges from Square. Square's own booking site, Square Go and Square's reschedule links do not know the rules, so the first milestone tests whether API bookings still work with Square's online booking switched off (which would make the page the only public channel); if not, the product is sold honestly as rules on the page plus a morning email listing any booking made elsewhere that breaks a rule. Returning clients are matched against the owner's Square customer list. Keeping a home address private is left to Square's own free workaround, explained in the setup guide.",
+      "targetCustomer": "Owners of solo and small (1 to 6 provider) salons, spas, skincare, nail, lash and massage studios that run bookings and payments on Square Appointments, including the free plan, and do not want to leave Square.",
+      "buyer": "The owner, on the business card, from the software budget that already pays for Square (Square's own plans run from a free plan to paid tiers).",
+      "whyNow": "Square's feature log shows Appointments changes through 2026-08-20 (add-ons, dark mode) and per-service deposits on 2026-05-14, but still no per-service availability or start-time control, while owners opened eight separate threads asking for these between 2026-08-31 and 2026-11-15. Square's API docs say an outside app can make buyer-level bookings for every seller, free plan included; Square staff confirmed in October 2026 that such bookings are accepted at once when the owner accepts all bookings, and in November 2026 that an unlisted app needs no marketplace listing or fee, so a small add-on can book on an owner's behalf today.",
+      "founderFit": "The core is a scheduling-rules engine over open time slots with a lock against double booking, which suits a CS professor who ships small web apps alone in days; the rest is a Square OAuth connection and a booking page on the HintWise platform.",
+      "problemEvidence": [
+        {
+          "url": "https://community.squareup.com/api/2.0/search?q=SELECT%20subject%2C%20body%2C%20post_time%2C%20author.rank.name%2C%20depth%2C%20kudos.sum%28weight%29%20FROM%20messages%20WHERE%20topic.id%20%3D%20%27851119%27%20ORDER%20BY%20post_time%20ASC%20LIMIT%2030",
+          "source": "community.squareup.com",
+          "author": "poster A (seller)",
+          "date": "2026-10-16",
+          "kind": "complaint",
+          "summary": "Asks to restrict individual services to specific weekdays (Tuesday to Friday versus Saturday only); a reply says Square \"does not support native service-specific hours or day restrictions\" and another seller on 2026-11-08 calls it \"very common in salons\"."
+        },
+        {
+          "url": "https://community.squareup.com/api/2.0/search?q=SELECT%20subject%2C%20body%2C%20post_time%2C%20author.rank.name%2C%20depth%2C%20kudos.sum%28weight%29%20FROM%20messages%20WHERE%20topic.id%20%3D%20%27850577%27%20ORDER%20BY%20post_time%20ASC%20LIMIT%2030",
+          "source": "community.squareup.com",
+          "author": "poster B (skincare studio owner)",
+          "date": "2026-10-06",
+          "kind": "complaint",
+          "summary": "Wants evenings and after-school slots reserved for facials and acne treatments with waxing, sugaring and threading blocked then; poster C (seller) adds on 2026-10-07 that they want specials by tech, service and time."
+        },
+        {
+          "url": "https://community.squareup.com/api/2.0/search?q=SELECT%20subject%2C%20body%2C%20post_time%2C%20author.rank.name%2C%20depth%2C%20kudos.sum%28weight%29%20FROM%20messages%20WHERE%20topic.id%20%3D%20%27850482%27%20ORDER%20BY%20post_time%20ASC%20LIMIT%2030",
+          "source": "community.squareup.com",
+          "author": "poster D (spa owner)",
+          "date": "2026-10-04",
+          "kind": "complaint",
+          "summary": "A dual-licensed provider does facials some days and massage others; the only advice is extra staff profiles; \"insanely frustrated\" and close to migrating off Square."
+        },
+        {
+          "url": "https://community.squareup.com/api/2.0/search?q=SELECT%20subject%2C%20body%2C%20post_time%2C%20author.rank.name%2C%20depth%2C%20kudos.sum%28weight%29%20FROM%20messages%20WHERE%20topic.id%20%3D%20%27852136%27%20ORDER%20BY%20post_time%20ASC%20LIMIT%2030",
+          "source": "community.squareup.com",
+          "author": "poster E (solo nail technician)",
+          "date": "2026-11-03",
+          "kind": "complaint",
+          "summary": "Wants fixed online start times (11 AM, 2 PM, 5 PM) because other times create gaps; has looked at other platforms but wants to keep Square for payments; poster F (solo provider) agrees on 2026-11-05."
+        },
+        {
+          "url": "https://community.squareup.com/api/2.0/search?q=SELECT%20subject%2C%20body%2C%20post_time%2C%20author.rank.name%2C%20depth%20FROM%20messages%20WHERE%20topic.id%20%3D%20%27852538%27%20ORDER%20BY%20post_time%20ASC%20LIMIT%2030",
+          "source": "community.squareup.com",
+          "author": "poster G (seller)",
+          "date": "2026-11-10",
+          "kind": "complaint",
+          "summary": "Wants weekday-only special-price services: \"a service is either bookable whenever we're open, or not at all\"; poster H (hospitality venue) wants the same for one-night event bookings."
+        },
+        {
+          "url": "https://community.squareup.com/api/2.0/search?q=SELECT%20subject%2C%20body%2C%20post_time%2C%20author.rank.name%2C%20depth%20FROM%20messages%20WHERE%20topic.id%20%3D%20%27852797%27%20ORDER%20BY%20post_time%20ASC%20LIMIT%2030",
+          "source": "community.squareup.com",
+          "author": "poster I (home-based appointment-only owner)",
+          "date": "2026-11-15",
+          "kind": "complaint",
+          "summary": "Wants the home address hidden and shared only after confirming a booking; a reply says Square has no built-in toggle and many others have complained. The reply also gives Square's free workaround: replace the street line with 'By Appointment Only' and put the address in the confirmation template."
+        },
+        {
+          "url": "https://community.squareup.com/api/2.0/search?q=SELECT%20subject%2C%20body%2C%20post_time%2C%20author.rank.name%2C%20depth%20FROM%20messages%20WHERE%20topic.id%20%3D%20%27849028%27%20ORDER%20BY%20post_time%20ASC%20LIMIT%2030",
+          "source": "community.squareup.com",
+          "author": "poster J (beauty business owner on Appointments Plus)",
+          "date": "2026-09-07",
+          "kind": "complaint",
+          "summary": "Pays for Appointments Plus, takes one client after a day job and wants only a 5:00 pm start, but long services make Square offer later start times such as 6:30 pm."
+        },
+        {
+          "url": "https://community.squareup.com/api/2.0/search?q=SELECT%20subject%2C%20body%2C%20post_time%2C%20author.rank.name%2C%20depth%20FROM%20messages%20WHERE%20topic.id%20%3D%20%27848804%27%20ORDER%20BY%20post_time%20ASC%20LIMIT%2030",
+          "source": "community.squareup.com",
+          "author": "poster K (seller)",
+          "date": "2026-08-31",
+          "kind": "complaint",
+          "summary": "Wants to close online booking to new clients while existing clients can still book; the reply's workaround is a private booking widget shared with regulars."
+        },
+        {
+          "url": "https://www.freelancer.com/api/projects/0.1/projects/all/?query=square%20appointments&limit=20&full_description=true&from_time=1787356800",
+          "source": "freelancer.com",
+          "author": "poster N (salon owner)",
+          "date": "2026-09-13",
+          "kind": "spend",
+          "summary": "Paid job 'Square Salon Booking Setup' (a CAD 25 budget): turn a 70-service, six-stylist price list into a working Square Appointments booking site, including a 9 to 11 am early-bird pricing window. Setup work and a pricing rule, not availability rules."
+        },
+        {
+          "url": "https://www.freelancer.com/api/projects/0.1/projects/all/?query=square%20api%20booking&limit=20&full_description=true&from_time=1787356800",
+          "source": "freelancer.com",
+          "author": "poster O (herbal salon owner)",
+          "date": "2026-10-07",
+          "kind": "spend",
+          "summary": "Paid job 'Elegant Herbal Salon Website Build' (USD 1,500 to 3,000, 570 bids): a salon site with an integrated booking system and Square API integration. Adjacent: a custom site, not booking rules."
+        },
+        {
+          "url": "https://square-appointment-wp.com/",
+          "source": "square-appointment-wp.com",
+          "author": "Appointments Booking for Square (vendor)",
+          "date": "2026-11-20",
+          "kind": "spend",
+          "summary": "Sells a Square-connected embedded booking page for WordPress: free edition, Embed $49/year (which can save the client's card on file), Tracking $299/year; read on the page. It offers no day, start-time or client rules. Added to wordpress.org on 2026-09-24 with 10 installs; its only community testimonial reads as promotion."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Square Appointments (native)",
+          "url": "https://squareup.com/us/en/feature-log",
+          "price": "Free plan and paid tiers; current prices unknown (the pricing page returned HTTP 429)",
+          "gap": "Online availability follows staff hours only; start times are by service duration or 10 to 30 minute steps (https://squareup.com/help/us/en/article/5351); no per-service days, fixed starts, regulars-only switch or private address. Workarounds are pretend staff profiles and private widgets."
+        },
+        {
+          "name": "Appointments Booking for Square (WordPress plugin)",
+          "url": "https://square-appointment-wp.com/",
+          "price": "Free; Embed $49/year; Tracking $299/year",
+          "gap": "Embeds Square's own flow on WordPress sites only, with no booking rules; its Embed edition already saves a card on file; added to wordpress.org on 2026-09-24 with 10 active installs and 0 ratings."
+        },
+        {
+          "name": "Setmore",
+          "url": "https://www.setmore.com/pricing",
+          "price": "Free $0 (up to 4 users, no custom service availability); Pro $5/user/month billed annually (monthly figure unclear on the page)",
+          "gap": "Pro sells 'Set custom availability for each service you offer' with deposits and Square payments, but replaces Square's calendar with its own; Free has neither custom service availability nor deposits."
+        },
+        {
+          "name": "Acuity Scheduling",
+          "url": "https://acuityscheduling.com/pricing",
+          "price": "Starter $16 or $20, Standard $27 or $34, Premium $55 or $69 a month (annual or monthly billing); no free plan",
+          "gap": "A separate scheduler that takes Square payments; the owner moves the calendar out of Square Appointments. Service-specific availability is not shown on the pricing page (unknown)."
+        },
+        {
+          "name": "Square Go (Square's consumer booking app)",
+          "url": "https://squareup.com/help/us/en/article/8025-get-started-with-square-go",
+          "price": "Free (included with Square online booking)",
+          "gap": "Lists the same services and availability as Square's booking site, so it also ignores the page's rules unless the owner switches it off per location."
+        },
+        {
+          "name": "Yatoon Pro (WordPress salon booking with Square sync)",
+          "url": "https://api.wordpress.org/plugins/info/1.2/?action=plugin_information&request[slug]=yatoon-booking-system&request[fields][sections]=1",
+          "price": "unknown",
+          "gap": "Two-way Square Appointments sync and deposits on WordPress sites; added 2026-03-26 with under 10 installs; no per-service day windows or fixed start times listed."
+        }
+      ],
+      "keyFeatures": [
+        "Per-service weekday and hour windows (for example facials only Monday to Wednesday after 3 pm, specials on weekdays only)",
+        "Fixed start times per service and day, plus a no-gaps option that offers only times next to existing bookings",
+        "Returning-clients-only switch matched against the owner's Square customers, with a callback form for new clients",
+        "Card on file through Square's card form, for owners who charge no-show fees",
+        "Bookings written into Square Appointments so Square's calendar, reminders and checkout keep working",
+        "Morning email listing bookings made on Square's own booking site or Square Go that break a rule",
+        "Hosted link and an embed snippet for the owner's website and social bios"
+      ],
+      "mvpScope": {
+        "features": [
+          "Square OAuth connection for one location",
+          "Enforcement test: API booking with Square's online booking and Square Go turned off",
+          "Rule editor: service day and hour windows, fixed start times, no-gaps option",
+          "Returning-clients-only switch",
+          "Card on file through Square's Web Payments SDK and Cards API",
+          "Hosted and embeddable booking page that books into Square",
+          "Availability cache, slot lock and morning rule-breach email"
+        ],
+        "outOfScope": [
+          "Square cancellation-fee services booked through the API (Square's API refuses them)",
+          "Deposits linked to a booking (Square has no supported way)",
+          "A private home address (Square's free workaround of editing the location line is explained in the guide instead)",
+          "Classes, rooms and other resources",
+          "Per-client service durations",
+          "Several locations",
+          "Text messages"
+        ],
+        "buildEstimate": "6 to 7 build days"
+      },
+      "techStack": "Static front end (booking page and rule editor), Supabase (sign-in, rules, settings, slot locks, cached availability), backend-hub on Render (Square OAuth with token refresh; Square Bookings, Catalog, Customers and Team APIs at buyer-level write plus seller-level read), scheduled jobs (token refresh, availability refresh, morning check), transactional email (confirmation with address, morning email).",
+      "pricing": {
+        "model": "Flat per-location subscription with a 30-day trial",
+        "pricePoint": "$12/month per location (estimate)",
+        "rationale": "Between the Square-connected WordPress embed ($49 to $299 a year) and Acuity ($16 to $69 a month), and far below moving to another platform; small enough to add on top of a free or paid Square plan."
+      },
+      "revenueSketch": "Estimate: 150 Square appointment businesses x $12/month = $1,800 MRR. Assumes owners find it through search for the exact Square limits and through Square Community threads where they ask for a fix; there is no marketplace listing, and conversion and churn are unknown.",
+      "distribution": "First 10: (1) answer Square Community threads only where an owner asks for a fix (eight such threads opened between 2026-08-31 and 2026-11-15), since the Square Community Code of Conduct says \"Don't promote your own products or services unprompted. Avoid talking about your services unless asked. Unsolicited private messages are a direct violation of this policy.\" (https://community.squareup.com/api/2.0/search?q=SELECT%20subject%2C%20body%2C%20post_time%2C%20author.rank.name%2C%20depth%20FROM%20messages%20WHERE%20topic.id%20%3D%20%27723469%27%20ORDER%20BY%20post_time%20ASC%20LIMIT%203); Square says the Community moves to a new platform before the end of 2026 (Admin post of 2026-11-16, https://community.squareup.com/api/2.0/search?q=SELECT%20id%2C%20subject%2C%20body%2C%20post_time%2C%20board.id%2C%20author.rank.name%20FROM%20messages%20WHERE%20body%20MATCHES%20%27promote%20your%20own%20products%20or%20services%27%20LIMIT%205), so thread links may change. (2) Search pages that answer the exact questions (\"Square Appointments service only on certain days\", \"fixed start times\", \"hide home address\"). (3) A free WordPress plugin that embeds the page, as the Appointments Booking for Square plugin shows is possible; the wordpress.org rule allowing a free plugin that connects to a paid service (no trialware) was recorded in the 2026-11-18 run and not re-read here. The Square App Marketplace is not a channel: onboarding of new listings is paused (https://developer.squareup.com/forums/t/28043.json, 2026-10-01; https://developer.squareup.com/forums/t/27517.json), but an unlisted OAuth app needs no listing, partnership or fee (https://developer.squareup.com/forums/t/28547.json).",
+      "validationTest": {
+        "method": "Build milestone 1 and a landing page with a rules-editor mock; reply only in Square Community threads where an owner has asked for a fix; set up the page by hand for 5 owners on the free plan using one fee-free service each, and watch real clients book through it for three weeks.",
+        "successCriteria": "5 owners connect Square and send real clients through the page within 21 days, at least 3 agree to pay $12/month after the trial, and no more than 1 of the 5 is blocked by needing Square's cancellation-fee protection on the services they route through the page.",
+        "cost": "About 2 build days for the slice and landing page; $0 to $100 in search ads."
+      },
+      "moat": "Thin: the rules engine and breach check are copyable, Square could ship per-service availability, and a Square-connected plugin already takes a card on file. Saved rules, embed links already on owners' sites and social bios, and price are the main defences.",
+      "compliance": [
+        "Privacy: client names, emails and phones from a public page; publish a privacy policy, keep minimal fields with row-level security per business, delete data when the owner disconnects Square; GDPR for UK and EU sellers, CCPA/CPRA for California clients where it applies.",
+        "Square Developer Terms: least-privilege OAuth scopes, no implied Square endorsement, and a clear 'not affiliated with Square' line.",
+        "Accessibility: the client booking page should meet WCAG 2.1 AA (US ADA claims against small businesses' booking flows are common).",
+        "Payments: no card data in the MVP; if card-on-file is added later, use Square's hosted card fields so card data stays with Square (PCI DSS SAQ A).",
+        "Email: confirmation and address emails are transactional; no marketing email without consent (CAN-SPAM, and UK/EU e-privacy rules).",
+        "Health data: salons and spas are not HIPAA covered entities, but massage and skincare intake answers can be health information; the MVP does not collect or store intake answers.",
+        "Consumer protection: show the business's own cancellation policy accurately on the page; no texts in the MVP, so TCPA/10DLC does not apply."
+      ],
+      "risks": [
+        {
+          "risk": "Square ships per-service availability or start-time control (a long-standing request; one Square Champion seller wrote that engineering is expanding schedule customisation, but no Square staff or release note says so).",
+          "mitigation": "Monthly billing with no lock-in; Square staff opened a stylist pricing and duration beta in September 2026, and owners there asked for service-by-day limits, so watch it and keep the parts Square is least likely to ship together: fixed start times, regulars-only and the morning breach check."
+        },
+        {
+          "risk": "Square's own booking site, Square Go and Square's reschedule links ignore the rules, and a service hidden from Square's site cannot be booked through the API.",
+          "mitigation": "Milestone 1 tests whether API bookings work with Square's online booking switched off; if they do, the guide has owners switch Square's channels off, and if not, the product is sold as rules plus a morning breach email, not enforced rules."
+        },
+        {
+          "risk": "Salon owners on Square commonly rely on no-show fees, which Square's API cannot attach to a booking.",
+          "mitigation": "Card on file is in the MVP through Square's card form, and the owner charges no-shows from Square; the validation test counts owners this still leaves out."
+        },
+        {
+          "risk": "Square's booking rate limit is low and concurrent bookings can double-book (https://developer.squareup.com/forums/t/28217.json, https://developer.squareup.com/forums/t/28368.json).",
+          "mitigation": "Cache availability on a schedule, hold a per-slot lock and re-check the slot just before booking."
+        },
+        {
+          "risk": "Square has no full sandbox for booking flows (https://developer.squareup.com/forums/t/28266.json), so testing needs a live account.",
+          "mitigation": "Test with a live free-plan Square account and fee-free test services; keep an end-to-end test that books and cancels."
+        },
+        {
+          "risk": "Reach: no marketplace, the community bans unprompted promotion and is moving platforms.",
+          "mitigation": "Answer only when asked, build search pages for each exact limit, and add a free WordPress embed."
+        }
+      ],
+      "scores": {
+        "pain": 5,
+        "willingnessToPay": 3,
+        "reachability": 3,
+        "competitiveGap": 3,
+        "feasibility": 3,
+        "complianceBurden": 4,
+        "total": 21
+      },
+      "scoreRationale": {
+        "pain": "Eight owners opened separate threads from 2026-08-31 to 2026-11-15 asking for per-service days, fixed starts, regulars-only booking or a private address, others replied in agreement, and a spa owner is close to leaving Square (https://community.squareup.com/api/2.0/search?q=SELECT%20subject%2C%20body%2C%20post_time%2C%20author.rank.name%2C%20depth%2C%20kudos.sum%28weight%29%20FROM%20messages%20WHERE%20topic.id%20%3D%20%27850482%27%20ORDER%20BY%20post_time%20ASC%20LIMIT%2030).",
+        "willingnessToPay": "Setmore Pro charges for per-service custom availability (https://www.setmore.com/pricing) and a Square-connected booking embed sells at $49 and $299 a year (https://square-appointment-wp.com/), though that plugin has 10 installs and no paid job asks for these rules.",
+        "reachability": "Many recent Square Community threads where owners ask for a fix, but the Code of Conduct forbids unprompted promotion (https://community.squareup.com/api/2.0/search?q=SELECT%20subject%2C%20body%2C%20post_time%2C%20author.rank.name%2C%20depth%20FROM%20messages%20WHERE%20topic.id%20%3D%20%27723469%27%20ORDER%20BY%20post_time%20ASC%20LIMIT%203) and the App Marketplace is closed to new listings (https://developer.squareup.com/forums/t/28043.json).",
+        "competitiveGap": "Nothing native is shipped or announced (https://squareup.com/us/en/feature-log), but Square's booking site, Square Go and its reschedule links bypass the rules (https://developer.squareup.com/forums/t/28258.json), two of the drafted features have free Square workarounds, and Setmore Pro sells per-service availability with Square payments (https://www.setmore.com/pricing).",
+        "feasibility": "Buyer-level bookings work on the free plan (https://developer.squareup.com/docs/bookings-api/what-it-is), but services with a cancellation fee cannot be booked through the API (https://developer.squareup.com/docs/bookings-api/use-the-api.md), the rate limit needs caching (https://developer.squareup.com/forums/t/28217.json) and booking flows cannot be tested in sandbox (https://developer.squareup.com/forums/t/28266.json).",
+        "complianceBurden": "Client contact details on a public page need a privacy policy, deletion on disconnect and WCAG 2.1 AA; card on file through Square's hosted card form keeps the app at PCI SAQ A (https://developer.squareup.com/forums/t/28018.json)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "An adversarial reviewer confirmed the pain (eight owner-opened Square Community threads from 2026-08-31 to 2026-11-15, plus owners asking for service-by-day limits in Square's own stylist-pricing beta thread) and found nothing native shipped or announced. It cut competitiveGap from 4 to 3: Square's booking site, Square Go and its reschedule links bypass the rules, the private-address and regulars-only features have free Square workarounds, Setmore Pro sells per-service availability with Square payments, and a $49-a-year Square-connected plugin already takes a card on file. It also dropped two evidence items (a messaging thread older than 180 days and a resource-booking venue). Rescored 22 to 21, provisional; re-scoped to drop the private address, put card on file in the MVP, and make milestone 1 test whether bookings work with Square's own online booking switched off."
+      },
+      "inspiredBy": "https://community.squareup.com/api/2.0/search?q=SELECT%20subject%2C%20body%2C%20post_time%2C%20author.rank.name%2C%20depth%2C%20kudos.sum%28weight%29%20FROM%20messages%20WHERE%20topic.id%20%3D%20%27851119%27%20ORDER%20BY%20post_time%20ASC%20LIMIT%2030"
+    },
+    {
+      "n": 3,
+      "title": "Rebook Reminders and Aftercare for Square Appointments",
+      "slug": "rebook-reminders-and-aftercare-for-square-appointments",
+      "category": "Small Business Ops",
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "gateGap": {
+        "missing": [
+          "total 20 is below 22",
+          "willingnessToPay 3 rests on one paid plan (NiceJob Pro) with no paid jobs and no Square seller seen paying for rebook reminders",
+          "competitiveGap 2: Klaviyo's Square integration already sends per-item post-checkout and timed win-back emails"
+        ],
+        "closedBy": "The validation test: 5 Square Free owners running the appointment-aware reminders for 4 weeks, with 3 agreeing to pay and a measured rebook rate above Klaviyo-style timed win-backs, would lift willingnessToPay to 4 and competitiveGap to 3, for a total of 22."
+      },
+      "topic": "Data & Visualization",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": true,
+        "engine": true,
+        "shared": true,
+        "notes": {
+          "stateful": "The owner keeps aftercare templates per service, per-client interval overrides and a send log, and returns to see who rebooked after a reminder.",
+          "connected": "Connects to the owner's own Square account by OAuth and reads bookings, customers and services through the Bookings, Customers and Catalog APIs, with booking.created and booking.updated webhooks.",
+          "unattended": "An hourly job sends aftercare a set time after each visit and a nightly job sends rebook reminders to clients past their usual interval.",
+          "engine": "Estimates each client's usual interval from attended visits (ignoring vacation gaps, with an owner override), infers a finished visit from ACCEPTED bookings whose end has passed, and suppresses reminders for no-shows, cancellations, unsubscribes and clients who already have a future booking.",
+          "shared": "The owner sets up the templates and rules; the clients receive the aftercare and rebook emails."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "email",
+        "scheduled",
+        "backend"
+      ],
+      "buildPlan": [
+        {
+          "n": 1,
+          "title": "Connect Square and see client rhythms",
+          "delivers": "Sign in, connect Square, import 12 months of bookings and clients, and see each client's last visit, next booking and usual interval, with a list of who is overdue and not booked.",
+          "acceptance": "On a Square sandbox seller seeded with bookings, three hand-checked clients show the right median interval and overdue status; the email-coverage count matches the seed; deployed at its hintwise.org address."
+        },
+        {
+          "n": 2,
+          "title": "Aftercare per service",
+          "delivers": "Write an aftercare email per service and choose the delay from the booking's end; optionally add a Google review link at a chosen delay.",
+          "acceptance": "A seeded finished booking produces exactly one aftercare email at the set delay; a NO_SHOW or cancelled booking produces none; a two-service visit sends one combined email."
+        },
+        {
+          "n": 3,
+          "title": "Rebook reminders",
+          "delivers": "Rebook emails with the owner's booking link when a client passes their usual interval plus a grace period, with a per-client override and a cap of two reminders per cycle.",
+          "acceptance": "Unit cases pass: a client with a future booking gets nothing, an overdue client gets one email, a third reminder is never sent, and a vacation gap does not shift the interval."
+        },
+        {
+          "n": 4,
+          "title": "Live sync",
+          "delivers": "A webhook receiver on the backend keeps bookings current and cancels any queued reminder when the client books.",
+          "acceptance": "A booking created in the sandbox cancels the queued reminder within a minute; a missed webhook is caught by the nightly reconcile."
+        },
+        {
+          "n": 5,
+          "title": "Consent and results",
+          "delivers": "Unsubscribe link and list, Square's own email opt-out honoured, business postal address in every email, an opt-in-only setting for locations outside the US, a send log and a results page of clients who rebooked within 14 days of a reminder.",
+          "acceptance": "An unsubscribed or Square-opted-out client never receives a rebook email in tests; every email carries a working unsubscribe and the address; the results count matches seeded data."
+        },
+        {
+          "n": 6,
+          "title": "Polish",
+          "delivers": "Owner README, phone layout, keyboard and screen-reader pass, walkthrough test.",
+          "acceptance": "A new owner connects Square and turns on aftercare for one service on a phone in under 10 minutes; axe reports no serious issues."
+        }
+      ],
+      "summary": "For salon, barber, lash, massage and skincare owners on Square Appointments, Square Free first: a rebook reminder when each client passes their own usual interval with nothing booked, and per-service aftercare after each visit.",
+      "public": {
+        "summary": "Sends each regular a friendly reminder to rebook when they are due, based on how often they usually come in, and the right aftercare tips after each visit.",
+        "problem": "Your booking system reminds clients before an appointment, then goes quiet once they leave. You want lash clients to get different care tips from massage clients, and you try to remember who comes every four weeks and who comes every eight. When a regular drifts past their usual time, you often notice only after they have stopped coming.",
+        "forWhom": "Salon, barber, lash, nail, massage and skincare owners who take bookings in Square Appointments.",
+        "benefits": [
+          "Regulars hear from you when they are due, not on one fixed timer",
+          "No reminder goes to anyone who has already booked",
+          "Aftercare tips reach every client at the right time after each service",
+          "Each client's usual visit rhythm at a glance",
+          "Fewer regulars quietly drifting away"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "Square Appointments sends messages only before a visit. Owners say \"I can't believe a simple post appointment automated communication option still hasn't been added\" and want different aftercare per service (\"if they go for a Pregnancy Massage I should be able to send different aftercare than if they've had a Hypnotherapy appointment\"). Stylists rebook clients on 4- to 10-week cycles by memory: \"It's impossible to remember everyone's usual cycle\", and they count weeks back through appointment history by hand.",
+      "description": "The owner connects Square once. The app reads a year of bookings and customers and works out each client's usual gap between attended visits, ignoring vacation gaps and letting the owner set a preferred interval. A nightly job emails a rebook reminder, with the owner's booking link, to clients who are past their usual interval and have no future booking; no-shows and cancellations are skipped, and a new booking arriving by webhook cancels any queued reminder. This appointment-aware engine is the part neither Square nor Klaviyo's order-based Square flows can do. As a second feature, the owner writes a short aftercare email per service, sent a set time after the booking's end (no checkout or order needed), with an optional Google review link at a delay the owner chooses. A phone-friendly list shows each client's interval and booked status for use at checkout. Unsubscribes, Square's own email opt-out and a results page of who rebooked are built in. It works on Square's free plan because it only reads bookings.",
+      "targetCustomer": "Solo and small salons, barbers, lash and brow artists, nail techs, massage therapists and aestheticians on Square Appointments whose clients return on personal cycles of 3 to 12 weeks.",
+      "buyer": "The owner, from the marketing or software budget, on a business card alongside Square.",
+      "whyNow": "Square's feature releases of 22 October, 5 November and 19 November 2026 (Volumes 15 to 17) add AI tools and receipt links but no message after a visit, while sellers asked for one from January to September 2026. Square's AI assistant can now draft a win-back email for clients who have not booked in 60 days when the owner asks (2026-11-12), which shows the value but leaves it manual. The Bookings API lets an app read every booking without a paid Appointments plan, so the app also reaches solo owners who cannot use Square's paid marketing automations.",
+      "founderFit": "Pisan ships small web apps alone in days. The work is one OAuth integration plus a scheduling engine over booking history (interval estimation, suppression rules, webhook-driven cancels), which is algorithmic CS work that fits the HintWise platform's scheduled jobs and transactional email.",
+      "problemEvidence": [
+        {
+          "url": "https://community.squareup.com/api/2.0/search?q=SELECT%20subject%2C%20body%2C%20post_time%2C%20author.rank.name%2C%20depth%20FROM%20messages%20WHERE%20topic.id%20%3D%20%27770017%27%20ORDER%20BY%20post_time%20ASC%20LIMIT%2040",
+          "source": "community.squareup.com",
+          "author": "posters A to D (appointment sellers; poster A a nail spa owner, poster D a massage and hypnotherapy practitioner)",
+          "date": "2026-07-16",
+          "kind": "complaint",
+          "summary": "Thread opened 2025-01-03 asking for post-appointment messages; sellers add 2026-01-26 (\"still not available\"), 2026-02-16 (\"a 'post service' customisable email/text\") and 2026-07-16 (different aftercare per service). Poster A built a custom front end on the Square API with a nightly job over completed bookings."
+        },
+        {
+          "url": "https://community.squareup.com/api/2.0/search?q=SELECT%20subject%2C%20body%2C%20post_time%2C%20author.rank.name%2C%20depth%20FROM%20messages%20WHERE%20topic.id%20%3D%20%27848722%27%20ORDER%20BY%20post_time%20ASC%20LIMIT%2030",
+          "source": "community.squareup.com",
+          "author": "poster E (seller)",
+          "date": "2026-08-28",
+          "kind": "complaint",
+          "summary": "Post titled 'Aftercare and Rebooking text reminders': wants an automated text 24 to 72 hours after each appointment covering aftercare, a reminder to rebook and thanks. Asks for texts specifically; no replies or kudos."
+        },
+        {
+          "url": "https://community.squareup.com/api/2.0/search?q=SELECT%20subject%2C%20body%2C%20post_time%2C%20author.rank.name%2C%20depth%20FROM%20messages%20WHERE%20topic.id%20%3D%20%27845692%27%20ORDER%20BY%20post_time%20ASC%20LIMIT%2030",
+          "source": "community.squareup.com",
+          "author": "poster I (hair care seller)",
+          "date": "2026-07-03",
+          "kind": "complaint",
+          "summary": "Wants to send a 'next appt due' reminder to clients whose last appointment was 3 weeks ago and finds it is not possible in Square."
+        },
+        {
+          "url": "https://community.squareup.com/api/2.0/search?q=SELECT%20subject%2C%20body%2C%20post_time%2C%20author.rank.name%2C%20depth%20FROM%20messages%20WHERE%20topic.id%20%3D%20%27850080%27%20ORDER%20BY%20post_time%20ASC%20LIMIT%2030",
+          "source": "community.squareup.com",
+          "author": "poster F (stylist)",
+          "date": "2026-09-24",
+          "kind": "complaint",
+          "summary": "Clients come every 4, 5, 6, 8 or 10 weeks; counts weeks through appointment history by hand when rebooking at checkout; asks for each client's typical interval shown in the client record, with a manual override (a display request, not reminders)."
+        },
+        {
+          "url": "https://community.squareup.com/api/2.0/search?q=SELECT%20subject%2C%20body%2C%20post_time%2C%20author.rank.name%2C%20depth%20FROM%20messages%20WHERE%20topic.id%20%3D%20%27845313%27%20ORDER%20BY%20post_time%20ASC%20LIMIT%2030",
+          "source": "community.squareup.com",
+          "author": "poster G (beauty and aesthetics seller)",
+          "date": "2026-06-25",
+          "kind": "spend",
+          "summary": "Pays a third-party service a monthly fee just to send Google review requests at the right time after an appointment, because Square cannot time post-visit messages (spend on review timing, which the re-scoped MVP covers only as an optional link)."
+        },
+        {
+          "url": "https://community.squareup.com/api/2.0/search?q=SELECT%20subject%2C%20body%2C%20post_time%2C%20author.rank.name%2C%20depth%20FROM%20messages%20WHERE%20topic.id%20%3D%20%27803738%27%20ORDER%20BY%20post_time%20ASC%20LIMIT%2030",
+          "source": "community.squareup.com",
+          "author": "poster H (Square Marketing subscriber)",
+          "date": "2025-07-31",
+          "kind": "spend",
+          "summary": "Pays for Square Marketing, but its lapsed-client automation fires at about 1.5 months with a fixed $5 offer; wants a plain rebook nudge after 3 to 4 weeks ('what am I really paying for?'); a moderator confirmed on 2025-08-13 it cannot be changed. Older than 180 days."
+        },
+        {
+          "url": "https://get.nicejob.com/pricing",
+          "source": "get.nicejob.com",
+          "author": "NiceJob (vendor)",
+          "date": "2026-11-20",
+          "kind": "spend",
+          "summary": "Sells rebooking reminders based on last service date in its Pro plan at $135 a month (Starter $95), read on the pricing page; its Square link enrols customers on invoices, not appointments."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Klaviyo (Square integration)",
+          "url": "https://help.klaviyo.com/hc/en-us/articles/11117215837211-Getting-started-with-Square-Online",
+          "price": "Free up to 250 active profiles and 500 emails a month; Email plan from $20/month (https://www.klaviyo.com/pricing)",
+          "gap": "Syncs Square orders every 30 minutes and offers win-back and post-purchase flows on an owner-set timer, but reads orders, not appointments: it cannot see future bookings, no-shows or each client's own interval, and needs a checkout with the client's email attached."
+        },
+        {
+          "name": "Square Marketing lapsed-client automations",
+          "url": "https://community.squareup.com/api/2.0/search?q=SELECT%20subject%2C%20body%2C%20post_time%2C%20author.rank.name%2C%20depth%20FROM%20messages%20WHERE%20topic.id%20%3D%20%27780880%27%20ORDER%20BY%20post_time%20ASC%20LIMIT%2030",
+          "price": "Included in Square Plus ($49/month per location) and Premium ($149/month); not on Square Free (https://squareup.com/us/en/marketing)",
+          "gap": "Two fixed timers: lapsed bookers at 3 months (moderator replies in 2025) and lapsed purchasers at about 1.5 months with a $5 offer; sellers reported both still fixed in April and July 2026. One timer for every client, no aftercare."
+        },
+        {
+          "name": "Squaremates (Square's AI assistant)",
+          "url": "https://community.squareup.com/api/2.0/search?q=SELECT%20subject%2C%20body%2C%20post_time%2C%20author.rank.name%2C%20depth%20FROM%20messages%20WHERE%20topic.id%20%3D%20%27852146%27%20ORDER%20BY%20post_time%20ASC%20LIMIT%2040",
+          "price": "Free for US sellers (Square's 2026-11-19 release notes)",
+          "gap": "On request only: the owner asks it to list clients who have not booked in 60 days and approves each drafted email; no schedule, no per-client interval, no aftercare; US and English only, and sending a marketing email on Square Free may need a paid plan (2026-11-19 release notes, https://community.squareup.com/api/2.0/search?q=SELECT%20subject%2C%20body%2C%20post_time%2C%20author.rank.name%2C%20depth%20FROM%20messages%20WHERE%20id%20%3D%20%27853032%27). Square's 2026-11-19 'December Features Coming Soon' post says it can email customers with the seller's approval, and Squaremates Apps (custom apps hosted by Square) exist, so Square has the building blocks to ship this itself."
+        },
+        {
+          "name": "Square Appointments notifications",
+          "url": "https://squareup.com/help/us/en/article/6729-manage-appointment-booking-notifications-and-reminders",
+          "price": "Included in all Square Appointments plans",
+          "gap": "Confirmations, reminders, and new, change and cancellation notices only; transactional only with marketing language blocked; nothing after a visit."
+        },
+        {
+          "name": "Square Go rebook prompts",
+          "url": "https://www.salontoday.com/articles/square-go-squares-new-booking-app-seamlessly-connects-consumers-with-beauty-and-personal-care-businesses",
+          "price": "Free",
+          "gap": "In-app prompts to consumers who use the Square Go app; the business cannot set timing or content; no aftercare."
+        },
+        {
+          "name": "Square Marketing Google review requests",
+          "url": "https://squareup.com/us/en/marketing",
+          "price": "Needs Square Plus or Premium",
+          "gap": "Sends a review ask after a sale; no aftercare and no rebook timing."
+        },
+        {
+          "name": "NiceJob",
+          "url": "https://get.nicejob.com/pricing",
+          "price": "Starter $95/month, Pro $135/month (rebook reminders are Pro only)",
+          "gap": "Built for home-service jobs; its Square integration imports invoices and payments and enrols on sending an invoice (https://partners.nicejob.com/integrations/square-4), so appointment salons that do not invoice are not covered."
+        },
+        {
+          "name": "Birdeye",
+          "url": "https://birdeye.com/integration/square",
+          "price": "unknown",
+          "gap": "Square integration sends review requests only."
+        },
+        {
+          "name": "Zapier plus an email or SMS tool",
+          "url": "https://zapier.com/apps/square/integrations",
+          "price": "Free (two-step, 100 tasks, no filters) or Pro $19.99/month annual, $29.99/month monthly (https://zapier.com/pricing), plus the messaging tool",
+          "gap": "Square trigger is New Appointment only (no updated or completed trigger), so the owner must build and maintain delays and checks; no interval engine and no future-booking check."
+        }
+      ],
+      "keyFeatures": [
+        "One-click Square connection that imports a year of bookings and clients",
+        "Each client's usual visit interval, with vacation gaps ignored and an owner override",
+        "Rebook email with the owner's booking link when a client passes their interval with no future booking",
+        "A new booking cancels any queued reminder; no-shows and cancellations are skipped",
+        "Aftercare email per service, timed from the booking's end, with an optional delayed review link",
+        "Phone-friendly list of each client's interval and booked status for checkout",
+        "Unsubscribe handling that honours Square's own email opt-out, and a results page of who rebooked"
+      ],
+      "mvpScope": {
+        "features": [
+          "Square OAuth connection and 12-month booking import",
+          "Per-client interval and overdue list, viewable on a phone",
+          "Rebook reminder emails with a two-per-cycle cap",
+          "Webhook cancel on new booking",
+          "Per-service aftercare emails timed from the booking's end, with an optional delayed review link",
+          "Unsubscribe list, Square opt-out check and postal address footer"
+        ],
+        "outOfScope": [
+          "Text messages (needs 10DLC registration and a texting provider)",
+          "AI-written aftercare text",
+          "Intake forms, treatment notes or anything clinical",
+          "Two-way replies",
+          "Chains with more than 3 locations"
+        ],
+        "buildEstimate": "6 build days"
+      },
+      "techStack": "Static front end (React + Vite); shared Supabase project for sign-in and per-app tables (connections, clients, intervals, templates, send log, unsubscribes); backend-hub on Render for Square OAuth token exchange and refresh, the booking.created and booking.updated webhook receiver and Square API calls; scheduled jobs (hourly aftercare, nightly interval and rebook pass, nightly reconcile); transactional email. Square Bookings, Customers, Catalog and Locations APIs.",
+      "pricing": {
+        "model": "Per-location monthly subscription with a 14-day free trial",
+        "pricePoint": "$15/month per location",
+        "rationale": "Well under NiceJob Pro at $135/month and under the $49/month Appointments Plus upgrade owners would need for Square's own paid automations; close to the Zapier Pro plan ($19.99 to $29.99/month) that do-it-yourself owners pay before adding a messaging tool."
+      },
+      "revenueSketch": "Estimate: 150 paying locations x $15/month = $2,250 MRR after 12 months. Assumptions: buyers come from Square Community threads and search pages only (no App Marketplace listing while onboarding is paused), about 5% monthly churn, and no count of Square Appointments sellers was read.",
+      "distribution": "1) Square Seller Community, Appointments and Beauty and Wellness boards: the threads behind this idea (topics 770017, 848722, 850080) hold owners asking for exactly this, and sellers in 770017 asked how a custom solution worked. Promotion rule: not read; the Community Etiquette Guidelines page returned an empty bot-gate response (HTTP 202), so the Marketer must read it before posting anything. 2) Square App Marketplace: a Square employee wrote on 2026-10-01 that onboarding of new apps is paused (https://developer.squareup.com/forums/t/listing-square-apps-marketplace/28043), so the app is reached by a direct Connect Square link until it reopens. 3) Search pages for 'Square Appointments aftercare email' and 'rebooking reminder for Square'.",
+      "validationTest": {
+        "method": "Ship milestone 1 as a free read-only client rhythm report (connect Square, see each client's usual interval and who is overdue with no future booking) on a landing page that offers aftercare and rebook emails as a paid beta; share it only where the Square Community rules allow, and through the search pages.",
+        "successCriteria": "Within 30 days, 20 Square sellers connect and at least 5 start the paid beta at $15/month; record how many ask for texts, which decides whether email-only is enough.",
+        "cost": "About 2 build days and under $100 (domain and test email volume)."
+      },
+      "moat": "Thin. Templates, overrides and interval history build up in the app, and the interval engine with future-booking suppression and webhook cancels does what Square's fixed timers and Klaviyo's order-based flows cannot, but Square has the building blocks (Squaremates, hosted apps) to add it.",
+      "compliance": [
+        "CAN-SPAM (US): rebook reminders are commercial email: honour opt-outs within 10 business days, include a postal address and an honest subject line; aftercare whose primary purpose is care or safety information about a service the client bought can be transactional, so keep promotions out of aftercare emails (https://www.ftc.gov/business-guidance/resources/can-spam-act-compliance-guide-business).",
+        "Consent outside the US: Square's own Australian help says emails collected for a booking cannot be used for marketing without explicit consent (https://api.squareup.com/help/au/en/article/5660); CASL (Canada), UK PECR and EU GDPR and ePrivacy also restrict marketing email, so rebook reminders go only to clients the owner marks as opted in outside the US. The CRTC's CASL FAQ returned 403 and was not read.",
+        "Square's email opt-out flag (CustomerPreferences.email_unsubscribed) is read-only, so the app must honour it and keep its own unsubscribe list (https://developer.squareup.com/reference/square/objects/CustomerPreferences).",
+        "Washington My Health My Data Act: service names such as pregnancy massage can be consumer health data (the WA AG treats inferred pregnancy data as protected, small businesses covered since 2024-06-30) (https://atg.wa.gov/protecting-washingtonians-personal-health-data-and-privacy); store only booking dates, service IDs and names, and client email; let owners exclude services; publish a health data privacy policy. The Act binds processors (the app is the salon's processor, so it needs processor contract terms) and is enforced through private actions as well as by the Attorney General.",
+        "HIPAA: not expected for salons and massage studios; a medical spa that is a HIPAA covered entity would need a business associate agreement, so the MVP imports no notes or forms and is not offered to covered entities.",
+        "TCPA and 10DLC: not triggered while the app sends email only.",
+        "Accessibility: WCAG 2.2 AA for the owner app and plain, readable emails.",
+        "Data handling: encrypt Square OAuth tokens and delete a seller's data on disconnect."
+      ],
+      "risks": [
+        {
+          "risk": "Square adds a post-appointment message type or schedules Squaremates win-back emails.",
+          "mitigation": "Lead with the per-client interval engine and future-booking suppression; month-to-month pricing; watch Square's monthly release notes. Square's Squaremates can now email customers with approval and build hosted custom apps, so the risk is higher than it looks; keep the interval engine and future-booking suppression as the core."
+        },
+        {
+          "risk": "Owners asked for texts (the 2026-08-28 post is titled 'text reminders'), and the platform sends email only.",
+          "mitigation": "Show each owner's email coverage in milestone 1; the validation test counts text requests before any SMS work."
+        },
+        {
+          "risk": "Many clients book with a phone number and no email.",
+          "mitigation": "Report coverage up front and add an email-capture tip to the booking confirmation copy."
+        },
+        {
+          "risk": "No App Marketplace listing while onboarding is paused.",
+          "mitigation": "Direct Connect Square link, search pages, and community answers where allowed; apply when onboarding reopens."
+        },
+        {
+          "risk": "Health-related service data for massage and aesthetics.",
+          "mitigation": "Minimal data, service exclusions, privacy policy, no notes or forms."
+        },
+        {
+          "risk": "No COMPLETED booking status, so a visit is inferred.",
+          "mitigation": "Treat ACCEPTED bookings whose end has passed as visits, honour NO_SHOW, and let the owner fix a wrongly sent email's cause in the log."
+        },
+        {
+          "risk": "The Square Community, where the buyers and the evidence threads are, moves to a new platform before the end of 2026, so thread links and the LiQL API may change.",
+          "mitigation": "Keep the human thread URLs beside the API URLs, and build search pages for the exact questions so reach does not depend on the threads."
+        }
+      ],
+      "scores": {
+        "pain": 5,
+        "willingnessToPay": 3,
+        "reachability": 3,
+        "competitiveGap": 2,
+        "feasibility": 4,
+        "complianceBurden": 3,
+        "total": 20
+      },
+      "scoreRationale": {
+        "pain": "Six sellers on four Square Community pages ask in 2026 for messages after the visit or help rebooking on personal cycles, most recently 2026-08-28 and 2026-09-24: https://community.squareup.com/api/2.0/search?q=SELECT%20subject%2C%20body%2C%20post_time%2C%20author.rank.name%2C%20depth%20FROM%20messages%20WHERE%20topic.id%20%3D%20%27850080%27%20ORDER%20BY%20post_time%20ASC%20LIMIT%2030",
+        "willingnessToPay": "One paid plan for the job, NiceJob Pro at $135/month for rebooking reminders (https://get.nicejob.com/pricing); no paid jobs; the one seller paying a third party pays for review timing, and the Square Marketing payer's complaint is from 2025.",
+        "reachability": "Buyers are in named Square Community threads (topic 770017 has over 28,000 views), but App Marketplace onboarding is paused (https://developer.squareup.com/forums/t/listing-square-apps-marketplace/28043.json) and the Community moves to a new platform before the end of 2026.",
+        "competitiveGap": "Klaviyo's native Square integration already sends per-item post-checkout and timed win-back emails from $0 to $20 a month (https://help.klaviyo.com/hc/en-us/articles/11117215837211-Getting-started-with-Square-Online), Square Plus has fixed-timer lapsed automations and Squaremates drafts win-backs on request; only the appointment-aware rebook engine is unserved.",
+        "feasibility": "Seller-level booking reads work without a paid plan and booking.created and booking.updated webhooks exist (https://developer.squareup.com/docs/bookings-api/what-it-is); ListBookings filters by customer in 31-day windows (https://developer.squareup.com/reference/square/bookings-api/list-bookings); there is no COMPLETED status (https://developer.squareup.com/reference/square/enums/BookingStatus), and email-only falls short of owners who asked for texts.",
+        "complianceBurden": "Rebook reminders are commercial email under CAN-SPAM (https://www.ftc.gov/business-guidance/resources/can-spam-act-compliance-guide-business) and need opt-in in several Square markets (https://api.squareup.com/help/au/en/article/5660); massage and aesthetics service names can be consumer health data in Washington (https://atg.wa.gov/protecting-washingtonians-personal-health-data-and-privacy)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "An adversarial reviewer (stopped by the account's usage limit and resumed four hours later) confirmed six independent sellers asking in 2026 for post-visit messages or rebooking on each client's own cycle, with two posts within 90 days that read as owners but drew no replies, one of them asking specifically for texts. It found the draft missed Klaviyo's native Square integration, which already sends per-item post-checkout and timed win-back emails from $0 to $20 a month, and that Squaremates can now email customers with approval, raising the risk that Square ships this itself. willingnessToPay fell from 4 to 3 (one paid plan, no paid jobs; the only paid workaround is review timing) and competitiveGap from 3 to 2, so the total is 20 and the idea is provisional, re-scoped to lead with the appointment-aware rebook engine for Square Free sellers, with aftercare and an optional delayed review link second."
+      },
+      "inspiredBy": "https://community.squareup.com/api/2.0/search?q=SELECT%20subject%2C%20body%2C%20post_time%2C%20author.rank.name%2C%20depth%20FROM%20messages%20WHERE%20topic.id%20%3D%20%27770017%27%20ORDER%20BY%20post_time%20ASC%20LIMIT%2040"
+    }
+  ],
+  "runNotes": {
+    "weekday": "Friday",
+    "domainLens": "Small business, customer-facing: local services, trades, clinics, restaurants, retail, their websites and bookings",
+    "focusSources": [
+      "A13 Discourse forums, any niche (community.shopify.com)",
+      "B11 Freelance job boards",
+      "C8 Trade news"
+    ],
+    "searches": [
+      "A13 complaint: community.shopify.com search.json: local delivery after:2026-08-22",
+      "A13 complaint: community.shopify.com search.json: booking appointment after:2026-08-22",
+      "A13 complaint: community.shopify.com search.json: booking after:2026-08-22",
+      "A13 complaint: community.shopify.com search.json: POS return exchange after:2026-08-22",
+      "A13 complaint: community.shopify.com search.json: pickup in store after:2026-08-22",
+      "A13 mandate: community.shopify.com search.json: POS receipt after:2026-08-22",
+      "A13 complaint: community.shopify.com search.json: Shopify Inbox customers messages after:2026-08-22",
+      "A13 complaint: community.shopify.com search.json: delivery date missing order after:2026-08-22",
+      "A13 complaint: community.n8n.io search.json: google reviews restaurant after:2026-08-22",
+      "A13 complaint: community.make.com search.json: appointment booking customers after:2026-08-22",
+      "A13 mandate: community.shopify.com search.json: receipt editor after:2026-09-01",
+      "A13 complaint: community.shopify.com search.json: reviews app customers after:2026-09-01",
+      "A13 mandate: community.shopify.com search.json: withdrawal button EU after:2026-06-01",
+      "A13 complaint: help.shopify.com editing orders limitations local delivery orders cannot be edited",
+      "B12 spend: site:apps.shopify.com grocery substitutions out of stock replacement customer approval order",
+      "B12 spend: site:apps.shopify.com Zapiet pickup delivery date local delivery app",
+      "A13 complaint: help.shopify.com local delivery notifications out for delivery missed delivery Local Delivery app",
+      "B12 spend: site:apps.shopify.com delivery date picker thank you page order status page choose date after checkout missing date",
+      "A13 mandate: community.shopify.com search.json: legacy customer accounts after:2026-08-22",
+      "A13 complaint: forum.invoiceninja.com search.json: client portal customers after:2026-08-22",
+      "A13 complaint: Invoice Ninja optional quote line items customer select client portal GitHub",
+      "B12 spend: Quotient quoting software optional items customer selects pricing plans Xero QuickBooks",
+      "A13 complaint: community.shopify.com search.json: bakery orders customers after:2026-08-22",
+      "B12 spend: site:apps.shopify.com layaway payment plan POS partial payments balance reminders",
+      "A13 complaint: community.openfoodnetwork.org search.json: customers after:2026-05-24",
+      "A13 complaint: community.shopify.com search.json: store credit customers in store after:2026-08-22",
+      "A13 complaint: community.shopify.com search.json: restaurant orders after:2026-08-22",
+      "A13 complaint: community.shopify.com search.json: text message customers pickup ready after:2026-08-22",
+      "B12 spend: site:apps.shopify.com EasyRoutes local delivery route planner customer notifications",
+      "A13 complaint: help.shopify.com POS partially paid order collect remaining balance split payment layaway",
+      "A13 complaint: shopify.dev Order paymentCollectionDetails additionalPaymentCollectionUrl outstanding balance",
+      "A13 complaint: community.shopify.com search.json: Google reviews in-store customers after:2026-08-01",
+      "A13 complaint: community.shopify.com search.json: POS customers email marketing in person after:2026-08-22",
+      "A13 mandate: Shopify POS printed receipt code editor retired January 1 2027 visual editor changelog",
+      "A13 complaint: community.shopify.com search.json: customers confused pickup delivery after:2026-08-22",
+      "B12 spend: site:apps.shopify.com PickupLock pickup only products hide shipping checkout",
+      "B12 spend: site:apps.shopify.com B2B local delivery wholesale customers delivery day company location",
+      "B12 spend: site:apps.shopify.com POS custom receipt printing line item properties packing slip receipt printer app",
+      "A16 complaint: LiQL subject MATCHES 'waitlist'",
+      "A16 complaint: LiQL subject MATCHES 'no show' since 2026-08-01",
+      "A16 complaint: LiQL subject MATCHES 'cancellation fee' since 2026-08-01",
+      "A16 complaint: LiQL subject MATCHES 'reminder' since 2026-08-01",
+      "A16 complaint: LiQL subject MATCHES 'estimate' since 2026-08-01",
+      "A16 complaint: LiQL subject MATCHES 'pause online' since 2026-08-01",
+      "A16 complaint: site:community.calendly.com waitlist cancellation fill slot",
+      "A16 complaint: site:community.calendly.com no-show fee charge card",
+      "A16 complaint: site:support.google.com/business/thread booking button appointment link removed 2026",
+      "A16 complaint: Calendly help center waitlist feature 2026",
+      "A16 complaint: LiQL subject MATCHES 'rebook' since 2026-06-01",
+      "A16 complaint: LiQL subject MATCHES 'follow up' since 2026-06-01",
+      "A16 complaint: LiQL subject MATCHES 'review' since 2026-06-01",
+      "A16 complaint: Square Appointments rebooking reminder automatic message after appointment squareup.com help",
+      "A16 mandate: site:community.squareup.com Product Updates Square Appointments 2026 new features",
+      "A16 mandate: Square Marketing automated campaigns lapsed customers welcome birthday help article squareup",
+      "A12 complaint: HN comments: booking no-shows small business (since 2025-08-22)",
+      "A12 complaint: HN comments: salon booking software",
+      "A12 complaint: HN comments: waitlist cancellations appointments",
+      "A16 complaint: site:forum.wixstudio.com Wix Bookings waitlist OR reminder OR no-show 2026",
+      "A16 complaint: site:forum.squarespace.com Acuity scheduling clients complaint 2026",
+      "B12 spend: Calendly waitlist add-on app cancellation notify waitlisted clients",
+      "B12 spend: WP plugin API search: appointment waitlist",
+      "A16 complaint: LiQL subject MATCHES 'availability' since 2026-07-01",
+      "A16 complaint: LiQL subject MATCHES 'book online' since 2026-07-01",
+      "A16 complaint: LiQL subject MATCHES 'pickup time' since 2026-07-01",
+      "A16 complaint: LiQL subject MATCHES 'time slot' since 2026-07-01",
+      "A16 complaint: Square Appointments custom booking widget restrict services by day app marketplace booking rules third-party",
+      "B12 spend: site:squareup.com/us/en/app-marketplace appointments booking app",
+      "A16 complaint: productideas.xero.com search: quote deposit",
+      "B12 spend: Xero quote follow up reminder app automatic quote reminders Xero App Store",
+      "B12 spend: Paidnice quote reminders Xero pricing",
+      "A16 complaint: site:support.google.com/business/thread reviews disappeared business owner 2026",
+      "A16 complaint: site:community.toasttab.com online ordering feature request 2026",
+      "A16 complaint: LiQL subject MATCHES 'intake' since 2026-07-15",
+      "A16 complaint: LiQL subject MATCHES 'form' since 2026-07-15",
+      "A16 complaint: LiQL subject MATCHES 'text message' since 2026-07-15",
+      "A16 complaint: LiQL subject MATCHES 'existing clients' since 2026-07-15",
+      "B12 spend: rebooking reminder app for Square Appointments salon integration automatic rebook reminders clients due",
+      "A16 mandate: Calendly API webhooks invitee.canceled paid plan required single-use scheduling links create API",
+      "A16 complaint: site:community.calendly.com no-show OR late cancellation fee card on file 2026",
+      "A16 complaint: LiQL board product-ideas depth 0 since 2026-08-22 by kudos",
+      "A16 complaint: Square Online back in stock notification app customers notify me when available Square",
+      "B12 spend: site:squareup.com app-marketplace back in stock OR restock alerts OR waitlist Square Online app",
+      "A16 complaint: LiQL subject MATCHES 'back in stock' since 2026-01-01",
+      "B12 spend: apps.shopify.com back in stock restock alerts app reviews pricing",
+      "A16 mandate: Square Online add embed code section product page custom code help article plan required",
+      "A16 complaint: QuickBooks Online automatic estimate follow-up reminder pending estimates customers 2026 community",
+      "A16 complaint: LiQL subject MATCHES 'travel' since 2026-06-01",
+      "A16 complaint: LiQL subject MATCHES 'mobile business' since 2026-06-01",
+      "A16 complaint: LiQL subject MATCHES 'address' since 2026-06-01",
+      "A16 complaint: Square Online customer reviews product reviews request email help article squareup.com",
+      "A16 complaint: Square Appointments help article service availability specific days times per service settings",
+      "B11 spend: booking system salon",
+      "B11 spend: google reviews request",
+      "B11 spend: restaurant menu update",
+      "B11 spend: appointment reminder sms",
+      "B11 spend: quote calculator website",
+      "B11 spend: intake form clinic",
+      "B11 spend: loyalty program cafe",
+      "B11 spend: instant quote",
+      "B11 spend: price estimate form",
+      "B11 spend: google business profile hours",
+      "B11 spend: wix bookings",
+      "B11 spend: update prices website",
+      "B11 spend: waitlist",
+      "B11 spend: contact form not working",
+      "B11 spend: catering order form",
+      "B11 spend: consultation form salon",
+      "B11 spend: price list update",
+      "B11 spend: quote calculator",
+      "B11 spend: booking system",
+      "B11 spend: category: website-development (local filter: quote|booking|prices)",
+      "B11 spend: cleaning business website",
+      "B11 spend: lawn care landscaping",
+      "B11 spend: dog grooming",
+      "B11 spend: tattoo studio",
+      "B11 spend: yoga studio class booking",
+      "B11 spend: dental clinic website",
+      "B12 spend: cleaning business owner instant quote calculator website customers want price online forum 2026",
+      "A14 complaint: wordpress.org support cost calculator builder quote form not working 2026",
+      "B11 spend: square appointments",
+      "B11 spend: fresha vagaro booking setup",
+      "B11 spend: acuity scheduling",
+      "B11 spend: cash for cars quote",
+      "B11 spend: zapier automation",
+      "B11 spend: n8n workflow",
+      "B11 spend: google sheets automation",
+      "B11 spend: whatsapp automation",
+      "A13 complaint: reddit r/smallbusiness OR r/CleaningBusiness OR r/lawncare quote calculator on my website leads 2026",
+      "A16 spend: Square Appointments bulk import services CSV price list salon community.squareup.com",
+      "B11 spend: wordpress form fix",
+      "B11 spend: website booking form fix",
+      "A13 complaint: restaurant owner raising menu prices update printed menus website DoorDash Uber Eats everywhere hassle forum 2026",
+      "A16 complaint: community.squareup.com restaurant update menu prices Square Online DoorDash Uber Eats sync prices different manually 2026",
+      "B12 spend: print menu generated from Square item library app marketplace printable menu PDF auto update prices",
+      "B12 spend: apps.shopify.com search: square footage calculator",
+      "B12 spend: apps.shopify.com search: service quote calculator",
+      "B12 spend: apps.shopify.com flooring square footage calculator boxes per square foot app reviews",
+      "A13 complaint: forum.wixstudio.com: price calculator after:2026-05-24",
+      "A13 complaint: lawnsite OR plowsite instant quote online pricing website customers instant quote 2026 thread",
+      "B11 spend: remove fake reviews",
+      "A13 complaint: Google Business Profile community fake 1-star reviews not customers reported not removed small business owner 2026",
+      "A16 mandate: Google Business Profile help review management tool report review check status appeal",
+      "B12 spend: software to dispute fake Google reviews track removal requests evidence small business tool pricing",
+      "B12 spend: contact form monitoring service sends test submission daily alerts if website form broken small business",
+      "A14 complaint: wordpress.org support not receiving contact form emails lost leads customers business 2026",
+      "A13 complaint: reprint menus every time prices go up restaurant owner forum chalkboard QR menu cost of updating menus 2026",
+      "A13 complaint: r/restaurantowners updating menu prices website PDF Google menu print menus every price increase how do you manage",
+      "A13 complaint: forum.wixstudio.com: quote form price service after:2026-05-24",
+      "A13 complaint: forum.wixstudio.com: calculator after:2026-05-24",
+      "C5 mandate: restaurant service charge junk fee law takes effect 2026 menu disclosure",
+      "C5 mandate: California SB 68 allergen disclosure restaurant menus July 1 2026 compliance",
+      "C8 mandate: achrnews EPA refrigerant rule change contractors recordkeeping leak repair 2026 (site:achrnews.com)",
+      "C5 mandate: salon cancellation fee no-show deposit law OR rule 2026 booking platform change",
+      "C5 mandate: RBA surcharge ban final decision debit credit card surcharges removed date small business 2026",
+      "C5 mandate: Illinois Interchange Fee Prohibition Act July 1 2026 merchants tips sales tax refund processors status",
+      "C10 mandate: Google Business Profile change October 2026 OR November 2026 removed feature local businesses",
+      "C8 complaint: surcharge ban 1 October 2026 cafe owner merchant fees not reduced forum Square Tyro Zeller",
+      "C10 mandate: compare merchant fees tool small business Australia acquirer published fees October 2026 surcharge ban calculator",
+      "C10 complaint: site:community.squareup.com surcharge Australia October 2026 fees",
+      "A13 complaint: whirlpool forums surcharge ban merchant fees small business 2026",
+      "C8 complaint: reddit australia small business owner surcharge ban 1.6% OR merchant fees October 2026 cafe absorb",
+      "C5 mandate: FR API: refrigerant leak repair",
+      "C8 complaint: refrigeration tech leak rate calculation 15 lbs ER&R paperwork 2026 small contractor complaint forum reddit",
+      "C8 mandate: new laws take effect January 1 2027 restaurants small businesses (restaurant trade hosts)",
+      "C10 mandate: salon booking software price increase OR shutting down Sept-Nov 2026 Vagaro Mindbody Booksy Fresha GlossGenius Square Appointments",
+      "C10 mandate: POS discontinued OR end of life OR sunsetting restaurant retail small business 2026 merchants must migrate by",
+      "C5 mandate: Visa Mastercard merchant settlement 2026 court approval honor all cards premium cards surcharge changes effective date small merchants",
+      "C5 mandate: DMCC Act subscription contracts regime commencement date 2026 2027 businesses reminder notices cooling-off",
+      "C5 mandate: gov.uk subscription contracts regime January 2027 DBT announcement reminder notice regulations (gov.uk, legislation.gov.uk)",
+      "C5 complaint: subscription rules January 2027 UK gym OR salon OR membership small business owner worried reminder notices forum thread",
+      "C10 mandate: GoCardless DMCC subscription contracts reminder notices feature merchants January 2027",
+      "A13 complaint: site:ukbusinessforums.co.uk subscription contracts DMCC reminder notice 2027",
+      "C10 mandate: Stripe Billing UK subscription regime DMCC reminder notices January 2027 support feature",
+      "C10 complaint: community.squareup.com sellers price change OR fee increase OR feature removed October 2026 OR November 2026",
+      "C5 complaint: subscription reminder every six months direct debit new rules 2027 window cleaner OR boiler cover OR gym owner forum small business UK",
+      "A14 complaint: wordpress.org support subscription plugin UK DMCC OR subscription contracts reminder notice cancellation 2027 compliance",
+      "A13 complaint: surcharge ban merchant fees small business thread October 2026 (whirlpool.net.au)",
+      "B12 spend: refrigerant tracking software pricing per month small refrigeration contractor leak rate compliance app EPA ER&R 2026",
+      "C5 mandate: Employment Rights Act 2025 tipping consultation workers tips policy commencement October 2026 hospitality employers",
+      "C5 mandate: New Zealand card surcharge ban in-store date 2026 legislation passed retailers",
+      "C5 mandate: Employment Rights Act 2025 commencement regulations tipping consultation in force date confirmed 2026 hospitality",
+      "C5 mandate: IEEPA tariff refunds small businesses 2026 how to claim CBP deadline Supreme Court ruling importers UPS FedEx DHL brokerage",
+      "C5 mandate: new California laws January 1, 2027 small businesses contractors salons restaurants signed Newsom October 2026",
+      "C5 mandate: AB 1640 Restaurant Reservation Anti-Piracy Act California signed 2026 AppointmentTrader",
+      "C5 mandate: FR API: HIPAA security rule electronic protected health information (HHS)",
+      "C8 mandate: HIPAA Privacy Rule final rule November 2026 right of access 15 days compliance date small practices changes notice of privacy practices",
+      "C10 spend: Compayr merchant fee comparison Australia free statement upload small business",
+      "C8 complaint: dental OR therapy OR physical therapy practice owner records request patient copies 30 days fee frustrated forum 2026",
+      "A13 complaint: flyingsolo forum surcharge ban merchant fees small business owner 2026",
+      "C8 mandate: salon owners new law 2026 OR 2027 deadline license booth rental tips cancellation fees requirement (salon trade hosts)",
+      "C10 mandate: gym membership software UK subscription contracts regime January 2027 reminder notices feature ClubRight OR Glofox OR TeamUp OR Ashbourne OR Xplor Gym DMCC",
+      "B12 spend: small dental practice HIPAA compliance software price per month Abyde OR Compliancy Group OR HIPAA One right of access request log 2026",
+      "B12 spend: Shopify subscription app UK DMCC reminder notice compliance January 2027 Recharge OR Appstle OR Loop OR Skio OR Seal Subscriptions",
+      "B11 spend: merchant fee review service Australia small business fee % of savings OR no saving no fee after surcharge ban 2026",
+      "C10 mandate: Open Dental OR SimplePractice OR Jane App patient records request tracking feature deadline release of information log help article",
+      "A14 complaint: wordpress.org support WooCommerce card surcharge fee Australia ban 1 October 2026 remove surcharge plugin",
+      "C5 mandate: FR API: \"emissions reduction and reclamation\"",
+      "A13 complaint: forum.invoiceninja.com: subscription UK after:2026-08-22",
+      "C10 spend: Compayr payments cost comparison Australia merchants",
+      "A16 complaint: Square Appointments new feature 2026 service availability specific days online booking",
+      "A16 mandate: Square developer changelog Bookings API 2026",
+      "A16 mandate: squareup.com release notes October 2026 Appointments",
+      "A16 mandate: Square Bookings API limitations deposit cancellation fee card on file no-show booking created API",
+      "A16 mandate: developer.squareup.com bookings api no_show_fee service variation cannot be booked",
+      "A13 mandate: developer.squareup.com forums: app marketplace after:2026-10-01",
+      "B12 spend: custom booking widget for Square Appointments sync booking rules service availability by day app",
+      "B12 spend: WordPress plugin Square Appointments booking two-way sync availability Square Appointments integration plugin",
+      "B12 spend: squareup.com app-marketplace appointments booking app works with Square Appointments calendar sync",
+      "B12 spend: Acuity Scheduling pricing plans 2026 Emerging Growing Powerhouse per month",
+      "A16 mandate: Square Seller Community code of conduct guidelines promote products services self-promotion",
+      "A16 complaint: LiQL subject MATCHES 'availability' depth 0 since 2026-08-01",
+      "A16 complaint: LiQL subject MATCHES 'start time' depth 0 since 2026-08-01",
+      "A16 complaint: LiQL subject MATCHES 'specific days' depth 0 since 2026-08-01",
+      "A16 complaint: LiQL subject MATCHES 'new clients' depth 0 since 2026-08-01",
+      "A16 complaint: LiQL subject MATCHES 'existing clients' depth 0 since 2026-08-01",
+      "A16 complaint: LiQL subject MATCHES 'service hours' depth 0 since 2026-08-01",
+      "B11 spend: freelancer projects/all query=square appointments from 2026-08-22",
+      "B11 spend: freelancer projects/all query=square booking from 2026-08-22",
+      "B11 spend: freelancer projects/all query=square api booking from 2026-08-22",
+      "B11 spend: freelancer projects/all query=booking widget from 2026-08-22 (filtered for Square)",
+      "B11 spend: freelancer projects/all query=custom booking page from 2026-08-22 (filtered for Square)",
+      "B12 spend: Square Appointments add-on app fixed start times minimize gaps service availability rules third-party booking page keeps Square",
+      "A13 mandate: developer.squareup.com forums: online booking disabled CreateBooking",
+      "A13 mandate: developer.squareup.com forums: online_booking_enabled buyer",
+      "A16 mandate: LiQL subject MATCHES Code of Conduct depth 0",
+      "A16 mandate: LiQL body MATCHES promote your own products or services",
+      "B12 spend: Acuity Scheduling plans pricing (acuityscheduling.com, squarespace.com)",
+      "A16 complaint: LiQL subject MATCHES 'rebook' since 2026-05-01",
+      "A16 complaint: LiQL subject MATCHES 'after appointment' since 2026-05-01",
+      "A16 complaint: LiQL subject MATCHES 'follow up' since 2026-05-01",
+      "A16 complaint: LiQL body MATCHES 'aftercare' since 2026-06-01",
+      "A16 complaint: LiQL body MATCHES 'client retention' since 2026-06-01",
+      "A16 complaint: LiQL body MATCHES 'reminder to rebook' since 2026-06-01",
+      "A16 complaint: LiQL body MATCHES 'post appointment' since 2026-06-01",
+      "A16 complaint: LiQL body MATCHES 'lapsed clients' since 2026-06-01",
+      "A16 complaint: LiQL body MATCHES 'haven't booked' since 2026-06-01",
+      "B12 spend: Square Marketing automated campaigns lapsed customers haven't visited automation help article",
+      "B12 spend: squareup.com help marketing automations win back OR lapsed customers Square Marketing 2026",
+      "B12 spend: Square help lapsed bookers automation appointments reminder to book another appointment",
+      "B12 spend: Square Appointments integration automated rebooking reminder aftercare follow-up text app salon 2026",
+      "B12 spend: Square Appointments app marketplace rebook OR rebooking reminders automatically clients due integration pricing",
+      "B12 spend: Square App Marketplace salon client follow-up after appointment automated text email rebook integration Square Appointments pricing per month",
+      "B12 spend: integrates with Square salon rebooking reminders OR rebook reminders OR aftercare automated texts software lash studio",
+      "B11 spend: Freelancer API query=rebooking reminder from 2026-08-22, filtered rebook|follow up|aftercare|retention|lapsed|reminder",
+      "B11 spend: Freelancer API query=salon follow up from 2026-08-22, filtered rebook|follow up|aftercare|retention|lapsed|reminder",
+      "B11 spend: Freelancer API query=square appointments from 2026-08-22, filtered rebook|follow up|aftercare|retention|lapsed|reminder",
+      "B11 spend: Freelancer API query=salon automation from 2026-08-22, filtered rebook|follow up|aftercare|retention|lapsed|reminder",
+      "B11 spend: Freelancer API query=square api from 2026-08-22, filtered rebook|follow up|aftercare|retention|lapsed|reminder",
+      "B11 spend: Freelancer API query=sms reminders salon from 2026-08-22, filtered rebook|follow up|aftercare|retention|lapsed|reminder",
+      "B12 spend: Square App Marketplace review request after appointment app Square Appointments NiceJob OR Birdeye OR Review Wave OR GatherUp integration price",
+      "B12 spend: NiceJob Square integration Square appointments rebooking reminders repeats",
+      "A16 mandate: Square Seller Community guidelines self-promotion advertising promote products services rules community.squareup.com",
+      "A16 mandate: developer.squareup.com list your app on Square App Marketplace requirements review process minimum sellers",
+      "C5 mandate: Washington My Health My Data Act FAQ attorney general consumer health data definition pregnancy services small business",
+      "A16 complaint: site:community.calendly.com waitlist",
+      "A16 complaint: site:community.calendly.com \"waiting list\" cancellation",
+      "A16 complaint: Calendly waitlist cancelled appointment fill slot 2026",
+      "A16 mandate: calendly.com/help waitlist OR \"waiting list\"",
+      "A16 mandate: Calendly single-use link \"Customize once and share\" plan availability help",
+      "B12 spend: Calendly waitlist add-on app integration notify when slot opens",
+      "B12 spend: \"waitlist\" \"for Calendly\" cancellation automatically offer slot app",
+      "B12 spend: zapier.com Calendly waitlist template invitee canceled notify waitlist",
+      "A16 complaint: reddit calendly waitlist cancellation massage therapist OR coach OR tutor",
+      "B12 complaint: Calendly review \"waitlist\" missing feature capterra OR g2 OR trustpilot",
+      "B12 spend: \"Calendly\" waitlist tool fill cancellations \"works with Calendly\"",
+      "B12 spend: producthunt waitlist cancellation slot fill Calendly add-on",
+      "B11 spend: Freelancer API: appointment_waitlist (from 2026-08-22, filtered locally for waitlist/cancellation fill)",
+      "B11 spend: Freelancer API: booking_cancellation_automation (from 2026-08-22, filtered locally for waitlist/cancellation fill)",
+      "B11 spend: Freelancer API: calendly (from 2026-08-22, filtered locally for waitlist/cancellation fill)",
+      "B11 spend: Freelancer API: cancellation (from 2026-08-22, filtered locally for waitlist/cancellation fill)",
+      "B11 spend: Freelancer API: waitlist (from 2026-08-22, filtered locally for waitlist/cancellation fill)",
+      "A16 complaint: calendly waitlist cancellation (allowed_domains reddit.com)",
+      "A16 complaint: \"Calendly doesnt have a waitlist\" OR \"Calendly does not have a waitlist\" OR \"calendly has no waitlist\"",
+      "B12 spend: github calendly waitlist \"invitee.canceled\" open source",
+      "A16 complaint: LiQL subject MATCHES 'back in stock' since 2025-06-01",
+      "A16 complaint: LiQL subject MATCHES 'restock' since 2025-01-01",
+      "A16 complaint: LiQL body MATCHES 'back in stock' since 2025-06-01",
+      "A16 complaint: LiQL subject MATCHES 'notify stock' depth 0",
+      "A16 complaint: LiQL subject MATCHES 'back in stock notification' depth 0 before 2025-06-01",
+      "A16 complaint: Square Online \"back in stock\" notification customers notify me",
+      "A16 mandate: LiQL product-news board depth 0 since 2026-01-01, scanned for back in stock/restock/waitlist/notify",
+      "A16 mandate: site:squareup.com help Square Online out of stock items customers notify pre-order",
+      "B12 spend: \"Square Online\" back in stock alerts app waitlist notify when available integration",
+      "A16 complaint: LiQL subject MATCHES 'waitlist' since 2026-05-24",
+      "A16 complaint: LiQL subject MATCHES 'notify' since 2026-05-24",
+      "A16 complaint: LiQL body MATCHES notify/restock/sold out since 2026-05-24, local regex filter for restock notification",
+      "A16 complaint: reddit Square Online store \"back in stock\" notification email customers",
+      "A13 spend: developer.squareup.com/forums search back in stock",
+      "A16 mandate: \"square.site\" product \"sold out\" shop",
+      "A16 mandate: site:square.site product \"Sold out\"",
+      "B12 spend: squareup.com app-marketplace \"back in stock\" OR \"restock\" notifications Square Online app",
+      "B12 spend: back in stock notification widget works with Square Online any website embed script restock alert",
+      "B12 spend: Klaviyo back in stock flow Square Online integration supported platforms",
+      "B11 spend: Freelancer API query 'back in stock' since 2026-08-22, local filter back-in-stock/waitlist/notify me (~277 projects)",
+      "B11 spend: Freelancer API query 'restock notification' since 2026-08-22",
+      "B11 spend: Freelancer API query 'square online' and 'square' since 2026-08-22, local filter Square Online + restock",
+      "A16 mandate: Square Community guidelines self-promotion advertising apps rules",
+      "A16 mandate: Square App Marketplace list your app requirements developer partner application review",
+      "B12 spend: \"back in stock\" app \"for Square\" sellers notify customers restock email integration Square inventory 2026",
+      "B12 spend: Xero quote reminders app automatic follow up unaccepted quotes",
+      "B12 spend: apps.xero.com quote follow up reminder accepted declined",
+      "A16 mandate: Xero \"quote reminders\" new feature 2026",
+      "A16 mandate: Xero \"new quotes\" test users \"classic invoicing\" quote reminders productideas",
+      "A16 mandate: Xero new quotes experience 2026 release quote features what's new (site xero.com)",
+      "C10 mandate: Xero webhooks available event categories invoices contacts credit notes quotes",
+      "C10 mandate: Xero app partner certification checkpoints requirements App Store listing developer (site developer.xero.com, xero.com)",
+      "B12 spend: Quotient quote software automatic reminders follow up customers not accepted quote",
+      "A16 complaint: \"quote\" follow up reminder Xero unaccepted quotes trades small business 2026 -productideas",
+      "A16 complaint: central.xero.com quote reminder automatic follow up quote not accepted",
+      "B11 spend: freelancer API: xero quote (from 2026-08-22, filtered locally for quote + follow-up/remind)",
+      "B11 spend: freelancer API: quote follow up (from 2026-08-22, filtered locally for quote + follow-up/remind)",
+      "B11 spend: freelancer API: xero automation (from 2026-08-22, filtered locally for quote + follow-up/remind)",
+      "B11 spend: freelancer API: quote reminder (from 2026-08-22, filtered locally for quote + follow-up/remind)",
+      "B11 spend: freelancer API: quotes automation (from 2026-08-22, filtered locally for quote + follow-up/remind)",
+      "B11 spend: freelancer API: servicem8 (from 2026-08-22, filtered locally for quote + follow-up/remind)",
+      "B12 spend: Tradify automatic quote follow up reminders pricing per user",
+      "B12 spend: \"quote chaser\" OR \"chase quotes\" app for Xero quotes automatic emails",
+      "C10 mandate: Shopify B2B available on Basic Grow Advanced plans 2026",
+      "C10 mandate: Shopify changelog B2B local delivery checkout 2026",
+      "C10 mandate: help.shopify.com market-driven shipping B2B markets local delivery shipping options",
+      "A13 complaint: community.shopify.com search.json b2b local delivery after:2026-05-24",
+      "A13 complaint: community.shopify.com search.json wholesale delivery day after:2026-05-24",
+      "A13 complaint: community.shopify.com search.json b2b delivery date after:2026-05-24",
+      "A13 complaint: community.shopify.com search.json wholesale local delivery after:2026-05-24",
+      "A13 complaint: community.shopify.com search.json b2b local delivery after:2025-01-01",
+      "A13 complaint: community.shopify.com search.json b2b delivery schedule after:2026-05-24",
+      "B12 spend: apps.shopify.com delivery date picker B2B company locations wholesale delivery days",
+      "B12 spend: Shopify B2B delivery date picker app B2B checkout company location delivery day wholesale bakery coffee roaster",
+      "B12 spend: Zapiet pickup delivery Shopify B2B companies wholesale local delivery support",
+      "B12 spend: Zapiet Shopify B2B OR B2B checkout delivery date help article",
+      "B12 spend: delivery date app works with Shopify B2B companies B2B local delivery rate company location Shopify app 2026",
+      "B12 spend: Shopify app wholesale delivery routes standing orders delivery schedule bakery coffee roaster B2B delivery days",
+      "B12 spend: wholesale ordering platform food producers bakery coffee roaster delivery days ordering portal pricing Pepper Choco Notch GrazeCart Local Food Marketplace",
+      "B11 spend: freelancer.com API query=shopify b2b delivery from 2026-08-22, local filter shopify + b2b/wholesale + delivery/route/schedule",
+      "B11 spend: freelancer.com API query=shopify wholesale delivery from 2026-08-22, local filter shopify + b2b/wholesale + delivery/route/schedule",
+      "B11 spend: freelancer.com API query=shopify local delivery from 2026-08-22, local filter shopify + b2b/wholesale + delivery/route/schedule",
+      "B11 spend: freelancer.com API query=shopify delivery date from 2026-08-22, local filter shopify + b2b/wholesale + delivery/route/schedule",
+      "B11 spend: freelancer.com API query=wholesale ordering delivery from 2026-08-22, local filter b2b/wholesale/restaurant + delivery day/route/cutoff",
+      "B11 spend: freelancer.com API query=delivery route wholesale from 2026-08-22, local filter b2b/wholesale/restaurant + delivery day/route/cutoff",
+      "B12 spend: Pickeasy OR Zapiet OR Flare delivery date Shopify B2B company customers not showing delivery date picker B2B checkout",
+      "A13 complaint: community.shopify.com search.json b2b zip code shipping after:2026-05-24",
+      "A13 complaint: community.shopify.com search.json wholesale delivery route after:2026-05-24",
+      "A16 complaint: Square Appointments limit service to certain days of week online booking availability by service",
+      "A16 complaint: booking app syncs with Square Appointments calendar service availability rules fixed start times",
+      "A16 spend: Square App Marketplace appointments integration Square Appointments sync two-way booking app 2026",
+      "B12 spend: Nailzy booking app set appointment start times Square payments",
+      "A16 mandate: dev forum: online booking turned off api booking",
+      "A16 mandate: dev forum: booking site disabled buyer level",
+      "A16 complaint: LiQL: depth=0, post_time>2026-08-22, subject MATCHES deposit",
+      "A16 complaint: LiQL: depth=0, post_time>2026-08-22, board.id=appointments",
+      "A16 complaint: LiQL: depth=0 since 2026-05-24 subject MATCHES no show / cancellation fee / card on file",
+      "B12 spend: free appointment scheduling software Square payment integration service-specific availability custom start times 2026",
+      "A16 mandate: \"Square Go\" app book appointments Square sellers customers discover",
+      "A16 mandate: LiQL: post_time>2026-06-01 body MATCHES 'specific days'",
+      "B12 spend: iBooker Square Appointments booking widget hosted pricing",
+      "B12 spend: Yatoon Pro salon booking plugin Square two-way sync",
+      "A16 spend: Square Marketing automated campaigns win back lapsed customers customize timing 2026",
+      "A16 spend: Squaremates Square AI assistant schedule automated email clients appointments",
+      "A16 spend: \"lapsed bookers\" Square automation",
+      "A16 complaint: Square Appointments integration aftercare email rebooking reminder app salon automated follow-up after appointment",
+      "B12 spend: Marsello Square Appointments integration win-back automation rebook salon pricing",
+      "A16 spend: Square App Marketplace app \"Square Appointments\" post-appointment follow-up text email rebook reminder",
+      "B12 spend: Marsello Square integration automated email marketing win back customers",
+      "B12 spend: Mailchimp Square integration appointments sync automation follow-up after booking",
+      "A16 spend: Square Managerbot Squaremates recurring tasks \"every week\" OR \"scheduled tasks\" OR \"autonomously\" help",
+      "A16 spend: \"Squaremates Apps\" Square custom apps hosted by Square",
+      "A16 spend: squareup.com app-marketplace app appointments client retention rebooking reviews SMS salon",
+      "A16 spend: app for Square Appointments sellers automatic rebooking reminders based on client visit frequency",
+      "B12 spend: ReturnFlowHQ Square SMS lapsed customers pricing",
+      "B12 spend: Klaviyo Square integration sync orders customers flows POS",
+      "A16 complaint: LiQL: body MATCHES 'lapsed' since 2026-01-01",
+      "A16 spend: LiQL: body MATCHES 'Squaremates Apps' since 2026-09-01",
+      "A16 complaint: LiQL: body MATCHES 'rebook' since 2026-09-21",
+      "A16 complaint: LiQL: body MATCHES 'aftercare' since 2026-09-21",
+      "A16 complaint: LiQL: body MATCHES 'follow up' since 2026-09-21",
+      "A16 mandate: LiQL: body MATCHES 'new platform' since 2026-10-01, topics only",
+      "B12 spend: Calendly waitlist integration app fill cancelled appointments",
+      "B12 spend: \"waitlist\" \"for Calendly\" cancellation notify next client",
+      "B12 spend: WaitlistPing Calendly",
+      "B12 spend: Calendly waitlist add-on OR extension OR plugin \"fully booked\" 2026",
+      "A16 mandate: Calendly API terms of use developer terms third-party applications",
+      "A16 mandate: Calendly single-use link payment Stripe collect payment one-off meeting",
+      "A16 spend: site:calendly.com/integration waitlist",
+      "B12 spend: Calendly cancellation waitlist Make.com OR Pipedream OR n8n template invitee.canceled notify waitlist",
+      "B12 spend: Calendly waitlist tool launch fazier OR producthunt OR indiehackers OR \"show hn\" cancelled slot",
+      "A16 complaint: site:community.calendly.com waitlist cancellation 2026",
+      "A16 mandate: Calendly Callie AI scheduling assistant cancellation reschedule fill slot beta",
+      "B12 spend: \"add a waitlist to Calendly\" OR \"Calendly waitlist app\" OR \"waitlist for your Calendly\"",
+      "A16 complaint: Square Online \"back in stock\" notification app OR widget for Square Online store",
+      "A16 complaint: squareup.com help Square Online \"notify\" customers when sold out item available",
+      "A16 spend: squareup.com app-marketplace \"back in stock\" OR \"restock\" OR \"waitlist\" app Square Online",
+      "A16 spend: Zapier Square \"inventory\" trigger back in stock email customers template",
+      "A16 spend: \"Square Online\" \"notify me\" back in stock widget POWR OR \"Common Ninja\" OR Elfsight OR \"third-party\"",
+      "A16 spend: back in stock alerts app \"Square\" integration restock notification 2026 \"Square Online\" OR \"Square POS\" app",
+      "A16 complaint: LiQL: body MATCHES 'back in stock' AND post_time > 2026-01-01",
+      "A16 spend: app marketplace back in stock notify customers sold out items (squareup.com, square.com)",
+      "A16 mandate: Square Online \"Snippets API\" early access app back in stock OR waitlist OR \"notify me\"",
+      "A13 mandate: developer forum: snippet product page item id",
+      "B11 spend: Freelancer API query=back in stock from 2026-08-22",
+      "B11 spend: Freelancer API query=square online from 2026-05-24",
+      "A16 mandate: Square Marketing automated email campaigns triggers list help article \"automated\" Square Marketing back in stock",
+      "A16 spend: \"app-marketplace/app\" square \"out of stock\" OR \"back in stock\" OR \"stock notification\" customers email",
+      "A16 spend: \"back in stock\" notification widget any website embed code works with \"Square Online\" OR \"any platform\" POWR OR \"Common Ninja\" OR Elfsight OR Notifyvisitors",
+      "A16 spend: Marsello OR Mailchimp OR Omnisend Square integration \"back in stock\" automation Square Online sellers",
+      "A16 mandate: Square Seller Community guidelines self-promotion third-party apps developers \"Community Guidelines\"",
+      "A16 spend: GitHub repos: square back in stock",
+      "A16 spend: GitHub repos: square online restock notification",
+      "A16 mandate: LiQL: subject MATCHES 'Delivered' since 2026-11-01",
+      "A16 mandate: LiQL: product-ideas replies since 2026-11-10 (status changes)",
+      "A16 mandate: LiQL: all messages 2026-11-17 to 2026-11-18 (moderator status batch)",
+      "A16 mandate: LiQL: product-news topics since 2026-08-01 scanned for stock, notify, waitlist",
+      "A16 complaint: LiQL: product-ideas ranked by kudos since 2023 and since 2021 (roadmap status scan)",
+      "A16 spend: GitHub repos: squareup inventory notify customers",
+      "A16 spend: GitHub repos: back-in-stock square",
+      "A16 complaint: LiQL: messages WHERE body MATCHES Vancouver OR British Columbia OR Manitoba since 2026-10-20 (syntax error)",
+      "A16 complaint: LiQL: messages WHERE body MATCHES time zone Vancouver AND post_time > 2026-10-20",
+      "C10 mandate: Calendly Vancouver time zone British Columbia permanent time release notes 2026",
+      "B11 spend: Freelancer API: time zone appointments (from 2026-08-22)",
+      "B11 spend: Freelancer API: square appointments (from 2026-08-22)",
+      "B11 spend: Freelancer API: calendly (from 2026-08-22)",
+      "B11 spend: PeoplePerHour: square appointments",
+      "B12 spend: bulk shift appointments one hour time zone fix tool Square Appointments OR Calendly British Columbia Alberta Manitoba November 2026",
+      "C10 mandate: Square Bookings API seller-level permissions requires Appointments Plus or Premium subscription UpdateBooking",
+      "A16 complaint: site:calendly.com/help book on behalf invitee text confirmation link text notifications opt in",
+      "C10 mandate: Calendly API invitee text_reminder_number SMS consent status field",
+      "B12 spend: Calendly integration SMS text reminders app paid Apptoto OR SimpleTexting OR Textline Calendly appointment reminders pricing 2026",
+      "B12 spend: Salesmsg pricing plans per month",
+      "A13 complaint: forum.invoiceninja.com search.json: peppol after:2026-08-22",
+      "B11 spend: Freelancer API: peppol (from 2026-08-22)",
+      "B11 spend: Freelancer API: e-invoice (from 2026-08-22)",
+      "B11 spend: Freelancer API: ubl invoice (from 2026-08-22)",
+      "A16 complaint: Peppol invoice rejected validation error small business Belgium cannot send invoices forum November 2026",
+      "B12 spend: free Peppol BIS Billing 3.0 validator upload UBL invoice explain validation errors",
+      "B11 spend: Freelancer API: sms reminder (from 2026-08-22)",
+      "B11 spend: Freelancer API: text reminders appointments (from 2026-08-22)",
+      "B11 spend: Freelancer API: twilio calendly (from 2026-08-22)",
+      "C10 mandate: site:calendly.com/help time zone Vancouver OR Alberta OR Manitoba OR British Columbia 2026"
+    ],
+    "unverifiedSignals": [
+      {
+        "url": "https://community.loyverse.com/latest.json",
+        "reason": "timeout: probe: no response / host not resolved"
+      },
+      {
+        "url": "https://discourse.webflow.com/latest.json",
+        "reason": "empty: probe: redirects to a non-Discourse community page"
+      },
+      {
+        "url": "https://invoiceninja.github.io/en/quotes",
+        "reason": "empty: JS shell"
+      },
+      {
+        "url": "https://community.lodgify.com/latest.json",
+        "reason": "http_403: Cloudflare challenge; not retried"
+      },
+      {
+        "url": "https://community.ecwid.com/latest.json",
+        "reason": "http_404: not Discourse"
+      },
+      {
+        "url": "https://community.lightspeedhq.com/latest.json",
+        "reason": "redirect: redirects to lightspeedhq.com/support, not Discourse"
+      },
+      {
+        "url": "https://community.cliniko.com/latest.json",
+        "reason": "redirect: redirects to cliniko.com/help, not Discourse"
+      },
+      {
+        "url": "https://calendly.com/releases",
+        "reason": "empty: not a changelog; user booking page"
+      },
+      {
+        "url": "https://developer.xero.com/documentation/api/accounting/quotes",
+        "reason": "empty: JS shell, title only"
+      },
+      {
+        "url": "https://forum.squarespace.com/search/?q=scheduling%20waitlist&quick=1&type=forums_topic",
+        "reason": "http_403: Squarespace forum search 403"
+      },
+      {
+        "url": "https://apps.shopify.com/search?q=back%20in%20stock",
+        "reason": "empty: JS-rendered search, no items"
+      },
+      {
+        "url": "https://feedback.qbo.intuit.com/forums/966060-qbo-estimates/suggestions/50805503-simple-enhancements-for-managing-estimates",
+        "reason": "empty: private forum, sign-in wall"
+      },
+      {
+        "url": "https://www.peopleperhour.com/freelance-jobs?q=quote+calculator",
+        "reason": "empty: q ignored: returns the same 20 latest jobs, none matching"
+      },
+      {
+        "url": "https://www.peopleperhour.com/freelance-jobs?q=booking+system",
+        "reason": "empty: q ignored: identical list to quote+calculator"
+      },
+      {
+        "url": "https://apps.shopify.com/search?q=square+footage+calculator",
+        "reason": "empty: search results load client-side: 'We are having trouble loading your results'"
+      },
+      {
+        "url": "https://apps.shopify.com/search?q=service+quote+calculator",
+        "reason": "empty: same JS shell"
+      },
+      {
+        "url": "https://community.squareup.com/t5/Square-for-Restaurants/Changing-Menu-pricing-on-Uber-Eats/m-p/736362",
+        "reason": "empty: WebFetch returned empty page"
+      },
+      {
+        "url": "https://forum.wixstudio.com/search.json?q=quote%20form%20price%20service%20after%3A2026-05-24",
+        "reason": "empty: no results"
+      },
+      {
+        "url": "https://www.freelancer.com/projects/legal-writing/Remove-Fake-Google-Reviews-40769542",
+        "reason": "empty: HTTP 200 but JS shell: no title or job text; API record is the readable copy"
+      },
+      {
+        "url": "https://www.freelancer.com/projects/customer-service/Remove-Fake-Google-Reviews-40791857",
+        "reason": "empty: HTTP 200 but JS shell: no title or job text; API record is the readable copy"
+      },
+      {
+        "url": "https://www.freelancer.com/projects/google-ads/Remove-Fake-Reviews-from-Google",
+        "reason": "empty: HTTP 200 but JS shell: no title or job text; API record is the readable copy"
+      },
+      {
+        "url": "https://www.freelancer.com/projects/web-development/Fix-Snow-Quote-Calculator",
+        "reason": "empty: HTTP 200 but JS shell: no title or job text; API record is the readable copy"
+      },
+      {
+        "url": "https://www.freelancer.com/projects/adobe-illustrator/Editable-Indian-Menu-Design",
+        "reason": "empty: HTTP 200 but JS shell: no title or job text; API record is the readable copy"
+      },
+      {
+        "url": "https://www.achrnews.com/topics/2669-price-increases",
+        "reason": "empty: topic page lists no article items to curl"
+      },
+      {
+        "url": "https://www.ecfr.gov/current/title-40/chapter-I/subchapter-C/part-84/subpart-C/section-84.106",
+        "reason": "redirect: 302 to unblock.federalregister.gov; not pursued"
+      },
+      {
+        "url": "https://www.americansalon.com/",
+        "reason": "http_403: 403"
+      },
+      {
+        "url": "https://community.squareup.com/t5/Feedback-Discussions/Forced-into-Square-Plus/td-p/847889",
+        "reason": "empty: WebFetch got empty page"
+      },
+      {
+        "url": "https://forums.whirlpool.net.au/thread/3n111zwk?p=2",
+        "reason": "http_403: 403, not retried"
+      },
+      {
+        "url": "https://www.capterra.com/p/10054017/Ref-LeakLog/",
+        "reason": "http_403: 403"
+      },
+      {
+        "url": "https://www.softwareadvice.com/product/561604-Ref-LeakLog/",
+        "reason": "http_403: 403"
+      },
+      {
+        "url": "https://www.federalregister.gov/documents/2026/11/19/2026-23429/hipaa-privacy-rule-changes-to-support-coordinated-care-and-individual-engagement-and-reduce",
+        "reason": "redirect: 302 to unblock.federalregister.gov"
+      },
+      {
+        "url": "https://www.federalregister.gov/documents/full_text/text/2026/11/19/2026-23429.txt",
+        "reason": "empty: Request Access interstitial; not pursued"
+      },
+      {
+        "url": "https://www.hhs.gov/hipaa/for-professionals/privacy/changes-support-coordinated-care-individual-engagement-reduce-regulatory-burdens-final-rule.html",
+        "reason": "http_403: 403"
+      },
+      {
+        "url": "https://www.indiehackers.com/product/ref-leaklog",
+        "reason": "http_403: 403"
+      },
+      {
+        "url": "https://www.canberratimes.com.au/story/9306403/small-businesses-speak-out-ahead-of-credit-card-surcharge-ban/",
+        "reason": "http_403: 403"
+      },
+      {
+        "url": "https://squareup.com/us/en/release-notes",
+        "reason": "http_429: release notes index"
+      },
+      {
+        "url": "https://squareup.com/us/en/feature-log",
+        "reason": "http_429"
+      },
+      {
+        "url": "https://squareup.com/us/en/app-marketplace/app/setmore",
+        "reason": "http_429"
+      },
+      {
+        "url": "https://sellercommunity.com/t5/Orientation-Etiquette/Community-Etiquette-Guidelines/td-p/40441",
+        "reason": "empty: HTTP 202, empty body"
+      },
+      {
+        "url": "https://community.squareup.com/t5/Orientation-Etiquette/Community-Etiquette-Guidelines/td-p/40441",
+        "reason": "empty"
+      },
+      {
+        "url": "https://squareup.com/us/en/appointments/pricing",
+        "reason": "http_429"
+      },
+      {
+        "url": "https://community.squareup.com/api/2.0/search?q=SELECT%20id%2C%20subject%2C%20post_time%2C%20board.id%20FROM%20messages%20WHERE%20subject%20MATCHES%20%27Code%20of%20Conduct%27%20AND%20depth%20%3D%200%20ORDER%20BY%20post_time%20DESC%20LIMIT%2015",
+        "reason": "empty: no guideline post in results"
+      },
+      {
+        "url": "https://community.squareup.com/api/2.0/search?q=SELECT%20subject%2C%20body%2C%20post_time%2C%20author.rank.name%2C%20depth%2C%20topic.id%20FROM%20messages%20WHERE%20subject%20MATCHES%20%27follow%20up%27%20AND%20post_time%20%3E%202026-05-01T00%3A00%3A00.000-07%3A00%20ORDER%20BY%20post_time%20DESC%20LIMIT%2040",
+        "reason": "empty: MATCHES follow up: 0 items"
+      },
+      {
+        "url": "https://squareup.com/help/ie/article/5660",
+        "reason": "redirect: redirects to help/ie/en/article/8412-create-marketing-campaigns; old automated campaign list (winback criteria) no longer on the page"
+      },
+      {
+        "url": "https://community.squareup.com/api/2.0/search?q=SELECT%20subject%2C%20body%2C%20post_time%2C%20author.rank.name%2C%20depth%20FROM%20messages%20WHERE%20topic.id%20%3D%20%27804112%27%20ORDER%20BY%20post_time%20ASC%20LIMIT%2030",
+        "reason": "empty: topic 804112: 0 items (id may be a message id, not a topic id)"
+      },
+      {
+        "url": "https://api.squareup.com/help/gb/en/article/5660",
+        "reason": "redirect: redirects to 8412-create-marketing-campaigns (GB); no automation list"
+      },
+      {
+        "url": "https://squareup.com/us/en/pricing",
+        "reason": "http_429: HTTP 429; not retried"
+      },
+      {
+        "url": "https://square.com/us/en/appointments/pricing",
+        "reason": "redirect: 301 to squareup.com/us/en/appointments/pricing"
+      },
+      {
+        "url": "https://squareup.com/us/en/app-marketplace/search?q=rebook",
+        "reason": "empty: JS shell, title only"
+      },
+      {
+        "url": "https://get.nicejob.com/integrations",
+        "reason": "http_404: constructed path; 404"
+      },
+      {
+        "url": "https://community.squareup.com/api/2.0/search?q=SELECT%20subject%2C%20body%2C%20post_time%2C%20author.rank.name%20FROM%20messages%20WHERE%20id%20%3D%20%27654675%27",
+        "reason": "empty: guidelines message 654675 not returned by LiQL (0 items)"
+      },
+      {
+        "url": "https://community.squareup.com/api/2.0/search?q=SELECT%20id%2C%20subject%2C%20post_time%2C%20author.rank.name%2C%20board.id%20FROM%20messages%20WHERE%20subject%20MATCHES%20%27Guidelines%27%20AND%20depth%20%3D%200%20ORDER%20BY%20post_time%20DESC%20LIMIT%2020",
+        "reason": "empty: no community guidelines topic among messages"
+      },
+      {
+        "url": "https://sellercommunity.com/t5/About-the-Seller-Community/Community-Etiquette-Guidelines/m-p/654675",
+        "reason": "empty: redirect to community.squareup.com guidelines page; HTTP 202 empty body (bot gate); not retried"
+      },
+      {
+        "url": "https://developer.squareup.com/docs/app-marketplace/promote-your-app",
+        "reason": "http_404: 404"
+      },
+      {
+        "url": "https://developer.squareup.com/docs/app-marketplace",
+        "reason": "http_404: constructed path; 404"
+      },
+      {
+        "url": "https://crtc.gc.ca/eng/com500/faq500.htm",
+        "reason": "http_403: HTTP 403; not retried"
+      },
+      {
+        "url": "https://community.squareup.com/api/2.0/search?q=SELECT%20id%2C%20subject%2C%20body%2C%20post_time%2C%20author.rank.name%20FROM%20messages%20WHERE%20subject%20MATCHES%20%27What%27%27s%20New%20From%20Square%27%20AND%20depth%20%3D%200%20AND%20post_time%20%3E%202026-07-01T00%3A00%3A00.000-07%3A00%20AND%20post_time%20%3C%202026-11-01T00%3A00%3A00.000-07%3A00%20ORDER%20BY%20post_time%20DESC%20LIMIT%2010",
+        "reason": "empty: loose word match; no What is New volumes returned"
+      },
+      {
+        "url": "https://community.squareup.com/api/2.0/search?q=SELECT%20id%2C%20subject%2C%20body%2C%20post_time%2C%20author.rank.name%20FROM%20messages%20WHERE%20author.rank.name%20%3D%20%27Admin%27%20AND%20subject%20MATCHES%20%27Volume%27%20AND%20depth%20%3D%200%20AND%20post_time%20%3E%202026-06-01T00%3A00%3A00.000-07%3A00%20ORDER%20BY%20post_time%20DESC%20LIMIT%2010",
+        "reason": "empty: HTTP 400 invalid query syntax (rank filter)"
+      },
+      {
+        "url": "https://community.calendly.com/developer-q-a-61/index2.html",
+        "reason": "empty: same list as page 1, pagination not served"
+      },
+      {
+        "url": "https://community.calendly.com/developer-q-a-61/index3.html",
+        "reason": "empty: same list as page 1"
+      },
+      {
+        "url": "https://zapier.com/templates/details/notify-waitlist-contacts-when-an-appointment-is-cancelled-1b32b81954e7",
+        "reason": "http_404: gatherer URL from search, now 404"
+      },
+      {
+        "url": "https://calendly.com/integrations",
+        "reason": "empty: JS shell"
+      },
+      {
+        "url": "https://community.squareup.com/api/2.0/search?q=SELECT%20subject%2C%20body%2C%20post_time%2C%20author.rank.name%2C%20depth%20FROM%20messages%20WHERE%20topic.id%20%3D%20%27849059%27%20ORDER%20BY%20post_time%20ASC%20LIMIT%2030",
+        "reason": "empty: 849059 is a reply, not a topic; looked up its topic 824310"
+      },
+      {
+        "url": "https://community.squareup.com/api/2.0/search?q=SELECT%20id%2C%20subject%2C%20body%2C%20post_time%2C%20author.rank.name%2C%20depth%2C%20topic.id%20FROM%20messages%20WHERE%20body%20MATCHES%20%27notify%27%20AND%20body%20MATCHES%20%27stock%27%20AND%20post_time%20%3E%202026-05-24T00%3A00%3A00.000-07%3A00%20ORDER%20BY%20post_time%20DESC%20LIMIT%20100",
+        "reason": "http_5xx: HTTP 400 invalid query syntax (two MATCHES on body); my query error"
+      },
+      {
+        "url": "https://squareup.com/us/en/app-marketplace/search?q=back%20in%20stock",
+        "reason": "http_429: App Marketplace search rate-limited; not retried"
+      },
+      {
+        "url": "https://squareup.com/us/en/app-marketplace/search?q=waitlist",
+        "reason": "http_429: App Marketplace search rate-limited; not retried"
+      },
+      {
+        "url": "https://www.freelancer.com/api/projects/0.1/projects/all/?query=back%20in%20stock&limit=100&offset=300&full_description=true&from_time=1787356800",
+        "reason": "empty: empty page (end of results)"
+      },
+      {
+        "url": "https://www.freelancer.com/api/projects/0.1/projects/all/?query=back%20in%20stock&limit=100&offset=400&full_description=true&from_time=1787356800",
+        "reason": "empty: empty page (end of results)"
+      },
+      {
+        "url": "https://community.squareup.com/api/2.0/search?q=SELECT%20id%2C%20subject%2C%20body%2C%20post_time%2C%20edit_time%20FROM%20messages%20WHERE%20id%20%3D%20%2740441%27",
+        "reason": "http_5xx: HTTP 400 invalid syntax (edit_time field); my query error"
+      },
+      {
+        "url": "https://community.squareup.com/api/2.0/search?q=SELECT%20id%2C%20subject%2C%20body%2C%20post_time%20FROM%20messages%20WHERE%20id%20%3D%20%2740441%27",
+        "reason": "empty: message 40441 not returned by LiQL (0 items)"
+      },
+      {
+        "url": "https://developer.squareup.com/docs/app-marketplace/faq",
+        "reason": "http_404: 404"
+      },
+      {
+        "url": "https://innovations.xero.com/",
+        "reason": "empty: Q2 2026 edition shell; update items load by JS"
+      },
+      {
+        "url": "https://api.github.com/repos/XeroAPI/Xero-OpenAPI/contents/",
+        "reason": "http_403: GitHub API path refused by the proxy; repo listing not available"
+      },
+      {
+        "url": "https://productideas.xero.com/forums/939198-for-small-businesses/suggestions/46437406-webhooks-expand-to-include-projects-quotes-and",
+        "reason": "http_404: search-result URL returns 404"
+      },
+      {
+        "url": "https://developer.xero.com/documentation/xero-app-store/app-partner-guides/certification-checkpoints",
+        "reason": "empty: JS shell, title only"
+      },
+      {
+        "url": "https://www.quotientapp.com/pricing",
+        "reason": "empty: 19 KB JS shell; no reminder wording"
+      },
+      {
+        "url": "https://productideas.xero.com/forums/967115-invoices-quotes/suggestions/50861924-autonomous-quoting-system",
+        "reason": "redirect: merged: serves the quote reminder idea 45019228 (same thread, not independent)"
+      },
+      {
+        "url": "https://www.freelancer.com/projects/ai-automation/Claude-MCP-Automation-Developer-Small",
+        "reason": "empty: public project page is a JS shell; no job text"
+      },
+      {
+        "url": "https://apps.shopify.com/search?q=b2b+delivery+date",
+        "reason": "empty: search results are JS skeleton cards"
+      },
+      {
+        "url": "https://apps.shopify.com/b2b-wholesale-solution",
+        "reason": "http_404: guessed slug; not cited"
+      },
+      {
+        "url": "https://apps.shopify.com/flare/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest",
+        "reason": "http_404: not retried"
+      },
+      {
+        "url": "https://apps.shopify.com/the-usual",
+        "reason": "http_404: URL from search result; listing gone"
+      },
+      {
+        "url": "https://squareup.com/help/gb/article/6600",
+        "reason": "redirect: 301 to app-marketplace Setmore listing"
+      },
+      {
+        "url": "https://zapier.com/apps/mailchimp/integrations/square/255576883/add-or-update-mailchimp-subscribers-whenever-new-appointments-are-scheduled-in-square",
+        "reason": "http_404: template URL from search; 404"
+      },
+      {
+        "url": "https://squareup.com/us/en/appointments/features",
+        "reason": "http_429: 429; not retried"
+      },
+      {
+        "url": "https://community.squareup.com/api/2.0/search?q=SELECT%20subject%2C%20body%2C%20post_time%2C%20author.rank.name%2C%20depth%2C%20topic.id%20FROM%20messages%20WHERE%20body%20MATCHES%20%27aftercare%27%20AND%20post_time%20%3E%202026-09-21T00%3A00%3A00.000-08%3A00%20ORDER%20BY%20post_time%20DESC%20LIMIT%2025",
+        "reason": "empty: 0 items since 2026-09-21"
+      },
+      {
+        "url": "https://www.reddit.com/search.json?q=calendly%20waitlist&sort=new&limit=25",
+        "reason": "http_403: review: Reddit blocks; not retried"
+      },
+      {
+        "url": "https://community.squareup.com/api/2.0/search?q=SELECT%20id%2C%20subject%2C%20post_time%2C%20topic.id%2C%20board.id%2C%20author.rank.name%20FROM%20messages%20WHERE%20subject%20MATCHES%20%27Delivered%27%20AND%20post_time%20%3E%202026-11-01T00%3A00%3A00.000-08%3A00%20ORDER%20BY%20post_time%20DESC%20LIMIT%2050",
+        "reason": "empty: fuzzy match, 1 irrelevant hit"
+      },
+      {
+        "url": "https://www.freelancer.com/api/projects/0.1/projects/all/?query=square%20online&limit=100&offset=0&full_description=true&from_time=1779580800",
+        "reason": "empty: fuzzy query: 2057 results, none about Square Online stock alerts in first 100"
+      },
+      {
+        "url": "https://community.squareup.com/api/2.0/search?q=SELECT%20id%2C%20subject%2C%20post_time%2C%20kudos.sum%28weight%29%2C%20status.name%2C%20board.id%20FROM%20messages%20WHERE%20status.name%20%3D%20%27On%20Roadmap%27%20AND%20depth%20%3D%200%20LIMIT%20100",
+        "reason": "http_5xx: HTTP 400 invalid query syntax (status.name filter)"
+      },
+      {
+        "url": "https://community.squareup.com/api/2.0/search?q=SELECT%20subject%2C%20body%2C%20post_time%2C%20author.rank.name%2C%20depth%20FROM%20messages%20WHERE%20id%20%3D%20%2740441%27",
+        "reason": "empty: etiquette topic 40441 not returned by LiQL (0 items)"
+      },
+      {
+        "url": "https://community.calendly.com/how-do-i-40/calendly-incorrectly-schedules-british-columbia-appointments-after-november-1-2026-5868",
+        "reason": "timeout: first curl attempt returned no response within 20 s"
+      },
+      {
+        "url": "https://community.squareup.com/api/2.0/search?q=SELECT%20subject%2C%20post_time%2C%20author.rank.name%2C%20topic.id%2C%20depth%2C%20view_href%20FROM%20messages%20WHERE%20%28body%20MATCHES%20%27Vancouver%27%20OR%20body%20MATCHES%20%27British%20Columbia%27%20OR%20body%20MATCHES%20%27Manitoba%27%29%20AND%20post_time%20%3E%202026-10-20T00%3A00%3A00.000-08%3A00%20ORDER%20BY%20post_time%20DESC%20LIMIT%2040",
+        "reason": "empty: HTTP 400 Invalid query syntax (OR inside MATCHES with parentheses)"
+      },
+      {
+        "url": "https://api.github.com/repos/invoiceninja/invoiceninja/releases?per_page=20",
+        "reason": "http_403: GitHub API access to this repository not enabled for the session"
+      },
+      {
+        "url": "https://github.com/invoiceninja/invoiceninja/releases",
+        "reason": "http_403: curl refused; WebFetch of same page worked"
+      },
+      {
+        "url": "https://ecosio.com/en/peppol-and-xml-document-validator",
+        "reason": "http_403: 403 from site; not retried"
+      },
+      {
+        "url": "https://vatcalc.com/belgium/belgium-updates-e-invoicing-faq",
+        "reason": "http_403: 403 from site; not retried"
+      }
+    ],
+    "rejectedCandidates": [
+      {
+        "title": "Cancellation Waitlist for Calendly",
+        "total": 18,
+        "reason": "Researched and reviewed: rescored 24 to 20 to 18. WaitlistPing, a $15/month Calendly waitlist add-on, launched 2026-11-04; the only 90-day posts are a developer's and a customer-discovery question, so no practitioner complaint within 90 days. Survived review but did not ship (fill stops at 3); the reviewer suggests folding a one-at-a-time waitlist into Lesson Series Booker (2026-11-19)."
+      },
+      {
+        "title": "Wholesale Delivery Days for Shopify B2B",
+        "total": 19,
+        "reason": "Researched, not reviewed: rescored 21 to 19 (competitiveGap 2: Delivery Rules by Caretaker covers rate eligibility for $2; existing date pickers may already work for native B2B buyers, untested; no merchant asks for the day picker itself). Watchlist full."
+      },
+      {
+        "title": "Quote Follow-ups for Xero",
+        "total": 19,
+        "reason": "Researched, not reviewed: rescored 22 to 19. Paidnice already chases Xero quotes (only inside its US$69/month collections plan) and ServiceM8 Free does it for solo trades who quote there; Xero's community bans commercial posts. Watchlist full."
+      },
+      {
+        "title": "Option-Pick Quotes for Contractors on Invoice Ninja",
+        "total": 19,
+        "reason": "Gathered only: one recent complaint; Quotient and Jobber already ship optional quote lines. Watchlist full."
+      },
+      {
+        "title": "Fake-Review Case File for Local Businesses",
+        "total": 19,
+        "reason": "Gathered only: three paid jobs in 60 days, but ReviewPace already sells dispute packs with a free tier and Google removes clear bursts itself. Watchlist full."
+      },
+      {
+        "title": "Zotero Research Desk with Your Own Key",
+        "total": 20,
+        "reason": "Carried from the watchlist (firstSeen 2026-11-18), not re-researched today; watchlist full, and its 2026-11-19 re-research found no paid job and free bring-your-own-key plugins."
+      },
+      {
+        "title": "MTD Property Pack for Landlords with More than 10 Properties on Xero",
+        "total": 19,
+        "reason": "Carried from 2026-11-19, not re-researched; watchlist full."
+      },
+      {
+        "title": "Mandatory Deposit Rules for Trade Quotes",
+        "total": 19,
+        "reason": "Carried from 2026-11-18, not re-researched; watchlist full (Jobber, ServiceM8 and tradiecore build deposits into quotes)."
+      },
+      {
+        "title": "Self-Rescheduling for Shopify Service Bookings",
+        "total": 19,
+        "reason": "Carried from 2026-11-18, not re-researched; watchlist full (pain 3 on one complaint about a free app's bug)."
+      },
+      {
+        "title": "Text-Reminder Consent Tracker for Staff-Booked Calendly Clients",
+        "total": 18,
+        "reason": "Re-researched from the watchlist: pain 5 and willingnessToPay 3, but Calendly's API exposes no SMS consent status (sent texts are visible only on Enterprise), so the tracker cannot be built; the fallback is another SMS sender with 10DLC and TCPA burden."
+      },
+      {
+        "title": "Renewal Reminder Notices for UK Membership Businesses on GoCardless or Stripe",
+        "total": 18,
+        "reason": "Mandate-led: the DMCC Act subscription notices apply to contracts from 2027-01-01 (regulations still in draft); no owner complaint found, no named community."
+      },
+      {
+        "title": "Merchant Fee Pass-Through Check for Australian Cafes and Shops",
+        "total": 17,
+        "reason": "Mandate plus two owners quoted in a news article after the 2026-10-01 surcharge ban; no payment evidence, no readable owner community, and a one-off job."
+      },
+      {
+        "title": "Leak Rate Log for Small Refrigeration Contractors",
+        "total": 16,
+        "reason": "EPA 15 lb leak-repair rule since 2026-01-01, but a free Hawaii DOH calculator and templates plus Ref LeakLog already serve small contractors; no recent complaint."
+      },
+      {
+        "title": "Peppol Rejection Explainer for Small Invoicing Tools",
+        "total": 15,
+        "reason": "Re-researched from the watchlist: one poster's complaint about a vendor bug; free validators and vendors' explainer pages already serve owners. Dropped from the watchlist."
+      },
+      {
+        "title": "Records Request Clock for Small US Practices (HIPAA 15-day rule)",
+        "total": 14,
+        "reason": "HHS final rule published 2026-11-19, but storing requests means storing PHI (complianceBurden 1) and no practice complaint was found."
+      },
+      {
+        "title": "Gathering-stage drops (about 53 leads)",
+        "total": 0,
+        "reason": "Dropped by the gatherers before scoring, mostly because the vendor already ships it, an app already covers it, it duplicates a past idea, or the only posters were app developers: e.g. Shopify bookings, store credit and returns threads (developer-written), Square native waitlist and intake forms, Square service-menu setup (labour), California SB 68 allergens (chains only), restaurant fee disclosure and Martyn's Law (duplicates), Illinois swipe-fee law (delayed to 2027). Each is listed in its gatherer's report in hintwise-workflow runs/2026/11/2026-11-20T0955Z-finder-gatherer-*.md."
+      }
+    ],
+    "watchlist": [
+      {
+        "title": "Booking Time-Zone Audit for BC, Alberta and Manitoba",
+        "targetCustomer": "Salons, studios, clinics and solo service providers in British Columbia, Alberta and Manitoba who take bookings in Square Appointments or Calendly.",
+        "problemStatement": "Appointments saved before the vendor's time-zone update sit an hour off; one salon owner has over 200 to check by hand, and Square support says no patch is coming.",
+        "total": 21,
+        "missedGate": "Re-researched 2026-11-20: willingnessToPay 2 (no paid job or app found) and total 21; a one-off clean-up that shrinks as sellers finish by hand.",
+        "evidence": [
+          "https://community.squareup.com/api/2.0/search?q=SELECT%20subject%2C%20body%2C%20post_time%2C%20author.rank.name%2C%20depth%20FROM%20messages%20WHERE%20topic.id%20%3D%20%27847330%27%20ORDER%20BY%20post_time%20ASC%20LIMIT%2040%20OFFSET%2040",
+          "https://community.calendly.com/how-do-i-40/calendly-incorrectly-schedules-british-columbia-appointments-after-november-1-2026-5868/index2.html"
+        ],
+        "firstSeen": "2026-11-19"
+      },
+      {
+        "title": "Local Order Status Desk for Shopify Pickup and Own-Driver Delivery",
+        "targetCustomer": "Small grocers, bakeries and boutiques on Shopify that offer store pickup and deliver with their own drivers.",
+        "problemStatement": "Native local delivery orders cannot be edited, and the shipping-rate workaround loses the local statuses and sends a 'shipped' email for collected orders.",
+        "total": 21,
+        "missedGate": "Not researched; competitiveGap 2 (EasyRoutes free plan and Zapiet already send local status messages; the edit block is in Shopify's platform).",
+        "evidence": [
+          "https://community.shopify.com/t/691546.json",
+          "https://community.shopify.com/t/690055.json",
+          "https://community.shopify.com/t/681096.json"
+        ],
+        "firstSeen": "2026-11-20"
+      },
+      {
+        "title": "Payment-Plan Collector for Partly Paid Shopify POS Orders",
+        "targetCustomer": "Bridal boutiques, furniture shops and custom jewellers that take a deposit at the counter on Shopify POS and collect the balance over months.",
+        "problemStatement": "Staff negotiate a schedule at the counter but must chase every instalment by hand; Shopify does not charge the balance on its due date.",
+        "total": 21,
+        "missedGate": "Not researched; pain 3 (one detailed merchant plus agreement), and a new $17/month POS layaway app may be close enough.",
+        "evidence": [
+          "https://community.shopify.com/t/680580.json",
+          "https://apps.shopify.com/downpay",
+          "https://apps.shopify.com/layaway-1"
+        ],
+        "firstSeen": "2026-11-20"
+      },
+      {
+        "title": "Pickup Preselect for Pickup-Only Shopify Carts",
+        "targetCustomer": "Small Shopify food makers and shops selling pickup-only items next to items they ship.",
+        "problemStatement": "Checkout hides shipping on pickup-only carts with no explanation and resets the cart's pickup choice to Ship, so customers abandon or order wrongly.",
+        "total": 21,
+        "missedGate": "Not researched; pain 3 and competitiveGap 2 (PickupLock covers most of it from $5.99/month).",
+        "evidence": [
+          "https://community.shopify.com/t/693011.json",
+          "https://community.shopify.com/t/707284.json",
+          "https://apps.shopify.com/pickuplock"
+        ],
+        "firstSeen": "2026-11-20"
+      },
+      {
+        "title": "Line-Item Receipts for Shopify POS after the Liquid Editor Ends",
+        "targetCustomer": "Small shops on Shopify POS Pro whose printed receipts were customised in Liquid.",
+        "problemStatement": "Shopify moves every shop to the new receipt editor on 2027-01-01, and the switch removes line-item details and separators merchants relied on.",
+        "total": 20,
+        "missedGate": "Not researched; pain 3 (one complaint plus the mandate) and competitiveGap 2 (Printer Pro and a December launch at $9/month).",
+        "evidence": [
+          "https://community.shopify.com/t/665024.json",
+          "https://changelog.shopify.com/posts/enhanced-printed-receipt-editor",
+          "https://apps.shopify.com/printer-pro"
+        ],
+        "firstSeen": "2026-11-20"
+      },
+      {
+        "title": "Instant Quote Page for Home-Service Websites",
+        "targetCustomer": "Small cleaning, snow-removal, pet-waste, insulation and repair businesses on WordPress, Wix or plain sites.",
+        "problemStatement": "Owners pay freelancers to hand-build quote calculators that customers use before calling, and those calculators break quietly.",
+        "total": 20,
+        "missedGate": "Not researched; pain 2 (no complaint found, so pain is capped) and competitiveGap 1 (ConvertCalculator free tier and $20-40 plans).",
+        "evidence": [
+          "https://www.freelancer.com/api/projects/0.1/projects/all/?query=quote%20calculator%20website&limit=50&full_description=true&from_time=1787356800",
+          "https://www.freelancer.com/api/projects/0.1/projects/all/?query=instant%20quote&limit=50&full_description=true&from_time=1787356800"
+        ],
+        "firstSeen": "2026-11-20"
+      },
+      {
+        "title": "Print Menu That Follows Square Item Prices",
+        "targetCustomer": "Independent restaurants and cafes on Square whose printed and PDF menus go stale when prices change.",
+        "problemStatement": "Owners pay designers for menus and insist on editable files so they can swap prices later; Square feeds every channel except print.",
+        "total": 20,
+        "missedGate": "Not researched; pain 2 (no complaint found; spend only), nothing ties the evidence to Square restaurants.",
+        "evidence": [
+          "https://www.freelancer.com/api/projects/0.1/projects/all/?query=restaurant%20menu%20update&limit=50&full_description=true&from_time=1787356800",
+          "https://squareup.com/help/us/en/article/6424-create-and-update-menus"
+        ],
+        "firstSeen": "2026-11-20"
+      },
+      {
+        "title": "Year-End Pack for the Accountant from Bank CSVs",
+        "targetCustomer": "Sole traders with a side business or rentals who hand a year-end summary to their accountant.",
+        "problemStatement": "Owners pay freelancers to add up a year of business, personal and rental expenses for their accountant.",
+        "total": 20,
+        "missedGate": "Carried from 2026-11-19, not re-researched (outside the top 3): no complaint evidence (pain capped at 3) and a crowded field.",
+        "evidence": [
+          "https://www.freelancer.com/api/projects/0.1/projects/all/?query=bank%20statement%20pdf%20to%20excel&limit=15&full_description=true&from_time=1787306322"
+        ],
+        "firstSeen": "2026-11-19"
+      }
+    ],
+    "caveats": "No idea cleared the gate as gathered without losing points in research or review; one ships validated at exactly 22 (Restock Alerts for Square Online, willingnessToPay 3 at the floor of its band: Shopify spend for the same job, no Square seller seen paying) and two ship provisional to fill the day to 3. Six candidates were researched and four adversarially reviewed: none killed, three rescored down (Booking Rules 22 to 21, Rebook Reminders 22 to 20, Cancellation Waitlist 20 to 18) and one passed (Restock 22). Review stopped once 3 ideas had survived; the waitlist survived review but did not ship because the fill stops at 3. Concentration: all three ideas are Square add-ons, and two serve the same customer (small salons and studios on Square Appointments) with different problems; the Square Seller Community's LiQL API was today's richest complaint vein, and Square says that community moves to a new platform before the end of 2026, so its API evidence URLs may stop resolving. No selected idea is a Weekend MVP: all three are substantial Multi-week builds with a buildPlan, and no Weekend MVP candidate met the floor with a review, so the Weekend MVP constraint is not met. Friday's focus sources: A13 (community.shopify.com) produced six candidates, all at 21 or below because most customer-facing Shopify threads are written by app developers; B11 produced spend-only candidates with no complaints; C8 trade news produced mandates but almost no dated owner complaints. This environment changed on 2026-11-20 (the routine now runs in the FullInternet environment), so scripts/probe_sources.py --write re-measured the catalog first: A1 and B5 went to blocked, C3 to ok-curl. The run was interrupted by the account's 5-hour usage limit from about 10:46 to 14:40 UTC; one review was resumed afterwards and the run finished at about 15:30 UTC."
+  }
+}

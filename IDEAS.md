@@ -664,3 +664,6 @@
 | 2026-11-19 | Own-Domain Invoice Mail for QuickBooks Online | Small Business Ops | Multi-week | 18 | provisional |  |
 | 2026-11-19 | Payday Super Clock for Bookkeepers | Accessibility & Compliance | Multi-week | 17 | provisional |  |
 | 2026-11-19 | Books Keeper: Archive Before You Cancel QuickBooks | Small Business Ops | Multi-week | 14 | provisional |  |
+| 2026-11-20 | Restock Alerts for Square Online | Micro-SaaS | Multi-week | 22 | validated |  |
+| 2026-11-20 | Booking Rules Page for Square Appointments | Small Business Ops | Multi-week | 21 | provisional |  |
+| 2026-11-20 | Rebook Reminders and Aftercare for Square Appointments | Small Business Ops | Multi-week | 20 | provisional |  |

@@ -1,6 +1,11 @@
 {
   "avoid": [
     {
+      "id": "A1",
+      "name": "LMS idea boards",
+      "why": "Canvas Community 403s and renders title-only; the Moodle Jira path is HTTP 410."
+    },
+    {
       "id": "A7",
       "name": "Higher ed Reddit",
       "why": "Reddit returns 403, a 'Welcome to Reddit' interstitial, or 'Blocked' on every path tried."
@@ -31,6 +36,11 @@
       "why": "Reddit, same as A7."
     },
     {
+      "id": "B5",
+      "name": "Acquisition marketplaces",
+      "why": "Find acquire."
+    },
+    {
       "id": "B7",
       "name": "Product Hunt",
       "why": "producthunt.com returns HTTP 403 without an API key."
@@ -52,6 +62,19 @@
         "empty": 1
       },
       "workingPaths": []
+    },
+    "<store domain withheld: the sold-out product page cited in square community topic 845776>": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://<store domain withheld: the sold-out product page cited in Square community topic 845776>/product/<slug>/<24-character item id>"
+      ]
     },
     "about.usps.com": {
       "attempts": 1,
@@ -148,17 +171,18 @@
       ]
     },
     "acuityscheduling.com": {
-      "attempts": 2,
-      "evidenceItems": 1,
-      "lastAttempt": "2026-11-19",
-      "lastOk": "2026-11-19",
-      "ok": 2,
+      "attempts": 6,
+      "evidenceItems": 5,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 6,
       "outcomes": {
-        "ok": 2
+        "ok": 6
       },
       "workingPaths": [
         "webfetch https://acuityscheduling.com/signup.php",
-        "curl https://acuityscheduling.com/pricing"
+        "curl https://acuityscheduling.com/pricing",
+        "webfetch https://acuityscheduling.com/pricing"
       ]
     },
     "adanews.ada.org": {
@@ -332,14 +356,14 @@
       ]
     },
     "api.github.com": {
-      "attempts": 93,
+      "attempts": 95,
       "evidenceItems": 16,
-      "lastAttempt": "2026-11-19",
+      "lastAttempt": "2026-11-20",
       "lastOk": "2026-11-18",
       "ok": 58,
       "outcomes": {
         "empty": 15,
-        "http_403": 18,
+        "http_403": 20,
         "http_404": 1,
         "http_5xx": 1,
         "ok": 58
@@ -348,6 +372,19 @@
         "curl https://api.github.com/search/issues?q=nbgrader+is%3Aissue+created%3A%3E2026-08-01&per_page=20",
         "curl https://api.github.com/search/issues?q=autograder+is%3Aissue+state%3Aopen+sort%3Areactions&per_page=10",
         "curl https://api.github.com/search/issues?q=repo%3Ajupyter%2Fnbgrader+is%3Aissue+state%3Aopen+sort%3Areactions&per_page=10"
+      ]
+    },
+    "api.n8n.io": {
+      "attempts": 2,
+      "evidenceItems": 2,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "curl https://api.n8n.io/api/templates/workflows/19598"
       ]
     },
     "api.npmjs.org": {
@@ -402,6 +439,20 @@
       },
       "workingPaths": []
     },
+    "api.squareup.com": {
+      "attempts": 2,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1,
+        "redirect": 1
+      },
+      "workingPaths": [
+        "curl https://api.squareup.com/help/au/en/article/5660"
+      ]
+    },
     "api.stackexchange.com": {
       "attempts": 20,
       "evidenceItems": 2,
@@ -419,14 +470,14 @@
       ]
     },
     "api.wordpress.org": {
-      "attempts": 32,
-      "evidenceItems": 5,
-      "lastAttempt": "2026-11-18",
-      "lastOk": "2026-11-18",
-      "ok": 31,
+      "attempts": 36,
+      "evidenceItems": 8,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 35,
       "outcomes": {
         "empty": 1,
-        "ok": 31
+        "ok": 35
       },
       "workingPaths": [
         "curl https://api.wordpress.org/plugins/info/1.2/?action=query_plugins&request[search]=accessibility&request[per_page]=15",
@@ -461,18 +512,19 @@
       ]
     },
     "apify.com": {
-      "attempts": 3,
+      "attempts": 4,
       "evidenceItems": 1,
-      "lastAttempt": "2026-11-18",
-      "lastOk": "2026-11-18",
-      "ok": 2,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 3,
       "outcomes": {
         "empty": 1,
-        "ok": 2
+        "ok": 3
       },
       "workingPaths": [
         "curl https://apify.com/renzomacar/supabase-rls-scanner",
-        "webfetch https://apify.com/flintglade/documentation-deprecation-monitor"
+        "webfetch https://apify.com/flintglade/documentation-deprecation-monitor",
+        "curl https://apify.com/kamerozkan/peppol-bis-preflight-validator.md"
       ]
     },
     "app.acquire.com": {
@@ -559,15 +611,15 @@
       ]
     },
     "apps.shopify.com": {
-      "attempts": 321,
-      "evidenceItems": 65,
-      "lastAttempt": "2026-11-19",
-      "lastOk": "2026-11-19",
-      "ok": 262,
+      "attempts": 358,
+      "evidenceItems": 91,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 291,
       "outcomes": {
-        "empty": 41,
-        "http_404": 16,
-        "ok": 262,
+        "empty": 46,
+        "http_404": 19,
+        "ok": 291,
         "redirect": 2
       },
       "workingPaths": [
@@ -577,15 +629,15 @@
       ]
     },
     "apps.xero.com": {
-      "attempts": 41,
-      "evidenceItems": 5,
-      "lastAttempt": "2026-11-19",
-      "lastOk": "2026-11-19",
-      "ok": 29,
+      "attempts": 43,
+      "evidenceItems": 7,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 31,
       "outcomes": {
         "empty": 11,
         "http_404": 1,
-        "ok": 29
+        "ok": 31
       },
       "workingPaths": [
         "curl https://apps.xero.com/us/function/debtor-tracking/app/remitclear",
@@ -656,17 +708,44 @@
         "webfetch https://arrivy.com/?p=13934"
       ]
     },
-    "assets.publishing.service.gov.uk": {
+    "asbfeo.gov.au": {
       "attempts": 1,
-      "evidenceItems": 0,
-      "lastAttempt": "2026-11-12",
-      "lastOk": "2026-11-12",
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
       "ok": 1,
       "outcomes": {
         "ok": 1
       },
       "workingPaths": [
-        "curl https://assets.publishing.service.gov.uk/media/69f0cc3b4e01778358c191a7/Construction_Forum_Minutes_10_March_2026.odt"
+        "webfetch https://asbfeo.gov.au/resources-tools-centre/card-surcharging-ban"
+      ]
+    },
+    "assets.publishing.service.gov.uk": {
+      "attempts": 2,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "curl https://assets.publishing.service.gov.uk/media/69f0cc3b4e01778358c191a7/Construction_Forum_Minutes_10_March_2026.odt",
+        "webfetch https://assets.publishing.service.gov.uk/media/697b92522ff8d10a830d5d79/tips_and_gratuities_factsheet.pdf"
+      ]
+    },
+    "atg.wa.gov": {
+      "attempts": 2,
+      "evidenceItems": 2,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "webfetch https://atg.wa.gov/protecting-washingtonians-personal-health-data-and-privacy"
       ]
     },
     "baptist.org.uk": {
@@ -754,6 +833,19 @@
       },
       "workingPaths": [
         "webfetch https://billable.to/"
+      ]
+    },
+    "birdeye.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://birdeye.com/integration/square"
       ]
     },
     "bitwarden.com": {
@@ -1084,32 +1176,47 @@
       ]
     },
     "cal.com": {
-      "attempts": 2,
-      "evidenceItems": 1,
-      "lastAttempt": "2026-11-19",
-      "lastOk": "2026-11-19",
-      "ok": 2,
-      "outcomes": {
-        "ok": 2
-      },
-      "workingPaths": [
-        "curl https://cal.com/help/event-types/recurring-events.md",
-        "curl https://cal.com/pricing"
-      ]
-    },
-    "calendly.com": {
       "attempts": 3,
-      "evidenceItems": 1,
-      "lastAttempt": "2026-11-19",
-      "lastOk": "2026-11-19",
+      "evidenceItems": 2,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
       "ok": 3,
       "outcomes": {
         "ok": 3
       },
       "workingPaths": [
+        "curl https://cal.com/help/event-types/recurring-events.md",
+        "curl https://cal.com/pricing",
+        "curl https://cal.com/docs/features/cal-events-waitlist.md"
+      ]
+    },
+    "calendly.com": {
+      "attempts": 16,
+      "evidenceItems": 11,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 13,
+      "outcomes": {
+        "empty": 3,
+        "ok": 13
+      },
+      "workingPaths": [
         "curl https://calendly.com/help/how-to-chat-with-callie",
         "curl https://calendly.com/help/callie-scheduling",
         "curl https://calendly.com/pricing"
+      ]
+    },
+    "calendly.stoplight.io": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://calendly.stoplight.io/api/v1/projects/calendly/api-docs/nodes/reference%2Fcalendly-api%2Fopenapi.yaml"
       ]
     },
     "careers.csudh.edu": {
@@ -1267,13 +1374,13 @@
       ]
     },
     "changelog.shopify.com": {
-      "attempts": 3,
-      "evidenceItems": 0,
-      "lastAttempt": "2026-11-07",
-      "lastOk": "2026-11-07",
-      "ok": 3,
+      "attempts": 5,
+      "evidenceItems": 2,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 5,
       "outcomes": {
-        "ok": 3
+        "ok": 5
       },
       "workingPaths": [
         "curl https://changelog.shopify.com/posts/run-inventory-counts-in-pos",
@@ -1566,15 +1673,16 @@
       "workingPaths": []
     },
     "community.calendly.com": {
-      "attempts": 26,
-      "evidenceItems": 7,
-      "lastAttempt": "2026-11-19",
-      "lastOk": "2026-11-19",
-      "ok": 23,
+      "attempts": 77,
+      "evidenceItems": 37,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 71,
       "outcomes": {
-        "empty": 2,
+        "empty": 4,
         "http_404": 1,
-        "ok": 23
+        "ok": 71,
+        "timeout": 1
       },
       "workingPaths": [
         "curl https://community.calendly.com/how-do-i-40/sudden-exchange-calendar-disconnection-ionos-hosted-exchange-ews-anyone-else-experiencing-this-6143",
@@ -1590,6 +1698,17 @@
       "ok": 0,
       "outcomes": {
         "timeout": 1
+      },
+      "workingPaths": []
+    },
+    "community.cliniko.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-20",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "redirect": 1
       },
       "workingPaths": []
     },
@@ -1613,6 +1732,17 @@
       "ok": 0,
       "outcomes": {
         "empty": 1
+      },
+      "workingPaths": []
+    },
+    "community.ecwid.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-20",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_404": 1
       },
       "workingPaths": []
     },
@@ -1733,15 +1863,48 @@
       },
       "workingPaths": []
     },
+    "community.lightspeedhq.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-20",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "redirect": 1
+      },
+      "workingPaths": []
+    },
+    "community.lodgify.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-20",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_403": 1
+      },
+      "workingPaths": []
+    },
+    "community.loyverse.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-20",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "timeout": 1
+      },
+      "workingPaths": []
+    },
     "community.make.com": {
-      "attempts": 40,
+      "attempts": 41,
       "evidenceItems": 6,
-      "lastAttempt": "2026-11-19",
-      "lastOk": "2026-11-19",
-      "ok": 36,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 37,
       "outcomes": {
         "empty": 4,
-        "ok": 36
+        "ok": 37
       },
       "workingPaths": [
         "curl https://community.make.com/search.json?q=deprecated%20after%3A2026-08-01",
@@ -1750,14 +1913,14 @@
       ]
     },
     "community.n8n.io": {
-      "attempts": 114,
+      "attempts": 115,
       "evidenceItems": 19,
-      "lastAttempt": "2026-11-19",
-      "lastOk": "2026-11-19",
-      "ok": 109,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 110,
       "outcomes": {
         "empty": 5,
-        "ok": 109
+        "ok": 110
       },
       "workingPaths": [
         "curl https://community.n8n.io/search.json?q=invoice%20small%20business%20after%3A2026-09-01",
@@ -1775,6 +1938,20 @@
         "empty": 1
       },
       "workingPaths": []
+    },
+    "community.openfoodnetwork.org": {
+      "attempts": 2,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "curl https://community.openfoodnetwork.org/latest.json",
+        "curl https://community.openfoodnetwork.org/search.json?q=customers+after%3A2026-05-24"
+      ]
     },
     "community.openhab.org": {
       "attempts": 1,
@@ -1840,16 +2017,16 @@
       ]
     },
     "community.shopify.com": {
-      "attempts": 397,
-      "evidenceItems": 48,
-      "lastAttempt": "2026-11-18",
-      "lastOk": "2026-11-18",
-      "ok": 372,
+      "attempts": 454,
+      "evidenceItems": 67,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 429,
       "outcomes": {
         "empty": 23,
         "http_404": 1,
         "http_429": 1,
-        "ok": 372
+        "ok": 429
       },
       "workingPaths": [
         "curl https://community.shopify.com/search.json?q=ADA%20lawsuit%20after%3A2026-05-01",
@@ -1870,6 +2047,19 @@
         "curl https://community.shopify.dev/search.json?q=deprecated%20after%3A2026-08-20",
         "curl https://community.shopify.dev/t/33904.json",
         "curl https://community.shopify.dev/t/36558.json"
+      ]
+    },
+    "community.softr.io": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://community.softr.io/latest.json"
       ]
     },
     "community.spiceworks.com": {
@@ -1899,15 +2089,16 @@
       "workingPaths": []
     },
     "community.squareup.com": {
-      "attempts": 86,
-      "evidenceItems": 11,
-      "lastAttempt": "2026-11-19",
-      "lastOk": "2026-11-19",
-      "ok": 60,
+      "attempts": 281,
+      "evidenceItems": 100,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 232,
       "outcomes": {
-        "empty": 25,
+        "empty": 45,
         "http_404": 1,
-        "ok": 60
+        "http_5xx": 3,
+        "ok": 232
       },
       "workingPaths": [
         "curl https://community.squareup.com/t5/forums/searchpage/tab/message?q=appointments",
@@ -2145,6 +2336,17 @@
         "curl https://cronitor.io/pricing"
       ]
     },
+    "crtc.gc.ca": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-20",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_403": 1
+      },
+      "workingPaths": []
+    },
     "cseducators.stackexchange.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -2248,14 +2450,14 @@
       ]
     },
     "dev.to": {
-      "attempts": 4,
-      "evidenceItems": 0,
-      "lastAttempt": "2026-11-18",
-      "lastOk": "2026-11-18",
-      "ok": 3,
+      "attempts": 5,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 4,
       "outcomes": {
         "http_404": 1,
-        "ok": 3
+        "ok": 4
       },
       "workingPaths": [
         "curl https://dev.to/craevidence",
@@ -2264,13 +2466,13 @@
       ]
     },
     "developer.calendly.com": {
-      "attempts": 12,
-      "evidenceItems": 2,
-      "lastAttempt": "2026-11-19",
-      "lastOk": "2026-11-19",
-      "ok": 12,
+      "attempts": 29,
+      "evidenceItems": 13,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 29,
       "outcomes": {
-        "ok": 12
+        "ok": 29
       },
       "workingPaths": [
         "webfetch https://developer.calendly.com/api-docs/overview/examples/event-availability-alert",
@@ -2354,14 +2556,15 @@
       ]
     },
     "developer.squareup.com": {
-      "attempts": 30,
-      "evidenceItems": 4,
-      "lastAttempt": "2026-11-19",
-      "lastOk": "2026-11-19",
-      "ok": 28,
+      "attempts": 74,
+      "evidenceItems": 32,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 68,
       "outcomes": {
         "empty": 1,
-        "ok": 28,
+        "http_404": 4,
+        "ok": 68,
         "redirect": 1
       },
       "workingPaths": [
@@ -2384,14 +2587,14 @@
       ]
     },
     "developer.xero.com": {
-      "attempts": 19,
-      "evidenceItems": 1,
-      "lastAttempt": "2026-11-19",
-      "lastOk": "2026-11-19",
-      "ok": 10,
+      "attempts": 23,
+      "evidenceItems": 2,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 12,
       "outcomes": {
-        "empty": 9,
-        "ok": 10
+        "empty": 11,
+        "ok": 12
       },
       "workingPaths": [
         "webfetch https://developer.xero.com/pricing",
@@ -2512,24 +2715,24 @@
       ]
     },
     "discourse.webflow.com": {
-      "attempts": 1,
+      "attempts": 2,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-07",
+      "lastAttempt": "2026-11-20",
       "lastOk": null,
       "ok": 0,
       "outcomes": {
-        "empty": 1
+        "empty": 2
       },
       "workingPaths": []
     },
     "discuss.frappe.io": {
-      "attempts": 16,
+      "attempts": 17,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-18",
-      "lastOk": "2026-11-18",
-      "ok": 16,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 17,
       "outcomes": {
-        "ok": 16
+        "ok": 17
       },
       "workingPaths": [
         "curl https://discuss.frappe.io/search.json?q=small%20business%20invoice+after%3A2026-08-07",
@@ -2590,6 +2793,19 @@
       },
       "workingPaths": [
         "curl https://docparser.com/pricing/"
+      ]
+    },
+    "docs-shpf.bsscommerce.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://docs-shpf.bsscommerce.com/b2b-wholesale-solution/integration/zapiet-pickup-+-delivery"
       ]
     },
     "docs.cronofy.com": {
@@ -2750,13 +2966,13 @@
       ]
     },
     "docs.stripe.com": {
-      "attempts": 4,
-      "evidenceItems": 0,
-      "lastAttempt": "2026-11-19",
-      "lastOk": "2026-11-19",
-      "ok": 4,
+      "attempts": 5,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 5,
       "outcomes": {
-        "ok": 4
+        "ok": 5
       },
       "workingPaths": [
         "curl https://docs.stripe.com/api/balance_transactions/list.md",
@@ -3015,6 +3231,17 @@
       },
       "workingPaths": []
     },
+    "ecosio.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-20",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_403": 1
+      },
+      "workingPaths": []
+    },
     "ecosire.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -3064,6 +3291,20 @@
         "http_404": 1
       },
       "workingPaths": []
+    },
+    "elfsight.com": {
+      "attempts": 2,
+      "evidenceItems": 2,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "curl https://elfsight.com/back-in-stock-widget/squarespace/",
+        "webfetch https://elfsight.com/back-in-stock-widget/"
+      ]
     },
     "elvanto.com": {
       "attempts": 1,
@@ -3301,13 +3542,14 @@
       "workingPaths": []
     },
     "feedback.qbo.intuit.com": {
-      "attempts": 2,
+      "attempts": 3,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-08",
+      "lastAttempt": "2026-11-20",
       "lastOk": null,
       "ok": 0,
       "outcomes": {
-        "allowlist": 2
+        "allowlist": 2,
+        "empty": 1
       },
       "workingPaths": []
     },
@@ -3549,15 +3791,15 @@
       ]
     },
     "forum.invoiceninja.com": {
-      "attempts": 77,
-      "evidenceItems": 3,
-      "lastAttempt": "2026-11-19",
-      "lastOk": "2026-11-19",
-      "ok": 73,
+      "attempts": 82,
+      "evidenceItems": 5,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 78,
       "outcomes": {
         "empty": 3,
         "http_404": 1,
-        "ok": 73
+        "ok": 78
       },
       "workingPaths": [
         "curl https://forum.invoiceninja.com/search.json?q=sales%20tax%20after%3A2026-06-01",
@@ -3674,14 +3916,14 @@
       ]
     },
     "forum.squarespace.com": {
-      "attempts": 2,
+      "attempts": 3,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-07",
+      "lastAttempt": "2026-11-20",
       "lastOk": null,
       "ok": 0,
       "outcomes": {
         "empty": 1,
-        "http_403": 1
+        "http_403": 2
       },
       "workingPaths": []
     },
@@ -3704,6 +3946,32 @@
       "ok": 0,
       "outcomes": {
         "empty": 3
+      },
+      "workingPaths": []
+    },
+    "forum.wixstudio.com": {
+      "attempts": 3,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 2,
+      "outcomes": {
+        "empty": 1,
+        "ok": 2
+      },
+      "workingPaths": [
+        "webfetch https://forum.wixstudio.com/search.json?q=price%20calculator%20after%3A2026-05-24",
+        "webfetch https://forum.wixstudio.com/search.json?q=calculator%20after%3A2026-05-24"
+      ]
+    },
+    "forums.whirlpool.net.au": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-20",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_403": 1
       },
       "workingPaths": []
     },
@@ -3772,6 +4040,20 @@
       },
       "workingPaths": [
         "webfetch https://frontdeskreview.com/software/equipment-rental-software/goodshuffle-pro/"
+      ]
+    },
+    "get.nicejob.com": {
+      "attempts": 3,
+      "evidenceItems": 2,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 2,
+      "outcomes": {
+        "http_404": 1,
+        "ok": 2
+      },
+      "workingPaths": [
+        "webfetch https://get.nicejob.com/pricing"
       ]
     },
     "get.popmenu.com": {
@@ -3920,14 +4202,14 @@
       ]
     },
     "github.com": {
-      "attempts": 19,
-      "evidenceItems": 6,
-      "lastAttempt": "2026-11-19",
-      "lastOk": "2026-11-18",
-      "ok": 11,
+      "attempts": 22,
+      "evidenceItems": 8,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 13,
       "outcomes": {
-        "http_403": 8,
-        "ok": 11
+        "http_403": 9,
+        "ok": 13
       },
       "workingPaths": [
         "webfetch https://github.com/PrairieLearn/PrairieLearn/issues/14717",
@@ -4111,6 +4393,19 @@
       },
       "workingPaths": [
         "curl https://haflarental.com/"
+      ]
+    },
+    "health.hawaii.gov": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://health.hawaii.gov/cab/files/2026/03/AIM-Act-Compliance-Guide-for-Small-Businesses.pdf"
       ]
     },
     "healthchecks.io": {
@@ -4321,6 +4616,21 @@
         "curl https://help.joinzipper.com/p/articles/how-to-create-a-punch-card-product"
       ]
     },
+    "help.klaviyo.com": {
+      "attempts": 5,
+      "evidenceItems": 5,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 5,
+      "outcomes": {
+        "ok": 5
+      },
+      "workingPaths": [
+        "webfetch https://help.klaviyo.com/hc/en-us/articles/11117215837211-Getting-started-with-Square-Online",
+        "webfetch https://help.klaviyo.com/hc/en-us/articles/115003872251",
+        "webfetch https://help.klaviyo.com/hc/en-us/articles/19450345654811"
+      ]
+    },
     "help.landlordstudio.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -4484,13 +4794,13 @@
       ]
     },
     "help.shopify.com": {
-      "attempts": 12,
-      "evidenceItems": 2,
-      "lastAttempt": "2026-11-13",
-      "lastOk": "2026-11-13",
-      "ok": 12,
+      "attempts": 21,
+      "evidenceItems": 11,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 21,
       "outcomes": {
-        "ok": 12
+        "ok": 21
       },
       "workingPaths": [
         "curl https://help.shopify.com/en/manual/sell-in-person/shopify-pos/inventory-management/inventory-counts",
@@ -4540,15 +4850,18 @@
       ]
     },
     "help.zoho.com": {
-      "attempts": 2,
+      "attempts": 3,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-18",
-      "lastOk": null,
-      "ok": 0,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 1,
       "outcomes": {
-        "empty": 2
+        "empty": 2,
+        "ok": 1
       },
-      "workingPaths": []
+      "workingPaths": [
+        "webfetch https://help.zoho.com/portal/en/community/topic/the-peppol-nightmare-with-zoho-books"
+      ]
     },
     "helpdesk.scoutsqld.com.au": {
       "attempts": 1,
@@ -4591,14 +4904,14 @@
       ]
     },
     "hn.algolia.com": {
-      "attempts": 249,
+      "attempts": 252,
       "evidenceItems": 24,
-      "lastAttempt": "2026-11-19",
-      "lastOk": "2026-11-19",
-      "ok": 200,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 203,
       "outcomes": {
         "empty": 49,
-        "ok": 200
+        "ok": 203
       },
       "workingPaths": [
         "curl https://hn.algolia.com/api/v1/search_by_date?query=%22alt%20text%22&tags=comment&hitsPerPage=30",
@@ -4704,16 +5017,18 @@
       "workingPaths": []
     },
     "innovations.xero.com": {
-      "attempts": 1,
-      "evidenceItems": 0,
-      "lastAttempt": "2026-11-16",
-      "lastOk": "2026-11-16",
-      "ok": 1,
+      "attempts": 3,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 2,
       "outcomes": {
-        "ok": 1
+        "empty": 1,
+        "ok": 2
       },
       "workingPaths": [
-        "webfetch https://innovations.xero.com/changelog"
+        "webfetch https://innovations.xero.com/changelog",
+        "curl https://innovations.xero.com/changelog"
       ]
     },
     "insightfulaccountant.com": {
@@ -4742,6 +5057,19 @@
         "curl https://instarenewal.com/"
       ]
     },
+    "integrately.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://integrately.com/integrations/calendly/waitlist"
+      ]
+    },
     "integratestack.pages.dev": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -4756,17 +5084,18 @@
       ]
     },
     "intercom.help": {
-      "attempts": 2,
-      "evidenceItems": 1,
-      "lastAttempt": "2026-11-18",
-      "lastOk": "2026-11-18",
-      "ok": 1,
+      "attempts": 3,
+      "evidenceItems": 2,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 2,
       "outcomes": {
         "http_404": 1,
-        "ok": 1
+        "ok": 2
       },
       "workingPaths": [
-        "webfetch https://intercom.help/bsport-helpcenter/en/articles/15768623-understand-deferred-revenue"
+        "webfetch https://intercom.help/bsport-helpcenter/en/articles/15768623-understand-deferred-revenue",
+        "webfetch https://intercom.help/zapiet-ltd/en/articles/6279795-app-compatibility"
       ]
     },
     "invoiceninja.com": {
@@ -4782,6 +5111,20 @@
         "webfetch https://invoiceninja.com/pricing-plans/",
         "curl https://invoiceninja.com/pricing-plans/",
         "curl https://invoiceninja.com/"
+      ]
+    },
+    "invoiceninja.github.io": {
+      "attempts": 3,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 1,
+      "outcomes": {
+        "empty": 2,
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://invoiceninja.github.io/docs/user-guide/quotes"
       ]
     },
     "invoicequickly.com": {
@@ -4808,6 +5151,19 @@
       },
       "workingPaths": [
         "webfetch https://invoicesherpa.com/pricing.html"
+      ]
+    },
+    "itbrief.co.nz": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://itbrief.co.nz/story/xero-expands-developer-tools-with-new-webhook-events"
       ]
     },
     "itbrief.com.au": {
@@ -4945,6 +5301,19 @@
         "webfetch https://keito.ai/solutions/alternatives/harvest-alternative/"
       ]
     },
+    "knowledge.workspace.google.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://knowledge.workspace.google.com/admin/calendar/manage-canadian-daylight-saving-time-changes"
+      ]
+    },
     "kostenlose-erechnung.de": {
       "attempts": 2,
       "evidenceItems": 0,
@@ -4997,6 +5366,19 @@
       "workingPaths": [
         "webfetch https://labyrinthinc.com/california-launches-new-online-system-for-charitable-registration/",
         "webfetch https://labyrinthinc.com/nonprofit-annual-filing-requirements-california/"
+      ]
+    },
+    "lamaquina.studio": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://lamaquina.studio/automate-waitlist-when-appointment-cancels/"
       ]
     },
     "landing-bwz.pages.dev": {
@@ -5193,13 +5575,13 @@
       ]
     },
     "localsearchforum.com": {
-      "attempts": 20,
-      "evidenceItems": 12,
-      "lastAttempt": "2026-11-18",
-      "lastOk": "2026-11-18",
-      "ok": 20,
+      "attempts": 22,
+      "evidenceItems": 13,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 22,
       "outcomes": {
-        "ok": 20
+        "ok": 22
       },
       "workingPaths": [
         "webfetch https://localsearchforum.com/threads/rejection-on-ownership-transfer-verification-due-to-business-acquisition-missing-custom-domain-email.63443/",
@@ -5230,6 +5612,19 @@
       },
       "workingPaths": [
         "webfetch https://mage-people.com/product/wordpress-taxi-cab-booking-plugin-for-woocommerce/"
+      ]
+    },
+    "mailchimp.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://mailchimp.com/help/back-in-stock-alerts/"
       ]
     },
     "mailparser.io": {
@@ -5507,13 +5902,13 @@
       ]
     },
     "n8n.io": {
-      "attempts": 3,
-      "evidenceItems": 1,
-      "lastAttempt": "2026-11-19",
-      "lastOk": "2026-11-19",
-      "ok": 3,
+      "attempts": 5,
+      "evidenceItems": 3,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 5,
       "outcomes": {
-        "ok": 3
+        "ok": 5
       },
       "workingPaths": [
         "webfetch https://n8n.io/workflows/20556-create-daily-construction-site-reports-from-whatsapp-with-openai-and-google/",
@@ -5849,6 +6244,19 @@
         "curl https://partial.ly/platform/invoicing"
       ]
     },
+    "partners.nicejob.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://partners.nicejob.com/integrations/square-4"
+      ]
+    },
     "pasqualepillitteri.it": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -5859,6 +6267,19 @@
         "empty": 1
       },
       "workingPaths": []
+    },
+    "patient-protect.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://patient-protect.com/post/2026-hipaa-privacy-rule-final-rule"
+      ]
     },
     "payhip.com": {
       "attempts": 1,
@@ -6072,16 +6493,16 @@
       ]
     },
     "productideas.xero.com": {
-      "attempts": 266,
-      "evidenceItems": 42,
-      "lastAttempt": "2026-11-19",
-      "lastOk": "2026-11-19",
-      "ok": 255,
+      "attempts": 281,
+      "evidenceItems": 46,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 268,
       "outcomes": {
         "empty": 9,
-        "http_404": 1,
-        "ok": 255,
-        "redirect": 1
+        "http_404": 2,
+        "ok": 268,
+        "redirect": 2
       },
       "workingPaths": [
         "curl https://productideas.xero.com/forums/939198-for-small-businesses/suggestions/45701299-bank-reconciliation-bulk-import-recieved-payments",
@@ -6235,15 +6656,15 @@
       ]
     },
     "raw.githubusercontent.com": {
-      "attempts": 29,
-      "evidenceItems": 6,
-      "lastAttempt": "2026-11-19",
-      "lastOk": "2026-11-19",
-      "ok": 27,
+      "attempts": 30,
+      "evidenceItems": 7,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 28,
       "outcomes": {
         "empty": 1,
         "http_404": 1,
-        "ok": 27
+        "ok": 28
       },
       "workingPaths": [
         "curl https://raw.githubusercontent.com/XeroAPI/Xero-OpenAPI/master/xero_accounting.yaml",
@@ -6299,6 +6720,19 @@
       },
       "workingPaths": [
         "webfetch https://recipal.com/pricing"
+      ]
+    },
+    "region.com.au": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://region.com.au/no-more-card-surcharges-but-canberra-small-businesses-say-the-cost-has-not-disappeared/1005496/"
       ]
     },
     "registry.npmjs.org": {
@@ -6441,6 +6875,19 @@
         "curl https://rewind.com/pricing/quickbooks/"
       ]
     },
+    "roastertools.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://roastertools.com/features/wholesale-portal"
+      ]
+    },
     "rootbrief.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -6500,6 +6947,19 @@
       },
       "workingPaths": [
         "webfetch https://salepager.com"
+      ]
+    },
+    "salesmessage.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://salesmessage.com/pricing"
       ]
     },
     "salisbury.anglican.org": {
@@ -6615,6 +7075,18 @@
         "curl https://seedfund.nsf.gov/solicitation-proposal/"
       ]
     },
+    "sellercommunity.com": {
+      "attempts": 5,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-20",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "empty": 3,
+        "redirect": 2
+      },
+      "workingPaths": []
+    },
     "sellersasksellers.com": {
       "attempts": 22,
       "evidenceItems": 4,
@@ -6669,13 +7141,13 @@
       ]
     },
     "shopify.dev": {
-      "attempts": 18,
-      "evidenceItems": 3,
-      "lastAttempt": "2026-11-18",
-      "lastOk": "2026-11-18",
-      "ok": 18,
+      "attempts": 27,
+      "evidenceItems": 12,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 27,
       "outcomes": {
-        "ok": 18
+        "ok": 27
       },
       "workingPaths": [
         "curl https://shopify.dev/docs/api/admin-rest/latest/resources/asset",
@@ -6764,15 +7236,18 @@
       "workingPaths": []
     },
     "sourceforge.net": {
-      "attempts": 1,
-      "evidenceItems": 0,
-      "lastAttempt": "2026-11-11",
-      "lastOk": null,
-      "ok": 0,
+      "attempts": 2,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 1,
       "outcomes": {
-        "http_403": 1
+        "http_403": 1,
+        "ok": 1
       },
-      "workingPaths": []
+      "workingPaths": [
+        "webfetch https://sourceforge.net/software/product/ReviewPace/"
+      ]
     },
     "spendwall.app": {
       "attempts": 1,
@@ -6813,30 +7288,45 @@
         "webfetch https://sproutinvoices.com/?p=896"
       ]
     },
+    "square-appointment-wp.com": {
+      "attempts": 2,
+      "evidenceItems": 2,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "webfetch https://square-appointment-wp.com/",
+        "curl https://square-appointment-wp.com/"
+      ]
+    },
     "square.com": {
-      "attempts": 1,
+      "attempts": 2,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-19",
+      "lastAttempt": "2026-11-20",
       "lastOk": "2026-11-19",
       "ok": 1,
       "outcomes": {
-        "ok": 1
+        "ok": 1,
+        "redirect": 1
       },
       "workingPaths": [
         "curl https://square.com/us/en/appointments/pricing"
       ]
     },
     "squareup.com": {
-      "attempts": 30,
-      "evidenceItems": 6,
-      "lastAttempt": "2026-11-19",
-      "lastOk": "2026-11-19",
-      "ok": 18,
+      "attempts": 78,
+      "evidenceItems": 33,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 49,
       "outcomes": {
-        "empty": 1,
-        "http_429": 9,
-        "ok": 18,
-        "redirect": 2
+        "empty": 2,
+        "http_429": 23,
+        "ok": 49,
+        "redirect": 4
       },
       "workingPaths": [
         "webfetch https://squareup.com/help/us/en/article/8712-understand-no-tax-on-tips-deductions",
@@ -6933,6 +7423,19 @@
         "webfetch https://support.approvalmax.com/en/articles/414105-bill-to-po-matching-what-is-the-remaining-balance-and-when-is-it-recalculated"
       ]
     },
+    "support.banqup.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://support.banqup.com/en/articles/809405-peppol-validation-errors-explained-cl008-br-co-15-r120-br-co-26-and-more"
+      ]
+    },
     "support.churchsuite.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -6968,18 +7471,32 @@
       },
       "workingPaths": []
     },
-    "support.google.com": {
-      "attempts": 2,
+    "support.gocardless.com": {
+      "attempts": 1,
       "evidenceItems": 1,
-      "lastAttempt": "2026-11-06",
-      "lastOk": "2026-11-03",
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
       "ok": 1,
       "outcomes": {
-        "http_404": 1,
         "ok": 1
       },
       "workingPaths": [
-        "curl https://support.google.com/merchants/answer/6150127"
+        "webfetch https://support.gocardless.com/hc/en-gb/articles/17144912552220-Payer-notifications"
+      ]
+    },
+    "support.google.com": {
+      "attempts": 3,
+      "evidenceItems": 2,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 2,
+      "outcomes": {
+        "http_404": 1,
+        "ok": 2
+      },
+      "workingPaths": [
+        "curl https://support.google.com/merchants/answer/6150127",
+        "webfetch https://support.google.com/business/answer/4596773?hl=en"
       ]
     },
     "support.gusto.com": {
@@ -7045,17 +7562,18 @@
       ]
     },
     "support.servicem8.com": {
-      "attempts": 2,
-      "evidenceItems": 0,
-      "lastAttempt": "2026-11-19",
-      "lastOk": "2026-11-19",
-      "ok": 2,
+      "attempts": 3,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 3,
       "outcomes": {
-        "ok": 2
+        "ok": 3
       },
       "workingPaths": [
         "webfetch https://support.servicem8.com/hc/en-us/articles/10804448488463-How-Deposits-sync-to-Xero-with-ServiceM8-Pay",
-        "curl https://support.servicem8.com/help-center/servicem8-add-ons/servicem8-inbox/how-work-order-scanning-works.md"
+        "curl https://support.servicem8.com/help-center/servicem8-add-ons/servicem8-inbox/how-work-order-scanning-works.md",
+        "curl https://support.servicem8.com/help-center/servicem8-add-ons/automation/quote-follow-up-automation.md"
       ]
     },
     "support.toasttab.com": {
@@ -7097,6 +7615,19 @@
         "http_403": 1
       },
       "workingPaths": []
+    },
+    "support.wix.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://support.wix.com/en/article/wix-bookings-request-automatic-appointment-waitlist-management"
+      ]
     },
     "support.wrkr.com.au": {
       "attempts": 1,
@@ -7422,6 +7953,19 @@
         "webfetch https://tilt.colostate.edu/new-ai-browsers-can-complete-canvas-quizzes/"
       ]
     },
+    "todaysveterinarybusiness.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://todaysveterinarybusiness.com/"
+      ]
+    },
     "toggl.com": {
       "attempts": 5,
       "evidenceItems": 0,
@@ -7738,6 +8282,17 @@
         "webfetch https://valueaddedresource.net/etsy-item-deactivations-shopify-integration-apps"
       ]
     },
+    "vatcalc.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-20",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_403": 1
+      },
+      "workingPaths": []
+    },
     "vatit.com": {
       "attempts": 1,
       "evidenceItems": 1,
@@ -7900,6 +8455,19 @@
         "webfetch https://waitlist.me/pricing"
       ]
     },
+    "waitlistping.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://waitlistping.com"
+      ]
+    },
     "waitwhile.com": {
       "attempts": 1,
       "evidenceItems": 1,
@@ -7987,15 +8555,15 @@
       ]
     },
     "wordpress.org": {
-      "attempts": 147,
-      "evidenceItems": 29,
-      "lastAttempt": "2026-11-18",
-      "lastOk": "2026-11-18",
-      "ok": 144,
+      "attempts": 154,
+      "evidenceItems": 31,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 151,
       "outcomes": {
         "empty": 1,
         "http_404": 2,
-        "ok": 144
+        "ok": 151
       },
       "workingPaths": [
         "curl https://wordpress.org/support/plugin/wp-accessibility/",
@@ -8136,13 +8704,14 @@
       "workingPaths": []
     },
     "www.achrnews.com": {
-      "attempts": 5,
-      "evidenceItems": 2,
-      "lastAttempt": "2026-11-13",
-      "lastOk": "2026-11-13",
-      "ok": 5,
+      "attempts": 9,
+      "evidenceItems": 4,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 8,
       "outcomes": {
-        "ok": 5
+        "empty": 1,
+        "ok": 8
       },
       "workingPaths": [
         "curl https://www.achrnews.com/",
@@ -8235,6 +8804,17 @@
       "workingPaths": [
         "curl https://www.ambrite.ca/knowledgebase/38/Reservation-Plugin-Monitoring-Best-Practices.html"
       ]
+    },
+    "www.americansalon.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-20",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_403": 1
+      },
+      "workingPaths": []
     },
     "www.applytosupply.digitalmarketplace.service.gov.uk": {
       "attempts": 1,
@@ -8567,6 +9147,17 @@
         "webfetch https://www.calxa.com/pricing"
       ]
     },
+    "www.canberratimes.com.au": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-20",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_403": 1
+      },
+      "workingPaths": []
+    },
     "www.canva.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -8605,13 +9196,13 @@
       ]
     },
     "www.capterra.com": {
-      "attempts": 8,
+      "attempts": 9,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-16",
+      "lastAttempt": "2026-11-20",
       "lastOk": "2026-11-16",
       "ok": 3,
       "outcomes": {
-        "http_403": 4,
+        "http_403": 5,
         "http_404": 1,
         "ok": 3
       },
@@ -8883,6 +9474,19 @@
         "webfetch https://www.claytonutz.com/insights/2026/june/payday-super-frequently-asked-questions"
       ]
     },
+    "www.cleanlink.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://www.cleanlink.com/"
+      ]
+    },
     "www.clearbooks.co.uk": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -8909,6 +9513,19 @@
         "curl https://www.compatshield.com/"
       ]
     },
+    "www.contractormag.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://www.contractormag.com/"
+      ]
+    },
     "www.contractortalk.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -8930,6 +9547,19 @@
         "http_5xx": 1
       },
       "workingPaths": []
+    },
+    "www.convertcalculator.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.convertcalculator.com/pricing/"
+      ]
     },
     "www.cookiebot.com": {
       "attempts": 1,
@@ -9052,6 +9682,19 @@
       },
       "workingPaths": []
     },
+    "www.dentaleconomics.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://www.dentaleconomics.com/"
+      ]
+    },
     "www.deputy.com": {
       "attempts": 2,
       "evidenceItems": 0,
@@ -9100,6 +9743,19 @@
         "http_403": 1
       },
       "workingPaths": []
+    },
+    "www.digitaltransactions.net": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.digitaltransactions.net/intuit-is-ending-support-for-quickbooks-pos-triggering-a-scramble-for-small-merchants-business/"
+      ]
     },
     "www.diyphotography.net": {
       "attempts": 1,
@@ -9186,6 +9842,17 @@
         "webfetch https://www.ecclesiastical.com/media/5bleijez/martyns-law-made-simple.pdf"
       ]
     },
+    "www.ecfr.gov": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-20",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "redirect": 1
+      },
+      "workingPaths": []
+    },
     "www.edjoin.org": {
       "attempts": 2,
       "evidenceItems": 0,
@@ -9224,6 +9891,19 @@
       },
       "workingPaths": [
         "curl https://www.enisa.europa.eu/topics/product-security/vulnerability-services/eu-incident-response-and-cyber-crisis-management/single-reporting-platform-srp/frequently-asked-questions"
+      ]
+    },
+    "www.epa.gov": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://www.epa.gov/system/files/documents/2026-01/er-r-fact-sheet-leak-repair-2026-01-13_1.pdf"
       ]
     },
     "www.erp-recycling.org": {
@@ -9301,6 +9981,19 @@
         "webfetch https://www.facebook.com/help/1929252614431792"
       ]
     },
+    "www.faegredrinker.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.faegredrinker.com/en/insights/publications/2026/11/hhs-office-of-civil-rights-revises-the-hipaa-privacy-rule"
+      ]
+    },
     "www.fairwork.gov.au": {
       "attempts": 7,
       "evidenceItems": 0,
@@ -9315,15 +10008,15 @@
       "workingPaths": []
     },
     "www.federalregister.gov": {
-      "attempts": 72,
-      "evidenceItems": 10,
-      "lastAttempt": "2026-11-19",
-      "lastOk": "2026-11-18",
-      "ok": 52,
+      "attempts": 78,
+      "evidenceItems": 14,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 56,
       "outcomes": {
-        "empty": 9,
-        "ok": 52,
-        "redirect": 11
+        "empty": 10,
+        "ok": 56,
+        "redirect": 12
       },
       "workingPaths": [
         "curl https://www.federalregister.gov/api/v1/documents.json?per_page=10&order=newest&conditions[term]=web%20accessibility",
@@ -9435,14 +10128,14 @@
       ]
     },
     "www.freelancer.com": {
-      "attempts": 514,
-      "evidenceItems": 31,
-      "lastAttempt": "2026-11-19",
-      "lastOk": "2026-11-19",
-      "ok": 475,
+      "attempts": 609,
+      "evidenceItems": 47,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 561,
       "outcomes": {
-        "empty": 39,
-        "ok": 475
+        "empty": 48,
+        "ok": 561
       },
       "workingPaths": [
         "curl https://www.freelancer.com/api/projects/0.1/projects/active/?query=booking%20system&limit=20&full_description=true",
@@ -9476,17 +10169,31 @@
         "webfetch https://www.freightwaves.com/news/new-jersey-cdl-school-lawsuit-questions-evidence-behind-fmcsa-shutdown"
       ]
     },
-    "www.ftc.gov": {
+    "www.fresha.com": {
       "attempts": 1,
-      "evidenceItems": 0,
-      "lastAttempt": "2026-11-14",
-      "lastOk": "2026-11-14",
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
       "ok": 1,
       "outcomes": {
         "ok": 1
       },
       "workingPaths": [
-        "webfetch https://www.ftc.gov/business-guidance/resources/ftc-safeguards-rule-what-your-business-needs-know"
+        "webfetch https://www.fresha.com/pricing"
+      ]
+    },
+    "www.ftc.gov": {
+      "attempts": 3,
+      "evidenceItems": 2,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 3,
+      "outcomes": {
+        "ok": 3
+      },
+      "workingPaths": [
+        "webfetch https://www.ftc.gov/business-guidance/resources/ftc-safeguards-rule-what-your-business-needs-know",
+        "webfetch https://www.ftc.gov/business-guidance/resources/can-spam-act-compliance-guide-business"
       ]
     },
     "www.g2.com": {
@@ -9540,13 +10247,13 @@
       ]
     },
     "www.getjobber.com": {
-      "attempts": 1,
-      "evidenceItems": 0,
-      "lastAttempt": "2026-11-06",
-      "lastOk": "2026-11-06",
-      "ok": 1,
+      "attempts": 2,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 2,
       "outcomes": {
-        "ok": 1
+        "ok": 2
       },
       "workingPaths": [
         "webfetch https://www.getjobber.com/pricing/"
@@ -9685,6 +10392,30 @@
         "webfetch https://www.harborcompliance.com/charitable-registration"
       ]
     },
+    "www.healthclubmanagement.co.uk": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.healthclubmanagement.co.uk/health-club-management-features/DMCC-Legally-exposed/38307"
+      ]
+    },
+    "www.hhs.gov": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-20",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_403": 1
+      },
+      "workingPaths": []
+    },
     "www.higheredjobs.com": {
       "attempts": 3,
       "evidenceItems": 0,
@@ -9733,6 +10464,19 @@
       },
       "workingPaths": []
     },
+    "www.hvacrschool.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://www.hvacrschool.com/the-epas-15-pound-refrigerant-threshold-in-2026/"
+      ]
+    },
     "www.idealist.org": {
       "attempts": 11,
       "evidenceItems": 0,
@@ -9764,6 +10508,17 @@
       "attempts": 1,
       "evidenceItems": 0,
       "lastAttempt": "2026-11-19",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_403": 1
+      },
+      "workingPaths": []
+    },
+    "www.indiehackers.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-20",
       "lastOk": null,
       "ok": 0,
       "outcomes": {
@@ -9894,6 +10649,19 @@
         "webfetch https://www.kimai.org/en/blog/2026/kimai-vs-harvest"
       ]
     },
+    "www.klaviyo.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.klaviyo.com/pricing"
+      ]
+    },
     "www.krowdbase.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -9955,6 +10723,20 @@
       },
       "workingPaths": [
         "curl https://www.legislation.gov.au/C2025A00057/asmade/2025-11-06/text/original/epub/OEBPS/document_1/document_1.html"
+      ]
+    },
+    "www.legislation.gov.uk": {
+      "attempts": 2,
+      "evidenceItems": 2,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "curl https://www.legislation.gov.uk/ukdsi/2026/9780348287912/pdfs/ukdsi_9780348287912_en.pdf",
+        "curl https://www.legislation.gov.uk/ukpga/2024/13/section/258"
       ]
     },
     "www.lethub.co": {
@@ -10094,6 +10876,19 @@
         "webfetch https://www.mediabistro.com/jobs/3541554618-ada-504-coordinator"
       ]
     },
+    "www.meetergo.com": {
+      "attempts": 2,
+      "evidenceItems": 2,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "webfetch https://www.meetergo.com/en/features/waitlist"
+      ]
+    },
     "www.messagedesk.com": {
       "attempts": 2,
       "evidenceItems": 0,
@@ -10160,6 +10955,19 @@
         "curl https://www.modernretail.co/",
         "curl https://www.modernretail.co/operations/marketplace-briefing-online-merchants-welcome-trump-customs-crackdown-amid-wave-of-tariff-evasion-pitches/",
         "curl https://www.modernretail.co/operations/walmart-gets-close-to-3-billion-in-tariff-refunds/"
+      ]
+    },
+    "www.modernsalon.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://www.modernsalon.com/"
       ]
     },
     "www.momoyoga.com": {
@@ -10352,14 +11160,14 @@
       ]
     },
     "www.nrn.com": {
-      "attempts": 2,
+      "attempts": 3,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-13",
-      "lastOk": "2026-11-13",
-      "ok": 1,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 2,
       "outcomes": {
         "empty": 1,
-        "ok": 1
+        "ok": 2
       },
       "workingPaths": [
         "curl https://www.nrn.com/"
@@ -10446,6 +11254,19 @@
         "webfetch https://www.onpay.com/insights/no-tax-tips-what-employers-should-know/"
       ]
     },
+    "www.ordermentum.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.ordermentum.com/features-1"
+      ]
+    },
     "www.osiaffiliate.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -10469,16 +11290,18 @@
       "workingPaths": []
     },
     "www.paidnice.com": {
-      "attempts": 1,
-      "evidenceItems": 1,
-      "lastAttempt": "2026-11-19",
-      "lastOk": "2026-11-19",
-      "ok": 1,
+      "attempts": 4,
+      "evidenceItems": 4,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 4,
       "outcomes": {
-        "ok": 1
+        "ok": 4
       },
       "workingPaths": [
-        "curl https://www.paidnice.com/pricing"
+        "curl https://www.paidnice.com/pricing",
+        "webfetch https://www.paidnice.com/pricing",
+        "curl https://www.paidnice.com/quote-reminders"
       ]
     },
     "www.patreon.com": {
@@ -10546,14 +11369,14 @@
       ]
     },
     "www.peopleperhour.com": {
-      "attempts": 16,
+      "attempts": 20,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-18",
-      "lastOk": "2026-11-15",
-      "ok": 4,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 6,
       "outcomes": {
-        "empty": 12,
-        "ok": 4
+        "empty": 14,
+        "ok": 6
       },
       "workingPaths": [
         "curl https://www.peopleperhour.com/freelance-jobs?q=shopify%20theme%20update",
@@ -10622,6 +11445,20 @@
         "webfetch https://www.praxikon.com/en/templates/article-4-evidence-dossier-checklist"
       ]
     },
+    "www.producthunt.com": {
+      "attempts": 2,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "webfetch https://www.producthunt.com/posts/waitlist-flow-wizard",
+        "webfetch https://www.producthunt.com/products/nosho-app"
+      ]
+    },
     "www.profileward.com": {
       "attempts": 2,
       "evidenceItems": 0,
@@ -10674,13 +11511,14 @@
       ]
     },
     "www.quotientapp.com": {
-      "attempts": 7,
-      "evidenceItems": 1,
-      "lastAttempt": "2026-11-12",
-      "lastOk": "2026-11-12",
-      "ok": 7,
+      "attempts": 11,
+      "evidenceItems": 4,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 10,
       "outcomes": {
-        "ok": 7
+        "empty": 1,
+        "ok": 10
       },
       "workingPaths": [
         "webfetch https://www.quotientapp.com/blog/deposits-split-invoices-adjustments",
@@ -10688,14 +11526,29 @@
         "webfetch https://www.quotientapp.com/help/invoicing-overview"
       ]
     },
-    "www.reddit.com": {
+    "www.rba.gov.au": {
       "attempts": 2,
+      "evidenceItems": 2,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "webfetch https://www.rba.gov.au/payments-and-infrastructure/review-of-retail-payments-regulation/2026-03/conclusions-paper/surcharging.html",
+        "webfetch https://www.rba.gov.au/payments-and-infrastructure/review-of-retail-payments-regulation/2026-03/conclusions-paper/impact-and-implementation.html"
+      ]
+    },
+    "www.reddit.com": {
+      "attempts": 3,
       "evidenceItems": 0,
-      "lastAttempt": "2026-10-31",
+      "lastAttempt": "2026-11-20",
       "lastOk": null,
       "ok": 0,
       "outcomes": {
-        "allowlist": 2
+        "allowlist": 2,
+        "http_403": 1
       },
       "workingPaths": []
     },
@@ -10737,6 +11590,19 @@
       },
       "workingPaths": [
         "curl https://www.restaurantbusinessonline.com/financing/minnesota-restaurants"
+      ]
+    },
+    "www.restaurantdive.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://www.restaurantdive.com/"
       ]
     },
     "www.restaurantonline.co.uk": {
@@ -10826,6 +11692,20 @@
       },
       "workingPaths": []
     },
+    "www.salontoday.com": {
+      "attempts": 3,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 3,
+      "outcomes": {
+        "ok": 3
+      },
+      "workingPaths": [
+        "webfetch https://www.salontoday.com/articles/square-go-squares-new-booking-app-seamlessly-connects-consumers-with-beauty-and-personal-care-businesses",
+        "webfetch https://www.salontoday.com/articles/beautydeskai-announces-official-partnership-with-square-to-power-smarter-salon-operations"
+      ]
+    },
     "www.sandiegocounty.gov": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -10848,6 +11728,32 @@
       },
       "workingPaths": [
         "webfetch https://www.selfemployed.com/news/etsy-seller-ai-disclosure-fees-2026/"
+      ]
+    },
+    "www.servicem8.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://www.servicem8.com/pricing"
+      ]
+    },
+    "www.setmore.com": {
+      "attempts": 2,
+      "evidenceItems": 2,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "webfetch https://www.setmore.com/pricing"
       ]
     },
     "www.sharp.net.nz": {
@@ -10965,6 +11871,19 @@
         "webfetch https://www.slrlounge.com/pass-is-shutting-down-what-photographers-need-to-do-now/"
       ]
     },
+    "www.smartcompany.com.au": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.smartcompany.com.au/finance/surcharge-ban-are-banks-actually-passing-on-interchange-fee-cuts-to-small-businesses/"
+      ]
+    },
     "www.smartsense.co": {
       "attempts": 1,
       "evidenceItems": 1,
@@ -10993,13 +11912,13 @@
       ]
     },
     "www.softwareadvice.com": {
-      "attempts": 1,
+      "attempts": 2,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-06",
+      "lastAttempt": "2026-11-20",
       "lastOk": null,
       "ok": 0,
       "outcomes": {
-        "http_403": 1
+        "http_403": 2
       },
       "workingPaths": []
     },
@@ -11213,6 +12132,20 @@
         "webfetch https://www.toriihq.com/articles/six-tools-to-track-cursor-usage-and-spend"
       ]
     },
+    "www.tradifyhq.com": {
+      "attempts": 2,
+      "evidenceItems": 2,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "curl https://www.tradifyhq.com/au/features/quoting-software",
+        "curl https://www.tradifyhq.com/au/pricing"
+      ]
+    },
     "www.transact-tech.com": {
       "attempts": 1,
       "evidenceItems": 1,
@@ -11308,16 +12241,17 @@
       ]
     },
     "www.ukbusinessforums.co.uk": {
-      "attempts": 1,
-      "evidenceItems": 0,
-      "lastAttempt": "2026-11-18",
-      "lastOk": "2026-11-18",
-      "ok": 1,
+      "attempts": 2,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 2,
       "outcomes": {
-        "ok": 1
+        "ok": 2
       },
       "workingPaths": [
-        "webfetch https://www.ukbusinessforums.co.uk/threads/problems-with-web-developer-part-2.291590/post-2507828"
+        "webfetch https://www.ukbusinessforums.co.uk/threads/problems-with-web-developer-part-2.291590/post-2507828",
+        "webfetch https://www.ukbusinessforums.co.uk/threads/built-a-quote-calculator-tool-for-service-businesses-not-sure-if-theres-a-real-market-for-it-would-love-honest-feedback.430900/"
       ]
     },
     "www.uptimerobot.com": {
@@ -11477,17 +12411,18 @@
       ]
     },
     "www.wix.com": {
-      "attempts": 2,
-      "evidenceItems": 0,
-      "lastAttempt": "2026-11-19",
-      "lastOk": "2026-11-19",
-      "ok": 2,
+      "attempts": 5,
+      "evidenceItems": 2,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 5,
       "outcomes": {
-        "ok": 2
+        "ok": 5
       },
       "workingPaths": [
         "webfetch https://www.wix.com/app-market/maor54235423-selects-1",
-        "curl https://www.wix.com/app-market/web-solution/pikkco-clinic-intake-and-consent-1"
+        "curl https://www.wix.com/app-market/web-solution/pikkco-clinic-intake-and-consent-1",
+        "webfetch https://www.wix.com/app-market/appointment-waitlist"
       ]
     },
     "www.wrkr.com.au": {
@@ -11547,13 +12482,13 @@
       ]
     },
     "www.xero.com": {
-      "attempts": 12,
-      "evidenceItems": 1,
-      "lastAttempt": "2026-11-19",
-      "lastOk": "2026-11-19",
-      "ok": 12,
+      "attempts": 15,
+      "evidenceItems": 3,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 15,
       "outcomes": {
-        "ok": 12
+        "ok": 15
       },
       "workingPaths": [
         "curl https://www.xero.com/ie/accountant-bookkeeper-guides/what-is-e-invoicing/",
@@ -11649,13 +12584,14 @@
       ]
     },
     "zapier.com": {
-      "attempts": 7,
-      "evidenceItems": 0,
-      "lastAttempt": "2026-11-19",
-      "lastOk": "2026-11-19",
-      "ok": 7,
+      "attempts": 17,
+      "evidenceItems": 6,
+      "lastAttempt": "2026-11-20",
+      "lastOk": "2026-11-20",
+      "ok": 14,
       "outcomes": {
-        "ok": 7
+        "http_404": 3,
+        "ok": 14
       },
       "workingPaths": [
         "webfetch https://zapier.com/apps/wildapricot/integrations",
@@ -11787,28 +12723,28 @@
     "A12": {
       "candidates": 28,
       "fetchFail": 41,
-      "fetchOk": 208,
-      "lastUsed": "2026-11-19",
-      "runs": 21,
-      "searches": 200,
+      "fetchOk": 211,
+      "lastUsed": "2026-11-20",
+      "runs": 22,
+      "searches": 203,
       "selected": 3
     },
     "A13": {
-      "candidates": 145,
-      "fetchFail": 84,
-      "fetchOk": 855,
-      "lastUsed": "2026-11-19",
-      "runs": 22,
-      "searches": 481,
+      "candidates": 152,
+      "fetchFail": 94,
+      "fetchOk": 940,
+      "lastUsed": "2026-11-20",
+      "runs": 23,
+      "searches": 538,
       "selected": 16
     },
     "A14": {
       "candidates": 25,
       "fetchFail": 6,
-      "fetchOk": 108,
-      "lastUsed": "2026-11-18",
-      "runs": 14,
-      "searches": 52,
+      "fetchOk": 114,
+      "lastUsed": "2026-11-20",
+      "runs": 15,
+      "searches": 56,
       "selected": 4
     },
     "A15": {
@@ -11821,13 +12757,13 @@
       "selected": 2
     },
     "A16": {
-      "candidates": 68,
-      "fetchFail": 35,
-      "fetchOk": 384,
-      "lastUsed": "2026-11-19",
-      "runs": 12,
-      "searches": 172,
-      "selected": 17
+      "candidates": 75,
+      "fetchFail": 90,
+      "fetchOk": 709,
+      "lastUsed": "2026-11-20",
+      "runs": 13,
+      "searches": 330,
+      "selected": 20
     },
     "A2": {
       "candidates": 5,
@@ -11904,28 +12840,28 @@
     "B10": {
       "candidates": 6,
       "fetchFail": 1,
-      "fetchOk": 25,
-      "lastUsed": "2026-11-09",
-      "runs": 7,
+      "fetchOk": 26,
+      "lastUsed": "2026-11-20",
+      "runs": 8,
       "searches": 23,
       "selected": 0
     },
     "B11": {
-      "candidates": 39,
-      "fetchFail": 38,
-      "fetchOk": 479,
-      "lastUsed": "2026-11-19",
-      "runs": 19,
-      "searches": 454,
+      "candidates": 42,
+      "fetchFail": 49,
+      "fetchOk": 567,
+      "lastUsed": "2026-11-20",
+      "runs": 20,
+      "searches": 535,
       "selected": 5
     },
     "B12": {
       "candidates": 50,
-      "fetchFail": 104,
-      "fetchOk": 527,
-      "lastUsed": "2026-11-19",
-      "runs": 17,
-      "searches": 294,
+      "fetchFail": 127,
+      "fetchOk": 629,
+      "lastUsed": "2026-11-20",
+      "runs": 18,
+      "searches": 381,
       "selected": 13
     },
     "B2": {
@@ -11993,11 +12929,11 @@
     },
     "C10": {
       "candidates": 52,
-      "fetchFail": 55,
-      "fetchOk": 236,
-      "lastUsed": "2026-11-19",
-      "runs": 19,
-      "searches": 169,
+      "fetchFail": 62,
+      "fetchOk": 269,
+      "lastUsed": "2026-11-20",
+      "runs": 20,
+      "searches": 190,
       "selected": 8
     },
     "C11": {
@@ -12037,12 +12973,12 @@
       "selected": 0
     },
     "C5": {
-      "candidates": 45,
-      "fetchFail": 43,
-      "fetchOk": 116,
-      "lastUsed": "2026-11-19",
-      "runs": 18,
-      "searches": 99,
+      "candidates": 47,
+      "fetchFail": 49,
+      "fetchOk": 133,
+      "lastUsed": "2026-11-20",
+      "runs": 19,
+      "searches": 119,
       "selected": 12
     },
     "C6": {
@@ -12064,12 +13000,12 @@
       "selected": 0
     },
     "C8": {
-      "candidates": 12,
-      "fetchFail": 10,
-      "fetchOk": 29,
-      "lastUsed": "2026-11-18",
-      "runs": 6,
-      "searches": 24,
+      "candidates": 14,
+      "fetchFail": 13,
+      "fetchOk": 47,
+      "lastUsed": "2026-11-20",
+      "runs": 7,
+      "searches": 32,
       "selected": 5
     },
     "C9": {
@@ -12082,28 +13018,32 @@
       "selected": 0
     }
   },
-  "disagreements": [],
+  "disagreements": [
+    {
+      "catalogStatus": "blocked",
+      "id": "A1",
+      "logSays": "reachable",
+      "name": "LMS idea boards",
+      "why": "2 usable fetches in the window"
+    },
+    {
+      "catalogStatus": "blocked",
+      "id": "B5",
+      "logSays": "reachable",
+      "name": "Acquisition marketplaces",
+      "why": "4 usable fetches in the window"
+    },
+    {
+      "catalogStatus": "ok-curl",
+      "id": "C3",
+      "logSays": "blocked",
+      "name": "Procurement and RFP portals",
+      "why": "5 attempts in the window, none usable"
+    }
+  ],
   "failingPaths": [
     {
-      "detail": "236353B",
-      "fallbacks": 0,
-      "id": "A1",
-      "name": "LMS idea boards",
-      "outcome": "http_403",
-      "status": "ok",
-      "url": "https://community.instructure.com/t5/forums/searchpage/tab/message?q=gradebook"
-    },
-    {
-      "detail": "218B",
-      "fallbacks": 0,
-      "id": "A1",
-      "name": "LMS idea boards",
-      "outcome": "http_410",
-      "status": "ok",
-      "url": "https://moodle.atlassian.net/rest/api/2/search?jql=project%3DMDL&maxResults=3"
-    },
-    {
-      "detail": "177B",
+      "detail": "177B (twice, first was http_422)",
       "fallbacks": 0,
       "id": "A4",
       "name": "GitHub Education and Classroom discussions",
@@ -12112,22 +13052,22 @@
       "url": "https://api.github.com/search/issues?q=repo%3Acommunity%2Fcommunity+classroom&per_page=5"
     },
     {
-      "detail": "453602B",
+      "detail": "no status (curl exit 3) (twice, first was timeout)",
       "fallbacks": 1,
-      "id": "B5",
-      "name": "Acquisition marketplaces",
-      "outcome": "http_404",
+      "id": "A16",
+      "name": "Vendor feature-request boards",
+      "outcome": "timeout",
       "status": "ok-curl",
-      "url": "https://acquire.com/search/?industry=education"
+      "url": "https://forums.wildapricot.com/ (wishlist and suggestion pages)"
     },
     {
-      "detail": "HTTP 200, 41603B, but 'company' is absent",
-      "fallbacks": 0,
-      "id": "C9",
-      "name": "Y Combinator requests and directory",
-      "outcome": "empty",
+      "detail": "827B (twice, first was http_429)",
+      "fallbacks": 1,
+      "id": "C2",
+      "name": "Education and computing research",
+      "outcome": "http_429",
       "status": "ok",
-      "url": "https://www.ycombinator.com/companies?query=education"
+      "url": "https://api.openalex.org/works?search=computing%20education&per-page=5&sort=publication_date:desc"
     }
   ],
   "floorFailures": [
@@ -12153,13 +13093,13 @@
     }
   ],
   "funnel": {
-    "candidates": 558,
-    "passedGate": 9,
-    "passedRejectRules": 470,
-    "provisional": 61,
+    "candidates": 584,
+    "passedGate": 12,
+    "passedRejectRules": 496,
+    "provisional": 63,
     "reviewKilled": 59,
-    "validated": 0,
-    "watchlist": 53
+    "validated": 1,
+    "watchlist": 61
   },
   "gateFailures": {
     "evidenceCountBelow2": 0,
@@ -12168,11 +13108,11 @@
     "painBelow4": 3,
     "rejectRule": 88,
     "reviewKill": 59,
-    "totalBelowMin": 394,
+    "totalBelowMin": 419,
     "unverifiedEvidence": 0,
     "wtpBelow3": 0
   },
-  "generated": "2026-11-19",
+  "generated": "2026-11-20",
   "prefer": [
     {
       "client": "curl",
@@ -12180,7 +13120,7 @@
       "id": "A16",
       "name": "Vendor feature-request boards",
       "path": "https://productideas.xero.com/search?query={q}",
-      "selectedIdeas": 17,
+      "selectedIdeas": 20,
       "status": "ok-curl"
     },
     {
@@ -12301,15 +13241,6 @@
       "status": "ok"
     },
     {
-      "client": "both",
-      "evidence": "complaint",
-      "id": "A1",
-      "name": "LMS idea boards",
-      "path": "https://community.instructure.com/t5/forums/searchpage/tab/message?q={q}",
-      "selectedIdeas": 0,
-      "status": "ok"
-    },
-    {
       "client": "webfetch",
       "evidence": "complaint",
       "id": "A2",
@@ -12344,15 +13275,6 @@
       "path": "https://appsumo.com/software/{category}/",
       "selectedIdeas": 0,
       "status": "ok"
-    },
-    {
-      "client": "webfetch",
-      "evidence": "spend",
-      "id": "B5",
-      "name": "Acquisition marketplaces",
-      "path": "https://acquire.com/search/?industry=education",
-      "selectedIdeas": 0,
-      "status": "ok-curl"
     },
     {
       "client": "curl",
@@ -12427,6 +13349,6 @@
       "status": "ok"
     }
   ],
-  "runsInWindow": 28,
+  "runsInWindow": 29,
   "windowDays": 45
 }
