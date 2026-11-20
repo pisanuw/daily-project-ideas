@@ -40,7 +40,10 @@ class Handler(http.server.BaseHTTPRequestHandler):
             self.send_header(name, value)
         self.send_header("Content-Length", str(len(body)))
         self.end_headers()
-        self.wfile.write(body)
+        try:
+            self.wfile.write(body)
+        except (BrokenPipeError, ConnectionResetError):
+            pass  # the client gave up first: the timeout tests
 
     def do_GET(self):
         Handler.seen.append(self.path)
@@ -62,6 +65,14 @@ class Handler(http.server.BaseHTTPRequestHandler):
             self.send(302, headers=[("Location", f"http://localhost:{port}/ok?consent=1")])
         elif self.path == "/to-file":
             self.send(302, headers=[("Location", "file:///etc/passwd")])
+        elif self.path.startswith("/other-port/"):
+            self.send(302, headers=[("Location",
+                                     f"http://127.0.0.1:{self.path.split('/')[2]}/ok?port=2")])
+        elif self.path == "/to-metadata":
+            self.send(302, headers=[("Location", "http://169.254.169.254/latest/meta-data/")])
+        elif self.path == "/slow-hop":
+            time.sleep(0.7)
+            self.send(302, headers=[("Location", "/slow-hop")])
         elif self.path == "/loop":
             self.send(302, headers=[("Location", "/loop")])
         elif self.path == "/big":
@@ -73,9 +84,10 @@ class Handler(http.server.BaseHTTPRequestHandler):
             self.send(200, b"other")
 
 
-def refusing_proxy():
-    """A proxy that answers every CONNECT with 403, as a session's egress
-    proxy does for a host it does not allow."""
+def refusing_proxy(answer=b"403 Forbidden"):
+    """A proxy that answers every CONNECT with one status: 403 as a session's
+    egress proxy does for a host it does not allow, 502 as it does for a host
+    it cannot reach."""
     sock = socket.socket()
     sock.bind(("127.0.0.1", 0))
     sock.listen(5)
@@ -87,7 +99,7 @@ def refusing_proxy():
             except OSError:
                 return
             conn.recv(4096)
-            conn.sendall(b"HTTP/1.1 403 Forbidden\r\nContent-Length: 0\r\n\r\n")
+            conn.sendall(b"HTTP/1.1 " + answer + b"\r\nContent-Length: 0\r\n\r\n")
             conn.close()
 
     threading.Thread(target=serve, daemon=True).start()
@@ -100,6 +112,9 @@ class FetchTest(unittest.TestCase):
         cls.server = http.server.ThreadingHTTPServer(("127.0.0.1", 0), Handler)
         cls.port = cls.server.server_address[1]
         threading.Thread(target=cls.server.serve_forever, daemon=True).start()
+        cls.second = http.server.ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+        cls.second_port = cls.second.server_address[1]
+        threading.Thread(target=cls.second.serve_forever, daemon=True).start()
         cls.base = f"http://127.0.0.1:{cls.port}"
         cls.tmp = tempfile.TemporaryDirectory()
         # The test server is local: keep any session proxy out of the way.
@@ -108,14 +123,18 @@ class FetchTest(unittest.TestCase):
     @classmethod
     def tearDownClass(cls):
         cls.server.shutdown()
+        cls.second.shutdown()
         cls.tmp.cleanup()
 
-    def run_script(self, *args, stdin=None, env=None):
+    def run_script(self, *args, stdin=None, env=None, local=True):
+        """local: the test server is on 127.0.0.1, which the script refuses
+        unless it is told this is a test."""
         log = os.path.join(self.tmp.name, "fetches.jsonl")
         if os.path.exists(log):
             os.unlink(log)
+        allow = ["--allow-private-hosts"] if local else []
         proc = subprocess.run(
-            [sys.executable, SCRIPT, "--log", log, *args], input=stdin,
+            [sys.executable, SCRIPT, "--log", log, *allow, *args], input=stdin,
             capture_output=True, text=True, cwd=self.tmp.name, env=env or self.env)
         status = [l for l in proc.stderr.splitlines() if l.startswith("fetch: ")]
         record = json.loads(status[-1][len("fetch: "):]) if status else None
@@ -200,11 +219,70 @@ class FetchTest(unittest.TestCase):
         self.assertEqual(record["outcome"], "redirect")
         self.assertIn("more than 5 redirects", record["note"])
 
-    def test_www_and_https_do_not_count_as_another_host(self):
-        self.assertEqual(fetch_url.site("http://Example.com/a"),
-                         fetch_url.site("https://www.example.com/b"))
-        self.assertNotEqual(fetch_url.site("https://example.com/"),
-                            fetch_url.site("https://consent.example.com/"))
+    def test_what_counts_as_the_same_place(self):
+        same = fetch_url.why_not_followed
+        self.assertIsNone(same("https://example.com/a", "https://www.example.com/b"))
+        self.assertIsNone(same("http://example.com/a", "https://example.com/a"))
+        self.assertIn("another host", same("https://example.com/", "https://consent.example.com/"))
+        self.assertIn("from https to http", same("https://example.com/", "http://example.com/"))
+        self.assertIn("another port", same("https://example.com/", "https://example.com:8443/"))
+        self.assertIn("from http to https", same("http://example.com:8080/", "https://example.com/"))
+
+    def test_a_redirect_to_another_port_is_not_followed(self):
+        Handler.seen.clear()
+        proc, record, _ = self.run_script(f"{self.base}/other-port/{self.second_port}")
+        self.assertEqual(proc.returncode, 1)
+        self.assertEqual(record["outcome"], "redirect")
+        self.assertIn(f"another port ({self.second_port})", record["note"])
+        self.assertEqual(Handler.seen, [f"/other-port/{self.second_port}"])
+
+    def test_a_redirect_to_a_private_address_is_not_followed(self):
+        # Let the script reach the test server, and nothing else that is private.
+        real = fetch_url.private_host
+        fetch_url.private_host = lambda host: None if host == "127.0.0.1" else real(host)
+        try:
+            record = fetch_url.fetch(self.base + "/to-metadata",
+                                     os.path.join(self.tmp.name, "meta.html"))
+        finally:
+            fetch_url.private_host = real
+        self.assertEqual(record["outcome"], "redirect")
+        self.assertEqual(record["redirectTo"], "http://169.254.169.254/latest/meta-data/")
+        self.assertIn("loopback, private or link-local", record["note"])
+        self.assertEqual(record["hops"], [])
+
+    def test_hosts_on_this_machine_or_a_private_network_are_refused(self):
+        Handler.seen.clear()
+        for url in (self.base + "/ok", f"http://localhost:{self.port}/ok",
+                    f"http://app.localhost:{self.port}/ok", "http://10.0.0.1/",
+                    "http://192.168.1.1/", "http://172.16.0.1/", "http://169.254.169.254/",
+                    "http://[::1]/", "http://[fe80::1]/", "http://[fd00::1]/",
+                    "http://[::ffff:127.0.0.1]/", "http://0.0.0.0/", "http://2130706433/",
+                    "http://0x7f.0.0.1/", "http://0x7f000001/", "http://127.1/"):
+            proc, record, _ = self.run_script(url, local=False)
+            self.assertEqual(proc.returncode, 2, url)
+            self.assertEqual(record["outcome"], "refused_url", url)
+        self.assertEqual(Handler.seen, [])
+        for url in ("https://example.com/", "https://8.8.8.8/", "https://x0.io/",
+                    "https://[2606:4700:4700::1111]/"):
+            self.assertIsNone(fetch_url.bad_url(url), url)
+
+    def test_all_the_hops_together_have_one_time_limit(self):
+        started = time.monotonic()
+        proc, record, _ = self.run_script("--total-timeout", "1", self.base + "/slow-hop")
+        self.assertEqual(proc.returncode, 1)
+        self.assertEqual(record["outcome"], "timeout")
+        self.assertLess(time.monotonic() - started, 5)
+
+    def test_a_stale_output_file_does_not_survive_a_refusal_or_an_oversize_body(self):
+        out = os.path.join(self.tmp.name, "stale.html")
+        for args in (["--max-bytes", "1000", self.base + "/big"], ["file:///etc/passwd"]):
+            with open(out, "w") as fh:
+                fh.write("yesterday's page")
+            proc, record, _ = self.run_script("-o", out, *args)
+            self.assertIn(record["outcome"], ("too_large", "refused_url"))
+            self.assertFalse(os.path.exists(out), args)
+        proc, record, _ = self.run_script("-o", os.devnull, "file:///etc/passwd")
+        self.assertTrue(os.path.exists(os.devnull))
 
     def test_a_body_over_the_limit_is_refused(self):
         proc, record, _ = self.run_script("--max-bytes", "1000", self.base + "/big")
@@ -242,9 +320,27 @@ class FetchTest(unittest.TestCase):
         self.assertEqual(record["logAs"], "environment")
         self.assertIn("403", record["note"])
 
+    def test_a_host_the_proxy_cannot_reach_counts_against_the_site(self):
+        for answer, outcome in ((b"502 Bad Gateway", "error"),
+                                (b"503 Service Unavailable", "error"),
+                                (b"504 Gateway Timeout", "timeout"),
+                                (b"429 Too Many Requests", "environment"),
+                                (b"407 Proxy Authentication Required", "environment")):
+            proxy = refusing_proxy(answer)
+            try:
+                env = dict(self.env, https_proxy=f"http://127.0.0.1:{proxy.getsockname()[1]}")
+                proc, record, _ = self.run_script("https://dead.example/", env=env)
+            finally:
+                proxy.close()
+            self.assertEqual(record["outcome"], outcome, answer)
+            self.assertEqual(record["logAs"], "environment" if outcome == "environment"
+                             else "timeout", answer)
+            self.assertIn(answer[:3].decode(), record["note"])
+
     def test_no_log_writes_no_log(self):
         log = os.path.join(self.tmp.name, "unused.jsonl")
-        subprocess.run([sys.executable, SCRIPT, "--log", log, "--no-log", self.base + "/ok"],
+        subprocess.run([sys.executable, SCRIPT, "--allow-private-hosts", "--log", log,
+                        "--no-log", self.base + "/ok"],
                        capture_output=True, env=self.env)
         self.assertFalse(os.path.exists(log))
 
