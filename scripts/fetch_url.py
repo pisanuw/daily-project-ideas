@@ -20,8 +20,12 @@ What it does:
   * refuses a host on this machine or a private network: localhost and
     *.localhost, and a literal IP address that is loopback, private,
     link-local or otherwise not public, also when written as one number or in
-    hex. It checks the text of the URL only: it does not resolve names, so a
-    public name that points at a private address is not caught here;
+    hex. curl decodes a host before it connects, so the check reads the host
+    the way curl will: a host with a percent sign in it is refused outright,
+    and look-alike characters (full-width digits and letters, circled
+    letters, ideographic full stops) are folded to plain ones first. It does
+    not resolve names, so a public name that points at a private address is
+    not caught here;
   * calls curl with -g (brackets and braces are literal), --proto =http,https,
     -m 20, --max-filesize, --compressed and -w '%{http_code} %{url_effective}';
   * follows a redirect only when it stays on the same host, scheme and port,
@@ -45,11 +49,11 @@ The record's `outcome`:
                proxy answering 504 for the host
   too_large    the body is larger than --max-bytes (nothing is kept)
   environment  this session's own proxy refused the host as a matter of
-               policy or of its own limits: it answered CONNECT with 403, 407
-               or 429, or could not be reached itself. It says nothing about
+               policy or of its own limits: it answered CONNECT with 403, 407,
+               429 or 503, or could not be reached itself. It says nothing about
                the site and never counts as a site block.
   error        curl failed some other way (`note` has curl's message). That
-               includes the proxy answering 502 or 503 for the host: the
+               includes the proxy answering 502 for the host: the
                proxy tried and could not reach it, which is what a dead host
                looks like from behind a proxy, so it counts against the site
                like a timeout.
@@ -75,6 +79,7 @@ import subprocess
 import sys
 import tempfile
 import time
+import unicodedata
 from urllib.parse import urlsplit
 
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
@@ -93,14 +98,24 @@ WRITE_OUT = "%{http_code} %{url_effective}\n%{redirect_url}\n%{http_connect}\n"
 PROXY_EXITS = {5: "could not resolve the proxy", 97: "proxy handshake failed"}
 # The proxy's answers to CONNECT that are its own policy or its own limit.
 PROXY_POLICY = {403: "refused the host", 407: "asked for credentials",
-                429: "is rate limiting this session"}
+                429: "is rate limiting this session",
+                503: "is not serving this session just now"}
 DEFAULT_PORT = {"http": 80, "https": 443}
+
+
+FULL_STOPS = str.maketrans({"\u3002": ".", "\uff0e": ".", "\uff61": "."})
+
+
+def plain_host(host):
+    """The host as curl will read it: look-alike characters folded to plain
+    ones (NFKC), the full-stop variants turned into dots, lower case."""
+    return unicodedata.normalize("NFKC", host).translate(FULL_STOPS).lower()
 
 
 def private_host(host):
     """Return why this host is on this machine or a private network, or None.
     Looks at the text only; names are not resolved."""
-    host = host.lower().rstrip(".")
+    host = plain_host(host).rstrip(".")
     if host == "localhost" or host.endswith(".localhost"):
         return "localhost is not fetched"
     try:
@@ -138,6 +153,9 @@ def bad_url(url, allow_private=False):
         return "no host"
     if "@" in parts.netloc:
         return "a user name or password in the URL is not allowed"
+    if "%" in parts.netloc:
+        # curl would decode it: 127.0.0.%31 is 127.0.0.1.
+        return "a percent sign in the host is not allowed"
     try:
         parts.port
     except ValueError:

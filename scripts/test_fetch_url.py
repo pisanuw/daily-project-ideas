@@ -68,6 +68,8 @@ class Handler(http.server.BaseHTTPRequestHandler):
         elif self.path.startswith("/other-port/"):
             self.send(302, headers=[("Location",
                                      f"http://127.0.0.1:{self.path.split('/')[2]}/ok?port=2")])
+        elif self.path == "/to-encoded-host":
+            self.send(302, headers=[("Location", "http://169.254.169.%32%35%34/latest/")])
         elif self.path == "/to-metadata":
             self.send(302, headers=[("Location", "http://169.254.169.254/latest/meta-data/")])
         elif self.path == "/slow-hop":
@@ -250,6 +252,47 @@ class FetchTest(unittest.TestCase):
         self.assertIn("loopback, private or link-local", record["note"])
         self.assertEqual(record["hops"], [])
 
+    def test_a_host_curl_would_decode_to_a_local_one_is_refused(self):
+        # curl decodes the host before it connects; each of these reached the
+        # test server before the check read the host the way curl does.
+        Handler.seen.clear()
+        for url in (f"http://127.0.0.%31:{self.port}/ok",
+                    f"http://%6cocalhost:{self.port}/ok",
+                    f"http://127\u30020\u30020\u30021:{self.port}/ok",
+                    f"http://127\uff0e0\uff610\u30021:{self.port}/ok",
+                    f"http://\u24dbocalhost:{self.port}/ok",
+                    f"http://\uff11\uff12\uff17.0.0.1:{self.port}/ok",
+                    f"http://LOCALHOST:{self.port}/ok"):
+            proc, record, _ = self.run_script(url, local=False)
+            self.assertEqual(proc.returncode, 2, url)
+            self.assertEqual(record["outcome"], "refused_url", url)
+            self.assertEqual(proc.stdout, "", url)
+        self.assertEqual(Handler.seen, [])
+        # A percent sign in the host is refused even in the tests' own mode.
+        proc, record, _ = self.run_script(f"http://127.0.0.%31:{self.port}/ok")
+        self.assertEqual(record["outcome"], "refused_url")
+        self.assertIn("percent sign", record["note"])
+        self.assertEqual(Handler.seen, [])
+
+    def test_a_redirect_to_an_encoded_local_host_is_not_followed(self):
+        # The site answers with Location: http://169.254.169.%32%35%34/latest/.
+        # Whether curl reports that target as written or already decoded, it
+        # is refused: by the percent sign, or as a link-local address.
+        Handler.seen.clear()
+        real = fetch_url.private_host
+        fetch_url.private_host = lambda host: None if host == "127.0.0.1" else real(host)
+        try:
+            record = fetch_url.fetch(self.base + "/to-encoded-host",
+                                     os.path.join(self.tmp.name, "encoded.html"))
+        finally:
+            fetch_url.private_host = real
+        self.assertEqual(record["outcome"], "redirect")
+        self.assertIn("redirect to a URL this script refuses", record["note"])
+        self.assertEqual(record["hops"], [])
+        self.assertEqual(Handler.seen, ["/to-encoded-host"])
+        for target in ("http://169.254.169.%32%35%34/latest/", "http://169.254.169.254/latest/"):
+            self.assertIsNotNone(fetch_url.bad_url(target), target)
+
     def test_hosts_on_this_machine_or_a_private_network_are_refused(self):
         Handler.seen.clear()
         for url in (self.base + "/ok", f"http://localhost:{self.port}/ok",
@@ -320,9 +363,9 @@ class FetchTest(unittest.TestCase):
         self.assertEqual(record["logAs"], "environment")
         self.assertIn("403", record["note"])
 
-    def test_a_host_the_proxy_cannot_reach_counts_against_the_site(self):
+    def test_only_a_502_from_the_proxy_counts_against_the_site(self):
         for answer, outcome in ((b"502 Bad Gateway", "error"),
-                                (b"503 Service Unavailable", "error"),
+                                (b"503 Service Unavailable", "environment"),
                                 (b"504 Gateway Timeout", "timeout"),
                                 (b"429 Too Many Requests", "environment"),
                                 (b"407 Proxy Authentication Required", "environment")):
