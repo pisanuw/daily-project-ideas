@@ -667,3 +667,7 @@
 | 2026-11-20 | Restock Alerts for Square Online | Micro-SaaS | Multi-week | 22 | validated |  |
 | 2026-11-20 | Booking Rules Page for Square Appointments | Small Business Ops | Multi-week | 21 | provisional |  |
 | 2026-11-20 | Rebook Reminders and Aftercare for Square Appointments | Small Business Ops | Multi-week | 20 | provisional |  |
+| 2026-11-21 | Leftover-Offset Check for Square Appointments in BC, Alberta and Manitoba | Small Business Ops | Weekend MVP | 19 | provisional |  |
+| 2026-11-21 | One-Case Disciplinary File for UK Micro Employers | Small Business Ops | Multi-week | 18 | provisional |  |
+| 2026-11-21 | Club-Branded Member Cards with Your Own Numbers for Zeffy | Micro-SaaS | Multi-week | 17 | provisional |  |
+| 2026-11-21 | Linked Audit Registers for Small NDIS Therapy Practices | Accessibility & Compliance | Multi-week | 16 | provisional |  |

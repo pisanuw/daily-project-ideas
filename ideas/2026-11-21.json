@@ -1,0 +1,1436 @@
+{
+  "date": "2026-11-21",
+  "schemaVersion": 3,
+  "complete": true,
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Leftover-Offset Check for Square Appointments in BC, Alberta and Manitoba",
+      "slug": "leftover-offset-check-square-appointments",
+      "category": "Small Business Ops",
+      "complexity": "Weekend MVP",
+      "confidence": "provisional",
+      "topic": "Algorithms & Data Structures",
+      "shape": {
+        "stateful": false,
+        "connected": true,
+        "unattended": false,
+        "engine": true,
+        "shared": false,
+        "notes": {
+          "connected": "Connects to the seller's Square account by OAuth, reads future bookings and business hours, and moves bookings back through the Bookings API where the plan allows writes.",
+          "engine": "The match rule: bookings dated 2026-11-01 to 2027-03-13, saved before the date the owner fixed their time-zone settings and not edited since, flagged when they sit exactly an hour outside business hours."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "backend"
+      ],
+      "summary": "For salons, studios and solo providers in BC, Alberta and Manitoba on Square Appointments: finds the bookings still an hour off after the 1 November 2026 time change and moves them back in confirmed batches, until the mismatch ends on 14 March 2027.",
+      "public": {
+        "summary": "Find the appointments that are still an hour off since the November time change, and fix them in a few clicks.",
+        "problem": "Your province stopped changing its clocks, and appointments you booked before you updated your settings now show an hour off, in your calendar and in your clients' reminders. Moving them one by one takes hours, and missing one means a client turns up at the wrong time.",
+        "forWhom": "Salons, studios, clinics and solo service providers in British Columbia, Alberta and Manitoba who take bookings in Square.",
+        "benefits": [
+          "See every appointment that is still an hour off",
+          "Fix them in batches you approve",
+          "A checklist to work through if your plan cannot fix them automatically",
+          "Fewer wrong-time arrivals and comped services"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "Since BC, Alberta and Manitoba moved to permanent daylight time on 1 November 2026, appointments saved before a seller corrected their Square settings sit an hour off; sellers move hundreds by hand and comp services, and Square offers no bulk fix.",
+      "description": "A one-off checker. The owner connects Square and enters the date they corrected their location, device and account time zones. The app lists future bookings up to 13 March 2027 that were saved before that date and not edited since, and flags those that fall exactly an hour outside business hours. Where the seller's plan allows API writes (Appointments Plus or Premium), it moves the flagged bookings back in batches the owner confirms; on the free plan it produces a printable checklist. It sends no messages to clients.",
+      "targetCustomer": "Salons, studios and solo service providers in British Columbia, Alberta and Manitoba on Square Appointments with bookings saved before 1 November 2026.",
+      "buyer": "The owner, one-off, by card.",
+      "whyNow": "BC, Alberta and Manitoba moved to permanent daylight time on 1 November 2026 (gov.bc.ca, 2026-10-30); the mismatch with stand-in US zones lasts until 14 March 2027 (HR trade press, 2026-10-19), and Square has no bulk tool.",
+      "founderFit": "Nothing beyond building it alone.",
+      "problemEvidence": [
+        {
+          "url": "https://community.squareup.com/api/2.0/search?q=SELECT%20subject%2C%20body%2C%20post_time%2C%20author.rank.name%20FROM%20messages%20WHERE%20topic.id%20%3D%20%27847330%27",
+          "source": "community.squareup.com",
+          "author": "poster A (Alberta salon owner, seller rank)",
+          "date": "2026-11-08",
+          "kind": "complaint",
+          "summary": "Says Square support told them no patch is coming; moving every client an hour by hand, comping appointments, and only halfway through December."
+        },
+        {
+          "url": "https://community.squareup.com/api/2.0/search?q=SELECT%20subject%2C%20body%2C%20post_time%2C%20author.rank.name%20FROM%20messages%20WHERE%20topic.id%20%3D%20%27847330%27",
+          "source": "community.squareup.com",
+          "author": "poster F (appointment seller)",
+          "date": "2026-11-02",
+          "kind": "complaint",
+          "summary": "Over 200 appointments affected; peers in Manitoba on other platforms do not have the problem."
+        },
+        {
+          "url": "https://community.squareup.com/api/2.0/search?q=SELECT%20subject%2C%20body%2C%20post_time%2C%20author.rank.name%2C%20depth%20FROM%20messages%20WHERE%20topic.id%20%3D%20%27852498%27%20ORDER%20BY%20post_time%20ASC%20LIMIT%2030",
+          "source": "community.squareup.com",
+          "author": "poster J (BC appointment business)",
+          "date": "2026-11-09",
+          "kind": "complaint",
+          "summary": "Calendar shows availability an hour later than business hours; an 11 AM booking appeared at 12 PM."
+        },
+        {
+          "url": "https://community.calendly.com/how-do-i-40/calendly-incorrectly-schedules-british-columbia-appointments-after-november-1-2026-5868/index2.html",
+          "source": "community.calendly.com",
+          "author": "poster G (Calendly customer)",
+          "date": "2026-11-01",
+          "kind": "complaint",
+          "summary": "Lost two potential clients after confirmation emails showed the wrong time (Calendly, not Square)."
+        },
+        {
+          "url": "https://www.hcamag.com/ca/specialization/payroll/permanent-daylight-time-splits-canadas-clocks-for-national-employers/594105",
+          "source": "hcamag.com",
+          "author": "HR trade press",
+          "date": "2026-10-19",
+          "kind": "mandate",
+          "summary": "BC, Alberta and Manitoba move to permanent daylight time; border hours are adjusted from 1 November 2026 to 14 March 2027."
+        },
+        {
+          "url": "https://www2.gov.bc.ca/gov/content/governments/celebrating-british-columbia/daylight-saving-time",
+          "source": "gov.bc.ca",
+          "author": "Government of British Columbia",
+          "date": "2026-10-30",
+          "kind": "mandate",
+          "summary": "British Columbia is on UTC-7 all year from 1 November 2026."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Square Appointments (edit and save each booking)",
+          "url": "https://community.squareup.com/api/2.0/search?q=SELECT%20subject%2C%20body%2C%20post_time%2C%20author.rank.name%20FROM%20messages%20WHERE%20topic.id%20%3D%20%27847330%27",
+          "price": "Free (included)",
+          "gap": "Square staff advise correcting settings and re-saving bookings one by one; no bulk tool."
+        },
+        {
+          "name": "Google Calendar's own shift",
+          "url": "https://knowledge.workspace.google.com/admin/calendar/manage-canadian-daylight-saving-time-changes",
+          "price": "Free (built in)",
+          "gap": "Shifts Google's own events and shows a banner; does nothing for Square bookings."
+        },
+        {
+          "name": "Calendly's new time zones",
+          "url": "https://community.calendly.com/how-do-i-40/calendly-incorrectly-schedules-british-columbia-appointments-after-november-1-2026-5868/index2.html",
+          "price": "Included in Calendly plans",
+          "gap": "Calendly added the new zones on 2026-10-20, but users still reported wrong times on 2026-11-17, and its API cannot move bookings."
+        }
+      ],
+      "keyFeatures": [
+        "Square OAuth connection",
+        "Cutoff-date match rule",
+        "One-hour-outside-hours flag",
+        "Batch move with owner confirmation",
+        "Printable checklist for free plans"
+      ],
+      "mvpScope": {
+        "features": [
+          "Connect Square",
+          "List and flag affected bookings",
+          "Batch move on Plus and Premium",
+          "Checklist export"
+        ],
+        "outOfScope": [
+          "Calendly",
+          "Client messaging",
+          "Regulated health clinics",
+          "Anything after 14 March 2027"
+        ],
+        "buildEstimate": "About 2 build days"
+      },
+      "techStack": "React + Vite front end; Supabase sign-in; backend-hub on Render for Square OAuth and Bookings API calls; no model calls.",
+      "pricing": {
+        "model": "One-off fee per location",
+        "pricePoint": "$19 per location (estimate)",
+        "rationale": "Less than one comped service; there is no paid comparison because nobody sells a fix."
+      },
+      "revenueSketch": "Estimate: 100 locations x $19 = $1,900, once, before March 2027. Assumes search finds sellers who have not finished by hand; the thread has been quiet since 2026-11-10, so this may be high.",
+      "distribution": "First 10: search ads on 'Square appointments wrong time BC' and similar queries until March 2027. The Square Seller Community's Code of Conduct says 'Don't promote your own products or services unprompted' (roles/finder/KNOWLEDGE.md, 2026-11-20), so no posting there, and Square's App Marketplace has paused new apps (developer forum topic 28043, 2026-10-01). Never post in the evidence threads.",
+      "validationTest": {
+        "method": "A one-page checker that explains the fix with a $19 one-time price button leading to a waitlist, promoted for 10 days by search ads limited to BC, Alberta and Manitoba; no outreach and no posts in Square's community.",
+        "successCriteria": "At least 5 price-button clicks with a Square business email from 100 or more visits within 10 days.",
+        "cost": "About $80 to $120 in ads and half a build day."
+      },
+      "moat": "None to speak of: a short-lived fix whose value is being first while the mismatch lasts.",
+      "compliance": [
+        "Canadian privacy law (PIPEDA; BC and Alberta PIPA): the app reads booking times and client names through OAuth; store tokens and nothing else, and delete on disconnect.",
+        "Square's developer terms for third-party apps apply.",
+        "Leave regulated health clinics out of the first version.",
+        "Accessibility: WCAG 2.2 AA for the checker pages."
+      ],
+      "risks": [
+        {
+          "risk": "The problem is mostly over: sellers fixed bookings by hand and the mismatch ends on 2027-03-14.",
+          "mitigation": "Build only after the test shows paying demand, and stop at the Weekend MVP."
+        },
+        {
+          "risk": "A wrong guess, or a later Square fix, double-shifts a correct appointment.",
+          "mitigation": "Batch moves with owner confirmation and an undo list; never move a booking edited after the cutoff."
+        },
+        {
+          "risk": "Most affected sellers are on Square's free plan, where API writes fail.",
+          "mitigation": "Offer the checklist on the free plan and price it lower."
+        }
+      ],
+      "scores": {
+        "pain": 5,
+        "willingnessToPay": 2,
+        "reachability": 2,
+        "competitiveGap": 2,
+        "feasibility": 3,
+        "complianceBurden": 5,
+        "total": 19
+      },
+      "scoreRationale": {
+        "pain": "Many independent sellers from 2026-10-30 to 2026-11-17 (https://community.squareup.com/api/2.0/search?q=SELECT%20subject%2C%20body%2C%20post_time%2C%20author.rank.name%20FROM%20messages%20WHERE%20topic.id%20%3D%20%27847330%27; https://community.calendly.com/how-do-i-40/calendly-incorrectly-schedules-british-columbia-appointments-after-november-1-2026-5868/index2.html).",
+        "willingnessToPay": "No paid job, app or offer found in two runs; sellers ask Square for compensation or switch platforms (https://community.squareup.com/api/2.0/search?q=SELECT%20subject%2C%20body%2C%20post_time%2C%20author.rank.name%20FROM%20messages%20WHERE%20topic.id%20%3D%20%27847330%27).",
+        "reachability": "Square's community forbids unprompted promotion and its marketplace is closed to new apps, leaving search ads (https://community.squareup.com/api/2.0/search?q=SELECT%20subject%2C%20body%2C%20post_time%2C%20author.rank.name%2C%20depth%20FROM%20messages%20WHERE%20topic.id%20%3D%20%27852498%27%20ORDER%20BY%20post_time%20ASC%20LIMIT%2030).",
+        "competitiveGap": "No bulk tool exists, but editing by hand in Square is the free option most sellers have finished (https://community.squareup.com/api/2.0/search?q=SELECT%20subject%2C%20body%2C%20post_time%2C%20author.rank.name%20FROM%20messages%20WHERE%20topic.id%20%3D%20%27847330%27).",
+        "feasibility": "The API stores no time zone and the cutoff differs per seller, and writes need Plus or Premium (https://developer.squareup.com/docs/bookings-api/what-it-is.md).",
+        "complianceBurden": "Reads booking times and client names by OAuth and sends no messages (https://developer.squareup.com/docs/bookings-api/what-it-is.md)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Re-researched from the watchlist today: no paid job or app for the fix was found (as on 2026-11-20), Calendly shipped the new zones but users still reported wrong times on 2026-11-17, and GoHighLevel leaves existing contacts to the user. The adversarial reviewer cut the total from 21 to 19: reachability 3 to 2 (the only gathering place is Square's moderated community, quiet since 2026-11-10, and the App Marketplace is paused) and feasibility 4 to 3 (Square's Bookings API keeps no time zone, the cutoff differs per seller, and seller-level writes return 403 on the free plan). It found the posters to be independent sellers, that part of the problem is Square's own display and reminder bugs, and that the mismatch ends by itself on 14 March 2027; it recommended not carrying the entry on the watchlist again. Re-scoped to a leftover-offset checker with confirmed batch moves where the plan allows, and a checklist otherwise."
+      },
+      "gateGap": {
+        "missing": [
+          "total 19 is below 22",
+          "willingnessToPay 2 is below 3: no paid job, app or offer found"
+        ],
+        "closedBy": "The 10-day ad test with a $19 price button: 5 or more clicks from Square sellers would be the first payment signal (willingnessToPay 3, total 20); the problem ends on 14 March 2027, so the gate of 22 is out of reach and this ships only as a short-lived lead."
+      },
+      "inspiredBy": "https://community.squareup.com/api/2.0/search?q=SELECT%20subject%2C%20body%2C%20post_time%2C%20author.rank.name%20FROM%20messages%20WHERE%20topic.id%20%3D%20%27847330%27"
+    },
+    {
+      "n": 2,
+      "title": "One-Case Disciplinary File for UK Micro Employers",
+      "slug": "one-case-disciplinary-file",
+      "category": "Small Business Ops",
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Writing & Language",
+      "shape": {
+        "stateful": true,
+        "connected": false,
+        "unattended": true,
+        "engine": true,
+        "shared": true,
+        "notes": {
+          "stateful": "The owner comes back to one case file over several weeks: timeline, letters, minutes and evidence index.",
+          "unattended": "A daily job emails the owner before a notice period or the appeal window closes.",
+          "engine": "The Acas Code's steps in order (investigation, invitation with the right to be accompanied, hearing, outcome, appeal), with skipped steps blocked and working-day deadlines.",
+          "shared": "The employee receives each letter, and the indexed bundle goes to an adviser or a tribunal; an appeal manager can be a second role."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "email",
+        "scheduled"
+      ],
+      "buildPlan": [
+        {
+          "n": 1,
+          "title": "One case, first letter",
+          "delivers": "Sign in, open a case, add dated timeline entries and download the hearing invitation as Word or PDF.",
+          "acceptance": "A signed-in owner creates a case and downloads an invitation that states the date, time, allegations, enclosed evidence and the right to be accompanied; deployed."
+        },
+        {
+          "n": 2,
+          "title": "Step engine",
+          "delivers": "The five Acas stages in order, with a step that would be skipped blocked and explained.",
+          "acceptance": "Tests show no outcome letter can be produced before a hearing record exists and no appeal before an outcome; each stage's letter renders."
+        },
+        {
+          "n": 3,
+          "title": "Evidence log and hearing minutes",
+          "delivers": "A dated evidence index with capped file uploads and a minutes template with attendees, roles and timestamps.",
+          "acceptance": "A sample hearing's minutes export to Word with every attendee and role; evidence items list in date order."
+        },
+        {
+          "n": 4,
+          "title": "Deadline reminders",
+          "delivers": "A scheduled job that emails the owner before notice periods and the appeal window close.",
+          "acceptance": "A seeded case produces exactly one reminder per due step on the right working day."
+        },
+        {
+          "n": 5,
+          "title": "Hearing bundle",
+          "delivers": "One-click indexed PDF bundle of the timeline, letters, minutes and evidence index.",
+          "acceptance": "The bundle's page numbers match its index for a 20-item sample case."
+        },
+        {
+          "n": 6,
+          "title": "Polish and pay per case",
+          "delivers": "Card payment per case, retention and delete, owner guide, phone layout, keyboard and screen-reader pass, walkthrough test.",
+          "acceptance": "A walkthrough test runs sign-in to bundle; axe reports no serious issues; deleting a case removes its files."
+        }
+      ],
+      "summary": "For UK owners with under ten staff and no HR adviser: one case file that walks a disciplinary through the Acas Code, writes the letters and minutes, keeps the dates, and exports a hearing bundle, priced per case.",
+      "public": {
+        "summary": "Run one staff disciplinary fairly, step by step, with every letter and note kept in one dated file.",
+        "problem": "You have a problem with a member of staff and no HR department. The official guidance is long, each letter has to say the right things, and one missed step can cost you dearly if it goes to a tribunal. From January 2027 far more of your staff will be able to make that claim.",
+        "forWhom": "Owners and managers of small businesses in England, Scotland and Wales who have no HR adviser.",
+        "benefits": [
+          "Always know the next step and what it must include",
+          "Letters and meeting notes ready to send",
+          "A dated record of what happened and when",
+          "A tidy bundle to hand an adviser if it goes further",
+          "Pay for one case, not a yearly contract"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "Small employers run a disciplinary perhaps once a year, get the steps and letters wrong or pay an outsider to minute or run the hearing; from 1 January 2027 an employee can claim unfair dismissal after six months and the compensation cap goes, so a skipped step costs far more.",
+      "description": "A guided case file for one disciplinary, with grievances to follow. The owner opens a case and the app walks through the Acas Code's stages in order (investigation, invitation with the right to be accompanied, hearing, outcome, appeal) and blocks a step that would be skipped. Each stage produces its letter as Word or PDF, the hearing stage gives a minutes template with attendees and roles, and every action is dated in a timeline with an evidence index. Reminders go out before notice periods and the appeal window close, and the file exports as an indexed bundle. It is priced per case, so an owner with one problem does not take a monthly HR platform.",
+      "targetCustomer": "Owners and managers of micro employers (1 to 10 staff) in England, Scotland and Wales with no HR retainer, no legal-expenses helpline and no membership that includes employment advice: care providers, restaurants, shops, trades.",
+      "buyer": "The owner, by card, per case, from the operating budget.",
+      "whyNow": "From 1 January 2027 employees can claim unfair dismissal after 6 months instead of 2 years and the compensation limit is removed (Acas, updated 2026-11-12; business.gov.uk, updated 2026-11-15); Acas consulted on a revised disciplinary Code from 30 July to 23 September 2026.",
+      "founderFit": "Nothing beyond building it alone.",
+      "problemEvidence": [
+        {
+          "url": "https://www.freelancer.com/api/projects/0.1/projects/40826456/?full_description=true",
+          "source": "freelancer.com",
+          "author": "poster A (a UK organisation)",
+          "date": "2026-11-19",
+          "kind": "spend",
+          "summary": "Pays GBP 250 to 750 for an outside note-taker to minute a three-person disciplinary panel verbatim in Word (a person, not a tool, was bought)."
+        },
+        {
+          "url": "https://www.freelancer.com/api/projects/0.1/projects/40682738/?full_description=true",
+          "source": "freelancer.com",
+          "author": "poster B (a care home in England)",
+          "date": "2026-08-31",
+          "kind": "spend",
+          "summary": "Pays GBP 500 to 750 for a replacement HR consultant to run a gross-misconduct hearing and its letters after its own hearing officer dropped out."
+        },
+        {
+          "url": "https://www.acas.org.uk/node/1979",
+          "source": "acas.org.uk",
+          "author": "Acas (public body)",
+          "date": "2026-11-12",
+          "kind": "mandate",
+          "summary": "From 1 January 2027 employees can claim unfair dismissal after 6 months instead of 2 years, and the limit on compensation is removed."
+        },
+        {
+          "url": "https://www.acas.org.uk/acas-updates-code-of-practice-as-formal-disciplinaries-estimated-to-cost-employers-2-billion-a-year",
+          "source": "acas.org.uk",
+          "author": "Acas (public body)",
+          "date": "2026-07-30",
+          "kind": "spend",
+          "summary": "Acas estimates the average formal disciplinary case costs an employer about £1,141, across about 1.7 million cases a year."
+        },
+        {
+          "url": "https://www.ukbusinessforums.co.uk/threads/looking-for-the-best-strategy-to-dismiss-an-employee.407719/",
+          "source": "ukbusinessforums.co.uk",
+          "author": "poster C (manager at a small employer)",
+          "date": "2020-07-28",
+          "kind": "complaint",
+          "summary": "Struggles to run a dismissal correctly: about 30 documents and fear of a discrimination claim and a grievance (old, before the 2027 change)."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Leo HR",
+          "url": "https://www.leohr.co.uk/pricing",
+          "price": "£75 a month up to 50 employees, £125 up to 150, £175 up to 250 (VAT not stated); 7-day free trial",
+          "gap": "Guides each stage with a tribunal 'Matter Bundle' and deadline monitoring (launched 2026-09-02), but only as a monthly platform; its pages do not show Acas-Code letters or blocks on skipped steps."
+        },
+        {
+          "name": "Adam HR (HR AI Pro)",
+          "url": "https://businesscloud.co.uk/?p=267044",
+          "price": "Freemium; paid price unknown",
+          "gap": "Drafts letters, investigation questions and outcomes; no case record, timeline or deadlines mentioned."
+        },
+        {
+          "name": "BrightHR",
+          "url": "https://www.brighthr.com/pricing",
+          "price": "From £21.20 per employee per month (£106.00 a month exc. tax) with 24/7 advice and templates",
+          "gap": "Templates and an advice line on a subscription; no guided case workflow listed."
+        },
+        {
+          "name": "Breathe HR",
+          "url": "https://www.breathehr.com/product-pricing",
+          "price": "£24 a month for 1 to 10 staff (ex VAT)",
+          "gap": "No disciplinary or case feature on the pricing page."
+        },
+        {
+          "name": "Acas step-by-step guide and templates",
+          "url": "https://www.acas.org.uk/node/136",
+          "price": "Free",
+          "gap": "Guidance, a checklist and a hearing-notice letter; no case record, minutes or outcome templates, no deadlines."
+        },
+        {
+          "name": "Croner HR Case Tracker",
+          "url": "https://croner.co.uk/services/hr/case-tracker",
+          "price": "unknown",
+          "gap": "Audit trail and 250+ letters and workflows, tied to Croner's advisory retainer."
+        }
+      ],
+      "keyFeatures": [
+        "Acas Code step engine that blocks skipped steps",
+        "Letters for every stage as Word or PDF",
+        "Hearing minutes template with attendees and roles",
+        "Dated timeline and evidence index",
+        "Deadline reminders by email",
+        "Indexed hearing bundle export"
+      ],
+      "mvpScope": {
+        "features": [
+          "Disciplinary cases only",
+          "Step engine for the five Acas stages",
+          "Invitation, outcome and appeal letters",
+          "Minutes template",
+          "Timeline, evidence index and bundle PDF",
+          "Pay per case"
+        ],
+        "outOfScope": [
+          "Grievances (second release)",
+          "Northern Ireland",
+          "Legal advice or an advice line",
+          "AI drafting",
+          "Payroll or staff records"
+        ],
+        "buildEstimate": "About 6 build days"
+      },
+      "techStack": "React + Vite + Tailwind front end; Supabase sign-in and a per-app schema, with capped evidence uploads in Supabase Storage; Word and PDF generated in the browser; a scheduled job and transactional email for reminders; card payment per case.",
+      "pricing": {
+        "model": "Per case, no subscription",
+        "pricePoint": "£39 per case (estimate)",
+        "rationale": "Below one month of Leo HR (£75) or BrightHR's advice tier (£106 a month exc. tax), and far below Acas's estimate of about £1,141 per case; above the free Acas templates because it keeps the record, the dates and the bundle."
+      },
+      "revenueSketch": "Estimate: 60 cases a month x £39 = £2,340 a month. Assumes owners find it by search when a case arises; search volume, conversion and repeat use are unknown.",
+      "distribution": "First 10: UK search ads and content on moment-of-need queries ('disciplinary hearing letter template', 'how to run a disciplinary hearing'), contested by HR vendors; Google Ads policy for HR services: rule unknown, check before posting. UK Business Forums: the only rule found is a 2006 staff post saying offers go in an offers section and other advertising is a brief message in your signature (https://www.ukbusinessforums.co.uk/threads/self-promotion-on-these-forums.14865/), and the current code of conduct page returned a bot check: rule unknown, check before posting. Never post in or reply to the evidence threads.",
+      "validationTest": {
+        "method": "A one-page site, 'Run one disciplinary the Acas way', with a £39 per-case price button that leads to a waitlist, and a 14-day UK-only search-ad test on moment-of-need queries; no outreach and nobody contacted.",
+        "successCriteria": "Click-through of 3% or more, at least 8% of visitors press the price button, and at least 15 UK business sign-ups at £15 or less each, while Leo HR's trial is one search away.",
+        "cost": "About £200 in ads, a domain, and half a build day."
+      },
+      "moat": "A step engine and bundle format kept current with the revised Acas Code, and a per-case price that subscription HR platforms are slow to match.",
+      "compliance": [
+        "UK GDPR and the Data Protection Act 2018: case files can hold criminal-offence and health data; the app is the employer's processor (Article 28 terms, UK or EEA hosting, retention and delete, subject access).",
+        "Not legal advice: present it as following the Acas Code with a clear disclaimer, and keep the wording current once the revised Code is approved.",
+        "England, Scotland and Wales only; Northern Ireland has its own code.",
+        "Equality Act 2010: prompt for reasonable adjustments and the companion's role.",
+        "Accessibility: letters in an accessible format, the app at WCAG 2.2 AA."
+      ],
+      "risks": [
+        {
+          "risk": "Leo HR or BrightHR adds a per-case plan.",
+          "mitigation": "Stay narrow and cheap: one case, one price; ship the bundle export first."
+        },
+        {
+          "risk": "Owners call a person, not software (Acas's 2022 research with small employers).",
+          "mitigation": "Position it as the file an adviser needs, and test the price against Leo HR before building past milestone 1."
+        },
+        {
+          "risk": "The revised Acas Code changes the required wording.",
+          "mitigation": "Keep letter wording in data behind a switch for the new Code."
+        },
+        {
+          "risk": "The shared Supabase project's region is not UK or EEA.",
+          "mitigation": "Confirm the region before storing case files; otherwise store the evidence index only, not files."
+        }
+      ],
+      "scores": {
+        "pain": 3,
+        "willingnessToPay": 3,
+        "reachability": 3,
+        "competitiveGap": 2,
+        "feasibility": 4,
+        "complianceBurden": 3,
+        "total": 18
+      },
+      "scoreRationale": {
+        "pain": "Stakes rise from 1 January 2027 (https://www.acas.org.uk/node/1979), but the only complaint is from 2020 (https://www.ukbusinessforums.co.uk/threads/looking-for-the-best-strategy-to-dismiss-an-employee.407719/).",
+        "willingnessToPay": "A paid plan for the job exists, Leo HR at £75 a month (https://www.leohr.co.uk/pricing); the two freelance posters paid for people, not a tool (https://www.freelancer.com/api/projects/0.1/projects/40826456/?full_description=true).",
+        "reachability": "Self-serve UK search ads when a case arises, contested by HR vendors (https://www.brighthr.com/pricing).",
+        "competitiveGap": "Leo HR guides each stage with a Matter Bundle and deadline monitoring (https://www.leohr.co.uk/platform) and Adam HR drafts letters (https://businesscloud.co.uk/?p=267044); what is left is a one-off per-case price.",
+        "feasibility": "No external API and public rules (https://www.acas.org.uk/about-us/acas-consultations/code-of-practice-disciplinary-grievance-2026); fits about 6 days with disciplinary cases only.",
+        "complianceBurden": "Criminal-offence and health data with the app as processor, and a Code under revision (https://www.acas.org.uk/about-us/acas-consultations/code-of-practice-disciplinary-grievance-2026)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Research (19) found that BrightHR, Breathe and CharlieHR list no guided case workflow and that the free Acas templates keep no record or deadlines. The adversarial reviewer found Leo HR, launched 2026-09-02, which guides each stage, keeps a tribunal 'Matter Bundle' and monitors deadlines for small employers at £75 a month, and Adam HR, a freemium letter drafter; it cut competitiveGap from 3 to 2 (total 19 to 18). It also found that both freelance posters bought a person (a note-taker, a hearing officer), not a tool, so they support the need but not software spend, and that the 1 January 2027 date has not moved. Re-scoped to a one-off, per-case disciplinary file for micro employers with no adviser, priced well below a month of Leo HR."
+      },
+      "gateGap": {
+        "missing": [
+          "total 18 is below 22",
+          "pain 3 is below 4: the only complaint is from 2020"
+        ],
+        "closedBy": "The search-ad test: 15 or more UK business sign-ups at £39 per case within 14 days, with Leo HR one search away, would show a per-case gap (competitiveGap back to 3); a dated owner complaint about running a disciplinary under the January 2027 rules would lift pain to 4."
+      },
+      "inspiredBy": "https://www.freelancer.com/api/projects/0.1/projects/40826456/?full_description=true"
+    },
+    {
+      "n": 3,
+      "title": "Club-Branded Member Cards with Your Own Numbers for Zeffy",
+      "slug": "club-branded-member-cards-zeffy",
+      "category": "Micro-SaaS",
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Data & Visualization",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": true,
+        "engine": false,
+        "shared": true,
+        "notes": {
+          "stateful": "The club keeps its member register, its own number sequence and one card template per membership type in the app.",
+          "connected": "Receives each Zeffy membership payment through Zeffy's payment webhook and API using the club's own key, and imports the existing member list by CSV.",
+          "unattended": "A card is issued and emailed automatically when a membership payment arrives, with a nightly check against Zeffy for missed webhooks.",
+          "shared": "The administrator designs the card, the member receives it, and partner-club staff check it on a verify page."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "email",
+        "scheduled",
+        "backend"
+      ],
+      "buildPlan": [
+        {
+          "n": 1,
+          "title": "Import and one card",
+          "delivers": "Sign in, store the club's Zeffy key on the server, import existing members and numbers by CSV, and render a branded PDF card for one member.",
+          "acceptance": "A 100-row sample list imports with numbers kept; one card shows the club's logo, membership type and number; deployed."
+        },
+        {
+          "n": 2,
+          "title": "Webhook issuing",
+          "delivers": "Receive Zeffy's payment webhook, drop non-membership payments, assign the next club number and email the card.",
+          "acceptance": "A test membership payment produces exactly one card email with the next number; a donation produces none; duplicates are ignored."
+        },
+        {
+          "n": 3,
+          "title": "Card designer",
+          "delivers": "One template per membership type with logo, colours, a leadership signature image and partner or reciprocal logos.",
+          "acceptance": "Two membership types render different templates from the same register; images stay sharp in the PDF."
+        },
+        {
+          "n": 4,
+          "title": "Verify page and family tiers",
+          "delivers": "A token-based verify page showing name, type, club number and valid-through date, and one card per named person on family payments.",
+          "acceptance": "A family payment with three names yields three cards and three verify links; an expired member shows as expired."
+        },
+        {
+          "n": 5,
+          "title": "Polish",
+          "delivers": "Nightly reconciliation with Zeffy, member list export, data deletion, administrator guide, phone layout, keyboard and screen-reader pass.",
+          "acceptance": "A walkthrough test runs import to card email; axe reports no serious issues; disconnecting deletes the key and member data."
+        }
+      ],
+      "summary": "For small clubs, museums and associations that sell memberships on Zeffy: member cards in the club's own design, numbered in the club's own sequence and issued automatically on each payment, with a verify page partner clubs can check.",
+      "public": {
+        "summary": "Give every member a card in your club's own look, with your own member numbers, sent automatically when they join or renew.",
+        "problem": "Your members pay through Zeffy, but the card they get carries Zeffy's numbers, not yours, and you cannot add your logo, a signature or your partner clubs. So you either redo the cards by hand each season or live with cards that other clubs will not honour.",
+        "forWhom": "Volunteer membership chairs and administrators of small clubs, museums and associations that use Zeffy.",
+        "benefits": [
+          "Cards that look like your club's, not a platform's",
+          "Your existing member numbers, carried on",
+          "Cards sent automatically on every new payment",
+          "A check page your partner clubs can trust"
+        ],
+        "audience": "teams"
+      },
+      "problemStatement": "Clubs on Zeffy cannot customise the membership card: numbers start at one instead of continuing the club's own sequence, and there is no logo, leadership signature or partner-club branding, so cards are redone by hand or not honoured by reciprocal partners.",
+      "description": "A small service connected to a club's Zeffy account by its own API key. It imports the existing member list and number sequence, then listens for Zeffy membership payments and issues each new member the next club number and a card in the template set for that membership type: logo, colours, a leadership signature and partner logos. Cards go out by email as PDFs, and each carries a link to a verify page with the club's number and valid-through date. Expiry dates and wallet passes stay with Zeffy, which already handles them.",
+      "targetCustomer": "Volunteer membership chairs and administrators of small clubs, museums, historical societies and associations that sell memberships through Zeffy.",
+      "buyer": "The organisation, by card, from a small admin budget.",
+      "whyNow": "Ten customers commented on Zeffy's card customisation request between 2026-10-23 and about 2026-11-17 (323 votes, open since 2022, no status); Zeffy's API is free and since 2026-09-01 lets an endpoint choose its webhook events.",
+      "founderFit": "Nothing beyond building it alone.",
+      "problemEvidence": [
+        {
+          "url": "https://feedback.zeffy.com/feature-requests/p/customize-membership-card-personnaliser-la-carte-de-membre",
+          "source": "feedback.zeffy.com",
+          "author": "poster H (nonprofit administrator)",
+          "date": "2026-11-04",
+          "kind": "complaint",
+          "summary": "Card numbers should match the organisation's own member numbers."
+        },
+        {
+          "url": "https://feedback.zeffy.com/feature-requests/p/customize-membership-card-personnaliser-la-carte-de-membre",
+          "source": "feedback.zeffy.com",
+          "author": "poster C (nonprofit administrator)",
+          "date": "2026-11-13",
+          "kind": "complaint",
+          "summary": "Asks for custom membership IDs (and custom end dates, which Zeffy's fixed-date setting partly covers)."
+        },
+        {
+          "url": "https://feedback.zeffy.com/feature-requests/p/customize-membership-card-personnaliser-la-carte-de-membre",
+          "source": "feedback.zeffy.com",
+          "author": "poster B (nonprofit administrator)",
+          "date": "2026-11-17",
+          "kind": "complaint",
+          "summary": "Wants leadership names and signatures on the card so other clubs honour it."
+        },
+        {
+          "url": "https://feedback.zeffy.com/feature-requests/p/customize-membership-card-personnaliser-la-carte-de-membre",
+          "source": "feedback.zeffy.com",
+          "author": "poster I (museum or nonprofit administrator)",
+          "date": "2026-10-31",
+          "kind": "complaint",
+          "summary": "Wants reciprocal-agreement logos and QR codes linked to purchases on the card."
+        },
+        {
+          "url": "https://www.freelancer.com/api/projects/0.1/projects/all/?query=membership%20card&limit=20&full_description=true&from_time=1787443200",
+          "source": "freelancer.com",
+          "author": "poster L (nonprofit workers' organisation)",
+          "date": "2026-11-12",
+          "kind": "spend",
+          "summary": "Project 40815373: pays INR 1,500 to 12,500 for a membership portal that includes digital member ID cards with QR codes (part of a larger build)."
+        },
+        {
+          "url": "https://joinit.com/pricing",
+          "source": "joinit.com",
+          "author": "Join It (vendor)",
+          "date": "2026-11-21",
+          "kind": "spend",
+          "summary": "Membership software sells 'Customize Digital Cards by Membership Type' only on its Extra plan at $199 a month."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Zeffy's built-in membership card",
+          "url": "https://support.zeffy.com/generating-membership-cards-mmit3",
+          "price": "Free",
+          "gap": "Shows the membership type, dates and a live QR status, and adds to Apple or Google Wallet, but 'It is not currently possible to customize what information appears on a membership card' and numbers start at one."
+        },
+        {
+          "name": "Canva Nonprofits plus mail merge (as Zeffy's blog suggests)",
+          "url": "https://zeffy.com/blog/membership-card",
+          "price": "Free for eligible nonprofits; print services $1 to $3+ per card",
+          "gap": "Full design control, but manual and re-run every renewal season; no numbering or automatic issuing."
+        },
+        {
+          "name": "Passcreator nonprofit club plan",
+          "url": "https://www.passcreator.com/en/membership-cards-for-clubs-in-google-wallet-and-apple-wallet",
+          "price": "First 500 passes free for approved nonprofit clubs; regular prices unknown",
+          "gap": "Needs Zapier or CSV glue from Zeffy and Passcreator's approval, which reads as aimed at European associations."
+        },
+        {
+          "name": "Join It",
+          "url": "https://joinit.com/pricing",
+          "price": "$99 a month (cards) or $199 a month (cards by membership type), plus transaction fees",
+          "gap": "Replaces Zeffy and adds fees; too costly for clubs that chose a free platform."
+        },
+        {
+          "name": "PassKit",
+          "url": "https://passkit.com/pricing/rates/",
+          "price": "From $39.50 a month for up to 250 passes",
+          "gap": "A developer tool with no Zeffy connector."
+        }
+      ],
+      "keyFeatures": [
+        "Zeffy webhook issuing",
+        "Club number sequence import and continuation",
+        "Card template per membership type",
+        "Signature and partner logos",
+        "Token-based verify page",
+        "One card per person on family tiers"
+      ],
+      "mvpScope": {
+        "features": [
+          "CSV import of members and numbers",
+          "Webhook issuing by email",
+          "Templates per membership type",
+          "Verify page"
+        ],
+        "outOfScope": [
+          "Expiry rules and renewals (Zeffy has them)",
+          "Wallet passes (Zeffy has them)",
+          "Payments",
+          "Platforms other than Zeffy"
+        ],
+        "buildEstimate": "About 5 build days"
+      },
+      "techStack": "React + Vite + Tailwind front end; Supabase sign-in and a per-app schema; backend-hub on Render for the Zeffy webhook, server-side key storage and PDF rendering; a nightly scheduled check and transactional email.",
+      "pricing": {
+        "model": "Flat per organisation, monthly or yearly",
+        "pricePoint": "$5 a month or $49 a year per organisation (estimate)",
+        "rationale": "Clubs chose a free platform, and the closest paid card app costs $2 to $3.60 a month; far below Join It ($199) and PassKit ($39.50), and worth it only if it saves the seasonal mail merge."
+      },
+      "revenueSketch": "Estimate: 150 organisations x $49 a year = $7,350 a year. Assumes the Zeffy Experts directory or search reaches clubs that want custom cards; conversion is unknown and the price ceiling is low.",
+      "distribution": "First 10: a listing in Zeffy's Experts directory (https://www.zeffy.com/en-gb/home/experts; application form on an external host, rules unknown: check before applying) and search ads on Zeffy card queries (Google's trademark policy must be checked before using 'Zeffy' in ad text). Zeffy's community guidelines say 'Off-topic promotion or spam doesn't belong here' (https://community.zeffy.com/community-guidelines): treat promotion there as not allowed. Never post in the evidence thread on Zeffy's feature board.",
+      "validationTest": {
+        "method": "A one-page site, 'Club member cards for organisations using Zeffy (not affiliated with Zeffy)', with three example cards and a '$49 a year, reserve a place' button leading to a waitlist; check search volume first, then run a 14-day search-ad test if there is volume, or apply to the Experts directory if not; no outreach and no posts in the evidence thread.",
+        "successCriteria": "At least 5% of visitors press the price button and at least 8 organisations join the waitlist within 14 days.",
+        "cost": "About $100 to $150 in ads and one build day."
+      },
+      "moat": "Little: Zeffy could ship card customisation. The defence is speed, a low price and handling the club's own numbering and partner branding well.",
+      "compliance": [
+        "Zeffy's API key is unscoped and reads all of an organisation's data, and the payment webhook carries donations: drop non-membership data on arrival, encrypt the key server-side, offer a data-processing agreement.",
+        "Privacy law: PIPEDA and Quebec's Law 25 for Canadian clubs, UK GDPR for UK clubs, US state laws for US nonprofits.",
+        "Public verify page: unguessable tokens, showing only name, type, number and valid-through date.",
+        "Zeffy's terms have no developer clause found; use only the club's API key, never an administrator login.",
+        "Accessibility: cards with text alternatives and pages at WCAG 2.2 AA."
+      ],
+      "risks": [
+        {
+          "risk": "Zeffy ships card customisation; it is actively building memberships.",
+          "mitigation": "Build only after the waitlist test, keep the build to five days, and price low."
+        },
+        {
+          "risk": "Members end up with two cards and two numbers (Zeffy's and the club's).",
+          "mitigation": "Show the club number prominently, explain how to turn Zeffy's card off, and keep Zeffy's wallet pass as the expiry source."
+        },
+        {
+          "risk": "Clubs on a free platform will not pay.",
+          "mitigation": "A yearly price under $50 and a free first season for the first 10 clubs."
+        }
+      ],
+      "scores": {
+        "pain": 3,
+        "willingnessToPay": 3,
+        "reachability": 3,
+        "competitiveGap": 2,
+        "feasibility": 3,
+        "complianceBurden": 3,
+        "total": 17
+      },
+      "scoreRationale": {
+        "pain": "Ten independent customers in one thread count as one item, and four of them ask for date rules Zeffy already ships (https://support.zeffy.com/automatic-membership-renewals; https://feedback.zeffy.com/feature-requests/p/customize-membership-card-personnaliser-la-carte-de-membre).",
+        "willingnessToPay": "One paid plan for the task exists, Join It Extra at $199 a month (https://joinit.com/pricing); no evidence that Zeffy clubs pay for add-ons.",
+        "reachability": "Zeffy's Experts directory (https://www.zeffy.com/en-gb/home/experts) plus search, where Zeffy's own blog steers to free Canva (https://zeffy.com/blog/membership-card).",
+        "competitiveGap": "Zeffy ships the membership type on the card, live QR status and wallet passes (https://www.zeffy.com/home/releases); free Canva, mail merge and Passcreator cover branding by hand.",
+        "feasibility": "No membership object in Zeffy's API and family tiers put several members on one payment (https://support.zeffy.com/get-started-with-the-zeffy-api-yourg).",
+        "complianceBurden": "An unscoped key that reads donor data and a webhook that carries donations (https://support.zeffy.com/get-started-with-the-zeffy-api-yourg)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Research (from 22 to 19) found Zeffy's free card already shows a QR check and that Passcreator gives nonprofit clubs 500 free wallet passes; it re-scoped the idea to a Zeffy-connected register and card service. The adversarial reviewer cut the total from 19 to 17: pain 4 to 3 (the ten complaints are one thread, and four ask for end-date rules that Zeffy's fixed-date expiry with a 3-month carry-over already gives) and competitiveGap 3 to 2 (Zeffy ships the membership type on the card, live QR status and, since 2026-08-06, wallet passes for memberships; free Canva Nonprofits, mail merge and Passcreator cover branding and numbering by hand). It found the posters independent, no paid Zeffy add-on, and no developer clause in Zeffy's terms. Re-scoped to club-branded cards with the club's own number sequence, issued from Zeffy's webhook, at a few dollars a month."
+      },
+      "gateGap": {
+        "missing": [
+          "total 17 is below 22",
+          "pain 3 is below 4: the complaints are one thread, partly covered by Zeffy's own settings"
+        ],
+        "closedBy": "The waitlist test: 8 or more organisations at $49 a year in 14 days would confirm willingness to pay despite the free workarounds; a second, independent complaint page (another forum or Zeffy's community) about numbering or branding would lift pain to 4."
+      },
+      "inspiredBy": "https://feedback.zeffy.com/feature-requests/p/customize-membership-card-personnaliser-la-carte-de-membre"
+    },
+    {
+      "n": 4,
+      "title": "Linked Audit Registers for Small NDIS Therapy Practices",
+      "slug": "linked-audit-registers-ndis-therapy",
+      "category": "Accessibility & Compliance",
+      "smallBusiness": true,
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Data & Visualization",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": true,
+        "engine": true,
+        "shared": true,
+        "notes": {
+          "stateful": "The practice keeps its incident, complaint, risk, improvement, credential and audit registers in the app and comes back to them daily.",
+          "connected": "Imports the practice's existing Excel or SharePoint registers by CSV and exports the auditor's evidence pack.",
+          "unattended": "Daily jobs send credential-expiry, review-due and overdue-action emails and run the reportable-incident clock.",
+          "engine": "The reportable-incident deadlines (24 hours and 5 business days, with state public holidays) and the mapping of each register to the verification module's clauses.",
+          "shared": "Clinicians log incidents, the manager reviews, families can submit complaints, and the auditor receives a read-only evidence pack."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "email",
+        "scheduled"
+      ],
+      "buildPlan": [
+        {
+          "n": 1,
+          "title": "Incident register and clock",
+          "delivers": "Practice sign-up, the incident register with its form, and the reportable-incident deadline clock.",
+          "acceptance": "A logged reportable incident shows the right 24-hour and 5-business-day due times, skipping weekends and the state's public holidays; deployed."
+        },
+        {
+          "n": 2,
+          "title": "Complaints and feedback",
+          "delivers": "A public complaint form, an emailed acknowledgement, outcome recording and statistics.",
+          "acceptance": "A submitted complaint sends one acknowledgement and appears in the statistics by category and month."
+        },
+        {
+          "n": 3,
+          "title": "Risk and improvement registers",
+          "delivers": "Risk and continuous-improvement registers linked to incidents and complaints, with review-due alerts.",
+          "acceptance": "An improvement item can be raised from an incident and a risk past its review date triggers one email."
+        },
+        {
+          "n": 4,
+          "title": "Credentials and CSV import",
+          "delivers": "Staff qualification and screening expiry register with email warnings, and CSV import of existing Excel registers.",
+          "acceptance": "A 50-row sample register imports with no lost rows; an expiry 30 days out produces one warning."
+        },
+        {
+          "n": 5,
+          "title": "Audit schedule and evidence pack",
+          "delivers": "An internal audit schedule and a PDF and CSV evidence pack mapped to the verification module, with read-only auditor access.",
+          "acceptance": "The pack lists each register against its clause and an auditor link opens read-only."
+        },
+        {
+          "n": 6,
+          "title": "Polish",
+          "delivers": "Dashboard, 7-year retention and export, practice-owner README, phone layout, keyboard and screen-reader pass, walkthrough test.",
+          "acceptance": "A walkthrough test runs sign-up to evidence pack; axe reports no serious issues; nothing can be hard-deleted."
+        }
+      ],
+      "summary": "For NDIS-registered therapy practices with 2 to 10 clinicians facing verification audits: incident, complaint, risk, improvement, credential and audit registers that link up, remind on time, and export the auditor's evidence pack, at a flat price per practice.",
+      "public": {
+        "summary": "Keep your practice's incident, complaint, risk and staff records linked, on time and ready for your next audit.",
+        "problem": "As a registered practice you keep a pile of separate spreadsheets: incidents, complaints, risks, improvements, staff checks and your audit schedule. Nothing reminds you when a check expires or a serious incident must be reported, and before every audit you spend days pulling the evidence together.",
+        "forWhom": "Owners and practice managers of small registered therapy practices (psychology, occupational therapy, speech pathology) in Australia.",
+        "benefits": [
+          "Every register in one place, linked to each other",
+          "Reminders before checks expire and reports fall due",
+          "Complaints acknowledged and counted automatically",
+          "An evidence pack ready for your auditor",
+          "One flat price for the practice"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "Small registered therapy practices keep up to ten unlinked Excel registers with no reminders or escalations, and scramble to assemble evidence for registration and renewal audits; one paid for a custom SharePoint build to fix it.",
+      "description": "A register suite that sits beside the practice's existing practice-management software. Clinicians log incidents, and the app runs the reportable-incident clock (24 hours and 5 business days) with state public holidays. Complaints come in through a public form, are acknowledged by email and counted for the statistics the rules require; risks and continuous-improvement items link to them with review-due alerts. A credential register warns before staff qualifications and screening checks expire, an internal audit schedule keeps the year on track, and an evidence pack maps each register to the verification module's clauses for the auditor. Existing Excel or SharePoint registers import by CSV, and records are kept for the 7 years the rules require.",
+      "targetCustomer": "Owners and practice managers of NDIS-registered practices for therapeutic supports (registration group 0128) with 2 to 10 clinicians that face verification audits and do not roster support workers.",
+      "buyer": "The practice owner, from the admin or compliance budget, flat per practice.",
+      "whyNow": "The Practice Standards' verification module for therapeutic supports was compiled again on 2026-07-01; the Securing the NDIS Bill 2026 proposes 7-year payment records and a 90-day claim window; and professional bodies report registration and audits as 'prohibitively costly' (Speech Pathology Australia, 2026).",
+      "founderFit": "Nothing beyond building it alone.",
+      "problemEvidence": [
+        {
+          "url": "https://www.freelancer.com/api/projects/0.1/projects/40800463/?full_description=true",
+          "source": "freelancer.com",
+          "author": "poster A (owner or manager of a psychology and NDIS practice)",
+          "date": "2026-11-03",
+          "kind": "spend",
+          "summary": "Pays AUD 750 to 1,500 (awarded) to move up to 10 Excel registers into linked SharePoint lists with forms, expiry and audit-schedule automations, escalations and dashboards."
+        },
+        {
+          "url": "https://speechpathologyaustralia.org.au/Public/Members/News-and-publications/Articles/2026/06-June/NDIS-reforms-in-focus.aspx",
+          "source": "speechpathologyaustralia.org.au",
+          "author": "poster D (professional association relaying members' feedback)",
+          "date": "2026-04-28",
+          "kind": "complaint",
+          "summary": "Members report registration and audit processes as 'prohibitively costly' with 'an unreasonably high administrative burden'."
+        },
+        {
+          "url": "https://www.freelancer.com/api/projects/0.1/projects/40685758/?full_description=true",
+          "source": "freelancer.com",
+          "author": "poster C (allied-health practice with OTs, a speech pathologist and behaviour practitioners)",
+          "date": "2026-09-02",
+          "kind": "spend",
+          "summary": "Pays AUD 1,500 to 3,000 for registration governance documents, compliance files and an evidence matrix, 'not generic templates' (consulting, and a certification audit)."
+        },
+        {
+          "url": "https://www.legislation.gov.au/F2018L00633/asmade/2018-05-18/text/original/word",
+          "source": "legislation.gov.au",
+          "author": "Commonwealth legislation",
+          "date": "2018-05-18",
+          "kind": "mandate",
+          "summary": "Incident management rules: documented system, minimum details per incident, 7-year records, 24-hour and 5-business-day reportable-incident deadlines."
+        },
+        {
+          "url": "https://www.legislation.gov.au/F2018L00631/2026-07-01/2026-07-01/text/original/epub/OEBPS/document_1/document_1.html",
+          "source": "legislation.gov.au",
+          "author": "Commonwealth legislation",
+          "date": "2026-07-01",
+          "kind": "mandate",
+          "summary": "Practice Standards verification module for therapeutic supports: risk, complaints, incidents and qualified workers; core module on continuous improvement and records."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Astalty",
+          "url": "https://astalty.com.au/pricing",
+          "price": "AUD 64 per standard user per month, AUD 30 per support worker (GST inclusive)",
+          "gap": "Incident, complaint and risk registers with expiry and review alerts (https://astalty.com.au/features/compliance-dashboard), built around support coordination; no continuous-improvement register, internal audit schedule or Practice Standards mapping."
+        },
+        {
+          "name": "ShiftCare",
+          "url": "https://shiftcare.com/uk/recent-releases",
+          "price": "AUD 20 per user per month billed annually, minimum 5 users (https://shiftcare.com/platform/compliance-software)",
+          "gap": "Shipped a complaints register (July 2026) and a qualifications expiry report (February 2026), but it is a rostering platform for support-work providers."
+        },
+        {
+          "name": "CTARS",
+          "url": "https://ctars.com.au/pricing/",
+          "price": "Per client per month (AUD 11 to 66) with a minimum licence and setup from AUD 2,500",
+          "gap": "Covers almost every register, priced and built for SIL and community services, not a small therapy practice."
+        },
+        {
+          "name": "Centro ASSIST",
+          "url": "https://www.centroassist.com.au/centro-qmsstarter",
+          "price": "unknown (annual subscription; a free tier exists)",
+          "gap": "Policies and registers mapped to about 250 Practice Standards obligations; internal audits and improvement sit in a higher tier."
+        },
+        {
+          "name": "Mitti (by SafetyCulture)",
+          "url": "https://mitti.com/pricing",
+          "price": "Free up to 10 seats; Premium $24 per seat per month annually",
+          "gap": "General forms and checklists; no NDIS clock, acknowledgements or clause mapping."
+        },
+        {
+          "name": "Splose",
+          "url": "https://splose.com/pricing",
+          "price": "AUD 32 per practitioner per month ex GST",
+          "gap": "Allied-health practice software with NDIS plan features but no incident, complaint, risk or audit registers."
+        }
+      ],
+      "keyFeatures": [
+        "Reportable-incident clock with state public holidays",
+        "Complaint form, acknowledgement and statistics",
+        "Linked risk and continuous-improvement registers",
+        "Credential and screening expiry warnings",
+        "Internal audit schedule",
+        "Evidence pack mapped to the verification module"
+      ],
+      "mvpScope": {
+        "features": [
+          "Incident register and clock",
+          "Complaints with acknowledgement",
+          "Risk and improvement registers",
+          "Credential expiry",
+          "Evidence pack"
+        ],
+        "outOfScope": [
+          "Rostering and billing",
+          "Lodging with the Commission's portal",
+          "Certification-audit practices (behaviour support)",
+          "Clinical notes"
+        ],
+        "buildEstimate": "About 6 build days"
+      },
+      "techStack": "React + Vite + Tailwind front end; Supabase sign-in and a per-app schema (Australian region to confirm); scheduled jobs and transactional email; PDF and CSV export in the browser.",
+      "pricing": {
+        "model": "Flat per practice, monthly",
+        "pricePoint": "AUD 49 a month per practice up to 10 clinicians (estimate)",
+        "rationale": "Below Astalty for a 6-clinician practice (about AUD 384 a month) and CTARS's setup fee, above Mitti's free plan because it carries the NDIS clock, the acknowledgements and the clause mapping."
+      },
+      "revenueSketch": "Estimate: 60 practices x AUD 49 = AUD 2,940 a month. Assumes search finds practices looking for register templates; the number of registered therapy practices that stay registered is unknown.",
+      "distribution": "First 10: search ads and content on template-seeking queries ('NDIS incident register template', 'NDIS complaints register'), where AUD 40 to 120 template packs already compete (https://www.banterspeech.com.au/ndis-templates/). Cliniko's Connected Apps directory (https://www.cliniko.com/connected-apps/) shows no way to submit an app: rule unknown, check before posting. AHPA's NDIS registration support site returned an error: rule unknown, check before posting. Never bid on or reply to the evidence jobs.",
+      "validationTest": {
+        "method": "A landing page naming Microsoft 365, Astalty and ShiftCare as the alternatives, with an AUD 49 a month price button and a waitlist, and a 14-day Google Search ads test in Australia on 6 to 10 register and audit keywords; no outreach.",
+        "successCriteria": "Click-through of 3% or more, at least 8 waitlist sign-ups from Australian practices and 3 price-button clicks; a 'thinking of deregistering' answer counts against.",
+        "cost": "About AUD 200 to 300 in ads and half a build day."
+      },
+      "moat": "The NDIS-specific clock, clause mapping and evidence pack, kept current with the Practice Standards, at a flat practice price the per-user and per-client platforms do not offer.",
+      "compliance": [
+        "Privacy Act 1988 and the Australian Privacy Principles: incident and complaint records hold health information about participants, often children; health providers are covered whatever their turnover.",
+        "Retention: incident and complaint records must be kept 7 years (incident rules s 12(4), s 25(2); complaints rules s 10(3)); no hard delete, and an exit export.",
+        "Data residency (APP 8): confirm the shared Supabase region; Australian hosting is likely expected.",
+        "Record-keeping, not compliance advice; reportable incidents are still lodged by the provider in the Commission's portal.",
+        "Accessibility: the public complaint form at WCAG 2.2 AA."
+      ],
+      "risks": [
+        {
+          "risk": "Practices deregister instead of paying for audits, or a lower-cost model for therapy providers shrinks the need.",
+          "mitigation": "Count deregistration intent in the test, and keep the incident and complaint registers useful to unregistered practices too."
+        },
+        {
+          "risk": "Astalty or ShiftCare adds the improvement register and clause mapping.",
+          "mitigation": "Lead with the clock, the improvement register, the audit schedule and the evidence pack, at a flat price."
+        },
+        {
+          "risk": "Storing sensitive incident records for 7 years as a solo vendor.",
+          "mitigation": "Minimum incident detail, a breach plan, and a documented export and exit before launch."
+        }
+      ],
+      "scores": {
+        "pain": 3,
+        "willingnessToPay": 3,
+        "reachability": 2,
+        "competitiveGap": 2,
+        "feasibility": 4,
+        "complianceBurden": 2,
+        "total": 16
+      },
+      "scoreRationale": {
+        "pain": "A professional body relays members' complaints of costly, burdensome audits, but none is about the registers themselves (https://speechpathologyaustralia.org.au/Public/Members/News-and-publications/Articles/2026/06-June/NDIS-reforms-in-focus.aspx).",
+        "willingnessToPay": "One independent paid job for the task, a one-off SharePoint build (https://www.freelancer.com/api/projects/0.1/projects/40800463/?full_description=true); paid apps exist (https://astalty.com.au/pricing).",
+        "reachability": "Search ads and content only, on keywords already served by template packs (https://www.banterspeech.com.au/ndis-templates/).",
+        "competitiveGap": "ShiftCare shipped a complaints register in July 2026 (https://shiftcare.com/uk/recent-releases), Astalty has registers with alerts (https://astalty.com.au/features/compliance-dashboard) and Mitti is free for 10 seats (https://mitti.com/pricing).",
+        "feasibility": "No outside API; the deadline engine comes from the incident rules (https://www.legislation.gov.au/F2018L00633/asmade/2018-05-18/text/original/word).",
+        "complianceBurden": "Health information about vulnerable people under 7-year mandated retention, probably with Australian hosting (https://www.legislation.gov.au/F2018L00633/asmade/2018-05-18/text/original/word)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Research (19) found that allied-health practice systems (Splose, Nookal, Cliniko's directory) ship no registers, that CTARS covers them at per-client prices with a AUD 2,500 setup, and that the free NDS register is static. The adversarial reviewer cut the total from 19 to 16: willingnessToPay 4 to 3 (only poster A paid for the task, a one-off SharePoint build; posters B and C paid for consultants), competitiveGap 3 to 2 (ShiftCare shipped a complaints register in July 2026 and a qualifications expiry report in February 2026; Astalty has incident, complaint and risk registers with alerts; Centro maps to the Practice Standards; Mitti is free for up to 10 seats), and complianceBurden 3 to 2 (7-year records of serious incidents about vulnerable people, likely Australian hosting). Re-scoped to practices registered only for therapeutic supports, leading with the reportable-incident clock, the improvement register, the audit schedule and the evidence pack."
+      },
+      "gateGap": {
+        "missing": [
+          "total 16 is below 22",
+          "pain 3 is below 4: no complaint about the registers themselves"
+        ],
+        "closedBy": "The Australian search-ad test: 8 or more practice sign-ups and 3 price-button clicks at AUD 49 a month would show demand against Astalty and the template packs (reachability 3, competitiveGap 3); a practice manager's dated complaint about keeping audit registers would lift pain to 4."
+      },
+      "inspiredBy": "https://www.freelancer.com/api/projects/0.1/projects/40800463/?full_description=true"
+    }
+  ],
+  "runNotes": {
+    "weekday": "Saturday",
+    "domainLens": "Institutional back-office work",
+    "focusSources": [
+      "A2 Other LMS and classroom forums",
+      "A13 Discourse forums, any niche (in place of B5 Acquisition marketplaces, on the avoid list; and in place of C4 after its path failed)",
+      "C4 Job postings that describe manual work (probed: HigherEdJobs interstitial, closed postings 404 or 410)"
+    ],
+    "searches": [
+      "assoc-gatherer: church management software community forum discourse treasurer giving statements",
+      "assoc-gatherer: discourse forum club membership management software sports club treasurer renewals",
+      "assoc-gatherer: site:forums.wildapricot.com QuickBooks reconcile payments deposit Stripe payout",
+      "assoc-gatherer: PTA treasurer reconcile Venmo PayPal Square deposits spreadsheet nightmare 2026",
+      "assoc-gatherer: home daycare provider year-end tax statement parents dependent care receipts software forum 2026",
+      "assoc-gatherer: \"forum\" dolibarr OR galette association adhérents cotisations membership module renewal discourse",
+      "assoc-gatherer: self-managed HOA treasurer handover records new board spreadsheet dues tracking problem forum 2026",
+      "assoc-gatherer: canny.io feature requests nonprofit donor management OR church management OR club membership board",
+      "assoc-gatherer: \"Wild Apricot\" QuickBooks Online integration deposits payouts fees reconcile problem",
+      "assoc-gatherer: small charity treasurer \"receipts and payments\" accounts independent examiner spreadsheet struggle 2026",
+      "assoc-gatherer: accountingweb charity \"receipts and payments\" accounts software independent examination template",
+      "assoc-gatherer: accountingweb any answers charity independent examination receipts payments 2026 threshold £500,000 switch from accruals",
+      "assoc-gatherer: \"new treasurer\" club OR society OR charity \"previous treasurer\" spreadsheet records mess help forum 2026",
+      "assoc-gatherer: Companies House identity verification volunteer directors residents management company OR charity trustees confirmation statement deadline problems 2026",
+      "assoc-gatherer: \"management company\" leaseholder directors identity verification refuse to verify confirmation statement managing agent 2026",
+      "lms-gatherer: wordpress.org support LMS plugin certificate expiry date renewal reminder recertification",
+      "lms-gatherer: training company \"completion report\" employer group LMS plugin export per company forum 2026",
+      "lms-gatherer: moodle.org forum 2026 certificate expiry recertification report company training provider",
+      "lms-gatherer: small training provider tracking learner certificate expiry renewals spreadsheet \"nightmare\" OR \"headache\" 2026",
+      "lms-gatherer: CE provider \"CE Broker\" upload course completions roster manually small provider forum",
+      "lms-gatherer: CPR instructor training site AHA Atlas eCards roster complaint 2026 forum",
+      "lms-gatherer: IOMAD moodle forum 2026 company licenses completion report training company clients",
+      "lms-gatherer: \"CE Broker\" integration plugin LearnDash OR WooCommerce OR Thinkific report completions automatically price",
+      "lms-gatherer: eligible training provider list ETPL annual performance report student data submission private training provider 2026 deadline",
+      "lms-gatherer: piano teacher forum studio business billing makeup lessons tuition software complaint 2026",
+      "lms-gatherer: migrate students course progress completions certificates from Teachable OR Thinkific OR Kajabi to another platform lost progress 2026",
+      "lms-gatherer: community.zapier.com training company invoice employer per learner course enrollment QuickBooks Xero LMS 2026",
+      "lms-gatherer: wordpress.org support LearnDash OR \"Tutor LMS\" OR LearnPress course completion history lost certificate records after reset OR update OR migration 2026",
+      "lms-gatherer: moodle.org/mod/forum/discuss.php 2026 training company \"certificate\" expire reminder OR \"completion report\" manager clients (allowed_domains moodle.org)",
+      "lms-gatherer: 2026 bulletin continuing education providers must submit rosters new system deadline days after course completion insurance OR \"real estate\" OR cosmetology",
+      "lms-gatherer: training providers leaving eligible training provider list reporting burden \"all student\" data 2026",
+      "lms-gatherer: ukbusinessforums.co.uk training provider courses admin booking certificates software 2026",
+      "mandates-gatherer: idealist ong-empleo \"operations coordinator\" nonprofit manual spreadsheets grant reporting 2026",
+      "mandates-gatherer: idealist ong-empleo credentialing coordinator community health clinic licenses expirations tracking 2026",
+      "mandates-gatherer: Companies House accounts software only filing 2027 small companies profit and loss micro-entity change date gov.uk",
+      "mandates-gatherer: HMRC company tax return online service closed 31 March 2026 dormant small company CT600 free software alternative",
+      "mandates-gatherer: Microsoft Publisher retired October 2026 church bulletin replacement what to use now .pub files",
+      "mandates-gatherer: \"release of information\" medical records clerk job posting private practice requests within 30 days log 2026",
+      "mandates-gatherer: IRS FIRE system retirement IRIS transition 1099 filers tax year 2026 deadline small payroll firms",
+      "mandates-gatherer: Employment Rights Act 2025 tipping consultation written policy review employers October 2026 hospitality gov.uk commencement",
+      "mandates-gatherer: \"IRIS\" TCC application 1099 small business owner frustrated rejected CSV \"taxpayer portal\" forum 2026",
+      "mandates-gatherer: \"will be discontinued\" OR \"sunsetting\" \"2026\" small business invoicing OR payroll OR timesheet app customers must migrate announcement",
+      "mandates-gatherer: OCR \"right of access\" enforcement 2026 settlement small practice failed to provide medical records timely dental OR counseling OR chiropractic",
+      "mandates-gatherer: patient records request tracking log software small practice HIPAA right of access due date pricing \"release of information\" in-house",
+      "mandates-gatherer: tipping consultation duty commencement regulations \"Employment Rights Act 2025 (Commencement\" tips October 2026 in force code of practice revised",
+      "mandates-gatherer: Slovakia mandatory B2B e-invoicing 1 January 2027 Peppol small businesses free state tool financna sprava",
+      "mandates-gatherer: AODA accessibility compliance report due December 31 2026 businesses 20 or more employees Ontario how to file",
+      "mandates-gatherer: forums.aapc.com OR dentaltown medical records request patient attorney copies fee \"30 days\" office manager how do you track 2026",
+      "mandates-gatherer: forum.invoiceninja.com search.json q=peppol after:2026-08-23",
+      "mandates-gatherer: forum.manager.io search.json q=peppol after:2026-08-23",
+      "spend-gatherer: \"membership renewal\"",
+      "spend-gatherer: \"certificate generation\" (read again at offset 100000)",
+      "spend-gatherer: \"tutoring invoicing\"",
+      "spend-gatherer: \"tutoring\"",
+      "spend-gatherer: \"volunteer scheduling\"",
+      "spend-gatherer: \"attendance tracking\"",
+      "spend-gatherer: \"fee reminders\"",
+      "spend-gatherer: \"bulk certificates\"",
+      "spend-gatherer: \"HOA\"",
+      "spend-gatherer: \"meeting minutes\"",
+      "spend-gatherer: \"NDIS\"",
+      "spend-gatherer: \"AppSheet\"",
+      "spend-gatherer: \"CQC\"",
+      "spend-gatherer: \"disciplinary hearing\"",
+      "spend-gatherer: WordPress plugin API search \"volunteer sign up\"",
+      "spend-gatherer: WordPress plugin API search \"attendance\"",
+      "spend-gatherer: WebSearch site:workspace.google.com marketplace certificates google forms add-on",
+      "spend-gatherer: NDIS small provider compliance software registers incidents complaints worker screening audit evidence pricing per month",
+      "spend-gatherer: Employment Rights Act unfair dismissal qualifying period six months 1 January 2027 small employers disciplinary procedure",
+      "hearing-file-research: \"BrightHR disciplinary case management feature small business pricing\"",
+      "hearing-file-research: \"Employment Rights Act 2025 unfair dismissal qualifying period six months 1 January 2027 commencement Acas Code revised\"",
+      "hearing-file-research: \"ukbusinessforums.co.uk disciplinary hearing employee small business advice\"",
+      "hearing-file-research: \"HR software UK small business \"disciplinary\" case management module guided letters Acas Breathe OR CharlieHR OR \"Natural HR\" OR \"HR Partner\"\"",
+      "hearing-file-research: \"disciplinary investigation hearing case file software UK employers tool step-by-step letters timeline \"employee relations\" small business price per month\"",
+      "hearing-file-research: \"Breathe HR pricing plans UK and CharlieHR pricing plans HR advice disciplinary\"",
+      "hearing-file-research: \"AI disciplinary hearing assistant UK small business Acas Code letters investigation outcome appeal app 2026\"",
+      "hearing-file-research: \"small employers worried unfair dismissal six months 2027 disciplinary process forum owner \"no HR\"\"",
+      "hearing-file-research: \"disciplinary hearing staff member employer advice dismiss\" (ukbusinessforums.co.uk only)",
+      "hearing-file-research: \"Acas consultation draft revised Code of Practice disciplinary and grievance procedures 2026\" (acas.org.uk and gov.uk only)",
+      "hearing-file-research: \"Employment Rights Act unfair dismissal six months small business owner worried staff probation\" (ukbusinessforums.co.uk only)",
+      "hearing-file-research: \"Law Donut disciplinary toolkit price OR \"disciplinary pack\" letters template UK small employer buy\"",
+      "hearing-file-research: \"BrightHR \"disciplinary\" tool feature app guided letters managers \"BrightAdvice\" OR \"Bright Lightning\" OR \"HR advice\"\" (brighthr.com only)",
+      "hearing-file-research: \"UK Business Forums forum rules self promotion advertising links signature\" (ukbusinessforums.co.uk only)",
+      "learner-archive-research: Tutor LMS reset course lost certificate completion support forum",
+      "learner-archive-research: Uncanny Continuing Education Credits pricing LearnDash",
+      "learner-archive-research: WordPress plugin directory detailed plugin guidelines serviceware paid service",
+      "learner-archive-research: LifterLMS reset student progress earned certificates kept deleted documentation",
+      "learner-archive-research: Tutor LMS Pro certificate \"reset\" course progress certificate deleted docs themeum",
+      "learner-archive-research: PressPrimer Certificate pricing enterprise audit log WordPress",
+      "learner-archive-research: wordpress.org support certificate disappeared after update students completed course lost LearnPress OR \"Tutor LMS\" OR LifterLMS 2026",
+      "learner-archive-research: PressPrimer certificate pricing Educator School Enterprise plan",
+      "learner-archive-research: Tutor LMS certificate after \"reset\" progress student certificate gone wordpress.org support tutor (wordpress.org only)",
+      "learner-archive-research: docs.themeum.com Tutor LMS reset course progress individual student certificate",
+      "learner-archive-research: student certificates lost after migrating LMS plugin wordpress course completion records missing (wordpress.org only)",
+      "learner-archive-research: Certifier OR Accredible integration \"Tutor LMS\" OR LearnPress certificates hosted credential",
+      "rp-accounts-research: CC16 receipts and payments accounts template £500,000 update Charity Commission",
+      "rp-accounts-research: receipts and payments accounts software small charities price treasurer",
+      "rp-accounts-research: \"receipts and payments\" charity accounting software UK independent examiner accounts production",
+      "rp-accounts-research: Expense Plus charity receipts and payments accounts",
+      "rp-accounts-research: accounts production software charity receipts and payments template IRIS TaxCalc Sage practice independent examination",
+      "rp-accounts-research: treasurer \"switch\" accruals to \"receipts and payments\" charity 2026 £500,000 forum question",
+      "rp-accounts-research: charity treasurer struggling year end accounts independent examiner \"receipts and payments\" spreadsheet help 2026",
+      "rp-accounts-research: Charity Commission updated guidance receipts and payments accounts template 2026 new CC16 pack announcement",
+      "rp-accounts-research: Association of Charity Independent Examiners ACIE members forum rules advertising",
+      "rp-accounts-research: forums.aat.org.uk charity receipts and payments accounts independent examination 2026 threshold",
+      "rp-accounts-research: Xero app charity fund accounting receipts and payments year end accounts UK add-on price",
+      "rp-accounts-research: UK Business Forums forum rules self promotion advertising links signature",
+      "zeffy-cards-research: \"Zeffy API integration Zapier membership data export\"",
+      "zeffy-cards-research: \"Zeffy membership card customization\"",
+      "zeffy-cards-research: \"Zeffy API documentation payments object webhooks developers\"",
+      "zeffy-cards-research: \"Join It pricing membership software digital membership card plans\"",
+      "zeffy-cards-research: \"PassKit pricing membership cards Apple Wallet Google Wallet per pass\"",
+      "zeffy-cards-research: \"WildApricot pricing plans digital membership card\"",
+      "zeffy-cards-research: \"Apple Wallet pass type identifier certificate Apple Developer Program required create passes\"",
+      "zeffy-cards-research: \"Google Wallet API generic pass issuer account membership card developer\"",
+      "zeffy-cards-research: \"Zeffy partner program apps directory experts consultants\"",
+      "zeffy-cards-research: \"digital membership card wallet pass Zapier integration small nonprofit club pricing member number\"",
+      "zeffy-cards-research: \"Zeffy new membership cards Apple Wallet Google Wallet announcement 2026\"",
+      "zeffy-cards-research: \"Apple Developer Program enrollment annual fee 99 USD membership\"",
+      "hearing-file-review: BrightHR disciplinary case management tool guided workflow small business",
+      "hearing-file-review: Peninsula BrightHR \"Blip\" OR \"Brightadvice\" disciplinary hearing app feature 2026",
+      "hearing-file-review: Citation Atlas OR Croner OR WorkNest HR software disciplinary case tracker guided steps small business UK",
+      "hearing-file-review: UK HR software \"case management\" disciplinary grievance small business module Cezanne OR \"Natural HR\" OR \"Employment Hero\" OR Personio price",
+      "hearing-file-review: FSB membership employment law advice helpline disciplinary templates included small business legal expenses insurance",
+      "hearing-file-review: unfair dismissal six months qualifying period 1 January 2027 commencement regulations made November 2026",
+      "hearing-file-review: online disciplinary process tool UK small employers step by step Acas compliant letters invitation outcome appeal \"per case\" OR \"one-off\" app",
+      "hearing-file-review: AI HR assistant UK SMEs disciplinary investigation hearing letters launch 2026 Employment Rights Act startup",
+      "hearing-file-review: \"Leo HR\" AI HR expert disciplinaries grievances deadline monitoring pricing",
+      "hearing-file-review: \"HR AI Pro\" Adam \"Advanced Decision and Risk Manager\" pricing",
+      "local-status-review: Shopify app custom order status \"ready for pickup\" \"out for delivery\" notify customer any order status page",
+      "local-status-review: shopify.dev FulfillmentEventStatus READY_FOR_PICKUP PICKED_UP OUT_FOR_DELIVERY",
+      "local-status-review: help.shopify.com fulfill order \"Send shipment details to your customer now\" checkbox",
+      "local-status-review: Shopify changelog 2026 local delivery orders edit order OR \"local pickup\" partial \"ready for pickup\"",
+      "local-status-review: help.shopify.com local pickup \"mark as ready for pickup\" some items partial fulfillment order \"ready for pickup\" notification",
+      "local-status-review: Shopify local delivery as shipping rate \"shipping confirmation\" email pickup collected customers confused out for delivery notification 2026",
+      "local-status-review: Zapiet Pickup + Delivery help edit order after checkout local delivery shipping rate carrier service \"edit\", limited to Zapiet domains",
+      "local-status-review: shopify.dev protected customer data level 2 requirements name email address app review public app",
+      "local-status-review: help.shopify.com \"fulfilling orders\" manually \"Send shipment details\" OR \"notify customer\" uncheck shipping confirmation mark as fulfilled, limited to help.shopify.com",
+      "ndis-registers-review: NDIS compliance software allied health practice incident complaints risk register continuous improvement small provider pricing",
+      "ndis-registers-review: Zanda Power Diary OR Halaxy OR Coreplus NDIS incident register complaints register feature",
+      "ndis-registers-review: \"Allied Health NDIS Audit Checklist\" free cloud compliance tool allied health practices",
+      "ndis-registers-review: SafetyCulture pricing free plan up to 10 seats credentials expiry issues incident reporting",
+      "ndis-registers-review: Coreplus OR Zanda OR Halaxy OR Lumary allied health \"incident management\" NDIS registered provider feature 2026",
+      "ndis-registers-review: NDIS therapy providers registration \"verification\" audit changes 2026 lower-cost registration model allied health mandatory registration July 2027",
+      "ndis-registers-review: NDIS registers template pack incident complaints continuous improvement risk register staff qualifications register excel download allied health price",
+      "ndis-registers-review: splose OR nookal OR coreplus OR cliniko \"incident\" \"complaints\" register NDIS feature release notes",
+      "ndis-registers-review: Centro Assist NDIS quality management system pricing per month small provider registers policies",
+      "ndis-registers-review: Zanda (formerly Power Diary) OR Halaxy NDIS registered provider incident reporting form practitioner registration expiry compliance features",
+      "rp-accounts-review: switching from accruals to receipts and payments charity 2026 £500,000 template spreadsheet independent examiner",
+      "rp-accounts-review: Charity Commission CC16 receipts and payments template updated £500,000 November 2026",
+      "rp-accounts-review: free receipts and payments accounts spreadsheet charity treasurer Excel workbook parish ACAT statement of assets and liabilities",
+      "rp-accounts-review: Xero receipts and payments account charity report fund accounting app UK independent examination year end",
+      "rp-accounts-review: accountingweb OR forums.aat.org.uk charity \"receipts and payments\" switch from accruals comparatives 2026 threshold £500k",
+      "rp-accounts-review: charity accounts software receipts and payments £500,000 2026 switch accruals \"receipts and payments\" product launch independent examiners practice",
+      "rp-accounts-review: ACIE independent examiners accruals to receipts and payments conversion 2026 factsheet workbook switch threshold",
+      "rp-accounts-review: ExpensePlus release notes 2026 receipts and payments switch comparatives new feature",
+      "rp-accounts-review: PCC parish receipts and payments £500,000 2026 switch accruals Church Accounting Regulations parish resources guidance",
+      "rp-accounts-review: \"receipts and payments\" \"statement of assets and liabilities\" charity accounts production software VT Final Accounts OR Accounts Production OR CaseWare practice",
+      "rp-accounts-review: accounts production charity \"receipts and payments\" module unincorporated IRIS OR CCH OR Digita OR \"Sage Accounts Production\" OR Taxfiler",
+      "rp-accounts-review: Xero Central profit and loss report cash basis accounting basis option tracking category",
+      "tz-audit-review: Square Appointments time zone British Columbia Alberta Manitoba appointments one hour off fix",
+      "tz-audit-review: Square Bookings API seller-level permissions Appointments Plus Premium UpdateBooking ListBookings",
+      "tz-audit-review: permanent daylight time British Columbia Alberta Manitoba March 2027 clocks booking software existing appointments",
+      "tz-audit-review: Square Appointments release notes November 2026 time zone Canada existing appointments adjusted",
+      "tz-audit-review: bulk reschedule appointments one hour Square Appointments tool OR app OR Zapier time zone change",
+      "tz-audit-review: Calendly British Columbia time zone issue resolved November 2026",
+      "tz-audit-review: Square support article Canada time zone change British Columbia Alberta Manitoba appointments review repeating appointments November 2026",
+      "tz-audit-review: \"time zone\" British Columbia permanent daylight time booking software existing appointments automatically updated Fresha OR Vagaro OR Acuity OR Jane OR Mindbody",
+      "tz-audit-review: hire help fix Square Appointments bookings wrong time after November 1 BC Alberta Manitoba reschedule service",
+      "main (spend pass): digital membership card wallet pass for nonprofits clubs pricing per month member numbers QR",
+      "main (spend pass): UK disciplinary procedure software small business case management Acas code price per month",
+      "main (spend pass): Smartwaiver pricing plans per month nonprofit volunteer waiver",
+      "main (spend pass): Storecove pricing per invoice Peppol small business",
+      "main (spend pass): tipping policy consultation template UK hospitality employers paid tool tronc software price 2026",
+      "main (spend pass): freelancer.com API: membership card (from 2026-08-23)",
+      "main (spend pass): freelancer.com API: charity accounts (from 2026-08-23)",
+      "main (spend pass): freelancer.com API: medical records request (from 2026-08-23)"
+    ],
+    "unverifiedSignals": [
+      {
+        "url": "https://www.higheredjobs.com/admin/search.cfm?JobCat=185",
+        "reason": "C4 path: a 212-byte Incapsula interstitial to curl and an empty page to WebFetch, as on 2026-11-14."
+      },
+      {
+        "url": "https://www.accountingweb.co.uk/node/232915",
+        "reason": "HTTP 403 from the site."
+      },
+      {
+        "url": "https://www.accountingweb.co.uk/node/232207",
+        "reason": "HTTP 403 from the site."
+      },
+      {
+        "url": "https://help.acuityscheduling.com/hc/articles/16676881708941",
+        "reason": "HTTP 403; the claim that Acuity converts existing bookings automatically is unverified."
+      },
+      {
+        "url": "https://www.castanet.net/edition/news-story-636320-3-.htm",
+        "reason": "HTTP 403 from the site."
+      },
+      {
+        "url": "https://www.ctvnews.ca/vancouver/article/bcs-move-to-end-clock-changes-wont-be-without-complications/",
+        "reason": "Article body missing (empty)."
+      },
+      {
+        "url": "https://help.cebroker.com/hc/en-us/articles/15226531886868",
+        "reason": "HTTP 403 from the site."
+      },
+      {
+        "url": "https://www.hhs.gov/press-room/hhs-ocr-settles-hipaa-investigation-with-azul-vision.html",
+        "reason": "HTTP 403 from the site."
+      },
+      {
+        "url": "https://www.ontario.ca/page/completing-your-accessibility-compliance-report",
+        "reason": "HTTP 403 from the site."
+      },
+      {
+        "url": "https://hopscotchsupport.zendesk.com/hc/en-us/articles/41280786318356-Hopscotch-Shutdown-FAQ",
+        "reason": "HTTP 403; the shutdown is unverified."
+      },
+      {
+        "url": "https://www.ndis.gov.au/news/11764-new-90-day-claiming-timeframe-starts-1-december-2026",
+        "reason": "HTTP 403; the 1 December 2026 start of the 90-day claim window is seen only in its title."
+      },
+      {
+        "url": "https://www.ndiscommission.gov.au/rules-and-standards/reportable-incidents-and-incident-management/reportable-incidents",
+        "reason": "HTTP 503 on every attempt from this run's path (WebFetch), in research and review; a fact about the path, not the site."
+      },
+      {
+        "url": "https://www.health.gov.au/sites/default/files/2026-09/securing-the-ndis-for-future-generations-timeline.pdf",
+        "reason": "HTTP 503 on every attempt from this run's path."
+      },
+      {
+        "url": "https://www.minterellison.com/articles/ndis-legislative-reforms-mandatory-registration-and-new-access-rules",
+        "reason": "HTTP 403; registration-reform details unverified."
+      },
+      {
+        "url": "https://www.ukbusinessforums.co.uk/code-of-conduct/",
+        "reason": "Empty in WebFetch and a bot challenge to curl; the forum's current promotion rule is unknown."
+      },
+      {
+        "url": "https://support.zeffy.com/can-e-tickets-and-membership-cards-be-added-to-wallet",
+        "reason": "HTTP 404; Zeffy's own pages disagree on wallet-pass support."
+      },
+      {
+        "url": "https://apps.shopify.com/order-status-pro/reviews",
+        "reason": "HTTP 404; only StatusPro's review count was read, off its listing."
+      },
+      {
+        "url": "https://www.acas.org.uk/about-us/using-ai",
+        "reason": "Search result only; Acas's warning about AI tools not reflecting UK law is unverified."
+      },
+      {
+        "url": "https://www.theaccessgroup.com/en-gb/hr/software/case-management/",
+        "reason": "Search result only; aimed at organisations with 500 or more staff."
+      },
+      {
+        "url": "https://www.innovus.co.uk/insights/companies-house-id-verification-what-rmc-directors-need-to-do-now",
+        "reason": "Not fetched (budget); a managing agent's page."
+      },
+      {
+        "url": "https://www.illinoisworknet.com/partners/Documents/IWDS%20and%20Monitoring/2026/Instructions%20Training%20Provider%20Download-Upload%20All-Student%20Data%20Performance%20Spreadsheet.docx",
+        "reason": "Not fetched (budget); possible support for the ETPL lead."
+      },
+      {
+        "url": "https://wp-webhooks.com/integrations/tutor-lms/actions/tutor_reset_course_progress/",
+        "reason": "Search result only."
+      },
+      {
+        "url": "https://www.cp24.com/news/canada/2026/10/31/bcs-new-time-zone-could-cause-confusion-from-calendars-to-medical-appointments/",
+        "reason": "Fetched and usable but not cited: it says calendar appointments made before the update may need manual changes, without naming booking systems."
+      },
+      {
+        "url": "https://www.indiehackers.com/product/wild-apricot-quickbooks-manager",
+        "reason": "Indie Hackers is on the avoid list; not fetched."
+      }
+    ],
+    "rejectedCandidates": [
+      {
+        "title": "Payment-Plan Collector for Partly Paid Shopify POS Orders",
+        "total": 17,
+        "reason": "Re-researched from the watchlist: DP: Deposit & Partial Payments (launched 2026-07-29) collects POS layaway balances on a free plan and instalments at $15/month (https://apps.shopify.com/dp-deposit-partial-payments); still only one detailed merchant complaint, and the newest adjacent one is 187 days old."
+      },
+      {
+        "title": "Learner Record Archive for Small Course Sellers on WordPress LMS Plugins",
+        "total": 14,
+        "reason": "Research ended it: the free PressPrimer Certificate plugin keeps issued-certificate records with verification, export and erase for Tutor LMS, LearnPress and LifterLMS (https://wordpress.org/plugins/pressprimer-certificate/), and no second complaint within 180 days was found."
+      },
+      {
+        "title": "Inspection-Ready Staff Compliance Records for Small UK Care Providers",
+        "total": 18,
+        "reason": "One poster paying a VA by the hour (https://www.freelancer.com/api/projects/0.1/projects/40705132/?full_description=true, 2026-09-11) in a crowded field of care compliance software; close to the 2026-11-16 staff-files idea."
+      },
+      {
+        "title": "UK Tipping Policy Consultation Pack",
+        "total": 18,
+        "reason": "Mandate only; the consultation duty's commencement date is not confirmed (https://doyleclayton.co.uk/employment-rights-act-2025-upcoming-changes-to-tips-and-gratuities-legislation/) and no paid tool or complaint was found."
+      },
+      {
+        "title": "Matching WildApricot Payment Settlements to Bank Deposits",
+        "total": 18,
+        "reason": "One requester within 180 days (https://forums.wildapricot.com/forums/308932-wishlist/suggestions/51861309-set-campaign-tag-payment-processing-fee-donations) and existing QuickBooks connectors."
+      },
+      {
+        "title": "Certificate Issuing with Expiry and Renewal for Small Training Businesses",
+        "total": 18,
+        "reason": "Paid one-off builds exist (https://www.freelancer.com/api/projects/0.1/projects/40782778/?full_description=true) but PressPrimer Certificate and other certificate tools already offer validity periods and renewal reminders; no complaint."
+      },
+      {
+        "title": "Admin Desk for Small Tutoring Centres",
+        "total": 17,
+        "reason": "Spend is low-budget VA work (https://www.freelancer.com/api/projects/0.1/projects/40820533/?full_description=true) in a crowded tutoring-software market; no complaint."
+      },
+      {
+        "title": "CC&R Responsibility Matrix for Self-Managed HOAs",
+        "total": 17,
+        "reason": "Rejection rule: an AI wrapper (OCR plus a model summary of a document) with no workflow or data moat; one poster (https://www.freelancer.com/api/projects/0.1/projects/40740401/?full_description=true)."
+      },
+      {
+        "title": "Peppol and E-Reporting Readiness for Micro Businesses on Light Invoicing Apps",
+        "total": 17,
+        "reason": "Three customer posts on the Invoice Ninja forum (https://forum.invoiceninja.com/t/facturation-electronique/23535.json), but it needs a certified access point or accredited platform and the invoicing apps are adding it through Storecove."
+      },
+      {
+        "title": "ETPL All-Student Data Pack for Small Private Career Schools",
+        "total": 16,
+        "reason": "Mandate only (https://edd.ca.gov/en/jobs_and_training/Information_Notices/wsin26-08/), per-state templates, SSNs in the data, and the next window is July 2027."
+      },
+      {
+        "title": "CE Roster Desk for Small Continuing-Education Providers",
+        "total": 16,
+        "reason": "Mandate only (https://www.insurance.wa.gov/producers-adjusters/education/continuing-education-ce-providers/submit-ce-course-roster); each regulator's system differs and CE Broker already serves several states."
+      },
+      {
+        "title": "AODA Report-Ready Records for Ontario Small Employers",
+        "total": 16,
+        "reason": "One law-firm mandate article (https://www.littler.com/news-analysis/asap/canada-ontario-aoda-reporting-deadline-draws-near-accessibility-scrutiny-grows); the filing portal is free and the next report is three years away."
+      },
+      {
+        "title": "IRIS Switch Kit for Small 1099 Filers",
+        "total": 16,
+        "reason": "The IRS IRIS Taxpayer Portal is free (https://www.irs.gov/fire) and 1099 tools for bookkeepers are already well served (run log 2026-11-14#1)."
+      },
+      {
+        "title": "Director Identity Verification Chaser for Volunteer-Run UK Companies",
+        "total": 15,
+        "reason": "One mandate signal (https://www.gov.uk/government/news/identity-verification-is-making-the-uks-company-register-more-trustworthy: 88.1% of companies already compliant); no complaint and the deadline has passed."
+      },
+      {
+        "title": "Posted-Worker Paperwork Pack for Small Spanish Temp Agencies",
+        "total": 14,
+        "reason": "One poster with a budget under EUR 300 (https://www.freelancer.com/api/projects/0.1/projects/40794690/?full_description=true); depends on government systems with no API."
+      },
+      {
+        "title": "Local Order Status Desk for Shopify Pickup and Own-Driver Delivery",
+        "total": 18,
+        "reason": "Re-researched from the watchlist and killed in review: StatusPro ($9/month, 87 reviews, https://apps.shopify.com/order-status-pro) and CB Order Status Manager already send custom statuses, emails and a status page on any order; native fulfilment and Flow skip the shipped email for free; Zapiet sends the local statuses; the core evidence is one grocer across three threads."
+      },
+      {
+        "title": "Switch-Year Pack for Charities Moving to Receipts and Payments",
+        "total": 17,
+        "reason": "Survived research and review (rescored 20 to 17: no complaint from a £250k to £500k treasurer, free cash books and a £17.99 workbook already produce R&P accounts, https://payhip.com/b/PkcLx) but did not ship: the run's provisional cap of 4 went to higher-ranked candidates and, among those within 2 points, to small-business buyers. It is a one-off need that ends with the 2027 switch year."
+      }
+    ],
+    "watchlist": [
+      {
+        "title": "Pickup Preselect for Pickup-Only Shopify Carts",
+        "targetCustomer": "Small Shopify food makers and shops selling pickup-only items next to items they ship.",
+        "problemStatement": "Checkout hides shipping on pickup-only carts with no explanation and resets the cart's pickup choice to Ship, so customers abandon or order wrongly.",
+        "total": 21,
+        "missedGate": "Not researched; pain 3 and competitiveGap 2 (PickupLock covers most of it from $5.99/month).",
+        "evidence": [
+          "https://community.shopify.com/t/693011.json",
+          "https://community.shopify.com/t/707284.json",
+          "https://apps.shopify.com/pickuplock"
+        ],
+        "firstSeen": "2026-11-20"
+      },
+      {
+        "title": "Line-Item Receipts for Shopify POS after the Liquid Editor Ends",
+        "targetCustomer": "Small shops on Shopify POS Pro whose printed receipts were customised in Liquid.",
+        "problemStatement": "Shopify moves every shop to the new receipt editor on 2027-01-01, and the switch removes line-item details and separators merchants relied on.",
+        "total": 20,
+        "missedGate": "Not researched; pain 3 (one complaint plus the mandate) and competitiveGap 2 (Printer Pro and a December launch at $9/month).",
+        "evidence": [
+          "https://community.shopify.com/t/665024.json",
+          "https://changelog.shopify.com/posts/enhanced-printed-receipt-editor",
+          "https://apps.shopify.com/printer-pro"
+        ],
+        "firstSeen": "2026-11-20"
+      },
+      {
+        "title": "Instant Quote Page for Home-Service Websites",
+        "targetCustomer": "Small cleaning, snow-removal, pet-waste, insulation and repair businesses on WordPress, Wix or plain sites.",
+        "problemStatement": "Owners pay freelancers to hand-build quote calculators that customers use before calling, and those calculators break quietly.",
+        "total": 20,
+        "missedGate": "Not researched; pain 2 (no complaint found, so pain is capped) and competitiveGap 1 (ConvertCalculator free tier and $20-40 plans).",
+        "evidence": [
+          "https://www.freelancer.com/api/projects/0.1/projects/all/?query=quote%20calculator%20website&limit=50&full_description=true&from_time=1787356800",
+          "https://www.freelancer.com/api/projects/0.1/projects/all/?query=instant%20quote&limit=50&full_description=true&from_time=1787356800"
+        ],
+        "firstSeen": "2026-11-20"
+      },
+      {
+        "title": "Print Menu That Follows Square Item Prices",
+        "targetCustomer": "Independent restaurants and cafes on Square whose printed and PDF menus go stale when prices change.",
+        "problemStatement": "Owners pay designers for menus and insist on editable files so they can swap prices later; Square feeds every channel except print.",
+        "total": 20,
+        "missedGate": "Not researched; pain 2 (no complaint found; spend only), nothing ties the evidence to Square restaurants.",
+        "evidence": [
+          "https://www.freelancer.com/api/projects/0.1/projects/all/?query=restaurant%20menu%20update&limit=50&full_description=true&from_time=1787356800",
+          "https://squareup.com/help/us/en/article/6424-create-and-update-menus"
+        ],
+        "firstSeen": "2026-11-20"
+      },
+      {
+        "title": "Year-End Pack for the Accountant from Bank CSVs",
+        "targetCustomer": "Sole traders with a side business or rentals who hand a year-end summary to their accountant.",
+        "problemStatement": "Owners pay freelancers to add up a year of business, personal and rental expenses for their accountant.",
+        "total": 20,
+        "missedGate": "Carried from 2026-11-19, not re-researched (outside the top 3): no complaint evidence (pain capped at 3) and a crowded field.",
+        "evidence": [
+          "https://www.freelancer.com/api/projects/0.1/projects/all/?query=bank%20statement%20pdf%20to%20excel&limit=15&full_description=true&from_time=1787306322"
+        ],
+        "firstSeen": "2026-11-19"
+      },
+      {
+        "title": "15-Day Records Request Clock for Small Practices (HIPAA access rule)",
+        "targetCustomer": "Front-desk staff and office managers at independent dental, optometry, therapy, chiropractic and PT practices that answer patient record requests in-house.",
+        "problemStatement": "From 2027-07-19 practices get 15 calendar days, not 30, to answer a records request and must post a fee schedule online; requests arrive by email, fax, portal and at the desk with nobody tracking the clock.",
+        "total": 19,
+        "missedGate": "Not researched; mandate only (the final rule was published 2026-11-19), pain 3 with no complaint, and release-of-information vendors such as ChartRequest may add the clock.",
+        "evidence": [
+          "https://www.govinfo.gov/content/pkg/FR-2026-11-19/pdf/2026-23429.pdf",
+          "https://www.paubox.com/blog/dental-practice-agrees-to-140k-settlement-after-records-complaint",
+          "https://www.chartrequest.com/providers/solo-practitioners"
+        ],
+        "firstSeen": "2026-11-21"
+      },
+      {
+        "title": "Event and Volunteer Waivers for Organisations on Zeffy",
+        "targetCustomer": "Small nonprofits and clubs that run events and volunteer days through Zeffy.",
+        "problemStatement": "Zeffy has no waiver or photo-consent step at registration, so organisations send a separate waiver link; one user said they would pay for it as an add-on.",
+        "total": 19,
+        "missedGate": "Not researched; competitiveGap 2 (generic waiver tools and free forms with a signature field), pain 3, and the willingness-to-pay comment is from 2026-07-14.",
+        "evidence": [
+          "https://feedback.zeffy.com/feature-requests/p/waivers-1"
+        ],
+        "firstSeen": "2026-11-21"
+      }
+    ],
+    "caveats": "No candidate cleared the quality gate, so four ideas ship as provisional, each with its gap written on it. Twenty new candidates were scored plus three re-researched watchlist entries; one candidate (Zeffy member cards) looked gate-ready at 22 before research and fell to 17 after research and review. Five candidates were researched by subagents and the two top watchlist entries were researched by the watchlist gatherer; six were adversarially reviewed: one killed (Local Order Status Desk, cheaper apps and free native steps already do it) and five rescored down (time-zone check 21 to 19, disciplinary file 19 to 18, Zeffy cards 19 to 17, charity switch-year pack 20 to 17, NDIS registers 19 to 16). Review went on past three survivors because Zeffy cards ranked above all three before its review. Selection: the time-zone check ranks first at 19 but has willingnessToPay 2 and ends by itself on 2027-03-14 (its reviewer recommended not carrying it on the watchlist again); among the candidates within 2 points, the routine's preferences for willingnessToPay of 3 or more and for small-business buyers put the disciplinary file and the NDIS registers ahead, and Zeffy cards (17, pain 3) took the fourth slot over the charity switch-year pack (17, pain 2, no complaint from its customer), which went to rejectedCandidates. NDIS registers (16) shipped over the two 17s because it has a small-business buyer and is within 2 points of them. Constraints: small-business buyers in ideas 1, 2 and 4; Weekend MVP in idea 1; substantial Multi-week ideas with a buildPlan in 2, 3 and 4; categories at most 2 each. Evidence caveats: idea 1's evidence mixes Square and Calendly users and part of its pain is Square's own display bugs, which the tool cannot fix; idea 3's ten complaints sit in one feature-request thread and count as one item; ideas 2 and 4 rest on paid jobs that bought people (a note-taker, consultants), not software, plus mandates. Saturday's focus sources were thin again: A2 (Open edX, Gibbon, Frappe Education, WordPress LMS forums) was developer and vendor talk; B5 is on the avoid list and C4's HigherEdJobs path returned a 212-byte interstitial and closed postings 404 or 410, so A13 stood in for both. The day's useful veins were freelancer.com (B11), vendor feature boards (feedback.zeffy.com, forums.wildapricot.com), and regulators' pages (gov.uk, legislation.gov.au, irs.gov, federalregister.gov). The run stopped on the account's 5-hour usage limit while the five researchers were starting and resumed at 13:09Z; the researchers were resumed by message, not restarted."
+  }
+}

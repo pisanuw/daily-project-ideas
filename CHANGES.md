@@ -708,3 +708,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-20 [code] fetch_url.py: refuses private and local hosts, treats a scheme or port change as another host, caps a fetch at 60 s, and counts a host the proxy cannot reach against the site.
 
 2026-11-20 [code] fetch_url.py: reads the host as curl will (percent signs refused, look-alike characters folded) before the private-host check; a proxy 503 is environment.
+
+2026-11-21 [doc] Created ideas/2026-11-21.json (schemaVersion 3, 4 ideas): TZ Check (19, provisional), HR Case File (18, provisional), Zeffy Cards (17, provisional), NDIS Registers (16, provisional)
