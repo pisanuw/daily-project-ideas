@@ -671,3 +671,7 @@
 | 2026-11-21 | One-Case Disciplinary File for UK Micro Employers | Small Business Ops | Multi-week | 18 | provisional |  |
 | 2026-11-21 | Club-Branded Member Cards with Your Own Numbers for Zeffy | Micro-SaaS | Multi-week | 17 | provisional |  |
 | 2026-11-21 | Linked Audit Registers for Small NDIS Therapy Practices | Accessibility & Compliance | Multi-week | 16 | provisional |  |
+| 2026-11-22 | Batch Book for Small Cosmetics and Soap Makers | Small Business Ops | Multi-week | 16 | provisional |  |
+| 2026-11-22 | Pickup Choice Keeper for One-Location Shopify Shops | Small Business Ops | Multi-week | 16 | provisional |  |
+| 2026-11-22 | EU Duty Line Check for UK Shopify Shops on Royal Mail | Accessibility & Compliance | Multi-week | 14 | provisional |  |
+| 2026-11-22 | Duplicate Draft Cleaner for ArtStation Sellers Moving to Gumroad | Creative & Prosumer | Weekend MVP | 14 | provisional |  |

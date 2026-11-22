@@ -1,0 +1,1440 @@
+{
+  "date": "2026-11-22",
+  "schemaVersion": 3,
+  "complete": true,
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Batch Book for Small Cosmetics and Soap Makers",
+      "slug": "batch-book-for-small-cosmetics-makers",
+      "category": "Small Business Ops",
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Data & Visualization",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": true,
+        "engine": true,
+        "shared": false,
+        "notes": {
+          "stateful": "The maker keeps materials, recipes, supplier lots, batches and cost history and returns to them every production day.",
+          "connected": "Imports supplier lots and Etsy or Shopify order exports by CSV so orders link to batches, and exports everything as CSV and printable batch records.",
+          "unattended": "A daily email lists materials below their reorder point and lots that expire within 30 days.",
+          "engine": "Consumes lots oldest-first or earliest-expiry across several lots with unit conversion, prices each batch from the lots actually used, and traces a supplier lot to every batch and order made from it."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "email",
+        "scheduled"
+      ],
+      "buildPlan": [
+        {
+          "n": 1,
+          "title": "Recipe to batch",
+          "delivers": "Sign in, add materials and a recipe, record a batch that deducts stock and shows a batch code in the maker's format.",
+          "acceptance": "A 10-bar batch deducts the exact grams from stock and shows a code in the chosen format; deployed."
+        },
+        {
+          "n": 2,
+          "title": "Lots, oldest first",
+          "delivers": "Receive lots with supplier batch number, cost and expiry; a batch draws from the oldest or earliest-expiring lot first.",
+          "acceptance": "A batch larger than the first lot splits across two lots, checked by a unit test."
+        },
+        {
+          "n": 3,
+          "title": "Actual cost",
+          "delivers": "Cost per batch and per unit from the lots used, including packaging and unit conversion between grams, ounces and millilitres.",
+          "acceptance": "Matches a hand-worked fixture to the cent."
+        },
+        {
+          "n": 4,
+          "title": "Recall view and batch record",
+          "delivers": "Pick a supplier lot and see every batch made from it; print a batch record page for the product information file.",
+          "acceptance": "A fixture with three batches over two lots returns exactly the right batches, and the printed record lists every lot used."
+        },
+        {
+          "n": 5,
+          "title": "Reorder and expiry digest",
+          "delivers": "A reorder point per material and a scheduled daily email of materials to reorder and lots near expiry.",
+          "acceptance": "An email is sent only when a threshold is crossed, and lists the right materials."
+        },
+        {
+          "n": 6,
+          "title": "Order import and full export",
+          "delivers": "Import an Etsy or Shopify order CSV to link orders to batches; export every record as CSV for safekeeping.",
+          "acceptance": "A sample Etsy CSV links its orders without duplicates on re-import, and the export imports again cleanly."
+        },
+        {
+          "n": 7,
+          "title": "Polish",
+          "delivers": "Business-owner README, phone layout for the workshop, keyboard and screen-reader pass, walkthrough test.",
+          "acceptance": "A walkthrough test runs sign-in to recall view; axe reports no serious issues."
+        }
+      ],
+      "summary": "A batch book for solo cosmetics and soap makers who sell on Etsy and at markets: ingredient lots used oldest-first, a batch code for each label, the true cost of every batch and a recall view, for far less than the incumbent's lot-tracking plan.",
+      "public": {
+        "summary": "Keep a proper batch record for every batch you make, with the real cost of each one, without a spreadsheet.",
+        "problem": "You make soap, balms or creams in small batches, and every label needs a batch number you can trace back. You want to know which jar of oil or bag of butter went into which batch, and what that batch really cost you. The tools that do this either cost a lot each month or only work if you sell on one platform, so you end up with a spreadsheet you don't trust.",
+        "forWhom": "Solo and small cosmetics and soap makers who sell on Etsy, at markets and on their own website.",
+        "benefits": [
+          "A batch code for every label, ready to print",
+          "Know exactly what each batch cost you",
+          "Find every batch made from a faulty ingredient in seconds",
+          "A reminder before you run out or an ingredient expires",
+          "Records you can export and keep for years"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "Cosmetics makers in Great Britain and the EU must put a batch number on every label and keep a product information file for ten years after the last batch, and every maker wants to know what each batch really cost and which supplier lot went into it; the tool many of them used raised its price and puts lot tracking on a $99-a-month plan, so they fall back to spreadsheets.",
+      "description": "The maker enters materials and recipes once, then receives each purchase as a lot with the supplier's batch number, cost and expiry date. Recording a production run consumes lots oldest-first, gives the batch a code for the label and prices the batch from the lots actually used. A recall view lists every batch, and every Etsy or market order linked by CSV import, made from a given supplier lot, and each batch prints as a record for the product information file. A daily email warns of materials to reorder and lots about to expire, and everything exports as CSV.",
+      "targetCustomer": "Solo and micro cosmetics and soap makers (1 to 5 people) in Great Britain and the EU who sell on Etsy, at markets and on their own non-Shopify websites.",
+      "buyer": "The maker, from the business's own card; a small monthly subscription.",
+      "whyNow": "Stocksmith (Craftybase under a new name since July 2026) keeps batch and lot tracking on its Indie plan at $99 a month; four Shopify-only batch and lot apps launched between July and October 2026 show the demand but leave Etsy and market sellers out; and Great Britain's cosmetics rules require a batch identification number on the label and a product information file kept 10 years after the last batch.",
+      "founderFit": "Nothing beyond building it alone.",
+      "problemEvidence": [
+        {
+          "url": "https://apps.shopify.com/stocksmith-inventory-manufacturing/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest",
+          "source": "apps.shopify.com",
+          "author": "poster A (US soap and cosmetics maker following GMP, about 3 years on the app)",
+          "date": "2023-09-05",
+          "kind": "complaint",
+          "summary": "Needed stock tracked per lot and used first-in first-out for GMP; even the top tier did not do it, and the price was rising from $34.99 to $79 a month, so they were looking for another system."
+        },
+        {
+          "url": "https://stocksmith.io/pricing/",
+          "source": "stocksmith.io",
+          "author": "Stocksmith (vendor)",
+          "date": "2026-11-22",
+          "kind": "spend",
+          "summary": "Batch and lot tracking and traceability reports appear only from the Indie plan at $99 a month ($83 billed yearly); Pro from $20 and Studio $49 do not include lots (read 2026-11-22)."
+        },
+        {
+          "url": "https://batchmakes.com/pricing",
+          "source": "batchmakes.com",
+          "author": "BatchMakes (vendor)",
+          "date": "2026-11-22",
+          "kind": "spend",
+          "summary": "A web app for makers sells its lot register, lot traceability and recall reports only on Business at 59 EUR a month plus VAT; the free plan has recipes, batches and costs but no lots (read 2026-11-22)."
+        },
+        {
+          "url": "https://www.gov.uk/guidance/making-cosmetic-products-available-to-consumers-in-great-britain",
+          "source": "gov.uk",
+          "author": "UK government (regulator)",
+          "date": "2021-10-04",
+          "kind": "mandate",
+          "summary": "A cosmetic label must carry an identification number such as a batch number, the product information file must be kept 10 years after the last batch, and a sole trader can be the Responsible Person; no small-business exemption."
+        },
+        {
+          "url": "https://www.fda.gov/cosmetics/cosmetics-laws-regulations/modernization-cosmetics-regulation-act-2022-mocra",
+          "source": "fda.gov",
+          "author": "US FDA (regulator)",
+          "date": "2026-10-29",
+          "kind": "mandate",
+          "summary": "Small businesses are exempt from GMP, registration and listing under MoCRA, while adverse-event reports and safety records still apply; for US makers a batch record is good practice, not a duty, which narrows the buyer to Great Britain and the EU."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Stocksmith (formerly Craftybase)",
+          "url": "https://stocksmith.io/pricing/",
+          "price": "Pro from $20 a month; Studio $49; Indie $99 ($83 billed yearly); Business $199; Growth $349",
+          "gap": "Has batch and lot tracking, first-in first-out and recall lookup, but only from the $99 Indie plan."
+        },
+        {
+          "name": "BatchMakes",
+          "url": "https://batchmakes.com/pricing",
+          "price": "Free for one user; Business 59 EUR a month plus VAT",
+          "gap": "Lot register and recall reports only on the 59-euro plan; first-in first-out lot use not mentioned; no Etsy integration."
+        },
+        {
+          "name": "Inventora",
+          "url": "https://www.inventora.com/pricing-plans/",
+          "price": "Starter $23 a month (500 materials)",
+          "gap": "Lists 'Full Batch Traceability' and syncs with Etsy, but its help pages do not describe supplier lots, first-in first-out use or expiry."
+        },
+        {
+          "name": "MakerPantry",
+          "url": "https://apps.shopify.com/makerpantry",
+          "price": "Free, $19, $39, $69 a month; 0 reviews",
+          "gap": "Tracks ingredient lots first-in first-out, but keeps no batch records or codes and works only on Shopify."
+        },
+        {
+          "name": "Batchready",
+          "url": "https://apps.shopify.com/batchready",
+          "price": "Free; 0 reviews",
+          "gap": "Batch numbers, best-before dates and a recall record, but no ingredient lots or costing, and Shopify only."
+        },
+        {
+          "name": "Soap batch tracker spreadsheet",
+          "url": "https://payhip.com/b/QBo4i",
+          "price": "$2.69",
+          "gap": "A batch log and cost per bar with no lot tracking or recall view."
+        }
+      ],
+      "keyFeatures": [
+        "Ingredient lots with supplier batch number, cost and expiry",
+        "Batches that use lots oldest-first and get a label code",
+        "Actual cost per batch and per unit",
+        "Recall view from a supplier lot to every batch and order",
+        "Daily reorder and expiry email",
+        "Printable batch record and full CSV export"
+      ],
+      "mvpScope": {
+        "features": [
+          "Materials, recipes and lots",
+          "Batch recording with oldest-first lot use and a batch code",
+          "Cost per batch",
+          "Recall view",
+          "Batch record print and CSV export"
+        ],
+        "outOfScope": [
+          "Live Etsy or Shopify sync (CSV import first)",
+          "Safety assessments or label design",
+          "Wholesale invoicing",
+          "Multi-user teams"
+        ],
+        "buildEstimate": "About 7 build days"
+      },
+      "techStack": "React + Vite + Tailwind front end; Supabase sign-in and a per-app schema for materials, lots, batches and orders; a scheduled job and transactional email for the daily digest; CSV parsing and PDF batch records in the browser.",
+      "pricing": {
+        "model": "Monthly or yearly subscription per maker",
+        "pricePoint": "$12 a month or $99 a year (estimate)",
+        "rationale": "Well under Inventora's $23, BatchMakes' 59 euros and Stocksmith's $99 lot plan, and above the cheap Shopify-only tools that have no lots, because it adds costing and the lot-to-batch trace off Shopify."
+      },
+      "revenueSketch": "Estimate: 120 makers x $12 a month = $1,440 a month. Assumes makers in Great Britain and the EU find it by search for batch codes and batch records; search volume and conversion are unknown.",
+      "distribution": "First 10: a free 'cosmetic batch code generator' and 'soap batch record template' page found by search, leading to the paid app; Etsy has no app store, so search is the channel. soapmakingforum.com returned 403 to this run and its promotion rule was not found: rule unknown, check before posting. Never post in the evidence thread.",
+      "validationTest": {
+        "method": "A landing page offering 'Batch Book: lot-tracked batch records and the true cost of every batch' with a '$12 a month, start' button and the free batch-code tool, promoted for 14 days by search ads on 'soap batch record template', 'cosmetic batch code' and 'lot tracking soap software' in Great Britain and the EU; no outreach to anyone.",
+        "successCriteria": "At least 300 visitors, at least 4% price-button clicks and at least 10 email sign-ups in 14 days.",
+        "cost": "About $100 in ads plus a domain and one day of work."
+      },
+      "moat": "A maker's lots, recipes and years of batch records live in the app, and a 10-year record duty makes switching costly; the oldest-first lot engine with costing is more than a spreadsheet template.",
+      "compliance": [
+        "Cosmetics law (GB and EU): the duties fall on the maker; the app supports batch codes and the product information file but must never claim to make anyone compliant.",
+        "Records retention: promise and deliver full export, because the product information file must be kept 10 years after the last batch.",
+        "UK GDPR and GDPR if customer names arrive with order imports: minimise and allow deletion.",
+        "Accessibility: WCAG 2.2 AA for the app."
+      ],
+      "risks": [
+        {
+          "risk": "BatchMakes or Inventora moves lots to a cheaper plan.",
+          "mitigation": "Compete on oldest-first costing and the batch record for Etsy and market sellers, at a lower price."
+        },
+        {
+          "risk": "Makers fear losing years of records if the service closes.",
+          "mitigation": "One-click full export from day one and a stated retention policy."
+        },
+        {
+          "risk": "Demand is thin: the only complaint found is from 2023.",
+          "mitigation": "Run the ad and landing-page test before building beyond milestone 1."
+        }
+      ],
+      "scores": {
+        "pain": 2,
+        "willingnessToPay": 3,
+        "reachability": 2,
+        "competitiveGap": 1,
+        "feasibility": 4,
+        "complianceBurden": 4,
+        "total": 16
+      },
+      "scoreRationale": {
+        "pain": "One dated complaint about missing lot and first-in first-out tracking, from 2023-09-05, by a US maker with no federal batch duty (https://apps.shopify.com/stocksmith-inventory-manufacturing/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest; https://www.fda.gov/cosmetics/cosmetics-laws-regulations/modernization-cosmetics-regulation-act-2022-mocra); none found within 90 days.",
+        "willingnessToPay": "Vendors charge for exactly this: Stocksmith's lot plan at $99 a month (https://stocksmith.io/pricing/), BatchMakes at 59 euros (https://batchmakes.com/pricing), and the complainant paid $34.99 for about three years.",
+        "reachability": "Self-serve search for batch-code and batch-record tools is the channel, and the incumbent already competes on that content (https://stocksmith.io/blog/batch-tracking).",
+        "competitiveGap": "BatchMakes (https://batchmakes.com/pricing) and Inventora with Etsy sync from $23 (https://www.inventora.com/pricing-plans/) already sell traceability off Shopify; only a cheaper, oldest-first, cosmetics-focused tool is left.",
+        "feasibility": "A standalone web app with CSV import, a lot-consumption engine and a daily email; small vendors ship parts of it (https://apps.shopify.com/makerpantry).",
+        "complianceBurden": "The legal duties fall on the maker, not the tool, but it must keep and export records for years (https://www.gov.uk/guidance/making-cosmetic-products-available-to-consumers-in-great-britain)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Researched as a materials-cost and lot book after the spend pass found Stocksmith's paid plans and its 2023 low reviews. The adversarial reviewer cut the total from 18 to 16: pain 3 to 2 (one complaint, from 2023, by a US maker with no legal batch duty, and Stocksmith has since added first-in first-out and expiry on its $99 plan) and competitiveGap 2 to 1 (BatchMakes sells a lot register and recall reports off Shopify for 59 euros, and Inventora lists full batch traceability with Etsy sync from $23). It confirmed that BatchMakes' free plan has no lots, that four Shopify-only batch or lot apps exist, and that the legal driver applies to cosmetics makers in Great Britain and the EU, not to US soap and candle makers. Re-scoped to those makers, with oldest-first lots, label codes, actual cost per batch, a recall view from Etsy order imports and a batch-record export."
+      },
+      "inspiredBy": "https://apps.shopify.com/stocksmith-inventory-manufacturing/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest",
+      "gateGap": {
+        "missing": [
+          "total 16 is below 22",
+          "pain 2 is below 4: the only complaint is from 2023-09-05, by a maker with no legal batch duty, and none was found within 90 days"
+        ],
+        "closedBy": "The 14-day ad test with the free batch-code tool: 10 or more sign-ups and 4% price-button clicks from Great Britain and EU makers would show the pain the evidence lacks (pain 3); reaching 22 would also need a dated maker complaint within 90 days and a clearer gap below BatchMakes and Inventora, so validated is out of reach without new evidence."
+      }
+    },
+    {
+      "n": 2,
+      "title": "Pickup Choice Keeper for One-Location Shopify Shops",
+      "slug": "pickup-choice-keeper-for-shopify",
+      "category": "Small Business Ops",
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Data & Visualization",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": false,
+        "engine": true,
+        "shared": true,
+        "notes": {
+          "stateful": "Each shop's rules are saved and revisited: which products are pickup-only, the pickup location and the message shoppers see.",
+          "connected": "A public Shopify app: Admin API for products and tags, a checkout validation function, and the Storefront API pickup preference set from the theme.",
+          "engine": "Cart rules for pickup-only, mixed and ship-only carts, the location-stock rule that decides whether pickup is offered at all, and express-checkout paths that skip the cart.",
+          "shared": "The merchant sets the rules and the message; the shopper receives checkout opened on pickup and a clear message when Ship cannot apply."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "database",
+        "backend"
+      ],
+      "buildPlan": [
+        {
+          "n": 1,
+          "title": "Block Ship with a message",
+          "delivers": "Install on a dev store, tag pickup-only products, and a validation function blocks the Ship path with the merchant's own message.",
+          "acceptance": "A cart with a tagged item and Ship selected cannot complete checkout and shows the message; an untagged cart checks out; deployed."
+        },
+        {
+          "n": 2,
+          "title": "Carry the cart choice into checkout",
+          "delivers": "Read the pickup choice the theme or a calendar app already writes as a cart attribute, and set the Storefront API pickup preference when the shopper clicks Checkout.",
+          "acceptance": "Checkout opens on Pick up at the shop's location in at least 9 of 10 runs on desktop and phone; on failure it falls back to Ship with the validation message."
+        },
+        {
+          "n": 3,
+          "title": "Live cart notice",
+          "delivers": "A theme block for the cart page and drawer that explains pickup-only items and updates without a page reload.",
+          "acceptance": "The notice appears and disappears without a refresh in Dawn and one other free theme."
+        },
+        {
+          "n": 4,
+          "title": "Mixed carts, stock and express checkout",
+          "delivers": "Rules for mixed carts and the location-stock condition, with express-checkout paths covered by validation.",
+          "acceptance": "A test matrix passes: pickup-only, ship-only, mixed, out of stock at the location, and Shop Pay and Apple Pay buttons."
+        },
+        {
+          "n": 5,
+          "title": "Billing and App Store readiness",
+          "delivers": "A billing plan with trial, mandatory privacy webhooks, uninstall cleanup and the listing.",
+          "acceptance": "A test charge is approved on a dev store and the privacy webhooks return 200."
+        },
+        {
+          "n": 6,
+          "title": "Polish",
+          "delivers": "Business-owner README, phone layout for settings, accessible notice (announced to screen readers, contrast passes), walkthrough test.",
+          "acceptance": "A walkthrough test runs install to a pickup order; axe reports no serious issues."
+        }
+      ],
+      "summary": "For one-location Shopify bakeries, butchers and food shops on Basic or Grow: keep the pickup choice a shopper made in the cart when they reach checkout, and stop pickup-only items being ordered for shipping, with a clear message.",
+      "public": {
+        "summary": "When a customer chooses pickup in your cart, checkout stays on pickup, and items you can't ship can't be ordered for delivery by mistake.",
+        "problem": "You sell cakes, fresh meat or other items customers must collect, next to things you post. A customer picks collection in the cart, then checkout switches them back to delivery or shows a confusing error. Some give up, and some place an order you can't fulfil.",
+        "forWhom": "Small shops on Shopify with one shop or kitchen where customers collect some items and others are posted.",
+        "benefits": [
+          "Customers who choose pickup stay on pickup",
+          "No more orders for items you can't post",
+          "A clear message in your own words when delivery isn't possible",
+          "Fewer abandoned checkouts and refund emails"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "Shoppers choose collection in the cart, but checkout starts on Ship; with pickup-only items it hides delivery with no explanation or shows a misleading error, and the cart's pickup choice is lost, so orders are abandoned or placed for delivery the shop cannot make.",
+      "description": "The merchant tags pickup-only products and writes the message shoppers should see. When the shopper clicks Checkout, the app reads the pickup choice the theme or a calendar app already stored on the cart and sets Shopify's pickup preference, so checkout opens on Pick up at the shop's location. A checkout validation function, which runs on every plan for public apps and also covers express buttons, blocks the Ship path for pickup-only items with the merchant's message. A live cart notice explains the rule before checkout.",
+      "targetCustomer": "Owners of one-location Shopify shops on Basic or Grow (bakeries, butchers, florists, delis and food makers) that sell collection-only items next to items they post.",
+      "buyer": "The shop owner, on the business card through Shopify's app billing.",
+      "whyNow": "Shopify's ship-and-pickup in one order (June 2026) is for Plus and Enterprise only, checkout UI messages need Plus, and merchants on Basic and Grow posted the problem in September, October and November 2026; the apps that launched in May 2026 have 0 to 2 reviews.",
+      "founderFit": "Nothing beyond building it alone.",
+      "problemEvidence": [
+        {
+          "url": "https://community.shopify.com/t/707284.json",
+          "source": "community.shopify.com",
+          "author": "poster B (Shopify user; the account carries a staff-group label, so independence is uncertain)",
+          "date": "2026-10-31",
+          "kind": "complaint",
+          "summary": "Asks Shopify to keep the pickup choice made in the cart and preselect Pick up instead of Ship; there is no native setting and apps add cost. A later post reports a free Storefront API prefill working on Basic."
+        },
+        {
+          "url": "https://community.shopify.com/t/693011.json",
+          "source": "community.shopify.com",
+          "author": "poster A (owner of a small food business)",
+          "date": "2026-10-06",
+          "kind": "complaint",
+          "summary": "Checkout hides shipping on carts of pickup-only items with no explanation; the owner fixed it with a free cart notice that does not refresh after cart changes."
+        },
+        {
+          "url": "https://community.shopify.com/t/694793.json",
+          "source": "community.shopify.com",
+          "author": "poster C (store owner on Grow)",
+          "date": "2026-10-08",
+          "kind": "complaint",
+          "summary": "With pickup-only products both Ship and Pickup show, and choosing Ship gives a misleading phone-number error; replies say Grow has no native fix and point to an editable checkout message."
+        },
+        {
+          "url": "https://www.freelancer.com/api/projects/0.1/projects/all/?query=shopify%20pickup%20checkout&limit=30&full_description=true&from_time=1782259200",
+          "source": "freelancer.com",
+          "author": "poster D (mobile butcher, employer)",
+          "date": "2026-07-30",
+          "kind": "spend",
+          "summary": "Offered 250 to 750 GBP for a required delivery-or-collect choice in the cart, saved to the order, on Basic or Grow without Plus; expired, not awarded, and it buys a person rather than software."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "PickupLock",
+          "url": "https://apps.shopify.com/pickuplock",
+          "price": "Basic $5.99 a month; Pro $9.99; Pro+ $19.99; 2 reviews",
+          "gap": "Hides delivery methods that do not fit the cart and shows a cart warning, but does not keep or preselect the pickup choice; rules by tag need Pro."
+        },
+        {
+          "name": "BoomGate: Checkout Validation",
+          "url": "https://apps.shopify.com/boomgate",
+          "price": "Free for 1 rule on any plan; Standard $4.99 a month for Basic and Grow; 50 reviews",
+          "gap": "Blocks checkout with a custom message by tag or cart attribute; a pickup-versus-ship condition is not documented and it does not preselect pickup."
+        },
+        {
+          "name": "BopiSafe",
+          "url": "https://apps.shopify.com/bopisafe",
+          "price": "Growth $19.90 a month (up to 3 locations); 0 reviews",
+          "gap": "Claims the store chosen in the cart holds through checkout, the closest match, but unproven and over three times PickupLock's price for a one-location shop."
+        },
+        {
+          "name": "Zapiet Pickup + Delivery",
+          "url": "https://apps.shopify.com/click-and-collect",
+          "price": "From $49.99 a month; 1,908 reviews",
+          "gap": "A full pickup and delivery scheduler, too costly for a one-location maker who only needs the pickup choice kept."
+        },
+        {
+          "name": "Free Storefront API recipe",
+          "url": "https://community.shopify.com/t/707284.json",
+          "price": "Free",
+          "gap": "The accepted answer in the evidence thread sets the pickup preference with theme code; it needs a developer and is not maintained or tested across themes."
+        }
+      ],
+      "keyFeatures": [
+        "Pickup-only products by tag",
+        "Checkout opens on Pick up when the cart says pickup",
+        "Ship blocked with the merchant's own message, express buttons included",
+        "Live cart notice",
+        "Works on Basic and Grow"
+      ],
+      "mvpScope": {
+        "features": [
+          "Validation function with the merchant's message",
+          "Cart-attribute pickup preference set at checkout",
+          "Cart notice block",
+          "Single location"
+        ],
+        "outOfScope": [
+          "Pickup time slots and calendars",
+          "Several locations",
+          "Local delivery zones",
+          "Plus-only checkout extensions"
+        ],
+        "buildEstimate": "About 6 build days"
+      },
+      "techStack": "Shopify public app: Shopify Functions (cart and checkout validation) deployed with the Shopify CLI, a theme app extension for the cart notice and the pickup preference, a small Node backend on backend-hub for OAuth, webhooks and billing, and a per-app Supabase schema for shop settings.",
+      "pricing": {
+        "model": "Monthly subscription through Shopify billing",
+        "pricePoint": "$7 a month with a 14-day trial (estimate)",
+        "rationale": "Level with PickupLock ($5.99) and BoomGate ($4.99) and well below BopiSafe ($19.90) and Zapiet ($49.99), because it does the one job those cheaper apps do not: keep the cart's pickup choice."
+      },
+      "revenueSketch": "Estimate: 150 shops x $7 a month = $1,050 a month. Assumes App Store search finds it; the exact-niche apps launched in May 2026 have 0 and 2 reviews, so uptake is unknown.",
+      "distribution": "First 10: a Shopify App Store listing in the Delivery and pickup category. The Shopify Community's FAQ (https://community.shopify.com/faq) prohibits 'Recommending or promoting apps outside the Ask and Offer board, even when an app is relevant to the question', and on that board members must disclose any commercial relationship. Never reply in the evidence threads.",
+      "validationTest": {
+        "method": "A landing page with a '$7 a month, start trial' button and a $60 search-ad test on queries such as 'shopify pickup only products checkout'; in parallel, record PickupLock's and BopiSafe's review counts now and again in 30 days. No outreach to anyone.",
+        "successCriteria": "Ad click-through of at least 3% and at least 8 price-button clicks from 300 visits, or either competitor gaining 5 or more reviews in 30 days.",
+        "cost": "About $60 in ads and a day of work."
+      },
+      "moat": "Little: tested behaviour across themes, calendar apps and express checkout is the main edge, and Shopify may extend ship-and-pickup to all plans.",
+      "compliance": [
+        "Shopify app requirements: mandatory privacy webhooks and minimal access scopes.",
+        "Consumer law: delivery information must be clear before purchase, which the message supports.",
+        "Accessibility: the cart notice is announced to screen readers and meets WCAG 2.2 AA contrast."
+      ],
+      "risks": [
+        {
+          "risk": "The pickup preference does not reach theme carts, as a Shopify staff reply (2026-06-17) suggests.",
+          "mitigation": "Spike it on day one on a dev store; if it fails, fall back to a rebuilt Storefront cart or ship validation only."
+        },
+        {
+          "risk": "Shopify extends ship-and-pickup or pickup defaults to Basic and Grow.",
+          "mitigation": "Keep the app small and cheap and watch the changelog."
+        },
+        {
+          "risk": "PickupLock or BoomGate adds the same feature.",
+          "mitigation": "Compete on the cart-choice carry-through and one-location simplicity."
+        }
+      ],
+      "scores": {
+        "pain": 3,
+        "willingnessToPay": 2,
+        "reachability": 3,
+        "competitiveGap": 1,
+        "feasibility": 3,
+        "complianceBurden": 4,
+        "total": 16
+      },
+      "scoreRationale": {
+        "pain": "Three on-target merchant threads within 90 days (https://community.shopify.com/t/707284.json, https://community.shopify.com/t/693011.json, https://community.shopify.com/t/694793.json), but two report a free cart notice or text edit as enough.",
+        "willingnessToPay": "The only same-area spend buys a person for a cart choice, posted twice and expired (https://www.freelancer.com/api/projects/0.1/projects/all/?query=shopify%20pickup%20checkout&limit=30&full_description=true&from_time=1782259200), and the exact-niche apps have 2 and 0 reviews (https://apps.shopify.com/pickuplock).",
+        "reachability": "Self-serve through the Shopify App Store's Delivery and pickup category, where PickupLock is listed (https://apps.shopify.com/pickuplock); community promotion is confined to Ask and Offer (https://community.shopify.com/faq).",
+        "competitiveGap": "PickupLock hides and warns from $5.99, BoomGate blocks by rule free or for $4.99 (https://apps.shopify.com/boomgate), BopiSafe claims the choice holds through checkout (https://apps.shopify.com/bopisafe), and a free recipe is the accepted answer in https://community.shopify.com/t/707284.json.",
+        "feasibility": "Validation functions work on all plans for public apps (https://shopify.dev/docs/api/functions/latest/cart-and-checkout-validation.md), but the pickup preference only prefills (https://shopify.dev/docs/api/storefront/latest/objects/CartDeliveryPreference.md) and staff say theme and Storefront carts are separate (https://community.shopify.dev/t/storefront-cart-api-and-shopify-liquid-themes-cart-how-to-make-them-sync/35172).",
+        "complianceBurden": "No payments beyond Shopify billing and little personal data: the validation function reads cart lines and the delivery method type (https://shopify.dev/docs/api/functions/latest/cart-and-checkout-validation.md); Shopify's privacy webhook rules were not read this run."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Re-researched from the watchlist (first seen 2026-11-20): the watchlist gatherer found two more merchant threads, and the researcher confirmed that a public app's validation function can block Ship on every plan while preselecting pickup is only a Storefront API prefill. The adversarial reviewer cut the total from 18 to 16: willingnessToPay 3 to 2 (the paid job was one butcher posting twice for a different task, expired, buying a person; PickupLock has 2 reviews and BopiSafe 0) and competitiveGap 2 to 1 (PickupLock, BoomGate's free rule, BopiSafe's claim and a free recipe in the evidence thread). It found two of five threads off target (a two-location card shop, a florist hiring help for a calendar app) and two later posts by new low-trust accounts that may be app makers, not counted. Re-scoped to carrying a pickup choice already made in the cart into checkout for one-location shops."
+      },
+      "inspiredBy": "https://community.shopify.com/t/707284.json",
+      "gateGap": {
+        "missing": [
+          "total 16 is below 22",
+          "pain 3 is below 4: three on-target merchant threads, two of them content with a free fix",
+          "willingnessToPay 2 is below 3: no paid app or job for this exact job with buyers"
+        ],
+        "closedBy": "The ad and landing-page test: 8 or more price-button clicks from 300 visits, or PickupLock or BopiSafe gaining 5 reviews in 30 days, would be the first payment signal (willingnessToPay 3, total 17); with competitiveGap at 1 the gate of 22 is out of reach unless the preselect proves to be something no rival can do."
+      }
+    },
+    {
+      "n": 3,
+      "title": "EU Duty Line Check for UK Shopify Shops on Royal Mail",
+      "slug": "eu-duty-line-check-for-uk-shopify-shops",
+      "category": "Accessibility & Compliance",
+      "smallBusiness": true,
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Data & Visualization",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": true,
+        "engine": true,
+        "shared": false,
+        "notes": {
+          "stateful": "Keeps the shop's product codes, EU orders and monthly results, so the owner sees which orders cost them duty over time.",
+          "connected": "Reads the Shopify catalogue and EU orders (HS code, origin, per-line duties) through the Admin API, and imports a Royal Mail business-account duty statement when the format allows.",
+          "unattended": "A monthly email of EU orders where the shop absorbed duty or fees, and an alert when a new variant lacks an HS code or origin.",
+          "engine": "Counts declaration lines the way the rule does (per tariff classification) and the way the carrier does (per line or per origin), adds the 3-euro duty and the 2-euro handling fee, and applies the 150-euro threshold."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "email",
+        "scheduled",
+        "backend"
+      ],
+      "buildPlan": [
+        {
+          "n": 1,
+          "title": "Connect and see the gaps",
+          "delivers": "Install on a dev store and list variants missing an HS code, country of origin or SKU.",
+          "acceptance": "Three seeded gaps all appear; deployed."
+        },
+        {
+          "n": 2,
+          "title": "Line-count engine",
+          "delivers": "Expected duty and handling fee for each EU order of 150 euros or less, counted per tariff classification and per carrier line, side by side.",
+          "acceptance": "Unit tests pass for the European Commission's examples (3 and 6 euros) and for a per-origin carrier count of 9 euros."
+        },
+        {
+          "n": 3,
+          "title": "Checkout comparison and uplift advice",
+          "delivers": "Collected against expected duty per order from recent EU orders, and the surcharge or currency uplift that would cover the gap.",
+          "acceptance": "Seeded orders show the correct difference and a suggested uplift."
+        },
+        {
+          "n": 4,
+          "title": "Carrier statement import",
+          "delivers": "Upload a Royal Mail business-account duty statement and match its charges to orders.",
+          "acceptance": "At least 9 of 10 sample rows match, and the rest are listed as unmatched."
+        },
+        {
+          "n": 5,
+          "title": "Monthly digest",
+          "delivers": "A scheduled email of the orders where the shop absorbed duty or fees, plus new code gaps.",
+          "acceptance": "A manual trigger sends the email with the correct totals."
+        },
+        {
+          "n": 6,
+          "title": "Billing and App Store readiness",
+          "delivers": "A billing plan with a free check tier, privacy webhooks and the protected customer data request.",
+          "acceptance": "A test charge is accepted and the webhooks return 200."
+        },
+        {
+          "n": 7,
+          "title": "Polish",
+          "delivers": "Business-owner README, phone layout, keyboard and screen-reader pass, walkthrough test.",
+          "acceptance": "A walkthrough test runs install to digest; axe reports no serious issues."
+        }
+      ],
+      "summary": "For small UK Shopify shops posting to EU customers with Royal Mail: see how checkout, the EU rule and the carrier each count the new 3-euro duty and 2-euro fee, what uplift covers the difference, and which orders cost you money.",
+      "public": {
+        "summary": "Find out which EU orders cost you money in the new EU parcel charges, and what to change so they stop.",
+        "problem": "Since July every small parcel you post to an EU customer carries a new flat duty, and since November a handling fee as well. Your checkout, the EU rule and your carrier each count the items differently, and the difference arrives later as a bill from the carrier. You cannot see which orders lost you money or how much to add to your prices.",
+        "forWhom": "Small UK online shops on Shopify that post orders to customers in the EU.",
+        "benefits": [
+          "See which EU orders cost you money",
+          "Know how much to add to cover the charges",
+          "Spot products missing the codes customs need",
+          "A monthly summary instead of surprise bills"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "Since 1 July 2026 the EU charges 3 euros per item by tariff classification on parcels of 150 euros or less, and from 1 November 2026 a 2-euro handling fee; Shopify's checkout, the rule and Royal Mail count lines differently, carriers recharge taxes later, and small UK shops learn from the courier's bill that they absorbed the difference.",
+      "description": "The app reads the shop's catalogue and EU orders through the Shopify Admin API and lists variants missing an HS code or origin. For each EU order under 150 euros it counts declaration lines the way the rule counts them and the way the carrier counts them, adds the 3-euro duty and the 2-euro handling fee, and compares the result with the duty checkout collected. It suggests the surcharge or currency uplift that would cover the gap, and, where the shop can export its Royal Mail business-account duty statement, matches the carrier's charges to orders. A monthly email lists the orders that cost the shop money.",
+      "targetCustomer": "Owners of small UK Shopify shops (1 to 5 people), such as makers, craft shops and indie publishers, that post orders under 150 euros to EU consumers with Royal Mail delivered-duty-paid on a business account and have Shopify duties turned on.",
+      "buyer": "The shop owner, on the business card through Shopify's app billing.",
+      "whyNow": "The 3-euro EU duty began on 1 July 2026 and runs to 1 July 2028; product identifiers became mandatory and a 2-euro handling fee per declaration item applies from 1 November 2026 under Delegated Regulation (EU) 2026/2152, and Shopify's own help tells merchants to compare checkout charges with customs charged at destination by hand.",
+      "founderFit": "Nothing beyond building it alone.",
+      "problemEvidence": [
+        {
+          "url": "https://community.shopify.com/t/644531.json",
+          "source": "community.shopify.com",
+          "author": "poster A (UK merchant shipping to the EU)",
+          "date": "2026-07-01",
+          "kind": "complaint",
+          "summary": "Duties enabled and HS and origin codes set, yet no 3-euro line appeared at checkout; the thread has 65 posts from 2026-07-01 to 2026-11-16."
+        },
+        {
+          "url": "https://community.shopify.com/t/644531.json?page=3",
+          "source": "community.shopify.com",
+          "author": "poster B (UK merchant)",
+          "date": "2026-07-10",
+          "kind": "complaint",
+          "summary": "Receiving Royal Mail bills recharging taxes from Germany after orders shipped."
+        },
+        {
+          "url": "https://community.shopify.com/t/607782.json",
+          "source": "community.shopify.com",
+          "author": "poster C (UK merchant)",
+          "date": "2026-07-02",
+          "kind": "complaint",
+          "summary": "Checkout charges 3 euros per SKU instead of per commodity code; in the same thread another merchant reports the carrier counting each origin as a line, 9 euros on one order (2026-08-06)."
+        },
+        {
+          "url": "https://taxation-customs.ec.europa.eu/news/guidance-and-legal-text-temporary-flat-fee-low-value-imports-which-will-apply-until-1-july-2028-2026-06-08_en",
+          "source": "taxation-customs.ec.europa.eu",
+          "author": "European Commission (regulator)",
+          "date": "2026-07-20",
+          "kind": "mandate",
+          "summary": "3 euros per item based on tariff classification, not quantity, on consignments of 150 euros or less from 1 July 2026 to 1 July 2028; the declarant is the seller or importer."
+        },
+        {
+          "url": "https://www.ebnerstolz.de/en/what-we-offer/services/tax-advice/customs-law/customs-processing-fee-and-product-identification-requirement-from-1-november-2026-114756.html",
+          "source": "ebnerstolz.de",
+          "author": "tax adviser (law and tax firm)",
+          "date": "2026-10-28",
+          "kind": "mandate",
+          "summary": "A 2-euro customs processing fee per declaration item under Delegated Regulation (EU) 2026/2152 from 1 November 2026, on top of the 3-euro duty, with product identifier codes required."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Shopify duties and import taxes",
+          "url": "https://help.shopify.com/manual/markets/duties-and-import-taxes/charging-duties",
+          "price": "0.85% (Shopify Payments) or 1.5% per order with duties calculated, temporarily 0.5%",
+          "gap": "Collects 3 euros per tariff line since 2026-06-26, but gives no report of collected against billed duty; its help says to compare by hand."
+        },
+        {
+          "name": "Shopify Managed Markets",
+          "url": "https://changelog.shopify.com/posts/new-3-eu-import-customs-duty-arrives-july-1",
+          "price": "unknown",
+          "gap": "Guarantees duty shown at checkout, but merchants resist moving to it and it changes the merchant of record."
+        },
+        {
+          "name": "PIDReady",
+          "url": "https://apps.shopify.com/pidready",
+          "price": "Free for every fix; Starter $14.99; Pro $29.99 a month; 0 reviews",
+          "gap": "Fixes HS codes, origins and identifiers; no duty calculation or reconciliation."
+        },
+        {
+          "name": "Oh Ship!",
+          "url": "https://apps.shopify.com/oh-ship",
+          "price": "Free for the last 30 days of orders; 1 review",
+          "gap": "Shows shipping charged against paid per order with carrier adjustment detection, but not EU duty; the nearest rival and the likeliest to add it."
+        },
+        {
+          "name": "Zonos Duty and Tax",
+          "url": "https://apps.shopify.com/duty-and-tax-calculator-iglobal-stores",
+          "price": "$2,500 a year plus $2 and 10% of duties per order; 160 reviews",
+          "gap": "Pays customs discrepancies, but priced far beyond a small maker."
+        },
+        {
+          "name": "EU Customs Fee Manager",
+          "url": "https://apps.shopify.com/parcel-insurance",
+          "price": "$9 a month; 0 reviews",
+          "gap": "Adds HS-code and handling-fee rules at checkout, but does not compare with what the carrier billed."
+        }
+      ],
+      "keyFeatures": [
+        "Variants missing HS code or origin",
+        "Line counts by the rule and by the carrier, side by side",
+        "3-euro duty and 2-euro fee per EU order",
+        "Suggested surcharge or currency uplift",
+        "Carrier statement matching where the format allows",
+        "Monthly email of orders that cost money"
+      ],
+      "mvpScope": {
+        "features": [
+          "Free code-gap and line-count check",
+          "Expected against collected duty per order",
+          "Uplift suggestion",
+          "Monthly digest"
+        ],
+        "outOfScope": [
+          "Carriers other than Royal Mail at first",
+          "Filing customs declarations",
+          "Non-EU destinations",
+          "Shops not on Shopify"
+        ],
+        "buildEstimate": "About 7 build days"
+      },
+      "techStack": "Shopify public app with an embedded admin page; Node backend on backend-hub for OAuth, webhooks and billing; a per-app Supabase schema for orders and results; a scheduled job and transactional email for the digest.",
+      "pricing": {
+        "model": "Free check; paid monthly reconciliation",
+        "pricePoint": "Free line-count check; 9 GBP a month or 79 GBP a year for comparison and the digest (estimate)",
+        "rationale": "A shop with 20 EU orders a month absorbing 3 to 5 euros on each loses 60 to 100 euros a month (an estimate, not a merchant's figure); the audit apps charge $7.99 to $14.99 and Zonos $2,500 a year."
+      },
+      "revenueSketch": "Estimate: 100 shops x 9 GBP a month = 900 GBP a month. Assumes UK shops find it in the App Store and that absorbed charges persist after July's fixes; both are unverified.",
+      "distribution": "First 10: a Shopify App Store listing with the keywords 'EU duty', 'Royal Mail DDP' and 'duty recharge'. The Shopify Community allows app recommendations only on the Ask and Offer board, with any commercial relationship disclosed (https://community.shopify.com/guidelines). Never reply in the evidence threads.",
+      "validationTest": {
+        "method": "A landing page 'See which EU orders cost you duty' with a 9 GBP a month price button, driven by a 14-day UK search-ad test on 'EU 3 euro duty Shopify' and 'Royal Mail DDP duty charge'; no outreach to anyone.",
+        "successCriteria": "Click-through to the price button of 3% or more and 5 or more sign-ups from shops that say they are on Shopify.",
+        "cost": "About 100 GBP in ads and a day of work."
+      },
+      "moat": "A maintained engine for how the rule, Shopify and each carrier count lines, which changes often and which generic duty apps do not track for small UK shops.",
+      "compliance": [
+        "UK GDPR: order addresses are personal data, and Shopify's protected customer data rules apply (not read this run: check before building).",
+        "Not customs or tax advice: label every figure an estimate and cite the rule text.",
+        "Accessibility: WCAG 2.2 AA for the admin page."
+      ],
+      "risks": [
+        {
+          "risk": "The problem was a launch-week bug that Shopify has fixed, and losses stopped.",
+          "mitigation": "Wait for a merchant report after 1 November of the 2-euro fee or a recharge being absorbed before building beyond the free check."
+        },
+        {
+          "risk": "No carrier statement format can be imported.",
+          "mitigation": "Start with the free line-count and uplift check, which needs only Shopify data."
+        },
+        {
+          "risk": "Sources disagree on how the fee is counted (per declaration item or per parcel).",
+          "mitigation": "Show each count next to its source and let the owner pick the carrier's rule."
+        }
+      ],
+      "scores": {
+        "pain": 2,
+        "willingnessToPay": 2,
+        "reachability": 2,
+        "competitiveGap": 3,
+        "feasibility": 2,
+        "complianceBurden": 3,
+        "total": 14
+      },
+      "scoreRationale": {
+        "pain": "Every report of absorbed duty is dated 2026-07-01 to 2026-08-06, mostly launch-week bugs (https://community.shopify.com/t/644531.json, https://community.shopify.com/t/607782.json); later posts ask only about identifier setup (https://community.shopify.com/t/704809.json).",
+        "willingnessToPay": "No paid job or app for reconciliation was found; merchants fixed it free with a 5% currency uplift (https://community.shopify.com/t/644531.json?page=2), and Shopify's fee is for calculation, not reconciliation (https://help.shopify.com/manual/markets/duties-and-import-taxes/charging-duties).",
+        "reachability": "Self-serve through a crowded Shopify App Store search, with ten or more HS-code and identifier apps launched July to October 2026 (https://apps.shopify.com/pidready).",
+        "competitiveGap": "No app reconciles collected duty against the carrier bill for small shops; Shopify tells merchants to compare by hand (https://help.shopify.com/en/manual/international/duties-and-import-taxes/additional-tasks.md), and the nearest rival covers shipping, not duty (https://apps.shopify.com/oh-ship).",
+        "feasibility": "Per-line duties are in the Admin API (https://shopify.dev/docs/api/admin-graphql/latest/objects/Duty), but carrier duty is invoiced after customs assessment, no usable statement format was found, and sources count the fee differently (https://www.evri.com/news/eu-customs-update-2026).",
+        "complianceBurden": "Reads order personal data and its figures look like customs advice, so it needs estimate labels and Shopify's protected data approval (https://shopify.dev/docs/api/admin-graphql/latest/objects/Duty)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Research narrowed the idea from flagging missing codes (free apps such as PIDReady already do that) to reconciling duty collected at checkout with what the carrier billed, and confirmed it is not the same problem as the published US Duty Price Sheet or Postage Price Check for UK makers. The adversarial reviewer cut the total from 17 to 14: pain 3 to 2 (the 'wiped out our profit' quote the research used was about Norway's VAT scheme, not the EU duty; two poster labels were one account; every absorbed-duty report is from July or early August 2026), willingnessToPay 3 to 2 (the one paid job was unrelated customs paperwork, and merchants fixed it free with a currency uplift) and feasibility 3 to 2 (no Royal Mail or Evri statement with per-parcel duty was found, and Evri and a tax firm count the 2-euro fee differently). It found Oh Ship! as the nearest rival. Re-scoped to shops on Royal Mail delivered-duty-paid with a business account, the 2-euro fee from 1 November and carrier line counting, with a free check first."
+      },
+      "inspiredBy": "https://community.shopify.com/t/644531.json",
+      "gateGap": {
+        "missing": [
+          "total 14 is below 22",
+          "pain 2 is below 4: every absorbed-duty report is from July or early August 2026",
+          "willingnessToPay 2 is below 3: no paid job or app for this job, and merchants fixed it free with a currency uplift"
+        ],
+        "closedBy": "The landing-page test (5 or more sign-ups at 9 GBP a month) would be the first payment signal (willingnessToPay 3); promotion also needs a merchant post after 1 November 2026 reporting the 2-euro fee or a recharge being absorbed (pain 3 or 4) and a sample Royal Mail statement that can be imported (feasibility 3), and even then the total stays well below 22."
+      }
+    },
+    {
+      "n": 4,
+      "title": "Duplicate Draft Cleaner for ArtStation Sellers Moving to Gumroad",
+      "slug": "artstation-gumroad-duplicate-cleaner",
+      "category": "Creative & Prosumer",
+      "smallBusiness": true,
+      "complexity": "Weekend MVP",
+      "confidence": "provisional",
+      "topic": "Data & Visualization",
+      "shape": {
+        "stateful": false,
+        "connected": true,
+        "unattended": true,
+        "engine": true,
+        "shared": false,
+        "notes": {
+          "connected": "Connects to the seller's Gumroad account by OAuth to list products, read their state and archive or delete the duplicates the seller confirms.",
+          "unattended": "A weekly email until 28 February 2027 lists imported drafts still unpublished or unmatched.",
+          "engine": "Matches imported drafts to existing listings by name, price, permalink and files, and computes net per sale under Gumroad's 10% plus $0.50 fee."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "email",
+        "scheduled",
+        "backend"
+      ],
+      "summary": "For ArtStation sellers who already ran a Gumroad store: find the imported drafts that duplicate listings they already have, clean them up safely before 28 February 2027, and see which cheap items the new fees hurt.",
+      "public": {
+        "summary": "Tidy up the duplicate products your shop move creates, before the deadline, in minutes instead of an afternoon.",
+        "problem": "Your marketplace is closing and your products arrive in your new store as drafts. If you already sold there, every product you had now appears twice, and you have to find and delete the extra copies by hand, one by one. Miss one and buyers see two versions of the same thing.",
+        "forWhom": "Digital artists moving their brushes, models and tutorials from ArtStation to a Gumroad store they already had.",
+        "benefits": [
+          "Every duplicate found and paired with the original",
+          "Clean up in one pass, with nothing deleted until you confirm",
+          "See which low-priced items the new fees hurt",
+          "A reminder of drafts still waiting before the deadline"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "ArtStation's Marketplace checkout closes on 18 December 2026 and products move to Gumroad only as unpublished drafts by 28 February 2027; imports are not merged with existing Gumroad listings, so sellers who already had a Gumroad store must find and delete the duplicates by hand, and their reviews and sales history do not move.",
+      "description": "The seller connects their Gumroad account; the tool lists every product with its state and pairs each imported draft with the existing listing it duplicates by name, price, permalink and files. The seller confirms each pair and the tool archives or deletes the extra copy through Gumroad's API, never without confirmation. It also shows net per sale under Gumroad's fee so the seller can reprice items where the fixed $0.50 bites, and a weekly email lists drafts still unpublished until the deadline.",
+      "targetCustomer": "Solo artists and small studios selling digital products (brushes, 3D models, textures, tutorials) on the ArtStation Marketplace who already ran a Gumroad store.",
+      "buyer": "The artist, paying once from their own card.",
+      "whyNow": "ArtStation announced on 18 to 20 November 2026 that Marketplace checkout closes on 2026-12-18 and digital products must be moved to Gumroad by 2027-02-28, as drafts that are not merged with existing listings.",
+      "founderFit": "Nothing beyond building it alone.",
+      "problemEvidence": [
+        {
+          "url": "https://help.artstation.com/en/articles/18442391-artstation-marketplace-migration-seller-faq",
+          "source": "help.artstation.com",
+          "author": "ArtStation (vendor help centre)",
+          "date": "2026-11-20",
+          "kind": "mandate",
+          "summary": "Checkout closes 2026-12-18 and digital migration ends 2027-02-28; products arrive as unpublished drafts, imports are not merged with existing Gumroad listings (delete the imported draft), and ratings, reviews, sales history and buyer emails do not transfer."
+        },
+        {
+          "url": "https://www.tutkit.com/en/news/1147-artstation-marketplace-closes-on-december-18-gumroad-takes-over-sales",
+          "source": "tutkit.com",
+          "author": "trade-news author",
+          "date": "2026-11-19",
+          "kind": "mandate",
+          "summary": "Duplicates arrive as extra drafts that must be deleted by hand; Gumroad charges 10% plus $0.50 on direct sales and 30% through Discover."
+        },
+        {
+          "url": "https://80.lv/articles/artstation-is-making-a-very-difficult-decision-by-moving-marketplace-to-gumroad/",
+          "source": "80.lv",
+          "author": "trade-news editor",
+          "date": "2026-11-19",
+          "kind": "mandate",
+          "summary": "Confirms the move on 2026-12-18 and that artists must move their own listings."
+        },
+        {
+          "url": "https://forums.unrealengine.com/t/2856883.json",
+          "source": "forums.unrealengine.com",
+          "author": "poster A (Fab marketplace creator who bought on ArtStation)",
+          "date": "2026-11-16",
+          "kind": "complaint",
+          "summary": "Asks when Fab will carry the formats bought on ArtStation; shows sellers and buyers looking for a new home, not a complaint about the move's chores."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "ArtStation's own migration",
+          "url": "https://help.artstation.com/en/articles/18442391-artstation-marketplace-migration-seller-faq",
+          "price": "Free",
+          "gap": "Copies listings as drafts only; no pairing with existing listings and no duplicate clean-up."
+        },
+        {
+          "name": "Gumroad connector for AI assistants",
+          "url": "https://gumroad.com/mcp",
+          "price": "Free (price not stated on the page)",
+          "gap": "Lists products with their state, updates categories and prices and publishes, but has no delete tool and needs an AI assistant, which many artists will not use."
+        },
+        {
+          "name": "Gumroad products dashboard",
+          "url": "https://gumroad.com/help/article/304-products-dashboard",
+          "price": "Free",
+          "gap": "Duplicate, archive and delete one product at a time; no bulk actions or duplicate detection."
+        },
+        {
+          "name": "Gumroad's own migration screens",
+          "url": "https://github.com/antiwork/gumroad/pull/8817",
+          "price": "Free",
+          "gap": "Gumroad merged a drafts notice for partner imports on 2026-11-03; no duplicate matching yet, but it could ship any time."
+        }
+      ],
+      "keyFeatures": [
+        "Pairs imported drafts with existing listings",
+        "Confirm-then-clean duplicates",
+        "Net per sale under Gumroad's fees",
+        "Weekly reminder of drafts still waiting"
+      ],
+      "mvpScope": {
+        "features": [
+          "Gumroad OAuth connection",
+          "Duplicate pairing and confirmed clean-up",
+          "Fee check per product",
+          "Weekly email until the deadline"
+        ],
+        "outOfScope": [
+          "Moving ArtStation reviews or sales history (no export exists)",
+          "Publishing or categorising drafts (Gumroad's connector does it)",
+          "Other marketplaces"
+        ],
+        "buildEstimate": "About 2 to 3 build days"
+      },
+      "techStack": "React + Vite + Tailwind front end; Supabase sign-in; the Gumroad OAuth secret exchange and API calls on backend-hub; a scheduled job and transactional email for the weekly reminder; no buyer data stored.",
+      "pricing": {
+        "model": "One-off, pay what you want",
+        "pricePoint": "Free scan; pay what you want with $9 suggested for the clean-up (estimate)",
+        "rationale": "A one-time chore for fee-sensitive sellers, with free tools covering everything but the duplicate clean-up; a high price would not sell in a 98-day window."
+      },
+      "revenueSketch": "Estimate: 150 sellers x $9 = $1,350 once, before 2027-02-28. Assumes a few hundred sellers with an existing Gumroad store find it by search; the number of affected sellers is unknown.",
+      "distribution": "First 10: search ads on 'artstation gumroad migration' and 'artstation marketplace closing' plus a free checklist page. ArtStation sends companies to its paid advertising or recruitment sections rather than artwork posts (https://help.artstation.com/en/articles/16155062); Blender Artists allows one commercial post a month (https://blenderartists.org/t/our-new-policy-on-commercial-posts/1131607). Never post in the evidence thread.",
+      "validationTest": {
+        "method": "A landing page 'Clean up your ArtStation-to-Gumroad duplicates' with a free scan and a $9 pay-what-you-want button, promoted by a $75 search-ad test over 7 days before 2026-12-10; no outreach to anyone.",
+        "successCriteria": "At least 300 visits, a click-to-price rate of 4% or more, and at least 5 payments or pre-orders.",
+        "cost": "About $75 in ads and a domain."
+      },
+      "moat": "None to speak of: a short-lived tool that Gumroad itself could replace; its value is shipping before the deadline.",
+      "compliance": [
+        "GDPR, UK GDPR and CCPA for the seller's account data and OAuth token; request only the product scope and store no buyer data.",
+        "Never delete without the seller's confirmation, and log every change.",
+        "Accessibility: WCAG 2.2 AA."
+      ],
+      "risks": [
+        {
+          "risk": "Gumroad ships duplicate matching or bulk clean-up itself.",
+          "mitigation": "Ship within days and keep it free to scan; stop when Gumroad does."
+        },
+        {
+          "risk": "Most sellers have few products or no earlier Gumroad store, so the job is small.",
+          "mitigation": "Target sellers with existing Gumroad stores; the scan shows the count before anyone pays."
+        },
+        {
+          "risk": "A wrong match deletes a real listing.",
+          "mitigation": "Archive first, delete only on confirmation, and keep an undo list."
+        }
+      ],
+      "scores": {
+        "pain": 2,
+        "willingnessToPay": 1,
+        "reachability": 2,
+        "competitiveGap": 1,
+        "feasibility": 4,
+        "complianceBurden": 4,
+        "total": 14
+      },
+      "scoreRationale": {
+        "pain": "The chores are certain (https://help.artstation.com/en/articles/18442391-artstation-marketplace-migration-seller-faq) but small for a typical catalogue, and the one fetched seller post is about moving to Fab, not the chores (https://forums.unrealengine.com/t/2856883.json).",
+        "willingnessToPay": "No paid job or tool for the move was found, free tools cover most of it (https://gumroad.com/mcp), and sellers are fee-sensitive (https://www.tutkit.com/en/news/1147-artstation-marketplace-closes-on-december-18-gumroad-takes-over-sales).",
+        "reachability": "Search ads only: ArtStation routes companies to paid advertising (https://help.artstation.com/en/articles/16155062).",
+        "competitiveGap": "Gumroad's free connector lists drafts and publishes (https://gumroad.com/mcp) and Gumroad is building its own migration screens (https://github.com/antiwork/gumroad/pull/8817); only duplicate clean-up is left.",
+        "feasibility": "Gumroad OAuth with the edit_products scope (https://gumroad.com/help/article/280-create-application-api) lets an app list, update, enable, disable and delete products, as Gumroad's open-source API code shows (https://raw.githubusercontent.com/antiwork/gumroad/main/app/controllers/api/v2/links_controller.rb).",
+        "complianceBurden": "Holds a store token but no buyer data if it never requests sales scopes (https://gumroad.com/help/article/280-create-application-api)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Research confirmed the vendor-mandated chores (drafts, no merge, reviews and history lost) but found no fetched seller complaint about them (seller posts on artstation.com returned 403) and no payment evidence. The adversarial reviewer cut the total from 17 to 14: pain 3 to 2, willingnessToPay 2 to 1 and competitiveGap 3 to 1, because Gumroad's official free connector already lists drafts, sets categories and prices and publishes, Gumroad merged its own migration notices on 2026-11-03, and a free 22-step checklist published on dev.to on 2026-11-19 (URL withheld: it contains a handle) already flags categories; feasibility rose 3 to 4 from Gumroad's open-source API code. It found Lemon Squeezy's wind-down goes to Stripe's own tooling, not a second market. Re-scoped to duplicate matching and clean-up for sellers who already had a Gumroad store, as a free scan with pay-what-you-want clean-up."
+      },
+      "inspiredBy": "https://help.artstation.com/en/articles/18442391-artstation-marketplace-migration-seller-faq",
+      "gateGap": {
+        "missing": [
+          "total 14 is below 22",
+          "pain 2 is below 4: no fetched seller complaint about the move's chores",
+          "willingnessToPay 1 is below 3: no payment evidence and free tools cover most of the job"
+        ],
+        "closedBy": "The 7-day ad test before 2026-12-10: 5 or more payments from 300 visits would be the first payment signal (willingnessToPay 2 or 3); the demand ends on 2027-02-28 and Gumroad may ship the feature, so this ships only as a short-lived lead and cannot reach the gate."
+      }
+    }
+  ],
+  "runNotes": {
+    "weekday": "Sunday",
+    "domainLens": "Makers, creators and freelancers who sell: craft and online shops, studios, photographers, tutors, consultants",
+    "focusSources": [
+      "A12 Ask HN and HN comments",
+      "B12 Paid app marketplaces",
+      "C10 Change events: shutdowns, price rises, removed free tiers"
+    ],
+    "searches": [
+      "hn-gatherer (A12): HN Algolia comments \"my clients\" invoice since 2026-06-24",
+      "hn-gatherer (A12): HN Algolia comments \"photography business\" since 2026-06-24",
+      "hn-gatherer (A12): HN Algolia comments \"my etsy shop\" since 2026-06-24 (0 hits)",
+      "hn-gatherer (A12): HN Algolia comments \"my shopify store\" since 2026-06-24 (0 hits)",
+      "hn-gatherer (A12): HN Algolia comments \"as a freelancer\" since 2026-06-24",
+      "hn-gatherer (A12): HN Algolia comments \"tutoring business\" since 2026-06-24 (0 hits)",
+      "hn-gatherer (A12): HN Algolia comments \"my wife runs\" since 2026-06-24",
+      "hn-gatherer (A12): HN Algolia ask_hn small business since 2026-06-24",
+      "hn-gatherer (A12): HN Algolia ask_hn freelance since 2026-06-24",
+      "hn-gatherer (A12): HN Algolia comments \"wish there was\" clients since 2026-06-24",
+      "hn-gatherer (A12): HN Algolia comments etsy sellers since 2026-09-23 (0 hits)",
+      "hn-gatherer (A12): HN Algolia comments \"my customers\" spreadsheet since 2026-06-24 (0 hits)",
+      "hn-gatherer (A12): HN Algolia stories DMARC since 2026-09-23",
+      "hn-gatherer (A12): HN Algolia comments small business in the Outlook DMARC story of 2026-11-08",
+      "hn-gatherer (A12): HN Algolia comments clients in the Outlook DMARC story of 2026-11-08",
+      "hn-gatherer (A12): HN Algolia comments \"making tax digital\"",
+      "hn-gatherer (A12): HN Algolia ask_hn etsy",
+      "hn-gatherer (A12): HN Algolia comments \"side business\" since 2026-09-23",
+      "hn-gatherer (A12): HN Algolia comments squarespace since 2026-09-23",
+      "hn-gatherer (A12): HN Algolia comments \"my small business\" since 2026-09-23",
+      "hn-gatherer (A12): HN Algolia comments business in a Stripe account-closure Ask HN of 2026-11-15",
+      "hn-gatherer (A12): HN Algolia comments mailchimp since 2026-09-23",
+      "hn-gatherer (A12): HN Algolia stories mailchimp since 2026-10-26",
+      "hn-gatherer (A12): HN Algolia comments mailchimp subscribers since 2026-10-26 (0 hits)",
+      "hn-gatherer (A15): community.make.com search etsy after 2026-08-24",
+      "hn-gatherer (A15): community.n8n.io search etsy after 2026-08-24",
+      "hn-gatherer (A15): community.n8n.io search photographer after 2026-08-24",
+      "hn-gatherer (A15): community.make.com search tutoring after 2026-08-24",
+      "hn-gatherer (A15): community.make.com search photographer after 2026-08-24",
+      "forums-gatherer (A13): photographers community forum discourse client gallery invoicing",
+      "forums-gatherer (A16): HoneyBook feature request board",
+      "forums-gatherer (A16): Canny boards for Pixieset, ShootProof, Pic-Time, Payhip, Podia, Big Cartel",
+      "forums-gatherer (A16): feature request boards for TutorBird, My Music Staff, Teachworks",
+      "forums-gatherer (A16): site:canny.io photographers invoice, sales tax, deposit",
+      "forums-gatherer (A16): featurebase, canny or frill boards for creators: digital downloads VAT, sales tax, payout",
+      "forums-gatherer (A16): Dubsado, Lemon Squeezy, Ko-fi, Podia, Kajabi, Bonsai feature request boards",
+      "forums-gatherer (A16): feedback.kajabi.com ideas for creators",
+      "forums-gatherer (A13): music teachers forum 2026 studio policy makeup lessons billing",
+      "forums-gatherer (A13): Discourse forums for Etsy, craft and handmade sellers",
+      "forums-gatherer (A13): community.glowforge.com search selling after 2026-08-24",
+      "forums-gatherer (A13): talk.folksy.com search fees after 2026-08-24",
+      "forums-gatherer (A13): talk.folksy.com search HMRC after 2026-08-24",
+      "forums-gatherer (A16): productideas.xero.com search making tax digital sole trader",
+      "forums-gatherer (A13): community.shopify.com search consignment after 2026-08-24",
+      "forums-gatherer (A13): forum.ghost.org search tax after 2026-08-24",
+      "forums-gatherer (A13): forum.ghost.org search stripe country after 2026-08-24",
+      "forums-gatherer (A13): community.shopify.com search faire wholesale after 2026-08-24",
+      "forums-gatherer (A14): wordpress.org support easy-digital-downloads",
+      "spend-gatherer (B12): site:apps.shopify.com raw materials inventory bill of materials makers",
+      "spend-gatherer (B12): site:apps.shopify.com wholesale order form B2B small brand",
+      "spend-gatherer (B12): site:apps.shopify.com digital downloads license usage rights photographers",
+      "spend-gatherer (B12): site:apps.shopify.com custom commission request artist deposit",
+      "spend-gatherer (B12): site:apps.shopify.com sales tax VAT handmade sellers report",
+      "spend-gatherer (B12): Chrome Web Store Etsy orders export spreadsheet bookkeeping extension",
+      "spend-gatherer (B12): Wix App Market photographers client proofing gallery app",
+      "spend-gatherer (B12): site:apps.shopify.com certificate of authenticity limited edition prints artist",
+      "spend-gatherer (B12): site:apps.shopify.com line sheet wholesale catalog PDF",
+      "spend-gatherer (B12): Lightroom Classic plugin import client selections from proofing gallery, paid",
+      "spend-gatherer (B12): Squarespace extensions inventory digital downloads makers",
+      "spend-gatherer (B12): site:apps.shopify.com consignment shop consignor payouts app",
+      "spend-gatherer (B12): Craftybase renamed Stocksmith",
+      "spend-gatherer (B11): freelancer.com active photography client gallery proofing (nothing found)",
+      "spend-gatherer (B11): freelancer.com active raw materials inventory handmade (nothing found)",
+      "spend-gatherer (B11): freelancer.com all etsy shop spreadsheet",
+      "spend-gatherer (B11): freelancer.com all photographer booking contract invoice (0 results)",
+      "spend-gatherer (B11): freelancer.com all consignment",
+      "spend-gatherer (B11): freelancer.com all artist royalty",
+      "changes-gatherer (C10): shutting down November 2026 sellers creators platform",
+      "changes-gatherer (C10): price increase 2026 SmugMug, Pixieset, ShootProof, Pic-Time, Zenfolio",
+      "changes-gatherer (C10): Etsy fee change December 2026 sellers",
+      "changes-gatherer (C10): free plan ending or discontinued 2026 for creators and freelancers",
+      "changes-gatherer (C10): HoneyBook, Dubsado, Acuity, Calendly price increase Oct-Nov 2026",
+      "changes-gatherer (C10): Big Cartel, Gumroad, Ko-fi, Payhip, Lemon Squeezy changes Nov 2026",
+      "changes-gatherer (C5): DMCC subscription regime commencement and reminders",
+      "changes-gatherer (C5): EU 3-euro customs duty on low-value parcels from 1 July 2026",
+      "changes-gatherer (C10): Squarespace price increase renewal 2026",
+      "changes-gatherer (C10): Canada Post, Royal Mail, Evri changes Nov 2026",
+      "changes-gatherer (C10): discontinued or sunsetting 2026 booking, shop or gallery tools",
+      "changes-gatherer (C10): Outschool, Wyzant, Teachable, Kajabi, Thinkific fee change fall 2026",
+      "changes-gatherer (C8): ArtStation Gumroad migration seller reaction and prints",
+      "changes-gatherer (C5): EU Digital Fairness Act proposal 2026",
+      "changes-gatherer (C5): Australia unfair trading practices subscription rules 2026",
+      "changes-gatherer (C5): DMCC renewal reminder for Shopify subscription apps",
+      "changes-gatherer (C10): EU product identifiers from 1 November 2026, Royal Mail and USPS",
+      "changes-gatherer (C10): product identifier Click & Drop EU sellers",
+      "changes-gatherer (C10): Shopify and eBay communities on EU product identifiers",
+      "changes-gatherer (C10): Mailchimp, Kit, Flodesk, MailerLite free plan or price change 2026",
+      "changes-gatherer (C10): Square Appointments, Wix Bookings, Google Business Profile booking change",
+      "changes-gatherer (C8): ArtStation Gumroad reviews lost, seller forums",
+      "changes-gatherer (C10): price increases effective January 1, 2027 for small businesses",
+      "changes-gatherer (C5): Federal Register API term negative option",
+      "changes-gatherer (C5): Federal Register API term small business online sellers",
+      "watchlist-gatherer (A13): community.shopify.com search pickup only shipping checkout after 2026-08-24",
+      "watchlist-gatherer (B12): Shopify app pickup only products mixed cart local pickup checkout hide shipping",
+      "watchlist-gatherer (A13): community.shopify.com search POS receipt editor after 2026-08-24",
+      "watchlist-gatherer (B12): Shopify POS custom printed receipt app line item properties Star Epson pricing reviews",
+      "watchlist-gatherer (A12): HN Algolia comments accountant spreadsheet expenses",
+      "watchlist-gatherer (B12): free tool bank statement CSV categorise business and personal expenses year-end summary for accountant",
+      "spendpass-gatherer (B11): freelancer.com all mailchimp migration (nothing found)",
+      "spendpass-gatherer (B11): freelancer.com all consignment payouts (nothing found)",
+      "spendpass-gatherer (B12): site:apps.shopify.com artist royalties payouts print on demand",
+      "spendpass-gatherer (B11): freelancer.com all SPF DKIM DMARC (page held a bidder instruction; unverified)",
+      "spendpass-gatherer (B12): site:apps.shopify.com app subscription cost tracker price changes (nothing found)",
+      "spendpass-gatherer (B11): freelancer.com all HS codes (nothing for the task)",
+      "spendpass-gatherer (B12): site:apps.shopify.com EU withdrawal button",
+      "spendpass-gatherer (B11): freelancer.com all squarespace course (nothing found)",
+      "spendpass-gatherer (B12): Stocksmith formerly Craftybase pricing",
+      "spendpass-gatherer (B11): freelancer.com all kajabi migration (nothing found)",
+      "uk-subscription-notices-review: Stripe UK subscription contracts DMCC reminder notices Billing settings 2027",
+      "uk-subscription-notices-review: Stripe subscription renewal reminders UK consumer law compliance Digital Markets Competition Consumers Act",
+      "uk-subscription-notices-review: \"UK Subscription Notices\" Stripe app renewal reminders cancel record",
+      "uk-subscription-notices-review: Stripe App Marketplace UK subscription regime reminder notices cancel page app DMCCA 2027",
+      "uk-subscription-notices-review: \"Remind customers before renewal, let them cancel, keep the record\"",
+      "uk-subscription-notices-review: support.stripe.com UK subscription law changes 2027 billing updates FAQ reminder emails cancellation",
+      "uk-subscription-notices-review: Squarespace OR Kajabi OR Podia OR Patreon UK subscription rules January 2027 reminder notices creators DMCC",
+      "uk-subscription-notices-review: small business owner Stripe subscriptions UK new subscription rules 2027 reminder every six months how do I comply forum",
+      "uk-subscription-notices-review: \"UK Subscription Notices\" Stripe app pricing install DMCCA reminder cancel link proof",
+      "eu-parcel-levy-review: Shopify duties and import taxes at checkout which plans Basic Grow Advanced eligibility",
+      "eu-parcel-levy-review: Royal Mail Click & Drop DDP EU duty charged per parcel invoice report €3 duty breakdown",
+      "eu-parcel-levy-review: Shopify app reconcile duties collected at checkout vs carrier invoice DDP duty absorbed report",
+      "eu-parcel-levy-review: \"€3\" EU customs duty Shopify app UK sellers duty calculator checkout low value parcels 2026",
+      "eu-parcel-levy-review: changelog.shopify.com EU handling fee €2 November 2026 duties product identifiers",
+      "eu-parcel-levy-review: Shopify \"handling fee\" EU Union handling fee checkout duties Managed Markets help",
+      "eu-parcel-levy-review: Click & Drop \"landed cost\" PDDP duties taxes calculated label Royal Mail EU sender charged",
+      "eu-parcel-levy-review: Royal Mail PDDP EU account customers only Click & Drop pay as you go duty recharge invoice OBA small business",
+      "eu-parcel-levy-review: apps.shopify.com EU €3 duty per tariff line calculator handling fee UK store app",
+      "pickup-preselect-review: Shopify app preselect local pickup at checkout pickup-only products",
+      "pickup-preselect-review: Shopify \"pickup only\" app \"checkout validation\" block shipping message products tag 2026",
+      "pickup-preselect-review: BoomGate checkout validation Code57 condition delivery method pickup \"local pickup\" rule",
+      "pickup-preselect-review: shopify.dev changelog 2026 cart API ship and pickup delivery preferences pickup selection cart",
+      "pickup-preselect-review: Shopify Ajax cart token /cart.js use with Storefront API \"gid://shopify/Cart\" online store theme cart same cart",
+      "pickup-preselect-review: Shopify help checkout language edit checkout text \"no shipping methods\" message customize all plans",
+      "guest-artist-royalties-research: Shopify app pay artists royalties per product sales designer commission reviews",
+      "guest-artist-royalties-research: \"royalty\" statement software small publisher contributors pricing per month",
+      "guest-artist-royalties-research: shop owner pay guest artists royalties spreadsheet every month sticker shop collab designs percentage",
+      "guest-artist-royalties-research: Gumroad collaborators split revenue automatically pattern designer co-author percentage",
+      "guest-artist-royalties-research: Printful OR Printify OR Gelato store \"royalties\" OR \"revenue split\" collaborating artist designer payout feature",
+      "guest-artist-royalties-research: PuppetVendors Shopify app store reviews pricing multi vendor marketplace",
+      "guest-artist-royalties-research: Etsy Open API v3 getShopReceipts transactions scope transactions_r commercial access personal access app approval",
+      "guest-artist-royalties-research: \"royalty\" OR \"royalties\" guest artist collab print shop owner \"spreadsheet\" calculate each month 2026 forum",
+      "guest-artist-royalties-research: artist collab merch shop never sent royalty statement owed percentage sales how do I track what shop owes me",
+      "guest-artist-royalties-research: Shopify Community guidelines self-promotion app developers promoting apps rules",
+      "pickup-preselect-research: shopify.dev delivery customization function plan availability non-Plus public app",
+      "pickup-preselect-research: shopify.dev cart and checkout validation function error message checkout non-Plus \"validation\" delivery method pickup",
+      "pickup-preselect-research: Storefront API cart buyerIdentity preferences delivery deliveryMethod PICK_UP pickupHandle checkout prefill",
+      "pickup-preselect-research: Online Store theme cart token Storefront API cart ID same cart \"cart.js\" gid://shopify/Cart theme app extension storefront access token",
+      "pickup-preselect-research: site:apps.shopify.com pickup only products hide shipping checkout local pickup rules",
+      "pickup-preselect-research: Zapiet Pickup + Delivery Shopify app cart widget pickup selected checkout reviews pricing",
+      "pickup-preselect-research: Shopify changelog 2026 local pickup checkout \"ship and pickup\" in one order split delivery",
+      "pickup-preselect-research: Checkout Blocks Shopify app validation rules hide delivery methods available all plans not Plus",
+      "pickup-preselect-research: Shopify Community guidelines self-promotion promoting your own app rules community.shopify.com",
+      "eu-withdrawal-button-research: Directive (EU) 2023/2673 withdrawal function button 19 June 2026 online shops requirements confirmation",
+      "eu-withdrawal-button-research: Wix withdrawal button EU 2023/2673 native feature stores \"withdrawal\"",
+      "eu-withdrawal-button-research: Squarespace EU withdrawal button right of withdrawal form June 2026",
+      "eu-withdrawal-button-research: Squarespace commerce \"withdrawal\" button EU directive merchants solution forum",
+      "eu-withdrawal-button-research: Ecwid Lightspeed eCom withdrawal button EU 2026 OR \"Big Cartel\" withdrawal button EU",
+      "eu-withdrawal-button-research: Ecwid \"withdrawal\" button EU consumer rights directive store owners help",
+      "eu-withdrawal-button-research: hosted withdrawal button service any website platform-independent embed widget \"withdrawal\" iubenda OR eRecht24 OR \"IT-Recht Kanzlei\" OR Händlerbund 2026",
+      "eu-withdrawal-button-research: Widerrufsbutton plattformunabhängig einbinden jede Website Onlineshop Lösung Widerrufsfunktion Anbieter",
+      "eu-withdrawal-button-research: widerrufonline.de Widerrufsbutton Jimdo Wix Squarespace Preis",
+      "eu-withdrawal-button-research: widerrufsbutton.info gehostetes Widerrufsformular Link Shop",
+      "eu-withdrawal-button-research: support.squarespace.com withdrawal button EU form block lightbox right of withdrawal",
+      "eu-withdrawal-button-research: forum.squarespace.com withdrawal button EU",
+      "eu-withdrawal-button-research: Etsy sellers EU withdrawal button Widerrufsbutton Etsy community seller complaint 2026",
+      "eu-withdrawal-button-research: widerrufonline Widerrufsfunktion mieten Homepage-Baukasten",
+      "edition-register-research: how do you keep track of limited edition print numbers sold across galleries fairs and online forum printmaker",
+      "edition-register-research: discuss.pixls.us limited edition prints numbering certificate of authenticity",
+      "edition-register-research: \"edition\" \"certificate of authenticity\" artist sold same number twice spreadsheet Etsy community",
+      "edition-register-research: community.shopify.com limited edition numbered prints assign edition number each order certificate",
+      "edition-register-research: Artwork Archive pricing plans artist edition tracking certificate of authenticity",
+      "edition-register-research: MadeReady edition tracking certificates artists beta $49",
+      "edition-register-research: artist inventory software limited edition prints certificate of authenticity generator free template spreadsheet",
+      "edition-register-research: Arcual pricing artists plan free subscription certificates editions",
+      "edition-register-research: certificate of authenticity app for artists reviews limited edition numbering Squarespace Etsy sellers",
+      "edition-register-research: photographer forum \"limited edition\" prints \"keep track\" numbers sold galleries certificate 2026",
+      "edition-register-research: printmaker record keeping edition ledger which prints sold where \"edition\" forum wetcanvas OR printmaking discussion",
+      "edition-register-research: community.etsy.com limited edition prints numbering how do you track which number sold certificate",
+      "edition-register-research: Etsy Open API v3 getShopReceipts transactions_r scope personal access app approval documentation",
+      "maker-batch-book-review: BatchMakes lot register traceability soap makers free solo plan",
+      "maker-batch-book-review: soap maker software batch lot tracking ingredient lots cost per batch free app Etsy sellers 2026",
+      "maker-batch-book-review: \"Studio for Makers\" OR \"SoapLog\" OR \"BatchLab\" soap candle batch records software pricing",
+      "maker-batch-book-review: batch record software UK handmade cosmetics GMP lot traceability small makers app",
+      "maker-batch-book-review: Katana cloud inventory pricing 2026 batch tracking which plan",
+      "maker-batch-book-review: soapmaking forum lot numbers batch records software spreadsheet \"lot\" \"batch\" 2026 small maker which software do you use",
+      "maker-batch-book-review: Craftybase alternative cheaper lot tracking soap candle maker Etsy 2026",
+      "maker-batch-book-review: BatchLab candle maker software pricing batch tracking wick wax lot",
+      "maker-batch-book-review: Inventora batch traceability material lot numbers supply order FIFO help documentation",
+      "maker-batch-book-review: UK handmade soap maker batch numbers PIF record keeping software recommendation forum 2026",
+      "artstation-move-review: Gumroad MCP server sellers manage products Claude ChatGPT",
+      "artstation-move-review: Gumroad ArtStation migration imported drafts duplicates help",
+      "artstation-move-review: gumroad.com ArtStation sellers welcome store tab connect",
+      "artstation-move-review: \"ArtStation\" marketplace Gumroad December 18 sellers reaction forum leaving",
+      "artstation-move-review: Gumroad changelog November 2026 ArtStation import drafts bulk publish",
+      "artstation-move-review: ArtStation marketplace how many products per seller statistics sellers brushes 2026",
+      "uk-subscription-notices-research: gov.uk subscription contracts regime DMCC regulations commencement 2027 reminder notice consultation response",
+      "uk-subscription-notices-research: \"subscription\" \"DMCC\" small business forum worried renewal reminders cancel online Shopify UK seller 2026",
+      "uk-subscription-notices-research: ukbusinessforums.co.uk subscription rules 2027 DMCC cancellation reminder",
+      "uk-subscription-notices-research: Recharge OR Appstle OR Loop OR Seal subscriptions UK DMCC compliance renewal reminder cancellation feature",
+      "uk-subscription-notices-research: Subnotice subscription reminder notices DMCC Shopify app pricing",
+      "uk-subscription-notices-research: Stripe Billing upcoming renewal reminder email customer portal cancel subscription docs",
+      "uk-subscription-notices-research: Shopify Subscriptions app customer cancel subscription customer account upcoming order reminder email help",
+      "uk-subscription-notices-research: Recharge subscriptions UK DMCCA \"subscription contracts\" merchants prepare 2027 cancellation reminders",
+      "uk-subscription-notices-research: forum \"subscription\" UK \"new rules\" 2027 \"reminder\" small business owner \"subscription box\" OR \"membership\" worried how comply WooCommerce OR Squarespace OR Ghost",
+      "uk-subscription-notices-research: \"DMCC\" OR \"DMCCA\" subscriptions plugin support topic renewal reminder UK law",
+      "uk-subscription-notices-research: Patreon OR Ko-fi OR Squarespace UK subscription rules January 2027 DMCC creators cancellation reminder merchant of record",
+      "uk-subscription-notices-research: Stripe App Marketplace app review requirements listing guidelines publish app",
+      "eu-parcel-levy-research: Shopify help duties import taxes EU €3 low value consignment duty 2026",
+      "eu-parcel-levy-research: help.shopify.com EU customs product identifiers November 2026 handling fee duties",
+      "eu-parcel-levy-research: apps.shopify.com HS code country of origin EU product identifier audit app",
+      "eu-parcel-levy-research: Shopify app reconcile duties collected at checkout against carrier duty invoice DDP EU orders",
+      "eu-parcel-levy-research: Royal Mail DDP EU €3 customs duty Click & Drop charge per item business 2026",
+      "eu-parcel-levy-research: European Commission Union handling fee €2 low value consignments 1 November 2026 delegated regulation",
+      "eu-parcel-levy-research: Shopify app duty calculator EU reviews \"1 star\" OR \"2 stars\" duties wrong Zonos Dutify Easyship",
+      "eu-parcel-levy-research: UK seller EU €3 duty Royal Mail DDP charged me duty Shopify checkout didn't collect November 2026 forum",
+      "eu-parcel-levy-research: community.shopify.com EU duties wrong €3 per item overcharged UK store October 2026",
+      "eu-parcel-levy-research: changelog.shopify.com EU duty tariff line fix duties calculation update 2026",
+      "eu-parcel-levy-research: Shopify Community guidelines self-promotion app developers promoting apps rules",
+      "maker-batch-book-research: soap maker batch records lot tracking software spreadsheet 2026",
+      "maker-batch-book-research: Stocksmith lot tracking batch traceability release changelog",
+      "maker-batch-book-research: BatchMakes lot register small makers soap candle",
+      "maker-batch-book-research: stocksmith.io lot tracking feature raw material lots FIFO",
+      "maker-batch-book-research: soap candle maker forum \"batch\" \"lot numbers\" inventory app too expensive spreadsheet",
+      "maker-batch-book-research: soapmakingforum.com inventory software batch tracking craftybase price increase",
+      "maker-batch-book-research: soap candle cosmetics batch tracking lot numbers inventory costing",
+      "maker-batch-book-research: FDA MoCRA small business exemption facility registration product listing GMP records adverse event",
+      "maker-batch-book-research: gov.uk cosmetic products labelling batch number product information file responsible person small business",
+      "artstation-move-research: ArtStation marketplace Gumroad migration sellers angry forum",
+      "artstation-move-research: \"ArtStation\" \"Gumroad\" marketplace closing December 18 artists reaction",
+      "artstation-move-research: \"ArtStation announced the transfer of the market to Gumroad\" Fab forum",
+      "artstation-move-research: Gumroad API v2 products endpoint \"disable\" \"enable\" \"PUT /v2/products\" documentation",
+      "artstation-move-research: Gumroad help center API application access token scopes \"edit_products\" \"view_sales\"",
+      "artstation-move-research: ArtStation marketplace sellers moving to Fab Superhive Cubebrush Payhip after Gumroad announcement",
+      "artstation-move-research: tool to bulk edit Gumroad products duplicate drafts publish in bulk",
+      "artstation-move-research: import digital products from Gumroad migration tool Payhip Lemon Squeezy Sellfy \"import\" catalogue",
+      "artstation-move-research: ArtStation marketplace seller export sales history CSV download orders report",
+      "artstation-move-research: Gumroad help center products drafts publish unpublish duplicate product bulk",
+      "artstation-move-research: ArtStation Gumroad migration sellers \"sales history\" reviews lost artists say creativebloq OR cgchannel OR gamedeveloper",
+      "artstation-move-research: help.artstation.com community guidelines blog posts self-promotion advertising rules",
+      "artstation-move-research: \"ArtStation\" marketplace closing Gumroad \"my products\" OR \"my store\" brushes seller blog November 2026"
+    ],
+    "unverifiedSignals": [
+      {
+        "url": "https://www.freelancer.com/api/projects/0.1/projects/all/?query=SPF+DKIM+DMARC&limit=30&full_description=true&from_time=1782259200",
+        "reason": "contains instructions: one job post tells bidders how to start their proposal."
+      },
+      {
+        "url": "https://hn.algolia.com/api/v1/search?query=small%20business&tags=ask_hn&hitsPerPage=20&numericFilters=created_at_i%3E1782259200",
+        "reason": "contains instructions: posts ask readers to review a case or escalate a ticket."
+      },
+      {
+        "url": "https://hn.algolia.com/api/v1/search?query=freelance&tags=ask_hn&hitsPerPage=20&numericFilters=created_at_i%3E1782259200",
+        "reason": "contains instructions: posting rules and requests to email."
+      },
+      {
+        "url": "https://mailroute.net/blog/outlook-rejecting-email-without-dmarc",
+        "reason": "contains instructions: a vendor page telling readers to run a command and contact sales."
+      },
+      {
+        "url": "https://community.n8n.io/t/322025.json",
+        "reason": "contains instructions: replies ask the reader to audit a linked repository and reply."
+      },
+      {
+        "url": "https://community.make.com/t/108087.json",
+        "reason": "contains instructions: replies tell the reader to book calls; also old and on a crowded topic."
+      },
+      {
+        "url": "https://www.agensi.io/skills/gumroad-bulk-uploader-pro",
+        "reason": "contains instructions: tells readers to paste a prompt into an agent."
+      },
+      {
+        "url": "https://marketplace.stripe.com/apps/uk-subscription-notices",
+        "reason": "Listing body rendered by JavaScript; only the page metadata was readable, so price, developer and installs are unknown."
+      },
+      {
+        "url": "https://www.saashub.com/batchmakes",
+        "reason": "HTTP 403 from the site; BatchMakes' own pricing page was read instead."
+      },
+      {
+        "url": "https://www.royalmail.com/europeantradeinsights",
+        "reason": "HTTP 403 from the site."
+      },
+      {
+        "url": "https://www.soapmakingforum.com/threads/materials-inventory-tracking-methods-software.93613/",
+        "reason": "HTTP 403 from the site."
+      },
+      {
+        "url": "https://www.photrio.com/forum/threads/limited-edition-database.150044",
+        "reason": "HTTP 403 from the site."
+      },
+      {
+        "url": "https://forum.squarespace.com/topic/348918-monthly-subscription-renewal-emails",
+        "reason": "HTTP 403 from the site."
+      },
+      {
+        "url": "https://help.shootproof.com/hc/en-us/articles/43136609693079-Booking-Plan-Increase",
+        "reason": "HTTP 403 from the site; the ShootProof Booking plan rise is a search snippet only."
+      },
+      {
+        "url": "https://magazine.artstation.com/2026/11/artstation-marketplace-migration-2026/",
+        "reason": "HTTP 403 from the site; ArtStation's help centre FAQ was read instead."
+      },
+      {
+        "url": "https://www.artstation.com/blogs/",
+        "reason": "Three seller blog posts about the Marketplace closing returned HTTP 403; their URLs are withheld because they contain handles."
+      },
+      {
+        "url": "https://feedback.kajabi.com/",
+        "reason": "Login wall for staff accounts only."
+      },
+      {
+        "url": "https://teachworks.featureupvote.com/",
+        "reason": "HTTP 403 from the site."
+      }
+    ],
+    "rejectedCandidates": [
+      {
+        "title": "DMCC Renewal Notices and Cancel Page for Small UK Sellers on Stripe",
+        "total": 14,
+        "reason": "Killed in review: a Stripe App Marketplace app of the same name (https://marketplace.stripe.com/apps/uk-subscription-notices) and Renewful, from 19 GBP a month and not yet open (https://renewful.co.uk/), already sell reminders, a cancel page and a proof log to UK sellers on Stripe; Stripe's free portal meets the online-exit duty and Stripe Managed Payments already sends UK six-month reminders (https://docs.stripe.com/payments/managed-payments/how-it-works). No seller complaint found; reminders first fall due around mid-2027."
+      },
+      {
+        "title": "Edition Register and Certificates for Print Artists and Photographers",
+        "total": 17,
+        "reason": "Research ended it: no artist complaint found at any date, Artwork Archive already tracks editions for a solo artist (https://help.artworkarchive.com/en/articles/426873-artwork-archive-account-types), Arcual covers editions and certificates, and four 2026 Shopify certificate apps have free tiers (https://apps.shopify.com/coa-license-pdf)."
+      },
+      {
+        "title": "EU Withdrawal Button and Request Log for Small Shops off Shopify",
+        "total": 16,
+        "reason": "Research ended it: at least nine free WooCommerce plugins with request logs (https://api.wordpress.org/plugins/info/1.2/?action=query_plugins&request[search]=withdrawal+button&request[per_page]=10), free Wix apps, built-in buttons on Big Cartel (https://www.bigcartel.com/resources/help/article/how-cancellation-requests-work), Jimdo, Strato and Etsy, and hosted embeds from 9 EUR a year; every off-Shopify complaint is from the June 2026 deadline rush."
+      },
+      {
+        "title": "Guest-Artist Royalty Statements for Small Print and Merch Shops",
+        "total": 18,
+        "reason": "Not reviewed: its researcher was stopped once four ideas had survived review and the run's cap of four provisional ideas was reached; the spend pass found paid Shopify royalty apps with 0 reviews (https://apps.shopify.com/royalty-payouts-paladin)."
+      },
+      {
+        "title": "Line-Item Receipts for Shopify POS after the Liquid Editor Ends",
+        "total": 18,
+        "reason": "Re-researched from the watchlist: no new merchant complaint about the new receipt editor, only developers (https://community.shopify.com/t/719019.json), POS UI extensions cannot touch line items (https://community.shopify.dev/t/pos-ui-extensions-have-no-receipt-line-item-target-the-receipt-body-is-closed-to-apps/39146), and Printer Pro plus a December launch at $9 already print separate receipts (https://apps.shopify.com/printer-pro); below 19, so it leaves the watchlist. Worth a fresh search after 2027-01-01."
+      },
+      {
+        "title": "Year-End Pack for the Accountant from Bank CSVs",
+        "total": 16,
+        "reason": "Re-researched from the watchlist: still no first-person complaint, and BankClean already totals UK bank CSVs into SA103 and SA105 boxes free or for 19 GBP once (https://workspace.google.com/marketplace/app/turbokast_bankclean/938277334543)."
+      },
+      {
+        "title": "Squarespace Digital-Products Fee Move Check for Course Sellers",
+        "total": 18,
+        "reason": "Not reached in review order; the Digital Products plan closed to new sign-ups on 2026-07-23 (https://support.squarespace.com/hc/en-us/articles/360050832771-Digital-Products-plan-pricing-billing-and-invoices), but no complaint and no paid job was found (spend pass), and it is a one-off calculation."
+      },
+      {
+        "title": "Course Hosting Cost versus Revenue Check",
+        "total": 18,
+        "reason": "Not reached in review order; one freelancer's comment (https://hn.algolia.com/api/v1/search_by_date?query=%22as%20a%20freelancer%22&tags=comment&hitsPerPage=20&numericFilters=created_at_i%3E1782259200) and no paid job to move a course to cut cost (spend pass)."
+      },
+      {
+        "title": "Mailchimp Exit Planner for Small Shops and Studios",
+        "total": 17,
+        "reason": "The sale to a new owner was announced on 2026-11-19 (https://hn.algolia.com/api/v1/search?query=mailchimp&tags=story&hitsPerPage=10&numericFilters=created_at_i%3E1793000000) but no price change has happened, rival senders import lists free, and the spend pass found no paid migration job."
+      },
+      {
+        "title": "Booth-Rent and Consignment Statements for Maker Co-op Shops",
+        "total": 17,
+        "reason": "Crowded with 2026 Shopify consignment apps (https://apps.shopify.com/consignment-hub has booth rent); the paying-customer complaints are from 2020 to 2022 (https://apps.shopify.com/vendor-consignment/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest); the spend pass found no paid job."
+      },
+      {
+        "title": "Invoice and Booking Mail Health Watch for Freelancers",
+        "total": 17,
+        "reason": "Free record checkers abound; the paid jobs page found by the spend pass contained a bidder instruction and is unverified, and those jobs buy a person to fix mail by hand."
+      },
+      {
+        "title": "Price-Change Watch for a Small Seller's Tool Stack",
+        "total": 17,
+        "reason": "No complaint and no paid app for the task (spend pass); general page monitors already exist."
+      },
+      {
+        "title": "EU Product-Identifier Sheet for Makers off Shopify",
+        "total": 17,
+        "reason": "USPS Click-N-Ship asks for the identifiers free (https://www.usps.com/international/product-identifiers.htm) and eBay supplies the listing ID; no paid job for makers (spend pass); same customer as the published UK maker postage and duty ideas."
+      },
+      {
+        "title": "Contact-Bill Trimmer for List-Priced Email Tools",
+        "total": 16,
+        "reason": "One commenter's complaint about paying for contacts never emailed (https://hn.algolia.com/api/v1/search_by_date?query=mailchimp&tags=comment&hitsPerPage=20&numericFilters=created_at_i%3E1790121600); the email tools already archive contacts, and no payment evidence."
+      },
+      {
+        "title": "File Licence Tiers per Order for Digital Creators",
+        "total": 16,
+        "reason": "Two Shopify apps already sell it with 0 reviews (https://apps.shopify.com/licensify), so no proof of demand."
+      },
+      {
+        "title": "Facebook Additional-Profile Switch Kit for Makers",
+        "total": 16,
+        "reason": "Real worry on Folksy before 14 December (https://talk.folksy.com/t/33976.json), but a free Facebook page solves it and a seller there refuses to pay even for a business account."
+      },
+      {
+        "title": "Invoice Extras for Photographers on All-in-One CRMs",
+        "total": 16,
+        "reason": "Requests for promo codes and cash payments (https://community.honeybook.com/honeybook-product-talk-7/honeybook-pricing-vs-feature-progress-6232) cannot be added to closed CRMs; free invoicing tools exist."
+      },
+      {
+        "title": "Gallery Expiry and Payment Reminders for Photographers",
+        "total": 16,
+        "reason": "Pixieset, Pic-Time and ShootProof already expire galleries, and Unscripted marks both requests in progress (https://unscriptedphotographers.com/feature_requests)."
+      },
+      {
+        "title": "Separate Wholesale and Retail Fulfilment Metrics for Faire Makers on Shopify",
+        "total": 16,
+        "reason": "An app cannot change Shopify's Shop Promise metric, as a partner confirmed (https://community.shopify.com/t/709228.json); feasibility 1."
+      },
+      {
+        "title": "Location-Limited Staff Access for Consignment-Booth Sellers on Shopify",
+        "total": 16,
+        "reason": "Old evidence (https://community.shopify.com/t/258852.json, 2023 and 2025) and a platform permission an app cannot change."
+      },
+      {
+        "title": "Etsy-to-Amazon Handmade Listing Move",
+        "total": 15,
+        "reason": "One paid job (https://www.freelancer.com/api/projects/0.1/projects/all/?query=etsy%20shop%20spreadsheet&limit=20&full_description=true&from_time=1782259200), next to the crowded Etsy bulk-listing niche."
+      },
+      {
+        "title": "Etsy-to-Sheet Connector without Developer Setup",
+        "total": 15,
+        "reason": "Two thin automation complaints (https://community.make.com/search.json?q=etsy+after%3A2026-08-24); Etsy's commercial API access is reviewed manually and integrations already exist."
+      }
+    ],
+    "watchlist": [
+      {
+        "title": "Instant Quote Page for Home-Service Websites",
+        "targetCustomer": "Small cleaning, snow-removal, pet-waste, insulation and repair businesses on WordPress, Wix or plain sites.",
+        "problemStatement": "Owners pay freelancers to hand-build quote calculators that customers use before calling, and those calculators break quietly.",
+        "total": 20,
+        "missedGate": "Not researched; pain 2 (no complaint found, so pain is capped) and competitiveGap 1 (ConvertCalculator free tier and $20-40 plans).",
+        "evidence": [
+          "https://www.freelancer.com/api/projects/0.1/projects/all/?query=quote%20calculator%20website&limit=50&full_description=true&from_time=1787356800",
+          "https://www.freelancer.com/api/projects/0.1/projects/all/?query=instant%20quote&limit=50&full_description=true&from_time=1787356800"
+        ],
+        "firstSeen": "2026-11-20"
+      },
+      {
+        "title": "Print Menu That Follows Square Item Prices",
+        "targetCustomer": "Independent restaurants and cafes on Square whose printed and PDF menus go stale when prices change.",
+        "problemStatement": "Owners pay designers for menus and insist on editable files so they can swap prices later; Square feeds every channel except print.",
+        "total": 20,
+        "missedGate": "Not researched; pain 2 (no complaint found; spend only), nothing ties the evidence to Square restaurants.",
+        "evidence": [
+          "https://www.freelancer.com/api/projects/0.1/projects/all/?query=restaurant%20menu%20update&limit=50&full_description=true&from_time=1787356800",
+          "https://squareup.com/help/us/en/article/6424-create-and-update-menus"
+        ],
+        "firstSeen": "2026-11-20"
+      },
+      {
+        "title": "15-Day Records Request Clock for Small Practices (HIPAA access rule)",
+        "targetCustomer": "Front-desk staff and office managers at independent dental, optometry, therapy, chiropractic and PT practices that answer patient record requests in-house.",
+        "problemStatement": "From 2027-07-19 practices get 15 calendar days, not 30, to answer a records request and must post a fee schedule online; requests arrive by email, fax, portal and at the desk with nobody tracking the clock.",
+        "total": 19,
+        "missedGate": "Not researched; mandate only (the final rule was published 2026-11-19), pain 3 with no complaint, and release-of-information vendors such as ChartRequest may add the clock.",
+        "evidence": [
+          "https://www.govinfo.gov/content/pkg/FR-2026-11-19/pdf/2026-23429.pdf",
+          "https://www.paubox.com/blog/dental-practice-agrees-to-140k-settlement-after-records-complaint",
+          "https://www.chartrequest.com/providers/solo-practitioners"
+        ],
+        "firstSeen": "2026-11-21"
+      },
+      {
+        "title": "Event and Volunteer Waivers for Organisations on Zeffy",
+        "targetCustomer": "Small nonprofits and clubs that run events and volunteer days through Zeffy.",
+        "problemStatement": "Zeffy has no waiver or photo-consent step at registration, so organisations send a separate waiver link; one user said they would pay for it as an add-on.",
+        "total": 19,
+        "missedGate": "Not researched; competitiveGap 2 (generic waiver tools and free forms with a signature field), pain 3, and the willingness-to-pay comment is from 2026-07-14.",
+        "evidence": [
+          "https://feedback.zeffy.com/feature-requests/p/waivers-1"
+        ],
+        "firstSeen": "2026-11-21"
+      }
+    ],
+    "caveats": "No candidate cleared the quality gate, so four ideas ship as provisional, each with its gap written on it; the best were already crowded or thin. Twenty-three new candidates were scored plus three re-researched watchlist entries (26). Eight candidates went to researchers: two were ended by research (edition register: Artwork Archive and free Shopify tiers; EU withdrawal button off Shopify: free plugins, built-in platform features and hosted embeds), one researcher was stopped unreported once the provisional cap was reached (guest-artist royalties), and five were adversarially reviewed: one killed (DMCC renewal notices for Stripe sellers: two Stripe-specific products already sell it) and four rescored down (batch book 18 to 16, pickup 18 to 16, EU duty 17 to 14, ArtStation move 17 to 14). Review stopped at five reviews because four ideas had survived, the first run's provisional cap. Ideas 3 and 4 ship at 14 under the routine's rule that any reviewed survivor meeting the floor ships up to the cap; both are short-lived leads (the EU duty losses are mostly from July 2026, and the ArtStation move ends on 2027-02-28). Idea 3 serves the same UK makers as the published US Duty Price Sheet (2026-11-08) and Postage Price Check (2026-11-15) but a different problem (reconciling EU duty after the order), as both researcher and reviewer checked. Constraints: small-business buyers in all four (ideas 1 and 2 Small Business Ops, ideas 3 and 4 smallBusiness true); one Weekend MVP (idea 4) and three Multi-week; ideas 1, 2 and 3 are substantial Multi-week with a buildPlan; no category used more than twice. Watchlist: Pickup Preselect shipped as idea 2; POS receipts (18) and the year-end pack (16) were re-researched and left; four carried entries remain, none re-researched today (only the top three are). Every idea's topic is Data & Visualization as the closest fit; the closed list has no topic for shop operations (see the run log's topic request). Evidence URLs that contain a poster's handle (seller blog posts, a dev.to post, a Threads post) are withheld; the facts they would support are cited from vendor pages instead."
+  }
+}
