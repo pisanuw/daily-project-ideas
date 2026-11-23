@@ -1,0 +1,1705 @@
+{
+  "date": "2026-11-23",
+  "schemaVersion": 3,
+  "complete": true,
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Exempt Sales Book for Square Sellers",
+      "slug": "exempt-sales-book-for-square-sellers",
+      "category": "Accessibility & Compliance",
+      "smallBusiness": true,
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Data & Visualization",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": true,
+        "engine": true,
+        "shared": true,
+        "notes": {
+          "stateful": "The seller keeps a register of exempt customers and their certificates and comes back every month to the report and the history.",
+          "connected": "Connects to the seller's Square account by OAuth: reads orders, refunds, catalog tax settings and customers, and can write an 'Exempt until' custom attribute.",
+          "unattended": "A daily job checks expiry dates and 12-month lapses and emails the seller; a monthly job builds the exempt-sales report.",
+          "engine": "Matches each sale on which tax was not charged or was refunded to a certificate valid on the sale date, using a state rules table (accepted forms, expiry, the 12-month lapse, the 90-day window).",
+          "shared": "The exempt buyer fills in or uploads a certificate through a link the seller sends, and the seller approves it."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "email",
+        "scheduled",
+        "backend"
+      ],
+      "buildPlan": [
+        {
+          "n": 1,
+          "title": "Connect Square, see exempt sales",
+          "delivers": "Sign in, connect a Square account, and see last month's sales where a taxable catalog item sold without tax or the tax was refunded, by customer.",
+          "acceptance": "On a Square sandbox seeded with taxed, untaxed and refunded orders, the deployed page lists exactly the untaxed and refunded sales with the right totals."
+        },
+        {
+          "n": 2,
+          "title": "Certificate register",
+          "delivers": "Attach a certificate to a Square customer with state, form, number (masked), expiry and the file; optionally write an 'Exempt until' field to the customer in Square.",
+          "acceptance": "A saved certificate survives sign-out and sign-in, and the customer's custom attribute read back from the Square API holds the saved date."
+        },
+        {
+          "n": 3,
+          "title": "Buyer link",
+          "delivers": "The seller sends an exempt buyer a link to fill in the SST or MTC fields or upload a certificate, without an account; the seller approves or rejects it.",
+          "acceptance": "A submission appears as pending; approving it attaches it to the right customer; the link stops working after use or 14 days."
+        },
+        {
+          "n": 4,
+          "title": "State rules table",
+          "delivers": "Rules for the Streamlined Sales Tax states plus two large states with their own forms: accepted forms, expiry, the 12-month lapse and the 90-day window, each with its source and a last-checked date.",
+          "acceptance": "Unit tests for Florida's yearly expiry, a 12-month lapse, Iowa's 90-day window and an expired certificate return the expected status for given dates."
+        },
+        {
+          "n": 5,
+          "title": "Monthly exempt-sales report",
+          "delivers": "Each month, every untaxed or refunded sale is matched to a certificate valid on the sale date; gaps are listed (no customer on the sale, no certificate, expired, wrong state); the exempt-sales total per state for the return; CSV export and an email.",
+          "acceptance": "A fixture month gives the expected matches, gaps and per-state totals to the cent, including sales whose tax was refunded after the sale."
+        },
+        {
+          "n": 6,
+          "title": "Reminders and audit binder",
+          "delivers": "Emails 30 and 7 days before a certificate expires and before a 12-month lapse; a ZIP of certificates and the register for any date range; seller-set retention and deletion on disconnect.",
+          "acceptance": "A clock-shifted test sends each reminder exactly once; the ZIP holds every certificate cited in that period's report."
+        },
+        {
+          "n": 7,
+          "title": "Polish",
+          "delivers": "A business-owner README (including how to take tax off at checkout with Square's own rules), phone layout, keyboard and screen-reader pass, walkthrough test.",
+          "acceptance": "A walkthrough test runs from connecting Square to downloading the report; axe reports no serious issues."
+        }
+      ],
+      "summary": "A monthly book of tax-free sales for Square sellers who sell to churches, schools, nonprofits and resellers: each untaxed or refunded sale matched to a valid exemption certificate, with the gaps and the figure for the return.",
+      "public": {
+        "summary": "Know that every tax-free sale you made this month has a valid exemption certificate behind it, and get the figure for your sales tax return.",
+        "problem": "You sell to churches, schools and other buyers who do not pay sales tax, but your point-of-sale system has no place for their exemption. Their certificate numbers end up in order notes and their forms in a folder, you refund tax by hand when it was charged, and if the state audits you, you have to find the certificate behind every tax-free sale.",
+        "forWhom": "Small shops, suppliers and caterers on Square that regularly sell to tax-exempt organisations or resellers.",
+        "benefits": [
+          "Every tax-free sale matched to a certificate, with the gaps listed",
+          "Exempt buyers send their certificate through a simple link",
+          "Reminders before a certificate expires",
+          "The exempt-sales total for each state's return",
+          "An audit binder ready in one download"
+        ]
+      },
+      "problemStatement": "Square has no tax-exempt customer profile and its tax rules cannot use the customer, so sellers who serve churches, schools, colleges, nonprofits, government and resellers keep exemption numbers in order notes 'which isn't searchable' for audits, refund tax by hand on online orders and keep a separate ledger to adjust the monthly return, and keep certificates and their expiry dates outside Square.",
+      "description": "The seller connects Square. Each month the app finds every sale on which a taxable catalog item was sold without tax or the tax was refunded, and matches it to the customer's exemption certificate valid on the sale date, listing the gaps (no customer on the sale, no certificate, expired, wrong state). Exempt buyers fill in or upload a certificate through a link, the seller approves it, and a state rules table applies expiry dates and the 12-month lapse, with reminders before each. The monthly report gives the exempt-sales total per state for the return, and an audit binder exports the certificates for any period. It cannot take tax off an in-store Square sale; the seller still does that at checkout.",
+      "targetCustomer": "Small US retailers, suppliers, feed and farm stores, print shops and caterers on Square with a steady stream of tax-exempt buyers (churches, schools, colleges, nonprofits, resellers).",
+      "buyer": "The business owner, from the business card; a small monthly subscription.",
+      "whyNow": "Sellers asked for customer-level exemption again through 2026 (five feature requests from January to October; the oldest thread, opened in 2023, has 21,609 views) and a forum admin said on 2026-07-07 only that related requests would be combined, with no roadmap; Square's release notes to 2026-11-19 show nothing on it. New certificate apps launched on Shopify in October 2026 (EXEMPTAX, CertVault), and none connects to Square; Square's App Marketplace paused new listings in September 2026, so incumbents are not arriving there either.",
+      "founderFit": "Nothing beyond building it alone.",
+      "problemEvidence": [
+        {
+          "url": "https://community.squareup.com/t5/Feature-Requests/Add-tax-exempt-numbers-to-orders-and-customer-profiles/idi-p/846834",
+          "source": "community.squareup.com",
+          "author": "poster A",
+          "date": "2026-07-24",
+          "kind": "complaint",
+          "summary": "A seller to schools, churches, nonprofits and government keeps exemption numbers in order notes, which cannot be searched, and cannot find them for audits (one of several requests the same account posted that day)."
+        },
+        {
+          "url": "https://community.squareup.com/t5/Feature-Requests/Tax-Exempt-Customers/idi-p/848856",
+          "source": "community.squareup.com",
+          "author": "poster B",
+          "date": "2026-09-01",
+          "kind": "complaint",
+          "summary": "An online retailer issues manual refunds of tax to exempt customers and keeps a separate ledger to adjust the monthly return."
+        },
+        {
+          "url": "https://community.squareup.com/t5/Feature-Requests/Tax-Exempt-Customer-Profiles/idi-p/849972",
+          "source": "community.squareup.com",
+          "author": "poster C",
+          "date": "2026-09-23",
+          "kind": "complaint",
+          "summary": "A seller whose many customers are churches and nonprofits asks for exempt customer profiles with certificate storage and expiry."
+        },
+        {
+          "url": "https://community.squareup.com/t5/Feature-Requests/Customer-Tax-Exempt-Automation-at-the-Customer-Level/idc-p/845697#M18400",
+          "source": "community.squareup.com",
+          "author": "poster D",
+          "date": "2026-07-03",
+          "kind": "complaint",
+          "summary": "A feed mill with many exempt customers added a tax-exempt toggle to customer cards, but it does not prompt the cashier, and tax refunded later still shows as taxable in Square's reports."
+        },
+        {
+          "url": "https://community.squareup.com/t5/Feature-Requests/Feature-request-customer-bases-tax-exempt/idi-p/834171",
+          "source": "community.squareup.com",
+          "author": "poster E",
+          "date": "2026-02-05",
+          "kind": "complaint",
+          "summary": "A seller who has asked for tax-exempt customers since 2019 asks again."
+        },
+        {
+          "url": "https://www.avalara.com/blog/en/north-america/2026/08/avalara-select-sales-tax-pricing-small-businesses.html",
+          "source": "avalara.com",
+          "author": "unknown",
+          "date": "2026-08-01",
+          "kind": "spend",
+          "summary": "Avalara's small-business package with exemption certificate management costs $79 per state per month, minimum three states (an August 2026 post; the day is not shown in the address and was not recorded)."
+        },
+        {
+          "url": "https://tax.nv.gov/wp-content/uploads/2024/03/SST-Certificate-Exemption-12-21-2021.pdf",
+          "source": "tax.nv.gov",
+          "author": "unknown",
+          "date": "2021-12-21",
+          "kind": "mandate",
+          "summary": "The Streamlined Sales Tax certificate: the seller keeps the certificate and is relieved of liability if it has one within 90 days of the sale; a blanket certificate lapses after 12 months without purchases."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Square's own customer custom fields and files",
+          "url": "https://squareup.com/help/us/en/article/5860-creating-custom-fields-in-your-customer-directory",
+          "price": "Free with Square",
+          "gap": "A toggle or date field and attached files; no buyer link, no state rules, no matching of tax-free sales to certificates, and no prompt at checkout."
+        },
+        {
+          "name": "Avalara (Core Compliance with exemption certificates)",
+          "url": "https://www.avalara.com/blog/en/north-america/2026/08/avalara-select-sales-tax-pricing-small-businesses.html",
+          "price": "$79 per state per month or $799 per state per year, minimum 3 states",
+          "gap": "Far too costly for a shop with a handful of exempt buyers; no Square connection listed."
+        },
+        {
+          "name": "TaxJar customer exemptions",
+          "url": "https://support.taxjar.com/article/1168-which-taxjar-integrations-support-customer-exemptions",
+          "price": "Professional plan; price unknown",
+          "gap": "Square is not among the integrations that support exemptions."
+        },
+        {
+          "name": "TaxCloud exemption certificate management",
+          "url": "https://taxcloud.com/exemption-certificate-management/",
+          "price": "unknown",
+          "gap": "No Square; says it does not provide automated verification or renewal tracking."
+        },
+        {
+          "name": "ExemptHQ",
+          "url": "https://ecosystem.hubspot.com/marketplace/listing/exempthq-certificate-management",
+          "price": "$49 a month (listing dated 2026-04-30)",
+          "gap": "Collection link, expiry tracking and reminders, but connects only to HubSpot."
+        },
+        {
+          "name": "CertVault",
+          "url": "https://apps.shopify.com/certvault",
+          "price": "Free for 1 company; Pro $9.99 a month or $99.99 a year",
+          "gap": "Shopify B2B only."
+        }
+      ],
+      "keyFeatures": [
+        "Monthly match of every untaxed or refunded sale to a valid certificate, with gaps",
+        "Buyer link to fill in or upload a certificate",
+        "State rules for expiry and the 12-month lapse",
+        "Expiry and lapse reminders",
+        "Exempt-sales total per state for the return",
+        "Audit binder export"
+      ],
+      "mvpScope": {
+        "features": [
+          "Square connection and exempt-sales list",
+          "Certificate register with expiry",
+          "Monthly match report with gaps and per-state totals",
+          "Expiry reminders"
+        ],
+        "outOfScope": [
+          "Taking tax off sales at checkout (Square's API cannot change in-store orders)",
+          "Filing returns",
+          "Verifying a buyer's eligibility with the state",
+          "States beyond the SST members and two large states"
+        ],
+        "buildEstimate": "About 6 to 7 build days"
+      },
+      "techStack": "React + Vite + Tailwind front end; Supabase sign-in, a per-app schema and storage for certificate files; a small Node service on backend-hub for Square OAuth and API calls; scheduled jobs and transactional email for reminders and the monthly report.",
+      "pricing": {
+        "model": "Monthly or yearly subscription per seller",
+        "pricePoint": "$12 a month or $99 a year (estimate)",
+        "rationale": "Near CertVault's $9.99 on Shopify and far under Avalara's $79 per state per month; the free Square fields set the floor, so the price has to buy the monthly match and the return figure."
+      },
+      "revenueSketch": "Estimate: 80 sellers x $12 a month = $960 a month. Assumes sellers find it by search for Square tax-exempt customers; the request threads' view counts suggest the search exists, but no seller in the evidence mentions paying for a tool.",
+      "distribution": "First 10: a free page that says which exemption forms each state accepts and when certificates expire, plus a guide to Square's own tax rules, found by search for 'Square tax exempt customer', leading to the paid app; search ads on the same terms. Square's App Marketplace has paused new listings (Square staff, 2026-10-01), so the app runs unlisted. The Square Seller Community forbids unprompted promotion ('Don't promote your own products or services unprompted'), and its request threads are the evidence, so no posting there. Reddit r/Square: rule unknown: check before posting.",
+      "validationTest": {
+        "method": "A landing page with the free state lookup and a '$12 a month, early access' button that asks for an email and one question (how many exempt customers?), with about $100 of search ads over 14 days on 'Square tax exempt customer' and similar terms. No outreach, no community posts, and no contact with anyone in the evidence.",
+        "successCriteria": "At least 5 early-access sign-ups from 150 or more visits, with at least 2 reporting 5 or more exempt customers.",
+        "cost": "About $100 to $150 in ads and half a build day."
+      },
+      "moat": "Years of certificates and monthly match reports live in the app, which a seller would need in an audit; the state rules table and the matching of refunded-tax sales are work a generic form tool does not do.",
+      "compliance": [
+        "Tax: the app does not make a sale exempt, judge a buyer's eligibility, give tax advice or guarantee audit protection; the seller decides whether to accept a certificate (SST and MTC instructions).",
+        "The app must never encourage buyers to claim exemptions; only the seller sends links, to buyers it knows are exempt (the SST form ends seller relief if the seller solicits unlawful claims).",
+        "Data: organisations' tax ids and FEINs, and for sole traders possibly a driver's licence number; encrypt, mask on screen, seller-only access, seller-set retention, deletion on disconnect.",
+        "Square: least-privilege scopes (customers read and write, orders read, items read); tokens held server-side and encrypted.",
+        "Accessibility: the buyer link and the app meet WCAG 2.2 AA."
+      ],
+      "risks": [
+        {
+          "risk": "Square ships customer-level exemption (an admin said requests would be combined).",
+          "mitigation": "Centre the product on the monthly match, certificates and the audit binder, which a checkout toggle does not give; watch Square's release notes monthly."
+        },
+        {
+          "risk": "Sellers want tax off at checkout, which the app cannot do.",
+          "mitigation": "Say so plainly on the page and document Square's own tax rules in the README."
+        },
+        {
+          "risk": "Tax-free sales rung up with no customer attached cannot be matched.",
+          "mitigation": "List them as gaps so the seller can attach the customer."
+        },
+        {
+          "risk": "Wrong state rules.",
+          "mitigation": "Every rule carries its source and a last-checked date; launch with SST states and two large states."
+        },
+        {
+          "risk": "Square's community moves to a new platform and evidence links change.",
+          "mitigation": "The evidence summaries are kept in this file."
+        }
+      ],
+      "scores": {
+        "pain": 3,
+        "willingnessToPay": 2,
+        "reachability": 2,
+        "competitiveGap": 3,
+        "feasibility": 3,
+        "complianceBurden": 3,
+        "total": 16
+      },
+      "scoreRationale": {
+        "pain": "Five independent sellers asked through 2026, but most want tax off at checkout, which this cannot do; only two ask for certificate records (https://community.squareup.com/t5/Feature-Requests/Add-tax-exempt-numbers-to-orders-and-customer-profiles/idi-p/846834, https://community.squareup.com/t5/Feature-Requests/Tax-Exempt-Customer-Profiles/idi-p/849972).",
+        "willingnessToPay": "Every workaround the posters use is free (toggles, notes, folders, refunds) and none mentions paying for a tool or an audit; paid tools exist only off Square (https://community.squareup.com/t5/Feature-Requests/Customer-Tax-Exempt-Automation-at-the-Customer-Level/idc-p/845697#M18400).",
+        "reachability": "Self-serve search only: Square paused new App Marketplace listings (https://developer.squareup.com/forums/t/listing-square-apps-marketplace/28043) and its community forbids unprompted promotion.",
+        "competitiveGap": "No certificate tool connects to Square (https://support.taxjar.com/article/1168-which-taxjar-integrations-support-customer-exemptions), but Square's free fields already cover the flag, the date and file storage (https://squareup.com/help/us/en/article/5860-creating-custom-fields-in-your-customer-directory).",
+        "feasibility": "The Orders API returns in-store sales with line-item taxes (https://developer.squareup.com/reference/square/objects/OrderLineItem), but it cannot change in-store orders, matching needs a customer on the sale, and refunds need their own handling (https://developer.squareup.com/docs/orders-api/manage-orders/update-orders).",
+        "complianceBurden": "It holds organisations' tax ids and possibly driver's licence numbers, and sellers will rely on its rules table in an audit (https://tax.nv.gov/wp-content/uploads/2024/03/SST-Certificate-Exemption-12-21-2021.pdf)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Researched as an exemption certificate desk for Square: Square has no customer-level exemption or certificate feature and its tax rules cannot use the customer (help 5622; release notes to 2026-11-19), no certificate tool connects to Square (TaxJar, TaxCloud, ExemptHQ on HubSpot, CertVault and EXEMPTAX on Shopify), and Avalara costs $79 per state per month. The reviewer confirmed five distinct sellers with no product links, but found that four of them mainly want tax removed at checkout, which an app cannot do on in-store sales; one of the requests was among 13 the same account posted within ten minutes; a feed mill already uses Square's free toggle field; and matching needs a customer on the sale. Rescored from 20 to 16: pain 4 to 3, willingnessToPay 3 to 2, competitiveGap 4 to 3, feasibility 4 to 3. Re-scoped, as the reviewer proposed, to lead with the monthly exempt-sales report and the figure for the return, with the buyer link, reminders and audit binder as supporting features and the Square field demoted."
+      },
+      "inspiredBy": "https://community.squareup.com/t5/Feature-Requests/Tax-Exempt-Customers/idi-p/848856",
+      "gateGap": {
+        "missing": [
+          "total 16 is below 22",
+          "pain 3 is below 4: most requests ask for tax off at checkout, not for records",
+          "willingnessToPay 2 is below 3: no Square seller in the evidence pays for any tool, and the paid tools found work only off Square"
+        ],
+        "closedBy": "The landing page and price button in validationTest close the largest gap, willingness to pay: 5 early-access sign-ups at $12 a month from 150 visits, with 2 sellers reporting 5 or more exempt customers, would raise willingnessToPay to 3; a seller's own words about an audit or a return adjustment would lift pain."
+      }
+    },
+    {
+      "n": 2,
+      "title": "Subcontractor Cover Check for Xero Pay Runs",
+      "slug": "subcontractor-cover-check-for-xero-pay-runs",
+      "category": "Small Business Ops",
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Data & Visualization",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": true,
+        "engine": true,
+        "shared": true,
+        "notes": {
+          "stateful": "Keeps each subcontractor's certificates of currency, subcontractor's statements and their history, which the builder returns to before every pay run.",
+          "connected": "Connects to the builder's Xero by OAuth: reads supplier contacts and awaiting-payment bills, writes a history note and, if chosen, a later planned payment date on a flagged bill.",
+          "unattended": "A daily job chases subcontractors before a certificate expires and flags bills before the pay run.",
+          "engine": "Requirement templates by state and country (NSW subcontractor's statement for each payment claim, workers' compensation and public liability cover, minimum limits) checked against the work period of each bill.",
+          "shared": "Subcontractors upload their certificates and statements through an expiring link, and the builder's office staff work from the same list."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "llm",
+        "email",
+        "scheduled",
+        "backend"
+      ],
+      "buildPlan": [
+        {
+          "n": 1,
+          "title": "Connect Xero, see uncovered bills",
+          "delivers": "Sign in, connect Xero, import supplier contacts, enter a certificate by hand, and see every approved bill from a subcontractor with no current certificate.",
+          "acceptance": "In the Xero demo company, a lapsed certificate on a contact with an AUTHORISED bill makes that bill appear on the deployed page."
+        },
+        {
+          "n": 2,
+          "title": "Upload link and reading",
+          "delivers": "A subcontractor uploads a certificate of currency through an expiring link; insurer, policy number, cover type and expiry are pre-filled and the builder confirms them.",
+          "acceptance": "A sample certificate pre-fills the four fields; nothing is saved until the builder confirms; the link stops working after use or 14 days."
+        },
+        {
+          "n": 3,
+          "title": "Subcontractor's statement per payment claim",
+          "delivers": "For NSW, each bill needs a subcontractor's statement covering its period; bills without one are flagged and statements are kept for seven years.",
+          "acceptance": "A fixture with three bills and two statements flags exactly the uncovered bill, and each statement carries a retention date seven years out."
+        },
+        {
+          "n": 4,
+          "title": "Requirement templates",
+          "delivers": "Templates for NSW, the other Australian states and the UK: cover types and minimum limits per subcontractor, with a status of compliant, expiring, lapsed or deficient.",
+          "acceptance": "A 12-case fixture returns the expected status for each case."
+        },
+        {
+          "n": 5,
+          "title": "Pay-run flag and chaser",
+          "delivers": "Before the pay run, each flagged bill gets a history note and, if chosen, a later planned payment date that is restored once cover is current; a digest email; chaser emails 30 and 7 days before expiry.",
+          "acceptance": "In the demo company the bill gets its note and new date, the original date returns after a compliant upload, and each chaser is sent exactly once."
+        },
+        {
+          "n": 6,
+          "title": "Audit export and polish",
+          "delivers": "For each paid bill, the certificate in force during the work period and the statement that covered it; business-owner README, phone layout, keyboard and screen-reader pass, walkthrough test.",
+          "acceptance": "The export lists every paid bill in a period with its certificate and statement, or 'none'; a walkthrough test runs from connecting Xero to the export; axe reports no serious issues."
+        }
+      ],
+      "summary": "A pre-pay-run check for small builders on Xero: each bill from a subcontractor is checked for a current certificate of currency and, in NSW, a subcontractor's statement, and subcontractors are chased for renewals by email.",
+      "public": {
+        "summary": "Before you pay a subcontractor, know that their insurance is current and their paperwork for that job is in, without a spreadsheet.",
+        "problem": "You pay subcontractors every week or two, and each one should have current insurance and, in some states, a signed statement for every payment claim. The certificates live in an email folder and the expiry dates in your head, so a lapsed policy only shows up when an insurer's audit or a claim finds it.",
+        "forWhom": "Small builders, trades businesses and property managers who pay subcontractors through their accounting software.",
+        "benefits": [
+          "Every bill checked for current cover before you pay it",
+          "Subcontractors reminded to send renewals before they lapse",
+          "Statements kept for each payment claim, for as long as you must keep them",
+          "One list your office staff can work from",
+          "An audit pack ready in one download"
+        ]
+      },
+      "problemStatement": "Xero stores attached documents with no expiry date and has no way to hold a bill, so builders who pay subcontractors track insurance expiry 'outside of Xero', as Xero's own staff advise, and ask for bills to be blocked when a certificate of insurance lapses; in NSW a principal contractor should also hold a subcontractor's statement for each payment claim and may withhold payment without one.",
+      "description": "The builder connects Xero. The app imports supplier contacts and keeps each subcontractor's certificates of currency and subcontractor's statements, pulled from uploaded files and confirmed by a person. Before each pay run it checks every approved bill from a subcontractor against the template for that state or country: current workers' compensation and public liability cover during the work period, minimum limits, and in NSW a statement covering that claim. A flagged bill gets a history note in Xero and, if the builder chooses, a later planned payment date (Xero's own suggested workaround), and the office gets a digest. Subcontractors are chased by email with an upload link before cover expires. It cannot stop a payment in Xero.",
+      "targetCustomer": "Small builders, renovators and trades businesses in Australia (NSW first) and the UK that use Xero and pay several subcontractors each month, and the bookkeepers who run their pay runs.",
+      "buyer": "The business owner, from the business's own card; a small monthly subscription.",
+      "whyNow": "SubDoc ships this check for QuickBooks at $20 a month (with an owner override on held bills), but nothing does it for Xero. Xero's staff wrote on 2026-10-29 that a bill flag is 'not directly in the pipeline yet' on an idea with 1,298 votes, its coming bills approval flow routes by supplier but checks no insurance, and three 2026 Xero ideas ask for certificate expiry or a bill block.",
+      "founderFit": "Nothing beyond building it alone.",
+      "problemEvidence": [
+        {
+          "url": "https://productideas.xero.com/forums/967124-projects-tracking/suggestions/50947124-bills-certificate-insurance-prevent-bill-from",
+          "source": "productideas.xero.com",
+          "author": "poster A",
+          "date": "2026-01-30",
+          "kind": "complaint",
+          "summary": "A business that relies on subcontractors' certificates of insurance asks Xero to block a bill when the certificate expires within 30 days (6 votes, Gaining Support)."
+        },
+        {
+          "url": "https://productideas.xero.com/forums/967130-contacts-documents/suggestions/51182920-us-tax-certificate-of-insurance-coi-management",
+          "source": "productideas.xero.com",
+          "author": "poster B",
+          "date": "2026-09-05",
+          "kind": "complaint",
+          "summary": "A US business using subcontractors asks for certificate of insurance management in Xero (2026-04-10); a construction company adds its support on 2026-09-05 (2 votes)."
+        },
+        {
+          "url": "https://productideas.xero.com/forums/967130-contacts-documents/suggestions/50765798-documents-add-expiry-renewal-date-and-automated",
+          "source": "productideas.xero.com",
+          "author": "poster C",
+          "date": "2026-06-15",
+          "kind": "complaint",
+          "summary": "A request for expiry dates and reminders on Xero documents, backed by a UK construction business (2025-12-09) and by a commenter for clients with rental properties (2026-06-15); Xero staff say to track expiry dates outside Xero (4 votes)."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "SubDoc",
+          "url": "https://subdoc.io/coi-tracking-software",
+          "price": "$0 for 3 vendors; Pro $20 a month for 100 vendors; Advanced $49 a month",
+          "gap": "Reads certificates and holds payment with an owner override, but connects to QuickBooks Online and exports CSV for Sage; Xero is not mentioned, and it is built around US certificates."
+        },
+        {
+          "name": "BCS",
+          "url": "https://www.getbcs.com/pricing-and-plans",
+          "price": "Free to 25 vendors; $0.95 per active vendor a month",
+          "gap": "Tracks certificates only; no accounting connection and no payment check."
+        },
+        {
+          "name": "TrustLayer",
+          "url": "https://www.trustlayer.io/plans",
+          "price": "Starter free to 50 vendors; Pro unknown",
+          "gap": "Connects to Procore, CMiC and Vista, not Xero; no bill check."
+        },
+        {
+          "name": "BuildPass",
+          "url": "https://www.buildpass.ai/features/health-and-safety/insurances",
+          "price": "unknown (no prices published); Xero only on its 'All In' plan",
+          "gap": "Chases certificates of currency before and after expiry but says nothing about checking payments."
+        },
+        {
+          "name": "Buildxact",
+          "url": "https://help.buildxact.com/en/articles/3038657-tracking-insurance-expiry-of-contractors-suppliers",
+          "price": "unknown",
+          "gap": "Expiry alerts on contact cards inside an estimating and job tool; nothing on bills."
+        },
+        {
+          "name": "Manage My Renewals",
+          "url": "https://apps.xero.com/au/function/bills-expenses/app/manage-my-renewals",
+          "price": "unknown (7-day trial)",
+          "gap": "Tracks the business's own renewals from bill attachments; no subcontractor requirements and no bill flag."
+        }
+      ],
+      "keyFeatures": [
+        "Check of every approved subcontractor bill against current cover before the pay run",
+        "Subcontractor's statement per payment claim (NSW) with seven-year retention",
+        "Upload link with fields read from the certificate and confirmed by a person",
+        "Renewal chasers by email",
+        "History note and optional later planned payment date on flagged bills",
+        "Audit export by work period"
+      ],
+      "mvpScope": {
+        "features": [
+          "Xero connection and supplier import",
+          "Certificate register with expiry",
+          "Pre-pay-run list of uncovered bills with a history note",
+          "Renewal chaser emails"
+        ],
+        "outOfScope": [
+          "Stopping a payment in Xero (no hold exists)",
+          "Verifying cover with the insurer",
+          "US templates at launch",
+          "Paying subcontractors"
+        ],
+        "buildEstimate": "About 6 build days"
+      },
+      "techStack": "React + Vite + Tailwind front end; Supabase sign-in, a per-app schema and storage for certificates; a small Node service on backend-hub for Xero OAuth and token refresh; the LLM gateway to read certificate fields, always confirmed by a person; scheduled jobs and transactional email.",
+      "pricing": {
+        "model": "Monthly subscription per business",
+        "pricePoint": "A$25 a month (estimate)",
+        "rationale": "Close to SubDoc's $20 a month on QuickBooks, far below construction suites; free certificate trackers set the floor, so the price buys the Xero bill check and the NSW statement check."
+      },
+      "revenueSketch": "Estimate: 50 builders x A$25 a month = A$1,250 a month, less Xero's developer fee (A$35 a month for up to 50 connections on Core; A$245 a month on Plus for an App Store listing). Assumes builders find it by search; the Xero ideas have only about 12 votes between them, so demand is unproven.",
+      "distribution": "First 10: a free page and checklist for 'subcontractor's statement NSW' and 'certificate of currency Xero', found by search, leading to the app; small search-ad tests in Australia and the UK. The Xero App Store needs Xero's Plus tier (A$245 a month) and certification, so not at launch. Xero's community guidelines say 'don't spam us with advertisements, promotions, or posts of a commercial nature', and the idea pages are the evidence, so no posting there. Reddit builder and bookkeeping communities: rule unknown: check before posting.",
+      "validationTest": {
+        "method": "A landing page offering a free 'bills from subcontractors without current cover' report from the first milestone (Xero's free developer tier covers 5 connections), with an 'A$25 a month, start' button, and about A$150 of search ads in Australia and the UK over 14 days. No outreach, no comments on the Xero idea pages, and no contact with anyone in the evidence.",
+        "successCriteria": "At least 15 sign-ups, at least 3 Xero connections and at least 2 pre-orders at A$25 a month.",
+        "cost": "About A$165 (ads and a domain) and 2 build days."
+      },
+      "moat": "Years of certificates, statements and the history of each pay run live in the app, which a builder needs for an insurer's audit; the state templates and the check against Xero bills are work a generic certificate tracker does not do.",
+      "compliance": [
+        "Insurance: the app does not verify cover with the insurer, give insurance or legal advice, or guarantee compliance with workers' compensation rules; a certificate is evidence, not proof, and the builder decides.",
+        "NSW subcontractor's statements: the app records and flags them; it never says a payment may or may not be withheld.",
+        "Personal data: sole-trader subcontractors' names, addresses and policy numbers fall under Australia's Privacy Act and UK GDPR; a data processing agreement, expiring upload links, file-type checks, deletion on disconnect.",
+        "Xero: its terms forbid training models on API data; certificate reading uses uploaded files only, through a gateway setting that keeps them out of training.",
+        "Accessibility: the upload link and the app meet WCAG 2.2 AA."
+      ],
+      "risks": [
+        {
+          "risk": "SubDoc adds Xero.",
+          "mitigation": "Lead with Australian and UK templates and the NSW statement check, which a US certificate tool lacks."
+        },
+        {
+          "risk": "Xero's bills approval flow adds insurance checks.",
+          "mitigation": "Watch the idea statuses; keep the chaser, the statements and the audit export as the core."
+        },
+        {
+          "risk": "Only a soft hold is possible, and the bill can still be paid.",
+          "mitigation": "Say so plainly ('flags before the pay run') and send a digest the person running the pay run sees."
+        },
+        {
+          "risk": "Demand is thin (about 12 votes) and builders use spreadsheets.",
+          "mitigation": "Run the validation test before building beyond the first milestone."
+        },
+        {
+          "risk": "A misread certificate field.",
+          "mitigation": "A person confirms every field before it counts."
+        }
+      ],
+      "scores": {
+        "pain": 2,
+        "willingnessToPay": 2,
+        "reachability": 2,
+        "competitiveGap": 3,
+        "feasibility": 4,
+        "complianceBurden": 3,
+        "total": 16
+      },
+      "scoreRationale": {
+        "pain": "About 12 votes across three 2026 ideas, with no user comments on the bill-block idea (https://productideas.xero.com/forums/967124-projects-tracking/suggestions/50947124-bills-certificate-insurance-prevent-bill-from); practitioners elsewhere use a spreadsheet.",
+        "willingnessToPay": "Free tiers are common (https://www.getbcs.com/pricing-and-plans, https://www.trustlayer.io/plans) and SubDoc's payment hold costs $20 a month on QuickBooks (https://subdoc.io/coi-tracking-software); no Xero builder in the evidence mentions paying.",
+        "reachability": "Self-serve search only: a Xero App Store listing needs the Plus tier at A$245 a month and certification (https://developer.xero.com/pricing), and Xero's community forbids commercial posts.",
+        "competitiveGap": "No app checks Xero bills against subcontractors' cover (https://apps.xero.com/au/collection/contractor-management-software); the tools that check payments connect to QuickBooks (https://subdoc.io/coi-tracking-software).",
+        "feasibility": "Xero's API reads awaiting-payment bills by contact and writes bill history notes, and the planned-payment-date push is Xero staff's own suggested workaround (https://productideas.xero.com/forums/939198/suggestions/46010152?page=1); no true hold exists.",
+        "complianceBurden": "It holds third parties' insurance documents and must avoid any claim of verifying cover (https://www.travelers.com/business-insurance/services/premium-audit/workers-compensation-premium-audit)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Researched as a certificate-of-insurance gate for Xero bills: no product tracks certificates and checks unpaid Xero bills; SubDoc does it for QuickBooks at $20 a month; BCS and TrustLayer have free tiers with no accounting link; Xero has no bill hold, so the app can only note a bill and push its planned payment date. The reviewer read the three idea pages (6, 4 and 2 votes; no vendors among the posters; the UK construction comment is from 2025-12-09, not 2026-06-15), found that the UK HSE guidance and the icare NSW page cited by the researcher impose no duty to check a subcontractor's certificate, that the US is already served by SubDoc and free tools, that a practitioner thread relies on a spreadsheet, and that a premium audit asks whether cover was in effect while the work was done, not on the payment date. The stronger rule is NSW's subcontractor's statement, which a principal contractor should get with each payment claim and may withhold payment without (https://hia.com.au/resources-and-advice/managing-your-business/working-with-contractors/articles/subcontractors-statement). Rescored from 18 to 16: pain 3 to 2, willingnessToPay 3 to 2. Re-scoped to NSW principal contractors first, the UK second, the US dropped at launch, and the audit export keyed to the work period."
+      },
+      "inspiredBy": "https://productideas.xero.com/forums/967124-projects-tracking/suggestions/50947124-bills-certificate-insurance-prevent-bill-from",
+      "gateGap": {
+        "missing": [
+          "total 16 is below 22",
+          "pain 2 is below 4: about 12 votes across three ideas and no user comment on the bill-block idea",
+          "willingnessToPay 2 is below 3: free certificate trackers exist and no Xero builder in the evidence pays for one"
+        ],
+        "closedBy": "The landing page and price button in validationTest close the largest gaps: 3 Xero connections and 2 pre-orders at A$25 a month would raise willingnessToPay to 3, and sign-ups that name the NSW statement or an insurer's audit would raise pain."
+      }
+    },
+    {
+      "n": 3,
+      "title": "Visitor Levy Book for Cardiff Letting Agents and Hosts",
+      "slug": "visitor-levy-book-cardiff",
+      "category": "Small Business Ops",
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Data & Visualization",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": true,
+        "engine": true,
+        "shared": true,
+        "notes": {
+          "stateful": "Keeps every stay, each premises' registration details and every return for the six years the Welsh Revenue Authority asks for.",
+          "connected": "Imports the agent's or host's booking-system or channel export (CSV or XLS) and Airbnb or Booking.com calendar feeds.",
+          "unattended": "A daily job reminds before each return and each 30-day deadline for reporting a change to the register.",
+          "engine": "Applies the national rates (GBP 1.30 or 75p per person per night), the exemptions (32 nights or more, cancellations, the provider's own staff, under-18s at the lower rate) and the rule that bookings made before 28 September 2026 owe nothing unless nights or guests are added.",
+          "shared": "A letting agent prepares the totals per address and per rate for each owner, and the owner receives a statement they can file or approve."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "email",
+        "scheduled",
+        "backend"
+      ],
+      "buildPlan": [
+        {
+          "n": 1,
+          "title": "One premises, one quarter",
+          "delivers": "Sign in, add a premises, enter stays with guests, nights and booking date, and see the levy for a quarter by rate.",
+          "acceptance": "On the deployed app the ten-stay worked example from the WRA's tally page gives the same total."
+        },
+        {
+          "n": 2,
+          "title": "Imports",
+          "delivers": "Import stays from a booking-system CSV or XLS with column mapping, and stay dates from a calendar feed, with a list of stays missing a guest count.",
+          "acceptance": "A 200-row sample imports with no lost rows; stays without guest counts are listed for the user to complete."
+        },
+        {
+          "n": 3,
+          "title": "Rules and exemptions",
+          "delivers": "Rates, the 32-night exemption, cancellations, own-staff stays, under-18s at the lower rate, and the 28 September 2026 booking-date rule.",
+          "acceptance": "A 15-case fixture returns the expected levy for each stay."
+        },
+        {
+          "n": 4,
+          "title": "Owners, returns and reminders",
+          "delivers": "Premises grouped by owner; totals per address and per rate for each return period; yearly or quarterly frequency by the GBP 1,000 test; nil returns; reminder emails before each return and each 30-day register change.",
+          "acceptance": "A fixture owner over GBP 1,000 gets quarterly periods due 60 days after each quarter, and each reminder is sent exactly once."
+        },
+        {
+          "n": 5,
+          "title": "Records and polish",
+          "delivers": "Six-year retention with export and deletion, a Welsh and English interface, business-owner README, phone layout, keyboard and screen-reader pass, walkthrough test.",
+          "acceptance": "A walkthrough test runs from import to an owner's statement in both languages; axe reports no serious issues."
+        }
+      ],
+      "summary": "A visitor levy book for Cardiff's letting agents and self-managing hosts: stays imported, the levy worked out per address and per rate, owners' statements and return reminders, and six years of records.",
+      "public": {
+        "summary": "Work out the Cardiff visitor levy for every property you let, keep the records you must keep, and never miss a return.",
+        "problem": "From April 2027 you owe a levy for each person and each night your guests stay, at different rates, with exemptions, and you must keep a record of every stay for six years. Booking sites may show the levy to guests, but they do not file it for you, and their calendars leave out how many guests stayed.",
+        "forWhom": "Letting agents and hosts who let holiday homes, rooms or B&B rooms in Cardiff.",
+        "benefits": [
+          "The levy for each property and each rate, ready for the return",
+          "A statement for each owner you manage",
+          "Reminders before every return and every register change",
+          "Six years of records kept for you"
+        ]
+      },
+      "problemStatement": "Cardiff charges the Welsh visitor levy from 1 April 2027 at GBP 1.30 per person per night (75p in tents and shared hostel rooms), with exemptions, on bookings made from 28 September 2026; providers must keep a record of every stay for six years and file totals per address and per rate, while every premises in Wales must be registered by 31 March 2027 and changes reported within 30 days, at GBP 100 per premises and then GBP 10 a day; platforms may calculate the levy but do not file it.",
+      "description": "A letting agent or host adds each premises and imports stays from a booking-system or channel export, or a calendar feed, then fills in guest counts where the feed lacks them. The app applies the rates, the exemptions and the booking-date rule, and gives the levy per address and per rate for each return period, yearly or quarterly by the GBP 1,000 test, nil returns included. An agent sees each owner's properties together and sends each owner a statement. Reminders go out before each return and before each 30-day deadline for reporting a change to the register, and the records are kept for six years. It does not register premises or file returns with the Welsh Revenue Authority.",
+      "targetCustomer": "Cardiff's small letting agents and short-let managers (88 to 94 of them run about 1,006 listings), and self-managing hosts of holiday lets, rooms and B&Bs in Cardiff.",
+      "buyer": "The letting agent from its business budget, per unit; a self-managing host from their own card.",
+      "whyNow": "Cardiff is the only council charging the levy, from 1 April 2027, and providers have had to account for it on new bookings since 28 September 2026; the register for all of Wales closes on 31 March 2027; Conwy deferred and Anglesey declined for now (2026-09-27), and Gwynedd's decision is still open. Scottish levy tools (Visitor Levy App, freetobook) do not cover Wales, whose levy is per person per night rather than a share of the price.",
+      "founderFit": "Nothing beyond building it alone.",
+      "problemEvidence": [
+        {
+          "url": "https://gov.wales/failing-register-update-details-or-deregister-your-visitor-accommodation",
+          "source": "gov.wales",
+          "author": "unknown",
+          "date": "2026-10-01",
+          "kind": "mandate",
+          "summary": "Welsh Revenue Authority: penalties for failing to register, update or deregister visitor accommodation within 30 days, GBP 100 per premises, then GBP 10 a day for 30 days, then GBP 1,000."
+        },
+        {
+          "url": "https://gov.wales/visitor-levy-for-visitor-accommodation-providers-technical-guidance-record-keeping-html",
+          "source": "gov.wales",
+          "author": "unknown",
+          "date": "2026-10-06",
+          "kind": "mandate",
+          "summary": "Technical guidance on records (updated 2026-10-06): the provider keeps the records; platforms may calculate the levy and send the information to the provider."
+        },
+        {
+          "url": "https://www.gov.wales/visitor-levy-checklist-accommodation-providers-cardiff",
+          "source": "gov.wales",
+          "author": "unknown",
+          "date": "2026-06-09",
+          "kind": "mandate",
+          "summary": "The Cardiff checklist for providers (updated 2026-06-09): Airbnb or Booking.com may help add levy fees, but the provider is responsible."
+        },
+        {
+          "url": "https://nation.cymru/news/tourism-industry-welcomes-councils-decisions-to-hold-off-on-visitor-levy/",
+          "source": "nation.cymru",
+          "author": "unknown",
+          "date": "2026-09-27",
+          "kind": "mandate",
+          "summary": "Conwy deferred its levy decision and Anglesey decided not to charge one for now, leaving Cardiff as the only council with a levy."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Visitor Levy App",
+          "url": "https://visitorlevyapp.com/pricing",
+          "price": "GBP 6 per property a month for short lets; GBP 1.50 per room for B&Bs; one unit free",
+          "gap": "Scotland only, built on a percentage levy; no Wales."
+        },
+        {
+          "name": "freetobook",
+          "url": "https://en.freetobook.com/blog/scottish-visitor-levy-tax/",
+          "price": "Booking engine free; channel manager GBP 1.50 a booking",
+          "gap": "Shows the Scottish levy to guests; no Welsh levy and no return totals."
+        },
+        {
+          "name": "Airbnb's custom tax tool",
+          "url": "https://www.airbnb.com/help/article/4105",
+          "price": "Free",
+          "gap": "Collects a fee the host sets and pays it out to the host; the obligation stays with the host and there is no return report."
+        },
+        {
+          "name": "The WRA's own worked example",
+          "url": "https://www.gov.wales/visitor-levy-accommodation-providers-steps/tally-levy",
+          "price": "Free",
+          "gap": "A table of ten stays to copy into a spreadsheet; no records, imports or reminders."
+        },
+        {
+          "name": "Managing agencies (for example Menai Holiday Cottages)",
+          "url": "https://www.menaiholidays.co.uk/blog/welsh-visitor-levy/",
+          "price": "Part of the agency's commission; unknown",
+          "gap": "Handles the levy only for owners the agency manages; not a tool for other agents or hosts."
+        }
+      ],
+      "keyFeatures": [
+        "Stay import from booking-system exports and calendar feeds",
+        "Rates, exemptions and the booking-date rule",
+        "Totals per address and per rate for each return",
+        "Statements per owner for letting agents",
+        "Reminders for returns and 30-day register changes",
+        "Six-year records with export"
+      ],
+      "mvpScope": {
+        "features": [
+          "Premises and stays",
+          "CSV import with column mapping",
+          "Rates and exemptions",
+          "Return totals per address and rate",
+          "Return reminders"
+        ],
+        "outOfScope": [
+          "Registering premises or filing returns with the WRA",
+          "Charging guests",
+          "Councils other than Cardiff until one adopts the levy"
+        ],
+        "buildEstimate": "About 5 build days"
+      },
+      "techStack": "React + Vite + Tailwind front end; Supabase sign-in and a per-app schema for premises, stays and returns; a small Node route on backend-hub to fetch calendar feeds; scheduled jobs and transactional email for reminders.",
+      "pricing": {
+        "model": "Per unit for agents; yearly for self-managing hosts",
+        "pricePoint": "GBP 2 per unit a month for agents; GBP 29 a year for a host (estimates)",
+        "rationale": "Under Visitor Levy App's GBP 6 per property in Scotland; a host owes perhaps GBP 360 to 540 a year (the reviewer's estimate), so a host's price must stay small."
+      },
+      "revenueSketch": "Estimate: 10 agents x 40 units x GBP 2 = GBP 800 a month, plus 60 hosts x GBP 29 = GBP 1,740 a year. Assumes Cardiff alone until another council adopts the levy, which cannot happen before 2028.",
+      "distribution": "First 10: a free bilingual 'Cardiff visitor levy calculator' page found by search, leading to the paid book; a small search-ad test on Cardiff levy terms. Airbnb's content policy bars content created for the sole purpose of advertising a separate business (https://www.airbnb.com/help/article/546), so no posting in the Airbnb Community Center. Facebook host groups and Reddit r/Cardiff: rule unknown: check before posting.",
+      "validationTest": {
+        "method": "Publish the free calculator page (enter stays, get the levy per rate) with two buttons, 'GBP 29 a year for hosts' and 'GBP 2 per unit a month for agents', each asking for an email; about GBP 50 of search ads limited to Cardiff for 30 days. No outreach and no posts in communities.",
+        "successCriteria": "At least 2 agents managing 10 or more units, or at least 10 hosts, pre-order within 60 days.",
+        "cost": "About GBP 50 in ads and 1 build day."
+      },
+      "moat": "Six years of stay records per premises live in the app; Welsh rules and a bilingual interface are work Scottish tools have not done. Thin: Visitor Levy App could add Wales, with one unit free.",
+      "compliance": [
+        "Tax: the app works out figures; it does not register premises or file returns, is not endorsed by the WRA or the Welsh Government, and does not guarantee the figures; the provider stays responsible.",
+        "Data: guest counts and stay dates only; no guest names or dates of birth, which the WRA does not need; UK GDPR processor terms for agents and hosts; six-year retention with export and deletion.",
+        "VAT: the levy is shown before VAT and VAT is left to the provider's adviser.",
+        "Language: Welsh and English interface.",
+        "Accessibility: the app meets WCAG 2.2 AA."
+      ],
+      "risks": [
+        {
+          "risk": "The market is one city until 2028 or later.",
+          "mitigation": "Sell to agents per unit; add a council when it adopts the levy."
+        },
+        {
+          "risk": "Visitor Levy App or freetobook adds Wales.",
+          "mitigation": "Ship before April 2027 with Welsh rules, bilingual pages and owner statements for agents."
+        },
+        {
+          "risk": "Hosts owe little and file once a year, so they use a spreadsheet.",
+          "mitigation": "Lead with agents, who file for many owners; keep the host price yearly and small."
+        },
+        {
+          "risk": "Calendar feeds lack guest counts and booking dates.",
+          "mitigation": "Prefer booking-system exports, and list stays missing data for the user to complete."
+        }
+      ],
+      "scores": {
+        "pain": 1,
+        "willingnessToPay": 1,
+        "reachability": 1,
+        "competitiveGap": 3,
+        "feasibility": 4,
+        "complianceBurden": 4,
+        "total": 14
+      },
+      "scoreRationale": {
+        "pain": "Mandate only, with one return a year for most hosts and the first yearly return due 31 May 2028 (https://gov.wales/visitor-levy-for-visitor-accommodation-providers-technical-guidance-duty-to-make-returns-html); no complaint found.",
+        "willingnessToPay": "A host owes perhaps a few hundred pounds a year, the WRA shows a do-it-yourself table (https://www.gov.wales/visitor-levy-accommodation-providers-steps/tally-levy), and the nearest app gives one unit free (https://visitorlevyapp.com/pricing).",
+        "reachability": "About 600 to 700 self-managed hosts and 88 to 94 agents in one city (https://airbtics.com/top-airbnb-management-companies-in-cardiff-united-kingdom); search is the only self-serve channel.",
+        "competitiveGap": "Nothing covers the Welsh levy; the Scottish tools are close (https://en.freetobook.com/blog/scottish-visitor-levy-tax/).",
+        "feasibility": "Fixed national rates and a simple ledger (https://www.gov.wales/visitor-levy-accommodation-providers-steps/how-much); calendar feeds lack guest counts (https://www.uplisting.io/blog/how-the-airbnb-icalendar-ical-changes-will-affect-you-and-how-to-avoid-disruption).",
+        "complianceBurden": "Guest counts only, no names or dates of birth, but six-year retention (https://www.gov.wales/visitor-levy-accommodation-providers-steps/good-records)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Researched as a register and levy ledger for small hosts across Wales: only Cardiff charges the levy, from 2027-04-01; no council is consulting; the WRA's filing service takes totals typed by hand and has no calculator; platforms do not remit; Visitor Levy App and freetobook cover Scotland only. The reviewer confirmed no Welsh tool exists and the rates, penalties, totals per address and rate and six-year retention were read right, and corrected the rest: bookings made before 28 September 2026 owe nothing unless nights or guests are added (so the ledger needs booking dates, which calendar feeds lack), the work-stay exemption covers only the provider's own staff, nil returns are required, quarterly returns fall due 60 days after each quarter, and the first yearly return is due 31 May 2028. It estimated about 600 to 700 self-managed hosts in Cardiff, each owing perhaps GBP 360 to 540 a year, and found Airbnb's calendar export has no guest count. Rescored from 17 to 14: pain 2 to 1, willingnessToPay 2 to 1, reachability 2 to 1. Re-scoped, as the reviewer proposed, to Cardiff's letting agents first (88 to 94 run about 1,006 listings), with booking-system imports that carry guest counts and per-owner totals."
+      },
+      "inspiredBy": "https://www.gov.wales/visitor-levy-checklist-accommodation-providers-cardiff",
+      "gateGap": {
+        "missing": [
+          "total 14 is below 22",
+          "pain 1 is below 4: no complaint found; the evidence is mandates only",
+          "willingnessToPay 1 is below 3: no payment for this task found in Wales",
+          "no evidence item is a complaint"
+        ],
+        "closedBy": "The calculator page and pre-order buttons in validationTest close the largest gap, willingness to pay: 2 agents managing 10 or more units, or 10 hosts, pre-ordering within 60 days would raise willingnessToPay to 3."
+      }
+    },
+    {
+      "n": 4,
+      "title": "Software Use-Tax Worksheet for California and Colorado Bookkeepers",
+      "slug": "software-use-tax-worksheet-ca-co",
+      "category": "Accessibility & Compliance",
+      "smallBusiness": true,
+      "complexity": "Weekend MVP",
+      "confidence": "provisional",
+      "topic": "Data & Visualization",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": false,
+        "engine": true,
+        "shared": true,
+        "notes": {
+          "stateful": "Each client's vendor list, with which vendors charged tax and the evidence, is kept and reused the next year.",
+          "connected": "Takes the client's own card or bank CSV export and its software invoices.",
+          "engine": "California use tax at the district rate where each user works (CDTFA's rate service), the Colorado DR 0252 line with only state-administered taxes, credit for tax a vendor charged, and the signed-licence exemption.",
+          "shared": "The bookkeeper prepares a worksheet and its evidence that the client, or the person filing the return, receives."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "backend"
+      ],
+      "summary": "A yearly worksheet for bookkeepers and preparers with California or Colorado clients: which software vendors did not charge the new 2027 tax, the use tax owed on them, and the evidence for the return.",
+      "public": {
+        "summary": "Work out, for each client, the use tax owed on software subscriptions whose vendors did not charge sales tax, with the evidence behind the figure.",
+        "problem": "From 2027 California and Colorado tax software subscriptions, and when a vendor does not charge the tax, your client owes it. Card statements do not show which vendors charged tax, the rate depends on where each person using the software works, and the figure has to go on the right return line.",
+        "forWhom": "Bookkeepers and tax preparers whose small-business clients are in California or Colorado.",
+        "benefits": [
+          "A list of the software vendors that did not charge tax",
+          "The use tax owed, at the right local rate",
+          "The figure for the return, with the evidence kept",
+          "Last year's vendor list ready for next year"
+        ]
+      },
+      "problemStatement": "From 1 January 2027 California taxes prewritten software accessed remotely and Colorado taxes software delivered by any means; a business that buys from a vendor that does not collect owes use tax, card statements do not show whether tax was charged, California sets the rate where the person using the software is located, and Colorado's state return takes only state-administered taxes while home-rule cities file separately.",
+      "description": "The bookkeeper uploads a client's card or bank CSV and the software invoices for the year. The app groups the software vendors, reads from each invoice whether California or Colorado tax was charged, and lists the vendors that did not. It computes California use tax at the district rate where each user works, credits tax paid to another state, computes the Colorado DR 0252 line with state-administered taxes only and lists home-rule cities separately, flags a client whose untaxed purchases pass $10,000 a year (California's qualified purchaser test), and exports the figures for the return with the evidence per vendor. It does not file.",
+      "targetCustomer": "Bookkeepers and tax preparers with small-business clients in California or Colorado.",
+      "buyer": "The bookkeeper or preparer, per client per year, from the practice's own budget.",
+      "whyNow": "California's SB 122 and Colorado's HB 26-1223 make software taxable from 1 January 2027 (CDTFA Special Notice L-1036; Colorado guidance of October 2026), CDTFA's emergency regulations were still proposed on 2026-11-18, and the first returns that carry the new use tax fall due in 2027.",
+      "founderFit": "Nothing beyond building it alone.",
+      "problemEvidence": [
+        {
+          "url": "https://cdtfa.ca.gov/taxes-and-fees/digital-products-emergency.htm",
+          "source": "cdtfa.ca.gov",
+          "author": "unknown",
+          "date": "2026-11-18",
+          "kind": "mandate",
+          "summary": "CDTFA's proposed emergency regulations for digital products (notice dated 11/18/26), including place of use when users are in several places."
+        },
+        {
+          "url": "https://tax.colorado.gov/sites/default/files/documents/DR0252_2026.pdf",
+          "source": "tax.colorado.gov",
+          "author": "unknown",
+          "date": "2026-07-06",
+          "kind": "mandate",
+          "summary": "Colorado's consumer use tax return instructions (07/06/26): businesses owing under $300 a year file by January 20; the Department does not administer city or county use taxes."
+        },
+        {
+          "url": "https://productideas.xero.com/forums/967133-reports-tax/suggestions/51404356-us-sales-tax-use-tax-application-and-returns",
+          "source": "productideas.xero.com",
+          "author": "poster A",
+          "date": "2026-06-15",
+          "kind": "complaint",
+          "summary": "A Xero user asks for US use tax support (a liability account, untaxed bills, returns); about use tax in general, not software or 2027, 1 vote, and the poster's role is not stated."
+        },
+        {
+          "url": "https://trykintsugi.com/blog/use-tax-now-handled-where-you-already-manage-sales-tax.md",
+          "source": "trykintsugi.com",
+          "author": "unknown",
+          "date": "2026-09-24",
+          "kind": "spend",
+          "summary": "Kintsugi now calculates, monitors and files use tax alongside sales tax, crediting vendor-charged tax; its Starter plan charges $75 per action."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Kintsugi use tax",
+          "url": "https://trykintsugi.com/pricing.md",
+          "price": "Free tier; Starter $75 per action (a filing is an action); use-tax price not published",
+          "gap": "Aimed at businesses that already manage sales tax with Kintsugi; not a preparer's worksheet."
+        },
+        {
+          "name": "Taxwire on Ramp",
+          "url": "https://ramp.com/integrations/taxwire",
+          "price": "Free, one-off scan",
+          "gap": "Only for Ramp customers headquartered in California; gives a range, no Colorado, no filing figure."
+        },
+        {
+          "name": "Taxwire filings",
+          "url": "https://www.taxwire.com/blog/use-tax-saas-purchases-california-colorado",
+          "price": "unknown (demo)",
+          "gap": "A managed service for finance teams, not self-serve."
+        },
+        {
+          "name": "Avalara for QuickBooks Online (accounts payable use tax)",
+          "url": "https://www.avalara.com/us/en/blog/ap-consumer-use-tax-automation-quickbooks.html",
+          "price": "unknown",
+          "gap": "A separate subscription aimed at construction and manufacturing."
+        },
+        {
+          "name": "Spreadsheet and CDTFA's free rate lookup",
+          "url": "https://www.cdtfa.ca.gov/taxes-and-fees/use-tax/business-use.htm",
+          "price": "Free",
+          "gap": "Works for a handful of vendors; the preparer still has to check each invoice and each user's location."
+        }
+      ],
+      "keyFeatures": [
+        "Vendor grouping from a card or bank CSV",
+        "Invoice check for California or Colorado tax charged",
+        "California use tax at each user's district rate",
+        "Colorado DR 0252 line with home-rule cities listed separately",
+        "Qualified purchaser flag at $10,000",
+        "Export of figures and evidence per client"
+      ],
+      "mvpScope": {
+        "features": [
+          "CSV upload and vendor grouping",
+          "Taxed or untaxed marking with the invoice attached",
+          "California figure at one or more user locations",
+          "Colorado state line",
+          "Export"
+        ],
+        "outOfScope": [
+          "Filing returns",
+          "Accounting-system connections",
+          "Home-rule city returns",
+          "Any state beyond California and Colorado"
+        ],
+        "buildEstimate": "About 3 build days"
+      },
+      "techStack": "React + Vite + Tailwind front end; Supabase sign-in and a per-app schema for clients, vendors and worksheets; a small Node route on backend-hub to call CDTFA's rate service.",
+      "pricing": {
+        "model": "Per client per year, bought by the bookkeeper",
+        "pricePoint": "$15 per client per year (estimate)",
+        "rationale": "Below one Kintsugi action at $75 and small next to a preparer's fee; the leftover tax per client is likely small, so the price has to be too."
+      },
+      "revenueSketch": "Estimate: 40 practices x 15 clients x $15 = $9,000 a year. Assumes preparers find it by search in early 2027; no source counts how many small businesses will owe this tax, and the reviewer judged the leftover tax per business to be small.",
+      "distribution": "First 10: a free 'California and Colorado software use tax 2027' worksheet page found by search, leading to the paid per-client version. Xero's community forbids 'advertisements, promotions, or posts of a commercial nature', and QuickBooks' community does not allow promoting a business; Reddit bookkeeping communities: rule unknown: check before posting.",
+      "validationTest": {
+        "method": "A landing page with a free estimator (paste a vendor list, get an estimated 2027 California and Colorado use tax) and a '$15 per client per year' pre-order button, with about $150 of search ads on 'California use tax software 2027' from December 2026 to January 2027. No outreach and no contact with anyone in the evidence.",
+        "successCriteria": "At least 40 estimates and at least 5 pre-orders from bookkeepers or preparers, or at least 20 waitlist sign-ups that name a practice.",
+        "cost": "About $150 in ads and 2 build days."
+      },
+      "moat": "Thin: a client's vendor history and the rate rules save time each year, but Kintsugi or Taxwire could add the same worksheet.",
+      "compliance": [
+        "Tax: not tax advice and it does not file; every figure shows its workings and the date of the rule it used, because CDTFA's regulations were still proposed on 2026-11-18.",
+        "Never call a vendor registered or unregistered without proof, and never use CDTFA's estimated table for business purchases (CDTFA says it may not be used for them).",
+        "Data: client names, vendors, amounts and invoices; strip card numbers from uploads, encrypt, delete on request.",
+        "Accessibility: the app meets WCAG 2.2 AA."
+      ],
+      "risks": [
+        {
+          "risk": "Almost every vendor collects, so the leftover tax is too small to pay for.",
+          "mitigation": "Measure the untaxed share in the validation test before building beyond it; reposition as checking that each vendor charged the right tax if that is where the errors are."
+        },
+        {
+          "risk": "Rules change while the regulations are proposed.",
+          "mitigation": "Rules kept in a dated table and shown with every figure."
+        },
+        {
+          "risk": "Kintsugi or Taxwire moves down to preparers.",
+          "mitigation": "Stay a cheap per-client worksheet that covers Colorado and businesses not on Ramp."
+        },
+        {
+          "risk": "Wrong rate near a district boundary.",
+          "mitigation": "Show every rate returned and ask the preparer to confirm each user's location."
+        }
+      ],
+      "scores": {
+        "pain": 1,
+        "willingnessToPay": 1,
+        "reachability": 2,
+        "competitiveGap": 2,
+        "feasibility": 2,
+        "complianceBurden": 2,
+        "total": 10
+      },
+      "scoreRationale": {
+        "pain": "Mandate only: the law starts in 2027 and the only related post is a 1-vote request about use tax in general (https://productideas.xero.com/forums/967133-reports-tax/suggestions/51404356-us-sales-tax-use-tax-application-and-returns).",
+        "willingnessToPay": "Most vendors will register and collect, leaving little tax, and Kintsugi already files use tax for $75 per action (https://trykintsugi.com/pricing.md).",
+        "reachability": "Self-serve search only; the accounting communities forbid promotion (https://www.cdtfa.ca.gov/taxes-and-fees/use-tax/business-use.htm shows the return routes preparers use).",
+        "competitiveGap": "Kintsugi, Taxwire's free Ramp scan and Avalara on QuickBooks each cover part of the job (https://ramp.com/integrations/taxwire).",
+        "feasibility": "It needs invoices, a rate for each user's location and Colorado's split administration (https://tax.colorado.gov/sites/default/files/documents/DR0252_2026.pdf).",
+        "complianceBurden": "It produces a figure for a tax return while the regulations are still proposed (https://cdtfa.ca.gov/taxes-and-fees/digital-products-emergency.htm)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Researched as a use-tax ledger for small businesses connected to QuickBooks or Xero: no complaint was found; large vendors with California sales over $500,000 must register and collect, leaving small and foreign vendors; Taxwire's free Ramp scan and Kintsugi cover parts. The reviewer found the leftover tax per business is likely smaller than a $79 yearly fee (its estimate; no source counts it), Kintsugi files use tax at $75 per action, Special Notice L-1036 was misread (it names purchasers only for the $5 million liability shift; the duty on purchasers of unregistered sellers is on CDTFA's purchasers page), card statements do not show tax so invoices are needed, and the planned Colorado line wrongly added city and county rates the state does not administer. Rescored from 15 to 10: pain 2 to 1, willingnessToPay 2 to 1, competitiveGap 3 to 2, feasibility 3 to 2, complianceBurden 3 to 2. Re-scoped, as the reviewer proposed, to a per-client worksheet for bookkeepers and preparers, with Colorado computed correctly and no accounting connection."
+      },
+      "inspiredBy": "https://cdtfa.ca.gov/formspubs/l1036.pdf",
+      "gateGap": {
+        "missing": [
+          "total 10 is below 22",
+          "pain 1 is below 4: no one has described the problem yet; the rule starts on 2027-01-01",
+          "willingnessToPay 1 is below 3: no payment for this task by a small business was found",
+          "only 1 complaint-kind item, and it is about use tax in general"
+        ],
+        "closedBy": "The estimator and pre-order button in validationTest close the largest gap, willingness to pay: 5 pre-orders from bookkeepers or preparers would raise willingnessToPay to 3, and the estimates would show whether the untaxed share is large enough to matter."
+      }
+    }
+  ],
+  "runNotes": {
+    "weekday": "Monday",
+    "domainLens": "Accessibility and regulatory compliance for small businesses and startups: website accessibility, privacy notices, sales tax, licensing and permits",
+    "focusSources": [
+      "A13 Discourse forums, any niche",
+      "B12 Paid app marketplaces",
+      "C5 Policy and regulation trackers"
+    ],
+    "searches": [
+      "xero-coi-gate-research: Xero app certificate of insurance subcontractor expiry tracking",
+      "xero-coi-gate-research: apps.xero.com subcontractor compliance insurance certificate",
+      "xero-coi-gate-research: PaperBoss COI tracking pricing",
+      "xero-coi-gate-research: COI tracking QuickBooks integration hold payment expired insurance subcontractor small contractor",
+      "xero-coi-gate-research: SubDoc subcontractor document tracking $14 month",
+      "xero-coi-gate-research: \"COI Clock\" certificate of insurance",
+      "xero-coi-gate-research: Subdoc subcontractor compliance software pricing Pro Advanced vendors",
+      "xero-coi-gate-research: PaperBoss subcontractor documents COI W-9 lien waivers software",
+      "xero-coi-gate-research: subdoc.io OR getsubdoc subcontractor COI tracker passwordless upload",
+      "xero-coi-gate-research: CertCove certificate of insurance tracking pricing",
+      "xero-coi-gate-research: \"Xero\" integration COI tracking software subcontractor insurance expiry bills pay run",
+      "xero-coi-gate-research: site:apps.xero.com subcontractor insurance",
+      "xero-coi-gate-research: Xero app store \"certificate of currency\" subcontractor expiry Australia app",
+      "xero-coi-gate-research: TrustLayer QuickBooks integration vendor compliance before payment pricing",
+      "xero-coi-gate-research: TrustLayer Xero integration",
+      "xero-coi-gate-research: Xero app hold bill until supplier insurance certificate compliant approval workflow ApprovalMax supplier documents",
+      "xero-coi-gate-research: Xero product updates 2026 contact files expiry date documents new feature",
+      "xero-coi-gate-research: Xero 2026 bills \"on hold\" new feature bill payment hold supplier",
+      "xero-coi-gate-research: Xero API ACCPAY invoice PlannedPaymentDate update API",
+      "xero-coi-gate-research: XeroAPI Xero-OpenAPI xero_accounting.yaml github",
+      "xero-coi-gate-research: Xero API change AUTHORISED invoice back to DRAFT not allowed status transition",
+      "xero-coi-gate-research: Xero developer pricing tiers Starter Core Plus 2026 connections",
+      "xero-coi-gate-research: workers compensation premium audit uninsured subcontractor payments added to payroll certificate of insurance",
+      "xero-coi-gate-research: NSW principal contractor liable workers compensation uninsured subcontractor subcontractor's statement certificate of currency",
+      "xero-coi-gate-research: HSE employers liability compulsory insurance minimum £5 million subcontractors construction",
+      "xero-coi-gate-research: Adaptive construction AI accounting adaptive.build QuickBooks Xero integration pricing",
+      "xero-coi-gate-research: BuildPass insurances certificate of currency expiry Xero integration pricing",
+      "xero-coi-gate-research: Payapps subcontractor insurance compliance Xero payment claims expired insurance",
+      "xero-coi-gate-research: Payapps pricing per month head contractor subcontractors free",
+      "xero-coi-gate-research: QuickBooks App Store certificate of insurance tracking app vendor COI expiration sync",
+      "xero-coi-gate-research: COI Clock app subcontractor insurance expiration free tier $39",
+      "xero-coi-gate-research: COI tracking \"Xero\" bills subcontractor insurance check before paying app 2026",
+      "xero-coi-gate-research: subdoc.io pricing",
+      "xero-coi-gate-research: subcontractor compliance app integrates Xero insurance expiry alerts Australia New Zealand builders small",
+      "xero-coi-gate-research: Xero Community guidelines advertisements promotions posts of a commercial nature",
+      "xero-coi-gate-research: reddit r/xero rules self promotion",
+      "xero-coi-gate-research: productideas.xero.com contacts insurance expiry date supplier certificate reminder",
+      "xero-coi-gate-research: Xero developer platform terms 2026 AI model training prohibited API data",
+      "square-exemption-certs-review: Square tax exempt customer profile feature 2026",
+      "square-exemption-certs-review: Square App Marketplace sales tax exemption certificate app",
+      "square-exemption-certs-review: free exemption certificate management software small business",
+      "square-exemption-certs-review: squareup.com release notes 2026 \"tax exempt\" customer",
+      "square-exemption-certs-review: Square \"tax exempt\" toggle customer directory profile",
+      "square-exemption-certs-review: Kintsugi sales tax Square integration exemption certificates",
+      "square-exemption-certs-review: TaxCloud Square integration exemption certificates",
+      "square-exemption-certs-review: Numeral OR Zamp OR Commenda sales tax Square POS exemption certificate management",
+      "square-exemption-certs-review: squareup.com app-marketplace sales tax apps Avalara TaxJar DAVO exemption",
+      "square-exemption-certs-review: Square sellers resale certificate tracking app tax exempt customers Square POS integration",
+      "square-exemption-certs-review: \"app-marketplace\" squareup \"exemption certificate\"",
+      "square-exemption-certs-review: Square customer custom fields \"tax exempt\" certificate expiration help article",
+      "square-exemption-certs-review: Square Orders API line item applied_taxes POS order tax removed catalog item tax_ids auto_applied",
+      "square-exemption-certs-review: developer.squareup.com forums POS order tax turned off line item applied_taxes missing exempt sale",
+      "square-exemption-certs-review: Avalara CertExpress free collect store exemption certificates expiration reminders US",
+      "square-exemption-certs-review: \"CertExpress\" free sign up seller exemption certificates small business review limits",
+      "square-exemption-certs-review: ExemptHQ certificate management pricing free plan integrations Square",
+      "square-exemption-certs-review: EXEMPTAX integrations Square POS pricing",
+      "square-exemption-certs-review: Avalara AvaTax Square POS integration exemption certificates 2026",
+      "uk-complaints-log-research: Data (Use and Access) Act data protection complaints small business how to handle forum",
+      "uk-complaints-log-research: \"data protection complaints\" new rules small business \"how do I\" OR \"anyone else\" 2026 forum",
+      "uk-complaints-log-research: \"164A\" Data Protection Act 2018 complaints by data subjects legislation.gov.uk acknowledge 30 days",
+      "uk-complaints-log-research: \"data protection complaints procedure\" template free small business UK 2026",
+      "uk-complaints-log-research: GDPR plugin WordPress \"complaint form\" data protection complaints UK DUAA",
+      "uk-complaints-log-research: \"complaints\" \"Data (Use and Access) Act\" uk business forums OR accountingweb OR reddit small business how to",
+      "uk-complaints-log-research: data protection complaints procedure new law June 2026",
+      "uk-complaints-log-research: data protection complaints procedure new law 2026",
+      "uk-complaints-log-research: Seers \"complaint\" data protection complaints management DUAA pricing",
+      "uk-complaints-log-research: \"data protection complaints\" software OR tool OR app small business UK log acknowledge 30 days",
+      "uk-complaints-log-research: DPOeye pricing data protection complaints module small business",
+      "uk-complaints-log-research: iubenda OR Termly OR Complianz OR CookieYes \"data protection complaint\" form UK Data Use and Access Act 2026",
+      "uk-complaints-log-research: Seers pricing plans data subject request complaints UK small business per month",
+      "uk-complaints-log-research: \"complaints\" DUAA \"complaint form\" generator OR software \"free\" UK GDPR small business launched 2026",
+      "uk-complaints-log-research: ICO privacy notice generator updated complaints to us Data Use and Access Act small business",
+      "uk-complaints-log-research: \"DUAA\" OR \"Data Use and Access Act\" complaints site:ukbusinessforums.co.uk OR site:accountingweb.co.uk OR site:wordpress.org/support",
+      "uk-complaints-log-research: DUAA complaints management software UK SME \"per month\" complaint log acknowledgement deadline tracking",
+      "uk-complaints-log-research: sole trader \"data protection complaints\" do I need procedure privacy policy update June 2026",
+      "uk-complaints-log-research: \"complaints\" \"data protection\" new requirement privacy policy update \"19 June\" small charity OR clinic OR therapist OR tutor forum question",
+      "uk-complaints-log-research: ukbusinessforums GDPR complaints procedure privacy policy 2026 thread",
+      "uk-complaints-log-research: wordpress plugin support \"complaint form\" UK GDPR data protection complaints 2026",
+      "uk-complaints-log-research: accountingweb any answers \"complaints procedure\" data protection DUAA practice engagement letter 2026",
+      "uk-complaints-log-research: WordPress.org detailed plugin guidelines \"Software as a Service\" permitted serviceware trialware",
+      "uk-complaints-log-research: \"data protection complaints procedure template\"",
+      "uk-complaints-log-research: Supabase London region eu-west-2 data processing agreement UK GDPR",
+      "mandates-gatherer (C5, C10): state privacy law effective January 1, 2027 small business requirements",
+      "mandates-gatherer (C5, C10): Data (Use and Access) Act commencement regulations 2026 small business cookies complaints procedure",
+      "mandates-gatherer (C5, C10): FTC rule unfair deceptive fees cancellation click to cancel 2026 rulemaking small business",
+      "mandates-gatherer (C5, C10): sales tax change January 1 2027 state remote seller threshold marketplace small sellers",
+      "mandates-gatherer (C5, C10): free plan discontinued 2026 small business compliance tool shutting down sales tax filing app sunset",
+      "mandates-gatherer (C5, C10): European Accessibility Act enforcement 2026 microenterprise fines national authority first cases",
+      "mandates-gatherer (C5, C10): ICO guidance data protection complaints organisations \"complaint form\" electronically 30 days acknowledge small business",
+      "mandates-gatherer (C5, C10): Delaware HB 380 Personal Data Privacy Act amendment 10,000 consumers January 1 2027 legis.delaware.gov",
+      "mandates-gatherer (C5, C10): Shopify Tax automated filing ending December 31 2026 help center",
+      "mandates-gatherer (C5, C10): Colorado Department of Revenue software as a service taxable January 1, 2027 HB25 sales tax",
+      "mandates-gatherer (C5, C10): CDTFA special notice electronically delivered prewritten software taxable January 1 2027",
+      "mandates-gatherer (C5, C10): short-term rental registration required 2027 new state law hosts permit number listing platforms deadline",
+      "mandates-gatherer (C5, C10): gov.wales Welsh Revenue Authority visitor accommodation register providers must register by 2027 visitor levy",
+      "mandates-gatherer (C5, C10): automatic renewal law effective 2027 state attorney general subscription cancellation small businesses notice requirements new",
+      "mandates-gatherer (C5, C10): \"free plan\" ending 2026 cookie consent OR privacy policy generator OR accessibility widget price increase small business announcement",
+      "nyc-click-to-cancel-research: NYC DCWP click to cancel rule gym studio owner automatic renewal October 2026",
+      "nyc-click-to-cancel-research: New York GBL 527-a automatic renewal amendment 2026 state budget click to cancel",
+      "nyc-click-to-cancel-research: nysenate.gov laws GBS 527-A automatic renewal text",
+      "nyc-click-to-cancel-research: \"click to cancel\" NYC rule yoga studio OR gym OR \"fitness studio\" small business owners comply Mindbody",
+      "nyc-click-to-cancel-research: reddit NYC can't cancel yoga studio membership 2026",
+      "nyc-click-to-cancel-research: studio owner \"click to cancel\" New York City rule membership renewal notice forum OR community 2026",
+      "nyc-click-to-cancel-research: Mindbody client cancel contract online consumer mode autorenew notification email",
+      "nyc-click-to-cancel-research: Mindbody support \"terminate\" contract online clients setting auto-renew reminder email",
+      "nyc-click-to-cancel-research: Mariana Tek click to cancel member self-cancel membership feature",
+      "nyc-click-to-cancel-research: Glofox OR Momence OR Arketa \"New York City\" click to cancel rule members cancel online",
+      "nyc-click-to-cancel-research: Vagaro membership auto-renew client cancel online membership notification renewal reminder",
+      "nyc-click-to-cancel-research: Vagaro support \"cancel membership\" client online \"New York\"",
+      "nyc-click-to-cancel-research: WellnessLiving New York click to cancel clients cancel auto-renewal online feature 2026",
+      "nyc-click-to-cancel-research: Stripe customer portal cancel subscription upcoming renewal reminder email settings",
+      "nyc-click-to-cancel-research: Arketa memberships client cancel online auto-renew help center",
+      "nyc-click-to-cancel-research: reddit gym owner OR studio owner \"New York\" \"click to cancel\" rule 2026",
+      "nyc-click-to-cancel-research: NYC small business \"click to cancel\" dance studio OR tutoring OR salon membership owners react DCWP",
+      "nyc-click-to-cancel-research: \"studio owner\" New York membership \"30 days notice\" cancellation illegal email cancel 2026",
+      "nyc-click-to-cancel-research: auto-renewal compliance software renewal notice automation small business click-to-cancel tool pricing",
+      "nyc-click-to-cancel-research: Square subscriptions customer cancel online \"manage subscription\" Square Appointments memberships auto-renew notice",
+      "nyc-click-to-cancel-research: Zen Planner member self-service cancel membership online New York",
+      "nyc-click-to-cancel-research: WellnessLiving help \"cancel\" purchase option client app auto-renew \"New York\" OR \"click to cancel\"",
+      "nyc-click-to-cancel-research: Mindbody product update clients cancel contracts online self-service \"click to cancel\" 2025 OR 2026",
+      "nyc-click-to-cancel-research: Vagaro \"click to cancel\" memberships customers cancel online feature",
+      "nyc-click-to-cancel-research: Arketa pricing plans per month studio",
+      "nyc-click-to-cancel-research: Mindbody business pricing starter plan per month 2026",
+      "nyc-click-to-cancel-research: Mindbody Public API client contracts endpoint developer access fee per site activation",
+      "nyc-click-to-cancel-research: Momence API memberships customers export CSV OR Arketa API developer",
+      "nyc-click-to-cancel-research: reddit r/gymowners rules self-promotion",
+      "nyc-click-to-cancel-research: Stripe App Marketplace publish app listing review guidelines developers",
+      "nyc-click-to-cancel-research: gymowners subreddit rules promotion",
+      "nyc-click-to-cancel-research: yoga studio owners pilates studio owners subreddit rules no self promotion",
+      "nyc-click-to-cancel-research: DCWP warning notices 187 gyms health clubs February 2026",
+      "nyc-click-to-cancel-research: \"New York\" studio owner asks online cancellation required members signed up in person email cancel rule question forum",
+      "complaints-gatherer (A13, A16, A14): site:community.shopify.com European Accessibility Act accessibility statement store 2026",
+      "complaints-gatherer (A13, A16, A14): site:community.squareup.com sales tax permit renewal license small business 2026",
+      "complaints-gatherer (A13, A16, A14): site:productideas.xero.com sales tax nexus economic threshold tracking",
+      "complaints-gatherer (A13, A16, A14): site:forum.ghost.org privacy policy \"do not sell\" opt-out state privacy law",
+      "complaints-gatherer (A13, A16, A14): dental clinic website accessibility lawsuit demand letter small practice forum 2026",
+      "complaints-gatherer (A13, A16, A14): contractor license renewal continuing education tracking multiple states forum complaint 2026",
+      "complaints-gatherer (A13, A16, A14): restaurant health permit renewal food handler certificate expiry tracking staff forum",
+      "complaints-gatherer (A13, A16, A14): \"accessibility statement\" microenterprise exemption EAA small business forum question services website 2026",
+      "complaints-gatherer (A13, A16, A14): therapist private practice website privacy policy new state privacy law HIPAA notice small practice forum discussion 2026",
+      "complaints-gatherer (A13, A16, A14): small online seller registered sales tax several states filing zero returns penalty late notice forum 2026",
+      "complaints-gatherer (A13, A16, A14): BFSG Abmahnung kleiner Onlineshop Barrierefreiheitserklärung Forum 2026",
+      "complaints-gatherer (A13, A16, A14): Square tax exempt customer exemption certificate app integration resale certificate small business",
+      "complaints-gatherer (A13, A16, A14): subcontractor certificate of insurance tracking small contractor expired COI software price per month",
+      "complaints-gatherer (A13, A16, A14): food truck owner permits every county commissary health permit renewal nightmare forum thread 2026",
+      "wales-visitor-levy-review: Wales visitor levy channel manager report Cardiff freetobook eviivo",
+      "wales-visitor-levy-review: Cardiff visitor levy number of accommodation providers impact assessment",
+      "wales-visitor-levy-review: \"visitor levy\" Wales Cardiff Smoobu OR Lodgify OR Beds24 OR Hostaway OR Guesty OR Sirvoy OR \"Little Hotelier\"",
+      "wales-visitor-levy-review: Cardiff Council cabinet report visitor levy revenue £ million bed spaces establishments",
+      "wales-visitor-levy-review: Welsh Revenue Authority visitor accommodation register opened providers registered so far",
+      "wales-visitor-levy-review: Cardiff visitor levy consultation document number of accommodation businesses short term lets Airbnb listings Cardiff",
+      "wales-visitor-levy-review: Visitor Accommodation (Register and Levy) Wales Bill explanatory memorandum regulatory impact assessment number of providers in Wales estimated",
+      "wales-visitor-levy-review: freetobook Welsh visitor levy Cardiff",
+      "wales-visitor-levy-review: Cardiff number of Airbnb short-term let listings 2025 OR 2026",
+      "wales-visitor-levy-review: Wales bedstock data Cardiff self-catering establishments serviced accommodation local authority",
+      "wales-visitor-levy-review: Airbnb Wales visitor levy Cardiff hosts collect pass-through fee help article",
+      "wales-visitor-levy-review: Booking.com Wales visitor levy Cardiff partner hub city tax setting",
+      "wales-visitor-levy-review: \"visitor levy\" software Wales WRA return Cardiff hosts app spreadsheet calculator",
+      "wales-visitor-levy-review: Airbnb iCal export what information included guest name number of guests reservation code",
+      "wales-visitor-levy-review: Airbnb hosts export reservations CSV transaction history columns guests nights booked date",
+      "wales-visitor-levy-review: Beds24 OR Smoobu OR Lodgify \"tourist tax\" per person per night setting report exemptions children",
+      "wales-visitor-levy-review: Cardiff hosts visitor levy Airbnb \"spare room\" B&B worried admin October 2026",
+      "wales-visitor-levy-review: \"visitor levy\" Wales OR Cardiff eviivo OR Sirvoy OR \"Little Hotelier\" OR Cloudbeds OR Supercontrol OR Bookster support update",
+      "wales-visitor-levy-review: welshrevenueauthority.blog.gov.wales visitor levy records template calculator November 2026",
+      "wales-visitor-levy-review: Wales visitor accommodation register \"registered\" providers figure WRA November 2026 Cardiff premises",
+      "wales-visitor-levy-review: Gwynedd OR Pembrokeshire OR Swansea visitor levy decision November 2026",
+      "wales-visitor-levy-review: Welsh visitor levy record keeping spreadsheet template free download hosts",
+      "wales-visitor-levy-review: Scotland visitor levy Edinburgh small hosts software adoption spreadsheet \"visitor levy\" app review 2026",
+      "wales-visitor-levy-review: Booking.com extranet download reservations list Excel columns \"booked on\" persons adults children",
+      "square-exemption-certs-research: Square tax exempt customer profile 2026",
+      "square-exemption-certs-research: squareup.com help tax exempt sales customer exemption certificate",
+      "square-exemption-certs-research: Square developer changelog 2026 tax exempt customer",
+      "square-exemption-certs-research: Square release notes \"tax exempt\" customers 2026 new feature",
+      "square-exemption-certs-research: Square customer directory \"tax exempt\" custom field customer card toggle",
+      "square-exemption-certs-research: Square Orders API taxes line item applied_taxes auto_apply_taxes pricing_options documentation",
+      "square-exemption-certs-research: Square UpdateOrder completed order cannot be updated \"COMPLETED\" orders API update restrictions",
+      "square-exemption-certs-research: Square API upload file attachment to customer profile customer directory files API",
+      "square-exemption-certs-research: sales tax exemption certificate expiration by state table resale certificate validity",
+      "square-exemption-certs-research: Streamlined Sales Tax certificate of exemption form F0003 member states MTC uniform resale certificate states accepted",
+      "square-exemption-certs-research: streamlinedsalestax.org exemption certificate \"recurring business relationship\" 12 months renewal seller relief",
+      "square-exemption-certs-research: Square App Marketplace exemption certificate tax exempt customers app",
+      "square-exemption-certs-research: Avalara exemption certificate management pricing small business per month 2026",
+      "square-exemption-certs-research: Shopify app tax exempt customers resale certificate upload approval pricing",
+      "square-exemption-certs-research: Streamlined Sales Tax certified service provider free \"volunteer seller\" eligibility physical presence state compensation",
+      "square-exemption-certs-research: squareup.com app-marketplace sales tax app Avalara TaxJar integration Square exempt",
+      "square-exemption-certs-research: TaxJar exemption certificates customer exemptions pricing Square integration",
+      "square-exemption-certs-research: \"App Marketplace\" Square \"exemption certificates\" OR \"resale certificates\" app listing",
+      "square-exemption-certs-research: Square developer forum App Marketplace new listings paused 2026",
+      "square-exemption-certs-research: Square OAuth app not listed on App Marketplace authorize other sellers allowed",
+      "square-exemption-certs-research: Square Seller Community code of conduct \"promote your own products or services\"",
+      "square-exemption-certs-research: reddit r/square subreddit rules self promotion Square sellers",
+      "square-exemption-certs-research: mtc.gov Uniform Sales & Use Tax Resale Certificate Multijurisdiction states accept",
+      "square-exemption-certs-research: developer.squareup.com docs changelog connect-logs 2026-10 OR 2026-11 Customers API",
+      "square-exemption-certs-research: upwork OR freelancer job Square POS tax exempt customers exemption certificates sales tax reconciliation 2026",
+      "wales-visitor-levy-research: Wales visitor levy councils announced start date 2027 Welsh Revenue Authority",
+      "wales-visitor-levy-research: Gwynedd OR Pembrokeshire OR Conwy OR Anglesey council visitor levy decision 2026",
+      "wales-visitor-levy-research: Cardiff visitor levy holiday let owners worried 2026",
+      "wales-visitor-levy-research: Airbnb Wales visitor levy collect remit hosts Cardiff",
+      "wales-visitor-levy-research: Airbnb help \"visitor levy\" Wales OR Cardiff OR Edinburgh collect and remit",
+      "wales-visitor-levy-research: Edinburgh visitor levy Airbnb collects on behalf of hosts",
+      "wales-visitor-levy-research: \"Wales visitor levy calculator\"",
+      "wales-visitor-levy-research: Freetobook OR eviivo OR Smoobu OR Lodgify \"visitor levy\" Wales",
+      "wales-visitor-levy-research: visitor levy software tool holiday let hosts Edinburgh Scotland returns calculate",
+      "wales-visitor-levy-research: Sykes Cottages OR \"Coast & Country\" OR \"Menai Holiday Cottages\" Wales visitor levy owners registration",
+      "wales-visitor-levy-research: channel manager PMS \"Welsh visitor levy\" OR \"Wales visitor levy\" feature hosts",
+      "wales-visitor-levy-research: Bookster visitor levy Wales Cardiff holiday rental software",
+      "wales-visitor-levy-research: freetobook visitor levy tax setting per person per night",
+      "wales-visitor-levy-research: Wales visitor levy app OR software OR spreadsheet template for B&B and holiday let owners",
+      "wales-visitor-levy-research: eviivo visitor levy Wales OR Scotland support",
+      "wales-visitor-levy-research: Smoobu tourist tax per person per night setting help",
+      "wales-visitor-levy-research: community.withairbnb.com Wales registration Welsh Revenue Authority visitor levy host",
+      "wales-visitor-levy-research: reddit Wales visitor accommodation register Welsh Revenue Authority holiday let spare room",
+      "wales-visitor-levy-research: \"visitor levy\" Wales forum holiday cottage owner registration \"WRA\" confusing",
+      "wales-visitor-levy-research: Wales visitor levy register host",
+      "wales-visitor-levy-research: propertytribes OR landlordzone OR moneysavingexpert Wales holiday let \"visitor levy\" OR \"visitor accommodation register\" 2026",
+      "wales-visitor-levy-research: Wales small B&B owner \"register\" \"Welsh Revenue Authority\" penalty worried casual host spare room levy record keeping burden",
+      "wales-visitor-levy-research: Cardiff tourist tax guesthouse owner admin burden visitor levy BBC 2026",
+      "wales-visitor-levy-research: estimated number of visitor accommodation providers Wales register \"providers\" regulatory impact assessment Cardiff short-term lets number",
+      "wales-visitor-levy-research: Welsh Language Standards do they apply to private businesses small companies Welsh Language Commissioner",
+      "wales-visitor-levy-research: Airbnb iCal export calendar does not include guest count Booking.com iCal fields",
+      "wales-visitor-levy-research: Airbnb export reservations CSV columns \"# of adults\" \"# of children\" host",
+      "wales-visitor-levy-research: Airbnb Community Center guidelines self-promotion advertising links not allowed",
+      "wales-visitor-levy-research: PASC UK Cymru self catering Wales visitor levy members guidance supplier directory",
+      "wales-visitor-levy-research: Booking.com partner hub visitor levy Wales Cardiff tax setting partners",
+      "wales-visitor-levy-research: Airbnb \"Wales\" visitor levy \"custom taxes\" OR \"collect\" tool hosts Cardiff 2027 announcement",
+      "wales-visitor-levy-research: Wales levy OR \"Welsh Revenue Authority\" OR \"visitor accommodation register\" host",
+      "wales-visitor-levy-research: WalesOnline Cardiff Airbnb host tourist tax levy register \"spare room\" 2026",
+      "wales-visitor-levy-research: holiday let owners Wales anger new register Welsh Revenue Authority October 2026 \"register\" owners say",
+      "wales-visitor-levy-research: freetobook pricing per month B&B booking system UK",
+      "wales-visitor-levy-research: Booking.com extranet download reservations list Excel columns persons adults children check-in check-out",
+      "wales-visitor-levy-research: visitorlevyapp.com Wales OR Cardiff OR \"Welsh\"",
+      "shopify-self-filing-research: Shopify automated sales tax filing ending 2026 file yourself alternative",
+      "shopify-self-filing-research: cheap sales tax return worksheet tool Shopify sellers file own returns state report",
+      "shopify-self-filing-research: help.shopify.com Shopify Tax liability report US sales tax jurisdiction report filing",
+      "shopify-self-filing-research: \"United States sales tax\" report Shopify jurisdiction view \"state returns\"",
+      "shopify-self-filing-research: Streamlined Sales Tax certified service provider free for remote sellers 2026 Shopify",
+      "shopify-self-filing-research: Shopify app sales tax filing calendar due date reminders self file report \"per jurisdiction\" free",
+      "shopify-self-filing-research: TaxJar pricing 2026 Starter plan reports per month AutoFile",
+      "shopify-self-filing-research: StateWise sales tax Shopify app",
+      "shopify-self-filing-research: shopify.dev read_all_orders scope last 60 days orders request access",
+      "shopify-self-filing-research: sales tax return due dates by state filing frequency table official dataset 2027",
+      "shopify-self-filing-research: community.shopify.com community guidelines self-promotion apps \"Ask and Offer\" 2026",
+      "shopify-self-filing-research: PTIN required only for federal tax returns; state sales tax return preparer license requirement",
+      "shopify-self-filing-research: Shopify sales tax return template spreadsheet self-file after automated filing ends 2027",
+      "fssai-licence-research: which FSSAI licence do I need small food business confused category FoSCoS",
+      "fssai-licence-research: FSSAI licence renewal late fee 2026 FoSCoS new feature",
+      "fssai-licence-research: FoSCoS eligibility wizard \"know your\" licence FSSAI",
+      "fssai-licence-research: FSSAI licensing amendment regulations 2026 perpetual validity licence renewal removed notification",
+      "fssai-licence-research: FSSAI Licensing and Registration of Food Businesses Amendment Regulations 2026 gazette fssai.gov.in",
+      "fssai-licence-research: FSSAI annual return Form D-1 2026 who must file 31 May FoSCoS",
+      "fssai-licence-research: FSSAI Licensing Registration Amendment Regulations 23 June 2026 amendment 5 what changed",
+      "fssai-licence-research: fssai.gov.in annual return 2025-26 extension 15 June 2026 order manufacturers importers",
+      "fssai-licence-research: FSSAI licence online price Vakilsearch IndiaFilings LegalWiz package ₹ state licence central licence 2026",
+      "fssai-licence-research: free FSSAI license eligibility checker tool which licence do I need online calculator",
+      "fssai-licence-research: FSSAI compliance software app track licence annual return food brands India SaaS",
+      "fssai-licence-research: reddit FSSAI license confused which category home baker D2C brand 2026",
+      "fssai-licence-research: FoSCoS problem application rejected relabeller NOC \"FSSAI\" founder post 2026",
+      "fssai-licence-research: site:reddit.com FSSAI license help small business",
+      "fssai-licence-research: quora \"FSSAI\" licence which one do I need selling online homemade products",
+      "fssai-licence-research: FoSCoS portal not working complaint food business owner annual fee perpetual licence migration 2026",
+      "fssai-licence-research: linkedin post founder \"FSSAI\" licence ordeal food startup months central licence nutraceutical",
+      "fssai-licence-research: r/IndianStartups rules self promotion",
+      "fssai-licence-research: Shopify app store FSSAI licence number display India food app",
+      "fssai-licence-research: FSSAI perpetual validity annual fee not paid licence suspended FoSCoS \"annual fee\" 2026",
+      "fssai-licence-research: \"which FSSAI licence do I need\"",
+      "watchlist-gatherer: cleaning business owner instant quote calculator website plugin support forum not working 2026",
+      "watchlist-gatherer: ConvertCalculator pricing plans 2026",
+      "watchlist-gatherer: site:community.squareup.com menu print",
+      "watchlist-gatherer: Square for Restaurants print menu PDF from item library prices",
+      "watchlist-gatherer: HIPAA right of access final rule 15 days November 2026 Federal Register",
+      "watchlist-gatherer: dental office front desk patient records request overwhelmed complaint forum 2026",
+      "watchlist-gatherer: lawnsite OR plowsite OR pwresource \"instant quote\" website customers want price online",
+      "watchlist-gatherer: \"cleaning business\" owner website \"instant quote\" calculator recommendations which tool do you use",
+      "watchlist-gatherer: \"Menus for Square\" FourNineties 10Fish pro license price printable menu",
+      "watchlist-gatherer: Square community seller \"export\" items \"menu\" PDF printable prices restaurant cafe feature request",
+      "watchlist-gatherer: release of information software small practice price per month records request tracking dental chiropractic",
+      "watchlist-gatherer: practice manager 15 day records request HIPAA rule \"front desk\" worried staff fax portal requests 2026 forum",
+      "watchlist-gatherer: dentaltown records request patient copies 30 days office manager thread",
+      "watchlist-gatherer: upwork job \"medical records requests\" virtual assistant process patient record requests practice hourly 2026",
+      "xero-coi-gate-review: Payapps subcontractor insurance expiry compliance documents Xero",
+      "xero-coi-gate-review: Xero app subcontractor insurance certificate expiry tracking bills",
+      "xero-coi-gate-review: Archdesk pricing per user month construction software",
+      "xero-coi-gate-review: Fergus OR Tradify OR ServiceM8 subcontractor insurance expiry reminder",
+      "xero-coi-gate-review: Ressio builder software subcontractor insurance tracking Xero",
+      "xero-coi-gate-review: Buildertrend subs vendors certificates general liability workers comp expiration Xero bills",
+      "xero-coi-gate-review: Buildern pricing plans per month",
+      "xero-coi-gate-review: \"certificate of insurance\" tracking software \"Xero\" integration vendor compliance",
+      "xero-coi-gate-review: subcontractor certificate of currency expiry tracking app small builder Australia Xero",
+      "xero-coi-gate-review: CertCove subcontractor compliance pricing integrations",
+      "xero-coi-gate-review: UK CIS subcontractor app Xero insurance expiry public liability reminder",
+      "xero-coi-gate-review: Xero bills approval workflow 2026 announcement release",
+      "xero-coi-gate-review: Xero \"bill approval\" workflow Comprehensive Ultimate plans rollout November 2026",
+      "xero-coi-gate-review: Xero developer platform terms API data \"train\" AI models prohibited",
+      "xero-coi-gate-review: NSW subcontractor's statement principal contractor withhold payment workers compensation liable Revenue NSW",
+      "xero-coi-gate-review: reddit small contractor how do you track subcontractor COI expiration spreadsheet",
+      "xero-coi-gate-review: BuildPass Australia pricing per month builders plan cost",
+      "xero-coi-gate-review: apps.xero.com subcontractor compliance insurance certificates expiry app",
+      "xero-coi-gate-review: Expiration Reminder COI tracking pricing plans per month vendor portal",
+      "xero-coi-gate-review: Xero contact documents expiry date reminder feature 2026 product update",
+      "xero-coi-gate-review: simPRO contractor insurance licence expiry date contractor card alert",
+      "spend-gatherer (B12, B11): site:apps.shopify.com sales tax filing app reviews",
+      "spend-gatherer (B12, B11): site:apps.shopify.com age verification app",
+      "spend-gatherer (B12, B11): wordpress.org support plugin woocommerce-services reviews tax 2026",
+      "spend-gatherer (B12, B11): site:apps.shopify.com tax exempt resale certificate wholesale customers",
+      "spend-gatherer (B12, B11): site:apps.shopify.com restrict shipping by state hemp THC products compliance",
+      "spend-gatherer (B12, B11): site:apps.shopify.com sales tax nexus filing automation Numeral Kintsugi TaxJar",
+      "spend-gatherer (B12, B11): site:apps.xero.com sales tax filing US small business app",
+      "spend-gatherer (B12, B11): site:apps.shopify.com accessibility WCAG ADA app reviews",
+      "spend-gatherer (B12, B11): site:apps.shopify.com sales tax report by state export file returns yourself",
+      "spend-gatherer (B12, B11): squareup.com app marketplace sales tax filing app reviews restaurant",
+      "ca-co-software-use-tax-review: California SaaS sales tax 2027 small business use tax out-of-state vendor not collecting",
+      "ca-co-software-use-tax-review: QuickBooks Online use tax accrual software purchases California 2027",
+      "ca-co-software-use-tax-review: free consumer use tax tool SaaS subscriptions California Colorado 2027 small business",
+      "ca-co-software-use-tax-review: \"January 1, 2027\" \"California\" sales tax will be added to your invoice software subscription customers notice",
+      "ca-co-software-use-tax-review: CDTFA economic nexus $500,000 remote sellers SaaS register collect 2027 SB 122",
+      "ca-co-software-use-tax-review: use tax SaaS purchases California 2027 tool scan card spend vendors Brex Ramp Mercury QuickBooks",
+      "ca-co-software-use-tax-review: bookkeeper CPA California SB 122 use tax self-assessment software purchases small business clients spreadsheet",
+      "ca-co-software-use-tax-review: Paddle merchant of record California SaaS sales tax January 2027 collect",
+      "ca-co-software-use-tax-review: small SaaS founder under $500,000 California no need to register SB 122 customers owe use tax",
+      "ca-co-software-use-tax-review: Google Workspace sales tax by state United States help taxes charged SaaS states list",
+      "ca-co-software-use-tax-review: California use tax compliance rate businesses income tax return use tax line small percentage report LAO",
+      "ca-co-software-use-tax-review: \"use tax\" calculator OR template OR checklist SaaS subscriptions 2027 California Colorado free download",
+      "ca-co-software-use-tax-review: Kintsugi use tax pricing free plan purchases import consumer use tax 2026",
+      "ca-co-software-use-tax-review: tax.colorado.gov remote sellers economic nexus $100,000 retail sales register collect",
+      "spend-pass-gatherer: Square Online website accessibility ADA widget app pricing",
+      "spend-pass-gatherer: certificate of insurance tracking software subcontractor pricing small contractor Xero",
+      "spend-pass-gatherer: Wales visitor levy holiday let software register levy returns 2027",
+      "spend-pass-gatherer: NYC DCWP click to cancel rule gym studio membership cancellation compliance software",
+      "spend-pass-gatherer: UK small business data protection complaints DSAR management tool pricing per month Data Use and Access Act",
+      "spend-pass-gatherer: use tax software subscriptions small business tool accrue consumer use tax pricing California Colorado 2027",
+      "spend-pass-gatherer: Section 504 HHS website accessibility medical practice clinic compliance service price May 2026 deadline",
+      "spend-pass-gatherer: Termly pricing plans privacy policy small business; iubenda pricing US state privacy laws",
+      "spend-pass-gatherer: cookie consent banner Square Online supported pricing privacy policy generator Square Online",
+      "ca-co-software-use-tax-research: California use tax SaaS 2027 small business software subscriptions out-of-state vendor",
+      "ca-co-software-use-tax-research: CDTFA L-1036 digital products use tax purchasers 2027",
+      "ca-co-software-use-tax-research: CDTFA qualified purchaser use tax registration $100,000 gross receipts business without seller's permit",
+      "ca-co-software-use-tax-research: California estimated use tax lookup table income tax return non-business purchases under $1,000 business purchases",
+      "ca-co-software-use-tax-research: Colorado Department of Revenue software sales tax 2027 remote access SaaS consumer use tax",
+      "ca-co-software-use-tax-research: tax.colorado.gov HB26-1223 software guidance consumer use tax return DR 0252",
+      "ca-co-software-use-tax-research: Colorado consumer use tax businesses file return Revenue Online \"consumer use tax\" tax.colorado.gov",
+      "ca-co-software-use-tax-research: Google Workspace Microsoft 365 Adobe begin charging California sales tax January 2027 subscription notice customers",
+      "ca-co-software-use-tax-research: Google Workspace help sales tax United States states where Google collects tax on Workspace subscriptions",
+      "ca-co-software-use-tax-research: bookkeeper forum use tax SaaS subscriptions California 2027 clients QuickBooks accrue use tax",
+      "ca-co-software-use-tax-research: Kintsugi sales tax pricing plans per month use tax",
+      "ca-co-software-use-tax-research: Avalara Consumer Use pricing small business; Vertex consumer use tax price; TaxJar use tax buyers",
+      "ca-co-software-use-tax-research: QuickBooks Online record use tax on purchases automated sales tax \"use tax\" help article",
+      "ca-co-software-use-tax-research: Xero US use tax on bills accrue use tax purchases Xero Central",
+      "ca-co-software-use-tax-research: \"use tax\" software subscriptions 2027 small business owner worried California SB 122 forum thread",
+      "ca-co-software-use-tax-research: quickbooks.intuit.com community use tax SaaS California 2027",
+      "ca-co-software-use-tax-research: reddit use tax SaaS California 2027 small business accountant bookkeeper",
+      "ca-co-software-use-tax-research: \"use tax\" \"SaaS\" 2027 clients California taxprotalk OR atxcommunity OR accountingweb OR \"Intuit Accountants Community\"",
+      "ca-co-software-use-tax-research: Ramp OR Brex OR Tropic use tax accrual SaaS purchases feature 2026",
+      "ca-co-software-use-tax-research: free use tax calculator software subscriptions California small business spreadsheet template 2027",
+      "ca-co-software-use-tax-research: Xero developer platform pricing tiers Starter Core Plus connections 2026",
+      "ca-co-software-use-tax-research: QuickBooks Online API Intuit App Partner Program Builder tier free API calls pricing 2026",
+      "ca-co-software-use-tax-research: QuickBooks Online Accounting API Purchase entity Bill entity query vendor expenses credit card transactions",
+      "ca-co-software-use-tax-research: Xero Accounting API BankTransactions endpoint Invoices ACCPAY bills contact filter",
+      "ca-co-software-use-tax-research: CDTFA tax rate API by address free; Colorado sales use tax rate lookup GIS address API",
+      "ca-co-software-use-tax-research: QuickBooks App Store listing requirements Builder tier security review app marketplace listing 2026",
+      "ca-co-software-use-tax-research: QuickBooks community guidelines self-promotion advertising prohibited",
+      "ca-co-software-use-tax-research: Xero Community guidelines \"commercial nature\" advertisements promotions",
+      "ca-co-software-use-tax-research: \"use tax\" software \"2027\" California \"my clients\" OR \"our clients\" OR \"my business\" subscriptions vendors not charging tax discussion"
+    ],
+    "unverifiedSignals": [
+      {
+        "url": "https://docs.stripe.com/tax/supported-countries/united-states/california-software-tax",
+        "reason": "contains instructions (tells agents to install a CLI and run a command); not followed, not used as evidence"
+      },
+      {
+        "url": "https://docs.stripe.com/billing/revenue-recovery/customer-emails",
+        "reason": "contains instructions (tells agents to run a setup command); not followed, not used as evidence"
+      },
+      {
+        "url": "https://www.capterra.com/p/10052257/Subdoc/pricing/",
+        "reason": "HTTP 403 from the site."
+      },
+      {
+        "url": "https://www.capterra.com/p/10040782/PaperBoss/",
+        "reason": "HTTP 403 from the site."
+      },
+      {
+        "url": "https://www.getapp.com/all-software/a/subdoc/",
+        "reason": "HTTP 403 from the site."
+      },
+      {
+        "url": "https://serchen.com/company/paperboss",
+        "reason": "HTTP 403 from the site."
+      },
+      {
+        "url": "https://www.dli.pa.gov/Businesses/swif/Pages/Audits.aspx",
+        "reason": "Cross-host redirect, not followed."
+      },
+      {
+        "url": "https://www.saasworthy.com/product/coi-clock",
+        "reason": "HTTP 403 from the site."
+      },
+      {
+        "url": "https://squareup.com/release-notes/release-notes-october-8th",
+        "reason": "HTTP 429 from the site (rate limit)."
+      },
+      {
+        "url": "https://advertisinglaw.fkks.com/post/102kfm1/new-yorks-sfy-2025-26-budget-a-new-era-of-consumer-protections",
+        "reason": "Cross-host redirect, not followed."
+      },
+      {
+        "url": "https://support.glofox.com/hc/en-us/articles/46433069398548-How-to-Process-Member-Cancellations-in-Compliance-with-NY-State-Legal-Requirements-US",
+        "reason": "HTTP 403 from the site."
+      },
+      {
+        "url": "https://answers.justia.com/question/2025/09/16/is-club-pilates-27-day-cancellation-noti-1076179",
+        "reason": "HTTP 403 from the site."
+      },
+      {
+        "url": "https://community.shopify.com/search.json?q=sales+tax+filing+after%3A2026-08-01",
+        "reason": "HTTP 429 from the site (rate limit)."
+      },
+      {
+        "url": "https://community.shopify.com/search.json?q=privacy+policy+opt-out+after%3A2026-08-01",
+        "reason": "HTTP 429 from the site (rate limit)."
+      },
+      {
+        "url": "https://forum.webflow.com/search.json?q=accessibility+statement+after%3A2026-06-01",
+        "reason": "Cross-host redirect, not followed."
+      },
+      {
+        "url": "https://discourse.webflow.com/search.json?q=accessibility+statement+after%3A2026-06-01",
+        "reason": "Cross-host redirect, not followed."
+      },
+      {
+        "url": "https://community.shopify.com/t/sales-tax-with-ai/684481.json",
+        "reason": "HTTP 429 from the site (rate limit)."
+      },
+      {
+        "url": "https://community.shopify.com/search.json?q=age+verification+after%3A2026-08-01",
+        "reason": "HTTP 429 from the site (rate limit)."
+      },
+      {
+        "url": "https://www.cdocs.com/discussion-boards/view/id/92776",
+        "reason": "Cross-host redirect, not followed."
+      },
+      {
+        "url": "https://cardiff.gov.uk/visitorlevy",
+        "reason": "HTTP 403 from the site."
+      },
+      {
+        "url": "https://law.gov.wales/sites/default/files/2025-10/Visitor%20Accommodation%20%28Register%20and%20levy%29%20Etc%20%28Wales%29%20Act%202025%20-%20Explanatory%20Memorandum.pdf",
+        "reason": "Cross-host redirect, not followed."
+      },
+      {
+        "url": "https://community.withairbnb.com/t5/Help-with-your-business/Please-Restore-All-Reservations-and-the-Operational-CSV-Export/m-p/2300372",
+        "reason": "Cross-host redirect, not followed."
+      },
+      {
+        "url": "https://community.airbnb.com/t5/English-Language-Archive/Include-number-of-guests-on-calendar-export/td-p/626176",
+        "reason": "Cross-host redirect, not followed."
+      },
+      {
+        "url": "https://community.withairbnb.com/t5/English-Language-Archive/Include-number-of-guests-on-calendar-export/td-p/626176",
+        "reason": "Cross-host redirect, not followed."
+      },
+      {
+        "url": "https://blog.uplisting.io/airbnb-ical-changes-and-how-to-get-all-reservation-information/",
+        "reason": "Cross-host redirect, not followed."
+      },
+      {
+        "url": "https://support.smoobu.com/hc/en-us/articles/4517893424530",
+        "reason": "HTTP 403 from the site."
+      },
+      {
+        "url": "https://squareup.com/us/en/release-notes/release-notes-2026-11-19",
+        "reason": "HTTP 429 from the site (rate limit)."
+      },
+      {
+        "url": "https://www.squareup.com/us/en/release-notes",
+        "reason": "HTTP 429 from the site (rate limit)."
+      },
+      {
+        "url": "https://sellercommunity.com/t5/Orientation-Etiquette/Community-Etiquette-Guidelines/td-p/40441",
+        "reason": "Cross-host redirect, not followed."
+      },
+      {
+        "url": "https://squareup.com/us/en/release-notes/release-notes-november-5th",
+        "reason": "HTTP 429 from the site (rate limit)."
+      },
+      {
+        "url": "https://community.withairbnb.com/t5/Help-with-your-business/Wales-tourism-tax/m-p/2130651",
+        "reason": "Cross-host redirect, not followed."
+      },
+      {
+        "url": "https://www.itv.com/news/wales/2026-07-06/support-and-concern-as-councils-consider-visitor-levy",
+        "reason": "HTTP 5xx from the site."
+      },
+      {
+        "url": "https://community.withairbnb.com/t5/Help-with-your-business/Please-Restore-All-Reservations-and-the-Operational-CSV-Export/m-p/2300403",
+        "reason": "Cross-host redirect, not followed."
+      },
+      {
+        "url": "https://community.shopify.com/faq",
+        "reason": "HTTP 429 from the site (rate limit)."
+      },
+      {
+        "url": "https://egazette.gov.in/WriteReadData/2026/273797.pdf",
+        "reason": "HTTP 5xx from the site."
+      },
+      {
+        "url": "https://legaldocs.co.in/check-eligibility-for-fssai-food-license",
+        "reason": "Refused by the session's network (not a site block). DNS lookup failed inside the session's network"
+      },
+      {
+        "url": "https://vakilsearch.com/fssai-registration",
+        "reason": "HTTP 403 from the site."
+      },
+      {
+        "url": "https://www.fnbnews.com/Top-News/fssai-unveils-new-regulatory-updates-in-regard-to-validity-of-licences-86494",
+        "reason": "HTTP 5xx from the site."
+      },
+      {
+        "url": "https://www.capterra.com/p/175026/Clean-Calculator/",
+        "reason": "HTTP 403 from the site."
+      },
+      {
+        "url": "https://www.hhs.gov/press-room/hhs-ocr-settles-hipaa-investigation-with-azul-vision.html",
+        "reason": "HTTP 403 from the site."
+      },
+      {
+        "url": "https://www.upwork.com/freelance-jobs/apply/Virtual-Primary-Care-Medical-Assistant_~022070215041310972375/",
+        "reason": "HTTP 403 from the site."
+      },
+      {
+        "url": "https://www.capterra.com.au/software/1109350/CertCove",
+        "reason": "HTTP 403 from the site."
+      },
+      {
+        "url": "https://www.vatcalc.com/united-states/california-7-5-sales-tax-on-saas-software-january-2027/",
+        "reason": "HTTP 403 from the site."
+      },
+      {
+        "url": "https://hbkcpa.com/insights/california-will-tax-saas-starting-2027-heres-what-changes/",
+        "reason": "Cross-host redirect, not followed."
+      },
+      {
+        "url": "https://squareup.com/us/en/app-marketplace/app/web-accessibility",
+        "reason": "HTTP 429 from the site (rate limit)."
+      },
+      {
+        "url": "https://www.getapp.com/all-software/a/certcove/",
+        "reason": "HTTP 403 from the site."
+      },
+      {
+        "url": "https://www.capterra.com/p/10030393/DPOeye/",
+        "reason": "HTTP 403 from the site."
+      },
+      {
+        "url": "https://www.itgovernance.co.uk/shop/product/gdpr-manager",
+        "reason": "Cross-host redirect, not followed."
+      },
+      {
+        "url": "https://uk.grcsolutions.io/product/gdpr-manager",
+        "reason": "Cross-host redirect, not followed."
+      },
+      {
+        "url": "https://www.getapp.co.uk/software/2051951/subject-request-management",
+        "reason": "HTTP 403 from the site."
+      },
+      {
+        "url": "https://squareup.com/us/en/app-marketplace/app/accessibility-widget",
+        "reason": "HTTP 429 from the site (rate limit)."
+      },
+      {
+        "url": "https://www.hhs.gov/press-room/hhs-extends-mobile-and-web-accessibility-deadline.html",
+        "reason": "HTTP 403 from the site."
+      },
+      {
+        "url": "https://www.federalregister.gov/documents/2026/05/11/2026-09266/extension-of-compliance-dates-for-nondiscrimination-on-the-basis-of-disability-accessibility-of-web",
+        "reason": "Cross-host redirect, not followed."
+      },
+      {
+        "url": "https://quickbooks.intuit.com/learn-support/en-us/community-basics/why-we-decided-it-s-not-okay-to-promote-your-business-in-our-qb/00/136960",
+        "reason": "HTTP 5xx from the site."
+      },
+      {
+        "url": "https://www.statefarm.com/small-business-solutions/insurance/premium-audit",
+        "reason": "HTTP 403 from the site."
+      }
+    ],
+    "rejectedCandidates": [
+      {
+        "title": "Filing-Frequency Cost Check",
+        "total": 21,
+        "reason": "Merged into the Shopify self-filing desk, which research ended: TaxEqual already tracks filing frequency and due dates with reminders, free for one state and $19 a month for five."
+      },
+      {
+        "title": "Sales Tax Filing Watch (oversight of a paid filer)",
+        "total": 20,
+        "reason": "Merged into the Shopify self-filing desk, which research ended: TaxEqual already tracks filing frequency and due dates with reminders, free for one state and $19 a month for five."
+      },
+      {
+        "title": "Accessibility Remediation Acceptance Check",
+        "total": 18,
+        "reason": "Not researched: free scanners re-test pages (the owner's own accessibility-lens among them), its willingness to pay rests on one paid job that buys a person, and website accessibility is already the portfolio's largest small-business cluster (roles/picker/portfolio.md)."
+      },
+      {
+        "title": "State Privacy Law Applicability Checker for Small Shops",
+        "total": 18,
+        "reason": "Not researched: competitiveGap 1; Termly's free plan and iubenda at $5.99 a month already cover the state laws, and an applicability check is a page, not a product."
+      },
+      {
+        "title": "Instant Quote Page for Home-Service Websites",
+        "total": 18,
+        "reason": "Left the watchlist: re-researched to 18, below 19; no complaint found, and Calconic ($5 a month), a free Wix quote app and the free SudsQuote plugin cover cleaning quotes."
+      },
+      {
+        "title": "Print Menu That Follows Square Item Prices",
+        "total": 18,
+        "reason": "Left the watchlist: re-researched to 18, below 19; no complaint readable, and FourNineties Menus for Square prints menus from the Square item library for free (WordPress) beside Live Tap Lists."
+      },
+      {
+        "title": "15-Day Records Request Clock for Small Practices (HIPAA access rule)",
+        "total": 18,
+        "reason": "Left the watchlist: re-researched to 18, below 19; no complaint from a practice, and ChartRequest offers free managed release with a 5-day turnaround; the rule (91 FR 74848) takes effect 2027-01-19 with compliance by 2027-07-19."
+      },
+      {
+        "title": "Square Online Accessibility Fix List",
+        "total": 17,
+        "reason": "Not researched: the spend pass found accessiBe listed for Square at $59 a month claiming automatic alt text, and the app may not be able to change what Square Online renders; website accessibility is already the portfolio's largest small-business cluster."
+      },
+      {
+        "title": "Accessible PDF Pack for Small-Business Documents",
+        "total": 17,
+        "reason": "Not researched: no buyer found in two freelancer searches; EqualWeb already sells per-page remediation."
+      },
+      {
+        "title": "RRF Demand-Letter Response Pack for Restaurants",
+        "total": 17,
+        "reason": "Rejected by rule: a one-time response to SBA repayment demands is close to a consulting service, not a product."
+      },
+      {
+        "title": "Section 504 Website Check for Small Clinics",
+        "total": 17,
+        "reason": "Not researched: HHS moved the Section 504 web deadline to 2028 for providers with fewer than 15 staff (ADA News, 2026-05-06), free scanners exist, and the website-compliance cluster is already built."
+      },
+      {
+        "title": "Sales Tax Self-Filing Desk for Shopify Sellers",
+        "total": 16,
+        "reason": "Research: TaxEqual (Shopify app, launched 2026-10-02) is free for one state and $19 a month for five, with per-jurisdiction reports, filing frequency, due dates and reminders; Shopify's own jurisdiction report is free; Tax Rex files for $25 a return."
+      },
+      {
+        "title": "UK Data Protection Complaints Log for Micro Businesses",
+        "total": 16,
+        "reason": "Research: no complaint found; the ICO accepts an email address and a record; a free WordPress plugin with a complaint form and log (Privacy Compliance Tools for UK GDPR), a free Systemforce pack, and ComplaintsDesk at GBP 12 a month (waitlist) cover the job; rescored to 16."
+      },
+      {
+        "title": "Copy-Fee Schedule Page and Access Request Log for Small Practices",
+        "total": 16,
+        "reason": "Not researched: holds patient data (PHI), and ChartRequest offers free managed release to eligible practices."
+      },
+      {
+        "title": "Privacy and Cookie Policy Pages for Square Online",
+        "total": 16,
+        "reason": "Not researched: Cookiebot's free tier is built into Square Online's site settings."
+      },
+      {
+        "title": "SaaS Sales Tax Readiness for Small Software Startups",
+        "total": 15,
+        "reason": "Not researched: Anrok and Kintsugi already sell to software startups; competitiveGap 1."
+      },
+      {
+        "title": "FSSAI Licence Finder and Application Pack",
+        "total": 15,
+        "reason": "Research: since 2026-04-01 FSSAI licences and registrations are perpetual, so there is no renewal; FSSAI's own kind-of-business table and the FoSCoS eligibility step are free; Food Safety Mitras file for INR 500 and the free myFSC app sends reminders."
+      },
+      {
+        "title": "Sensitive-Data Consent Record Log (Delaware)",
+        "total": 15,
+        "reason": "Not researched: total 15; a consent log is a feature of existing privacy tools."
+      },
+      {
+        "title": "NYC Click-to-Cancel Kit for Membership Businesses",
+        "total": 14,
+        "reason": "Research: the rule lets a monitored email address serve as the online cancellation for in-person sign-ups, the studio platforms small businesses already pay for (Mariana Tek by default in New York, Momence, Arketa, Gymdesk, Stripe, Square) have self-cancel, renewal notices bind only terms of a year or longer, and no small owner's complaint was found."
+      },
+      {
+        "title": "French E-Invoicing Bridge for Self-Hosted Invoice Ninja",
+        "total": 14,
+        "reason": "Not researched: one complaint, and a developer already sells a connector; a certified platform is required."
+      },
+      {
+        "title": "Daily Sales Tax Set-Aside for Square Sellers",
+        "total": 13,
+        "reason": "Not researched: DAVO already sets aside and files sales tax for Square sellers."
+      }
+    ],
+    "watchlist": [
+      {
+        "title": "Event and Volunteer Waivers for Organisations on Zeffy",
+        "targetCustomer": "Small nonprofits and clubs that run events and volunteer days through Zeffy.",
+        "problemStatement": "Zeffy has no waiver or photo-consent step at registration, so organisations send a separate waiver link; one user said they would pay for it as an add-on.",
+        "total": 19,
+        "missedGate": "Not researched; competitiveGap 2 (generic waiver tools and free forms with a signature field), pain 3, and the willingness-to-pay comment is from 2026-07-14.",
+        "evidence": [
+          "https://feedback.zeffy.com/feature-requests/p/waivers-1"
+        ],
+        "firstSeen": "2026-11-21"
+      }
+    ],
+    "caveats": "No candidate cleared the quality gate, so four ideas ship as provisional, each with its gap written on it; the run resumed at 20:47Z after the account's usage limit stopped its 09:52Z start in setup, so it ran about eleven hours late. Twenty-two new candidates were scored plus three re-researched watchlist entries (25). Eight went to researchers: four were ended by research (Shopify sales tax self-filing desk: TaxEqual is free for one state and $19 a month for five, which also ended the filing watch and the frequency check merged into it; UK data protection complaints desk: a free plugin, a free pack and an email address satisfy the ICO; FSSAI licence desk: licences are perpetual since 2026-04-01 and FSSAI's own check is free; NYC click-to-cancel desk: an email address and the studio platforms' self-cancel cover it), and four were adversarially reviewed: none was killed and all four were rescored down (exempt sales book 20 to 16, subcontractor cover check 18 to 16, visitor levy book 17 to 14, software use-tax worksheet 15 to 10). Three survivors met the review target after the third review; the fourth review was already running and its survivor outranked the third, so all four ship within the provisional cap. Ideas 3 and 4 rest on mandates only, with no complaint found: the visitor levy (Cardiff only, from 2027-04-01) and the 2027 software use tax in California and Colorado are leads to test, not proven demand, and idea 4 scores 10. Idea 4 is the day's Weekend MVP; ideas 1 to 3 are substantial Multi-week ideas with a build plan. Every idea has a small-business buyer, and two categories hold two ideas each. The day's lens leaned towards sales tax, insurance and levy compliance rather than website accessibility, which is already the largest small-business cluster in the built portfolio. Ladder notes: the main session had no WebFetch tool, so every fetch was made by subagents (WebFetch, and the fetch helper where WebFetch returned an empty page); one researcher ran the helper on Xero's OpenAPI file without trying WebFetch first. Two pages (docs.stripe.com) carried instructions addressed to agents and are listed as unverified signals; neither was followed or used."
+  }
+}

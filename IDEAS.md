@@ -675,3 +675,7 @@
 | 2026-11-22 | Pickup Choice Keeper for One-Location Shopify Shops | Small Business Ops | Multi-week | 16 | provisional |  |
 | 2026-11-22 | EU Duty Line Check for UK Shopify Shops on Royal Mail | Accessibility & Compliance | Multi-week | 14 | provisional |  |
 | 2026-11-22 | Duplicate Draft Cleaner for ArtStation Sellers Moving to Gumroad | Creative & Prosumer | Weekend MVP | 14 | provisional |  |
+| 2026-11-23 | Exempt Sales Book for Square Sellers | Accessibility & Compliance | Multi-week | 16 | provisional |  |
+| 2026-11-23 | Subcontractor Cover Check for Xero Pay Runs | Small Business Ops | Multi-week | 16 | provisional |  |
+| 2026-11-23 | Visitor Levy Book for Cardiff Letting Agents and Hosts | Small Business Ops | Multi-week | 14 | provisional |  |
+| 2026-11-23 | Software Use-Tax Worksheet for California and Colorado Bookkeepers | Accessibility & Compliance | Weekend MVP | 10 | provisional |  |
