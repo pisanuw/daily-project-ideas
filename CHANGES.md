@@ -714,3 +714,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-22 [doc] Created ideas/2026-11-22.json (schemaVersion 3, 4 ideas): Batch Book (16, provisional), Pickup Keeper (16, provisional), EU Duty (14, provisional), Gumroad Dedupe (14, provisional)
 
 2026-11-23 [doc] Created ideas/2026-11-23.json (schemaVersion 3, 4 ideas): Exempt Sales (16, provisional), Cover Check (16, provisional), Levy Book (14, provisional), Use Tax (10, provisional)
+
+2026-11-24 [doc] Created ideas/2026-11-24.json (schemaVersion 3, 1 idea): Zeffy Signed Waivers (16, provisional); research ended 15 of 16 researched candidates

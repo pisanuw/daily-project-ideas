@@ -1,0 +1,730 @@
+{
+  "date": "2026-11-24",
+  "schemaVersion": 3,
+  "complete": true,
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Signed Waivers for Zeffy Event Tickets",
+      "slug": "signed-waivers-for-zeffy-event-tickets",
+      "category": "Micro-SaaS",
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Teaching Operations",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": true,
+        "engine": false,
+        "shared": true,
+        "notes": {
+          "stateful": "The organiser keeps a signed, dated record per event and per ticket, with the waiver version each signer saw, and comes back to it for every event and season.",
+          "connected": "Connects to the organisation's Zeffy account with its own API key and receives Zeffy's signed payment.completed webhook, which carries each ticket's attendee and per-ticket answers.",
+          "unattended": "A webhook sends each new ticket's guardian a signing link, and a scheduled job chases unsigned tickets before the event date.",
+          "shared": "The organiser writes the waiver, a parent or adult attendee signs it, and door staff work from the check-in list."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "email",
+        "scheduled",
+        "backend"
+      ],
+      "buildPlan": [
+        {
+          "n": 1,
+          "title": "One event, one signature",
+          "delivers": "An organiser signs in, pastes a waiver, connects a Zeffy key, and a test ticket's buyer receives a signing link and signs; the signed PDF is stored.",
+          "acceptance": "A seeded payment.completed webhook with a valid Zeffy-Signature header creates one signing request; the signed record holds the signer, time, waiver text hash and ticket id; deployed."
+        },
+        {
+          "n": 2,
+          "title": "Per-ticket attendees and guardians",
+          "delivers": "Each ticket on a multi-ticket order gets its own record; a parent signs once per child named on the tickets.",
+          "acceptance": "A webhook with three tickets yields three records linked to three attendee contact ids; signing one does not mark the others signed."
+        },
+        {
+          "n": 3,
+          "title": "Waiver versions and audit trail",
+          "delivers": "The organiser edits the waiver per event; each signature keeps the exact version, a hash, the time and the signer's typed or drawn signature, and a PDF copy is emailed to the signer.",
+          "acceptance": "Changing the text after a signature leaves the old record unchanged and verifiable by hash; the emailed PDF matches the stored one byte for byte."
+        },
+        {
+          "n": 4,
+          "title": "Chasing the unsigned",
+          "delivers": "A scheduled job reminds unsigned ticket holders 7, 3 and 1 days before the event and stops when they sign.",
+          "acceptance": "With a seeded event in 7 days and two unsigned tickets, exactly two reminders go out per scheduled step and none after signing."
+        },
+        {
+          "n": 5,
+          "title": "Door list",
+          "delivers": "A phone-friendly check-in page per event lists every ticket, signed or not, with the photo-consent answer from Zeffy's own per-ticket question.",
+          "acceptance": "The page loads 200 tickets in under 2 seconds on a throttled connection and filters to unsigned in one tap; staff access is by a per-event link that can be revoked."
+        },
+        {
+          "n": 6,
+          "title": "Polish",
+          "delivers": "Organiser README, retention setting per event, export of all signed PDFs as one zip, keyboard and screen-reader pass, walkthrough test.",
+          "acceptance": "A walkthrough test runs sign-in to door list; axe reports no serious issues; the zip contains one PDF per signed ticket."
+        }
+      ],
+      "summary": "Collects a signed, dated waiver from a parent or adult for every ticket sold on Zeffy, chases the unsigned before the event, and gives door staff a list of who has signed.",
+      "public": {
+        "summary": "Get a signed waiver for every ticket you sell, matched to the person who is coming.",
+        "problem": "You sell camp places and event tickets through Zeffy, but there is no way to collect a proper signature, so you add a checkbox, attach the waiver to the thank-you email, or send families to a separate form. Then, on the day, you cannot tell which children are covered and which are not.",
+        "forWhom": "Organisers of camps, youth programmes, clubs and parent-group events who sell their tickets on Zeffy.",
+        "benefits": [
+          "A signed, dated waiver for each child or adult attending",
+          "Reminders go out on their own until everyone has signed",
+          "A door list that shows who is covered at a glance",
+          "Every signed copy kept and ready if anyone asks"
+        ],
+        "audience": "teams"
+      },
+      "problemStatement": "Organisers who sell event and camp tickets through Zeffy need a liability waiver signed and dated for every attendee, adults and children; Zeffy offers only a required checkbox or a file on the thank-you email, so organisers bolt on outside forms that are not tied to the tickets and cannot tell on the day who has signed.",
+      "description": "The organiser connects their Zeffy organisation with its API key and turns on Zeffy's payment.completed webhook. When a ticket is bought, the service creates one record per ticket from the attendee data Zeffy sends and emails the buyer a signing link for each attendee. The signer reads the organiser's waiver for that event and signs by typing or drawing; the record keeps the waiver version, a hash, the time and a PDF copy, which is also emailed to the signer. A scheduled job chases unsigned tickets before the event, and door staff open a phone-friendly list showing who has signed, alongside the photo-consent answer Zeffy already collects per ticket.",
+      "targetCustomer": "Volunteer organisers and administrators of small nonprofits, summer camps, youth programmes, clubs and parent groups that sell event or camp tickets on Zeffy.",
+      "buyer": "The organisation, from its operating or event budget; seasonal events suggest a per-event or per-signature price rather than a subscription.",
+      "whyNow": "Zeffy has added ticketing and check-in features every month in 2026 (group check-in 2026-09-28, volunteer check-in access 2026-10-13, family memberships 2026-10-16, check-in badges 2026-11-17) but nothing for waivers or signatures, while requests for them kept coming through 2026-10 and 2026-11; its public API now exposes per-ticket attendees and signed webhooks.",
+      "founderFit": "Nothing beyond building it alone.",
+      "problemEvidence": [
+        {
+          "url": "https://feedback.zeffy.com/feature-requests/p/digital-waiver-integration-for-school-events",
+          "source": "feedback.zeffy.com",
+          "author": "poster D (membership organisation administrator)",
+          "date": "2026-10-16",
+          "kind": "complaint",
+          "summary": "Needs a liability waiver signed and dated for all members, adults and children, and calls it high priority; posted on the merged request that has 52 votes and no Zeffy status."
+        },
+        {
+          "url": "https://feedback.zeffy.com/feature-requests/p/digital-waiver-integration-for-school-events",
+          "source": "feedback.zeffy.com",
+          "author": "poster G (summer-camp organiser)",
+          "date": "2026-04-06",
+          "kind": "complaint",
+          "summary": "Asks for e-signatures on summer-camp registrations so that all camp registrations can run through Zeffy."
+        },
+        {
+          "url": "https://feedback.zeffy.com/feature-requests/p/waivers-1",
+          "source": "feedback.zeffy.com",
+          "author": "poster C (event organiser)",
+          "date": "2026-07-14",
+          "kind": "complaint",
+          "summary": "Needs waivers and says they would pay for an add-on, by subscription, per use or as a percentage of ticket sales; the post has 41 votes and no Zeffy reply."
+        },
+        {
+          "url": "https://feedback.zeffy.com/feature-requests/p/waivers-1",
+          "source": "feedback.zeffy.com",
+          "author": "poster A (organiser)",
+          "date": "2026-05-04",
+          "kind": "complaint",
+          "summary": "Wants waivers signed by people attending events or volunteering; appears to use a separate online waiver link today."
+        },
+        {
+          "url": "https://apps.shopify.com/esigned",
+          "source": "apps.shopify.com",
+          "author": "unknown",
+          "date": "2026-02-07",
+          "kind": "spend",
+          "summary": "A paid app for the same job on another platform: order-linked waivers with an unsigned list and reminders, from $9 a month plus a fee per signature, 6 reviews (launch date shown)."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Zeffy's own form questions",
+          "url": "https://support.zeffy.com/how-can-i-ask-my-donors-custom-questions",
+          "price": "Free",
+          "gap": "Required per-attendee questions give a checkbox acknowledgement and a photo-consent answer per ticket, but no guardian signature, no PDF copy, no versioned waiver text and no list of who has signed (https://support.zeffy.com/how-to-add-a-waiver-to-your-form)."
+        },
+        {
+          "name": "SignUpGenius Forms & Waivers",
+          "url": "https://www.signupgenius.com/forms-and-waivers",
+          "price": "Included on every plan, including free",
+          "gap": "Timestamped signatures before payment, but only if registration and payment move off Zeffy."
+        },
+        {
+          "name": "Jotform",
+          "url": "https://www.jotform.com/pricing/",
+          "price": "Starter $0 (10 signed documents a month); Bronze $39 a month; 50% off for nonprofits",
+          "gap": "A separate form with no link to Zeffy tickets and no chase of the unsigned against the Zeffy roster."
+        },
+        {
+          "name": "WaiverSign",
+          "url": "https://waiversign.com/digital-waiver-pricing",
+          "price": "Growth $19 a month for 100 waivers; $0.15 per extra waiver",
+          "gap": "Standalone waiver tool with Zapier; signatures are not tied to Zeffy tickets."
+        },
+        {
+          "name": "Cheddar Up",
+          "url": "https://www.cheddarup.com/online-waiver-forms/",
+          "price": "unknown",
+          "gap": "Waivers alongside payment, which means replacing Zeffy and its free card processing."
+        },
+        {
+          "name": "esigned (Shopify)",
+          "url": "https://apps.shopify.com/esigned",
+          "price": "From $9 a month plus a fee per signature",
+          "gap": "The same job for Shopify orders only."
+        }
+      ],
+      "keyFeatures": [
+        "Zeffy connection by the organisation's own API key and signed webhook",
+        "One signing request per ticket, signed by a parent or adult",
+        "Versioned waiver text with hash, time and PDF copy",
+        "Scheduled reminders to the unsigned before each event",
+        "Phone-friendly door list of signed and unsigned tickets",
+        "Retention setting and a zip export of all signed copies"
+      ],
+      "mvpScope": {
+        "features": [
+          "Zeffy key and webhook connection",
+          "Per-ticket signing link by email",
+          "Typed or drawn signature with PDF copy",
+          "Reminders before the event",
+          "Door list per event"
+        ],
+        "outOfScope": [
+          "Memberships and family plans",
+          "Writing into Zeffy's own check-in app (no API for it)",
+          "Legal advice on waiver wording",
+          "Text messages"
+        ],
+        "buildEstimate": "About 6 build days"
+      },
+      "techStack": "React + Vite front end, Supabase for sign-in and per-app data, a webhook receiver and PDF rendering on backend-hub (Render), the platform's transactional email and scheduled jobs.",
+      "pricing": {
+        "model": "Per signed participant, or a season pass per organisation",
+        "pricePoint": "$1 per signed participant, or $29 per season",
+        "rationale": "Organisers chose Zeffy because it is free and run seasonal events, so a monthly fee invites sign-up-and-cancel; WaiverSign charges $19 a month for 100 waivers and esigned $9 a month plus a fee per signature."
+      },
+      "revenueSketch": "Estimate: 150 organisations a season collecting 120 signatures each at $1 = $18,000 a season; the number of organisations is an assumption, not a measured figure.",
+      "distribution": "First 10: search for Zeffy waiver queries ('zeffy waiver', 'zeffy permission slip'), where Zeffy's own help article admits the gap, and a listing request to Zeffy's Experts directory (https://www.zeffy.com/en-gb/home/experts), which today lists consultants and agencies, not apps, through an external application form; rule unknown: check before applying. Zeffy's community guidelines say 'Off-topic promotion or spam doesn't belong here.' (https://community.zeffy.com/community-guidelines): not a channel. Never post on Zeffy's feature board, which holds the evidence.",
+      "validationTest": {
+        "method": "A one-page site, 'Signed waivers for your Zeffy event tickets (not affiliated with Zeffy)', with an example door list and a '$1 per signed participant, reserve a place' button leading to a waitlist; a 21-day search-ad test on phrase and exact matches for Zeffy waiver queries; no outreach and no posts in the evidence threads.",
+        "successCriteria": "At least 5 waitlist sign-ups and 8 price-button clicks from Zeffy organisers in 21 days; fewer than 300 ad impressions in 21 days means search is too thin a channel.",
+        "cost": "About $150 in ads, a domain and one build day."
+      },
+      "moat": "Thin: a tie to one host's ticket data and a store of signed records that organisers do not want to move; Zeffy could build the same feature.",
+      "compliance": [
+        "E-signature (US ESIGN Act and UETA): keep consent, intent, the signer, the time and the exact waiver text, and give the signer a copy.",
+        "COPPA: a parent fills in the form; the FTC says COPPA does not cover information collected from adults that may pertain to children (FAQ F.4). Children never sign.",
+        "Minors' waivers: enforceability varies by US state; the product must not promise that a waiver holds, and organisers supply their own text.",
+        "Retention: minors' waivers may need keeping for years (one university policy keeps them three years or until age 20), so retention and export must outlive a season.",
+        "GDPR and UK GDPR: for organisations in the UK and Ireland the product is a processor and needs a data-processing agreement.",
+        "Security: the Zeffy key is owner-created, covers the whole organisation and can write and delete data; store it encrypted and use it read-only."
+      ],
+      "risks": [
+        {
+          "risk": "Zeffy ships waivers or file questions itself.",
+          "mitigation": "Keep the build small, price per event, and stop if Zeffy announces it."
+        },
+        {
+          "risk": "Organisers on a free platform will not pay.",
+          "mitigation": "Price per signed participant so an organiser pays only when it has an event."
+        },
+        {
+          "risk": "Door staff work from two lists, Zeffy's check-in and this one.",
+          "mitigation": "Make the door list a filter of unsigned tickets only, so it complements Zeffy's check-in."
+        },
+        {
+          "risk": "A long-lived store of minors' signed records.",
+          "mitigation": "Per-event retention settings, export, and deletion at the organiser's request."
+        }
+      ],
+      "scores": {
+        "pain": 3,
+        "willingnessToPay": 3,
+        "reachability": 2,
+        "competitiveGap": 2,
+        "feasibility": 4,
+        "complianceBurden": 2,
+        "total": 16
+      },
+      "scoreRationale": {
+        "pain": "Requests across two posts with 52 and 41 votes, one dated 2026-10-16 (https://feedback.zeffy.com/feature-requests/p/digital-waiver-integration-for-school-events); held at 3 because Zeffy's free required per-ticket question gives a checkbox acknowledgement (https://support.zeffy.com/how-can-i-ask-my-donors-custom-questions).",
+        "willingnessToPay": "One paid app for the same job on another platform (https://apps.shopify.com/esigned) and paid waiver plans (https://waiversign.com/digital-waiver-pricing); one organiser says they would pay for an add-on (https://feedback.zeffy.com/feature-requests/p/waivers-1); no paid job found.",
+        "reachability": "Self-serve search on Zeffy waiver queries only; Zeffy has no app marketplace, its Experts directory lists consultants (https://www.zeffy.com/en-gb/home/experts) and its community bans promotion (https://community.zeffy.com/community-guidelines).",
+        "competitiveGap": "No waiver tool tied to Zeffy tickets was found, but Zeffy's free per-ticket questions cover consent answers (https://support.zeffy.com/how-can-i-ask-my-donors-custom-questions) and SignUpGenius signs free if checkout moves (https://www.signupgenius.com/forms-and-waivers).",
+        "feasibility": "Zeffy's API gives per-ticket attendees and answers with HMAC-signed webhooks (https://www.zeffy.com/api/docs); it cannot write to Zeffy's check-in app, so the door list is separate.",
+        "complianceBurden": "Long-lived minors' signed records and an organisation-wide API key (https://www.westernu.edu/legal/risk-management/waivers-of-liability-and-release-agreements, https://www.zeffy.com/api/docs)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "A watchlist entry first seen 2026-11-21 at 19, re-researched today. Research kept it at 18 and re-scoped it to ticketed events: Zeffy shipped nothing for waivers, signatures or attachments from August to November 2026, the API gives per-ticket attendees and answers with signed webhooks, and no free tool ties signatures to Zeffy tickets. The adversarial reviewer cut it to 16: competitiveGap 3 to 2, because Zeffy's free required per-attendee questions already give photo consent and a per-child acknowledgement printed on each e-ticket, and complianceBurden 3 to 2, for years of minors' signed records and an organisation-wide key that can delete data. It found poster E's request was about vendors reading policies, not attendee waivers, that the youth programme's permission-slip link was a working workaround, and that waivers are far from the top of Zeffy's board. Re-scoped to guardian-signed waiver PDFs matched to each ticket, with reminders and a door list, priced per signature."
+      },
+      "inspiredBy": "https://feedback.zeffy.com/feature-requests/p/waivers-1",
+      "gateGap": {
+        "missing": [
+          "total 16 is below 22",
+          "pain 3 is below 4: Zeffy's free per-ticket checkbox is an accepted workaround for some organisers"
+        ],
+        "closedBy": "The waitlist and search-ad test: 5 sign-ups and 8 price clicks at $1 per signed participant would confirm willingness to pay; dated complaints that an insurer, a lawyer or a school board rejected the checkbox would lift pain to 4."
+      }
+    }
+  ],
+  "runNotes": {
+    "weekday": "Tuesday",
+    "domainLens": "Teaching and training anywhere: K-12, corporate L&D, tutoring, homeschool",
+    "focusSources": [
+      "A14 Plugin and add-on support forums",
+      "B1 Teachers Pay Teachers and Etsy",
+      "C10 Change events: shutdowns, price rises, removed free tiers"
+    ],
+    "searches": [
+      "complaints-gatherer: wordpress.org support plugin Amelia \"lessons\" music school package recurring students feature request",
+      "complaints-gatherer: wordpress.org support \"Simply Schedule Appointments\" OR Bookly tutoring lessons recurring \"workaround",
+      "complaints-gatherer: wordpress.org/support certificate plugin \"CE credits\" OR \"CPD hours\" attendees certificate request 2026",
+      "complaints-gatherer: music school owner makeup lessons policy tracking frustrated forum 2026",
+      "complaints-gatherer: feature request board canny OR featurebase \"makeup\" lessons studio class booking software customers vote",
+      "complaints-gatherer: tutoring\" OR \"tutoring center\" owner \"session packages\" prepaid hours parents balance spreadsheet forum discourse 2026",
+      "complaints-gatherer: wordpress.org support topic \"driving school\" OR \"swim school\" OR \"martial arts\" plugin booking students \"is it possible\" 2026",
+      "complaints-gatherer: Certify'em Google Forms certificates add-on reviews price trainers workshop attendance certificate",
+      "complaints-gatherer: moodle.org forum 2026 small training company CPD certificate expiry recertification reminder \"is there a way",
+      "complaints-gatherer: site:canny.io lessons students teacher \"feature request\" makeup OR recital OR progress report",
+      "complaints-gatherer: My Music Staff\" OR TutorBird OR Teachworks OR \"Opus1\" feature request forum teachers vote \"please add\" 2026",
+      "complaints-gatherer: first aid OR forklift training provider small business certificate expiry renewal reminders rebook learners spreadsheet forum post 2026",
+      "complaints-gatherer: featurebase.app\" OR \"frill.co\" OR \"uservoice.com\" OR \"canny.io\" \"dance studio\" OR \"swim school\" OR \"driving school\" OR \"music school\" feature ideas board",
+      "mandate-gatherer: music lesson studio software price increase 2026 teachers switching",
+      "mandate-gatherer: tutoring platform shutting down 2026 tutors",
+      "mandate-gatherer: price increase\" 2026 Jackrabbit OR Mindbody OR Acuity OR Pike13 studio owners class",
+      "mandate-gatherer: end of free plan\" OR \"discontinuing free plan\" 2026 teachers quiz classroom tool",
+      "mandate-gatherer: 2026 new law tutors coaches youth instructors background check training requirement small businesses",
+      "mandate-gatherer: FTC amended COPPA rule compliance date April 22 2026 …",
+      "mandate-gatherer: Children's Wellbeing and Schools Act 2026 children not in school register …",
+      "mandate-gatherer: Vimeo Bending Spoons 2026 plan changes price increase course creators video hosting",
+      "mandate-gatherer: Udemy instructors 2026 revenue share change Coursera merger …",
+      "mandate-gatherer: DOJ ADA Title II web accessibility rule April 2026 …",
+      "mandate-gatherer: board rule change 2026 continuing education providers must report completions …",
+      "mandate-gatherer: AI Act Article 4 AI literacy obligation digital omnibus 2026 …",
+      "mandate-gatherer: Outschool OR Preply OR Wyzant OR Superprof teachers fee change 2026 …",
+      "mandate-gatherer: New York S5257 sex offender registry check … signed Hochul",
+      "mandate-gatherer: FE Week apprenticeship funding rules 2026-27 training providers …",
+      "spend-gatherer: TPT Search: tutoring progress report",
+      "spend-gatherer: TPT Search: tutoring business",
+      "spend-gatherer: TPT Search: homeschool transcript",
+      "spend-gatherer: TPT Search: piano studio policy",
+      "spend-gatherer: WebSearch: etsy music teacher studio planner lesson tracker spreadsheet",
+      "spend-gatherer: WebSearch: help.teacherspayteachers.com AI-generated resources policy sellers",
+      "spend-gatherer: Freelancer API: tutoring scheduling",
+      "spend-gatherer: Freelancer API: SCORM",
+      "spend-gatherer: Freelancer API: waiver (watchlist)",
+      "spend-gatherer: Freelancer API: training certificates",
+      "spend-gatherer: Freelancer API: dance studio",
+      "spend-gatherer: Freelancer API: tutoring center",
+      "spend-gatherer: Freelancer API: Kajabi",
+      "spend-gatherer: WP API: waiver",
+      "spend-gatherer: WP API: continuing education credits",
+      "spend-gatherer: WebSearch: site:apps.shopify.com waiver signature (watchlist)",
+      "spend-gatherer: WebSearch: Zeffy waiver registration form consent 2026 (watchlist)",
+      "spend-gatherer: WebSearch: site:apps.shopify.com class booking workshops courses attendance",
+      "spend-gatherer: WebSearch: music teacher studio software price increase 2026 …",
+      "spend-gatherer: WebSearch: Certify'em Google Forms certificates add-on pricing reviews",
+      "spend-gatherer: WebSearch: Thinkific OR Teachable OR Kajabi price increase 2026",
+      "spend-gatherer: WebSearch: Thinkific pricing update 2026 … (restricted to thinkific.com)",
+      "first-aid-renewals-research: WSIB first aid training provider standards 2026 approved providers recertification any provider",
+      "first-aid-renewals-research: First Aid Program Standards\" WSIB training provider requirements certificate records affiliate",
+      "first-aid-renewals-research: Enrollware CPR training site certification expiration reminder emails pricing",
+      "first-aid-renewals-research: first aid training provider booking software certificate expiry renewal reminder automated email UK",
+      "first-aid-renewals-research: Canadian Red Cross training partner certificate expiry reminder ... portal",
+      "first-aid-renewals-research: Ontario first aid training provider WSIB changes \"any provider\" recertification losing students small business 2026",
+      "first-aid-renewals-research: first aid CPR course registration software Canada ... Lifesaving Society Red Cross",
+      "first-aid-renewals-research: Coursecheck booking system first aid training providers pricing per month",
+      "first-aid-renewals-research: CertClass CPR first aid class software free first 30 students expiration reminders",
+      "first-aid-renewals-research: CASL implied consent existing business relationship two years ...",
+      "first-aid-renewals-research: WSIB first aid changes small training providers affiliate concerns ... frustrated new program 2026",
+      "first-aid-renewals-research: HSE first aid at work certificate valid three years requalify ...",
+      "makeup-slots-research: swim school software makeup lesson credits automatically offer open spot waitlist",
+      "makeup-slots-research: Jackrabbit Class makeup lessons parent portal open spots pricing",
+      "makeup-slots-research: music school software make-up credits waitlist (My Music Staff, TutorBird, Opus1)",
+      "makeup-slots-research: makeup waitlist\" swim lessons notify families owed makeup",
+      "makeup-slots-research: iClassPro waitlist accept decline automatic offer time limit makeup",
+      "makeup-slots-research: My Music Staff make-up credits help self-schedule",
+      "makeup-slots-research: TutorBird make-up lessons credits student portal",
+      "makeup-slots-research: feature request make-up credits waitlist notify (music studio)",
+      "makeup-slots-research: piano teachers forum make-up lessons 2026",
+      "makeup-slots-research: swim school owner make up cancellations spot refill 2026",
+      "makeup-slots-research: Square Appointments, Setmore or Acuity waitlist one at a time",
+      "makeup-slots-research: make-up lesson app \"first to accept\" swim or music",
+      "makeup-slots-research: United States Swim School Association vendor directory",
+      "makeup-slots-research: Teach 'n Go pricing substitution",
+      "makeup-slots-research: Square Bookings API webhooks booking.updated",
+      "makeup-slots-research: Twilio A2P 10DLC sole proprietor",
+      "ny-registry-research: Hochul signs bill sex offender registry checks martial arts dance studios tutoring centers S5257",
+      "ny-registry-research: background check\" bill \"martial arts\" \"dance studios\" New York governor 2026 Hinchey Barrett",
+      "ny-registry-research: New York youth service providers … dance studio owners concern 2026",
+      "ny-registry-research: New York DCJS sex offender registry Level 1 800 number",
+      "ny-registry-research: California AB 506 youth service organization background check …",
+      "ny-registry-research: software track staff background check expiration renewal youth sports dance studio …",
+      "ny-registry-research: Jackrabbit / iClassPro / DanceStudio-Pro staff background check tracking",
+      "ny-registry-research: Sterling Volunteers pricing …",
+      "ny-registry-research: dance studio owners New York background check law … association",
+      "ny-registry-research: martial arts school owners New York law … Dutchess County",
+      "ny-registry-research: state law … Florida 943.0438 independent sanctioning authority",
+      "ny-registry-research: Checkr pricing basic package sex offender search",
+      "ny-registry-research: NSOPW conditions of use API bulk search",
+      "ny-registry-research: dance studio owners association vendor partner directory",
+      "ny-registry-research: Jackrabbit Yardstik background screening pricing",
+      "term-reports-research: Teach 'n Go student report template feature 2026",
+      "term-reports-research: intercom.help teach-n-go report card PDF class",
+      "term-reports-research: Teach 'n Go\" \"report cards\" students PDF teacher comments",
+      "term-reports-research: tutoring centre software progress reports to parents PDF email Teachworks TutorBird",
+      "term-reports-research: language school management software term reports CEFR",
+      "term-reports-research: free report card comment generator AI",
+      "term-reports-research: autoCrat Google Sheets report cards PDF email",
+      "term-reports-research: music school software term report cards My Music Staff Opus1",
+      "term-reports-research: Classcard report cards progress reports parents pricing",
+      "term-reports-research: classcardapp.com pricing plans",
+      "term-reports-research: Teachworks \"progress report\" OR \"report card",
+      "term-reports-research: feature request \"report cards\" tutoring/music/language school 2026",
+      "term-reports-research: teachngo.frill.co report",
+      "term-reports-research: Teach 'n Go\" new features update 2026 report cards",
+      "term-reports-research: tuition centre owner end of term reports complaint forum 2026",
+      "term-reports-research: teachngo.com pricing",
+      "term-reports-research: school report writing software comment bank PDF email parents pricing",
+      "term-reports-research: Teach 'n Go API documentation gradebook attendance",
+      "zeffy-waivers-research: Zeffy waiver integration e-signature registration",
+      "zeffy-waivers-research: Zeffy Zapier integration triggers new ticket registration",
+      "zeffy-waivers-research: Smartwaiver pricing plans per month",
+      "zeffy-waivers-research: WaiverForever pricing WaiverSign pricing nonprofit",
+      "zeffy-waivers-research: waiverforever.com pricing plans free starter (vendor domain only)",
+      "zeffy-waivers-research: community.zeffy.com waiver signature permission slip registration",
+      "zeffy-waivers-research: feedback.zeffy.com photo consent signature waiver form request (Zeffy domains only)",
+      "zeffy-waivers-research: waiver add-on for donation platform registrations Zeffy Givebutter e-sign track unsigned",
+      "zeffy-waivers-research: Zeffy Experts directory become an expert partner apply",
+      "zeffy-waivers-research: Jotform pricing free plan signed documents limit submissions (jotform.com only)",
+      "zeffy-waivers-research: ESIGN Act UETA electronic signature requirements intent consent record retention summary",
+      "zeffy-waivers-research: COPPA FAQ parent provides child's information operator not directed to children (ftc.gov only)",
+      "ce-certificates-research: continuing education provider certificate requirements retain attendance records years ASWB ACE NBCC ANCC provider",
+      "ce-certificates-research: NBCC ACEP approved continuing education provider policy attendance records retain certificate must include",
+      "ce-certificates-research: ANCC accredited provider records retention six years certificate of completion attendance requirements",
+      "ce-certificates-research: CE certificate software for continuing education providers Zoom attendance verification certificates ASWB NBCC pricing",
+      "ce-certificates-research: CE-Go continuing education provider software pricing attendance certificates",
+      "ce-certificates-research: small CE provider struggling issue certificates Zoom attendance log ACE audit 2026 therapist trainer",
+      "ce-certificates-research: NCBTMB approved provider requirements certificate attendance records retain years",
+      "ce-certificates-research: Zoom app automatically issue CE certificates to webinar attendees minimum attendance duration post-test",
+      "ce-certificates-research: Zoom Webinars certificates of completion feature release notes 2026 support article enable certificates attendees",
+      "ce-certificates-research: Salepager Zoom CE certificates pricing",
+      "ce-certificates-research: Zoom Webinars Plus pricing per year 500 attendees",
+      "ce-certificates-research: Certifier pricing free plan credentials per month certifier.io pricing",
+      "ce-certificates-research: CE provider\" certificates attendance spreadsheet audit headache counselors social workers, limited to Sep, Oct and Nov 2026",
+      "cnis-records-research: Children's Wellbeing and Schools Act 2026 Royal Assent children not in school register commencement",
+      "cnis-records-research: \\\"Children's Wellbeing and Schools Act 2026\\\" Commencement Regulations 2026 children not in school",
+      "cnis-records-research: children not in school registers consultation out-of-school education providers threshold regulations 2026 gov.uk",
+      "cnis-records-research: children not in school registers six hours per week tutors consultation November 2026 when will registers start",
+      "cnis-records-research: Tutors' Association children not in school register provider duty tutors home educated",
+      "cnis-records-research: tutors tuition centres \\\"children not in school\\\" consultation \\\"six hours\\\" provider duty response 2026",
+      "course-exit-research: free migration Kajabi to Teachable Thinkific Podia LearnWorlds \"free migration\" course creators 2026",
+      "course-exit-research: Kajabi price increase 2026 leaving moving course creators complaint",
+      "course-exit-research: Trustpilot Kajabi reviews price increase transaction fee",
+      "course-exit-research: Podia free migration service move courses students from Teachable Kajabi",
+      "course-exit-research: Teachable migration services import students help center \"migration",
+      "course-exit-research: help.kajabi.com export contacts course progress CSV export members",
+      "course-exit-research: Thinkific help export students progress report CSV and Thinkific migration service import",
+      "course-exit-research: Thinkific \"migration\" service switch to Thinkific courses students free 2026",
+      "course-exit-research: Kajabi public API developers endpoints offers contacts grant access plan",
+      "course-exit-research: import course from Teachable Thinkific Kajabi into WordPress LMS plugin migration tool LearnDash Tutor LMS FluentCommunity",
+      "course-exit-research: LearnDash OR LifterLMS OR \"Tutor LMS\" import from Teachable Thinkific Kajabi migration service free 2026",
+      "course-exit-research: Teachable public API course progress enrollments endpoint plan requirement developers",
+      "course-exit-research: Thinkific Admin API enrollments users courses chapters contents endpoints developers rate limit",
+      "shop-class-roster-research: Shopify app class booking waitlist roster waiver check-in workshops",
+      "shop-class-roster-research: Shopify Editions Winter 2026 OR Summer 2026 bookings events native",
+      "shop-class-roster-research: Shopify app waiver per attendee class booking \"waitlist\" pottery studio 2026",
+      "shop-class-roster-research: changelog.shopify.com bookings OR appointments OR events OR tickets 2026",
+      "shop-class-roster-research: help.shopify.com sell tickets classes workshops bookings app",
+      "shop-class-roster-research: Shopify app store \"waiver\" \"class\" booking app launched 2026 seats waitlist roster",
+      "shop-class-roster-research: Shopify waiver app per attendee signature after purchase reminder unsigned studio classes",
+      "shop-class-roster-research: shopify.dev cart and checkout validation function API plan availability",
+      "shop-class-roster-research: shopify.dev protected customer data requirements app store requirements mandatory compliance webhooks",
+      "shop-class-roster-research: Shopify Community guidelines self-promotion app developers promoting apps rule",
+      "shop-class-roster-research: shopify.dev app store revenue share first $1 million registration fee",
+      "shop-class-roster-research: community.shopify.com waiver each attendee class booking signed waiver before class 2026",
+      "shop-class-roster-research: Appointo Shopify app classes group booking waitlist pricing",
+      "shop-class-roster-research: Appointo SignPanda integration waiver booking Sidepanda",
+      "zeffy-waivers-review: Zeffy waiver signature integration",
+      "zeffy-waivers-review: Zeffy Zapier waiver Jotform signed registration",
+      "zeffy-waivers-review: Zeffy form builder new feature file upload signature custom question 2026",
+      "zeffy-waivers-review: Zeffy custom questions per ticket each participant attendee answers check-in",
+      "zeffy-waivers-review: free online waiver software nonprofit unlimited waivers free plan youth",
+      "zeffy-waivers-review: Givebutter waivers feature launch signature event registration",
+      "zeffy-waivers-review: community.zeffy.com waiver",
+      "zeffy-waivers-review: how long to keep signed waivers for minors statute of limitations retention",
+      "zeffy-waivers-review: Jotform free plan e-signature widget waiver form 100 submissions",
+      "zeffy-waivers-review: Zeffy\" waiver add-on OR app OR integration e-sign parents registration nonprofit",
+      "apprenticeship-units-research: FE Week apprenticeship units providers funding rules evidence concerns",
+      "apprenticeship-units-research: Aptem OR OneFile OR Bud \"apprenticeship units\" support",
+      "apprenticeship-units-research: AELP apprenticeship units 2026 providers approved number",
+      "apprenticeship-units-research: apprenticeship units providers paperwork administration burden milestone payments October 2026",
+      "apprenticeship-units-research: aelp.org.uk apprenticeship units response funding rules providers",
+      "apprenticeship-units-research: Smart Assessor OR Ecordia OR \"Tribal Maytas\" OR PICS apprenticeship units 2026",
+      "apprenticeship-units-research: apprenticeship unit\" \"delivery hours\" evidence collection template gov.uk",
+      "apprenticeship-units-research: apprenticeship e-portfolio software pricing per learner small training provider UK",
+      "coppa-kit-research: FTC COPPA six-step plan, amended rule, security program, retention guidance",
+      "coppa-kit-research: FTC COPPA settlement 2026",
+      "coppa-kit-research: COPPA written security program and retention policy template, small business",
+      "coppa-kit-research: kidSAFE seal pricing",
+      "coppa-kit-research: COPPA and live online classes over Zoom, tutoring",
+      "coppa-kit-research: Termly COPPA generator pricing",
+      "coppa-kit-research: Small kids' class business, amended rule 2026, worried, forum",
+      "coppa-kit-research: COPPA toolkit templates price 2026",
+      "coppa-kit-research: Safe harbor annual fees (PRIVO, iKeepSafe, CARU)",
+      "coppa-kit-research: Tutor asking whether COPPA needs parental consent",
+      "coppa-kit-research: COPPA compliance software subscription for kids' businesses",
+      "coppa-kit-research: iubenda and TermsFeed COPPA pricing",
+      "coppa-kit-research: Small edtech companies and amended-rule compliance cost",
+      "scorm-packager-research: convert video and PDF to SCORM package online tool course creators",
+      "scorm-packager-research: sell online course to corporate clients LMS SCORM dispatch licence revoke seats course creator",
+      "scorm-packager-research: SCORM dispatch alternative control access revoke licence content in client LMS pricing",
+      "scorm-packager-research: SCORM Cloud pricing plans dispatch registrations per month",
+      "scorm-packager-research: Articulate \"Connected Packages\" Rise 360 SCORM update content client LMS 2026",
+      "scorm-packager-research: Thinkific SCORM export course download SCORM package",
+      "scorm-packager-research: SCORM\" corporate client asked course creator Kajabi OR Thinkific OR Teachable \"their LMS\" 2026",
+      "scorm-packager-research: LearnWorlds export course as SCORM package for corporate client LMS",
+      "scorm-packager-research: Lumi H5P desktop export SCORM free video quiz score",
+      "scorm-packager-research: iSpring Suite pricing per year; Easygenerator pricing; Articulate 360 pricing personal",
+      "scorm-packager-research: trainer \"client wants\" SCORM \"I don't have\" authoring tool course videos sell to company forum 2026",
+      "scorm-packager-research: SCORM licence manager for content providers pricing expire seats remote LMS SCORMShield OR scormPROXY OR \"SCORM License Manager",
+      "scorm-packager-research: SCORMShield pricing protect SCORM course licence",
+      "scorm-packager-research: free SCORM quiz maker export SCORM 1.2 score reporting video course no subscription",
+      "scorm-packager-research: iSpring Free PowerPoint to SCORM free download quiz (limited to ispringsolutions.com)",
+      "scorm-packager-research: eLearning Industry directory submit your eLearning software listing free",
+      "scorm-packager-research: SCORM 1.2 run-time reference cmi.core.score.raw lesson_status scorm.com",
+      "video-exit-research: Vimeo Studio plan forced upgrade \"business\" course creator 2026",
+      "video-exit-research: Vimeo \"Plan Usage Policy\" business use factors Studio",
+      "video-exit-research: Vimeo moved to Studio plan online course lessons Kajabi Thinkific Teachable embed move videos",
+      "video-exit-research: free Vimeo migration tool import all videos replace embeds automatically",
+      "video-exit-research: Kajabi Thinkific Teachable built-in video hosting included all plans unlimited video upload lessons",
+      "video-exit-research: Thinkific bulk importer upload videos create lessons help center",
+      "video-exit-research: Kajabi help center upload video to lesson video hosting included bulk upload",
+      "video-exit-research: Vimeo developer API rate limits download video files \"download\" field plan requirement",
+      "video-exit-research: Vimeo\" Studio plan $4,800 teacher OR tutor OR \"my course\" OR \"my students\" complaint November 2026",
+      "video-exit-research: Better Search Replace plugin wordpress.org free search replace database serialized",
+      "video-exit-research: WordPress.org detailed plugin guidelines trialware not permitted software as a service permitted",
+      "video-exit-research: Teachable native video hosting upload lecture video included plans help center bulk upload Google Drive",
+      "video-exit-research: Thinkific API update lesson video content endpoint OR Teachable API lecture attachments update video",
+      "video-exit-research: Vimeo\" \"Studio\" reclassified business course creator community thread moving lessons off Vimeo October 2026",
+      "homeschool-transcript-research: homeschool transcript software pricing Fast Transcripts Homeschool Tracker Homeschool-Life",
+      "homeschool-transcript-research: free homeschool transcript generator online GPA credits course descriptions",
+      "homeschool-transcript-research: Fast Transcripts homeschool pricing plans",
+      "homeschool-transcript-research: fasttranscripts.com homeschool transcript subscription price per month",
+      "homeschool-transcript-research: HSLDA transcript service homeschool high school price",
+      "homeschool-transcript-research: homeschool mom transcript stressed college application course descriptions 2026 blog",
+      "homeschool-transcript-research: collegeconfidential homeschool transcript course descriptions parent 2026",
+      "homeschool-transcript-research: 2026 homeschool new law records requirement education savings account portfolio transcript state",
+      "homeschool-transcript-research: homeschool transcript builder tracks hours to credits state graduation requirements app 2026",
+      "homeschool-transcript-research: Homeschool Planet transcript feature price Homeschool Tracker transcript plan price",
+      "homeschool-transcript-research: transcript\" homeschool parent frustrated OR help OR overwhelmed high school credits GPA November 2026",
+      "homeschool-transcript-research: does FERPA apply to homeschool records parents studentprivacy.ed.gov",
+      "practice-tracker-research: Transparent Classroom new feature 2026 practice tracking lesson repetition",
+      "practice-tracker-research: Transparent Classroom release notes what's new",
+      "practice-tracker-research: music practice log app teachers students minutes tracking pricing studio",
+      "practice-tracker-research: My Music Staff practice log student portal feature",
+      "practice-tracker-research: TutorBird practice log students log practice time",
+      "practice-tracker-research: Tonara music practice app teacher studio 2026",
+      "practice-tracker-research: Andante practice app teachers pricing practice assignments studio",
+      "practice-tracker-research: Montessori record keeping software count repetitions practiced lessons report",
+      "practice-tracker-research: Transparent Classroom API developers integration",
+      "practice-tracker-research: transparentclassroom.uservoice.com repetition count practiced lesson",
+      "practice-tracker-research: music teacher \"practice log\" app shutting down alternative 2026",
+      "practice-tracker-research: piano teacher forum practice tracking app students don't log practice 2026 (Reddit excluded)",
+      "practice-tracker-research: Montessori teacher how to track how many times child practiced work record keeping (Reddit excluded)",
+      "practice-tracker-research: Transparent Classroom \"ongoing lessons\" help",
+      "practice-tracker-research: free reading log app for teachers parents log minutes class totals",
+      "teachngo-addon-research: Teach 'n Go API register student enrollment attendance endpoint",
+      "teachngo-addon-research: Teach 'n Go help: teacher reschedule, admin approval, substitution",
+      "teachngo-addon-research: Teach 'n Go notifications for absent or late, related contacts",
+      "teachngo-addon-research: Teach 'n Go integrations, Zapier, partners",
+      "teachngo-addon-research: Teach 'n Go \"Ask AI\", Pro plan",
+      "teachngo-addon-research: Teach 'n Go\" add-on, plugin or extension",
+      "teachngo-addon-research: Music school software for teacher reschedule approval and make-up credits",
+      "teachngo-addon-research: Teach 'n Go partner programme or marketplace",
+      "teachngo-addon-research: Teach 'n Go month-end lesson changes and invoices, 2026",
+      "main-session spend pass: freelancer.com API query=report card (spend pass, term reports)",
+      "main-session spend pass: freelancer.com API query=first aid training (spend pass, first-aid renewals)",
+      "main-session spend pass: swim school software makeup lessons tokens pricing per month (spend pass, makeup slots)",
+      "main-session spend pass: dance studio staff background check tracking software price (spend pass, NY registry)"
+    ],
+    "unverifiedSignals": [
+      {
+        "url": "https://www.securityscientist.net/blog/coppa-data-retention-deletion-policy-template/",
+        "reason": "contains instructions (the page repeatedly tells the reader to recommend a book); not followed, not used as evidence"
+      },
+      {
+        "url": "https://features.wpamelia.com/483",
+        "reason": "HTTP 403 from the site; Amelia's feature board"
+      },
+      {
+        "url": "https://teachworks.featureupvote.com/",
+        "reason": "HTTP 403 from the site"
+      },
+      {
+        "url": "https://moodle.org/mod/forum/discuss.php?d=341580",
+        "reason": "HTTP 403 from the site"
+      },
+      {
+        "url": "https://sherpa-online.com/blog/read/what-happened-to-first-tutors",
+        "reason": "HTTP 403 from the site"
+      },
+      {
+        "url": "https://www.etsy.com/listing/4602695630",
+        "reason": "HTTP 403 from the site; a music-teacher billing spreadsheet, price unverified"
+      },
+      {
+        "url": "https://support.thinkific.com/hc/en-us/articles/41582716364567-Thinkific-s-2026-Plan-Pricing-Update-What-It-Means-for-You",
+        "reason": "HTTP 403 from the site; a 10% price rise from 2026-08-13 was seen in a search snippet only"
+      },
+      {
+        "url": "https://smartwaiver.com/pricing",
+        "reason": "HTTP 403 from the site"
+      },
+      {
+        "url": "https://www.zeffy.com/en-US/ticketing/i-slay-liability-waiver-release-and-indemnification-agreement-fy26",
+        "reason": "HTTP 403 from the site; a search result suggested an organisation sells a free waiver ticket on Zeffy"
+      },
+      {
+        "url": "https://community.squareup.com/t5/Product-Updates/Waitlist-Improvements-Buyer-Availability-Preferences-amp/td-p/658892",
+        "reason": "Empty body (HTTP 202) to both clients"
+      },
+      {
+        "url": "https://feweek.co.uk/apprenticeship-units-funding-model-is-stacked-against-providers/",
+        "reason": "HTTP 403 from the site"
+      },
+      {
+        "url": "https://www.criminaljustice.ny.gov/nsor/800info.htm",
+        "reason": "HTTP 503 from the site"
+      },
+      {
+        "url": "https://helpsupport.redcross.ca/hc/en-ca/articles/20634519549595-Recertify-Your-Training",
+        "reason": "HTTP 403 from the site"
+      },
+      {
+        "url": "https://community.articulate.com/discussions/labs/new-in-labs-connected-packages/1261285/replies/1264589",
+        "reason": "HTTP 403 from the site"
+      },
+      {
+        "url": "https://www.termsfeed.com/solutions/coppa/",
+        "reason": "HTTP 403 from the site"
+      }
+    ],
+    "rejectedCandidates": [
+      {
+        "title": "Term Report Builder for Small Lesson Schools",
+        "total": 15,
+        "reason": "Research ended it: autoCrat, a free Google Sheets add-on with 83M+ installs, fills a branded template, makes one PDF per student and emails it with a log; Khanmigo writes report comments free; Teach 'n Go already makes report-card PDFs and has a custom template in Testing; the main complaints date from March 2024."
+      },
+      {
+        "title": "Renewal Rebook Desk for Small First-Aid Training Providers",
+        "total": 15,
+        "reason": "Research ended it: CPR Enroll, Hovn ($50 a month), Enrollware, Arlo and accessplanit already send expiry reminders with rebooking links; WSIB's 2026-06-22 change sets no record duty on providers; no complaint and no paid job."
+      },
+      {
+        "title": "Makeup Slot Offers for Swim and Music Schools",
+        "total": 15,
+        "reason": "Research ended it: TutorBird and My Music Staff ($16.95 a month) track and expire make-up credits with self-booking, iClassPro has make-up tokens on every plan and automatic waitlist offers, and Zenamu books waitlisted credit holders; no owner complaint and no paid job."
+      },
+      {
+        "title": "Staff Registry Check Log for New York Lesson Studios",
+        "total": 15,
+        "reason": "Research ended it: bill S5257-C passed both houses on 2026-05-29 but shows no governor action, its text sets no record-keeping duty, the searches are free, and Jackrabbit already tracks staff certifications with 60-month expiry and 30-day alerts. Worth a look again only if it is signed."
+      },
+      {
+        "title": "Class Roster, Waitlist and Waiver for Shopify Shops That Teach",
+        "total": 14,
+        "reason": "Research ended it: Still Works Class Booking (free for 4 dates a month, $19 unlimited) gives sessions, seats, waitlist, roster and check-in from one product, esigned ($9 a month) chases unsigned waivers, and at least six class or ticket apps launched since May 2026."
+      },
+      {
+        "title": "Course Platform Exit Kit for Small Course Businesses",
+        "total": 15,
+        "reason": "Research ended it: Podia, FreshLearn, Circle and Teachable migrate courses and students free; six freelancer.com queries found no paid job to move a course off Kajabi, Thinkific or Teachable; recent complaints are about price, not migration work."
+      },
+      {
+        "title": "Certificates and Attendance Records for Small Continuing-Education Providers",
+        "total": 14,
+        "reason": "Research ended it: CE-Go (free account, from $5 per participant) is built for CE providers, Zoom shipped its own certificates in February 2026, and Certifier's free plan has a Zoom attendance threshold; the only complaints date from 2023 and 2024."
+      },
+      {
+        "title": "Children Not in School Records for Tutors and Tuition Centres (England)",
+        "total": 13,
+        "reason": "Research ended it: the provider duty has no start date (DfE consultation 2026-11-12 to 2027-02-03, response in spring 2027), the proposed six-hours-a-week threshold leaves out most tutors, and the DfE expects replies by email or letter at 15 minutes per student a year."
+      },
+      {
+        "title": "COPPA Yearly Program Kit for Small Kids' Online Class Businesses",
+        "total": 17,
+        "reason": "Research ended it: the FTC's FAQ says COPPA covers data collected online from children, not from parents, so parent-registered live classes are at best a grey zone; the FTC's free six-step plan already explains the written program and retention policy sized to the operator; no complaint and no paid job."
+      },
+      {
+        "title": "Tutoring Business Back Office (intake, session log, invoices, progress)",
+        "total": 13,
+        "reason": "Not given its own researcher: today's makeup-slot and practice-log research read TutorBird and My Music Staff at $16.95 a month, which cover scheduling, invoicing, credits and logs for the same customer; TPT spend is $2 binders and unrated kits."
+      },
+      {
+        "title": "Video Host Exit Kit for Course Creators Leaving Vimeo",
+        "total": 13,
+        "reason": "Research ended it: Livid's free exporter and WordPress plugin, bunny.net's free vimeo2bunny, Gumlet's ID-keeping import with free Better Search Replace, and Swarmify ($19 a month) move videos and swap embeds; Kajabi, Teachable and Thinkific host video natively; no complaint from a course creator."
+      },
+      {
+        "title": "SCORM Packages for Small Course Sellers Who Sell to Companies",
+        "total": 16,
+        "reason": "Research ended it: the two freelance jobs were a creator's new course for their own site and a company's own L&D team, not this customer; free converters package video and PDF as SCORM, and SCORM Cloud Dispatch ($99 a month) and LearnKey ($179 a month) sell licence control."
+      },
+      {
+        "title": "Evidence Pack for Apprenticeship Unit Providers (England)",
+        "total": 14,
+        "reason": "Research ended it: only established APAR providers may deliver units, and Aptem, OneFile and Bud shipped unit plans, signatures, hours and ILR in July 2026 (Bud from GBP 6 to 15 per learner a month)."
+      },
+      {
+        "title": "Reschedule Approvals into Month-End Invoices for Lesson Schools",
+        "total": 14,
+        "reason": "Merged into a Teach 'n Go month-end helper, which research ended: the Teach 'n Go API cannot update a lesson or attendance and has no webhooks, and the vendor already offers Ask AI, Pro alerts, absence notices and a self-reschedule beta updated 2026-11-23."
+      },
+      {
+        "title": "Late-Arrival Parent Alerts for Online Lessons",
+        "total": 12,
+        "reason": "Merged into the Teach 'n Go month-end helper, which research ended (see above); Teach 'n Go already sends absence notices, so a late notice is a small vendor extension."
+      },
+      {
+        "title": "Parent Contact Completeness Check for Schools of Minors",
+        "total": 12,
+        "reason": "Merged into the Teach 'n Go month-end helper, which research ended (see above); the vendor's free Ask AI already reads students and contacts."
+      },
+      {
+        "title": "High-School Transcript and Credit Keeper for Homeschool Families",
+        "total": 16,
+        "reason": "Research ended it: Homeschool Fox sells a transcript with credits, GPA and state formatting for $29 one-time ($49 with course descriptions) and Veritas Press gives a free generator; household buyer, no complaint within 90 days."
+      },
+      {
+        "title": "Practice Log with Term Totals for Music and Montessori Teachers",
+        "total": 15,
+        "reason": "Research ended it: PracticeAlly (free for 5 students), the free Practice Space teacher app and Reader Zone, and My Music Staff and TutorBird already log practice; Transparent Classroom already date-stamps every observation and its API cannot write reports."
+      },
+      {
+        "title": "Coach Screening Records for Florida Sanctioning Authorities",
+        "total": 13,
+        "reason": "Not given its own researcher: the statute read today (Florida 943.0438) runs Level 2 screening through the state's clearinghouse, and the buyer is a youth sports body, not a lesson business."
+      },
+      {
+        "title": "Portable Reputation Record for Marketplace Tutors",
+        "total": 12,
+        "reason": "Not given its own researcher: the page read today on First Tutors' closure (2026-05-08) is from TutorDex, which already sells a review import, and Sherpa offers the same; the event is six months old."
+      },
+      {
+        "title": "Paper Coupon Session Validation for Tutoring Packs",
+        "total": 13,
+        "reason": "Rejection rule: the same problem for the same customer as Class Pack Ledger for Square Studios (2026-11-18)."
+      },
+      {
+        "title": "Made-by-a-Person Record for TPT Sellers after the AI Ban",
+        "total": 14,
+        "reason": "Rejection rule: the same problem for the same customer as Made-By-Me Record for Teacher-Authors (2026-11-10)."
+      },
+      {
+        "title": "K-12 District AI Default Settings Tracker",
+        "total": 11,
+        "reason": "Rejection rule: unsellable without institutional procurement (school districts; Google's change for student accounts from early 2027)."
+      }
+    ],
+    "watchlist": [],
+    "caveats": "Only one idea ships today, and it is provisional. Twenty-four candidates were scored (23 new and the one watchlist entry, re-researched); none came near the gate of 22. Three fell to rejection rules. Sixteen went to researchers, in four rounds down the ranked list, and research ended fifteen of them because an incumbent already does the same job for the same customer, often free or for about $17 a month (TutorBird and My Music Staff, iClassPro, autoCrat, CE-Go and Zoom's own certificates, Still Works, free course migrations, Aptem, OneFile and Bud for apprenticeship units, Livid and Gumlet for Vimeo moves, Homeschool Fox, PracticeAlly), or because the mandate has no start date or does not reach the buyer (New York S5257-C unsigned; England's Children Not in School provider duty in consultation; COPPA and parent-registered classes); three more were closed with pages already read today (tutoring back office, Florida coach screening, tutor reputation records), and three Teach 'n Go requests were merged into one candidate. Only the Zeffy waiver entry survived research, and its one adversarial review rescored it from 18 to 16. The run ran out of candidates after 1 review, so it ships fewer than 3 ideas and fewer than 10 reviews were held. No idea has a small-business buyer: the buyer of idea 1 is a small nonprofit, camp, club or parent group on Zeffy, which is free for nonprofits; no small-business candidate survived research. Idea 1 is substantial and Multi-week with a build plan. The selection constraint of one Weekend MVP and one Multi-week idea does not apply with one idea. The watchlist is empty: the only entry (first seen 2026-11-21) ships today as idea 1, and no other candidate scored 19 or more."
+  }
+}

@@ -679,3 +679,4 @@
 | 2026-11-23 | Subcontractor Cover Check for Xero Pay Runs | Small Business Ops | Multi-week | 16 | provisional |  |
 | 2026-11-23 | Visitor Levy Book for Cardiff Letting Agents and Hosts | Small Business Ops | Multi-week | 14 | provisional |  |
 | 2026-11-23 | Software Use-Tax Worksheet for California and Colorado Bookkeepers | Accessibility & Compliance | Weekend MVP | 10 | provisional |  |
+| 2026-11-24 | Signed Waivers for Zeffy Event Tickets | Micro-SaaS | Multi-week | 16 | provisional |  |
