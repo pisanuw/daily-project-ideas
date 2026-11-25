@@ -1,0 +1,1103 @@
+{
+  "date": "2026-11-25",
+  "schemaVersion": 3,
+  "complete": true,
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Exam Room for R",
+      "slug": "exam-room-for-r",
+      "category": "EdTech: Higher Ed",
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Assessment & Grading",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": true,
+        "engine": true,
+        "shared": true,
+        "notes": {
+          "stateful": "Instructors come back to their saved question banks, exams, versioned answers and grades each term.",
+          "connected": "Imports the instructor's roster CSV and Safe Exam Browser settings, and exports a gradebook CSV in the format Canvas or Brightspace imports.",
+          "unattended": "A scheduled job closes each exam at its end time, emails the instructor that submissions are ready to grade, and purges answers after the retention period.",
+          "engine": "An R test harness run in webR with per-test timeouts, hidden tests graded only in the instructor's browser, the Safe Exam Browser Config Key hash check, and versioned autosave with an offline queue.",
+          "shared": "The instructor writes the exam, students take it, a teaching assistant can grade, and each student receives a graded answer report."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "email",
+        "scheduled",
+        "backend"
+      ],
+      "buildPlan": [
+        {
+          "n": 1,
+          "title": "One R question, end to end",
+          "delivers": "An instructor signs in and creates an exam with one R question and visible checks; a student joins with an exam code and a seat code, runs R in the browser and the answer autosaves; the instructor sees it.",
+          "acceptance": "On the deployed site, an exam created in one browser and joined in another shows the student's latest code in the instructor view within 10 seconds, with no student account created."
+        },
+        {
+          "n": 2,
+          "title": "Preflight and package preload",
+          "delivers": "A preflight page loads and caches webR and the exam's R packages, reports load time, and tells the student when the room is ready.",
+          "acceptance": "The preflight shows 'ready' and the measured load time; reloading the page offline still runs a cached R snippet."
+        },
+        {
+          "n": 3,
+          "title": "Hidden tests and grading",
+          "delivers": "Hidden tests are stored server-side and never sent to students; after the exam the instructor's browser grades every submission with per-test timeouts; the instructor overrides scores and adds comments.",
+          "acceptance": "The student page's network log contains no hidden-test text; 100 seeded submissions, one with an infinite loop, are graded with the expected scores and the loop times out."
+        },
+        {
+          "n": 4,
+          "title": "Exam controls",
+          "delivers": "Open and close times on server time, a time limit, extra time per seat, roster CSV import that keeps names in the instructor's browser, a scheduled close, and an optional Safe Exam Browser Config Key check.",
+          "acceptance": "The exam locks at its close time with no instructor action; with the check on, an ordinary browser is refused and Safe Exam Browser with the right settings is admitted; no student name reaches the database."
+        },
+        {
+          "n": 5,
+          "title": "Resilience and live roster",
+          "delivers": "An offline answer queue, answer version history, sync on reconnect, and a live list of joined, saving and submitted seats.",
+          "acceptance": "With the network cut for 2 minutes mid-exam, no edits are lost and every version syncs on reconnect; the live list updates within 10 seconds."
+        },
+        {
+          "n": 6,
+          "title": "Export, email and retention",
+          "delivers": "A gradebook CSV for Canvas and Brightspace import, a per-student answer report, the 'exam closed' email, and a retention purge job.",
+          "acceptance": "The exported CSV matches each LMS's documented import columns in a fixture test; the close email arrives; a purged exam leaves no answer rows."
+        },
+        {
+          "n": 7,
+          "title": "Polish",
+          "delivers": "Keyboard-only use, screen-reader labels, zoom and contrast on the student and instructor pages; an instructor README with a Safe Exam Browser setup guide; a walkthrough test.",
+          "acceptance": "An automated accessibility check reports no serious issues on either page, and a scripted walkthrough (create, join, answer, close, grade, export) passes."
+        }
+      ],
+      "summary": "For statistics and data-science instructors who now grade R in supervised exams: a browser exam room where students write and run R with no installs, no accounts and no AI assistant, inside Safe Exam Browser. Answers save as students type, hidden tests do the grading, and grades export to the gradebook.",
+      "public": {
+        "summary": "A quiet, locked room on the web for R exams: students write and run real code, with nothing to install and nothing to sign up for.",
+        "problem": "You moved graded R work into supervised exams because take-home work can no longer be trusted. The online R tools you could use make every student create an account, and students can switch on an assistant that writes the code for them. So you are left with paper exams or begging for a locked computer lab.",
+        "forWhom": "College and university instructors who teach statistics or data analysis in R and give coding exams in class or under a locked exam browser.",
+        "benefits": [
+          "Students write and run real R code in the exam, so you test what they can do, not what they remember on paper",
+          "No installs and no student sign-ups: students join with an exam code and a seat code",
+          "Every answer is saved as they work, so a dropped connection loses nothing",
+          "Hidden tests grade every answer, and you review and adjust before grades go out",
+          "Grades export in a file your gradebook already accepts"
+        ],
+        "audience": "education"
+      },
+      "problemStatement": "Instructors who run supervised R exams have no lightweight way to let students write and run R during the exam: hosted R environments need a per-student account, and each student can switch on an AI assistant the instructor cannot turn off; free autograders that run R in the browser record scores only through an LMS package or a locally installed LTI tool.",
+      "description": "Exam Room runs student code in the student's own browser with webR, so the server stores only the exam, the answers and the grades. The instructor writes R questions with visible and hidden checks and gets an exam code; students open the exam inside Safe Exam Browser and join with the exam code and a seat code, and their code autosaves as they type. When the exam closes on schedule, the instructor's browser runs the hidden tests against every submission, so hidden tests never reach students. The instructor reviews, overrides and exports a gradebook CSV; student names stay in the instructor's own roster file. An optional Safe Exam Browser Config Key check refuses ordinary browsers.",
+      "targetCustomer": "Statistics and data-science instructors who teach R at colleges and universities on Canvas or Brightspace campuses with no Numbas LTI tool and no campus RStudio server, and who run supervised exams in a lab or under Safe Exam Browser.",
+      "buyer": "The instructor by card, per course per term, or the department for several sections; campuses that review all software used in graded work must approve it first.",
+      "whyNow": "Posit Cloud account owners can now switch on Posit Assistant (July 2026), so instructors cannot guarantee an AI-free hosted R exam; universities are formalising supervised, no-GenAI assessment (Glasgow, 2026-07-07); and webR now runs R in an ordinary static page without special hosting.",
+      "founderFit": "He teaches CS at a university and reads CS education research, so supervised coding assessment and its literature are his own field, and he ships a web app alone in days. The R and statistics instructors who are the buyers are not in his stated CS-educator network.",
+      "problemEvidence": [
+        {
+          "url": "https://forum.posit.co/t/219793.json",
+          "source": "forum.posit.co",
+          "author": "poster A",
+          "date": "2026-10-15",
+          "kind": "complaint",
+          "summary": "A university R instructor running computational tests under Safe Exam Browser asks for online R without student accounts, because the hosted option needs an account and brings an AI assistant; the thread closed unanswered."
+        },
+        {
+          "url": "https://forum.posit.co/t/211566.json",
+          "source": "forum.posit.co",
+          "author": "poster B",
+          "date": "2026-05-14",
+          "kind": "complaint",
+          "summary": "An instructor teaching introductory R on the hosted platform asks how to stop AI use during exams under a lockdown browser; support said it cannot guarantee a student's own AI subscription is blocked; no replies."
+        },
+        {
+          "url": "https://www.gla.ac.uk/myglasgow/learningandteaching/news/headline_1279194_en.html",
+          "source": "gla.ac.uk",
+          "author": "unknown",
+          "date": "2026-07-07",
+          "kind": "mandate",
+          "summary": "From 2026-27 staff must declare every assessment either supervised, with no GenAI unless stated, or GenAI-permitted, before students start."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Posit Cloud",
+          "url": "https://docs.posit.co/cloud/guide/teach/",
+          "price": "$15 a month per instructor, plus $5 a month per student on one plan",
+          "gap": "Every student needs their own account, and account owners can switch on the AI assistant, so the instructor cannot guarantee an AI-free exam."
+        },
+        {
+          "name": "Numbas programming extension",
+          "url": "https://docs.numbas.org.uk/en/latest/tutorials/deliver-to-students.html",
+          "price": "Free",
+          "gap": "Runs R and Python in the browser with unit-test marking, but records scores only through an LMS SCORM package or a locally installed LTI provider; standalone attempts are not saved."
+        },
+        {
+          "name": "PrairieLearn",
+          "url": "https://www.prairielearn.com/pricing",
+          "price": "Free up to 20 students per term; $8 Basic or $16 Premium per student per course",
+          "gap": "Per-student pricing for normal course sizes, enrolled student accounts, and code autograding only in Premium."
+        },
+        {
+          "name": "CodeCheck",
+          "url": "https://horstmann.com/codecheck/assignments.html",
+          "price": "Free for public and non-profit institutions",
+          "gap": "Account-free, with hidden tests and CSV scores, but no R and no exam window or close time."
+        }
+      ],
+      "keyFeatures": [
+        "R questions with visible and hidden checks",
+        "Student join by exam code and seat code, no account",
+        "R runs in the browser with per-run time limits",
+        "Versioned autosave with an offline queue",
+        "Hidden tests graded only in the instructor's browser",
+        "Scheduled open and close, time limit and extra time per seat",
+        "Optional Safe Exam Browser Config Key check",
+        "Gradebook CSV export for Canvas and Brightspace"
+      ],
+      "mvpScope": {
+        "features": [
+          "R questions with checks",
+          "Join by exam code and seat code",
+          "Autosave with offline queue",
+          "Instructor batch grading with hidden tests",
+          "Scheduled close",
+          "Safe Exam Browser Config Key check",
+          "Roster import kept in the instructor's browser and grade CSV export",
+          "Preflight page"
+        ],
+        "outOfScope": [
+          "Python (served free by CodeCheck and campus notebooks)",
+          "Respondus LockDown Browser support beyond an experimental per-campus test",
+          "Webcam or remote proctoring",
+          "Plagiarism detection",
+          "LMS grade passback",
+          "Any AI feature"
+        ],
+        "buildEstimate": "7 build days"
+      },
+      "techStack": "Static front end with CodeMirror and webR in a Web Worker, self-hosted on the same origin with a service-worker cache; Supabase sign-in and tables for exams, questions, attempts and answer versions with row-level security; backend-hub for join tokens, server time and the Safe Exam Browser key check; platform email and scheduled jobs; no LLM.",
+      "pricing": {
+        "model": "Per course per term, paid by card, with a free practice tier",
+        "pricePoint": "$79 per course per term (up to 250 students); free for one practice exam of up to 25 students",
+        "rationale": "Below a term of Posit Cloud's instructor plan with per-student fees and far below PrairieLearn Premium at $16 per student per course, and within a personal card."
+      },
+      "revenueSketch": "Estimate: 30 paying R courses in year one at $79 for two terms is about $4,700; reaching 100 courses in year two is about $15,800. Assumes instructors at campuses that allow card-bought exam tools, which is unverified.",
+      "distribution": "Self-serve search: a public setup guide for running an R coding exam in Safe Exam Browser, a live demo exam and a free practice tier. Posit Community forum (forum.posit.co): the only rule found is 'Don't post spam or otherwise vandalize the forum' (https://forum.posit.co/faq), so rule unknown for product posts: check before posting, and never post in the evidence threads. SIGCSE-members list (https://sigcse.org/membership/mailing-lists.html) reaches CS educators, not most R instructors; it is moderated and the rule for product notes is unknown: check before posting.",
+      "validationTest": {
+        "method": "No outreach: before any ad spend, run the demo exam inside Safe Exam Browser on Windows and macOS. Then publish a landing page with a live one-question R demo, a waitlist asking for campus LMS, lockdown browser and 'Does your campus require a software review before you use a tool in graded exams?', and a 'Reserve for $79 per course next term' button; buy a small search-ad test on queries such as 'R exam safe exam browser' and 'online R without account for exams'.",
+        "successCriteria": "Within 3 weeks: at least 30 waitlist sign-ups from college or university addresses, at least 6 reservation clicks from instructors who say no review is needed or who already have approval, and an ad click-through rate of at least 3%.",
+        "cost": "About $150 in ads, $12 for a domain and one build day for the page and demo."
+      },
+      "moat": "Modest: saved question banks and tests create switching cost, and tested Safe Exam Browser recipes for R are rare; the runtime itself is open source, so the moat is the exam workflow and its setup polish.",
+      "compliance": [
+        "FERPA: answers and grades tied to students are education records; store seat codes only, keep the name mapping in the instructor's own roster file, and purge on a retention schedule.",
+        "Institutional review: some universities require review of any software used in a course, free or bought by card (University at Buffalo, Penn State), so the first sale may wait for approval.",
+        "Accessibility: the exam and editor must meet WCAG 2.1 AA, the ADA Title II standard for large public universities from 2027-04-26, with extra time per seat.",
+        "GDPR for UK and EU instructors: processor terms and data region.",
+        "No AI features, so no student code is sent to an LLM."
+      ],
+      "risks": [
+        {
+          "risk": "Campus software review blocks card purchases for graded exams.",
+          "mitigation": "Ask on the waitlist and count only instructors who need no review or already have approval; publish a data sheet (no names stored) to shorten reviews."
+        },
+        {
+          "risk": "Numbas through an LMS package already serves Moodle and Blackboard campuses for free.",
+          "mitigation": "Target Canvas and Brightspace campuses and confirm the share in the waitlist answers."
+        },
+        {
+          "risk": "A student fakes visible-test results in the browser.",
+          "mitigation": "Never trust client scores; hidden tests run only in the instructor's browser at grading time."
+        },
+        {
+          "risk": "A second device bypasses any browser lock.",
+          "mitigation": "State plainly that the product relies on room supervision and is not proctoring."
+        },
+        {
+          "risk": "webR and package downloads are slow on exam Wi-Fi.",
+          "mitigation": "Preload only the needed packages before the exam, serve from the same origin, cache with a service worker, and show load time on the preflight page."
+        },
+        {
+          "risk": "Respondus LockDown Browser treats another test platform's domain as an unsupported use.",
+          "mitigation": "Support Safe Exam Browser first and mark Respondus experimental, tested per campus."
+        }
+      ],
+      "scores": {
+        "pain": 3,
+        "willingnessToPay": 3,
+        "reachability": 3,
+        "competitiveGap": 3,
+        "feasibility": 3,
+        "complianceBurden": 2,
+        "total": 17
+      },
+      "scoreRationale": {
+        "pain": "Two independent R instructors on one vendor's forum, one within 90 days, describe the gap (https://forum.posit.co/t/219793.json, https://forum.posit.co/t/211566.json); no Python complaint survived review.",
+        "willingnessToPay": "Instructors already pay for hosted R teaching and exam autograding: Posit Cloud's instructor plan (https://docs.posit.co/cloud/guide/teach/) and PrairieLearn Premium (https://www.prairielearn.com/pricing); no paid job or review names this gap.",
+        "reachability": "R and statistics instructors are not the owner's CS-educator network, so the channel is self-serve search, a setup guide and the Posit forum, whose promotion rule is unknown (https://forum.posit.co/faq).",
+        "competitiveGap": "Numbas runs R in the browser but saves scores only through an LMS package or a local LTI install (https://docs.numbas.org.uk/en/latest/tutorials/deliver-to-students.html), and CodeCheck has no R (https://horstmann.com/codecheck/assignments.html), so the gap is R exams on Canvas or Brightspace campuses.",
+        "feasibility": "webR runs in an ordinary page (https://www.tidyverse.org/blog/2024/10/webr-0-4-2) and Safe Exam Browser exposes a Config Key API (https://www.safeexambrowser.org/developer/seb-config-key.html), but Respondus calls another test platform's domain unsupported (https://tdx.umsystem.edu/TDClient/66/MOOnline/KB/Article/1775/Allowing-access-to-external-web-content-in-Respondus-LockDown-Browser).",
+        "complianceBurden": "Universities require review of any course software, even free or bought by card (https://www.buffalo.edu/ubit/policies/policies-standards-guidelines/ubit-policies/use-software-applications.html, https://weblearning.psu.edu/?p=2285), and the exam stores graded student work."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "The reviewer re-opened every item and cut the total from 21 to 17. The Python half has no in-scope complaint and a free, account-free product (CodeCheck, hidden tests, CSV, LTI) already serves it, and the first complainant's own school runs Python exams on online notebooks under Safe Exam Browser; one cited question (CS Educators SE 8307) asked for C++ and Java, so it was dropped. Two independent R complaints survive. Campus policies (Buffalo, Penn State) require review of any course software, so card purchase does not avoid approval; Respondus guidance calls another test platform's domain unsupported. Re-scoped to R only, Safe Exam Browser first: pain 4 to 3, competitiveGap 3 (for the R segment), reachability 4 to 3 (R instructors are not CS educators), feasibility 4 to 3, complianceBurden 3 to 2."
+      },
+      "inspiredBy": "https://forum.posit.co/t/219793.json",
+      "gateGap": {
+        "missing": [
+          "total 17 is below 22",
+          "pain 3 is below 4"
+        ],
+        "closedBy": "The waitlist and reservation button in the validationTest: reservations from instructors who need no software review would show willingness to pay where it matters, and the waitlist's count of R instructors on Canvas or Brightspace campuses would show whether the complaint is wider than two forum posts."
+      }
+    },
+    {
+      "n": 2,
+      "title": "Trusted Deadline Grade for Classroom50",
+      "slug": "trusted-deadline-grade-classroom50",
+      "category": "EdTech: Higher Ed",
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Assessment & Grading",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": true,
+        "engine": true,
+        "shared": true,
+        "notes": {
+          "stateful": "Each course keeps its deadline schedule, regrade history and discrepancy reports, which the instructor returns to after every assignment; the reports live in the course's own private repository.",
+          "connected": "A GitHub App on the instructor's course organisation reads Classroom50's assignment configuration and submit tags, and dispatches workflows in a private staff repository.",
+          "unattended": "A scheduled job starts the trusted regrade at each deadline without a click, and emails a warning beforehand when the organisation's Actions minutes look too low for the run.",
+          "engine": "Picks the commit to grade per student, batches 25 submissions per job in a container with no network and no tokens, runs private tests, diffs on-submit against trusted scores per test, and forecasts the minutes a run will need.",
+          "shared": "The instructor sets it up, head teaching assistants review the discrepancy list and leave notes, and the CSV goes to whoever keeps the gradebook."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "email",
+        "scheduled",
+        "backend"
+      ],
+      "buildPlan": [
+        {
+          "n": 1,
+          "title": "One trusted regrade, end to end",
+          "delivers": "An instructor signs in with GitHub, installs the App on a test organisation, picks one Classroom50 assignment and starts a regrade by hand; a workflow in a private staff repository clones each submission and runs the tests; a scores CSV is committed to that private repository.",
+          "acceptance": "On a test organisation with 10 fixture student repositories, one click produces a committed CSV with 10 rows whose scores match a hand run of the same tests, and the vendor database holds no student login or score."
+        },
+        {
+          "n": 2,
+          "title": "Classroom50-aware submission picking",
+          "delivers": "Reads the assignment configuration and, per student, chooses the submit tag or the last commit before the deadline; maps repositories to students from the course's own files.",
+          "acceptance": "On fixtures with tagged, untagged, late and re-tagged submissions, the chosen commit matches the expected one in every case."
+        },
+        {
+          "n": 3,
+          "title": "Batched, sealed runner with private tests",
+          "delivers": "A workflow template that runs 25 submissions per job in a container with no network and no tokens, and pulls private tests from a private repository the students cannot read.",
+          "acceptance": "30 fixture submissions regrade in two jobs; a fixture that writes its own result file or reads the network still gets its true score; no student account can read the private tests or push to the staff repository."
+        },
+        {
+          "n": 4,
+          "title": "Discrepancy report",
+          "delivers": "Per assignment, a table of on-submit score against trusted score per test, written as CSV and Markdown into the private repository and shown in the app by reading it with the installation token at view time.",
+          "acceptance": "The app's table matches the committed CSV row for row, and students whose two scores differ are listed first."
+        },
+        {
+          "n": 5,
+          "title": "Deadline schedule and minutes forecast",
+          "delivers": "A scheduled job dispatches the regrade at each assignment deadline; a day before, it estimates the minutes the run needs against what the organisation has left and emails the instructor if it falls short.",
+          "acceptance": "With a deadline set 5 minutes ahead the run starts without a click; with a fixture minutes balance below the estimate, the warning email arrives with both numbers."
+        },
+        {
+          "n": 6,
+          "title": "Ruleset check and head-TA notes",
+          "delivers": "A read-only check that reports whether the organisation has a push ruleset on workflow and protected files and a tag ruleset on submit tags, with a step-by-step guide to add them; head teaching assistants sign in and add notes, committed to the private repository.",
+          "acceptance": "On a test organisation without rulesets the check lists both as missing and passes once they are added; a head-TA note appears in the private repository with its author and time, and a TA cannot change the schedule."
+        },
+        {
+          "n": 7,
+          "title": "Polish",
+          "delivers": "A 10-minute setup README for Classroom50 courses, a permissions explainer, an accessibility pass, a layout usable at 375 px width, and a scripted walkthrough.",
+          "acceptance": "A new user completes setup on a fresh test organisation from the README alone; an automated accessibility check reports no serious issues; the walkthrough (install, schedule, regrade, review, export) passes."
+        }
+      ],
+      "summary": "For CS instructors who grade programming assignments with Classroom50 in courses over 50 students: a GitHub App that re-grades every frozen submission once, at the deadline, in a staff-only repository students cannot touch, with private tests. It lists the students whose on-submit score and trusted score disagree, and it keeps every student record in the course's own private repository.",
+      "public": {
+        "summary": "One clean, trusted grade for every student at the deadline, without downloading every project and re-running the tests by hand.",
+        "problem": "Your automatic tests run inside each student's own project, so code that runs during grading can change the score that gets recorded. The free tool you moved to says so, and its advice for a final grade is to download every project and run the tests yourself. Re-running the tests on every change also uses up your free grading time in a big course.",
+        "forWhom": "College and university programming instructors and head teaching assistants who grade assignments with automatic tests, in courses of more than 50 students.",
+        "benefits": [
+          "Every submission is graded once at the deadline, in a place students cannot write to",
+          "Your private tests stay private",
+          "A short list shows the students whose first and final scores disagree",
+          "You get a warning before the deadline if your free grading time will run out",
+          "Student names and grades stay in your own course repository, not on someone else's server"
+        ],
+        "audience": "education"
+      },
+      "problemStatement": "Classroom50, the free replacement for the retired GitHub Classroom, runs grading inside each student's writable repository, and its own guidance says a collected score is reliable feedback, not proof. The trusted path it documents is manual: close submission, download every repository and run the tests again locally or in a workflow the instructor writes. Grading files are served on a public site, so tests cannot be secret, and re-running on every push draws on the organisation's 3,000 free Actions minutes, which large courses exhaust.",
+      "description": "The instructor installs a GitHub App on the course organisation and sets each assignment's deadline. At the deadline a scheduled job dispatches one batched workflow in a private staff repository: it picks each student's submit tag or last commit before the deadline, clones it, and runs the instructor's public and private tests in a container with no network and no tokens, 25 submissions per job. The results, and a per-test comparison with the score Classroom50 collected on submit, are committed as CSV and Markdown to the course's own private repository; the app reads them at view time with the installation token and stores no student data itself. Head teaching assistants add notes the same way. A day before each deadline the app forecasts the minutes the run needs and emails a warning if the organisation is short. A read-only check and a written guide help the instructor add the free organisation push ruleset that blocks edits to workflow and grading files.",
+      "targetCustomer": "CS instructors and head teaching assistants at colleges and universities who run Classroom50 courses of more than 50 students (CodeGrade's free tier covers smaller ones) and whose final marks rest on autograder scores.",
+      "buyer": "The instructor by personal or departmental card, per course per term; a department licence later. Because no student data leaves the course's own repository, the purchase needs no vendor data contract at universities that require one for stored grades.",
+      "whyNow": "GitHub Classroom was deprecated on 2026-08-28 and its externally defined tests deleted, so courses moved to Classroom50, which grades in student-writable repositories and documents a manual trusted-grade path (Autograding Basics, edited 2026-10-12); its default $0 Actions spending cap blocks runs once the 3,000 included minutes are gone, and instructors with large courses have turned autograding off to save minutes (2026-09-17).",
+      "founderFit": "He teaches CS at a university in courses that use agentic coding tools, so he grades programming work himself and the buyers are CS educators in his stated SIGCSE network; he ships a web app alone in days.",
+      "problemEvidence": [
+        {
+          "url": "https://github.com/foundation50/classroom50/issues/901",
+          "source": "github.com",
+          "author": "poster A",
+          "date": "2026-09-07",
+          "kind": "complaint",
+          "summary": "An instructor asks to be alerted, and to have grading skipped, when a student changes a graded file such as the workflow, 'a feature GitHub Classroom had'. One reaction, no comments, open; a free push ruleset now covers its 'allow only certain files' option."
+        },
+        {
+          "url": "https://github.com/foundation50/classroom50/discussions/1024",
+          "source": "github.com",
+          "author": "poster B",
+          "date": "2026-09-17",
+          "kind": "complaint",
+          "summary": "A teaching assistant asks whether students can change the recorded grade through the workflow, tests, code or a forged release before relying on on-submit grading for real marks. A question, not a report of cheating; a reply on 2026-09-20 recommends regrading the frozen submit commit with private tests in a teacher-controlled place."
+        },
+        {
+          "url": "https://github.com/foundation50/classroom50/issues/1019",
+          "source": "github.com",
+          "author": "poster C",
+          "date": "2026-09-17",
+          "kind": "complaint",
+          "summary": "An instructor with about 150 students says per-push autograding billed several minutes per short run and turned autograding off to stay within the free minutes; the project cut the billed jobs from three to two the same day."
+        },
+        {
+          "url": "https://github.com/foundation50/classroom50/issues/1051",
+          "source": "github.com",
+          "author": "poster D",
+          "date": "2026-09-22",
+          "kind": "complaint",
+          "summary": "An instructor found that 'Regrade all' did not re-run on students' latest commits, wants to grade everything at a point in time regardless of tags, and cloned the repositories and ran the tests by hand; a maintainer said on 2026-10-01 the feature needs design time."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Classroom50 (do it yourself)",
+          "url": "https://github.com/foundation50/classroom50/wiki/Autograding-Basics",
+          "price": "Free (GPL-3.0)",
+          "gap": "Documents the trusted path (close, download, run the tests locally or in a workflow you write) but does not automate it; tests are served on a public site, so they cannot be private; point-in-time grading (issue 1051) is being designed, not shipped."
+        },
+        {
+          "name": "GitHub organisation push rulesets",
+          "url": "https://github.blog/changelog/2025-06-16-organization-rulesets-now-available-for-github-team-plans/",
+          "price": "Included in Team, free to verified educators",
+          "gap": "Blocks pushes that change workflow and grading files in every matching repository, but does not stop student code that runs during grading from writing a score, and gives no trusted re-run or comparison."
+        },
+        {
+          "name": "phpeterson-usf/autograder",
+          "url": "https://github.com/phpeterson-usf/autograder",
+          "price": "Free (MIT)",
+          "gap": "A command-line tool the instructor runs by hand to clone student repositories and test them; no schedule, no Classroom50 tag picking, no comparison with on-submit scores, no shared review."
+        },
+        {
+          "name": "CodeGrade",
+          "url": "https://www.codegrade.com/blog/switching-from-github-classroom-to-codegrade-a-free-github-classroom-alternative-built-for-grading",
+          "price": "Free up to 50 students per course; paid from $24 per student per course; Advanced $39",
+          "gap": "Grades in its own sandbox only if the course moves grading to CodeGrade; per-student pricing makes a 150-student course cost thousands of dollars."
+        },
+        {
+          "name": "PrairieLearn",
+          "url": "https://www.prairielearn.com/pricing",
+          "price": "Free up to 20 students; $8 Basic or $16 Premium per student per course",
+          "gap": "A full platform switch away from GitHub repositories; code autograding only in Premium."
+        }
+      ],
+      "keyFeatures": [
+        "Scheduled trusted regrade at each deadline in a private staff repository",
+        "Per-student pick of the submit tag or the last commit before the deadline",
+        "Batched sealed runs (25 per job, no network, no tokens) with private tests",
+        "Per-test comparison of on-submit and trusted scores, disagreements first",
+        "Actions-minutes forecast and warning email before each deadline",
+        "Read-only ruleset check with a setup guide",
+        "Head-TA notes and CSV export, all stored in the course's own repository"
+      ],
+      "mvpScope": {
+        "features": [
+          "GitHub App install and course setup",
+          "Classroom50-aware submission picking",
+          "Batched sealed regrade with private tests",
+          "Discrepancy report committed to the private repository",
+          "Scheduled deadline run and minutes warning",
+          "Ruleset check and guide",
+          "Head-TA notes and CSV"
+        ],
+        "outOfScope": [
+          "A webhook tamper watcher (a free push ruleset prevents the edits)",
+          "Creating rulesets on the instructor's behalf",
+          "LMS grade passback and course provisioning (Repo Roster's ground)",
+          "Plagiarism detection",
+          "Running student code on the shared server",
+          "Storing student logins, scores or notes in the vendor database",
+          "GitLab"
+        ],
+        "buildEstimate": "7 build days, plus setting up a test organisation with fixture repositories"
+      },
+      "techStack": "Static front end; Supabase sign-in through GitHub and tables only for installations, courses, deadlines and run status (no student data); GitHub App webhook receiver and token minting on backend-hub; a regrade workflow template in the customer's private staff repository running a container with --network none; results committed to the customer's private repository and read at view time; platform email and scheduled jobs; no LLM.",
+      "pricing": {
+        "model": "Per course per term by card, with a free trial assignment",
+        "pricePoint": "$79 per course per term (up to 300 students); one assignment free per course; $499 a year for a department",
+        "rationale": "Far below CodeGrade at $24 per student per course and PrairieLearn Premium at $16 per student per course for a 150-student course, and within a personal card; the paid value is the automated trusted grade that Classroom50 leaves to a manual download."
+      },
+      "revenueSketch": "Estimate: the number of Classroom50 courses over 50 students is unknown (the project has about 240 stars); if 150 such courses are reachable in year one and 10% pay for two terms, that is 15 x $79 x 2 = $2,370, plus two department licences at $998, about $3,400 a year. Side income unless it extends to plain GitHub-organisation courses or ships as a Repo Roster module.",
+      "distribution": "SIGCSE-members list (https://sigcse.org/membership/mailing-lists.html): moderated, members-only posting, 'some types of professional announcements are also allowed' as a short note with a URL; no stated rule on product posts, so rule unknown: ask the moderators before posting. GitHub Marketplace free listing (https://docs.github.com/en/apps/github-marketplace/creating-apps-for-github-marketplace/requirements-for-listing-an-app): free apps are encouraged; paid plans need a verified publisher and about 100 installations, so early sales go through the app's own site. Search ads on GitHub Classroom retirement and autograding queries. r/CSEducation: rule unknown, check before posting. Never post in the Classroom50 project's issues or discussions.",
+      "validationTest": {
+        "method": "No outreach. Before any build day, re-check whether Classroom50's point-in-time grading (issue 1051) has shipped, and confirm in a test organisation that an organisation push ruleset coexists with Classroom50's own writes. Then publish a landing page that says plainly the push ruleset is free and the do-it-yourself path exists, with a waitlist asking course size, whether the course uses Classroom50, and whether grades feed final marks, and a 'Reserve for $79 per course next term' button; run about $60 of search ads on GitHub Classroom retirement and autograding-integrity queries; post one short note on SIGCSE-members only if the moderators confirm such announcements are allowed. Nobody from the evidence threads is contacted.",
+        "successCriteria": "Within 6 weeks: at least 30 waitlist sign-ups from institutional addresses for Classroom50 courses over 50 students, and at least 6 reservation clicks from those courses.",
+        "cost": "About $60 in ads, $12 for a domain and one build day for the page."
+      },
+      "moat": "Thin: the course's deadline schedules, private-test setup and regrade history create some switching cost, and the free incumbent could automate its own documented path; the defensible part is the sealed batched runner and the no-student-data design.",
+      "compliance": [
+        "FERPA: grades and rosters are education records; Indiana University forbids storing them in a third-party tool without a vendor contract, so the product keeps every student identifier, score and note in the course's own private repository and stores only installation configuration.",
+        "Untrusted student code runs only on runners the customer controls, in a container with no network and no tokens, never on the shared server.",
+        "GitHub App permissions: request the minimum (contents read on student repositories, contents and actions write on the staff repository, organisation administration read for the ruleset check) and publish a permissions explainer.",
+        "Academic integrity: a disagreement between scores is a signal, not a finding; the interface must say so, and instructors follow their institution's process.",
+        "GDPR for non-US courses: the no-student-data design keeps the vendor out of processing student records."
+      ],
+      "risks": [
+        {
+          "risk": "Classroom50 ships point-in-time grading (issue 1051) or a trusted regrade for free.",
+          "mitigation": "Re-check before building; lead with private tests and the sealed batched runner, which a serverless free tool is less likely to host; support plain GitHub-organisation courses too."
+        },
+        {
+          "risk": "The market of Classroom50 courses over 50 students is small and unquantified.",
+          "mitigation": "Run the landing-page test first and count only large courses; if Repo Roster is built, ship this as its trusted-grade module instead."
+        },
+        {
+          "risk": "The deadline run draws on the same 3,000-minute pool, and Classroom50's default $0 cap blocks runs when it is used up.",
+          "mitigation": "Batch 25 submissions per job, forecast the minutes and warn a day ahead, and support the instructor's own runner."
+        },
+        {
+          "risk": "Classroom50's runner contract changes often.",
+          "mitigation": "Depend only on its documented result contract and assignment configuration; contract tests; a custom-command fallback."
+        },
+        {
+          "risk": "A push ruleset conflicts with Classroom50's own writes to student repositories.",
+          "mitigation": "Test in a fixture organisation before recommending it, and make the guide list the bypass entries needed."
+        }
+      ],
+      "scores": {
+        "pain": 2,
+        "willingnessToPay": 3,
+        "reachability": 5,
+        "competitiveGap": 1,
+        "feasibility": 3,
+        "complianceBurden": 3,
+        "total": 17
+      },
+      "scoreRationale": {
+        "pain": "Only one feature request (https://github.com/foundation50/classroom50/issues/901, one reaction) and one question (https://github.com/foundation50/classroom50/discussions/1024) concern trusted grades, neither reports cheating, and none of the 29 issues opened since 2026-09-25 is about integrity (https://api.github.com/search/issues?q=repo%3Afoundation50%2Fclassroom50+is%3Aissue+created%3A%3E%3D2026-09-25&per_page=100); the minutes and point-in-time complaints (https://github.com/foundation50/classroom50/issues/1019, https://github.com/foundation50/classroom50/issues/1051) support the deadline-run angle.",
+        "willingnessToPay": "Paid plans exist for code grading in a context students cannot touch: CodeGrade from $24 per student per course (https://www.codegrade.com/blog/switching-from-github-classroom-to-codegrade-a-free-github-classroom-alternative-built-for-grading) and PrairieLearn Premium at $16 (https://www.prairielearn.com/pricing); one instructor turned autograding off rather than pay for minutes (https://github.com/foundation50/classroom50/issues/1019).",
+        "reachability": "The buyers are CS educators, the owner's stated SIGCSE network; SIGCSE-members is a moderated members-only list whose rule on product notes is unknown (https://sigcse.org/membership/mailing-lists.html).",
+        "competitiveGap": "Free paths cover most of the job: organisation push rulesets on Team (https://github.blog/changelog/2025-06-16-organization-rulesets-now-available-for-github-team-plans/), the incumbent's documented do-it-yourself regrade (https://github.com/foundation50/classroom50/wiki/Autograding-Basics), a free MIT clone-and-test CLI (https://github.com/phpeterson-usf/autograder), and point-in-time grading in design (https://github.com/foundation50/classroom50/issues/1051).",
+        "feasibility": "The regrade shares the 3,000-minute pool and Classroom50's default $0 cap blocks runs once it is spent (https://github.com/foundation50/classroom50/wiki/Managing-Actions-Cost), and Classroom50 writes to student repositories from several places (https://github.com/foundation50/classroom50/pull/929); webhooks and installation rate limits fit 100 to 500 repositories (https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api).",
+        "complianceBurden": "Indiana University forbids storing grades or rosters in a third-party tool without a vendor contract (https://citl.indiana.edu/teaching-resources/instructional-technologies/third-party-services-legal-privacy-concerns); the re-scoped design keeps student data in the course's own repository as Classroom50 does (https://github.com/foundation50/classroom50/wiki/FAQ), but still runs untrusted code and needs organisation-wide App permissions."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "The reviewer cut the total from 20 to 16 and re-scoped the idea. The watcher has a free replacement: organisation push rulesets have been on the Team plan, free to verified educators, since June 2025, contrary to the researcher's claim that they need Enterprise. The trusted regrade has free do-it-yourself paths (Classroom50's own guidance, a free MIT CLI, CodeGrade free up to 50 students), and a maintainer is designing point-in-time grading (issue 1051). Only two of five evidence items concern integrity and neither reports cheating; issue 864 was dropped and 1019 and 1051 now support only the deadline-run and minutes angle. The draft copied student logins and scores to the vendor's database, which Indiana-style rules forbid without a contract. Re-scoped to a scheduled trusted deadline grade with private tests and a minutes forecast, no watcher, and every student record kept in the course's own repository, which the reviewer said restores complianceBurden to about 3: pain 3 to 2, competitiveGap 2 to 1, feasibility 4 to 3, complianceBurden 3 (2 for the draft as written); total 17."
+      },
+      "inspiredBy": "https://github.com/foundation50/classroom50/discussions/1024",
+      "gateGap": {
+        "missing": [
+          "total 17 is below 22",
+          "pain 2 is below 4"
+        ],
+        "closedBy": "The landing page and reservation button in the validationTest, counted only for Classroom50 courses over 50 students after the page states the free alternatives: reservations would show that instructors pay for an automated trusted grade despite the free paths, and new complaints about forged or untrustworthy scores in Classroom50 courses would raise pain."
+      }
+    },
+    {
+      "n": 3,
+      "title": "Export Coverage Check for Postgres SaaS",
+      "slug": "export-coverage-check-postgres-saas",
+      "category": "Accessibility & Compliance",
+      "smallBusiness": true,
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Developer Tooling",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": true,
+        "engine": true,
+        "shared": false,
+        "notes": {
+          "stateful": "Each project keeps its schema versions, confirmed references, column classifications, manual mappings and a coverage result per release, which the maker returns to whenever the product changes.",
+          "connected": "Imports the maker's own schema-only pg_dump file and a test account's export (JSON, CSV or a ZIP), and accepts per-release uploads from the maker's CI pipeline through an API token.",
+          "unattended": "On every release the maker's CI step posts the new schema and the test export's field names; the service re-runs the check and emails the maker when coverage drops, with nobody opening the app.",
+          "engine": "A foreign-key walk from the customer root table plus name-based reference inference for undeclared *_id and tenant columns, JSON key-path matching, normalised export-to-column matching, and a file-manifest check that the export ZIP holds every referenced file."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "email",
+        "backend"
+      ],
+      "buildPlan": [
+        {
+          "n": 1,
+          "title": "Schema upload, end to end",
+          "delivers": "The maker signs in, creates a project, uploads a pg_dump -s file and sees its tables, columns and foreign keys, parsed in the browser and saved.",
+          "acceptance": "At the deployed URL, a 30-table fixture dump lists all 30 tables with the right column counts and foreign-key edges, and the project survives a reload."
+        },
+        {
+          "n": 2,
+          "title": "Customer-scope finder with inference",
+          "delivers": "The maker picks the customer root table; a walk over declared foreign keys plus inferred references from *_id and tenant, org or account columns lists every customer-scoped table with its path, inferred links flagged for the maker to confirm or reject.",
+          "acceptance": "On a 20-table fixture with 12 customer-scoped tables but only 4 declared foreign keys, the finder returns all 12, flags 8 as inferred, and terminates on cyclic schemas; unit tests pass."
+        },
+        {
+          "n": 3,
+          "title": "Export coverage check",
+          "delivers": "Upload a test account's export (JSON, CSV or ZIP); the tool extracts field paths, including JSON key paths, matches them to columns and declared jsonb keys (exact, normalised or maker-set mappings), reports the customer-scoped columns the export omits, and checks that files parse and are machine-readable.",
+          "acceptance": "A fixture export missing 3 known columns and one JSON key yields exactly those 4; a malformed CSV is flagged; a database inspection shows no row values stored."
+        },
+        {
+          "n": 4,
+          "title": "File manifest step",
+          "delivers": "The maker marks the columns that hold file keys and pastes or uploads the test account's list of file keys (names only); the tool checks that the export ZIP holds a file for each.",
+          "acceptance": "With 10 fixture file keys and a ZIP missing 2 of them, exactly those 2 are reported; no file contents are uploaded."
+        },
+        {
+          "n": 5,
+          "title": "Classification and category summary",
+          "delivers": "A board to mark each customer-scoped column exportable data, digital asset or excluded, with the Commission's definitions quoted and a reason required for each exclusion; a category-level summary of what customers can take and in which formats, as Markdown and HTML to paste into the maker's own help pages; a printable dated report; links to the free Commission clauses and free switching-deadline tools.",
+          "acceptance": "The summary lists every category, format and exclusion reason from the fixture project, validates as HTML, and contains no claim of compliance or certification."
+        },
+        {
+          "n": 6,
+          "title": "Per-release re-check from CI",
+          "delivers": "An API token and a small CI script that runs pg_dump -s and the test export, extracts names locally and posts them; the backend re-runs the check, stores the result per release and emails the maker when a new customer-scoped column or file type is missing from the export.",
+          "acceptance": "In a fixture repository, a release that adds a customer-scoped column not in the export produces a failing check and one email; a release with no change passes silently; the stored payload contains names only."
+        },
+        {
+          "n": 7,
+          "title": "Polish",
+          "delivers": "A maker README (setup, limits, not legal advice), a CI setup guide, mobile layout, an accessibility pass, and a walkthrough test from sign-up to a passing CI re-check.",
+          "acceptance": "The walkthrough passes at 375 px width; an automated accessibility check reports no serious issues; a new user wires up the CI step from the guide alone."
+        }
+      ],
+      "summary": "For small B2B SaaS makers on Postgres with business customers in the EU: a check that a test account's export really holds every piece of customer data the database schema holds, including inferred references, JSON fields and uploaded files, re-run on every release from CI. It drafts no terms, runs no switching clock and gives no legal advice.",
+      "public": {
+        "summary": "A check that your software's export really gives a leaving customer all of their data, run again every time you ship.",
+        "problem": "When a business customer in Europe leaves your software, the rules now say you must hand over all of their data in a usable form, and from January 2027 you cannot charge for it. You have probably never checked whether your export holds everything your database keeps about a customer, uploaded files included. Every new feature can quietly add data your export leaves out.",
+        "forWhom": "Founders and small teams who run online software for business customers in Europe and have no lawyer on staff.",
+        "benefits": [
+          "See exactly which customer data your export leaves out, before a customer finds out",
+          "Catch the gap each time a new release adds data your export misses",
+          "Get a plain summary of what customers can take with them, ready for your own help pages",
+          "Hand your lawyer or a customer's buyer a dated report instead of a promise"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "Since 2025-09-12 the EU Data Act's switching chapter covers SaaS with no exception for small providers: on a switch, the provider must export all exportable data (input, output and usage metadata) in a structured, commonly used, machine-readable format, and from 2027-01-12 switching charges are banned. Free Commission clauses cover the contract terms and free 2026 tools compute the switching dates, but nothing tests whether a small SaaS's export actually contains every piece of customer data its database and file storage hold, and most real schemas do not declare the foreign keys a simple check would follow.",
+      "description": "The maker uploads a schema-only Postgres dump, parsed in the browser, and picks the customer root table (account, workspace or org). The tool walks declared foreign keys and infers undeclared references from *_id and tenant columns, which the maker confirms, to list every customer-scoped table and column. The maker then uploads a test account's export and the list of that account's file keys; the tool reports which customer-scoped columns, JSON keys and files the export omits and whether its files are machine-readable. The maker classifies each column with the Commission's definitions shown, and gets a category-level summary for their own help pages and a dated report. A small CI step re-runs the check on every release, sending names only, and emails the maker when coverage drops.",
+      "targetCustomer": "Solo founders and teams of 2 to 20 running a B2B SaaS on Postgres, with business customers in the EU and no in-house lawyer.",
+      "buyer": "The SaaS founder or CTO, paying by card (self-serve).",
+      "whyNow": "Switching charges, egress included, are banned from 2027-01-12 (Commission FAQ v1.4); the proposed Digital Omnibus relief for small providers would cover only contracts concluded on or before 2025-09-12 (GT, 2026-07-15), and the Council's mandate of 2026-10-21 keeps that limit while Parliament has yet to vote (Publicea, 2026-10-22); business customers' exit checklists now tell buyers to ask each vendor for its switching documentation and format register (PrivyCDP, 2026-10-17).",
+      "founderFit": "Nothing beyond building it alone.",
+      "problemEvidence": [
+        {
+          "url": "https://www.pinsentmasons.com/out-law/guides/switching-porting-rules-eu-data-act",
+          "source": "pinsentmasons.com",
+          "author": "unknown",
+          "date": "2025-03-20",
+          "kind": "mandate",
+          "summary": "A law-firm guide: the switching chapter covers SaaS and PaaS with no exception for SME providers, requires export of all exportable data in a structured, machine-readable format and an online register of data structures and formats, and bans switching charges from 2027-01-12."
+        },
+        {
+          "url": "https://ec.europa.eu/newsroom/dae/redirection/document/108144",
+          "source": "ec.europa.eu",
+          "author": "unknown",
+          "date": "2026-01-22",
+          "kind": "mandate",
+          "summary": "The Commission's FAQ v1.4: the chapter makes no distinction between types of SaaS (Q58a, with a self-assessment caveat), exportable data means input, output and usage metadata excluding the provider's own IP (Q53), and switching charges end on 2027-01-12 (Q54)."
+        },
+        {
+          "url": "https://www.gtlaw.com/en/insights/2026/7/eu-digital-omnibus-package-proposes-amendments-to-data-act",
+          "source": "gtlaw.com",
+          "author": "unknown",
+          "date": "2026-07-15",
+          "kind": "mandate",
+          "summary": "A law-firm alert: the Council's compromise would relieve SME and small mid-cap providers only for contracts concluded on or before 2025-09-12, and the text may still change."
+        },
+        {
+          "url": "https://publicea.be/insights/digital-omnibus-gdpr-cookies-data-act",
+          "source": "publicea.be",
+          "author": "unknown",
+          "date": "2026-10-22",
+          "kind": "mandate",
+          "summary": "A policy update: the Council agreed its mandate on 2026-10-21 with the same 2025-09-12 contract limit for small-provider relief; Parliament's committees aim to vote before February 2027, so the relief stays narrow and unsettled."
+        },
+        {
+          "url": "https://francedigitale.org/en/posts/vigilance-effets-de-bord-du-data-act",
+          "source": "francedigitale.org",
+          "author": "poster A",
+          "date": "2025-10-15",
+          "kind": "complaint",
+          "summary": "A startup and investor association objects that customers can end contracts on two months' notice, which hurts revenue forecasting; it does not mention export work, a register or tools, so it is not a complaint about this product's job."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Offramp",
+          "url": "https://github.com/afkzonagroup/offramp",
+          "price": "Free (AGPL v3 with an attribution term); commercial licence price unknown",
+          "gap": "Computes every statutory switching date and generates the information pack and notices from a provider profile, offline; it does not read the schema or test the export."
+        },
+        {
+          "name": "DataActKit",
+          "url": "https://github.com/manea/dataactkit",
+          "price": "Free (MIT)",
+          "gap": "Computes the switching timelines and audits fee schedules against the 2027 ban; no schema or export check."
+        },
+        {
+          "name": "Commission model clauses and Data Act Legal Helpdesk",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/draft-recommendation-non-binding-model-contractual-terms-data-access-and-use-and-non-binding",
+          "price": "Free",
+          "gap": "Ready-to-use contract clauses and email answers on scope; nothing examines the product's export."
+        },
+        {
+          "name": "Fides (Ethyca)",
+          "url": "https://ethyca.github.io/fidesops",
+          "price": "Open source",
+          "gap": "Traverses a graph of the company's datasets to fulfil GDPR requests for a person; built for data subjects and privacy operations, not for checking that a business customer's export covers the schema."
+        },
+        {
+          "name": "Fiskil",
+          "url": "https://www.fiskil.com/eu-data-act/cloud-saas",
+          "price": "unknown (sales-led)",
+          "gap": "Offers providers self-service export, format standardisation and generated documentation of data structures; no completeness check against the schema, and no public price for a small SaaS."
+        },
+        {
+          "name": "compliance-panel",
+          "url": "https://github.com/sjsyrek/compliance-panel",
+          "price": "Free (MIT)",
+          "gap": "A coding-agent plugin whose Data Act assessor reads a repository's code and docs; it shows no depth on the switching chapter and gives no repeatable coverage result."
+        },
+        {
+          "name": "A hand-written switching page",
+          "url": "https://www.lime-technologies.com/en/legal/data-portability",
+          "price": "Free (staff time)",
+          "gap": "Real vendors list data categories, formats and exclusions by hand; nothing tells them whether the export actually holds those categories, or when a release breaks that."
+        }
+      ],
+      "keyFeatures": [
+        "Schema-only pg_dump upload parsed in the browser, no row data",
+        "Customer-scope finder over declared and inferred references, confirmed by the maker",
+        "Export coverage report for columns, JSON keys and file formats",
+        "File-manifest check that the export ZIP holds every referenced file",
+        "Classification board with the Commission's definitions",
+        "Category-level summary for the maker's own help pages and a dated report",
+        "Per-release re-check from CI with an email when coverage drops"
+      ],
+      "mvpScope": {
+        "features": [
+          "Schema upload and parse",
+          "Customer-scope finder with inference",
+          "Export coverage check with JSON key paths",
+          "File-manifest check",
+          "Classification and category summary",
+          "CI re-check with drop alerts"
+        ],
+        "outOfScope": [
+          "Switching-request intake, deadline clock and notices (free in Offramp and DataActKit)",
+          "Drafting or reviewing contract terms (link to the Commission's clauses)",
+          "Deciding whether the service is in scope",
+          "Live database connections or reading row values",
+          "MySQL and document databases beyond manual column entry",
+          "Running the export itself",
+          "Compliance badges or certification"
+        ],
+        "buildEstimate": "7 build days (the reviewer judged the earlier scope, with the clock and request intake, to run past 7 days; this scope drops them)"
+      },
+      "techStack": "Static TypeScript front end with the pg_dump SQL parser and the export parser running in the browser; Supabase sign-in and per-app tables for projects, columns, confirmed references, classifications and per-release results, with row-level security; a CI upload endpoint and the re-check on backend-hub; platform transactional email for drop alerts; no LLM.",
+      "pricing": {
+        "model": "Free in-browser check, then a small subscription for saved projects and per-release re-checks",
+        "pricePoint": "Free check for one schema; €9 a month or €90 a year for saved projects, CI re-checks and drop alerts (unvalidated)",
+        "rationale": "The reviewer found a monthly fee for a deadline clock has little to do, since free tools now compute the dates; recurring value comes from schema drift between releases, and the price sits far below a law-firm package or a sales-led platform."
+      },
+      "revenueSketch": "Estimate: 2,000 monthly visitors from search, 2% run the free check (40 a month), 10% of those subscribe (4 a month) and 3% monthly churn give about 40 paying makers after 12 months, roughly €360 MRR. All inputs are unvalidated, and demand may stay near zero if makers feel no enforcement pressure.",
+      "distribution": "Organic search on exact how-to questions ('what counts as exportable data', 'test your SaaS export') with the free check embedded, on the product's own site. Show HN once the free check works without sign-up (https://news.ycombinator.com/showhn.html): 'Show HN is for something you've made that other people can play with', no landing pages, and no asking friends to upvote. Product Hunt and dev.to: rule unknown, check before posting. Search ads (see validationTest).",
+      "validationTest": {
+        "method": "No outreach. Build a one-page site describing the coverage check with a 'Start: €9/month' button that leads to a waitlist, and run a 21-day search-ad campaign on queries such as 'EU Data Act SaaS export', 'Data Act exportable data' and 'test SaaS data export'. In parallel, with no contact, count small SaaS companies (under about 50 staff) that publish a Data Act switching or export page, using web search, and note at the end whether the free switching tools (Offramp, DataActKit) show any visible adoption such as stars or issues. No surveys and no posts in any forum or evidence thread.",
+        "successCriteria": "In 21 days: at least 300 visitors, a button click rate of at least 4%, at least 15 waitlist sign-ups with a company domain, an average cost per click under €3, and at least 10 small SaaS companies found publishing such a page. Missing the click or sign-up threshold ends the idea.",
+        "cost": "About €300 in ads plus a domain, and one day to build the page."
+      },
+      "moat": "Thin: the walk and the matching can be copied, and a free coding agent pointed at the maker's own code covers some of it. What holds customers is the saved project (confirmed references, mappings and classifications) and the per-release history, which would be tedious to rebuild.",
+      "compliance": [
+        "Not legal advice: the product never drafts terms or decides whether a service is in scope; it quotes the Commission FAQ and national guidance with links, and says 'readiness check', never 'compliant'.",
+        "Data minimisation: schema and export files are parsed in the browser and the CI script sends names only, so no row values or file contents are stored; makers are told to use a test account.",
+        "GDPR: the product holds maker account data only, needs a privacy notice, a processor agreement and a stated storage region; the shared Supabase project's region must be checked.",
+        "Changing law: the Digital Omnibus may change relief for older contracts, so rule references and the dated sources page must be kept current.",
+        "Licences: Offramp is AGPL v3 with an attribution term, so link to it rather than copying its code into a closed product."
+      ],
+      "risks": [
+        {
+          "risk": "No felt pain and quiet enforcement: no maker complaint was found in 14 months, and no fines against providers were found.",
+          "mitigation": "Run the validationTest before building and stop on a miss."
+        },
+        {
+          "risk": "Many small SaaS may not count as data processing services under the FAQ's caveat.",
+          "mitigation": "Self-assessment questions that quote FAQ Q58a, give no conclusion and link the free Legal Helpdesk."
+        },
+        {
+          "risk": "Inferred references produce false positives or misses on unusual schemas.",
+          "mitigation": "Flag every inferred link for the maker to confirm, allow manual links, and report coverage only over confirmed scope."
+        },
+        {
+          "risk": "Customer data outside Postgres beyond files (billing records, logs, third-party services) stays invisible.",
+          "mitigation": "Let the maker add manual categories with their own evidence, and say plainly what the check cannot see."
+        },
+        {
+          "risk": "Offramp or another free tool adds a schema check.",
+          "mitigation": "Keep the in-browser check free, focus on per-release drift from CI, and link to the free tools for the clock and notices."
+        },
+        {
+          "risk": "One-time use and churn.",
+          "mitigation": "The CI re-check gives value on every release; offer an annual plan."
+        }
+      ],
+      "scores": {
+        "pain": 2,
+        "willingnessToPay": 2,
+        "reachability": 2,
+        "competitiveGap": 2,
+        "feasibility": 3,
+        "complianceBurden": 4,
+        "total": 15
+      },
+      "scoreRationale": {
+        "pain": "The rule is binding (https://ec.europa.eu/newsroom/dae/redirection/document/108144) but no small SaaS maker complains about the export work, and HN comments mentioning 'Data Act' since 2026-08-27 are unrelated (https://hn.algolia.com/api/v1/search_by_date?query=%22Data%20Act%22&tags=comment&numericFilters=created_at_i%3E1787788800&hitsPerPage=50).",
+        "willingnessToPay": "No paid software at a known price: the only paid offers are a sales-led platform (https://www.fiskil.com/eu-data-act/cloud-saas), a service firm (https://www.workstreet.com/blog/eu-data-act-saas) and law-firm packages (https://www.skwschwarz.de/en/Cloud-Switching-Addendum).",
+        "reachability": "The buyers are not CS educators and no maker community discusses the topic (https://hn.algolia.com/api/v1/search_by_date?query=%22Data%20Act%22&tags=comment&numericFilters=created_at_i%3E1787788800&hitsPerPage=50); the regulation's search terms are crowded with law firms and vendor guides (https://cancelflow.dev/blog/eu-data-act-cloud-switching-saas).",
+        "competitiveGap": "Free 2026 tools already compute every switching date and generate the notices (https://github.com/afkzonagroup/offramp, https://github.com/manea/dataactkit), Fides already walks a dataset graph for privacy requests (https://ethyca.github.io/fidesops), and the Commission's clauses are free; only the export-against-schema check is uncovered.",
+        "feasibility": "Only 2 of 9 real web apps studied declared foreign keys (https://par.nsf.gov/servlets/purl/10404621), and files sit outside Postgres (https://www.lime-technologies.com/en/legal/data-portability), so the check needs inference, manual links and a file step; a schema-only dump carries no data (https://www.postgresql.org/docs/18/app-pgdump.html).",
+        "complianceBurden": "The product stores schema names and maker account data, not customer rows (https://www.postgresql.org/docs/18/app-pgdump.html), and quotes official deadlines and definitions (https://bundesnetzagentur.de/EN/Areas/Digitalisation/DataAct/background/3-provider/start.html) without judging scope; the residual risk is being read as legal advice."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "The reviewer cut the total from 18 to 15 and re-scoped the idea. Two free open-source tools launched in 2026, Offramp and DataActKit, already compute every switching date and generate the information pack and notices, and the Commission's clauses are free, so the request clock and the column-level register were dropped. Fides already walks a dataset graph for GDPR requests. A schema-only foreign-key walk is weak on real schemas (only 2 of 9 studied web apps declared foreign keys) and cannot see files in object storage, so the check now infers references, reads JSON key paths and adds a file-manifest step, with per-release re-checks from CI for recurring value. The evidence was read correctly but is all mandates; no maker complaint exists and HN shows no discussion. reachability 3 to 2, competitiveGap 3 to 2, feasibility 4 to 3; pain 2, willingnessToPay 2 and complianceBurden 4 unchanged."
+      },
+      "inspiredBy": "https://www.pinsentmasons.com/out-law/guides/switching-porting-rules-eu-data-act",
+      "gateGap": {
+        "missing": [
+          "total 15 is below 22",
+          "pain 2 is below 4",
+          "willingnessToPay 2 is below 3",
+          "no complaint from a SaaS maker about this job: the only complaint item concerns the termination right"
+        ],
+        "closedBy": "The price button and waitlist on the landing page, measured with search ads, test willingness to pay and search demand directly; the count of small SaaS publishing switching pages shows whether makers act on the rule at all. Pain stays open unless dated complaints from makers appear."
+      }
+    }
+  ],
+  "runNotes": {
+    "weekday": "Wednesday",
+    "domainLens": "Developer and research tooling",
+    "focusSources": [
+      "A3 Open-source teaching tools",
+      "B2 AppSumo",
+      "C2 Education and computing research"
+    ],
+    "searches": [
+      "GitHub issues repo:jupyter/nbgrader is:issue state:open sort:reactions",
+      "GitHub issues autograder is:issue state:open created:>2026-08-27",
+      "GitHub issues org:jupyterhub is:issue state:open created:>2026-06-01",
+      "discourse.jupyter.org search: grading after:2026-08-27",
+      "HN comments: security questionnaire, after 2026-08-27",
+      "HN comments: lab notebook, after 2026-07-01",
+      "forum.posit.co search: shinyapps.io after:2026-08-27",
+      "answers.netlify.com search: credits bill after:2026-08-27",
+      "WebSearch: academic lab electronic lab notebook free plan ending 2026 researchers complain",
+      "Ask HN: freelance clients, after 2026-07-27",
+      "Stack Exchange cseducators: grading",
+      "GitHub issues repo:jupyter-book is:issue state:open created:>2026-03-01",
+      "HN comments: easychair",
+      "community.vercel.com search: agency clients after:2026-08-27",
+      "community.vercel.com search: client billing after:2026-08-27",
+      "WebSearch: small agencies maintaining client sites complaints",
+      "WebSearch: feedback.render.com feature request spend limit alerts",
+      "forum.posit.co search: posit cloud students after:2026-08-27",
+      "GitHub issues: plagiarism code similarity created:>2026-03-01",
+      "GitHub issues: AI generated pull requests maintainers created:>2026-08-27",
+      "HN comments: SOC 2 small startup, after 2026-08-27",
+      "Stack Exchange academia: code, from 2026-07-01",
+      "Stack Exchange academia: software",
+      "GitHub issues repo:zenodo/zenodo is:issue state:open sort:reactions",
+      "discourse.jupyter.org search: nbgrader after:2026-06-01",
+      "discourse.jupyter.org search: course students after:2026-08-27",
+      "forum.cursor.com search: team spend limit after:2026-08-27",
+      "HN comments: hallucinated citations, after 2026-08-27",
+      "forum.image.sc search: data management lab after:2026-08-27",
+      "GitHub issues repo:PrairieLearn is:issue state:open created:>2026-05-01",
+      "HN comments: surprise bill spending cap, after 2026-08-27",
+      "HN comments: nonprofit volunteers spreadsheet, after 2026-07-27",
+      "site:appsumo.com/products developer tool API documentation",
+      "site:appsumo.com/products research papers academic literature review",
+      "site:appsumo.com/products website uptime monitoring agency clients",
+      "site:appsumo.com/products coding course instructors students assignments grading",
+      "site:appsumo.com/products client website maintenance reports WordPress agencies",
+      "site:appsumo.com/products teachers quiz exam generator classroom",
+      "site:appsumo.com/products data science Python notebook SQL analysis",
+      "autograder programming assignments pricing per student per course 2026",
+      "site:appsumo.com/products qualitative research interview transcripts coding themes researchers",
+      "site:appsumo.com/products interactive coding exercises tutorials course creators developers",
+      "CodeGrade pricing plans per student course instructors",
+      "site:appsumo.com/products visual website feedback bug reporting clients web agencies",
+      "instructors autograder alternative after price increase or shutdown 2026 programming course",
+      "\"GitHub Classroom\" transitioning to partners educators announcement",
+      "site:apps.shopify.com theme backup version control staging store developers",
+      "Freelancer API: autograder",
+      "Freelancer API: jupyter notebook",
+      "Freelancer API: latex thesis formatting",
+      "Freelancer API: github actions ci pipeline",
+      "Freelancer API: website maintenance monthly",
+      "Freelancer API: moodle quiz questions course",
+      "Freelancer API: laboratory sample tracking inventory",
+      "Freelancer API: lovable app deploy fix",
+      "Freelancer API: API documentation OpenAPI",
+      "Freelancer API: research lab data pipeline automation",
+      "Freelancer API: github classroom autograding",
+      "Freelancer API: charity nonprofit website update",
+      "Freelancer API: nonprofit website",
+      "Atlassian Marketplace API: release notes",
+      "Atlassian Marketplace API: latex",
+      "Atlassian Marketplace API: openapi swagger",
+      "WordPress plugin API: client maintenance report",
+      "ADA Title II compliance date 2026 extension",
+      "CRA reporting 11 September 2026 ENISA reporting platform",
+      "CA/Browser Forum SC-081 certificate validity dates",
+      "developer tool free plan removed November 2026",
+      "2026 sunset Overleaf Gradescope mybinder Code Ocean Mendeley",
+      "Postman free plan March 2026",
+      "EU Data Act SaaS switching",
+      "Android developer verification",
+      "NIH 2026 notices research software",
+      "GitHub Actions 2026 pricing",
+      "instructors Title II remediation workload",
+      "Cyber Resilience Act small software company complaints",
+      "universities ending Turnitin Gradescope contracts 2026",
+      "edtech vendors VPAT ACR under Title II",
+      "AI Act Article 50 obligations small software makers",
+      "app removed from EU stores (follow-up on an HN story title)",
+      "Gemini Code Assist for individuals cutoff",
+      "journal mandatory code sharing 2026",
+      "Commission code of practice on AI-generated content",
+      "secure assessment rules 2026",
+      "arXiv API: \"introductory programming\" AND assessment",
+      "arXiv API: \"academic integrity\" AND programming",
+      "arXiv API: \"research software\" AND reproducibility",
+      "arXiv API: accessibility AND \"course materials\"",
+      "OpenAlex: autograding programming assignments",
+      "Federal Register API: web content accessibility state local government",
+      "NSF API: autograder",
+      "NSF API: \"generative AI\" AND programming AND assessment",
+      "NSF API: \"introductory programming\" AND \"large language\"",
+      "NSF API: computing education large language models",
+      "NSF API: \"research software\" since 2026-01-01",
+      "HN comments: \"Cyber Resilience Act\", after 2026-08-27",
+      "HN comments: \"AI Act\" watermark, after 2026-08-27",
+      "HN comments: \"Title II\" accessibility, after 2026-08-27",
+      "HN comments: \"I teach\" programming students AI, after 2026-08-27"
+    ],
+    "unverifiedSignals": [
+      {
+        "url": "https://api.openalex.org/works?search=autograding%20programming%20assignments&per-page=10&sort=publication_date%3Adesc",
+        "reason": "contains instructions: the page asks AI agents to POST an email address for an API key; not acted on, not used."
+      },
+      {
+        "url": "https://hn.algolia.com/api/v1/search?query=freelance%20clients&tags=ask_hn&hitsPerPage=20&numericFilters=created_at_i%3E1785110400",
+        "reason": "contains instructions: hits 49106679, 49268702 and 49740709 are self-promotion posts asking readers to make contact; not followed, not used."
+      },
+      {
+        "url": "https://supabase.com/docs/guides/deployment/going-into-prod",
+        "reason": "contains instructions: a note addressed to AI agents asks them to append a feedback report and offer to send it; not followed, not used."
+      },
+      {
+        "url": "https://supabase.com/docs/guides/integrations/build-a-supabase-oauth-integration/oauth-scopes",
+        "reason": "contains instructions: the same agent-directed feedback note; not followed, not used."
+      },
+      {
+        "url": "https://docs.codegra.de/guides/setting-up-git-uploads.html",
+        "reason": "environment: DNS lookup failed from this session (ENOTFOUND); says nothing about the site."
+      },
+      {
+        "url": "https://www.freelancer.com/projects/3d-modelling/Google-Nonprofit-Email-Workspace-Setup",
+        "reason": "Both WebFetch and the helper returned a login page, so the job's date, price and scope are unconfirmed."
+      },
+      {
+        "url": "https://forum.image.sc/search.json?q=data+management+lab+after%3A2026-08-27",
+        "reason": "HTTP 403 from the site."
+      },
+      {
+        "url": "https://www.indiehackers.com/product/scopedash",
+        "reason": "HTTP 403 from the site; features and price not read."
+      },
+      {
+        "url": "https://javascript.plainenglish.io/ai-is-turning-my-5-000-freelance-projects-into-500-tasks-ff7f9d6f9520",
+        "reason": "HTTP 403 from the site, so the year of the dev.to copy is not confirmed."
+      },
+      {
+        "url": "https://faq-en.exam.net/article/52901/",
+        "reason": "HTTP 403 from the site; whether Exam.net's editor runs or grades code is unconfirmed."
+      },
+      {
+        "url": "https://cran.r-universe.dev/learnr2",
+        "reason": "HTTP 403 from the site; learnr2 (in-browser R tutorials with webR, seen in search only) may be a free R competitor to Exam Room for R."
+      },
+      {
+        "url": "https://support.cmts.jhu.edu/hc/en-us/articles/19824197847181-Classroom-50-for-GitHub-Getting-Started",
+        "reason": "HTTP 403 from the site; whether a university support desk vets Classroom50 is unknown."
+      },
+      {
+        "url": "https://www.switchops.ai/eu-data-act",
+        "reason": "Empty on WebFetch and the helper (a JavaScript-only page); features unverified."
+      },
+      {
+        "url": "https://www.saasrise.com/news/eu-data-act-guidance-sets-new-saas-export-and-switching-rules-e9655b01-16d7-4dce-a476-3aee999c343e",
+        "reason": "Claims a Commission guidance dated 2026-10-06 that no official page corroborates; not used."
+      },
+      {
+        "url": "https://redlib.ssps.io/r/academia/comments/1l51jr6/apps_to_manage_research_team",
+        "reason": "A Reddit mirror, not fetched under the rules; likely the same poster as the Academia Stack Exchange question of 2025-06-06."
+      },
+      {
+        "url": "https://github.forks.workers.dev/pawtograder/platform",
+        "reason": "A mirror, not fetched under the rules; Pawtograder's integrity model and price are unverified."
+      },
+      {
+        "url": "https://pages.charlotte.edu/carterlab/wp-content/uploads/sites/1315/2025/08/Using-Notion-to-Manage-an-Academic-Lab.pdf",
+        "reason": "HTTP 503 from the site."
+      },
+      {
+        "url": "https://www.upwork.com/freelance-jobs/r-shiny/",
+        "reason": "HTTP 403 from the site, not retried."
+      }
+    ],
+    "rejectedCandidates": [
+      {
+        "title": "Slide Deck to LMS Lesson and Quiz Converter",
+        "total": 19,
+        "reason": "Rejection rule: an AI wrapper with no workflow or data moat; many AI quiz generators already sell the conversion."
+      },
+      {
+        "title": "Spend Guard across Netlify, Vercel and Render",
+        "total": 20,
+        "reason": "Rejection rule: the same problem for the same customer as Idle Spend Watch for Fly.io Teams (2026-11-18 #4)."
+      },
+      {
+        "title": "STEM Course-Materials Accessibility Converter",
+        "total": 18,
+        "reason": "Rejection rule: the same problem for the same customer as Tagging Doctor for LaTeX Courses (2026-10-29 #2) and Alt Text Studio for CS Courses (2026-10-21 #2)."
+      },
+      {
+        "title": "ACR Kit for Small EdTech Vendors",
+        "total": 17,
+        "reason": "Rejection rule: the same problem for the same customer as ACR Draft for EdTech Vendors (2026-10-23 #2)."
+      },
+      {
+        "title": "Reference Checker for Authors, Reviewers and Small Journals",
+        "total": 17,
+        "reason": "Rejection rule: the same problem for the same customers as Reference Audit (2026-10-29 #1) and Camera-Ready Preflight (2026-10-29 #3)."
+      },
+      {
+        "title": "CRA Vulnerability Reporting Desk for Small Software Makers",
+        "total": 17,
+        "reason": "Rejection rule: the same problem for the same customer as CRA Report-Ready Kit for Micro Makers (2026-11-11 #3)."
+      },
+      {
+        "title": "Code Submission and Similarity Service for Departments Leaving Turnitin",
+        "total": 14,
+        "reason": "Rejection rule: unsellable without institutional procurement for the first sale (data-protection sign-off)."
+      },
+      {
+        "title": "Care Plan Reports for WordPress Agencies, Without a Connector Plugin",
+        "total": 19,
+        "reason": "Research ended it: SecurePress already sells the plugin-free version at EUR 3.99 a site, and WP Umbrella and ManageWP sell the client reports for less."
+      },
+      {
+        "title": "Credit Watch for Shiny Apps Moving to Posit Connect Cloud",
+        "total": 15,
+        "reason": "Research ended it: Posit's free Usage pages (2026-09-16) and rsconnect's usage functions do the job, and Connect Cloud has no usage API."
+      },
+      {
+        "title": "Production Hand-Over Check for AI-Built Apps",
+        "total": 18,
+        "reason": "Research ended it: Lovable, Bolt, Replit and Supabase scan apps for free, and PathToShip's free scan covers readiness."
+      },
+      {
+        "title": "Code Deposit Preflight for Journal Code Policies",
+        "total": 15,
+        "reason": "Research ended it: Zenodo's free GitHub integration and Code Ocean cover the job, the signals were misread, and no CS venue mandates it."
+      },
+      {
+        "title": "Form Delivery Watch for Freelancers' Client Sites",
+        "total": 18,
+        "reason": "Research ended it: FormTester 365, FormReceipt, FormWatch and free WordPress tools already run scheduled test submissions with proof for clients."
+      },
+      {
+        "title": "Evidence Gate for AI-Made Pull Requests",
+        "total": 18,
+        "reason": "Research ended it: the complainants are open-source maintainers served by free tools (CodeRabbit for open source, Danger JS, GitHub's pull-request limits), and no paying agency showed the pain."
+      },
+      {
+        "title": "Credit Pause Guard for Netlify Sites",
+        "total": 15,
+        "reason": "Research ended it: Netlify's free alerts at 50 to 100 percent, daily credit chart and auto recharge cover it, and no API exposes per-project credits."
+      },
+      {
+        "title": "AI Act Article 50 Transparency Kit for Small AI Apps",
+        "total": 16,
+        "reason": "Research ended it: Disclo, AI Disclosure Kit and Markproof sell each part cheaply, model vendors mark text upstream, and no small builder complains."
+      },
+      {
+        "title": "Fixed-Price Quote Builder for Freelance Developers",
+        "total": 17,
+        "reason": "Research ended it: Moxie and Bonsai sell proposals with acceptance, StayInScope has a free change-order plan, and the leftover pricing piece is advice or an AI wrapper."
+      },
+      {
+        "title": "Email Authentication Set-Up Check for Small Non-Profits",
+        "total": 17,
+        "reason": "Research ended it: Valimail Monitor, Cloudflare DMARC Management and Suped's free plan do the job, and mailbox DMARC rules apply to bulk senders."
+      },
+      {
+        "title": "Certificate Expiry Watch for Small Agencies",
+        "total": 19,
+        "reason": "Research ended it: Red Sift Certificates Lite monitors 250 certificates free and Oh Dear sells per-client reports; the complaints came from site owners, not agencies."
+      },
+      {
+        "title": "Docs Published from the Repo for Solo Founders",
+        "total": 17,
+        "reason": "Research ended it: Docs7 Free, Mintlify Free and GitHub's free docs-updater agentic workflow already do the job, and the leftover stale-page step is an AI wrapper."
+      },
+      {
+        "title": "Per-Developer Spend Guard for Cursor Teams",
+        "total": 16,
+        "reason": "Research ended it: Cursor's current Teams plan, Claude Team and Copilot set per-member limits natively, and Cursor's Admin API and limit writes are Enterprise-only, so a third party cannot enforce caps."
+      },
+      {
+        "title": "Project Log for Small Research Groups",
+        "total": 18,
+        "reason": "Research ended it: Notion's free education Plus plan, Geekbot's free tier for 10 and GitHub Projects cover the job, and the only signal (2025-06-06) was a request, not a complaint."
+      }
+    ],
+    "watchlist": [],
+    "caveats": "First run of 2026-11-25 (Wednesday, developer and research tooling lens; focus sources A3, B2, C2). Three provisional ideas ship, at 17, 17 and 15; none came near the gate of 22. Twenty-four candidates were generated (15 with a small-business buyer); seven failed a rejection rule and seventeen were researched. Research ended fourteen, almost all because a free or cheaper product already does the job for the same customer. The three that survived research were all reviewed and all survived as rescores (21 to 17, 20 to 17 and 18 to 15), so the review target of three survivors was met after three reviews and the ranked list was then exhausted. No Weekend MVP survived research, so the constraint of at least one Weekend MVP among three ideas is not met: all three are Multi-week. The small-business constraint rests on idea 3 alone (smallBusiness true), which has no maker complaint. Ideas 1 and 2 share the category EdTech: Higher Ed, the maximum. Idea 2 overlaps the customer of Repo Roster (2026-10-25); the reviewer judged it a different problem and suggests shipping it as a Repo Roster module if that is built. Access notes: Freelancer job pages served a login page to WebFetch and the helper; GitHub GraphQL is refused from this session (REST only); WebSearch refused the reddit.com domain filter; docs.codegra.de failed DNS from this session; Supabase docs pages and an OpenAlex response contained text addressed to AI agents and were not used. One researcher sent HN Algolia queries straight to the helper without trying WebFetch first, and two researchers typed a few URLs that they then did not cite."
+  }
+}

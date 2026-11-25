@@ -683,3 +683,6 @@
 | 2026-11-24 | Volunteer Match Schedules for Grants | Accessibility & Compliance | Multi-week | 18 | provisional |  |
 | 2026-11-24 | Back Issue Article Index for Society Journals | Creative & Prosumer | Multi-week | 18 | provisional |  |
 | 2026-11-24 | Zeffy Payout Journals for Xero | Micro-SaaS | Weekend MVP | 17 | provisional |  |
+| 2026-11-25 | Exam Room for R | EdTech: Higher Ed | Multi-week | 17 | provisional |  |
+| 2026-11-25 | Trusted Deadline Grade for Classroom50 | EdTech: Higher Ed | Multi-week | 17 | provisional |  |
+| 2026-11-25 | Export Coverage Check for Postgres SaaS | Accessibility & Compliance | Multi-week | 15 | provisional |  |

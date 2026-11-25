@@ -63,6 +63,19 @@
       },
       "workingPaths": []
     },
+    "2027.sigcse-ts.acm.org": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://2027.sigcse-ts.acm.org/track/sigcse-ts-2027-Papers-1"
+      ]
+    },
     "80.lv": {
       "attempts": 1,
       "evidenceItems": 1,
@@ -89,6 +102,19 @@
         "curl https://<store domain withheld: the sold-out product page cited in Square community topic 845776>/product/<slug>/<24-character item id>"
       ]
     },
+    "about.readthedocs.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://about.readthedocs.com/pricing/"
+      ]
+    },
     "about.usps.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -97,6 +123,17 @@
       "ok": 0,
       "outcomes": {
         "empty": 1
+      },
+      "workingPaths": []
+    },
+    "academia.stackexchange.com": {
+      "attempts": 2,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "allowlist": 2
       },
       "workingPaths": []
     },
@@ -113,6 +150,19 @@
         "webfetch https://accessibe.com/pricing",
         "webfetch https://accessibe.com/industry/healthcare",
         "webfetch https://accessibe.com/accessibility-platform/reports/sec-504/sec-504-plan-healthcare"
+      ]
+    },
+    "accessibility.arizona.edu": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://accessibility.arizona.edu/news/doj-issues-interim-final-rule-title-ii-digital-accessibility-compliance-dates"
       ]
     },
     "accessible.org": {
@@ -330,16 +380,17 @@
       ]
     },
     "ai-act-service-desk.ec.europa.eu": {
-      "attempts": 1,
-      "evidenceItems": 0,
-      "lastAttempt": "2026-11-17",
-      "lastOk": "2026-11-17",
-      "ok": 1,
+      "attempts": 2,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 2,
       "outcomes": {
-        "ok": 1
+        "ok": 2
       },
       "workingPaths": [
-        "webfetch https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-4"
+        "webfetch https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-4",
+        "webfetch https://ai-act-service-desk.ec.europa.eu/en/eu-ai-act-compliance-checker"
       ]
     },
     "ai.varsitytutors.com": {
@@ -422,15 +473,18 @@
       ]
     },
     "alternativeto.net": {
-      "attempts": 1,
+      "attempts": 2,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-12",
-      "lastOk": null,
-      "ok": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
       "outcomes": {
-        "http_403": 1
+        "http_403": 1,
+        "ok": 1
       },
-      "workingPaths": []
+      "workingPaths": [
+        "webfetch https://alternativeto.net/software/weekly-update/about"
+      ]
     },
     "answers.justia.com": {
       "attempts": 1,
@@ -442,6 +496,23 @@
         "http_403": 1
       },
       "workingPaths": []
+    },
+    "answers.netlify.com": {
+      "attempts": 15,
+      "evidenceItems": 9,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 13,
+      "outcomes": {
+        "empty": 1,
+        "http_404": 1,
+        "ok": 13
+      },
+      "workingPaths": [
+        "webfetch https://answers.netlify.com/search.json?q=credits+bill+after%3A2026-08-27",
+        "webfetch https://answers.netlify.com/t/168098.json",
+        "webfetch https://answers.netlify.com/t/form-submission-notifications-not-arriving-suspect-suppression-hard-bounce-list/169821"
+      ]
     },
     "aphyr.com": {
       "attempts": 2,
@@ -470,17 +541,17 @@
       ]
     },
     "api.github.com": {
-      "attempts": 102,
-      "evidenceItems": 16,
-      "lastAttempt": "2026-11-24",
-      "lastOk": "2026-11-24",
-      "ok": 65,
+      "attempts": 137,
+      "evidenceItems": 18,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 96,
       "outcomes": {
         "empty": 15,
         "http_403": 20,
-        "http_404": 1,
+        "http_404": 5,
         "http_5xx": 1,
-        "ok": 65
+        "ok": 96
       },
       "workingPaths": [
         "curl https://api.github.com/search/issues?q=nbgrader+is%3Aissue+created%3A%3E2026-08-01&per_page=20",
@@ -517,13 +588,13 @@
       ]
     },
     "api.nsf.gov": {
-      "attempts": 5,
-      "evidenceItems": 0,
-      "lastAttempt": "2026-11-05",
-      "lastOk": "2026-11-05",
-      "ok": 5,
+      "attempts": 10,
+      "evidenceItems": 2,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 10,
       "outcomes": {
-        "ok": 5
+        "ok": 10
       },
       "workingPaths": [
         "curl https://api.nsf.gov/services/v1/awards.json?keyword=small+business+compliance&printFields=id,title,date,awardeeName,fundsObligatedAmt&rpp=25&dateStart=01/01/2026",
@@ -532,15 +603,18 @@
       ]
     },
     "api.openalex.org": {
-      "attempts": 5,
+      "attempts": 6,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-11",
-      "lastOk": null,
-      "ok": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
       "outcomes": {
-        "http_429": 5
+        "http_429": 5,
+        "ok": 1
       },
-      "workingPaths": []
+      "workingPaths": [
+        "webfetch https://api.openalex.org/works?search=autograding%20programming%20assignments&per-page=10&sort=publication_date%3Adesc"
+      ]
     },
     "api.regulations.gov": {
       "attempts": 1,
@@ -568,14 +642,14 @@
       ]
     },
     "api.stackexchange.com": {
-      "attempts": 41,
+      "attempts": 69,
       "evidenceItems": 2,
-      "lastAttempt": "2026-11-24",
-      "lastOk": "2026-11-24",
-      "ok": 40,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 67,
       "outcomes": {
-        "allowlist": 1,
-        "ok": 40
+        "allowlist": 2,
+        "ok": 67
       },
       "workingPaths": [
         "curl https://api.stackexchange.com/2.3/search/advanced?site=academia&q=spreadsheet&order=desc&sort=creation&pagesize=20",
@@ -584,14 +658,14 @@
       ]
     },
     "api.wordpress.org": {
-      "attempts": 45,
-      "evidenceItems": 10,
-      "lastAttempt": "2026-11-24",
-      "lastOk": "2026-11-24",
-      "ok": 44,
+      "attempts": 48,
+      "evidenceItems": 13,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 47,
       "outcomes": {
         "empty": 1,
-        "ok": 44
+        "ok": 47
       },
       "workingPaths": [
         "curl https://api.wordpress.org/plugins/info/1.2/?action=query_plugins&request[search]=accessibility&request[per_page]=15",
@@ -762,15 +836,15 @@
       ]
     },
     "apps.shopify.com": {
-      "attempts": 458,
+      "attempts": 460,
       "evidenceItems": 127,
-      "lastAttempt": "2026-11-24",
-      "lastOk": "2026-11-24",
-      "ok": 386,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 388,
       "outcomes": {
         "empty": 48,
         "http_404": 22,
-        "ok": 386,
+        "ok": 388,
         "redirect": 2
       },
       "workingPaths": [
@@ -808,13 +882,13 @@
       "workingPaths": []
     },
     "appsumo.com": {
-      "attempts": 25,
-      "evidenceItems": 11,
-      "lastAttempt": "2026-11-24",
-      "lastOk": "2026-11-24",
-      "ok": 25,
+      "attempts": 38,
+      "evidenceItems": 18,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 38,
       "outcomes": {
-        "ok": 25
+        "ok": 38
       },
       "workingPaths": [
         "curl https://appsumo.com/software/development-tools/",
@@ -883,6 +957,22 @@
       },
       "workingPaths": [
         "webfetch https://artfairinsiders.com/forum/topics/limited-editions-help-with-dos"
+      ]
+    },
+    "arxiv.org": {
+      "attempts": 5,
+      "evidenceItems": 2,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 4,
+      "outcomes": {
+        "empty": 1,
+        "ok": 4
+      },
+      "workingPaths": [
+        "webfetch https://arxiv.org/abs/2601.10093v1",
+        "webfetch https://arxiv.org/html/2511.21654v1",
+        "webfetch http://arxiv.org/abs/2608.27100v1"
       ]
     },
     "asbfeo.gov.au": {
@@ -1043,16 +1133,17 @@
       "workingPaths": []
     },
     "betterstack.com": {
-      "attempts": 1,
+      "attempts": 2,
       "evidenceItems": 1,
-      "lastAttempt": "2026-11-18",
-      "lastOk": "2026-11-18",
-      "ok": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 2,
       "outcomes": {
-        "ok": 1
+        "ok": 2
       },
       "workingPaths": [
-        "curl https://betterstack.com/pricing"
+        "curl https://betterstack.com/pricing",
+        "webfetch https://betterstack.com/pricing"
       ]
     },
     "billable.to": {
@@ -1308,6 +1399,19 @@
         "webfetch https://blog.xero.com/uk/product-updates/mtd-it-multi-business-is-here/"
       ]
     },
+    "blog.zenodo.org": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://blog.zenodo.org/"
+      ]
+    },
     "blogs.intuit.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -1357,6 +1461,19 @@
       },
       "workingPaths": [
         "webfetch https://boards.straightdope.com/t/art-within-limits-limited-runs/1031669"
+      ]
+    },
+    "bolt.new": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://bolt.new/blog/security-audit-on-publish"
       ]
     },
     "bookkeep.com": {
@@ -1465,6 +1582,19 @@
         "webfetch https://btcsoftware.co.uk/?p=18814"
       ]
     },
+    "btcson66-rgb.github.io": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://btcson66-rgb.github.io/freelance-tools/blog/freelance-change-order-process/"
+      ]
+    },
     "buffer.com": {
       "attempts": 2,
       "evidenceItems": 1,
@@ -1491,6 +1621,19 @@
       "workingPaths": [
         "webfetch https://buildpass.ai/plans",
         "webfetch https://buildpass.ai/pricing"
+      ]
+    },
+    "bundesnetzagentur.de": {
+      "attempts": 2,
+      "evidenceItems": 2,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "webfetch https://bundesnetzagentur.de/EN/Areas/Digitalisation/DataAct/background/3-provider/start.html"
       ]
     },
     "bunny.net": {
@@ -1625,6 +1768,30 @@
         "curl https://calendly.stoplight.io/api/v1/projects/calendly/api-docs/nodes/reference%2Fcalendly-api%2Fopenapi.yaml"
       ]
     },
+    "cancelflow.dev": {
+      "attempts": 2,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "webfetch https://cancelflow.dev/blog/eu-data-act-cloud-switching-saas"
+      ]
+    },
+    "capterra.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_403": 1
+      },
+      "workingPaths": []
+    },
     "cardiff.gov.uk": {
       "attempts": 2,
       "evidenceItems": 0,
@@ -1750,16 +1917,17 @@
       ]
     },
     "cdn.jsdelivr.net": {
-      "attempts": 1,
-      "evidenceItems": 1,
-      "lastAttempt": "2026-11-11",
-      "lastOk": "2026-11-11",
-      "ok": 1,
+      "attempts": 2,
+      "evidenceItems": 2,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 2,
       "outcomes": {
-        "ok": 1
+        "ok": 2
       },
       "workingPaths": [
-        "curl https://cdn.jsdelivr.net/npm/ccusage-team@1.0.27/README.en.md"
+        "curl https://cdn.jsdelivr.net/npm/ccusage-team@1.0.27/README.en.md",
+        "webfetch https://cdn.jsdelivr.net/npm/plainstamp@0.7.18/docs/guides/eu-ai-act-article-50-builder-guide.md"
       ]
     },
     "cdtfa.ca.gov": {
@@ -1824,6 +1992,20 @@
       "workingPaths": [
         "webfetch https://certifier.io/pricing",
         "webfetch https://certifier.io/integrations/zoom"
+      ]
+    },
+    "certifytheweb.com": {
+      "attempts": 2,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "http_404": 1,
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://certifytheweb.com/upgrade"
       ]
     },
     "certpilot.app": {
@@ -1961,6 +2143,19 @@
         "webfetch https://circle.so/switch-from-thinkific"
       ]
     },
+    "citl.indiana.edu": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://citl.indiana.edu/teaching-resources/instructional-technologies/third-party-services-legal-privacy-concerns"
+      ]
+    },
     "clarity.eco": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -2079,6 +2274,31 @@
         "curl https://cloud.google.com/vision/pricing"
       ]
     },
+    "cloud.r-project.org": {
+      "attempts": 2,
+      "evidenceItems": 2,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "webfetch https://cloud.r-project.org/web/packages/rsconnect/refman/rsconnect.html",
+        "webfetch https://cloud.r-project.org/web/packages/shiny.telemetry/index.html"
+      ]
+    },
+    "cloud.wikis.utexas.edu": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "empty": 1
+      },
+      "workingPaths": []
+    },
     "cms.law": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -2157,6 +2377,30 @@
         "webfetch https://codecanyon.net/item/chauffeur-booking-system-for-wordpress/21072773"
       ]
     },
+    "codeteach.featurebase.app": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://codeteach.featurebase.app/help/articles/3657748-classroom-setup"
+      ]
+    },
+    "codio.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "empty": 1
+      },
+      "workingPaths": []
+    },
     "coefficient.io": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -2207,6 +2451,19 @@
         "webfetch https://commission.europa.eu/news-and-media/news/ensuring-fairness-and-safety-eur3-customs-duty-low-value-parcels-2026-06-29_en"
       ]
     },
+    "community.adobe.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://community.adobe.com/questions-621/fyi-shorter-ssl-lifespans-effective-march-15-2026-1552472"
+      ]
+    },
     "community.airbnb.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -2230,15 +2487,15 @@
       "workingPaths": []
     },
     "community.blackbaud.com": {
-      "attempts": 30,
+      "attempts": 32,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-24",
-      "lastOk": "2026-11-24",
-      "ok": 24,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 26,
       "outcomes": {
         "empty": 1,
         "http_403": 5,
-        "ok": 24
+        "ok": 26
       },
       "workingPaths": [
         "curl https://community.blackbaud.com/discussion/comment/267692",
@@ -2527,6 +2784,21 @@
       },
       "workingPaths": []
     },
+    "community.letsencrypt.org": {
+      "attempts": 4,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 4,
+      "outcomes": {
+        "ok": 4
+      },
+      "workingPaths": [
+        "webfetch https://community.letsencrypt.org/t/certificate-expired-when-it-was-set-to-renew/252034",
+        "webfetch https://community.letsencrypt.org/t/expired-certs-shut-done-websites/246962",
+        "webfetch https://community.letsencrypt.org/t/getting-an-email-when-certificates-are-about-to-expire/246540"
+      ]
+    },
     "community.lightspeedhq.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -2559,6 +2831,21 @@
         "timeout": 1
       },
       "workingPaths": []
+    },
+    "community.mainwp.com": {
+      "attempts": 6,
+      "evidenceItems": 4,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 6,
+      "outcomes": {
+        "ok": 6
+      },
+      "workingPaths": [
+        "webfetch https://community.mainwp.com/t/sheduled-reports-failing-to-send/10476",
+        "webfetch https://community.mainwp.com/t/pro-reports-not-generating/10665",
+        "webfetch https://community.mainwp.com/t/pro-reports-issues-after-mainwp-6-update/10607"
+      ]
     },
     "community.make.com": {
       "attempts": 46,
@@ -2819,6 +3106,20 @@
       },
       "workingPaths": []
     },
+    "community.vercel.com": {
+      "attempts": 3,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "empty": 2,
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://community.vercel.com/t/37551.json"
+      ]
+    },
     "community.withairbnb.com": {
       "attempts": 4,
       "evidenceItems": 0,
@@ -2926,6 +3227,20 @@
         "curl https://complianz.io/pricing/"
       ]
     },
+    "connect.posit.cloud": {
+      "attempts": 2,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "empty": 1,
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://connect.posit.cloud/plans"
+      ]
+    },
     "connecteam.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -2978,6 +3293,20 @@
         "webfetch https://content.govdelivery.com/accounts/MDDLLR/bulletins/3ede272"
       ]
     },
+    "context7.com": {
+      "attempts": 2,
+      "evidenceItems": 2,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "webfetch https://context7.com/ai-documentation-agent",
+        "webfetch https://context7.com/docs/docs7/plans.md"
+      ]
+    },
     "contra.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -2999,6 +3328,19 @@
         "redirect": 1
       },
       "workingPaths": []
+    },
+    "conventuslaw.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://conventuslaw.com/report/taking-the-eu-ai-act-to-practice-how-wrapping-a-third-party-model-can-trigger-the-output-marking-and-detection-obligation/"
+      ]
     },
     "convertcalculator.com": {
       "attempts": 1,
@@ -3093,6 +3435,17 @@
         "webfetch https://craftybase.com/blog/craftybase-is-becoming-stocksmith"
       ]
     },
+    "cran.r-universe.dev": {
+      "attempts": 2,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_403": 2
+      },
+      "workingPaths": []
+    },
     "craready.pages.dev": {
       "attempts": 1,
       "evidenceItems": 1,
@@ -3170,13 +3523,13 @@
       "workingPaths": []
     },
     "cseducators.stackexchange.com": {
-      "attempts": 1,
+      "attempts": 2,
       "evidenceItems": 0,
-      "lastAttempt": "2026-10-31",
+      "lastAttempt": "2026-11-25",
       "lastOk": null,
       "ok": 0,
       "outcomes": {
-        "allowlist": 1
+        "allowlist": 2
       },
       "workingPaths": []
     },
@@ -3220,6 +3573,22 @@
         "webfetch https://ctars.com.au/pricing/"
       ]
     },
+    "cursor.com": {
+      "attempts": 10,
+      "evidenceItems": 9,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 9,
+      "outcomes": {
+        "http_404": 1,
+        "ok": 9
+      },
+      "workingPaths": [
+        "webfetch https://cursor.com/docs/account/billing/spend-limits",
+        "webfetch https://cursor.com/docs/account/teams/admin-api",
+        "webfetch https://cursor.com/docs/api"
+      ]
+    },
     "cushionapp.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -3233,6 +3602,19 @@
         "webfetch https://cushionapp.com/support/time-tracking/importing-from-harvest"
       ]
     },
+    "cutler.portfolio.arts.ubc.ca": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://cutler.portfolio.arts.ubc.ca/activities/prograds-the-grad-student-progress-app/"
+      ]
+    },
     "cvdportal.com": {
       "attempts": 1,
       "evidenceItems": 1,
@@ -3244,6 +3626,19 @@
       },
       "workingPaths": [
         "curl https://cvdportal.com/pricing"
+      ]
+    },
+    "danger.systems": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://danger.systems/js/"
       ]
     },
     "data.iana.org": {
@@ -3313,19 +3708,32 @@
       ]
     },
     "dev.to": {
-      "attempts": 8,
-      "evidenceItems": 1,
-      "lastAttempt": "2026-11-23",
-      "lastOk": "2026-11-23",
-      "ok": 7,
+      "attempts": 13,
+      "evidenceItems": 3,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 11,
       "outcomes": {
-        "http_404": 1,
-        "ok": 7
+        "http_404": 2,
+        "ok": 11
       },
       "workingPaths": [
         "curl https://dev.to/craevidence",
         "curl https://dev.to/layerz/your-clients-contract-says-no-ai-what-you-can-still-do-50aa",
         "webfetch https://dev.to/instarenewal/the-clean-offboarding-checklist-how-to-hand-over-digital-assets-without-liability-4l2o"
+      ]
+    },
+    "developer.android.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://developer.android.com/blog/posts/android-developer-verification-rolling-out-to-all-developers-on-play-console-and-android-developer-console"
       ]
     },
     "developer.apple.com": {
@@ -3453,13 +3861,13 @@
       ]
     },
     "developer.wordpress.org": {
-      "attempts": 6,
-      "evidenceItems": 3,
-      "lastAttempt": "2026-11-24",
-      "lastOk": "2026-11-24",
-      "ok": 6,
+      "attempts": 9,
+      "evidenceItems": 5,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 9,
       "outcomes": {
-        "ok": 6
+        "ok": 9
       },
       "workingPaths": [
         "curl https://developer.wordpress.org/plugins/wordpress-org/detailed-plugin-guidelines/",
@@ -3481,6 +3889,19 @@
         "webfetch https://developer.xero.com/pricing",
         "webfetch https://developer.xero.com/xero-developer-platform-commercial-terms",
         "curl https://developer.xero.com/pricing"
+      ]
+    },
+    "developers.cloudflare.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://developers.cloudflare.com/dmarc-management/"
       ]
     },
     "developers.etsy.com": {
@@ -3577,6 +3998,32 @@
         "webfetch https://developers.openai.com/api/docs/deprecations.md"
       ]
     },
+    "developers.redhat.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://developers.redhat.com/articles/2026/04/21/ai-powered-documentation-updates-code-diff-docs-pr-one-comment"
+      ]
+    },
+    "developers.zenodo.org": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://developers.zenodo.org/"
+      ]
+    },
     "devforum.zoom.us": {
       "attempts": 4,
       "evidenceItems": 2,
@@ -3592,6 +4039,69 @@
         "webfetch https://devforum.zoom.us/t/146178"
       ]
     },
+    "devops-actions.github.io": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_404": 1
+      },
+      "workingPaths": []
+    },
+    "digital-client-solutions.hlc.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://digital-client-solutions.hlc.com/_uploads/digital-transformation-academy/data-act/CloudEdgeComputingServices-ActionItems.pdf"
+      ]
+    },
+    "digital-client-solutions.hoganlovells.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "redirect": 1
+      },
+      "workingPaths": []
+    },
+    "digital-strategy.ec.europa.eu": {
+      "attempts": 9,
+      "evidenceItems": 8,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 9,
+      "outcomes": {
+        "ok": 9
+      },
+      "workingPaths": [
+        "webfetch https://digital-strategy.ec.europa.eu/en/policies/cra-reporting",
+        "webfetch https://digital-strategy.ec.europa.eu/en/faqs/code-practice-transparency-ai-generated-content",
+        "webfetch https://digital-strategy.ec.europa.eu/en/library/draft-recommendation-non-binding-model-contractual-terms-data-access-and-use-and-non-binding"
+      ]
+    },
+    "disclo.eu": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://disclo.eu"
+      ]
+    },
     "discourse.datamethods.org": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -3604,14 +4114,14 @@
       "workingPaths": []
     },
     "discourse.jupyter.org": {
-      "attempts": 10,
+      "attempts": 13,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-24",
-      "lastOk": "2026-11-18",
-      "ok": 5,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 7,
       "outcomes": {
-        "empty": 5,
-        "ok": 5
+        "empty": 6,
+        "ok": 7
       },
       "workingPaths": [
         "curl https://discourse.jupyter.org/search.json?q=grading%20after%3A2026-08-01",
@@ -3688,6 +4198,32 @@
         "webfetch https://discuss.pixls.us/search.json?q=business%20after%3A2026-07-01"
       ]
     },
+    "dmarc.postmarkapp.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://dmarc.postmarkapp.com/"
+      ]
+    },
+    "dmarcian.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://dmarcian.com/pricing/"
+      ]
+    },
     "docparser.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -3712,6 +4248,44 @@
       },
       "workingPaths": [
         "webfetch https://docs-shpf.bsscommerce.com/b2b-wholesale-solution/integration/zapiet-pickup-+-delivery"
+      ]
+    },
+    "docs.codegra.de": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "environment": 1
+      },
+      "workingPaths": []
+    },
+    "docs.coderabbit.ai": {
+      "attempts": 2,
+      "evidenceItems": 2,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "webfetch https://docs.coderabbit.ai/pr-reviews/pre-merge-checks",
+        "webfetch https://docs.coderabbit.ai/management/plans"
+      ]
+    },
+    "docs.codio.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://docs.codio.com/instructors/setupcourses/assignment-settings/exam-proctoring.html"
       ]
     },
     "docs.cronofy.com": {
@@ -3766,6 +4340,22 @@
       "workingPaths": [
         "curl https://docs.ghost.org/admin-api/members/overview",
         "curl https://docs.ghost.org/admin-api"
+      ]
+    },
+    "docs.github.com": {
+      "attempts": 17,
+      "evidenceItems": 14,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 16,
+      "outcomes": {
+        "http_404": 1,
+        "ok": 16
+      },
+      "workingPaths": [
+        "webfetch https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets",
+        "webfetch https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api",
+        "webfetch https://docs.github.com/en/webhooks/webhook-events-and-payloads"
       ]
     },
     "docs.givebutter.com": {
@@ -3835,16 +4425,18 @@
       ]
     },
     "docs.lovable.dev": {
-      "attempts": 1,
-      "evidenceItems": 0,
-      "lastAttempt": "2026-11-04",
-      "lastOk": "2026-11-04",
-      "ok": 1,
+      "attempts": 3,
+      "evidenceItems": 2,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 3,
       "outcomes": {
-        "ok": 1
+        "ok": 3
       },
       "workingPaths": [
-        "curl https://docs.lovable.dev/features/security"
+        "curl https://docs.lovable.dev/features/security",
+        "webfetch https://docs.lovable.dev/features/security",
+        "webfetch https://docs.lovable.dev/features/database-backups"
       ]
     },
     "docs.machines.dev": {
@@ -3887,6 +4479,75 @@
         "webfetch https://docs.n8n.io/api/authentication/"
       ]
     },
+    "docs.netlify.com": {
+      "attempts": 5,
+      "evidenceItems": 5,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 5,
+      "outcomes": {
+        "ok": 5
+      },
+      "workingPaths": [
+        "webfetch https://docs.netlify.com/manage/accounts-and-billing/billing/billing-for-credit-based-plans/monitor-usage-for-credit-based-plans/",
+        "webfetch https://docs.netlify.com/manage/accounts-and-billing/billing/billing-for-credit-based-plans/how-credits-work/",
+        "webfetch https://docs.netlify.com/manage/accounts-and-billing/billing/billing-for-credit-based-plans/billing-faq-for-credit-based-plans.md"
+      ]
+    },
+    "docs.numbas.org.uk": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://docs.numbas.org.uk/en/latest/tutorials/deliver-to-students.html"
+      ]
+    },
+    "docs.patchstack.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://docs.patchstack.com/api-solutions/"
+      ]
+    },
+    "docs.posit.co": {
+      "attempts": 10,
+      "evidenceItems": 7,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 10,
+      "outcomes": {
+        "ok": 10
+      },
+      "workingPaths": [
+        "webfetch https://docs.posit.co/cloud/guide/teach/",
+        "webfetch https://docs.posit.co/connect-cloud/user/shinyapps-migration.html",
+        "webfetch https://docs.posit.co/connect-cloud/user/usage.html"
+      ]
+    },
+    "docs.prairielearn.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://docs.prairielearn.com/assessment/accessControl/"
+      ]
+    },
     "docs.railway.com": {
       "attempts": 1,
       "evidenceItems": 1,
@@ -3898,6 +4559,19 @@
       },
       "workingPaths": [
         "webfetch https://docs.railway.com/reference/usage-limits"
+      ]
+    },
+    "docs.replit.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://docs.replit.com/features/security/overview"
       ]
     },
     "docs.retellai.com": {
@@ -4006,6 +4680,19 @@
         "webfetch https://docs.zeffy.com/org/questions-frequentes/frequently-asked-questions-for-stripe.md"
       ]
     },
+    "docsio.co": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://docsio.co/pricing"
+      ]
+    },
     "documentation.outpost.pub": {
       "attempts": 2,
       "evidenceItems": 0,
@@ -4018,6 +4705,20 @@
       "workingPaths": [
         "curl https://documentation.outpost.pub/features/group-subscriptions.md",
         "curl https://documentation.outpost.pub/features/one-person-subscriptions.md"
+      ]
+    },
+    "dodona.be": {
+      "attempts": 2,
+      "evidenceItems": 2,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "webfetch https://dodona.be/en/pricing/",
+        "webfetch https://dodona.be/en/features/"
       ]
     },
     "domainmod.org": {
@@ -4217,6 +4918,19 @@
         "webfetch https://dwfgroup.com/en/news-and-insights/insights/2026/10/dmcca-subscription-contracts-regime-preparing-for-the-new-restrictions"
       ]
     },
+    "easydmarc.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://easydmarc.com/pricing"
+      ]
+    },
     "easyship.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -4231,16 +4945,17 @@
       ]
     },
     "ec.europa.eu": {
-      "attempts": 1,
-      "evidenceItems": 0,
-      "lastAttempt": "2026-11-19",
-      "lastOk": "2026-11-19",
-      "ok": 1,
+      "attempts": 2,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 2,
       "outcomes": {
-        "ok": 1
+        "ok": 2
       },
       "workingPaths": [
-        "curl https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/eInvoicing%2Bin%2BBelgium"
+        "curl https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/eInvoicing%2Bin%2BBelgium",
+        "webfetch https://ec.europa.eu/newsroom/dae/redirection/document/108144"
       ]
     },
     "ecom-tools.de": {
@@ -4390,6 +5105,30 @@
       "ok": 0,
       "outcomes": {
         "http_5xx": 1
+      },
+      "workingPaths": []
+    },
+    "elabftw.net": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://elabftw.net/"
+      ]
+    },
+    "elearn.soton.ac.uk": {
+      "attempts": 2,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "redirect": 2
       },
       "workingPaths": []
     },
@@ -4556,6 +5295,17 @@
         "webfetch https://equalizedigital.com/accessibility-checker/pricing/"
       ]
     },
+    "er.educause.edu": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_403": 1
+      },
+      "workingPaths": []
+    },
     "erank.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -4569,14 +5319,27 @@
         "curl https://erank.com/pricing"
       ]
     },
-    "eur-lex.europa.eu": {
+    "ethyca.github.io": {
       "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://ethyca.github.io/fidesops"
+      ]
+    },
+    "eur-lex.europa.eu": {
+      "attempts": 3,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-17",
+      "lastAttempt": "2026-11-25",
       "lastOk": null,
       "ok": 0,
       "outcomes": {
-        "empty": 1
+        "empty": 3
       },
       "workingPaths": []
     },
@@ -4656,6 +5419,19 @@
       },
       "workingPaths": []
     },
+    "exam.net": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://exam.net/pricing"
+      ]
+    },
     "expenseplus.co.uk": {
       "attempts": 4,
       "evidenceItems": 4,
@@ -4685,20 +5461,31 @@
       ]
     },
     "export.arxiv.org": {
-      "attempts": 18,
-      "evidenceItems": 6,
-      "lastAttempt": "2026-11-18",
-      "lastOk": "2026-11-18",
-      "ok": 15,
+      "attempts": 22,
+      "evidenceItems": 9,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 19,
       "outcomes": {
         "empty": 3,
-        "ok": 15
+        "ok": 19
       },
       "workingPaths": [
         "curl https://export.arxiv.org/api/query?search_query=all:%22small%20business%22%20AND%20all:software&sortBy=submittedDate&sortOrder=descending&max_results=10",
         "curl https://export.arxiv.org/api/query?search_query=all:%22shopping%20agent%22&sortBy=submittedDate&sortOrder=descending&max_results=10",
         "curl http://export.arxiv.org/api/query?search_query=abs:%22vibe%20coding%22+AND+abs:security&sortBy=submittedDate&sortOrder=descending&max_results=6"
       ]
+    },
+    "faq-en.exam.net": {
+      "attempts": 2,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_403": 2
+      },
+      "workingPaths": []
     },
     "fasta2p-portal.pages.dev": {
       "attempts": 2,
@@ -4818,13 +5605,13 @@
       "workingPaths": []
     },
     "feedback.render.com": {
-      "attempts": 1,
-      "evidenceItems": 1,
-      "lastAttempt": "2026-11-18",
-      "lastOk": "2026-11-18",
-      "ok": 1,
+      "attempts": 2,
+      "evidenceItems": 2,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 2,
       "outcomes": {
-        "ok": 1
+        "ok": 2
       },
       "workingPaths": [
         "webfetch https://feedback.render.com/features/p/account-spending-limits"
@@ -4985,6 +5772,58 @@
       },
       "workingPaths": []
     },
+    "formreceipt.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://formreceipt.com/"
+      ]
+    },
+    "formspree.io": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://formspree.io/plans"
+      ]
+    },
+    "formtester365.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://formtester365.com/"
+      ]
+    },
+    "formwatch.app": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://formwatch.app/"
+      ]
+    },
     "forum.arduino.cc": {
       "attempts": 2,
       "evidenceItems": 0,
@@ -5029,13 +5868,13 @@
       ]
     },
     "forum.cursor.com": {
-      "attempts": 8,
-      "evidenceItems": 7,
-      "lastAttempt": "2026-11-18",
-      "lastOk": "2026-11-18",
-      "ok": 8,
+      "attempts": 26,
+      "evidenceItems": 19,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 26,
       "outcomes": {
-        "ok": 8
+        "ok": 26
       },
       "workingPaths": [
         "curl https://forum.cursor.com/t/159552.json",
@@ -5094,13 +5933,25 @@
         "webfetch https://forum.heatinghelp.com/discussion/201444/material-price-increases-due-to-govermental-tarrifs"
       ]
     },
-    "forum.image.sc": {
+    "forum.howtoforge.com": {
       "attempts": 1,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-11",
+      "lastAttempt": "2026-11-25",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_403": 1
+      },
+      "workingPaths": []
+    },
+    "forum.image.sc": {
+      "attempts": 2,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
       "lastOk": "2026-11-11",
       "ok": 1,
       "outcomes": {
+        "http_403": 1,
         "ok": 1
       },
       "workingPaths": [
@@ -5124,16 +5975,17 @@
       ]
     },
     "forum.juce.com": {
-      "attempts": 1,
-      "evidenceItems": 1,
-      "lastAttempt": "2026-11-11",
-      "lastOk": "2026-11-11",
-      "ok": 1,
+      "attempts": 2,
+      "evidenceItems": 2,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 2,
       "outcomes": {
-        "ok": 1
+        "ok": 2
       },
       "workingPaths": [
-        "curl https://forum.juce.com/t/how-are-people-factoring-ai-usage-into-their-client-billing/69023.json"
+        "curl https://forum.juce.com/t/how-are-people-factoring-ai-usage-into-their-client-billing/69023.json",
+        "webfetch https://forum.juce.com/t/.../69023"
       ]
     },
     "forum.manager.io": {
@@ -5218,13 +6070,14 @@
       "workingPaths": []
     },
     "forum.posit.co": {
-      "attempts": 3,
-      "evidenceItems": 3,
-      "lastAttempt": "2026-11-18",
-      "lastOk": "2026-11-18",
-      "ok": 3,
+      "attempts": 30,
+      "evidenceItems": 20,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 29,
       "outcomes": {
-        "ok": 3
+        "empty": 1,
+        "ok": 29
       },
       "workingPaths": [
         "curl https://forum.posit.co/search.json?q=posit+cloud+students+after%3A2026-08-01",
@@ -5359,6 +6212,32 @@
       },
       "workingPaths": []
     },
+    "francedigitale.org": {
+      "attempts": 2,
+      "evidenceItems": 2,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "webfetch https://francedigitale.org/en/posts/vigilance-effets-de-bord-du-data-act"
+      ]
+    },
+    "freelancer.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://freelancer.com/projects/woocommerce/WooCommerce-Inventory-Integration"
+      ]
+    },
     "freetier-sentinel.dev": {
       "attempts": 1,
       "evidenceItems": 1,
@@ -5424,6 +6303,19 @@
       "workingPaths": [
         "webfetch https://fssai.gov.in/upload/uploadfiles/files/Press%20Release_FSSAI%20Reforms_130326.pdf",
         "webfetch https://fssai.gov.in/upload/advisories/2024/04/661e73c35373eRevised%20annual%20return.pdf"
+      ]
+    },
+    "geekbot.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://geekbot.com/pricing/"
       ]
     },
     "get.nicejob.com": {
@@ -5555,6 +6447,28 @@
         "webfetch https://getvela.com/pricing"
       ]
     },
+    "getweeklyupdate.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_5xx": 1
+      },
+      "workingPaths": []
+    },
+    "gh.io": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "redirect": 1
+      },
+      "workingPaths": []
+    },
     "ghost.org": {
       "attempts": 3,
       "evidenceItems": 0,
@@ -5571,16 +6485,17 @@
       ]
     },
     "ghostinspector.com": {
-      "attempts": 1,
+      "attempts": 2,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-03",
-      "lastOk": "2026-11-03",
-      "ok": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 2,
       "outcomes": {
-        "ok": 1
+        "ok": 2
       },
       "workingPaths": [
-        "curl https://ghostinspector.com/pricing/"
+        "curl https://ghostinspector.com/pricing/",
+        "webfetch https://ghostinspector.com/pricing/"
       ]
     },
     "ginkoflorist.pages.dev": {
@@ -5596,20 +6511,49 @@
         "webfetch https://ginkoflorist.pages.dev/"
       ]
     },
+    "github.blog": {
+      "attempts": 5,
+      "evidenceItems": 5,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 5,
+      "outcomes": {
+        "ok": 5
+      },
+      "workingPaths": [
+        "webfetch https://github.blog/changelog/2024-09-10-push-rules-are-now-generally-available-and-updates-to-custom-properties/",
+        "webfetch https://github.blog/changelog/2026-08-27-github-classroom-deprecated",
+        "webfetch https://github.blog/open-source/maintainers/your-contributors-are-ai-first-now-is-your-project/"
+      ]
+    },
     "github.com": {
-      "attempts": 26,
-      "evidenceItems": 9,
-      "lastAttempt": "2026-11-22",
-      "lastOk": "2026-11-22",
-      "ok": 17,
+      "attempts": 66,
+      "evidenceItems": 46,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 57,
       "outcomes": {
         "http_403": 9,
-        "ok": 17
+        "ok": 57
       },
       "workingPaths": [
         "webfetch https://github.com/PrairieLearn/PrairieLearn/issues/14717",
         "webfetch https://github.com/PICUP-Physics/trinket-oss/issues/168",
         "webfetch https://github.com/JMCanning78/datastructures-visualization/issues/313"
+      ]
+    },
+    "github.github.com": {
+      "attempts": 2,
+      "evidenceItems": 2,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "webfetch https://github.github.com/gh-aw/gallery/docs-automation/",
+        "webfetch https://github.github.com/gh-aw/blog/2026-01-13-meet-the-workflows-documentation/"
       ]
     },
     "givebutter.canny.io": {
@@ -5782,13 +6726,13 @@
       ]
     },
     "grants.nih.gov": {
-      "attempts": 9,
-      "evidenceItems": 0,
-      "lastAttempt": "2026-11-24",
-      "lastOk": "2026-11-24",
-      "ok": 8,
+      "attempts": 10,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 9,
       "outcomes": {
-        "ok": 8,
+        "ok": 9,
         "redirect": 1
       },
       "workingPaths": [
@@ -5836,6 +6780,32 @@
         "webfetch https://greenleaflabs.onrender.com/custom-reports-wildapricot"
       ]
     },
+    "greptile.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://greptile.com/pricing.md"
+      ]
+    },
+    "guide.runestone.academy": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://guide.runestone.academy/instructor-interface_exams-and-quizzes-in-runestone.html"
+      ]
+    },
     "gumroad.com": {
       "attempts": 11,
       "evidenceItems": 3,
@@ -5863,6 +6833,19 @@
       },
       "workingPaths": [
         "webfetch https://gymdesk.com/blog/click-to-cancel-gym-compliance"
+      ]
+    },
+    "h10y.github.io": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://h10y.github.io/book/9-platforms-shiny-hosting.html"
       ]
     },
     "h30434.www3.hp.com": {
@@ -5927,6 +6910,17 @@
       },
       "workingPaths": []
     },
+    "hashnode.com": {
+      "attempts": 2,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "empty": 2
+      },
+      "workingPaths": []
+    },
     "hbkcpa.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -5965,16 +6959,17 @@
       ]
     },
     "healthchecks.io": {
-      "attempts": 1,
+      "attempts": 2,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-04",
-      "lastOk": "2026-11-04",
-      "ok": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 2,
       "outcomes": {
-        "ok": 1
+        "ok": 2
       },
       "workingPaths": [
-        "curl https://healthchecks.io/pricing/"
+        "curl https://healthchecks.io/pricing/",
+        "webfetch https://healthchecks.io/pricing"
       ]
     },
     "hello.showmojo.com": {
@@ -5988,6 +6983,19 @@
       },
       "workingPaths": [
         "webfetch https://hello.showmojo.com/?p=22939"
+      ]
+    },
+    "hellobonsai.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://hellobonsai.com/pricing?fp_ref=max14"
       ]
     },
     "help-donorfy.theaccessgroup.com": {
@@ -6216,6 +7224,32 @@
       },
       "workingPaths": [
         "webfetch https://help.fergus.com/en/articles/13722102-quote-options"
+      ]
+    },
+    "help.formspree.io": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://help.formspree.io/articles/account-management/account-limits"
+      ]
+    },
+    "help.geekbot.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://help.geekbot.com/en/articles/14007798-understanding-your-starter-plan"
       ]
     },
     "help.getharvest.com": {
@@ -6731,14 +7765,14 @@
       ]
     },
     "hn.algolia.com": {
-      "attempts": 291,
-      "evidenceItems": 27,
-      "lastAttempt": "2026-11-24",
-      "lastOk": "2026-11-24",
-      "ok": 241,
+      "attempts": 349,
+      "evidenceItems": 36,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 296,
       "outcomes": {
-        "empty": 50,
-        "ok": 241
+        "empty": 53,
+        "ok": 296
       },
       "workingPaths": [
         "curl https://hn.algolia.com/api/v1/search_by_date?query=%22alt%20text%22&tags=comment&hitsPerPage=30",
@@ -6780,6 +7814,21 @@
         "http_403": 2
       },
       "workingPaths": []
+    },
+    "horstmann.com": {
+      "attempts": 3,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 3,
+      "outcomes": {
+        "ok": 3
+      },
+      "workingPaths": [
+        "webfetch https://horstmann.com/codecheck/",
+        "webfetch https://horstmann.com/codecheck/assignments.html",
+        "webfetch https://horstmann.com/codecheck/authoring.html"
+      ]
     },
     "housecallpro.com": {
       "attempts": 1,
@@ -6858,6 +7907,19 @@
         "curl https://hunted.space/product/vibes-to-bucks-bill-ai-cost-to-clients"
       ]
     },
+    "icer2026.acm.org": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://icer2026.acm.org/track/icer-2026-papers"
+      ]
+    },
     "iclasspro.com": {
       "attempts": 4,
       "evidenceItems": 0,
@@ -6927,6 +7989,17 @@
       },
       "workingPaths": []
     },
+    "indiehackers.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_403": 1
+      },
+      "workingPaths": []
+    },
     "inflowave.netlify.app": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -6960,6 +8033,19 @@
       },
       "workingPaths": [
         "webfetch https://info.nookal.com/ndis"
+      ]
+    },
+    "infoq.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://infoq.com/news/2026/08/eu-ai-content-watermark"
       ]
     },
     "innovations.xero.com": {
@@ -7137,6 +8223,19 @@
       },
       "workingPaths": []
     },
+    "itali.uq.edu.au": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://itali.uq.edu.au/node/11633"
+      ]
+    },
     "itbrief.co.nz": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -7200,6 +8299,17 @@
       "workingPaths": [
         "webfetch https://ja.wordpress.org/plugins/wwu-withdrawal-button/?output_format=md"
       ]
+    },
+    "javascript.plainenglish.io": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_5xx": 1
+      },
+      "workingPaths": []
     },
     "jcetf.org": {
       "attempts": 1,
@@ -7288,6 +8398,20 @@
         "empty": 1
       },
       "workingPaths": []
+    },
+    "journals.plos.org": {
+      "attempts": 3,
+      "evidenceItems": 3,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 3,
+      "outcomes": {
+        "ok": 3
+      },
+      "workingPaths": [
+        "webfetch https://journals.plos.org/plosmedicine/s/code-availability",
+        "webfetch https://journals.plos.org/plosbiology/s/code-availability"
+      ]
     },
     "jules.google": {
       "attempts": 1,
@@ -7429,16 +8553,17 @@
       ]
     },
     "knowledge.workspace.google.com": {
-      "attempts": 1,
-      "evidenceItems": 1,
-      "lastAttempt": "2026-11-20",
-      "lastOk": "2026-11-20",
-      "ok": 1,
+      "attempts": 2,
+      "evidenceItems": 2,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 2,
       "outcomes": {
-        "ok": 1
+        "ok": 2
       },
       "workingPaths": [
-        "webfetch https://knowledge.workspace.google.com/admin/calendar/manage-canadian-daylight-saving-time-changes"
+        "webfetch https://knowledge.workspace.google.com/admin/calendar/manage-canadian-daylight-saving-time-changes",
+        "webfetch https://knowledge.workspace.google.com/admin/security/monitor-the-health-of-your-gmail-settings"
       ]
     },
     "kostenlose-erechnung.de": {
@@ -7492,6 +8617,32 @@
       },
       "workingPaths": [
         "webfetch https://kulqiz.pages.dev/portfolio/flotilla/"
+      ]
+    },
+    "labarchives.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://labarchives.com/pricing"
+      ]
+    },
+    "labquiz.readthedocs.io": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://labquiz.readthedocs.io/en/latest/faq"
       ]
     },
     "labyrinthinc.com": {
@@ -7583,14 +8734,14 @@
       ]
     },
     "learn.microsoft.com": {
-      "attempts": 5,
+      "attempts": 6,
       "evidenceItems": 2,
-      "lastAttempt": "2026-11-21",
-      "lastOk": "2026-11-21",
-      "ok": 3,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 4,
       "outcomes": {
         "empty": 2,
-        "ok": 3
+        "ok": 4
       },
       "workingPaths": [
         "curl https://learn.microsoft.com/en-us/Exchange/monitoring/mail-flow-reports/mfr-smtp-auth-clients-report",
@@ -7699,6 +8850,20 @@
         "webfetch https://lenscratch.com/2026/01/beyond-the-photograph-editioning-photographic-work/"
       ]
     },
+    "letsencrypt.org": {
+      "attempts": 2,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "webfetch https://letsencrypt.org/fi/docs/monitoring-options/",
+        "webfetch https://letsencrypt.org/docs/expiration-emails/"
+      ]
+    },
     "letsmetrix.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -7710,6 +8875,32 @@
       },
       "workingPaths": [
         "webfetch https://letsmetrix.com/app/uk-subscription-guard"
+      ]
+    },
+    "library.harvard.edu": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://library.harvard.edu/services-tools/overleaf"
+      ]
+    },
+    "library.hkust.edu.hk": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://library.hkust.edu.hk/news-events/news/github-repo-doi-ten-minutes-make-your-code-citable"
       ]
     },
     "linkfix.app": {
@@ -7806,6 +8997,19 @@
       },
       "workingPaths": []
     },
+    "lovable.dev": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://lovable.dev/blog/find-it-fix-it-ship-it"
+      ]
+    },
     "lowcountryfoodbank.org": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -7895,27 +9099,41 @@
       ]
     },
     "mainwp.com": {
-      "attempts": 2,
-      "evidenceItems": 0,
-      "lastAttempt": "2026-11-18",
-      "lastOk": "2026-11-18",
-      "ok": 2,
-      "outcomes": {
-        "ok": 2
-      },
-      "workingPaths": [
-        "curl https://mainwp.com/extension/domain-monitor/",
-        "curl https://mainwp.com/pricing/"
-      ]
-    },
-    "managewp.com": {
       "attempts": 3,
-      "evidenceItems": 3,
-      "lastAttempt": "2026-11-18",
-      "lastOk": "2026-11-18",
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
       "ok": 3,
       "outcomes": {
         "ok": 3
+      },
+      "workingPaths": [
+        "curl https://mainwp.com/extension/domain-monitor/",
+        "curl https://mainwp.com/pricing/",
+        "webfetch https://mainwp.com/cart"
+      ]
+    },
+    "make.wordpress.org": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://make.wordpress.org/core/2020/11/05/application-passwords-integration-guide/?output_format=md"
+      ]
+    },
+    "managewp.com": {
+      "attempts": 4,
+      "evidenceItems": 4,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 4,
+      "outcomes": {
+        "ok": 4
       },
       "workingPaths": [
         "curl https://managewp.com/pricing",
@@ -7938,14 +9156,14 @@
       ]
     },
     "marketplace.atlassian.com": {
-      "attempts": 13,
-      "evidenceItems": 10,
-      "lastAttempt": "2026-11-18",
-      "lastOk": "2026-11-18",
-      "ok": 12,
+      "attempts": 17,
+      "evidenceItems": 14,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 16,
       "outcomes": {
         "empty": 1,
-        "ok": 12
+        "ok": 16
       },
       "workingPaths": [
         "curl https://marketplace.atlassian.com/rest/2/addons/amoeboids.releasenotes/reviews?sort=recent&limit=10",
@@ -8388,6 +9606,19 @@
       },
       "workingPaths": []
     },
+    "netlify.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://netlify.com/openapi.json"
+      ]
+    },
     "newpathconsulting.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -8415,14 +9646,14 @@
       ]
     },
     "news.ycombinator.com": {
-      "attempts": 4,
-      "evidenceItems": 0,
-      "lastAttempt": "2026-11-24",
-      "lastOk": "2026-11-24",
-      "ok": 3,
+      "attempts": 9,
+      "evidenceItems": 3,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 8,
       "outcomes": {
         "http_429": 1,
-        "ok": 3
+        "ok": 8
       },
       "workingPaths": [
         "curl https://news.ycombinator.com/item?id=50174520",
@@ -8491,6 +9722,19 @@
       },
       "workingPaths": [
         "webfetch https://nporesources.com/rrf-1"
+      ]
+    },
+    "numbas.mathcentre.ac.uk": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://numbas.mathcentre.ac.uk/extensions/253/documentation"
       ]
     },
     "nursingworld.org": {
@@ -8570,6 +9814,20 @@
       "workingPaths": [
         "webfetch https://occasion.app/blog/small-business-booking-software-2-fee-all-features-included",
         "webfetch https://occasion.app/"
+      ]
+    },
+    "ohdear.app": {
+      "attempts": 2,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "webfetch https://ohdear.app/pricing",
+        "webfetch https://ohdear.app/feature/certificate-monitoring"
       ]
     },
     "oia.pmc.gov.au": {
@@ -8723,6 +9981,19 @@
       },
       "workingPaths": []
     },
+    "outbound-emails.netlify.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://outbound-emails.netlify.com/credit-usage-alert-pro/50-percent-pro-plan"
+      ]
+    },
     "outpost.pub": {
       "attempts": 3,
       "evidenceItems": 0,
@@ -8776,6 +10047,17 @@
         "webfetch https://pagecrawl.io/blog/saas-api-deprecation-sunset-notice-monitoring"
       ]
     },
+    "pages.charlotte.edu": {
+      "attempts": 2,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_5xx": 2
+      },
+      "workingPaths": []
+    },
     "pages.twilio.com": {
       "attempts": 1,
       "evidenceItems": 1,
@@ -8787,6 +10069,19 @@
       },
       "workingPaths": [
         "webfetch https://pages.twilio.com/10DLC-HelpArticles-WW"
+      ]
+    },
+    "par.nsf.gov": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://par.nsf.gov/servlets/purl/10404621"
       ]
     },
     "parseur.com": {
@@ -8865,6 +10160,19 @@
       },
       "workingPaths": [
         "webfetch https://patch.com/new-york/brooklyn/ending-person-gym-membership-cancellations-what-nycs-click-cancel-rule-means-you"
+      ]
+    },
+    "pathtoship.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://pathtoship.com"
       ]
     },
     "patient-protect.com": {
@@ -8982,6 +10290,19 @@
         "curl https://peerpush.net/p/flowguard"
       ]
     },
+    "pentest-tools.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://pentest-tools.com/docs/tools/wordpress-scanner.md"
+      ]
+    },
     "peppol.org": {
       "attempts": 1,
       "evidenceItems": 1,
@@ -9048,6 +10369,19 @@
         "curl https://pickyourapp.com/products/payoutwatch-1"
       ]
     },
+    "pillar.science": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://pillar.science/academic-labs/"
+      ]
+    },
     "pl.trustpilot.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -9059,6 +10393,19 @@
       },
       "workingPaths": [
         "webfetch https://pl.trustpilot.com/review/kajabi.com"
+      ]
+    },
+    "pmc.ncbi.nlm.nih.gov": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://pmc.ncbi.nlm.nih.gov/articles/PMC12944752/"
       ]
     },
     "podia.com": {
@@ -9135,6 +10482,21 @@
         "webfetch https://pope.tech/pricing/"
       ]
     },
+    "posit.co": {
+      "attempts": 3,
+      "evidenceItems": 2,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 3,
+      "outcomes": {
+        "ok": 3
+      },
+      "workingPaths": [
+        "webfetch https://posit.co/blog/migrating-connect-cloud-posits-unified-publishing-solution",
+        "webfetch https://posit.co/products/enterprise/connect-cloud",
+        "webfetch https://posit.co/blog/introducing-posit-connect-cloud-advanced-plan"
+      ]
+    },
     "postmarkapp.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -9146,6 +10508,19 @@
       },
       "workingPaths": [
         "curl https://postmarkapp.com/pricing"
+      ]
+    },
+    "prairielearn.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://prairielearn.com/pricing"
       ]
     },
     "pressprimer.com": {
@@ -9178,16 +10553,17 @@
       ]
     },
     "pricingsaas.com": {
-      "attempts": 1,
-      "evidenceItems": 0,
-      "lastAttempt": "2026-11-03",
-      "lastOk": "2026-11-03",
-      "ok": 1,
+      "attempts": 2,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 2,
       "outcomes": {
-        "ok": 1
+        "ok": 2
       },
       "workingPaths": [
-        "curl https://pricingsaas.com/companies/teachworks"
+        "curl https://pricingsaas.com/companies/teachworks",
+        "webfetch https://pricingsaas.com/companies/dosu"
       ]
     },
     "printify.com": {
@@ -9227,6 +10603,34 @@
       },
       "workingPaths": [
         "webfetch https://privacytools.uk/product/pro/"
+      ]
+    },
+    "privycdp.org": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://privycdp.org/regulation/eu-data-act-cloud-switching"
+      ]
+    },
+    "producthunt.com": {
+      "attempts": 3,
+      "evidenceItems": 3,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 3,
+      "outcomes": {
+        "ok": 3
+      },
+      "workingPaths": [
+        "webfetch https://producthunt.com/products/stayinscope",
+        "webfetch https://producthunt.com/products/scopesiren",
+        "webfetch https://producthunt.com/products/scopepilot"
       ]
     },
     "productideas.xero.com": {
@@ -9307,6 +10711,19 @@
       },
       "workingPaths": []
     },
+    "publicea.be": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://publicea.be/insights/digital-omnibus-gdpr-cookies-data-act"
+      ]
+    },
     "publichealthmdc.com": {
       "attempts": 1,
       "evidenceItems": 1,
@@ -9318,6 +10735,20 @@
       },
       "workingPaths": [
         "webfetch https://publichealthmdc.com/documents/Cooling%20Log.pdf"
+      ]
+    },
+    "pullminder.com": {
+      "attempts": 2,
+      "evidenceItems": 2,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "webfetch https://pullminder.com",
+        "webfetch https://pullminder.com/pricing"
       ]
     },
     "punchpass.com": {
@@ -9359,6 +10790,30 @@
         "webfetch https://pushnote-azure.vercel.app/"
       ]
     },
+    "pyodide.org": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://pyodide.org/en/stable/usage/downloading-and-deploying.html"
+      ]
+    },
+    "pyodide.readthedocs.io": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "redirect": 1
+      },
+      "workingPaths": []
+    },
     "pypi.org": {
       "attempts": 7,
       "evidenceItems": 2,
@@ -9388,6 +10843,30 @@
         "curl https://pypistats.org/api/packages/depdesk/recent"
       ]
     },
+    "python-coach.pages.dev": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "redirect": 1
+      },
+      "workingPaths": []
+    },
+    "pythoncoach.org": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://pythoncoach.org/teachers.html"
+      ]
+    },
     "qminder.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -9400,6 +10879,17 @@
       "workingPaths": [
         "webfetch https://qminder.com/pricing"
       ]
+    },
+    "qodo-merge-docs.qodo.ai": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "redirect": 1
+      },
+      "workingPaths": []
     },
     "quickbooks.intuit.com": {
       "attempts": 58,
@@ -9488,6 +10978,19 @@
         "webfetch https://reachrightstudios.com/blog/free-church-software/"
       ]
     },
+    "readme.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://readme.com/resources/ai-writer-detecting-doc-drift"
+      ]
+    },
     "recensa.ai": {
       "attempts": 2,
       "evidenceItems": 0,
@@ -9513,6 +11016,20 @@
       },
       "workingPaths": [
         "webfetch https://recipal.com/pricing"
+      ]
+    },
+    "redsift.com": {
+      "attempts": 2,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "webfetch https://redsift.com/certificates-lite",
+        "webfetch https://redsift.com/blog/certificates/never-miss-an-expiring-certificate-again-with-red-sift-certificates-lite"
       ]
     },
     "region.com.au": {
@@ -9755,6 +11272,17 @@
         "webfetch https://rules.cityofnewyork.us/wp-content/uploads/2026/04/DCWP-WRITTEN-COMMENTS-MAY-2026-CLICK-TO-CANCEL.pdf"
       ]
     },
+    "runestone.academy": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_403": 1
+      },
+      "workingPaths": []
+    },
     "rusticisoftware.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -9778,6 +11306,19 @@
         "redirect": 2
       },
       "workingPaths": []
+    },
+    "saga-compliance.com": {
+      "attempts": 3,
+      "evidenceItems": 2,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 3,
+      "outcomes": {
+        "ok": 3
+      },
+      "workingPaths": [
+        "webfetch https://saga-compliance.com/learn/eu-data-act"
+      ]
     },
     "sage.hr": {
       "attempts": 1,
@@ -10006,6 +11547,19 @@
         "webfetch https://sellersasksellers.com/search.json?q=tariff%20after%3A2026-06-01"
       ]
     },
+    "senders.yahooinc.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://senders.yahooinc.com/best-practices"
+      ]
+    },
     "senderz-website.pages.dev": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -10160,6 +11714,19 @@
         "curl https://sift-health.pages.dev/pricing/"
       ]
     },
+    "sigcse.org": {
+      "attempts": 3,
+      "evidenceItems": 3,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 3,
+      "outcomes": {
+        "ok": 3
+      },
+      "workingPaths": [
+        "webfetch https://sigcse.org/membership/mailing-lists.html"
+      ]
+    },
     "silktide.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -10304,6 +11871,17 @@
       },
       "workingPaths": []
     },
+    "sotonac.sharepoint.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_403": 1
+      },
+      "workingPaths": []
+    },
     "sourceforge.net": {
       "attempts": 2,
       "evidenceItems": 1,
@@ -10384,6 +11962,19 @@
         "webfetch https://sport.nspcc.org.uk/news-and-blogs/2026-09-changes-to-definition-of-regulated-activity-in-sport/"
       ]
     },
+    "springernature.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://springernature.com/gp/open-science/code-policy"
+      ]
+    },
     "sproutinvoices.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -10456,6 +12047,19 @@
         "webfetch https://ssaes.org/volunteer-program/"
       ]
     },
+    "sslmate.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://sslmate.com/certspotter/pricing"
+      ]
+    },
     "stamps.org": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -10482,6 +12086,19 @@
         "curl https://standardcompute.com/bill-ai-coding-costs-to-clients"
       ]
     },
+    "startupstash.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://startupstash.com/top-freelance-scope-locking-and-contract-platforms/"
+      ]
+    },
     "static.developer.intuit.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -10493,6 +12110,19 @@
       },
       "workingPaths": [
         "curl https://static.developer.intuit.com/sdkdocs/qbv3doc/ipp-v3-java-devkit-javadoc/com/intuit/ipp/data/Attachable.html"
+      ]
+    },
+    "stayinscope.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://stayinscope.com"
       ]
     },
     "stocksmith.io": {
@@ -10511,13 +12141,13 @@
       ]
     },
     "strapi.io": {
-      "attempts": 1,
-      "evidenceItems": 1,
-      "lastAttempt": "2026-11-18",
-      "lastOk": "2026-11-18",
-      "ok": 1,
+      "attempts": 2,
+      "evidenceItems": 2,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 2,
       "outcomes": {
-        "ok": 1
+        "ok": 2
       },
       "workingPaths": [
         "webfetch https://strapi.io/blog/we-re-removing-the-free-plan-from-strapi-cloud"
@@ -10603,17 +12233,18 @@
       ]
     },
     "supabase.com": {
-      "attempts": 2,
-      "evidenceItems": 0,
-      "lastAttempt": "2026-11-23",
-      "lastOk": "2026-11-23",
-      "ok": 2,
+      "attempts": 5,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 5,
       "outcomes": {
-        "ok": 2
+        "ok": 5
       },
       "workingPaths": [
         "curl https://supabase.com/docs/guides/database/database-advisors",
-        "webfetch https://supabase.com/regions"
+        "webfetch https://supabase.com/regions",
+        "webfetch https://supabase.com/blog/supabase-security-2025-retro"
       ]
     },
     "support.approvalmax.com": {
@@ -10699,6 +12330,43 @@
       },
       "workingPaths": []
     },
+    "support.claude.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://support.claude.com/en/articles/12005970-manage-extra-usage-for-team-and-seat-based-enterprise-plans"
+      ]
+    },
+    "support.cmts.jhu.edu": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_403": 1
+      },
+      "workingPaths": []
+    },
+    "support.dnsimple.com": {
+      "attempts": 2,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "webfetch https://support.dnsimple.com/articles/announcement-ssl-certificate-validity-changes/"
+      ]
+    },
     "support.easyroutes.app": {
       "attempts": 2,
       "evidenceItems": 2,
@@ -10763,14 +12431,14 @@
       ]
     },
     "support.google.com": {
-      "attempts": 4,
-      "evidenceItems": 2,
-      "lastAttempt": "2026-11-24",
-      "lastOk": "2026-11-24",
-      "ok": 3,
+      "attempts": 6,
+      "evidenceItems": 3,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 5,
       "outcomes": {
         "http_404": 1,
-        "ok": 3
+        "ok": 5
       },
       "workingPaths": [
         "curl https://support.google.com/merchants/answer/6150127",
@@ -10863,6 +12531,19 @@
       },
       "workingPaths": [
         "curl https://support.punchpass.com/en/articles/1072468-does-punchpass-work-with-square"
+      ]
+    },
+    "support.respondus.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://support.respondus.com/hc/en-us/article_attachments/45228751761435"
       ]
     },
     "support.saasant.com": {
@@ -11074,6 +12755,17 @@
         "webfetch https://support.zeffy.com/do-you-integrate-with-other-tools"
       ]
     },
+    "support.zenodo.org": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "empty": 1
+      },
+      "workingPaths": []
+    },
     "support.zoom.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -11264,6 +12956,19 @@
         "webfetch https://taxguru.in/?p=1036897"
       ]
     },
+    "tdx.umsystem.edu": {
+      "attempts": 2,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "webfetch https://tdx.umsystem.edu/TDClient/66/MOOnline/KB/Article/1775/Allowing-access-to-external-web-content-in-Respondus-LockDown-Browser"
+      ]
+    },
     "teach.outschool.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -11339,13 +13044,13 @@
       ]
     },
     "techcommunity.microsoft.com": {
-      "attempts": 5,
-      "evidenceItems": 3,
-      "lastAttempt": "2026-11-11",
-      "lastOk": "2026-11-11",
-      "ok": 5,
+      "attempts": 6,
+      "evidenceItems": 4,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 6,
       "outcomes": {
-        "ok": 5
+        "ok": 6
       },
       "workingPaths": [
         "curl https://techcommunity.microsoft.com/blog/exchange/exchange-online-to-retire-basic-auth-for-client-submission-smtp-auth/4114750/replies/4501762",
@@ -11676,6 +13381,32 @@
       },
       "workingPaths": []
     },
+    "trackjs.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://trackjs.com/blog/introducing-certkit/"
+      ]
+    },
+    "trackssl.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://trackssl.com/pricing/"
+      ]
+    },
     "trainingindustry.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -11751,15 +13482,15 @@
       "workingPaths": []
     },
     "trustmrr.com": {
-      "attempts": 17,
+      "attempts": 21,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-24",
-      "lastOk": "2026-11-24",
-      "ok": 15,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 19,
       "outcomes": {
         "empty": 1,
         "http_404": 1,
-        "ok": 15
+        "ok": 19
       },
       "workingPaths": [
         "webfetch https://trustmrr.com/startup/exam-predictor",
@@ -11793,6 +13524,19 @@
         "webfetch https://trykintsugi.com/blog/sales-tax-changes-january-1-2027.md",
         "curl https://trykintsugi.com/blog/shopify-automated-filing-ending",
         "webfetch https://trykintsugi.com/blog/use-tax-now-handled-where-you-already-manage-sales-tax.md"
+      ]
+    },
+    "turnitin.gradescope.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://turnitin.gradescope.com/pricing"
       ]
     },
     "tutorcruncher.com": {
@@ -11941,13 +13685,13 @@
       ]
     },
     "uptimerobot.com": {
-      "attempts": 3,
-      "evidenceItems": 2,
-      "lastAttempt": "2026-11-18",
-      "lastOk": "2026-11-18",
-      "ok": 3,
+      "attempts": 5,
+      "evidenceItems": 3,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 5,
       "outcomes": {
-        "ok": 3
+        "ok": 5
       },
       "workingPaths": [
         "curl https://uptimerobot.com/pricing.md",
@@ -12165,17 +13909,18 @@
       "workingPaths": []
     },
     "vibeappscanner.com": {
-      "attempts": 2,
-      "evidenceItems": 0,
-      "lastAttempt": "2026-11-04",
-      "lastOk": "2026-11-04",
-      "ok": 2,
+      "attempts": 3,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 3,
       "outcomes": {
-        "ok": 2
+        "ok": 3
       },
       "workingPaths": [
         "curl https://vibeappscanner.com/question/security-audit-lovable",
-        "curl https://vibeappscanner.com"
+        "curl https://vibeappscanner.com",
+        "webfetch https://vibeappscanner.com/"
       ]
     },
     "vibecodingcost.pages.dev": {
@@ -12357,6 +14102,30 @@
       },
       "workingPaths": []
     },
+    "wbcomdesigns.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://wbcomdesigns.com/launching-wp-vanguard-wordpress-security-scanner/"
+      ]
+    },
+    "web3forms.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_403": 1
+      },
+      "workingPaths": []
+    },
     "webaim.org": {
       "attempts": 4,
       "evidenceItems": 0,
@@ -12369,6 +14138,19 @@
       },
       "workingPaths": [
         "curl https://webaim.org/discussion/archives"
+      ]
+    },
+    "weblearning.psu.edu": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://weblearning.psu.edu/?p=2285"
       ]
     },
     "welshrevenueauthority.blog.gov.wales": {
@@ -12431,6 +14213,20 @@
         "webfetch https://wisdmlabs.com/blog/kajabi-fees-rising-teachable-not-free-what-exiting-business-owners-found-out/"
       ]
     },
+    "withmoxie.com": {
+      "attempts": 2,
+      "evidenceItems": 2,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "webfetch https://withmoxie.com/pricing",
+        "webfetch https://withmoxie.com/proposals-and-contracts-for-freelancers"
+      ]
+    },
     "woocommerce.com": {
       "attempts": 3,
       "evidenceItems": 0,
@@ -12460,15 +14256,15 @@
       ]
     },
     "wordpress.org": {
-      "attempts": 197,
-      "evidenceItems": 42,
-      "lastAttempt": "2026-11-24",
-      "lastOk": "2026-11-24",
-      "ok": 194,
+      "attempts": 209,
+      "evidenceItems": 45,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 206,
       "outcomes": {
         "empty": 1,
         "http_404": 2,
-        "ok": 194
+        "ok": 206
       },
       "workingPaths": [
         "curl https://wordpress.org/support/plugin/wp-accessibility/",
@@ -12519,16 +14315,18 @@
       ]
     },
     "wp-umbrella.com": {
-      "attempts": 1,
-      "evidenceItems": 1,
-      "lastAttempt": "2026-11-18",
-      "lastOk": "2026-11-18",
-      "ok": 1,
+      "attempts": 3,
+      "evidenceItems": 3,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 3,
       "outcomes": {
-        "ok": 1
+        "ok": 3
       },
       "workingPaths": [
-        "webfetch https://wp-umbrella.com/pricing/"
+        "webfetch https://wp-umbrella.com/pricing/",
+        "webfetch https://wp-umbrella.com/pricing",
+        "webfetch https://wp-umbrella.com/features/client-report/"
       ]
     },
     "wpamelia.com": {
@@ -12559,6 +14357,43 @@
       "workingPaths": [
         "curl https://wpengine.com/smart-plugin-manager/"
       ]
+    },
+    "wpmudev.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://wpmudev.com/blog/?p=224771"
+      ]
+    },
+    "wpscan.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://wpscan.com/pricing/"
+      ]
+    },
+    "wpsec.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "http_403": 1
+      },
+      "workingPaths": []
     },
     "wtb.wa.gov": {
       "attempts": 1,
@@ -12927,6 +14762,19 @@
         "webfetch https://www.americorpsoig.gov/sites/default/files/media/document/2024-05/AntiFraud%20Memo.Volume%203.Final_.pdf"
       ]
     },
+    "www.anthropic.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.anthropic.com/news/claude-text-watermark"
+      ]
+    },
     "www.apideck.com": {
       "attempts": 2,
       "evidenceItems": 0,
@@ -12973,6 +14821,19 @@
       },
       "workingPaths": [
         "webfetch https://www.approvalmax.com/pricing"
+      ]
+    },
+    "www.appsumo.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.appsumo.com/products/siteskite/"
       ]
     },
     "www.archiveinabox.com": {
@@ -13457,6 +15318,19 @@
         "webfetch https://www.brownejacobson.com/insights/charity-law-update-autumn-2026/new-accounting-thresholds-and-independent-examination"
       ]
     },
+    "www.buffalo.edu": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.buffalo.edu/ubit/policies/policies-standards-guidelines/ubit-policies/use-software-applications.html"
+      ]
+    },
     "www.buildpass.ai": {
       "attempts": 3,
       "evidenceItems": 1,
@@ -13929,6 +15803,19 @@
         "webfetch https://www.chift.eu/blog/xero-march-2026-changes-guide-for-third-party-developers"
       ]
     },
+    "www.chorusaccess.org": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.chorusaccess.org/wp-content/uploads/SN-Open-Code-_-CHORUS-webinar_June2026.pdf"
+      ]
+    },
     "www.chronicle.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -14092,6 +15979,32 @@
       },
       "workingPaths": [
         "webfetch https://www.cliniko.com/connected-apps/"
+      ]
+    },
+    "www.codegrade.com": {
+      "attempts": 2,
+      "evidenceItems": 2,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "webfetch https://www.codegrade.com/blog/switching-from-github-classroom-to-codegrade-a-free-github-classroom-alternative-built-for-grading"
+      ]
+    },
+    "www.codio.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.codio.com/pricing/colleges-university-pricing"
       ]
     },
     "www.cognitoforms.com": {
@@ -14329,6 +16242,19 @@
       },
       "workingPaths": []
     },
+    "www.csulb.edu": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.csulb.edu/node/644256"
+      ]
+    },
     "www.ctvnews.ca": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -14415,6 +16341,20 @@
       },
       "workingPaths": []
     },
+    "www.digicert.com": {
+      "attempts": 2,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "webfetch https://www.digicert.com/valimail-solutions/compare-dmarc-plans",
+        "webfetch https://www.digicert.com/blog/your-tls-certificate-may-expire-soon"
+      ]
+    },
     "www.digismoothie.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -14462,6 +16402,19 @@
         "empty": 1
       },
       "workingPaths": []
+    },
+    "www.dlapiper.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.dlapiper.com/en-hk/insights/publications/2026/08/the-eus-new-guidelines-on-ai-transparency"
+      ]
     },
     "www.dli.pa.gov": {
       "attempts": 1,
@@ -14645,16 +16598,17 @@
       ]
     },
     "www.enisa.europa.eu": {
-      "attempts": 1,
-      "evidenceItems": 1,
-      "lastAttempt": "2026-11-11",
-      "lastOk": "2026-11-11",
-      "ok": 1,
+      "attempts": 2,
+      "evidenceItems": 2,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 2,
       "outcomes": {
-        "ok": 1
+        "ok": 2
       },
       "workingPaths": [
-        "curl https://www.enisa.europa.eu/topics/product-security/vulnerability-services/eu-incident-response-and-cyber-crisis-management/single-reporting-platform-srp/frequently-asked-questions"
+        "curl https://www.enisa.europa.eu/topics/product-security/vulnerability-services/eu-incident-response-and-cyber-crisis-management/single-reporting-platform-srp/frequently-asked-questions",
+        "webfetch https://www.enisa.europa.eu/news/the-cra-single-reporting-platform-is-launched"
       ]
     },
     "www.enrollware.com:443": {
@@ -14711,6 +16665,17 @@
       "attempts": 1,
       "evidenceItems": 0,
       "lastAttempt": "2026-11-12",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "empty": 1
+      },
+      "workingPaths": []
+    },
+    "www.ethyca.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
       "lastOk": null,
       "ok": 0,
       "outcomes": {
@@ -14836,16 +16801,17 @@
       ]
     },
     "www.faegredrinker.com": {
-      "attempts": 1,
+      "attempts": 2,
       "evidenceItems": 1,
-      "lastAttempt": "2026-11-20",
-      "lastOk": "2026-11-20",
-      "ok": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 2,
       "outcomes": {
-        "ok": 1
+        "ok": 2
       },
       "workingPaths": [
-        "webfetch https://www.faegredrinker.com/en/insights/publications/2026/11/hhs-office-of-civil-rights-revises-the-hipaa-privacy-rule"
+        "webfetch https://www.faegredrinker.com/en/insights/publications/2026/11/hhs-office-of-civil-rights-revises-the-hipaa-privacy-rule",
+        "webfetch https://www.faegredrinker.com/en/insights/publications/2026/7/eu-ai-act-commission-confirms-transparency-code-of-practice-as-adequate-and-publishes-final-version-of-its-guidelines-on-transparency-obligations"
       ]
     },
     "www.fairwork.gov.au": {
@@ -14876,14 +16842,14 @@
       ]
     },
     "www.federalregister.gov": {
-      "attempts": 88,
+      "attempts": 89,
       "evidenceItems": 16,
-      "lastAttempt": "2026-11-24",
-      "lastOk": "2026-11-24",
-      "ok": 64,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 65,
       "outcomes": {
         "empty": 11,
-        "ok": 64,
+        "ok": 65,
         "redirect": 13
       },
       "workingPaths": [
@@ -14928,6 +16894,19 @@
         "redirect": 1
       },
       "workingPaths": []
+    },
+    "www.fiskil.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.fiskil.com/eu-data-act/cloud-saas"
+      ]
     },
     "www.flsenate.gov": {
       "attempts": 2,
@@ -15045,14 +17024,14 @@
       ]
     },
     "www.freelancer.com": {
-      "attempts": 783,
-      "evidenceItems": 85,
-      "lastAttempt": "2026-11-24",
-      "lastOk": "2026-11-24",
-      "ok": 734,
+      "attempts": 808,
+      "evidenceItems": 96,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 757,
       "outcomes": {
-        "empty": 49,
-        "ok": 734
+        "empty": 51,
+        "ok": 757
       },
       "workingPaths": [
         "curl https://www.freelancer.com/api/projects/0.1/projects/active/?query=booking%20system&limit=20&full_description=true",
@@ -15281,17 +17260,44 @@
         "webfetch https://www.getly.store/alternatives/teachers-pay-teachers"
       ]
     },
-    "www.github.com": {
+    "www.gitbook.com": {
       "attempts": 1,
-      "evidenceItems": 0,
-      "lastAttempt": "2026-11-07",
-      "lastOk": "2026-11-07",
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
       "ok": 1,
       "outcomes": {
         "ok": 1
       },
       "workingPaths": [
-        "webfetch https://www.github.com/NewPath-Consulting/warm"
+        "webfetch https://www.gitbook.com/pricing"
+      ]
+    },
+    "www.github.com": {
+      "attempts": 2,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "webfetch https://www.github.com/NewPath-Consulting/warm",
+        "webfetch https://www.Github.com/orgs/community/discussions/88516"
+      ]
+    },
+    "www.gla.ac.uk": {
+      "attempts": 3,
+      "evidenceItems": 2,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 3,
+      "outcomes": {
+        "ok": 3
+      },
+      "workingPaths": [
+        "webfetch https://www.gla.ac.uk/myglasgow/learningandteaching/news/headline_1279194_en.html"
       ]
     },
     "www.goldenvolunteer.com": {
@@ -15331,6 +17337,19 @@
       },
       "workingPaths": []
     },
+    "www.goodwinlaw.com": {
+      "attempts": 2,
+      "evidenceItems": 2,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "webfetch https://www.goodwinlaw.com/en/insights/publications/2026/08/alerts-technology-dpc-eu-ai-act-transparency-obligations-now-in-force"
+      ]
+    },
     "www.gov.uk": {
       "attempts": 34,
       "evidenceItems": 18,
@@ -15363,13 +17382,13 @@
       ]
     },
     "www.govinfo.gov": {
-      "attempts": 10,
-      "evidenceItems": 2,
-      "lastAttempt": "2026-11-24",
-      "lastOk": "2026-11-24",
-      "ok": 10,
+      "attempts": 11,
+      "evidenceItems": 3,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 11,
       "outcomes": {
-        "ok": 10
+        "ok": 11
       },
       "workingPaths": [
         "curl https://www.govinfo.gov/content/pkg/FR-2026-05-11/html/2026-09266.htm",
@@ -15417,14 +17436,14 @@
       ]
     },
     "www.grants.nih.gov": {
-      "attempts": 6,
-      "evidenceItems": 0,
-      "lastAttempt": "2026-11-24",
-      "lastOk": "2026-11-24",
-      "ok": 5,
+      "attempts": 7,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 6,
       "outcomes": {
         "http_404": 1,
-        "ok": 5
+        "ok": 6
       },
       "workingPaths": [
         "curl https://www.grants.nih.gov/grants/guide/notice-files/NOT-OD-26-120.html",
@@ -15443,6 +17462,19 @@
       },
       "workingPaths": [
         "webfetch https://www.gravityforms.com/pricing/"
+      ]
+    },
+    "www.gtlaw.com": {
+      "attempts": 2,
+      "evidenceItems": 2,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "webfetch https://www.gtlaw.com/en/insights/2026/7/eu-digital-omnibus-package-proposes-amendments-to-data-act"
       ]
     },
     "www.gwynedd.llyw.cymru": {
@@ -15736,13 +17768,13 @@
       ]
     },
     "www.indiehackers.com": {
-      "attempts": 1,
+      "attempts": 3,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-20",
+      "lastAttempt": "2026-11-25",
       "lastOk": null,
       "ok": 0,
       "outcomes": {
-        "http_403": 1
+        "http_403": 3
       },
       "workingPaths": []
     },
@@ -15922,18 +17954,19 @@
       "workingPaths": []
     },
     "www.iubenda.com": {
-      "attempts": 3,
-      "evidenceItems": 0,
-      "lastAttempt": "2026-11-24",
-      "lastOk": "2026-11-23",
-      "ok": 2,
+      "attempts": 4,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 3,
       "outcomes": {
         "empty": 1,
-        "ok": 2
+        "ok": 3
       },
       "workingPaths": [
         "webfetch https://www.iubenda.com/en/us-privacy-law-compliance/",
-        "webfetch https://www.iubenda.com/en/pricing/"
+        "webfetch https://www.iubenda.com/en/pricing/",
+        "webfetch https://www.iubenda.com/en/help/154237-data-subject-rights-management-tool-guide-9/"
       ]
     },
     "www.jackrabbitclass.com": {
@@ -16252,6 +18285,19 @@
         "webfetch https://www.lifesavingsociety.com/first-aid/wsib-first-aid-program-changes-2026.aspx"
       ]
     },
+    "www.lime-technologies.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.lime-technologies.com/en/legal/data-portability"
+      ]
+    },
     "www.liquidweb.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -16494,15 +18540,18 @@
       "workingPaths": []
     },
     "www.mintlify.com": {
-      "attempts": 1,
-      "evidenceItems": 0,
-      "lastAttempt": "2026-11-22",
-      "lastOk": null,
-      "ok": 0,
+      "attempts": 2,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
       "outcomes": {
-        "http_404": 1
+        "http_404": 1,
+        "ok": 1
       },
-      "workingPaths": []
+      "workingPaths": [
+        "webfetch https://www.mintlify.com/pricing"
+      ]
     },
     "www.mitti.com": {
       "attempts": 1,
@@ -16673,6 +18722,19 @@
         "webfetch https://www.nachc.org/resource/section-504-disability-nondiscrimination-factsheet/"
       ]
     },
+    "www.namecheap.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.namecheap.com/support/knowledgebase/article/9511/38/how-your-ssl-coverage-works/"
+      ]
+    },
     "www.nasaa.org": {
       "attempts": 1,
       "evidenceItems": 1,
@@ -16807,6 +18869,20 @@
       },
       "workingPaths": []
     },
+    "www.netlify.com": {
+      "attempts": 2,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "webfetch https://www.netlify.com/changelog/2026-03-24-monitor-credit-usage-by-day.md",
+        "webfetch https://www.netlify.com/pricing/"
+      ]
+    },
     "www.niaid.nih.gov": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -16831,6 +18907,20 @@
       },
       "workingPaths": [
         "curl https://www.nigms.nih.gov/Research/Pages/data-management-and-sharing-plan"
+      ]
+    },
+    "www.notion.com": {
+      "attempts": 2,
+      "evidenceItems": 2,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 2,
+      "outcomes": {
+        "ok": 2
+      },
+      "workingPaths": [
+        "webfetch https://www.notion.com/en-us/help/notion-for-education",
+        "webfetch https://www.notion.com/templates/lab-notebook"
       ]
     },
     "www.nrn.com": {
@@ -16872,6 +18962,19 @@
       },
       "workingPaths": [
         "webfetch https://www.nspra.org/Portals/0/PR%20Resources%20Section/Positions%20and%20Reports/From%20Frustration%20to%20Shared%20Accountability-A%20New%20Procurement%20Playbook.pdf"
+      ]
+    },
+    "www.numbas.org.uk": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.numbas.org.uk/blog/2022/02/assess-programming-in-python-and-r-with-numbas/"
       ]
     },
     "www.nyc.gov": {
@@ -17250,6 +19353,20 @@
         "webfetch https://www.pike13.com/industries/swim-school-software"
       ]
     },
+    "www.pinsentmasons.com": {
+      "attempts": 4,
+      "evidenceItems": 4,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 4,
+      "outcomes": {
+        "ok": 4
+      },
+      "workingPaths": [
+        "webfetch https://www.pinsentmasons.com/out-law/guides/switching-porting-rules-eu-data-act",
+        "webfetch https://www.pinsentmasons.com/out-law/analysis/eu-data-act-draft-sccs-for-switching"
+      ]
+    },
     "www.plinth.org.uk": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -17274,6 +19391,32 @@
       },
       "workingPaths": [
         "webfetch https://www.pmlawyers.com.au/blog/2026/06/aged-care-blog/ndis-reform-provider-records/"
+      ]
+    },
+    "www.postgresql.org": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.postgresql.org/docs/18/app-pgdump.html"
+      ]
+    },
+    "www.prairielearn.com": {
+      "attempts": 3,
+      "evidenceItems": 2,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 3,
+      "outcomes": {
+        "ok": 3
+      },
+      "workingPaths": [
+        "webfetch https://www.prairielearn.com/pricing"
       ]
     },
     "www.praxikon.com": {
@@ -17303,17 +19446,18 @@
       ]
     },
     "www.producthunt.com": {
-      "attempts": 2,
-      "evidenceItems": 0,
-      "lastAttempt": "2026-11-20",
-      "lastOk": "2026-11-20",
-      "ok": 2,
+      "attempts": 8,
+      "evidenceItems": 4,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 8,
       "outcomes": {
-        "ok": 2
+        "ok": 8
       },
       "workingPaths": [
         "webfetch https://www.producthunt.com/posts/waitlist-flow-wizard",
-        "webfetch https://www.producthunt.com/products/nosho-app"
+        "webfetch https://www.producthunt.com/products/nosho-app",
+        "webfetch https://www.producthunt.com/products/pathtoship"
       ]
     },
     "www.profileward.com": {
@@ -17376,6 +19520,19 @@
         "curl https://www.punchpass.com/pricing"
       ]
     },
+    "www.pythonanywhere.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.pythonanywhere.com/forums/topic/36569/"
+      ]
+    },
     "www.quo.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -17403,6 +19560,19 @@
         "webfetch https://www.quotientapp.com/blog/deposits-split-invoices-adjustments",
         "webfetch https://www.quotientapp.com/pricing",
         "webfetch https://www.quotientapp.com/help/invoicing-overview"
+      ]
+    },
+    "www.ramp.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.ramp.com/ai-token-spend-management"
       ]
     },
     "www.rba.gov.au": {
@@ -17634,6 +19804,19 @@
       },
       "workingPaths": []
     },
+    "www.saasrise.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.saasrise.com/news/eu-data-act-guidance-sets-new-saas-export-and-switching-rules-e9655b01-16d7-4dce-a476-3aee999c343e"
+      ]
+    },
     "www.saastr.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -17657,6 +19840,21 @@
         "http_403": 1
       },
       "workingPaths": []
+    },
+    "www.safeexambrowser.org": {
+      "attempts": 3,
+      "evidenceItems": 3,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 3,
+      "outcomes": {
+        "ok": 3
+      },
+      "workingPaths": [
+        "webfetch https://www.safeexambrowser.org/windows/win_release_notes_en.html",
+        "webfetch https://www.safeexambrowser.org/macosx/mac_usermanual_en.html",
+        "webfetch https://www.safeexambrowser.org/developer/seb-config-key.html"
+      ]
     },
     "www.salontoday.com": {
       "attempts": 3,
@@ -17914,6 +20112,19 @@
         "webfetch https://www.skadden.com/insights/publications/2026/09/new-york-citys-click-to-cancel-rule"
       ]
     },
+    "www.skwschwarz.de": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.skwschwarz.de/en/Cloud-Switching-Addendum"
+      ]
+    },
     "www.skynettechnologies.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -18164,6 +20375,30 @@
         "webfetch https://www.supportability.com.au/?p=3432"
       ]
     },
+    "www.swarmia.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.swarmia.com/changelog/2026-08-05-ai-cost-beta/"
+      ]
+    },
+    "www.switchops.ai": {
+      "attempts": 2,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "empty": 2
+      },
+      "workingPaths": []
+    },
     "www.tablesready.com": {
       "attempts": 1,
       "evidenceItems": 1,
@@ -18312,6 +20547,19 @@
         "webfetch https://www.teachngo.com/blog/tutorbird-alternatives"
       ]
     },
+    "www.techzine.eu": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.techzine.eu/news/security/145550/thousands-of-lovable-apps-are-leaking-personal-data/"
+      ]
+    },
     "www.tenantturner.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -18389,6 +20637,19 @@
         "webfetch https://www.theprintspace.co.uk/help/knowledge-base/can-i-sell-a-limited-edition-print-outside-of-my-website/"
       ]
     },
+    "www.theregister.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.theregister.com/2026/02/27/lovable_app_vulnerabilities"
+      ]
+    },
     "www.thetruckersreport.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -18400,6 +20661,19 @@
       },
       "workingPaths": [
         "curl https://www.thetruckersreport.com/truckingindustryforum/threads/finally-actual-action-against-cdl-mills.2537774"
+      ]
+    },
+    "www.theverge.com": {
+      "attempts": 1,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "curl https://www.theverge.com/ai-artificial-intelligence/1004880/openai-chatgpt-text-watermarks-eu-ai-act"
       ]
     },
     "www.thinkific.com": {
@@ -18442,6 +20716,19 @@
         "webfetch https://www.threads.com/"
       ]
     },
+    "www.tidyverse.org": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.tidyverse.org/blog/2024/10/webr-0-4-2"
+      ]
+    },
     "www.timecamp.com": {
       "attempts": 1,
       "evidenceItems": 1,
@@ -18453,6 +20740,19 @@
       },
       "workingPaths": [
         "webfetch https://www.timecamp.com/blog/harvest-pricing/"
+      ]
+    },
+    "www.timeshighereducation.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.timeshighereducation.com/news/more-universities-review-use-turnitin-over-data-privacy-fears"
       ]
     },
     "www.tlt.com": {
@@ -18469,13 +20769,13 @@
       ]
     },
     "www.toriihq.com": {
-      "attempts": 2,
-      "evidenceItems": 0,
-      "lastAttempt": "2026-11-18",
-      "lastOk": "2026-11-18",
-      "ok": 2,
+      "attempts": 3,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 3,
       "outcomes": {
-        "ok": 2
+        "ok": 3
       },
       "workingPaths": [
         "curl https://www.toriihq.com/articles/five-claude-code-usage-dashboards-and-monitoring-tools",
@@ -18735,26 +21035,28 @@
       ]
     },
     "www.uptimia.com": {
-      "attempts": 1,
+      "attempts": 3,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-03",
-      "lastOk": "2026-11-03",
-      "ok": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 3,
       "outcomes": {
-        "ok": 1
+        "ok": 3
       },
       "workingPaths": [
-        "curl https://www.uptimia.com/form-monitoring"
+        "curl https://www.uptimia.com/form-monitoring",
+        "webfetch https://www.uptimia.com/form-monitoring",
+        "webfetch https://www.uptimia.com/pricing"
       ]
     },
     "www.upwork.com": {
-      "attempts": 3,
+      "attempts": 5,
       "evidenceItems": 0,
-      "lastAttempt": "2026-11-24",
+      "lastAttempt": "2026-11-25",
       "lastOk": null,
       "ok": 0,
       "outcomes": {
-        "http_403": 3
+        "http_403": 5
       },
       "workingPaths": []
     },
@@ -18822,6 +21124,19 @@
         "webfetch https://www.uvic.ca/systems/about/notices/bc-time-zone-change-may-affect-calendar-meetings.php"
       ]
     },
+    "www.uvm.edu": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.uvm.edu/accessibility-services/news/accessibility-review-now-required-it-purchases-uvm"
+      ]
+    },
     "www.valueaddedresource.net": {
       "attempts": 8,
       "evidenceItems": 3,
@@ -18835,6 +21150,19 @@
         "curl https://www.valueaddedresource.net/etsy-bans-ai-patterns/",
         "webfetch https://www.valueaddedresource.net/etsy-tests-us-tariff-calculator/",
         "webfetch https://www.valueaddedresource.net/etsy-requires-ddp-shipping-us-tariffs/"
+      ]
+    },
+    "www.vanta.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.vanta.com/resources/european-momentum-new-frameworks"
       ]
     },
     "www.vantage.sh": {
@@ -19006,6 +21334,30 @@
         "webfetch https://www.wix.com/app-market/maor54235423-selects-1",
         "curl https://www.wix.com/app-market/web-solution/pikkco-clinic-intake-and-consent-1",
         "webfetch https://www.wix.com/app-market/appointment-waitlist"
+      ]
+    },
+    "www.wordfence.com": {
+      "attempts": 5,
+      "evidenceItems": 0,
+      "lastAttempt": "2026-11-25",
+      "lastOk": null,
+      "ok": 0,
+      "outcomes": {
+        "empty": 5
+      },
+      "workingPaths": []
+    },
+    "www.workstreet.com": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://www.workstreet.com/blog/eu-data-act-saas"
       ]
     },
     "www.wrkr.com.au": {
@@ -19343,6 +21695,19 @@
         "webfetch https://zenler.canny.io/feature-requests/p/native-eu-statutory-withdrawal-features-withdrawal-button-checkout-exemption-che"
       ]
     },
+    "zenodo.org": {
+      "attempts": 1,
+      "evidenceItems": 1,
+      "lastAttempt": "2026-11-25",
+      "lastOk": "2026-11-25",
+      "ok": 1,
+      "outcomes": {
+        "ok": 1
+      },
+      "workingPaths": [
+        "webfetch https://zenodo.org/records/7041464"
+      ]
+    },
     "zenplanner.com": {
       "attempts": 1,
       "evidenceItems": 0,
@@ -19439,22 +21804,22 @@
       "selected": 2
     },
     "A12": {
-      "candidates": 34,
-      "fetchFail": 41,
-      "fetchOk": 251,
-      "lastUsed": "2026-11-24",
-      "runs": 25,
-      "searches": 236,
+      "candidates": 36,
+      "fetchFail": 44,
+      "fetchOk": 311,
+      "lastUsed": "2026-11-25",
+      "runs": 26,
+      "searches": 250,
       "selected": 3
     },
     "A13": {
-      "candidates": 169,
-      "fetchFail": 165,
-      "fetchOk": 1117,
-      "lastUsed": "2026-11-24",
-      "runs": 27,
-      "searches": 670,
-      "selected": 19
+      "candidates": 174,
+      "fetchFail": 171,
+      "fetchOk": 1183,
+      "lastUsed": "2026-11-25",
+      "runs": 28,
+      "searches": 679,
+      "selected": 20
     },
     "A14": {
       "candidates": 27,
@@ -19475,12 +21840,12 @@
       "selected": 2
     },
     "A16": {
-      "candidates": 92,
+      "candidates": 93,
       "fetchFail": 107,
-      "fetchOk": 818,
-      "lastUsed": "2026-11-24",
-      "runs": 18,
-      "searches": 360,
+      "fetchOk": 819,
+      "lastUsed": "2026-11-25",
+      "runs": 19,
+      "searches": 361,
       "selected": 26
     },
     "A2": {
@@ -19493,13 +21858,13 @@
       "selected": 0
     },
     "A3": {
-      "candidates": 16,
-      "fetchFail": 39,
-      "fetchOk": 79,
-      "lastUsed": "2026-11-24",
-      "runs": 8,
-      "searches": 75,
-      "selected": 2
+      "candidates": 18,
+      "fetchFail": 44,
+      "fetchOk": 138,
+      "lastUsed": "2026-11-25",
+      "runs": 9,
+      "searches": 86,
+      "selected": 3
     },
     "A4": {
       "candidates": 0,
@@ -19511,12 +21876,12 @@
       "selected": 0
     },
     "A5": {
-      "candidates": 9,
+      "candidates": 10,
       "fetchFail": 1,
-      "fetchOk": 41,
-      "lastUsed": "2026-11-24",
-      "runs": 9,
-      "searches": 36,
+      "fetchOk": 68,
+      "lastUsed": "2026-11-25",
+      "runs": 10,
+      "searches": 39,
       "selected": 2
     },
     "A6": {
@@ -19558,37 +21923,37 @@
     "B10": {
       "candidates": 7,
       "fetchFail": 1,
-      "fetchOk": 50,
-      "lastUsed": "2026-11-24",
-      "runs": 12,
-      "searches": 29,
+      "fetchOk": 61,
+      "lastUsed": "2026-11-25",
+      "runs": 13,
+      "searches": 30,
       "selected": 0
     },
     "B11": {
-      "candidates": 56,
-      "fetchFail": 53,
-      "fetchOk": 715,
-      "lastUsed": "2026-11-24",
-      "runs": 25,
-      "searches": 630,
+      "candidates": 58,
+      "fetchFail": 57,
+      "fetchOk": 739,
+      "lastUsed": "2026-11-25",
+      "runs": 26,
+      "searches": 643,
       "selected": 7
     },
     "B12": {
       "candidates": 60,
       "fetchFail": 140,
-      "fetchOk": 749,
-      "lastUsed": "2026-11-24",
-      "runs": 22,
-      "searches": 511,
+      "fetchOk": 755,
+      "lastUsed": "2026-11-25",
+      "runs": 23,
+      "searches": 515,
       "selected": 14
     },
     "B2": {
-      "candidates": 3,
+      "candidates": 6,
       "fetchFail": 0,
-      "fetchOk": 17,
-      "lastUsed": "2026-11-18",
-      "runs": 3,
-      "searches": 10,
+      "fetchOk": 31,
+      "lastUsed": "2026-11-25",
+      "runs": 4,
+      "searches": 20,
       "selected": 0
     },
     "B3": {
@@ -19612,9 +21977,9 @@
     "B6": {
       "candidates": 4,
       "fetchFail": 1,
-      "fetchOk": 15,
-      "lastUsed": "2026-11-24",
-      "runs": 3,
+      "fetchOk": 19,
+      "lastUsed": "2026-11-25",
+      "runs": 4,
       "searches": 18,
       "selected": 0
     },
@@ -19646,30 +22011,30 @@
       "selected": 0
     },
     "C10": {
-      "candidates": 58,
+      "candidates": 60,
       "fetchFail": 114,
-      "fetchOk": 470,
-      "lastUsed": "2026-11-24",
-      "runs": 24,
-      "searches": 370,
+      "fetchOk": 473,
+      "lastUsed": "2026-11-25",
+      "runs": 25,
+      "searches": 377,
       "selected": 9
     },
     "C11": {
       "candidates": 0,
       "fetchFail": 0,
-      "fetchOk": 5,
-      "lastUsed": "2026-11-05",
-      "runs": 2,
-      "searches": 5,
+      "fetchOk": 10,
+      "lastUsed": "2026-11-25",
+      "runs": 3,
+      "searches": 10,
       "selected": 0
     },
     "C2": {
       "candidates": 10,
-      "fetchFail": 8,
-      "fetchOk": 17,
-      "lastUsed": "2026-11-18",
-      "runs": 5,
-      "searches": 25,
+      "fetchFail": 9,
+      "fetchOk": 27,
+      "lastUsed": "2026-11-25",
+      "runs": 6,
+      "searches": 30,
       "selected": 0
     },
     "C3": {
@@ -19691,13 +22056,13 @@
       "selected": 0
     },
     "C5": {
-      "candidates": 71,
-      "fetchFail": 88,
-      "fetchOk": 322,
-      "lastUsed": "2026-11-24",
-      "runs": 23,
-      "searches": 363,
-      "selected": 14
+      "candidates": 77,
+      "fetchFail": 90,
+      "fetchOk": 337,
+      "lastUsed": "2026-11-25",
+      "runs": 24,
+      "searches": 378,
+      "selected": 15
     },
     "C6": {
       "candidates": 5,
@@ -19811,10 +22176,10 @@
     }
   ],
   "funnel": {
-    "candidates": 697,
+    "candidates": 721,
     "passedGate": 13,
-    "passedRejectRules": 603,
-    "provisional": 79,
+    "passedRejectRules": 620,
+    "provisional": 82,
     "reviewKilled": 61,
     "validated": 1,
     "watchlist": 73
@@ -19824,9 +22189,9 @@
     "noComplaintEvidence": 0,
     "noRecentEvidence": 2,
     "painBelow4": 3,
-    "rejectRule": 94,
+    "rejectRule": 101,
     "reviewKill": 61,
-    "totalBelowMin": 524,
+    "totalBelowMin": 541,
     "unverifiedEvidence": 0,
     "wtpBelow3": 0
   },
@@ -19847,16 +22212,7 @@
       "id": "A13",
       "name": "Discourse forums, any niche",
       "path": "https://{host}/search.json?q={q}+after%3A{YYYY-MM-DD}",
-      "selectedIdeas": 19,
-      "status": "ok"
-    },
-    {
-      "client": "curl",
-      "evidence": "spend",
-      "id": "B12",
-      "name": "Paid app marketplaces",
-      "path": "https://apps.shopify.com/{slug}/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest",
-      "selectedIdeas": 14,
+      "selectedIdeas": 20,
       "status": "ok"
     },
     {
@@ -19865,6 +22221,15 @@
       "id": "C5",
       "name": "Policy and regulation trackers",
       "path": "https://www.federalregister.gov/api/v1/documents.json?per_page=10&order=newest&conditions[term]={q}",
+      "selectedIdeas": 15,
+      "status": "ok"
+    },
+    {
+      "client": "curl",
+      "evidence": "spend",
+      "id": "B12",
+      "name": "Paid app marketplaces",
+      "path": "https://apps.shopify.com/{slug}/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest",
       "selectedIdeas": 14,
       "status": "ok"
     },
@@ -19914,6 +22279,15 @@
       "status": "ok"
     },
     {
+      "client": "curl",
+      "evidence": "complaint",
+      "id": "A3",
+      "name": "Open-source teaching tools",
+      "path": "https://api.github.com/search/issues?q={q}+is%3Aissue+state%3Aopen+sort%3Areactions&per_page=10",
+      "selectedIdeas": 3,
+      "status": "ok"
+    },
+    {
       "client": "webfetch",
       "evidence": "complaint",
       "id": "A11",
@@ -19928,15 +22302,6 @@
       "id": "A15",
       "name": "No-code automation communities",
       "path": "https://community.make.com/search.json?q={q}+after%3A{YYYY-MM-DD}",
-      "selectedIdeas": 2,
-      "status": "ok"
-    },
-    {
-      "client": "curl",
-      "evidence": "complaint",
-      "id": "A3",
-      "name": "Open-source teaching tools",
-      "path": "https://api.github.com/search/issues?q={q}+is%3Aissue+state%3Aopen+sort%3Areactions&per_page=10",
       "selectedIdeas": 2,
       "status": "ok"
     },
@@ -20067,6 +22432,6 @@
       "status": "ok"
     }
   ],
-  "runsInWindow": 34,
+  "runsInWindow": 35,
   "windowDays": 45
 }
