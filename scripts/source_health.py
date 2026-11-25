@@ -137,6 +137,13 @@ def summarize(runs, catalog):
     }
 
 
+def missing_keys(src):
+    """The environment variables a keyed path needs that this run does not have."""
+    names = [v for p in src.get("paths") or [] if p.get("client") == "keyed"
+             for v in p.get("env") or []]
+    return sorted({v for v in names if not os.environ.get(v)})
+
+
 def avoid_and_prefer(catalog, summary):
     """The two lists a run actually acts on."""
     avoid, prefer = [], []
@@ -144,14 +151,21 @@ def avoid_and_prefer(catalog, summary):
         row = summary["bySource"].get(src["id"], {})
         attempts = row.get("fetchOk", 0) + row.get("fetchFail", 0)
         dead_in_log = row.get("fetchOk", 0) == 0 and attempts >= DEAD_AFTER
-        if src["status"] == "blocked" or dead_in_log:
+        # ok-key works only with its keys (ROUTINE.md, Keyed APIs).
+        keyless = src["status"] == "ok-key" and missing_keys(src)
+        if src["status"] == "blocked" or dead_in_log or keyless:
             why = src.get("blockedBecause")
+            if keyless:
+                why = ("keyed source; " + ", ".join(missing_keys(src))
+                       + " not set in this environment.")
             if not why:
                 why = ("no usable fetch in the window" if dead_in_log
                        else (src.get("notes") or "blocked").split(".")[0] + ".")
             avoid.append({"id": src["id"], "name": src["name"], "why": why})
-        elif src["status"] in ("ok", "ok-curl"):
+        elif src["status"] in ("ok", "ok-curl", "ok-key"):
             paths = [p for p in src.get("paths", []) if p.get("verified")]
+            if src["status"] == "ok-key":
+                paths = [p for p in paths if p.get("client") == "keyed"] or paths
             prefer.append({
                 "id": src["id"], "name": src["name"], "evidence": src["evidence"],
                 "status": src["status"],

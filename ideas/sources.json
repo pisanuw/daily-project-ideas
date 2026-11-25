@@ -1,12 +1,13 @@
 {
-  "updated": "2026-11-04",
-  "note": "Source catalog for ROUTINE.md. Every entry names a concrete access path, not just a brand, so a run does not have to rediscover how to reach a source. Status is empirical: it records what a fetch actually returned. scripts/source_health.py refreshes status from ideas/run-log.jsonl; sources.json is the hand-maintained baseline. Each path may carry probeUrl (a concrete URL with the placeholders filled in) and expect (a string that must appear in the body for the fetch to count as usable). scripts/probe_sources.py uses those two fields to re-measure the catalog, which is what to run after the run environment changes. Statuses depend on where the probe ran. The 2026-11-01 baseline was measured from a European residential IP and then re-measured by the routine from its US cloud environment; the two agreed on every source but two. Where they disagree, the routine's measurement is the one that matters, because that is where the daily run happens. Two known geography effects: HigherEdJobs (C4) serves a stub to non-US addresses, and the Chrome Web Store (A6) redirects European traffic to a consent wall that US traffic does not see.",
+  "updated": "2026-11-25",
+  "note": "Source catalog for ROUTINE.md. Every entry names a concrete access path, not just a brand, so a run does not have to rediscover how to reach a source. Status is empirical: it records what a fetch actually returned. scripts/source_health.py refreshes status from ideas/run-log.jsonl; sources.json is the hand-maintained baseline. Each path may carry probeUrl (a concrete URL with the placeholders filled in) and expect (a string that must appear in the body for the fetch to count as usable). scripts/probe_sources.py uses those two fields to re-measure the catalog, which is what to run after the run environment changes. Statuses depend on where the probe ran. The 2026-11-01 baseline was measured from a European residential IP and then re-measured by the routine from its US cloud environment; the two agreed on every source but two. Where they disagree, the routine's measurement is the one that matters, because that is where the daily run happens. Two known geography effects: HigherEdJobs (C4) serves a stub to non-US addresses, and the Chrome Web Store (A6) redirects European traffic to a consent wall that US traffic does not see. On 2026-11-25 A17 to A20 and B13 were added, B12 gained the Atlassian Marketplace REST paths, and A7, A8, A9, B4 and B7 gained keyed API paths (client keyed), all probed from PManager's cloud environment rather than the Finder's; both have full internet access.",
   "statusMeanings": {
     "ok": "A verified path returns usable, dated content through the WebFetch tool.",
     "ok-curl": "Usable only through curl in Bash; the WebFetch allowlist or renderer fails on it.",
     "partial": "Reachable, but yields less than the source promises (index page only, no dates, no authors).",
     "blocked": "No usable path found. Do not spend searches here. Reasons: site bot-blocking, a consent interstitial, or the tool allowlist. Blocked entries carry blockedBecause.",
-    "unknown": "Never verified, or last verified more than 30 days ago. Probe once before relying on it."
+    "unknown": "Never verified, or last verified more than 30 days ago. Probe once before relying on it.",
+    "ok-key": "A keyed path (client keyed) returned usable, dated content in a run that had every environment variable in the path's env set. Usable only through the keyed block in ROUTINE.md (Keyed APIs) and only while those variables are set: a run without them treats the source as blocked, and scripts/source_health.py puts it on the avoid list. scripts/probe_sources.py never changes it, because it probes without keys. A source with a keyed path stays blocked until a run verifies that path."
   },
   "evidenceKinds": {
     "complaint": "A named person describing a problem, with a date.",
@@ -15,7 +16,8 @@
   },
   "clients": {
     "webfetch": "The WebFetch tool. Renders JS poorly; has its own host allowlist.",
-    "curl": "curl -sL -m 20 -A 'Mozilla/5.0' <url>, run through Bash. Reaches hosts the WebFetch allowlist refuses, and gets raw HTML that WebFetch's renderer sometimes empties."
+    "curl": "curl -sL -m 20 -A 'Mozilla/5.0' <url>, run through Bash. Reaches hosts the WebFetch allowlist refuses, and gets raw HTML that WebFetch's renderer sometimes empties.",
+    "keyed": "The keyed block in ROUTINE.md (Keyed APIs): curl with credentials that the block reads from the environment variables named in the path's env and never prints, logs or writes to a file. A keyed path has no probeUrl, and scripts/probe_sources.py skips it. The run log records its fetches with client curl."
   },
   "sources": [
     {
@@ -131,7 +133,7 @@
           "probeDetail": "177B (twice, first was http_422)"
         }
       ],
-      "notes": "api.github.com/search/issues answered HTTP 422 (177B) from the routine's environment on 2026-11-01 and HTTP 200 from a residential IP the same day, with and without advanced_search=true, so the query is not the problem and the cause is unidentified. Unauthenticated GitHub search allows only 10 requests a minute per IP, which a shared datacenter address can exhaust. Treat as unknown: probe once before relying on it, and fall back to A13. Discussions may also need GraphQL with a token, which is untested."
+      "notes": "api.github.com/search/issues answered HTTP 422 (177B) from the routine's environment on 2026-11-01 and HTTP 200 from a residential IP the same day, with and without advanced_search=true, so the query is not the problem and the cause is unidentified. Unauthenticated GitHub search allows only 10 requests a minute per IP, which a shared datacenter address can exhaust. Treat as unknown: probe once before relying on it, and fall back to A13. Discussions may also need GraphQL with a token, which is untested. 2026-11-25: GitHub Discussions, community/community's included, read through WebFetch on github.com; see A19."
     },
     {
       "id": "A5",
@@ -225,10 +227,21 @@
           "client": "curl",
           "verified": "2026-11-01",
           "result": "HTTP 403."
+        },
+        {
+          "url": "https://oauth.reddit.com/r/{sub}/search?q={q}&restrict_sr=1&sort=new&t=month&limit=25",
+          "client": "keyed",
+          "env": [
+            "REDDIT_CLIENT_ID",
+            "REDDIT_CLIENT_SECRET",
+            "REDDIT_USER_AGENT"
+          ],
+          "verified": null,
+          "result": "Added 2026-11-25 (owner: \"reddit ok\"). App-only OAuth: a token from https://www.reddit.com/api/v1/access_token (grant_type=client_credentials, the client id and secret as HTTP Basic auth), then the API at https://oauth.reddit.com. Dormant: the variables are not set. From PManager's environment on 2026-11-25 the token endpoint answered HTTP 401 JSON without credentials and oauth.reddit.com answered 403 without a token, so both hosts answer; nothing more could be tested. Example request for the keyed block: /r/Professors/new?limit=25."
         }
       ],
-      "notes": "Reddit is closed to this environment on every path tried. Treat r/Professors, r/AskAcademia, r/GradSchool, r/highereducation, r/instructionaldesign and r/edtech as unavailable. A past run cited reddit.sentinel-team.org as a mirror; that host serves a 'Reddit Sentiment Analyzer' app and 404s on subreddit paths, so it is not a mirror and must never be cited as evidence.",
-      "blockedBecause": "Reddit returns 403, a 'Welcome to Reddit' interstitial, or 'Blocked' on every path tried."
+      "notes": "Reddit is closed to this environment on every path tried. Treat r/Professors, r/AskAcademia, r/GradSchool, r/highereducation, r/instructionaldesign and r/edtech as unavailable. A past run cited reddit.sentinel-team.org as a mirror; that host serves a 'Reddit Sentiment Analyzer' app and 404s on subreddit paths, so it is not a mirror and must never be cited as evidence. 2026-11-25: a keyed path (app-only OAuth) waits for REDDIT_CLIENT_ID, REDDIT_CLIENT_SECRET and REDDIT_USER_AGENT; ROUTINE.md (Keyed APIs) says how a run uses it and promotes the source to ok-key. The same day the owner could not create an API app: www.reddit.com/prefs/apps redirected to the Devvit developer platform (developers.reddit.com), and old.reddit.com/prefs/apps answered \"Max clients have been reached\" after the human check, so the old-style app route may be closed. The path stays for if the owner gets keys later; until then the source is blocked as before.",
+      "blockedBecause": "Reddit returns 403, a 'Welcome to Reddit' interstitial, or 'Blocked' on every path tried; the keyed API path is dormant (no keys)."
     },
     {
       "id": "A8",
@@ -247,10 +260,21 @@
           "expect": "created_utc",
           "probeOutcome": "http_403",
           "probeDetail": "189907B"
+        },
+        {
+          "url": "https://oauth.reddit.com/r/{sub}/search?q={q}&restrict_sr=1&sort=new&t=month&limit=25",
+          "client": "keyed",
+          "env": [
+            "REDDIT_CLIENT_ID",
+            "REDDIT_CLIENT_SECRET",
+            "REDDIT_USER_AGENT"
+          ],
+          "verified": null,
+          "result": "Added 2026-11-25 (owner: \"reddit ok\"). App-only OAuth: a token from https://www.reddit.com/api/v1/access_token (grant_type=client_credentials, the client id and secret as HTTP Basic auth), then the API at https://oauth.reddit.com. Dormant: the variables are not set. From PManager's environment on 2026-11-25 the token endpoint answered HTTP 401 JSON without credentials and oauth.reddit.com answered 403 without a token, so both hosts answer; nothing more could be tested. Example request for the keyed block: /r/Teachers/new?limit=25."
         }
       ],
-      "notes": "Same block as A7. Replaced in the rotation by A13 and A14.",
-      "blockedBecause": "Reddit, same as A7."
+      "notes": "Same block as A7. Replaced in the rotation by A13 and A14. 2026-11-25: a keyed path (app-only OAuth) waits for REDDIT_CLIENT_ID, REDDIT_CLIENT_SECRET and REDDIT_USER_AGENT; ROUTINE.md (Keyed APIs) says how a run uses it and promotes the source to ok-key. The same day the owner could not create an API app: www.reddit.com/prefs/apps redirected to the Devvit developer platform (developers.reddit.com), and old.reddit.com/prefs/apps answered \"Max clients have been reached\" after the human check, so the old-style app route may be closed. The path stays for if the owner gets keys later; until then the source is blocked as before.",
+      "blockedBecause": "Reddit, same as A7; the keyed API path is dormant (no keys)."
     },
     {
       "id": "A9",
@@ -269,10 +293,21 @@
           "expect": "topic",
           "probeOutcome": "http_403",
           "probeDetail": "5620B"
+        },
+        {
+          "url": "https://oauth.reddit.com/r/{sub}/search?q={q}&restrict_sr=1&sort=new&t=month&limit=25",
+          "client": "keyed",
+          "env": [
+            "REDDIT_CLIENT_ID",
+            "REDDIT_CLIENT_SECRET",
+            "REDDIT_USER_AGENT"
+          ],
+          "verified": null,
+          "result": "Added 2026-11-25 (owner: \"reddit ok\"). App-only OAuth: a token from https://www.reddit.com/api/v1/access_token (grant_type=client_credentials, the client id and secret as HTTP Basic auth), then the API at https://oauth.reddit.com. Dormant: the variables are not set. From PManager's environment on 2026-11-25 the token endpoint answered HTTP 401 JSON without credentials and oauth.reddit.com answered 403 without a token, so both hosts answer; nothing more could be tested. Example request for the keyed block: /r/Tutoring/new?limit=25."
         }
       ],
-      "notes": "The Reddit half (r/homeschool, r/Tutoring, r/elearning) is blocked with A7, and the Well-Trained Mind forum 403s. The direct-pay buyer thesis survives through B1 (Teachers Pay Teachers, which is reachable) and A13.",
-      "blockedBecause": "Reddit half blocked with A7; the Well-Trained Mind forum 403s."
+      "notes": "The Reddit half (r/homeschool, r/Tutoring, r/elearning) is blocked with A7, and the Well-Trained Mind forum 403s. The direct-pay buyer thesis survives through B1 (Teachers Pay Teachers, which is reachable) and A13. 2026-11-25: a keyed path (app-only OAuth) waits for REDDIT_CLIENT_ID, REDDIT_CLIENT_SECRET and REDDIT_USER_AGENT; ROUTINE.md (Keyed APIs) says how a run uses it and promotes the source to ok-key. The same day the owner could not create an API app: www.reddit.com/prefs/apps redirected to the Devvit developer platform (developers.reddit.com), and old.reddit.com/prefs/apps answered \"Max clients have been reached\" after the human check, so the old-style app route may be closed. The path stays for if the owner gets keys later; until then the source is blocked as before.",
+      "blockedBecause": "Reddit half blocked with A7; the Well-Trained Mind forum 403s; the keyed API path is dormant (no keys)."
     },
     {
       "id": "A10",
@@ -509,6 +544,134 @@
       "notes": "Requests users file with the vendor of a tool they already pay for are complaint evidence from paying customers, and far less polluted than community forums, where most 2026 back-office threads are opened by builders promoting their own apps. Count the requester and the votes; check that the request is still open. 2026-11-07: forums.wildapricot.com wishlist added (gave the Renewal Audit idea)."
     },
     {
+      "id": "A17",
+      "group": "A",
+      "name": "Lobsters",
+      "evidence": "complaint",
+      "status": "ok",
+      "lastVerified": "2026-11-25",
+      "paths": [
+        {
+          "url": "https://lobste.rs/t/{tag}.json?page={N}",
+          "client": "both",
+          "verified": "2026-11-25",
+          "result": "JSON array of 25 stories a page, newest first, with created_at, title, url, score, comment_count, tags and comments_url; read by curl and WebFetch. The tag list is https://lobste.rs/tags.json. Probed 2026-11-25 from PManager's cloud environment, not the Finder's; both have full internet access, so expect the same answer, and the Finder's own first fetch is the one that counts.",
+          "probeUrl": "https://lobste.rs/t/ask.json",
+          "expect": "created_at",
+          "probeOutcome": "ok",
+          "probeDetail": "HTTP 200, 38624B"
+        },
+        {
+          "url": "https://lobste.rs/s/{short_id}.json",
+          "client": "curl",
+          "verified": "2026-11-25",
+          "result": "One story with all its comments: created_at, comment text, depth and score per comment. No probeUrl: comment text can contain words such as 'access denied' that scripts/probe_sources.py reads as a bot interstitial (it did on 2026-11-25). Probed 2026-11-25 from PManager's cloud environment, not the Finder's; both have full internet access, so expect the same answer, and the Finder's own first fetch is the one that counts."
+        },
+        {
+          "url": "https://lobste.rs/newest.json?page={N}",
+          "client": "curl",
+          "verified": "2026-11-25",
+          "result": "The newest stories across all tags, same shape. Probed 2026-11-25 from PManager's cloud environment, not the Finder's; both have full internet access, so expect the same answer, and the Finder's own first fetch is the one that counts.",
+          "probeUrl": "https://lobste.rs/newest.json",
+          "expect": "created_at",
+          "probeOutcome": "ok",
+          "probeDetail": "HTTP 200, 14226B"
+        }
+      ],
+      "notes": "A small, invitation-only community of programmers; complaints sit in the comments, so read the story JSON. Tags for the lenses: ask, practices, programming, testing, vcs, devops, editors, vibecoding, building-ai-tooling, a11y, pdf, education. The search page (https://lobste.rs/search) answers with a bot challenge (Anubis) to curl: that is the site's decision, so do not use it; browse the tags instead. Usernames are in the JSON: the Posters rule applies."
+    },
+    {
+      "id": "A18",
+      "group": "A",
+      "name": "Stack Exchange sites for work, software and trades",
+      "evidence": "complaint",
+      "status": "ok-curl",
+      "lastVerified": "2026-11-25",
+      "paths": [
+        {
+          "url": "https://api.stackexchange.com/2.3/search/advanced?site={site}&q={q}&order=desc&sort=creation&pagesize=20&filter=withbody",
+          "client": "curl",
+          "verified": "2026-11-25",
+          "result": "JSON items with creation_date, title, link and body. Answered HTTP 200 with items for site=webapps, superuser, softwarerecs, workplace, freelancing, diy, photo, graphicdesign, pm, money and law (q=invoice). Probed 2026-11-25 from PManager's cloud environment, not the Finder's; both have full internet access, so expect the same answer, and the Finder's own first fetch is the one that counts.",
+          "probeUrl": "https://api.stackexchange.com/2.3/search/advanced?site=webapps&q=invoice&order=desc&sort=creation&pagesize=3",
+          "expect": "creation_date",
+          "probeOutcome": "ok",
+          "probeDetail": "HTTP 200, 2232B"
+        },
+        {
+          "url": "https://api.stackexchange.com/2.3/questions?site={site}&order=desc&sort=creation&pagesize=20&filter=withbody",
+          "client": "curl",
+          "verified": "2026-11-25",
+          "result": "The newest questions on one site. On 2026-11-25 the five newest on webapps and softwarerecs were all from the past two weeks; freelancing's went back to 2025-12 and pm's to 2026-04, so those two are slow. Probed 2026-11-25 from PManager's cloud environment, not the Finder's; both have full internet access, so expect the same answer, and the Finder's own first fetch is the one that counts.",
+          "probeUrl": "https://api.stackexchange.com/2.3/questions?site=softwarerecs&order=desc&sort=creation&pagesize=3",
+          "expect": "creation_date",
+          "probeOutcome": "ok",
+          "probeDetail": "HTTP 200, 3947B"
+        }
+      ],
+      "notes": "The same API as A5, on sites outside education: webapps (web apps people use at work), superuser, softwarerecs (\"what tool does X\": a question with no good answer is a complaint about a gap), workplace, freelancing, pm (project management), money (includes self-employment), law, and trade sites: diy (home improvement), photo, graphicdesign. WebFetch refuses api.stackexchange.com (checked again 2026-11-25), so curl through the fetch helper is the client. The unauthenticated quota (quota_remaining in every answer) is per IP and shared with A5. Cite the question's public link after the API confirms its date; never record owner.display_name (Posters)."
+    },
+    {
+      "id": "A19",
+      "group": "A",
+      "name": "GitHub Discussions on popular repos",
+      "evidence": "complaint",
+      "status": "ok",
+      "lastVerified": "2026-11-25",
+      "paths": [
+        {
+          "url": "https://github.com/{owner}/{repo}/discussions?discussions_q={q}+sort%3Adate_created",
+          "client": "webfetch",
+          "verified": "2026-11-25",
+          "result": "Discussion titles with their authors and exact dates (WebFetch, PrairieLearn/PrairieLearn, 2026-11-25). WebFetch also read Discussions pages from the Finder's environment (run log: 9 of 9 usable). curl gets HTTP 403 for github.com pages from both environments (run log: 9 of 9; from PManager's, the session's own proxy said so), so this path has no probeUrl: scripts/probe_sources.py uses curl and would misreport it. Probed 2026-11-25 from PManager's cloud environment, not the Finder's; both have full internet access, so expect the same answer, and the Finder's own first fetch is the one that counts."
+        },
+        {
+          "url": "https://github.com/orgs/community/discussions?discussions_q=category%3A{category}+{q}+sort%3Adate_created",
+          "client": "webfetch",
+          "verified": "2026-11-25",
+          "result": "GitHub's own community forum (categories such as GitHub-Education), with authors; unpinned discussions show exact dates, pinned ones none. Probed 2026-11-25 from PManager's cloud environment, not the Finder's; both have full internet access, so expect the same answer, and the Finder's own first fetch is the one that counts."
+        },
+        {
+          "url": "https://github.com/{owner}/{repo}/discussions/{n}",
+          "client": "webfetch",
+          "verified": null,
+          "result": "One discussion with its replies. Unprobed; same site and renderer."
+        }
+      ],
+      "notes": "Discussions on the repos of tools people use: autograders and course platforms (PrairieLearn), coding agents and their editors, accessibility checkers, static site and docs tools. Find a repo's forum with WebSearch (site:github.com {tool} discussions) or open /discussions on a repo you know; a repo without discussions answers 404. The GraphQL API needs a token and is not used. Count the person who opened a discussion, not maintainers answering, and check that it is still open or unanswered. Usernames are shown: the Posters rule applies."
+    },
+    {
+      "id": "A20",
+      "group": "A",
+      "name": "Apple App Store customer reviews",
+      "evidence": "complaint",
+      "status": "ok",
+      "lastVerified": "2026-11-25",
+      "paths": [
+        {
+          "url": "https://itunes.apple.com/{country}/rss/customerreviews/page={1-10}/id={trackId}/sortby=mostrecent/json",
+          "client": "both",
+          "verified": "2026-11-25",
+          "result": "JSON feed of up to 50 reviews a page, newest first, each with updated (the date), im:rating, im:version, title and content; read by curl and WebFetch. Probed 2026-11-25 from PManager's cloud environment, not the Finder's; both have full internet access, so expect the same answer, and the Finder's own first fetch is the one that counts.",
+          "probeUrl": "https://itunes.apple.com/us/rss/customerreviews/page=1/id=694831622/sortby=mostrecent/json",
+          "expect": "im:rating",
+          "probeOutcome": "ok",
+          "probeDetail": "HTTP 200, 46491B"
+        },
+        {
+          "url": "https://itunes.apple.com/search?term={q}&entity=software&country=us&limit=20",
+          "client": "both",
+          "verified": "2026-11-25",
+          "result": "JSON apps with trackId, trackName, formattedPrice, userRatingCount and currentVersionReleaseDate; https://itunes.apple.com/lookup?id={trackId}&country=us gives one app. The first curl probe got HTTP 403 and a retry soon after 200, so Apple seems to limit the call rate: pause between calls. Probed 2026-11-25 from PManager's cloud environment, not the Finder's; both have full internet access, so expect the same answer, and the Finder's own first fetch is the one that counts.",
+          "probeUrl": "https://itunes.apple.com/search?term=invoice&entity=software&country=us&limit=3",
+          "expect": "trackId",
+          "probeOutcome": "ok",
+          "probeDetail": "HTTP 200, 35620B"
+        }
+      ],
+      "notes": "Find the app with the search path, then read its newest reviews. A 1 or 2 star review of an app the reviewer pays for (a price, or a subscription the review mentions) is a complaint from a paying customer. formattedPrice is only the upfront price, \"Free\" for most subscription apps, so take a subscription price from the app's own page, and a userRatingCount counts as spend only for a paid app or plan. The feed names each reviewer: record a label only (Posters)."
+    },
+    {
       "id": "B1",
       "group": "B",
       "name": "Teachers Pay Teachers and Etsy",
@@ -589,10 +752,21 @@
           "expect": "created_utc",
           "probeOutcome": "http_403",
           "probeDetail": "189907B"
+        },
+        {
+          "url": "https://oauth.reddit.com/r/{sub}/search?q={q}&restrict_sr=1&sort=new&t=month&limit=25",
+          "client": "keyed",
+          "env": [
+            "REDDIT_CLIENT_ID",
+            "REDDIT_CLIENT_SECRET",
+            "REDDIT_USER_AGENT"
+          ],
+          "verified": null,
+          "result": "Added 2026-11-25 (owner: \"reddit ok\"). App-only OAuth: a token from https://www.reddit.com/api/v1/access_token (grant_type=client_credentials, the client id and secret as HTTP Basic auth), then the API at https://oauth.reddit.com. Dormant: the variables are not set. From PManager's environment on 2026-11-25 the token endpoint answered HTTP 401 JSON without credentials and oauth.reddit.com answered 403 without a token, so both hosts answer; nothing more could be tested. Example request for the keyed block: /r/SaaS/new?limit=25."
         }
       ],
-      "notes": "r/SaaS and r/microsaas are blocked with A7. ID kept so historical focusSources entries stay readable.",
-      "blockedBecause": "Reddit, same as A7."
+      "notes": "r/SaaS and r/microsaas are blocked with A7. ID kept so historical focusSources entries stay readable. 2026-11-25: a keyed path (app-only OAuth) waits for REDDIT_CLIENT_ID, REDDIT_CLIENT_SECRET and REDDIT_USER_AGENT; ROUTINE.md (Keyed APIs) says how a run uses it and promotes the source to ok-key. The same day the owner could not create an API app: www.reddit.com/prefs/apps redirected to the Devvit developer platform (developers.reddit.com), and old.reddit.com/prefs/apps answered \"Max clients have been reached\" after the human check, so the old-style app route may be closed. The path stays for if the owner gets keys later; until then the source is blocked as before.",
+      "blockedBecause": "Reddit, same as A7; the keyed API path is dormant (no keys)."
     },
     {
       "id": "B5",
@@ -673,10 +847,20 @@
           "expect": "product",
           "probeOutcome": "http_403",
           "probeDetail": "5683B"
+        },
+        {
+          "url": "https://api.producthunt.com/v2/api/graphql",
+          "client": "keyed",
+          "env": [
+            "PRODUCT_HUNT_TOKEN"
+          ],
+          "permission": null,
+          "verified": null,
+          "result": "Added 2026-11-25. The GraphQL API, POST, with a developer token as \"Authorization: Bearer\"; the keyed block sends one of two fixed queries, posts in a topic since a date, or one post's comments. Product Hunt's API docs (https://api.producthunt.com/v2/docs) say \"By default the Product Hunt API must not be used for commercial purposes\" and send business use to hello@producthunt.com, so this path stays unused until `permission` records Product Hunt's written permission (its date and where it is kept). PManager records it on the owner's word; a run never does. From PManager's environment on 2026-11-25 a POST without a token answered HTTP 401 invalid_oauth_token."
         }
       ],
-      "notes": "Blocked without an API key.",
-      "blockedBecause": "producthunt.com returns HTTP 403 without an API key."
+      "notes": "Blocked without an API key. 2026-11-25: a keyed GraphQL path waits for PRODUCT_HUNT_TOKEN and for Product Hunt's written permission for commercial use (the path's permission field); ROUTINE.md (Keyed APIs).",
+      "blockedBecause": "producthunt.com returns HTTP 403 without an API key; the keyed API path waits for the token and for Product Hunt's written permission for commercial use."
     },
     {
       "id": "B8",
@@ -819,9 +1003,110 @@
           "expect": "atlassian",
           "probeOutcome": "ok",
           "probeDetail": "HTTP 200, 491899B"
+        },
+        {
+          "url": "https://marketplace.atlassian.com/rest/2/addons?text={q}&limit=10",
+          "client": "curl",
+          "verified": "2026-11-25",
+          "result": "JSON apps with key, name, the review count (_embedded.reviews.count) and total installs (_embedded.distribution.totalInstalls); 'timesheet' found 211. Probed 2026-11-25 from PManager's cloud environment, not the Finder's; both have full internet access, so expect the same answer, and the Finder's own first fetch is the one that counts.",
+          "probeUrl": "https://marketplace.atlassian.com/rest/2/addons?text=timesheet&limit=3",
+          "expect": "totalInstalls",
+          "probeOutcome": "ok",
+          "probeDetail": "HTTP 200, 13700B"
+        },
+        {
+          "url": "https://marketplace.atlassian.com/rest/2/addons/{key}/reviews?sort=recent&limit=20",
+          "client": "both",
+          "verified": "2026-11-25",
+          "result": "JSON reviews, newest first, each with date and stars, and the total count; read by curl and WebFetch. Prices per user tier: https://marketplace.atlassian.com/rest/2/addons/{key}/pricing/cloud/live (curl). Probed 2026-11-25 from PManager's cloud environment, not the Finder's; both have full internet access, so expect the same answer, and the Finder's own first fetch is the one that counts.",
+          "probeUrl": "https://marketplace.atlassian.com/rest/2/addons/com.tda.timesheet.report/reviews?sort=recent&limit=5",
+          "expect": "stars",
+          "probeOutcome": "ok",
+          "probeDetail": "HTTP 200, 9682B"
         }
       ],
-      "notes": "A paid app with many reviews for the same job is spend evidence (people pay for an inferior or partial solution); its 1 and 2 star reviews, with dates, are complaint evidence from paying customers. State the plan prices you saw and the review count. A free app with installs is not spend evidence. 2026-11-03#3: the apps.shopify.com/search page returned an empty shell ('trouble loading your results') to both curl and WebFetch; find slugs with WebSearch site:apps.shopify.com, then curl https://apps.shopify.com/{slug} and https://apps.shopify.com/{slug}/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest, which return dated, named reviews. Back-office Shopify niches filled up with new apps from July to October 2026, most with 0 reviews: an app with no reviews is not spend evidence. 2026-11-06: a wrong slug returns an ~80KB 404 page with HTTP 200 under curl -L, so check the body contains review text before reading it as 'no complaints'."
+      "notes": "A paid app with many reviews for the same job is spend evidence (people pay for an inferior or partial solution); its 1 and 2 star reviews, with dates, are complaint evidence from paying customers. State the plan prices you saw and the review count. A free app with installs is not spend evidence. 2026-11-03#3: the apps.shopify.com/search page returned an empty shell ('trouble loading your results') to both curl and WebFetch; find slugs with WebSearch site:apps.shopify.com, then curl https://apps.shopify.com/{slug} and https://apps.shopify.com/{slug}/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest, which return dated, named reviews. Back-office Shopify niches filled up with new apps from July to October 2026, most with 0 reviews: an app with no reviews is not spend evidence. 2026-11-06: a wrong slug returns an ~80KB 404 page with HTTP 200 under curl -L, so check the body contains review text before reading it as 'no complaints'. 2026-11-25: the Atlassian Marketplace REST API (rest/2) gives app search with review and install counts, and dated reviews, as JSON (paths 3 and 4). Other work-app and IDE marketplaces are B13."
+    },
+    {
+      "id": "B13",
+      "group": "B",
+      "name": "Work-app and IDE marketplaces",
+      "evidence": "spend",
+      "status": "ok",
+      "lastVerified": "2026-11-25",
+      "paths": [
+        {
+          "url": "https://workspace.google.com/marketplace/search/{q}",
+          "client": "curl",
+          "verified": "2026-11-25",
+          "result": "Google Workspace Marketplace: cards with app name, developer, rating and user count ('grading': Flubaroo 4.6, 44M+; Doctopus 4.1, 41M+), and links /marketplace/app/{slug}/{id}. Probed 2026-11-25 from PManager's cloud environment, not the Finder's; both have full internet access, so expect the same answer, and the Finder's own first fetch is the one that counts.",
+          "probeUrl": "https://workspace.google.com/marketplace/search/grading",
+          "expect": "users",
+          "probeOutcome": "ok",
+          "probeDetail": "HTTP 200, 1412705B"
+        },
+        {
+          "url": "https://workspace.google.com/marketplace/app/{slug}/{id}",
+          "client": "curl",
+          "verified": "2026-11-25",
+          "result": "App page: a Pricing line (\"Free of charge\", or paid), user count, rating count, \"Listing updated\" date and dated reviews in the HTML. WebFetch shows the pricing, users and rating but no reviews. Probed 2026-11-25 from PManager's cloud environment, not the Finder's; both have full internet access, so expect the same answer, and the Finder's own first fetch is the one that counts.",
+          "probeUrl": "https://workspace.google.com/marketplace/app/flubaroo/817638980086",
+          "expect": "Listing updated",
+          "probeOutcome": "ok",
+          "probeDetail": "HTTP 200, 869571B"
+        },
+        {
+          "url": "https://plugins.jetbrains.com/api/searchPlugins?search={q}&max=20&pricingModels=PAID",
+          "client": "curl",
+          "verified": "2026-11-25",
+          "result": "JetBrains Marketplace: JSON plugins with id, name, pricingModel (FREE, PAID, ...), downloads and link (the page is https://plugins.jetbrains.com plus link); drop pricingModels to see all. https://plugins.jetbrains.com/api/plugins/{id} adds purchaseInfo and trialPeriod. Probed 2026-11-25 from PManager's cloud environment, not the Finder's; both have full internet access, so expect the same answer, and the Finder's own first fetch is the one that counts.",
+          "probeUrl": "https://plugins.jetbrains.com/api/searchPlugins?search=test&max=10&pricingModels=PAID",
+          "expect": "pricingModel",
+          "probeOutcome": "ok",
+          "probeDetail": "HTTP 200, 6217B"
+        },
+        {
+          "url": "https://plugins.jetbrains.com/api/plugins/{id}/comments?size=20",
+          "client": "both",
+          "verified": "2026-11-25",
+          "result": "JSON reviews with cdate (Unix milliseconds, as a string), rating and the comment; read by curl and WebFetch. Probed 2026-11-25 from PManager's cloud environment, not the Finder's; both have full internet access, so expect the same answer, and the Finder's own first fetch is the one that counts.",
+          "probeUrl": "https://plugins.jetbrains.com/api/plugins/18289/comments?size=5",
+          "expect": "cdate",
+          "probeOutcome": "ok",
+          "probeDetail": "HTTP 200, 3405B"
+        },
+        {
+          "url": "https://slack.com/marketplace/search?q={q}",
+          "client": "curl",
+          "verified": "2026-11-25",
+          "result": "Slack Marketplace: HTML with embedded JSON per app, name, description and pricing_info (free, freemium, paid, paid_free_trial, included_with_subscription). No reviews, install counts or dates, and app pages carry none either; WebFetch shows only the title. Probed 2026-11-25 from PManager's cloud environment, not the Finder's; both have full internet access, so expect the same answer, and the Finder's own first fetch is the one that counts.",
+          "probeUrl": "https://slack.com/marketplace/search?q=timesheet",
+          "expect": "pricing_info",
+          "probeOutcome": "ok",
+          "probeDetail": "HTTP 200, 150042B"
+        },
+        {
+          "url": "https://www.notion.com/templates/search?query={q}",
+          "client": "curl",
+          "verified": "2026-11-25",
+          "result": "Notion template marketplace: embedded JSON per template with name, creator and price in dollars (0 when free). A template page https://www.notion.com/templates/{slug} adds a rating and rating count, but no dates; WebFetch showed no price. Probed 2026-11-25 from PManager's cloud environment, not the Finder's; both have full internet access, so expect the same answer, and the Finder's own first fetch is the one that counts.",
+          "probeUrl": "https://www.notion.com/templates/search?query=invoice",
+          "expect": "\"price\"",
+          "probeOutcome": "ok",
+          "probeDetail": "HTTP 200, 675896B"
+        },
+        {
+          "url": "https://marketplace.zoom.us/api/v1/apps/search?q={q}&pageSize=20",
+          "client": "both",
+          "verified": "2026-11-25",
+          "result": "Zoom App Marketplace: JSON apps with name, company, description and ratingStatistics (totalRatings, averageRating, rating1Count to rating5Count). No price and no dates; the app detail and review endpoints answer 401 and the app pages are a JavaScript shell. Probed 2026-11-25 from PManager's cloud environment, not the Finder's; both have full internet access, so expect the same answer, and the Finder's own first fetch is the one that counts.",
+          "probeUrl": "https://marketplace.zoom.us/api/v1/apps/search?q=attendance&pageSize=5",
+          "expect": "ratingStatistics",
+          "probeOutcome": "ok",
+          "probeDetail": "HTTP 200, 3657B"
+        }
+      ],
+      "notes": "Stores where small teams, developers and instructors buy add-ons for tools they already use. A paid listing or paid tier with many users or ratings is spend evidence: state the price or label and the count. Dated 1 and 2 star reviews (Google Workspace, JetBrains) are complaints from paying users. Slack's paid label alone supports willingnessToPay 3 at most, and Notion and Zoom carry no dates, so they cannot meet the recency rule. The Atlassian Marketplace stays in B12. Not added, because both clients got nothing usable on 2026-11-25: Figma Community (search, plugin list and plugin pages are a JavaScript shell to curl and HTTP 403 to WebFetch) and the monday.com marketplace (home, search and listing pages are a shell to both). Probed from PManager's environment, not the Finder's."
     },
     {
       "id": "C1",

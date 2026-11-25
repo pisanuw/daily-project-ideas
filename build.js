@@ -173,7 +173,7 @@ const COMMERCIAL_KEYS = [
   'problemEvidence', 'competitors', 'mvpScope', 'pricing', 'revenueSketch',
   'distribution', 'validationTest', 'moat', 'compliance', 'risks',
   'scores', 'scoreRationale', 'review', 'confidence', 'gateGap',
-  'smallBusiness', 'public',
+  'smallBusiness', 'public', 'wildcard', 'wildcardReason',
 ];
 
 // ---- Audience -------------------------------------------------------------

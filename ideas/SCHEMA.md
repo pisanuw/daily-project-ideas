@@ -160,6 +160,15 @@ version history:
     ideas without `shape` are judged by the build routine against the same
     rubric. The fields change no score and no gate;
     `scripts/validate_ideas.py` checks them on files from 2026-11-10.
+  - `wildcard` and `wildcardReason` (optional, added 2026-11-25, owner's
+    decision). A first run may ship one extra idea chosen for how interesting
+    it is and how well it fits the owner, even when a free tool partly covers
+    the job: `wildcard: true`, and `wildcardReason`, one or two sentences on
+    why. It is scored, reviewed and gated like any other idea (`confidence` is
+    still validated or provisional), counts outside the day's 3 to 5 and its
+    small-business and build-plan floors, and still counts toward the caps of
+    10 ideas and 2 per category. At most one a day. Other ideas omit both
+    fields. The notes view labels it.
 
 ### Topic files added 2026-11-01
 

@@ -7,7 +7,10 @@ Prints OK and exits 0 when the file passes, otherwise prints one problem per
 line and exits 1. Checks structure, the quality gate for validated ideas, the
 floor for provisional ones, and the evidence rules from ROUTINE.md. On files
 dated 2026-11-10 or later it also checks the shape rubric (`shape`,
-`substantial`), `platformNeeds` and the weekly build's `buildPlan`. It cannot
+`substantial`), `platformNeeds` and the weekly build's `buildPlan`. It checks
+the wildcard (ROUTINE.md Step 4, owner 2026-11-25): at most one a day, with a
+`wildcardReason`, and left out of the day's count of 3 and of the
+small-business and build-plan checks, which the other ideas must meet. It cannot
 check that URLs appeared in the run's search results; the routine does that by
 hand.
 
@@ -46,6 +49,7 @@ MAX_IDEAS = 10  # per day, first run plus extra runs (2026-11-04)
 MIN_IDEAS = 3  # since 2026-11-04
 MAX_PROVISIONAL = 10  # per day; ROUTINE.md caps each run (4 first, 3 extra)
 MAX_PER_CATEGORY = 2
+MAX_WILDCARDS = 1  # per day: one in the first run, none in extra runs (2026-11-25)
 MIN_TOTAL = 22
 RECENT_DAYS = 90
 FLOOR_DAYS = 180
@@ -295,6 +299,16 @@ def check_idea(idea, expected_n, today, errs):
         if pages < 1:
             errs.append(f"{tag}: provisional needs at least one evidence page")
 
+    if "wildcard" in idea and not isinstance(idea["wildcard"], bool):
+        errs.append(f"{tag}: wildcard must be true or false")
+    reason = idea.get("wildcardReason")
+    if idea.get("wildcard") is True:
+        if not isinstance(reason, str) or not reason.strip():
+            errs.append(f"{tag}: a wildcard needs wildcardReason: why it is interesting "
+                        "and fits the owner")
+    elif reason is not None:
+        errs.append(f"{tag}: wildcardReason belongs only on an idea with wildcard true")
+
 
 def main(path):
     errs = []
@@ -314,6 +328,9 @@ def main(path):
     run_notes = data.get("runNotes") or {}
     ideas = [i for i in data.get("ideas", [])
              if str(i.get("complexity", "")).lower() != "research"]
+    # The wildcard ships on top of the day's ideas (ROUTINE.md Step 4), so the
+    # day's count and floors are measured without it.
+    regular = [i for i in ideas if i.get("wildcard") is not True]
 
     if not ideas:
         if not run_notes.get("floorFailure"):
@@ -321,9 +338,11 @@ def main(path):
                         "candidate met the floor, runNotes.floorFailure must name "
                         "the floor condition that stopped every one of them, and "
                         "the run log must record it too")
-    if ideas and len(ideas) < MIN_IDEAS and not run_notes.get("caveats"):
-        errs.append(f"{len(ideas)} ideas: a first run ships at least {MIN_IDEAS}; if "
-                    "fewer met the floor, runNotes.caveats must say why")
+    if ideas and len(regular) < MIN_IDEAS and not run_notes.get("caveats"):
+        errs.append(f"{len(regular)} ideas besides the wildcard: a first run ships at least "
+                    f"{MIN_IDEAS}; if fewer met the floor, runNotes.caveats must say why")
+    if len(ideas) - len(regular) > MAX_WILDCARDS:
+        errs.append(f"{len(ideas) - len(regular)} wildcards, maximum is {MAX_WILDCARDS} a day")
     if len(ideas) > MAX_IDEAS:
         errs.append(f"{len(ideas)} ideas, maximum is {MAX_IDEAS}")
 
@@ -350,11 +369,11 @@ def main(path):
     for i in ideas:
         if "smallBusiness" in i and not isinstance(i["smallBusiness"], bool):
             errs.append(f"idea {i.get('n', '?')}: smallBusiness must be true or false")
-    if ideas and not any(is_small_business(i) for i in ideas):
+    if ideas and not any(is_small_business(i) for i in regular):
         if not run_notes.get("caveats"):
             errs.append("no idea has a small-business buyer and runNotes.caveats does "
                         "not explain why none qualified")
-    if ideas and today >= SHAPE_FROM and not any(is_buildable(i) for i in ideas):
+    if ideas and today >= SHAPE_FROM and not any(is_buildable(i) for i in regular):
         if not run_notes.get("caveats"):
             errs.append("no idea is substantial, Multi-week and carries a buildPlan, so "
                         "the weekly build has nothing to pick, and runNotes.caveats "

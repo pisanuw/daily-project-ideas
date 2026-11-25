@@ -76,6 +76,7 @@
     if (idea.category && NOTES_MODE) tags.push(el('span', { class: 'tag', text: idea.category }));
     if (NOTES_MODE && idea.scores && idea.scores.total) tags.push(el('span', { class: 'tag tag--score', text: 'Score ' + idea.scores.total + '/30' }));
     if (NOTES_MODE && idea.confidence === 'provisional') tags.push(el('span', { class: 'tag tag--provisional', text: 'Provisional' }));
+    if (NOTES_MODE && idea.wildcard === true) tags.push(el('span', { class: 'tag tag--wildcard', text: 'Wildcard' }));
     if (idea.implemented && idea.url) tags.push(el('span', { class: 'tag tag--live', text: 'Live ↗' }));
 
     var node = el('button', { class: 'card', type: 'button' }, [
@@ -401,6 +402,7 @@
     var blocks = [
       scorePanel(idea),
       gapBlock(idea),
+      idea.wildcard === true ? detailSection('Wildcard: why it is here', para(idea.wildcardReason)) : null,
       detailSection('Problem', para(idea.problemStatement, 'problem')),
       detailSection('What it is', para(idea.description)),
       detailSection('Who it is for', defList([

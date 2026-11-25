@@ -724,3 +724,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-25 [doc] Created ideas/2026-11-25.json (schemaVersion 3, 3 ideas): Exam Room for R (17, provisional), Classroom50 Deadline Grade (17, provisional), Export Coverage Check (15, provisional)
 
 2026-11-25 [doc] Extra run (owner directive, CS-teaching sources A5 A12 A13 A3 B11 B12 C2 C4 C10) added 0 ideas to ideas/2026-11-25.json: 0 ideas: floor not met, see run log
+
+2026-11-25 [decision] Finder widened (owner, "1 A+B+D, 2 yes"): new sources A17 Lobsters, A18 Stack Exchange beyond education, A19 GitHub Discussions, A20 App Store reviews, B13 work-app and IDE marketplaces; a daily wildcard idea (wildcard, wildcardReason; validator, build and site updated); dormant keyed paths for Reddit and Product Hunt (status ok-key)

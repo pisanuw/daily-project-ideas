@@ -135,6 +135,8 @@ def main(argv):
         if wanted and src["id"] not in wanted:
             continue
         for path in src.get("paths") or []:
+            if path.get("client") == "keyed":
+                continue  # needs credentials this probe does not have (ROUTINE.md, Keyed APIs)
             url = path.get("probeUrl") or path.get("url")
             if not url or "{" in url:
                 continue  # still templated, nothing concrete to probe
@@ -172,8 +174,9 @@ def main(argv):
         if reachable_now != reachable_before:
             changes.append((src, recorded, observed))
         if args.write:
-            # Keep a hand-set "ok" when curl agrees it is reachable.
-            if reachable_now and recorded == "ok":
+            # Keep a hand-set "ok" when curl agrees it is reachable, and "ok-key",
+            # which a run measured with keys that this probe does not have.
+            if (reachable_now and recorded == "ok") or recorded == "ok-key":
                 pass
             else:
                 src["status"] = observed
