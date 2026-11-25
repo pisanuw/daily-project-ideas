@@ -716,3 +716,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-23 [doc] Created ideas/2026-11-23.json (schemaVersion 3, 4 ideas): Exempt Sales (16, provisional), Cover Check (16, provisional), Levy Book (14, provisional), Use Tax (10, provisional)
 
 2026-11-24 [doc] Created ideas/2026-11-24.json (schemaVersion 3, 1 idea): Zeffy Signed Waivers (16, provisional); research ended 15 of 16 researched candidates
+
+2026-11-24 [doc] screen-reader-journeys (standalone, own repo pisan-labs/screen-reader-journeys) marked implemented for its 25 November launch: implemented.json entry with url, notes and publicNotes; studio.json entry (developers); web/media/screen-reader-journeys.jpg, a screenshot of the live signed-out home page.
