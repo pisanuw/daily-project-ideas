@@ -262,6 +262,684 @@
         ],
         "closedBy": "The waitlist and search-ad test: 5 sign-ups and 8 price clicks at $1 per signed participant would confirm willingness to pay; dated complaints that an insurer, a lawyer or a school board rejected the checkbox would lift pain to 4."
       }
+    },
+    {
+      "n": 2,
+      "title": "Volunteer Match Schedules for Grants",
+      "slug": "volunteer-match-schedules-for-grants",
+      "category": "Accessibility & Compliance",
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Data & Visualization",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": true,
+        "engine": true,
+        "shared": true,
+        "notes": {
+          "stateful": "The organisation keeps its awards, role rates with their documented basis, imported hour entries, allocations and an audit log, and returns every month.",
+          "connected": "Imports the approved-hours CSV the organisation already exports from POINT (Hours Start Time, Contact, Hours Duration, Program, Status), Golden, SignUpGenius or a sheet.",
+          "unattended": "A scheduled job emails the program manager before each award's invoice date, listing approved hours not yet allocated and awards short of their match.",
+          "engine": "Values each entry from a role rate table with its basis (2 CFR 200.306(e)), locks each entry to exactly one award (200.306(b)(2)) and enforces caps per award period.",
+          "shared": "The program manager prepares a monthly match schedule and backup pack that the grantor's monitor receives with the reimbursement invoice."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "email",
+        "scheduled"
+      ],
+      "buildPlan": [
+        {
+          "n": 1,
+          "title": "One award, one schedule",
+          "delivers": "Sign in, create an award with its match requirement and period, import a POINT hours CSV, and see the month's matched hours and value at one rate.",
+          "acceptance": "A signed-in user imports a 50-row sample POINT export and the schedule total equals a hand-worked figure; deployed."
+        },
+        {
+          "n": 2,
+          "title": "Rate table with its basis",
+          "delivers": "Define roles with an hourly rate and the documented basis for it (the organisation's pay for similar work, a wage source), and value each entry by role.",
+          "acceptance": "Changing a role's rate revalues its entries; a rate with no basis recorded cannot be used in a schedule."
+        },
+        {
+          "n": 3,
+          "title": "Allocation and the double-count lock",
+          "delivers": "Allocate approved entries to one award; an entry already allocated cannot be counted for another award; caps per award period.",
+          "acceptance": "A test that allocates one entry to two awards is refused; an allocation past the period cap is flagged and kept out of the schedule."
+        },
+        {
+          "n": 4,
+          "title": "Monthly schedule and backup pack",
+          "delivers": "Download a monthly match schedule per award (CSV and PDF) and a backup pack listing each entry's volunteer, date, hours, role, rate, basis, source file and import time.",
+          "acceptance": "For a seeded month the schedule total equals the sum of allocated entries and the PDF opens with every entry listed."
+        },
+        {
+          "n": 5,
+          "title": "Other imports and reminders",
+          "delivers": "Map the columns of a Golden or SignUpGenius export or any sheet once and reuse the mapping; a reminder email before each invoice date.",
+          "acceptance": "A mapped sample sheet imports with no lost rows; a scheduled run sends exactly one reminder for a seeded award."
+        },
+        {
+          "n": 6,
+          "title": "Polish",
+          "delivers": "A plain-language guide for program managers, phone layout, keyboard and screen-reader pass, an audit-log view and a walkthrough test.",
+          "acceptance": "A walkthrough test runs sign-in to schedule export; axe reports no serious issues."
+        }
+      ],
+      "summary": "For small non-profits that meet a grant's match with volunteer time: turns hours from a free volunteer tool into a monthly match schedule per award, valued at documented rates and never counted twice.",
+      "public": {
+        "summary": "Turn your volunteers' hours into a monthly match schedule for each grant, ready to send with your invoice.",
+        "problem": "Your grant asks you to match it, and volunteer time can count, but only if every hour is documented, valued fairly and claimed for one grant only. Your hours sit in a volunteer app or a spreadsheet, so each month you rebuild the match by hand and hope nothing is counted twice.",
+        "forWhom": "Program managers and finance leads at small non-profits whose grants require a volunteer or in-kind match.",
+        "benefits": [
+          "A monthly match schedule for each grant, ready to attach",
+          "Every hour valued at a rate you can explain",
+          "No hour counted for two grants",
+          "A backup pack that answers a monitor's questions",
+          "A reminder before each invoice is due"
+        ],
+        "audience": "teams"
+      },
+      "problemStatement": "Volunteer hours sit in POINT, Golden, SignUpGenius or a spreadsheet, but a grant's match must be verifiable in the records, counted for no other federal award, and valued at rates consistent with pay for similar work; small non-profits rebuild that schedule by hand each month, and weak records can turn an in-kind match into a cash match or a smaller award.",
+      "description": "A companion to the free volunteer tool the organisation already uses. The program manager imports approved hours as CSV, sets up each match-requiring award with its period and required match, and keeps a role rate table where every rate carries its documented basis. Entries are allocated to exactly one award and locked against the others, with caps per period, and the app produces a monthly match schedule per award plus a backup pack listing every hour behind it. A scheduled reminder goes out before each invoice date. It prepares the schedule; the organisation still certifies it.",
+      "targetCustomer": "Program managers and grants or finance leads at small non-profits holding one or more grants that require a cost-share or in-kind match, such as state service commission Volunteer Generation Fund subgrantees, AmeriCorps programs and state pass-through grants.",
+      "buyer": "The organisation, from its program or admin budget; Florida's 2026-27 Volunteer Generation Fund notice lists volunteer management software as an allowable cost, so the grant itself may pay.",
+      "whyNow": "Florida's 2026-27 Volunteer Generation Fund notice (August 2026) requires a 50% cash or in-kind match with monthly invoices and the same documentation for the match; Zeffy has no hour tracking and Givebutter's volunteer request has been open since 2022; the free tools that track hours (POINT, Golden, VolunteerBadge) value them at one rate and do not allocate them to awards.",
+      "founderFit": "Nothing beyond building it alone.",
+      "problemEvidence": [
+        {
+          "url": "https://feedback.zeffy.com/feature-requests/p/volunteer-time-management",
+          "source": "feedback.zeffy.com",
+          "author": "poster A",
+          "date": "2026-10-22",
+          "kind": "complaint",
+          "summary": "A Zeffy organisation (role not stated) asks to track volunteer hours with its contacts in Zeffy; 8 votes, open; Zeffy has no hour tracking."
+        },
+        {
+          "url": "https://appsumo.com/products/hoursmith/questions/tracking-volunteer-hours-1524282/",
+          "source": "appsumo.com",
+          "author": "poster B",
+          "date": "2026-06-22",
+          "kind": "complaint",
+          "summary": "Non-profit staff evaluating tools ask whether volunteers can enter their own hours for approval and tracking; the vendor says its product cannot."
+        },
+        {
+          "url": "https://givebutter.canny.io/track/p/volunteer-management",
+          "source": "givebutter.canny.io",
+          "author": "poster C",
+          "date": "2026-04-28",
+          "kind": "complaint",
+          "summary": "A Givebutter user asks 'Please add a way to track volunteer hours!' on a 338-vote request open since 2022-01-24; another commenter (2025-04-26) asked for hours valued by state. No comment mentions grant match."
+        },
+        {
+          "url": "https://www.volunteerflorida.org/wp-content/uploads/2026/08/VGF-2026-NOFO.pdf",
+          "source": "volunteerflorida.org",
+          "author": "unknown",
+          "date": "2026-08-11",
+          "kind": "mandate",
+          "summary": "Florida's 2026-27 Volunteer Generation Fund notice: a 50% cash or in-kind match, up to $20,000 for each of about 25 organisations, monthly invoices with the same documentation required for the match; volunteer management software is an allowable cost."
+        },
+        {
+          "url": "https://apps.apple.com/app/id6824345952",
+          "source": "apps.apple.com",
+          "author": "unknown",
+          "date": "2026-11-04",
+          "kind": "spend",
+          "summary": "Volunteer Ledger, a paid app launched in October 2026 (version 0.7.0 on 2026-11-04; $34.99 a month launch price on volunteerledger.com), reports the in-kind value of volunteer time; no per-award allocation is described."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "VolunteerBadge",
+          "url": "https://www.volunteerbadge.com/pricing",
+          "price": "Free plan with in-kind match value and grant-ready PDF and CSV reports",
+          "gap": "One Independent Sector rate for every hour, no documented basis per role, no lock of an hour to one award, no caps per period, no monthly match schedule."
+        },
+        {
+          "name": "POINT",
+          "url": "https://pointapp.org/nonprofit-pricing",
+          "price": "Free plan with time tracking and reporting; Pro about $99 a month billed annually",
+          "gap": "Tracks and syncs hours (also to Givebutter) but does not value them for a match or allocate them to awards; program management is on Pro."
+        },
+        {
+          "name": "Track It Forward",
+          "url": "https://help.trackitforward.com/doc/reports-faq",
+          "price": "unknown",
+          "gap": "A custom dropdown such as 'Grant' lets a report total hours by grant, but its help pages mention no valuation, rate basis or guard against counting an hour twice."
+        },
+        {
+          "name": "Volunteer Ledger",
+          "url": "https://volunteerledger.com",
+          "price": "$34.99 a month launch price, $59.99 standard",
+          "gap": "Shows the in-kind value of volunteer time; nothing on allocation per award, match schedules or approvals."
+        },
+        {
+          "name": "Campai free volunteer hours log",
+          "url": "https://www.campai.com/us/tools/volunteer-hours-log/",
+          "price": "Free Excel template",
+          "gap": "A rate field and a signature line, but no allocation per grant and no monthly schedule."
+        }
+      ],
+      "keyFeatures": [
+        "Imports approved hours from POINT, Golden, SignUpGenius or a sheet",
+        "Role rates that store their documented basis",
+        "Each hour locked to one award, with caps per period",
+        "Monthly match schedule and backup pack per award",
+        "Reminder before each invoice date"
+      ],
+      "mvpScope": {
+        "features": [
+          "POINT CSV import",
+          "awards with match requirement and period",
+          "role rate table with basis",
+          "allocation with the one-award lock",
+          "monthly schedule CSV and PDF"
+        ],
+        "outOfScope": [
+          "volunteer self-logging and approval (free tools already do it)",
+          "Givebutter and Zeffy API imports (their APIs carry no hours)",
+          "student hour letters",
+          "certifying the match on the organisation's behalf"
+        ],
+        "buildEstimate": "6 build days"
+      },
+      "techStack": "React + Vite, the shared Supabase project for sign-in and per-app data, a scheduled job and transactional email; no paid third-party API.",
+      "pricing": {
+        "model": "Free for one award; paid from the second concurrent award",
+        "pricePoint": "$19 a month or $190 a year",
+        "rationale": "Below Volunteer Ledger ($34.99 a month) and SignUpGenius Gold ($29.99 a month); the free tier covers the common case of one award, and the lock against double counting only matters from the second award."
+      },
+      "revenueSketch": "Estimate: 100 organisations with two or more match-requiring awards at $190 a year = $19,000 a year; the count of such organisations is an assumption, not a measured figure.",
+      "distribution": "First 10: search content and a small search-ad test on match-documentation terms ('volunteer in-kind match', 'value volunteer hours grant match'), landing on a free match calculator; later a listing request through Givebutter's partner page (https://givebutter.com/partner; listing rules unknown: check before applying). r/nonprofit: rule unknown, check before posting (the rules page returned 403). Never post in the Givebutter or Zeffy feature boards, which hold the evidence.",
+      "validationTest": {
+        "method": "A landing page, 'Monthly in-kind match schedules for volunteer hours', with a free match calculator and a price button ($19 a month or $190 a year) leading to a waitlist that asks for the organisation and the grant; a 14-day search-ad test on match-documentation terms; no outreach, no contact with posters and no posts in evidence threads.",
+        "successCriteria": "At least 8 waitlist sign-ups from organisation email domains that name a match-requiring grant, and at least 3% of visitors clicking the price button, within 14 days.",
+        "cost": "About $150 to $250 in ads, a domain, and half a day for the calculator page."
+      },
+      "moat": "The rate-basis records and the one-award lock are grant rules that general volunteer tools have not built, and each organisation's history of schedules and backup packs becomes its record from year to year.",
+      "compliance": [
+        "2 CFR 200.306: the tool prepares a schedule; the organisation certifies it, so the app shows the regulation text and never gives a valuation opinion.",
+        "Privacy: volunteer names, emails and hours need a privacy notice and deletion on request; launch US-only to avoid GDPR at first.",
+        "Minors: no student hour letters and no self-logging, so the app holds no minors' accounts; coordinators import hours only.",
+        "Grant records: an append-only audit log and exports for the organisation's files."
+      ],
+      "risks": [
+        {
+          "risk": "No complaint specific to match was found; the demand may be for hour tracking, which is free.",
+          "mitigation": "Run the landing-page test before building and end the idea if it fails."
+        },
+        {
+          "risk": "POINT, VolunteerBadge or Volunteer Ledger adds per-award allocation.",
+          "mitigation": "Stay a thin companion that imports their exports, and keep the rate basis and the one-award lock as the core."
+        },
+        {
+          "risk": "Valuation liability if a monitor questions a rate.",
+          "mitigation": "Require a documented basis for every rate and label the output as prepared for the organisation's review."
+        },
+        {
+          "risk": "A small market: Florida's notice funds about 25 organisations.",
+          "mitigation": "Aim at every grant type that takes in-kind match, and price for organisations holding two or more awards."
+        }
+      ],
+      "scores": {
+        "pain": 3,
+        "willingnessToPay": 3,
+        "reachability": 2,
+        "competitiveGap": 2,
+        "feasibility": 4,
+        "complianceBurden": 4,
+        "total": 18
+      },
+      "scoreRationale": {
+        "pain": "Recent complaints ask for hour tracking (https://feedback.zeffy.com/feature-requests/p/volunteer-time-management, 2026-10-22) and the match rule has consequences (https://www.dcjs.virginia.gov/node/5508), but no complaint about documenting match itself was found, so 3.",
+        "willingnessToPay": "One paid app sells the in-kind value of volunteer time (Volunteer Ledger, https://apps.apple.com/app/id6824345952), and Florida allows software as a grant cost (https://www.volunteerflorida.org/wp-content/uploads/2026/08/VGF-2026-NOFO.pdf); VolunteerBadge's free in-kind value holds it at 3.",
+        "reachability": "Self-serve search only; no community whose promotion rule could be read, and state commissions would be partnerships (https://www.volunteerflorida.org/wp-content/uploads/2026/08/VGF-2026-NOFO.pdf).",
+        "competitiveGap": "VolunteerBadge gives approval, an audit trail, in-kind value and grant reports free (https://www.volunteerbadge.com/pricing) and Track It Forward reports by a grant field (https://help.trackitforward.com/doc/reports-faq); only the rate basis, the one-award lock, caps and the monthly schedule are left.",
+        "feasibility": "CSV import of a documented export (https://support.pointapp.org/knowledge/how-can-i-export-a-volunteers-hours-report-as-an-admin), rate tables, allocation, PDF, a scheduled email: about 6 build days once self-logging and API imports are dropped.",
+        "complianceBurden": "Volunteer names and hours only, no minors' accounts and no institutional contract; the grantee certifies the match (https://www.ecfr.gov/api/renderer/v1/content/enhanced/current/title-2?part=200&section=200.306)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Research kept the idea but narrowed it: POINT and Golden already track hours free, POINT syncs hours into Givebutter nightly, Zeffy closed its volunteer option, and no free product allocates hours to one award at 2 CFR 200.306 rates. The adversarial reviewer cut it from 19 to 18 (competitiveGap 3 to 2) after finding VolunteerBadge's free plan with approval, an audit trail, in-kind match value and grant reports; it found that every complaint asks for hour tracking, not match, that the AmeriCorps inspector general's $1 million figure covers all kinds of match, that Givebutter's and Zeffy's APIs carry no hours (so imports are CSV only), and that Florida allows software as a grant cost. It re-scoped the idea to a match schedule and allocation companion for organisations holding two or more match-requiring awards, dropped self-logging, API imports and student letters, and asked for a name unlike Volunteer Ledger's."
+      },
+      "inspiredBy": "https://www.volunteerflorida.org/wp-content/uploads/2026/08/VGF-2026-NOFO.pdf",
+      "gateGap": {
+        "missing": [
+          "total 18 is below 22",
+          "pain 3 is below 4: the complaints ask for hour tracking, which free tools give; no dated complaint about documenting a volunteer match was found"
+        ],
+        "closedBy": "The landing-page and search-ad test: 8 sign-ups that name a match-requiring grant and 3% price-button clicks would show willingness to pay; a dated complaint about a questioned or rejected volunteer match would lift pain to 4."
+      }
+    },
+    {
+      "n": 3,
+      "title": "Back Issue Article Index for Society Journals",
+      "slug": "back-issue-article-index-for-society-journals",
+      "category": "Creative & Prosumer",
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Writing & Language",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": false,
+        "engine": true,
+        "shared": true,
+        "notes": {
+          "stateful": "The editor keeps the society's issues, the articles found in each with their page spans, titles and authors, and every correction, and adds each new issue.",
+          "connected": "Reads the society's own born-digital issue PDFs and links each search result to the society's own copy at #page=N; exports CSV and JSON citations the society can send to PERSI or a philatelic library.",
+          "engine": "Proposes article boundaries from the contents page and headings, reassembles articles that continue on a later page, and extracts title, author and section.",
+          "shared": "The editor builds and corrects the index; members and the public search the embedded article-level page."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "llm"
+      ],
+      "buildPlan": [
+        {
+          "n": 1,
+          "title": "One issue, one index",
+          "delivers": "Sign in, upload one text-layer issue PDF, see its articles proposed from the contents page with title, author and page span, and search them.",
+          "acceptance": "On a sample 40-page issue, every article on the contents page appears with the right first page; a search for an author returns that article; deployed."
+        },
+        {
+          "n": 2,
+          "title": "Corrections and jumps",
+          "delivers": "Correct, split or merge proposed articles in a list view, and join an article that continues on a later page.",
+          "acceptance": "A seeded 'continued on page 10' article comes back as one result spanning both page ranges; corrections survive sign-out and sign-in."
+        },
+        {
+          "n": 3,
+          "title": "Backfile upload",
+          "delivers": "Upload a batch of past issues, process them in the background within a capped model budget per issue, and review them one by one.",
+          "acceptance": "A 20-issue batch processes with no lost issue and the model spend per issue stays under the set cap."
+        },
+        {
+          "n": 4,
+          "title": "Embeddable search page",
+          "delivers": "A public article-level search page with filters for author, year and section, linking to the society's own PDFs at the right page, embeddable in any website.",
+          "acceptance": "The page embeds in a test WordPress page and a plain HTML page; each result opens the society's PDF at the article's first page."
+        },
+        {
+          "n": 5,
+          "title": "Export and ownership",
+          "delivers": "Download the whole index as CSV and JSON, a citation list for PERSI or a philatelic library, and a static HTML copy of the search page.",
+          "acceptance": "The static copy works offline from a folder with the same results as the hosted page; the CSV re-imports into a spreadsheet with one row per article."
+        },
+        {
+          "n": 6,
+          "title": "Polish",
+          "delivers": "A plain-language guide for volunteer editors, phone layout, keyboard and screen-reader pass, a takedown process, and a walkthrough test.",
+          "acceptance": "A walkthrough test runs sign-in to export; axe reports no serious issues."
+        }
+      ],
+      "summary": "For volunteer editors of philatelic, natural-history and other small societies: turns decades of back-issue PDFs into an article-level index members can search, which the society keeps and can export.",
+      "public": {
+        "summary": "Turn your society's back issues into a searchable index of every article, by title, author and year.",
+        "problem": "Your society has published its journal for decades, but a member searching the archive gets whole issues back, if anything. Volunteers have tried to list every article by hand, it takes many hours, and articles that continue on a later page get lost.",
+        "forWhom": "Volunteer editors, librarians and webmasters of small societies that publish a journal or newsletter.",
+        "benefits": [
+          "Every article findable by title, author, year and section",
+          "Articles that continue on a later page come back whole",
+          "A search page you can put on your own website",
+          "An index you keep and can take with you"
+        ],
+        "audience": "teams"
+      },
+      "problemStatement": "Small societies keep decades of journal issues as PDFs that are searchable only by issue; volunteers split issues into articles and build indexes by hand, unreliably and over many hours, and articles that jump pages are lost.",
+      "description": "The editor uploads issue PDFs that already carry text. The app proposes each issue's articles from its contents page and headings, with title, author, section and page span, and joins articles that continue on a later page; the editor corrects them in a list. A public article-level search page links each result to the society's own PDF at the right page and embeds in any website, so the app hosts no page images. The whole index exports as CSV, JSON, a citation list and a static HTML copy. Scanned issues, members-only pages and comments are left out of the first version.",
+      "targetCustomer": "Volunteer editors, librarians and webmasters of small philatelic, natural-history and similar societies with about 50 to 500 back issues as text-layer PDFs; genealogy and local-history societies come second, since PERSI already indexes many of their periodicals.",
+      "buyer": "The society, from its publications or website budget, approved by its board or committee.",
+      "whyNow": "Societies are building article indexes by hand right now (a Scottish family history society launched one on 2026-05-08 with 100 issues still to list; a philatelic society finished one in 2026), and a stamp club posted a USD 3,000 to 5,000 job for article-level search on 2026-11-22.",
+      "founderFit": "Nothing beyond building it alone.",
+      "problemEvidence": [
+        {
+          "url": "https://www.freelancer.com/projects/wordpress/Build-Searchable-Journal-Archive",
+          "source": "freelancer.com",
+          "author": "poster A",
+          "date": "2026-11-22",
+          "kind": "spend",
+          "summary": "A stamp club officer posts a fixed USD 3,000 to 5,000 job (about 300 bids) for article-level search of a quarterly journal, including articles across non-adjacent pages, by author, advertiser and year; a volunteer splits issues by hand, 'which has not been reliable'. The club wants to own the code, which reads as a custom build."
+        },
+        {
+          "url": "https://bordersfhs.org.uk/magazine-article-index-now-live/",
+          "source": "bordersfhs.org.uk",
+          "author": "poster B",
+          "date": "2026-05-08",
+          "kind": "complaint",
+          "summary": "A family history society launches a hand-built index of over 1,000 magazine articles and says that, 'with over 100 issues to create listings for, that will take time'."
+        },
+        {
+          "url": "https://militaryphs.org/blog/2026/03/12/master-index-of-the-mphs-bulletin-now-available/",
+          "source": "militaryphs.org",
+          "author": "poster C",
+          "date": "2026-07-07",
+          "kind": "complaint",
+          "summary": "A philatelic society's site admin announces a topic index for 1937 to 2022 that a member 'spent many hours reading the back issues' to build; its own issue-level search warns that long articles were 'broken up and spread across issues and even years' (https://militaryphs.org/back-issues-search.html)."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "PERSI (Periodical Source Index)",
+          "url": "https://www.genealogycenter.info/persi/",
+          "price": "Free",
+          "gap": "Over 3.2 million subject citations to articles in genealogy and local-history periodicals, but citations only, not full text, and the society cannot embed or control it."
+        },
+        {
+          "name": "APRL Philatelic Union Catalog",
+          "url": "https://stamps.org/Services/Library/Philatelic-Union-Catalog-Details",
+          "price": "Free",
+          "gap": "Article records for philatelic periodicals, but in a library catalog, not on the society's own site with full-text search."
+        },
+        {
+          "name": "Archive in a Box",
+          "url": "https://www.archiveinabox.com/why-us.php",
+          "price": "Free for historical societies",
+          "gap": "PDF upload, page-level OCR and multi-page records, but no article splitting, no export and everything public."
+        },
+        {
+          "name": "WebEquipe PDF Search for WordPress",
+          "url": "https://wordpress.org/plugins/webequipe-pdf-search/",
+          "price": "Free; Pro OCR price unknown",
+          "gap": "One result per PDF, no articles and no author index."
+        },
+        {
+          "name": "Internet Archive full-text search",
+          "url": "https://help.archive.org/help/search-a-basic-guide/",
+          "price": "Free",
+          "gap": "Finds pages, not articles, and only for issues the society is willing to make public there."
+        }
+      ],
+      "keyFeatures": [
+        "Articles proposed from each issue's contents page and headings",
+        "Continued-on articles joined into one result",
+        "Correction list for the volunteer editor",
+        "Embeddable article-level search linking to the society's own PDFs",
+        "Full export: CSV, JSON, citations and a static copy"
+      ],
+      "mvpScope": {
+        "features": [
+          "text-layer PDF upload",
+          "article proposals with corrections",
+          "joining continued articles",
+          "embeddable search page",
+          "CSV, JSON and static export"
+        ],
+        "outOfScope": [
+          "OCR of scanned issues (a later add-on priced per page)",
+          "members-only pages tied to the society's membership system",
+          "hosting page images",
+          "comments, alerts and video transcripts"
+        ],
+        "buildEstimate": "6 to 7 build days"
+      },
+      "techStack": "React + Vite, in-browser PDF text extraction, the shared Supabase project for sign-in and the index, the LLM gateway with a capped budget per issue for article proposals.",
+      "pricing": {
+        "model": "A one-time backfile fee plus a small yearly fee per society",
+        "pricePoint": "$99 to index a backfile of up to 300 issues, then $49 a year",
+        "rationale": "Far below the USD 3,000 to 5,000 custom-build quote and the publishers' tools, near Omeka.net's $35 to $75 plans; the reviewer advised against bundling a large backfile into one yearly price because of the model cost per page."
+      },
+      "revenueSketch": "Estimate: 60 societies a year at $99 plus $49 a year = about $8,900 in the first year; the number of societies is an assumption, not a measured figure.",
+      "distribution": "First 10: a how-to article on indexing a society journal for The Philatelic Communicator of the American Philatelic Society's Writers Unit #30, whose journal says 'Manuscripts are welcomed on subjects of interest to writers, editors, and publishers of all forms of philatelic literature' (https://wu30.org/tpc/2025/20251t.pdf); advertising there: rule unknown, check before submitting. Second, a free WordPress.org plugin that embeds the search page: the directory allows a plugin that interfaces with an external service 'even for paid services' but forbids features locked behind payment and contacting servers without consent (https://developer.wordpress.org/plugins/wordpress-org/detailed-plugin-guidelines/). Never bid on, reply to or contact the evidence job's poster or the societies in the evidence.",
+      "validationTest": {
+        "method": "A landing page, 'An index of every article in your society's back issues', with a demo built from public-domain issues, a waitlist that asks for the society and its number of issues, and a '$99 backfile' price button; a two-week search-ad test on 'index society journal', 'searchable newsletter archive' and 'digitize back issues'; re-run the freelancer.com searches weekly for 4 weeks to count new paid jobs; no outreach.",
+        "successCriteria": "At least 10 waitlist sign-ups that name a society, 3 price-button clicks, and one more paid job for the same task within 4 weeks.",
+        "cost": "About $100 to $150 in ads, a domain and one build day for the demo."
+      },
+      "moat": "Article boundaries and continued-on joins tuned on many societies' layouts, and each society's corrected index, are hard to copy quickly; the full export keeps trust but means no lock-in.",
+      "compliance": [
+        "Copyright: contributors' and advertisers' rights to old issues rest with the society; terms say so and a takedown process removes an article from the index.",
+        "Privacy: editor accounts hold names and emails; genealogy newsletters name living people, so an index of names stays off by default.",
+        "No students' or minors' records and no institutional contract."
+      ],
+      "risks": [
+        {
+          "risk": "The one paid buyer wants a custom build it owns, not a subscription.",
+          "mitigation": "Full export and a static copy, and the price-button test before building."
+        },
+        {
+          "risk": "Free indexes (PERSI, APRL) already serve genealogy, local-history and philatelic subject search.",
+          "mitigation": "Sell full-text article search on the society's own site, and export citations to those indexes rather than compete with them."
+        },
+        {
+          "risk": "Article proposals go wrong on unusual layouts.",
+          "mitigation": "Born-digital PDFs only at first, every proposal corrected by the editor, and model reading of layouts is checked, since 'fluent output is not proof of accuracy' (https://islam.zmo.de/s/westafrica/page/ocr)."
+        },
+        {
+          "risk": "Model cost on large backfiles.",
+          "mitigation": "A capped budget per issue through the gateway and a one-time backfile fee."
+        }
+      ],
+      "scores": {
+        "pain": 3,
+        "willingnessToPay": 3,
+        "reachability": 3,
+        "competitiveGap": 2,
+        "feasibility": 3,
+        "complianceBurden": 4,
+        "total": 18
+      },
+      "scoreRationale": {
+        "pain": "One complaint inside a paid job (https://www.freelancer.com/projects/wordpress/Build-Searchable-Journal-Archive, manual splitting 'has not been reliable') and hand-built indexes at two societies (https://bordersfhs.org.uk/magazine-article-index-now-live/, https://militaryphs.org/blog/2026/03/12/master-index-of-the-mphs-bulletin-now-available/), which are workarounds more than complaints, so 3.",
+        "willingnessToPay": "One dated paid job at USD 3,000 to 5,000 for this task (https://www.freelancer.com/projects/wordpress/Build-Searchable-Journal-Archive), though for a custom build the club will own.",
+        "reachability": "A self-serve channel through the APS Writers Unit #30 journal, which welcomes submissions on publishing philatelic literature (https://wu30.org/tpc/2025/20251t.pdf), and the WordPress plugin directory (https://developer.wordpress.org/plugins/wordpress-org/detailed-plugin-guidelines/).",
+        "competitiveGap": "PERSI (https://www.genealogycenter.info/persi/) and APRL (https://stamps.org/Services/Library/Philatelic-Union-Catalog-Details) already give free article citations for genealogy, local-history and philatelic periodicals; only full-text article search on the society's own site is left.",
+        "feasibility": "Born-digital PDFs only, a list view for corrections, links to the society's own PDFs instead of hosted page images: 6 to 7 build days; scans and member gating would push it past 7 (https://islam.zmo.de/s/westafrica/page/ocr).",
+        "complianceBurden": "Contributor copyright and a takedown process; no students' records and no institutional contract (https://www.archiveinabox.com/why-us.php shows a free host that blocks downloads for the same reason)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Research confirmed the stamp club's job (USD 3,000 to 5,000, posted about 2026-11-22) and found no small-society tool that splits issues into articles and follows continued-on pages; it found the job was the only paid one in about 90 days of freelancer.com searches. The adversarial reviewer cut the researched version from 19 to 17 (competitiveGap 3 to 2, feasibility 3 to 2): PERSI and APRL's catalog already give free article citations for genealogy, local-history and philatelic periodicals; the only buyer wants to own a much larger custom build; the three MPHS pages are one society and a finished workaround, not complaints, and one quote was on a different page; scans, page images and member gating exceed 7 days; and OCR costs per page make a bundled backfile unprofitable. It added a new independent society building its index by hand (2026-05-08) and re-scoped the idea to born-digital PDFs with a list-view editor, links to the society's own PDFs and a full export, which it expected to raise feasibility to 3 or 4; this file takes 3, for a total of 18."
+      },
+      "inspiredBy": "https://www.freelancer.com/projects/wordpress/Build-Searchable-Journal-Archive",
+      "gateGap": {
+        "missing": [
+          "total 18 is below 22",
+          "pain 3 is below 4: one complaint inside a paid job, and societies' hand-built indexes are workarounds",
+          "willingnessToPay rests on one paid job, and it is for a custom build"
+        ],
+        "closedBy": "The landing-page and price-button test: 10 sign-ups naming a society and 3 clicks on the $99 backfile button would show that societies buy a product rather than a build; a second paid job within 4 weeks would make the spend more than one club's."
+      }
+    },
+    {
+      "n": 4,
+      "title": "Zeffy Payout Journals for Xero",
+      "slug": "zeffy-payout-journals-for-xero",
+      "category": "Micro-SaaS",
+      "complexity": "Weekend MVP",
+      "confidence": "provisional",
+      "topic": "Data & Visualization",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": false,
+        "engine": true,
+        "shared": true,
+        "notes": {
+          "stateful": "The treasurer keeps saved rules from campaign, rate and fund to Xero account codes and tracking categories, and a history of payout totals.",
+          "connected": "Reads Zeffy's per-payout and itemised payments exports and writes a Xero manual-journal import file, both the organisation's own files.",
+          "engine": "Groups payments by payout, checks the sum against the payout amount, takes refunds from the payout report, and builds a balanced journal against a Zeffy clearing account.",
+          "shared": "A one-page payout summary the treasurer makes and the board receives."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database"
+      ],
+      "summary": "For Zeffy organisations that keep their books in Xero: turns each Zeffy payout into a ready-to-import Xero journal, coded by campaign and fund.",
+      "public": {
+        "summary": "Turn each Zeffy payout into a Xero journal you can import, already split by campaign and fund.",
+        "problem": "Zeffy connects to QuickBooks but not to Xero, so every payout that lands in your bank has to be rebuilt by hand from two exports. You split it by campaign, find the refunds, and type it into Xero again each week or month.",
+        "forWhom": "Volunteer treasurers and bookkeepers of charities, clubs and school groups that take money through Zeffy and keep their books in Xero.",
+        "benefits": [
+          "Each payout matched to the payments inside it",
+          "Income coded to your accounts and tracking categories",
+          "Refunds caught, not missed",
+          "A one-page payout summary for the board"
+        ],
+        "audience": "teams"
+      },
+      "problemStatement": "Zeffy connects natively only to QuickBooks Online; a treasurer who keeps the books in Xero rebuilds each payout by hand from the payout export and the itemised payments export, splitting it by campaign and fund and adding refunds, which appear only in the payout report.",
+      "description": "The treasurer uploads Zeffy's per-payout export and the itemised payments export; the app maps columns by header, groups payments by payout and checks the total against the payout amount. Saved rules map each campaign, rate and fund to a Xero account code and up to two tracking categories, and refunds are taken from the payout report. It produces a balanced Xero manual-journal import against a Zeffy clearing account (Xero journals cannot post to a bank account), with a one-time guide to the bank rule that codes each Zeffy deposit to that clearing account, and a one-page payout summary for the board. Files are parsed in the browser; only rules and payout totals are saved.",
+      "targetCustomer": "Volunteer treasurers and part-time bookkeepers of small charities, clubs and school groups that take money through Zeffy (US, Canada, UK, Ireland, Australia) and keep their books in Xero.",
+      "buyer": "The organisation, from its admin budget; these buyers are price-sensitive, having chosen Zeffy because it is free and Xero because it is cheaper.",
+      "whyNow": "Zeffy launched in the UK, Australia and Ireland, where Xero is common, and says it connects natively only to QuickBooks (https://www.zeffy.com/en-au/integration/api); its Xero request has had comments every few weeks since August 2026 with no staff reply, while its 2026-11-17 release made per-payout exports usable for this.",
+      "founderFit": "Nothing beyond building it alone.",
+      "problemEvidence": [
+        {
+          "url": "https://feedback.zeffy.com/feature-requests/p/xero-integration",
+          "source": "feedback.zeffy.com",
+          "author": "poster A",
+          "date": "2026-09-15",
+          "kind": "complaint",
+          "summary": "Open request for a Xero integration (opened 2026-05-18, 10 votes, no staff reply); distinct accounts commented on 2026-08-28, 09-15, 09-17, 10-26, 11-18 and about 11-21, mostly '+1'; the 2026-09-15 commenter chose Xero because it is cheaper and has a non-profit discount."
+        },
+        {
+          "url": "https://feedback.zeffy.com/feature-requests/p/break-out-ticket-amount-and-additional-donation-amount-on-separate-line-items-in",
+          "source": "feedback.zeffy.com",
+          "author": "poster B",
+          "date": "2026-09-04",
+          "kind": "complaint",
+          "summary": "A user who imports Zeffy reports into Xero says ticket and added donation on one line force manual adjustment in Xero; 4 votes; Zeffy marked it complete on 2026-10-01."
+        },
+        {
+          "url": "https://xero.uservoice.com/forums/28866-new-integrations/suggestions/51241744-zeffy-integration-payments-mapped-to-accounts-ca",
+          "source": "xero.uservoice.com",
+          "author": "poster C",
+          "date": "2026-04-28",
+          "kind": "complaint",
+          "summary": "A service club asks on Xero's ideas forum for Zeffy payouts mapped to accounts, campaign and fund; 2 votes, no reply."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Zeffy's QuickBooks Online sync",
+          "url": "https://support.zeffy.com/connect-zeffy-to-quickbooks-online-dbfsa",
+          "price": "Free",
+          "gap": "QuickBooks only; nothing for organisations on Xero."
+        },
+        {
+          "name": "Zeffy's own payout exports",
+          "url": "https://www.zeffy.com/home/releases",
+          "price": "Free",
+          "gap": "Since 2026-11-17 a payout shows its payments by campaign, but it is still a spreadsheet with no mapping to ledger accounts; a treasurer's guide puts the manual job at 20 to 30 minutes a month."
+        },
+        {
+          "name": "Zapier Zeffy app",
+          "url": "https://zapier.com/apps/xero/integrations/zeffy",
+          "price": "Free plan; paid plans for multi-step Zaps",
+          "gap": "Payment and contact triggers only, no payout trigger, so it cannot reconcile a payout."
+        },
+        {
+          "name": "MoneyMinder",
+          "url": "https://moneyminder.com/pricing/",
+          "price": "$299 a year",
+          "gap": "Integrates Zeffy since 2026-07-22 but replaces the ledger; no help to an organisation that keeps its books in Xero."
+        },
+        {
+          "name": "Stripe-based tools (Xero's Stripe feed, Synder, A2X)",
+          "url": "https://support.zeffy.com/what-is-stripe-f1fsz",
+          "price": "varies",
+          "gap": "Zeffy does not let organisations connect their own Stripe account, so tools that read Stripe payouts do not apply."
+        }
+      ],
+      "keyFeatures": [
+        "Payout grouping with a total check",
+        "Saved rules from campaign, rate and fund to account codes and tracking",
+        "Refunds taken from the payout report",
+        "Balanced Xero journal against a clearing account",
+        "One-page payout summary for the board"
+      ],
+      "mvpScope": {
+        "features": [
+          "upload both Zeffy exports",
+          "header-mapped parsing in the browser",
+          "saved mapping rules",
+          "Xero manual-journal CSV",
+          "clearing-account setup guide"
+        ],
+        "outOfScope": [
+          "Xero API connection (more than 5 organisations needs a paid Xero developer tier)",
+          "Zeffy API (it has no payout object)",
+          "Gift Aid or sales-tax calculations"
+        ],
+        "buildEstimate": "4 to 5 build days"
+      },
+      "techStack": "React + Vite with in-browser CSV parsing, the shared Supabase project for sign-in and saved rules; no Xero or Zeffy API.",
+      "pricing": {
+        "model": "Per organisation, first three payouts free",
+        "pricePoint": "$49 a year or $5 a month",
+        "rationale": "Far below MoneyMinder ($299 a year) and Zapier's paid plans, because these buyers chose Zeffy for being free; three free payouts rather than one a month, since an organisation paid monthly would otherwise never pay."
+      },
+      "revenueSketch": "Estimate: 150 Zeffy organisations on Xero at $49 a year = $7,350 a year; the number of such organisations is unknown and this is an assumption.",
+      "distribution": "First 10: a landing page built for 'zeffy xero' searches and a small search-ad test in the UK, Ireland, Australia, New Zealand, Canada and the US; a later application to Zeffy's Experts directory (https://www.zeffy.com/home/affiliate-expert, rule unknown: check before applying). Zeffy's community guidelines say 'Off-topic promotion or spam doesn't belong here' (https://community.zeffy.com/community-guidelines): not a channel. Xero Community forum: rule unknown, check before posting. Never post on Zeffy's feature board or Xero's ideas forum, which hold the evidence.",
+      "validationTest": {
+        "method": "A landing page with a demo on a synthetic payout file, a '$49 a year' price button and a waitlist; search ads on 'zeffy xero', 'zeffy xero integration', 'zeffy accounting export' and 'zeffy payout report' for 3 weeks in the six countries; no outreach and no posts in evidence threads.",
+        "successCriteria": "At least 8 waitlist sign-ups and 3 price-button clicks in 3 weeks; stop if fewer than 3 sign-ups, if the ads cannot serve for lack of search volume, or if Zeffy announces a Xero sync.",
+        "cost": "About $150 in ads, a domain and one build day."
+      },
+      "moat": "Little: header mapping across Zeffy's changing exports, refund handling and the clearing-account pattern are small know-how; Zeffy could close the gap with a native Xero sync.",
+      "compliance": [
+        "Privacy: donor names, addresses and tributes are parsed in the browser and not stored; only rules and payout totals are saved (UK GDPR, the Australian Privacy Act, PIPEDA).",
+        "Minors: custom answers may hold children's names in school and youth groups, so those columns are dropped on import.",
+        "Accounting: the output is a journal for the treasurer to review and import; the app gives no Gift Aid or tax opinion."
+      ],
+      "risks": [
+        {
+          "risk": "Zeffy ships a native Xero sync.",
+          "mitigation": "Build small and stop on any Zeffy announcement of Xero."
+        },
+        {
+          "risk": "A tiny market: about ten voters on the Xero request.",
+          "mitigation": "Run the search-ad test before building."
+        },
+        {
+          "risk": "Zeffy's export columns change and vary by user.",
+          "mitigation": "Map columns by header and keep test fixtures from the documented exports."
+        },
+        {
+          "risk": "The manual job is small (20 to 30 minutes a month).",
+          "mitigation": "Price low and sell the board summary and the caught refunds, not the time saved alone."
+        }
+      ],
+      "scores": {
+        "pain": 2,
+        "willingnessToPay": 2,
+        "reachability": 2,
+        "competitiveGap": 3,
+        "feasibility": 4,
+        "complianceBurden": 4,
+        "total": 17
+      },
+      "scoreRationale": {
+        "pain": "About ten '+1' comments (https://feedback.zeffy.com/feature-requests/p/xero-integration), Zeffy fixed the ticket and donation split on 2026-10-01 (https://feedback.zeffy.com/feature-requests/p/break-out-ticket-amount-and-additional-donation-amount-on-separate-line-items-in), and a treasurer's guide puts the job at 20 to 30 minutes a month (https://www.zeffy.com/blog/understanding-zeffy-payouts-webinar-recap).",
+        "willingnessToPay": "No payment evidence from Xero users, and the 2026-09-15 commenter chose Xero to save money (https://feedback.zeffy.com/feature-requests/p/xero-integration).",
+        "reachability": "No App Store listing without the Xero API and no community that allows promotion; search intent only (https://xero.uservoice.com/forums/28866-new-integrations/suggestions/51241744-zeffy-integration-payments-mapped-to-accounts-ca).",
+        "competitiveGap": "No native, Zapier or Stripe-based path for Xero users (https://www.zeffy.com/en-au/integration/api, https://support.zeffy.com/what-is-stripe-f1fsz), but Zeffy's own exports keep improving (https://www.zeffy.com/home/releases).",
+        "feasibility": "CSV in, Xero journal CSV out against a clearing account, since Xero journals cannot post to a bank account (https://productideas.xero.com/forums/967133-reports-tax/suggestions/47749109-manual-journals-ability-to-post-journal-entries): 4 to 5 build days.",
+        "complianceBurden": "Parsed in the browser with only rules and totals stored (https://www.zeffy.com/blog/how-to-reconcile-zeffy-payouts)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Research ended the original QuickBooks-facing payout reconciler: Zeffy shipped per-payout exports on 2026-11-17 and an itemised QuickBooks sync on 2026-11-19, and MoneyMinder integrates Zeffy since 2026-07-22. It re-scoped the idea to Zeffy organisations on Xero, which have no path. The adversarial reviewer cut it from 19 to 17 (pain 3 to 2, willingnessToPay 3 to 2): the Xero request is ten '+1's with no payment evidence, Zeffy fixed the ticket and donation split upstream, a treasurer's guide on Zeffy's blog puts the manual job at 20 to 30 minutes a month, the MoneyMinder and QuickBooks posts are other customers, and Xero manual journals cannot post to a bank account, so the journal must use a clearing account and a bank rule. It found no free or cheap product for Xero users, since Zeffy does not let organisations connect their own Stripe account, and changed the free tier to three payouts."
+      },
+      "inspiredBy": "https://feedback.zeffy.com/feature-requests/p/xero-integration",
+      "gateGap": {
+        "missing": [
+          "total 17 is below 22",
+          "pain 2 is below 4: the complaints are short '+1's and the manual job takes 20 to 30 minutes a month",
+          "willingnessToPay 2 is below 3: no payment evidence from Zeffy organisations on Xero"
+        ],
+        "closedBy": "The search-ad test: 8 waitlist sign-ups and 3 clicks on the $49 price button in 3 weeks would lift willingnessToPay to 3; dated complaints from Xero treasurers about the time payouts take would lift pain."
+      }
     }
   ],
   "runNotes": {
@@ -270,7 +948,18 @@
     "focusSources": [
       "A14 Plugin and add-on support forums",
       "B1 Teachers Pay Teachers and Etsy",
-      "C10 Change events: shutdowns, price rises, removed free tiers"
+      "C10 Change events: shutdowns, price rises, removed free tiers",
+      "A3 Open-source teaching tools",
+      "A11 Accessibility practitioners",
+      "B6 Verified revenue dashboards",
+      "C6 Accreditation and standards changes",
+      "B9 Freelance build requests",
+      "A2 Other LMS and classroom forums",
+      "A5 Educator Stack Exchanges",
+      "A12 Ask HN and HN comments",
+      "A16 Vendor feature-request boards",
+      "B1 Teachers Pay Teachers and Etsy",
+      "B11 Freelance job boards"
     ],
     "searches": [
       "complaints-gatherer: wordpress.org support plugin Amelia \"lessons\" music school package recurring students feature request",
@@ -543,7 +1232,69 @@
       "main-session spend pass: freelancer.com API query=report card (spend pass, term reports)",
       "main-session spend pass: freelancer.com API query=first aid training (spend pass, first-aid renewals)",
       "main-session spend pass: swim school software makeup lessons tokens pricing per month (spend pass, makeup slots)",
-      "main-session spend pass: dance studio staff background check tracking software price (spend pass, NY registry)"
+      "main-session spend pass: dance studio staff background check tracking software price (spend pass, NY registry)",
+      "extra-a-gatherer: GitHub issues nbgrader is:issue state:open sort:reactions",
+      "extra-a-gatherer: GitHub issues repo:learningequality/kolibri teacher",
+      "extra-a-gatherer: GitHub issues repo:TEAMMATES/teammates",
+      "extra-a-gatherer: GitHub issues classroom teacher gradebook created:>2025-09-01",
+      "extra-a-gatherer: GitHub issues repo:PrairieLearn/PrairieLearn",
+      "extra-a-gatherer: GitHub issues repo:GibbonEdu/core",
+      "extra-a-gatherer: GitHub issues h5p teacher",
+      "extra-a-gatherer: discourse.jupyter.org nbgrader after:2026-08-01; classroom students after:2026-08-01",
+      "extra-a-gatherer: Moodle tracker JQL unresolved New Feature ordered by votes",
+      "extra-a-gatherer: ADA Title II compliance date 2026 2027 extension DOJ interim final rule",
+      "extra-a-gatherer: DOJ Title II NPRM October November 2026",
+      "extra-a-gatherer: site:community.spiceworks.com Title II school district",
+      "extra-a-gatherer: site:moodle.org forum accessibility Title II",
+      "extra-a-gatherer: school district teachers told to remove class websites Title II",
+      "extra-a-gatherer: district accessibility coordinator collecting VPAT ACR",
+      "extra-a-gatherer: Charities SORP 2026 small charities tier 1",
+      "extra-a-gatherer: 2026 law youth service organizations volunteers background check training",
+      "extra-a-gatherer: CSTA K-12 computer science standards revision 2026",
+      "extra-b-gatherer: trustmrr.com category/education, category/community, category/saas, category/productivity, /recent, search?q=school",
+      "extra-b-gatherer: freelancer.com active projects: school, nonprofit, charity, volunteer, donor, grant, scholarship, church, teacher, attendance, membership, tutoring, university, fundraising, club, parents, students, donation, report card, food bank, NGO, LMS",
+      "extra-b-gatherer: peopleperhour.com freelance-jobs q=charity; q=school",
+      "extra-education-gatherer: proteacher forum substitute coverage spreadsheet small school 2026",
+      "extra-education-gatherer: science fair coordinator judging assignments spreadsheet volunteer judges scoring forum",
+      "extra-education-gatherer: site:support.google.com/edu/classroom conference scheduling 2026",
+      "extra-education-gatherer: teacher forum field trip permission slips money collection chaperone 2026",
+      "extra-education-gatherer: 21st CCLC attendance data entry EZReports OR Cayen frustrating",
+      "extra-education-gatherer: student activity funds audit finding 2026",
+      "extra-education-gatherer: service hours families required per hour handbook 2026-2027 parent volunteer hours buyout",
+      "extra-education-gatherer: Stack Exchange academia, cseducators, matheducators latest; academia spreadsheet, recommendation letters track, scheduling, capstone sponsor, accommodation letter; cseducators capstone",
+      "extra-education-gatherer: hn.algolia.com 'as a teacher', 'our school uses', 'permission slips'",
+      "extra-education-gatherer: teacherspayteachers.com field trip planning forms",
+      "extra-education-gatherer: community.blackbaud.com API K-12 category 300 recent discussions; field trip; service hours",
+      "extra-nonprofit-gatherer: site:quickbooks.intuit.com nonprofit restricted grant funds track balance",
+      "extra-nonprofit-gatherer: quickbooks.intuit.com learn-support nonprofit grant funder report class budget vs actual 2026",
+      "extra-nonprofit-gatherer: site:quickbooks.intuit.com net assets with donor restrictions release grant nonprofit",
+      "extra-nonprofit-gatherer: nonprofit software feature request board canny volunteer hours OR grant reporting",
+      "extra-nonprofit-gatherer: Givebutter OR Donorbox OR Little Green Light OR Bloomerang feature requests board",
+      "extra-nonprofit-gatherer: volunteer background-check expiry church youth programs",
+      "extra-nonprofit-gatherer: food pantry monthly report unduplicated households",
+      "extra-nonprofit-gatherer: conflict-of-interest annual disclosure Form 990 line 12b",
+      "extra-nonprofit-gatherer: feedback.zeffy.com newest, volunteer, grant, report, quickbooks, in-kind",
+      "extra-nonprofit-gatherer: givebutter.canny.io track and raise: volunteer, grant; payouts: quickbooks",
+      "extra-nonprofit-gatherer: hn.algolia.com nonprofit spreadsheet; volunteer hours; our nonprofit",
+      "extra-nonprofit-gatherer: civicrm Stack Exchange q=grant; q=volunteer",
+      "extra-grant-ledger-research: grant budget against actual QuickBooks Online; free post-award grant software; GrantLink pricing; Intuit App Partner Program tiers",
+      "extra-grant-ledger-research (spend): freelancer.com grant tracking; restricted funds; grant reporting quickbooks; nonprofit quickbooks; grant budget",
+      "extra-service-hours-research: Track It Forward parent volunteer hours buyout pricing; Helper Helper pricing; FACTS SIS parent service hours; 2026-2027 handbook per-hour FACTS charge",
+      "extra-service-hours-research (spend): freelancer.com volunteer hours; service hours school; volunteer tracking",
+      "extra-zeffy-payout-research: Zeffy QuickBooks help; Zeffy changelog; Zeffy Xero reconcile; MoneyMinder Zeffy; Xero developer pricing",
+      "extra-zeffy-payout-research (spend): freelancer.com zeffy; donation reconciliation; nonprofit bookkeeping; donations quickbooks",
+      "extra-volunteer-match-research: volunteer in-kind match AmeriCorps documentation; POINT pricing; Golden pricing; Volunteer Ledger; Volunteer Generation Fund 2026",
+      "extra-volunteer-match-research (spend): freelancer.com volunteer hours; volunteer tracking",
+      "extra-scholarship-review-research: scholarship committee spreadsheet Google Forms; Rotary scholarship software free; Kaleidoscope free for providers; Exponent Philanthropy vendor rules",
+      "extra-scholarship-review-research (spend): freelancer.com scholarship application portal; scholarship review",
+      "extra-nih-preflight-research: NIH common forms effective dates; NIH compliance checker tools; NIH formatting service prices",
+      "extra-nih-preflight-research (spend): freelancer.com NIH grant; NIH; biosketch; R01; grant formatting; specific aims; NIH proposal",
+      "extra-journal-archive-research: society newsletter back-issue archive searchable; WordPress PDF search plugin; Veridian pricing; APRL digitized journals; Omeka.net pricing",
+      "extra-journal-archive-research (spend): freelancer.com searchable archive; newsletter archive; back issues; journal archive; OCR newsletter; digitization; pdf search",
+      "extra-scholarship-review-review: ScholarsApp pricing; free scholarship review software blind conflict of interest; Evalato pricing; WordPress plugin scholarship review scoring",
+      "extra-volunteer-match-review: volunteer hours in-kind match grant tracking software; Track It Forward grant report; VOCA match waiver 2026; POINT export CSV",
+      "extra-zeffy-xero-review: Synder Zeffy; Zeffy Stripe account; Xero manual journal bank account; Zeffy launches UK Australia Ireland",
+      "extra-journal-archive-review: PERSI periodical source index; APRL article index; Biodiversity Heritage Library article segmentation; split journal issue PDF into articles tool"
     ],
     "unverifiedSignals": [
       {
@@ -605,6 +1356,38 @@
       {
         "url": "https://www.termsfeed.com/solutions/coppa/",
         "reason": "HTTP 403 from the site"
+      },
+      {
+        "url": "https://restrictedbooks.pages.dev/compare/pricing/quickbooks",
+        "reason": "Refused by this session's network (the host did not resolve); a possible restricted-funds product, not a site block."
+      },
+      {
+        "url": "https://trackitforward.com/pricing",
+        "reason": "HTTP 403 from the site on every www.trackitforward.com page; its prices are unknown (help.trackitforward.com is readable)."
+      },
+      {
+        "url": "https://www.scholarsapp.com/",
+        "reason": "A JavaScript-only page; its price and features come only from a third-party listing."
+      },
+      {
+        "url": "https://www.cdph.ca.gov/Programs/CID/DCDC/CDPH%20Document%20Library/Immunization/Annual_Immunization_Assessment_Reporting_2025-26.pdf",
+        "reason": "HTTP 503 through WebFetch and a TLS certificate error through the helper; the California reporting mandate was not read."
+      },
+      {
+        "url": "https://www.reddit.com/r/nonprofit/about/rules.json",
+        "reason": "HTTP 403 from the site; r/nonprofit's promotion rule is unknown."
+      },
+      {
+        "url": "https://productideas.xero.com/forums/966573-xero-partner-hub/suggestions/51240529-zeffy-as-a-non-profit-we-fundraise-on-zeffy-in",
+        "reason": "Returned the forum listing, not the idea; probably the same club as the Xero ideas-forum post used as evidence."
+      },
+      {
+        "url": "https://www.k12dive.com/press-release/20260923-edlio-launches-pdf-accessibility-tool-for-school-websites-1/",
+        "reason": "Seen only in a search result; not fetched."
+      },
+      {
+        "url": "https://pub.njleg.gov/bills/2026/S5000/4683_I1.HTM",
+        "reason": "A pending bill on youth-serving organisations, seen in search only; not law."
       }
     ],
     "rejectedCandidates": [
@@ -722,9 +1505,79 @@
         "title": "K-12 District AI Default Settings Tracker",
         "total": 11,
         "reason": "Rejection rule: unsellable without institutional procurement (school districts; Google's change for student accounts from early 2027)."
+      },
+      {
+        "title": "Grant Ledger for small non-profits on QuickBooks Online",
+        "total": 16,
+        "reason": "Research ended it: GrantLink ($59 a month, https://grantlink.app/faq) already gives QuickBooks Online non-profits per-grant budget against actual, restricted balances and funder reports; Intuit lists restricted funds as coming soon; the $999-a-month claim and the CIC job (pre-award writing) were misread."
+      },
+      {
+        "title": "Family Service Hours Ledger for private and parochial schools",
+        "total": 16,
+        "reason": "Research ended it: Helper Helper ($500 a year, https://k12.helperhelper.com/who-we-help/parent-volunteering), Track It Forward with a FACTS sync, OnVolunteers, Parent Booker and FACTS's own Family Portal hours already serve it; the 587 votes were about student hours and two Blackbaud threads were one school."
+      },
+      {
+        "title": "Scholarship Committee Review Room",
+        "total": 14,
+        "reason": "Reviewed and rescored from 16 to 14, then below the floor: the only evidence item within 180 days, a Hacker News comment of 2026-05-14 (194 days before this file's date), was about reading applications and matching sponsors, not review; Scholars App ($99 a year), a free Gravity Forms judging plugin (2026-07-15) and a free Taskade kit cover parts."
+      },
+      {
+        "title": "NIH Application Preflight for early-career researchers",
+        "total": 14,
+        "reason": "Research ended it: the one paid job was coursework ('my grading rubric'); NIH's eRA blocks non-compliant biosketches since 2026-05-08 (https://grants.nih.gov/grants/guide/notice-files/NOT-OD-26-079.html), SciENcv and Proposia's check are free, and Recensa claims the same preflight with a free daily check."
+      },
+      {
+        "title": "NIH Application Preflight",
+        "total": 18,
+        "reason": "Not researched; ranked below the reviewed candidates. Pain capped at 3: the only evidence is one paid job (https://www.freelancer.com/projects/grant-writing/NIH-Grant-Proposal-Format-Check, USD 30-250, 2026-11-23), no complaint; NIH ASSIST validation and university research offices check much of this free."
+      },
+      {
+        "title": "Society Journal Archive for volunteer-run societies",
+        "total": 17,
+        "reason": "Not researched; ranked below the reviewed candidates. One client only (https://www.freelancer.com/projects/wordpress/Build-Searchable-Journal-Archive, USD 3,000-5,000, 2026-11-22), who wants to own the code, which reads as a custom build; article segmentation of old scans is a feasibility risk."
+      },
+      {
+        "title": "Weekly Announcements Pipeline for churches",
+        "total": 16,
+        "reason": "Not researched; ranked below the reviewed candidates. No complaint found (pain capped); the spend signal is one product, bltn (https://trustmrr.com/startup/bltn.md), and the field is crowded (Planning Center, Flocknote, Canva plus Mailchimp)."
+      },
+      {
+        "title": "Edtech Accessibility Ledger (vendor ACR tracker for Title II)",
+        "total": 17,
+        "reason": "Rejection rule. Rejection rule: the buyer is a public school district or college, so the first sale needs institutional procurement; DOJ also moved the deadlines to 2027-04-26 and 2028-04-26 (https://www.govinfo.gov/content/pkg/FR-2026-04-20/html/2026-07663.htm) and may rewrite the rule."
+      },
+      {
+        "title": "Field Trip Packet for private and charter schools",
+        "total": 15,
+        "reason": "Not researched; ranked below the reviewed candidates. Crowded (PermissionClick, ParentSquare, Jotform, the SIS's own forms, $5 TPT packs at https://www.teacherspayteachers.com/browse?search=field%20trip%20planning%20forms) and it holds minors' medical data; the strongest complaint is an export gap in a system the school already pays for."
+      },
+      {
+        "title": "Test-Day Roll-Call for coaching institutes",
+        "total": 14,
+        "reason": "Not researched; ranked below the reviewed candidates. One client with a small INR budget (https://www.freelancer.com/projects/customer-service/Telecaller-for-Student-Reminders); WhatsApp and SMS tools and Google Forms already do reminders, and messaging costs are a paid third-party service."
+      },
+      {
+        "title": "Fee and Instalment Tracker for small private academies",
+        "total": 13,
+        "reason": "Not researched; ranked below the reviewed candidates. Four paid jobs in a week (for example https://www.freelancer.com/projects/full-stack-development/Build-Custom-School-Management-Student) but each client wants its own code, a custom build; free open-source school systems (Gibbon, OpenEduCat) and Fedena already cover fees and attendance, and it holds student records."
+      },
+      {
+        "title": "Learning Plan Sign-off for private schools",
+        "total": 13,
+        "reason": "Not researched; ranked below the reviewed candidates. One thread (https://community.blackbaud.com/discussion/85837/parent-signature-for-learning-profiles); students' disability records make the compliance burden heavy, and DocuSign and the SIS already cover signatures."
+      },
+      {
+        "title": "Standards and Rubric Reports for LMS teachers",
+        "total": 13,
+        "reason": "Not researched; ranked below the reviewed candidates. The complaints are 2010 to 2020 (https://moodle.atlassian.net/browse/MDL-21977, https://moodle.atlassian.net/browse/MDL-32089), a free Moodle plugin covers rubric export, mastery gradebooks are sold to districts, and student grade records add compliance weight."
+      },
+      {
+        "title": "Receipts and Payments Accounts Kit for small charities in England and Wales",
+        "total": 12,
+        "reason": "Not researched; ranked below the reviewed candidates. Mandate only, and it reduces work: from years ending on or after 2026-09-30 more charities may use receipts and payments accounts and fewer need an examination (https://www.gov.uk/guidance/changes-to-charity-accounting-and-reporting); free Charity Commission templates exist."
       }
     ],
     "watchlist": [],
-    "caveats": "Only one idea ships today, and it is provisional. Twenty-four candidates were scored (23 new and the one watchlist entry, re-researched); none came near the gate of 22. Three fell to rejection rules. Sixteen went to researchers, in four rounds down the ranked list, and research ended fifteen of them because an incumbent already does the same job for the same customer, often free or for about $17 a month (TutorBird and My Music Staff, iClassPro, autoCrat, CE-Go and Zoom's own certificates, Still Works, free course migrations, Aptem, OneFile and Bud for apprenticeship units, Livid and Gumlet for Vimeo moves, Homeschool Fox, PracticeAlly), or because the mandate has no start date or does not reach the buyer (New York S5257-C unsigned; England's Children Not in School provider duty in consultation; COPPA and parent-registered classes); three more were closed with pages already read today (tutoring back office, Florida coach screening, tutor reputation records), and three Teach 'n Go requests were merged into one candidate. Only the Zeffy waiver entry survived research, and its one adversarial review rescored it from 18 to 16. The run ran out of candidates after 1 review, so it ships fewer than 3 ideas and fewer than 10 reviews were held. No idea has a small-business buyer: the buyer of idea 1 is a small nonprofit, camp, club or parent group on Zeffy, which is free for nonprofits; no small-business candidate survived research. Idea 1 is substantial and Multi-week with a build plan. The selection constraint of one Weekend MVP and one Multi-week idea does not apply with one idea. The watchlist is empty: the only entry (first seen 2026-11-21) ships today as idea 1, and no other candidate scored 19 or more."
+    "caveats": "Only one idea ships today, and it is provisional. Twenty-four candidates were scored (23 new and the one watchlist entry, re-researched); none came near the gate of 22. Three fell to rejection rules. Sixteen went to researchers, in four rounds down the ranked list, and research ended fifteen of them because an incumbent already does the same job for the same customer, often free or for about $17 a month (TutorBird and My Music Staff, iClassPro, autoCrat, CE-Go and Zoom's own certificates, Still Works, free course migrations, Aptem, OneFile and Bud for apprenticeship units, Livid and Gumlet for Vimeo moves, Homeschool Fox, PracticeAlly), or because the mandate has no start date or does not reach the buyer (New York S5257-C unsigned; England's Children Not in School provider duty in consultation; COPPA and parent-registered classes); three more were closed with pages already read today (tutoring back office, Florida coach screening, tutor reputation records), and three Teach 'n Go requests were merged into one candidate. Only the Zeffy waiver entry survived research, and its one adversarial review rescored it from 18 to 16. The run ran out of candidates after 1 review, so it ships fewer than 3 ideas and fewer than 10 reviews were held. No idea has a small-business buyer: the buyer of idea 1 is a small nonprofit, camp, club or parent group on Zeffy, which is free for nonprofits; no small-business candidate survived research. Idea 1 is substantial and Multi-week with a build plan. The selection constraint of one Weekend MVP and one Multi-week idea does not apply with one idea. The watchlist is empty: the only entry (first seen 2026-11-21) ships today as idea 1, and no other candidate scored 19 or more. Extra run (random sources A3 A11 B6 C6 B9): run on the owner's direction recorded by PManager (ledger 2026-11-25T07:27Z, 'more education or non-profit like projects'), so every candidate was an education or non-profit idea and the random sources were searched with that lens, with supplementary searches on A2 (the Blackbaud K-12 community), A5, A12, A16 (the Zeffy and Givebutter boards), B1 and B11; it ran at 23:28 Los Angeles time on 24 November, so it adds to this file. It added ideas 2, 3 and 4, all provisional: Volunteer Match Schedules for Grants (18), Back Issue Article Index for Society Journals (18) and Zeffy Payout Journals for Xero (17). Fifteen candidates were scored; three had a small-business buyer (private schools, coaching institutes, private academies) and none of them reached research, so the day still has no small-business idea. Eight candidates were researched (four ended there) and four were reviewed (three survived, all rescored down; one fell below the floor). Ideas 2 and 3 are substantial and Multi-week with build plans; idea 4 is the Weekend MVP. The watchlist stays empty: no unshipped candidate scored 19 or more after research."
   }
 }

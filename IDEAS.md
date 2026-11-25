@@ -680,3 +680,6 @@
 | 2026-11-23 | Visitor Levy Book for Cardiff Letting Agents and Hosts | Small Business Ops | Multi-week | 14 | provisional |  |
 | 2026-11-23 | Software Use-Tax Worksheet for California and Colorado Bookkeepers | Accessibility & Compliance | Weekend MVP | 10 | provisional |  |
 | 2026-11-24 | Signed Waivers for Zeffy Event Tickets | Micro-SaaS | Multi-week | 16 | provisional |  |
+| 2026-11-24 | Volunteer Match Schedules for Grants | Accessibility & Compliance | Multi-week | 18 | provisional |  |
+| 2026-11-24 | Back Issue Article Index for Society Journals | Creative & Prosumer | Multi-week | 18 | provisional |  |
+| 2026-11-24 | Zeffy Payout Journals for Xero | Micro-SaaS | Weekend MVP | 17 | provisional |  |

@@ -718,3 +718,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-24 [doc] Created ideas/2026-11-24.json (schemaVersion 3, 1 idea): Zeffy Signed Waivers (16, provisional); research ended 15 of 16 researched candidates
 
 2026-11-24 [doc] screen-reader-journeys (standalone, own repo pisan-labs/screen-reader-journeys) marked implemented for its 25 November launch: implemented.json entry with url, notes and publicNotes; studio.json entry (developers); web/media/screen-reader-journeys.jpg, a screenshot of the live signed-out home page.
+
+2026-11-24 [doc] Extra run (random sources A3 A11 B6 C6 B9) added 3 ideas to ideas/2026-11-24.json: Volunteer Match (18, provisional), Back Issue Index (18, provisional), Zeffy Xero (17, provisional)
