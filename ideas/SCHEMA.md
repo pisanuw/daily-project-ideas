@@ -180,13 +180,15 @@ matches per idea, too loose to browse by.
 
 | File | Written by | Purpose |
 |---|---|---|
-| `ideas/topics-taxonomy.json` | by hand | The closed list of 13 topics, in display order. `build.js`, `scripts/tag_topics.py` and `scripts/validate_ideas.py` all read it, so the list cannot drift between them. Renaming or adding a topic means re-running the tagger with `--retag`, because existing assignments were made against the old list. |
-| `ideas/topics.json` | `scripts/tag_topics.py` | `{"<idea id>": "<topic>"}` for the archive, where the id is `YYYY-MM-DD-N`. Generated with the local `claude` CLI in batches of 40. |
+| `ideas/topics-taxonomy.json` | by hand | The closed list of 15 topics, in display order (13 from 2026-11-01; Small Business Operations and Nonprofit Operations added 2026-11-26). `build.js`, `scripts/tag_topics.py` and `scripts/validate_ideas.py` all read it, so the list cannot drift between them. When the list grows, tag only the ideas without a topic (a plain run of the tagger), preview the rest with `--retag --sample 1000` (it writes nothing) and copy into `topics.json` only the ideas the preview moves into the new topic. Do not keep a full `--retag`: on 26 Nov 2026 it moved 91 of the 601 archived ideas between old topics, because the tagger answers differently on a second run. Renaming a topic means renaming it in `topics.json` too. |
+| `ideas/topics.json` | `scripts/tag_topics.py` | `{"<idea id>": "<topic>"}`, where the id is `YYYY-MM-DD-N`. It holds a topic for every idea up to 2026-11-25: the archive, and the November ideas, where it overrides the Finder's own pick. Generated with the local `claude` CLI in batches of 40, which never tags an idea that carries its own topic on the list; later entries for such ideas are overrides written by hand. |
 
-The archive's topics live in `topics.json` rather than being written back into
-the daily files, because those files are an append-only record and a taxonomy
-that turns out wrong should be regenerable without rewriting them. New ideas
-carry their own `topic` field, and that always wins over `topics.json`.
+These topics live in `topics.json` rather than being written back into the
+daily files, because those files are an append-only record and a taxonomy that
+turns out wrong should be fixable without rewriting them. `build.js` shows an
+idea's `topics.json` entry when it has one on the list, and otherwise the
+idea's own `topic` field (since 2026-11-26; before that, build.js dropped the
+own field, so the ideas of 1 to 25 November showed no topic).
 
 ### Operational files added 2026-11-01
 

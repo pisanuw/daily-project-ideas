@@ -37,8 +37,10 @@ function topicSlug(name) {
     .replace(/^-|-$/g, '');
 }
 
-// An idea's own `topic` field wins (the routine writes it); ideas/topics.json
-// covers the archive, which predates the field.
+// ideas/topics.json wins: it holds a topic for every idea up to 2026-11-25
+// (the archive, which predates the field, and the November ideas, where it
+// overrides the Finder's own pick) and Keeper's later overrides. Otherwise the
+// idea's own `topic` field (the routine writes it) is shown.
 function loadTopics() {
   if (!fs.existsSync(TOPICS_FILE)) return {};
   try {
@@ -54,7 +56,9 @@ function applyTopics(ideas) {
   const known = new Set(TOPIC_NAMES);
   let off = 0;
   for (const idea of ideas) {
-    const topic = known.has(idea.topic) ? idea.topic : map[idea.id];
+    const fromMap = map[idea.id];
+    const topic = known.has(fromMap) ? fromMap
+      : known.has(idea.topic) ? idea.topic : (fromMap || idea.topic);
     if (topic && known.has(topic)) {
       idea.topic = topic;
       idea.topicSlug = topicSlug(topic);
@@ -250,6 +254,8 @@ function normalizeIdea(raw, date, n) {
   for (const key of COMMERCIAL_KEYS) {
     if (raw[key] !== undefined && raw[key] !== null && raw[key] !== '') base[key] = raw[key];
   }
+  // The idea's own topic; applyTopics lets ideas/topics.json override it.
+  if (raw.topic) base.topic = raw.topic;
   return base;
 }
 
