@@ -732,3 +732,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-26 [code] ads.txt for Google ads (owner): web/ads.txt, served at studio.hintwise.org/ads.txt; hintwise.org/ads.txt redirects there (same root domain)
 
 2026-11-26 [decision] Two new topics after Teaching Operations in ideas/topics-taxonomy.json (Keeper): Small Business Operations and Nonprofit Operations, answering the Finder's five topic requests of 21 to 24 Nov; tag_topics.py prompt guides the tagger to them. The Finder can use them once the owner updates roles/finder/ROUTINE.md.
+
+2026-11-26 [code] Retagged all 685 ideas against the 15 topics (tag_topics.py --retag, after fixing its skip of archived ideas): 65 Small Business Operations, 10 Nonprofit Operations, 84 November ideas that showed no topic now have one; 91 of 601 archived ideas also moved between old topics.
