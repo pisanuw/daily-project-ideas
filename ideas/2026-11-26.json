@@ -1,0 +1,1315 @@
+{
+  "date": "2026-11-26",
+  "schemaVersion": 3,
+  "complete": true,
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Overlay Exit Check for Small Shopify Shops",
+      "slug": "overlay-exit-check-for-small-shopify-shops",
+      "category": "Accessibility & Compliance",
+      "smallBusiness": true,
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Accessibility",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": true,
+        "engine": true,
+        "shared": true,
+        "notes": {
+          "stateful": "Each store keeps a dated history of runs and a fix log, so the owner can show when each problem was found and when it was fixed.",
+          "connected": "Walks the merchant's live storefront, authorised by a Shopify crawler access key the merchant creates in their own admin, which also proves they control the store.",
+          "unattended": "A weekly scheduled re-run of the buying path emails the owner and their developer when a step changes.",
+          "engine": "A journey runner that drives home, product, cart and checkout entry by keyboard, captures what a screen reader is given at each step, detects the overlay, and runs the path twice: overlay blocked, and overlay with its own screen-reader mode switched on.",
+          "shared": "The owner sends a read-only, revocable report link to the shop's developer, who works through the findings."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "email",
+        "scheduled",
+        "backend"
+      ],
+      "buildPlan": [
+        {
+          "n": 1,
+          "title": "One store, one walk",
+          "delivers": "Sign in, add a store you control (verified by a crawler access key or a theme meta tag), and get a deployed report of a keyboard walk from the home page to checkout entry with what a screen reader is told at each step.",
+          "acceptance": "On a test store the owner controls, the walk reaches checkout entry and the deployed report shows each step's announcement; an unverified store URL is refused."
+        },
+        {
+          "n": 2,
+          "title": "Overlay blocked and overlay switched on",
+          "delivers": "Detect the installed overlay, re-run the walk with its script blocked, and again with its screen-reader mode switched on, and show the three runs side by side per step.",
+          "acceptance": "On the test store with a free overlay plan installed, all three runs complete and the per-step differences appear; the 'on' run shows the overlay's screen-reader mode as active."
+        },
+        {
+          "n": 3,
+          "title": "Works across themes",
+          "delivers": "Selectors by role and name, cart drawer or cart page, variant pickers, popups recorded as findings, and the crawler-key header on every request.",
+          "acceptance": "The walk reaches checkout entry on at least 4 of 5 free Shopify themes; a run stopped by bot protection is labelled 'stopped at step N', with a screenshot."
+        },
+        {
+          "n": 4,
+          "title": "Findings the developer can act on",
+          "delivers": "Findings in plain words with the step, the element, the WCAG reference and a screenshot; PDF and CSV export; a revocable share link.",
+          "acceptance": "The export lists every failed step; the share link opens signed out and stops working once revoked."
+        },
+        {
+          "n": 5,
+          "title": "Fix log and weekly re-run",
+          "delivers": "Mark items fixed with a note, a scheduled weekly re-run, and an email when results change.",
+          "acceptance": "A fixed item clears on the next run and the log shows the found and fixed dates; a seeded change sends exactly one email."
+        },
+        {
+          "n": 6,
+          "title": "Payment and polish",
+          "delivers": "A one-off report and a monthly plan, owner README, phone layout, the app's own accessibility checked with Screen Reader Journeys, claims wording ('not an audit, not legal advice'), walkthrough test.",
+          "acceptance": "A new account buys and receives a report end to end; axe reports no serious issues; no page claims compliance or protection."
+        }
+      ],
+      "summary": "For small Shopify shops running an accessibility overlay: walks the buying path by keyboard with a screen reader's view, with the overlay blocked and with it switched on, and gives the shop's developer a dated findings list and a fix log before the owner decides whether to remove it.",
+      "public": {
+        "summary": "Find out whether a blind customer can actually get from your home page to checkout, with and without your accessibility widget.",
+        "problem": "You installed an accessibility widget because you were told it would protect you, but shops with widgets still get demand letters, and some widgets slow the site down. You have no way to see what a screen-reader user meets on the way to checkout, or what changes if you take the widget off.",
+        "forWhom": "Owners of small Shopify shops who run an accessibility widget or have received an accessibility complaint.",
+        "benefits": [
+          "See every step of your buying path the way a screen-reader user meets it",
+          "Know what your widget changes before you keep or remove it",
+          "Hand your developer a clear, dated list of what to fix",
+          "Keep a record of what was fixed and when",
+          "Hear about it when a theme or app update breaks the path again"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "Small Shopify merchants installed accessibility overlays to avoid lawsuits and were sued anyway: one installed accessiBe after a lawsuit and was 'hit with a second lawsuit soon after' for 'minor bugs' the widget did not catch; another says the overlay slowed the site and the vendor 'continues to misrepresent the legal coverage'; a UserWay customer paying $1,300 a year is in a lawsuit. They cannot see whether a screen-reader user can reach checkout, or what removing the widget would change.",
+      "description": "The owner adds their store and proves control with a Shopify crawler access key (or a theme meta tag). A worker on the backend, built on the engine of the owner's Screen Reader Journeys, walks home, a product page, add to cart, cart and checkout entry by keyboard and records what a screen reader is given at each step. It detects the installed overlay and runs the path twice more: with the overlay's script blocked, and with the overlay's own screen-reader mode switched on (accessiBe, for example, does not detect screen readers and needs Alt+1). The report lists failures in plain words with the step, the element, the WCAG reference and a screenshot, for the shop's developer; the owner marks fixes, and a weekly re-run updates the dated log. It makes no compliance or legal claim and is not an audit.",
+      "targetCustomer": "Owners of small US-facing Shopify stores who run an accessibility overlay (accessiBe, UserWay, Accessibly and similar) or who have received an accessibility demand letter, and the developer who looks after their theme.",
+      "buyer": "The store owner, on a personal or business card: a $49 one-off report, or $19 a month for re-runs and the fix log, against $49 to $349 a month for UserWay plans.",
+      "whyNow": "The FTC's final order of 2025-04-22 bars accessiBe from claiming its automated products make a site WCAG-compliant; UsableNet's 2026 report (updated 2026-11-25) says widgets 'do not materially reduce legal risk' and counts 95 to 155 suits a month against companies using them; merchants posted in July and September 2026 that they were sued despite a widget; and Shopify's crawler access keys (2025-08-29) let a merchant authorise their own testing tool past bot protection.",
+      "founderFit": "He ships web apps alone in days, and his own Screen Reader Journeys project already runs scripted screen-reader journeys through web apps, which is the engine this needs.",
+      "problemEvidence": [
+        {
+          "url": "https://apps.shopify.com/accesswidget/reviews?sort_by=newest",
+          "source": "apps.shopify.com",
+          "author": "poster A (US wholesale merchant, 6 months on the app)",
+          "date": "2026-09-18",
+          "kind": "complaint",
+          "summary": "Installed the accessiBe widget after a lawsuit and was 'hit with a second lawsuit soon after' over minor bugs the widget did not catch; the review is 4 stars and the merchant kept the app."
+        },
+        {
+          "url": "https://apps.shopify.com/accesswidget/reviews?sort_by=newest",
+          "source": "apps.shopify.com",
+          "author": "poster B (US merchant, 3 months on the app)",
+          "date": "2026-07-16",
+          "kind": "complaint",
+          "summary": "The widget slowed the site, was uninstalled, and the vendor 'continues to misrepresent the legal coverage'; 1 star, advises looking at other providers."
+        },
+        {
+          "url": "https://apps.shopify.com/userway-accessibility/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest",
+          "source": "apps.shopify.com",
+          "author": "poster C (US merchant)",
+          "date": "2024-11-04",
+          "kind": "complaint",
+          "summary": "Paid $1,300 for a yearly UserWay plan and is now in a lawsuit claiming the site is not compliant; their lawyer says widgets attract lawsuits."
+        },
+        {
+          "url": "https://apps.shopify.com/userway-accessibility/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest",
+          "source": "apps.shopify.com",
+          "author": "poster D (US merchant)",
+          "date": "2025-05-19",
+          "kind": "complaint",
+          "summary": "The paid version 'removed 0 items from the audit list provided by a third party… Waste of $50'."
+        },
+        {
+          "url": "https://apps.shopify.com/accessibly-app/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest",
+          "source": "apps.shopify.com",
+          "author": "poster E (US merchant in California)",
+          "date": "2025-05-04",
+          "kind": "complaint",
+          "summary": "'Got sued from a blind person and realized this app didn't protect us.'"
+        },
+        {
+          "url": "https://apps.shopify.com/userway-accessibility",
+          "source": "apps.shopify.com",
+          "author": "unknown",
+          "date": "2026-11-26",
+          "kind": "spend",
+          "summary": "UserWay's paid plans as read on 2026-11-26: Starter $49, Small Biz $149 and Growth $349 a month, sold with the claim 'Shield against accessibility-related lawsuits'; the listing has 11 reviews."
+        },
+        {
+          "url": "https://ftc.gov/news-events/news/press-releases/2025/04/ftc-approves-final-order-requiring-accessibe-pay-1-million",
+          "source": "ftc.gov",
+          "author": "unknown",
+          "date": "2025-04-22",
+          "kind": "mandate",
+          "summary": "Final FTC order: accessiBe pays $1 million and may not claim its automated products make any website WCAG-compliant without evidence."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Rated: Accessibility Checker",
+          "url": "https://apps.shopify.com/accessibility-checker-ada",
+          "price": "Free (home page only), $9 or $29 a month",
+          "gap": "axe-core rules on single buying-path pages; no keyboard or screen-reader journey and no overlay comparison; launched 2026-10-13 with 0 reviews."
+        },
+        {
+          "name": "AccessKit",
+          "url": "https://apps.shopify.com/accesskit",
+          "price": "$0 unlimited scans; $4.99 a month for scan history",
+          "gap": "Page scans only; no journey to checkout and no overlay comparison; launched 2026-07-28 with 0 reviews."
+        },
+        {
+          "name": "AccessifyAI",
+          "url": "https://apps.shopify.com/accessifyai",
+          "price": "Free for 10 pages; $4.99 or $14.99 a month",
+          "gap": "Lists keyboard use among page checks and offers a weekly scan, but runs no screen-reader journey and no overlay comparison; 2 reviews."
+        },
+        {
+          "name": "BrowserStack Screen Reader Experience Agent",
+          "url": "https://www.browserstack.com/docs/accessibility/screen-reader-launcher/screen-reader-experience-agent",
+          "price": "unknown (beta, on a developer platform)",
+          "gap": "Drives real NVDA through a task written in plain words, but it is a developer platform, not a merchant report, and has no overlay comparison or fix log."
+        },
+        {
+          "name": "AudioEye Expert Audits",
+          "url": "https://www.audioeye.com/solution/expert-audits/",
+          "price": "unknown",
+          "gap": "Manual audits that cover user flows, sold through sales; not self-serve for a small shop."
+        },
+        {
+          "name": "Accessibility Insights for Web",
+          "url": "https://accessibilityinsights.io/docs/web/overview/",
+          "price": "Free",
+          "gap": "A developer tool used page by page; its tab-stops step is only partly automated and it keeps no store history."
+        },
+        {
+          "name": "UserWay and accessiBe overlays",
+          "url": "https://apps.shopify.com/userway-accessibility",
+          "price": "UserWay $49 to $349 a month; accessiBe unknown",
+          "gap": "The product the owner is leaving; their low-star reviews say they did not stop lawsuits."
+        }
+      ],
+      "keyFeatures": [
+        "Keyboard and screen-reader walk from home page to checkout entry",
+        "Three runs per walk: overlay blocked, overlay idle, overlay's screen-reader mode on",
+        "Store control checked before any report is issued",
+        "Plain-language findings with step, element, WCAG reference and screenshot",
+        "Dated fix log and weekly re-run with change emails",
+        "Revocable share link and PDF for the developer"
+      ],
+      "mvpScope": {
+        "features": [
+          "Verified store and one buying-path walk",
+          "Overlay detection with blocked and switched-on runs",
+          "Findings, PDF export and share link",
+          "Dated fix log"
+        ],
+        "outOfScope": [
+          "Placing orders or completing payment",
+          "Full-site audits",
+          "Injecting scripts or auto-fixing",
+          "Any badge, certificate, compliance claim or legal advice",
+          "An embedded Shopify app",
+          "Real NVDA or VoiceOver runs (later, through Screen Reader Journeys)"
+        ],
+        "buildEstimate": "About 7 build days as a vertical of Screen Reader Journeys"
+      },
+      "techStack": "React + Vite front end, Supabase sign-in and per-app schema, the Screen Reader Journeys worker (headless browser) on Render, Resend for email, a hosted payment link.",
+      "pricing": {
+        "model": "One-off report plus an optional monthly plan",
+        "pricePoint": "$49 one-off exit report; $19 a month for weekly re-runs, the fix log and the share link",
+        "rationale": "Below UserWay's $49 to $349 a month and close to the $5 to $29 a month page scanners, justified by the journey and the overlay comparison; it is a report for a developer, not the audit a lawyer asks for after a demand letter, which costs far more."
+      },
+      "revenueSketch": "Estimate: 500 ad visitors a month converting at 2% gives 10 reports a month ($490); if 30% keep the $19 plan, about 18 subscribers ($340 a month) after six months. Unvalidated.",
+      "distribution": "Search ads on overlay-removal and widget-lawsuit queries to a landing page first. The Shopify App Store comes later and needs an embedded app: its rules say 'Apps that don't use or need any Shopify APIs are not permitted' (2.2.1), apps 'must use Shopify App Pricing or the Shopify Billing API for all app charges' (1.2), and 'Don't use stats, data, or unsubstantiated claims such as guarantees in the listing' (4.3.3) (https://shopify.dev/docs/apps/launch/shopify-app-store/app-store-requirements). Shopify Community: rule unknown: check before posting (its FAQ returned 429). Google Ads: rule unknown: check before posting.",
+      "validationTest": {
+        "method": "A landing page ('See what your accessibility widget is hiding: a screen-reader walk to your checkout, with the widget off and on') with a refundable $49 pre-order button and a waitlist that asks for a store URL, driven by a $150, two-week Google search-ad test on overlay-removal and widget-lawsuit queries. No outreach, and no posting in any review thread. In parallel, a one-day spike that reaches checkout entry on 5 free themes with accessiBe's screen-reader mode switched on.",
+        "successCriteria": "From at least 400 visitors, at least 5 refundable pre-orders or 15 price-button clicks with 8 waitlist sign-ups giving a store URL; the spike reaches checkout entry on at least 4 of 5 themes.",
+        "cost": "About $150 in ads and two days of work."
+      },
+      "moat": "Weak to moderate: a library of Shopify theme and cart-drawer journeys, overlay signatures and their screen-reader-mode switches, each store's dated history, and the Screen Reader Journeys engine that page scanners lack.",
+      "compliance": [
+        "Claims: no compliance, protection or legal-advice claims (FTC order against accessiBe; Shopify App Store requirement 4.3.3); label every report 'not an audit, not legal advice'.",
+        "Misuse: issue reports only for stores whose control is proven, since plaintiff firms already scan stores for widgets.",
+        "Accessibility: the app's own interface meets WCAG 2.2 AA.",
+        "Privacy (GDPR, UK GDPR): only merchant account data; synthetic data in checkout fields; no shopper data stored; crawler keys stored encrypted with an expiry."
+      ],
+      "risks": [
+        {
+          "risk": "Owners want legal protection, which a report cannot give, and money after a demand letter goes to lawyers and manual audits.",
+          "mitigation": "Sell it as the check before removing a widget and as a fix list for the developer; no badges; run the refundable pre-order test before building past milestone 1."
+        },
+        {
+          "risk": "Themes, popups and bot protection break the walk, and each overlay switches on its screen-reader mode differently.",
+          "mitigation": "Crawler access keys, selectors by role and name, 'stopped at step N' recorded as a finding, and overlay support added one vendor at a time starting with the two largest."
+        },
+        {
+          "risk": "The idea overlaps the published Popup Check (2026-11-03) for the same shops, and big vendors (BrowserStack) are adding screen-reader journeys.",
+          "mitigation": "Ship it as a vertical of Screen Reader Journeys that includes popups as findings, so Picker treats it as superseding Popup Check rather than shipping both."
+        }
+      ],
+      "scores": {
+        "pain": 4,
+        "willingnessToPay": 3,
+        "reachability": 3,
+        "competitiveGap": 3,
+        "feasibility": 3,
+        "complianceBurden": 4,
+        "total": 20
+      },
+      "scoreRationale": {
+        "pain": "Merchants on three overlay listings say they were sued despite the widget, one within 90 days (2026-09-18) and one within 180 (2026-07-16): https://apps.shopify.com/accesswidget/reviews?sort_by=newest and https://apps.shopify.com/userway-accessibility/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest.",
+        "willingnessToPay": "Merchants pay $49 to $349 a month for overlays (https://apps.shopify.com/userway-accessibility), but that money buys 'protection', the listings are small (11 and 17 reviews), and paid page scanners for this job sell at $5 to $29 a month with 0 to 2 reviews (https://apps.shopify.com/accessifyai): 3, not 4.",
+        "reachability": "Owners are outside the owner's stated network; the self-serve channel is paid search, already crowded by vendor guides (https://testparty.ai/blog/ada-demand-letter-shopify-merchant-guide), and the App Store needs an embedded app.",
+        "competitiveGap": "No merchant-facing tool runs a buying-path screen-reader walk or compares the store with the overlay off and on, but page scanners are cheap (https://apps.shopify.com/accesskit) and BrowserStack's beta agent drives NVDA through tasks (https://www.browserstack.com/docs/accessibility/screen-reader-launcher/screen-reader-experience-agent).",
+        "feasibility": "The Screen Reader Journeys engine exists, but a walk that survives many themes, switching on each overlay's screen-reader mode (https://accessibe.com/blog/knowledgebase/screen-reader-guide) and proving store control (https://changelog.shopify.com/posts/authorize-custom-crawlers-and-tools-with-new-crawler-access-keys) fill the 7 days.",
+        "complianceBurden": "No regulated data; the burden is claims, after the FTC order (https://ftc.gov/news-events/news/press-releases/2025/04/ftc-approves-final-order-requiring-accessibe-pay-1-million), and refusing reports on stores the user does not control."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Total 22 to 20, willingnessToPay 4 to 3 and feasibility 4 to 3. Confirmed the accessiBe, UserWay and Accessibly reviews and dates, UserWay's prices and Shopify's crawler access keys. Found cheaper page scanners than the researcher reported (AccessKit at $0 to $4.99, AccessifyAI at $4.99 to $14.99, Consentmo's bundled scanner), BrowserStack's beta Screen Reader Experience Agent driving real NVDA through tasks, and AudioEye's manual flow audits; no merchant-facing journey or overlay comparison exists. willingnessToPay 4 misread the rubric: the overlay listings have 11 and 17 reviews, the money bought 'protection', the $253 review is a refund dispute and was dropped, and after a demand letter merchants hire lawyers and manual audits ($2,000 to $8,500, a vendor guide). An 'overlay on' run must switch on the overlay's screen-reader mode, since accessiBe does not detect screen readers. Not a duplicate of Popup Check (2026-11-03), but this idea's findings include popups, so treat it as superseding it rather than shipping both. Added: proof of store control before any report, since plaintiff firms scan stores for widgets."
+      },
+      "gateGap": {
+        "missing": [
+          "total 20 is below 22"
+        ],
+        "closedBy": "The refundable $49 pre-order in the validation test would show payment for this exact job and could raise willingnessToPay to 4; the theme spike with the overlay's screen-reader mode on would raise feasibility back to 4. Both together would take the total to 22."
+      },
+      "inspiredBy": "https://apps.shopify.com/accesswidget/reviews?sort_by=newest"
+    },
+    {
+      "n": 2,
+      "title": "Delivery Note Bill Check for Small Wholesalers",
+      "slug": "delivery-note-bill-check-for-small-wholesalers",
+      "category": "Small Business Ops",
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Small Business Operations",
+      "shape": {
+        "stateful": true,
+        "connected": false,
+        "unattended": true,
+        "engine": true,
+        "shared": true,
+        "notes": {
+          "stateful": "Keeps a price book per supplier learned from accepted invoices, remembered line matches, a duplicate index and the list of credits still owed.",
+          "unattended": "A weekly digest of open credits and unresolved checks goes out from a scheduled job.",
+          "engine": "Aligns lines across the invoice, the delivery note and the order, and applies tolerance rules for quantity, unit of measure, unit price, tax rate and arithmetic, plus duplicate rules.",
+          "shared": "The person receiving goods logs short or damaged lines on a phone at the door, the admin checks the invoice, and the owner sees the credits owed."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "llm",
+        "email",
+        "scheduled",
+        "backend"
+      ],
+      "buildPlan": [
+        {
+          "n": 1,
+          "title": "One invoice, one delivery note",
+          "delivers": "Sign in, create a business, upload a supplier invoice PDF and a delivery-note photo, and see a side-by-side table with quantity differences after line extraction through the LLM gateway.",
+          "acceptance": "On 5 sample pairs the short-delivered lines show correctly at the live URL."
+        },
+        {
+          "n": 2,
+          "title": "Matching engine",
+          "delivers": "Line alignment by code and description with remembered manual matches per supplier; checks for quantity, unit of measure (cases against units), unit price, tax rate and totals; the purchase order as an optional third document; one invoice across several deliveries.",
+          "acceptance": "20 fixture documents with known discrepancies, including a unit-of-measure case, a substitution and a split delivery, are all flagged correctly; a manual re-match is remembered on the next invoice."
+        },
+        {
+          "n": 3,
+          "title": "Price book and duplicates",
+          "delivers": "The last accepted price per item per supplier, price-rise flags, and duplicate detection by supplier and invoice number and by amount and date.",
+          "acceptance": "A re-uploaded invoice is flagged as a duplicate and a seeded price rise is flagged."
+        },
+        {
+          "n": 4,
+          "title": "Receiving at the door",
+          "delivers": "Owner, admin and receiver roles; phone capture of the delivery note; tap to record short or damaged lines.",
+          "acceptance": "A shortage logged on a phone appears on the admin's check of the matching invoice."
+        },
+        {
+          "n": 5,
+          "title": "Credits owed and export",
+          "delivers": "Each discrepancy becomes a credit request with a status; a weekly digest email from a scheduled job; CSV export of checked rows for any accounting tool.",
+          "acceptance": "The digest sends on schedule in test and the CSV imports into a Sheets template."
+        },
+        {
+          "n": 6,
+          "title": "Usage caps",
+          "delivers": "A monthly usage counter per business, an LLM spending cap, the visitor's-own-key option and a checkout link.",
+          "acceptance": "The cap stops extraction past the limit with a clear message, and a test payment raises it."
+        },
+        {
+          "n": 7,
+          "title": "Polish",
+          "delivers": "Owner README, phone layout, keyboard and screen-reader pass, walkthrough test.",
+          "acceptance": "A walkthrough test runs sign-in to credit export on a phone and a desktop; axe reports no serious issues."
+        }
+      ],
+      "summary": "For small wholesalers and shops that pay someone to tick supplier invoices against delivery notes: checks each invoice against what arrived and the agreed price, flags short deliveries, price rises and duplicates, and keeps the list of credits still owed.",
+      "public": {
+        "summary": "Check every supplier invoice against what actually arrived, and keep track of the credits you are owed.",
+        "problem": "Before you pay a supplier, someone sits with the invoice, the delivery note and your order and ticks every line. It takes hours every week, short deliveries and quiet price rises still slip through, and nobody chases the credits.",
+        "forWhom": "Owners and office staff of small wholesalers, distributors and shops that receive goods against orders.",
+        "benefits": [
+          "Short deliveries and price rises caught before you pay",
+          "Duplicate invoices stopped",
+          "A running list of credits your suppliers owe you",
+          "Shortages logged at the door, on a phone",
+          "Hours of paperwork checking back every week"
+        ]
+      },
+      "problemStatement": "Small businesses pay freelancers by the hour to check each supplier invoice against the matching purchase order or receipt and the delivery records before it is entered (two such jobs posted on 2026-11-21 and 2026-11-23), because their accounting tool links bills to orders but does not flag price or quantity differences, and short deliveries and credits owed are tracked by hand.",
+      "description": "The admin uploads a supplier invoice (PDF or photo), the delivery note, and optionally the purchase order; the person receiving goods can photograph the delivery note at the door and tap any short or damaged lines. Lines are extracted through the LLM gateway, then a deterministic matching engine aligns them and checks quantity, unit of measure, unit price against the supplier's learned price book, tax and arithmetic, and duplicates. Every discrepancy becomes a credit request with a status, a weekly digest lists what is still owed, and checked rows export as CSV for whatever accounting tool the business uses. It does not create purchase orders, approve or pay bills, or write into an accounting system.",
+      "targetCustomer": "Owners and office or admin staff at small wholesalers, distributors and independent shops (about 1 to 20 staff, tens to a few hundred supplier invoices a month) that receive goods against orders and are not on Shopify or Xero, whether they keep their books in a spreadsheet or in QuickBooks Online, Zoho or Odoo.",
+      "buyer": "The owner, from the business's software budget, in place of an hourly freelancer or admin time: $29 a month up to about 150 invoices, $59 up to about 500.",
+      "whyNow": "Businesses posted paid jobs for exactly this hand check on 2026-11-21 and 2026-11-23; vendors' own features stop at linking a bill to an order (QuickBooks Online Plus and Advanced, help article updated 2026-07-16; Xero from 2026-06-17) or compare quantities only (Odoo 19), and the tools that compare lines cost $100 a month (Nanonets) to $319 a month (Lightyear).",
+      "founderFit": "Nothing beyond building it alone.",
+      "problemEvidence": [
+        {
+          "url": "https://www.freelancer.com/api/projects/0.1/projects/40828455/?full_description=true",
+          "source": "freelancer.com",
+          "author": "poster A (business admin; the sheet feeds their accounting process)",
+          "date": "2026-11-21",
+          "kind": "spend",
+          "summary": "Pays INR 750 to 1,250 an hour for someone to check each PDF supplier invoice against its purchase order or receipt (supplier, date, totals), enter it in Google Sheets and flag mismatches for supplier follow-up."
+        },
+        {
+          "url": "https://www.freelancer.com/api/projects/0.1/projects/40830879/?full_description=true",
+          "source": "freelancer.com",
+          "author": "poster B (business admin; output goes into their accounting system)",
+          "date": "2026-11-23",
+          "kind": "spend",
+          "summary": "Pays USD 15 to 25 an hour for someone to check every figure on each supplier invoice, line items and tax included, against the delivery or receipt records before entry, with validation rules to flag discrepancies welcome."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Nanonets Comparison Agent",
+          "url": "https://nanonets.com/agent/comparison-agent",
+          "price": "$50 in free credits, then $100 a month for 100 credits, runs billed at $0.02 to $0.30 (https://nanonets.com/pricing)",
+          "gap": "Compares PO with invoice and invoice with goods receipt at line level from scans, but has no supplier price book, no credits-owed list and no capture at the door."
+        },
+        {
+          "name": "Supplier Payment Guard (Shopify)",
+          "url": "https://apps.shopify.com/supplier-payment-guard",
+          "price": "$27.99 a month",
+          "gap": "Checks invoices against saved costs and Shopify product data for Shopify retailers only; no delivery-note or PO match; launched 2026-11-12 with 0 reviews."
+        },
+        {
+          "name": "Lightyear",
+          "url": "https://www.lightyear.cloud/pricing",
+          "price": "Essentials $199; Standard $319 with goods received notes and 3-way matching",
+          "gap": "About ten times what a small spreadsheet-keeping business would pay, and tied to an accounting integration."
+        },
+        {
+          "name": "Dext",
+          "url": "https://dext.com/business/pricing",
+          "price": "From $25.21 a month billed annually; line items from $20.50 a month",
+          "gap": "Extracts invoices and flags supplier-statement gaps, but does not match to a delivery note or order or flag price changes."
+        },
+        {
+          "name": "QuickBooks Online purchase orders",
+          "url": "https://quickbooks.intuit.com/learn-support/en-us/help-article/purchase-orders/add-purchase-orders-expenses-bills-checks-online/L9pRK49uC_US_en_US",
+          "price": "unknown (Plus and Advanced plans)",
+          "gap": "Links a PO to a bill with partial quantities and closes it when billed, but flags no price or quantity differences."
+        },
+        {
+          "name": "Odoo 19 three-way matching",
+          "url": "https://www.odoo.com/documentation/19.0/applications/inventory_and_mrp/purchase/manage_deals/control_bills.html",
+          "price": "unknown",
+          "gap": "Compares received with billed quantities only and shows an exception notice; no unit-price check or document capture on the page."
+        },
+        {
+          "name": "Zoho Inventory",
+          "url": "https://www.zoho.com/inventory/pricing-comparison/",
+          "price": "Free (20 POs and 20 bills a month); Standard $29 a month billed annually",
+          "gap": "Records orders, receipts and bills, but nothing on the page checks the supplier's documents against each other."
+        }
+      ],
+      "keyFeatures": [
+        "Line-by-line check of invoice against delivery note and order",
+        "Flags for short or missing lines, over-billed quantities, unit-of-measure slips, price rises, tax and arithmetic errors, duplicates",
+        "Supplier price book learned from accepted invoices",
+        "Receiver mode on a phone at the door",
+        "Credits-owed list with a weekly digest",
+        "CSV export for any accounting tool"
+      ],
+      "mvpScope": {
+        "features": [
+          "Upload and extraction",
+          "Matching engine with price book and duplicates",
+          "Receiver capture",
+          "Credits-owed list, digest and CSV export"
+        ],
+        "outOfScope": [
+          "Writing bills into Xero, QuickBooks or Zoho",
+          "Creating or sending purchase orders",
+          "Approvals and payments",
+          "Inventory",
+          "Restaurant recipe costing",
+          "E-invoice intake",
+          "An email-in address"
+        ],
+        "buildEstimate": "About 7 build days"
+      },
+      "techStack": "React + Vite front end, Supabase sign-in and per-app schema with row-level security per business, the LLM gateway for line extraction (capped, or the visitor's own key), a Render job for the weekly digest, Resend for email.",
+      "pricing": {
+        "model": "Monthly subscription per business, by invoices checked",
+        "pricePoint": "$29 a month up to about 150 invoices; $59 a month up to about 500",
+        "rationale": "One or two freelancer hours a month (USD 15 to 25 an hour), close to Dext and Supplier Payment Guard, and well below Nanonets ($100) and Lightyear ($319)."
+      },
+      "revenueSketch": "Estimate: 10 paying businesses at $29 by month 3 is about $290 a month; 50 at about $35 on average by month 12 is about $1,750 a month. LLM cost per invoice is assumed small and is not verified.",
+      "distribution": "Google search ads and a page with a free one-off check (one invoice and one delivery note, no sign-up, files deleted after 24 hours). Later a Google Sheets add-on in the Workspace Marketplace, whose review requires that 'The app has passed OAuth verification, uses the narrowest OAuth scopes possible' and that 'The app isn't meant for advertisement or spamming purposes' (https://developers.google.com/workspace/add-ons/concepts/gmail-addon-review?authuser=9). Google Ads policy: rule unknown: check before posting.",
+      "validationTest": {
+        "method": "No outreach. The free one-off check page (upload an invoice and a delivery note, see the difference table) with a 'Start at $29 a month' button that opens a waitlist, driven by a 14-day Google search-ad test on queries such as 'check invoice against delivery note'. Over the same weeks, re-run the freelancer.com spend searches and count jobs for this check, reading each job's own page.",
+        "successCriteria": "At least 40 ad clicks, 15 free checks run, 5 uploaded pairs that show a short-delivered or over-billed line with the amount at stake recorded, and 6 price-button clicks that leave an email; stop below 3 price-button clicks.",
+        "cost": "About $150 in ads, LLM use capped at $20, and one build day."
+      },
+      "moat": "Moderate to weak: each business's supplier price book, learned line matches and credits history build switching cost; no network effects.",
+      "compliance": [
+        "Privacy (GDPR, UK GDPR): processor terms and a data processing agreement, with the LLM gateway disclosed as a subprocessor; documents carry supplier contacts and staff names.",
+        "Accessibility: the app itself meets WCAG 2.2 AA.",
+        "Records: the app is not the system of record; the business's duty to keep accounting records stays with its accounting system.",
+        "No tax-software recognition needed: it files and issues nothing."
+      ],
+      "risks": [
+        {
+          "risk": "Extraction from scanned or handwritten delivery notes is wrong.",
+          "mitigation": "The receiver taps shortages at the door, and every flag shows both documents side by side for a person to confirm."
+        },
+        {
+          "risk": "Demand is thin: two paid jobs whose independence is unknown and no complaint from the target customer.",
+          "mitigation": "Run the free-check and price-button test before building past milestone 1, and stop below the threshold."
+        },
+        {
+          "risk": "Nanonets or the accounting tools add price and delivery-note checks.",
+          "mitigation": "Stay tool-agnostic and cheap, export only, and compete on the price book, the credits list and capture at the door."
+        }
+      ],
+      "scores": {
+        "pain": 2,
+        "willingnessToPay": 3,
+        "reachability": 2,
+        "competitiveGap": 2,
+        "feasibility": 4,
+        "complianceBurden": 4,
+        "total": 17
+      },
+      "scoreRationale": {
+        "pain": "No complaint from the target customer within 90 days; the only signal is two paid jobs for the check (https://www.freelancer.com/api/projects/0.1/projects/40828455/?full_description=true), so pain is capped below 3.",
+        "willingnessToPay": "Two dated paid jobs for this exact check (https://www.freelancer.com/api/projects/0.1/projects/40828455/?full_description=true and https://www.freelancer.com/api/projects/0.1/projects/40830879/?full_description=true) and vendors pricing the check at $28 to $100 a month (https://apps.shopify.com/supplier-payment-guard, https://nanonets.com/pricing); it falls to 2 if the jobs are one poster.",
+        "reachability": "Wholesalers are outside the owner's stated network; the self-serve channel is untested paid search, and the Shopify App Store route is taken (https://apps.shopify.com/supplier-payment-guard).",
+        "competitiveGap": "A self-serve tool already does the line comparison (https://nanonets.com/agent/comparison-agent) and a $27.99 Shopify app covers price, duplicates and credits for retailers (https://apps.shopify.com/supplier-payment-guard); left is the delivery-note check with a price book and credits list, under $60 a month, off Shopify and Xero.",
+        "feasibility": "Line-level comparison from scans is already shipped by others (https://nanonets.com/agent/comparison-agent), so the core is feasible on the LLM gateway; unit-of-measure and split-delivery cases are planned in milestone 2.",
+        "complianceBurden": "Commercial documents only, with processor duties under GDPR and the LLM gateway as a subprocessor; no regulated data and nothing filed (https://www.freelancer.com/api/projects/0.1/projects/40830879/?full_description=true)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "competitiveGap 3 to 2 and total 18 to 17; Shopify retailers dropped from the scope. Confirmed both jobs (40828455, 2026-11-21; 40830879, 2026-11-23) as this check, written by in-house businesses, one of which already has an accounting system, so the customer is not only spreadsheet keepers; the other two gatherer jobs are not this task. The '40 hours a week' is a per-job field, not a volume signal. Found Nanonets' self-serve Comparison Agent ($50 free credits, then $100 a month) comparing PO, invoice and goods receipt at line level, and Supplier Payment Guard on Shopify ($27.99 a month, launched 2026-11-12) checking price, duplicates and credits; two similar Shopify apps are delisted. QuickBooks Online Plus and Advanced link bills to POs but flag no differences; Odoo 19 compares quantities only; Zoho Inventory and Ramp do not check supplier documents. No free product does the delivery-note check. Not a duplicate of Open PO Balance for Xero (2026-11-14). Added unit-of-measure, split-delivery and substitution cases to milestone 2."
+      },
+      "gateGap": {
+        "missing": [
+          "total 17 is below 22",
+          "pain 2 is below 4",
+          "no complaint evidence from the target customer",
+          "the two paid jobs may be one poster, so the 2 independent pages are not proven"
+        ],
+        "closedBy": "The free one-off check would close the largest gap, pain: 5 real uploaded pairs that show a short-delivered or over-billed line, with the amount at stake, are a complaint in the customer's own documents. A validated version also needs a dated complaint from a wholesaler or shop and a third independent paid job."
+      },
+      "inspiredBy": "https://www.freelancer.com/api/projects/0.1/projects/40830879/?full_description=true"
+    },
+    {
+      "n": 3,
+      "title": "1099 Ready List for Xero US Owners",
+      "slug": "1099-ready-list-for-xero-us-owners",
+      "category": "Small Business Ops",
+      "complexity": "Weekend MVP",
+      "confidence": "provisional",
+      "topic": "Small Business Operations",
+      "shape": {
+        "stateful": true,
+        "connected": false,
+        "unattended": false,
+        "engine": true,
+        "shared": false,
+        "notes": {
+          "stateful": "Include or exclude decisions and their reasons are saved per supplier and tax year, without TINs or amounts, and carried into next year's list.",
+          "engine": "Rules flag suppliers that likely need no W-9 (overseas address, incorporated, goods-only account, receipted reimbursement) and apply a dated table of state thresholds, each sourced to the state's own page, to payee totals between $600 and $1,999."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database"
+      ],
+      "summary": "For owner-run US businesses on Xero: upload two Xero exports and get the list of suppliers that likely need a W-9 and a 1099 for 2026, with a reason for each one that does not, and the payees a state still wants reported below the new $2,000 federal line.",
+      "public": {
+        "summary": "Know exactly which of your suppliers need a 1099 this year, and why the others don't.",
+        "problem": "Your accounting software lists everyone you paid, including overseas companies, goods suppliers and staff you reimbursed. This year the federal line rose to $2,000, but some states still want forms for smaller amounts, so last year's list is wrong and you are not sure who to chase for a W-9.",
+        "forWhom": "Owners of small US businesses who do their own year-end paperwork in Xero.",
+        "benefits": [
+          "A short list of who needs a W-9 and a 1099",
+          "A plain reason for every supplier left off",
+          "A warning when your state still wants a form below $2,000",
+          "Last year's decisions remembered next January"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "Owners on Xero US see a W-9 and 1099 list that includes reimbursed employees, overseas companies and goods suppliers, and want to mark contacts as not eligible so they only see the vendors they must collect W-9s from (2026-11-20); for payments made in 2026 the federal 1099-NEC line rose from $600 to $2,000, while Wisconsin's revenue department still sets $600 for nonwage payments.",
+      "description": "The owner uploads Xero's Cash payments by vendor report and contacts export; both are parsed in the browser and no TIN is uploaded or stored. Rules mirror Xero's own exclusions (card payments, invoice payments, manual journals) and flag suppliers that likely need no W-9, with a reason: an overseas address, an incorporated business per the W-9 on file, an account mapped once as goods-only, a receipted reimbursement. A dated table of state thresholds, each value linked to the state's own page and re-checked every season, lists payees between $600 and $1,999 that the owner's state may still want reported; states not verified are marked so. The owner confirms each decision, exports a ready list to fix the 1099 contact group in Xero, and the decisions are kept for next year. It files nothing: Xero's free e-filing or IRS IRIS does that.",
+      "targetCustomer": "Owners of small US businesses on Xero US who pay contractors and prepare their own 1099s, especially in states with a lower state threshold such as Wisconsin. Bookkeeping firms are not the target: Double already serves them.",
+      "buyer": "The owner, by card, once a season: $19.",
+      "whyNow": "The federal 1099-NEC threshold is $2,000 for payments made in 2026 (IRS); Wisconsin's revenue department still sets $600 for nonwage payments (guidance dated 2026-02-20); Xero launched free 1099 e-filing for tax year 2026 on 2026-11-17 but leaves out separate filings for states outside the combined federal and state program; the first filings under the new line are due in January 2027.",
+      "founderFit": "Nothing beyond building it alone.",
+      "problemEvidence": [
+        {
+          "url": "https://productideas.xero.com/forums/967133-reports-tax/suggestions/51921517-1099-and-w-9-reporting-exclude-overseas-companie",
+          "source": "productideas.xero.com",
+          "author": "poster A (US small-business owner)",
+          "date": "2026-11-20",
+          "kind": "complaint",
+          "summary": "Wants to mark contacts as not 1099-eligible, since the W-9 list includes reimbursed employees, overseas companies and goods suppliers, so only vendors needing a W-9 show; 1 vote, status submitted."
+        },
+        {
+          "url": "https://www.revenue.wi.gov/Pages/FAQS/pcs-1099.aspx",
+          "source": "revenue.wi.gov",
+          "author": "unknown",
+          "date": "2026-02-20",
+          "kind": "mandate",
+          "summary": "Wisconsin requires information returns for nonwage compensation of $600 or more paid to Wisconsin residents, and to nonresidents for services performed in Wisconsin."
+        },
+        {
+          "url": "https://www.irs.gov/businesses/small-businesses-self-employed/am-i-required-to-file-a-form-1099-or-other-information-return",
+          "source": "irs.gov",
+          "author": "unknown",
+          "date": "2026-07-10",
+          "kind": "mandate",
+          "summary": "The 1099-NEC threshold is $600 for payments before 2026 and $2,000 for payments made in 2026; payments to incorporated businesses are exempt except medical and legal (page updated 2026-07-10)."
+        },
+        {
+          "url": "https://tax.thomsonreuters.com/blog/state-tax-information-reporting-what-changed-in-2025-and-what-to-expect-for-2026/",
+          "source": "tax.thomsonreuters.com",
+          "author": "unknown",
+          "date": "2026-05-19",
+          "kind": "mandate",
+          "summary": "A tax-software vendor's product manager: the federal line is $2,000 for 2026 payments, but some states differ (Mississippi and Wisconsin stay at $600)."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Xero US 1099 reporting and free e-filing",
+          "url": "https://blog.xero.com/product-updates/tax-season-1099-preparation-e-filing/",
+          "price": "Included on Early, Growing and Established plans; e-filing free for tax year 2026, possibly charged later",
+          "gap": "The 1099 contact group is opt-in and payment rules exclude cards and journals (https://www.xero.com/us/accounting-software/run-financial-reports/file-1099/), but there is no eligibility hint and no state-threshold logic, and separate state filings outside the combined program are left out."
+        },
+        {
+          "name": "Double (formerly Keeper)",
+          "url": "https://help.doublehq.com/en/articles/6365675-prepare-1099s",
+          "price": "unknown",
+          "gap": "Sold to bookkeeping firms: builds the 1099 vendor report from Xero or QuickBooks, leaves out card payments and vendors under $2,000, allows custom thresholds and keeps a per-vendor flag, but has no state table and is not sold to owners."
+        },
+        {
+          "name": "Melio (1099 and W-9 management)",
+          "url": "https://melio.com/1099-and-w9-management/",
+          "price": "Core from $20 a month billed annually",
+          "gap": "Sends W-9 requests in bulk and matches TINs with a two-way Xero sync, but the owner still decides who is a contractor and no state threshold is mentioned."
+        },
+        {
+          "name": "Xero's 1099 filing guide",
+          "url": "https://www.xero.com/us/accountant-bookkeeper-guides/1099-filing-requirements/",
+          "price": "Free",
+          "gap": "Explains the exemption rules (corporations, foreign payees, reimbursements, card payments) but says only that some states may need filings, names none, and flags no supplier."
+        },
+        {
+          "name": "IRS IRIS Taxpayer Portal",
+          "url": "https://www.irs.gov/businesses/small-businesses-self-employed/am-i-required-to-file-a-form-1099-or-other-information-return",
+          "price": "Free",
+          "gap": "Filing only; no classification of suppliers."
+        }
+      ],
+      "keyFeatures": [
+        "Browser-only parsing of Xero exports; no TINs stored",
+        "Likely-not-eligible flags with a reason for each supplier",
+        "Dated state-threshold list, each value linked to the state's own page",
+        "Decisions saved per supplier and carried to next year",
+        "Ready-list export to fix the 1099 contact group in Xero"
+      ],
+      "mvpScope": {
+        "features": [
+          "Upload and parse the two Xero exports in the browser",
+          "Eligibility flags with reasons",
+          "State-threshold list for verified states",
+          "Saved decisions and ready-list export"
+        ],
+        "outOfScope": [
+          "E-filing, W-9 collection and TIN matching (Xero, Melio and IRIS do these)",
+          "A Xero API connection",
+          "QuickBooks",
+          "Bookkeeping-firm seats and multi-client views"
+        ],
+        "buildEstimate": "2 to 3 build days"
+      },
+      "techStack": "React + Vite front end with CSV parsing in the browser; Supabase sign-in and a per-app schema for decisions only (no TINs or amounts); a hosted payment link.",
+      "pricing": {
+        "model": "One payment per tax season",
+        "pricePoint": "$19 a season",
+        "rationale": "Xero's e-filing is free this year and Melio Core costs $20 a month, so a once-a-year check has to sit below a month of either."
+      },
+      "revenueSketch": "Estimate: 200 owners at $19 in one season is about $3,800; unvalidated, and the season runs only from December to the end of January.",
+      "distribution": "Google search ads and an SEO page on queries such as 'which vendors need a 1099 Xero' and 'Wisconsin 1099 $600 2026' in December and January. Xero's community bans selling: 'don't spam us with advertisements, promotions, or posts of a commercial nature' (https://xero.com/us/support/community-guidelines). A Xero App Store listing is not available on the free API tiers. Google Ads policy: rule unknown: check before posting.",
+      "validationTest": {
+        "method": "A landing page with the free checker for one company and a '$19 for this season' price button, plus a $150 Google search-ad test for 10 days in early December on the queries above. No outreach, and no posts on the Xero board.",
+        "successCriteria": "At least 10 price-button clicks from Xero owners by 2026-12-15, at a cost per click of $3 or less.",
+        "cost": "About $165 (ads plus a domain)."
+      },
+      "moat": "Weak: a maintained, sourced state-threshold table and each owner's saved decisions across years; Xero could add both.",
+      "compliance": [
+        "Tax-information handling: TINs stay in the browser and are never stored; no IRS e-file credentials are needed because the app files nothing.",
+        "Liability: every state value cites the state's own page with a date and is shown as a review flag, not tax advice; unverified states are marked.",
+        "Accessibility: WCAG 2.2 AA for the app itself.",
+        "Xero developer terms apply only if an API connection is added later."
+      ],
+      "risks": [
+        {
+          "risk": "A wrong state threshold leads to a missed state filing; vendors already disagree with Wisconsin's own page.",
+          "mitigation": "Use only the state's own page, date every value, re-check each season, and label output as flags for the owner to confirm."
+        },
+        {
+          "risk": "Xero adds eligibility hints or state logic; it is investing in 1099s now.",
+          "mitigation": "Keep the build to 2 to 3 days with no API dependency, and add a QuickBooks export path next season if Xero closes the gap."
+        },
+        {
+          "risk": "The season is short and the pain is thin (one owner complaint, and practitioners call the threshold change a non-event).",
+          "mitigation": "Run the ad test by 2026-12-15 and shelve the idea until autumn 2027 if it misses."
+        }
+      ],
+      "scores": {
+        "pain": 2,
+        "willingnessToPay": 2,
+        "reachability": 2,
+        "competitiveGap": 1,
+        "feasibility": 3,
+        "complianceBurden": 3,
+        "total": 13
+      },
+      "scoreRationale": {
+        "pain": "One owner complaint on the core job, with 1 vote (https://productideas.xero.com/forums/967133-reports-tax/suggestions/51921517-1099-and-w-9-reporting-exclude-overseas-companie), and an enrolled agent calls the threshold change 'basically a non-event' (https://www.biggerpockets.com/forums/51/topics/1285820-1099-threshold-change-for-2026-surprised-this-isnt-getting-more-attention).",
+        "willingnessToPay": "No paid jobs found; firms already pay Double for the job (https://help.doublehq.com/en/articles/6365675-prepare-1099s) and owners get Xero's flow and guide free (https://www.xero.com/us/accountant-bookkeeper-guides/1099-filing-requirements/).",
+        "reachability": "Owners are scattered and reachable only through search in a short season; Xero's community bans commercial posts (https://xero.com/us/support/community-guidelines).",
+        "competitiveGap": "Double does the firm job with thresholds and saved flags (https://help.doublehq.com/en/articles/6365675-prepare-1099s), and Xero's opt-in group and payment rules cover most of the owner's job (https://www.xero.com/us/accounting-software/run-financial-reports/file-1099/); only eligibility hints and a sourced state table are left.",
+        "feasibility": "Xero's 1099 report holds only contacts the user added (https://www.xero.com/us/accounting-software/run-financial-reports/file-1099/), so the app must parse the cash-payments report and copy Xero's exclusion rules, and the state table is larger and less clear than it first looked (https://dor.mo.gov/taxation/business/tax-types/withholding/reporting-misc-income.html).",
+        "complianceBurden": "The output decides whether a state filing is needed, and vendor pages contradict the state on Wisconsin (https://taxbandits.com/form-1099-series/Wisconsin-state-filing-requirements against https://www.revenue.wi.gov/Pages/FAQS/pcs-1099.aspx)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Total 17 to 13 (pain 3 to 2, competitiveGap 2 to 1, feasibility 4 to 3, complianceBurden 4 to 3); re-scoped from bookkeeping firms to owner-run businesses. Found Double (formerly Keeper), which bookkeeping firms buy, already builds the 1099 vendor report from Xero or QuickBooks, leaves out card payments and vendors under $2,000, allows custom thresholds and keeps a per-vendor '1099 Needed' flag; a firm-side 1099 idea was killed for the same reason on 2026-11-14. Xero's 1099 contact group is opt-in and its payment rules already exclude cards, invoice payments and journals, and its free guide (2026-11-10) explains the exemptions, so ineligible payees reach the report only by the user's own mistake. Wisconsin's $600 is confirmed on its revenue department's page (2026-02-20), but TaxBandits tells payers to follow the federal line; Arkansas ($2,500) is above the federal line, not below; Missouri's $1,200 and Mississippi's $600 are unverified. The two recent bookkeeping-firm posts are one poster and off-scope, and the TIN-alert post predates Xero's new flow."
+      },
+      "gateGap": {
+        "missing": [
+          "total 13 is below 22",
+          "pain 2 is below 4",
+          "willingnessToPay 2 is below 3",
+          "only one complaint on the core job"
+        ],
+        "closedBy": "The keyword half of the ad test would close the largest gap, pain: click-through on 'which vendors need a 1099 Xero' and state-threshold queries. The $19 price button would test willingnessToPay; 10 clicks from Xero owners by 2026-12-15 would justify a 3."
+      },
+      "inspiredBy": "https://productideas.xero.com/forums/967133-reports-tax/suggestions/51921517-1099-and-w-9-reporting-exclude-overseas-companie"
+    },
+    {
+      "n": 4,
+      "title": "Heard-As Check for Tagged PDFs",
+      "slug": "heard-as-check-for-tagged-pdfs",
+      "category": "Developer Tool",
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Accessibility",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": true,
+        "engine": true,
+        "shared": false,
+        "notes": {
+          "stateful": "Keeps each file's run history across file versions and pdf.js versions, so a team sees when a reading changed and why.",
+          "connected": "Runs as a step in the team's own CI with their API key and reports back on the pull request, alongside a web upload for one-off checks.",
+          "unattended": "A weekly scheduled re-run of saved files on the latest pdf.js emails the team when what a reader is given changes.",
+          "engine": "Turns the accessibility tree that pdf.js's tagged layer exposes into a speech-style transcript (roles, table size and headers, alt text, language changes), walks the structure tree for the intended reading, and diffs the two."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "email",
+        "scheduled",
+        "backend"
+      ],
+      "buildPlan": [
+        {
+          "n": 1,
+          "title": "One PDF, one transcript",
+          "delivers": "Upload a tagged PDF and get, from the backend's headless browser running the current pinned pdf.js, a raw transcript of what its tagged layer exposes, deployed.",
+          "acceptance": "On the live URL a test file shows its heading, a 3-row table with headers and the figure's alt text; the pdf.js version is printed on the result."
+        },
+        {
+          "n": 2,
+          "title": "Speech-style transcript",
+          "delivers": "The raw tree becomes a transcript in the order and words a screen reader would use: role announcements, table size and headers, alt text, language changes.",
+          "acceptance": "Five sample PDFs give stable expected transcripts across two runs."
+        },
+        {
+          "n": 3,
+          "title": "Intended reading and diff",
+          "delivers": "A structure-tree walker (order, ActualText, Alt, Lang) and a side-by-side diff that names each fault class.",
+          "acceptance": "A reversed right-to-left line, untagged table-cell text and a missing alt text are each flagged on fixture files that pass veraPDF."
+        },
+        {
+          "n": 4,
+          "title": "veraPDF beside it",
+          "delivers": "veraPDF's PDF/UA results shown next to the diff, using the veraPDF service Tagging Doctor already runs, and a note when a fault is a known pdf.js viewer bug rather than the file's.",
+          "acceptance": "A file that passes veraPDF but shows a heard-as fault is labelled 'passes validator, fails reading'; a constant viewer quirk is labelled as such and not counted against the file."
+        },
+        {
+          "n": 5,
+          "title": "CI step and history",
+          "delivers": "Sign-in, an API key, a sample GitHub Actions step that fails the build on new faults, per-file history, and a weekly re-run on the latest pdf.js with a change email.",
+          "acceptance": "A seeded regression fails the sample workflow; a changed transcript sends exactly one email."
+        },
+        {
+          "n": 6,
+          "title": "Polish",
+          "delivers": "Developer README, retention setting for saved files, phone layout, the tool's own WCAG 2.2 AA pass checked with Screen Reader Journeys, walkthrough test.",
+          "acceptance": "A walkthrough test runs upload to diff to CI; axe reports no serious issues; files without retention opted in are deleted after the run."
+        }
+      ],
+      "summary": "For teams that generate or remediate tagged PDFs: shows, beside veraPDF's verdict, what a PDF viewer's tagged layer actually hands to a screen reader, diffed against the intended reading, so file faults that validators pass are caught in CI before a listener hears them.",
+      "public": {
+        "summary": "See what a screen reader will be given from your PDF, not just whether it passes a checker.",
+        "problem": "Your tagged PDFs pass the validator, yet a listener can still hear a right-to-left line backwards, miss a table's cell text or get no description for a figure. Today you only find out by testing by hand, one viewer and one file at a time.",
+        "forWhom": "Developers of tools that produce tagged PDFs, and teams that fix PDFs for accessibility.",
+        "benefits": [
+          "Faults the validator misses, shown line by line",
+          "A readable transcript of what a listener is given",
+          "Checks that run on every change, so a fix stays fixed",
+          "A warning when a viewer update changes what readers get"
+        ],
+        "audience": "teams"
+      },
+      "problemStatement": "Tagged-PDF generators and remediators rely on validators that check structure, not what reaches a listener: a developer found that 'veraPDF's PDF/UA-1 check passes all three, but assistive technology reads the text wrong' (2026-11-22), and a tester found that VoiceOver says 'Table not found' on a valid tagged PDF/UA-1 table in Firefox's viewer while NVDA reads it (2026-11-25).",
+      "description": "A developer uploads a tagged PDF or adds a step to their CI. A backend worker opens the file in a pinned version of pdf.js in headless Chromium, captures the accessibility tree its tagged layer exposes, and turns it into a speech-style transcript. A structure-tree walker builds the intended reading, and a diff names each fault class: reading order, untagged content, missing alt text, language changes, reversed right-to-left text, table size and headers. veraPDF's results sit beside it. It is a simulation from pdf.js in Chromium, labelled as such: it does not run Acrobat, Firefox's own accessibility layer or a real screen reader, and it cannot reproduce viewer bugs that depend on element size. It is best built as a PDF mode of Screen Reader Journeys, using Tagging Doctor's veraPDF service.",
+      "targetCustomer": "Developers and maintainers of tagged-PDF generators (HTML-to-PDF pipelines, Typst and krilla users, LaTeX tagging, report and invoice generators) who want regression checks; second, small PDF-remediation vendors who promise screen-reader-tested files.",
+      "buyer": "A small software team or a remediation firm, by card from its tools budget: $19 a month for one developer or $79 a month for a team with CI and batch runs; open-source projects free.",
+      "whyNow": "New tagged-PDF generators in 2026 are hitting validator-pass, listener-fail faults (four GitHub issues between 2026-11-22 and 2026-11-25); pdf.js changed what its tagged layer exposes in its August and November 2026 releases; and the ADA Title II web rule's dates (2027-04-26 and 2028-04-26) keep public bodies asking for accessible PDFs.",
+      "founderFit": "He ships web apps alone in days, and his own Tagging Doctor (accessible tagged PDFs from LaTeX) and Screen Reader Journeys (scripted screen-reader journeys) projects already supply the veraPDF service and the transcript engine this needs.",
+      "problemEvidence": [
+        {
+          "url": "https://github.com/mozilla/pdf.js/issues/22597",
+          "source": "github.com",
+          "author": "poster A (tester using VoiceOver and Playwright)",
+          "date": "2026-11-25",
+          "kind": "complaint",
+          "summary": "Tested by hand: on a valid tagged PDF/UA-1 table made with Typst, VoiceOver in Firefox's pdf.js says 'Table not found' while NVDA reads it; the table, rows and cells have zero size. Open, in the backlog, no maintainer reply."
+        },
+        {
+          "url": "https://github.com/fulgur-rs/fulgur/issues/977",
+          "source": "github.com",
+          "author": "poster B (developer of an HTML-to-PDF pipeline)",
+          "date": "2026-11-22",
+          "kind": "complaint",
+          "summary": "'veraPDF's PDF/UA-1 check passes all three, but assistive technology reads the text wrong': right-to-left lines backwards, an element's language missing, a heading's title repeated. Found by reading the structure, not with a screen reader; fixed within days."
+        },
+        {
+          "url": "https://accessible.org/pricing/",
+          "source": "accessible.org",
+          "author": "unknown",
+          "date": "2026-10-29",
+          "kind": "spend",
+          "summary": "A remediation vendor sells PDFs 'individually tested with screen reader assistive technology' from $4.00 a page (its FAQ says $7.50), minimum order $250: screen-reader testing is paid for, but bundled into remediation."
+        },
+        {
+          "url": "https://www.ada.gov/title-ii-web-rule/",
+          "source": "ada.gov",
+          "author": "unknown",
+          "date": "2026-04-20",
+          "kind": "mandate",
+          "summary": "The DOJ's interim final rule of 2026-04-20 sets the Title II web compliance dates at 2027-04-26 for public entities of 50,000 people or more and 2028-04-26 for smaller ones."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "outloud",
+          "url": "https://github.com/visionably/outloud",
+          "price": "Free (Apache 2.0)",
+          "gap": "Reads each page back in the order a screen reader would, from a structure model, with a CLI, SARIF and a GitHub Actions example; it names no viewer and does not show what a viewer's tagged layer exposes."
+        },
+        {
+          "name": "PAC 2026",
+          "url": "https://pac.pdf-accessibility.org/en/resources/quickstart-guide/introducing-pdf-accessibility-checker-2026",
+          "price": "Free",
+          "gap": "Windows only; checks structure, and its screen-reader preview is read from the structure tree, not taken from a viewer."
+        },
+        {
+          "name": "CommonLook PDF Validator",
+          "url": "https://allyant.com/commonlook-accessibility-suite/cl-pdf-validator/",
+          "price": "Free (download behind a form)",
+          "gap": "An Acrobat plugin on Windows with tag-tree and reading-order navigation; no heard-as transcript and no CI."
+        },
+        {
+          "name": "BrowserStack PDF Scanner",
+          "url": "https://www.browserstack.com/accessibility-testing/pdf-scanner",
+          "price": "unknown (free trial, paid plans)",
+          "gap": "Rule checks against PDF/UA-2 and WCAG 2.2 plus autotagging; its speech capture covers web pages, not PDFs."
+        },
+        {
+          "name": "Manual testing by remediation vendors",
+          "url": "https://accessible.org/pricing/",
+          "price": "Bundled in $4.00 to $7.50 a page",
+          "gap": "Done by hand in one viewer per file; this is the work the tool would shorten."
+        }
+      ],
+      "keyFeatures": [
+        "Speech-style transcript of what pdf.js's tagged layer exposes, per pinned pdf.js version",
+        "Intended reading from the structure tree, and a categorised diff",
+        "veraPDF results beside the diff",
+        "Viewer bugs labelled separately from file faults",
+        "CI step that fails on new faults; per-file history",
+        "Weekly re-run on the latest pdf.js with change emails"
+      ],
+      "mvpScope": {
+        "features": [
+          "Upload and transcript",
+          "Intended reading and diff",
+          "veraPDF beside it",
+          "CI step and history"
+        ],
+        "outOfScope": [
+          "Acrobat, Chrome's built-in viewer and Firefox's own accessibility layer",
+          "Real NVDA, JAWS or VoiceOver runs (later, through Screen Reader Journeys)",
+          "Fixing or remediating files",
+          "Forms, spoken math and OCR",
+          "Any conformance or certification claim"
+        ],
+        "buildEstimate": "About 7 build days as a PDF mode of Screen Reader Journeys"
+      },
+      "techStack": "React + Vite front end, Supabase sign-in and per-app schema, a Render worker with headless Chromium and pinned pdf.js (the Screen Reader Journeys worker), Tagging Doctor's veraPDF service on backend-hub, Resend for email, a GitHub Actions example.",
+      "pricing": {
+        "model": "Freemium subscription",
+        "pricePoint": "Free for 3 files a month and for open-source projects; $19 a month Solo; $79 a month Team with CI and batch",
+        "rationale": "Remediation vendors earn $4.00 to $7.50 a page, so a month costs less than a few pages; free tools (outloud, PAC) cover the intended reading, so the paid tier has to sell history, CI and viewer-change alerts."
+      },
+      "revenueSketch": "Estimate: 25 Solo and 5 Team customers after 12 months is about $870 a month; hosting cost for headless Chromium on Render is unknown. Unvalidated.",
+      "distribution": "Show HN with a demo people can try without signing up; its rules say 'Show HN is for something you've made that other people can play with' and 'Don't post landing pages or fundraisers' (https://news.ycombinator.com/showhn.html). A GitHub Actions example and README for generator projects; GitHub's rule on promotion: rule unknown: check before posting. Accessibility mailing lists and the SIGCSE community as early free users: rule unknown: check before posting.",
+      "validationTest": {
+        "method": "A one-day public demo (one PDF, no sign-up) with a 'History and CI, $19 a month: reserve' button that takes an email and asks which viewer their readers use; one Show HN post; a $100 search-ad test on 'test PDF with screen reader' and 'PDF passes PAC but screen reader'. No outreach to anyone, and no comments on the evidence issues.",
+        "successCriteria": "Within 14 days: 150 or more demo uploads, at least 20% of uploads that pass veraPDF but show a file-level heard-as fault (not a constant viewer quirk), and 10 or more reservations with at least 3 from ads.",
+        "cost": "One build day, $100 in ads and about $12 for a domain."
+      },
+      "moat": "Weak: a library of version-pinned pdf.js fixtures and viewer-quirk rules, regression history across pdf.js releases, and the owner's existing Screen Reader Journeys and Tagging Doctor engines.",
+      "compliance": [
+        "Privacy (GDPR, UK GDPR): delete uploaded files after the run unless the team opts in to retention for re-runs; a data processing agreement on request.",
+        "FERPA: only if student records are uploaded; advise against it.",
+        "Accessibility: the tool itself meets WCAG 2.2 AA, since public-body buyers under ADA Title II will expect it.",
+        "Claims: label every result 'simulated from pdf.js in Chromium; evaluation, not certification'."
+      ],
+      "risks": [
+        {
+          "risk": "A pdf.js transcript in Chromium is not what Acrobat or a real screen reader gives, and remediation vendors steer readers to Acrobat Reader, so buyers may discount it.",
+          "mitigation": "Lead with generator developers' CI, label the viewer on every result, and add real screen-reader runs later through Screen Reader Journeys' Orca and NVDA runners."
+        },
+        {
+          "risk": "pdf.js changes often, and some of its own bugs (zero-size elements) cannot be seen in a Chromium capture.",
+          "mitigation": "Pin versions, print the version on every result, separate viewer bugs from file faults, and sell version-change alerts as the feature."
+        },
+        {
+          "risk": "Free outloud already covers the intended reading and CI, and could add a viewer mode.",
+          "mitigation": "Stay a small, cheap PDF mode of an existing product and offer free use to open-source projects; stop after the validation test if reservations stay below target."
+        }
+      ],
+      "scores": {
+        "pain": 2,
+        "willingnessToPay": 2,
+        "reachability": 2,
+        "competitiveGap": 2,
+        "feasibility": 4,
+        "complianceBurden": 4,
+        "total": 16
+      },
+      "scoreRationale": {
+        "pain": "One tested listener failure, which is a pdf.js bug no file author can fix (https://github.com/mozilla/pdf.js/issues/22597), and one developer fault found by reading the structure and fixed within days (https://github.com/fulgur-rs/fulgur/issues/977).",
+        "willingnessToPay": "Screen-reader testing is paid for only inside remediation at $4.00 to $7.50 a page (https://accessible.org/pricing/), and CommonLook tells remediators to send readers to Acrobat Reader rather than tune for one viewer (https://support.allyant.com/support/solutions/articles/156000019162-what-to-do-when-a-screen-reader-doesn-t-read-a-remediated-document-correctly-).",
+        "reachability": "CS educators in the owner's network make course PDFs but are users, not the named buyers; generator developers and remediators are reachable only through open channels such as Show HN (https://news.ycombinator.com/showhn.html).",
+        "competitiveGap": "Free outloud covers the intended reading and CI (https://github.com/visionably/outloud) and PAC 2026 is free (https://pac.pdf-accessibility.org/en/resources/quickstart-guide/introducing-pdf-accessibility-checker-2026); what is left covers a viewer that 15.9% of screen-reader users name as their main browser (https://webaim.org/projects/screenreadersurvey11/).",
+        "feasibility": "A headless-Chromium capture of pdf.js's tagged layer worked in two local tests, and the worker and veraPDF service already exist; it must be re-tested on the current pdf.js release (https://github.com/mozilla/pdf.js/releases).",
+        "complianceBurden": "No certification; uploads may hold personal data, so retention must be opt-in, and public-body buyers expect the tool itself to meet WCAG (https://www.ada.gov/title-ii-web-rule/)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Wildcard review; total 20 to 16 (pain 3 to 2, willingnessToPay 3 to 2, reachability 3 to 2, competitiveGap 3 to 2). No free tool does the whole job for the same customer, so under the wildcard rule it is a rescore, not a kill. Confirmed the pdf.js and fulgur issues, accessible.org's pricing and the local capture (re-run by the reviewer). Found that the headless-Chromium capture is Chromium's reading of pdf.js's layer, not Firefox's: every struct-tree element measured zero size yet Chromium exposed the full table, so the tool would miss exactly the VoiceOver 'Table not found' case (a pdf.js bug known since Mozilla bug 1705139). The research ran an old pdf.js (5.4.394; current 6.5.438). outloud is free with a CLI, SARIF and a GitHub Actions example, and PAC 2026 is free. CommonLook tells remediators not to tune tags to one screen reader and to point readers to Acrobat Reader; WebAIM's 2026 survey puts Firefox at 15.9% of screen-reader users' main browsers. The owner's own Screen Reader Journeys and Tagging Doctor already provide the engine and veraPDF, so it should be a PDF mode of Screen Reader Journeys, re-scoped to generator developers' CI first. Dropped a Hacker News item that was praise, not a complaint, and a 2023 WebAIM post."
+      },
+      "gateGap": {
+        "missing": [
+          "total 16 is below 22",
+          "pain 2 is below 4",
+          "willingnessToPay 2 is below 3"
+        ],
+        "closedBy": "The reserve button fed by the search-ad test is the only buyer signal in the plan; the added criterion, the share of demo uploads that pass veraPDF but show a file-level heard-as fault, would show whether the pain is real for files and not only for one viewer."
+      },
+      "inspiredBy": "https://github.com/fulgur-rs/fulgur/issues/977",
+      "wildcard": true,
+      "wildcardReason": "It builds directly on the owner's two favourite HintWise projects, Tagging Doctor's accessible tagged PDFs and Screen Reader Journeys' screen-reader transcripts, as a developer tool for accessibility. Even if it never sells alone, it is a natural PDF mode for Screen Reader Journeys."
+    }
+  ],
+  "runNotes": {
+    "weekday": "Thursday",
+    "domainLens": "Small business back office and solo professionals: invoicing, scheduling, bookkeeping, client intake, paperwork",
+    "focusSources": [
+      "A16 Vendor feature-request boards",
+      "B11 Freelance job boards",
+      "C10 Change events: shutdowns, price rises, removed free tiers"
+    ],
+    "searches": [
+      "boards-gatherer: site:canny.io invoice feature request 2026",
+      "boards-gatherer: site:canny.io salon booking deposit no-show feature request",
+      "boards-gatherer: Jobber OR \"Housecall Pro\" feature request board ideas vote 2026 invoice",
+      "boards-gatherer: site:featurebase.app OR site:nolt.io OR site:frill.co invoicing bookkeeping feature request",
+      "boards-gatherer: Cliniko OR \"Jane App\" OR SimplePractice feature request intake form ideas board 2026",
+      "boards-gatherer: feedback.qbo.intuit.com feature request invoice 2026",
+      "boards-gatherer: \"Making Tax Digital\" income tax quarterly update sole trader landlord feature request idea vote November 2026",
+      "boards-gatherer: \"1099-NEC\" $2,000 threshold W-9 collection feature request 2026 bookkeeping software",
+      "boards-gatherer: quickbooks.intuit.com learn-support 1099 $2,000 threshold 2026 contractors wizard",
+      "boards-gatherer: HoneyBook OR Dubsado OR Moxie OR \"Bonsai\" feature request board vote client portal intake",
+      "boards-gatherer: site:communityhub.sage.com ideas MTD income tax OR invoice 2026",
+      "boards-gatherer: quickbooks community 1099 contractors \"2,000\" threshold still showing $600 vendors 2026 November",
+      "boards-gatherer: site:canny.io appointment booking intake form clients feature request",
+      "spend-gatherer: Shopify Stocky discontinued purchase orders replacement merchants 2026",
+      "spend-gatherer: site:workspace.google.com marketplace invoice generator Google Sheets add-on",
+      "spend-gatherer: Xero match supplier bill to purchase order delivery three-way matching small business",
+      "spend-gatherer: CATO closed March 2026 small company directors file accounts CT600 themselves software Companies House 2027",
+      "spend-gatherer: customers send proof of payment screenshot WhatsApp match to orders manually small business bank transfer tool",
+      "spend-gatherer: community.hmrc.gov.uk CATO closed company tax return director small company no free software what now",
+      "spend-gatherer: QuickBooks Online community undeposited funds huge balance year end small business owner help 2026",
+      "spend-gatherer: QuickBooks Online community \"uncategorized\" year end cleanup do my own books accountant says wrong 2026",
+      "spend-gatherer: small business checking supplier invoices against delivery notes short deliveries price changes spreadsheet forum 2026",
+      "changes-gatherer: invoicing app shutting down 2026 small business customers alternative",
+      "changes-gatherer: scheduling booking software price increase November 2026 small business",
+      "changes-gatherer: bookkeeping software discontinued sunset end of life 2026 announcement",
+      "changes-gatherer: \"free plan\" discontinued OR removed 2026 invoicing OR scheduling OR forms OR e-signature small business email notice",
+      "changes-gatherer: Hopscotch invoicing app shutdown freelancers 2026",
+      "changes-gatherer: price increase effective 2026 \"existing customers\" HoneyBook OR Dubsado OR Acuity OR Jobber OR Gusto OR FreshBooks complaint",
+      "changes-gatherer: \"shutting down\" OR \"sunsetting\" 2026 appointment booking OR client intake OR practice management software therapists OR salons OR freelancers",
+      "changes-gatherer: Botkeeper shutting down accounting firms data download deadline",
+      "changes-gatherer: \"Intuit Accountant Suite\" QuickBooks Online Accountant discontinued complaints missing features bookkeepers",
+      "changes-gatherer: \"Accountant Suite\" switched QuickBooks community \"switch back\" OR \"can't find\" OR \"where is\" accountant toolbox 2026",
+      "changes-gatherer: Companies House software-only accounts filing 2027 micro-entity profit and loss abridged accounts removed date",
+      "changes-gatherer: 1099-NEC threshold $2,000 payments made in 2026 small business what changes backup withholding W-9",
+      "changes-gatherer: HMRC Company Tax Return online service CATO closed 31 March 2026 small company director file CT600 free software complaint",
+      "changes-gatherer: Xero OR QuickBooks OR Square OR Calendly \"retiring\" OR \"will no longer be available\" feature 2026 small business users upset",
+      "changes-gatherer: Intuit Accountant Suite forced switch ProAdvisor complaint \"Accountant Suite\" November 2026",
+      "changes-gatherer: states not conforming $2,000 1099-NEC threshold keep $600 state filing 2026 payments Pennsylvania OR Massachusetts OR Oregon",
+      "changes-gatherer: \"will be discontinued\" OR \"end of support\" \"December 31, 2026\" OR \"January 2027\" small business invoicing OR payroll OR appointment app customers export data",
+      "changes-gatherer: Sage BusinessVision retirement customers convert data Sage 50 migration problem forum 2026",
+      "changes-gatherer: Verizon Connect \"Work\" field service app shutting down December 31 2026 Fleetmatics Work alternative customers",
+      "changes-gatherer: \"Verizon Connect Work\" sunset 2026 contractors migrate jobs invoices news",
+      "changes-gatherer: HMRC forum small limited company \"CT600\" software since CATO closed cost dormant director 2026",
+      "wildcard-gatherer: PDF remediation backlog Title II accessibility small staff complaint 2026",
+      "wildcard-gatherer: Canva PDF export not tagged accessibility screen reader forum 2026",
+      "wildcard-gatherer: community.adobe.com Acrobat autotag accessibility checker fails November 2026",
+      "wildcard-gatherer: \"agenda packet\" PDF accessibility Title II town clerk remediation 2026",
+      "wildcard-gatherer: apps.shopify.com accessibility app reviews \"demand letter\" overlay still sued",
+      "wildcard-gatherer: HHS Section 504 rule web content accessibility fewer than 15 employees May 2027 deadline hhs.gov",
+      "wildcard-gatherer: DOJ interim final rule April 2026 ADA Title II web accessibility compliance dates April 26 2027 April 26 2028 ada.gov",
+      "wildcard-gatherer: PDF remediation service price per page 2026 accessible PDF forms pricing",
+      "wildcard-gatherer: apps.shopify.com accessibility widget app 1-star review merchant still received lawsuit 2026",
+      "wildcard-gatherer: European Accessibility Act microenterprises exempt services 28 June 2025 European Commission official page",
+      "wildcard-gatherer: dental OR therapy practice patient intake forms accessibility Section 504 WCAG small practice fillable PDF screen reader October 2026",
+      "overlay-exit-research: Shopify app accessibility audit WCAG scan report storefront checkout screen reader",
+      "overlay-exit-research: FTC accessiBe order final April 2025 $1 million misrepresented WCAG",
+      "overlay-exit-research: ecommerce ADA website lawsuits 2025 overlay widget sued UsableNet report",
+      "overlay-exit-research: apps.shopify.com UserWay accessibility widget reviews",
+      "overlay-exit-research: apps.shopify.com Accessibly app accessibility reviews lawsuit",
+      "overlay-exit-research: community.shopify.com ADA demand letter accessibility lawsuit store 2026 overlay remove",
+      "overlay-exit-research: Shopify changelog 2026 accessibility theme checker storefront accessibility report admin",
+      "overlay-exit-research: changelog.shopify.com accessibility",
+      "overlay-exit-research: free website accessibility checker WAVE axe DevTools free extension Accessibility Insights for Web assessment",
+      "overlay-exit-research: Shopify Community guidelines self-promotion advertising apps services rule",
+      "overlay-exit-research: Shopify App Store requirements apps must use Shopify Billing API embedded listing requirements",
+      "qbo-year-end-research: QuickBooks Online books review feature year-end cleanup undeposited funds uncategorized 2026",
+      "qbo-year-end-research: QuickBooks file review tool for business owners uncategorized transactions duplicates undeposited funds health check app pricing",
+      "qbo-year-end-research: QuickBooks Online Accounting Agent \"books\" review anomalies undeposited funds new features 2026",
+      "qbo-year-end-research: \"What's new in QuickBooks Online\" 2026 release notes",
+      "qbo-year-end-research: QuickBooks Online Accountant \"Books review\" month-end review undeposited funds uncategorized transactions help article",
+      "qbo-year-end-research: Booke AI pricing QuickBooks review uncategorized transactions business owners plan",
+      "qbo-year-end-research: free QuickBooks Online health check scan for small business owners connect app score report errors",
+      "qbo-year-end-research: QuickBooks Live Expert Assisted cleanup price one-time year-end catch-up",
+      "qbo-year-end-research: QuickBooks community undeposited funds huge balance year end help my accountant 2026",
+      "qbo-year-end-research: Intuit App Partner Program tiers API call fees Builder Silver CorePlus 2026",
+      "qbo-year-end-research: QuickBooks Online API Payment UnappliedAmt Account UndepositedFunds AccountSubType reconcile status cleared not exposed API",
+      "qbo-year-end-research: Intuit developer publish app to QuickBooks App Store requirements app assessment security questionnaire listing review",
+      "qbo-year-end-research: \"I do my own books\" QuickBooks Online year end accountant found errors uncategorized undeposited 2026 small business owner",
+      "1099-ready-research: Xero US 1099 e-file TIN match W-9 request help central",
+      "1099-ready-research: IRS 2026 Form 1099-NEC reporting threshold $2,000 One Big Beautiful Bill payments made after December 31, 2025",
+      "1099-ready-research: Xero Central \"W-9\" management tab request W-9 secure link 1099 contacts group help article",
+      "1099-ready-research: Tax1099 pricing per form 1099-NEC 2026 e-file TIN matching W-9 Xero",
+      "1099-ready-research: Xero developer API pricing tiers 2026 app partner app store billing retired March 2026",
+      "1099-ready-research: productideas.xero.com 1099 report exclude payments vendors threshold state 2026",
+      "1099-ready-research: central.xero.com \"1099\" report threshold exclude payments set up 1099 contacts",
+      "1099-ready-research: developer.xero.com Accounting API Reports TenNinetyNine 1099 report endpoint contact groups",
+      "1099-ready-research: Xero Central community guidelines self-promotion advertising apps posts rules",
+      "1099-ready-research: bookkeeping firm multi-client 1099 vendor review W-9 tracking tool Xero QuickBooks Keeper 1099 tracker pricing",
+      "supplier-bill-research: three-way match invoice purchase order delivery note small business software free",
+      "supplier-bill-research: restaurant invoice delivery short shipped credit check app price changes supplier invoices",
+      "supplier-bill-research: Zoho Books free plan purchase orders bills features pricing",
+      "supplier-bill-research: MarginEdge pricing per location invoice processing",
+      "supplier-bill-research: QuickBooks Online 2026 bill purchase order matching new feature AI agent bills",
+      "supplier-bill-research: Nanonets three-way matching invoice purchase order goods receipt pricing",
+      "supplier-bill-research: Dext pricing plan per month supplier invoices extraction 2026",
+      "supplier-bill-research: Xero part receive purchase order goods received bill 2026 product update",
+      "supplier-bill-research: \"delivery note\" supplier invoice check by hand small business forum 2026 short delivery invoiced price",
+      "supplier-bill-research: xtraCHEF by Toast pricing invoice processing free plan",
+      "supplier-bill-research: QuickBooks community purchase order bill doesn't match price quantity received supplier invoice 2026",
+      "supplier-bill-research: Lightyear AP automation pricing three-way matching purchase orders small business",
+      "supplier-bill-research: Tradify OR Fergus OR ServiceM8 supplier invoice match purchase order price variance feature",
+      "supplier-bill-research: Google Workspace Marketplace publish Sheets add-on app review requirements OAuth verification program policies",
+      "mtd-property-research: HMRC find software that's compatible with Making Tax Digital for Income Tax free",
+      "mtd-property-research: find-making-tax-digital-income-tax-software product-details free version UK property",
+      "mtd-property-research: free MTD for Income Tax software landlords UK property quarterly update 2026",
+      "mtd-property-research: Xero MTD for Income Tax UK property income new feature product update 2026",
+      "mtd-property-research: HMRC developer hub MTD Income Tax end-to-end service guide production credentials minimum functionality standards software recognition",
+      "mtd-property-research: \"Income Tax (MTD) end-to-end service guide\" production approvals checklist \"minimum functionality\"",
+      "mtd-property-research: gov.uk use making tax digital for income tax send quarterly updates jointly owned property share deadlines",
+      "mtd-property-research: TaxCalc MTD filer income tax bridging property price per client agents",
+      "mtd-property-research: Hammock landlord software pricing MTD Income Tax; Landlord Vision pricing; Coconut pricing landlords",
+      "mtd-property-research: MTD income tax quarterly update property income second software sole trader Xero problem forum November 2026",
+      "mtd-property-research: Xero App Store listing requirements app partner certification checklist developer",
+      "heard-as-research: PDF accessibility screen reader preview what screen reader hears tool PAC 2024 \"screen reader preview\"",
+      "heard-as-research: PAC 2026 PDF Accessibility Checker axes4 screen reader preview download",
+      "heard-as-research: CommonLook PDF Validator free reading order screen reader view pricing 2026",
+      "heard-as-research: Chrome PDF viewer tagged PDF accessibility support structure tree screen reader 2026",
+      "heard-as-research: PDF remediation \"screen reader testing\" NVDA JAWS included per page vendor pricing",
+      "heard-as-research: automated screen reader testing cloud NVDA VoiceOver Guidepup Assistiv Labs pricing PDF",
+      "heard-as-research: BrowserStack accessibility \"PDF scanner\" tagged PDF screen reader",
+      "heard-as-research: Playwright Chromium headless built-in PDF viewer accessibility tree getFullAXTree PDF plugin",
+      "heard-as-research: webaim discussion PDF passes PAC accessibility checker but NVDA JAWS reads wrong 2026",
+      "heard-as-research: Adobe Acrobat release notes 2026 accessibility checker new reading order tool screen reader",
+      "heard-as-research: github tagged PDF screen reader output test harness NVDA VoiceOver pdf.js \"speech\" transcript PDF/UA 2026",
+      "heard-as-research: Show HN guidelines rules what counts as Show HN",
+      "overlay-exit-review: Shopify app accessibility keyboard navigation test screen reader simulation checkout flow merchants 2026",
+      "overlay-exit-review: accessiBe accessScan free accessibility scan Shopify OR AudioEye free website accessibility scan Shopify app",
+      "overlay-exit-review: Shopify changelog accessibility 2026 theme editor accessibility check storefront",
+      "overlay-exit-review: AudioEye \"Agentic Audits\" what it tests keyboard screen reader user journeys",
+      "overlay-exit-review: small online store ADA website demand letter settlement remediation audit cost what lawyers advise remove overlay 2026",
+      "overlay-exit-review: accessiBe screen reader adjustments activate automatically when screen reader detected hidden screen reader mode how it works",
+      "overlay-exit-review: free online tool automated keyboard tab order test whole user flow add to cart checkout screen reader simulator for store owners",
+      "qbo-year-end-review: What's new in QuickBooks Online November 2026",
+      "qbo-year-end-review: QuickBooks Online free year-end review tool for business owners undeposited funds uncategorized check app 2026",
+      "qbo-year-end-review: free QuickBooks Online books health check scan errors duplicates undeposited funds uncategorized for small business owners",
+      "qbo-year-end-review: CleanupOwl QuickBooks Online",
+      "qbo-year-end-review: QuickBooks Online \"business health check\" Intuit Intelligence 2026 what it checks",
+      "qbo-year-end-review: undeposited funds year end accountant my own books QuickBooks Online help November 2026",
+      "supplier-bill-review: Odoo One App Free plan Purchase app three-way matching bills received quantities",
+      "supplier-bill-review: QuickBooks Online match bill to purchase order received quantity AI bill capture 2026",
+      "supplier-bill-review: Zoho Inventory free plan purchase receives bills purchase orders pricing",
+      "supplier-bill-review: Ramp pricing Plus plan purchase orders 3-way matching receipts bill pay",
+      "supplier-bill-review: Nanonets pricing invoice three-way matching purchase order delivery note small business per page",
+      "supplier-bill-review: Dext OR AutoEntry OR Hubdoc supplier invoice match purchase order delivery note price change alert 2026",
+      "supplier-bill-review: \"delivery notes\" \"supplier invoices\" checking every line short delivery credit note chasing small business forum",
+      "supplier-bill-review: AI supplier invoice checker app small wholesaler retailer flags price increases short deliveries against delivery note credits owed",
+      "1099-ready-review: Wisconsin Department of Revenue 1099-NEC 2026 payments $600 threshold information return",
+      "1099-ready-review: Keeper bookkeeping 1099 vendor tracking W-9 Xero QuickBooks year-end 1099 review feature",
+      "1099-ready-review: dor.mo.gov Missouri 1099 information return $1,200 threshold 2026",
+      "1099-ready-review: Xero Central 1099 report \"1099 contacts\" W-9 management tab threshold payments below $2,000 included",
+      "1099-ready-review: states 1099-NEC threshold lower than federal $2,000 2026 list Mississippi Wisconsin state filing below federal threshold e-file software flags",
+      "1099-ready-review: doublehq.com pricing plans bookkeeping firms per month 1099 report included",
+      "1099-ready-review: Xero US app 1099 vendor eligibility check flag corporations foreign vendors W-9 tax classification automatically exempt payees",
+      "heard-as-review: pdf.js accessibility tree tagged PDF screen reader output tool github 2026",
+      "heard-as-review: \"screen reader\" simulator tagged PDF online free \"what a screen reader\" hears PDF reading order preview 2026",
+      "heard-as-review: WebAIM screen reader user survey results PDF browser Firefox Chrome Adobe Reader percentage",
+      "heard-as-review: PAC 2026 PDF Accessibility Checker free download \"Screen Reader Preview\" axes4",
+      "heard-as-review: PDF remediation services \"tested with\" JAWS NVDA \"Adobe Acrobat Reader\" screen reader testing deliverable",
+      "heard-as-review: Chrome built-in PDF viewer tagged PDF screen reader support structure tree 2026 Edge tagged PDF",
+      "heard-as-review: ngPDF tagged PDF to HTML derivation free online Dual Lab structure tree reading",
+      "heard-as-review: github playwright OR puppeteer \"pdf.js\" accessibility tree tagged PDF regression test CI \"screen reader\" 2026",
+      "heard-as-review: Adobe Acrobat 2026 new accessibility features reading order \"screen reader\" preview release",
+      "main session (spend pass): app match customer payment proof screenshot to WhatsApp orders bank transfer small seller pricing",
+      "main session (spend pass): site:apps.shopify.com purchase order supplier invoice receiving Stocky replacement reviews",
+      "main session (spend pass): PDF/UA validation GitHub Action CI paid service tagged PDF regression check developers",
+      "main session (spend pass): screen reader testing API for AI coding agents MCP server accessibility paid plan",
+      "main session (spend pass): Google Calendar to invoice app service business pricing \"invoice from calendar events\"",
+      "main session (spend pass): PAC veraPDF Acrobat accessibility checker results disagree explain failures tool pricing"
+    ],
+    "unverifiedSignals": [
+      {
+        "url": "https://support.work.fleetmatics.com/hc/en-us/articles/51620051793683-Key-Deadlines-Timeline",
+        "reason": "HTTP 403 from the site; the Verizon Connect Work sunset (2026-12-31) was seen only in search results."
+      },
+      {
+        "url": "https://hopscotchsupport.zendesk.com/hc/en-us/articles/41280786318356-Hopscotch-Shutdown-FAQ",
+        "reason": "HTTP 403 from the site; the Hopscotch shutdown was seen only in search results."
+      },
+      {
+        "url": "https://support.waveapps.com/hc/en-us/articles/26449863006612-FAQ-Plans-for-legacy-businesses",
+        "reason": "HTTP 403 from the site; Wave's free-plan change of 2026-06-01 was seen only in search results."
+      },
+      {
+        "url": "https://help.shootproof.com/hc/en-us/articles/43136609693079-Booking-Plan-Increase",
+        "reason": "HTTP 403 from the site; ShootProof's booking price rise was seen only in search results."
+      },
+      {
+        "url": "https://community.squareup.com/t5/Feedback-Discussions/Forced-into-Square-Plus/m-p/850777",
+        "reason": "Empty page (HTTP 202 with no body through the helper, empty through WebFetch)."
+      },
+      {
+        "url": "https://www.hhs.gov/press-room/hhs-extends-mobile-and-web-accessibility-deadline.html",
+        "reason": "HTTP 403 from the site; the rule text was read on govinfo.gov instead."
+      },
+      {
+        "url": "https://www.canva.com/help/pdf-accessibility-features/",
+        "reason": "HTTP 403 from the site."
+      },
+      {
+        "url": "https://community.shopify.com/t/ada-accessibility-lawsuits/351516",
+        "reason": "HTTP 429 from the site."
+      },
+      {
+        "url": "https://www.accountingweb.co.uk/node/230103",
+        "reason": "HTTP 403 from the site."
+      },
+      {
+        "url": "https://pdfa.org/product/ngpdf/",
+        "reason": "HTTP 403 from the site; ngPDF was seen only in search results."
+      },
+      {
+        "url": "https://www.testmuai.com/free-online-tools/pdf-accessibility-checker/",
+        "reason": "contains instructions"
+      },
+      {
+        "url": "https://community.getjobber.com/tag/invoicing",
+        "reason": "HTTP 403 from the site."
+      }
+    ],
+    "rejectedCandidates": [
+      {
+        "title": "Year-End Books Check for QuickBooks Online owners",
+        "total": 16,
+        "reason": "Review kill: CleanupOwl gives owners unlimited free scans for Undeposited Funds, double counts, duplicates, uncategorized items and unapplied credits, and LedgerMedic, BooksChecker and Acuity are free too (https://cleanupowl.com/pricing); two of the gatherer's four paid jobs were misread."
+      },
+      {
+        "title": "Property Side-Ledger for MTD for Income Tax",
+        "total": 13,
+        "reason": "Research ended it: Clear Books' free plan and ANNA (free for 2026-27) already file UK property quarterly updates beside another trade tool, Hammock and Landlord Vision from about £8 a month and TaxCalc's filer at £112 for 12 clients; submitting needs HMRC production approval and fraud-prevention headers (https://clearbooks.co.uk/free-mtd-software/)."
+      },
+      {
+        "title": "Shopify post-Stocky purchase order and supplier invoice tracker",
+        "total": 18,
+        "reason": "Crowded: Stockroom, Stockie, Restockly, Storeroom and others replace Stocky, the merchant threads are developer-heavy, and the newest merchant complaint is older than 90 days; competitiveGap 1 after the spend pass."
+      },
+      {
+        "title": "WhatsApp order and payment-proof desk (including catch-weight invoices)",
+        "total": 17,
+        "reason": "Two paid build jobs but no complaint, and Take App, Z Proof of Payment, PayProofy and PayMatch already collect and match payment proof; competitiveGap 2 after the spend pass."
+      },
+      {
+        "title": "Invoice from Google Calendar for service businesses",
+        "total": 17,
+        "reason": "CalendarForce and Calrows already invoice and bill from calendar events, and Harvest and Zapier routes exist; no recent complaint."
+      },
+      {
+        "title": "Tagged-output gate for app-generated PDFs",
+        "total": 18,
+        "reason": "Free CI validators already exist (pdfua, pdf-a11y, PDFix's action, veraPDF), and free outloud adds SARIF and a GitHub Actions example; no payment evidence."
+      },
+      {
+        "title": "Screen-reader ground truth for coding agents (MCP)",
+        "total": 18,
+        "reason": "One supporting comment only; Axe MCP has a free plan and a paid MCP that runs real screen-reader scenarios exists (search results only)."
+      },
+      {
+        "title": "Accessible patient intake forms for small HHS-funded practices",
+        "total": 16,
+        "reason": "The HHS Section 504 dates are confirmed (2027-05-11 and 2028-05-10), but no practice complaint was found and patient data brings a heavy compliance burden."
+      },
+      {
+        "title": "Canva export repair for small-business PDFs",
+        "total": 15,
+        "reason": "One undated university guide only; Canva's own help page returned 403 and no small-business complaint or spend was found."
+      },
+      {
+        "title": "STEM course PDFs to accessible HTML",
+        "total": 15,
+        "reason": "Rejection rule: the same customer and problem as the published Tagging Doctor for LaTeX Courses (2026-10-29); ReadableSTEM also exists."
+      },
+      {
+        "title": "UAE and Saudi e-invoice handoff for Manager.io",
+        "total": 15,
+        "reason": "Manager.io staff replied on 2026-11-26 that they are working on UAE e-invoicing, an accredited service provider is required, and the ZATCA PDF gap has one poster."
+      },
+      {
+        "title": "Client action page for HoneyBook",
+        "total": 16,
+        "reason": "HoneyBook has no public API (an API is itself one of the requests), and the newest item is dated 2026-08-25."
+      },
+      {
+        "title": "Kept-deposit invoice closeout for HighLevel agencies",
+        "total": 15,
+        "reason": "One request with 2 votes (2026-06-05); workflows may already cover it."
+      },
+      {
+        "title": "Sage BusinessVision history keeper",
+        "total": 16,
+        "reason": "The retirement on 2026-12-31 is confirmed, but announcement threads have replies disabled, no dated customer complaint was found, and the data files need a local export a web app cannot read."
+      },
+      {
+        "title": "Switch kit for Verizon Connect Work customers",
+        "total": 15,
+        "reason": "Unverified evidence: every vendor page returned HTTP 403 to WebFetch, so the sunset could not be read on a fetched page."
+      },
+      {
+        "title": "CT600 and year-end pack for UK one-person companies after CATO",
+        "total": 16,
+        "reason": "CATO's closure on 2026-03-31 is confirmed and two paid jobs exist, but cheap filers already exist (a £20 a year product named in a forum) and CT600 filing needs HMRC software recognition and iXBRL."
+      },
+      {
+        "title": "QuickBooks Online Accountant to Intuit Accountant Suite continuity map",
+        "total": 13,
+        "reason": "Intuit's Core plan is free and says nothing is lost; the one complaint is a poster's own account of support."
+      },
+      {
+        "title": "PTminder exit kit for personal trainers",
+        "total": 15,
+        "reason": "The retirement date comes only from a competitor's promotional blog, the date is a year away, and there is no complaint or spend."
+      },
+      {
+        "title": "Job sheets to invoices to Xero for small trade firms",
+        "total": 14,
+        "reason": "Rejection rule: the spend is for a custom build (a consulting service), and Tradify, Fergus, ServiceM8 and simPRO already serve the product version."
+      }
+    ],
+    "watchlist": [
+      {
+        "title": "Checker Second Opinion for tagged PDFs",
+        "targetCustomer": "Journal production staff, PDF-remediation freelancers and teams whose policy names one accessibility checker.",
+        "problemStatement": "PAC, veraPDF, Acrobat and krilla disagree on the same file: valid markup fails PAC, Acrobat flags tags that are not in the document, and PDF/A and PDF/UA conflict, so staff cannot tell a real barrier from a checker quirk.",
+        "total": 19,
+        "missedGate": "Not researched or reviewed in this run; willingnessToPay 2 (PAC and veraPDF are free) and total 19 below 22.",
+        "evidence": [
+          "https://github.com/latex3/tagging-project/issues/1734",
+          "https://github.com/latex3/tagging-project/issues/1676",
+          "https://community.adobe.com/questions-9/accessibility-checker-flags-items-that-aren-t-in-the-document-eg-table-headers-when-there-s-no-table-1630192"
+        ],
+        "firstSeen": "2026-11-26"
+      }
+    ],
+    "caveats": "First run of 2026-11-26 (Thursday, small-business back-office lens; focus sources A16, B11, C10). Three provisional ideas ship, at 20, 17 and 13, and a provisional wildcard at 16; none came near the gate of 22. Twenty-four candidates were generated (18 with a small-business buyer, 8 aimed at the owner's interests); two failed a rejection rule. Six were researched: research ended one (Property Side-Ledger for MTD, free and cheap filers already serve it), and five were reviewed (four regular, one wildcard): one was killed (Year-End Books Check for QuickBooks Online, free owner-facing scanners) and four survived as rescores (Overlay Exit Check 22 to 20, Delivery Note Bill Check 18 to 17, 1099 Ready List 17 to 13, the wildcard 20 to 16). Three ideas survived after four regular reviews, so the review target was met. The 1099 Ready List ships at 13: it passes the floor (an owner's complaint dated 2026-11-20, every rejection rule), but its competitive gap is 1 and its season ends in January. Selection constraints hold: idea 3 is a Weekend MVP and ideas 1, 2 and 4 are Multi-week; ideas 1 and 2 are substantial Multi-week ideas with build plans; every regular idea has a small-business buyer (idea 1 smallBusiness true, ideas 2 and 3 Small Business Ops, which is the maximum of 2). Overlay Exit Check serves the same small Shopify shops as the published Popup Check (2026-11-03); the reviewer judged it a different problem but advises treating it as superseding Popup Check rather than shipping both, and building it, like the wildcard, as a vertical of Screen Reader Journeys. No candidate except the unreviewed Checker Second Opinion scored 19 or more, so the watchlist holds one entry. Access notes: Zendesk help centres (Hopscotch, Wave, ShootProof, Verizon Connect Work) and hhs.gov, canva.com, accountingweb.co.uk, pdfa.org, simprogroup.com and community.getjobber.com answered HTTP 403 to WebFetch; feedback.qbo.intuit.com is an empty UserVoice shell (the forum looks retired); community.shopify.com answered 429; community.squareup.com threads came back empty (HTTP 202, no body); the WebAIM discussion list has been decommissioned since 2025-08-22; developer.xero.com, developer.intuit.com and innovations.xero.com render in the browser and return no text; HMRC's software finder needs a form POST; Freelancer job pages serve a login page while the per-project API answers; the GitHub MCP issue_read tool was refused by this session's configuration (an environment fact); a testmuai.com page carried instructions aimed at AI agents and was not used."
+  }
+}
