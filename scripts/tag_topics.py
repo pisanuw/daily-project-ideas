@@ -3,30 +3,46 @@
 
 Usage:
   python3 scripts/tag_topics.py --sample 20     # tag a sample, print, write nothing
-  python3 scripts/tag_topics.py                 # tag everything still untagged
-  python3 scripts/tag_topics.py --retag         # tag everything from scratch
+  python3 scripts/tag_topics.py                 # tag every idea still without a topic
+  python3 scripts/tag_topics.py --retag         # tag again every idea without its own topic
+  python3 scripts/tag_topics.py --retag --sample 1000   # preview a retag, write nothing
 
 Writes ideas/topics.json: {"<idea id>": "<topic>"}, where the id is
 "YYYY-MM-DD-N", matching the id build.js gives each idea.
 
-The topic lives here rather than in the daily idea files for two reasons: the
-daily files are an append-only record that should not be rewritten to add a
-field, and a taxonomy that turns out wrong should be regenerable without
-touching them. ROUTINE.md has new ideas carry a `topic` field going forward.
-This script tags those ideas too: build.js does not read that field today (its
-normalizeIdea drops it), so ideas/topics.json is what the site shows for them.
+ideas/topics.json holds a topic for every idea up to 2026-11-25: the archive,
+which predates the `topic` field, and the November ideas, where it overrides
+the topic the Finder wrote. build.js shows the topics.json entry when there is
+one, and otherwise the idea's own `topic` field. The topic lives here rather
+than in the daily idea files because those files are an append-only record
+that should not be rewritten, and a taxonomy that turns out wrong should be
+fixable without touching them.
+
+This script never tags an idea whose daily file carries a topic on the list:
+the Finder's pick stands unless someone writes an override into topics.json
+by hand. Under --retag, an idea that is not tagged again (its own topic, a
+failed batch, an answer off the list) keeps its previous entry, unless that
+topic has left the list.
+
+When the list grows, do not run a full --retag: on 26 Nov 2026 it moved 91 of
+the 601 archived ideas between old topics, because the tagger answers
+differently on a second run. Instead tag only the ideas without a topic (a
+plain run), preview the rest with --retag --sample 1000, and copy into
+topics.json only the ideas the preview moves into a new topic.
 
 Uses the local `claude` CLI, which is covered by the subscription. It does not
 use an API key.
 """
 
 import argparse
+import glob
 import json
 import os
 import re
 import subprocess
 import sys
 
+IDEAS_DIR = "ideas"
 TOPICS_FILE = "ideas/topics.json"
 DATA_JS = "dist/data.js"
 BATCH = 40
@@ -34,8 +50,9 @@ CLI_TIMEOUT = 300
 
 TAXONOMY_FILE = "ideas/topics-taxonomy.json"
 
-# One topic per idea, chosen to split this corpus of 601 ideas into browsable
-# piles. Derived from a keyword survey of the actual titles and summaries, then
+# One topic per idea, chosen on 2026-11-01 to split the 601 ideas then archived
+# into browsable piles (Small Business Operations and Nonprofit Operations were
+# added on 2026-11-26). Derived from a keyword survey of the actual titles and summaries, then
 # pruned: a plain keyword tagger averaged 3.4 matches per idea, so these are
 # meant as "the single best fit", not as labels that happen to apply. The list
 # is shared with build.js and scripts/validate_ideas.py through one file.
@@ -70,6 +87,26 @@ def load_ideas():
     raw = open(DATA_JS, encoding="utf-8").read()
     payload = json.loads(raw[raw.index("{"):raw.rindex("}") + 1])
     return [i for i in payload["ideas"] if not i.get("placeholder")]
+
+
+def own_topics():
+    """The on-list `topic` each daily file gives its ideas, by id "<date>-<n>".
+
+    Read from the daily files: dist/data.js cannot show them, because build.js
+    lets TOPICS_FILE override them there.
+    """
+    own = {}
+    for path in sorted(glob.glob(os.path.join(IDEAS_DIR, "[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9].json"))):
+        date = os.path.basename(path)[:10]
+        try:
+            data = json.load(open(path, encoding="utf-8"))
+        except ValueError:
+            continue
+        items = data if isinstance(data, list) else data.get("ideas", [])
+        for n, idea in enumerate(items, 1):
+            if isinstance(idea, dict) and idea.get("topic") in TOPICS:
+                own[f"{date}-{idea.get('n') or n}"] = idea["topic"]
+    return own
 
 
 def call_claude(prompt):
@@ -124,23 +161,27 @@ def main(argv):
     args = ap.parse_args(argv)
 
     ideas = load_ideas()
-    existing = {}
-    if os.path.exists(TOPICS_FILE) and not args.retag:
-        existing = json.load(open(TOPICS_FILE, encoding="utf-8"))
+    ids = {i["id"] for i in ideas}
+    previous = {}
+    if os.path.exists(TOPICS_FILE):
+        previous = json.load(open(TOPICS_FILE, encoding="utf-8"))
+    existing = {} if args.retag else previous
 
-    # Every idea not yet in TOPICS_FILE is tagged. dist/data.js cannot tell an
-    # idea's own topic field from one build.js filled in from TOPICS_FILE, so
-    # skipping ideas that show a topic there made --retag skip all 601 archived
-    # ideas and then write a TOPICS_FILE without them.
-    todo = [i for i in ideas if i["id"] not in existing]
+    # The Finder's own topic stands: an idea whose daily file names one on the
+    # list is never tagged. Read from the daily files, not from dist/data.js,
+    # where build.js has already filled TOPICS_FILE in (reading it there made
+    # --retag skip all 601 archived ideas and write a TOPICS_FILE without them).
+    own = own_topics()
+    todo = [i for i in ideas if i["id"] not in existing and i["id"] not in own]
     if args.sample:
         todo = todo[:args.sample]
     if not todo:
-        print(f"nothing to do: {len(existing)} tagged in {TOPICS_FILE}")
+        print(f"nothing to do: {len(existing)} in {TOPICS_FILE}, "
+              f"{len(own)} carry their own topic")
         return 0
 
     print(f"tagging {len(todo)} of {len(ideas)} ideas "
-          f"({len(existing)} already in {TOPICS_FILE})")
+          f"({len(existing)} already in {TOPICS_FILE}, {len(own)} carry their own topic)")
     batches = [todo[i:i + BATCH] for i in range(0, len(todo), BATCH)]
     tagged = {}
     for n, batch in enumerate(batches, 1):
@@ -153,17 +194,23 @@ def main(argv):
         print("\nsample result:")
         by_id = {i["id"]: i for i in ideas}
         for key, topic in sorted(tagged.items()):
-            print(f"  {topic:30} {by_id[key]['title'][:52]}")
+            was = previous.get(key, "-")
+            print(f"  {key:22} {topic:30} (was {was:30}) {by_id[key]['title'][:52]}")
         print("\n(sample run: nothing written)")
         return 0
 
-    merged = dict(existing)
+    if args.retag:
+        # An idea not tagged again keeps its previous entry, unless that topic
+        # has left the list, so a failed batch cannot drop ideas from the file.
+        merged = {k: v for k, v in previous.items() if k in ids and v in TOPICS}
+    else:
+        merged = dict(existing)
     merged.update(tagged)
     with open(TOPICS_FILE, "w", encoding="utf-8") as fh:
         json.dump(dict(sorted(merged.items())), fh, indent=2, ensure_ascii=False)
         fh.write("\n")
 
-    covered = len({i["id"] for i in ideas} & set(merged))
+    covered = len({k for k in ids if merged.get(k) in TOPICS or k in own})
     print(f"\nwrote {TOPICS_FILE}: {len(merged)} entries "
           f"({covered}/{len(ideas)} ideas have a topic)")
     if covered < len(ideas):
