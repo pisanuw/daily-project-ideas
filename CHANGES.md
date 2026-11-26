@@ -728,3 +728,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-25 [decision] Finder widened (owner, "1 A+B+D, 2 yes"): new sources A17 Lobsters, A18 Stack Exchange beyond education, A19 GitHub Discussions, A20 App Store reviews, B13 work-app and IDE marketplaces; a daily wildcard idea (wildcard, wildcardReason; validator, build and site updated); dormant keyed paths for Reddit and Product Hunt (status ok-key)
 
 2026-11-26 [doc] Tagging Doctor launched: implemented.json entry (placeholder replaced; url, repo, notes, publicNotes), studio.json entry (educators) and web/media/tagging-doctor.jpg (demo frame 3, the suggested fix, not the default frame with a cut line)
+
+2026-11-26 [code] ads.txt for Google ads (owner): web/ads.txt, served at studio.hintwise.org/ads.txt; hintwise.org/ads.txt redirects there (same root domain)
