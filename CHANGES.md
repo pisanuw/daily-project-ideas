@@ -734,3 +734,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-26 [decision] Two new topics after Teaching Operations in ideas/topics-taxonomy.json (Keeper): Small Business Operations and Nonprofit Operations, answering the Finder's five topic requests of 21 to 24 Nov; tag_topics.py prompt guides the tagger to them. The Finder can use them once the owner updates roles/finder/ROUTINE.md.
 
 2026-11-26 [code] Retagged all 685 ideas against the 15 topics (tag_topics.py --retag, after fixing its skip of archived ideas): 65 Small Business Operations, 10 Nonprofit Operations, 84 November ideas that showed no topic now have one; 91 of 601 archived ideas also moved between old topics.
+
+2026-11-26 [code] Kept the old topics (Keeper): the full retag had moved 91 archived ideas between old topics on a second run, so ideas/topics.json keeps every old assignment and takes only the 84 untagged ideas and the moves into the new topics; both Conference Pocket Schedule ideas (2026-09-23-5, 2026-10-08-5) are Nonprofit Operations.
