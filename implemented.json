@@ -692,9 +692,11 @@
         "date": "2026-10-29",
         "n": 2
       },
-      "placeholder": true,
-      "slug": "tagging-doctor",
-      "notes": "In progress since 2026-11-19, day 7 of 7, milestones 1 to 5b live (scan; accounts and course reports; Compile and check; fix cards, the patched copy and the compare; the checker in backend-hub; alt text for figures, saved alt texts, the full course report); milestone 6 (polish and finish) live since 25 Nov; its live check rejected AC-53 (layout shift on load), the fix is approved and releases on 26 Nov UTC, then a live re-check and the launch"
+      "url": "https://tagging-doctor.hintwise.org",
+      "repo": "https://github.com/pisanuw/claude-built-apps/tree/main/tagging-doctor",
+      "implementedOn": "2026-11-26",
+      "notes": "Vite + TypeScript app on Netlify; the scan runs in the browser and sends nothing. Signed in (Supabase: Google or emailed code, schema app_tagging_doctor with row level security): course reports, saved alt texts and Compile and check, which sends the patched copy to the checker in backend-hub (Docker image with TeX Live and veraPDF, mounted at /tagging-doctor) and compares PDF/UA-2 results against the original. Alt text for figures is drafted with the user's own key or through the HintWise LLM gateway within its caps, and approved before it goes into the copy. Built over seven build days (19 to 25 Nov 2026, milestones 1 to 6); m6's live check rejected a layout shift on load (AC-53), fixed and re-checked live on 26 Nov (Lighthouse mobile 100, CLS 0). Known limitations: acceptance/launch.md in pisan-labs/hintwise-workflow (15), among them Beamer and six classes not taggable, equation notation not checked, and the signed-in nav shift at tablet widths.",
+      "publicNotes": "Tagging Doctor shows instructors who write their course materials in LaTeX what stops each document from producing a tagged, accessible PDF. Drop a zipped project or a single .tex file and it lists, in your browser, every class and package that blocks tagging, with the file, the line and a suggested fix. It can make a copy with the fixes you accept and the figure descriptions you approve, and, once you sign in, compile that copy and check it against the PDF/UA-2 accessibility standard side by side with the original. It is for faculty in math, science and engineering, and for the accessibility offices and instructional designers who support them. The fixes do not make every document pass: Beamer slides and several common packages cannot be tagged yet, and TikZ drawings still need work by hand."
     },
     {
       "id": "screen-reader-journeys",
