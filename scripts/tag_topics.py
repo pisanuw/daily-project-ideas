@@ -12,8 +12,9 @@ Writes ideas/topics.json: {"<idea id>": "<topic>"}, where the id is
 The topic lives here rather than in the daily idea files for two reasons: the
 daily files are an append-only record that should not be rewritten to add a
 field, and a taxonomy that turns out wrong should be regenerable without
-touching them. ROUTINE.md has new ideas carry a `topic` field going forward,
-and this script leaves those alone.
+touching them. ROUTINE.md has new ideas carry a `topic` field going forward.
+This script tags those ideas too: build.js does not read that field today (its
+normalizeIdea drops it), so ideas/topics.json is what the site shows for them.
 
 Uses the local `claude` CLI, which is covered by the subscription. It does not
 use an API key.
@@ -127,20 +128,19 @@ def main(argv):
     if os.path.exists(TOPICS_FILE) and not args.retag:
         existing = json.load(open(TOPICS_FILE, encoding="utf-8"))
 
-    # An idea that already carries its own topic field (written by the routine)
-    # is authoritative; never overwrite it.
-    own = {i["id"]: i["topic"] for i in ideas if i.get("topic") in TOPICS}
-
-    todo = [i for i in ideas if i["id"] not in existing and i["id"] not in own]
+    # Every idea not yet in TOPICS_FILE is tagged. dist/data.js cannot tell an
+    # idea's own topic field from one build.js filled in from TOPICS_FILE, so
+    # skipping ideas that show a topic there made --retag skip all 601 archived
+    # ideas and then write a TOPICS_FILE without them.
+    todo = [i for i in ideas if i["id"] not in existing]
     if args.sample:
         todo = todo[:args.sample]
     if not todo:
-        print(f"nothing to do: {len(existing)} tagged in {TOPICS_FILE}, "
-              f"{len(own)} carry their own topic")
+        print(f"nothing to do: {len(existing)} tagged in {TOPICS_FILE}")
         return 0
 
     print(f"tagging {len(todo)} of {len(ideas)} ideas "
-          f"({len(existing)} already in {TOPICS_FILE}, {len(own)} self-tagged)")
+          f"({len(existing)} already in {TOPICS_FILE})")
     batches = [todo[i:i + BATCH] for i in range(0, len(todo), BATCH)]
     tagged = {}
     for n, batch in enumerate(batches, 1):
@@ -163,7 +163,7 @@ def main(argv):
         json.dump(dict(sorted(merged.items())), fh, indent=2, ensure_ascii=False)
         fh.write("\n")
 
-    covered = len(merged) + len(own)
+    covered = len({i["id"] for i in ideas} & set(merged))
     print(f"\nwrote {TOPICS_FILE}: {len(merged)} entries "
           f"({covered}/{len(ideas)} ideas have a topic)")
     if covered < len(ideas):
