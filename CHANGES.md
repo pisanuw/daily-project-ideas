@@ -730,3 +730,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-26 [doc] Tagging Doctor launched: implemented.json entry (placeholder replaced; url, repo, notes, publicNotes), studio.json entry (educators) and web/media/tagging-doctor.jpg (demo frame 3, the suggested fix, not the default frame with a cut line)
 
 2026-11-26 [code] ads.txt for Google ads (owner): web/ads.txt, served at studio.hintwise.org/ads.txt; hintwise.org/ads.txt redirects there (same root domain)
+
+2026-11-26 [decision] Two new topics after Teaching Operations in ideas/topics-taxonomy.json (Keeper): Small Business Operations and Nonprofit Operations, answering the Finder's five topic requests of 21 to 24 Nov; tag_topics.py prompt guides the tagger to them. The Finder can use them once the owner updates roles/finder/ROUTINE.md.

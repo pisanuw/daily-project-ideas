@@ -180,7 +180,7 @@ matches per idea, too loose to browse by.
 
 | File | Written by | Purpose |
 |---|---|---|
-| `ideas/topics-taxonomy.json` | by hand | The closed list of 13 topics, in display order. `build.js`, `scripts/tag_topics.py` and `scripts/validate_ideas.py` all read it, so the list cannot drift between them. Renaming or adding a topic means re-running the tagger with `--retag`, because existing assignments were made against the old list. |
+| `ideas/topics-taxonomy.json` | by hand | The closed list of 15 topics, in display order (13 from 2026-11-01; Small Business Operations and Nonprofit Operations added 2026-11-26). `build.js`, `scripts/tag_topics.py` and `scripts/validate_ideas.py` all read it, so the list cannot drift between them. Renaming or adding a topic means re-running the tagger with `--retag`, because existing assignments were made against the old list. |
 | `ideas/topics.json` | `scripts/tag_topics.py` | `{"<idea id>": "<topic>"}` for the archive, where the id is `YYYY-MM-DD-N`. Generated with the local `claude` CLI in batches of 40. |
 
 The archive's topics live in `topics.json` rather than being written back into

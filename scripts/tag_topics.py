@@ -50,6 +50,8 @@ Rules:
 - Nearly every idea here involves AI somewhere, because of when they were written. Use "AI Literacy & Ethics" only when the SUBJECT is AI itself: teaching how models behave, prompting, bias, agent oversight, AI policy. A grading tool that calls an LLM is "Assessment & Grading".
 - Likewise ignore the stack: a React app about sorting is "Algorithms & Data Structures", not "Developer Tooling". Use "Developer Tooling" for ideas about the practice of programming itself: version control, debugging, testing, code review, IDEs, deployment.
 - "Teaching Operations" is for the administrative work around a course: scheduling, rosters, syllabi, advising, accreditation, office hours.
+- "Small Business Operations" is for the back office and customer-facing work of a small business: compliance and HR records, tax, shop and order operations, bookings, invoicing. A café's booking tool is "Small Business Operations"; a grading tool sold to schools stays "Assessment & Grading".
+- "Nonprofit Operations" is for the work of running a nonprofit: donations and receipts, events and waivers, volunteers, grants, membership. A charity's donor receipts are "Nonprofit Operations".
 - "Data & Visualization" is for ideas whose point is exploring or presenting a dataset, when no other topic fits better.
 - There is no "other". Pick the closest topic even when the fit is loose.
 
