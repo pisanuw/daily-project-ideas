@@ -736,3 +736,7 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-26 [code] Retagged all 685 ideas against the 15 topics (tag_topics.py --retag, after fixing its skip of archived ideas): 65 Small Business Operations, 10 Nonprofit Operations, 84 November ideas that showed no topic now have one; 91 of 601 archived ideas also moved between old topics.
 
 2026-11-26 [code] Kept the old topics (Keeper): the full retag had moved 91 archived ideas between old topics on a second run, so ideas/topics.json keeps every old assignment and takes only the 84 untagged ideas and the moves into the new topics; both Conference Pocket Schedule ideas (2026-09-23-5, 2026-10-08-5) are Nonprofit Operations.
+
+2026-11-26 [code] build.js shows topics.json, else the idea's own topic (it dropped that field); tag_topics.py skips own topics, and --retag keeps old entries for ideas not re-tagged.
+
+2026-11-26 [note] Count fix: the 84 untagged were 83 November ideas (own topic dropped by build.js) and screen-reader-journeys. 3 tags fixed (review); now Small Business 62, Nonprofit 11.
