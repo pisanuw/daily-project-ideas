@@ -742,3 +742,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-26 [note] Count fix: the 84 untagged were 83 November ideas (own topic dropped by build.js) and screen-reader-journeys. 3 tags fixed (review); now Small Business 62, Nonprofit 11.
 
 2026-11-26 [doc] Created ideas/2026-11-26.json (schemaVersion 3, 4 ideas): Overlay Exit (20, provisional), Bill Check (17, provisional), 1099 List (13, provisional), Heard-As (16, prov., wildcard)
+
+2026-11-27 [doc] Created ideas/2026-11-27.json (schemaVersion 3, 5 ideas): Bill Leak (20, prov.), Pre-Order (19, prov.), Cash Close (19, prov.), Menu Desk (17, prov.), Spoken (15, prov., wildcard)

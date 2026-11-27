@@ -1,0 +1,1969 @@
+{
+  "date": "2026-11-27",
+  "schemaVersion": 3,
+  "complete": true,
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Bill Leak Check for Small Shopify Shops",
+      "slug": "bill-leak-check-for-small-shopify-shops",
+      "category": "Small Business Ops",
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "gateGap": {
+        "missing": [
+          "total 20 is below 22",
+          "pain 3 is below 4: only one complaint (2026-11-25) concerns the re-scoped job, fees on store credit or gift cards and idle POS Pro"
+        ],
+        "closedBy": "The search-ad calculator test closes the largest gap, pain: if at least a quarter of 40 or more calculator runs show a store-credit, gift-card or idle POS Pro leak over $100 a year, and at least 3 visitors describe a leak of their own in the page's comment box, that is independent evidence beyond the single complaint and would support pain 4 (total 21); runs costing under $5 each would show the self-serve channel works (reachability 4, total 22), and 4 refundable $49 pre-orders would show payment for this exact job (willingnessToPay 4)."
+      },
+      "topic": "Small Business Operations",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": true,
+        "engine": true,
+        "shared": false,
+        "notes": {
+          "stateful": "Each shop keeps its bill history, a month-to-month diff and a running leak total, and comes back to it on every bill.",
+          "connected": "Reads the bill CSV exported from Settings > Billing, and orders, payment methods and POS locations through the Shopify Admin API or the orders CSV.",
+          "unattended": "A daily job estimates fees on new store-credit and gift-card payments and finds locations with no POS sales; a bill-day email asks for the new bill while refund windows are still open.",
+          "engine": "Fee rules by store creation date (12 May 2025 cut-off), plan rate and split payment; POS Pro per location against POS sales; refund windows of 7, 30 and 90 days; app 30-day cycles and final charges after an uninstall."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "email",
+        "scheduled",
+        "backend"
+      ],
+      "buildPlan": [
+        {
+          "n": 1,
+          "title": "One bill, one leak",
+          "delivers": "Sign in, upload a Shopify bill CSV and an orders CSV, and see each store-credit or gift-card order with its third-party fee, the total, and the cheaper setting.",
+          "acceptance": "On a fixture pair with three store-credit orders on a Basic store created after 12 May 2025, exactly those three are listed and the total equals 2% of their store-credit amounts; deployed."
+        },
+        {
+          "n": 2,
+          "title": "POS Pro, app and renewal rules",
+          "delivers": "Flags POS Pro lines per location against that location's POS sales, app charges dated after an uninstall date the owner enters, and annual charges, each with its refund deadline.",
+          "acceptance": "Seeded fixtures give the expected flag list; a monthly POS Pro flag shows a deadline 7 days after its billing date and an annual one 30 days."
+        },
+        {
+          "n": 3,
+          "title": "Bill history",
+          "delivers": "Saved bills per shop, a month-to-month diff of new, raised and removed charges, and a running leak total.",
+          "acceptance": "Two uploaded months show the right new, raised and removed charges; data survives sign-out and sign-in."
+        },
+        {
+          "n": 4,
+          "title": "Shopify app shell",
+          "delivers": "Install from a Shopify link, open the check inside the admin and pay through Shopify Billing; orders and locations sync without a CSV.",
+          "acceptance": "Installs on a development store through OAuth, approves a test charge, answers the three mandatory privacy webhooks with 200, and syncs recent orders with their payment methods and POS locations."
+        },
+        {
+          "n": 5,
+          "title": "Daily watch and bill-day email",
+          "delivers": "A daily job estimates fees on new store-credit and gift-card payments and finds locations with no POS sales; on bill day an email asks for the new bill and lists what to check while refunds are possible.",
+          "acceptance": "A seeded store-credit order and an idle location produce exactly one email within 24 hours; a quiet day sends none."
+        },
+        {
+          "n": 6,
+          "title": "Polish",
+          "delivers": "Business-owner README, phone layout, keyboard and screen-reader pass, walkthrough test, App Store listing text.",
+          "acceptance": "A walkthrough test runs from install to first flag; axe reports no serious issues; the listing text is checked against the App Store requirements."
+        }
+      ],
+      "summary": "For owners of small Shopify shops: checks each Shopify bill for fees and add-ons they pay without using (fees on store credit and gift cards, POS Pro on idle locations, app charges after uninstalling) in time to change the setting or ask for a refund.",
+      "public": {
+        "summary": "Checks every Shopify bill for charges you are paying without using, and shows you the cheaper setting before the next bill.",
+        "problem": "You give customers store credit for free, or you tried in-person selling once, and months later you find hundreds of dollars on your bill for money you never collected. By the time you notice, the refund window has closed and support says no. Your bill lists every charge, but nothing tells you which ones you could have avoided.",
+        "forWhom": "Owners of small Shopify shops who give store credit or gift cards, have an in-person selling add-on, or pay for several apps.",
+        "benefits": [
+          "Spot fees on the store credit and gift cards you give away",
+          "Stop paying for in-person selling at a location that never sells",
+          "Know which app charges after uninstalling are normal and which to question",
+          "Hear about a costly charge while you can still ask for a refund",
+          "See what each bill cost you compared with last month"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "An owner who gave store credit away free was 'charged $546.10 in fees from June to November on money I never collected', plus about $290 for POS Pro on a store with no POS sales, and Shopify 'refused any refund or even a partial goodwill credit'. The rule is published (stores created on or after 12 May 2025 pay third-party transaction fees on store-credit and gift-card payments), but the admin shows no warning, and POS Pro refunds close 7 days after a monthly billing date. Other owners report charges after uninstalling apps; those are usually final charges for time used, and some were refunded.",
+      "description": "The owner installs it from the Shopify App Store and drops in the bill CSV from Settings > Billing; it reads orders, payment methods and POS locations through the Admin API, or from the orders CSV for older months. It leads with two leaks no other app checks: third-party transaction fees on store-credit and gift-card payments (only stores created on or after 12 May 2025 pay them), and POS Pro billed on locations with no POS sales. Each flag shows the amount to date, the fix where one exists (single-use 100% discount codes instead of store credit given away free, confirmed with a free test order; downgrading an idle location to the free POS level), the plain cost where no cheaper setting exists (gift cards sold for money), and the refund deadline where Shopify publishes one (POS Pro: 7 days after a monthly billing date, 30 days after an annual one). App charges after an uninstall and annual renewals are shown as a calendar, without claiming a fix. A daily job watches new store-credit and gift-card payments and idle locations, and a bill-day email asks for the new bill.",
+      "targetCustomer": "Owners of small Shopify shops (1 to 10 people) on Basic or Grow whose store was created on or after 12 May 2025 and that give store credit (loyalty, refunds as credit, free-credit programmes) or sell gift cards, or that pay for POS Pro on a location; older stores never pay the store-credit or gift-card fee.",
+      "buyer": "The shop owner, on the business card, from the same budget as the shop's apps.",
+      "whyNow": "Stores created on or after 12 May 2025 pay third-party transaction fees on store-credit and gift-card payments, while a 2024 community answer still says store credit carries no fee, so every store opened in the last 18 months is exposed to advice that is wrong for it. POS Pro refunds close 7 days after a monthly billing date. Three bill or app-spend apps launched between November 2025 and August 2026 with 0 reviews, four similar fee or invoice audit listings now read 'not currently available', and none looks at fees or POS Pro.",
+      "founderFit": "Nothing beyond building it alone.",
+      "problemEvidence": [
+        {
+          "url": "https://community.shopify.com/t/722775.json",
+          "source": "community.shopify.com",
+          "author": "poster A",
+          "date": "2026-11-25",
+          "kind": "complaint",
+          "summary": "Shop owner running a free store-credit program: $546.10 in fees June to November on credit given away, plus about $290 POS Pro with $0 POS sales; refund and goodwill credit refused."
+        },
+        {
+          "url": "https://apps.shopify.com/reviews/2349396",
+          "source": "apps.shopify.com",
+          "author": "poster D",
+          "date": "2026-09-05",
+          "kind": "complaint",
+          "summary": "US merchant reviewer kept being charged after uninstalling; the developer called it a final charge for time used and refunded it; an app-charge case, the secondary feature."
+        },
+        {
+          "url": "https://apps.shopify.com/reviews/2385947",
+          "source": "apps.shopify.com",
+          "author": "poster E",
+          "date": "2026-10-06",
+          "kind": "complaint",
+          "summary": "UK merchant reviewer charged £14.92 after uninstalling, warns other owners to check their bills after uninstalling; the developer refunded it as a final charge; refunded in full by the developer on 2026-10-08."
+        },
+        {
+          "url": "https://apps.shopify.com/apptrim",
+          "source": "apps.shopify.com",
+          "author": "unknown",
+          "date": "2025-11-07",
+          "kind": "spend",
+          "summary": "AppTrim (launched 2025-11-07, read 2026-11-27): owner uploads the bill PDF or CSV; $9 per invoice, $15/month, $499 audit; app charges only; 0 reviews."
+        },
+        {
+          "url": "https://apps.shopify.com/app-cost-audit-monitor",
+          "source": "apps.shopify.com",
+          "author": "unknown",
+          "date": "2026-06-19",
+          "kind": "spend",
+          "summary": "Watchdog (launched 2026-06-19, read 2026-11-27 by the gatherer): Free and Monitor $9.99/month; invoice-confirmed app spend; nothing on fees or POS Pro; 0 reviews."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "AppTrim: App Spend Tracker",
+          "url": "https://apps.shopify.com/apptrim",
+          "price": "Free (1 invoice), $9 per invoice, $15/month Unlimited, $499 Expert Audit",
+          "gap": "Lists apps on an uploaded bill, including uninstalled ones; nothing on fees on store credit or gift cards, POS Pro, or refund deadlines. 0 reviews a year after launch. Its Unlimited plan already gives the month-to-month app diff ('Upload a later invoice to see which apps are new or went up')."
+        },
+        {
+          "name": "Watchdog: App Spend Audit",
+          "url": "https://apps.shopify.com/app-cost-audit-monitor",
+          "price": "Free; Monitor $9.99/month",
+          "gap": "App spend and apps that bill but never load; nothing on transaction fees or POS Pro. It now shows price-hike alerts."
+        },
+        {
+          "name": "CostPilot Pro",
+          "url": "https://apps.shopify.com/spendlens",
+          "price": "$9.99/month or $79/year",
+          "gap": "Scans the storefront for duplicate or unused apps, not the bill."
+        },
+        {
+          "name": "Shopify billing page (native)",
+          "url": "https://help.shopify.com/en/manual/your-account/manage-billing/your-invoice/apps",
+          "price": "free",
+          "gap": "Shows current and past charges; the help pages describe no warning for avoidable fees, idle POS Pro or closing refund windows."
+        },
+        {
+          "name": "Shopify App Pricing billing card (native)",
+          "url": "https://shopify.dev/changelog/posts/shopify-app-pricing-charge-for-usage-recurring-subscriptions-or-both.md",
+          "price": "free",
+          "gap": "Since 2026-05-12, shows each app's plan, status, usage charges and upcoming changes in the admin for apps on App Pricing (optional for apps); nothing on transaction fees or POS Pro."
+        },
+        {
+          "name": "Shopify POS Pro Subscription page (native)",
+          "url": "https://help.shopify.com/en/manual/sell-in-person/getting-started/identify-your-pos-needs",
+          "price": "free",
+          "gap": "Lists which locations have POS Pro; no warning for a location with no sales and no notice before a charge."
+        }
+      ],
+      "keyFeatures": [
+        "Store-credit and gift-card fee finder: each order, its fee, the total to date, and the fix where one exists (discount codes for credit given away free)",
+        "Idle POS Pro check: POS Pro charges per location against that location's POS sales, with the downgrade and refund deadline",
+        "App charge explainer: charges after uninstalling marked as a normal final charge or unexpected, with who decides the refund",
+        "Renewal calendar: annual plan, app and POS Pro charges coming up, with refund windows",
+        "Month-to-month bill diff and running leak total",
+        "Daily watch and bill-day email"
+      ],
+      "mvpScope": {
+        "features": [
+          "Bill CSV and orders CSV upload with the store-credit, gift-card and POS Pro rules",
+          "Saved bill history and month-to-month diff",
+          "Shopify app install that syncs orders, payment methods and locations",
+          "Daily watch and bill-day email"
+        ],
+        "outOfScope": [
+          "Plus organisation billing across many stores",
+          "Shopify Payments processing-fee and payout audits",
+          "Filing refund requests on the owner's behalf",
+          "Chargebacks",
+          "Any LLM explanation"
+        ],
+        "buildEstimate": "6 build days, plus Shopify App Store review time, which is outside the build, plus a Level 1 protected-customer-data review."
+      },
+      "techStack": "React + Vite static front end; Shopify embedded app shell (App Bridge, OAuth, session tokens) and webhooks on backend-hub (Render); Shopify Admin GraphQL API (read_orders, read_locations) and Shopify Billing API; shared Supabase project for per-shop data; platform scheduled job and transactional email.",
+      "pricing": {
+        "model": "Per-shop annual subscription; first bill check free",
+        "pricePoint": "$49/year",
+        "rationale": "A monthly plan invites cancelling after the one-time fix (switching to discount codes, downgrading POS Pro); the month-to-month app diff is already in AppTrim Unlimited at $15/month. On Basic the store-credit fee passes $49 a year only above about $2,450 a year of redeemed credit."
+      },
+      "revenueSketch": "Estimate: 120 shops x $49/year = about $5,900 a year (about $490 MRR) after 12 months, assuming App Store search brings about 40 installs a month and a quarter of installs find a leak and pay. AppTrim and Watchdog show 0 reviews after 5 to 12 months, so the low case is close to zero.",
+      "distribution": "Shopify App Store listing, a self-serve channel; AppTrim shows that an app built on bill uploads is accepted there. A free public fee calculator page for search traffic on store-credit fee and POS Pro refund queries. Shopify Community: its FAQ allows promoting an app only on the Ask and Offer board ('App recommendations are allowed only on the Ask and Offer board.'), with disclosure of 'any ownership, employment, affiliate, or other commercial relationship' (https://community.shopify.com/faq); its rule on market research or survey posts: rule unknown: check before posting.",
+      "validationTest": {
+        "method": "A one-page leak calculator outside the App Store. The owner enters the plan, the month the store opened, store credit and gift cards redeemed per month, POS locations and their POS sales; the page shows the yearly avoidable fees and the cheaper settings, then a 'Watch my bills: $49 a year, refundable pre-order' button and an optional 'What happened to you?' comment box. Traffic comes from a small search-ad test on queries such as 'shopify store credit transaction fee', 'shopify POS Pro refund' and 'shopify charged after uninstalling app'. No outreach: nobody in the evidence is contacted and nothing is posted in the evidence threads.",
+        "successCriteria": "In three weeks: at least 400 visitors, 40 calculator runs at under $5 each, a quarter of runs showing a leak over $100 a year, and 4 refundable pre-orders or 12 price-button clicks, and at least 3 visitors describe a leak of their own in the comment box.",
+        "cost": "One build day for the page, $200 in search ads, three weeks of waiting."
+      },
+      "moat": "Thin. The rules (the fee cut-off date, plan rates, POS Pro windows, app billing cycles) are public. The defensible parts are a parser tested on real bill exports, a rule set kept current as Shopify changes fees, and each shop's saved bill history. Shopify could add a native warning at any time.",
+      "compliance": [
+        "GDPR and UK GDPR: holds owners' contact data and bill line items; orders are read for payment method, amount and location only; public apps must answer Shopify's mandatory privacy webhooks.",
+        "Shopify App Store requirements: Shopify Billing for the app's own charges (1.2.1), only necessary scopes with read_all_orders justified (3.2, 3.2.1), expiring offline tokens (3.1.2).",
+        "No financial advice: figures are estimates from Shopify's published rates, and refunds stay Shopify's or the developer's decision.",
+        "Accessibility: WCAG 2.1 AA for the embedded page and the upload page.",
+        "Protected customer data: orders and transactions are Level 1 protected customer data (no name, address, phone or email fields), which a public app must request and pass review for, with data minimisation, merchant data-protection agreements, retention periods and encryption at rest and in transit (https://shopify.dev/docs/apps/launch/protected-customer-data.md)."
+      ],
+      "risks": [
+        {
+          "risk": "Shopify adds a native warning or changes the store-credit fee rule.",
+          "mitigation": "Keep the renewal calendar, refund-window alerts and month-to-month diff, which stay useful without the fee rule."
+        },
+        {
+          "risk": "The bill CSV's columns are undocumented and a development store has no real bill to test on.",
+          "mitigation": "Build the parser from bill exports volunteered with consent after the validation test; fall back to bill totals reconciled against fees recomputed from orders."
+        },
+        {
+          "risk": "POS Pro status per location is not in the Admin API (Shopify staff, 2025-08-15), and the transaction gateway string is not a stable contract.",
+          "mitigation": "Read POS Pro lines from the bill, use the API only for POS sales per location, and identify store-credit payments from the orders CSV Payment Method plus a development-store test."
+        },
+        {
+          "risk": "A leak is fixed once and the owner cancels.",
+          "mitigation": "Annual price, renewal calendar, and bill-day checks for new charges."
+        },
+        {
+          "risk": "Developers crowd the niche (three 0-review bill apps, a developer probing merchants on 2026-11-18).",
+          "mitigation": "Lead with fees and POS Pro, which none of them covers."
+        },
+        {
+          "risk": "Owners read a flag as a promise of a refund.",
+          "mitigation": "Show Shopify's published windows with links and say plainly that refunds are not guaranteed."
+        },
+        {
+          "risk": "The main leaks are one-time fixes: once an owner switches to discount codes or downgrades POS Pro, nothing more is found.",
+          "mitigation": "Annual price only, free first check, renewal calendar; accept low renewal and measure it."
+        },
+        {
+          "risk": "The app-charge part is free elsewhere (AppTrim's free invoice, Watchdog's free plan, Shopify's App Pricing billing card).",
+          "mitigation": "Do not charge for app-charge features; lead with fees and POS Pro."
+        }
+      ],
+      "scores": {
+        "pain": 3,
+        "willingnessToPay": 3,
+        "reachability": 3,
+        "competitiveGap": 4,
+        "feasibility": 3,
+        "complianceBurden": 4,
+        "total": 20
+      },
+      "scoreRationale": {
+        "pain": "One recent merchant complaint hits the job (https://community.shopify.com/t/722775.json, 2026-11-25); the others are app charges after uninstalling, one refunded in full (https://apps.shopify.com/reviews/2385947), and two community searches since 2026-05-31 found no other store-credit or POS Pro complaint: 3.",
+        "willingnessToPay": "Paid apps exist for the app-charge part only (https://apps.shopify.com/apptrim at $9 per invoice or $15/month; https://apps.shopify.com/app-cost-audit-monitor at $9.99/month), and none shows a buyer: 0 reviews.",
+        "reachability": "Self-serve channel only: the Shopify App Store, where the upload-based AppTrim lists (https://apps.shopify.com/apptrim) but has 0 reviews a year after launch; the Community allows promotion only on Ask and Offer (https://community.shopify.com/faq).",
+        "competitiveGap": "Re-scoped to fees on store credit and gift cards, idle POS Pro and refund windows, no listing covers them (https://apps.shopify.com/apptrim, https://apps.shopify.com/app-cost-audit-monitor) and Shopify only discloses the rule (https://help.shopify.com/en/manual/customers/store-credit); not 5, because Shopify could add a warning and the app-charge part is free or native (https://shopify.dev/changelog/posts/shopify-app-pricing-charge-for-usage-recurring-subscriptions-or-both.md).",
+        "feasibility": "Rules on uploaded CSVs fit the platform in days, but bills cannot be read by API (https://shopify.dev/docs/apps/launch/billing), the bill CSV is undocumented, POS Pro status is not in the API (https://community.shopify.dev/t/easy-way-to-identify-pos-pro-locations-via-graphql-api/21289), and listing needs OAuth, App Bridge and Shopify Billing (https://shopify.dev/docs/apps/launch/shopify-app-store/app-store-requirements).",
+        "complianceBurden": "No sector regulation, but orders and transactions are Level 1 protected customer data needing Shopify's review, a merchant data agreement, retention periods and encryption (https://shopify.dev/docs/apps/launch/protected-customer-data.md): 4."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "The reviewer re-read the founding complaint and found that it is the only recent complaint about fees on store credit or gift cards or idle POS Pro; two more community searches (third-party transaction fees; POS Pro subscription, both since 2026-05-31) found no other, and the remaining complaints concern plan charges on stores the app would never be installed on, an app developer's refund policy, or a final charge refunded in full, so pain falls from 4 to 3 and those items were dropped from the evidence. Shopify's fees and store-credit help pages confirm the rule for stores created on or after 12 May 2025, with no 2026 change and no admin warning described, and the Fall '26 Edition adds none. The app-charge part is already free or native (AppTrim's free invoice, Watchdog's free plan, Shopify's App Pricing billing card since May 2026), and four similar fee or invoice audit listings now read 'not currently available'. The idea was re-scoped to lead with fees and idle POS Pro, competitiveGap rises from 3 to 4, and the total stays at 20, provisional. The reviewer also corrected the compliance text (orders are Level 1 protected customer data needing Shopify review), moved pricing to annual only because the main fixes are one-time, and noted that gift cards sold for money have no cheaper setting."
+      },
+      "inspiredBy": "https://community.shopify.com/t/722775.json"
+    },
+    {
+      "n": 2,
+      "title": "Holiday Pre-Order Page for Square Food Sellers",
+      "slug": "holiday-pre-order-page-for-square-food-sellers",
+      "category": "Micro-SaaS",
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "gateGap": {
+        "missing": [
+          "total 19 is below 22"
+        ],
+        "closedBy": "The search-ad landing-page test in validationTest: if at least 20 Square food sellers sign up, at least 5 already pay for a pre-order tool or a plan they bought for pre-orders, and at least half say their pre-orders must stay inside Square (they tried or rejected Hotplate, Homegrown or a form tool), that supports reachability 3, willingnessToPay 4 and competitiveGap 3, a total of 22."
+      },
+      "topic": "Small Business Operations",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": true,
+        "engine": true,
+        "shared": true,
+        "notes": {
+          "stateful": "The seller keeps saved holiday and weekly menus, pickup days, cut-offs and caps, and copies last season's menu instead of rebuilding it.",
+          "connected": "Connects to the seller's Square account with their own sign-in: reads the item library and writes each paid order into Square with its pickup time.",
+          "unattended": "A scheduled job closes each menu at its cut-off, closes a pickup day when its cap is reached, emails the next day's prep list each evening and refreshes the Square connection before it expires.",
+          "engine": "Availability rules per menu: which items on which pickup days, per-day and per-window caps, cut-offs, prep-time offsets so tickets print the day before, and mixed-cart rules.",
+          "shared": "The owner builds the menu, customers order from the public page, and kitchen staff work from the printed prep list."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "email",
+        "scheduled",
+        "backend"
+      ],
+      "buildPlan": [
+        {
+          "n": 1,
+          "title": "One menu, one pickup day, one order in Square",
+          "delivers": "The owner connects a Square sandbox account, picks two items and one pickup day; a customer chooses the day, pays, and the order shows in Square with that pickup time.",
+          "acceptance": "An order placed on the deployed page appears in the sandbox seller's orders as a paid pickup order whose pickup time equals the chosen slot."
+        },
+        {
+          "n": 2,
+          "title": "Holiday menu builder",
+          "delivers": "Build a menu from the Square item library with several pickup days, pickup windows, a cut-off and a cap per day; save, edit and copy it.",
+          "acceptance": "A menu with 12 items and 3 pickup days survives sign-out and sign-in; a copied menu keeps every rule and gets new dates."
+        },
+        {
+          "n": 3,
+          "title": "Pickup day first, then the menu",
+          "delivers": "Customers must pick a pickup day before seeing items; they see only that day's items, open windows and remaining capacity; they get an email confirmation.",
+          "acceptance": "Tests show no order can be placed without a pickup day, after the cut-off, outside a window, or above a day's cap; the confirmation email names the day and window."
+        },
+        {
+          "n": 4,
+          "title": "Prep lists by day",
+          "delivers": "A printable prep list per pickup day with totals per item and a pickup sheet sorted by window; tickets print in Square the day before pickup.",
+          "acceptance": "For 40 seeded orders the item totals match a hand count; the sandbox orders carry the prep-time offset set on the menu."
+        },
+        {
+          "n": 5,
+          "title": "Runs by itself",
+          "delivers": "Auto-close at cut-off and at each day's cap, a prep-list email each evening, refunds and cancellations made in Square reflected on the page, and the Square connection refreshed before it lapses.",
+          "acceptance": "A scheduled run closes a menu whose cut-off passed; a refund made in the sandbox updates the prep list within 5 minutes; a token older than 25 days is refreshed."
+        },
+        {
+          "n": 6,
+          "title": "Weekly pre-order menus",
+          "delivers": "A repeating weekly menu (for example a Monday cut-off for Thursday and Friday bread pickup) that opens and closes itself every week.",
+          "acceptance": "Over a simulated four weeks the menu opens and closes on schedule with no manual edits."
+        },
+        {
+          "n": 7,
+          "title": "Polish",
+          "delivers": "Business-owner README, phone layout for the order page, keyboard and screen-reader pass, walkthrough test.",
+          "acceptance": "A walkthrough test runs connect, build menu, order, prep list; axe reports no serious issues on the order page at phone width."
+        }
+      ],
+      "summary": "For bakeries, caterers, butchers and coffee shops that sell holiday and weekly pre-orders on Square: customers pick their pickup day first, orders land in Square with the right pickup time, and the kitchen gets a prep list per day.",
+      "public": {
+        "summary": "A pre-order page for your holiday menu where every customer picks a pickup day, every order lands in Square with the right time, and your kitchen gets a prep list for each day.",
+        "problem": "You open your Thanksgiving or Christmas menu on Square and most customers check out with the first pickup time they are offered, so you spend the week calling them to confirm the real day. You set up the dates item by item, and changing your pickup hours for one week means changing them back by hand afterwards. Then you count how many pies to bake for each day by going through the orders one at a time.",
+        "forWhom": "Owners of bakeries, pie shops, caterers, butchers and coffee shops on Square who take pre-orders for holidays or weekly bake days.",
+        "benefits": [
+          "Every order arrives with the pickup day the customer actually chose",
+          "Set up a whole holiday menu once, with its own pickup days and order deadline",
+          "No more orders on any one day than you can make",
+          "A prep list for each pickup day, ready to print",
+          "Reuse this year's menu next year"
+        ]
+      },
+      "problemStatement": "Food sellers on Square open a holiday menu and customers check out with the earliest pickup slot Square assigns, so one seller confirms about 70% of Thanksgiving orders by hand. Pre-order rules are set item by item, a pre-order window can make the whole store say it is not accepting orders, one seller's Sunday-only pre-order day still offers Saturday pickup (possibly a settings issue), and there is no way to change pickup hours for one week and have them revert (a Square Champion: the feature does not exist yet). And Square gives no item totals per pickup day (a free early-access tool, CafeKit, exists only to fill that).",
+      "description": "A pre-order page the seller links from their site or social posts. The owner connects Square, builds a holiday or weekly menu from their Square items, and sets pickup days, windows, a cut-off and a cap per day; that menu's hours never touch the store's regular Square hours. Customers pick a pickup day first, see only what is available that day, and pay through the seller's own Square account. Each order is written into Square as a paid pickup order with the chosen time and a prep-time offset, so it shows in Order Manager and reaches kitchen printers and the kitchen display at pickup time minus the prep time set on the menu. The app closes the menu at the cut-off or when a day is full and emails the next day's prep list. It is for sellers who want pre-orders kept in Square rather than in a separate storefront such as Hotplate or Homegrown.",
+      "targetCustomer": "Owners and managers of one- to three-location bakeries, pie shops, caterers, butchers and coffee shops in the US that sell through Square (Square Online, the online ordering profile or Square for Restaurants) and take pickup pre-orders for holidays or weekly bake days, and who want pre-orders to stay inside Square (one catalog, one payout, orders in Order Manager and on kitchen printers) rather than in a separate pre-order storefront.",
+      "buyer": "The owner, on the business card. No seller in the evidence is shown paying for a pre-order add-on; category prices are Homegrown at $10 a month and Hotplate's per-order fee, which sellers can pass to customers. Square Online preorders need Plus ($49 a month per location) or Premium, but item pre-ordering on online ordering profiles names no plan.",
+      "whyNow": "The Thanksgiving complaints were posted between 2026-11-03 and 2026-11-19, and the Christmas, Valentine's Day, Lunar New Year and Easter pre-order seasons follow; a Square Champion confirmed on 2026-11-10 that one-week pickup-hour overrides do not exist; an archived 2020 Square request for date and time selection on pre-orders drew 333 replies, and the same questions came back in 2022, 2023, 2025 and 2026, so the gap has outlasted six seasons. Square shipped item-level pre-ordering for ordering profiles (2026-04-23, 2026-06-04) and pre-orders for sold-out items (2026-09-24), but its 2026-10-22, 2026-11-05 and 2026-11-19 'What's New From Square' posts announce no pickup-day-first rule, menu-level setup or per-day cap.",
+      "founderFit": "Nothing beyond building it alone.",
+      "problemEvidence": [
+        {
+          "url": "https://community.squareup.com/t5/Feature-Requests/FOOD-SERVICE-HOLIDAY-PRE-ORDERS/idi-p/852098",
+          "source": "community.squareup.com",
+          "author": "poster A; replies poster B (Square Champion), poster C (Proponent)",
+          "date": "2026-11-03",
+          "kind": "complaint",
+          "summary": "Food-service seller with a Thanksgiving menu (Tuesday or Wednesday pickup): Square assigns the earliest day unless the customer changes it, so the seller had to confirm about 70% of orders; a dozen items need pre-order settings one by one. Replies on 2026-11-05 and 2026-11-07: B supports requiring a pickup date; C suggests one item per pickup day 'until Square adds this feature'."
+        },
+        {
+          "url": "https://community.squareup.com/t5/Feature-Requests/Pre-Order-Date-Stops-Online-Orders/idi-p/852298",
+          "source": "community.squareup.com",
+          "author": "poster D",
+          "date": "2026-11-05",
+          "kind": "complaint",
+          "summary": "Seller (business not stated): setting a pre-order fulfilment window on an item makes the online store show 'not currently accepting orders' until the window opens."
+        },
+        {
+          "url": "https://community.squareup.com/t5/Feature-Requests/One-week-pickup-schedule-overrides-without-changing-recurring/idi-p/852499",
+          "source": "community.squareup.com",
+          "author": "poster E; reply poster F (Square Champion)",
+          "date": "2026-11-09",
+          "kind": "complaint",
+          "summary": "Seller (business not stated) wants pickup days or hours changed for one week and then reverted; restricted dates cannot set different hours. The Champion replies that the feature does not exist yet."
+        },
+        {
+          "url": "https://community.squareup.com/t5/Orders-Menu-Items-Catalog/Setting-up-preordering-ignoring-opening-hours/td-p/853050",
+          "source": "community.squareup.com",
+          "author": "poster H",
+          "date": "2026-11-19",
+          "kind": "complaint",
+          "summary": "Seller (business not stated) set products as preorders for a Sunday-only pickup, but checkout still offers Saturday windows from standard hours. A 2026-11-22 reply points to manually assigned pickup times, which Square's own help says break preorders, so this is probably a settings issue; not counted toward pain."
+        },
+        {
+          "url": "https://community.squareup.com/t5/Feature-Requests/Recurring-Pre-order-request/idi-p/850023",
+          "source": "community.squareup.com",
+          "author": "poster I",
+          "date": "2026-09-23",
+          "kind": "complaint",
+          "summary": "Bread seller wants weekly recurring pre-orders (Monday 6pm cut-off for Thursday or Friday pickup) without editing settings every week."
+        },
+        {
+          "url": "https://www.hotplate.com/pricing",
+          "source": "hotplate.com",
+          "author": "unknown",
+          "date": "2026-09-18",
+          "kind": "spend",
+          "summary": "Hotplate, a pre-order platform for food sellers with prep lists, charges 5% + $0.55 per order, which the seller can pay or pass on to customers, plus 2.9% + $0.30 processing paid by the seller; no subscription; the page names no Square or POS integration."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Square's own preorders and pickup scheduling",
+          "url": "https://squareup.com/help/us/en/article/8285-sell-items-as-preorders-with-square-online",
+          "price": "Square Online preorders need Plus or Premium (Square Plus $49/month per location, https://squareup.com/us/en/pricing); item-level pre-ordering on online ordering profiles, which Square Free includes, names no plan (https://squareup.com/us/en/release-notes/release-notes-june-4th)",
+          "gap": "Set item by item; customers can change a default pickup slot but are never made to choose one; a window can close the store; no one-week hours override; 15-minute window caps but no per-day cap; no item totals per pickup day. Square shipped preorder changes on 2026-04-23, 2026-06-04 and 2026-09-24, so the gap may close."
+        },
+        {
+          "name": "Hotplate",
+          "url": "https://www.hotplate.com/pricing",
+          "price": "5% + $0.55 per order, which the seller may pass to customers, plus 2.9% + $0.30 processing; no subscription",
+          "gap": "Does the whole pre-order job (pickup windows, inventory reservation, prep lists, SMS) at no cost to a seller who passes the fee on, but as a separate storefront and payout; its pages name no Square or POS integration."
+        },
+        {
+          "name": "CafeKit",
+          "url": "https://cafekit-laravel-production-oixkkr.laravel.cloud/",
+          "price": "Free in early access; later price unknown",
+          "gap": "Read-only: turns Square orders into daily production lists but takes no orders and cannot make customers pick a day; in early access since at least May 2025."
+        },
+        {
+          "name": "Ecwid by Lightspeed (Square integration)",
+          "url": "https://www.ecwid.com/apps/pos/square-page",
+          "price": "Integration free; Ecwid plan price unknown",
+          "gap": "A second store to run; the page does not say pickup dates or pre-order rules reach Square."
+        },
+        {
+          "name": "Pickeasy (Shopify, price reference only)",
+          "url": "https://apps.shopify.com/order-delivery-date-time",
+          "price": "Free up to 10 orders; $9.99, $19.99 or $29.99/month",
+          "gap": "Shopify only; not usable by Square sellers."
+        },
+        {
+          "name": "Delivery Guard (Shopify, price reference only)",
+          "url": "https://apps.shopify.com/delivery-guard-1",
+          "price": "Free (30 dated orders); $14.99 or $29.99/month",
+          "gap": "Shopify only; not usable by Square sellers."
+        },
+        {
+          "name": "Homegrown",
+          "url": "https://findhomegrown.com/blog/hotplate-vs-square-online-food-drops",
+          "price": "$10/month billed annually, 0% commission, 7-day trial (its cofounder's post, 2026-11-02)",
+          "gap": "A separate storefront for food vendors with pickup locations and local delivery; the post mentions no Square integration."
+        },
+        {
+          "name": "Jotform with Square payments",
+          "url": "https://www.jotform.com/help/459-how-to-integrate-square-with-jotform/",
+          "price": "not read",
+          "gap": "An order form whose payments land in the seller's Square account with pickup as the default fulfilment; the guide does not say the chosen pickup date reaches Square, and it offers no per-day caps or prep lists."
+        }
+      ],
+      "keyFeatures": [
+        "Holiday and weekly menus built from the Square item library, each with its own pickup days, windows, cut-off and caps",
+        "Customers choose the pickup day first and see only that day's items and open windows",
+        "Each order written into Square as a paid pickup order with the chosen time, so it shows in Order Manager and reaches kitchen printers and the kitchen display at pickup time minus prep time",
+        "Prep list per pickup day with item totals and a pickup sheet by window",
+        "Auto-close at the cut-off or when a day is full, and copy last season's menu"
+      ],
+      "mvpScope": {
+        "features": [
+          "Connect Square and build one holiday menu with pickup days, windows, a cut-off and per-day caps",
+          "Pickup-day-first order page with payment through the seller's Square account",
+          "Orders written to Square with pickup time and a prep-time offset",
+          "Printable prep list per day and an evening email",
+          "Auto-close at cut-off and at each day's cap"
+        ],
+        "outOfScope": [
+          "Pay-at-pickup and phone orders (would need Square Invoices)",
+          "Delivery and shipping",
+          "Deposits and part payments",
+          "SMS reminders",
+          "Toast, Clover and Shopify",
+          "Custom cake order forms with photos"
+        ],
+        "buildEstimate": "7 build days"
+      },
+      "techStack": "Static React + Vite front end on the HintWise platform; Supabase for sign-in, menus, pickup days and an order mirror; backend-hub on Render for Square OAuth (code flow, token refresh before the 30-day expiry), Catalog, Orders and Payments API calls and Square webhooks; Square Web Payments SDK card fields (or Checkout API payment links) so card data never touches the app; platform transactional email and a scheduled job. No LLM.",
+      "pricing": {
+        "model": "Per location: a monthly plan for sellers with weekly pre-orders, or a season pass for sellers who pre-sell only at holidays",
+        "pricePoint": "$12/month per location, or $29 per holiday season (one menu open up to 60 days)",
+        "rationale": "Hotplate costs a seller nothing beyond card processing when its fee is passed to customers, and Homegrown is $10 a month, so the price must be justified by keeping orders, payouts and kitchen tickets inside Square; Shopify pickup-date apps charge $9.99 to $29.99 a month."
+      },
+      "revenueSketch": "Estimate: 60 sellers on the monthly plan x $12 = $720 MRR, plus 150 season passes a year x $29 = $4,350 a year (about $360 a month), so about $1,080 a month after a year. Unsupported until the ad test reports sign-ups; it assumes sellers buy two or three seasons a year and that the app takes no cut of card payments.",
+      "distribution": "Self-serve only. Square's App Marketplace is closed to new listings (Square staff, 2026-10-01: \"we have currently paused onboarding new apps/partners for listing on the Square App Marketplace\", https://developer.squareup.com/forums/t/listing-square-apps-marketplace/28043), though staff say developers can keep using Square's APIs, and sellers connect through Square's standard OAuth flow. The Square Community Code of Conduct says \"Don't promote your own products or services unprompted.\", \"Avoid talking about your services unless asked.\" and \"Unsolicited private messages are a direct violation of this policy.\" (https://community.squareup.com/t5/Community-Resources/Square-Community-Code-of-Conduct/ta-p/723469), so no posting there. First 10 customers: Google search ads and a how-to landing page on searches such as \"Square preorder pickup date\" and \"Square Online holiday preorders\", timed to the weeks sellers set up Christmas, Valentine's Day, Easter and Mother's Day menus. Facebook groups for bakery owners: rule unknown: check before posting.",
+      "validationTest": {
+        "method": "A one-page landing page that shows the pickup-day-first order page and a sample prep list, with a 'Join for the next season' form that asks which Square plan the seller is on, how many pre-orders they took last season, what they use for pre-orders now (Square's own preorders, Hotplate, Homegrown, a form tool, phone or paper) and what it costs them, and whether orders must land in Square. Two price buttons ($12/month, $29/season) lead to a 'not open yet' note. Drive it with about $250 of Google search ads on Square pre-order searches from 2026-11-30 to 2026-12-20. The ads and the page say the tool is independent and not made by Square, and use no Square logo. No outreach to anyone, and no posting in the Square community.",
+        "successCriteria": "From about 400 visitors in three weeks: at least 20 sign-ups that say they sell food on Square and take pre-orders; at least 5 price-button clicks; at least 5 sign-ups who already pay for a pre-order tool or a plan bought for pre-orders; and at least half of sign-ups saying orders must land in Square.",
+        "cost": "About one day to build the page and set up ads, plus about $250 in ad spend."
+      },
+      "moat": "Thin, and Square is actively shipping pre-order features (release notes of 2026-04-23, 2026-06-04 and 2026-09-24). The value is Square-specific know-how (preorders break when pickup times are set manually, tickets print at pickup time minus prep time, paid-only visibility, 30-day token refresh) and saved menus that sellers reuse every season; Square could close the core gap with one release.",
+      "compliance": [
+        "Payments and PCI: card entry stays in Square's hosted Web Payments SDK fields or a Square payment link, so the app never sees card numbers (lowest PCI self-assessment scope).",
+        "Consumer data: the app stores the seller's customers' names, emails and phone numbers; needs a privacy policy, deletion when a seller disconnects, and no marketing use. SMS reminders, if added, need consent under US texting rules.",
+        "Square developer terms and OAuth: tokens encrypted at rest and refreshed before the 30-day expiry; request only the needed permissions (items read, orders write, payments write).",
+        "Accessibility: the public order page should meet WCAG 2.2 AA, since it is a public checkout for the seller's customers.",
+        "Sales tax: taxes come from the seller's Square item tax settings on the order; the app sets no rates.",
+        "GDPR: not in scope for US sellers; it would apply if UK or EU sellers join."
+      ],
+      "risks": [
+        {
+          "risk": "Square adds menu-level preorders or a required pickup-date choice.",
+          "mitigation": "Keep the product small and cheap, and lean on what Square is unlikely to ship soon: per-day caps across a menu, prep lists, weekly menus and reused seasons. Check Square's release notes before each build day and before each season."
+        },
+        {
+          "risk": "Seasonal use: sellers churn between holidays.",
+          "mitigation": "Season-pass pricing, plus weekly bake-day menus for year-round use."
+        },
+        {
+          "risk": "A failure during the holiday rush loses orders.",
+          "mitigation": "Idempotency keys on every Square call, webhook reconciliation, a test-order mode before each menu opens, and an email to the owner if an order fails to reach Square."
+        },
+        {
+          "risk": "Unpaid pre-orders do not show in Square, because orders with fulfillments appear only after payment.",
+          "mitigation": "MVP is pay-now only; pay-at-pickup later through Square Invoices."
+        },
+        {
+          "risk": "No marketplace listing and no community promotion make customers hard to reach.",
+          "mitigation": "Run the search-ad test before building, and build only if it passes."
+        },
+        {
+          "risk": "Christmas 2026 is too close for a build.",
+          "mitigation": "Use this season only for the demand test; ship in January for Valentine's Day, Lunar New Year and Easter."
+        }
+      ],
+      "scores": {
+        "pain": 4,
+        "willingnessToPay": 3,
+        "reachability": 2,
+        "competitiveGap": 2,
+        "feasibility": 4,
+        "complianceBurden": 4,
+        "total": 19
+      },
+      "scoreRationale": {
+        "pain": "Four independent original posters from 2026-09-23 to 2026-11-09 report unresolved pre-order problems, one confirming about 70% of orders by hand (https://community.squareup.com/t5/Feature-Requests/FOOD-SERVICE-HOLIDAY-PRE-ORDERS/idi-p/852098); all have 0 kudos and only two say they sell food, so not 5.",
+        "willingnessToPay": "Hotplate lets the seller pass its fee to customers (https://www.hotplate.com/pricing), Homegrown is $10 a month (https://findhomegrown.com/blog/hotplate-vs-square-online-food-drops), and item pre-ordering on ordering profiles, which Square Free includes, names no plan (https://squareup.com/us/en/release-notes/release-notes-june-4th); paid tools exist, but a bundled Square plan is not shown to be spend on an inferior tool for this job: 3.",
+        "reachability": "Square paused new App Marketplace listings (https://developer.squareup.com/forums/t/listing-square-apps-marketplace/28043) and its community bans unprompted promotion (https://community.squareup.com/t5/Community-Resources/Square-Community-Code-of-Conduct/ta-p/723469); untested search ads are the only self-serve channel.",
+        "competitiveGap": "Hotplate (free to a seller who passes the fee on) and Homegrown ($10 a month) do the whole pre-order job outside Square, Square shipped preorder changes on 2026-04-23, 06-04 and 09-24 (https://squareup.com/us/en/release-notes/release-notes-september-24th), and CafeKit gives free prep lists (https://cafekit-laravel-production-oixkkr.laravel.cloud/); only pickup-day-first, menu-level setup and per-day caps inside Square remain: 2.",
+        "feasibility": "Paid pickup orders with pickup_at created through the Orders API show in Order Manager, printers and the kitchen display (https://developer.squareup.com/docs/orders-api/fulfillments) and are paid with CreatePayment and the order ID (https://developer.squareup.com/docs/orders-api/pay-for-orders); OAuth, webhooks and holiday-peak support keep it from 5.",
+        "complianceBurden": "Card data stays in Square's hosted fields (https://developer.squareup.com/docs/orders-api/pay-for-orders), but the app holds sellers' customer contact data and Square tokens that expire every 30 days (https://developer.squareup.com/docs/oauth-api/overview), and the public order page needs accessibility work."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "The reviewer reread Square's preorder and pickup help pages and its 2026 release notes, the October and November 'What's New From Square' posts, Hotplate's pricing and home pages, a 2026-11-02 Homegrown post, CafeKit and Jotform's Square guide, and re-read every evidence thread through the Square community API. Square shipped item-level pre-ordering for ordering profiles (which Square Free includes) and pre-orders for sold-out items in 2026, but still makes no customer pick a pickup day, has no menu-level setup and no per-day cap. Hotplate does the whole pre-order job for free to a seller who passes its fee to customers, and Homegrown charges $10 a month, though neither puts orders into Square, so competitiveGap fell from 3 to 2 and the idea is re-scoped to sellers who need pre-orders inside Square; willingnessToPay fell from 4 to 3, because a bundled Square plan is not shown to be spend on this job and the category's prices are low or passed on to customers. The six original posters are distinct accounts, but the pay-at-pickup thread is out of scope and was removed, one thread is probably a settings issue, and the undated Square vendor pages moved from evidence to competitors, giving a total of 19 and provisional status."
+      },
+      "inspiredBy": "https://community.squareup.com/t5/Feature-Requests/FOOD-SERVICE-HOLIDAY-PRE-ORDERS/idi-p/852098",
+      "smallBusiness": true
+    },
+    {
+      "n": 3,
+      "title": "Blind Cash Close for Square Counters",
+      "slug": "blind-cash-close-for-square-counters",
+      "category": "Small Business Ops",
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "gateGap": {
+        "missing": [
+          "total 19 is below 22",
+          "willingnessToPay 2 is below 3"
+        ],
+        "closedBy": "The refundable founding payment in validationTest closes the willingnessToPay gap: if at least 3 visitors who run Square Cash Management on a tablet, Terminal, Register or Handheld pay the refundable $12 first month within 21 days, Square sellers are shown paying for this exact job and willingnessToPay rises to 3; if those buyers arrived through the ads and the free counter page, reachability rises to 3 as well, for a total of 21, which still leaves the total one point below 22."
+      },
+      "topic": "Small Business Operations",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": true,
+        "engine": true,
+        "shared": true,
+        "notes": {
+          "stateful": "The owner comes back to a saved history of counts, floats, deposits and variance per closer and register.",
+          "connected": "Connects to the seller's Square account with read-only OAuth (CASH_DRAWER_READ, EMPLOYEES_READ, MERCHANT_PROFILE_READ) to read expected cash, paid in and out, and the closing team member per drawer session.",
+          "unattended": "A nightly job pulls the day's drawer sessions, computes variance, and emails the owner a digest with out-of-tolerance drawers and repeat-shortfall flags.",
+          "engine": "Matches each count to a Square drawer session by device and time window, and solves the float split: which bills and coins to leave so the drawer starts at the target float, with the rest going to the deposit.",
+          "shared": "Closers count on a PIN screen that never shows the expected figure; the owner or manager receives the variance view and digest."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "email",
+        "scheduled",
+        "backend"
+      ],
+      "buildPlan": [
+        {
+          "n": 1,
+          "title": "One blind count, saved",
+          "delivers": "The owner signs in, adds a location and its registers, and shares a count link; a closer enters a PIN and counts bills and coins by denomination; the owner sees the saved total.",
+          "acceptance": "Deployed; a known set of denominations totals correctly and survives sign-out; an automated test asserts the closer screen's payload contains no expected-cash field."
+        },
+        {
+          "n": 2,
+          "title": "Connect Square",
+          "delivers": "The owner connects Square (read-only) and sees each drawer session per register with Square's expected cash, paid in and paid out.",
+          "acceptance": "In the Square sandbox a seeded shift's expected_cash_money, cash_paid_in_money and cash_paid_out_money match the app; the token refresh runs on backend-hub."
+        },
+        {
+          "n": 3,
+          "title": "Match and variance",
+          "delivers": "Each count is matched to its drawer session through the owner's register-to-device map and the end time; the owner sees counted minus expected per session, with the closer (from the PIN) and everyone Square lists as logged in during it.",
+          "acceptance": "A fixture of 3 registers by 2 shifts matches every count correctly, including a drawer left open for two days; an unmatched count is flagged for the owner to assign."
+        },
+        {
+          "n": 4,
+          "title": "Float and deposit split",
+          "delivers": "The owner sets a float target per register; after counting, the closer is told which bills and coins to leave and how much goes in the deposit bag, and records the bag or slip number.",
+          "acceptance": "For 20 test drawers the suggested float equals the target whenever the counted denominations allow it, and deposit equals counted minus float."
+        },
+        {
+          "n": 5,
+          "title": "Nightly digest and repeat-shortfall flags",
+          "delivers": "A scheduled job pulls closed sessions and emails the owner the day's variance per session; a register or staff roster short beyond tolerance N times in 30 days is flagged, with a note that a flag is not evidence against one person.",
+          "acceptance": "Seeded history produces exactly one flag email; a day with all drawers within tolerance sends a digest with no flag."
+        },
+        {
+          "n": 6,
+          "title": "Polish",
+          "delivers": "Business-owner README (device requirement, how to turn off Square's expected-amount permission for closers, variance is not a basis for pay deductions), CSV export, tablet and phone layout, accessibility pass, walkthrough test.",
+          "acceptance": "A walkthrough test runs sign-in, connect, count, match and digest; axe reports no serious issues; the CSV opens in a spreadsheet with one row per drawer session."
+        }
+      ],
+      "summary": "For Square counters with 1 to 7 registers that run Cash Management on a tablet, Terminal, Register or Handheld: each closer's count is matched to Square's expected cash for that drawer session, and the owner sees over and short by session, register and staff over time, with the float and deposit split, CSV export and a nightly digest.",
+      "public": {
+        "summary": "Count the till by bill and coin at closing without seeing what the register expects, then see who was over or short, every day, in one place.",
+        "problem": "You close the day on a paper count sheet, then type one total into your register and hope nobody added wrong. When the drawer is off, you can't tell whether it was a miscount, a float that wasn't set aside, or the same person every Tuesday. So the counts get skipped, or you rebuild it all in a spreadsheet.",
+        "forWhom": "Owners and managers of cafés, pubs, counter-service restaurants and small grocers, and of food trucks or market stalls that run Square on a tablet or register, who take a lot of cash across one to seven registers.",
+        "benefits": [
+          "Closers count quickly by bill and coin, without seeing the expected total",
+          "A clear split between what stays in the drawer and what goes to the bank",
+          "Each day's over or short, by closer and by register, in one place",
+          "A morning email when a drawer is off or the same shortfall keeps repeating",
+          "No more retyping paper count sheets"
+        ]
+      },
+      "problemStatement": "Closing the cash drawer on Square \"live[s] in our heads or on paper\": the closer counts on a sheet or a phone app, types one total into Square, and nobody can tell later \"who added this wrong\". Square records starting and expected cash, emails a cash report and can hide the expected figure from staff, and free phone counters handle bills and coins, but nothing links the count to Square's expected cash for each drawer session or keeps a history by register and by who was on the drawer. So some owners stopped having staff count at all, and others rebuild it in their own spreadsheets.",
+      "description": "A closer opens the count screen on the register tablet or a phone, enters a 4-digit PIN, picks the register and counts bills and coins by denomination; the screen never receives an expected figure. The app then says which bills and coins to leave as tomorrow's float and what goes in the deposit bag. The closer still taps End Drawer in Square POS, because Square's API cannot record a count. A backend job uses a read-only Square connection: it lists the location's drawer sessions, retrieves each one for its expected cash, paid in and out, device name and the team members logged in during it, matches the session to the count through the register-to-device map the owner set up, and records the variance. The owner sees variance per drawer session with its closer and everyone else on that drawer, trends by register and staff over weeks, and a CSV export, which Square's Dashboard cannot produce. A nightly email flags sessions outside tolerance and repeat shortfalls on the same register or staff roster.",
+      "targetCustomer": "Owners and shift managers at cash-heavy Square counters with 1 to 7 registers that run Square Cash Management on an iPad, Android tablet, Square Terminal, Register or Handheld: cafés, pubs, counter-service restaurants and small grocers, and food trucks or market stalls only when they use one of those devices, not a phone. Closers use the count screen nightly.",
+      "buyer": "The owner, on the business card, from the monthly software budget alongside Square fees.",
+      "whyNow": "The 2026-09-22 cash-close request is the top-kudos Square idea since May, and a second request followed on 2026-11-18. Sellers arriving from Toast, Redtail and grocery POS systems lose a close they had, and Square's release notes from 2026-10-08 to 2026-11-19 have no cash-drawer item. Its API is open while the App Marketplace is paused. Tillwise launched a paid blind close for Shopify POS on 2026-09-16, with per-staff variance in its $29 Pro plan, which shows a vendor expects this to pay on another POS, though it had no reviews on 2026-11-27.",
+      "founderFit": "Nothing beyond building it alone.",
+      "problemEvidence": [
+        {
+          "url": "https://community.squareup.com/t5/Feature-Requests/Redesign-the-end-of-day-cash-closing-flow-denomination-counting/idi-p/849765",
+          "source": "community.squareup.com",
+          "author": "poster A",
+          "date": "2026-09-22",
+          "kind": "complaint",
+          "summary": "Food-truck and café seller asks for denomination counting, blind close, float and deposit tracking and per-closer accountability: \"Right now these steps live in our heads or on paper.\" 18 kudos, status Open; the same poster later built a Square-API dashboard for counts (2026-10-07)."
+        },
+        {
+          "url": "https://community.squareup.com/t5/Feature-Requests/Redesign-the-end-of-day-cash-closing-flow-denomination-counting/idi-p/849765",
+          "source": "community.squareup.com",
+          "author": "poster B",
+          "date": "2026-09-22",
+          "kind": "complaint",
+          "summary": "Seller who \"switched from toast to square\": \"We ultimately stopped having our staff count the drawer\". Same thread as poster A, so counted as one item for the gate."
+        },
+        {
+          "url": "https://community.squareup.com/t5/Feature-Requests/Redesign-the-end-of-day-cash-closing-flow-denomination-counting/idi-p/849765",
+          "source": "community.squareup.com",
+          "author": "poster F",
+          "date": "2026-11-15",
+          "kind": "complaint",
+          "summary": "Café and grocery seller with seven registers calls the move to Square a downgrade for cash and runs blind counts in Google Sheets with a weekly reconciliation; says variances were \"mostly due to miscounts\". Same thread, one item for the gate."
+        },
+        {
+          "url": "https://community.squareup.com/t5/Feature-Requests/Cash-Denomination-Counter/idi-p/853008",
+          "source": "community.squareup.com",
+          "author": "poster H",
+          "date": "2026-11-18",
+          "kind": "complaint",
+          "summary": "Seller asks for a denomination counter for opening and closing drawers, else will need a separate iPhone app: \"there's no way we're going to avoid errors without one.\" Independent of 849765 (no shared author, checked by author ID)."
+        },
+        {
+          "url": "https://community.squareup.com/t5/Feature-Requests/Cash-Denomination-Counter/idi-p/853008",
+          "source": "community.squareup.com",
+          "author": "poster I",
+          "date": "2026-11-19",
+          "kind": "complaint",
+          "summary": "Pub seller (Square Champion) counts tills nightly on a count sheet, types the total into Square, and wants denomination entry to end \"who added this wrong\" moments. Poster J adds (2026-11-20): \"We shouldn't have to rely on third-party apps\"."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Square Cash Management (free add-on)",
+          "url": "https://squareup.com/help/us/en/article/5152",
+          "price": "Free",
+          "gap": "Free on every account: starting, expected and actual cash per drawer session, and an emailed cash report; every account also has one customizable Team Permissions set (https://squareup.com/help/us/en/article/5822-employee-permissions), through which, by a Square Champion's 2023 reply, the expected amount can be hidden from staff. Missing: a count by denomination, a float and deposit split, variance history by staff or roster, and export (Dashboard cash drawer reports cannot be exported, https://squareup.com/help/us/en/article/8358-view-cash-drawer-reports). Not on phones."
+        },
+        {
+          "name": "Toast Blind Access (native, other POS)",
+          "url": "https://doc.toasttab.com/doc/platformguide/adminUserPermissionsCashMgmt.html",
+          "price": "unknown",
+          "gap": "Requires switching POS; the evidence posters moved from such systems to Square and accepted the loss."
+        },
+        {
+          "name": "Tillwise",
+          "url": "https://apps.shopify.com/tillwise",
+          "price": "Starter $5/month (blind denomination counts, 30 days of history, 1 location); Pro $29/month (up to 5 locations, variance ranked by staff member, daily summary email, CSV, 1 year of history); Chain $99/month",
+          "gap": "Shopify POS only, and its variance reporting requires Shopify POS Pro; 0 reviews on 2026-11-27, ten weeks after launch."
+        },
+        {
+          "name": "SpendNote",
+          "url": "https://spendnote.app/cash-count-sheet-template",
+          "price": "$19/month, or $15.83/month billed yearly; the count sheet is free",
+          "gap": "Not connected to any POS; the sheet compares against an expected balance the counter sees; no history by closer."
+        },
+        {
+          "name": "Unnamed Square-connected beta app (developer in thread 849765)",
+          "url": "https://community.squareup.com/t5/Feature-Requests/Redesign-the-end-of-day-cash-closing-flow-denomination-counting/idi-p/849765",
+          "price": "unknown (free 3-month beta for 10 testers, 2026-10-07)",
+          "gap": "No public product page or price found; not launched."
+        },
+        {
+          "name": "Unnamed read-only over/short tool (developer in thread 849765)",
+          "url": "https://community.squareup.com/t5/Feature-Requests/Redesign-the-end-of-day-cash-closing-flow-denomination-counting/idi-p/849765",
+          "price": "unknown (free 90-day analysis offered, 2026-11-14)",
+          "gap": "Reads Square's totals only; no denomination or blind count entry described; a seller in the thread declined to share data with it."
+        },
+        {
+          "name": "Register Closing (free iPhone app)",
+          "url": "https://apps.apple.com/app/id1397689734",
+          "price": "Free, no in-app purchases listed",
+          "gap": "Counts each register and the safe by denomination, with a starting amount per register and one grand-total deposit; no POS connection, no expected cash from Square, no history by closer described; 1 rating."
+        },
+        {
+          "name": "Free phone counting apps used by Square sellers' staff (one named in an older Square request, 2025-07-22)",
+          "url": "https://community.squareup.com/t5/Feature-Requests/Register-Count-by-Denomination-Cash-Drawer/idi-p/680746",
+          "price": "unknown (no listing found)",
+          "gap": "Count only; the closer still types a total into Square; no Square link or history."
+        }
+      ],
+      "keyFeatures": [
+        "Each count matched to Square's expected cash for its drawer session (read-only connection)",
+        "Variance by session, register and staff roster over time, with CSV export",
+        "Nightly owner digest with out-of-tolerance sessions and repeat-shortfall flags",
+        "Float and deposit split with the bills and coins to leave in the drawer",
+        "Blind count by denomination on a PIN screen that never receives the expected figure"
+      ],
+      "mvpScope": {
+        "features": [
+          "PIN count screen by denomination (USD)",
+          "Square OAuth, read-only; drawer sessions and team members",
+          "Count-to-session matching and variance per closer and day",
+          "Float target and deposit amount per register",
+          "Nightly email digest",
+          "Register-to-Square-device map at setup",
+          "Variance shown per drawer session with everyone logged in during it"
+        ],
+        "outOfScope": [
+          "Writing counts back into Square (the API is read-only)",
+          "Coin weighing or note-counter hardware",
+          "Currencies other than USD",
+          "Safe counts, change orders and tip-outs",
+          "Other POS systems",
+          "A native mobile app"
+        ],
+        "buildEstimate": "6 build days"
+      },
+      "techStack": "Static React + Vite front end; shared Supabase (sign-in, locations, registers, closers, counts, floats, deposits); backend-hub on Render for Square OAuth, token refresh and Cash Drawer Shifts, Team and Locations API calls; scheduled job for the nightly pull; transactional email for the digest.",
+      "pricing": {
+        "model": "Per-location monthly subscription, up to 7 registers, 14-day trial",
+        "pricePoint": "$12/month per location",
+        "rationale": "Below $29 for Tillwise Pro, the cheapest plan of the only paid blind close that ranks variance by staff (Shopify POS only), and below SpendNote's $19 tool that has no POS link; above Square's free Cash Management and free phone counters, which a seller can already combine for everything except the connected variance history."
+      },
+      "revenueSketch": "Estimate: $300/month of search ads at an assumed $2 a click brings 150 visits; 4% start a trial and half convert, about 3 paying locations a month, plus about 2 a month from the free counter page; about 60 locations after 12 months, ignoring churn, is 60 x $12 = $720 MRR.",
+      "distribution": "Self-serve search only. Square App Marketplace onboarding is paused (staff, 2026-10-01: \"we have currently paused onboarding new apps/partners for listing on the Square App Marketplace\", with \"you're welcome to continue using Square's developer tools and APIs\"; https://developer.squareup.com/forums/t/listing-square-apps-marketplace/28043), so the app runs as an unlisted OAuth app. The Square Community Code of Conduct (updated 2025-09-22) says \"Don't promote your own products or services unprompted.\" and \"Unsolicited private messages are a direct violation of this policy.\" (https://community.squareup.com/t5/Community-Resources/Square-Community-Code-of-Conduct/ta-p/723469), so no community posting. Channel: a free, no-sign-in denomination counter page that ranks for count-sheet searches, plus search ads on Square cash-drawer terms, upgrading to the Square-connected plan. Food-truck and café Facebook groups: rule unknown, check before posting.",
+      "validationTest": {
+        "method": "A landing page with a free, no-sign-in denomination counter and a \"Connect Square: $12/month per location\" button that says the connected app is in build, records the click, asks for an email, the POS used and the device the drawer runs on, and then offers a refundable $12 founding first month through a payment link (refunded on request, or in full if the app has not shipped within 60 days). Run $300 of search ads for 21 days on Square cash-drawer, blind cash count and cash count sheet terms. No outreach, and no posting in any Square Community thread.",
+        "successCriteria": "Within 21 days: at least 150 visitors, at least 20 uses of the free counter, at least 10 price-button clicks with an email from visitors who run Square Cash Management on a tablet, Terminal, Register or Handheld, and at least 3 refundable founding payments.",
+        "cost": "One day to build the page, $300 in ads (about 150 visits at an assumed $2 a click), and payment-link fees on any founding payments."
+      },
+      "moat": "Weak at launch: Square could ship a native close and Tillwise could port to Square. The defensible part is the accumulated per-closer variance history and float settings, which make switching costly, and the float-split and matching logic.",
+      "compliance": [
+        "Employee data: variance and shortfall flags by closer are records about named staff; under GDPR and UK GDPR, where Square sells, tell staff, set a retention limit and let the owner delete a closer's history.",
+        "Wage law: several US states limit deducting cash shortages from pay; the app reports variance only and the README says it is not a basis for deductions (check per state).",
+        "Square OAuth: request only CASH_DRAWER_READ, EMPLOYEES_READ and MERCHANT_PROFILE_READ; keep tokens encrypted on backend-hub; revoke and delete data on disconnect.",
+        "Accessibility: WCAG 2.1 AA on the count screen (large targets, labelled inputs, screen-reader support).",
+        "No FERPA, COPPA or institutional contracts; no card data is handled."
+      ],
+      "risks": [
+        {
+          "risk": "Square ships denomination counting natively (an older request, 680746, was shown as Reviewed on its page in 2023).",
+          "mitigation": "Keep the value in what Square has not touched: float and deposit split, per-closer history and repeat-shortfall flags; stay a cheap monthly plan with no lock-in."
+        },
+        {
+          "risk": "Two developers in the evidence thread launch first.",
+          "mitigation": "Compete on the float split, per-closer history and a free counter page that brings search traffic; price low."
+        },
+        {
+          "risk": "Owners refuse to share Square data with a third party (one evidence poster did).",
+          "mitigation": "Read-only scopes listed on the connect screen, no card or customer data, delete-on-disconnect, and a mode that works without connecting Square."
+        },
+        {
+          "risk": "Square cash management is not available on phones, so phone-only sellers have no drawer session to read.",
+          "mitigation": "State the device requirement on the landing page; offer count-only mode with a manually entered expected figure."
+        },
+        {
+          "risk": "Several drawers on one device or overlapping sessions break automatic matching.",
+          "mitigation": "Match by device and time and let the closer or owner pick the session when more than one fits."
+        },
+        {
+          "risk": "Sellers already combine free tools that cover most of the job: Square's free hide-expected permission and emailed cash report plus a free phone counter, and an evidence poster says they \"shouldn't have to rely on third-party apps\".",
+          "mitigation": "Charge only for the connected part (count matched to Square's expected cash, history, export, digest) and keep the counter page free."
+        },
+        {
+          "risk": "Square lists everyone logged in during a drawer session (team_member_ids), so a shortfall on a shared drawer cannot fairly be pinned on the closer, and per-closer flags could feed unfair discipline.",
+          "mitigation": "Show variance per session with its full roster, flag repeat patterns by register or roster, and say in the app and README that a flag is not evidence against one person."
+        },
+        {
+          "risk": "List returns only summaries filtered on opened_at, and Square's sample device field carries only a name; drawers left open for days, duplicate device names or a drawer ended from the Dashboard break matching.",
+          "mitigation": "The owner maps registers to Square device names at setup; the nightly job looks back 30 days on opened_at and retrieves each shift; unmatched counts go to the owner to assign."
+        }
+      ],
+      "scores": {
+        "pain": 5,
+        "willingnessToPay": 2,
+        "reachability": 2,
+        "competitiveGap": 2,
+        "feasibility": 4,
+        "complianceBurden": 4,
+        "total": 19
+      },
+      "scoreRationale": {
+        "pain": "Six sellers in one thread (2026-09-22 to 2026-11-16, https://community.squareup.com/t5/Feature-Requests/Redesign-the-end-of-day-cash-closing-flow-denomination-counting/idi-p/849765) and three different sellers in another (2026-11-18 to 11-20, https://community.squareup.com/t5/Feature-Requests/Cash-Denomination-Counter/idi-p/853008) complain about paper counts and retyped totals.",
+        "willingnessToPay": "No Square seller is seen paying for a cash-count tool: the only priced blind close (https://apps.shopify.com/tillwise) is on Shopify POS with 0 reviews ten weeks after launch, and the evidence sellers use sheets, free phone apps (https://apps.apple.com/app/id1397689734) or stopped counting, one rejecting third-party apps (https://community.squareup.com/t5/Feature-Requests/Cash-Denomination-Counter/idi-p/853008): 2.",
+        "reachability": "App Marketplace onboarding is paused (https://developer.squareup.com/forums/t/listing-square-apps-marketplace/28043) and the Community forbids unprompted promotion (https://community.squareup.com/t5/Community-Resources/Square-Community-Code-of-Conduct/ta-p/723469); the only channel left is search with a free counter page and ads.",
+        "competitiveGap": "Free tools cover most of the job: Square hides the expected amount through the one customizable permission set every account has (https://squareup.com/help/us/en/article/5822-employee-permissions), a free phone app counts by denomination with float and deposit totals (https://apps.apple.com/app/id1397689734), and two developers are pitching Square-connected tools in https://community.squareup.com/t5/Feature-Requests/Redesign-the-end-of-day-cash-closing-flow-denomination-counting/idi-p/849765; only the count matched to Square's expected cash, and its history, is unserved: 2.",
+        "feasibility": "The read-only Cash Drawer Shifts API gives expected cash, paid in and out, device and closing team member per shift (https://developer.squareup.com/reference/square/objects/CashDrawerShift, https://developer.squareup.com/docs/cashdrawershift-api/reporting); about 6 days on the platform, with matching and the phone exclusion as the hard parts.",
+        "complianceBurden": "Light but present: per-closer records about named staff from team_member_ids (https://developer.squareup.com/reference/square/objects/CashDrawerShift) plus custody of a Square token, which a seller in https://community.squareup.com/t5/Feature-Requests/Redesign-the-end-of-day-cash-closing-flow-denomination-counting/idi-p/849765 refused to share."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "The reviewer rechecked both threads through the community API by rank and author ID, recording none: 849765 has nine distinct authors, three of them developers or vendors, and 853008 has four, with no shared author, so the two evidence items stand as independent and recent. Square's release notes from 2026-10-08 to 2026-11-19 add nothing on cash drawers, and every Square account has one customizable permission set, so hiding the expected amount is free. A free iPhone register-and-safe counter with a deposit total, and a phone app one Square seller's staff use, already cover the denomination count and much of the float and deposit split. The only priced tool for the exact job, on Shopify POS, still has 0 reviews ten weeks after launch, while the Square sellers in the evidence use sheets or free apps, or stopped counting, and one says they should not have to rely on third-party apps; so competitiveGap falls from 3 to 2 and willingnessToPay from 3 to 2, for a total of 19. The idea is re-scoped to what nothing free does: each count matched to Square's expected cash per drawer session, with history by register and roster, export and a nightly digest; the read-only API supports this, but Square lists everyone logged in during a session, so the app must not pin a shared-drawer shortfall on the closer. The draft's ad test, which could not reach its visitor target on its budget, was replaced by a 21-day test with a refundable founding payment."
+      },
+      "inspiredBy": "https://community.squareup.com/t5/Feature-Requests/Redesign-the-end-of-day-cash-closing-flow-denomination-counting/idi-p/849765"
+    },
+    {
+      "n": 4,
+      "title": "Menu and Specials Desk for Small Restaurants",
+      "slug": "menu-and-specials-desk-for-small-restaurants",
+      "category": "Micro-SaaS",
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "gateGap": {
+        "missing": [
+          "total 17 is below 22",
+          "pain 3 is below 4"
+        ],
+        "closedBy": "Pain is the gap the test targets: 3 or more independent owner complaints in four weeks over Christmas and New Year that name holiday hours, specials or the menu on Google or the website would justify pain 4 (total 18). The test cannot lift the total to 22 alone: that also needs willingnessToPay and reachability at 4 (6 or more price-button clicks from 400 visitors, with most answers naming Google or the website), feasibility back at 3 (Basic API Access approved and one non-test account connected through OAuth), and competitiveGap 2 (clicks coming from restaurants not on WordPress or Toast); until all of those hold the idea stays provisional."
+      },
+      "topic": "Small Business Operations",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": true,
+        "engine": true,
+        "shared": true,
+        "notes": {
+          "stateful": "Each restaurant keeps a saved menu, specials, a regular-hours schedule, a holiday calendar and a change log, and staff come back to them every week.",
+          "connected": "Writes regular and special hours and the food menu to the restaurant's Google Business Profile under the owner's own OAuth grant, and serves the menu block embedded on the restaurant's own website.",
+          "unattended": "A scheduled job pushes upcoming holiday hours to Google days ahead, starts and ends dated specials, and emails staff on the change date and the change-back date for channels that cannot be updated automatically.",
+          "engine": "Resolves regular hours, dated overrides, day-parts and automatic expiry into the effective hours for each channel and date, and diffs that against what Google currently shows before writing.",
+          "shared": "Staff edit and the owner reviews the change log; diners receive the published menu and hours on the website and the listing."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "email",
+        "scheduled",
+        "backend"
+      ],
+      "buildPlan": [
+        {
+          "n": 1,
+          "title": "One menu, live on a page",
+          "delivers": "Sign in, create a location, enter menu sections, items and prices, and paste an embed snippet that shows an accessible HTML menu on any website.",
+          "acceptance": "A signed-in user saves 10 items in 2 sections and a test page with the snippet renders them as headings and lists with prices as text; deployed."
+        },
+        {
+          "n": 2,
+          "title": "Hours and holiday calendar",
+          "delivers": "Set regular hours, add dated overrides (closed, special hours, a special running from one date to another) that change back by themselves; the embed shows today's hours and an upcoming holiday notice.",
+          "acceptance": "20 fixture cases pass, including a Thanksgiving override that ends and returns to regular hours with no edit, and an overnight close after midnight."
+        },
+        {
+          "n": 3,
+          "title": "Connect Google, push hours",
+          "delivers": "Connect a Google Business Profile, pick the location, and push regular and special hours, with a preview of the difference and a change log entry.",
+          "acceptance": "On a test profile, a validateOnly call passes, then the patched specialHours appear in a fresh locations.get read; the log records who, what and when."
+        },
+        {
+          "n": 4,
+          "title": "Menu to Google",
+          "delivers": "Check menu eligibility, then send the menu to Google in its food-menu format, after a plain warning that Google's own menu editor may be switched off while the app supplies the menu.",
+          "acceptance": "A 3-section sample menu reads back from getFoodMenus with no differences; an ineligible location shows the fallback (menu link) instead of an error."
+        },
+        {
+          "n": 5,
+          "title": "Scheduled pushes and reminders",
+          "delivers": "A scheduled job sends holiday hours to Google ahead of time, switches dated specials on and off, and emails a checklist on the change date and the change-back date for channels with no API (online-ordering pickup hours, delivery apps).",
+          "acceptance": "A seeded holiday produces exactly one Google push and two emails (change, change back) at the right local times across a daylight-saving change."
+        },
+        {
+          "n": 6,
+          "title": "Polish",
+          "delivers": "Business-owner README, phone-friendly editor, keyboard and screen-reader pass on the editor and the embed, walkthrough test.",
+          "acceptance": "A walkthrough test runs sign-in to embed to Google push; axe reports no serious issues on the editor or the embed."
+        }
+      ],
+      "summary": "For independent restaurants with 1 to 5 locations whose site and POS do not already sync to Google: staff set the menu, dated specials and holiday dates once; the website menu and the Google profile's food menu and special hours follow, and a reminder covers each ordering channel that still has to be changed by hand, and changed back.",
+      "public": {
+        "summary": "Change your menu, specials and holiday hours in one place, and your website and your listing in maps and search follow.",
+        "problem": "Every holiday you change your hours in three or four places, and the week after you forget to change one back. Your website menu is a file only your web person can update, so prices and specials drift. Customers see one set of hours on your site and another on the map, and they call, or they don't come.",
+        "forWhom": "Owners and managers of independent restaurants, cafés and bars with one to five locations.",
+        "benefits": [
+          "Holiday and special hours set once, weeks ahead, that switch back on their own",
+          "A menu on your website that staff can update in minutes, easy to read on any phone",
+          "Your listing in maps and search shows the same hours and menu as your website",
+          "A reminder on the day for anything that still has to be changed by hand, and another when it should go back",
+          "A record of who changed what, and when"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "Restaurant hours change every week and around every holiday, and each change has to be made separately in each place that shows them: 'lots of work every week, can we have them all sync to be the same?' (Square seller, 2026-11-10). Holiday hours have to be set by hand and changed back by hand ('eliminate manual resets'), and staff forget. Owners commissioning new websites ask that 'restaurant staff should be able to update prices, change holiday hours, and add specials without hiring a developer', with the menu on the page rather than in a PDF. None of the complaints found names the website or Google: they name Square's ordering channels and the delivery apps.",
+      "description": "Staff keep one menu and a list of dated specials, with holiday dates, in a simple editor. A small embed shows the menu and today's specials on the restaurant's own website as accessible HTML. With the owner's permission the app writes the same menu to the Google Business Profile's food menu and the holiday dates to its special hours, after showing what will change; Google shows special hours only on the dates set, so nothing there has to be changed back. A scheduled job starts and ends specials on their dates and emails a change-day and change-back checklist for channels with no API, such as Square Online pickup hours and delivery apps. It is aimed at sites that do not already get this free: not WordPress sites, where a free plugin copies regular and special hours from Google, and not Toast sites, whose menus already sync to Google. Every change goes into a log with who made it and when.",
+      "targetCustomer": "Owners and managers of independent restaurants, cafés and bars with 1 to 5 locations whose website is on Wix, Squarespace (not checked) or a freelancer-built site, and whose POS does not already sync the menu to Google (not Toast), including Square sellers, whose free Google sync carries regular hours but not special hours.",
+      "buyer": "The owner, on the business card, from the website and marketing budget: the money now spent on a $57 to $90 a month listings tool, or the time spent editing Google by hand.",
+      "whyNow": "Holiday season is the peak time for special-hours changes, and Square sellers filed fresh complaints about hours in several places in November 2026. Square's free Google sync still carries regular hours only (a request to add special hours has been open since 2024), and Toast says hours on Google are managed in Google, not Toast (updated 2026-10-27). BentoBox is now sold only to Clover restaurants. Two website-build jobs posted 2026-11-25 and 2026-11-26 asked for menus that staff can edit themselves.",
+      "founderFit": "Nothing beyond building it alone.",
+      "problemEvidence": [
+        {
+          "url": "https://community.squareup.com/t5/Feature-Requests/Unifed-Hours/idi-p/852536",
+          "source": "community.squareup.com",
+          "author": "poster E",
+          "date": "2026-11-10",
+          "kind": "complaint",
+          "summary": "Square food-and-beverage seller: hours change weekly and must be set separately for business hours, DoorDash, Uber Eats, delivery and pickup, and menu hours, 'lots of work every week'; in the same thread a pub-style business (poster F, a Square Champion) says its business, online pickup, bar and bistro menu hours do not sync. 2 kudos, Open."
+        },
+        {
+          "url": "https://community.squareup.com/t5/Feature-Requests/One-week-pickup-schedule-overrides-without-changing-recurring/idi-p/852499",
+          "source": "community.squareup.com",
+          "author": "poster G",
+          "date": "2026-11-09",
+          "kind": "complaint",
+          "summary": "Square seller (business not named) wants a one-week pickup-hours override that ends on its own, to 'eliminate manual resets' and stop pickups being booked when they are unavailable; a Square Champion replies that the only workaround is changing the schedule and changing it back."
+        },
+        {
+          "url": "https://community.squareup.com/t5/Feature-Requests/special-hourse-for-various-holidays-not-just-quot-open-quot-or/idi-p/845314",
+          "source": "community.squareup.com",
+          "author": "poster H",
+          "date": "2026-06-25",
+          "kind": "complaint",
+          "summary": "Restaurant seller on Square asks for one-off holiday fulfillment hours (July 4, the day before Thanksgiving) without changing the weekly schedule; the workaround 'creates unnecessary manual work'. 2 kudos. Dated 2026-06-25: outside 90 days, inside 180."
+        },
+        {
+          "url": "https://community.squareup.com/t5/Feature-Requests/Enable-Holiday-or-custom-hours-in-Square-for-Restaurants-for/idc-p/846286#M18475",
+          "source": "community.squareup.com",
+          "author": "poster I",
+          "date": "2026-07-15",
+          "kind": "complaint",
+          "summary": "In a Square for Restaurants request for holiday or custom hours (opened 2026-01-06, 4 kudos, Open), a seller writes that most platforms have holiday hours and that they forgot to revert hours changed the week before; a bagel shop owner (poster J, 2026-01-07) asked for special hours that work as on Google and Yelp. Inside 180 days."
+        },
+        {
+          "url": "https://www.freelancer.com/api/projects/0.1/projects/40836425/?full_description=true",
+          "source": "freelancer.com",
+          "author": "poster A",
+          "date": "2026-11-26",
+          "kind": "spend",
+          "summary": "Restaurant business with several locations pays USD 250 to 750 (513 bids) for a one-off build of branded websites with Home, Menu, About and Location pages; one requirement is a staff-friendly CMS so that 'restaurant staff should be able to update prices, change holiday hours, and add specials without hiring a developer'. A website build, not a recurring update service."
+        },
+        {
+          "url": "https://www.freelancer.com/api/projects/0.1/projects/40835036/?full_description=true",
+          "source": "freelancer.com",
+          "author": "poster B",
+          "date": "2026-11-25",
+          "kind": "spend",
+          "summary": "Owner of a small restaurant not yet open pays USD 250 to 750 (the text says 500 to 1,500; 481 bids) for a five-page website with reservations and owner-editable menu prices and photos. A website build."
+        },
+        {
+          "url": "https://marqii.com/pricing",
+          "source": "marqii.com",
+          "author": "unknown",
+          "date": "2026-11-27",
+          "kind": "spend",
+          "summary": "Vendor page, undated, read 2026-11-27: Marqii Base at $90 a month per location on an annual contract sells automated menu updates to 70+ listings publishers and hours and menu website widgets, so restaurants pay for this job."
+        },
+        {
+          "url": "https://gbppromote.com/bulk-update-opening-hours-and-menus/",
+          "source": "gbppromote.com",
+          "author": "unknown",
+          "date": "2026-10-16",
+          "kind": "spend",
+          "summary": "Vendor page (published 2026-09-10, modified 2026-10-16): $57 a month for one location, $133 flat for 2 to 7, to bulk-edit Google profiles' food menus and regular and special hours; Google only, not the website (read by the spend gatherer with the fetch helper)."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Marqii",
+          "url": "https://marqii.com/pricing",
+          "price": "$90/month per location (Base, annual contract); Growth $145, Scale $180, Marqii Package $250",
+          "gap": "Annual contract per location, about $1,080 a year for one restaurant; built around POS integrations; its pricing and Toast pages do not mention holiday or special hours, and hours sync is only in the Advanced Toast integration."
+        },
+        {
+          "name": "GBPPromote",
+          "url": "https://gbppromote.com/bulk-update-opening-hours-and-menus/",
+          "price": "$57/month for 1 location; $133/month flat for 2 to 7",
+          "gap": "Edits Google profiles only; the restaurant's own website menu and specials are untouched."
+        },
+        {
+          "name": "Owner.com",
+          "url": "https://owner.com/pricing",
+          "price": "$249/month plus 5% per order, or $499/month flat",
+          "gap": "A full website and ordering platform, far more than this customer needs; Google sync of menu or hours not stated on the page."
+        },
+        {
+          "name": "Popmenu",
+          "url": "https://get.popmenu.com/pricing",
+          "price": "unknown",
+          "gap": "Pricing page returned 403; not read."
+        },
+        {
+          "name": "BentoBox",
+          "url": "https://www.getbento.com/pricing/",
+          "price": "unknown",
+          "gap": "Now sold only to Clover POS customers."
+        },
+        {
+          "name": "Square Google Business Profile sync",
+          "url": "https://squareup.com/help/us/en/article/7689-set-up-google-business-profile-with-square",
+          "price": "Free on Square Free, Plus and Premium",
+          "gap": "Syncs regular hours, phone, website and logo; special hours and menus not mentioned; Square Online fulfillment hours are separate and not writable by API. A request to add Google special-hours sync has been open since 2024-03-07 (https://community.squareup.com/t5/Feature-Requests/Google-Listing-Sync-Special-Hours/idi-p/714937)."
+        },
+        {
+          "name": "Wix Restaurants Orders (Order with Google)",
+          "url": "https://support.wix.com/en/article/wix-restaurants-setting-up-order-with-google",
+          "price": "unknown (included with Wix; plan price not read)",
+          "gap": "Syncs the ordering URL, pickup and delivery options, the first online-order menu page and the service fee; hours and special hours are not listed; Wix sites only."
+        },
+        {
+          "name": "Google Business Profile menu editor",
+          "url": "https://support.google.com/business/answer/9455840?hl=en",
+          "price": "Free",
+          "gap": "Manual, one location at a time, separate from the website; Google may transcribe the website menu, which helps only if the website menu is HTML."
+        },
+        {
+          "name": "Wix Google Business Profile app",
+          "url": "https://www.wix.com/app-market/google-business-profile",
+          "price": "Free, or Pro $5/month",
+          "gap": "Syncs hours, address and categories; holiday hours and menus not mentioned; 11 reviews (read by the gatherer)."
+        },
+        {
+          "name": "Opening Hours (WordPress plugin)",
+          "url": "https://wordpress.org/plugins/opening-hours/",
+          "price": "Free; no premium upgrades (needs a Places API key with Google's free allocation)",
+          "gap": "Copies regular and special hours from Google to a WordPress site daily (5,000+ installs, updated 2026-11-12); hours only, no menu or specials, and does not copy temporary closures."
+        },
+        {
+          "name": "Mobal",
+          "url": "https://wordpress.org/plugins/mobal-opening-hours/",
+          "price": "unknown (page mentions a free profile and a trial; price not read)",
+          "gap": "Keeps hours, including holiday and exception hours, correct across Google, Apple Maps and Facebook, with a WordPress hours widget launched 2026-08-28; menus and specials not mentioned."
+        },
+        {
+          "name": "Moz Local",
+          "url": "https://www.brightlocal.com/resources/listings-management-services-compared/",
+          "price": "Lite $16/month per location ($199/year), Preferred $24, Elite $33 (BrightLocal comparison page dated 2024-08-21; not read on Moz's own page)",
+          "gap": "Listings sync across directories; holiday hours, menus and the website menu not confirmed on a fetched page."
+        },
+        {
+          "name": "Localo",
+          "url": "https://www.brightlocal.com/resources/listings-management-services-compared/",
+          "price": "$29/month for one profile; $49/month for up to 10 (same 2024 page)",
+          "gap": "Google profile management; menu and website not stated."
+        },
+        {
+          "name": "Toast Order with Google",
+          "url": "https://support.toasttab.com/en/article/Using-Order-with-Google",
+          "price": "Included with Toast Online Ordering (plan price not read)",
+          "gap": "Menus and 86s sync to Google in near real time, but hours on the Google listing are managed in Google, not Toast (updated 2026-10-27)."
+        },
+        {
+          "name": "Wix Google Business Profile (dashboard)",
+          "url": "https://support.wix.com/en/article/adding-and-managing-your-google-business-profile",
+          "price": "Free",
+          "gap": "Opening hours, photos and attributes edited both ways with Google (updated 2026-11-18); special hours and menus not mentioned."
+        }
+      ],
+      "keyFeatures": [
+        "One editor for the menu, dated specials and holiday dates",
+        "Accessible HTML menu and specials block on any website",
+        "Push the menu to Google's food menu and holiday dates to special hours, after a preview",
+        "Change-day and change-back email checklists for channels with no API",
+        "Change log of who changed what and when"
+      ],
+      "mvpScope": {
+        "features": [
+          "Menu editor and embed for one location",
+          "Regular hours plus holiday overrides with automatic expiry",
+          "Google profile connection pushing regular and special hours",
+          "Scheduled holiday push and change and change-back reminder emails",
+          "Change log"
+        ],
+        "outOfScope": [
+          "Writing hours to Square Online, DoorDash or Uber Eats",
+          "Menu import from a POS catalogue",
+          "Specials published as Google posts",
+          "Yelp, Apple Maps and other listings",
+          "Online ordering and payments",
+          "Menu import from a PDF or photo"
+        ],
+        "buildEstimate": "About 6 build days on the platform, but only after Basic API Access is approved and OAuth works for a non-test account; 2026 developer reports show both stalling for weeks with no reply."
+      },
+      "techStack": "Static React + Vite front end on the HintWise platform; the shared Supabase project for sign-in and per-app tables (locations, menu items, specials, hours, overrides, change log); backend-hub on Render for Google OAuth tokens, the Business Profile API calls and the scheduled job; transactional email for reminders; a small JavaScript embed that renders server-generated accessible HTML.",
+      "pricing": {
+        "model": "Per-restaurant subscription, month to month",
+        "pricePoint": "$24/month for one location; $59/month for 2 to 5 locations",
+        "rationale": "About a quarter of Marqii's $90 per location on an annual contract and under GBPPromote's $57 for Google alone, while covering the website menu too; above the $5 Wix app, which does not handle holiday hours or menus. Moz Local lists from $16 per location per month on annual billing (2024 comparison page), so $24 is not the cheapest listings option; the case rests on the website menu and specials being included."
+      },
+      "revenueSketch": "Estimate: 60 single-location restaurants x $24 + 10 groups x $59 = $1,440 + $590 = about $2,030 MRR after 12 months, assuming roughly 2% of plugin installs and ad visitors convert.",
+      "distribution": "Self-serve only; the owner's network does not reach restaurants. (1) WordPress plugin directory: a free, accessible restaurant menu-and-specials block, not an hours block: the free Opening Hours plugin (5,000+ installs) already copies hours from Google, and a WordPress-to-Google-profile sync plugin closed permanently on 2026-06-13 with no reviews. Rule: Guideline 6, 'Plugins that act as an interface to some external third party service (e.g. a video hosting site) are allowed', and Guideline 5, 'Plugins may not contain functionality that is restricted or locked, only to be made available by payment or upgrade' (https://developer.wordpress.org/plugins/wordpress-org/detailed-plugin-guidelines/). (2) A small search-ad test on queries about changing holiday hours on the website and the listing together: rule unknown: check before running. (3) Later, a Square App Marketplace listing that imports the menu from a seller's Square catalogue: search results describe an App Partner application and a QA review, but its docs pages returned 404 to this run, so rule unknown: check before listing. (4) Square Seller Community: rule unknown: check before posting; never post in the threads cited as evidence.",
+      "validationTest": {
+        "method": "No outreach. (1) For four weeks from 2026-11-30, through Christmas and New Year, a weekly passive count of new owner posts (not developers, agencies or vendors; check who wrote each) in the Square Seller Community and the Google Business Profile Help Community saying that holiday or special hours, specials or the menu were wrong on Google or the website, or had to be entered in both. (2) A landing page leading with one menu and dated specials published to the website and Google's food menu, plus holiday hours, with a waitlist, a price button at $24 a month and one optional question, 'Where do you change your hours and menu today?', fed by a $150 two-week search-ad test on queries about updating the menu or holiday hours on Google and the website together (ad rules: check before running). Contacts nobody and posts in no thread.",
+        "successCriteria": "At least 3 independent owner complaints naming Google or the website in the four weeks; and in two weeks at least 400 visitors, 20 waitlist sign-ups and 6 price-button clicks, with at least half of the answers naming Google or the website.",
+        "cost": "About 4 hours to build the page, $150 in ads, and 30 minutes a week for the count."
+      },
+      "moat": "Thin. It rests on the saved menu, holiday calendar and change history for each restaurant, on approved Google API access (a 60-day verified profile and a review), and on plugin installs. Marqii or GBPPromote could cut prices or add month-to-month terms.",
+      "compliance": [
+        "Accessibility: the website menu embed must meet WCAG 2.2 AA (headings, lists, prices as text, no PDF), because restaurant websites are public-facing; this is also a selling point.",
+        "Google API terms: access needs an approved Basic API Access application, and every write uses the owner's OAuth grant with business.manage. Google's console lists that scope as non-sensitive, but developers report in 2026 that non-test users get '403 access_denied ... developer-approved testers' and no verification path is offered (https://discuss.google.dev/t/oauth-business-manage-shown-as-non-sensitive-in-auth-platform-but-backend-blocks-all-external-users-with-error-403-access-denied-no-submit-for-verification-path-exists/384175).",
+        "Data: business data and staff sign-in emails only; no consumer, student or payment data; GDPR is minimal, limited to staff accounts outside the US.",
+        "Menu accuracy: prices and dietary labels are the restaurant's statements; the change log records who published them."
+      ],
+      "risks": [
+        {
+          "risk": "Google API access is gated: the applicant must manage a profile verified and active for 60+ days with a website, and review takes up to 14 days; it can be refused.",
+          "mitigation": "Apply before building; until approved, ship the website block, the holiday calendar and reminders with deep links into Google's own editor."
+        },
+        {
+          "risk": "When the API supplies the menu, Google may switch off the owner's own menu editor.",
+          "mitigation": "Make the menu push opt-in with a plain warning; by default rely on Google transcribing the HTML menu on the website and push only hours."
+        },
+        {
+          "risk": "The strongest complaints name Square Online pickup hours and delivery apps, which the product cannot write (Square says fulfillment hours are not in its API).",
+          "mitigation": "Do not claim sync there; send change-day and change-back reminders with a checklist, and say so plainly on the landing page."
+        },
+        {
+          "risk": "Square already syncs location hours to Google, and its sync could overwrite or conflict with hours pushed by the app.",
+          "mitigation": "Detect Square-linked profiles, push only special hours for them, read back after each push and alert on any drift."
+        },
+        {
+          "risk": "Marqii already sells this job with 70+ publishers.",
+          "mitigation": "Target independents with 1 to 5 locations that are not tied to a POS, on month-to-month pricing at about a quarter of the cost, and compete on the holiday calendar and the staff change log."
+        },
+        {
+          "risk": "Some locations are not eligible for food menus (canHaveFoodMenus false).",
+          "mitigation": "Check eligibility first and fall back to the menu link."
+        },
+        {
+          "risk": "Google may not let paying customers connect at all: Basic API Access requests reported stuck at 0 requests per minute for 14+ days with no reply, one rejected for a website mismatch, and external OAuth users blocked with no verification path (2026 developer threads).",
+          "mitigation": "Apply and test one external OAuth grant before any build; ship the website menu, specials and reminders first with deep links into Google's editor, and sell the Google push only once a non-test account connects."
+        },
+        {
+          "risk": "Free paths already cover the hours half: Google shows special hours only on the dates set, and a free WordPress plugin copies regular and special hours from Google to the site daily.",
+          "mitigation": "Lead with the menu and dated specials pushed to both the site and Google's food menu; target sites not on WordPress or Toast."
+        }
+      ],
+      "scores": {
+        "pain": 3,
+        "willingnessToPay": 3,
+        "reachability": 3,
+        "competitiveGap": 1,
+        "feasibility": 2,
+        "complianceBurden": 5,
+        "total": 17
+      },
+      "scoreRationale": {
+        "pain": "Recent complaints are real but name only Square ordering and delivery channels, which the product cannot write; no complaint within 180 days names the website or Google (https://community.squareup.com/t5/Feature-Requests/Unifed-Hours/idi-p/852536, 2026-11-10): 3.",
+        "willingnessToPay": "Restaurants pay listing tools for the Google half (Marqii $90 per location, https://marqii.com/pricing; GBPPromote $57, https://gbppromote.com/bulk-update-opening-hours-and-menus/); the freelance jobs are one-off website builds (https://www.freelancer.com/api/projects/0.1/projects/40836425/?full_description=true), not this task: 3.",
+        "reachability": "Self-serve only, through the WordPress plugin directory (https://developer.wordpress.org/plugins/wordpress-org/detailed-plugin-guidelines/), where the hours niche already has a free 5,000+ install plugin and a Google sync plugin closed in June 2026 (https://bg.wordpress.org/plugins/synoveo/): 3.",
+        "competitiveGap": "Free paths cover hours (Google special hours, https://support.google.com/business/answer/6303076?hl=en, plus https://wordpress.org/plugins/opening-hours/; Wix; Square regular-hours sync), Toast syncs menus to Google (https://support.toasttab.com/en/article/Using-Order-with-Google), and Mobal and Moz Local sell multi-channel hours; what is left is a cheaper push of menu and specials to site and Google for non-WordPress, non-Toast sites: 1.",
+        "feasibility": "About 6 build days, but 2026 developer threads report Basic API Access stuck at 0 requests per minute for weeks (https://discuss.google.dev/t/gbp-api-escalation-basic-access-pending-14-days-requests-per-minute-locked-at-0/393020) and external OAuth users blocked with no verification path (https://discuss.google.dev/t/oauth-business-manage-shown-as-non-sensitive-in-auth-platform-but-backend-blocks-all-external-users-with-error-403-access-denied-no-submit-for-verification-path-exists/384175): 2.",
+        "complianceBurden": "Business data only, under the owner's OAuth grant (https://developers.google.com/my-business/content/implement-oauth); no consumer or student data; WCAG for the embed is a build requirement: 5."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "The reviewer re-read the two November Square threads and found that neither mentions Google or the website; the only Square request for Google special-hours sync dates from 2024-03-07, so pain drops from 4 to 3. The three freelance jobs are one-off website builds and a local-SEO retainer, not recurring menu and hours updates, so willingnessToPay rests on listing tools alone (Marqii $90, GBPPromote $57, Moz Local from $16 per location on a 2024 comparison page) and drops from 4 to 3, and the SEO retainer was removed from the evidence. Free paths cover the hours half: Google shows special hours only on the dates set, a free WordPress plugin with 5,000+ installs copies regular and special hours from Google to the site daily, Wix edits opening hours both ways with Google, and Toast syncs menus to Google while saying hours on Google are managed in Google; Mobal sells holiday hours across Google, Apple Maps and Facebook, and a WordPress-to-Google sync plugin closed in June 2026, so competitiveGap drops from 2 to 1 and the idea is re-scoped (and retitled) to the menu and dated specials pushed to both the site and Google's food menu for sites not on WordPress or Toast. Google's food-menu API is current (dietary options added 2026-10-09), but 2026 developer threads report Basic API Access stuck at 0 requests per minute for weeks and external OAuth users blocked with no verification path, so feasibility drops from 3 to 2. The new total is 17 (pain 3, willingnessToPay 3, reachability 3, competitiveGap 1, feasibility 2, complianceBurden 5); the idea misses the gate on total and pain and ships only as provisional."
+      },
+      "inspiredBy": "https://community.squareup.com/t5/Feature-Requests/Unifed-Hours/idi-p/852536",
+      "smallBusiness": true
+    },
+    {
+      "n": 5,
+      "title": "Spoken Booking Check",
+      "slug": "spoken-booking-check",
+      "category": "Accessibility & Compliance",
+      "smallBusiness": true,
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "gateGap": {
+        "missing": [
+          "total 15 is below 22",
+          "pain 2 is below 4"
+        ],
+        "closedBy": "The landing-page test goes at the largest gap, the total (15 of 22), through its weakest parts: eight or more waitlist sign-ups from developers whose booking code is in their own repository would show the pain is felt (pain 3), and three or more paid pre-orders at $19 or more, with the free Screen Reader Journeys engine named on the page, would raise willingnessToPay to 4, for a total of 17. Validated also needs pain 4 (recent complaints from booking-page developers or their clients, not agent-written gates), a gap beyond the engine's own free workflows (competitiveGap) and a channel that brings buyers (reachability)."
+      },
+      "topic": "Accessibility",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": true,
+        "engine": true,
+        "shared": true,
+        "notes": {
+          "stateful": "Each booking flow keeps its saved journey (the labels of its service, staff, time, details and confirm steps) and a dated history of transcripts the developer comes back to.",
+          "connected": "A GitHub Action in the developer's own repository runs the journey under real NVDA and Orca on their runners and posts the result on the pull request.",
+          "unattended": "The Action runs on every pull request, and a weekly hosted re-run emails the developer when what is announced changes.",
+          "engine": "Booking failure rules over the speech transcript and focus log: a chosen slot never announced as selected, focus dropped to the page body after a step, an error never announced, identical button names on every row, an availability change with no live announcement; plus a diff of what is heard against the last run.",
+          "shared": "The developer makes a dated evidence page and hands its link to the client, the salon or clinic, who reads it without an account."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "email",
+        "scheduled",
+        "backend"
+      ],
+      "buildPlan": [
+        {
+          "n": 1,
+          "title": "One booking journey, keyboard walker",
+          "delivers": "Sign in, add a booking page address proved by a meta tag, name its steps, and see what a screen reader is given at each step in the hosted walker mode.",
+          "acceptance": "On the owner's own demo booking page a run returns a transcript and focus path for all six steps (service, staff, time, details, confirm, error); deployed."
+        },
+        {
+          "n": 2,
+          "title": "Booking failure checks",
+          "delivers": "Each run flags the known booking faults in plain words, with the step and the element.",
+          "acceptance": "A demo seeded with five known faults (no selected state on slots, focus lost after a step, unannounced error, identical row buttons, silent availability change) flags exactly those five; the fixed demo flags none."
+        },
+        {
+          "n": 3,
+          "title": "Emulated reader and the no-booking guard",
+          "delivers": "Runs also in the virtual screen reader mode with its speech; a run on a live address stops before the final confirm unless a test-mode address is given.",
+          "acceptance": "Both modes produce transcripts on the demo; the request log of a live-address run shows no booking request sent."
+        },
+        {
+          "n": 4,
+          "title": "Client evidence page",
+          "delivers": "A share link with the dated transcript, the mode or screen reader used, the focus path and the faults found, worded as a record, not an audit.",
+          "acceptance": "A signed-out viewer opens the link; the page passes its own walker run with no flagged fault."
+        },
+        {
+          "n": 5,
+          "title": "Real screen readers in the developer's CI",
+          "delivers": "A published composite action (action.yml at the root, as the Marketplace requires) that calls the engine's existing NVDA and Orca workflows with the saved booking journey, uploads the transcripts, and comments a diff on the pull request.",
+          "acceptance": "In a sample repository a pull request that removes the selected state from slot buttons gets a comment naming the new fault; the NVDA and Orca jobs both pass on the fixed branch."
+        },
+        {
+          "n": 6,
+          "title": "Weekly re-run and email",
+          "delivers": "A scheduled hosted re-run per saved flow; an email when what is heard changes.",
+          "acceptance": "A seeded change in the demo produces exactly one email with the before-and-after lines."
+        },
+        {
+          "n": 7,
+          "title": "Polish",
+          "delivers": "Developer README and Action docs, agency branding on evidence pages, phone layout, the app's own screen-reader pass, walkthrough test.",
+          "acceptance": "A walkthrough test runs sign-in to shared evidence page; axe reports no serious issues; the walker mode flags nothing on the app itself."
+        }
+      ],
+      "summary": "For freelance developers and small agencies who build booking pages for salons, barbers, clinics and garages: runs the booking journey the way a screen-reader user would, records what is heard and where focus goes, flags the usual booking faults, and makes a dated page to hand to the client.",
+      "public": {
+        "summary": "Runs your booking page the way a blind customer would, records what their screen reader says at each step, and gives you a page you can hand to your client.",
+        "problem": "You build a booking page for a salon or a clinic, and the automatic accessibility checks all pass. But nobody has listened to what a screen reader says when a customer picks a time or makes a mistake, so you cannot say whether a blind customer can finish a booking. Your client may be the one who finds out, from an unhappy customer or a demand letter.",
+        "forWhom": "Freelance developers and small agencies who build or customise online booking for salons, barbers, clinics, garages and studios.",
+        "benefits": [
+          "Know a screen-reader user can finish a booking before you ship",
+          "Catch the usual booking slips: a chosen time never announced, focus lost after each step, errors nobody hears",
+          "Hand your client a dated record of what was heard",
+          "Re-check automatically every time the booking page changes"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "Teams building appointment and booking screens pass their automated checks but cannot say what a screen reader actually announces: 'No spoken screen-reader output was captured' (a counselling platform's appointment calendar, 2026-11-19, where the fault itself was found from the accessibility tree), and a barber booking backlog that requires 'Given NVDA on the calendar, then the date, availability and selection are announced' (2026-09-28). The faults they find are the booking ones: names that omit what the sighted user sees, and announced labels that differ from the visible text. Where a release gate asks for a qualified human NVDA reviewer and a signed report (a clinic appointments demo, 2026-11-09), an automated transcript does not close it.",
+      "description": "The developer signs in, adds a booking page address (proved by a meta tag or a staging address), and names the labels of its steps: service, staff, time, customer details, confirm, and a deliberate error. A hosted worker built on Screen Reader Journeys runs that journey by keyboard in the walker mode (what Chromium gives a screen reader) and the virtual mode (an emulated screen reader's speech), stopping before the final confirm on a live address. Booking rules read the transcript and focus log and flag the known faults in plain words. For real speech, a GitHub Action runs the same journey under NVDA and Orca in the developer's own repository, comments the diff on the pull request, and adds the transcript to a dated evidence page the developer can share with the client, labelled with the mode or screen reader and version and worded as a record, not an audit.",
+      "targetCustomer": "Freelance developers, small agencies and indie teams (1 to 10 people) whose booking flow's code is in their own repository: custom or self-hosted booking pages for local service businesses, and small booking and appointment products. Not sites that embed a hosted booking platform or plugin the developer cannot change (SimplyBook.me, for one, offers its own WCAG 2.1 AA booking theme: https://simplybook.me/en/accessibility).",
+      "buyer": "The developer or agency, by card from its tools budget: free for one flow in the hosted modes, $19 a month for one developer with the CI Action and evidence pages, $49 a month for an agency with ten client flows and its own branding; the salon or clinic receives the evidence page and may be billed for it in the build fee.",
+      "whyNow": "Since September 2026, small booking and appointment projects, some of them run with coding agents, leave the spoken screen-reader check open while automated checks pass (https://github.com/OpenResilienceInitiative/ORISO-Frontend/issues/2377). The engine that listens is already free: the owner's Screen Reader Journeys, launched 2026-11-25 (https://github.com/pisan-labs/screen-reader-journeys). BrowserStack's screen-reader scans are a public beta on paid plans (https://www.browserstack.com/docs/accessibility/screen-reader-launcher/screen-reader-scan). What is new is a booking-specific check and a record a developer can hand to a client. ADA Title III suits ran at 5,006 in the first half of 2026 (vendor-produced: https://stacker.com/stories/small-business/website-accessibility-lawsuits-are-rising-and-smaller-businesses-are).",
+      "founderFit": "He ships a web app alone in days and teaches courses that use agentic coding tools, the way of working whose agents leave this spoken check open; nothing in his stated network reaches booking-page developers.",
+      "problemEvidence": [
+        {
+          "url": "https://github.com/OpenResilienceInitiative/ORISO-Frontend/issues/2377",
+          "source": "github.com",
+          "author": "poster A",
+          "date": "2026-11-19",
+          "kind": "complaint",
+          "summary": "Developer on an online counselling platform (organisation repository, 2 stars): appointment buttons omit the visible modality (video, phone, chat, on-site) for assistive technology, reproduced in six views and found from Chromium's accessibility tree with a dev cross-check; 'No spoken screen-reader output was captured' and the acceptance still requires verifying an actual announcement. A reported barrier, found without a screen reader."
+        },
+        {
+          "url": "https://github.com/ARG-Digital-Solutions/aronexa-qa-central/issues/4",
+          "source": "github.com",
+          "author": "poster B",
+          "date": "2026-11-09",
+          "kind": "complaint",
+          "summary": "QA for a clinic reception and appointments demo (organisation repository created 2026-11-08; a synthetic in-memory demo: 'Do not use real patient information'): 'REVIEWER NOT ASSIGNED; HUMAN SCREEN-READER TEST NOT RUN; AUTOMATED TESTS PASS', with the merge held. Its comments were posted through a coding agent's connector, and the gate asks for a qualified human reviewer with NVDA and Chrome and a dated, signed report, so an automated transcript would not close it."
+        },
+        {
+          "url": "https://github.com/The-Last-Barbershop-of-Ladysmith/thad-the-barber/issues/84",
+          "source": "github.com",
+          "author": "poster C",
+          "date": "2026-09-28",
+          "kind": "complaint",
+          "summary": "Developer of a barbershop's booking app (organisation repository created 2026-09-27, issue opened the next day): a date picker and time-slot story imported from a backlog file, with 'Given NVDA on the calendar, then the date, availability and selection are announced' and, in its business rules, 'Slot toggles use aria-pressed'; still open, with later commits adding Playwright and axe suites and a booking calendar label fix (2026-11-17). A planned acceptance check, not a reported barrier."
+        },
+        {
+          "url": "https://github.com/Paige-Agent-AI/Paige-Agent-AI/issues/1480",
+          "source": "github.com",
+          "author": "poster D",
+          "date": "2026-09-26",
+          "kind": "complaint",
+          "summary": "A booking calendars product (organisation repository): an issue opened by a bot account ('Filed and routed') while fixing a stale copy test says screen readers still announce 'Booking presets' where sighted users read 'Booking calendars': 'Sighted users read \"calendars\" while screen-reader users hear \"presets\".' A real fault, found by reading code, not by listening; open."
+        },
+        {
+          "url": "https://github.com/nhsuk/nhsuk-service-manual-community-backlog/issues/599",
+          "source": "github.com",
+          "author": "poster E",
+          "date": "2026-11-09",
+          "kind": "complaint",
+          "summary": "An NHS design team building appointment booking asks for guidance on selecting one slot from a variable number, including 'screen-reader behaviour'; a contributor replies there is no agreed NHS pattern yet. A human design question with no screen-reader testing, from a public body, not a small business."
+        },
+        {
+          "url": "https://github.com/WordPress/WPCredits/issues/248",
+          "source": "github.com",
+          "author": "poster F",
+          "date": "2026-10-09",
+          "kind": "complaint",
+          "summary": "Contributor task in a WordPress Foundation programme that brings university students into contribution (repository description): a screen reader and keyboard pass on the Education Dashboard's booking calendar 'which nobody has recorded yet', asking screen-reader users for help. Weak: a task, and not a local-business booking flow."
+        },
+        {
+          "url": "https://stacker.com/stories/small-business/website-accessibility-lawsuits-are-rising-and-smaller-businesses-are",
+          "source": "stacker.com",
+          "author": "unknown",
+          "date": "2026-10-15",
+          "kind": "mandate",
+          "summary": "Compliance-vendor content: 5,006 federal ADA Title III suits in H1 2026 (Seyfarth); about 2 in 3 web suits against firms under $50M revenue (UsableNet); Q1 2026 web suits medical 75 and beauty 75 of 1,037 (EcomBack); names 'a salon with an online booking page' among the sites in these suits. Says nothing on who pays for fixes."
+        },
+        {
+          "url": "https://assistivlabs.com/pricing",
+          "source": "assistivlabs.com",
+          "author": "unknown",
+          "date": "2026-11-27",
+          "kind": "spend",
+          "summary": "Real assistive technology in the cloud, sold by the month: Freelancer $19 (120 minutes, NVDA and Narrator), Professional $99 (unlimited minutes; VoiceOver and TalkBack 'contact for pricing'). Manual sessions; no automation, CI or speech record on the page. Page undated, read 2026-11-27."
+        },
+        {
+          "url": "https://www.browserstack.com/pricing",
+          "source": "browserstack.com",
+          "author": "unknown",
+          "date": "2026-11-27",
+          "kind": "spend",
+          "summary": "Live Team Pro at $249 a month billed annually lists 'Screenreader testing with voiceover, talkback, and NVDA'; the accessibility plan Test & Monitor is $1,099 a month billed annually. Page undated, read 2026-11-27 (first 100,000 characters)."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Guidepup",
+          "url": "https://github.com/guidepup/guidepup",
+          "price": "Free (MIT)",
+          "gap": "Drives NVDA on Windows, VoiceOver on macOS and Orca on Linux with spokenPhraseLog(), a Playwright integration, a CI setup tool and a free Virtual Screen Reader; it is a library: no booking journey, no booking fault rules, no client page, and the developer sets up the runner."
+        },
+        {
+          "name": "BrowserStack screen reader automation",
+          "url": "https://www.browserstack.com/docs/accessibility/screen-reader-launcher/screen-reader-automation-overview",
+          "price": "On all paid plans (public beta); the accessibility plan Test & Monitor is $1,099 a month billed annually (https://www.browserstack.com/pricing)",
+          "gap": "Real NVDA and VoiceOver inside existing functional tests, with speech captured as plain text; priced and sold for QA teams, and it brings no booking journey, booking rules or client-facing page."
+        },
+        {
+          "name": "BrowserStack Screen Reader Experience Agent",
+          "url": "https://www.browserstack.com/docs/accessibility/screen-reader-launcher/screen-reader-experience-agent",
+          "price": "Unknown: beta, access on request, not on the pricing page; BrowserStack's screen-reader testing starts at Live Team Pro, $249 a month billed annually, and no free plan includes it (https://www.browserstack.com/pricing)",
+          "gap": "Runs a task described in plain words under real NVDA on a real device, with 12 checks along the path, among them 'Unique accessible name within a landmark', 'Feedback after an action', 'Dialog focus and dismissal' and 'Form error announcement', which overlap four of the five booking rules; severity report, audio logs, screenshots and video. Beta, behind a BrowserStack account, no CI or API stated, no client-facing record."
+        },
+        {
+          "name": "Assistiv Labs",
+          "url": "https://assistivlabs.com/pricing",
+          "price": "$19 a month (120 minutes, NVDA and Narrator) or $99 a month (unlimited minutes)",
+          "gap": "Remote real screen readers for manual testing by a person; nothing automated, no record of what was heard, no client page."
+        },
+        {
+          "name": "Screen Reader Journeys (the owner's own engine)",
+          "url": "https://github.com/pisan-labs/screen-reader-journeys",
+          "price": "Free (MIT); hosted walker and virtual modes, 10 runs a day per person",
+          "gap": "Journeys written by role and accessible name; walker and virtual modes anywhere, real NVDA and Orca on GitHub runners; 'Evaluate a site' and 'Compare screen readers' workflows another repository can call; HTML, JSON, JUnit, SARIF and CSV reports and a compare of main against a PR preview. No ready booking journey, no selected-slot, identical-row-name or silent-availability rules, the hosted service runs only its own journeys, no client page and no scheduled re-check."
+        },
+        {
+          "name": "auto-a11y-test (a personal-account repository)",
+          "url": "https://api.github.com/search/repositories?q=auto-a11y-test+in:name",
+          "price": "Free (open source); needs the user's own model-provider API key",
+          "gap": "A GitHub Action for 'basic usability testing through screen reader on use cases defined by your doc', AI-driven under NVDA on pushes and pull requests (README seen in search results only); 2 stars, last pushed 2026-05-21; no booking rules, no client page."
+        },
+        {
+          "name": "GitHub Accessibility Scanner",
+          "url": "https://github.com/github/accessibility-scanner",
+          "price": "Free (MIT, public preview); uses the repository's Actions minutes",
+          "gap": "axe and accesslint scans filed as issues with optional coding-agent fixes; no screen reader and no spoken output."
+        }
+      ],
+      "keyFeatures": [
+        "A ready booking journey (service, staff, time, details, confirm, error) set up by naming each step's label",
+        "Booking fault rules: slot selected state, focus after each step, announced errors, identical row buttons, silent availability changes",
+        "Hosted walker and emulated-reader runs with no setup; real NVDA and Orca through a GitHub Action in the developer's own CI",
+        "A dated, shareable evidence page per client, labelled with the mode or screen reader used",
+        "Pull-request comments with a diff of what is heard, readable by people and coding agents"
+      ],
+      "mvpScope": {
+        "features": [
+          "Hosted walker and virtual runs of the booking journey on a proved address, stopping before the final confirm",
+          "The five booking fault rules",
+          "Shareable evidence page",
+          "GitHub Action for NVDA and Orca in the developer's repository with a pull-request comment",
+          "Weekly re-run with an email on change"
+        ],
+        "outOfScope": [
+          "Hosted real NVDA, VoiceOver or JAWS (needs Windows or Mac machines the platform does not have)",
+          "VoiceOver in CI until the engine's VoiceOver mode is tried on a Mac",
+          "An MCP server for coding agents",
+          "Mobile apps, TalkBack and iOS VoiceOver",
+          "Booking widgets inside third-party iframes the developer cannot change",
+          "Booking pages on hosted booking platforms or plugins the developer cannot change"
+        ],
+        "buildEstimate": "About 3 weeks as a vertical of Screen Reader Journeys"
+      },
+      "techStack": "React + Vite front end, Supabase sign-in and per-app schema, the Screen Reader Journeys worker on Render (headless Chromium; walker mode and Guidepup's Virtual Screen Reader), a GitHub Action wrapping Guidepup for NVDA on Windows runners and Orca on Ubuntu runners in the customer's repository, Resend for email, a hosted payment link.",
+      "pricing": {
+        "model": "Per-developer and per-agency subscription, with a free hosted tier",
+        "pricePoint": "Free for one flow (hosted modes); $19 a month per developer; $49 a month per agency (10 client flows, branded evidence pages)",
+        "rationale": "Matches Assistiv Labs' $19 Freelancer plan for manual real-reader minutes (which gives open-source projects free access) and sits far below BrowserStack's $249 and $1,099 plans. The paid tier must earn its price over the free Screen Reader Journeys engine it runs on, so it charges only for the booking rules, the client page and the re-check; the CI minutes are the customer's own."
+      },
+      "revenueSketch": "Estimate: 60 developers x $19 + 15 agencies x $49 = $1,140 + $735 = $1,875 MRR, assuming about 2% of free hosted users convert and the Marketplace listing brings a steady trickle; unproven.",
+      "distribution": "1) GitHub Marketplace listing of a free composite action that wraps the engine's NVDA and Orca workflows and links to the paid evidence pages: 'The action must be in a public repository', 'Each repository must contain a single action metadata file (action.yml or action.yaml) at the root', the owner accepts the Marketplace Developer Agreement and uses two-factor authentication, and listings that meet the requirements 'are published to GitHub Marketplace immediately and aren't reviewed by GitHub' (https://docs.github.com/en/enterprise-cloud@latest/actions/how-tos/create-and-publish-actions/publish-in-github-marketplace). 2) A notice inside Screen Reader Journeys for its signed-in users (the owner's own product; no outside rule). 3) Search ads on screen-reader-testing queries: Google Ads rule unknown, check before posting. Not Show HN: 'New features and upgrades (\"Foo 1.3.1 is out\") generally aren't substantive enough to be Show HNs' and 'Don't post quickly-generated one-offs' (https://news.ycombinator.com/showhn.html), and the engine's own Show HN is drafted for 8 December 2026. Accessibility mailing lists and Slack groups: rule unknown, check before posting. Never in the evidence issues or their repositories.",
+      "validationTest": {
+        "method": "Build a demo booking page of the owner's own with five seeded faults and publish a sample evidence page from it. Put both on a landing page that says plainly that the engine is the free Screen Reader Journeys and what the paid tier adds (the booking journey and rules, the dated client page, the weekly re-check), with a free hosted check of the demo, a $19 a month and a $49 a month price button, and a waitlist that asks for the booking page address and whether its code is in the developer's own repository. Drive traffic with a two-week search-ad test on queries such as 'screen reader test booking form' and 'NVDA test my website' (Google Ads rules: check before posting) and a notice to signed-in Screen Reader Journeys users. No outreach to anyone, no Show HN for a landing page, nothing posted in any evidence thread.",
+        "successCriteria": "From about 400 visitors in two weeks: 15 or more price-button clicks, 8 or more waitlist sign-ups whose booking code is in their own repository, and at least 3 paid pre-orders at $19 or more.",
+        "cost": "About 2 days of work and $150 to $250 in search ads."
+      },
+      "moat": "Thin: a booking fault library tuned on real flows, each client's history of transcripts, and agencies' branded evidence pages. The engine underneath is the owner's own free MIT tool, and anyone can add booking rules to it.",
+      "compliance": [
+        "ADA Title III and WCAG 2.2 AA: the evidence page records what a named mode or screen reader announced on a date; it is not an audit, makes no conformance claim and is not legal advice.",
+        "Live bookings: runs on a live address stop before the final confirm and use synthetic details; full journeys run only on a staging or test-mode address; the developer proves control of the address first.",
+        "Health data: clinic flows use synthetic patient details only; no real patient data is entered or stored, so HIPAA is not engaged; say so in the terms.",
+        "GDPR: accounts hold an email and run artifacts; screenshots and transcripts have retention caps (Screen Reader Journeys already prunes runs).",
+        "GitHub terms (effective 2026-08-27): Actions 'should not be used for' 'The provision of a stand-alone or integrated application or service offering the Actions product or service', for commercial purposes; on GitHub-hosted runners, not for activity unrelated to the software project associated with the repository where Actions are used; and 'You may only access and use GitHub Actions to develop and test your application(s)' (https://docs.github.com/en/site-policy/github-terms/github-terms-for-additional-products-and-features). Real-reader runs therefore happen in the repository that holds the booking code, never in a HintWise repository on the customer's behalf, and the Action's docs say it checks that repository's own booking flow, not other sites.",
+        "Accessibility of the app itself: checked with Screen Reader Journeys before launch.",
+        "The evidence page is not the signed human screen-reader review some release gates require, and says so."
+      ],
+      "risks": [
+        {
+          "risk": "BrowserStack's beta screen-reader automation and its plain-words Experience Agent move down-market and cover the booking case.",
+          "mitigation": "Stay priced for freelancers, keep the booking rules and the client page as the product, and run in the developer's own CI at no runner cost to HintWise."
+        },
+        {
+          "risk": "The signal is inflated: many issues are checklists written by coding agents, and the projects are tiny, so few will pay.",
+          "mitigation": "Run the price-button test before building; count Marketplace installs, not issues."
+        },
+        {
+          "risk": "One booking journey does not fit the variety of booking interfaces, and per-site fixes turn it into a service.",
+          "mitigation": "Journeys are named steps over roles and accessible names that the developer edits; no custom work is sold."
+        },
+        {
+          "risk": "Real NVDA and Orca runs are flaky on CI runners.",
+          "mitigation": "Retry once, compare with the virtual mode, and mark a run inconclusive rather than failed."
+        },
+        {
+          "risk": "A client treats the evidence page as proof of compliance in a dispute.",
+          "mitigation": "Plain wording on every page: a dated record of what was heard, not an audit or legal advice."
+        },
+        {
+          "risk": "Salons on hosted booking platforms cannot fix a third-party widget, so the salon is not a buyer.",
+          "mitigation": "Sell to the developers who own the booking code; leave hosted-platform widgets out of scope."
+        },
+        {
+          "risk": "The paid vertical competes with the owner's own free engine: a developer can write the booking journey as a journey file and run it in the free NVDA and Orca workflows.",
+          "mitigation": "Charge only for what the free engine lacks (booking rules, client page, scheduled re-check) and say on the page that the engine is free."
+        }
+      ],
+      "scores": {
+        "pain": 2,
+        "willingnessToPay": 3,
+        "reachability": 2,
+        "competitiveGap": 1,
+        "feasibility": 3,
+        "complianceBurden": 4,
+        "total": 15
+      },
+      "scoreRationale": {
+        "pain": "Of six organisation-owned items, only one is a human-reported barrier, found from the accessibility tree (https://github.com/OpenResilienceInitiative/ORISO-Frontend/issues/2377); the others are a bot-filed fault (https://github.com/Paige-Agent-AI/Paige-Agent-AI/issues/1480), an agent-commented gate on a synthetic demo that wants a human reviewer (https://github.com/ARG-Digital-Solutions/aronexa-qa-central/issues/4), a backlog import, a design question and a student task, and none comes from the named customer: 2.",
+        "willingnessToPay": "Freelancers pay $19 a month for manual real-reader minutes, though open-source projects get them free (https://assistivlabs.com/pricing), and screen-reader testing at BrowserStack starts at $249 a month billed annually (https://www.browserstack.com/pricing); nobody in the evidence pays, and the engine is free: 3, the gate's minimum.",
+        "reachability": "The buyers are outside the owner's stated network; Show HN rules out feature upgrades and the engine's own Show HN is drafted for 8 December (https://news.ycombinator.com/showhn.html), leaving one unproven self-serve channel, the unreviewed Marketplace listing (https://docs.github.com/en/enterprise-cloud@latest/actions/how-tos/create-and-publish-actions/publish-in-github-marketplace): 2.",
+        "competitiveGap": "The owner's free engine already runs role-and-name journeys and real NVDA and Orca in workflows other repositories can call (https://github.com/pisan-labs/screen-reader-journeys), Guidepup is free and widely installed (https://api.npmjs.org/downloads/point/last-month/@guidepup/guidepup), and BrowserStack's agent covers four of the five booking rules (https://www.browserstack.com/docs/accessibility/screen-reader-launcher/screen-reader-experience-agent); what is left is a booking journey, two rules, a client record and a re-check: 1.",
+        "feasibility": "The engine and its CI workflows exist (https://github.com/pisan-labs/screen-reader-journeys), but the hosted worker runs only its own journeys on a capped free plan, user journeys widen the sandbox, one journey must fit many booking interfaces, and Actions are 'to develop and test your application(s)' only (https://docs.github.com/en/site-policy/github-terms/github-terms-for-additional-products-and-features); about 3 weeks of work: 3.",
+        "complianceBurden": "Wording as a dated record, not an audit (https://stacker.com/stories/small-business/website-accessibility-lawsuits-are-rising-and-smaller-businesses-are); the page must never stand in for the signed human review that gates ask for (https://github.com/ARG-Digital-Solutions/aronexa-qa-central/issues/4); plus the stop-before-confirm guard and the GitHub terms: 4."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "The reviewer read all six cited issues, each in an organisation-owned repository and dated 2026-09-26 to 2026-11-19. Only one is a human-reported barrier, an appointment calendar whose button names leave out the modality, found from Chromium's accessibility tree without a screen reader; the rest are a fault filed by a bot account, an agent-commented gate on a synthetic demo that asks for a qualified human NVDA reviewer and a signed report (so an automated transcript would not close it), a backlog import, an NHS design question and a student-programme task, and none comes from a freelancer building for a local business, so pain drops from 3 to 2. No free tool does the whole job, but the owner's own free Screen Reader Journeys already runs role-and-name journeys in walker and virtual modes and real NVDA and Orca in workflows other repositories can call, Guidepup (MIT, about 978,000 npm downloads in the month to 2026-11-26) covers developers who write tests, a free Action runs AI-driven NVDA tests on pull requests, and BrowserStack's paid beta agent already checks unique names, feedback after an action, dialog focus and form error announcements under real NVDA, so competitiveGap drops from 2 to 1, re-scoped to a ready booking journey, the selected-slot and silent-availability rules, a dated client record and a scheduled re-check, for developers who own their booking code. Show HN's rules say feature upgrades generally do not qualify and the engine's own Show HN is drafted for 8 December, leaving the unreviewed Marketplace listing as the one self-serve channel, so reachability drops from 3 to 2. The GitHub terms reading holds, and the terms add that Actions may be used only to develop and test your own application, so the CI path fits only repositories that hold the booking code; the total is 15 and it ships as a provisional wildcard."
+      },
+      "inspiredBy": "https://github.com/OpenResilienceInitiative/ORISO-Frontend/issues/2377",
+      "wildcard": true,
+      "wildcardReason": "It is the small-business vertical of Screen Reader Journeys, the project that most excited the owner, and adds what its free engine lacks: a booking journey, booking fault rules, and a dated record a developer can hand to a client. It fits testing with assistive technology and tools for working with coding agents."
+    }
+  ],
+  "runNotes": {
+    "weekday": "Friday",
+    "domainLens": "Small business, customer-facing: local services, trades, clinics, restaurants, retail, their websites and bookings",
+    "focusSources": [
+      "A13 Discourse forums, any niche (community.shopify.com)",
+      "B11 Freelance job boards",
+      "C8 Trade news"
+    ],
+    "searches": [
+      "freelance-gatherer: site:apps.shopify.com appointment booking services salon",
+      "freelance-gatherer: site:apps.shopify.com google reviews request local store",
+      "freelance-gatherer: site:apps.shopify.com POS in-store customers Google review request SMS QR",
+      "freelance-gatherer: Wix App Market Google reviews request app local business paid plan reviews",
+      "freelance-gatherer: Wix App Market restaurant menu app sync Google Business Profile holiday hours",
+      "freelance-gatherer: freelancer.com API query=booking website",
+      "freelance-gatherer: freelancer.com API query=appointment",
+      "freelance-gatherer: freelancer.com API query=salon",
+      "freelance-gatherer: freelancer.com API query=google reviews",
+      "freelance-gatherer: freelancer.com API query=restaurant",
+      "freelance-gatherer: freelancer.com API query=reminders",
+      "freelance-gatherer: freelancer.com API query=intake form",
+      "freelance-gatherer: freelancer.com API query=dental",
+      "freelance-gatherer: freelancer.com API query=google business profile",
+      "freelance-gatherer: freelancer.com API query=menu",
+      "freelance-gatherer: freelancer.com API query=contractor",
+      "freelance-gatherer: freelancer.com API query=accessibility",
+      "freelance-gatherer: freelancer.com API query=whatsapp",
+      "freelance-gatherer: Google Workspace Marketplace search: appointment booking",
+      "mandates-gatherer: new state law takes effect January 1, 2027 small businesses price disclosure fees surcharge",
+      "mandates-gatherer: achrnews November 2026 contractors deadline 2027 rule",
+      "mandates-gatherer: booking software shutting down 2026 salons spas customers must migrate",
+      "mandates-gatherer: Google Business Profile feature removed November 2026 small businesses",
+      "mandates-gatherer: restaurant operators new laws 2027 nrn OR restaurantbusinessonline November 2026",
+      "mandates-gatherer: salon owners new state law 2027 booking deposit no-show fee OR licensing americansalon OR modernsalon",
+      "mandates-gatherer: site:achrnews.com refrigerant leak repair recordkeeping 2026 contractors EPA rule",
+      "mandates-gatherer: site:modernretail.co independent retailers November 2026",
+      "mandates-gatherer: automatic renewal law effective January 1, 2027 memberships cancel online state signed 2026",
+      "mandates-gatherer: credit card surcharge new rules merchants 2027 state law OR Visa Mastercard settlement small businesses",
+      "mandates-gatherer: NYC DCWP automatic renewal rule October 1 2026 gyms studios small businesses cancel online",
+      "mandates-gatherer: Visa Mastercard interchange settlement final approval hearing Judge Cogan honor all cards merchants November 2026",
+      "mandates-gatherer: \"price increase\" 2026 Vagaro OR Mindbody OR Booksy OR GlossGenius OR Fresha OR Square Appointments subscribers",
+      "mandates-gatherer: \"end of free plan\" OR \"discontinuing free plan\" OR \"sunsetting\" 2026 small business website builder OR online ordering OR reviews tool",
+      "mandates-gatherer: dental practices compliance deadline 2027 new rule small practices dentistry today OR dental economics OR ADA news 2026",
+      "services-gatherer: canny.io feature request booking salon appointments",
+      "services-gatherer: Housecall Pro feature request board ideas",
+      "services-gatherer: Jane App feature requests forum clinic",
+      "services-gatherer: Toast restaurant community feature request ideas board 2026",
+      "services-gatherer: Tradify OR ServiceM8 OR Workiz feature request board vote",
+      "services-gatherer: forum.squarespace.com scheduling Acuity booking problem 2026",
+      "services-gatherer: SimplePractice OR Mindbody OR Vagaro OR Fresha \"feature request\" board vote ideas portal",
+      "services-gatherer: Wix Bookings feature request \"collecting votes\" 2026",
+      "services-gatherer: support.google.com/business/thread 2026 business owner reviews disappeared OR \"special hours\" OR \"menu\" problem",
+      "services-gatherer: \"support.google.com/business\" thread reviews missing paused 2026",
+      "services-gatherer: Squarespace Acuity scheduling forum owners complaint deposit no-show intake 2026 (limited to forum.squarespace.com)",
+      "services-gatherer: TipHaus pricing per location month tip pooling Square",
+      "services-gatherer: LiQL (community.squareup.com API): recent product ideas since 2026-09-28",
+      "services-gatherer: LiQL (community.squareup.com API): bodies of 13 product ideas",
+      "services-gatherer: LiQL (community.squareup.com API): replies in 5 topics",
+      "services-gatherer: LiQL (community.squareup.com API): subject MATCHES 'pre-order pickup date'",
+      "services-gatherer: LiQL (community.squareup.com API): pre-order threads",
+      "services-gatherer: LiQL (community.squareup.com API): subject MATCHES 'tip pool'",
+      "services-gatherer: LiQL (community.squareup.com API): subject MATCHES 'resource room equipment bay'",
+      "services-gatherer: LiQL (community.squareup.com API): tip and resource threads",
+      "services-gatherer: LiQL (community.squareup.com API): top kudos product ideas since 2026-05-31",
+      "services-gatherer: LiQL (community.squareup.com API): cash close thread 849765",
+      "shopify-gatherer: site:apps.shopify.com store credit",
+      "shopify-gatherer: site:apps.shopify.com appointment booking app reviews",
+      "shopify-gatherer: site:apps.shopify.com customer registration form \"new customer accounts\"",
+      "shopify-gatherer: site:apps.shopify.com Shopify POS point of sale reviews",
+      "shopify-gatherer: Shopify checkout hijack HulkApps Swym Selleasy extensions October 2026",
+      "shopify-gatherer: site:apps.shopify.com Hulk Product Options reviews",
+      "shopify-gatherer: site:apps.shopify.com storefront script monitoring security malicious redirect",
+      "shopify-gatherer: site:apps.shopify.com local delivery pickup date scheduler reviews",
+      "shopify-gatherer: site:apps.shopify.com physical gift cards mailed sell online",
+      "shopify-gatherer: site:apps.shopify.com Shopify Inbox reviews AI agent checkout link",
+      "shopify-gatherer: site:apps.shopify.com Shopify Subscriptions app reviews Shop Pay",
+      "wildcard-gatherer: freelancer API `query=PDF accessibility` (limit 20, then the same search paged at limit 100)",
+      "wildcard-gatherer: WebSearch: \"PDF accessibility checker pricing PDF/UA validator license per year CommonLook axesPDF PDFix\"",
+      "wildcard-gatherer: HN Algolia \"screen reader booking\" (comments)",
+      "wildcard-gatherer: HN Algolia \"PDF menu accessibility\" (comments)",
+      "wildcard-gatherer: WebSearch: HHS Section 504 web rule, WCAG 2.1 AA, May 2026 deadline, intake forms, delay",
+      "wildcard-gatherer: GitHub search API: `booking \"screen reader\" is:issue created:>2026-09-01",
+      "wildcard-gatherer: WebSearch: 2026 ADA website lawsuits, small business, restaurants, booking widget, PDF menu, demand letter",
+      "wildcard-gatherer: WebSearch: site:wordpress.org/support, booking plugin, screen reader or keyboard, 2026",
+      "wildcard-gatherer: GitHub search API: `repo:calcom/cal.com accessibility …` (2 forms)",
+      "wildcard-gatherer: HN Algolia \"screen reader agent\", comments since 2026-08-29",
+      "wildcard-gatherer: WebSearch: site:community.adobe.com, accessible fillable form, NVDA, JAWS, tooltip, tab order, 2026",
+      "wildcard-gatherer: freelancer API `query=WCAG",
+      "wildcard-gatherer: WebSearch: site:community.squareup.com, ADA, screen reader, appointments, demand letter",
+      "wildcard-gatherer: GitHub search API: `\"screen reader\" manual appointment is:issue created:>2026-09-01",
+      "spend-shopify-gatherer: site:apps.shopify.com delivery date time slot local delivery app",
+      "spend-shopify-gatherer: Shopify delivery date missing on order \"Buy it now\" OR \"express checkout\" skips cart delivery date app",
+      "spend-shopify-gatherer: Shopify app audit bills app subscription charges after uninstall track app spend",
+      "spend-shopify-gatherer: site:apps.shopify.com app cost tracker subscription spend billing audit",
+      "spend-shopify-gatherer: Shopify subscriptions send customer email to update payment method Shop Pay migrate subscribers payment method",
+      "spend-shopify-gatherer: subscription app Shopify bulk \"payment method update\" campaign subscribers switch off Shop Pay Loop Skio Appstle Recharge",
+      "spend-shopify-gatherer: Shop Pay subscription customers cannot update card 2026 Appstle OR Skio OR Loop \"Shop Pay\" turn off subscriptions",
+      "spend-shopify-gatherer: site:apps.shopify.com customer registration form new customer accounts sign up fields",
+      "spend-shopify-gatherer: Shopify \"new customer accounts\" sign ups dropped registrations stopped after switching members 2026",
+      "spend-shopify-gatherer: real screen reader testing service pricing NVDA JAWS VoiceOver manual accessibility testing per page price",
+      "spend-shopify-gatherer: accessible fillable PDF form remediation price per page Section 508 PDF/UA form fields service pricing",
+      "spend-shopify-gatherer: HHS Section 504 web accessibility rule May 11 2027 healthcare providers patient intake forms accessible PDF",
+      "spend-shopify-gatherer: HIPAA patient intake form software WCAG 2.1 AA accessible screen reader pricing small practice",
+      "spend-square-gatherer: Square POS blind cash count drawer reconciliation app denomination variance per employee",
+      "spend-square-gatherer: cash count app integrates with Square end of day till count blind close deposit tracking pricing",
+      "spend-square-gatherer: \"Square\" app \"cash drawer\" count denominations blind count \"per month\" connects to Square POS 2026",
+      "spend-square-gatherer: blind cash drawer close feature Toast Clover Lightspeed Shopify POS denomination count native",
+      "spend-square-gatherer: Square tip pooling Shifts Plus cash tips split by hours worked front of house back of house percentage",
+      "spend-square-gatherer: TipHaus pricing per location month tip pooling restaurant 2026",
+      "spend-square-gatherer: 7shifts tip pooling pricing plan per location Square integration cash tips",
+      "spend-square-gatherer: TipHaus OR Kickfin app reviews tip payout restaurant apps.apple.com",
+      "spend-square-gatherer: Hotplate pre-order platform fees pricing sellers buyer fee bakery pickup windows",
+      "spend-square-gatherer: site:apps.shopify.com pre-order pickup date cut-off prep list bakery holiday orders",
+      "spend-square-gatherer: Resova pricing plans per month bookings fee; Bookeo pricing; Xola pricing booking fee golf simulator axe throwing",
+      "spend-square-gatherer: Resova pricing plans resources lanes bays (limited to resova.com, bookeo.com, xola.com)",
+      "spend-square-gatherer: Square Appointments resources book rooms equipment not tied to staff multiple resources one booking golf simulator bays",
+      "spend-square-gatherer: Bookeo pricing plans per month bookings resources (limited to bookeo.com)",
+      "spend-square-gatherer: Xola OR Resova OR Bookeo review \"1 star\" OR complaint 2026 bays lanes booking software escape room golf simulator",
+      "spend-square-gatherer: refrigerant tracking software small HVAC refrigeration contractor pricing leak rate calculation EPA AIM Act 2026 Trakref FMHero",
+      "spend-square-gatherer: pricing plans per technician refrigerant tracking leak rate (limited to fmhero.com, trakref.com, refleaklog.com, servicetitan.com)",
+      "spend-square-gatherer: free refrigerant leak rate calculator app 15 lb appliance 40 CFR 84 subpart C technicians record keeping",
+      "spend-square-gatherer: Square Dashboard Google Business Profile integration sync hours menu items specials automatically",
+      "spend-square-gatherer: Popmenu pricing per location month; Owner.com pricing restaurant; BentoBox pricing plans",
+      "spend-square-gatherer: restaurant menu sync Google Business Profile website one update listings tool pricing single location Yext OR Brightlocal OR \"Menu sync\" 2026",
+      "bill-leak-research: Shopify help center store credit considerations third-party transaction fee stores created May 12 2025",
+      "bill-leak-research: Shopify help center POS Pro subscription billed per location remove POS Pro from location billing",
+      "bill-leak-research: help.shopify.com app charges refund uninstall app billing \"app charges\" invoice",
+      "bill-leak-research: Shopify help \"export\" bill CSV Settings Billing past bills download charges transaction fees",
+      "bill-leak-research: shopify.dev OrderTransaction gateway store credit \"shopify_store_credit\" OR \"store_credit\" paymentGatewayNames gift_card",
+      "bill-leak-research: Shopify app audit find unused apps still billing free app \"transaction fees\" \"POS Pro\" bill analyzer",
+      "bill-leak-research: community.shopify.com charged transaction fee store credit order 2026",
+      "bill-leak-research: site:apps.shopify.com reviews \"charged\" \"after uninstalling\" 2026",
+      "bill-leak-research: shopify.dev Admin API query which locations have POS Pro subscription \"POS Pro\" location API",
+      "bill-leak-research: Shopify \"third-party transaction fees\" gift cards store credit stores created after May 2025 merchants surprised fee audit tool",
+      "bill-leak-research: Shopify Community guidelines self-promotion app developers promote apps rules community.shopify.com",
+      "cash-close-research: Square developer Cash Drawers API ListCashDrawerShifts expected_cash_money closing_team_member_id",
+      "cash-close-research: Square team permissions \"cash drawer\" \"expected\" amount hide employees end of drawer report",
+      "cash-close-research: \"View Expected Amount In Cash Drawer\" Square permission",
+      "cash-close-research: Square POS release notes 2026 cash drawer denomination count new feature",
+      "cash-close-research: Square release notes November 2026 cash management (squareup.com only)",
+      "cash-close-research: Clover POS blind close cash drawer count denomination \"blind\" end of day cash log",
+      "cash-close-research: Square cash drawer count app denomination blind close integrates Square pricing per month",
+      "cash-close-research: Square App Marketplace cash drawer reconciliation app listing (squareup.com, developer.squareup.com)",
+      "cash-close-research: Square App Marketplace pause new app listings 2026 developers",
+      "cash-close-research: Square Seller Community code of conduct self-promotion advertising \"community guidelines\"",
+      "cash-close-research: \"cash count sheet\" OR \"blind cash count\" app café food truck end of day cash reconciliation free template 2026",
+      "cash-close-research: Square cash drawer over short report by employee app read-only CashDrawerShift variance tool",
+      "cash-close-research: Square Team API RetrieveTeamMember permission EMPLOYEES_READ SearchTeamMembers (developer.squareup.com)",
+      "holiday-preorder-research: Square Online pre-order fulfillment window pickup date help (squareup.com): 1 useful (article 8285)",
+      "holiday-preorder-research: Square Online pickup settings, scheduling, restricted dates, per-slot limits (squareup.com): 2",
+      "holiday-preorder-research: Square Order Manager, filter by pickup date, prep list: 1 (6728; no prep totals found)",
+      "holiday-preorder-research: Orders API pickup_at, SCHEDULED, Order Manager after payment (developer.squareup.com): 1",
+      "holiday-preorder-research: Checkout API CreatePaymentLink pickup fulfillment (developer.squareup.com): 1",
+      "holiday-preorder-research: Holiday pre-order software for bakeries that integrates with Square: 2 (seasonal threads, Ecwid lead)",
+      "holiday-preorder-research: Square Online plans pricing (squareup.com): 1",
+      "holiday-preorder-research: Hotplate Square integration: 0",
+      "holiday-preorder-research: Square bakery preorder app prep list pricing: 1 (CafeKit lead)",
+      "holiday-preorder-research: CafeKit Square prep sheet: 1",
+      "holiday-preorder-research: Tock To Go, Square integration, pricing: 1 (snippet prices not used)",
+      "holiday-preorder-research: Square pay for orders, CreatePayment order_id, Web Payments SDK (developer.squareup.com): 1",
+      "holiday-preorder-research: Square App Marketplace listings paused: 2",
+      "holiday-preorder-research: Square community guidelines on self-promotion: 1",
+      "holiday-preorder-research: Square App Marketplace preorder apps (squareup.com): 1 (archived 2020 request found)",
+      "holiday-preorder-research: Ecwid Square integration, pickup date: 1",
+      "holiday-preorder-research: Square OAuth overview, unlisted apps (developer.squareup.com): 1",
+      "menu-desk-research: Google Business Profile API access request prerequisites approval specialHours food menus updateFoodMenus",
+      "menu-desk-research: Business Information API locations.patch specialHours updateMask holiday hours developers.google.com my-business",
+      "menu-desk-research: Toast POS Google Business Profile integration sync menu and hours automatically holiday hours",
+      "menu-desk-research: Wix Restaurants Menus connect Google Business Profile menu sync special hours support.wix.com",
+      "menu-desk-research: support.google.com/business/thread restaurant menu Google profile shows old menu wrong prices website 2026",
+      "menu-desk-research: Square Locations API UpdateLocation business_hours periods developer.squareup.com special hours",
+      "menu-desk-research: Square App Marketplace list your app requirements review process partner developers",
+      "menu-desk-research: WordPress.org detailed plugin guidelines serviceware external service paid upgrade trialware",
+      "review-ask-research: Square help on Google reviews automation: found help article 8418 and Freshreview.",
+      "review-ask-research: Google Business Profile review link, QR code and policy: found answer 16816815.",
+      "review-ask-research: FTC rule 16 CFR 465: found the FTC Q&A.",
+      "review-ask-research: TCPA consent, one-to-one rule vacated: found the mofo page.",
+      "review-ask-research: NiceJob pricing.",
+      "review-ask-research: GatherUp and Grade.us pricing: Grade.us has only inconsistent third-party figures, not used.",
+      "review-ask-research: Business Profile API reviews.list and access: found the FAQ and the reference page.",
+      "review-ask-research: Places API userRatingCount and caching: found the policies and SKU pages.",
+      "review-ask-research: Owner forum posts on walk-in Google reviews: 0 usable (vendor content only).",
+      "review-ask-research: Square Seller Community self-promotion rules: found the etiquette page, which proved unreadable.",
+      "spoken-booking-research: automated real screen reader testing, NVDA, VoiceOver, CI, cloud pricing",
+      "spoken-booking-research: BrowserStack screen reader testing pricing",
+      "spoken-booking-research: GitHub Actions additional product terms",
+      "spoken-booking-research: GitHub Actions runner pricing per minute",
+      "spoken-booking-research: Render compute plans pricing",
+      "spoken-booking-research: publishing actions in GitHub Marketplace",
+      "spoken-booking-research: Show HN guidelines",
+      "spoken-booking-research: Playwright, NVDA, hosted service, spoken output",
+      "spoken-booking-research: salon booking widget, ADA demand letter, 2026",
+      "shopify-gatherer: community.shopify.com search.json q=store credit",
+      "shopify-gatherer: community.shopify.com search.json q=new customer accounts",
+      "shopify-gatherer: community.shopify.com search.json q=exchange POS",
+      "shopify-gatherer: community.shopify.com search.json q=withdrawal button",
+      "shopify-gatherer: community.shopify.com search.json q=booking appointment",
+      "shopify-gatherer: community.shopify.com search.json q=gift card",
+      "shopify-gatherer: community.shopify.com search.json q=return in store online order",
+      "shopify-gatherer: community.shopify.com search.json q=fake checkout redirect",
+      "shopify-gatherer: community.shopify.com search.json q=legacy customer accounts switch",
+      "shopify-gatherer: community.shopify.com search.json q=Shop Pay opt out",
+      "shopify-gatherer: community.shopify.com search.json q=delivery date buy it now skips cart",
+      "shopify-gatherer: community.shopify.com search.json q=orders missing delivery date",
+      "main: Illinois junk fee ban 2027 small business price display compliance tool OR app OR service salons auto repair \"all-in price\" (spend pass, C5/B13)"
+    ],
+    "unverifiedSignals": [
+      {
+        "url": "https://community.squareup.com/t5/Feedback-Discussions/Forced-into-Square-Plus/td-p/847889",
+        "reason": "Empty to WebFetch; the fetch helper got HTTP 202 with 0 bytes."
+      },
+      {
+        "url": "https://ilga.gov/Legislation/PublicActs/View/104-0472",
+        "reason": "HTTP 503 on both capitalisations; the enacted Illinois text was not read."
+      },
+      {
+        "url": "https://www.drbicuspid.com/dental-business/regulatory-updates/article/15826318/dental-practices-get-extra-year-for-digital-accessibility",
+        "reason": "HTTP 403 from the site."
+      },
+      {
+        "url": "https://dev.wix.com/docs/build-apps/get-started/get-an-idea",
+        "reason": "contains instructions"
+      },
+      {
+        "url": "https://community.toasttab.com/t5/restaurant-operations/feature-requests/m-p/16551",
+        "reason": "HTTP 403 from the site (the Toast community API answered 403 too)."
+      },
+      {
+        "url": "https://forum.squarespace.com/topic/326046-client-account-creation-issue/",
+        "reason": "HTTP 403 from the site."
+      },
+      {
+        "url": "https://get.popmenu.com/pricing",
+        "reason": "HTTP 403 from the site; Popmenu's price is unknown."
+      },
+      {
+        "url": "https://exploretock.com/join/restaurant-delivery-takeout-software/",
+        "reason": "HTTP 403 from the site."
+      },
+      {
+        "url": "https://learn.tiphaus.com/en/articles/10214156-tiphaus-pricing",
+        "reason": "HTTP 404; prices were read from tiphaus.com/subscription-plan instead."
+      },
+      {
+        "url": "https://www.softwareadvice.com/ca/retail/kickfin-profile/reviews/",
+        "reason": "HTTP 403 from the site."
+      },
+      {
+        "url": "https://findstack.com/products/xola/reviews",
+        "reason": "HTTP 403 from the site."
+      },
+      {
+        "url": "https://www.getapp.com/all-software/a/ref-leaklog/",
+        "reason": "HTTP 403 from the site."
+      },
+      {
+        "url": "https://www.hhs.gov/press-room/hhs-extends-mobile-and-web-accessibility-deadline.html",
+        "reason": "HTTP 403 to WebFetch; the Federal Register copy on govinfo.gov was read instead."
+      },
+      {
+        "url": "https://community.squareup.com/t5/About-the-Seller-Community/Community-Etiquette-Guidelines/m-p/654675",
+        "reason": "Empty to WebFetch and the fetch helper; the Code of Conduct page was read instead."
+      },
+      {
+        "url": "https://www.trustradius.com/products/mobal/reviews",
+        "reason": "HTTP 403 from the site; Mobal's price is unknown."
+      },
+      {
+        "url": "https://pos.toasttab.com/partners/directory/vistify",
+        "reason": "HTTP 403 from the site."
+      },
+      {
+        "url": "https://whito.co.uk/news/the-ipad-on-your-counter-is-now-breaking-googles-review-rules/",
+        "reason": "Claims a counter QR code breaks Google's review rules but cites no Google source; not used."
+      },
+      {
+        "url": "https://housecallpro-roadmap.monterey.ai/feedback",
+        "reason": "A client-rendered shell with no items to WebFetch and the fetch helper."
+      },
+      {
+        "url": "https://community.squareup.com/t5/Online-Store/ADA-Compliance-with-Forms/m-p/804575",
+        "reason": "Empty to WebFetch; the fetch helper got HTTP 202 with 0 bytes."
+      }
+    ],
+    "rejectedCandidates": [
+      {
+        "title": "Walk-In Review Ask",
+        "total": 13,
+        "reason": "Review kill: the Google-review complaints came from an appointment business and a junk-removal business about Square's request timing, and a third was about Square Online product reviews, so none is a walk-in shop; the one walk-in owner paid once for a plan and a spreadsheet template, which Google's free review QR, a free review sign maker, free dynamic QR codes with scan counts, Google's new-review email alerts and Square's and Toast's review counts already cover; the paid weekly count needs Business Profile API access the owner cannot apply for on day 1."
+      },
+      {
+        "title": "Cart-Skip Order Catcher for Local-Delivery Shopify Shops",
+        "total": 18,
+        "reason": "Spend pass: Delivery Guard (launched 2026-11-03, $14.99 a month) already 'Holds and recovers orders with no date' and checks dates even with Buy it now, at a similar price; only one merchant post is about missing dates (the Inbox reviews are about its AI agent), so pain 3 and competitiveGap 1."
+      },
+      {
+        "title": "Cash Tip Split for Square Cafés",
+        "total": 18,
+        "reason": "Square's own tip pooling already splits by hours worked and by percentage per job (FOH and BOH) from timecards in Square Plus at $49 a month, and TipHaus ($79 to $99 a month) integrates with Square; only cash tips remain unserved."
+      },
+      {
+        "title": "Heard-in-PR screen-reader gate for agent-built UI",
+        "total": 17,
+        "reason": "Guidepup (free, MIT) already drives NVDA, VoiceOver and Orca and logs spoken phrases in CI, and the owner's own free Screen Reader Journeys runs callable NVDA and Orca workflows; the same evidence was weighed in the wildcard's review."
+      },
+      {
+        "title": "Refrigerant Leak-Rate Log for Small Refrigeration Contractors",
+        "total": 17,
+        "reason": "Mandate only: EPA allows a paper or electronic log, Ref LeakLog ($29 to $89 a month) does exactly this, FMHero's Team plan covers leak rates, a free Subpart C calculator exists, and the trade articles were written by a vendor."
+      },
+      {
+        "title": "Illinois All-In Price Check for Service Businesses",
+        "total": 18,
+        "reason": "willingnessToPay 2: the cheapest compliance path (edit your own price list or drop the fee) is free, the spend search found no paid tool, and it extends the published Fee Disclosure Check for Restaurants (2026-11-06)."
+      },
+      {
+        "title": "Accessible Intake Forms for Small Medicaid Clinics",
+        "total": 18,
+        "reason": "Mandate only (HHS Section 504 web rule, due 2027-05-11 and 2028-05-10, with HHS planning further rulemaking); no complaint within 180 days; paid remediation is priced per page for universities and public bodies, with no clinic buyer seen."
+      },
+      {
+        "title": "Shop Pay Exit Plan for Subscription Shops",
+        "total": 17,
+        "reason": "No payment evidence (willingnessToPay 2); the complaints are older than 180 days except three forum posts; Shopify's own update-payment-method email exists, and a native January 2026 change may already let buyers replace the payment method."
+      },
+      {
+        "title": "Menu Page from PDF for Restaurants",
+        "total": 19,
+        "reason": "Same customer and problem as the shipped Menu and Specials Desk (idea 4), whose website block is an accessible HTML menu; no complaint within 180 days."
+      },
+      {
+        "title": "Listing Consistency Check for Restaurant Groups and Clinics",
+        "total": 18,
+        "reason": "Crowded: BrightLocal, Yext, Moz Local, Semrush and Whitespark already sell it, mostly through agencies (competitiveGap 1)."
+      },
+      {
+        "title": "Booking-Fee Checkout for Solo Clinics",
+        "total": 16,
+        "reason": "Very crowded (Practo, Calendly with Stripe or Razorpay, Zoho Bookings, SimplyBook.me, Setmore, Fresha, Amelia and 88 or more Workspace add-ons) and close to published booking ideas."
+      },
+      {
+        "title": "Card Surcharge Planner after the Visa and Mastercard Settlement",
+        "total": 16,
+        "reason": "The settlement had only preliminary approval and faces an appeal; processors are likely to add settings."
+      },
+      {
+        "title": "WhatsApp and Instagram Order Desk for Small Shops",
+        "total": 15,
+        "reason": "Crowded (the free WhatsApp Business app and Meta Business Suite inbox, respond.io, Wati, Trengo and others) and the WhatsApp Business API needs Meta approval."
+      },
+      {
+        "title": "Package Redemption Log for Square Medspas",
+        "total": 18,
+        "reason": "Rejection rule: the same problem as the published Class Pack Ledger for Square Studios (2026-11-18), Square package redemptions tracked by hand."
+      },
+      {
+        "title": "NYC Click-to-Cancel Kit for Membership Businesses",
+        "total": 14,
+        "reason": "Researched and ended on 2026-11-23 (a monitored email address satisfies the rule, studio platforms already offer self-cancel); no new evidence of a small owner's complaint today."
+      },
+      {
+        "title": "Checker Second Opinion for tagged PDFs",
+        "total": 18,
+        "reason": "Watchlist entry re-researched: no paid job for PDF/UA or PAC fixes on freelancer.com, paid remediation tools are each tied to one checker, issue 1676 was fixed upstream on 2026-11-01 and the Adobe thread's accepted answer says the checker was right; pain falls to 2."
+      }
+    ],
+    "watchlist": [
+      {
+        "title": "Lane and Bay Booking for Square Venues",
+        "targetCustomer": "Golf-simulator, axe-throwing, VR and escape-room venues and room hire on Square Appointments.",
+        "problemStatement": "Each bay or lane must be tied to a staff member, so booking Bay 1 blocks Bays 2 and 3, and one booking cannot span several lanes; one venue's old booking system shut down.",
+        "total": 19,
+        "missedGate": "Not researched or reviewed in this run; competitiveGap 2 (Resova Standard $49.95 a month with resources, Bookeo $39.95 a month) and total 19 below 22.",
+        "evidence": [
+          "https://community.squareup.com/t5/Feature-Requests/Bookable-resources-with-availability-NOT-tied-to-team-member/idi-p/852213",
+          "https://community.squareup.com/t5/Feature-Requests/Proper-Resource-Allocation-Not-useful-for-150-a-month/idi-p/848547",
+          "https://get.resova.com/pricing/"
+        ],
+        "firstSeen": "2026-11-27"
+      },
+      {
+        "title": "Account Switch Sign-up Watch for Shopify Shops",
+        "targetCustomer": "Small Shopify shops that depend on member sign-ups and moved from legacy to new customer accounts.",
+        "problemStatement": "Daily new member registrations dropped by nearly half after the switch, custom login is Plus-only, and a registration app's verification emails stopped for months unnoticed.",
+        "total": 19,
+        "missedGate": "Not researched or reviewed in this run; thin complaint evidence (pain 3) and willingnessToPay 3 from registration-form apps that do no monitoring.",
+        "evidence": [
+          "https://community.shopify.com/t/689630.json",
+          "https://community.shopify.com/t/700856.json",
+          "https://apps.shopify.com/customr/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest"
+        ],
+        "firstSeen": "2026-11-27"
+      },
+      {
+        "title": "Hijack Window Order Check for Shopify Shops",
+        "targetCustomer": "Owners of small Shopify shops that ran a storefront app compromised in the October 2026 checkout-redirect incidents.",
+        "problemStatement": "Shops closed for days on Shopify's advice, orders from the incident window look normal in the admin and come back weeks later as chargebacks, and owners cannot reproduce the redirect to know when it is safe to reopen.",
+        "total": 19,
+        "missedGate": "Not researched or reviewed in this run; a one-off incident whose demand may fade, competitiveGap 3, total 19 below 22.",
+        "evidence": [
+          "https://community.shopify.com/t/698208.json",
+          "https://community.shopify.com/t/700903.json",
+          "https://apps.shopify.com/sketchaudit"
+        ],
+        "firstSeen": "2026-11-27"
+      },
+      {
+        "title": "Booking-Tap Counter for Local Service Sites",
+        "targetCustomer": "Owners of salons, spas and clinics with a WordPress or Wix site, often through the freelancer who looks after it.",
+        "problemStatement": "Owners pay freelancers to set up conversion tracking for booking clicks, calls and WhatsApp enquiries and weekly booking reports, because GA4 and Tag Manager are free but hard to set up.",
+        "total": 19,
+        "missedGate": "Not researched or reviewed in this run; no complaint (pain capped at 3), GA4 is free (competitiveGap 2).",
+        "evidence": [
+          "https://www.freelancer.com/api/projects/0.1/projects/40833276/?full_description=true",
+          "https://www.freelancer.com/api/projects/0.1/projects/40835036/?full_description=true"
+        ],
+        "firstSeen": "2026-11-27"
+      }
+    ],
+    "caveats": "First run of 2026-11-27 (Friday, customer-facing small-business lens; focus sources A13 with community.shopify.com, B11 and C8). Four regular ideas ship, all provisional (Bill Leak Check 20, Holiday Pre-Order Page 19, Blind Cash Close 19, Menu and Specials Desk 17), and a provisional wildcard (Spoken Booking Check, 15); none came near the gate of 22. Twenty-four candidates were generated (22 with a small-business buyer, 4 aimed at the owner's interests) plus the one watchlist entry, Checker Second Opinion, which was re-researched, fell to 18 and left the watchlist. Six were researched (none ended in research) and six reviewed: five regular reviews, of which one was killed (Walk-In Review Ask, free tools cover it) and four survived as rescores (Bill Leak 20 unchanged in total, Holiday Pre-Order 21 to 19, Blind Cash Close 21 to 19, Menu and Specials Desk 21 to 17), and one wildcard review (18 to 15). Three ideas had survived after five regular reviews, so the review target was met. Selection constraints: every idea has a small-business buyer; ideas 1 to 4 are substantial Multi-week ideas with build plans; at most two share a category (ideas 1 and 3 Small Business Ops, ideas 2 and 4 Micro-SaaS with smallBusiness true, the wildcard Accessibility & Compliance). The constraint of at least one Weekend MVP cannot be met: every surviving idea needs a platform connection (Shopify, Square or Google) and a scheduled job, and Bill Leak Check's CSV-only core would be a Weekend MVP but cannot list on the Shopify App Store without the app shell. Ideas 2 and 3 both serve Square food and cash counters but solve different problems (pre-orders and the cash close); idea 4 shares its customer with the published Fee Disclosure Check for Restaurants (2026-11-06) and State-Code Food Safety Logs (2026-11-13) but not their problem. The wildcard is a vertical of the owner's own Screen Reader Journeys, and its reviewer found the free engine already does much of the job, so it should be weighed as a module of that project, not a new app. Square's App Marketplace has paused new listings and its community forbids unprompted promotion, so ideas 2 and 3 rely on search ads alone; Google Business Profile API access (idea 4) was reported stalled for weeks in 2026 developer threads. Holiday Pre-Order Page cannot be built in time for Christmas 2026; its test runs now and the build targets the Valentine's Day to Easter seasons."
+  }
+}

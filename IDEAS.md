@@ -690,3 +690,8 @@
 | 2026-11-26 | Delivery Note Bill Check for Small Wholesalers | Small Business Ops | Multi-week | 17 | provisional |  |
 | 2026-11-26 | 1099 Ready List for Xero US Owners | Small Business Ops | Weekend MVP | 13 | provisional |  |
 | 2026-11-26 | Heard-As Check for Tagged PDFs | Developer Tool | Multi-week | 16 | provisional, wildcard |  |
+| 2026-11-27 | Bill Leak Check for Small Shopify Shops | Small Business Ops | Multi-week | 20 | provisional |  |
+| 2026-11-27 | Holiday Pre-Order Page for Square Food Sellers | Micro-SaaS | Multi-week | 19 | provisional |  |
+| 2026-11-27 | Blind Cash Close for Square Counters | Small Business Ops | Multi-week | 19 | provisional |  |
+| 2026-11-27 | Menu and Specials Desk for Small Restaurants | Micro-SaaS | Multi-week | 17 | provisional |  |
+| 2026-11-27 | Spoken Booking Check | Accessibility & Compliance | Multi-week | 15 | provisional, wildcard |  |
