@@ -1,0 +1,1626 @@
+{
+  "date": "2026-11-28",
+  "schemaVersion": 3,
+  "complete": true,
+  "ideas": [
+    {
+      "n": 1,
+      "title": "Retention Pay Check for Childcare Centres on Xero Payroll AU",
+      "slug": "retention-pay-check-for-childcare-centres-on-xero-payroll-au",
+      "category": "Small Business Ops",
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Small Business Operations",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": true,
+        "engine": true,
+        "shared": false,
+        "notes": {
+          "stateful": "Keeps each worker's award level and status, effective-dated retention rate tables, and a per-worker, per-period ledger of retention pay.",
+          "connected": "Reads draft pay runs, payslips, employees, pay items and timesheets through the Xero Payroll AU API with the centre's own login.",
+          "unattended": "A scheduled job checks each new draft pay run before it is posted and emails the person running pay when lines are missing, doubled or wrong.",
+          "engine": "Works out each eligible worker's expected Worker Retention Payment from the award level, not the actual rate, across ordinary hours, leave and leave loading, with juniors at the adult rate and staged award changes applied by date."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "email",
+        "scheduled",
+        "backend"
+      ],
+      "buildPlan": [
+        {
+          "n": 1,
+          "title": "Connect and check one pay run",
+          "delivers": "Sign in, connect the Xero demo company, read the latest draft pay run, set one worker's award level and see expected against actual retention pay on ordinary hours.",
+          "acceptance": "Deployed; a missing retention line in the demo company is flagged."
+        },
+        {
+          "n": 2,
+          "title": "Rate tables and worker set-up",
+          "delivers": "Effective-dated retention rate tables for the eight award levels, junior at the adult rate, over-award and ineligible staff, CSV import of worker levels.",
+          "acceptance": "Tests show the right rate for each period across an award step and the adult rate for a junior."
+        },
+        {
+          "n": 3,
+          "title": "Full checks",
+          "delivers": "Leave and leave loading, a configurable overtime rule, duplicate detection (template plus timesheet) and a wrong-rate tolerance.",
+          "acceptance": "Ten test scenarios pass, including the 'allocated twice' case."
+        },
+        {
+          "n": 4,
+          "title": "Unattended alerts",
+          "delivers": "A scheduled poll for new draft pay runs, Xero token refresh and an email summary of issues.",
+          "acceptance": "Exactly one email per new draft with issues, and none for a clean draft."
+        },
+        {
+          "n": 5,
+          "title": "Ledger and reconciliation pack",
+          "delivers": "A per-worker, per-period ledger and a CSV pack of hours, retention pay and super on it, against funding received as entered by the centre.",
+          "acceptance": "The pack's totals equal the posted payslip lines for a test quarter."
+        },
+        {
+          "n": 6,
+          "title": "Polish",
+          "delivers": "A plain README for a centre owner or bookkeeper, phone layout, an accessibility pass, a bookkeeper's switcher between centres and a walkthrough test.",
+          "acceptance": "The walkthrough passes at phone width and axe reports no serious issues."
+        }
+      ],
+      "summary": "For owners and bookkeepers of Australian long day care and OSHC services on Xero Payroll AU: a check of every draft pay run for the Worker Retention Payment, and a ledger to reconcile it against funding.",
+      "public": {
+        "summary": "Check every pay run for the childcare retention payment before you post it, and keep the record you need for funding reviews.",
+        "problem": "Your educators' retention payment has to sit on its own pay line, apply to leave as well as hours, and change every time the award steps up. Your payroll software has no feature for it, so you set it up by hand and hope nothing is missed, doubled or out of date.",
+        "forWhom": "Owners, directors and bookkeepers of long day care and outside-school-hours care services that run payroll in Xero.",
+        "benefits": [
+          "Missing, doubled or wrong retention lines caught before pay day",
+          "Rates kept current through each award step",
+          "Leave and leave loading included automatically",
+          "A ready reconciliation for funding reviews",
+          "No need to move your payroll to a new system"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "The retention payment 'must be separate from the award rate and it applies to normal hours, any leave, any leave loading'; payroll software has no feature for it, so bookkeepers keep it in a spreadsheet 'every payroll', Xero users find 'the WRP is allocated twice', and since 1 March 2026 the amount for each of the eight award levels changes at every staged award increase.",
+      "description": "The app connects to Xero Payroll AU and reads each draft pay run before it is posted. It works out each eligible worker's Worker Retention Payment from their award level (not their actual rate), covering ordinary hours, leave and leave loading, applying the adult rate to juniors and excluding head-office and administration staff, using effective-dated rate tables that follow each award step. It flags missing, doubled and wrong-rate lines and emails the person running pay. After posting it keeps a per-worker, per-period ledger and builds a reconciliation pack of retention pay against funding received for funding reviews.",
+      "targetCustomer": "Owners, directors, office managers and outside bookkeepers of single-site and small-group long day care and outside-school-hours care services in Australia that run Xero Payroll AU and take the ECEC Worker Retention Payment; family day care and in-home care only where they employ their educators.",
+      "buyer": "The centre owner or director, or their outside bookkeeper, by card.",
+      "whyNow": "The Worker Retention Payment was extended to 30 June 2028, with family day care and in-home care added (The Sector, 2026-06-18). The Children's Services Award moved to eight levels on 1 March 2026 and the payment now absorbs staged award increases, so each level's amount changes at every step (Aussie Childcare Network, 2025-12-19; OIA impact analysis, 2026-03-16). Xero's request for retention pay items is still 'Gaining Support' and unbuilt.",
+      "founderFit": "Nothing beyond building it alone.",
+      "problemEvidence": [
+        {
+          "url": "https://community.myob.com/discussions/staffing_and_payroll/allowance-for-worker-retention-grant/896250/replies/897228",
+          "source": "community.myob.com",
+          "author": "poster A",
+          "date": "2025-11-24",
+          "kind": "complaint",
+          "summary": "Bookkeeper for a childcare client: the uplift must sit apart from the award rate and apply to hours, leave and leave loading, at the adult rate for juniors; enters the amounts into a spreadsheet every payroll; MYOB staff say to manage it manually."
+        },
+        {
+          "url": "https://community.myob.com/discussions/staffing_and_payroll/early-childhood-retention-grant/904785",
+          "source": "community.myob.com",
+          "author": "poster B",
+          "date": "2025-11-25",
+          "kind": "complaint",
+          "summary": "Payroll staff at a childcare centre set up a 10% allowance to assist with acquittal and ask whether anyone has worked through it; MYOB staff suggest consulting an accountant."
+        },
+        {
+          "url": "https://productideas.xero.com/forums/967118-payroll-expenses/suggestions/49497542-au-payroll-ecec-worker-retention-grant",
+          "source": "productideas.xero.com",
+          "author": "poster C",
+          "date": "2025-09-16",
+          "kind": "complaint",
+          "summary": "Xero request for retention pay items (17 votes, 'Gaining Support' since 2026-03-12, not built); a payroll user's workaround allowance was 'allocated twice' and the extra line had to be deleted by hand."
+        },
+        {
+          "url": "https://thesector.com.au/article/Worker%20Retention%20Payment%20Extended%20to%202028%3A%20What%20Early%20Childhood%20Providers%20Need%20to%20Know",
+          "source": "thesector.com.au",
+          "author": "unknown",
+          "date": "2026-06-18",
+          "kind": "mandate",
+          "summary": "Trade news: the Worker Retention Payment is extended to 30 June 2028, family day care and in-home care become eligible, minimum amounts rise with the award, and providers may need to review payroll."
+        },
+        {
+          "url": "https://oia.pmc.gov.au/published-impact-analyses-and-reports/early-childhood-education-and-care-worker-retention-payment",
+          "source": "oia.pmc.gov.au",
+          "author": "unknown",
+          "date": "2026-03-16",
+          "kind": "mandate",
+          "summary": "Government impact analysis: the above-award requirement is reduced as award increases take effect, so the payment's amount per level changes over time; sector compliance costs estimated."
+        },
+        {
+          "url": "https://www.hcamag.com/au/specialisation/employment-law/childcare-pay-rise-is-settled-but-payroll-compliance-risk-isnt/587927",
+          "source": "hcamag.com",
+          "author": "unknown",
+          "date": "2026-08-31",
+          "kind": "mandate",
+          "summary": "Trade press quoting a payroll vendor's specialist: the payment should sit on its own payslip line and be recalculated whenever award rates move; staff move to an eight-level structure (vendor-sourced)."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Xero Payroll AU (native)",
+          "url": "https://productideas.xero.com/forums/967118-payroll-expenses/suggestions/49497542-au-payroll-ecec-worker-retention-grant",
+          "price": "included in Xero plans",
+          "gap": "No retention pay items; centres set up a custom earnings rate per level by hand, with no check for missing, doubled or out-of-date lines and no reconciliation."
+        },
+        {
+          "name": "Employment Hero Payroll",
+          "url": "https://employmenthero.com/comparison-table-payroll/",
+          "price": "Payroll Standard from $80 a month minimum; Premium from $100 a month minimum",
+          "gap": "Has retention pay categories and award rules, but the centre must move its payroll off Xero."
+        },
+        {
+          "name": "foundU (Citation Group)",
+          "url": "https://www.foundu.com.au/industries/childcare",
+          "price": "unknown",
+          "gap": "A full workforce and payroll platform that claims to manage the payment in one place; its Xero app sends journals only, so it too means switching payroll."
+        },
+        {
+          "name": "Outsourced childcare payroll (Accounts Advantage)",
+          "url": "https://accountsadvantage.com.au/bookkeeping-faq/",
+          "price": "fixed monthly fee, amount unknown",
+          "gap": "A service, not a self-serve check; the centre hands over payroll."
+        },
+        {
+          "name": "MYOB (native)",
+          "url": "https://www.myob.com/support/myob-business/product-account/myob-business-release-notes",
+          "price": "included in MYOB plans",
+          "gap": "No feature in releases to 25 November 2026; staff advise a zero-rate wage category filled by hand each pay run; its API exposes no pay runs."
+        }
+      ],
+      "keyFeatures": [
+        "Xero Payroll AU connection: draft pay runs, payslips, employees, pay items, timesheets",
+        "Worker set-up by award level, junior, over-award or ineligible, with effective-dated rate tables",
+        "Pre-posting check of expected against actual retention pay per worker",
+        "Email alert when a draft pay run has missing, doubled or wrong lines",
+        "Per-worker ledger and reconciliation pack for funding reviews",
+        "A bookkeeper's view across several centres"
+      ],
+      "mvpScope": {
+        "features": [
+          "Xero connection",
+          "Worker set-up and rate tables",
+          "Pre-posting check with alerts",
+          "Ledger and CSV reconciliation pack"
+        ],
+        "outOfScope": [
+          "Writing to payslips",
+          "MYOB (by CSV later)",
+          "General award interpretation",
+          "Workplace instrument and fee-cap compliance",
+          "Funding claims and STP"
+        ],
+        "buildEstimate": "about 6 build days, plus a rules-verification day at each award step"
+      },
+      "techStack": "Static front end; the shared Supabase project for sign-in and per-organisation data under row-level security; backend-hub on Render for Xero OAuth 2.0, API calls and the calculation engine; scheduled jobs and transactional email; no LLM.",
+      "pricing": {
+        "model": "Monthly subscription per service, with a bookkeeper plan",
+        "pricePoint": "A$39 a month per service, or A$99 a month for a bookkeeper with up to five services (untested)",
+        "rationale": "Below the cost of moving payroll to Employment Hero (from $80 a month) and kept modest because the government estimates the sector's compliance cost per service as small and the programme ends on 30 June 2028."
+      },
+      "revenueSketch": "Estimate only: 40 services at A$39 a month is about A$1,560 a month after 6 to 9 months; the number of services on Xero Payroll AU is unknown and the programme's end on 30 June 2028 caps lifetime value.",
+      "distribution": "Self-serve search: a 'check my pay-run set-up' waitlist page and a small search-ad test on terms such as 'worker retention payment Xero'. Xero's community guidelines bar 'advertisements, promotions, or posts of a commercial nature' (https://www.xero.com/au/support/community-guidelines/). Listing on the Xero App Store needs the Plus partner tier at A$245 a month (https://developer.xero.com/pricing). MYOB community and childcare owners' groups: rule unknown: check before posting.",
+      "validationTest": {
+        "method": "A landing page with a 'check my pay-run set-up' waitlist and an 'A$39 per service per month: reserve' price button, a free keyword-volume check, then three weeks of Australia-only search ads from early December 2026, when the next round of the payment is said to begin. A free calculator is published only once the rate tables are verified. No outreach and no posts in any evidence thread.",
+        "successCriteria": "At least 300 visits, at least 15 sign-ups giving a centre or bookkeeper role, and at least 5 price-button clicks.",
+        "cost": "About A$200 in ads, a domain and one build day."
+      },
+      "moat": "Weak. Maintained, effective-dated rate tables, the per-worker ledger history and a bookkeeper's multi-centre workflow give some switching cost; Xero could ship pay items.",
+      "compliance": [
+        "Australian Privacy Act 1988 and the Australian Privacy Principles, with the Notifiable Data Breaches scheme; plan as covered, since the employee-records exemption is the employer's, not a processor's",
+        "Request the minimum Xero scopes; never store tax file numbers or tax declaration fields",
+        "Juniors' dates of birth are minors' personal information: keep to the minimum",
+        "Fair Work record-keeping and grant evidence remain the employer's duty; show the working on every flag and a 'not payroll or legal advice' notice",
+        "Xero developer platform terms",
+        "Card payments through Stripe; GST on B2B digital services"
+      ],
+      "risks": [
+        {
+          "risk": "The programme ends on 30 June 2028 and the payment per level shrinks as award increases absorb it.",
+          "mitigation": "Keep the build small, price monthly, and widen later to childcare award-change checks."
+        },
+        {
+          "risk": "Rate tables and eligibility rules could not be read from education.gov.au this run.",
+          "mitigation": "Verify against the grant guidelines before launch and at each award step; show the working on every line."
+        },
+        {
+          "risk": "Department-funded free support (peak bodies offering payroll help) or a future government system that collects hours and classifications could absorb the need.",
+          "mitigation": "Run the validation test first; position the check and ledger as complements to that help."
+        },
+        {
+          "risk": "Xero ships native retention pay items.",
+          "mitigation": "The pre-posting check and reconciliation still add value; keep switching cost low."
+        },
+        {
+          "risk": "A wrong flag could lead to underpayment.",
+          "mitigation": "Read-only flags with visible calculations and a human decision on every change."
+        }
+      ],
+      "scores": {
+        "pain": 3,
+        "willingnessToPay": 3,
+        "reachability": 3,
+        "competitiveGap": 3,
+        "feasibility": 4,
+        "complianceBurden": 3,
+        "total": 19
+      },
+      "scoreRationale": {
+        "pain": "Complaints from several distinct payroll users and a bookkeeper, but the newest is 2025-11-25 (https://community.myob.com/discussions/staffing_and_payroll/early-childhood-retention-grant/904785) and the 2026 items are news and one vendor's commentary (https://www.hcamag.com/au/specialisation/employment-law/childcare-pay-rise-is-settled-but-payroll-compliance-risk-isnt/587927).",
+        "willingnessToPay": "A paid plan does the task for centres that switch payroll (https://employmenthero.com/comparison-table-payroll/); no paid jobs found, and the government estimates compliance costs per service as small (https://oia.pmc.gov.au/published-impact-analyses-and-reports/early-childhood-education-and-care-worker-retention-payment).",
+        "reachability": "Self-serve search only; Xero App Store listing needs the Plus tier (https://developer.xero.com/pricing) and the owner's stated network does not reach childcare centres.",
+        "competitiveGap": "Nothing native in Xero (https://productideas.xero.com/forums/967118-payroll-expenses/suggestions/49497542-au-payroll-ecec-worker-retention-grant); centres willing to switch are served by Employment Hero and foundU (https://www.foundu.com.au/industries/childcare); the eight-level award makes the manual set-up easier.",
+        "feasibility": "The Xero Payroll AU API exposes pay runs, payslips and pay items (https://xeroapi.github.io/xero-python/v1/payroll-au/index.html); award level is not an API field, so workers are set up by hand, and rules change at each award step (https://aussiechildcarenetwork.com.au/news/childcare-news/worker-retention-payment-update-award-review-payments-processed-key-deadlines).",
+        "complianceBurden": "Employee pay data including juniors' dates of birth and grant evidence (https://community.myob.com/discussions/staffing_and_payroll/allowance-for-worker-retention-grant/896250/replies/897228); a wrong flag means an underpayment."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Rescored 20 to 19 (complianceBurden 4 to 3) and re-scoped to long day care and OSHC services on Xero Payroll AU, MYOB later. No free or native pre-posting check or per-worker ledger exists for a centre staying on Xero: Xero's request is still 'Gaining Support' with no customer comment since 2025-09-16, MYOB's answer is a manual zero-rate category, no Department or peak-body calculator was found, and Xplor and Tanda show no retention feature; Employment Hero, foundU and OWNA cover it only if the centre switches payroll. The 2026 evidence is not independent buyer pain: the foundU blog and the HCAMag article quoting a foundU specialist are one vendor, and The Sector reports the extension without complaints. Since the 2025 complaints, the award moved to eight levels on 1 March 2026 and the payment absorbs staged increases, so the remaining pain is leave lines, duplicates, keeping amounts current and funding reconciliation. Distinct from the published Pay Rate Scheduler and Fair Work Date Watch, which put award-rate calculation out of scope."
+      },
+      "gateGap": {
+        "missing": [
+          "total 19 is below 22",
+          "pain 3 is below 4",
+          "no complaint dated within 90 days: the newest buyer post is 2025-11-25",
+          "the 2026 items are news, a government analysis and one vendor's commentary",
+          "no spend evidence: no paid jobs",
+          "rate tables and the rules from 1 December 2026 are unverified (education.gov.au answered 503)"
+        ],
+        "closedBy": "A fetched buyer complaint after 2026-08-30 about retention lines in Xero pay runs (the December 2026 change is the likely trigger) would lift pain to 4; the ad test meeting its criteria (300 visits, 15 role-qualified sign-ups, 5 price-button clicks) would support reachability 4. CompetitiveGap or willingnessToPay would also need to rise to reach 22."
+      },
+      "inspiredBy": "https://community.myob.com/discussions/staffing_and_payroll/allowance-for-worker-retention-grant/896250/replies/897228"
+    },
+    {
+      "n": 2,
+      "title": "CIC Funder Shortlist and Bid Calendar",
+      "slug": "cic-funder-shortlist-and-bid-calendar",
+      "category": "Micro-SaaS",
+      "smallBusiness": true,
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Nonprofit Operations",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": true,
+        "engine": true,
+        "shared": false,
+        "notes": {
+          "stateful": "Each organisation keeps its profile, saved shortlist, confirmed deadlines and bid statuses and comes back to them through the year.",
+          "connected": "Pulls openly licensed 360Giving publisher files listed in the registry, and publishes a calendar feed that Google Calendar or Outlook subscribes to.",
+          "unattended": "A weekly job refreshes the grants data and a daily job sends deadline reminders without the user opening the app.",
+          "engine": "Works out, from about 1.5 million awarded-grant records, how many grants each funder made to CICs (by name and company number), its award-size range, its awards in the user's local authority and the months its awards cluster."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "email",
+        "scheduled",
+        "backend"
+      ],
+      "buildPlan": [
+        {
+          "n": 1,
+          "title": "Profile and seed shortlist",
+          "delivers": "Sign in, enter legal form, local authority and themes, and see a shortlist served from a seed funder table built offline from two or three publishers' files.",
+          "acceptance": "A new account entering 'CIC limited by shares, Lambeth, youth' sees at least 5 funders, each with a count of grants to CICs and links to example grants; deployed."
+        },
+        {
+          "n": 2,
+          "title": "Open-data pipeline",
+          "delivers": "A backend-hub job that reads the 360Giving registry, keeps openly licensed files, builds funder-level figures, loads them weekly and shows an attribution page.",
+          "acceptance": "Every openly licensed publisher is loaded with its licence recorded; the job logs counts; the attribution page lists each publisher; share-alike files are excluded."
+        },
+        {
+          "n": 3,
+          "title": "Ranking and saved shortlist",
+          "delivers": "15 to 20 ranked funders with a 'why this funder' panel, save to shortlist and CSV export.",
+          "acceptance": "The same profile always gives the same list, and every row links to at least one awarded grant to a CIC or says none was found."
+        },
+        {
+          "n": 4,
+          "title": "Bid calendar and tracker",
+          "delivers": "User-confirmed or rolling deadlines, an internal deadline a month earlier, a materials checklist, a status flow and a calendar feed.",
+          "acceptance": "Google Calendar subscribes to the feed and shows both the internal and the real date for a test bid."
+        },
+        {
+          "n": 5,
+          "title": "Reminders and payment",
+          "delivers": "Reminder emails 30, 14 and 3 days before each internal deadline, Stripe checkout with tax, and free-tier limits.",
+          "acceptance": "A test account receives each reminder once, and a paid plan unlocks the calendar."
+        },
+        {
+          "n": 6,
+          "title": "Polish",
+          "delivers": "A plain README for a CIC director, phone layout, a keyboard and screen-reader pass, a privacy page and a walkthrough test.",
+          "acceptance": "A walkthrough test of the whole journey on a fresh account passes at phone width; axe reports no serious issues."
+        }
+      ],
+      "summary": "For directors of small UK community interest companies with no grants staff: a shortlist of funders that have actually funded CICs like theirs, plus a bid calendar with reminders.",
+      "public": {
+        "summary": "Find the funders that really fund community interest companies like yours, and never miss a bid deadline.",
+        "problem": "You run a small CIC and every grant search turns up funders that only accept registered charities. You end up paying someone to build a shortlist and a deadline calendar, or you keep it in your head and miss windows.",
+        "forWhom": "Directors and part-time fundraisers of small UK community interest companies.",
+        "benefits": [
+          "A shortlist of funders that have already funded CICs, with real examples",
+          "Funders that give in your area shown first",
+          "One calendar of every bid deadline, with your own earlier target date",
+          "Reminders before each deadline",
+          "A simple record of every bid and its outcome"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "Small UK CICs need 'a prioritised shortlist of 15 to 20 realistic UK funders… with deadlines, typical award sizes and eligibility', must 'check each one funds community interest companies', and want 'a funder calendar so we can plan the next 12 months of bids'; directors pay freelancers for it because most funder searches assume a registered charity.",
+      "description": "The director enters the CIC's legal form (limited by guarantee or by shares), local authority, themes, income and typical request. The app ranks 15 to 20 funders from openly licensed 360Giving records of grants already awarded, showing for each how many grants it made to CICs (with links to examples), its typical award size, its awards in the CIC's area and the months its awards cluster, labelled as a hint and never as a deadline. The user confirms each funder's real deadline from the funder's own page or marks it rolling; the app sets an internal deadline a month earlier, keeps a materials checklist, sends reminders and publishes a calendar feed. A light status tracker follows each bid from research to decision.",
+      "targetCustomer": "Directors and part-time fundraising leads of small UK community interest companies, especially CICs limited by shares, that are not registered charities and have no grants staff.",
+      "buyer": "The CIC's director, paying by card from the operating budget.",
+      "whyNow": "IVAR's 2026 survey of 1,200 charities found 69% significantly affected by narrowing eligibility criteria and 61% seeing funders pause or close (Civil Society, 2026-05-21). Open awarded-grant data now holds about 1.57 million grants from 356 funders on GrantNav. Tools built on the Charity Commission register (Localgiving's matching) and charity-only free tiers (Grant Genie) leave CICs limited by shares outside.",
+      "founderFit": "Nothing beyond building it alone.",
+      "problemEvidence": [
+        {
+          "url": "https://www.freelancer.com/api/projects/0.1/projects/40773125/?full_description=true",
+          "source": "freelancer.com",
+          "author": "poster A",
+          "date": "2026-10-17",
+          "kind": "spend",
+          "summary": "Director of a youth-careers CIC in South London offered £750–1,500 for a shortlist of 15–20 UK funders checked for CIC eligibility, a 12-month funder calendar, a case for support and 2–3 applications; expired without a hire."
+        },
+        {
+          "url": "https://www.freelancer.com/api/projects/0.1/projects/40825919/?full_description=true",
+          "source": "freelancer.com",
+          "author": "poster B",
+          "date": "2026-11-19",
+          "kind": "spend",
+          "summary": "Newly registered London CIC (complementary-health clinic) offered £10–15 an hour, 40 hours a week, to research grants, meet deadlines and track the grant process; frozen without a hire."
+        },
+        {
+          "url": "https://www.freelancer.com/api/projects/0.1/projects/40796011/?full_description=true",
+          "source": "freelancer.com",
+          "author": "poster C",
+          "date": "2026-10-31",
+          "kind": "spend",
+          "summary": "UK community health and wellbeing project offered £250–750 for a grant writer with research skills to find suitable funders; no calendar asked for."
+        },
+        {
+          "url": "https://www.freelancer.com/api/projects/0.1/projects/40803140/?full_description=true",
+          "source": "freelancer.com",
+          "author": "poster D",
+          "date": "2026-11-04",
+          "kind": "spend",
+          "summary": "Charitable foundation (country not stated) offered $10–30 for a researched shortlist of grant-makers and a calendar of application windows, deadlines and required materials."
+        },
+        {
+          "url": "https://www.civilsociety.co.uk/news/charities-describe-applying-for-funding-as-soul-destroying-in-new-report.html",
+          "source": "civilsociety.co.uk",
+          "author": "unknown",
+          "date": "2026-05-21",
+          "kind": "complaint",
+          "summary": "Trade report of IVAR's survey of 1,200 charities: applying is 'soul-destroying', the search is 'like scanning an ocean for a single life raft', 69% hit by narrowing eligibility; aggregated respondents, no deadline or CIC detail."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Plinth (free Community plan)",
+          "url": "https://www.plinth.org.uk/pricing",
+          "price": "£0 'Free forever' Community fundraising plan; paid plans above",
+          "gap": "Tracks every grant applied for with deadline and reporting reminders and claims eligibility checks and capped funder research; whether CICs can sign up and how deep the funder research goes is not stated, and nothing shows grants already made to CICs."
+        },
+        {
+          "name": "Localgiving Grant Success Tier",
+          "url": "https://localgiving.org/monthly-payments",
+          "price": "£43 a month or £516 a year",
+          "gap": "AI matching from 360Giving data with a weekly email of matches, but the profile comes from the Charity Commission register and membership excludes companies not limited by guarantee, so CICs limited by shares are left out."
+        },
+        {
+          "name": "Open 4 Community (Idox) council portals",
+          "url": "https://grantfinder.co.uk/o4c/",
+          "price": "free to groups in the 54 subscribing council areas (inferred from the council framing)",
+          "gap": "Eligibility-aware search with deadlines and weekly alerts for CICs in those areas; no personal calendar, tracker or evidence of which funders have funded CICs."
+        },
+        {
+          "name": "Grantsights",
+          "url": "https://grantsights.com/blog/grants-for-community-interest-companies-uk",
+          "price": "UK community funder list US$29 one-off; Pro (US only) $49 a month",
+          "gap": "Already publishes each major funder's share of grants to CICs from 360Giving data (2026-10-17) and sells a full tracker and calendar in the US; no UK tracker or calendar yet."
+        },
+        {
+          "name": "Grant Genie",
+          "url": "https://www.grant-genie.ai/?join=true",
+          "price": "£59 + VAT every 4 weeks or £499 + VAT a year; free tier only for small registered charities",
+          "gap": "Search with bookmarks and application status; no deadline calendar or legal-form matching described, and CICs cannot use the free tier."
+        },
+        {
+          "name": "Charity Excellence Funding Finder",
+          "url": "https://www.charityexcellence.co.uk/free-grant-funding-finder-directory/",
+          "price": "free",
+          "gap": "Has a 'Social Enterprise & CICs' category and amount filter; no deadlines, calendar, reminders or saved shortlist described."
+        },
+        {
+          "name": "Funding Eye",
+          "url": "https://fundingeye.substack.com/about",
+          "price": "from £15 a month",
+          "gap": "A monthly newsletter of CIC grant opportunities; no profile matching, calendar or tracker."
+        }
+      ],
+      "keyFeatures": [
+        "Profile by legal form (CIC by guarantee or by shares), local authority, themes and income",
+        "Shortlist of 15–20 funders with counts and examples of grants already made to CICs",
+        "Award-month pattern per funder, shown as a hint, never as a deadline",
+        "12-month bid calendar with internal deadlines, materials checklist and calendar feed",
+        "Reminder emails and a simple bid status tracker",
+        "CSV and PDF export for directors and boards"
+      ],
+      "mvpScope": {
+        "features": [
+          "Profile",
+          "Ranked shortlist from 360Giving data with CIC counts and example grants",
+          "User-confirmed deadline calendar with feed",
+          "Reminder emails and status tracker",
+          "CSV export"
+        ],
+        "outOfScope": [
+          "US 990-PF data",
+          "Automatic deadline extraction",
+          "Bid writing",
+          "Government grants (GOV.UK Find a grant covers them)",
+          "Funders that do not publish to 360Giving except by manual entry"
+        ],
+        "buildEstimate": "about 6 build days (6 milestones)"
+      },
+      "techStack": "Static front end; the shared Supabase project for sign-in and per-organisation data; backend-hub on Render for the weekly 360Giving pipeline and the calendar (.ics) feed; scheduled jobs and transactional email for reminders; no LLM in the MVP.",
+      "pricing": {
+        "model": "One-off shortlist-and-calendar pack, with an optional subscription for reminders and tracking",
+        "pricePoint": "£29 one-off pack; £12 a month or £99 a year",
+        "rationale": "Matches Grantsights' US$29 UK list head to head and sits below Funding Eye (£15 a month), Localgiving (£43 a month) and Grant Genie (£59 every 4 weeks); a fraction of the £750–1,500 one CIC offered a freelancer for this and more."
+      },
+      "revenueSketch": "Estimate only: 150 one-off packs at £29 plus 40 annual plans at £99 in the first year is about £8,300. Assumes search-ad acquisition under £15 per sale and that CICs outside Charity Commission tools convert; no market size was verified.",
+      "distribution": "Self-serve Google Search ads and landing pages built from open data (for example 'funders that have funded CICs in Lambeth'); Grantsights already competes for this kind of content. UK Business Forums staff wrote that members must answer the question asked before mentioning their business and must not post a sales brochure (https://www.ukbusinessforums.co.uk/threads/what-constitutes-self-promotion.416063/latest). CIC Association, Mumsnet and council funding pages: rule unknown: check before posting. Freelancer.com holds the evidence threads and is not used.",
+      "validationTest": {
+        "method": "A landing page ('Which funders actually fund CICs? Plus a 12-month bid calendar') with one hand-built sample shortlist for a London borough taken from GrantNav data, a waitlist, a '£29 pack' and a '£12 a month' price button that say 'launching soon', and one optional question for ad visitors only: 'what do you use now?'. Traffic from Google Search ads on 'grants for community interest companies' and 'funders that fund CICs', run until 400 visitors. No outreach, no posting in any community, and no contact with anyone in the evidence.",
+        "successCriteria": "Over at least 400 visitors: 8% or more join the waitlist, 2% or more click a price button, and fewer than half name a free tool (Plinth, Charity Excellence, a council portal) they already use.",
+        "cost": "About £150–250 in ads, depending on cost per click; the page runs on the existing platform."
+      },
+      "moat": "Weak. Figures computed from open data can be rebuilt, and Grantsights already publishes CIC shares; the only edges are user-confirmed deadlines, CIC-specific landing pages and a low price.",
+      "compliance": [
+        "UK GDPR and the Data Protection Act 2018 for accounts and reminder emails (privacy notice, processor terms, region of the shared project)",
+        "PECR: reminders are service emails; marketing email needs consent",
+        "Data licences: CC BY 4.0, OGL 3.0 and CC0 need attribution per publisher; exclude CC BY-SA files or publish derived data under the same licence; do not use the personal-credential 360Giving Datastore",
+        "Accessibility: WCAG 2.2 AA as good practice and Equality Act 2010 reasonable adjustments",
+        "UK VAT on digital services for a seller outside the UK (Stripe Tax or a merchant of record)"
+      ],
+      "risks": [
+        {
+          "risk": "Open data carries no deadlines, so the calendar depends on users confirming dates.",
+          "mitigation": "Make confirmation one click from the funder's page, show award months only as a hint, and never present a guessed date as fact."
+        },
+        {
+          "risk": "Only 356 funders publish to 360Giving, a fraction of UK trusts.",
+          "mitigation": "Say so on the page, allow manual funder entries and focus on large funders that already fund CICs."
+        },
+        {
+          "risk": "Grantsights ships a UK tracker and calendar, or Plinth's free plan proves to cover CICs well.",
+          "mitigation": "Run the validation test before building and keep the build to the CIC-specific shortlist."
+        },
+        {
+          "risk": "Buyers want the writing done, not a tool (the paid jobs were grant-writer hires).",
+          "mitigation": "Lead with the one-off pack and measure price-button clicks before building the subscription."
+        },
+        {
+          "risk": "CIC detection from free-text organisation types and names misses CICs that use trading names.",
+          "mitigation": "Use company numbers where present, show 'funded N CICs' with links, and never label a funder 'eligible'."
+        }
+      ],
+      "scores": {
+        "pain": 3,
+        "willingnessToPay": 3,
+        "reachability": 3,
+        "competitiveGap": 1,
+        "feasibility": 4,
+        "complianceBurden": 5,
+        "total": 19
+      },
+      "scoreRationale": {
+        "pain": "One aggregated, independent complaint about searching for eligible funders, 191 days old and without deadline or CIC detail (https://www.civilsociety.co.uk/news/charities-describe-applying-for-funding-as-soul-destroying-in-new-report.html); no complaint within 90 days.",
+        "willingnessToPay": "Paid freelance jobs for this work within 90 days, but they buy grant writing and only one UK job names the shortlist and calendar, and it expired unhired (https://www.freelancer.com/api/projects/0.1/projects/40773125/?full_description=true); a paid CIC-list newsletter exists (https://fundingeye.substack.com/about).",
+        "reachability": "Self-serve search ads and open-data landing pages only, untested and contested by Grantsights' CIC content (https://grantsights.com/blog/grants-for-community-interest-companies-uk); the owner's stated network does not reach CICs.",
+        "competitiveGap": "Each part is free somewhere: tracker and deadline reminders on Plinth's free plan (https://www.plinth.org.uk/pricing), CIC-eligible search with deadlines in 54 council portals (https://grantfinder.co.uk/o4c/), a CIC category in Charity Excellence; only the combination for CICs outside Charity Commission based tools is left.",
+        "feasibility": "Openly licensed data with a public registry (https://registry.threesixtygiving.org/data.json); CIC type must be inferred from names and company numbers (https://grantnav.threesixtygiving.org/org/GB-COH-10058631); about 6 build days.",
+        "complianceBurden": "Organisational data only, with licence attribution and share-alike handling (https://grantnav.threesixtygiving.org/about states CC BY 4.0)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Rescored 21 to 19 (willingnessToPay 4 to 3, competitiveGap 2 to 1) and re-scoped from small charities and CICs to CICs only. All seven freelancer jobs are grant-writer hires and six show no award; in the UK only one names the shortlist and calendar as deliverables. Plinth's free Community plan offers grant tracking with deadline reminders and claimed eligibility checks; Idox's Open 4 Community council portals give CIC-eligible search with deadlines and alerts in 54 areas; Grantsights published funders' CIC shares from 360Giving data on 2026-10-17 and sells a full tracker and calendar in the US. The remaining gap is narrow: CICs, especially those limited by shares, fall outside Localgiving's Charity Commission based matching and Grant Genie's charity-only free tier. GrantNav's CIC organisation type is an unverified addition, so CICs must be found by name and company number. Not killed: no single free product is confirmed to do the whole job for a CIC, and no rejection rule applies."
+      },
+      "gateGap": {
+        "missing": [
+          "total 19 is below 22",
+          "pain 3 is below 4: the only complaint is an aggregated survey report from 2026-05-21",
+          "no complaint dated within 90 days",
+          "fewer than 2 independent complaint items",
+          "the willingness-to-pay evidence buys grant writing, not a tool, and six of seven jobs show no hire"
+        ],
+        "closedBy": "The landing-page test: 8% waitlist and 2% price-button clicks over 400 visitors, with few naming a free tool, would support willingnessToPay 4; a public, dated complaint from a CIC director within 90 days, found by search and never by contact, would support pain 4. Even then competitiveGap must rise to 2 (showing Plinth's free plan and council portals give CICs no funder shortlist) to reach 22."
+      },
+      "inspiredBy": "https://www.freelancer.com/api/projects/0.1/projects/40773125/?full_description=true"
+    },
+    {
+      "n": 3,
+      "title": "Multi-Lane Party Booking for Square Venues",
+      "slug": "multi-lane-party-booking-for-square-venues",
+      "category": "Small Business Ops",
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Small Business Operations",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": true,
+        "engine": true,
+        "shared": true,
+        "notes": {
+          "stateful": "Keeps the venue's lanes, holds, bookings and balances due, and the guest records written to Square.",
+          "connected": "Uses the venue's own Square account through OAuth: Web Payments SDK, Payments, Orders and Customers APIs.",
+          "unattended": "The public booking page takes paid bookings around the clock; scheduled jobs refresh Square tokens, release expired holds and send reminders.",
+          "engine": "Allocates N free, preferably adjacent, lanes for a party size, duration and buffers, with holds that survive simultaneous checkouts (a database exclusion constraint).",
+          "shared": "Several front-desk staff and the public booking page act on one lane grid."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "email",
+        "scheduled",
+        "backend"
+      ],
+      "buildPlan": [
+        {
+          "n": 1,
+          "title": "Lanes and a booking page",
+          "delivers": "Venue sign-in, lane and experience set-up, a public page that books one or more lanes without payment, and a read-only day grid.",
+          "acceptance": "Two simultaneous bookings for the last lane give exactly one success; an 8-person party gets 2 lanes; deployed."
+        },
+        {
+          "n": 2,
+          "title": "Square connect",
+          "delivers": "Square OAuth on backend-hub, encrypted tokens, a location picker and a weekly token refresh.",
+          "acceptance": "A sandbox seller connects and disconnects, and the refresh run is logged."
+        },
+        {
+          "n": 3,
+          "title": "Payments into the venue's Square account",
+          "delivers": "The Web Payments SDK form, full prepayment or a deposit through CreatePayment with an idempotency key, a 10-minute lane hold and refund on cancel.",
+          "acceptance": "The payment appears in the sandbox seller's dashboard; an abandoned hold is released after 10 minutes."
+        },
+        {
+          "n": 4,
+          "title": "Write into Square and email",
+          "delivers": "Customer upsert, a paid order with fulfilment for each payment, the balance due shown on the grid for staff to ring up as a normal POS sale, and confirmation and reminder emails.",
+          "acceptance": "The paid order and customer are visible in the sandbox seller's account, and the emails arrive."
+        },
+        {
+          "n": 5,
+          "title": "Front-desk grid",
+          "delivers": "Move and resize bookings, walk-in blocks, check-in, buffers and opening hours on a tablet-first grid.",
+          "acceptance": "Moving a 2-lane booking creates no conflict, and a second device sees the change within 5 seconds."
+        },
+        {
+          "n": 6,
+          "title": "Polish",
+          "delivers": "A plain README for the venue owner (set-up, Square connect, refunds), WCAG 2.1 AA on the booking page, the mobile booking flow and a scripted sandbox walkthrough.",
+          "acceptance": "axe reports no violations on the booking page and the walkthrough passes."
+        }
+      ],
+      "summary": "For axe-throwing, bowling, darts and karaoke venues that run Square: one online booking for a party that needs several lanes, paid into the venue's own Square account.",
+      "public": {
+        "summary": "Let a big group book two or three lanes in one go online, and get paid straight into your Square account.",
+        "problem": "When a party of eight books online, your booking system can only hold one lane, so you split the booking by hand or set lanes up as pretend staff. You want to stay on Square for your till, but the booking tools that handle groups want you to move your payments elsewhere.",
+        "forWhom": "Owners of axe-throwing, bowling, darts, shuffleboard and karaoke venues that use Square.",
+        "benefits": [
+          "Groups book all the lanes they need in one booking",
+          "Only times with enough free lanes are shown",
+          "Deposits and payments land in your Square account",
+          "A simple lane-by-time grid for the front desk",
+          "Reminders that cut no-shows"
+        ],
+        "audience": "small-business"
+      },
+      "problemStatement": "A party of 6 to 10 needs two lanes, but Square Appointments books only 'one of these assigned resources' per appointment, so lane venues split parties by hand or set lanes up as team members; one axe venue owner paying for Square's resources feature wrote 'If I'm having to pay $150 for only this feature, it should work correctly' and that no other booking system compares to Square POS.",
+      "description": "A booking page and front-desk lane grid for lane and room venues that run Square. A guest picks party size, duration and time and sees only slots where enough lanes are free; the lanes are held during checkout, and the full price or a deposit is charged through the venue's own Square account. Each payment is written into Square as a paid order with a customer record; a deposit's balance shows on the lane grid for staff to ring up as a normal Square sale, because Square only shows fully paid API orders at the point of sale. Staff run the day from a lane-by-time grid beside Square POS.",
+      "targetCustomer": "Owners of independent US axe-throwing (the lead segment), bowling and duckpin, darts, shuffleboard, karaoke-room and similar venues with 3 to 12 lanes or rooms that run Square POS and want to stay on it; golf simulators are excluded.",
+      "buyer": "The venue owner, by card.",
+      "whyNow": "An axe venue owner reported that his booking-and-POS vendor closed on 2026-09-17 (one owner's word, unverified), and Square's product updates from August to December 2026 added booking add-ons but nothing for multiple resources; its API still treats a booking's resources as read-only.",
+      "founderFit": "Nothing beyond building it alone.",
+      "problemEvidence": [
+        {
+          "url": "https://community.squareup.com/t5/Feature-Requests/Proper-Resource-Allocation-Not-useful-for-150-a-month/idi-p/848547",
+          "source": "community.squareup.com",
+          "author": "poster A",
+          "date": "2026-08-24",
+          "kind": "complaint",
+          "summary": "Axe-throwing venue owner with 6 lanes: a 6 to 10 guest booking needs two resources but Square books one; 'If I'm having to pay $150 for only this feature, it should work correctly'; 2 kudos, status Open."
+        },
+        {
+          "url": "https://community.squareup.com/t5/Feature-Requests/Proper-Resource-Allocation-Not-useful-for-150-a-month/idc-p/848858#M19240",
+          "source": "community.squareup.com",
+          "author": "poster A",
+          "date": "2026-09-01",
+          "kind": "complaint",
+          "summary": "Same owner, same thread: finding another booking system is easy, finding one that pairs with Square POS is not; 'none compare to Square POS'."
+        },
+        {
+          "url": "https://community.squareup.com/t5/Feature-Requests/Bookable-resources-with-availability-NOT-tied-to-team-member/idi-p/852213",
+          "source": "community.squareup.com",
+          "author": "poster B",
+          "date": "2026-11-04",
+          "kind": "complaint",
+          "summary": "Golf-simulator owner (an adjacent, excluded segment): bays must be tied to a staff member, so one booked bay blocks all bays; shows the same platform limit, not the multi-lane party problem."
+        },
+        {
+          "url": "https://community.squareup.com/t5/Feature-Requests/Appointments-Should-Block-All-Required-Resources-Not-Just-One/idi-p/778031",
+          "source": "community.squareup.com",
+          "author": "poster C",
+          "date": "2025-02-19",
+          "kind": "complaint",
+          "summary": "Party rental venue owner: only one of the required resources is blocked, causing double bookings; marked Open by Square staff, 4 kudos in 21 months."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Square Appointments (native)",
+          "url": "https://squareup.com/help/article/7065-square-appointments-resource-management",
+          "price": "Premium $149 a month per location for resources; Plus $49 a month",
+          "gap": "Books one resource per appointment; the workaround of lanes as team members means a party needs separate bookings and online checkouts."
+        },
+        {
+          "name": "FareHarbor",
+          "url": "https://fareharbor.com/blog/now-available-square-integration-for-fareharbor-operators",
+          "price": "free Square integration; FareHarbor charges guests a booking fee",
+          "gap": "Writes bookings and customers into Square in real time and can assign lanes; whether one booking can take several lanes and whether card payments go through Square is not stated."
+        },
+        {
+          "name": "Checkfront",
+          "url": "https://www.checkfront.com/axe-throwing-booking-software/",
+          "price": "$99 a month + 3% online booking fee",
+          "gap": "Shares lane resources across mixed group sizes and takes payments through the venue's Square account (Square to Checkfront sync only), at 2.5 times the price or more."
+        },
+        {
+          "name": "Bookeo",
+          "url": "https://www.bookeo.com/integrations/",
+          "price": "Standard $39.95 a month (https://www.bookeo.com/tours/pricing/)",
+          "gap": "Lists Square as a payment gateway only, with no booking or customer sync; lanes can be resources, but one booking using several lanes is not stated."
+        },
+        {
+          "name": "Wakesys",
+          "url": "https://www.wakesys.com/best-axe-throwing-software",
+          "price": "free for 12 months, then 2% (1% above a threshold)",
+          "gap": "Books several lanes for a group but runs its own POS through Stripe Terminal, so the venue leaves Square."
+        },
+        {
+          "name": "Whoosh",
+          "url": "https://www.whoosh.io/lp/square",
+          "price": "unknown",
+          "gap": "A Square partner whose sales sync to the Square catalog, aimed at golf and training facilities; no bowling, axe or multi-lane booking described."
+        }
+      ],
+      "keyFeatures": [
+        "Party-size to lane-count rules with buffers; only slots with enough free lanes are shown",
+        "A 10-minute lane hold during checkout",
+        "Full prepayment or a deposit through the venue's Square account",
+        "Paid orders and customer records written into Square",
+        "A front-desk lane grid with walk-in blocks, check-in and balance due",
+        "Confirmation, reminder and cancellation emails"
+      ],
+      "mvpScope": {
+        "features": [
+          "Lane rules and booking page for one location",
+          "Square OAuth and payments",
+          "Paid orders and customers in Square",
+          "Lane grid",
+          "Emails"
+        ],
+        "outOfScope": [
+          "Settling a deposit's balance on the same Square order (not possible through the API)",
+          "Waivers",
+          "Leagues and memberships",
+          "Food and drink",
+          "Gift cards",
+          "Multiple locations",
+          "Writing to the Square Appointments calendar"
+        ],
+        "buildEstimate": "about 7 build days"
+      },
+      "techStack": "Static front end with the Square Web Payments SDK; the shared Supabase project for staff sign-in, lanes, holds and bookings with a Postgres range exclusion constraint; backend-hub on Render for Square OAuth, CreatePayment, CreateOrder, UpsertCustomer and webhooks; transactional email; scheduled token refresh, hold expiry and reminders; no LLM.",
+      "pricing": {
+        "model": "Flat monthly fee per location with a 14-day trial",
+        "pricePoint": "$39 a month",
+        "rationale": "Level with Bookeo Standard ($39.95), below Resova Standard ($49.95) and well below Checkfront ($99 a month + 3%); the venue pays Square's own processing fees."
+      },
+      "revenueSketch": "Estimate only: 15 venues at $39 is $585 a month at month 6 and 40 venues $1,560 a month at month 18, assuming search ads convert without a Square App Marketplace listing; none of these figures is measured.",
+      "distribution": "A self-serve landing page with Google Search ads on queries such as 'axe throwing booking software' and 'book two lanes Square'. The Square Community is not a channel: its Code of Conduct says 'Don't promote your own products or services unprompted' (https://community.squareup.com/t5/Community-Resources/Square-Community-Code-of-Conduct/ta-p/723469), and it goes read-only on 2026-12-01 before a new site opens on 2026-12-16. Square App Marketplace onboarding is reported paused (https://developer.squareup.com/forums/t/how-does-a-developer-get-an-assigned-partnerships-contact-while-marketplace-onboarding-is-paused/28138.md). Axe-throwing owner groups: rule unknown: check before posting.",
+      "validationTest": {
+        "method": "A landing page ('Book two lanes in one booking, paid into your Square account') with a short demo of the lane grid and a '$39 a month: start trial' button leading to a waitlist form (venue type, lane count, 'Do you use Square POS?', current booking tool including Bookeo, Checkfront and FareHarbor), backed by $150 of Google Search ads over 14 days. No outreach, no contact with anyone in the evidence and no posts in evidence threads.",
+        "successCriteria": "At least 40 clicks at 3% click-through or better; at least 6 waitlist sign-ups from venues with 3 or more lanes on Square POS; at least 3 price-button clicks; fewer than half of sign-ups already on Bookeo, Checkfront or FareHarbor with Square.",
+        "cost": "About $150 in ads, a domain and one build day."
+      },
+      "moat": "Thin. Lane configuration, booking history and Square OAuth know-how; Square shipping multi-resource booking would erase it.",
+      "compliance": [
+        "PCI DSS: card data stays inside Square's SDK, likely SAQ A",
+        "Square developer terms; OAuth tokens encrypted at rest",
+        "Guest personal data (name, email, phone) held as the venue's service provider",
+        "WCAG 2.1 AA for the public booking page (ADA Title III exposure for venues)",
+        "COPPA: birthday parties are booked by parents; collect no data about children",
+        "Cancellation and deposit terms shown at checkout; reminder emails are transactional under CAN-SPAM"
+      ],
+      "risks": [
+        {
+          "risk": "Square ships multi-resource booking.",
+          "mitigation": "Low build cost, monthly plans and watching Square's release notes."
+        },
+        {
+          "risk": "FareHarbor, Checkfront or Bookeo with Square is good enough.",
+          "mitigation": "The waitlist asks for the current tool; position on staying on Square at a low flat price."
+        },
+        {
+          "risk": "A deposit cannot be settled on the same Square order at the point of sale.",
+          "mitigation": "Write each payment as its own paid order, show the balance on the grid, and test the Invoices API deposit route in the sandbox."
+        },
+        {
+          "risk": "A tiny market: one recent target-customer complaint with 2 kudos.",
+          "mitigation": "Run the validation test before building."
+        },
+        {
+          "risk": "Square's 30-day OAuth tokens and API changes on paid bookings.",
+          "mitigation": "Weekly refresh with alerts; use only Orders, Payments and Customers, not Bookings."
+        }
+      ],
+      "scores": {
+        "pain": 2,
+        "willingnessToPay": 3,
+        "reachability": 2,
+        "competitiveGap": 2,
+        "feasibility": 2,
+        "complianceBurden": 4,
+        "total": 15
+      },
+      "scoreRationale": {
+        "pain": "One recent target-customer complainant (https://community.squareup.com/t5/Feature-Requests/Proper-Resource-Allocation-Not-useful-for-150-a-month/idi-p/848547, 2 kudos); the golf post is an excluded segment and the older request has 4 kudos in 21 months (https://community.squareup.com/t5/Feature-Requests/Appointments-Should-Block-All-Required-Resources-Not-Just-One/idi-p/778031).",
+        "willingnessToPay": "The axe venue owner already pays Square Premium (about $150 a month) for resources (https://community.squareup.com/t5/Feature-Requests/Proper-Resource-Allocation-Not-useful-for-150-a-month/idi-p/848547); venues pay $39.95 to $99 + 3% for booking tools (https://www.checkfront.com/axe-throwing-booking-software/).",
+        "reachability": "The Square Community bans unprompted promotion and App Marketplace onboarding is reported paused (https://developer.squareup.com/forums/t/how-does-a-developer-get-an-assigned-partnerships-contact-while-marketplace-onboarding-is-paused/28138.md); search ads are untested.",
+        "competitiveGap": "FareHarbor writes bookings and customers into Square for free (https://fareharbor.com/blog/now-available-square-integration-for-fareharbor-operators), Checkfront takes Square payments with shared lanes (https://www.checkfront.com/activate-square) and Bookeo has a Square gateway; each covers part.",
+        "feasibility": "Only fully paid orders with fulfilment reach Square POS (https://developer.squareup.com/docs/orders-api/what-it-does), resources are read-only in the Bookings API (https://developer.squareup.com/docs/bookings-api/use-the-api.md), so the app keeps its own calendar and cannot settle deposits on the same order.",
+        "complianceBurden": "Card data stays in Square's SDK and there is no health or student data; guest personal data and booking-page accessibility remain (https://squareup.com/us/en/services/group-recreation)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Rescored 18 to 15 (pain 3 to 2, competitiveGap 3 to 2, feasibility 3 to 2), customer unchanged with axe venues as the lead segment. Only one recent target-customer complainant exists (the axe owner's two posts are one thread); the golf-simulator post is an excluded segment asking for bay availability not tied to staff, not multi-lane parties, and the closest older request has 4 kudos in 21 months. The draft's quote about lanes as fake team members was not the axe owner's and was replaced by verified quotes. Square's Orders API documentation says only fully paid orders with fulfilment are pushed to the point of sale, so 'deposit online, balance on the same order at the POS' cannot be built; each payment becomes its own paid order. No free or same-price product does the whole job, but FareHarbor writes bookings and customers into Square at no cost, Checkfront takes Square payments with shared lane resources at $99 a month plus 3%, and Bookeo has a Square payment gateway at $39.95. The vendor closure that drove the axe owner rests on his word alone."
+      },
+      "gateGap": {
+        "missing": [
+          "total 15 is below 22",
+          "pain 2 is below 4",
+          "only one independent target-customer complainant (two posts in one thread)",
+          "only one target-customer item within 90 days, from that same poster",
+          "no verified self-serve channel",
+          "unknown whether Bookeo, Checkfront or FareHarbor can put several lanes in one booking paid through Square"
+        ],
+        "closedBy": "The landing-page test meeting its criteria (6 Square-using lane venues on the waitlist, 3 price-button clicks, fewer than half already on Bookeo, Checkfront or FareHarbor), with free-text answers describing split or double-booked parties, would support pain 3 to 4; a second independent venue complaint on the new Square Community after 2026-12-16 would add evidence. Reaching 22 would also need a workable deposit flow and a confirmed competitive gap."
+      },
+      "inspiredBy": "https://community.squareup.com/t5/Feature-Requests/Proper-Resource-Allocation-Not-useful-for-150-a-month/idi-p/848547"
+    },
+    {
+      "n": 4,
+      "title": "Archive-or-Fix Register for Small Public Bodies",
+      "slug": "archive-or-fix-register-for-small-public-bodies",
+      "category": "Civic & Public Sector",
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Accessibility",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": true,
+        "engine": true,
+        "shared": true,
+        "notes": {
+          "stateful": "Keeps each body's PDF inventory, every confirmed decision with who made it, and the log of requests for accessible copies.",
+          "connected": "Crawls the body's public website and agenda pages to find and read its PDFs.",
+          "unattended": "A weekly re-crawl flags archived files that changed (they lose the exception) and new PDFs that join the fix queue, and reminders chase open requests.",
+          "engine": "Rules map each PDF's facts (date against the compliance date, linking page, real form fields, tagging) to the ADA Title II archived-content and preexisting-document clauses, with veraPDF checks.",
+          "shared": "Staff and counsel confirm decisions and sign the memo; residents use the generated archive page and request form."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "email",
+        "scheduled",
+        "backend"
+      ],
+      "buildPlan": [
+        {
+          "n": 1,
+          "title": "Crawl and inventory",
+          "delivers": "Sign in, enter a site address, crawl up to 500 pages on backend-hub and list every PDF with its linking page, best-evidence date, tagged flag and form-field types, with CSV export.",
+          "acceptance": "On a test site the list matches a hand-checked sample of 30 PDFs; deployed."
+        },
+        {
+          "n": 2,
+          "title": "Decision rules and confirmation",
+          "delivers": "A proposed category per PDF (fix, archive candidate, preexisting and not used for a service, form to rebuild, needs review) with the rule clause and facts, confirmed or overridden by a named staff member.",
+          "acceptance": "Every decision shows its clause, its facts and who confirmed it when; unconfirmed items default to 'needs review'."
+        },
+        {
+          "n": 3,
+          "title": "Archive page and memo",
+          "delivers": "A generated, labelled archive page with an accessible-copy request statement, and a draft memo to file listing the method, counts and documents for staff or counsel to sign.",
+          "acceptance": "The generated page passes an axe check with zero violations, and the memo lists every archived document."
+        },
+        {
+          "n": 4,
+          "title": "Request log",
+          "delivers": "An intake form for accessible copies, an email to the clerk, reminders on day 7 and day 12, and a response-time report.",
+          "acceptance": "A test request triggers both reminders and appears in the report with its response time."
+        },
+        {
+          "n": 5,
+          "title": "Re-crawl, drift alerts and fix queue",
+          "delivers": "A weekly re-crawl, an alert when an archived file changes, and a prioritised fix queue with page counts for remediation quotes.",
+          "acceptance": "Modifying an archived test file triggers one alert, and the queue's page totals match the files."
+        },
+        {
+          "n": 6,
+          "title": "Polish",
+          "delivers": "A clerk-facing README, phone layout, an accessibility audit of the app itself and a walkthrough test on a sample special-district site.",
+          "acceptance": "The walkthrough passes at phone width and the app reports no serious axe issues."
+        }
+      ],
+      "summary": "For clerks and managers of small towns, special districts and public libraries: a register that sorts every PDF on the website into fix, archive or leave, records why, and handles requests for accessible copies before the April 2028 deadline.",
+      "public": {
+        "summary": "Decide, and keep a record of, which old documents on your website you must fix, which you can archive, and how you answer requests for accessible copies.",
+        "problem": "Your website holds years of agendas, minutes and packets as PDFs, and the new accessibility rule reaches them by April 2028. Fixing every page is quoted at thousands of dollars a year, but deciding what can safely be archived, and writing down why, is left to you.",
+        "forWhom": "Clerks, general managers and library directors of small towns, special districts and public libraries.",
+        "benefits": [
+          "A full list of the PDFs on your site, sorted into fix, archive or review",
+          "The rule behind every decision, confirmed by your own staff",
+          "A ready-made archive page with a way to request accessible copies",
+          "A written record of how you decided, for your board or counsel",
+          "Alerts when an archived file changes or a new one appears"
+        ],
+        "audience": "teams"
+      },
+      "problemStatement": "Small public bodies hold thousands of PDF pages of agendas, minutes and packets; host add-ons charge by page ($400 a month for 10,000 pages, $800 for 20,000) and a general manager wrote that the new standards 'will be difficult to achieve with staffing resources'. Before April 2028 they must decide which files to fix, archive, hide or keep, and keep a record of how they decided.",
+      "description": "The register crawls a public body's website and lists every PDF with its linking page, its best-evidence date against the compliance date, whether it is tagged, whether it has real fillable fields and whether it sits in a service flow. For each document it proposes a category with the archived-content or preexisting-document clause and the facts behind it, and a named staff member confirms or overrides it, so the record is the body's own decision. It then generates an accessible, labelled archive page and a draft memo to file for staff or counsel to sign, and runs a request log with a response clock for accessible copies. A weekly re-crawl flags archived files that changed and new PDFs, and keeps a fix queue with page counts for remediation quotes.",
+      "targetCustomer": "Clerks, general managers, administrators and webmasters of US public bodies on the 2028-04-26 ADA Title II date (towns and counties under 50,000, special districts, public libraries, small school districts) and community action agencies on the HHS Section 504 dates, before they commit to or renew page-priced document conversion, or delete old files.",
+      "buyer": "The clerk, general manager or library director, from a small operating budget within staff signing authority.",
+      "whyNow": "DOJ's interim final rule of 2026-04-20 set 2028-04-26 for small public entities and special districts, and HHS set 2027-05-11 and 2028-05-10 for Section 504 recipients. State guidance asks bodies to document their exception method, and host add-ons are selling page-priced conversion of every PDF, so bodies are choosing now what to pay for. The dates could still move either way: DOJ asked about more relief for small governments and disability groups are suing over the extension.",
+      "founderFit": "Nothing beyond building it alone.",
+      "problemEvidence": [
+        {
+          "url": "https://www.rrfc.net/files/3a0efb8be/Item+8+Website+Accessibility+Document+Service.pdf",
+          "source": "rrfc.net",
+          "author": "poster A",
+          "date": "2025-12-08",
+          "kind": "complaint",
+          "summary": "General manager of a flood-control special district: the new standards 'will be difficult to achieve with staffing resources'; a three-year document service at $20,160 against a $7,000 office budget; written to support the host's add-on."
+        },
+        {
+          "url": "https://www.buenaparklibrary.org/files/885b5cfdd/2026+06+Board+Packet+-+FINAL.pdf",
+          "source": "buenaparklibrary.org",
+          "author": "poster B",
+          "date": "2026-06-02",
+          "kind": "spend",
+          "summary": "Library district board packet: minutes record approval of a DocAccess agreement on 2026-05-05 and the payment register shows $6,288 paid on 2026-05-15 for PDF remediation; a host-bundled add-on."
+        },
+        {
+          "url": "https://www.napa.lafco.ca.gov/files/a0c1ace63/4-6-26+6e+Digital+Accessibility+Requirements.pdf",
+          "source": "napa.lafco.ca.gov",
+          "author": "poster C",
+          "date": "2026-04-06",
+          "kind": "spend",
+          "summary": "County LAFCO staff report: a three-year DocAccess contract at $280 a month, signed by staff on 2026-03-09 under the old deadline; vendor counts 2,426 documents and about 10,000 pages."
+        },
+        {
+          "url": "https://www.crestlinevillagewaterca.gov/files/d9a30e552/10+Memo+ADA+Compliance+for+Website.pdf",
+          "source": "crestlinevillagewaterca.gov",
+          "author": "poster D",
+          "date": "2025-07-10",
+          "kind": "spend",
+          "summary": "Water district memo: page-priced conversion at $0.04 a page ($400 a month for 10,000 pages, $800 for 20,000) for 9,922 non-compliant pages; the district can hide files to cut the billed count."
+        },
+        {
+          "url": "https://www.govinfo.gov/content/pkg/FR-2026-05-11/html/2026-09266.htm",
+          "source": "govinfo.gov",
+          "author": "unknown",
+          "date": "2026-05-11",
+          "kind": "mandate",
+          "summary": "HHS Section 504 interim final rule: web compliance dates 2027-05-11 and 2028-05-10; relays counties' 'especially time-consuming and costly remediation of PDF documents' and costs that exceed what they had budgeted."
+        },
+        {
+          "url": "https://www.ada.gov/resources/small-entity-compliance-guide",
+          "source": "ada.gov",
+          "author": "unknown",
+          "date": "2026-04-20",
+          "kind": "mandate",
+          "summary": "DOJ small-entity guide (noting the 2026-04-20 rule): 2028-04-26 for entities under 50,000 and special districts; all four archived-content criteria must be met; preexisting documents excepted only if not used to apply for or access a service."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "DocAccess (CivicPlus/Streamline)",
+          "url": "https://docaccess.com/pricing",
+          "price": "unknown on the vendor page; contracts read this run: $280 a month (Napa LAFCO), $0.04 a page (Crestline), $560 a month (a flood-control district)",
+          "gap": "Converts every PDF, archives included, into HTML alternatives with indemnity, installs on any CMS, and asks how many documents qualify as exempt; no per-document exception record with the rule clause, archive memo or request log seen."
+        },
+        {
+          "name": "DocAccess inside Diligent BoardDocs and iCompass",
+          "url": "https://www.diligent.com/company/newsroom/diligent-announces-integration-with-civicplus-docaccess",
+          "price": "unknown",
+          "gap": "Since 2026-09-22 covers archived and new agenda-packet PDFs inside the agenda platform; no exception record."
+        },
+        {
+          "name": "ASAP PDF (Code for America)",
+          "url": "https://github.com/codeforamerica/asap_pdf",
+          "price": "free, open source (self-hosted)",
+          "gap": "Crawls for PDFs, classifies them and runs exception checks, but needs Rails, Postgres, Docker and AWS; no hosted offer, archive page, memo or request log."
+        },
+        {
+          "name": "CASO Comply free scan",
+          "url": "https://casocomply.com/resources/old-pdfs-title-ii-exceptions",
+          "price": "free scan",
+          "gap": "Inventories a site's PDFs and offers a manual five-question sort; no stored decision record or request log."
+        },
+        {
+          "name": "DocAccessible",
+          "url": "https://docaccessible.com/guides/ada-title-ii-document-exceptions",
+          "price": "free scanner and free plan",
+          "gap": "Explains the exceptions and scans; no per-document confirmed decision with a memo and archive page described."
+        },
+        {
+          "name": "Ockem",
+          "url": "https://ockem.com/guides",
+          "price": "free assessment; $59 per certification",
+          "gap": "Counts linked PDFs and publishes an archive, keep or fix guide; no hosted decision register."
+        },
+        {
+          "name": "Maryland DoIT archive guidance",
+          "url": "https://digital.maryland.gov/accessibility/accessible-documents-and-webpages/how-archive-electronic-documents",
+          "price": "free",
+          "gap": "A free template for an archive page and request process; no per-document tooling."
+        }
+      ],
+      "keyFeatures": [
+        "Site crawl and PDF inventory with the evidence behind each fact",
+        "Category proposals tied to the archived-content and preexisting-document clauses, confirmed by named staff",
+        "Accessible archive page generator with an accessible-copy request statement",
+        "Draft memo to file for staff or counsel to sign",
+        "Request log with response clock and reminders",
+        "Weekly re-crawl, drift alerts and a fix queue with page counts"
+      ],
+      "mvpScope": {
+        "features": [
+          "Crawl up to 5,000 pages per site",
+          "Facts per PDF",
+          "Proposals and staff confirmation",
+          "Archive page",
+          "Memo",
+          "Request log"
+        ],
+        "outOfScope": [
+          "Remediating files",
+          "JavaScript-heavy agenda portals at first (CSV import instead)",
+          "Legal determinations",
+          "HTML page audits",
+          "Video and captions"
+        ],
+        "buildEstimate": "about 6 build days, with crawling scale and portal support pushing it into a second week"
+      },
+      "techStack": "Static front end; the shared Supabase project for sign-in, sites, documents, decisions and requests; backend-hub on Render for the crawler (robots.txt, sitemaps), poppler and pypdf for dates, tags and form fields, and the veraPDF command line; transactional email; scheduled re-crawls; no LLM needed.",
+      "pricing": {
+        "model": "Annual subscription per body, with a free scan summary",
+        "pricePoint": "$390 a year up to 5,000 PDFs; $790 above",
+        "rationale": "Well under the page-priced conversion contracts read this run ($280 to $800 a month) and small enough for staff signing authority; it competes with deleting files, which is free."
+      },
+      "revenueSketch": "Estimate only: 25 paying bodies in year one at an average of $500 is about $12,500 a year, assuming search ads reach bodies before they sign a conversion contract; no market count was verified.",
+      "distribution": "A free 'archive readiness' scan plus Google Search ads on exception queries (self-serve). California Special Districts Association business affiliate listing: its value page shows no vendor rule, so rule unknown: check before posting (https://www.csda.net/value-benefits). GovLoop and library listservs: rule unknown: check before posting. No contact with the bodies in the evidence.",
+      "validationTest": {
+        "method": "A landing page where a visitor scans their own site and gets counts of PDFs by year against 2028-04-26, the untagged share and likely forms, with a '$390 a year' price button that takes a paid pre-order and a waitlist; $150 of search ads over 14 days on archive and exception queries. Alongside, a desk count of board approvals dated 2026-08-30 to 2026-11-28 that mention archiving, hiding or exempt documents. No outreach and no posting in any evidence thread.",
+        "successCriteria": "At least 1 paid pre-order within 30 days from a public body not already on a page-priced conversion add-on, plus 3 or more price-button clicks from public-body domains (scans count as weak signals); a desk count of 3 or more approvals mentioning archives or exemptions.",
+        "cost": "About $160 plus 2 build days."
+      },
+      "moat": "Weak. The per-body decision history and request log create some switching cost; the crawl and exception-check code exists in open source.",
+      "compliance": [
+        "ADA Title II web rule (28 CFR 35.200 to 35.205): the archived-content and preexisting-document exceptions, conforming alternate versions only for technical or legal limits, and the effective-communication duty",
+        "WCAG 2.1 AA for the app and every generated archive page",
+        "HHS Section 504 web rule for community action agencies",
+        "Public records and retention laws: the request log may itself be a record, and deleting files may break retention schedules",
+        "Requester privacy: accessibility requests reveal disability, so collect the minimum",
+        "Not legal advice: the tool records the body's own confirmed decision; expect errors-and-omissions cover and counsel review",
+        "Polite crawling (robots.txt, rate limits); public-body purchasing (W-9, invoices, tax-exempt status)"
+      ],
+      "risks": [
+        {
+          "risk": "Host add-ons that convert every PDF (with indemnity) capture the budget first.",
+          "mitigation": "Reach bodies before they sign or renew, and position the register as the record of what not to pay to convert."
+        },
+        {
+          "risk": "Free scans, the open-source ASAP PDF, a spreadsheet or simply hiding old files cover most of the job.",
+          "mitigation": "Offer a hosted register with confirmations, archive page, memo and request log that a clerk can run without IT."
+        },
+        {
+          "risk": "Legal exposure from proposing exemptions that state guidance warns against leaning on.",
+          "mitigation": "Show clause and facts only, default to 'needs review', require named confirmation and recommend counsel review."
+        },
+        {
+          "risk": "The small-government deadline moves again, either relaxed or pulled forward.",
+          "mitigation": "Keep the build small; the request log stays useful under the existing effective-communication duty."
+        },
+        {
+          "risk": "Unreliable facts: PDF creation dates differ from posting dates and form flags fire on signature fields.",
+          "mitigation": "Show the evidence for each fact and require human confirmation."
+        }
+      ],
+      "scores": {
+        "pain": 3,
+        "willingnessToPay": 2,
+        "reachability": 2,
+        "competitiveGap": 2,
+        "feasibility": 4,
+        "complianceBurden": 3,
+        "total": 16
+      },
+      "scoreRationale": {
+        "pain": "Real staffing and cost pain from a special-district general manager, but older than 90 days and about remediation, not the archive decision (https://www.rrfc.net/files/3a0efb8be/Item+8+Website+Accessibility+Document+Service.pdf); counties' cost complaints relayed by HHS (https://www.govinfo.gov/content/pkg/FR-2026-05-11/html/2026-09266.htm).",
+        "willingnessToPay": "Every payer found bought its host's conversion add-on, not an exception record (https://www.napa.lafco.ca.gov/files/a0c1ace63/4-6-26+6e+Digital+Accessibility+Requirements.pdf, https://www.buenaparklibrary.org/files/885b5cfdd/2026+06+Board+Packet+-+FINAL.pdf).",
+        "reachability": "No verified channel rule; the incumbent reaches these buyers through their own web host and claims thousands of local-government customers (https://docaccess.com/pricing).",
+        "competitiveGap": "DocAccess installs on any CMS and asks about archive-exempt documents (https://docaccess.com/pricing); free inventories and exception checks exist (https://casocomply.com/resources/old-pdfs-title-ii-exceptions, https://github.com/codeforamerica/asap_pdf); only the hosted decision record with archive page, memo and request log is unserved.",
+        "feasibility": "Crawl, classification and exception-check code exists in open source (https://github.com/codeforamerica/asap_pdf) and veraPDF has a command line (https://docs.verapdf.org/cli/validation); posting dates and service use stay human-confirmed.",
+        "complianceBurden": "Proposing exemptions carries legal exposure and state guidance says to use exceptions to prioritise, not avoid, work (https://www.tsl.texas.gov/sites/default/files/public/tslac/distancelearning/TSLAC%20Title%20II%20for%20Libraries_March%2027%202026.pdf); the request log holds disability-related requests."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Rescored 18 to 16 (willingnessToPay 3 to 2, complianceBurden 4 to 3). All four paying bodies in the evidence are Streamline-hosted and bought their host's DocAccess conversion add-on, with $50,000 indemnity, under the old deadline; none paid for an exception record. DocAccess installs on any CMS and its pricing page already asks how many documents qualify as exempt, and since 2026-09-22 it is inside Diligent's agenda platforms. Free PDF inventories are now common (DocAccessible, CASO Comply, Ockem, CivicPlus) and Code for America's ASAP PDF runs exception checks but must be self-hosted; nobody sells a hosted per-document decision record with an archive page, memo and request log. The mandate is unchanged at 2028-04-26 for small bodies but unsettled (DOJ asked about more relief; disability groups sued over the extension). Legal-advice exposure is a burden, not a blocker. The vendor's '$70,000 or 42 weeks' figure was dropped as vendor copy. Not killed: no free product does the whole job and no rejection rule applies."
+      },
+      "gateGap": {
+        "missing": [
+          "total 16 is below 22",
+          "pain 3 is below 4: no first-hand complaint about the archive or exception decision itself",
+          "willingnessToPay 2 is below 3: all spend found is host-bundled conversion",
+          "no evidence item dated within 90 days",
+          "the 180-day floor rests on one item, a board packet dated 2026-06-02 recording a May approval"
+        ],
+        "closedBy": "A paid pre-order within 30 days from a body not on a conversion add-on, plus three or more board approvals from September to November 2026 mentioning archives or exemptions, would lift willingnessToPay to 3; a dated first-hand complaint about deciding what to archive would lift pain to 4. That reaches about 18, so the test can confirm a provisional build but not reach validated by itself."
+      },
+      "inspiredBy": "https://www.rrfc.net/files/3a0efb8be/Item+8+Website+Accessibility+Document+Service.pdf"
+    },
+    {
+      "n": 5,
+      "title": "Terminal Journeys: Screen-Reader Transcript Tests for Coding-Agent CLIs",
+      "slug": "terminal-journeys-screen-reader-transcript-tests",
+      "category": "Developer Tool",
+      "complexity": "Multi-week",
+      "confidence": "provisional",
+      "topic": "Accessibility",
+      "wildcard": true,
+      "wildcardReason": "It joins the owner's two strongest interests, accessibility and developer tools, and extends his own Screen Reader Journeys from web pages to the terminal interfaces of the coding agents his courses use; blind developers filed dated complaints about exactly these interfaces this autumn.",
+      "shape": {
+        "stateful": true,
+        "connected": true,
+        "unattended": true,
+        "engine": true,
+        "shared": false,
+        "notes": {
+          "stateful": "Keeps transcript history per repository, so a team sees what changed in what a screen reader would hear between runs.",
+          "connected": "Runs inside the team's own GitHub Actions and uploads transcripts to the hosted dashboard with a repository token.",
+          "unattended": "Runs on every push and emails the team when a change adds new announcements or silences a selection.",
+          "engine": "A pseudo-terminal journey runner and an emulator that turns screen updates into the speech NVDA's diffing would produce in Windows Terminal, with assertions on the transcript."
+        }
+      },
+      "substantial": true,
+      "platformNeeds": [
+        "accounts",
+        "database",
+        "email",
+        "scheduled",
+        "backend"
+      ],
+      "buildPlan": [
+        {
+          "n": 1,
+          "title": "Run a journey, get a transcript",
+          "delivers": "A command that runs a CLI in a pseudo-terminal through a scripted journey and writes the emulated 'heard' transcript, plus a landing page with a waitlist.",
+          "acceptance": "On a sample spinner app the transcript shows repeated bare-number announcements, and its screen-reader-mode variant does not; the page is live."
+        },
+        {
+          "n": 2,
+          "title": "Assertions and CI",
+          "delivers": "An expect API (heard, not heard, maximum re-announcements, typed echo), JUnit output and a GitHub Action.",
+          "acceptance": "The Action fails a sample pull request whose status counter is re-announced more than the set limit."
+        },
+        {
+          "n": 3,
+          "title": "Fidelity profiles",
+          "delivers": "NVDA's Automatic diff mode (Diff Match Patch with Difflib fallback), conhost and Windows Terminal profiles, and alternate-screen warnings.",
+          "acceptance": "Five fixture apps (Ink, huh, Textual, ratatui, readline) match expected transcripts."
+        },
+        {
+          "n": 4,
+          "title": "Real-NVDA comparison recipe",
+          "delivers": "A free documented workflow that runs the same journey under portable NVDA on a Windows runner (and Orca on Ubuntu) and reports per-step agreement with the emulator.",
+          "acceptance": "One fixture journey runs under real NVDA in Actions and produces a comparison report."
+        },
+        {
+          "n": 5,
+          "title": "Hosted history",
+          "delivers": "Sign-in, repository tokens, an upload endpoint, run-to-run transcript diffs and regression email.",
+          "acceptance": "Two uploads show the new lines and one email arrives."
+        },
+        {
+          "n": 6,
+          "title": "Polish",
+          "delivers": "A README for an engineering lead, framework guides, phone layout, an accessible dashboard checked with Screen Reader Journeys, and a walkthrough test.",
+          "acceptance": "The walkthrough passes and the dashboard reports no serious axe issues."
+        }
+      ],
+      "summary": "For teams building coding-agent command-line tools with a screen-reader mode: CI tests that assert on what a screen reader would announce, so status-line noise and silent menus are caught before blind users report them.",
+      "public": {
+        "summary": "Test in every build what a screen reader will say when someone uses your command-line tool.",
+        "problem": "Blind developers tell you your progress line makes their screen reader read out bare numbers, your menu selection is silent, and redrawn lines swallow what they type. Today you only find out from their bug reports, because you test by hand with one screen reader in one terminal.",
+        "forWhom": "Teams that build coding agents and other interactive command-line tools.",
+        "benefits": [
+          "A readable transcript of what a screen reader announces for each step",
+          "Builds that fail when a change makes your tool noisy or silent again",
+          "The same journey checked against a real screen reader when you need it",
+          "A history of changes, so a fix stays fixed"
+        ],
+        "audience": "teams"
+      },
+      "problemStatement": "Blind developers report that coding-agent CLIs make NVDA speak bare progress counts ('with three or four of them I can barely hear anything else'), move menu selections silently and hide progress until a turn ends, while the teams adding screen-reader modes test 'by hand with NVDA in Windows Terminal' and leave other terminals untested.",
+      "description": "Terminal Journeys runs a CLI or terminal interface in a pseudo-terminal through a scripted journey of key presses, waits and answers. It turns each screen update into the stream NVDA would announce in Windows Terminal (NVDA's default Automatic diffing), and tests assert on that transcript: the selected item is heard, a status counter is announced at most once, typed words are echoed. A free documented recipe runs the same journey under real NVDA or Orca on hosted runners and reports where emulation and real speech differ. A hosted dashboard keeps transcript history per repository and emails when a change adds new announcements.",
+      "targetCustomer": "Engineering teams and maintainers shipping coding-agent command-line tools and terminal interfaces that have, or are adding, a screen-reader mode.",
+      "buyer": "An engineering lead at a developer-tool company with a closed-source agent CLI; open-source maintainers use the free engine.",
+      "whyNow": "Coding-agent CLIs shipped screen-reader modes in 2026 and blind users still filed terminal bugs from October to November 2026; GitHub search shows 35 issues and pull requests adding screen-reader modes to terminal interfaces since 2026-08-30, tested by hand. Real NVDA has now been run on GitHub-hosted Windows runners by other projects, which makes a calibrated emulator practical.",
+      "founderFit": "He teaches courses that use agentic coding tools, whose terminal interfaces are where these problems arise, and he ships a web app alone in days; his Screen Reader Journeys project already runs real NVDA and Orca in workflows for web apps.",
+      "problemEvidence": [
+        {
+          "url": "https://github.com/anthropics/claude-code/issues/105382",
+          "source": "github.com",
+          "author": "poster A",
+          "date": "2026-10-27",
+          "kind": "complaint",
+          "summary": "Blind developer using NVDA in Windows Terminal: progress-line rewrites while subagents run make NVDA speak bare counts and drown everything else; fixed by the vendor on 2026-11-20 after the report."
+        },
+        {
+          "url": "https://github.com/anthropics/claude-code/issues/100253",
+          "source": "github.com",
+          "author": "poster B",
+          "date": "2026-10-07",
+          "kind": "complaint",
+          "summary": "Report for a blind JAWS and NVDA user: in screen-reader mode, arrow keys in the command menu produce no output, so the selection is silent."
+        },
+        {
+          "url": "https://github.com/anomalyco/opencode/issues/63909",
+          "source": "github.com",
+          "author": "poster C",
+          "date": "2026-11-14",
+          "kind": "complaint",
+          "summary": "Screen-reader user with NVDA on Windows: live agent and tool progress is invisible to the screen reader until the turn ends, and menu items never get focus."
+        },
+        {
+          "url": "https://github.com/anthropics/claude-code/issues/110978",
+          "source": "github.com",
+          "author": "poster D",
+          "date": "2026-11-18",
+          "kind": "complaint",
+          "summary": "Blind developer using NVDA on Windows, Linux and macOS: reading the live terminal with a screen reader is tiring because of redraws, long outputs and tool noise; built a plain-text log workaround."
+        },
+        {
+          "url": "https://github.com/anomalyco/opencode/issues/39368",
+          "source": "github.com",
+          "author": "poster E",
+          "date": "2026-07-28",
+          "kind": "complaint",
+          "summary": "Screen-reader user: when a tool runs, the spinner rewrites the same line and NVDA reports duplicated content; a maintainer put it on the wishlist with no timeline."
+        }
+      ],
+      "competitors": [
+        {
+          "name": "Guidepup",
+          "url": "https://github.com/guidepup/guidepup",
+          "price": "free (MIT)",
+          "gap": "Drives real NVDA, VoiceOver and Orca and returns spoken phrases; no terminal journey harness, no emulation and no assertions on redraw noise."
+        },
+        {
+          "name": "Microsoft tui-test",
+          "url": "https://github.com/microsoft/tui-test",
+          "price": "free",
+          "gap": "Drives, snapshots and records terminal sessions; no speech or screen-reader output."
+        },
+        {
+          "name": "Ink screen-reader mode",
+          "url": "https://unpkg.com/ink@7.1.1/readme.md",
+          "price": "free",
+          "gap": "Changes what an Ink app prints for screen readers; its testing helpers assert on frames, not on what NVDA speaks."
+        },
+        {
+          "name": "Do-it-yourself real-NVDA CI checks",
+          "url": "https://github.com/openclaw/openclaw/pull/185921",
+          "price": "free (team time)",
+          "gap": "Projects have built their own NVDA speech checks or reprint counters on hosted runners; each is hand-built, not packaged for terminals, and not reusable."
+        },
+        {
+          "name": "Assistiv Labs",
+          "url": "https://assistivlabs.com/pricing",
+          "price": "$19 a month Freelancer, $99 a month Professional",
+          "gap": "Manual remote NVDA for websites in a browser; no terminals and no CI assertions."
+        },
+        {
+          "name": "BrowserStack screen-reader automation",
+          "url": "https://www.browserstack.com/docs/accessibility/screen-reader-launcher/screen-reader-automation-overview",
+          "price": "on paid plans; price unknown",
+          "gap": "Captures screen-reader speech as text for websites only."
+        }
+      ],
+      "keyFeatures": [
+        "Pseudo-terminal journey runner with an NVDA-diffing emulator",
+        "Transcript assertions: heard, not heard, maximum re-announcements, typed echo",
+        "GitHub Action with JUnit output",
+        "Free real-NVDA and Orca comparison recipe",
+        "Hosted transcript history and regression email",
+        "A journey library for spinners, progress lines, menus and prompts"
+      ],
+      "mvpScope": {
+        "features": [
+          "Journey runner and emulator",
+          "Assertions and GitHub Action",
+          "Hosted history with regression email"
+        ],
+        "outOfScope": [
+          "JAWS (needs a licence)",
+          "VoiceOver",
+          "Running customer binaries on HintWise servers",
+          "Desktop and web apps (Screen Reader Journeys covers web)"
+        ],
+        "buildEstimate": "about 6 build days, with the real-NVDA calibration possibly taking 2 to 3"
+      },
+      "techStack": "Node and TypeScript engine with node-pty, a headless xterm and diff libraries, run in the customer's own CI; Guidepup's setup action and the Screen Reader Journeys Orca workflow for real runs; hosted part on the platform: static front end, the shared Supabase project for sign-in and history, a backend-hub upload endpoint, scheduled retention and transactional email; no LLM.",
+      "pricing": {
+        "model": "Free open-source engine and Action; paid organisation plan for private repositories",
+        "pricePoint": "$29 a month per organisation (assumption)",
+        "rationale": "Between Assistiv Labs' $19 and $99 monthly plans; no price evidence exists for this task, so the validation test measures it."
+      },
+      "revenueSketch": "Estimate only, unsupported: if the free Action reaches about 200 repositories in a year and 5 to 10% are private-repository teams paying $29, that is 10 to 20 customers, roughly $290 to $580 a month.",
+      "distribution": "GitHub Marketplace for the Action: the action must be in a public repository, and listings are published without review once the developer agreement is accepted (https://docs.github.com/en/enterprise-cloud@latest/actions/how-tos/create-and-publish-actions/publish-in-github-marketplace). Show HN once the engine is tryable: 'Show HN is for something you've made that other people can play with' and 'Don't post landing pages or fundraisers' (https://news.ycombinator.com/showhn.html). Ratatui forum's 'Made with Ratatui' category invites apps and widgets, other rules unknown: check before posting (https://forum.ratatui.rs/t/about-the-made-with-ratatui-category/26). No contact with anyone in the evidence.",
+      "validationTest": {
+        "method": "Build milestones 1 and 2, publish the free emulated-mode Action on GitHub Marketplace and npm, and put up a landing page with a '$29 a month per organisation: private repos, history, regression email' price button leading to a work-email waitlist. Post one Show HN once it is tryable. Count Action users, price-button clicks and waitlist emails. No contact with evidence posters and no posts in evidence threads.",
+        "successCriteria": "Within 30 days of Show HN: at least 10 price-button clicks with work emails from at least 5 organisations with private-repository terminal tools, and at least 25 repositories using the Action; fewer than 3 organisations ends it.",
+        "cost": "$0 to $15 plus about 2 build days."
+      },
+      "moat": "Weak. A calibration corpus of emulated against real NVDA and Orca transcripts, a journey library and the link with Screen Reader Journeys are the only assets.",
+      "compliance": [
+        "Accessibility: WCAG2ICT is informative guidance for non-web software; label results as evidence, not conformance",
+        "GDPR and UK GDPR for account emails and uploaded transcripts, which may contain personal data or secrets the app printed: redaction, retention limits and deletion",
+        "Never run customer binaries on HintWise servers; the engine runs in the customer's CI",
+        "NVDA portable licence terms (GPL) for the recipe; JAWS is out of scope"
+      ],
+      "risks": [
+        {
+          "risk": "Emulated speech differs from real NVDA (timing, coalescing, caret echo), and NVDA's terminal handling may move from diffing to pushed text.",
+          "mitigation": "Label transcripts 'emulated', calibrate against real runs and publish known differences."
+        },
+        {
+          "risk": "Nobody pays: most adopters are open source and real-NVDA checks can be built for free.",
+          "mitigation": "Keep the core free and build the hosted tier only after the price-button test."
+        },
+        {
+          "risk": "Vendors fix reported bugs one at a time and see no need for a test tool.",
+          "mitigation": "Show each fixed bug as a regression test the Action would have caught."
+        },
+        {
+          "risk": "Windows Terminal may not be installed on hosted Windows runners.",
+          "mitigation": "Start with the conhost profile and the emulator on Linux runners."
+        }
+      ],
+      "scores": {
+        "pain": 4,
+        "willingnessToPay": 2,
+        "reachability": 3,
+        "competitiveGap": 3,
+        "feasibility": 3,
+        "complianceBurden": 5,
+        "total": 20
+      },
+      "scoreRationale": {
+        "pain": "Several independent, recent complaints a transcript test would catch (https://github.com/anthropics/claude-code/issues/105382, https://github.com/anthropics/claude-code/issues/100253, https://github.com/anomalyco/opencode/issues/63909); the complainants are end users, not buyers.",
+        "willingnessToPay": "No paid job or plan for terminal screen-reader testing; paid screen-reader testing found covers websites only (https://assistivlabs.com/pricing).",
+        "reachability": "Self-serve channels only: GitHub Marketplace publishes Actions without review and Show HN accepts tryable tools (https://news.ycombinator.com/showhn.html); the owner's stated network does not reach these buyers.",
+        "competitiveGap": "No free tool does the whole job, but real-NVDA checks on hosted runners are a free do-it-yourself pattern (https://github.com/openclaw/openclaw/pull/185921) and terminal snapshots are free (https://github.com/microsoft/tui-test); the emulator and hosted history are what is left.",
+        "feasibility": "NVDA's terminal speech is diff-based (https://download.nvaccess.org/documentation/userGuide.html), so emulation is plausible, but fidelity is unproven and calibration takes weeks.",
+        "complianceBurden": "A developer tool with no student, child or health data; GDPR basics and redaction of uploaded transcripts (https://github.com/microsoft/tui-test runs in the customer's own CI)."
+      },
+      "review": {
+        "verdict": "rescored",
+        "findings": "Wildcard review: rescored 21 to 20 (competitiveGap 4 to 3) and re-scoped to teams building coding-agent CLIs and terminal interfaces with a screen-reader mode. No free tool does the whole job, so the wildcard kill does not apply: Guidepup, tui-test, Ink's screen-reader mode and framework snapshot testers each do part. But real-NVDA speech assertions on GitHub-hosted Windows runners are now a free do-it-yourself pattern (one merged pull request in a desktop app in November 2026, another project's speech-assertion rig in October 2026), so the product's edge is a fast emulated transcript plus hosted history, whose fidelity is unproven; NVDA's default is Automatic diffing and its Windows Terminal handling is changing. Eight distinct accounts filed the terminal items; two of the five recent complaints (a hotkey feature request and a suggestion closed the same day) are not things a transcript test would catch, and all evidence comes from coding-agent interfaces. The only spend on CLI accessibility found was research interviews paid by a large platform, not testing."
+      },
+      "gateGap": {
+        "missing": [
+          "total 20 is below 22",
+          "willingnessToPay 2 is below 3: no paid job or plan for testing terminal screen-reader output",
+          "no complaint about testing in the buyer's own voice",
+          "emulator fidelity to real NVDA is unproven"
+        ],
+        "closedBy": "The validation test producing at least 5 organisations with private-repository terminal tools on the work-email waitlist, one of them paying for a pilot, would support willingnessToPay 3; milestone 4's calibration showing emulated and real NVDA agree on most steps across the fixtures would restore competitiveGap to 4, for a total of 22."
+      },
+      "inspiredBy": "https://github.com/anthropics/claude-code/issues/105382"
+    }
+  ],
+  "runNotes": {
+    "weekday": "Saturday",
+    "domainLens": "Institutional back-office work",
+    "focusSources": [
+      "A2 Other LMS and classroom forums",
+      "A13 Discourse forums, any niche (substituted for B5 Acquisition marketplaces, on the avoid list)",
+      "C4 Job postings that describe manual work"
+    ],
+    "searches": [
+      "A2 discuss.openedx.org search.json 'certificates after:2026-09-29'",
+      "A2 discuss.openedx.org search.json 'grade report export after:2026-09-29'",
+      "A2 forum.code.org search.json 'attendance after:2026-08-01'",
+      "A2 ask.gibbonedu.org search.json 'report after:2026-08-01'",
+      "A2 discuss.frappe.io search.json 'education student after:2026-09-29'",
+      "A2 WebSearch community.d2l.com brightspace accommodations special access every course admin",
+      "A5 api.stackexchange.com academia: accommodations exam, accreditation, course evaluations, registrar, spreadsheet",
+      "A18 api.stackexchange.com softwarerecs: school, attendance, certificates, students",
+      "A13 community.open-emr.org search.json 'billing after:2026-09-29'",
+      "A13 forum.invoiceninja.com search.json 'school after:2026-06-01'",
+      "A13 www.dolibarr.org/forum search.json 'membership after:2026-08-01'",
+      "A13 forum.omeka.org latest.json; discuss.frappe.io 'school fees after:2026-07-01'; community.glideapps.com 'school after:2026-09-29'; forum.manager.io 'church after:2026-06-01'",
+      "A16 productideas.xero.com search: restricted funds, grant funding, not-for-profit, childcare, NDIS, school fees, allied health, plan manager",
+      "A16 WebSearch: childcare, clinic and church vendor feature-request boards (Canny, Frill, UserVoice, Nolt, Featurebase)",
+      "A16 transparentclassroom.uservoice.com suggestions (staff sign-in, headcount, waitlists, forms, invoicing)",
+      "C4 higheredjobs.com admin/search.cfm?JobCat=185 (helper and WebFetch)",
+      "C4 WebSearch governmentjobs.com medical records clerk release of information",
+      "C4 WebSearch governmentjobs.com deputy clerk agenda packets minutes",
+      "C4 WebSearch accessibility coordinator PDF remediation ADA Title II job",
+      "C5 federalregister.gov API term 'HIPAA privacy rule access'",
+      "C5 federalregister.gov API term 'Accessibility of Web Information and Services'",
+      "C5 federalregister.gov API term 'extension of compliance dates' disability federal financial assistance",
+      "C5 WebSearch IRS FIRE retirement IRIS January 1 2027",
+      "C10 WebSearch 'price increase' 2026 software childcare OR church OR 'small nonprofit'",
+      "C10 WebSearch nonprofit software shutting down OR sunset 2026",
+      "C8 WebSearch K-12 Dive OR Higher Ed Dive 2026 web accessibility Title II",
+      "B11 freelancer.com projects/all query=funder, grants, charity, CIC, church, nursery, daycare, cemetery, CQC, Ofsted, NOM-035, clinic, volunteers, 990",
+      "B11 peopleperhour.com freelance-jobs?q=charity (query ignored by the site)",
+      "B13 workspace.google.com marketplace search: attendance, permission slip, approval, volunteer, certificate, grant tracker",
+      "B10 api.wordpress.org query_plugins: attendance, church management, school management",
+      "A19 api.github.com search/issues 'screen reader' in coding-agent repositories; 'screen reader' in:title TUI created:>2026-08-30",
+      "A13 forum.typst.app, discourse.jupyter.org, forum.posit.co, forum.snap.berkeley.edu, discuss.openedx.org search.json accessibility",
+      "A11 lists.w3.org w3c-wai-ig 2026OctDec archive",
+      "Watchlist re-research: community.squareup.com LiQL resources, lanes, simulator; squareup.com release notes 2026-11-19",
+      "Watchlist re-research: community.shopify.com search.json 'new customer accounts' order:latest; shopify.dev changelog",
+      "Watchlist re-research: community.shopify.com search.json 'hijack order:latest'; freelancer.com 'shopify malware'",
+      "Spend pass B11: freelancer.com projects/all query=childcare from 2026-08-30 (retention pay, year-end statements): nothing for the task",
+      "Spend pass B11: freelancer.com projects/all query=cosmetology from 2026-06-01 (board hours filer): nothing for the task",
+      "Spend pass B11: freelancer.com projects/all query=NVDA from 2026-06-01 (terminal journeys): website and app screen-reader audits only",
+      "Spend pass B11: freelancer.com projects/all query=NDIS from 2026-08-30 (NDIS claim clock): nothing for the task",
+      "Spend pass B11: freelancer.com projects/all query=accessibility from 2026-08-30 (archive register, course tool pre-check): nothing for the task",
+      "Spend pass B11: freelancer.com projects/all query=medical records from 2026-08-30 (records request clock): nothing for the task",
+      "Research: Plinth, Localgiving, Grant Genie, Grantsights, Charity Excellence, Open 4 Community pricing and features",
+      "Research: Employment Hero, foundU, Xero Payroll AU API, MYOB release notes, OIA impact analysis for the Worker Retention Payment",
+      "Research: DocAccess, ASAP PDF, CASO Comply, DocAccessible, Ockem; board packets approving PDF remediation",
+      "Research: Guidepup, tui-test, Ink screen-reader mode, NVDA user guide diffing, GitHub Marketplace publishing rules",
+      "Research: Square Bookings API resources, Bookeo, Resova, Wakesys, Beyonk, Peek Pro for lane venues",
+      "Research: HIPAA 15-day access rule, ChartRequest, Tabflows, Patient Protect; QBO childcare statements, brightwheel, Procare, MyKidReports"
+    ],
+    "unverifiedSignals": [
+      {
+        "url": "https://www.freelancer.com/api/projects/0.1/projects/40786686/?full_description=true",
+        "reason": "contains instructions (tells bidders to start their reply with a set phrase); not used."
+      },
+      {
+        "url": "https://www.freelancer.com/api/projects/0.1/projects/all/?query=axe&limit=20&full_description=true",
+        "reason": "contains instructions (a listing asks AI agents to label their bids); not used."
+      },
+      {
+        "url": "https://supabase.com/docs/guides/security/hipaa-compliance",
+        "reason": "contains instructions (a note addressed to AI agents); not used."
+      },
+      {
+        "url": "https://dev.wix.com/docs/build-apps/launch-your-app/app-distribution/app-market-guidelines",
+        "reason": "contains instructions (header tells AI agents to follow an outside URL); not used."
+      },
+      {
+        "url": "https://www.education.gov.au/early-childhood/providers/workforce/worker-retention-payment",
+        "reason": "HTTP 503 to WebFetch on this and several other education.gov.au pages; the extension, Year 3 and minimum-rate details were seen in snippets only."
+      },
+      {
+        "url": "https://www.ndis.gov.au/news/11764",
+        "reason": "HTTP 403; the 90-day NDIS claiming limit from 2026-12-01 was seen in a snippet only."
+      },
+      {
+        "url": "https://help.employmenthero.com/hc/en-au/articles/17426940262415-How-to-set-up-the-ECEC-worker-retention-payment-in-the-payroll-platform",
+        "reason": "HTTP 403; set-up details from a snippet only."
+      },
+      {
+        "url": "https://advocacy.sba.gov/wp-content/uploads/2026/06/Comment-Letter-ADA-Title-II-Extension-of-Compliance-Dates-062226.pdf",
+        "reason": "HTTP 403; SBA Advocacy's call to withdraw or narrow the rule for small governments seen in snippets only."
+      },
+      {
+        "url": "https://www.federalregister.gov/documents/2026/08/14/2026-16606/regulatory-agenda",
+        "reason": "redirect to a challenge host; the Title II rule's listing under Long-Term Actions is from a snippet only."
+      },
+      {
+        "url": "https://www.the74million.org/article/overwhelmed-esa-systems-in-west-virginia-arkansas-leave-thousands-of-homeschoolers-hanging/",
+        "reason": "snippet only (ESA payment delays)."
+      },
+      {
+        "url": "https://www.propublica.org/article/school-voucher-management-classwallet-odyssey-merit-student-first",
+        "reason": "snippet only (voucher platform problems)."
+      },
+      {
+        "url": "https://moodle.org/mod/forum/discuss.php?d=458026",
+        "reason": "HTTP 403 from moodle.org forums."
+      },
+      {
+        "url": "https://www.edugeek.net/forums/topic/214538-attendance-coodes/",
+        "reason": "HTTP 403."
+      },
+      {
+        "url": "https://applevis.com/comment/202623",
+        "reason": "HTTP 403; a patient's screen-reader problem with a portal code field seen in a snippet only."
+      },
+      {
+        "url": "https://www.g2.com/products/fundrobin/pricing",
+        "reason": "HTTP 403; FundRobin's £19 a month with deadline tracking from a snippet only."
+      },
+      {
+        "url": "https://cc-publicdocs.santa-ana.org/WebLink/1/doc/550269/Page1.aspx",
+        "reason": "cookie wall; a city's DocAccess sole-source figure seen in a snippet only."
+      },
+      {
+        "url": "https://citizenportal.ai/articles/10301402/indiana/grant-county/matthews/clerk-warns-town-website-and-meeting-materials-must-comply-with-ada-deadlines",
+        "reason": "HTTP 403; automated meeting summaries seen in search results only."
+      },
+      {
+        "url": "https://www.govloop.com/community/blog/the-document-problem-no-one-is-talking-about/",
+        "reason": "HTTP 403."
+      },
+      {
+        "url": "https://support.bookeo.com/hc/en-us/articles/360018202671",
+        "reason": "HTTP 403; Bookeo's one-resource-per-booking behaviour from snippets only."
+      },
+      {
+        "url": "https://help.fareharbor.com/hc/en-us/articles/40897623777947-Introduction-to-resources",
+        "reason": "HTTP 403; whether one FareHarbor booking can hold several lanes is unknown."
+      },
+      {
+        "url": "https://poweredbyrkd.com/",
+        "reason": "DNS lookup failed in this session (WebFetch and the fetch helper); a fact about this run's path, not evidence that the vendor closed."
+      },
+      {
+        "url": "https://www.mumsnet.com/talk/am_i_being_unreasonable/5372749-have-you-set-up-a-non-profit?page=2",
+        "reason": "fetched but over a year old (2025-07-18) and general; not used."
+      },
+      {
+        "url": "https://www.paubox.com/blog/hipaa-privacy-rule-final-rule-15-day-records-request-deadline",
+        "reason": "vendor blog; a search summary gave different HIPAA dates from the Federal Register, which was used instead."
+      }
+    ],
+    "rejectedCandidates": [
+      {
+        "title": "15-Day Records Request Clock for Small Practices",
+        "total": 12,
+        "reason": "Research ended it: HHS says the smallest practices get few access requests and points them to free association and government resources; ChartRequest offers queues with completion timers, free for eligible specialties; the product would hold PHI (request dates are identifiers); no small-practice complaint after 2026-08-30."
+      },
+      {
+        "title": "Year-End Childcare Payment Statements for QuickBooks Online",
+        "total": 17,
+        "reason": "Research ended it: the floor is not met (newest buyer complaint 2025-10-23, no paid job since 2026-06-01); replacement billing platforms (brightwheel, Procare, MyKidReports from free) do the whole job. Re-check in January 2027."
+      },
+      {
+        "title": "Booking-Tap Counter for Local Service Sites",
+        "total": 18,
+        "reason": "Watchlist entry (first seen 2026-11-27); research ended it: Wix Analytics counts phone, WhatsApp and button clicks and emails reports on a schedule, GA4 counts outbound clicks with no setup, free WordPress plugins count taps by page and source; no owner complaint found."
+      },
+      {
+        "title": "Account Switch Sign-up Watch for Shopify Shops",
+        "total": 17,
+        "reason": "Watchlist entry (first seen 2026-11-27), re-researched: one of its two threads was a Shopify Partner's and resolved as temporary; Shopify changed new-account sign-in webhooks on 2026-10-28; no sunset date announced; no new owner complaint since 2026-10-01. Leaves the watchlist."
+      },
+      {
+        "title": "Hijack Window Order Check for Shopify Shops",
+        "total": 15,
+        "reason": "Watchlist entry (first seen 2026-11-27), re-researched: no owner posts in November, only a vendor offering free scans; the paid scanner has no reviews; the one-off incident's demand has faded. Leaves the watchlist."
+      },
+      {
+        "title": "Board Hours Filer for Small Beauty and Barber Schools",
+        "total": 18,
+        "reason": "Mandate only (Pennsylvania and Texas board hour reporting); no owner complaint and no spend found in the spend pass; not researched because higher-ranked candidates filled the review target."
+      },
+      {
+        "title": "Ledger-to-Register for Small Cemeteries",
+        "total": 18,
+        "reason": "One awarded paid job for the task in a crowded market of cemetery-records products (CemSites, webCemeteries, Cemify and others); not researched."
+      },
+      {
+        "title": "ESA and Scholarship Receivables Desk for Microschools and Small Private Schools",
+        "total": 17,
+        "reason": "Complaints are second-hand through news reports; no spend found; FACTS and Blackbaud cover school-choice payments for larger schools; not researched."
+      },
+      {
+        "title": "Room-Move Occupancy Planner for Independent UK Nurseries",
+        "total": 17,
+        "reason": "One paid job older than 90 days; nursery platforms (Famly, Procare and others) already forecast room moves; not researched."
+      },
+      {
+        "title": "Course Tool Screen-Reader Pre-Check",
+        "total": 17,
+        "reason": "Only one dated course-tool complaint (since fixed); institutional buyer; considered for the wildcard but ranked below Terminal Journeys."
+      },
+      {
+        "title": "NDIS Claim Clock for Small Therapy Practices on Xero",
+        "total": 17,
+        "reason": "Newest evidence 2025-10-28 (over 180 days); NDIS practice software covers funding periods; the spend pass found no paid job."
+      },
+      {
+        "title": "NOM-035 Questionnaire Scoring for Small Mexican Employers",
+        "total": 16,
+        "reason": "One employer posting the same job twice; competitors unchecked; weak fit with the institutional lens."
+      },
+      {
+        "title": "Patient-Tool Evidence Log for Small Health Centres (HHS Section 504)",
+        "total": 16,
+        "reason": "Mandate and association guidance only; no clinic complaint; overlaps the published Spoken Booking Check on the vendor side."
+      },
+      {
+        "title": "Form-Fee Exit for Raiser's Edge NXT Customers",
+        "total": 15,
+        "reason": "Real complaints about a 1.5 to 2% form fee, but from mid-size nonprofits, and integrations from Donorbox, Givebutter and others already exist."
+      },
+      {
+        "title": "Staff Sign-In and Headcount for Small Montessori Schools",
+        "total": 15,
+        "reason": "Requests on Transparent Classroom's board are real but old (top request from 2016); childcare platforms include staff check-in; no API known."
+      },
+      {
+        "title": "Timetable Import Bridge for Small Schools on Gibbon",
+        "total": 15,
+        "reason": "One thread on a niche platform, from a large school; free timetablers (FET, UniTime) and partner services."
+      },
+      {
+        "title": "Accessible Intake and Consent Forms for Small HHS-Funded Providers",
+        "total": 14,
+        "reason": "Mandate only; no complaint or spend found."
+      },
+      {
+        "title": "Bulk Tuition Invoicing for ERPNext Schools",
+        "total": 14,
+        "reason": "One poster; the Education app and consultants cover it."
+      },
+      {
+        "title": "Accommodation Sync for Brightspace",
+        "total": 14,
+        "reason": "Rejection rule: the buyer is an institution needing procurement for the first sale; the evidence is from 2025; close to the published Extension Desk (2026-10-26)."
+      },
+      {
+        "title": "Staff Compliance Matrix for Small CQC Care Providers",
+        "total": 16,
+        "reason": "Rejection rule: duplicate of the published Staff Files and Right-to-Work Follow-Ups (2026-11-16), and DBS trackers were ruled out by earlier runs."
+      },
+      {
+        "title": "Martyn's Law Risk Assessment Form for Primary Schools",
+        "total": 13,
+        "reason": "Rejection rule: duplicate of the published Briefing Log for Martyn's Law Standard Tier (2026-11-17)."
+      }
+    ],
+    "watchlist": [],
+    "caveats": "First run of 2026-11-28 (Saturday, institutional back-office lens; focus sources A2, A13 in place of B5, which is on the avoid list, and C4). Four regular ideas ship, all provisional (Retention Pay Check 19, CIC Funder Shortlist 19, Multi-Lane Party Booking 15, Archive-or-Fix Register 16), and a provisional wildcard (Terminal Journeys, 20); none came near the gate of 22, and none has a complaint dated within 90 days except the wildcard and Multi-Lane. Twenty-two new candidates were generated (11 with a small-business buyer, 5 aimed at the owner's interests) plus the four watchlist entries of 2026-11-27, three of them re-researched; 3 failed a rejection rule. Eight were researched: three were ended in research (15-Day Records Request Clock, 12; Year-End Childcare Statements, 17, floor not met; Booking-Tap Counter, 18, a free native path in Wix and GA4), and five were reviewed: four regular reviews, all rescores (Retention 20 to 19, Funder 21 to 19, Archive 18 to 16, Multi-Lane 18 to 15), and one wildcard review (21 to 20). Three ideas had survived after three regular reviews, so the review target was met; Multi-Lane, which survived the fourth review, ships as the fourth provisional idea, within the cap of four. Multi-Lane Party Booking is the watchlist entry Lane and Bay Booking for Square Venues (first seen 2026-11-27), re-scoped to non-golf lane venues. Selection constraints: ideas 1 and 3 are Small Business Ops, idea 2 is Micro-SaaS with smallBusiness true, idea 4 is Civic & Public Sector and the wildcard a Developer Tool, so no category has more than two; ideas 1 to 4 are substantial Multi-week ideas with build plans. The constraint of at least one Weekend MVP cannot be met: every surviving idea needs a platform connection (Xero, Square, 360Giving or a site crawl) and a scheduled job, and the one candidate that could have been a Weekend MVP, Year-End Childcare Statements, failed the floor. Ordering: Multi-Lane (15, small business) is placed before Archive-or-Fix (16, public bodies) under the small-business preference for totals within 2 points. Access: the subagents' shared WebSearch budget for one turn ran out during research, so several researchers finished on fetches alone; education.gov.au answered 503 throughout, so Worker Retention Payment rate tables are unverified; HigherEdJobs (C4) served its 212-byte interstitial for the fourth Saturday running."
+  }
+}

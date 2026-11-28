@@ -744,3 +744,5 @@ Format: `YYYY-MM-DD [type] description` (max 200 chars). Types: decision, plan, 
 2026-11-26 [doc] Created ideas/2026-11-26.json (schemaVersion 3, 4 ideas): Overlay Exit (20, provisional), Bill Check (17, provisional), 1099 List (13, provisional), Heard-As (16, prov., wildcard)
 
 2026-11-27 [doc] Created ideas/2026-11-27.json (schemaVersion 3, 5 ideas): Bill Leak (20, prov.), Pre-Order (19, prov.), Cash Close (19, prov.), Menu Desk (17, prov.), Spoken (15, prov., wildcard)
+
+2026-11-28 [doc] Created ideas/2026-11-28.json (schemaVersion 3, 5 ideas): Retention Pay (19, prov.), CIC Funder (19, prov.), Multi-Lane (15, prov.), Archive (16, prov.), Terminal (20, prov, wildcard)

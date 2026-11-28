@@ -695,3 +695,8 @@
 | 2026-11-27 | Blind Cash Close for Square Counters | Small Business Ops | Multi-week | 19 | provisional |  |
 | 2026-11-27 | Menu and Specials Desk for Small Restaurants | Micro-SaaS | Multi-week | 17 | provisional |  |
 | 2026-11-27 | Spoken Booking Check | Accessibility & Compliance | Multi-week | 15 | provisional, wildcard |  |
+| 2026-11-28 | Retention Pay Check for Childcare Centres on Xero Payroll AU | Small Business Ops | Multi-week | 19 | provisional |  |
+| 2026-11-28 | CIC Funder Shortlist and Bid Calendar | Micro-SaaS | Multi-week | 19 | provisional |  |
+| 2026-11-28 | Multi-Lane Party Booking for Square Venues | Small Business Ops | Multi-week | 15 | provisional |  |
+| 2026-11-28 | Archive-or-Fix Register for Small Public Bodies | Civic & Public Sector | Multi-week | 16 | provisional |  |
+| 2026-11-28 | Terminal Journeys: Screen-Reader Transcript Tests for Coding-Agent CLIs | Developer Tool | Multi-week | 20 | provisional, wildcard |  |

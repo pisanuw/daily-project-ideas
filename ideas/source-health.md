@@ -1,6 +1,6 @@
 # Source health
 
-Generated 2026-11-27 from the last 45 days of `ideas/run-log.jsonl` (38 runs). Do not edit by hand: regenerate with `python3 scripts/source_health.py`.
+Generated 2026-11-28 from the last 45 days of `ideas/run-log.jsonl` (39 runs). Do not edit by hand: regenerate with `python3 scripts/source_health.py`.
 
 ## Do not spend searches here
 
@@ -23,21 +23,21 @@ Generated 2026-11-27 from the last 45 days of `ideas/run-log.jsonl` (38 runs). D
 
 | Source | Yields | Status | selected | Access path |
 |---|---|---|---|---|
-| A16 Vendor feature-request boards | complaint | ok-curl | 30 | `curl: https://productideas.xero.com/search?query={q}` |
+| A16 Vendor feature-request boards | complaint | ok-curl | 32 | `curl: https://productideas.xero.com/search?query={q}` |
 | A13 Discourse forums, any niche | complaint | ok | 21 | `webfetch: https://{host}/search.json?q={q}+after%3A{YYYY-MM-DD}` |
+| C5 Policy and regulation trackers | mandate | ok | 16 | `webfetch: https://www.federalregister.gov/api/v1/documents.json?per_page=10&order=newest&conditions[term]={q}` |
 | B12 Paid app marketplaces | spend | ok | 15 | `curl: https://apps.shopify.com/{slug}/reviews?ratings%5B%5D=1&ratings%5B%5D=2&sort_by=newest` |
-| C5 Policy and regulation trackers | mandate | ok | 15 | `webfetch: https://www.federalregister.gov/api/v1/documents.json?per_page=10&order=newest&conditions[term]={q}` |
+| B11 Freelance job boards | spend | ok | 9 | `webfetch: https://www.freelancer.com/api/projects/0.1/projects/active/?query={q}&limit=20&full_description=true` |
 | C10 Change events: shutdowns, price rises, removed free tiers | mandate | ok | 9 | no verified path |
-| B11 Freelance job boards | spend | ok | 8 | `webfetch: https://www.freelancer.com/api/projects/0.1/projects/active/?query={q}&limit=20&full_description=true` |
 | C8 Trade news | mandate | ok-curl | 5 | `curl: https://www.edsurge.com/news` |
 | A14 Plugin and add-on support forums | complaint | ok | 4 | `webfetch: https://wordpress.org/support/plugin/{slug}/` |
 | A3 Open-source teaching tools | complaint | ok | 4 | `curl: https://api.github.com/search/issues?q={q}+is%3Aissue+state%3Aopen+sort%3Areactions&per_page=10` |
 | A12 Ask HN and HN comments | complaint | ok | 3 | `webfetch: https://hn.algolia.com/api/v1/search_by_date?query={q}&tags=comment&hitsPerPage=20` |
 | A11 Accessibility practitioners | complaint | ok-curl | 2 | `webfetch: https://webaim.org/discussion/archives` |
 | A15 No-code automation communities | complaint | ok | 2 | `webfetch: https://community.make.com/search.json?q={q}+after%3A{YYYY-MM-DD}` |
+| A19 GitHub Discussions on popular repos | complaint | ok | 2 | `webfetch: https://github.com/{owner}/{repo}/discussions?discussions_q={q}+sort%3Adate_created` |
 | A5 Educator Stack Exchanges | complaint | ok-curl | 2 | `curl: https://api.stackexchange.com/2.3/questions?site={cseducators|academia|matheducators}&order=desc&sort=creation&pagesize=20&filter=withbody` |
 | B1 Teachers Pay Teachers and Etsy | spend | ok | 2 | `webfetch: https://www.teacherspayteachers.com/Browse/Search:{q}` |
-| A19 GitHub Discussions on popular repos | complaint | ok | 1 | `webfetch: https://github.com/{owner}/{repo}/discussions?discussions_q={q}+sort%3Adate_created` |
 | B9 Freelance build requests | spend | ok-curl | 1 | `curl: https://www.freelancer.com/api/projects/0.1/projects/active/?query={q}&limit=20&full_description=true` |
 | A17 Lobsters | complaint | ok | 0 | `both: https://lobste.rs/t/{tag}.json?page={N}` |
 | A18 Stack Exchange sites for work, software and trades | complaint | ok-curl | 0 | `curl: https://api.stackexchange.com/2.3/search/advanced?site={site}&q={q}&order=desc&sort=creation&pagesize=20&filter=withbody` |
@@ -69,78 +69,79 @@ These sources are not on the avoid list, because at least one of their paths wor
 
 | Host | usable/tried | Outcomes | Last usable |
 |---|---|---|---|
-| www.freelancer.com | 852/908 | empty 56, ok 852 | 2026-11-27 |
-| community.shopify.com | 533/593 | empty 30, http_404 1, http_429 29, ok 533 | 2026-11-27 |
-| apps.shopify.com | 455/536 | empty 50, http_404 25, http_429 4, ok 455, redirect 2 | 2026-11-27 |
-| community.squareup.com | 339/421 | empty 74, http_404 5, http_5xx 3, ok 339 | 2026-11-27 |
+| www.freelancer.com | 963/1023 | empty 59, http_404 1, ok 963 | 2026-11-28 |
+| community.shopify.com | 549/612 | empty 30, http_404 1, http_429 32, ok 549 | 2026-11-28 |
+| apps.shopify.com | 457/538 | empty 50, http_404 25, http_429 4, ok 457, redirect 2 | 2026-11-28 |
+| community.squareup.com | 390/474 | empty 75, http_404 6, http_5xx 3, ok 390 | 2026-11-28 |
 | hn.algolia.com | 316/372 | empty 56, ok 316 | 2026-11-27 |
-| productideas.xero.com | 311/327 | empty 12, http_404 2, ok 311, redirect 2 | 2026-11-26 |
-| wordpress.org | 213/216 | empty 1, http_404 2, ok 213 | 2026-11-27 |
-| api.github.com | 112/162 | empty 16, environment 6, http_403 20, http_404 7, http_5xx 1, ok 112 | 2026-11-27 |
-| squareup.com | 102/142 | empty 4, http_429 32, ok 102, redirect 4 | 2026-11-27 |
-| api.stackexchange.com | 111/121 | allowlist 5, empty 5, ok 111 | 2026-11-26 |
-| github.com | 110/119 | http_403 9, ok 110 | 2026-11-27 |
+| productideas.xero.com | 327/343 | empty 12, http_404 2, ok 327, redirect 2 | 2026-11-28 |
+| wordpress.org | 216/219 | empty 1, http_404 2, ok 216 | 2026-11-28 |
+| api.github.com | 153/203 | empty 16, environment 6, http_403 20, http_404 7, http_5xx 1, ok 153 | 2026-11-28 |
+| squareup.com | 114/162 | empty 8, http_429 34, ok 114, redirect 6 | 2026-11-28 |
+| github.com | 142/151 | http_403 9, ok 142 | 2026-11-28 |
+| api.stackexchange.com | 126/142 | allowlist 8, empty 8, ok 126 | 2026-11-28 |
+| developer.squareup.com | 114/127 | empty 3, http_404 9, ok 114, redirect 1 | 2026-11-28 |
 | community.n8n.io | 112/113 | empty 1, ok 112 | 2026-11-24 |
-| developer.squareup.com | 101/112 | empty 1, http_404 9, ok 101, redirect 1 | 2026-11-27 |
-| www.federalregister.gov | 69/97 | empty 11, ok 69, redirect 17 | 2026-11-27 |
-| forum.invoiceninja.com | 82/85 | empty 3, ok 82 | 2026-11-23 |
+| www.federalregister.gov | 79/110 | empty 11, http_429 1, ok 79, redirect 19 | 2026-11-28 |
+| quickbooks.intuit.com | 84/96 | empty 5, http_404 1, http_5xx 1, ok 84, timeout 5 | 2026-11-28 |
+| forum.invoiceninja.com | 83/86 | empty 3, ok 83 | 2026-11-28 |
 | community.calendly.com | 72/78 | empty 4, http_404 1, ok 72, timeout 1 | 2026-11-21 |
-| quickbooks.intuit.com | 67/77 | empty 4, http_404 1, http_5xx 1, ok 67, timeout 4 | 2026-11-26 |
-| apps.xero.com | 40/52 | empty 11, http_404 1, ok 40 | 2026-11-26 |
-| feedback.zeffy.com | 49/52 | http_404 3, ok 49 | 2026-11-24 |
-| forum.manager.io | 49/52 | empty 3, ok 49 | 2026-11-26 |
-| shopify.dev | 51/51 | ok 51 | 2026-11-27 |
-| api.wordpress.org | 47/48 | empty 1, ok 47 | 2026-11-25 |
+| shopify.dev | 56/56 | ok 56 | 2026-11-28 |
+| apps.xero.com | 41/53 | empty 11, http_404 1, ok 41 | 2026-11-28 |
+| feedback.zeffy.com | 50/53 | http_404 3, ok 50 | 2026-11-28 |
+| forum.manager.io | 50/53 | empty 3, ok 50 | 2026-11-28 |
+| api.wordpress.org | 51/52 | empty 1, ok 51 | 2026-11-28 |
+| developer.xero.com | 28/50 | empty 22, ok 28 | 2026-11-28 |
 | help.shopify.com | 48/48 | ok 48 | 2026-11-27 |
 | community.make.com | 42/46 | empty 4, ok 42 | 2026-11-24 |
 | www.gov.uk | 42/43 | http_404 1, ok 42 | 2026-11-26 |
 | raw.githubusercontent.com | 39/42 | empty 1, http_404 2, ok 39 | 2026-11-25 |
-| developer.xero.com | 23/41 | empty 18, ok 23 | 2026-11-26 |
 | community.fly.io | 40/40 | ok 40 | 2026-11-18 |
 | appsumo.com | 38/38 | ok 38 | 2026-11-25 |
 | talk.folksy.com | 33/35 | empty 2, ok 33 | 2026-11-22 |
+| community.blackbaud.com | 27/34 | empty 2, http_403 5, ok 27 | 2026-11-28 |
 | forum.ghost.org | 33/34 | empty 1, ok 33 | 2026-11-24 |
-| community.blackbaud.com | 26/32 | empty 1, http_403 5, ok 26 | 2026-11-25 |
-| forum.posit.co | 29/30 | empty 1, ok 29 | 2026-11-25 |
+| forum.posit.co | 30/31 | empty 1, ok 30 | 2026-11-28 |
+| discuss.openedx.org | 29/30 | empty 1, ok 29 | 2026-11-28 |
 | developer.calendly.com | 29/29 | ok 29 | 2026-11-20 |
 | www.gov.wales | 28/28 | ok 28 | 2026-11-23 |
+| www.peopleperhour.com | 7/28 | empty 21, ok 7 | 2026-11-26 |
 | community.toggl.com | 27/27 | ok 27 | 2026-11-19 |
-| discuss.openedx.org | 25/26 | empty 1, ok 25 | 2026-11-24 |
+| forums.wildapricot.com | 27/27 | ok 27 | 2026-11-28 |
 | forum.cursor.com | 26/26 | ok 26 | 2026-11-25 |
-| forums.wildapricot.com | 26/26 | ok 26 | 2026-11-21 |
 | zapier.com | 21/26 | http_404 4, http_5xx 1, ok 21 | 2026-11-27 |
-| www.peopleperhour.com | 7/25 | empty 18, ok 7 | 2026-11-26 |
-| www.zeffy.com | 21/24 | empty 2, http_403 1, ok 21 | 2026-11-24 |
+| discuss.frappe.io | 25/25 | ok 25 | 2026-11-28 |
+| www.zeffy.com | 22/25 | empty 2, http_403 1, ok 22 | 2026-11-28 |
+| www.xero.com | 24/24 | ok 24 | 2026-11-28 |
 | localsearchforum.com | 23/23 | ok 23 | 2026-11-27 |
 | sellersasksellers.com | 23/23 | ok 23 | 2026-11-22 |
-| www.xero.com | 23/23 | ok 23 | 2026-11-26 |
+| docs.github.com | 21/22 | http_404 1, ok 21 | 2026-11-28 |
 | export.arxiv.org | 19/22 | empty 3, ok 19 | 2026-11-25 |
 | support.zeffy.com | 19/22 | http_404 3, ok 19 | 2026-11-24 |
-| docs.github.com | 20/21 | http_404 1, ok 20 | 2026-11-27 |
+| workspace.google.com | 22/22 | ok 22 | 2026-11-28 |
+| developers.google.com | 21/21 | ok 21 | 2026-11-28 |
 | trustmrr.com | 19/21 | empty 1, http_404 1, ok 19 | 2026-11-25 |
-| developers.google.com | 20/20 | ok 20 | 2026-11-27 |
-| discuss.frappe.io | 20/20 | ok 20 | 2026-11-23 |
+| www.govinfo.gov | 21/21 | ok 21 | 2026-11-28 |
+| forum.code.org | 19/20 | empty 1, ok 19 | 2026-11-28 |
 | calendly.com | 15/18 | empty 3, ok 15 | 2026-11-25 |
-| marketplace.atlassian.com | 16/17 | empty 1, ok 16 | 2026-11-25 |
+| marketplace.atlassian.com | 17/18 | empty 1, ok 17 | 2026-11-28 |
 | community.etsy.com | 5/16 | allowlist 1, empty 6, http_404 4, ok 5 | 2026-11-22 |
+| community.shopify.dev | 16/16 | ok 16 | 2026-11-28 |
 | communityhub.sage.com | 16/16 | ok 16 | 2026-11-26 |
 | intercom.help | 13/16 | http_404 3, ok 13 | 2026-11-24 |
+| support.google.com | 15/16 | http_404 1, ok 15 | 2026-11-28 |
 | www.teacherspayteachers.com | 16/16 | ok 16 | 2026-11-25 |
+| www.wix.com | 15/16 | http_404 1, ok 15 | 2026-11-28 |
 | answers.netlify.com | 13/15 | empty 1, http_404 1, ok 13 | 2026-11-25 |
-| forum.code.org | 15/15 | ok 15 | 2026-11-25 |
-| community.shopify.dev | 14/14 | ok 14 | 2026-11-27 |
+| www.capterra.com | 3/15 | http_403 11, http_404 1, ok 3 | 2026-11-16 |
+| discourse.jupyter.org | 8/14 | empty 6, ok 8 | 2026-11-28 |
 | givebutter.canny.io | 14/14 | ok 14 | 2026-11-24 |
-| workspace.google.com | 14/14 | ok 14 | 2026-11-27 |
+| news.ycombinator.com | 13/14 | http_429 1, ok 13 | 2026-11-28 |
 | www.accountingweb.co.uk | 0/14 | http_403 14 | never |
-| www.capterra.com | 3/14 | http_403 10, http_404 1, ok 3 | 2026-11-16 |
-| www.govinfo.gov | 14/14 | ok 14 | 2026-11-27 |
-| www.wix.com | 13/14 | http_404 1, ok 13 | 2026-11-27 |
+| www.browserstack.com | 14/14 | ok 14 | 2026-11-28 |
 | apps.apple.com | 11/13 | http_404 2, ok 11 | 2026-11-27 |
 | community.zoom.com | 8/13 | empty 5, ok 8 | 2026-11-24 |
 | dev.to | 11/13 | http_404 2, ok 11 | 2026-11-25 |
-| discourse.jupyter.org | 7/13 | empty 6, ok 7 | 2026-11-25 |
-| news.ycombinator.com | 12/13 | http_429 1, ok 12 | 2026-11-27 |
-| support.google.com | 12/13 | http_404 1, ok 12 | 2026-11-27 |
 | www.achrnews.com | 12/13 | empty 1, ok 12 | 2026-11-27 |
 | blog.xero.com | 12/12 | ok 12 | 2026-11-26 |
 | changelog.shopify.com | 12/12 | ok 12 | 2026-11-27 |
@@ -148,36 +149,48 @@ These sources are not on the avoid list, because at least one of their paths wor
 | docs.stripe.com | 12/12 | ok 12 | 2026-11-23 |
 | ico.org.uk | 11/12 | http_404 1, ok 11 | 2026-11-23 |
 | www.avalara.com | 11/12 | http_404 1, ok 11 | 2026-11-26 |
-| www.browserstack.com | 12/12 | ok 12 | 2026-11-27 |
+| www.irs.gov | 12/12 | ok 12 | 2026-11-28 |
+| ask.gibbonedu.org | 11/11 | ok 11 | 2026-11-28 |
+| developer.intuit.com | 1/11 | empty 10, ok 1 | 2026-11-28 |
+| developer.wordpress.org | 11/11 | ok 11 | 2026-11-28 |
 | gumroad.com | 7/11 | empty 4, ok 7 | 2026-11-22 |
+| transparentclassroom.uservoice.com | 11/11 | ok 11 | 2026-11-28 |
+| www.hhs.gov | 0/11 | http_403 11 | never |
 | www.idealist.org | 1/11 | http_404 10, ok 1 | 2026-11-07 |
 | www.quotientapp.com | 10/11 | empty 1, ok 10 | 2026-11-20 |
+| www.ukbusinessforums.co.uk | 9/11 | empty 2, ok 9 | 2026-11-28 |
 | api.nsf.gov | 10/10 | ok 10 | 2026-11-25 |
 | cursor.com | 9/10 | http_404 1, ok 9 | 2026-11-25 |
-| developer.wordpress.org | 10/10 | ok 10 | 2026-11-27 |
 | docs.posit.co | 10/10 | ok 10 | 2026-11-25 |
 | grants.nih.gov | 9/10 | ok 9, redirect 1 | 2026-11-25 |
 | arxiv.org | 8/9 | empty 1, ok 8 | 2026-11-25 |
 | cdtfa.ca.gov | 9/9 | ok 9 | 2026-11-23 |
-| developer.intuit.com | 0/9 | empty 9 | never |
 | digital-strategy.ec.europa.eu | 9/9 | ok 9 | 2026-11-25 |
 | forum.bubble.io | 8/9 | empty 1, ok 8 | 2026-11-18 |
 | gethelp.wildapricot.com | 5/9 | empty 4, ok 5 | 2026-11-07 |
+| github.blog | 9/9 | ok 9 | 2026-11-28 |
 | help.kajabi.com | 3/9 | http_404 6, ok 3 | 2026-11-24 |
 | help.zoho.com | 2/9 | empty 7, ok 2 | 2026-11-26 |
 | pypi.org | 2/9 | empty 6, http_404 1, ok 2 | 2026-11-18 |
+| support.wix.com | 8/9 | http_404 1, ok 8 | 2026-11-28 |
 | uwaterloo.ca | 8/9 | http_404 1, ok 8 | 2026-11-25 |
 | webaim.org | 6/9 | empty 3, ok 6 | 2026-11-26 |
+| www.bookeo.com | 9/9 | ok 9 | 2026-11-28 |
+| www.governmentjobs.com | 9/9 | ok 9 | 2026-11-28 |
 | www.nyc.gov | 9/9 | ok 9 | 2026-11-27 |
-| www.ukbusinessforums.co.uk | 7/9 | empty 2, ok 7 | 2026-11-21 |
 | accessible.org | 8/8 | ok 8 | 2026-11-27 |
+| community.d2l.com | 6/8 | empty 2, ok 6 | 2026-11-28 |
 | community.glowforge.com | 7/8 | empty 1, ok 7 | 2026-11-22 |
+| community.myob.com | 7/8 | empty 1, ok 7 | 2026-11-28 |
 | community.retellai.com | 8/8 | ok 8 | 2026-11-23 |
 | community.zeffy.com | 8/8 | ok 8 | 2026-11-24 |
 | docs.n8n.io | 7/8 | empty 1, ok 7 | 2026-11-18 |
+| employmenthero.com | 8/8 | ok 8 | 2026-11-28 |
 | sellercommunity.com | 0/8 | empty 3, redirect 5 | never |
+| www.chartrequest.com | 7/8 | http_404 1, ok 7 | 2026-11-28 |
+| www.education.gov.au | 0/8 | http_5xx 8 | never |
+| www.fairwork.gov.au | 0/8 | empty 2, http_5xx 4, timeout 2 | never |
 | www.icaew.com | 6/8 | empty 2, ok 6 | 2026-11-23 |
-| www.irs.gov | 8/8 | ok 8 | 2026-11-26 |
 | www.producthunt.com | 8/8 | ok 8 | 2026-11-25 |
 | www.reddit.com | 0/8 | allowlist 3, http_403 5 | never |
 | www.valueaddedresource.net | 8/8 | ok 8 | 2026-11-15 |
@@ -187,13 +200,16 @@ These sources are not on the avoid list, because at least one of their paths wor
 | community.adobe.com | 7/7 | ok 7 | 2026-11-27 |
 | cseducators.stackexchange.com | 4/7 | allowlist 2, http_403 1, ok 4 | 2026-11-25 |
 | fly.io | 5/7 | ok 5, redirect 2 | 2026-11-18 |
-| github.blog | 7/7 | ok 7 | 2026-11-25 |
+| learn.microsoft.com | 5/7 | empty 2, ok 5 | 2026-11-28 |
+| localgiving.org | 7/7 | ok 7 | 2026-11-28 |
 | oag.ca.gov | 7/7 | ok 7 | 2026-11-07 |
+| supabase.com | 7/7 | ok 7 | 2026-11-28 |
 | teachngo.frill.co | 7/7 | ok 7 | 2026-11-24 |
 | trykintsugi.com | 7/7 | ok 7 | 2026-11-23 |
-| www.fairwork.gov.au | 0/7 | empty 2, http_5xx 3, timeout 2 | never |
+| www.etsy.com | 0/7 | empty 1, http_403 6 | never |
+| www.getapp.com | 0/7 | http_403 7 | never |
 | www.grants.nih.gov | 6/7 | http_404 1, ok 6 | 2026-11-25 |
-| www.hhs.gov | 0/7 | http_403 7 | never |
+| www.higheredjobs.com | 0/7 | empty 7 | never |
 | www.jotform.com | 7/7 | ok 7 | 2026-11-27 |
 | www.wsib.ca | 6/7 | empty 1, ok 6 | 2026-11-24 |
 | academia.stackexchange.com | 3/6 | allowlist 2, http_403 1, ok 3 | 2026-11-25 |
@@ -205,26 +221,29 @@ These sources are not on the avoid list, because at least one of their paths wor
 | community.mainwp.com | 6/6 | ok 6 | 2026-11-25 |
 | craftybase.com | 3/6 | ok 3, redirect 3 | 2026-11-22 |
 | gov.wales | 6/6 | ok 6 | 2026-11-23 |
-| learn.microsoft.com | 4/6 | empty 2, ok 4 | 2026-11-25 |
 | partial.ly | 6/6 | ok 6 | 2026-11-08 |
 | seedfund.nsf.gov | 3/6 | http_404 3, ok 3 | 2026-11-06 |
 | square.com | 1/6 | ok 1, redirect 5 | 2026-11-19 |
 | support.toasttab.com | 6/6 | ok 6 | 2026-11-27 |
 | taxcloud.com | 6/6 | ok 6 | 2026-11-23 |
 | techcommunity.microsoft.com | 6/6 | ok 6 | 2026-11-25 |
+| thesector.com.au | 3/6 | empty 3, ok 3 | 2026-11-28 |
 | www.acas.org.uk | 6/6 | ok 6 | 2026-11-21 |
 | www.ce-go.com | 6/6 | ok 6 | 2026-11-24 |
-| www.etsy.com | 0/6 | empty 1, http_403 5 | never |
 | www.ftc.gov | 6/6 | ok 6 | 2026-11-27 |
 | www.legislation.gov.uk | 4/6 | empty 2, ok 4 | 2026-11-23 |
+| www.plinth.org.uk | 6/6 | ok 6 | 2026-11-28 |
 | www.prairielearn.com | 6/6 | ok 6 | 2026-11-25 |
 | www.shopify.com | 6/6 | ok 6 | 2026-11-27 |
 | www.signupgenius.com | 4/6 | empty 2, ok 4 | 2026-11-25 |
 | www.tutorbird.com | 5/6 | empty 1, ok 5 | 2026-11-24 |
 | adanews.ada.org | 5/5 | ok 5 | 2026-11-27 |
+| advocacy.sba.gov | 0/5 | http_403 5 | never |
 | api.npmjs.org | 5/5 | ok 5 | 2026-11-27 |
+| code.claude.com | 5/5 | ok 5 | 2026-11-28 |
 | community.getjobber.com | 0/5 | http_403 5 | never |
 | community.honeybook.com | 4/5 | http_403 1, ok 4 | 2026-11-26 |
+| community.open-emr.org | 5/5 | ok 5 | 2026-11-28 |
 | community.servicem8.com | 5/5 | ok 5 | 2026-11-27 |
 | despatch.blog.gov.uk | 5/5 | ok 5 | 2026-11-17 |
 | developer.etsy.com | 5/5 | ok 5 | 2026-11-22 |
@@ -234,26 +253,29 @@ These sources are not on the avoid list, because at least one of their paths wor
 | engineering.toggl.com | 5/5 | ok 5 | 2026-11-19 |
 | feedback.qbo.intuit.com | 0/5 | allowlist 2, empty 3 | never |
 | flippa.com | 2/5 | empty 3, ok 2 | 2026-11-07 |
+| forum.omeka.org | 5/5 | ok 5 | 2026-11-28 |
 | forum.squarespace.com | 0/5 | empty 1, http_403 4 | never |
 | foscos.fssai.gov.in | 0/5 | empty 5 | never |
+| grantsights.com | 5/5 | ok 5 | 2026-11-28 |
+| help.employmenthero.com | 0/5 | http_403 5 | never |
 | help.klaviyo.com | 5/5 | ok 5 | 2026-11-20 |
 | help.trackitforward.com | 5/5 | ok 5 | 2026-11-24 |
 | innovations.xero.com | 2/5 | empty 3, ok 2 | 2026-11-20 |
 | invoiceninja.com | 5/5 | ok 5 | 2026-11-19 |
 | n8n.io | 5/5 | ok 5 | 2026-11-20 |
 | payhip.com | 5/5 | ok 5 | 2026-11-22 |
-| supabase.com | 5/5 | ok 5 | 2026-11-25 |
-| support.wix.com | 5/5 | ok 5 | 2026-11-27 |
 | tax.colorado.gov | 5/5 | ok 5 | 2026-11-23 |
 | toggl.com | 5/5 | ok 5 | 2026-11-19 |
 | uptimerobot.com | 5/5 | ok 5 | 2026-11-25 |
 | workiz.canny.io | 5/5 | ok 5 | 2026-11-27 |
+| wpamelia.com | 5/5 | ok 5 | 2026-11-28 |
+| www.360giving.org | 1/5 | http_404 4, ok 1 | 2026-11-28 |
+| www.aapc.com | 5/5 | ok 5 | 2026-11-28 |
+| www.ada.gov | 5/5 | ok 5 | 2026-11-28 |
 | www.airbnb.com | 5/5 | ok 5 | 2026-11-23 |
 | www.ato.gov.au | 0/5 | http_403 5 | never |
 | www.breathehr.com | 4/5 | http_404 1, ok 4 | 2026-11-21 |
 | www.cdtfa.ca.gov | 5/5 | ok 5 | 2026-11-23 |
-| www.getapp.com | 0/5 | http_403 5 | never |
-| www.higheredjobs.com | 0/5 | empty 5 | never |
 | www.inventora.com | 4/5 | http_404 1, ok 4 | 2026-11-22 |
 | www.mymusicstaff.com | 5/5 | ok 5 | 2026-11-24 |
 | www.rosterelf.com | 4/5 | http_404 1, ok 4 | 2026-11-17 |
@@ -264,22 +286,24 @@ These sources are not on the avoid list, because at least one of their paths wor
 | www.wordfence.com | 0/5 | empty 5 | never |
 | www.wrkr.com.au | 5/5 | ok 5 | 2026-11-19 |
 | apify.com | 3/4 | empty 1, ok 3 | 2026-11-20 |
+| assistivlabs.com | 4/4 | ok 4 | 2026-11-28 |
 | astalty.com.au | 4/4 | ok 4 | 2026-11-21 |
 | blog.insightfulaccountant.com | 4/4 | ok 4 | 2026-11-19 |
 | cleanupowl.com | 3/4 | http_404 1, ok 3 | 2026-11-26 |
 | clockify.me | 4/4 | ok 4 | 2026-11-19 |
-| community.d2l.com | 4/4 | ok 4 | 2026-11-25 |
 | community.letsencrypt.org | 4/4 | ok 4 | 2026-11-25 |
 | community.spiceworks.com | 2/4 | empty 2, ok 2 | 2026-11-11 |
 | community.withairbnb.com | 0/4 | redirect 4 | never |
 | developer.service.hmrc.gov.uk | 4/4 | ok 4 | 2026-11-26 |
 | devforum.zoom.us | 4/4 | ok 4 | 2026-11-10 |
-| employmenthero.com | 4/4 | ok 4 | 2026-11-16 |
+| download.nvaccess.org | 4/4 | ok 4 | 2026-11-28 |
 | expenseplus.co.uk | 4/4 | ok 4 | 2026-11-21 |
 | forum.obsidian.md | 3/4 | empty 1, ok 3 | 2026-11-18 |
 | forum.webflow.com | 0/4 | empty 3, redirect 1 | never |
+| forum.wixstudio.com | 3/4 | empty 1, ok 3 | 2026-11-28 |
 | get.nicejob.com | 3/4 | http_404 1, ok 3 | 2026-11-27 |
 | givebutter.com | 4/4 | ok 4 | 2026-11-24 |
+| grantnav.threesixtygiving.org | 4/4 | ok 4 | 2026-11-28 |
 | hackceleration.com | 4/4 | ok 4 | 2026-11-27 |
 | help.etsy.com | 3/4 | empty 1, ok 3 | 2026-11-15 |
 | help.getharvest.com | 4/4 | ok 4 | 2026-11-18 |
@@ -292,6 +316,7 @@ These sources are not on the avoid list, because at least one of their paths wor
 | meet.ribblr.com | 4/4 | ok 4 | 2026-11-22 |
 | militaryphs.org | 4/4 | ok 4 | 2026-11-24 |
 | moneyminder.com | 4/4 | ok 4 | 2026-11-24 |
+| poweredbyrkd.com | 0/4 | environment 3, timeout 1 | never |
 | pressprimer.com | 3/4 | empty 1, ok 3 | 2026-11-21 |
 | ramp.com | 4/4 | ok 4 | 2026-11-26 |
 | sigcse.org | 4/4 | ok 4 | 2026-11-25 |
@@ -301,6 +326,7 @@ These sources are not on the avoid list, because at least one of their paths wor
 | www.accaglobal.com | 4/4 | ok 4 | 2026-11-23 |
 | www.audioeye.com | 4/4 | ok 4 | 2026-11-27 |
 | www.biggerpockets.com | 4/4 | ok 4 | 2026-11-26 |
+| www.civicplus.com | 4/4 | ok 4 | 2026-11-28 |
 | www.fssai.gov.in | 3/4 | empty 1, ok 3 | 2026-11-23 |
 | www.getbcs.com | 4/4 | ok 4 | 2026-11-23 |
 | www.getharvest.com | 3/4 | http_404 1, ok 3 | 2026-11-25 |
@@ -315,23 +341,26 @@ These sources are not on the avoid list, because at least one of their paths wor
 | www.paidnice.com | 4/4 | ok 4 | 2026-11-20 |
 | www.paytraqer.com | 2/4 | http_404 2, ok 2 | 2026-11-19 |
 | www.pinsentmasons.com | 4/4 | ok 4 | 2026-11-25 |
+| www.tabflows.com | 4/4 | ok 4 | 2026-11-28 |
 | www.trustpilot.com | 3/4 | http_403 1, ok 3 | 2026-11-24 |
 | zeffy.hc.ferndesk.com | 0/4 | redirect 4 | never |
 | zonos.com | 3/4 | empty 1, ok 3 | 2026-11-16 |
 | alternativeto.net | 2/3 | http_403 1, ok 2 | 2026-11-27 |
+| apply.workable.com | 0/3 | http_404 3 | never |
 | approvalmax.com | 3/3 | ok 3 | 2026-11-14 |
 | archdesk.com | 3/3 | ok 3 | 2026-11-23 |
-| assistivlabs.com | 3/3 | ok 3 | 2026-11-27 |
 | beancount.io | 3/3 | ok 3 | 2026-11-18 |
 | blackbaudk12.ideas.aha.io | 3/3 | ok 3 | 2026-11-24 |
 | blenderartists.org | 3/3 | ok 3 | 2026-11-22 |
 | blog.usablenet.com | 3/3 | ok 3 | 2026-11-26 |
 | booqable.com | 2/3 | http_404 1, ok 2 | 2026-11-18 |
+| business.gov.au | 2/3 | http_404 1, ok 2 | 2026-11-28 |
 | cal.com | 3/3 | ok 3 | 2026-11-20 |
 | cartmango.com | 3/3 | ok 3 | 2026-11-22 |
+| cdn.jsdelivr.net | 3/3 | ok 3 | 2026-11-28 |
 | certifier.io | 3/3 | ok 3 | 2026-11-24 |
 | certpilot.app | 2/3 | http_404 1, ok 2 | 2026-11-18 |
-| code.claude.com | 3/3 | ok 3 | 2026-11-11 |
+| community.glideapps.com | 3/3 | ok 3 | 2026-11-28 |
 | community.vercel.com | 1/3 | empty 2, ok 1 | 2026-11-25 |
 | developer.apple.com | 3/3 | ok 3 | 2026-11-21 |
 | developer.getjobber.com | 0/3 | http_403 3 | never |
@@ -351,7 +380,6 @@ These sources are not on the avoid list, because at least one of their paths wor
 | equalizedigital.com | 2/3 | http_403 1, ok 2 | 2026-11-27 |
 | eur-lex.europa.eu | 0/3 | empty 3 | never |
 | fiverr.com | 0/3 | http_403 3 | never |
-| forum.wixstudio.com | 2/3 | empty 1, ok 2 | 2026-11-20 |
 | get.popmenu.com | 0/3 | http_403 3 | never |
 | ghost.org | 3/3 | ok 3 | 2026-11-15 |
 | help.buildxact.com | 3/3 | ok 3 | 2026-11-23 |
@@ -362,17 +390,24 @@ These sources are not on the avoid list, because at least one of their paths wor
 | horstmann.com | 3/3 | ok 3 | 2026-11-25 |
 | housecallpro-roadmap.monterey.ai | 2/3 | empty 1, ok 2 | 2026-11-27 |
 | invoiceninja.github.io | 1/3 | empty 2, ok 1 | 2026-11-20 |
+| itbrief.com.au | 3/3 | ok 3 | 2026-11-28 |
 | journals.plos.org | 3/3 | ok 3 | 2026-11-25 |
 | legacy.cdocs.com | 3/3 | ok 3 | 2026-11-23 |
+| lists.w3.org | 2/3 | http_404 1, ok 2 | 2026-11-28 |
 | mainwp.com | 3/3 | ok 3 | 2026-11-25 |
 | marketing-website-3vj.pages.dev | 3/3 | ok 3 | 2026-11-18 |
 | moodle.atlassian.net | 3/3 | ok 3 | 2026-11-24 |
+| moodle.org | 0/3 | http_403 3 | never |
+| mykidreports.com | 3/3 | ok 3 | 2026-11-28 |
 | n8n-handoff-kit.vercel.app | 3/3 | ok 3 | 2026-11-04 |
 | nanonets.com | 2/3 | empty 1, ok 2 | 2026-11-26 |
+| oia.pmc.gov.au | 2/3 | http_404 1, ok 2 | 2026-11-28 |
 | outpost.pub | 3/3 | ok 3 | 2026-11-15 |
+| patient-protect.com | 3/3 | ok 3 | 2026-11-28 |
 | petapixel.com | 2/3 | http_403 1, ok 2 | 2026-11-24 |
 | pointapp.org | 1/3 | empty 1, ok 1, timeout 1 | 2026-11-24 |
 | posit.co | 3/3 | ok 3 | 2026-11-25 |
+| practiceq.canny.io | 0/3 | http_404 3 | never |
 | pricingsaas.com | 3/3 | ok 3 | 2026-11-26 |
 | producthunt.com | 3/3 | ok 3 | 2026-11-25 |
 | punchpass.com | 3/3 | ok 3 | 2026-11-18 |
@@ -381,6 +416,8 @@ These sources are not on the avoid list, because at least one of their paths wor
 | saga-compliance.com | 3/3 | ok 3 | 2026-11-25 |
 | skyvia.com | 1/3 | http_404 2, ok 1 | 2026-11-19 |
 | smtply.pages.dev | 2/3 | http_404 1, ok 2 | 2026-11-11 |
+| static.developer.intuit.com | 3/3 | ok 3 | 2026-11-28 |
+| support.bookeo.com | 0/3 | http_403 3 | never |
 | support.expenseplus.co.uk | 3/3 | ok 3 | 2026-11-21 |
 | support.getharvest.com | 0/3 | http_403 3 | never |
 | support.gusto.com | 0/3 | http_403 3 | never |
@@ -392,16 +429,17 @@ These sources are not on the avoid list, because at least one of their paths wor
 | techradar.com | 2/3 | empty 1, ok 2 | 2026-11-18 |
 | termly.io | 3/3 | ok 3 | 2026-11-24 |
 | testparty.ai | 3/3 | ok 3 | 2026-11-26 |
+| threesixtygiving.org | 0/3 | redirect 3 | never |
 | totaldrive.co.uk | 2/3 | http_404 1, ok 2 | 2026-11-17 |
 | tritontesting.ucsd.edu | 2/3 | http_404 1, ok 2 | 2026-11-25 |
 | tutorcruncher.com | 1/3 | empty 2, ok 1 | 2026-11-24 |
 | uk.trustpilot.com | 3/3 | ok 3 | 2026-11-24 |
+| unpkg.com | 3/3 | ok 3 | 2026-11-28 |
 | versionly.dev | 2/3 | http_404 1, ok 2 | 2026-11-18 |
 | vibeappscanner.com | 3/3 | ok 3 | 2026-11-25 |
 | visitorlevyapp.com | 3/3 | ok 3 | 2026-11-23 |
 | woocommerce.com | 3/3 | ok 3 | 2026-11-22 |
 | wp-umbrella.com | 3/3 | ok 3 | 2026-11-25 |
-| wpamelia.com | 3/3 | ok 3 | 2026-11-18 |
 | www.accessibilitychecker.org | 3/3 | ok 3 | 2026-11-23 |
 | www.brighthr.com | 3/3 | ok 3 | 2026-11-21 |
 | www.buildpass.ai | 3/3 | ok 3 | 2026-11-23 |
@@ -409,20 +447,27 @@ These sources are not on the avoid list, because at least one of their paths wor
 | www.cdph.ca.gov | 0/3 | http_5xx 2, timeout 1 | never |
 | www.change.org | 3/3 | ok 3 | 2026-11-10 |
 | www.charityjob.co.uk | 0/3 | http_403 3 | never |
-| www.chartrequest.com | 3/3 | ok 3 | 2026-11-23 |
 | www.checklyhq.com | 3/3 | ok 3 | 2026-11-18 |
 | www.claytonutz.com | 3/3 | ok 3 | 2026-11-22 |
 | www.codegrade.com | 3/3 | ok 3 | 2026-11-25 |
+| www.dolibarr.org | 3/3 | ok 3 | 2026-11-28 |
 | www.ecfr.gov | 2/3 | ok 2, redirect 1 | 2026-11-24 |
+| www.foundu.com.au | 3/3 | ok 3 | 2026-11-28 |
 | www.gla.ac.uk | 3/3 | ok 3 | 2026-11-25 |
+| www.hcamag.com | 3/3 | ok 3 | 2026-11-28 |
 | www.health.gov.au | 0/3 | http_5xx 3 | never |
 | www.indiehackers.com | 0/3 | http_403 3 | never |
 | www.legislation.gov.au | 3/3 | ok 3 | 2026-11-21 |
 | www.leohr.co.uk | 3/3 | ok 3 | 2026-11-21 |
+| www.mumsnet.com | 3/3 | ok 3 | 2026-11-28 |
 | www.nsf.gov | 1/3 | http_404 2, ok 1 | 2026-11-04 |
+| www.pa.gov | 2/3 | http_404 1, ok 2 | 2026-11-28 |
+| www.paubox.com | 3/3 | ok 3 | 2026-11-28 |
 | www.payapps.com | 3/3 | ok 3 | 2026-11-23 |
+| www.resourcecentre.org.uk | 3/3 | ok 3 | 2026-11-28 |
 | www.safeexambrowser.org | 3/3 | ok 3 | 2026-11-25 |
 | www.salontoday.com | 3/3 | ok 3 | 2026-11-20 |
+| www.simplepractice.com | 3/3 | ok 3 | 2026-11-28 |
 | www.simprogroup.com | 0/3 | http_403 3 | never |
 | www.softwareadvice.com | 0/3 | http_403 3 | never |
 | www.squareup.com | 2/3 | http_429 1, ok 2 | 2026-11-27 |
@@ -434,23 +479,29 @@ These sources are not on the avoid list, because at least one of their paths wor
 | www.trustlayer.io | 3/3 | ok 3 | 2026-11-23 |
 | www.uptimia.com | 3/3 | ok 3 | 2026-11-25 |
 | www.usecarly.com | 1/3 | http_429 2, ok 1 | 2026-11-19 |
+| www.whatconverts.com | 3/3 | ok 3 | 2026-11-28 |
 | www.xbert.io | 2/3 | http_404 1, ok 2 | 2026-11-19 |
 | www.zoho.com | 3/3 | ok 3 | 2026-11-26 |
 | xero.com | 3/3 | ok 3 | 2026-11-26 |
+| aapc.com | 2/2 | ok 2 | 2026-11-28 |
+| accountsadvantage.com.au | 2/2 | ok 2 | 2026-11-28 |
 | acie.wildapricot.org | 2/2 | ok 2 | 2026-11-21 |
 | acuity.co | 2/2 | ok 2 | 2026-11-26 |
 | administrate.dev | 2/2 | ok 2 | 2026-11-18 |
 | ai-act-service-desk.ec.europa.eu | 2/2 | ok 2 | 2026-11-25 |
+| allyant.com | 1/2 | http_404 1, ok 1 | 2026-11-26 |
 | alteg.io | 2/2 | ok 2 | 2026-11-06 |
 | aphyr.com | 2/2 | ok 2 | 2026-11-18 |
 | api.n8n.io | 2/2 | ok 2 | 2026-11-20 |
 | api.squareup.com | 1/2 | ok 1, redirect 1 | 2026-11-20 |
 | apis.io | 2/2 | ok 2 | 2026-11-24 |
+| app.semanticdiff.com | 0/2 | http_429 2 | never |
+| app.squareup.com | 1/2 | ok 1, redirect 1 | 2026-11-08 |
 | app.thetutor.link | 2/2 | ok 2 | 2026-11-03 |
-| apply.workable.com | 0/2 | http_404 2 | never |
 | atg.wa.gov | 2/2 | ok 2 | 2026-11-20 |
 | batchmakes.com | 2/2 | ok 2 | 2026-11-22 |
 | betterstack.com | 2/2 | ok 2 | 2026-11-25 |
+| beyonk.com | 2/2 | ok 2 | 2026-11-28 |
 | billable.to | 2/2 | ok 2 | 2026-11-18 |
 | bloomerang.com | 1/2 | http_404 1, ok 1 | 2026-11-24 |
 | buffer.com | 2/2 | ok 2 | 2026-11-18 |
@@ -460,16 +511,17 @@ These sources are not on the avoid list, because at least one of their paths wor
 | cabgrid.com | 1/2 | http_403 1, ok 1 | 2026-11-06 |
 | cafekit-laravel-production-oixkkr.laravel.cloud | 2/2 | ok 2 | 2026-11-27 |
 | cancelflow.dev | 2/2 | ok 2 | 2026-11-25 |
+| caplaw.org | 2/2 | ok 2 | 2026-11-28 |
 | cardiff.gov.uk | 0/2 | http_403 2 | never |
 | cbtf.ubc.ca | 2/2 | ok 2 | 2026-11-25 |
-| cdn.jsdelivr.net | 2/2 | ok 2 | 2026-11-25 |
 | certifytheweb.com | 1/2 | http_404 1, ok 1 | 2026-11-25 |
 | ch.trustpilot.com | 1/2 | http_403 1, ok 1 | 2026-11-18 |
+| citizenportal.ai | 0/2 | http_403 2 | never |
 | clientmeter.pages.dev | 2/2 | ok 2 | 2026-11-11 |
 | cloud.google.com | 1/2 | empty 1, ok 1 | 2026-11-24 |
 | cloud.r-project.org | 2/2 | ok 2 | 2026-11-25 |
-| community.glideapps.com | 2/2 | ok 2 | 2026-11-24 |
 | community.instructure.com | 0/2 | empty 2 | never |
+| community.learningequality.org | 2/2 | ok 2 | 2026-11-28 |
 | community.openfoodnetwork.org | 2/2 | ok 2 | 2026-11-20 |
 | community.softr.io | 2/2 | ok 2 | 2026-11-24 |
 | community.toasttab.com | 0/2 | http_403 2 | never |
@@ -485,7 +537,10 @@ These sources are not on the avoid list, because at least one of their paths wor
 | crtc.gc.ca | 0/2 | http_403 2 | never |
 | ctars.com.au | 2/2 | ok 2 | 2026-11-21 |
 | ddiy.co | 2/2 | ok 2 | 2026-11-24 |
+| dev.wix.com | 2/2 | ok 2 | 2026-11-28 |
+| developer.myob.com | 2/2 | ok 2 | 2026-11-28 |
 | developers.make.com | 2/2 | ok 2 | 2026-11-18 |
+| docaccess.com | 2/2 | ok 2 | 2026-11-28 |
 | docs.coderabbit.ai | 2/2 | ok 2 | 2026-11-25 |
 | docs.dingdoong.io | 1/2 | empty 1, ok 1 | 2026-11-13 |
 | docs.ghost.org | 2/2 | ok 2 | 2026-11-15 |
@@ -496,11 +551,14 @@ These sources are not on the avoid list, because at least one of their paths wor
 | dodona.be | 2/2 | ok 2 | 2026-11-25 |
 | dsp.berkeley.edu | 2/2 | ok 2 | 2026-11-01 |
 | dvoorhees.com | 2/2 | ok 2 | 2026-11-18 |
+| easyteegolf.com | 2/2 | ok 2 | 2026-11-28 |
 | ec.europa.eu | 2/2 | ok 2 | 2026-11-25 |
+| edsurge.com | 2/2 | ok 2 | 2026-11-28 |
 | elearn.soton.ac.uk | 0/2 | redirect 2 | never |
 | europeanpurpose.com | 2/2 | ok 2 | 2026-11-27 |
 | euverify.com | 2/2 | ok 2 | 2026-11-23 |
 | faq-en.exam.net | 0/2 | http_403 2 | never |
+| fareharbor.com | 2/2 | ok 2 | 2026-11-28 |
 | fasta2p-portal.pages.dev | 2/2 | ok 2 | 2026-11-09 |
 | feedback.kajabi.com | 0/2 | allowlist 1, empty 1 | never |
 | feedback.render.com | 2/2 | ok 2 | 2026-11-25 |
@@ -516,18 +574,22 @@ These sources are not on the avoid list, because at least one of their paths wor
 | freshlearn.com | 2/2 | ok 2 | 2026-11-24 |
 | fssai.gov.in | 2/2 | ok 2 | 2026-11-23 |
 | gbppromote.com | 1/2 | empty 1, ok 1 | 2026-11-27 |
+| get.resova.com | 2/2 | ok 2 | 2026-11-28 |
 | getvela.com | 2/2 | ok 2 | 2026-11-10 |
 | ghostinspector.com | 2/2 | ok 2 | 2026-11-25 |
 | github.github.com | 2/2 | ok 2 | 2026-11-25 |
 | gitlab.ewi.tudelft.nl | 2/2 | ok 2 | 2026-11-25 |
 | grantedai.com | 2/2 | ok 2 | 2026-11-11 |
+| grantfinder.co.uk | 2/2 | ok 2 | 2026-11-28 |
 | grantlink.app | 2/2 | ok 2 | 2026-11-24 |
+| grantnav.readthedocs.io | 0/2 | redirect 2 | never |
 | hashnode.com | 0/2 | empty 2 | never |
 | healthchecks.io | 2/2 | ok 2 | 2026-11-25 |
 | help.acuityscheduling.com | 0/2 | http_403 2 | never |
 | help.arketa.com | 2/2 | ok 2 | 2026-11-23 |
 | help.artstation.com | 2/2 | ok 2 | 2026-11-22 |
-| help.employmenthero.com | 0/2 | http_403 2 | never |
+| help.famly.co | 0/2 | http_404 1, redirect 1 | never |
+| help.grantnav.threesixtygiving.org | 0/2 | redirect 2 | never |
 | help.housecallpro.com | 2/2 | ok 2 | 2026-11-27 |
 | help.inventora.com | 2/2 | ok 2 | 2026-11-22 |
 | help.momence.com | 2/2 | ok 2 | 2026-11-23 |
@@ -541,8 +603,11 @@ These sources are not on the avoid list, because at least one of their paths wor
 | ilga.gov | 0/2 | http_5xx 2 | never |
 | issuu.com | 0/2 | empty 2 | never |
 | itbrief.co.uk | 2/2 | ok 2 | 2026-11-21 |
+| ja.wordpress.org | 2/2 | ok 2 | 2026-11-28 |
+| jobs.406ventures.com | 2/2 | ok 2 | 2026-11-28 |
 | joinit.com | 2/2 | ok 2 | 2026-11-21 |
 | kajabi.com | 2/2 | ok 2 | 2026-11-24 |
+| katv.com | 2/2 | ok 2 | 2026-11-28 |
 | knowledge.workspace.google.com | 2/2 | ok 2 | 2026-11-25 |
 | kostenlose-erechnung.de | 2/2 | ok 2 | 2026-11-11 |
 | labyrinthinc.com | 2/2 | ok 2 | 2026-11-07 |
@@ -552,11 +617,13 @@ These sources are not on the avoid list, because at least one of their paths wor
 | letsencrypt.org | 2/2 | ok 2 | 2026-11-25 |
 | magazine.artstation.com | 0/2 | http_403 2 | never |
 | mage-people.com | 1/2 | http_404 1, ok 1 | 2026-11-06 |
+| makeitfable.com | 1/2 | empty 1, ok 1 | 2026-11-28 |
+| marketing.fareharbor.com | 2/2 | ok 2 | 2026-11-28 |
 | marqii.com | 2/2 | ok 2 | 2026-11-27 |
 | mastodon.gamedev.place | 2/2 | ok 2 | 2026-11-06 |
 | melio.com | 2/2 | ok 2 | 2026-11-26 |
 | meta.discourse.org | 2/2 | ok 2 | 2026-11-10 |
-| moodle.org | 0/2 | http_403 2 | never |
+| myob.lithium.com | 0/2 | http_403 2 | never |
 | nation.cymru | 2/2 | ok 2 | 2026-11-23 |
 | ndiscommission.gov.au | 0/2 | http_5xx 2 | never |
 | nds.org.au | 0/2 | empty 2 | never |
@@ -564,6 +631,7 @@ These sources are not on the avoid list, because at least one of their paths wor
 | ohdear.app | 2/2 | ok 2 | 2026-11-25 |
 | onlineornot.com | 2/2 | ok 2 | 2026-11-18 |
 | osiaffiliate.freshdesk.com | 0/2 | redirect 2 | never |
+| pac.pdf-accessibility.org | 2/2 | ok 2 | 2026-11-28 |
 | pages.charlotte.edu | 0/2 | http_5xx 2 | never |
 | par.nsf.gov | 2/2 | ok 2 | 2026-11-25 |
 | pdfa.org | 0/2 | http_403 2 | never |
@@ -572,7 +640,9 @@ These sources are not on the avoid list, because at least one of their paths wor
 | public.api.bsky.app | 0/2 | http_403 2 | never |
 | pullminder.com | 2/2 | ok 2 | 2026-11-25 |
 | queue.tudelft.nl | 0/2 | http_5xx 2 | never |
+| readabletown.com | 2/2 | ok 2 | 2026-11-28 |
 | recensa.ai | 2/2 | ok 2 | 2026-11-24 |
+| recruiting.paylocity.com | 0/2 | empty 2 | never |
 | redsift.com | 2/2 | ok 2 | 2026-11-25 |
 | registry.npmjs.org | 2/2 | ok 2 | 2026-11-18 |
 | roundtriplabs.helpscoutdocs.com | 0/2 | redirect 2 | never |
@@ -585,6 +655,7 @@ These sources are not on the avoid list, because at least one of their paths wor
 | servicehub.passgallery.com | 2/2 | ok 2 | 2026-11-08 |
 | shiftcare.com | 2/2 | ok 2 | 2026-11-21 |
 | sigcse2026.sigcse.org | 2/2 | ok 2 | 2026-11-25 |
+| site-kit-dev.appspot.com | 2/2 | ok 2 | 2026-11-28 |
 | sites.google.com | 2/2 | ok 2 | 2026-11-23 |
 | slashdot.org | 2/2 | ok 2 | 2026-11-24 |
 | softwaredevelopers.ato.gov.au | 0/2 | empty 1, http_5xx 1 | never |
@@ -612,8 +683,10 @@ These sources are not on the avoid list, because at least one of their paths wor
 | themarkup.org | 2/2 | ok 2 | 2026-11-02 |
 | toolradar.com | 2/2 | ok 2 | 2026-11-21 |
 | trackitforward.com | 0/2 | http_403 2 | never |
+| ttlc.intuit.com | 2/2 | ok 2 | 2026-11-28 |
 | turnitin.gradescope.com | 2/2 | ok 2 | 2026-11-25 |
 | tutorlms.com | 2/2 | ok 2 | 2026-11-24 |
+| ukbusinessforums.co.uk | 1/2 | empty 1, ok 1 | 2026-11-28 |
 | unscriptedphotographers.com | 2/2 | ok 2 | 2026-11-22 |
 | welshrevenueauthority.blog.gov.wales | 2/2 | ok 2 | 2026-11-23 |
 | wisdmlabs.com | 1/2 | http_403 1, ok 1 | 2026-11-10 |
@@ -621,7 +694,7 @@ These sources are not on the avoid list, because at least one of their paths wor
 | workfloor.com.au | 2/2 | ok 2 | 2026-11-16 |
 | wpengine.com | 1/2 | http_404 1, ok 1 | 2026-11-03 |
 | wu30.org | 2/2 | ok 2 | 2026-11-24 |
-| www.ada.gov | 2/2 | ok 2 | 2026-11-26 |
+| www.ala.org | 2/2 | ok 2 | 2026-11-28 |
 | www.allergicliving.com | 0/2 | http_403 2 | never |
 | www.alura.io | 2/2 | ok 2 | 2026-11-08 |
 | www.americorpsoig.gov | 2/2 | ok 2 | 2026-11-24 |
@@ -633,20 +706,26 @@ These sources are not on the avoid list, because at least one of their paths wor
 | www.awardspring.com | 2/2 | ok 2 | 2026-11-24 |
 | www.azets.com | 2/2 | ok 2 | 2026-11-12 |
 | www.bcnys.org | 1/2 | http_403 1, ok 1 | 2026-11-06 |
+| www.beyonk.com | 2/2 | ok 2 | 2026-11-28 |
 | www.brownejacobson.com | 2/2 | ok 2 | 2026-11-21 |
 | www.calconic.com | 2/2 | ok 2 | 2026-11-23 |
 | www.catholicjobs.com | 0/2 | http_404 2 | never |
 | www.cdocs.com | 0/2 | redirect 2 | never |
 | www.centroassist.com.au | 1/2 | empty 1, ok 1 | 2026-11-21 |
 | www.chalkbeat.org | 2/2 | ok 2 | 2026-11-24 |
+| www.charityexcellence.co.uk | 2/2 | ok 2 | 2026-11-28 |
+| www.chcanys.org | 2/2 | ok 2 | 2026-11-28 |
+| www.checkfront.com | 2/2 | ok 2 | 2026-11-28 |
 | www.churchofengland.org | 0/2 | http_404 2 | never |
+| www.civilsociety.co.uk | 2/2 | ok 2 | 2026-11-28 |
 | www.claconnect.com | 2/2 | ok 2 | 2026-11-23 |
 | www.cognitoforms.com | 2/2 | ok 2 | 2026-11-24 |
 | www.cpapracticeadvisor.com | 2/2 | ok 2 | 2026-11-07 |
 | www.cs.umd.edu | 1/2 | http_5xx 1, ok 1 | 2026-11-25 |
+| www.ctas.tennessee.edu | 2/2 | ok 2 | 2026-11-28 |
 | www.deputy.com | 2/2 | ok 2 | 2026-11-16 |
 | www.digicert.com | 2/2 | ok 2 | 2026-11-25 |
-| www.dolibarr.org | 2/2 | ok 2 | 2026-11-21 |
+| www.diligent.com | 2/2 | ok 2 | 2026-11-28 |
 | www.drbicuspid.com | 0/2 | http_403 2 | never |
 | www.dwt.com | 1/2 | http_403 1, ok 1 | 2026-11-27 |
 | www.e-recht24.de | 2/2 | ok 2 | 2026-11-22 |
@@ -657,19 +736,27 @@ These sources are not on the avoid list, because at least one of their paths wor
 | www.expirationreminder.com | 2/2 | ok 2 | 2026-11-23 |
 | www.faegredrinker.com | 2/2 | ok 2 | 2026-11-25 |
 | www.fda.gov | 2/2 | ok 2 | 2026-11-22 |
+| www.find-government-grants.service.gov.uk | 2/2 | ok 2 | 2026-11-28 |
 | www.flsenate.gov | 1/2 | empty 1, ok 1 | 2026-11-10 |
 | www.fmhero.com | 2/2 | ok 2 | 2026-11-27 |
 | www.fqhc.org | 1/2 | http_404 1, ok 1 | 2026-11-07 |
 | www.freeagent.com | 2/2 | ok 2 | 2026-11-26 |
+| www.freelancer.de | 2/2 | ok 2 | 2026-11-28 |
+| www.g2.com | 0/2 | http_403 2 | never |
+| www.getapp.co.uk | 0/2 | http_403 2 | never |
 | www.getjobber.com | 2/2 | ok 2 | 2026-11-20 |
 | www.github.com | 2/2 | ok 2 | 2026-11-25 |
 | www.goodshuffle.com | 0/2 | empty 2 | never |
 | www.goodwinlaw.com | 2/2 | ok 2 | 2026-11-25 |
+| www.govtech.com | 2/2 | ok 2 | 2026-11-28 |
+| www.grant-genie.ai | 2/2 | ok 2 | 2026-11-28 |
+| www.grant-tracker.org | 0/2 | http_5xx 2 | never |
 | www.gtlaw.com | 2/2 | ok 2 | 2026-11-25 |
 | www.halfpricesoft.com | 2/2 | ok 2 | 2026-11-07 |
 | www.housecallpro.com | 2/2 | ok 2 | 2026-11-27 |
 | www.icare.nsw.gov.au | 2/2 | ok 2 | 2026-11-23 |
 | www.infoodle.com | 2/2 | ok 2 | 2026-11-14 |
+| www.instrumentl.com | 2/2 | ok 2 | 2026-11-28 |
 | www.ird.govt.nz | 1/2 | empty 1, ok 1 | 2026-11-16 |
 | www.ispringsolutions.com | 2/2 | ok 2 | 2026-11-24 |
 | www.listadum.com | 2/2 | ok 2 | 2026-11-15 |
@@ -681,7 +768,9 @@ These sources are not on the avoid list, because at least one of their paths wor
 | www.mintlify.com | 1/2 | http_404 1, ok 1 | 2026-11-25 |
 | www.momoyoga.com | 2/2 | ok 2 | 2026-11-18 |
 | www.mondaq.com | 1/2 | ok 1, redirect 1 | 2026-11-02 |
+| www.napa.lafco.ca.gov | 2/2 | ok 2 | 2026-11-28 |
 | www.nasbaregistry.org | 2/2 | ok 2 | 2026-11-10 |
+| www.ndis.gov.au | 0/2 | http_403 2 | never |
 | www.ndiscommission.gov.au | 0/2 | http_5xx 2 | never |
 | www.netlify.com | 2/2 | ok 2 | 2026-11-25 |
 | www.notion.com | 2/2 | ok 2 | 2026-11-25 |
@@ -693,7 +782,6 @@ These sources are not on the avoid list, because at least one of their paths wor
 | www.photrio.com | 0/2 | http_403 2 | never |
 | www.profileward.com | 1/2 | http_404 1, ok 1 | 2026-11-18 |
 | www.rba.gov.au | 2/2 | ok 2 | 2026-11-20 |
-| www.resourcecentre.org.uk | 2/2 | ok 2 | 2026-11-21 |
 | www.restaurantbusinessonline.com | 1/2 | empty 1, ok 1 | 2026-11-06 |
 | www.retailgazette.co.uk | 1/2 | http_429 1, ok 1 | 2026-11-12 |
 | www.rubydoc.info | 0/2 | http_5xx 2 | never |
@@ -708,6 +796,7 @@ These sources are not on the avoid list, because at least one of their paths wor
 | www.smarterselect.com | 1/2 | http_404 1, ok 1 | 2026-11-24 |
 | www.smtp2go.com | 2/2 | ok 2 | 2026-11-11 |
 | www.soapmakingforum.com | 0/2 | http_403 2 | never |
+| www.softwareadvice.co.uk | 0/2 | http_403 2 | never |
 | www.statefarm.com | 0/2 | empty 1, http_403 1 | never |
 | www.switchops.ai | 0/2 | empty 2 | never |
 | www.tanda.co | 2/2 | ok 2 | 2026-11-16 |
@@ -718,6 +807,7 @@ These sources are not on the avoid list, because at least one of their paths wor
 | www.tiphaus.com | 2/2 | ok 2 | 2026-11-27 |
 | www.tradifyhq.com | 2/2 | ok 2 | 2026-11-20 |
 | www.travelers.com | 2/2 | ok 2 | 2026-11-23 |
+| www.tsl.texas.gov | 2/2 | ok 2 | 2026-11-28 |
 | www.uncannyowl.com | 2/2 | ok 2 | 2026-11-21 |
 | www.usehammock.com | 2/2 | ok 2 | 2026-11-26 |
 | www.vantage.sh | 2/2 | ok 2 | 2026-11-18 |
@@ -756,7 +846,6 @@ These sources are not on the avoid list, because at least one of their paths wor
 | allenstraining.com.au | 1/1 | ok 1 | 2026-11-24 |
 | allitservices.com.au | 1/1 | ok 1 | 2026-11-11 |
 | allwork.space | 1/1 | ok 1 | 2026-11-25 |
-| allyant.com | 1/1 | ok 1 | 2026-11-26 |
 | anna.money | 1/1 | ok 1 | 2026-11-26 |
 | answers.justia.com | 0/1 | http_403 1 | never |
 | apcentral.collegeboard.org | 1/1 | ok 1 | 2026-11-25 |
@@ -764,10 +853,12 @@ These sources are not on the avoid list, because at least one of their paths wor
 | api.regulations.gov | 0/1 | http_429 1 | never |
 | api.www.sbir.gov | 0/1 | http_403 1 | never |
 | app.acquire.com | 1/1 | ok 1 | 2026-11-07 |
+| app.breezechms.com | 1/1 | ok 1 | 2026-11-28 |
 | app.gumroad.com | 0/1 | redirect 1 | never |
 | app.smartsheet.com | 0/1 | empty 1 | never |
-| app.squareup.com | 1/1 | ok 1 | 2026-11-08 |
 | app2.boardontrack.com | 1/1 | ok 1 | 2026-11-25 |
+| applevis.com | 0/1 | http_403 1 | never |
+| apps.intuit.com | 0/1 | redirect 1 | never |
 | apps.odoo.com | 1/1 | ok 1 | 2026-11-12 |
 | appsource.microsoft.com | 0/1 | empty 1 | never |
 | apuo.ca | 0/1 | empty 1 | never |
@@ -775,26 +866,33 @@ These sources are not on the avoid list, because at least one of their paths wor
 | arrivy.com | 1/1 | ok 1 | 2026-11-13 |
 | artfairinsiders.com | 1/1 | ok 1 | 2026-11-22 |
 | asbfeo.gov.au | 1/1 | ok 1 | 2026-11-20 |
-| ask.gibbonedu.org | 1/1 | ok 1 | 2026-11-21 |
+| athenahealth.com | 0/1 | http_403 1 | never |
 | athletechnews.com | 1/1 | ok 1 | 2026-11-23 |
+| aussiechildcarenetwork.com.au | 1/1 | ok 1 | 2026-11-28 |
 | baptist.org.uk | 0/1 | http_404 1 | never |
 | batchbound.com | 1/1 | ok 1 | 2026-11-06 |
+| bcpcouncil.gov.uk | 1/1 | ok 1 | 2026-11-28 |
 | becker.wustl.edu | 0/1 | timeout 1 | never |
 | bestfoodtrucks.com | 0/1 | http_429 1 | never |
 | bg.wordpress.org | 1/1 | ok 1 | 2026-11-27 |
+| bigredconsulting.com | 1/1 | ok 1 | 2026-11-28 |
 | billdrpro.featurebase.app | 1/1 | ok 1 | 2026-11-23 |
 | birdeye.com | 1/1 | ok 1 | 2026-11-20 |
 | bitbucket.org | 0/1 | http_404 1 | never |
 | bitwarden.com | 1/1 | ok 1 | 2026-11-18 |
 | biz.booksy.com | 1/1 | ok 1 | 2026-11-12 |
+| blackbaud.com | 1/1 | ok 1 | 2026-11-28 |
+| blog.blackbaud.com | 1/1 | ok 1 | 2026-11-28 |
 | blog.coupler.io | 1/1 | ok 1 | 2026-11-18 |
 | blog.groupmail.io | 1/1 | ok 1 | 2026-11-07 |
 | blog.petpooja.com | 1/1 | ok 1 | 2026-11-23 |
 | blog.protrainings.com | 1/1 | ok 1 | 2026-11-24 |
 | blog.report-uri.com | 1/1 | ok 1 | 2026-11-04 |
+| blog.squarespace.com | 0/1 | redirect 1 | never |
 | blog.symquest.com | 1/1 | ok 1 | 2026-11-11 |
 | blog.taxbandits.com | 1/1 | ok 1 | 2026-11-07 |
 | blog.techsoup.org | 1/1 | ok 1 | 2026-11-07 |
+| blog.therapynotes.com | 1/1 | ok 1 | 2026-11-28 |
 | blog.uplisting.io | 0/1 | redirect 1 | never |
 | blog.zenodo.org | 1/1 | ok 1 | 2026-11-25 |
 | blogs.chapman.edu | 1/1 | ok 1 | 2026-11-25 |
@@ -813,25 +911,32 @@ These sources are not on the avoid list, because at least one of their paths wor
 | boulevard.uservoice.com | 1/1 | ok 1 | 2026-11-27 |
 | breww.com | 1/1 | ok 1 | 2026-11-12 |
 | brightsg.com | 1/1 | ok 1 | 2026-11-12 |
+| bronson.docaccess.com | 0/1 | environment 1 | never |
 | btcsoftware.co.uk | 1/1 | ok 1 | 2026-11-21 |
 | btcson66-rgb.github.io | 1/1 | ok 1 | 2026-11-25 |
 | bunny.net | 1/1 | ok 1 | 2026-11-24 |
-| business.gov.au | 0/1 | http_404 1 | never |
 | businesscloud.co.uk | 1/1 | ok 1 | 2026-11-21 |
 | buunto.helpscoutdocs.com | 1/1 | ok 1 | 2026-11-22 |
 | ca-rcf.evokeplatform.com | 0/1 | empty 1 | never |
 | cakerybakeries.com | 1/1 | ok 1 | 2026-11-06 |
 | calendly.stoplight.io | 1/1 | ok 1 | 2026-11-20 |
+| candid.org | 1/1 | ok 1 | 2026-11-28 |
 | canvas.ubc.ca | 1/1 | ok 1 | 2026-11-25 |
 | capterra.com | 0/1 | http_403 1 | never |
+| cardinalatwork.stanford.edu | 1/1 | ok 1 | 2026-11-28 |
+| caredence.com | 1/1 | ok 1 | 2026-11-28 |
 | careerbridge.wa.gov | 1/1 | ok 1 | 2026-11-21 |
+| careers-centralnm-ymca.icims.com | 0/1 | http_404 1 | never |
 | careers-mrocorp.icims.com | 0/1 | http_404 1 | never |
 | careers.csudh.edu | 0/1 | empty 1 | never |
 | carey.jhu.edu | 1/1 | ok 1 | 2026-11-25 |
 | carleton.ca | 1/1 | ok 1 | 2026-11-25 |
+| casocomply.com | 1/1 | ok 1 | 2026-11-28 |
+| casrai.org | 1/1 | ok 1 | 2026-11-28 |
 | catchingnumbers.com | 1/1 | ok 1 | 2026-11-18 |
 | cause-comply.onrender.com | 0/1 | http_5xx 1 | never |
 | cbs12.com | 1/1 | ok 1 | 2026-11-06 |
+| cc-publicdocs.santa-ana.org | 0/1 | empty 1 | never |
 | cdlpowersuite.com | 1/1 | ok 1 | 2026-11-17 |
 | cdn.cdata.com | 1/1 | ok 1 | 2026-11-14 |
 | ce-go.com | 0/1 | empty 1 | never |
@@ -860,6 +965,7 @@ These sources are not on the avoid list, because at least one of their paths wor
 | coddy.tech | 0/1 | http_403 1 | never |
 | codeboard.io | 1/1 | ok 1 | 2026-11-01 |
 | codecanyon.net | 1/1 | ok 1 | 2026-11-06 |
+| codeforamerica.org | 1/1 | ok 1 | 2026-11-28 |
 | codequiry.com | 1/1 | ok 1 | 2026-11-25 |
 | codeteach.featurebase.app | 1/1 | ok 1 | 2026-11-25 |
 | codio.com | 0/1 | empty 1 | never |
@@ -873,6 +979,7 @@ These sources are not on the avoid list, because at least one of their paths wor
 | community.cal.com | 0/1 | timeout 1 | never |
 | community.canva.com | 0/1 | timeout 1 | never |
 | community.cliniko.com | 0/1 | redirect 1 | never |
+| community.coda.io | 0/1 | redirect 1 | never |
 | community.ebay.co.uk | 0/1 | empty 1 | never |
 | community.ebay.com | 1/1 | ok 1 | 2026-11-22 |
 | community.ecwid.com | 0/1 | http_404 1 | never |
@@ -904,6 +1011,7 @@ These sources are not on the avoid list, because at least one of their paths wor
 | copyright.universityofcalifornia.edu | 1/1 | ok 1 | 2026-11-25 |
 | costbench.com | 1/1 | ok 1 | 2026-11-18 |
 | coursecheck.com | 1/1 | ok 1 | 2026-11-24 |
+| cowboystatedaily.com | 1/1 | ok 1 | 2026-11-28 |
 | cprenroll.com | 1/1 | ok 1 | 2026-11-24 |
 | cpw.state.co.us:443 | 0/1 | http_404 1 | never |
 | craready.pages.dev | 1/1 | ok 1 | 2026-11-11 |
@@ -921,17 +1029,18 @@ These sources are not on the avoid list, because at least one of their paths wor
 | cvdportal.com | 1/1 | ok 1 | 2026-11-11 |
 | dailybruin.com | 1/1 | ok 1 | 2026-11-25 |
 | danger.systems | 1/1 | ok 1 | 2026-11-25 |
+| danville.ca.gov | 1/1 | ok 1 | 2026-11-28 |
 | das.osu.edu | 0/1 | redirect 1 | never |
 | data.iana.org | 1/1 | ok 1 | 2026-11-18 |
 | datadryad.org | 1/1 | ok 1 | 2026-11-11 |
 | demo.cvdportal.com | 0/1 | redirect 1 | never |
-| dev.wix.com | 1/1 | ok 1 | 2026-11-27 |
 | developer.android.com | 1/1 | ok 1 | 2026-11-25 |
 | developer.candid.org | 1/1 | ok 1 | 2026-11-07 |
 | developer.nylas.com | 1/1 | ok 1 | 2026-11-18 |
 | developers.apideck.com | 1/1 | ok 1 | 2026-11-26 |
 | developers.cloudflare.com | 1/1 | ok 1 | 2026-11-25 |
 | developers.hubspot.com | 1/1 | ok 1 | 2026-11-18 |
+| developers.intuit.com | 0/1 | http_404 1 | never |
 | developers.kajabi.com | 0/1 | http_404 1 | never |
 | developers.mindbodyonline.com | 1/1 | ok 1 | 2026-11-23 |
 | developers.openai.com | 1/1 | ok 1 | 2026-11-18 |
@@ -940,6 +1049,7 @@ These sources are not on the avoid list, because at least one of their paths wor
 | dext.com | 1/1 | ok 1 | 2026-11-26 |
 | digital-client-solutions.hlc.com | 1/1 | ok 1 | 2026-11-25 |
 | digital-client-solutions.hoganlovells.com | 0/1 | redirect 1 | never |
+| digital.maryland.gov | 1/1 | ok 1 | 2026-11-28 |
 | disability.tamu.edu | 1/1 | ok 1 | 2026-11-25 |
 | disclo.eu | 1/1 | ok 1 | 2026-11-25 |
 | discourse.datamethods.org | 0/1 | empty 1 | never |
@@ -947,6 +1057,8 @@ These sources are not on the avoid list, because at least one of their paths wor
 | dmarc.postmarkapp.com | 1/1 | ok 1 | 2026-11-25 |
 | dmarcian.com | 1/1 | ok 1 | 2026-11-25 |
 | doc.toasttab.com | 1/1 | ok 1 | 2026-11-27 |
+| docaccessible.com | 1/1 | ok 1 | 2026-11-28 |
+| dockaccess.org | 1/1 | ok 1 | 2026-11-28 |
 | docparser.com | 1/1 | ok 1 | 2026-11-19 |
 | docs-shpf.bsscommerce.com | 1/1 | ok 1 | 2026-11-20 |
 | docs.appjetty.com | 1/1 | ok 1 | 2026-11-27 |
@@ -958,16 +1070,20 @@ These sources are not on the avoid list, because at least one of their paths wor
 | docs.k-id.com | 1/1 | ok 1 | 2026-11-24 |
 | docs.lemonsqueezy.com | 1/1 | ok 1 | 2026-11-22 |
 | docs.moodle.org | 1/1 | ok 1 | 2026-11-24 |
+| docs.nextgen.com | 0/1 | http_403 1 | never |
 | docs.numbas.org.uk | 1/1 | ok 1 | 2026-11-25 |
 | docs.patchstack.com | 1/1 | ok 1 | 2026-11-25 |
 | docs.railway.com | 1/1 | ok 1 | 2026-11-18 |
 | docs.replit.com | 1/1 | ok 1 | 2026-11-25 |
 | docs.retellai.com | 1/1 | ok 1 | 2026-11-09 |
+| docs.rs | 1/1 | ok 1 | 2026-11-28 |
 | docs.smrtphone.io | 0/1 | redirect 1 | never |
 | docs.solidtime.io | 1/1 | ok 1 | 2026-11-18 |
 | docs.studiobase.org | 1/1 | ok 1 | 2026-11-18 |
+| docs.verapdf.org | 1/1 | ok 1 | 2026-11-28 |
 | docs.withampersand.com | 1/1 | ok 1 | 2026-11-19 |
 | docsio.co | 1/1 | ok 1 | 2026-11-25 |
+| doit.illinois.gov | 1/1 | ok 1 | 2026-11-28 |
 | domainmod.org | 1/1 | ok 1 | 2026-11-18 |
 | donationdocket.com.au | 1/1 | ok 1 | 2026-11-07 |
 | donationmanager.co.nz | 1/1 | ok 1 | 2026-11-07 |
@@ -988,16 +1104,17 @@ These sources are not on the avoid list, because at least one of their paths wor
 | ecosire.com | 1/1 | ok 1 | 2026-11-03 |
 | ecosystem.hubspot.com | 1/1 | ok 1 | 2026-11-23 |
 | edd.ca.gov | 1/1 | ok 1 | 2026-11-21 |
-| edsurge.com | 1/1 | ok 1 | 2026-11-24 |
 | edtech.uconn.edu | 1/1 | ok 1 | 2026-11-25 |
 | edtechimpact.com | 1/1 | ok 1 | 2026-11-24 |
 | edtechtools.eee.uci.edu | 1/1 | ok 1 | 2026-11-25 |
 | edubracket.com | 1/1 | ok 1 | 2026-11-10 |
+| education.gov.au | 0/1 | http_5xx 1 | never |
 | educationfreedom.texas.gov | 1/1 | ok 1 | 2026-11-10 |
 | educationhub.blog.gov.uk | 1/1 | ok 1 | 2026-11-24 |
 | egazette.gov.in | 0/1 | http_5xx 1 | never |
 | elabftw.net | 1/1 | ok 1 | 2026-11-25 |
 | elementor.com | 0/1 | http_404 1 | never |
+| elgl.org | 0/1 | http_403 1 | never |
 | elvanto.com | 1/1 | ok 1 | 2026-11-07 |
 | emailmeter.com | 1/1 | ok 1 | 2026-11-06 |
 | englandkorfball.co.uk | 1/1 | ok 1 | 2026-11-14 |
@@ -1015,6 +1132,7 @@ These sources are not on the avoid list, because at least one of their paths wor
 | example.com | 1/1 | ok 1 | 2026-11-26 |
 | exploretock.com | 0/1 | http_403 1 | never |
 | exponentphilanthropy.org | 1/1 | ok 1 | 2026-11-24 |
+| eyfs.info | 1/1 | ok 1 | 2026-11-28 |
 | fazier.com | 1/1 | ok 1 | 2026-11-18 |
 | features.wpamelia.com | 0/1 | http_403 1 | never |
 | feedback.beacons.ai | 0/1 | http_403 1 | never |
@@ -1043,9 +1161,14 @@ These sources are not on the avoid list, because at least one of their paths wor
 | forum.moodle.org | 0/1 | timeout 1 | never |
 | forum.odrive.com | 1/1 | ok 1 | 2026-11-18 |
 | forum.openwrt.org | 0/1 | http_429 1 | never |
+| forum.pkp.sfu.ca | 0/1 | empty 1 | never |
+| forum.ratatui.rs | 1/1 | ok 1 | 2026-11-28 |
 | forum.shopware.com | 1/1 | ok 1 | 2026-11-23 |
+| forum.snap.berkeley.edu | 1/1 | ok 1 | 2026-11-28 |
 | forum.thirtybees.com | 1/1 | ok 1 | 2026-11-22 |
+| forum.threesixtygiving.org | 1/1 | ok 1 | 2026-11-28 |
 | forum.tutorcruncher.com | 0/1 | timeout 1 | never |
+| forum.typst.app | 1/1 | ok 1 | 2026-11-28 |
 | forums.moneysavingexpert.com | 1/1 | ok 1 | 2026-11-26 |
 | forums.whirlpool.net.au | 0/1 | http_403 1 | never |
 | franklinoit.atlassian.net | 0/1 | empty 1 | never |
@@ -1054,35 +1177,43 @@ These sources are not on the avoid list, because at least one of their paths wor
 | fresha.com | 1/1 | ok 1 | 2026-11-12 |
 | frontdeskreview.com | 1/1 | ok 1 | 2026-11-18 |
 | ftc.gov | 1/1 | ok 1 | 2026-11-26 |
+| funding.scot | 1/1 | ok 1 | 2026-11-28 |
+| fundingeye.substack.com | 1/1 | ok 1 | 2026-11-28 |
 | geekbot.com | 1/1 | ok 1 | 2026-11-25 |
-| get.resova.com | 1/1 | ok 1 | 2026-11-27 |
 | getbcs.com | 1/1 | ok 1 | 2026-11-12 |
 | getesapaid.com | 1/1 | ok 1 | 2026-11-10 |
 | getholdings.com | 0/1 | http_404 1 | never |
 | getjobber.com | 1/1 | ok 1 | 2026-11-18 |
 | getsquire.com | 1/1 | ok 1 | 2026-11-12 |
+| getstreamline.com | 1/1 | ok 1 | 2026-11-28 |
 | gettingstarted.tutorbird.com | 0/1 | http_5xx 1 | never |
 | getweeklyupdate.com | 0/1 | http_5xx 1 | never |
 | gh.io | 0/1 | redirect 1 | never |
 | ginkoflorist.pages.dev | 1/1 | ok 1 | 2026-11-13 |
+| gist.github.com | 1/1 | ok 1 | 2026-11-28 |
 | givewp.com | 0/1 | redirect 1 | never |
 | glossgenius.com | 1/1 | ok 1 | 2026-11-12 |
 | go.appsumo.com | 1/1 | ok 1 | 2026-11-18 |
+| go.boarddocs.com | 0/1 | http_403 1 | never |
 | go.canvas.duke.edu | 1/1 | ok 1 | 2026-11-25 |
 | go.ressiosoftware.com | 0/1 | http_404 1 | never |
 | gofile.co.uk | 0/1 | http_403 1 | never |
 | googleapis.github.io | 1/1 | ok 1 | 2026-11-27 |
 | gotranscript.com | 1/1 | ok 1 | 2026-11-10 |
+| govably.com | 1/1 | ok 1 | 2026-11-28 |
 | governancedocs.com | 1/1 | ok 1 | 2026-11-23 |
 | grad.tamu.edu | 0/1 | http_404 1 | never |
 | grad.uw.edu | 1/1 | ok 1 | 2026-11-25 |
 | grad.uwo.ca | 1/1 | ok 1 | 2026-11-25 |
 | grade.us | 1/1 | ok 1 | 2026-11-27 |
+| grantpipe-site.pages.dev | 0/1 | environment 1 | never |
+| grantwatch.com | 0/1 | http_403 1 | never |
 | graphene-edu.com | 1/1 | ok 1 | 2026-11-10 |
 | grcsolutions.io | 1/1 | ok 1 | 2026-11-23 |
 | greenleaflabs.onrender.com | 1/1 | ok 1 | 2026-11-07 |
 | greptile.com | 1/1 | ok 1 | 2026-11-25 |
 | guide.runestone.academy | 1/1 | ok 1 | 2026-11-25 |
+| guidepup.github.io | 0/1 | http_404 1 | never |
 | gymdesk.com | 1/1 | ok 1 | 2026-11-23 |
 | h10y.github.io | 1/1 | ok 1 | 2026-11-25 |
 | h30434.www3.hp.com | 0/1 | http_403 1 | never |
@@ -1095,9 +1226,11 @@ These sources are not on the avoid list, because at least one of their paths wor
 | hello.showmojo.com | 1/1 | ok 1 | 2026-11-13 |
 | hellobonsai.com | 1/1 | ok 1 | 2026-11-25 |
 | help-donorfy.theaccessgroup.com | 1/1 | ok 1 | 2026-11-14 |
+| help.amilia.com | 1/1 | ok 1 | 2026-11-28 |
 | help.apprenticeships.education.gov.uk | 0/1 | http_403 1 | never |
 | help.archive.org | 1/1 | ok 1 | 2026-11-24 |
 | help.artworkarchive.com | 1/1 | ok 1 | 2026-11-22 |
+| help.athenahealth.com | 1/1 | ok 1 | 2026-11-28 |
 | help.buildern.com | 1/1 | ok 1 | 2026-11-23 |
 | help.buildpass.ai | 1/1 | ok 1 | 2026-11-12 |
 | help.ce-go.com | 1/1 | ok 1 | 2026-11-07 |
@@ -1107,9 +1240,11 @@ These sources are not on the avoid list, because at least one of their paths wor
 | help.doublehq.com | 1/1 | ok 1 | 2026-11-26 |
 | help.elearningindustry.com | 1/1 | ok 1 | 2026-11-24 |
 | help.elvanto.com | 0/1 | http_403 1 | never |
+| help.fareharbor.com | 0/1 | http_403 1 | never |
 | help.fergus.com | 1/1 | ok 1 | 2026-11-12 |
 | help.formspree.io | 1/1 | ok 1 | 2026-11-25 |
 | help.geekbot.com | 1/1 | ok 1 | 2026-11-25 |
+| help.getslick.com | 1/1 | ok 1 | 2026-11-28 |
 | help.gohighlevel.com | 1/1 | ok 1 | 2026-11-09 |
 | help.instrumentl.com | 1/1 | ok 1 | 2026-11-24 |
 | help.jackrabbitclass.com | 0/1 | empty 1 | never |
@@ -1121,6 +1256,7 @@ These sources are not on the avoid list, because at least one of their paths wor
 | help.outofthesandbox.com | 0/1 | http_403 1 | never |
 | help.patriotsoftware.com | 1/1 | ok 1 | 2026-11-07 |
 | help.pickcode.io | 1/1 | ok 1 | 2026-11-01 |
+| help.powerschool.com | 0/1 | redirect 1 | never |
 | help.productive.io | 1/1 | ok 1 | 2026-11-18 |
 | help.projectworks.com | 1/1 | ok 1 | 2026-11-18 |
 | help.propertymeld.com | 0/1 | http_403 1 | never |
@@ -1128,6 +1264,8 @@ These sources are not on the avoid list, because at least one of their paths wor
 | help.safetyculture.com | 0/1 | redirect 1 | never |
 | help.smrtphone.io | 1/1 | ok 1 | 2026-11-09 |
 | help.studioninja.co | 1/1 | ok 1 | 2026-11-08 |
+| help.tripworks.com | 0/1 | http_404 1 | never |
+| help.wpamelia.com | 0/1 | http_404 1 | never |
 | help.zenamu.com | 1/1 | ok 1 | 2026-11-24 |
 | helpcenter.websitex5.com | 0/1 | http_403 1 | never |
 | helpdesk.scoutsqld.com.au | 1/1 | ok 1 | 2026-11-07 |
@@ -1136,6 +1274,7 @@ These sources are not on the avoid list, because at least one of their paths wor
 | hia.com.au | 1/1 | ok 1 | 2026-11-23 |
 | higheredav.com | 1/1 | ok 1 | 2026-11-25 |
 | hiverhq.com | 1/1 | ok 1 | 2026-11-06 |
+| honesttaskers.com | 1/1 | ok 1 | 2026-11-28 |
 | honestyjar.app | 0/1 | http_5xx 1 | never |
 | hookdeck.com | 1/1 | ok 1 | 2026-11-03 |
 | housecallpro.com | 1/1 | ok 1 | 2026-11-13 |
@@ -1155,8 +1294,10 @@ These sources are not on the avoid list, because at least one of their paths wor
 | informationsecurity.iu.edu | 1/1 | ok 1 | 2026-11-25 |
 | insightfulaccountant.com | 1/1 | ok 1 | 2026-11-19 |
 | instarenewal.com | 1/1 | ok 1 | 2026-11-18 |
+| instrumentl.com | 1/1 | ok 1 | 2026-11-28 |
 | integrately.com | 1/1 | ok 1 | 2026-11-20 |
 | integratestack.pages.dev | 1/1 | ok 1 | 2026-11-08 |
+| intuitdeveloper.github.io | 0/1 | http_404 1 | never |
 | investors.intuit.com | 1/1 | ok 1 | 2026-11-26 |
 | invoicequickly.com | 1/1 | ok 1 | 2026-11-18 |
 | invoicesherpa.com | 1/1 | ok 1 | 2026-11-19 |
@@ -1165,13 +1306,13 @@ These sources are not on the avoid list, because at least one of their paths wor
 | it.osu.edu | 1/1 | ok 1 | 2026-11-26 |
 | itali.uq.edu.au | 1/1 | ok 1 | 2026-11-25 |
 | itbrief.co.nz | 1/1 | ok 1 | 2026-11-20 |
-| itbrief.com.au | 1/1 | ok 1 | 2026-11-19 |
 | its.umich.edu | 0/1 | http_403 1 | never |
 | itsaccessibility.syr.edu | 1/1 | ok 1 | 2026-11-27 |
-| ja.wordpress.org | 1/1 | ok 1 | 2026-11-22 |
+| jane.app | 1/1 | ok 1 | 2026-11-28 |
 | javascript.plainenglish.io | 0/1 | http_5xx 1 | never |
 | jcetf.org | 1/1 | ok 1 | 2026-11-24 |
 | jentic.com | 1/1 | ok 1 | 2026-11-22 |
+| jobs.hireheroesusa.org | 0/1 | http_403 1 | never |
 | jobs.mehi.masstech.org | 1/1 | ok 1 | 2026-11-07 |
 | joinblvd.com | 1/1 | ok 1 | 2026-11-12 |
 | jorijn.com | 0/1 | redirect 1 | never |
@@ -1180,7 +1321,6 @@ These sources are not on the avoid list, because at least one of their paths wor
 | k12.helperhelper.com | 1/1 | ok 1 | 2026-11-24 |
 | karbonhq.com | 1/1 | ok 1 | 2026-11-07 |
 | katanamrp.com | 1/1 | ok 1 | 2026-11-22 |
-| katv.com | 1/1 | ok 1 | 2026-11-10 |
 | kb.7shifts.com | 0/1 | http_403 1 | never |
 | kb.astate.edu | 1/1 | ok 1 | 2026-11-25 |
 | kb.drakesoftware.com | 0/1 | http_404 1 | never |
@@ -1197,6 +1337,7 @@ These sources are not on the avoid list, because at least one of their paths wor
 | landing-bwz.pages.dev | 1/1 | ok 1 | 2026-11-18 |
 | lapaasvoice.com | 1/1 | ok 1 | 2026-11-19 |
 | latexformat.netlify.app | 0/1 | http_404 1 | never |
+| launchcodex.com | 1/1 | ok 1 | 2026-11-28 |
 | law.gov.wales | 0/1 | redirect 1 | never |
 | leadsie.com | 1/1 | ok 1 | 2026-11-18 |
 | learning.central.xero.com | 1/1 | ok 1 | 2026-11-11 |
@@ -1206,6 +1347,7 @@ These sources are not on the avoid list, because at least one of their paths wor
 | lemonbooking.com | 1/1 | ok 1 | 2026-11-17 |
 | lenscratch.com | 1/1 | ok 1 | 2026-11-22 |
 | letsmetrix.com | 1/1 | ok 1 | 2026-11-22 |
+| libguides.ala.org | 0/1 | empty 1 | never |
 | library.harvard.edu | 1/1 | ok 1 | 2026-11-25 |
 | library.hkust.edu.hk | 1/1 | ok 1 | 2026-11-25 |
 | linkfix.app | 1/1 | ok 1 | 2026-11-08 |
@@ -1221,12 +1363,17 @@ These sources are not on the avoid list, because at least one of their paths wor
 | mailchimp.com | 1/1 | ok 1 | 2026-11-20 |
 | mailparser.io | 1/1 | ok 1 | 2026-11-19 |
 | mailroute.net | 1/1 | ok 1 | 2026-11-22 |
+| mainfolk.com | 1/1 | ok 1 | 2026-11-28 |
+| makandracards.com | 0/1 | http_404 1 | never |
 | make.wordpress.org | 1/1 | ok 1 | 2026-11-25 |
 | marginedge.com | 1/1 | ok 1 | 2026-11-26 |
 | marketplace.simprogroup.com | 0/1 | http_403 1 | never |
 | mc.merill.net | 1/1 | ok 1 | 2026-11-11 |
+| mchenrylibrary.org | 0/1 | http_5xx 1 | never |
 | mclibrary.duke.edu | 1/1 | ok 1 | 2026-11-11 |
 | mcpservers.org | 0/1 | http_403 1 | never |
+| medcurity.com | 1/1 | ok 1 | 2026-11-28 |
+| medrecords.ai | 1/1 | ok 1 | 2026-11-28 |
 | meliopayments.com | 0/1 | redirect 1 | never |
 | menssheds.org.uk | 1/1 | ok 1 | 2026-11-21 |
 | metricool.com | 1/1 | ok 1 | 2026-11-27 |
@@ -1239,10 +1386,11 @@ These sources are not on the avoid list, because at least one of their paths wor
 | monk.com | 1/1 | ok 1 | 2026-11-12 |
 | mosscpa.com | 1/1 | ok 1 | 2026-11-07 |
 | motopress.com | 0/1 | http_403 1 | never |
+| mr.wordpress.org | 1/1 | ok 1 | 2026-11-28 |
 | mtc.gov | 1/1 | ok 1 | 2026-11-23 |
 | my.squareup.com | 0/1 | redirect 1 | never |
+| mybrightwheel.com | 1/1 | ok 1 | 2026-11-28 |
 | mynews13.com | 1/1 | ok 1 | 2026-11-06 |
-| myob.lithium.com | 0/1 | http_403 1 | never |
 | nango.dev | 1/1 | ok 1 | 2026-11-19 |
 | nbcc.org | 1/1 | ok 1 | 2026-11-24 |
 | ncbtmb.org | 0/1 | http_404 1 | never |
@@ -1254,27 +1402,31 @@ These sources are not on the avoid list, because at least one of their paths wor
 | nodehero.io | 0/1 | timeout 1 | never |
 | nonprofitlawblog.com | 1/1 | ok 1 | 2026-11-07 |
 | notbyai.fyi | 1/1 | ok 1 | 2026-11-10 |
+| notudocs.com | 1/1 | ok 1 | 2026-11-28 |
+| npmjs.com | 0/1 | http_403 1 | never |
 | nporesources.com | 1/1 | ok 1 | 2026-11-07 |
 | numbas.mathcentre.ac.uk | 1/1 | ok 1 | 2026-11-25 |
 | nursingworld.org | 1/1 | ok 1 | 2026-11-24 |
+| nvda.groups.io | 0/1 | http_403 1 | never |
 | nwelearn2026.sched.com | 0/1 | http_403 1 | never |
 | nysenate.gov | 1/1 | ok 1 | 2026-11-23 |
 | nz.trustpilot.com | 1/1 | ok 1 | 2026-11-24 |
-| oia.pmc.gov.au | 0/1 | http_404 1 | never |
+| ockem.com | 1/1 | ok 1 | 2026-11-28 |
 | oit.duke.edu | 1/1 | ok 1 | 2026-11-24 |
 | omb.report | 1/1 | ok 1 | 2026-11-17 |
 | omr.com | 1/1 | ok 1 | 2026-11-12 |
 | onde.app | 1/1 | ok 1 | 2026-11-06 |
 | onvolunteers.com | 1/1 | ok 1 | 2026-11-24 |
+| opfpd.specialdistrict.org | 0/1 | http_404 1 | never |
 | ora.stanford.edu | 1/1 | ok 1 | 2026-11-11 |
 | orchid.ganoksin.com | 1/1 | ok 1 | 2026-11-08 |
 | originality.ai | 1/1 | ok 1 | 2026-11-10 |
 | ourvolts.uservoice.com | 0/1 | http_404 1 | never |
+| ourxplor.com | 1/1 | ok 1 | 2026-11-28 |
 | outbound-emails.netlify.com | 1/1 | ok 1 | 2026-11-25 |
 | outschool.com | 1/1 | ok 1 | 2026-11-24 |
 | owner.com | 1/1 | ok 1 | 2026-11-27 |
 | oxpecker.dev | 1/1 | ok 1 | 2026-11-18 |
-| pac.pdf-accessibility.org | 1/1 | ok 1 | 2026-11-26 |
 | pagecrawl.io | 1/1 | ok 1 | 2026-11-18 |
 | pages.twilio.com | 1/1 | ok 1 | 2026-11-12 |
 | parseur.com | 1/1 | ok 1 | 2026-11-19 |
@@ -1283,7 +1435,6 @@ These sources are not on the avoid list, because at least one of their paths wor
 | passkit.com | 1/1 | ok 1 | 2026-11-21 |
 | patch.com | 1/1 | ok 1 | 2026-11-23 |
 | pathtoship.com | 1/1 | ok 1 | 2026-11-25 |
-| patient-protect.com | 1/1 | ok 1 | 2026-11-20 |
 | payoutcheck.online | 1/1 | ok 1 | 2026-11-06 |
 | payoutpilot.pages.dev | 0/1 | empty 1 | never |
 | payroller.com.au | 1/1 | ok 1 | 2026-11-16 |
@@ -1301,22 +1452,28 @@ These sources are not on the avoid list, because at least one of their paths wor
 | pickyourapp.com | 1/1 | ok 1 | 2026-11-19 |
 | pillar.science | 1/1 | ok 1 | 2026-11-25 |
 | pl.trustpilot.com | 1/1 | ok 1 | 2026-11-24 |
+| plausible.io | 1/1 | ok 1 | 2026-11-28 |
 | pmc.ncbi.nlm.nih.gov | 1/1 | ok 1 | 2026-11-25 |
 | podia.com | 1/1 | ok 1 | 2026-11-24 |
+| poklib.org | 1/1 | ok 1 | 2026-11-28 |
 | policycommons.net | 0/1 | http_403 1 | never |
 | polycount.com | 0/1 | http_403 1 | never |
 | poolwerx.freshdesk.com | 0/1 | redirect 1 | never |
 | pope.tech | 1/1 | ok 1 | 2026-11-07 |
 | pos.toasttab.com | 0/1 | http_403 1 | never |
 | postmarkapp.com | 1/1 | ok 1 | 2026-11-19 |
+| ppc.land | 1/1 | ok 1 | 2026-11-28 |
 | prairielearn.com | 1/1 | ok 1 | 2026-11-25 |
+| pressreleases.responsesource.com | 1/1 | ok 1 | 2026-11-28 |
 | pricebook.digital | 1/1 | ok 1 | 2026-11-13 |
 | printify.com | 1/1 | ok 1 | 2026-11-22 |
 | privacylawmap.com | 1/1 | ok 1 | 2026-11-24 |
 | privacytools.uk | 1/1 | ok 1 | 2026-11-23 |
 | privycdp.org | 1/1 | ok 1 | 2026-11-25 |
+| prnewswire.com | 1/1 | ok 1 | 2026-11-28 |
 | productupdates.getjobber.com | 0/1 | http_403 1 | never |
 | projectoem.csumb.edu | 0/1 | http_5xx 1 | never |
+| projects.propublica.org | 1/1 | ok 1 | 2026-11-28 |
 | projects.raspberrypi.org | 0/1 | empty 1 | never |
 | publer.com | 1/1 | ok 1 | 2026-11-06 |
 | publicea.be | 1/1 | ok 1 | 2026-11-25 |
@@ -1333,22 +1490,27 @@ These sources are not on the avoid list, because at least one of their paths wor
 | qodo-merge-docs.qodo.ai | 0/1 | redirect 1 | never |
 | rct.doj.ca.gov | 0/1 | http_404 1 | never |
 | rdap.org | 1/1 | ok 1 | 2026-11-18 |
+| reach.dog | 0/1 | http_404 1 | never |
 | reachrightstudios.com | 1/1 | ok 1 | 2026-11-07 |
 | readme.com | 1/1 | ok 1 | 2026-11-25 |
 | recipal.com | 1/1 | ok 1 | 2026-11-06 |
+| redirect.github.com | 0/1 | redirect 1 | never |
 | region.com.au | 1/1 | ok 1 | 2026-11-20 |
+| registry.threesixtygiving.org | 1/1 | ok 1 | 2026-11-28 |
 | remittancego.com | 1/1 | ok 1 | 2026-11-05 |
 | render.com | 1/1 | ok 1 | 2026-11-27 |
 | render.discourse.group | 0/1 | http_5xx 1 | never |
 | renewful.co.uk | 1/1 | ok 1 | 2026-11-22 |
 | rental.software | 0/1 | empty 1 | never |
 | rentmy.co | 1/1 | ok 1 | 2026-11-18 |
+| request.kidcheck.com | 0/1 | http_403 1 | never |
 | research.luriechildrens.org | 1/1 | ok 1 | 2026-11-11 |
 | research.ufl.edu | 0/1 | timeout 1 | never |
 | reservety.com | 1/1 | ok 1 | 2026-11-18 |
 | resources.github.com | 0/1 | redirect 1 | never |
 | restrictedbooks.pages.dev | 0/1 | environment 1 | never |
 | righttool.app | 1/1 | ok 1 | 2026-11-26 |
+| roadmap.famly.co | 1/1 | ok 1 | 2026-11-28 |
 | roastertools.com | 1/1 | ok 1 | 2026-11-20 |
 | rootbrief.com | 1/1 | ok 1 | 2026-11-04 |
 | rules.cityofnewyork.us | 1/1 | ok 1 | 2026-11-23 |
@@ -1386,6 +1548,7 @@ These sources are not on the avoid list, because at least one of their paths wor
 | simplybook.me | 1/1 | ok 1 | 2026-11-27 |
 | simplyk.canny.io | 1/1 | ok 1 | 2026-11-21 |
 | simplyscheduleappointments.com | 1/1 | ok 1 | 2026-11-27 |
+| smartcare.com | 0/1 | redirect 1 | never |
 | smartwaiver.com | 0/1 | http_403 1 | never |
 | smythmyke.github.io | 1/1 | ok 1 | 2026-11-15 |
 | sotonac.sharepoint.com | 0/1 | http_403 1 | never |
@@ -1396,14 +1559,15 @@ These sources are not on the avoid list, because at least one of their paths wor
 | spendwall.app | 1/1 | ok 1 | 2026-11-18 |
 | spiromedia.featurebase.app | 1/1 | ok 1 | 2026-11-22 |
 | sport.nspcc.org.uk | 1/1 | ok 1 | 2026-11-14 |
+| sportscarnival.com | 0/1 | http_403 1 | never |
 | springernature.com | 1/1 | ok 1 | 2026-11-25 |
 | sproutinvoices.com | 1/1 | ok 1 | 2026-11-18 |
 | ssaes.org | 1/1 | ok 1 | 2026-11-24 |
 | sslmate.com | 1/1 | ok 1 | 2026-11-25 |
 | stamps.org | 1/1 | ok 1 | 2026-11-24 |
+| standard.threesixtygiving.org | 1/1 | ok 1 | 2026-11-28 |
 | stanford-cs221.github.io | 1/1 | ok 1 | 2026-11-25 |
 | startupstash.com | 1/1 | ok 1 | 2026-11-25 |
-| static.developer.intuit.com | 1/1 | ok 1 | 2026-11-19 |
 | stayinscope.com | 1/1 | ok 1 | 2026-11-25 |
 | streetfoodfinder.com | 0/1 | http_403 1 | never |
 | studentprivacy.ed.gov | 1/1 | ok 1 | 2026-11-24 |
@@ -1430,6 +1594,7 @@ These sources are not on the avoid list, because at least one of their paths wor
 | support.splose.com | 0/1 | http_404 1 | never |
 | support.squarespace.com | 1/1 | ok 1 | 2026-11-22 |
 | support.taxcloud.com | 0/1 | http_404 1 | never |
+| support.therapyappointment.com | 1/1 | ok 1 | 2026-11-28 |
 | support.waveapps.com | 0/1 | http_403 1 | never |
 | support.wildapricot.com | 0/1 | http_403 1 | never |
 | support.work.fleetmatics.com | 0/1 | http_403 1 | never |
@@ -1441,6 +1606,7 @@ These sources are not on the avoid list, because at least one of their paths wor
 | sylvanassurance.pages.dev | 0/1 | http_404 1 | never |
 | systemforce.co.uk | 1/1 | ok 1 | 2026-11-23 |
 | systems.eecs.tufts.edu | 1/1 | ok 1 | 2026-11-25 |
+| tanda.com.au | 0/1 | redirect 1 | never |
 | tasks.mechanic.dev | 1/1 | ok 1 | 2026-11-18 |
 | taxation-customs.ec.europa.eu | 1/1 | ok 1 | 2026-11-22 |
 | teach.outschool.com | 0/1 | http_404 1 | never |
@@ -1459,11 +1625,14 @@ These sources are not on the avoid list, because at least one of their paths wor
 | thenewflatrate.com | 1/1 | ok 1 | 2026-11-13 |
 | theprintspace.co.uk | 1/1 | ok 1 | 2026-11-22 |
 | theproducenews.com | 0/1 | http_403 1 | never |
+| theranest.uservoice.com | 0/1 | http_404 1 | never |
 | theseoteacher.com.au | 1/1 | ok 1 | 2026-11-10 |
 | thinkific.com | 1/1 | ok 1 | 2026-11-24 |
 | thirtyoneeight.org | 1/1 | ok 1 | 2026-11-14 |
 | tidyhq.com | 1/1 | ok 1 | 2026-11-14 |
 | tilt.colostate.edu | 1/1 | ok 1 | 2026-11-01 |
+| titleii.org | 1/1 | ok 1 | 2026-11-28 |
+| tl.wordpress.org | 1/1 | ok 1 | 2026-11-28 |
 | todaysveterinarybusiness.com | 1/1 | ok 1 | 2026-11-20 |
 | tonsofskills.com | 1/1 | ok 1 | 2026-11-18 |
 | topaihubs.com | 1/1 | ok 1 | 2026-11-18 |
@@ -1472,7 +1641,7 @@ These sources are not on the avoid list, because at least one of their paths wor
 | trackjs.com | 1/1 | ok 1 | 2026-11-25 |
 | trackssl.com | 1/1 | ok 1 | 2026-11-25 |
 | trainingindustry.com | 1/1 | ok 1 | 2026-11-24 |
-| transparentclassroom.uservoice.com | 1/1 | ok 1 | 2026-11-24 |
+| triagecancer.org | 1/1 | ok 1 | 2026-11-28 |
 | trinket.io | 1/1 | ok 1 | 2026-11-01 |
 | trippz.com | 1/1 | ok 1 | 2026-11-23 |
 | truckspotting.com | 0/1 | http_5xx 1 | never |
@@ -1536,10 +1705,12 @@ These sources are not on the avoid list, because at least one of their paths wor
 | www.3dissue.com | 1/1 | ok 1 | 2026-11-24 |
 | www.accessplanit.com | 1/1 | ok 1 | 2026-11-24 |
 | www.accountable.de | 1/1 | ok 1 | 2026-11-11 |
+| www.acquia.com | 1/1 | ok 1 | 2026-11-28 |
 | www.ada.org | 0/1 | empty 1 | never |
 | www.adaptive.build | 1/1 | ok 1 | 2026-11-23 |
 | www.adlercolvin.com | 1/1 | ok 1 | 2026-11-07 |
 | www.adobe.com | 1/1 | ok 1 | 2026-11-24 |
+| www.adweek.com | 1/1 | ok 1 | 2026-11-28 |
 | www.afslaw.com | 1/1 | ok 1 | 2026-11-23 |
 | www.agensi.io | 1/1 | ok 1 | 2026-11-22 |
 | www.agg.com | 1/1 | ok 1 | 2026-11-27 |
@@ -1559,6 +1730,7 @@ These sources are not on the avoid list, because at least one of their paths wor
 | www.arkansasonline.com | 1/1 | ok 1 | 2026-11-10 |
 | www.arketa.com | 1/1 | ok 1 | 2026-11-18 |
 | www.arlo.co | 1/1 | ok 1 | 2026-11-24 |
+| www.arnoldporter.com | 1/1 | ok 1 | 2026-11-28 |
 | www.articulate.com | 1/1 | ok 1 | 2026-11-24 |
 | www.ashurstperkinscoie.com | 0/1 | http_404 1 | never |
 | www.asset.accountant | 0/1 | empty 1 | never |
@@ -1567,23 +1739,28 @@ These sources are not on the avoid list, because at least one of their paths wor
 | www.australiansuper.com | 0/1 | http_403 1 | never |
 | www.avaza.com | 1/1 | ok 1 | 2026-11-18 |
 | www.azed.gov | 0/1 | http_403 1 | never |
+| www.bakerdonelson.com | 1/1 | ok 1 | 2026-11-28 |
 | www.banterspeech.com.au | 1/1 | ok 1 | 2026-11-21 |
 | www.barnesdennig.com | 1/1 | ok 1 | 2026-11-07 |
+| www.bathnes.gov.uk | 1/1 | ok 1 | 2026-11-28 |
 | www.bayshorechristianschool.org | 1/1 | ok 1 | 2026-11-24 |
 | www.beveragedaily.com | 1/1 | ok 1 | 2026-11-12 |
 | www.bigcartel.com | 1/1 | ok 1 | 2026-11-22 |
 | www.bigcommerce.com | 1/1 | ok 1 | 2026-11-22 |
 | www.blackbaud.com | 1/1 | ok 1 | 2026-11-24 |
+| www.blog.owna.com.au | 0/1 | redirect 1 | never |
 | www.bluehost.com | 0/1 | http_403 1 | never |
 | www.boisestate.edu | 1/1 | ok 1 | 2026-11-26 |
-| www.bookeo.com | 1/1 | ok 1 | 2026-11-27 |
 | www.booker-app.com | 1/1 | ok 1 | 2026-11-23 |
 | www.bookitlive.net | 1/1 | ok 1 | 2026-11-24 |
 | www.boomeranggmail.com | 1/1 | ok 1 | 2026-11-06 |
 | www.brightlocal.com | 1/1 | ok 1 | 2026-11-27 |
+| www.britishequestrian.org.uk | 0/1 | empty 1 | never |
+| www.buenaparklibrary.org | 1/1 | ok 1 | 2026-11-28 |
 | www.buffalo.edu | 1/1 | ok 1 | 2026-11-25 |
 | www.business.gov.uk | 1/1 | ok 1 | 2026-11-21 |
 | www.businesswire.com | 0/1 | http_403 1 | never |
+| www.callrail.com | 1/1 | ok 1 | 2026-11-28 |
 | www.calrest.org | 1/1 | ok 1 | 2026-11-27 |
 | www.calxa.com | 1/1 | ok 1 | 2026-11-14 |
 | www.campai.com | 1/1 | ok 1 | 2026-11-24 |
@@ -1591,6 +1768,7 @@ These sources are not on the avoid list, because at least one of their paths wor
 | www.canyou.com.au | 1/1 | ok 1 | 2026-11-17 |
 | www.capium.com | 1/1 | ok 1 | 2026-11-21 |
 | www.captaindns.com | 1/1 | ok 1 | 2026-11-11 |
+| www.capterra.co.uk | 0/1 | http_403 1 | never |
 | www.capterra.com.au | 0/1 | http_403 1 | never |
 | www.careerbuilder.com | 0/1 | http_403 1 | never |
 | www.castanet.net | 0/1 | http_403 1 | never |
@@ -1603,7 +1781,6 @@ These sources are not on the avoid list, because at least one of their paths wor
 | www.chaponline.com | 1/1 | ok 1 | 2026-11-10 |
 | www.charliehr.com | 1/1 | ok 1 | 2026-11-21 |
 | www.chaserhq.com | 1/1 | ok 1 | 2026-11-19 |
-| www.chcanys.org | 1/1 | ok 1 | 2026-11-07 |
 | www.cheddarup.com | 1/1 | ok 1 | 2026-11-24 |
 | www.chift.eu | 1/1 | ok 1 | 2026-11-23 |
 | www.chorusaccess.org | 1/1 | ok 1 | 2026-11-25 |
@@ -1634,15 +1811,18 @@ These sources are not on the avoid list, because at least one of their paths wor
 | www.coupler.io | 1/1 | ok 1 | 2026-11-18 |
 | www.craftybase.com | 0/1 | redirect 1 | never |
 | www.credas.com | 0/1 | http_403 1 | never |
+| www.crestlinevillagewaterca.gov | 1/1 | ok 1 | 2026-11-28 |
 | www.cripps.co.uk | 1/1 | ok 1 | 2026-11-21 |
 | www.cs.cmu.edu | 1/1 | ok 1 | 2026-11-25 |
 | www.cs.purdue.edu | 1/1 | ok 1 | 2026-11-25 |
 | www.cs.toronto.edu | 1/1 | ok 1 | 2026-11-25 |
 | www.csc.gov.au | 0/1 | http_403 1 | never |
+| www.csda.net | 1/1 | ok 1 | 2026-11-28 |
 | www.csulb.edu | 1/1 | ok 1 | 2026-11-25 |
 | www.ctvnews.ca | 0/1 | empty 1 | never |
 | www.cu.edu | 1/1 | ok 1 | 2026-11-25 |
 | www.dailycal.org | 0/1 | http_403 1 | never |
+| www.datavant.com | 1/1 | ok 1 | 2026-11-28 |
 | www.dcjs.virginia.gov | 1/1 | ok 1 | 2026-11-24 |
 | www.dentaleconomics.com | 1/1 | ok 1 | 2026-11-20 |
 | www.dentaltown.com | 1/1 | ok 1 | 2026-11-23 |
@@ -1658,9 +1838,11 @@ These sources are not on the avoid list, because at least one of their paths wor
 | www.donorfy.com | 1/1 | ok 1 | 2026-11-14 |
 | www.dor.wa.gov | 1/1 | ok 1 | 2026-11-02 |
 | www.duanemorris.com | 1/1 | ok 1 | 2026-11-07 |
+| www.eastsuffolk.gov.uk | 0/1 | http_404 1 | never |
 | www.ebnerstolz.de | 1/1 | ok 1 | 2026-11-22 |
 | www.ecclesiastical.com | 1/1 | ok 1 | 2026-11-17 |
 | www.ecwid.com | 1/1 | ok 1 | 2026-11-27 |
+| www.edugeek.net | 0/1 | http_403 1 | never |
 | www.engadget.com | 1/1 | ok 1 | 2026-11-08 |
 | www.enrollware.com:443 | 0/1 | redirect 1 | never |
 | www.enrollwaresolutions.com | 1/1 | ok 1 | 2026-11-24 |
@@ -1684,15 +1866,13 @@ These sources are not on the avoid list, because at least one of their paths wor
 | www.fooddocs.com | 1/1 | ok 1 | 2026-11-13 |
 | www.fourlane.com | 1/1 | ok 1 | 2026-11-07 |
 | www.frassaticatholicacademy.org | 1/1 | ok 1 | 2026-11-24 |
-| www.freelancer.de | 1/1 | ok 1 | 2026-11-10 |
 | www.freeonlinebooking.com | 1/1 | ok 1 | 2026-11-23 |
 | www.freightwaves.com | 1/1 | ok 1 | 2026-11-17 |
 | www.fresha.com | 1/1 | ok 1 | 2026-11-20 |
 | www.freshbooks.com | 1/1 | ok 1 | 2026-11-22 |
 | www.freshfields.com | 1/1 | ok 1 | 2026-11-22 |
-| www.g2.com | 0/1 | http_403 1 | never |
+| www.fwc.gov.au | 0/1 | http_403 1 | never |
 | www.gatherup.com | 1/1 | ok 1 | 2026-11-27 |
-| www.getapp.co.uk | 0/1 | http_403 1 | never |
 | www.getapp.com.au | 0/1 | http_403 1 | never |
 | www.getbento.com | 1/1 | ok 1 | 2026-11-27 |
 | www.getclockwise.com | 1/1 | ok 1 | 2026-11-19 |
@@ -1701,7 +1881,7 @@ These sources are not on the avoid list, because at least one of their paths wor
 | www.gitbook.com | 1/1 | ok 1 | 2026-11-25 |
 | www.goldenvolunteer.com | 1/1 | ok 1 | 2026-11-24 |
 | www.goodgrants.com | 1/1 | ok 1 | 2026-11-24 |
-| www.govtech.com | 1/1 | ok 1 | 2026-11-24 |
+| www.govloop.com | 0/1 | http_403 1 | never |
 | www.grammarly.com | 1/1 | ok 1 | 2026-11-10 |
 | www.grantable.co | 1/1 | ok 1 | 2026-11-24 |
 | www.gravityforms.com | 1/1 | ok 1 | 2026-11-24 |
@@ -1710,21 +1890,24 @@ These sources are not on the avoid list, because at least one of their paths wor
 | www.haendlerbund.de | 1/1 | ok 1 | 2026-11-22 |
 | www.hallmaster.co.uk | 0/1 | timeout 1 | never |
 | www.harborcompliance.com | 1/1 | ok 1 | 2026-11-07 |
-| www.hcamag.com | 1/1 | ok 1 | 2026-11-21 |
 | www.healthclubmanagement.co.uk | 1/1 | ok 1 | 2026-11-20 |
+| www.healthinfolaw.org | 1/1 | ok 1 | 2026-11-28 |
+| www.hiregaynell.com | 1/1 | ok 1 | 2026-11-28 |
 | www.hiveage.com | 1/1 | ok 1 | 2026-11-26 |
+| www.hklaw.com | 1/1 | ok 1 | 2026-11-28 |
 | www.hostaway.com | 1/1 | ok 1 | 2026-11-23 |
+| www.houstonmethodistcareers.org | 0/1 | http_404 1 | never |
 | www.hse.gov.uk | 1/1 | ok 1 | 2026-11-24 |
 | www.hsfkramer.com | 0/1 | http_403 1 | never |
 | www.hudu.com | 1/1 | ok 1 | 2026-11-18 |
 | www.hvac-talk.com | 0/1 | redirect 1 | never |
 | www.hvacrschool.com | 1/1 | ok 1 | 2026-11-20 |
+| www.hygienetown.com | 1/1 | ok 1 | 2026-11-28 |
 | www.ifpti.org | 1/1 | ok 1 | 2026-11-13 |
 | www.ihk.de | 0/1 | http_403 1 | never |
 | www.indiafilings.com | 1/1 | ok 1 | 2026-11-23 |
 | www.insightagent.app | 1/1 | ok 1 | 2026-11-15 |
 | www.instarenewal.com | 1/1 | ok 1 | 2026-11-18 |
-| www.instrumentl.com | 1/1 | ok 1 | 2026-11-24 |
 | www.insurance.wa.gov | 1/1 | ok 1 | 2026-11-21 |
 | www.it-recht-kanzlei.de | 1/1 | ok 1 | 2026-11-22 |
 | www.itgovernance.co.uk | 0/1 | redirect 1 | never |
@@ -1732,14 +1915,18 @@ These sources are not on the avoid list, because at least one of their paths wor
 | www.jackrabbitclass.com | 1/1 | ok 1 | 2026-11-24 |
 | www.jibble.io | 1/1 | ok 1 | 2026-11-06 |
 | www.just-drinks.com | 1/1 | ok 1 | 2026-11-12 |
+| www.k12jobspot.com | 0/1 | http_404 1 | never |
+| www.kansasworks.com | 0/1 | http_403 1 | never |
 | www.khaitanco.com | 1/1 | ok 1 | 2026-11-23 |
 | www.khanmigo.ai | 1/1 | ok 1 | 2026-11-24 |
+| www.kidcheck.com | 1/1 | ok 1 | 2026-11-28 |
 | www.kimai.org | 1/1 | ok 1 | 2026-11-18 |
 | www.klaviyo.com | 1/1 | ok 1 | 2026-11-20 |
 | www.klgates.com | 1/1 | ok 1 | 2026-11-22 |
 | www.krowdbase.com | 0/1 | http_403 1 | never |
 | www.landlordstudio.com | 1/1 | ok 1 | 2026-11-19 |
 | www.landlordvision.co.uk | 1/1 | ok 1 | 2026-11-26 |
+| www.law.cornell.edu | 1/1 | ok 1 | 2026-11-28 |
 | www.lbc.co.uk | 1/1 | ok 1 | 2026-11-17 |
 | www.ldi.la.gov | 0/1 | http_403 1 | never |
 | www.legal500.com | 1/1 | ok 1 | 2026-11-07 |
@@ -1756,11 +1943,14 @@ These sources are not on the avoid list, because at least one of their paths wor
 | www.litrg.org.uk | 0/1 | http_403 1 | never |
 | www.littler.com | 1/1 | ok 1 | 2026-11-21 |
 | www.liveimpact.org | 1/1 | ok 1 | 2026-11-24 |
+| www.lmc.org | 1/1 | ok 1 | 2026-11-28 |
 | www.loffler.com | 1/1 | ok 1 | 2026-11-11 |
 | www.lovingly.com | 0/1 | redirect 1 | never |
 | www.ltcillinois.org | 1/1 | ok 1 | 2026-11-24 |
 | www.makeinfluence.com | 1/1 | ok 1 | 2026-11-15 |
+| www.massachusetts.edu | 1/1 | ok 1 | 2026-11-28 |
 | www.mediabistro.com | 1/1 | ok 1 | 2026-11-07 |
+| www.meevo.com | 1/1 | ok 1 | 2026-11-28 |
 | www.microns.io | 1/1 | ok 1 | 2026-11-07 |
 | www.microsoft.com | 0/1 | http_5xx 1 | never |
 | www.mindbodyonline.com | 0/1 | empty 1 | never |
@@ -1768,12 +1958,14 @@ These sources are not on the avoid list, because at least one of their paths wor
 | www.mitti.com | 1/1 | ok 1 | 2026-11-13 |
 | www.modernsalon.com | 1/1 | ok 1 | 2026-11-20 |
 | www.mofo.com | 1/1 | ok 1 | 2026-11-27 |
+| www.monster.com | 0/1 | http_403 1 | never |
+| www.monsterinsights.com | 1/1 | ok 1 | 2026-11-28 |
 | www.montana.edu | 1/1 | ok 1 | 2026-11-25 |
 | www.moovs.app | 0/1 | allowlist 1 | never |
-| www.mumsnet.com | 1/1 | ok 1 | 2026-11-08 |
 | www.myaifrontdesk.com | 1/1 | ok 1 | 2026-11-19 |
 | www.myhr.works | 1/1 | ok 1 | 2026-11-21 |
 | www.mykaleidoscope.com | 1/1 | ok 1 | 2026-11-24 |
+| www.myob.com | 1/1 | ok 1 | 2026-11-28 |
 | www.myschoolyear.com | 0/1 | http_403 1 | never |
 | www.nachc.org | 1/1 | ok 1 | 2026-11-07 |
 | www.namecheap.com | 1/1 | ok 1 | 2026-11-25 |
@@ -1783,7 +1975,6 @@ These sources are not on the avoid list, because at least one of their paths wor
 | www.nccommunitycolleges.edu | 1/1 | ok 1 | 2026-11-07 |
 | www.ncrla.org | 1/1 | ok 1 | 2026-11-13 |
 | www.ncura.edu | 1/1 | ok 1 | 2026-11-24 |
-| www.ndis.gov.au | 0/1 | http_403 1 | never |
 | www.nds.org.au | 0/1 | http_404 1 | never |
 | www.ndsmcobserver.com | 0/1 | http_403 1 | never |
 | www.nerdwallet.com | 0/1 | http_403 1 | never |
@@ -1792,37 +1983,42 @@ These sources are not on the avoid list, because at least one of their paths wor
 | www.northwestern.edu | 1/1 | ok 1 | 2026-11-25 |
 | www.nspra.org | 1/1 | ok 1 | 2026-11-24 |
 | www.numbas.org.uk | 1/1 | ok 1 | 2026-11-25 |
+| www.nvaccess.org | 0/1 | redirect 1 | never |
 | www.odoo.com | 1/1 | ok 1 | 2026-11-26 |
 | www.omeka.net | 1/1 | ok 1 | 2026-11-24 |
 | www.onefile.co.uk | 1/1 | ok 1 | 2026-11-24 |
 | www.onlinelabels.com | 1/1 | ok 1 | 2026-11-06 |
 | www.onpay.com | 1/1 | ok 1 | 2026-11-07 |
 | www.ontario.ca | 0/1 | http_403 1 | never |
+| www.opendental.com | 1/1 | ok 1 | 2026-11-28 |
 | www.ordermentum.com | 1/1 | ok 1 | 2026-11-20 |
 | www.osiaffiliate.com | 0/1 | http_404 1 | never |
+| www.osnews.com | 0/1 | http_403 1 | never |
 | www.parentbooker.com | 1/1 | ok 1 | 2026-11-24 |
 | www.parenttrack.io | 1/1 | ok 1 | 2026-11-24 |
 | www.passcreator.com | 1/1 | ok 1 | 2026-11-21 |
 | www.patreon.com | 0/1 | http_403 1 | never |
-| www.paubox.com | 1/1 | ok 1 | 2026-11-21 |
 | www.payhelm.com | 1/1 | ok 1 | 2026-11-15 |
 | www.paylocity.com | 0/1 | empty 1 | never |
 | www.paymentsdive.com | 1/1 | ok 1 | 2026-11-27 |
+| www.peekpro.com | 1/1 | ok 1 | 2026-11-28 |
 | www.peterborough-diocese.org.uk | 0/1 | http_404 1 | never |
 | www.phaa.org | 1/1 | ok 1 | 2026-11-10 |
 | www.pike13.com | 1/1 | ok 1 | 2026-11-24 |
-| www.plinth.org.uk | 1/1 | ok 1 | 2026-11-14 |
 | www.pmlawyers.com.au | 1/1 | ok 1 | 2026-11-21 |
 | www.postgresql.org | 1/1 | ok 1 | 2026-11-25 |
 | www.powermapper.com | 1/1 | ok 1 | 2026-11-26 |
 | www.praxikon.com | 1/1 | ok 1 | 2026-11-17 |
 | www.presspadapp.com | 1/1 | ok 1 | 2026-11-24 |
+| www.prismrisk.gov | 0/1 | http_403 1 | never |
+| www.procaresoftware.com | 1/1 | ok 1 | 2026-11-28 |
 | www.proteacher.net | 0/1 | http_403 1 | never |
 | www.protrainings.com | 0/1 | redirect 1 | never |
 | www.pulse.bot | 0/1 | http_5xx 1 | never |
 | www.punchpass.com | 1/1 | ok 1 | 2026-11-18 |
 | www.pythonanywhere.com | 1/1 | ok 1 | 2026-11-25 |
 | www.queensjournal.ca | 1/1 | ok 1 | 2026-11-25 |
+| www.quickbooks-payroll.org | 1/1 | ok 1 | 2026-11-28 |
 | www.quo.com | 1/1 | ok 1 | 2026-11-06 |
 | www.ramp.com | 1/1 | ok 1 | 2026-11-25 |
 | www.recordinglaw.com | 1/1 | ok 1 | 2026-11-27 |
@@ -1834,6 +2030,9 @@ These sources are not on the avoid list, because at least one of their paths wor
 | www.revenue.wi.gov | 1/1 | ok 1 | 2026-11-26 |
 | www.reviewflowz.com | 1/1 | ok 1 | 2026-11-27 |
 | www.reviewr.com | 1/1 | ok 1 | 2026-11-24 |
+| www.revtrak.com | 0/1 | redirect 1 | never |
+| www.route-fifty.com | 1/1 | ok 1 | 2026-11-28 |
+| www.rrfc.net | 1/1 | ok 1 | 2026-11-28 |
 | www.ru.nl | 0/1 | http_5xx 1 | never |
 | www.saashub.com | 0/1 | http_403 1 | never |
 | www.saasrise.com | 1/1 | ok 1 | 2026-11-25 |
@@ -1847,6 +2046,7 @@ These sources are not on the avoid list, because at least one of their paths wor
 | www.sellersasksellers.com | 1/1 | ok 1 | 2026-11-22 |
 | www.seroundtable.com | 1/1 | ok 1 | 2026-11-27 |
 | www.sharp.net.nz | 1/1 | ok 1 | 2026-11-11 |
+| www.sherwoodoregon.gov | 1/1 | ok 1 | 2026-11-28 |
 | www.silicon.co.uk | 1/1 | ok 1 | 2026-11-18 |
 | www.singletouch.com.au | 1/1 | ok 1 | 2026-11-16 |
 | www.siteground.com | 0/1 | http_404 1 | never |
@@ -1857,11 +2057,13 @@ These sources are not on the avoid list, because at least one of their paths wor
 | www.smartcompany.com.au | 1/1 | ok 1 | 2026-11-20 |
 | www.smartsense.co | 1/1 | ok 1 | 2026-11-13 |
 | www.smoobu.com | 0/1 | http_404 1 | never |
-| www.softwareadvice.co.uk | 0/1 | http_403 1 | never |
+| www.sog.unc.edu | 0/1 | http_403 1 | never |
 | www.solidtime.io | 1/1 | ok 1 | 2026-11-18 |
 | www.springlex.eu | 0/1 | empty 1 | never |
 | www.square.com | 0/1 | redirect 1 | never |
+| www.squarespace.com | 0/1 | redirect 1 | never |
 | www.srainternational.org | 1/1 | ok 1 | 2026-11-24 |
+| www.standoutdaycare.com | 1/1 | ok 1 | 2026-11-28 |
 | www.startupdaily.net | 1/1 | ok 1 | 2026-11-07 |
 | www.strato.de | 1/1 | ok 1 | 2026-11-22 |
 | www.studlife.com | 1/1 | ok 1 | 2026-11-25 |
@@ -1871,7 +2073,11 @@ These sources are not on the avoid list, because at least one of their paths wor
 | www.supportability.com.au | 1/1 | ok 1 | 2026-11-21 |
 | www.swarmia.com | 1/1 | ok 1 | 2026-11-25 |
 | www.tablesready.com | 1/1 | ok 1 | 2026-11-12 |
+| www.talentify.io | 0/1 | empty 1 | never |
+| www.tanda.com | 1/1 | ok 1 | 2026-11-28 |
 | www.taskade.com | 1/1 | ok 1 | 2026-11-24 |
+| www.tavrn.ai | 1/1 | ok 1 | 2026-11-28 |
+| www.tdlr.texas.gov | 1/1 | ok 1 | 2026-11-28 |
 | www.teachable.com | 1/1 | ok 1 | 2026-11-24 |
 | www.techzine.eu | 1/1 | ok 1 | 2026-11-25 |
 | www.tenantturner.com | 1/1 | ok 1 | 2026-11-13 |
@@ -1879,6 +2085,7 @@ These sources are not on the avoid list, because at least one of their paths wor
 | www.testmuai.com | 1/1 | ok 1 | 2026-11-26 |
 | www.thankyoupayroll.co.nz | 1/1 | ok 1 | 2026-11-14 |
 | www.the-standard.org | 1/1 | ok 1 | 2026-11-01 |
+| www.the74million.org | 1/1 | ok 1 | 2026-11-28 |
 | www.themarysue.com | 1/1 | ok 1 | 2026-11-23 |
 | www.theoj.org | 1/1 | ok 1 | 2026-11-25 |
 | www.theregister.com | 1/1 | ok 1 | 2026-11-25 |
@@ -1892,6 +2099,7 @@ These sources are not on the avoid list, because at least one of their paths wor
 | www.tlt.com | 1/1 | ok 1 | 2026-11-22 |
 | www.trackitforward.com | 0/1 | http_403 1 | never |
 | www.transact-tech.com | 1/1 | ok 1 | 2026-11-06 |
+| www.trendsight.com.au | 1/1 | ok 1 | 2026-11-28 |
 | www.tropicapp.io | 1/1 | ok 1 | 2026-11-23 |
 | www.truckinginfo.com | 1/1 | ok 1 | 2026-11-17 |
 | www.turbotenant.com | 1/1 | ok 1 | 2026-11-13 |
@@ -1907,16 +2115,21 @@ These sources are not on the avoid list, because at least one of their paths wor
 | www.usps.com | 1/1 | ok 1 | 2026-11-22 |
 | www.uvic.ca | 1/1 | ok 1 | 2026-11-21 |
 | www.uvm.edu | 1/1 | ok 1 | 2026-11-25 |
+| www.vancopayments.com | 0/1 | redirect 1 | never |
 | www.vanta.com | 1/1 | ok 1 | 2026-11-25 |
 | www.vatcalc.com | 0/1 | http_403 1 | never |
 | www.vinetur.com | 1/1 | ok 1 | 2026-11-23 |
 | www.volunteerflorida.org | 1/1 | ok 1 | 2026-11-24 |
+| www.w3.org | 1/1 | ok 1 | 2026-11-28 |
+| www.wakesys.com | 1/1 | ok 1 | 2026-11-28 |
 | www.wales247.co.uk | 1/1 | ok 1 | 2026-11-23 |
 | www.webull.com | 1/1 | ok 1 | 2026-11-10 |
 | www.wellnessliving.com | 1/1 | ok 1 | 2026-11-26 |
 | www.westernu.edu | 1/1 | ok 1 | 2026-11-24 |
 | www.whitecase.com | 0/1 | http_403 1 | never |
+| www.whoosh.io | 1/1 | ok 1 | 2026-11-28 |
 | www.wisdfoundation.org | 1/1 | ok 1 | 2026-11-24 |
+| www.wlrn.org | 1/1 | ok 1 | 2026-11-28 |
 | www.wlu.ca | 1/1 | ok 1 | 2026-11-25 |
 | www.workstreet.com | 1/1 | ok 1 | 2026-11-25 |
 | www.wxxinews.org | 1/1 | ok 1 | 2026-11-06 |
@@ -1932,6 +2145,7 @@ These sources are not on the avoid list, because at least one of their paths wor
 | xdaforums.com | 0/1 | http_403 1 | never |
 | xenett.com | 1/1 | ok 1 | 2026-11-26 |
 | xero.uservoice.com | 1/1 | ok 1 | 2026-11-24 |
+| xeroapi.github.io | 1/1 | ok 1 | 2026-11-28 |
 | yorku.ca | 1/1 | ok 1 | 2026-11-25 |
 | zapiet.com | 1/1 | ok 1 | 2026-11-13 |
 | zeitride.com | 1/1 | ok 1 | 2026-11-06 |
@@ -1945,8 +2159,8 @@ These sources are not on the avoid list, because at least one of their paths wor
 
 | Gate condition | Candidates lost |
 |---|---|
-| totalBelowMin | 598 |
-| rejectRule | 107 |
+| totalBelowMin | 621 |
+| rejectRule | 110 |
 | reviewKill | 62 |
 | painBelow4 | 3 |
 | noRecentEvidence | 2 |
@@ -1959,7 +2173,7 @@ The largest row is the one to argue about before changing anything else.
 
 ## Funnel over the window
 
-candidates 785 -> passedRejectRules 678 -> passedGate 13 -> reviewKilled 66 -> validated 1 -> provisional 91 -> watchlist 78
+candidates 811 -> passedRejectRules 701 -> passedGate 13 -> reviewKilled 66 -> validated 1 -> provisional 96 -> watchlist 78
 
 ## Runs that produced nothing
 
